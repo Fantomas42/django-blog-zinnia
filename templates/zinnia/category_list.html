@@ -1,0 +1,17 @@
+{% extends "zinnia/base.html" %}
+
+{% block title %}Cat&eacute;gories{% endblock %}
+
+{% block content %}
+<h2>Liste des cat&eacute;gories</h2>
+<div>
+  <ul>
+    {% for object in object_list %}
+    <li>
+      <a href="{{ object.get_absolute_url }}" title="{{ object }}">{{ object }}</a> 
+      {{ object.entries_published_set|length }} Article{{ object.entries_published_set|length|pluralize }}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

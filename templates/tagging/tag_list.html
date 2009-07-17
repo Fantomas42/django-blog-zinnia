@@ -1,0 +1,16 @@
+{% extends "zinnia/base.html" %}
+
+{% block title %}Tags{% endblock %}
+
+{% block content %}
+<h2>Liste des tags</h2>
+<div>
+  <ul>
+    {% for object in object_list %}
+    <li>
+      <a href="{% url zinnia_tagged_entry_list object %}" title="{{ object }}">{{ object }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

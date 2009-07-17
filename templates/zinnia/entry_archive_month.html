@@ -1,0 +1,11 @@
+{% extends "zinnia/entry_archive_base.html" %}
+
+{% block title %}Actus {{ month|date:"F Y"|capfirst }}{% endblock %}
+
+{% block content %}
+  {{ block.super }}
+  <!--<ul>
+    <li><a href="{% url zinnia_entry_archive_month previous_month|date:"Y" previous_month|date:"b" %}">{{ previous_month|date:"F Y"|capfirst }}</a></li>  
+    <li><a href="{% url zinnia_entry_archive_month next_month|date:"Y" next_month|date:"b" %}">{{ next_month|date:"F Y"|capfirst }}</a></li>
+  </ul>-->
+{% endblock %}

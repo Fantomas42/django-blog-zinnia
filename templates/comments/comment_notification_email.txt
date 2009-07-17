@@ -1,0 +1,6 @@
+Auteur : {{ comment.userinfo.name }} {{ comment.userinfo.url }}
+Email : {{ comment.userinfo.email }}
+IP : {{ comment.ip_address }}
+
+Commentaire :
+{{ comment.comment }}

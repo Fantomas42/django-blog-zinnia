@@ -1,0 +1,3 @@
+{% extends "zinnia/entry_archive_base.html" %}
+
+{% block title %}Derni&egrave;re Actus {% if category %}| Cat&eacute;gorie {{ category }}{% endif %}{% if tag %}| Tag {{ tag }}{% endif %}{% if author %}| Par {{ author }}{% endif %}{% if page_obj %}{% ifnotequal page_obj.number 1 %}| Page {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
