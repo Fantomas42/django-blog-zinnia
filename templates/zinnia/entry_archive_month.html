@@ -1,6 +1,7 @@
 {% extends "zinnia/entry_archive_base.html" %}
+{% load i18n %}
 
-{% block title %}Actus {{ month|date:"F Y"|capfirst }}{% endblock %}
+{% block title %}{% trans "Archive" %} {{ month|date:"F Y"|capfirst }}{% endblock %}
 
 {% block content %}
   {{ block.super }}

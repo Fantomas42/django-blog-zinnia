@@ -15,27 +15,32 @@ def author_detail(request, username):
     return object_list(request, queryset=entries_published(author.entry_set),
                        extra_context={'author': author})
 
+
 def category_detail(request, slug):
     """Display the entries of a category"""
     category = get_object_or_404(Category, slug=slug)
     return object_list(request, queryset=category.entries_published_set(),
                        extra_context={'category': category})
 
+
 def search_list(request):
     """Search entries matching with a pattern"""
     error = None
+    pattern = None
     entries = Entry.published.none()
 
     if request.GET:
-        pattern = request.GET.get('pattern', '')
+        pattern = request.GET.get('q', '')
         if len(pattern) < 3:
             error = _('the pattern is too short')
         else:
             entries = Entry.published.search(pattern)
     else:
         error = _('no pattern to search found')
-    
+
     return object_list(request, queryset=entries,
-                       template_name='zinnia/entry_search.html',
-                       extra_context={'error': error,
-                                      'pattern': pattern})
+                        template_name='zinnia/entry_search.html',
+                        extra_context={
+                            'error': error,
+                            'pattern': pattern,
+                        })

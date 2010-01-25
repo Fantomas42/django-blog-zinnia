@@ -19,8 +19,10 @@ current_site = Site.objects.get_current()
 
 from sgmllib import SGMLParser
 
+
 class ImgParser(SGMLParser):
     """Parser for getting img markups"""
+
     def __init__(self):
         SGMLParser.__init__(self)
         self.img_locations = []
@@ -29,6 +31,7 @@ class ImgParser(SGMLParser):
         attr = dict(attr)
         if attr.get('src', ''):
             self.img_locations.append(attr['src'])
+
 
 class EntryFeed(Feed):
     """Base Entry Feed"""
@@ -58,7 +61,8 @@ class EntryFeed(Feed):
             if current_site.domain in parser.img_locations[0]:
                 return parser.img_locations[0]
             else:
-                return 'http://%s%s' % (current_site.domain, parser.img_locations[0])
+                return 'http://%s%s' % (current_site.domain,
+                                        parser.img_locations[0])
         return None
 
     def item_enclosure_length(self, item):
@@ -67,19 +71,22 @@ class EntryFeed(Feed):
     def item_enclosure_mime_type(self, item):
         return 'image/jpeg'
 
+
 class LatestEntries(EntryFeed):
     """Feed for the latest entries"""
     title = _('%s - News') % current_site.name
     description = _('The last news for the site %s') % current_site.domain
 
     def link(self):
-        return reverse('zinnia_entry_archive_index')
+        return reverse('zinnia:entry_archive_index')
 
     def items(self):
         return Entry.published.all()
 
+
 class CategoryEntries(EntryFeed):
     """Feed filtered by a category"""
+
     def get_object(self, bits):
         if len(bits) != 1:
             raise FeedDoesNotExist
@@ -97,8 +104,10 @@ class CategoryEntries(EntryFeed):
     def description(self, obj):
         return _('The last news for the category %s') % obj.title
 
+
 class AuthorEntries(EntryFeed):
     """Feed filtered by an author"""
+
     def get_object(self, bits):
         if len(bits) != 1:
             raise FeedDoesNotExist
@@ -108,7 +117,7 @@ class AuthorEntries(EntryFeed):
         return entries_published(obj.entry_set)
 
     def link(self, obj):
-        return reverse('zinnia_author_detail', args=[obj.username])
+        return reverse('zinnia:author_detail', args=[obj.username])
 
     def title(self, obj):
         return _('Entries for author %s') % obj.username
@@ -119,6 +128,7 @@ class AuthorEntries(EntryFeed):
 
 class TagEntries(EntryFeed):
     """Feed filtered by a tag"""
+
     def get_object(self, bits):
         if len(bits) != 1:
             raise FeedDoesNotExist
@@ -128,7 +138,7 @@ class TagEntries(EntryFeed):
         return TaggedItem.objects.get_by_model(Entry.published.all(), obj)
 
     def link(self, obj):
-        return reverse('zinnia_tagged_entry_list', args=[obj.name])
+        return reverse('zinnia:tagged_entry_list', args=[obj.name])
 
     def title(self, obj):
         return _('Entries for the tag %s') % obj.name
@@ -136,8 +146,10 @@ class TagEntries(EntryFeed):
     def description(self, obj):
         return _('The last news for the tag %s') % obj.name
 
+
 class SearchEntries(EntryFeed):
     """Feed filtered by search pattern"""
+
     def get_object(self, bits):
         if len(bits) != 1:
             raise FeedDoesNotExist
@@ -147,7 +159,7 @@ class SearchEntries(EntryFeed):
         return Entry.published.search(obj)
 
     def link(self, obj):
-        return '%s?pattern=%s' % (reverse('zinnia_entry_search'), obj)
+        return '%s?pattern=%s' % (reverse('zinnia:entry_search'), obj)
 
     def title(self, obj):
         return _("Results of the search for %s") % obj
@@ -155,8 +167,10 @@ class SearchEntries(EntryFeed):
     def description(self, obj):
         return _("The news containing the pattern %s") % obj
 
+
 class CommentEntries(Feed):
     """Feed for comments in an entry"""
+
     def get_object(self, bits):
         if len(bits) != 1:
             raise FeedDoesNotExist
@@ -176,4 +190,3 @@ class CommentEntries(Feed):
 
     def description(self, obj):
         return _('The last comments for the news %s') % obj.title
-    

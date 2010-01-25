@@ -1,4 +1,18 @@
 {% extends "zinnia/entry_archive_base.html" %}
+{% load i18n %}
 
-{% block title %}R&eacute;sultats de recherche pour {% if pattern %}'{{ pattern }}'{% endif %}{% endblock %}
+{% block title %}{% trans "Search results" %} {% if pattern %}'{{ pattern }}'{% endif %}{% endblock %}
 
+{% block content %}
+<h1>{% trans "Search results" %} {% if pattern %}'{{ pattern }}'{% endif %}</h1>
+
+{% for object in object_list %}
+<div class="entry">
+	{% with object.get_content|truncatewords_html:100|safe as object_content %}
+		{% include "zinnia/_entry_detail.html" %}
+	{% endwith %}
+</div>
+{% empty %}
+<p>{% trans "Nothing found." %}</p>
+{% endfor %}
+{% endblock %}
