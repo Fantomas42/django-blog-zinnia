@@ -60,8 +60,8 @@ class Entry(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
     comment_enabled = models.BooleanField(_('comment enabled'), default=True)
 
-    creation_date = models.DateTimeField(_('creation date'), auto_now_add=True)
-    last_update = models.DateTimeField(_('last update'), auto_now=True)
+    creation_date = models.DateTimeField(_('creation date'), default=datetime.now)
+    last_update = models.DateTimeField(_('last update'))
     start_publication = models.DateTimeField(_('start publication'),
                                              help_text=_('date start publish'),
                                              default=datetime.now)
