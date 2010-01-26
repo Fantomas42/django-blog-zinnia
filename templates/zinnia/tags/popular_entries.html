@@ -1,8 +1,0 @@
-<ul>
-	{% for entry in entries %}
-	<li>
-		<p><a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a></p>
-		<a href="{{ entry.get_absolute_url }}#comments" title="{{ entry.title }}">{{ entry.get_n_comments }} commentaire{{ entry.get_n_comments|pluralize }}</a>
-	</li>
-	{% endfor %}
-</ul>
