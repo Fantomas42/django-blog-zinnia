@@ -1,1 +1,2 @@
-{{ obj.user_name }} le {{ obj.submit_date|date:"d F Y \a H:i" }}
+{% load i18n %}
+{{ obj.user_name }} {% trans "on" %} {{ obj.submit_date|date:"d F Y \a H:i" }}

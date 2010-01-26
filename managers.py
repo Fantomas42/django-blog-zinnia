@@ -8,13 +8,16 @@ DRAFT = 0
 HIDDEN = 1
 PUBLISHED = 2
 
+
 def authors_published():
     """Return the published authors"""
     from zinnia.models import Entry
     from django.contrib.auth.models import User
-    
-    author_ids = [user.pk for user in User.objects.all() if user.entry_set.count()]
+
+    author_ids = [user.pk for user in User.objects.all() \
+                    if user.entry_set.count()]
     return User.objects.filter(pk__in=author_ids)
+
 
 def entries_published(queryset):
     """Return only the entries published"""
@@ -24,12 +27,14 @@ def entries_published(queryset):
                            end_publication__gt=now,
                            sites=Site.objects.get_current())
 
+
 class EntryPublishedManager(models.Manager):
     """Manager to retrieve published entries"""
 
     def get_query_set(self):
-        return entries_published(super(EntryPublishedManager, self).get_query_set())
-        
+        return entries_published(super(EntryPublishedManager, self)
+                                .get_query_set())
+
     def search(self, pattern):
         lookup = None
         for pattern in pattern.split():
@@ -40,5 +45,5 @@ class EntryPublishedManager(models.Manager):
                 lookup = q
             else:
                 lookup |= q
-        
+
         return self.get_query_set().filter(lookup)

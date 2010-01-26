@@ -16,6 +16,7 @@ from zinnia.settings import AKISMET_COMMENT
 
 AKISMET_API_KEY = getattr(settings, 'AKISMET_API_KEY', '')
 
+
 class EntryCommentModerator(CommentModerator):
     """Moderate the comment of Entry"""
     email_notification = MAIL_COMMENT
@@ -24,7 +25,7 @@ class EntryCommentModerator(CommentModerator):
     def email(self, comment, content_object):
         if comment.is_public:
             super(EntryCommentModerator, self).email(comment, content_object)
-            
+
     def moderate_akismet(self, comment, content_object, request):
         """Need to pass Akismet test"""
         if not AKISMET_COMMENT:
@@ -34,16 +35,18 @@ class EntryCommentModerator(CommentModerator):
         from akismet import APIKeyError
 
         akismet = Akismet(key=AKISMET_API_KEY,
-                          blog_url='http://%s/' % Site.objects.get_current().domain)
+                    blog_url='http://%s/' % Site.objects.get_current().domain)
         if akismet.verify_key():
-            akismet_data = {'user_ip': request.META.get('REMOTE_ADDR', ''),
-                            'user_agent': request.META.get('HTTP_USER_AGENT', ''),
-                            'referrer': request.META.get('HTTP_REFERER', 'unknown'),
-                            'permalink': content_object.get_absolute_url(),
-                            'comment_type': 'comment',
-                            'comment_author': comment.userinfo.get('name', ''),
-                            'comment_author_email': comment.userinfo.get('email', ''),
-                            'comment_author_url': comment.userinfo.get('url', '')}
+            akismet_data = {
+                'user_ip': request.META.get('REMOTE_ADDR', ''),
+                'user_agent': request.META.get('HTTP_USER_AGENT', ''),
+                'referrer': request.META.get('HTTP_REFERER', 'unknown'),
+                'permalink': content_object.get_absolute_url(),
+                'comment_type': 'comment',
+                'comment_author': comment.userinfo.get('name', ''),
+                'comment_author_email': comment.userinfo.get('email', ''),
+                'comment_author_url': comment.userinfo.get('url', ''),
+            }
             return akismet.comment_check(smart_str(comment.comment),
                                          data=akismet_data,
                                          build_data=True)
@@ -54,18 +57,19 @@ class EntryModerator(Moderator):
     """Moderator for Entry"""
 
     def connect(self):
-        comment_will_be_posted.connect(self.pre_save_moderation, sender=comments.get_model())
-        signals.post_save.connect(self.post_save_moderation, sender=comments.get_model())
-        
+        comment_will_be_posted.connect(self.pre_save_moderation,
+                                        sender=comments.get_model())
+        signals.post_save.connect(self.post_save_moderation,
+                                    sender=comments.get_model())
 
     def pre_save_moderation(self, sender, comment, request, **kwargs):
         """Overriding the existing method by passing request to allow"""
-        super(EntryModerator, self).pre_save_moderation(sender, comment, **kwargs)
+        super(EntryModerator, self).pre_save_moderation(sender, comment,
+                                                        **kwargs)
 
         moderation_class = self._registry[comment.content_type.model_class()]
-        if moderation_class.moderate_akismet(comment, comment.content_object, request):
+        if moderation_class.moderate_akismet(comment, comment.content_object,
+                                            request):
             comment.is_public = False
 
-
-
-moderator = EntryModerator()    
+moderator = EntryModerator()

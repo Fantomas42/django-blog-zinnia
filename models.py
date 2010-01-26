@@ -15,6 +15,7 @@ from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 
+
 class Category(models.Model):
     """Category object for Entry"""
 
@@ -31,7 +32,7 @@ class Category(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('zinnia_category_detail', (self.slug,))
+        return ('zinnia:category_detail', (self.slug, ))
 
     class Meta:
         verbose_name = _('category')
@@ -47,18 +48,20 @@ class Entry(models.Model):
 
     title = models.CharField(_('title'), max_length=100)
     content = models.TextField(_('content'))
-    excerpt = models.TextField(_('excerpt'), blank=True, help_text=_('optional element'))
+    excerpt = models.TextField(_('excerpt'), blank=True,
+                                help_text=_('optional element'))
 
     tags = TagField()
     categories = models.ManyToManyField(Category, verbose_name=_('categories'))
 
     slug = models.SlugField(help_text=_('used for publication'))
-    authors = models.ManyToManyField(User, verbose_name=_('authors'), blank=True)
+    authors = models.ManyToManyField(User, verbose_name=_('authors'),
+                                    blank=True)
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
     comment_enabled = models.BooleanField(_('comment enabled'), default=True)
 
-    creation_date = models.DateTimeField(_('creation date'), default=datetime.now)
-    last_update = models.DateTimeField(_('last update'))
+    creation_date = models.DateTimeField(_('creation date'), auto_now_add=True)
+    last_update = models.DateTimeField(_('last update'), auto_now=True)
     start_publication = models.DateTimeField(_('start publication'),
                                              help_text=_('date start publish'),
                                              default=datetime.now)
@@ -70,7 +73,6 @@ class Entry(models.Model):
 
     objects = models.Manager()
     published = EntryPublishedManager()
-
 
     def get_content(self):
         """Return the content correctly formatted"""
@@ -101,16 +103,17 @@ class Entry(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('zinnia_entry_detail', (), {'year': self.creation_date.strftime('%Y'),
-                                            'month': self.creation_date.strftime('%b').lower(),
-                                            'day': self.creation_date.strftime('%d'),
-                                            'slug': self.slug})
+        return ('zinnia:entry_detail', (), {
+                            'year': self.creation_date.strftime('%Y'),
+                            'month': self.creation_date.strftime('%m').lower(),
+                            'day': self.creation_date.strftime('%d'),
+                            'slug': self.slug})
 
     class Meta:
         ordering = ['-creation_date']
         verbose_name = _('entry')
         verbose_name_plural = _('entries')
         permissions = (('can_view_all', 'Can view all'),
-                       ('can_change_author', 'Can change author'),)
+                       ('can_change_author', 'Can change author'), )
 
 moderator.register(Entry, EntryCommentModerator)

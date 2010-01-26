@@ -1,65 +1,34 @@
 {% extends "zinnia/base.html" %}
-
-{% load tagging_tags comments %}
-
+{% load tagging_tags comments i18n %}
 
 {% block content %}
-  {% if category %}
-  <h1>{{ category.title }}</h1>
-  {% if category.description %}
-  <p>{{ category.description|striptags|safe }}</p>
-  {% endif %}
-  {% endif %}
-  {% if tag %}
-  <h1>Tag : {{ tag }}</h1>
-  {% endif %}
-  {% if author %}
-  <h1>Articles de {{ author.username }}</h1>
-  <p>Tous les articles de {{ author.username }}</p>
-  {% endif %}
+{% if category %}
+	<h1>{{ category.title }}</h1>
+	{% if category.description %}
+		<p>{{ category.description|striptags|safe }}</p>
+	{% endif %}
+{% endif %}
+ 
+{% if tag %}
+	<h1>{% trans "Tag" %}: {{ tag }}</h1>
+{% endif %}
+ 
+{% if author %}
+	<h1>{% blocktrans with author.username as author %}Articles by {{ author }}{% endblocktrans %}</h1>
+{% endif %}
 
-  {% for object in object_list %}
-    <div class="entry">
-      <h2 class="entryTitle">
-        <a href="{{ object.get_absolute_url }}" title="{{ object.title }}">{{ object.title }}</a>
-      </h2>
-      <p class="entryMeta">
-        Post&eacute; par {% for author in object.authors.all %}<a href="{% url zinnia_author_detail author %}" title="Tous les articles de {{ author }}"><strong>{{ author }}</strong></a>, {% endfor %}
-	le {{ object.creation_date|date:"d F Y"|capfirst }}
-        sous {% for category in object.categories.all %}
-        <a href="{{ category.get_absolute_url }}" title="{{ category }}">{{ category }}</a>
-      {% endfor %}
-      </p>
-      <div class="entryContent">{{ object.get_content|truncatewords_html:100|safe }}</div>
-      <span class="entryMore">
-        <a href="{{ object.get_absolute_url }}" title="Lire la suite sur {{ object.title }}">Lire la suite&hellip;</a>
-      </span>
-      <span class="entryComments">
-        {% if object.comment_enabled %}
-        {% get_comment_count for object as comment_count %}
-        <a href="{{ object.get_absolute_url }}#comments">{{ comment_count }} commentaire{{ comment_count|pluralize }}</a>
-	{% else %}
-	  <a>Commentaires ferm&eacute;s</a>
-	{% endif %}
-      </span>
-      <span class="entryTags"><em>:</em>
-        {% tags_for_object object as tag_list %}
-        {% if tag_list|length %}
-        {% for tag in tag_list %}
-          <a href="{% url zinnia_tagged_entry_list tag %}" title="Tag {{ tag }}">{{ tag }}</a>
-        {% endfor%}
-	{% else %}
-	  <span>Pas de tags</span>
-	{% endif %}
-      </span>
-    </div>
-    <br />
-  {% endfor %}
+{% for object in object_list %}
+<div class="entry">
+	{% with object.get_content|truncatewords_html:100|safe as object_content %}
+		{% include "zinnia/_entry_detail.html" %}
+	{% endwith %}
+</div>
+{% endfor %}
   {% if is_paginated %}
     <div class="paginator">
       {% if page_obj.has_previous %}
       <span class="previous">
-        <a href="{% url zinnia_entry_archive_index_paginated page_obj.previous_page_number %}" class="previous">Articles plus r&eacute;cents</a>
+        <a href="{% url zinnia:entry_archive_index_paginated page_obj.previous_page_number %}" class="previous">Articles plus r&eacute;cents</a>
       </span>
       {% endif %}
       <span class="current">
@@ -67,7 +36,7 @@
       </span>
       {% if page_obj.has_next %}
       <span class="next">
-        <a href="{% url zinnia_entry_archive_index_paginated page_obj.next_page_number %}">Articles plus anciens</a>
+        <a href="{% url zinnia:entry_archive_index_paginated page_obj.next_page_number %}">Articles plus anciens</a>
       </span>  
       {% endif %}
     </div>
