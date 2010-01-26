@@ -1,0 +1,12 @@
+{% extends "zinnia/entry_archive_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Archive" %} {{ day|date:"d" }} {{ day|date:"F"|capfirst }} {{ day|date:"Y" }}{% endblock %}
+
+{% block content %}
+  {{ block.super }}
+  <!--<ul>
+    <li><a href="{% url zinnia_entry_archive_day previous_day|date:"Y" previous_day|date:"b" previous_day|date:"d" %}">{{ previous_day|date:"d F Y"|capfirst }}</a></li>  
+    <li><a href="{% url zinnia_entry_archive_day next_day|date:"Y" next_day|date:"b" next_day|date:"d" %}">{{ next_day|date:"d F Y"|capfirst }}</a></li>
+  </ul>-->
+{% endblock %}

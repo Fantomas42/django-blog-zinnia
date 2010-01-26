@@ -1,0 +1,45 @@
+{% extends "zinnia/base.html" %}
+{% load tagging_tags comments i18n %}
+
+{% block content %}
+{% if category %}
+	<h1>{{ category.title }}</h1>
+	{% if category.description %}
+		<p>{{ category.description|striptags|safe }}</p>
+	{% endif %}
+{% endif %}
+ 
+{% if tag %}
+	<h1>{% trans "Tag" %}: {{ tag }}</h1>
+{% endif %}
+ 
+{% if author %}
+	<h1>{% blocktrans with author.username as author %}Articles by {{ author }}{% endblocktrans %}</h1>
+{% endif %}
+
+{% for object in object_list %}
+<div class="entry">
+	{% with object.get_content|truncatewords_html:100|safe as object_content %}
+		{% include "zinnia/_entry_detail.html" %}
+	{% endwith %}
+</div>
+{% endfor %}
+  {% if is_paginated %}
+    <div class="paginator">
+      {% if page_obj.has_previous %}
+      <span class="previous">
+        <a href="{% url zinnia:entry_archive_index_paginated page_obj.previous_page_number %}" class="previous">Articles plus r&eacute;cents</a>
+      </span>
+      {% endif %}
+      <span class="current">
+        Page {{ page_obj.number }} sur {{ paginator.num_pages }}
+      </span>
+      {% if page_obj.has_next %}
+      <span class="next">
+        <a href="{% url zinnia:entry_archive_index_paginated page_obj.next_page_number %}">Articles plus anciens</a>
+      </span>  
+      {% endif %}
+    </div>
+  {% endif %}
+
+{% endblock %}

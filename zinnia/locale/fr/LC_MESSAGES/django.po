@@ -1,0 +1,245 @@
+# French translation of Zinnia.
+# Copyright (C) 2008 THE Zinnia'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Zinnia package.
+# Fantomas42 <fantomas42@gmail.com>, 2008.
+# , fuzzy
+# 
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Zinnia 0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-05-24 20:04+0200\n"
+"PO-Revision-Date: 2009-05-24 20:05+0200\n"
+"Last-Translator: Fantomas42 <fantomas42@gmail.com>\n"
+"Language-Team: French <gnomefr@traduc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit"
+
+#: admin.py:29
+msgid "Content"
+msgstr "Contenu"
+
+#: admin.py:30
+msgid "Options"
+msgstr "Options"
+
+#: admin.py:34
+msgid "Sorting"
+msgstr "Répartition"
+
+#: admin.py:94
+msgid "Set the entries to the user"
+msgstr "Acquérir les articles"
+
+#: admin.py:99
+msgid "Set entries selected as published"
+msgstr "Publier les articles sélectionnés"
+
+#: admin.py:104
+msgid "Set entries selected as hidden"
+msgstr "Masquer les articles sélectionnés"
+
+#: admin.py:109
+msgid "Close the comments for selected entries"
+msgstr "Fermer les commentaires pour les articles sélectionnés"
+
+#: admin.py:120
+#, python-format
+msgid "%i directories succesfully pinged."
+msgstr "%i annuaires pingés avec succès."
+
+#: admin.py:121
+msgid "Ping Directories for selected entries"
+msgstr "Pinger les articles dans les annuaires."
+
+#: feeds.py:72
+#, python-format
+msgid "%s - News"
+msgstr "%s | Dernières actualités"
+
+#: feeds.py:73
+#, python-format
+msgid "The last news for the site %s"
+msgstr "Les dernières actualités du site %s"
+
+#: feeds.py:95
+#, python-format
+msgid "Entries for the category %s"
+msgstr "Actualités pour la catégorie : %s"
+
+#: feeds.py:98
+#, python-format
+msgid "The last news for the category %s"
+msgstr "Les dernières actualités pour la catégorie : %s"
+
+#: feeds.py:114
+#, python-format
+msgid "Entries for author %s"
+msgstr "L'actualités par %s"
+
+#: feeds.py:117
+#, python-format
+msgid "The last news by %s"
+msgstr "Les dernières actualités par %s"
+
+#: feeds.py:134
+#, python-format
+msgid "Entries for the tag %s"
+msgstr "Actualités pour le tag : %s"
+
+#: feeds.py:137
+#, python-format
+msgid "The last news for the tag %s"
+msgstr "Les dernières actualités pour le tag : %s"
+
+#: feeds.py:153
+#, python-format
+msgid "Results of the search for %s"
+msgstr "Résultats de recherche pour '%s'"
+
+#: feeds.py:156
+#, python-format
+msgid "The news containing the pattern %s"
+msgstr "Les dernières actualités contenant le motif '%s'"
+
+#: feeds.py:175
+#, python-format
+msgid "Comments on %s"
+msgstr "Commentaires sur : %s"
+
+#: feeds.py:178
+#, python-format
+msgid "The last comments for the news %s"
+msgstr "Les derniers commentaires sur l'actualité : %s"
+
+#: models.py:22 models.py:49 models.py:96
+msgid "title"
+msgstr "titre"
+
+#: models.py:23 models.py:56
+msgid "used for publication"
+msgstr "Utilisé pour la publication"
+
+#: models.py:24
+msgid "description"
+msgstr "description"
+
+#: models.py:38
+msgid "category"
+msgstr "catégorie"
+
+#: models.py:39 models.py:54
+msgid "categories"
+msgstr "catégories"
+
+#: models.py:45
+msgid "draft"
+msgstr "Brouillon"
+
+#: models.py:46
+msgid "hidden"
+msgstr "Non publié"
+
+#: models.py:47
+msgid "published"
+msgstr "Publié"
+
+#: models.py:50
+msgid "content"
+msgstr "contenu"
+
+#: models.py:51
+msgid "excerpt"
+msgstr "extrait"
+
+#: models.py:51
+msgid "optional element"
+msgstr "Elément optionnel"
+
+#: models.py:57
+msgid "authors"
+msgstr "auteurs"
+
+#: models.py:59
+msgid "comment enabled"
+msgstr "commentaires ?"
+
+#: models.py:61
+msgid "creation date"
+msgstr "date de création"
+
+#: models.py:62
+msgid "last update"
+msgstr "mise à jour"
+
+#: models.py:63
+msgid "start publication"
+msgstr "démarrage"
+
+#: models.py:64
+msgid "date start publish"
+msgstr "Date utilisé pour démarrer la publication"
+
+#: models.py:66
+msgid "end publication"
+msgstr "arrêt"
+
+#: models.py:67
+msgid "date end publish"
+msgstr "Date utilisé pour arrêter la publication"
+
+#: models.py:70
+msgid "sites publication"
+msgstr "sites publiés"
+
+#: models.py:104
+msgid "author(s)"
+msgstr "auteur(s)"
+
+#: models.py:112
+msgid "category(s)"
+msgstr "Catégorie(s)"
+
+#: models.py:120
+msgid "tag(s)"
+msgstr "Tag(s)"
+
+#: models.py:127
+msgid "site(s)"
+msgstr "Site(s)"
+
+#: models.py:134
+msgid "is_actual"
+msgstr "En cours ?"
+
+#: models.py:140
+msgid "is_visible"
+msgstr "Visible ?"
+
+#: models.py:144
+#, python-format
+msgid "<a href=\"%s\" target=\"blank\">View</a>"
+msgstr "<a href=\"%s\" target=\"blank\">Consulter</a>"
+
+#: models.py:146
+msgid "View on site"
+msgstr "Voir sur le site"
+
+#: models.py:160
+msgid "entry"
+msgstr "article"
+
+#: models.py:161
+msgid "entries"
+msgstr "articles"
+
+#: views.py:32
+msgid "the pattern is too short"
+msgstr "Le motif de recherche est trop court !"
+
+#: views.py:36
+msgid "no pattern to search found"
+msgstr "Pas de résultats trouvé pour ce motif de recherche."
+

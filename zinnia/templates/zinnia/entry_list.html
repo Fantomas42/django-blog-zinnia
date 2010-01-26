@@ -1,0 +1,4 @@
+{% extends "zinnia/entry_archive_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Latest articles" %} {% if category %}| {% trans "Category" %} {{ category }}{% endif %}{% if tag %}| {% trans "Tag" %} {{ tag }}{% endif %}{% if author %}| {% trans "Author" %} {{ author }}{% endif %}{% if page_obj %}{% ifnotequal page_obj.number 1 %}| {% trans "Page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}

@@ -1,0 +1,7 @@
+{% load i18n %}
+{% trans "Author" %}: {{ comment.userinfo.name }} {{ comment.userinfo.url }}
+{% trans "Email" %}: {{ comment.userinfo.email }}
+{% trans "IP" %}: {{ comment.ip_address }}
+
+{% trans "Comment" %}:
+{{ comment.comment }}
