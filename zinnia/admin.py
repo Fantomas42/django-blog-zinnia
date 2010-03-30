@@ -28,7 +28,7 @@ class EntryAdmin(admin.ModelAdmin):
     date_hierarchy = 'creation_date'
     fieldsets = ((_('Content'), {'fields': ('title', 'content', 'status')}),
                  (_('Options'), {'fields': ('authors', 'slug', 'excerpt',
-                                            #'creation_date',
+                                            'creation_date',
                                             'start_publication',
                                             'end_publication',
                                             'comment_enabled'),
