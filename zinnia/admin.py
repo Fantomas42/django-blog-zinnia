@@ -181,10 +181,8 @@ class EntryAdmin(admin.ModelAdmin):
                 response = pinger.ping(entry)
                 if not response.get('flerror', True):
                     success += 1
-        self.message_user(request, _('%i directories succesfully pinged.') \
-                        % success)
-    ping_directories.short_description = _('Ping Directories for selected' \
-                                            ' entries')
+        self.message_user(request, _('%i directories succesfully pinged.') % success)
+    ping_directories.short_description = _('Ping Directories for selected entries')
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Entry, EntryAdmin)
