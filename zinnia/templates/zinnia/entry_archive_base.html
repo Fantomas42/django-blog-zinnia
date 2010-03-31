@@ -3,10 +3,10 @@
 
 {% block content %}
 {% if category %}
-	<h1>{{ category.title }}</h1>
-	{% if category.description %}
-		<p>{{ category.description|striptags|safe }}</p>
-	{% endif %}
+<h1>{{ category.title }}</h1>
+{% if category.description %}
+  <p>{{ category.description|striptags|safe }}</p>
+{% endif %}
 {% endif %}
  
 {% if tag %}
@@ -28,7 +28,7 @@
     <div class="paginator">
       {% if page_obj.has_previous %}
       <span class="previous">
-        <a href="{% url zinnia:entry_archive_index_paginated page_obj.previous_page_number %}" class="previous">Articles plus r&eacute;cents</a>
+        <a href="{% url zinnia_entry_archive_index_paginated page_obj.previous_page_number %}" class="previous">Articles plus r&eacute;cents</a>
       </span>
       {% endif %}
       <span class="current">
@@ -36,7 +36,7 @@
       </span>
       {% if page_obj.has_next %}
       <span class="next">
-        <a href="{% url zinnia:entry_archive_index_paginated page_obj.next_page_number %}">Articles plus anciens</a>
+        <a href="{% url zinnia_entry_archive_index_paginated page_obj.next_page_number %}">Articles plus anciens</a>
       </span>  
       {% endif %}
     </div>
