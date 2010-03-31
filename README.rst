@@ -15,10 +15,11 @@ More than a long speech, here the list of the main features :
   * RSS Feeds
   * Search engine
   * Archives views
-  * Collaborative work
+  * Tags and categories views
   * Widgets (Popular entries, Recent entries, ...)
-  * Support Gravatar
   * Spam protection with Akismet
+  * Support Gravatar
+  * Collaborative work
   * Prepublication
 
 Dependancies
