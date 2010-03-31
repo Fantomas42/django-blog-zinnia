@@ -1,0 +1,14 @@
+*~
+*.pyc
+README.html
+bin
+lib
+dist
+eggs
+parts
+build
+include
+downloads
+develop-eggs
+.installed.cfg
+django_blog_zinnia.egg-info/
