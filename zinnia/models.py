@@ -5,11 +5,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import linebreaks
+from django.contrib.comments.moderation import moderator
 from django.utils.translation import ugettext, ugettext_lazy as _
 
 from tagging.fields import TagField
 
-from zinnia.moderator import moderator
 from zinnia.moderator import EntryCommentModerator
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager

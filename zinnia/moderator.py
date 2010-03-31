@@ -22,11 +22,11 @@ class EntryCommentModerator(CommentModerator):
     email_notification = MAIL_COMMENT
     enable_field = 'comment_enabled'
 
-    def email(self, comment, content_object):
+    def email(self, comment, content_object, request):
         if comment.is_public:
-            super(EntryCommentModerator, self).email(comment, content_object)
+            super(EntryCommentModerator, self).email(comment, content_object, request)
 
-    def moderate_akismet(self, comment, content_object, request):
+    def moderate(self, comment, content_object, request):
         """Need to pass Akismet test"""
         if not AKISMET_COMMENT:
             return False
@@ -38,7 +38,7 @@ class EntryCommentModerator(CommentModerator):
             return False
 
         akismet = Akismet(key=AKISMET_API_KEY,
-                    blog_url='http://%s/' % Site.objects.get_current().domain)
+                          blog_url='http://%s/' % Site.objects.get_current().domain)
         if akismet.verify_key():
             akismet_data = {
                 'user_ip': request.META.get('REMOTE_ADDR', ''),
@@ -55,24 +55,3 @@ class EntryCommentModerator(CommentModerator):
                                          build_data=True)
         raise APIKeyError("Your Akismet API key is invalid.")
 
-
-class EntryModerator(Moderator):
-    """Moderator for Entry"""
-
-    def connect(self):
-        comment_will_be_posted.connect(self.pre_save_moderation,
-                                        sender=comments.get_model())
-        signals.post_save.connect(self.post_save_moderation,
-                                    sender=comments.get_model())
-
-    def pre_save_moderation(self, sender, comment, request, **kwargs):
-        """Overriding the existing method by passing request to allow"""
-        super(EntryModerator, self).pre_save_moderation(sender, comment,
-                                                        **kwargs)
-
-        moderation_class = self._registry[comment.content_type.model_class()]
-        if moderation_class.moderate_akismet(comment, comment.content_object,
-                                            request):
-            comment.is_public = False
-
-moderator = EntryModerator()
