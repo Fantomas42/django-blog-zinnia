@@ -28,10 +28,8 @@ class EntryAdmin(admin.ModelAdmin):
     date_hierarchy = 'creation_date'
     fieldsets = ((_('Content'), {'fields': ('title', 'content', 'status')}),
                  (_('Options'), {'fields': ('authors', 'slug', 'excerpt',
-                                            'creation_date',
-                                            'start_publication',
-                                            'end_publication',
-                                            'comment_enabled'),
+                                            'creation_date', 'start_publication',
+                                            'end_publication', 'comment_enabled'),
                                  'classes': ('collapse', 'collapse-closed')}),
                  (_('Sorting'), {'fields': ('sites', 'categories', 'tags')}))
     list_filter = ('status', 'creation_date', 'authors', 'comment_enabled',
@@ -43,7 +41,7 @@ class EntryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title', )}
     search_fields = ('title', 'excerpt', 'content', 'tags')
     actions = ['make_mine', 'make_published', 'make_hidden', 'close_comments',
-                'ping_directories']
+               'ping_directories']
     actions_on_top = True
     actions_on_bottom = True
 
@@ -63,9 +61,8 @@ class EntryAdmin(admin.ModelAdmin):
         """Return the authors in HTML"""
         try:
             authors = ['<a href="%s" target="blank">%s</a>' %
-                       (reverse('zinnia:author_detail',
-                        args=[author.username]), author.username) \
-                        for author in entry.authors.all()]
+                       (reverse('zinnia_author_detail', args=[author.username]),
+                        author.username) for author in entry.authors.all()]
         except NoReverseMatch:
             authors = [author.username for author in entry.authors.all()]
         return ', '.join(authors)
@@ -79,8 +76,7 @@ class EntryAdmin(admin.ModelAdmin):
                           (category.get_absolute_url(), category.title)
                           for category in entry.categories.all()]
         except NoReverseMatch:
-            categories = [category.title \
-                            for category in entry.categories.all()]
+            categories = [category.title for category in entry.categories.all()]
         return ', '.join(categories)
     get_categories.allow_tags = True
     get_categories.short_description = _('category(s)')
@@ -89,8 +85,7 @@ class EntryAdmin(admin.ModelAdmin):
         """Return the tags linked in HTML"""
         try:
             return ', '.join(['<a href="%s" target="blank">%s</a>' %
-                              (reverse('zinnia:tagged_entry_list', args=[tag]),
-                              tag) \
+                              (reverse('zinnia_tag_detail', args=[tag]), tag)
                               for tag in entry.tags.replace(',', '').split()])
         except NoReverseMatch:
             return ', '.join(entry.tags.replace(',', '').split())
@@ -99,16 +94,14 @@ class EntryAdmin(admin.ModelAdmin):
 
     def get_sites(self, entry):
         """Return the sites linked in HTML"""
-        return ', '.join(['<a href="http://%(domain)s" target="blank">' \
-                            '%(name)s</a>' %
-                            site.__dict__ for site in entry.sites.all()])
+        return ', '.join(['<a href="http://%(domain)s" target="blank">%(name)s</a>' %
+                          site.__dict__ for site in entry.sites.all()])
     get_sites.allow_tags = True
     get_sites.short_description = _('site(s)')
 
     def get_link(self, entry):
         """Return a formated link to the entry"""
-        return _('<a href="%s" target="blank">View</a>') \
-                % entry.get_absolute_url()
+        return _('<a href="%s" target="blank">View</a>') % entry.get_absolute_url()
     get_link.allow_tags = True
     get_link.short_description = _('View on site')
 
@@ -140,11 +133,11 @@ class EntryAdmin(admin.ModelAdmin):
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         """Filters the disposable authors"""
         if db_field.name == 'authors' and \
-                not request.user.has_perm('zinnia.can_change_author'):
+               not request.user.has_perm('zinnia.can_change_author'):
             kwargs['queryset'] = User.objects.filter(pk=request.user.pk)
             return db_field.formfield(**kwargs)
-        return super(EntryAdmin, self).formfield_for_manytomany(db_field,
-                    request, **kwargs)
+        return super(EntryAdmin, self).formfield_for_manytomany(
+            db_field, request, **kwargs)
 
     def get_actions(self, request):
         """Define user actions by permissions"""
@@ -177,8 +170,7 @@ class EntryAdmin(admin.ModelAdmin):
     def close_comments(self, request, queryset):
         """Close the comments for selected entries"""
         queryset.update(comment_enabled=False)
-    close_comments.short_description = _('Close the comments' \
-                                        ' for selected entries')
+    close_comments.short_description = _('Close the comments for selected entries')
 
     def ping_directories(self, request, queryset):
         """Ping Directories for selected entries"""

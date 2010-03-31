@@ -1,5 +1,6 @@
 """Feeds for Zinnia"""
 from datetime import datetime
+from sgmllib import SGMLParser
 
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
@@ -15,10 +16,8 @@ from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import entries_published
 
+
 current_site = Site.objects.get_current()
-
-from sgmllib import SGMLParser
-
 
 class ImgParser(SGMLParser):
     """Parser for getting img markups"""
@@ -61,8 +60,8 @@ class EntryFeed(Feed):
             if current_site.domain in parser.img_locations[0]:
                 return parser.img_locations[0]
             else:
-                return 'http://%s%s' % (current_site.domain,
-                                        parser.img_locations[0])
+                return 'http://%s%s' % (
+                    current_site.domain, parser.img_locations[0])
         return None
 
     def item_enclosure_length(self, item):
@@ -78,7 +77,7 @@ class LatestEntries(EntryFeed):
     description = _('The last news for the site %s') % current_site.domain
 
     def link(self):
-        return reverse('zinnia:entry_archive_index')
+        return reverse('zinnia_entry_archive_index')
 
     def items(self):
         return Entry.published.all()
@@ -117,7 +116,7 @@ class AuthorEntries(EntryFeed):
         return entries_published(obj.entry_set)
 
     def link(self, obj):
-        return reverse('zinnia:author_detail', args=[obj.username])
+        return reverse('zinnia_author_detail', args=[obj.username])
 
     def title(self, obj):
         return _('Entries for author %s') % obj.username
@@ -138,7 +137,7 @@ class TagEntries(EntryFeed):
         return TaggedItem.objects.get_by_model(Entry.published.all(), obj)
 
     def link(self, obj):
-        return reverse('zinnia:tagged_entry_list', args=[obj.name])
+        return reverse('zinnia_tag_detail', args=[obj.name])
 
     def title(self, obj):
         return _('Entries for the tag %s') % obj.name
@@ -159,7 +158,7 @@ class SearchEntries(EntryFeed):
         return Entry.published.search(obj)
 
     def link(self, obj):
-        return '%s?pattern=%s' % (reverse('zinnia:entry_search'), obj)
+        return '%s?pattern=%s' % (reverse('zinnia_entry_search'), obj)
 
     def title(self, obj):
         return _("Results of the search for %s") % obj
@@ -190,3 +189,4 @@ class CommentEntries(Feed):
 
     def description(self, obj):
         return _('The last comments for the news %s') % obj.title
+

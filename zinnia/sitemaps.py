@@ -32,8 +32,7 @@ class CategorySitemap(Sitemap):
         len_entries = float(Entry.published.count())
         self.cache_categories = {}
         for cat in categories:
-            self.cache_categories[cat.pk] = \
-                        entries_published(cat.entry_set).count() / len_entries
+            self.cache_categories[cat.pk] = cat.entries_published_set().count() / len_entries
 
     def items(self):
         categories = Category.objects.all()
@@ -68,7 +67,7 @@ class AuthorSitemap(Sitemap):
         return entries[0].creation_date
 
     def location(self, obj):
-        return reverse('zinnia:author_detail', args=[obj.username])
+        return reverse('zinnia_author_detail', args=[obj.username])
 
 
 class TagSitemap(Sitemap):
@@ -100,4 +99,4 @@ class TagSitemap(Sitemap):
         return '%.1f' % priority
 
     def location(self, obj):
-        return reverse('zinnia:tagged_entry_list', args=[obj.name])
+        return reverse('zinnia_tagged_entry_list', args=[obj.name])

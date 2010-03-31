@@ -4,18 +4,18 @@ from datetime import datetime
 from django.db import models
 from django.contrib.sites.models import Site
 
+
 DRAFT = 0
 HIDDEN = 1
 PUBLISHED = 2
-
 
 def authors_published():
     """Return the published authors"""
     from zinnia.models import Entry
     from django.contrib.auth.models import User
 
-    author_ids = [user.pk for user in User.objects.all() \
-                    if user.entry_set.count()]
+    author_ids = [user.pk for user in User.objects.all()
+                  if user.entry_set.count()]
     return User.objects.filter(pk__in=author_ids)
 
 
@@ -32,8 +32,8 @@ class EntryPublishedManager(models.Manager):
     """Manager to retrieve published entries"""
 
     def get_query_set(self):
-        return entries_published(super(EntryPublishedManager, self)
-                                .get_query_set())
+        return entries_published(
+            super(EntryPublishedManager, self).get_query_set())
 
     def search(self, pattern):
         lookup = None

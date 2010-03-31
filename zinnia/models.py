@@ -32,7 +32,7 @@ class Category(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('zinnia:category_detail', (self.slug, ))
+        return ('zinnia_category_detail', (self.slug, ))
 
     class Meta:
         verbose_name = _('category')
@@ -103,11 +103,11 @@ class Entry(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('zinnia:entry_detail', (), {
-                            'year': self.creation_date.strftime('%Y'),
-                            'month': self.creation_date.strftime('%m').lower(),
-                            'day': self.creation_date.strftime('%d'),
-                            'slug': self.slug})
+        return ('zinnia_entry_detail', (), {
+            'year': self.creation_date.strftime('%Y'),
+            'month': self.creation_date.strftime('%b').lower(),
+            'day': self.creation_date.strftime('%d'),
+            'slug': self.slug})
 
     class Meta:
         ordering = ['-creation_date']
