@@ -14,8 +14,8 @@ from django.contrib.comments.moderation import CommentModerator
 from zinnia.settings import MAIL_COMMENT
 from zinnia.settings import AKISMET_COMMENT
 
-AKISMET_API_KEY = getattr(settings, 'AKISMET_API_KEY', '')
 
+AKISMET_API_KEY = getattr(settings, 'AKISMET_API_KEY', '')
 
 class EntryCommentModerator(CommentModerator):
     """Moderate the comment of Entry"""
@@ -31,8 +31,11 @@ class EntryCommentModerator(CommentModerator):
         if not AKISMET_COMMENT:
             return False
 
-        from akismet import Akismet
-        from akismet import APIKeyError
+        try:
+            from akismet import Akismet
+            from akismet import APIKeyError
+        except ImportError:
+            return False
 
         akismet = Akismet(key=AKISMET_API_KEY,
                     blog_url='http://%s/' % Site.objects.get_current().domain)
