@@ -3,7 +3,6 @@ from django.conf.urls.defaults import *
 
 from zinnia.models import Entry
 from zinnia.settings import PAGINATION
-from zinnia.settings import MONTH_FORMAT
 
 entry_conf_list = {'queryset': Entry.published.all(),
                    'paginate_by': PAGINATION,}
