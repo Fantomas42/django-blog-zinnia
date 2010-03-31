@@ -16,6 +16,6 @@ feeds = {'latest': LatestEntries,
          'categories': CategoryEntries}
 
 urlpatterns = patterns('',
-    url(r'^(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
-    {'feed_dict': feeds, }, 'feeds'),
-)
+                       url(r'^(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
+                           {'feed_dict': feeds,}, 'zinnia_feeds'),
+                       )
