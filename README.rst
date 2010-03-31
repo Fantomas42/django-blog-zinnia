@@ -101,6 +101,22 @@ so if you want to fill your website's sitemap with the entries of your blog, fol
   ...			      )
 
 
+Akismet
+-------
+
+By default the Akismet spam protection is enabled when someone leaving a comment.
+
+But you need to have an API key, if you does not have, get a key at http://akismet.com/personal/ it's free.
+
+Then set this intruction in your project's settings. ::
+
+  >>> AKISMET_API_KEY = 'your key'
+
+If you do not want spam protection for comments, you can disable it with this setting. ::
+
+  >>> ZINNIA_AKISMET_COMMENT = False
+
+
 Synchronization
 ---------------
 
