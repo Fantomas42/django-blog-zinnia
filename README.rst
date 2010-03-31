@@ -14,6 +14,7 @@ More than a long speech, here the list of the main features :
   * Comments
   * RSS Feeds
   * Search engine
+  * Sitemap
   * Archives views
   * Tags and categories views
   * Widgets (Popular entries, Recent entries, ...)
@@ -56,7 +57,7 @@ Then register **zinnia**, **django.contrib.admin**, **django.contrib.comments** 
 Urls
 ----
 
-In your project urls.py adding this following lines to include the zinnia's urls for serving the blog. ::
+In your project's urls.py adding this following lines to include the zinnia's urls for serving the blog. ::
 
   >>> url(r'^weblog/', include('zinnia.urls')),
   >>> url(r'^comments/', include('django.contrib.comments.urls')),
@@ -71,9 +72,46 @@ Note the zinnia urlset is provided for convenient usage, but you can do somethin
   >>> url(r'^weblog/', include('zinnia.urls.entries')),
   >>> url(r'^comments/', include('django.contrib.comments.urls')),
 
+Sitemap
+-------
+
+One of the cool features of Django is the sitemap application, 
+so if you want to fill your website's sitemap with the entries of your blog, follow this procedure.
+
+  * Register **django.contrib.sitemaps** in the INSTALLED_APPS section.
+  * Edit your project's urls to add this code :
+
+::
+
+  >>> from zinnia.sitemaps import TagSitemap
+  >>> from zinnia.sitemaps import EntrySitemap
+  >>> from zinnia.sitemaps import CategorySitemap
+  >>> from zinnia.sitemaps import AuthorSitemap
+  >>> 
+  >>> sitemaps = {'tags': TagSitemap,
+  ...             'blog': EntrySitemap,
+  ...             'authors': AuthorSitemap,
+  ...             'categories': CategorySitemap,}
+  ...
+  >>> urlpatterns += patterns('django.contrib.sitemaps.views',
+  ... 	                      (r'^sitemap.xml$', 'index',
+  ...                          {'sitemaps': sitemaps}),
+  ...                         (r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
+  ...                          {'sitemaps': sitemaps}),
+  ...			      )
+
 
 Synchronization
 ---------------
 
 Now you can run a *syncdb* for installing the models into your database.
+
+
+Examples
+========
+
+  * `Fantomas' side
+    <http://fantomas.willbreak.it>`_.
+
+If you used Zinnia and liked it, don't hesitate to send me the url of your website, it will be added to the list.
 
