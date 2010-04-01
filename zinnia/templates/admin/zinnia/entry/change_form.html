@@ -1,5 +1,5 @@
 {% extends "admin/change_form.html" %}
-{% load i18n admin_modify adminmedia %}
+{% load tagging_tags %}
 
 {% block extrahead %}
 {{ block.super }}
@@ -8,7 +8,8 @@
 <script type="text/javascript" src="/js/jquery.autocomplete.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-  var data = "toto django development".split(" ");
+  {% tags_for_model zinnia.Entry as entry_tags %}
+  var data = "{% for tag in entry_tags %}{{ tag.name }} {% endfor %}".split(" ");
   $("#id_tags").autocomplete(data, {
                 width: 150, max: 10, highlight: false,
                 multiple: true, multipleSeparator: ", ",
