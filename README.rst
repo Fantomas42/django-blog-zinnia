@@ -123,6 +123,15 @@ Synchronization
 Now you can run a *syncdb* for installing the models into your database.
 
 
+Translations
+============
+
+If you want to contribute by updating a translation or adding a translation in your language,
+it's simple, create a account on Transifex.net and you will have the possibility to edit the translations at this url :
+
+http://www.transifex.net/projects/p/django-blog-zinnia/c/master/
+
+
 Examples
 ========
 
