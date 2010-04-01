@@ -14,7 +14,7 @@
 {% endif %}
  
 {% if author %}
-<h1>{% blocktrans with author.username as author %}Articles by {{ author }}{% endblocktrans %}</h1>
+<h1>{% blocktrans with author.username as author %}Entries by {{ author }}{% endblocktrans %}</h1>
 {% endif %}
 
 {% for object in object_list %}

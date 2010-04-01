@@ -7,7 +7,7 @@
 <p class="entryMeta">
   {% trans "Written by" %} 
   {% for author in object.authors.all %}
-  <a href="{% url zinnia_author_detail author %}" title="{% blocktrans with author as author %}Show {{ author }} articles{% endblocktrans %}">
+  <a href="{% url zinnia_author_detail author %}" title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">
     <strong>{{ author }}</strong>
   </a>{% if not forloop.last %}, {% endif %}
   {% endfor %}

@@ -11,9 +11,9 @@
     <li>
       <a href="{{ object.get_absolute_url }}" title="{{ object }}">{{ object }}</a> 
       {% blocktrans count object.entries_published_set|length as entries_published %}
-      {{ entries_published }} article
+      {{ entries_published }} entry
       {% plural %}
-      {{ entries_published }} articles
+      {{ entries_published }} entries
       {% endblocktrans %}
     </li>
     {% endfor %}
