@@ -20,6 +20,9 @@
 </p>
 
 <div class="entryContent">
+  {% if object.image %}
+  <img src="{{ object.image.url }}" alt="{{ object.title }}" />
+  {% endif %}
   {{ object_content }}
 </div>
 

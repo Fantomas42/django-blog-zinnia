@@ -14,6 +14,7 @@ from zinnia.moderator import EntryCommentModerator
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
+from zinnia.settings import UPLOAD_TO
 
 
 class Category(models.Model):
@@ -47,6 +48,9 @@ class Entry(models.Model):
                       (PUBLISHED, _('published')))
 
     title = models.CharField(_('title'), max_length=100)
+
+    image = models.ImageField(_('image'), upload_to=UPLOAD_TO,
+                              blank=True, help_text=_('used for illustration'))
     content = models.TextField(_('content'))
     excerpt = models.TextField(_('excerpt'), blank=True,
                                 help_text=_('optional element'))

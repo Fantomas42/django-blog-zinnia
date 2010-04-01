@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-01 14:37+0200\n"
-"PO-Revision-Date: 2010-04-01 14:50+0100\n"
+"POT-Creation-Date: 2010-04-01 15:53+0200\n"
+"PO-Revision-Date: 2010-04-01 15:54+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -34,8 +34,8 @@ msgid "Sorting"
 msgstr "Répartition"
 
 #: admin.py:58
-#: models.py:22
-#: models.py:49
+#: models.py:23
+#: models.py:50
 msgid "title"
 msgstr "titre"
 
@@ -89,157 +89,165 @@ msgstr "%i annuaires pingés avec succès."
 msgid "Ping Directories for selected entries"
 msgstr "Pinger les articles dans les annuaires."
 
-#: feeds.py:76
+#: feeds.py:77
 #, python-format
 msgid "%s - News"
 msgstr "%s | Dernières actualités"
 
-#: feeds.py:77
+#: feeds.py:78
 #, python-format
 msgid "The last news for the site %s"
 msgstr "Les dernières actualités du site %s"
 
-#: feeds.py:101
+#: feeds.py:102
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Actualités pour la catégorie : %s"
 
-#: feeds.py:104
+#: feeds.py:105
 #, python-format
 msgid "The last news for the category %s"
 msgstr "Les dernières actualités pour la catégorie : %s"
 
-#: feeds.py:122
+#: feeds.py:123
 #, python-format
 msgid "Entries for author %s"
 msgstr "L'actualités par %s"
 
-#: feeds.py:125
+#: feeds.py:126
 #, python-format
 msgid "The last news by %s"
 msgstr "Les dernières actualités par %s"
 
-#: feeds.py:143
+#: feeds.py:144
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Actualités pour le tag : %s"
 
-#: feeds.py:146
+#: feeds.py:147
 #, python-format
 msgid "The last news for the tag %s"
 msgstr "Les dernières actualités pour le tag : %s"
 
-#: feeds.py:164
+#: feeds.py:165
 #, python-format
 msgid "Results of the search for %s"
 msgstr "Résultats de recherche pour '%s'"
 
-#: feeds.py:167
+#: feeds.py:168
 #, python-format
 msgid "The news containing the pattern %s"
 msgstr "Les dernières actualités contenant le motif '%s'"
 
-#: feeds.py:188
+#: feeds.py:189
 #, python-format
 msgid "Comments on %s"
 msgstr "Commentaires sur : %s"
 
-#: feeds.py:191
+#: feeds.py:192
 #, python-format
 msgid "The last comments for the news %s"
 msgstr "Les derniers commentaires sur l'actualité : %s"
 
-#: models.py:23
-#: models.py:57
+#: models.py:24
+#: models.py:61
 msgid "used for publication"
 msgstr "Utilisé pour la publication"
 
-#: models.py:24
+#: models.py:25
 msgid "description"
 msgstr "description"
 
-#: models.py:38
+#: models.py:39
 msgid "category"
 msgstr "catégorie"
 
-#: models.py:39
-#: models.py:55
+#: models.py:40
+#: models.py:59
 msgid "categories"
 msgstr "catégories"
 
-#: models.py:45
+#: models.py:46
 msgid "draft"
 msgstr "Brouillon"
 
-#: models.py:46
+#: models.py:47
 msgid "hidden"
 msgstr "Non publié"
 
-#: models.py:47
+#: models.py:48
 msgid "published"
 msgstr "Publié"
 
-#: models.py:50
+#: models.py:52
+msgid "image"
+msgstr "image"
+
+#: models.py:53
+msgid "used for illustration"
+msgstr "Utilisée comme illustration"
+
+#: models.py:54
 msgid "content"
 msgstr "contenu"
 
-#: models.py:51
+#: models.py:55
 msgid "excerpt"
 msgstr "extrait"
 
-#: models.py:52
+#: models.py:56
 msgid "optional element"
 msgstr "Elément optionnel"
 
-#: models.py:58
+#: models.py:62
 msgid "authors"
 msgstr "auteurs"
 
-#: models.py:61
+#: models.py:65
 msgid "comment enabled"
 msgstr "commentaires ?"
 
-#: models.py:63
+#: models.py:67
 msgid "creation date"
 msgstr "date de création"
 
-#: models.py:64
+#: models.py:68
 msgid "last update"
 msgstr "mise à jour"
 
-#: models.py:65
+#: models.py:69
 msgid "start publication"
 msgstr "démarrage"
 
-#: models.py:66
+#: models.py:70
 msgid "date start publish"
 msgstr "Date utilisé pour démarrer la publication"
 
-#: models.py:68
+#: models.py:72
 msgid "end publication"
 msgstr "arrêt"
 
-#: models.py:69
+#: models.py:73
 msgid "date end publish"
 msgstr "Date utilisé pour arrêter la publication"
 
-#: models.py:72
+#: models.py:76
 msgid "sites publication"
 msgstr "sites publiés"
 
-#: models.py:93
+#: models.py:97
 msgid "is_actual"
 msgstr "En cours ?"
 
-#: models.py:99
+#: models.py:103
 msgid "is_visible"
 msgstr "Visible ?"
 
-#: models.py:114
+#: models.py:118
 msgid "entry"
 msgstr "article"
 
-#: models.py:115
+#: models.py:119
 msgid "entries"
 msgstr "articles"
 
@@ -332,7 +340,7 @@ msgstr "à la date du"
 msgid "in"
 msgstr "sous"
 
-#: templates/zinnia/_entry_detail.html:31
+#: templates/zinnia/_entry_detail.html:34
 msgid "No tags"
 msgstr "Pas de tags"
 
