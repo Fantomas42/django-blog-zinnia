@@ -1,66 +1,75 @@
 {% extends "zinnia/base.html" %}
-{% load tagging_tags comments i18n %}
+{% load tagging_tags comments i18n zinnia_tags %}
 
 {% block title %}{{ object.title }}{% endblock %}
 
 {% block content %}
 <div class="entryPost">
-	{% with object.get_content|safe as object_content %}
-		{% include "zinnia/_entry_detail.html" %}
-	{% endwith %}
+  {% with object.get_content|safe as object_content %}
+  {% include "zinnia/_entry_detail.html" %}
+  {% endwith %}
 </div>
 
 {% get_comment_count for object as comment_count %}
 <a name="comments"></a>
 {% if comment_count %}
 <div id="numberofcomments">
-	<span>
-		{% blocktrans count comment_count as comment_count %}
-			{{ comment_count }} comment
-		{% plural %}
-			{{ comment_count }} comments
-		{% endblocktrans %}
-	</span>
+  <span>
+    {% blocktrans count comment_count as comment_count %}
+    {{ comment_count }} comment
+    {% plural %}
+    {{ comment_count }} comments
+    {% endblocktrans %}
+  </span>
 </div>
 {% else %}
-	{% if object.comment_enabled %}
-	<div id="numberofcomments">
-		<span>{% trans "No comments yet." %}</span>
-	</div>
-	{% endif %}
+{% if object.comment_enabled %}
+<div id="numberofcomments">
+  <span>{% trans "No comments yet." %}</span>
+</div>
+{% endif %}
 {% endif %}
 
 <div id="comment">
-	{% if comment_count %}
-		{% get_comment_list for object as comment_list %}
-		<ol id="commentlist">
-			{% for comment in comment_list %}
-			<li class="alt {% cycle box1,box2 %}">
-				<div class="commentbody">
-					<a name="comment_{{ comment.pk }}"></a>
-					<cite>{{ comment.user_name }}</cite><br />
-					{% if comment.url %}<small><a href="{{ comment.url }}" target="blank">{{ comment.url }}</a></small><br />{% endif %}
-					
-					<small class="commentmetadata"><a>{{ comment.submit_date|date:"l d F Y \a H:i" }}</a></small>
-					{{ comment.comment|safe|linebreaks }}
-				</div>
-				<div class="cleared"></div>
-			</li>
-			{% endfor %}
-		</ol>
-	{% else %}
-		{% if object.comment_enabled %}
-		<p>{% trans "Be first to comment!" %}</p>
-		{% endif %}
-	{% endif %}
+  {% if comment_count %}
+  {% get_comment_list for object as comment_list %}
+  <ol id="commentlist">
+    {% for comment in comment_list %}
+    <li class="alt {% cycle box1,box2 %}">
+      <a class="gravatar">
+	<img src="{% get_gravatar comment.email 60 "G" %}" />
+      </a>
+      <div class="commentbody">
+	<a name="comment_{{ comment.pk }}"></a>
+	<cite>{{ comment.user_name }}</cite>
+	<br />
+	{% if comment.url %}
+	<small>
+	  <a href="{{ comment.url }}" target="blank">{{ comment.url }}</a>
+	</small>
+	<br />
+	{% endif %}				
+	<small class="commentmetadata">
+	  <a>{{ comment.submit_date|date:"l d F Y \a H:i" }}</a>
+	</small>
+	{{ comment.comment|safe|linebreaks }}
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  {% if object.comment_enabled %}
+  <p>{% trans "Be first to comment!" %}</p>
+  {% endif %}
+  {% endif %}
 
-	{% if object.comment_enabled %}
-	<h3>{% trans "Post your comment" %}</h3>
-	<div>
-		{% render_comment_form for object %}
-	</div>
-	{% else %}
-		<h3>{% trans "Comments are closed." %}</h3>
-	{% endif %}
+  {% if object.comment_enabled %}
+  <h3>{% trans "Post your comment" %}</h3>
+  <div>
+    {% render_comment_form for object %}
+  </div>
+  {% else %}
+  <h3>{% trans "Comments are closed." %}</h3>
+  {% endif %}
 </div>
 {% endblock %}

@@ -1,21 +1,33 @@
 {% load tagging_tags comments i18n %}
 
 <h2 class="entryTitle">
-	<a href="{{ object.get_absolute_url }}" title="{{ object.title }}">{{ object.title }}</a>
+  <a href="{{ object.get_absolute_url }}" title="{{ object.title }}">{{ object.title }}</a>
 </h2>
-<p class="entryMeta">
-	{% trans "Written by" %} {% for author in object.authors.all %}<a href="{% url zinnia_author_detail author %}" title="{% blocktrans with author as author %}Show {{ author }} articles{% endblocktrans %}"><strong>{{ author }}</strong></a>{% if not forloop.last %}, {% endif %}{% endfor %}
-{% trans "on date" %} {{ object.creation_date|date:"d F Y"|capfirst }}
-{% trans "in" %} {% for category in object.categories.all %}<a href="{{ category.get_absolute_url }}" title="{{ category }}">{{ category }}</a>{% if not forloop.last %}, {% endif %}
-{% endfor %}</p>
 
-<div class="entryContent">{{ object_content }}</div>
+<p class="entryMeta">
+  {% trans "Written by" %} 
+  {% for author in object.authors.all %}
+  <a href="{% url zinnia_author_detail author %}" title="{% blocktrans with author as author %}Show {{ author }} articles{% endblocktrans %}">
+    <strong>{{ author }}</strong>
+  </a>{% if not forloop.last %}, {% endif %}
+  {% endfor %}
+  {% trans "on date" %} {{ object.creation_date|date:"d F Y"|capfirst }}
+  {% trans "in" %} 
+  {% for category in object.categories.all %}
+  <a href="{{ category.get_absolute_url }}" title="{{ category }}">{{ category }}</a>
+  {% if not forloop.last %}, {% endif %}
+  {% endfor %}
+</p>
+
+<div class="entryContent">
+  {{ object_content }}
+</div>
 
 <span class="entryTags">
-	{% tags_for_object object as tag_list %}
-	{% for tag in tag_list %}  
-		<a href="{% url zinnia_tag_detail tag %}" title="Tag {{ tag }}">{{ tag }}</a>
-	{% empty %}
-		<span>{% trans "No tags" %}</span>
-	{% endfor %}
+  {% tags_for_object object as tag_list %}
+  {% for tag in tag_list %}  
+  <a href="{% url zinnia_tag_detail tag %}" title="Tag {{ tag }}">{{ tag }}</a>
+  {% empty %}
+  <span>{% trans "No tags" %}</span>
+  {% endfor %}
 </span>

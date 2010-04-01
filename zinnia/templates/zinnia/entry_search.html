@@ -8,9 +8,9 @@
 
 {% for object in object_list %}
 <div class="entry">
-	{% with object.get_content|truncatewords_html:100|safe as object_content %}
-		{% include "zinnia/_entry_detail.html" %}
-	{% endwith %}
+  {% with object.get_content|truncatewords_html:100|safe as object_content %}
+  {% include "zinnia/_entry_detail.html" %}
+  {% endwith %}
 </div>
 {% empty %}
 <p>{% trans "Nothing found." %}</p>

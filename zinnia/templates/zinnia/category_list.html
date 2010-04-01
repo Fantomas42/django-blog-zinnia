@@ -6,17 +6,17 @@
 {% block content %}
 <h2>{% trans "Category list" %}</h2>
 <div>
-	<ul>
-		{% for object in object_list %}
-		<li>
-			<a href="{{ object.get_absolute_url }}" title="{{ object }}">{{ object }}</a> 
-			{% blocktrans with object.entries_published_set|length as entries_published %}
-				{{ entries_published }} article
-			{% plural %}
-				{{ entries_published }} articles
-			{% endblocktrans %}
-		</li>
-		{% endfor %}
-	</ul>
+  <ul>
+    {% for object in object_list %}
+    <li>
+      <a href="{{ object.get_absolute_url }}" title="{{ object }}">{{ object }}</a> 
+      {% blocktrans count object.entries_published_set|length as entries_published %}
+      {{ entries_published }} article
+      {% plural %}
+      {{ entries_published }} articles
+      {% endblocktrans %}
+    </li>
+    {% endfor %}
+  </ul>
 </div>
 {% endblock %}

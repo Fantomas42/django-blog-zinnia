@@ -1,12 +1,15 @@
 {% extends "zinnia/entry_archive_base.html" %}
+{% load i18n %}
 
-{% block title %}Derni&egrave;res actus{% endblock %}
+{% block title %}{% trans "Latest entries" %}{% endblock %}
 
 {% block content %}
-  {{ block.super }}
-  <!--<ul>  
+{{ block.super }}
+<!--<ul>  
   {% for date in date_list %}
-    <li><a href="{% url zinnia_entry_archive_year date|date:"Y" %}">{{ date|date:"Y"|capfirst }}</a></li>  
+    <li>
+      <a href="{% url zinnia_entry_archive_year date|date:"Y" %}">{{ date|date:"Y"|capfirst }}</a>
+    </li>  
   {% endfor %}  
-  </ul>-->
+</ul>-->
 {% endblock %}
