@@ -15,6 +15,7 @@ from tagging.models import TaggedItem
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import entries_published
+from zinnia.settings import COPYRIGHT
 
 
 current_site = Site.objects.get_current()
@@ -36,7 +37,7 @@ class EntryFeed(Feed):
     """Base Entry Feed"""
     title_template = 'feeds/entry_title.html'
     description_template= 'feeds/entry_description.html'
-    copyright = 'Copyright (c) 2005-%i, Julien Fache' % datetime.now().year
+    feed_copyright = COPYRIGHT
 
     def item_pubdate(self, item):
         return item.creation_date
