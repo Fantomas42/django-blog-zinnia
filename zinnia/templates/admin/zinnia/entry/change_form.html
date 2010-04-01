@@ -1,0 +1,25 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_modify adminmedia %}
+
+{% block extrahead %}
+{{ block.super }}
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.bgiframe.js"></script>
+<script type="text/javascript" src="/js/jquery.autocomplete.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  var data = "toto django development".split(" ");
+  $("#id_tags").autocomplete(data, {
+                width: 150, max: 10, highlight: false,
+                multiple: true, multipleSeparator: ", ",
+                scroll: true, scrollHeight: 300,
+                matchContains: true, autoFill: true,});
+});
+</script>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link href="/css/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
