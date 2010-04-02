@@ -12,6 +12,9 @@ from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import PUBLISHED
 from zinnia.settings import USE_BITLY
+from zinnia.settings import USE_TWITTER
+from zinnia.settings import TWITTER_USER
+from zinnia.settings import TWITTER_PASSWORD
 from zinnia.settings import PING_DIRECTORIES
 from zinnia.settings import SAVE_PING_DIRECTORIES
 from zinnia.ping import DirectoryPinger
@@ -38,12 +41,12 @@ class EntryAdmin(admin.ModelAdmin):
     list_display = ('get_title_comments', 'get_authors', 'creation_date',
                     'last_update', 'get_categories', 'get_tags', 'get_sites',
                     'comment_enabled', 'is_actual', 'is_visible', 'get_link',
-                    'get_shorturl')
+                    'get_short_url')
     filter_horizontal = ('categories', 'authors')
     prepopulated_fields = {'slug': ('title', )}
     search_fields = ('title', 'excerpt', 'content', 'tags')
     actions = ['make_mine', 'make_published', 'make_hidden', 'close_comments',
-               'ping_directories',]# 'bitlify']
+               'ping_directories', 'make_tweet']
     actions_on_top = True
     actions_on_bottom = True
 
@@ -107,20 +110,11 @@ class EntryAdmin(admin.ModelAdmin):
     get_link.allow_tags = True
     get_link.short_description = _('View on site')
 
-    def get_shorturl(self, value):
-        if not USE_BITLY:
-            return _('Unavailable')
-            
-        from django_bitly.models import Bittle
-        
-        bittle = Bittle.objects.bitlify(value)
-        if bittle:
-            url = bittle.shortUrl
-        else:
-            url = value.get_absolute_url
-        return _('<a href="%(url)s" target="blank">%(url)s</a>') % {'url': url}
-    get_shorturl.allow_tags = True
-    get_shorturl.short_description = _('short url')
+    def get_short_url(self, entry):
+        return '<a href="%(url)s" target="blank">%(url)s</a>' % \
+               {'url': entry.get_short_url()}
+    get_short_url.allow_tags = True
+    get_short_url.short_description = _('Short url')
 
     # Custom Methods
     def save_model(self, request, entry, form, change):
@@ -164,6 +158,9 @@ class EntryAdmin(admin.ModelAdmin):
             del actions['make_mine']
         if not PING_DIRECTORIES:
             del actions['ping_directories']
+        if not USE_TWITTER or not USE_BITLY:
+            del actions['make_tweet']
+
         return actions
 
     # Custom Actions
@@ -183,6 +180,15 @@ class EntryAdmin(admin.ModelAdmin):
         """Set entries selected as hidden"""
         queryset.update(status='hidden')
     make_hidden.short_description = _('Set entries selected as hidden')
+
+    def make_tweet(self, request, queryset):
+        """Post an update on Twitter"""
+        import twitter
+        api = twitter.Api(username=TWITTER_USER, password=TWITTER_PASSWORD)
+        for entry in queryset:
+            message = '%s %s' % (entry.title[:119], entry.get_short_url())
+            api.PostUpdate(message)
+    make_tweet.short_description = _('Tweet entries selected')
 
     def close_comments(self, request, queryset):
         """Close the comments for selected entries"""
