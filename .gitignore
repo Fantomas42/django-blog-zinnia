@@ -10,6 +10,7 @@ parts
 build
 include
 downloads
+src_eggs
 develop-eggs
 .installed.cfg
 django_blog_zinnia.egg-info/

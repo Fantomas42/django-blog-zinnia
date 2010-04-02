@@ -12,9 +12,10 @@ Features
 More than a long speech, here the list of the main features :
 
   * Comments
+  * Sitemaps
   * RSS Feeds
+  * URL Shortener
   * Search engine
-  * Sitemap
   * Archives views
   * Tags and categories views
   * Widgets (Popular entries, Recent entries, ...)
@@ -116,6 +117,19 @@ If you do not want spam protection for comments, you can disable it with this se
 
   >>> ZINNIA_AKISMET_COMMENT = False
 
+Bit.ly
+------
+
+You find `Bit.ly
+<http://bit.ly>`_ usefull and want to use it for your blog entries ?
+
+It's simple, install `django_bitly
+<http://bitbucket.org/discovery/django-bitly/>`_ in your project's settings and add those settings. ::
+
+  >>> BITLY_LOGIN = 'Your Bit.ly login'
+  >>> BITLY_API_KEY = 'Your Bit.ly api key'
+
+Zinnia will do the rest.
 
 Synchronization
 ---------------

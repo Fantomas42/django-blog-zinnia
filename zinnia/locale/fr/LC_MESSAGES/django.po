@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-01 15:53+0200\n"
-"PO-Revision-Date: 2010-04-01 15:54+0100\n"
+"POT-Creation-Date: 2010-04-02 15:20+0200\n"
+"PO-Revision-Date: 2010-04-02 15:22+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -21,71 +21,84 @@ msgstr ""
 "X-Poedit-Country: FRANCE\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: admin.py:29
+#: admin.py:30
 msgid "Content"
 msgstr "Contenu"
 
-#: admin.py:30
+#: admin.py:31
 msgid "Options"
 msgstr "Options"
 
-#: admin.py:34
+#: admin.py:35
 msgid "Sorting"
 msgstr "Répartition"
 
-#: admin.py:58
+#: admin.py:60
 #: models.py:23
 #: models.py:50
 msgid "title"
 msgstr "titre"
 
-#: admin.py:70
+#: admin.py:72
 msgid "author(s)"
 msgstr "auteur(s)"
 
-#: admin.py:82
+#: admin.py:84
 msgid "category(s)"
 msgstr "Catégorie(s)"
 
-#: admin.py:93
+#: admin.py:95
 msgid "tag(s)"
 msgstr "Tag(s)"
 
-#: admin.py:100
+#: admin.py:102
 msgid "site(s)"
 msgstr "Site(s)"
 
-#: admin.py:104
+#: admin.py:106
 #, python-format
 msgid "<a href=\"%s\" target=\"blank\">View</a>"
 msgstr "<a href=\"%s\" target=\"blank\">Consulter</a>"
 
-#: admin.py:106
+#: admin.py:108
 msgid "View on site"
 msgstr "Voir sur le site"
 
-#: admin.py:158
+#: admin.py:112
+msgid "Unavailable"
+msgstr "Indisponible"
+
+#: admin.py:121
+#, python-format
+msgid "<a href=\"%(url)s\" target=\"blank\">%(url)s</a>"
+msgstr "<a href=\"%(url)s\" target=\"blank\">%(url)s</a>"
+
+#: admin.py:123
+msgid "short url"
+msgstr "url raccourcie"
+
+#: admin.py:175
 msgid "Set the entries to the user"
 msgstr "Acquérir les articles"
 
-#: admin.py:163
+#: admin.py:180
 msgid "Set entries selected as published"
 msgstr "Publier les articles sélectionnés"
 
-#: admin.py:168
+#: admin.py:185
 msgid "Set entries selected as hidden"
 msgstr "Masquer les articles sélectionnés"
 
-#: admin.py:173
+#: admin.py:190
 msgid "Close the comments for selected entries"
 msgstr "Fermer les commentaires pour les articles sélectionnés"
 
-#: admin.py:184
+#: admin.py:201
 #, python-format
 msgid "%i directories succesfully pinged."
 msgstr "%i annuaires pingés avec succès."
 
-#: admin.py:185
+#: admin.py:202
 msgid "Ping Directories for selected entries"
 msgstr "Pinger les articles dans les annuaires."
 
