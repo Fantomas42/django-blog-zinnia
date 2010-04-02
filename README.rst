@@ -132,7 +132,7 @@ It's simple, install `django_bitly
 
 Zinnia will do the rest.
 
-Tweeter
+Twitter
 -------
 
 When you post a new entry on your blog it can be usefull to tweet this entry.
