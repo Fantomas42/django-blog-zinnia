@@ -124,7 +124,7 @@ You find `Bit.ly
 <http://bit.ly>`_ usefull and want to use it for your blog entries ?
 
 It's simple, install `django_bitly
-<http://bitbucket.org/discovery/django-bitly/>`_ in your project's settings and add those settings. ::
+<http://bitbucket.org/discovery/django-bitly/>`_ in your project's settings and add these settings. ::
 
   >>> BITLY_LOGIN = 'Your Bit.ly login'
   >>> BITLY_API_KEY = 'Your Bit.ly api key'
