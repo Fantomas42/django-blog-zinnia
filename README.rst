@@ -14,12 +14,13 @@ More than a long speech, here the list of the main features :
   * Comments
   * Sitemaps
   * RSS Feeds
-  * URL Shortener
   * Search engine
   * Archives views
   * Tags and categories views
   * Widgets (Popular entries, Recent entries, ...)
   * Spam protection with Akismet
+  * Support Bit.ly
+  * Support Twitter
   * Support Gravatar
   * Collaborative work
   * Prepublication
@@ -36,7 +37,7 @@ Installation
 ============
 
 You could retrieve the last sources from http://github.com/Fantomas42/django-blog-zinnia and running the installation script ::
-    
+
   $> python setup.py install
 
 or use pip ::
@@ -76,7 +77,7 @@ Note the zinnia urlset is provided for convenient usage, but you can do somethin
 Sitemap
 -------
 
-One of the cool features of Django is the sitemap application, 
+One of the cool features of Django is the sitemap application,
 so if you want to fill your website's sitemap with the entries of your blog, follow this procedure.
 
   * Register **django.contrib.sitemaps** in the INSTALLED_APPS section.
@@ -88,7 +89,7 @@ so if you want to fill your website's sitemap with the entries of your blog, fol
   >>> from zinnia.sitemaps import EntrySitemap
   >>> from zinnia.sitemaps import CategorySitemap
   >>> from zinnia.sitemaps import AuthorSitemap
-  >>> 
+  >>>
   >>> sitemaps = {'tags': TagSitemap,
   ...             'blog': EntrySitemap,
   ...             'authors': AuthorSitemap,
@@ -126,15 +127,27 @@ You find `Bit.ly
 It's simple, install `django_bitly
 <http://bitbucket.org/discovery/django-bitly/>`_ in your project's settings and add these settings. ::
 
-  >>> BITLY_LOGIN = 'Your Bit.ly login'
-  >>> BITLY_API_KEY = 'Your Bit.ly api key'
+  >>> BITLY_LOGIN = 'your bit.ly login'
+  >>> BITLY_API_KEY = 'your bit.ly api key'
 
 Zinnia will do the rest.
 
-Synchronization
----------------
+Tweeter
+-------
 
-Now you can run a *syncdb* for installing the models into your database.
+When you post a new entry on your blog it can be usefull to tweet this entry.
+
+For doing that, first you need to activate the Bit.ly support like described in
+the paragraph above.
+
+Then install `python-twitter
+<http://code.google.com/p/python-twitter/>`_ and add these settings. ::
+
+  >>> TWITTER_USER = 'your twitter username'
+  >>> TWITTER_PASSWORD = 'your twitter password'
+
+Now in admin, you have the possibilty to post an update containing your entry title and
+the short url your the entry.
 
 
 Translations
