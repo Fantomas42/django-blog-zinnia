@@ -43,7 +43,7 @@ def get_popular_entries(number=5):
 def get_archives_entries():
     """Return archives entries"""
     return {'archives': Entry.published.dates('creation_date', 'month',
-                                                order='DESC')}
+                                              order='DESC')}
 
 
 @register.simple_tag

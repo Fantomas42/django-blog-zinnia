@@ -149,6 +149,26 @@ Then install `python-twitter
 Now in admin, you have the possibilty to post an update containing your entry title and
 the short url your the entry.
 
+Templatetags
+============
+
+Zinnia provides several templatetags to create some **widgets** in your website's templates.
+
+* get_recent_entries number
+
+Display the latest entries.
+
+* get_random_entries [number]
+
+Display random entries.
+
+* get_popular_entries [number]
+
+Display popular entries.
+
+* get_archives_entries
+
+Display link markups for listing the archives
 
 Translations
 ============
