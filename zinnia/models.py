@@ -14,6 +14,7 @@ from zinnia.moderator import EntryCommentModerator
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
+from zinnia.settings import USE_BITLY
 from zinnia.settings import UPLOAD_TO
 
 
@@ -94,13 +95,24 @@ class Entry(models.Model):
         now = datetime.now()
         return now >= self.start_publication and now < self.end_publication
     is_actual.boolean = True
-    is_actual.short_description = _('is_actual')
+    is_actual.short_description = _('is actual')
 
     def is_visible(self):
         """Define if an entry is visible on site"""
         return self.is_actual() and self.status == PUBLISHED
     is_visible.boolean = True
-    is_visible.short_description = _('is_visible')
+    is_visible.short_description = _('is visible')
+
+    def get_short_url(self):
+        if not USE_BITLY:
+            return _('Unavailable')
+            
+        from django_bitly.models import Bittle
+        
+        bittle = Bittle.objects.bitlify(self)
+        url = bittle and bittle.shortUrl or self.get_absolute_url()
+        return url
+    get_short_url.short_description = _('short url')
 
     def __unicode__(self):
         return '%s: %s' % (self.title, self.get_status_display())
