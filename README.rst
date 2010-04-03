@@ -2,14 +2,14 @@
 Django Blog Zinnia
 ==================
 
-Simple but powerfull application for managing a blogs into your Django website.
+Simple yet powerful application for managing a blog within your Django website.
 
 .. contents::
 
 Features
 ========
 
-More than a long speech, here the list of the main features :
+Main features :
 
   * Comments
   * Sitemaps
@@ -19,16 +19,16 @@ More than a long speech, here the list of the main features :
   * Tags and categories views
   * Widgets (Popular entries, Recent entries, ...)
   * Spam protection with Akismet
-  * Support Bit.ly
-  * Support Twitter
-  * Support Gravatar
+  * Bit.ly support
+  * Twitter support
+  * Gravatar support
   * Collaborative work
   * Prepublication
 
 Dependancies
 ============
 
-Before installing Zinnia make sure that you already have installed this packages
+Make sure to install these packages prior to installation :
 
  * akismet
  * django-tagging
@@ -36,7 +36,7 @@ Before installing Zinnia make sure that you already have installed this packages
 Installation
 ============
 
-You could retrieve the last sources from http://github.com/Fantomas42/django-blog-zinnia and running the installation script ::
+You could retrieve the last sources from http://github.com/Fantomas42/django-blog-zinnia and run the installation script ::
 
   $> python setup.py install
 
@@ -59,13 +59,13 @@ Then register **zinnia**, **django.contrib.admin**, **django.contrib.comments** 
 Urls
 ----
 
-In your project's urls.py adding this following lines to include the zinnia's urls for serving the blog. ::
+Add the following lines to your project's urls.py in order to display the blog. ::
 
   >>> url(r'^weblog/', include('zinnia.urls')),
   >>> url(r'^comments/', include('django.contrib.comments.urls')),
 
 
-Note the zinnia urlset is provided for convenient usage, but you can do something like that if you want to customize your urls : ::
+Note that the default zinnia urlset is provided for convenient usage, but you can customize your urls if you want. Here's how : ::
 
   >>> url(r'^weblog/feeds/', include('zinnia.urls.feeds')),
   >>> url(r'^weblog/authors/', include('zinnia.urls.authors')),
@@ -78,10 +78,10 @@ Sitemap
 -------
 
 One of the cool features of Django is the sitemap application,
-so if you want to fill your website's sitemap with the entries of your blog, follow this procedure.
+so if you want to fill your website's sitemap with the entries of your blog, follow these steps.
 
   * Register **django.contrib.sitemaps** in the INSTALLED_APPS section.
-  * Edit your project's urls to add this code :
+  * Edit your project's urls and add this code :
 
 ::
 
@@ -106,15 +106,13 @@ so if you want to fill your website's sitemap with the entries of your blog, fol
 Akismet
 -------
 
-By default the Akismet spam protection is enabled when someone leaving a comment.
+By default the Akismet spam protection is enabled when anyone leaves a comment.
 
-But you need to have an API key, if you does not have, get a key at http://akismet.com/personal/ it's free.
-
-Then set this intruction in your project's settings. ::
+IMPORTANT : you need an API key. If you don't have any, get one for free at http://akismet.com/personal/ then set it in your project's settings like this : ::
 
   >>> AKISMET_API_KEY = 'your key'
 
-If you do not want spam protection for comments, you can disable it with this setting. ::
+If you don't want spam protection for comments, you can disable it with this setting. ::
 
   >>> ZINNIA_AKISMET_COMMENT = False
 
@@ -122,7 +120,7 @@ Bit.ly
 ------
 
 You find `Bit.ly
-<http://bit.ly>`_ usefull and want to use it for your blog entries ?
+<http://bit.ly>`_ useful and want to use it for your blog entries ?
 
 It's simple, install `django_bitly
 <http://bitbucket.org/discovery/django-bitly/>`_ in your project's settings and add these settings. ::
@@ -135,10 +133,9 @@ Zinnia will do the rest.
 Twitter
 -------
 
-When you post a new entry on your blog it can be usefull to tweet this entry.
+When you post a new entry on your blog you might want to tweet it as well.
 
-For doing that, first you need to activate the Bit.ly support like described in
-the paragraph above.
+In order to do that, you first need to activate the Bit.ly support like described above.
 
 Then install `python-twitter
 <http://code.google.com/p/python-twitter/>`_ and add these settings. ::
@@ -146,8 +143,8 @@ Then install `python-twitter
   >>> TWITTER_USER = 'your twitter username'
   >>> TWITTER_PASSWORD = 'your twitter password'
 
-Now in admin, you have the possibilty to post an update containing your entry title and
-the short url your the entry.
+Now in admin, you have the possibilty to post an update containing your entry's title and
+the shortened url of your entry.
 
 Templatetags
 ============
@@ -185,5 +182,4 @@ Examples
   * `Fantomas' side
     <http://fantomas.willbreak.it>`_.
 
-If you used Zinnia and liked it, don't hesitate to send me the url of your website, it will be added to the list.
-
+If you are a proud user of Zinnia, send me the url of your website and I will add it to the list.
