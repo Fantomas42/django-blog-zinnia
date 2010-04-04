@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-02 17:10+0200\n"
-"PO-Revision-Date: 2010-04-02 17:23+0100\n"
+"POT-Creation-Date: 2010-04-04 19:38+0200\n"
+"PO-Revision-Date: 2010-04-04 19:39+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -244,27 +244,27 @@ msgstr "Date utilisé pour arrêter la publication"
 msgid "sites publication"
 msgstr "sites publiés"
 
-#: models.py:98
+#: models.py:99
 msgid "is actual"
 msgstr "En cours ?"
 
-#: models.py:104
+#: models.py:106
 msgid "is visible"
 msgstr "Visible ?"
 
-#: models.py:108
+#: models.py:111
 msgid "Unavailable"
 msgstr "Indisponible"
 
-#: models.py:115
+#: models.py:118
 msgid "short url"
 msgstr "url raccourcie"
 
-#: models.py:130
+#: models.py:133
 msgid "entry"
 msgstr "article"
 
-#: models.py:131
+#: models.py:134
 msgid "entries"
 msgstr "articles"
 
@@ -486,6 +486,10 @@ msgstr "Résultats de recherche"
 #: templates/zinnia/entry_search.html:16
 msgid "Nothing found."
 msgstr "Aucun article trouvé."
+
+#: templates/zinnia/tags/popular_entries.html:8
+msgid "comment"
+msgstr "commentaire"
 
 #~ msgid "<a href=\"%(url)s\" target=\"blank\">%(url)s</a>"
 #~ msgstr "<a href=\"%(url)s\" target=\"blank\">%(url)s</a>"
