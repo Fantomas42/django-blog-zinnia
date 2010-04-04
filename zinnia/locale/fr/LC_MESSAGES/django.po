@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-04 19:38+0200\n"
-"PO-Revision-Date: 2010-04-04 19:39+0100\n"
+"POT-Creation-Date: 2010-04-04 22:37+0200\n"
+"PO-Revision-Date: 2010-04-04 22:37+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -65,7 +65,7 @@ msgid "View on site"
 msgstr "Voir sur le site"
 
 #: admin.py:117
-#: templates/zinnia/_entry_detail.html:39
+#: templates/zinnia/_entry_detail.html:40
 msgid "Short url"
 msgstr "Url raccourcie"
 
@@ -244,27 +244,27 @@ msgstr "Date utilisé pour arrêter la publication"
 msgid "sites publication"
 msgstr "sites publiés"
 
-#: models.py:99
+#: models.py:98
 msgid "is actual"
 msgstr "En cours ?"
 
-#: models.py:106
+#: models.py:104
 msgid "is visible"
 msgstr "Visible ?"
 
-#: models.py:111
+#: models.py:108
 msgid "Unavailable"
 msgstr "Indisponible"
 
-#: models.py:118
+#: models.py:115
 msgid "short url"
 msgstr "url raccourcie"
 
-#: models.py:133
+#: models.py:130
 msgid "entry"
 msgstr "article"
 
-#: models.py:134
+#: models.py:131
 msgid "entries"
 msgstr "articles"
 
@@ -328,11 +328,12 @@ msgid "Comment"
 msgstr "Commentaire"
 
 #: templates/feeds/comments_title.html:2
-#: templates/zinnia/entry_archive_base.html:36
+#: templates/zinnia/entry_archive_base.html:38
 msgid "on"
 msgstr "le"
 
 #: templates/tagging/tag_list.html:4
+#: templates/zinnia/_entry_detail.html:30
 msgid "Tags"
 msgstr "Tags"
 
@@ -357,9 +358,37 @@ msgstr "à la date du"
 msgid "in"
 msgstr "sous"
 
-#: templates/zinnia/_entry_detail.html:34
+#: templates/zinnia/_entry_detail.html:35
 msgid "No tags"
 msgstr "Pas de tags"
+
+#: templates/zinnia/_entry_detail.html:50
+#, python-format
+msgid ""
+"\n"
+"      %(comment_count)s comment\n"
+"    "
+msgid_plural ""
+"\n"
+"      %(comment_count)s comments\n"
+"    "
+msgstr[0] ""
+"\n"
+"    %(comment_count)s commentaire\n"
+"    "
+msgstr[1] ""
+"\n"
+"    %(comment_count)s commentaires\n"
+"    "
+
+#: templates/zinnia/_entry_detail.html:58
+msgid "Not yet comments."
+msgstr "Pas de commentaires."
+
+#: templates/zinnia/_entry_detail.html:60
+#: templates/zinnia/entry_detail.html:42
+msgid "Comments are closed."
+msgstr "Les commentaires sont fermés"
 
 #: templates/zinnia/author_list.html:4
 msgid "Authors"
@@ -415,18 +444,37 @@ msgstr "Tag"
 msgid "Entries by %(author)s"
 msgstr "L'actualité par %(author)s"
 
-#: templates/zinnia/entry_archive_base.html:32
+#: templates/zinnia/entry_archive_base.html:27
+#: templates/zinnia/tags/popular_entries.html:12
+#: templates/zinnia/tags/random_entries.html:9
+#: templates/zinnia/tags/recent_entries.html:9
+msgid "Not yet entries."
+msgstr "Pas d'articles publiés."
+
+#: templates/zinnia/entry_archive_base.html:34
 msgid "More recent entries"
 msgstr "Articles plus récents"
 
-#: templates/zinnia/entry_archive_base.html:36
+#: templates/zinnia/entry_archive_base.html:38
 #: templates/zinnia/entry_list.html:4
 msgid "Page"
 msgstr "Page"
 
-#: templates/zinnia/entry_archive_base.html:40
+#: templates/zinnia/entry_archive_base.html:42
 msgid "More old entries"
 msgstr "Articles plus anciens"
+
+#: templates/zinnia/entry_archive_base.html:50
+msgid "Recent entries"
+msgstr "Articles récents"
+
+#: templates/zinnia/entry_archive_base.html:54
+msgid "Random entries"
+msgstr "Articles au hasard"
+
+#: templates/zinnia/entry_archive_base.html:58
+msgid "Popular entries"
+msgstr "Articles populaire"
 
 #: templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_month.html:4
@@ -435,40 +483,13 @@ msgstr "Articles plus anciens"
 msgid "Archives"
 msgstr "Archives"
 
-#: templates/zinnia/entry_detail.html:18
-#, python-format
-msgid ""
-"\n"
-"    %(comment_count)s comment\n"
-"    "
-msgid_plural ""
-"\n"
-"    %(comment_count)s comments\n"
-"    "
-msgstr[0] ""
-"\n"
-"    %(comment_count)s commentaire\n"
-"    "
-msgstr[1] ""
-"\n"
-"    %(comment_count)s commentaires\n"
-"    "
-
-#: templates/zinnia/entry_detail.html:28
-msgid "No comments yet."
-msgstr "Pas encore de commentaires"
-
-#: templates/zinnia/entry_detail.html:62
-msgid "Be first to comment!"
+#: templates/zinnia/entry_detail.html:46
+msgid "Be first to comment !"
 msgstr "Soyez le premier à commenter !"
 
-#: templates/zinnia/entry_detail.html:67
+#: templates/zinnia/entry_detail.html:51
 msgid "Post your comment"
 msgstr "Poster un commentaire"
-
-#: templates/zinnia/entry_detail.html:72
-msgid "Comments are closed."
-msgstr "Les commentaires sont fermés"
 
 #: templates/zinnia/entry_list.html:4
 msgid "Category"

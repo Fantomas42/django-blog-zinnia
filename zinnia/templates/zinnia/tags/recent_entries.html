@@ -1,5 +1,12 @@
+{% load i18n %}
 <ul>
   {% for entry in entries %}
-  <li><a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a></li>
+  <li>
+    <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
+  </li>
+  {% empty %}
+  <li>
+    {% trans "Not yet entries." %}
+  </li>
   {% endfor %}
 </ul>

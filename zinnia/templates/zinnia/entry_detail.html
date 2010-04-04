@@ -1,5 +1,5 @@
 {% extends "zinnia/base.html" %}
-{% load tagging_tags comments i18n zinnia_tags %}
+{% load i18n tagging_tags comments zinnia_tags %}
 
 {% block title %}{{ object.title }}{% endblock %}
 
@@ -10,30 +10,11 @@
   {% endwith %}
 </div>
 
-{% get_comment_count for object as comment_count %}
 <a name="comments"></a>
-{% if comment_count %}
-<div id="numberofcomments">
-  <span>
-    {% blocktrans count comment_count as comment_count %}
-    {{ comment_count }} comment
-    {% plural %}
-    {{ comment_count }} comments
-    {% endblocktrans %}
-  </span>
-</div>
-{% else %}
-{% if object.comment_enabled %}
-<div id="numberofcomments">
-  <span>{% trans "No comments yet." %}</span>
-</div>
-{% endif %}
-{% endif %}
-
-<div id="comment">
-  {% if comment_count %}
-  {% get_comment_list for object as comment_list %}
-  <ol id="commentlist">
+<div id="comments">
+  {% with object.get_comments as comment_list %}
+  {% if comment_list.count %}
+  <ol id="commentList">
     {% for comment in comment_list %}
     <li class="alt {% cycle box1,box2 %}">
       <a class="gravatar">
@@ -57,19 +38,21 @@
     </li>
     {% endfor %}
   </ol>
+    {% if not object.comment_enabled %}
+  <p>{% trans "Comments are closed." %}</p>
+    {% endif %}
   {% else %}
-  {% if object.comment_enabled %}
-  <p>{% trans "Be first to comment!" %}</p>
-  {% endif %}
+    {% if object.comment_enabled %}
+  <p>{% trans "Be first to comment !" %}</p>
+    {% endif %}
   {% endif %}
 
   {% if object.comment_enabled %}
   <h3>{% trans "Post your comment" %}</h3>
-  <div>
+  <div class="commentForm">
     {% render_comment_form for object %}
   </div>
-  {% else %}
-  <h3>{% trans "Comments are closed." %}</h3>
   {% endif %}
+  {% endwith %}
 </div>
 {% endblock %}

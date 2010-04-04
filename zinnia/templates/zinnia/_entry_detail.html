@@ -26,16 +26,41 @@
   {{ object_content }}
 </div>
 
-<span class="entryTags">
+<p class="entryTags">
+  {% trans "Tags" %} :
   {% tags_for_object object as tag_list %}
   {% for tag in tag_list %}  
   <a href="{% url zinnia_tag_detail tag %}" title="Tag {{ tag }}">{{ tag }}</a>
   {% empty %}
   <span>{% trans "No tags" %}</span>
   {% endfor %}
-</span>
+</p>
 
-<div class="entryShortUrl">
-  {% trans "Short url" %} : {{ object.get_short_url }}
-</div>
+<p class="entryShortUrl">
+  {% trans "Short url" %} : 
+  <a href="{{ object.get_short_url }}" title="{{ object.title }}">
+    {{ object.get_short_url }}
+  </a>
+</p>
+
+<p class="entryComments">
+  {% with object.get_comments.count as comment_count %}
+    {% if comment_count %}
+  <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
+    {% blocktrans count comment_count as comment_count %}
+      {{ comment_count }} comment
+    {% plural %}
+      {{ comment_count }} comments
+    {% endblocktrans %}
+  </a>
+    {% else %}
+      {% if object.comment_enabled %}
+        {% trans "Not yet comments." %}
+      {% else %}
+        {% trans "Comments are closed." %}
+      {% endif %}
+    {% endif %}
+  {% endwith %}
+</p>
+
 

@@ -7,5 +7,9 @@
     </p>
     <a href="{{ entry.get_absolute_url }}#comments" title="{{ entry.title }}">{{ entry.get_comments.count }} {% trans "comment" %}{{ entry.get_comments.count|pluralize }}</a>
   </li>
+  {% empty %}
+  <li>
+    {% trans "Not yet entries." %}
+  </li>
   {% endfor %}
 </ul>

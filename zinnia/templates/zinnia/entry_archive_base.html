@@ -1,5 +1,5 @@
 {% extends "zinnia/base.html" %}
-{% load tagging_tags comments i18n %}
+{% load i18n tagging_tags zinnia_tags %}
 
 {% block content %}
 {% if category %}
@@ -23,6 +23,8 @@
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 </div>
+{% empty %}
+  {% trans "Not yet entries." %}
 {% endfor %}
 
 {% if is_paginated %}
@@ -42,4 +44,20 @@
   {% endif %}
 </div>
 {% endif %}
+
+<div class="widgets">
+  <div class="recents">
+    <h3>{% trans "Recent entries" %}</h3>
+    {% get_recent_entries 5 %}
+  </div>
+  <div class="randoms">
+    <h3>{% trans "Random entries" %}</h3>
+    {% get_random_entries 5 %}
+  </div>
+  <div class="populars">
+    <h3>{% trans "Popular entries" %}</h3>
+    {% get_popular_entries 5 %}
+  </div>
+</div>
+
 {% endblock %}
