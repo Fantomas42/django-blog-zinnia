@@ -32,7 +32,7 @@ def get_random_entries(number=5):
 @register.inclusion_tag('zinnia/tags/popular_entries.html')
 def get_popular_entries(number=5):
     """Return popular  entries"""
-    entries_comment = [(e, e.get_n_comments()) for e in Entry.published.all()]
+    entries_comment = [(e, e.get_comments().count()) for e in Entry.published.all()]
     entries_comment = sorted(entries_comment, key=lambda x: (x[1], x[0]),
                              reverse=True)[:number]
     entries = [entry for entry, n_comments in entries_comment]

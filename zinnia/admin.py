@@ -56,7 +56,7 @@ class EntryAdmin(admin.ModelAdmin):
         title = entry.title
         if len(title) > 30:
             title = title[:27] + '...'
-        comments = entry.get_n_comments()
+        comments = entry.get_comments().count()
         if comments:
             return '%s (%i)' % (title, comments)
         return title

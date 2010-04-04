@@ -119,23 +119,23 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.get_content(),
                           '<p>Hello world !<br />        this is my content</p>')
 
-    def test_get_n_comments(self):
+    def test_get_comments(self):
         site = Site.objects.get_current()
 
-        self.assertEquals(self.entry.get_n_comments(), 0)
+        self.assertEquals(self.entry.get_comments().count(), 0)
         Comment.objects.create(comment='My Comment 1',
                                content_object=self.entry,
                                site=site)
-        self.assertEquals(self.entry.get_n_comments(), 1)
+        self.assertEquals(self.entry.get_comments().count(), 1)
         Comment.objects.create(comment='My Comment 2',
                                content_object=self.entry,
                                site=site, is_public=False)
-        self.assertEquals(self.entry.get_n_comments(), 1)
+        self.assertEquals(self.entry.get_comments().count(), 1)
         Comment.objects.create(comment='My Comment 3',
                                content_object=self.entry,
                                site=Site.objects.create(domain='http://toto.com',
                                                         name='Toto.com'))
-        self.assertEquals(self.entry.get_n_comments(), 2)
+        self.assertEquals(self.entry.get_comments().count(), 2)
 
     def test_is_actual(self):
         self.assertTrue(self.entry.is_actual())
