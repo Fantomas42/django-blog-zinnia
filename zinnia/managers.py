@@ -11,11 +11,10 @@ PUBLISHED = 2
 
 def authors_published():
     """Return the published authors"""
-    from zinnia.models import Entry
     from django.contrib.auth.models import User
 
     author_ids = [user.pk for user in User.objects.all()
-                  if user.entry_set.count()]
+                  if user.entry_set.filter(status=PUBLISHED).count()]
     return User.objects.filter(pk__in=author_ids)
 
 
