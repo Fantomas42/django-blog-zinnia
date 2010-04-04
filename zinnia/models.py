@@ -90,7 +90,6 @@ class Entry(models.Model):
         from django.contrib.comments.models import Comment
         return Comment.objects.for_model(self).filter(is_public=True)
 
-    #TODO: convert to property
     def is_actual(self):
         """Define is an entry is between the date of publication"""
         now = datetime.now()
@@ -98,14 +97,12 @@ class Entry(models.Model):
     is_actual.boolean = True
     is_actual.short_description = _('is actual')
 
-    #TODO: convert to property
     def is_visible(self):
         """Define if an entry is visible on site"""
         return self.is_actual() and self.status == PUBLISHED
     is_visible.boolean = True
     is_visible.short_description = _('is visible')
 
-    #TODO: convert to property
     def get_short_url(self):
         if not USE_BITLY:
             return _('Unavailable')
