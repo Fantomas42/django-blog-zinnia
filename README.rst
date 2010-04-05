@@ -47,14 +47,37 @@ or use pip ::
 Applications
 ------------
 
-Then register **zinnia**, **django.contrib.admin**, **django.contrib.comments** and **tagging** in the INSTALLED_APPS section of your project's settings. ::
+Then register **zinnia**, and these following applications in the INSTALLED_APPS section of your project's settings. ::
 
   >>> INSTALLED_APPS = (
   ...   # Your favorites apps
+  ...   'django.contrib.contenttypes',
   ...   'django.contrib.comments',
+  ...   'django.contrib.sites',
   ...   'django.contrib.admin',
   ...   'tagging',
   ...   'zinnia',)
+
+Template Context Processors
+---------------------------
+
+Add these following template context processors if not already present. ::
+
+  >>> TEMPLATE_CONTEXT_PROCESSORS = (
+  ...      'django.core.context_processors.auth',
+  ...      'django.core.context_processors.i18n',
+  ...      'django.core.context_processors.request',
+  ...      'django.core.context_processors.media',
+  ...      'zinnia.context_processors.media',
+  ...	)
+
+Media Files
+-----------
+
+You have to make a symbolic link from zinnia/media/zinnia directory to your media directory or make a copy named **zinnia**,
+but if want to change this value, define ZINNIA_MEDIA_URL in the settings.py as appropriate.
+
+And don't forget to serve this url.
 
 Urls
 ----

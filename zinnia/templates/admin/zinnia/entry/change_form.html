@@ -3,9 +3,9 @@
 
 {% block extrahead %}
 {{ block.super }}
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/jquery.bgiframe.js"></script>
-<script type="text/javascript" src="/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.js"></script>
+<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.bgiframe.js"></script>
+<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.autocomplete.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   {% tags_for_model zinnia.Entry as entry_tags %}
@@ -21,6 +21,6 @@ $(document).ready(function() {
 
 {% block extrastyle %}
 {{ block.super }}
-<link href="/css/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="{{ ZINNIA_MEDIA_URL }}css/jquery.autocomplete.css" />
 {% endblock %}
 

@@ -11,6 +11,8 @@ MAIL_COMMENT = getattr(settings, 'ZINNIA_MAIL_COMMENT', True)
 AKISMET_COMMENT = getattr(settings, 'ZINNIA_AKISMET_COMMENT', True)
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads')
 
+MEDIA_URL = getattr(settings, 'ZINNIA_MEDIA_URL', '/zinnia/')
+
 F_MIN = getattr(settings, 'ZINNIA_F_MIN', 0.1)
 F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
 
