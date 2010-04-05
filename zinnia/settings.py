@@ -11,6 +11,9 @@ MAIL_COMMENT = getattr(settings, 'ZINNIA_MAIL_COMMENT', True)
 AKISMET_COMMENT = getattr(settings, 'ZINNIA_AKISMET_COMMENT', True)
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads')
 
+F_MIN = getattr(settings, 'ZINNIA_F_MIN', 0.1)
+F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
+
 USE_BITLY = getattr(settings, 'ZINNIA_USE_BITLY', 'django_bitly' in settings.INSTALLED_APPS)
 
 try:

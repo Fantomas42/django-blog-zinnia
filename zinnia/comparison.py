@@ -1,7 +1,9 @@
 """Comparison tools for zinnia
 Based on clustered_models app"""
-
 from math import sqrt
+
+from zinnia.settings import F_MIN
+from zinnia.settings import F_MAX
 
 def pearson_score(l1, l2):
     """Compute the pearson score between 2 lists of vectors"""
@@ -20,9 +22,6 @@ def pearson_score(l1, l2):
     return 1.0 - num / den
 
 
-FMIN = 0.2
-FMAX = 0.8
-
 class ClusteredModel(object):
 
     def __init__(self, info_dict):
@@ -34,6 +33,7 @@ class ClusteredModel(object):
         for item in self.queryset.filter():
             dataset[item] = ' '.join([item.__dict__[field] for field in self.fields])
         return dataset
+
 
 class VectorBuilder(object):
     """Build a list of vectors"""
@@ -63,7 +63,7 @@ class VectorBuilder(object):
         top_words = []
         for word, count in words_total.items():
             frequency = float(count) / len(data)
-            if frequency > FMIN and frequency < FMAX:
+            if frequency > F_MIN and frequency < F_MAX:
                 top_words.append(word)
 
         self.dataset = {}

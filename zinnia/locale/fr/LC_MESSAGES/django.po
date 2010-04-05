@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-04 22:37+0200\n"
-"PO-Revision-Date: 2010-04-04 22:37+0100\n"
+"POT-Creation-Date: 2010-04-05 22:21+0200\n"
+"PO-Revision-Date: 2010-04-05 22:22+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -386,7 +386,7 @@ msgid "Not yet comments."
 msgstr "Pas de commentaires."
 
 #: templates/zinnia/_entry_detail.html:60
-#: templates/zinnia/entry_detail.html:42
+#: templates/zinnia/entry_detail.html:47
 msgid "Comments are closed."
 msgstr "Les commentaires sont fermés"
 
@@ -483,11 +483,15 @@ msgstr "Articles populaire"
 msgid "Archives"
 msgstr "Archives"
 
-#: templates/zinnia/entry_detail.html:46
+#: templates/zinnia/entry_detail.html:14
+msgid "Related entries"
+msgstr "Articles associés"
+
+#: templates/zinnia/entry_detail.html:51
 msgid "Be first to comment !"
 msgstr "Soyez le premier à commenter !"
 
-#: templates/zinnia/entry_detail.html:51
+#: templates/zinnia/entry_detail.html:56
 msgid "Post your comment"
 msgstr "Poster un commentaire"
 
@@ -511,6 +515,10 @@ msgstr "Aucun article trouvé."
 #: templates/zinnia/tags/popular_entries.html:8
 msgid "comment"
 msgstr "commentaire"
+
+#: templates/zinnia/tags/related_entries.html:9
+msgid "No entries related."
+msgstr "Pas d'articles associés."
 
 #~ msgid "<a href=\"%(url)s\" target=\"blank\">%(url)s</a>"
 #~ msgstr "<a href=\"%(url)s\" target=\"blank\">%(url)s</a>"
