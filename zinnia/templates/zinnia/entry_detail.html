@@ -10,6 +10,11 @@
   {% endwith %}
 </div>
 
+<div class="entryRelated">
+  <h3>{% trans "Related entries" %}</h3>
+  {% get_related_entries 5 %}
+</div>
+
 <a name="comments"></a>
 <div id="comments">
   {% with object.get_comments as comment_list %}

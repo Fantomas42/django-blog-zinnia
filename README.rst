@@ -17,7 +17,7 @@ Main features :
   * Search engine
   * Archives views
   * Tags and categories views
-  * Widgets (Popular entries, Recent entries, ...)
+  * Widgets (Popular entries, Related entries, ...)
   * Spam protection with Akismet
   * Bit.ly support
   * Twitter support
@@ -151,7 +151,7 @@ Templatetags
 
 Zinnia provides several templatetags to create some **widgets** in your website's templates.
 
-* get_recent_entries number
+* get_recent_entries [number]
 
 Display the latest entries.
 
@@ -162,6 +162,10 @@ Display random entries.
 * get_popular_entries [number]
 
 Display popular entries.
+
+* get_related_entries [number]
+
+Display related entries of an entry.
 
 * get_archives_entries
 
