@@ -6,6 +6,7 @@
 <script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.js"></script>
 <script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.bgiframe.js"></script>
 <script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/wymeditor/jquery.wymeditor.pack.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   {% tags_for_model zinnia.Entry as entry_tags %}
@@ -15,6 +16,9 @@ $(document).ready(function() {
                 multiple: true, multipleSeparator: ", ",
                 scroll: true, scrollHeight: 300,
                 matchContains: true, autoFill: true,});
+  $("#id_content").wymeditor({
+                   skin: "django", lang: "{{ LANGUAGE_CODE }}",
+                   updateSelector: "input:submit", updateEvent: "click"});
 });
 </script>
 {% endblock %}

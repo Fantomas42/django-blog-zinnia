@@ -22,6 +22,7 @@ Main features :
   * Bit.ly support
   * Twitter support
   * Gravatar support
+  * WYMeditor support
   * Collaborative work
   * Prepublication
 
