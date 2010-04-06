@@ -19,6 +19,7 @@ Main features :
   * Tags and categories views
   * Widgets (Popular entries, Related entries, ...)
   * Spam protection with Akismet
+  * Ping Directories
   * Bit.ly support
   * Twitter support
   * Gravatar support
