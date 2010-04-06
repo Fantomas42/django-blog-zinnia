@@ -105,8 +105,8 @@ class Entry(models.Model):
 
     def get_short_url(self):
         if not USE_BITLY:
-            return _('Unavailable')
-            
+            return False
+
         from django_bitly.models import Bittle
         
         bittle = Bittle.objects.bitlify(self)

@@ -111,8 +111,11 @@ class EntryAdmin(admin.ModelAdmin):
     get_link.short_description = _('View on site')
 
     def get_short_url(self, entry):
+        url = entry.get_short_url()
+        if not url:
+            return _('Unavailable')
         return '<a href="%(url)s" target="blank">%(url)s</a>' % \
-               {'url': entry.get_short_url()}
+               {'url': url}
     get_short_url.allow_tags = True
     get_short_url.short_description = _('Short url')
 

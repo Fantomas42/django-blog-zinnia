@@ -38,9 +38,13 @@
 
 <p class="entryShortUrl">
   {% trans "Short url" %} : 
+  {% if object.get_short_url %}
   <a href="{{ object.get_short_url }}" title="{{ object.title }}">
     {{ object.get_short_url }}
   </a>
+  {% else %}
+  {% trans "Unavailable" %}
+  {% endif %}
 </p>
 
 <p class="entryComments">
