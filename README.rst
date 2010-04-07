@@ -192,6 +192,10 @@ Display popular entries.
 
 Display related entries of an entry.
 
+* get_categories
+
+Display all the categories availables.
+
 * get_archives_entries
 
 Display link markups for listing the archives

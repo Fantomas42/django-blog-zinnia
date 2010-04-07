@@ -10,6 +10,7 @@ from urllib import urlencode
 from django.template import Library
 
 from zinnia.models import Entry
+from zinnia.models import Category
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
 
@@ -19,6 +20,10 @@ vectors = VectorBuilder({'queryset': Entry.published.all(),
                         'fields': ['title', 'excerpt', 'content']})
 cache_entries_related = {}
 
+@register.inclusion_tag('zinnia/tags/categories.html')
+def get_categories():
+    """Return the categories"""
+    return {'categories': Category.objects.all()}
 
 @register.inclusion_tag('zinnia/tags/recent_entries.html')
 def get_recent_entries(number=5):

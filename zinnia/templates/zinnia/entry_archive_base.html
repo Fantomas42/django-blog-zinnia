@@ -46,6 +46,10 @@
 {% endif %}
 
 <div class="widgets">
+  <div class="categories">
+    <h3>{% trans "Categories" %}</h3>
+    {% get_categories %}
+  </div>
   <div class="recents">
     <h3>{% trans "Recent entries" %}</h3>
     {% get_recent_entries 5 %}
