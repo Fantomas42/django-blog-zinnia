@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 22:21+0200\n"
-"PO-Revision-Date: 2010-04-05 22:22+0100\n"
+"POT-Creation-Date: 2010-04-07 10:41+0200\n"
+"PO-Revision-Date: 2010-04-07 10:42+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -64,37 +64,42 @@ msgstr "<a href=\"%s\" target=\"blank\">Consulter</a>"
 msgid "View on site"
 msgstr "Voir sur le site"
 
-#: admin.py:117
+#: admin.py:116
+#: templates/zinnia/_entry_detail.html:46
+msgid "Unavailable"
+msgstr "Indisponible"
+
+#: admin.py:120
 #: templates/zinnia/_entry_detail.html:40
 msgid "Short url"
 msgstr "Url raccourcie"
 
-#: admin.py:172
+#: admin.py:175
 msgid "Set the entries to the user"
 msgstr "Acquérir les articles"
 
-#: admin.py:177
+#: admin.py:180
 msgid "Set entries selected as published"
 msgstr "Publier les articles sélectionnés"
 
-#: admin.py:182
+#: admin.py:185
 msgid "Set entries selected as hidden"
 msgstr "Masquer les articles sélectionnés"
 
-#: admin.py:191
+#: admin.py:194
 msgid "Tweet entries selected"
 msgstr "Tweeter les articles sélectionnés"
 
-#: admin.py:196
+#: admin.py:199
 msgid "Close the comments for selected entries"
 msgstr "Fermer les commentaires pour les articles sélectionnés"
 
-#: admin.py:207
+#: admin.py:210
 #, python-format
 msgid "%i directories succesfully pinged."
 msgstr "%i annuaires pingés avec succès."
 
-#: admin.py:208
+#: admin.py:211
 msgid "Ping Directories for selected entries"
 msgstr "Pinger les articles dans les annuaires."
 
@@ -252,10 +257,6 @@ msgstr "En cours ?"
 msgid "is visible"
 msgstr "Visible ?"
 
-#: models.py:108
-msgid "Unavailable"
-msgstr "Indisponible"
-
 #: models.py:115
 msgid "short url"
 msgstr "url raccourcie"
@@ -362,7 +363,7 @@ msgstr "sous"
 msgid "No tags"
 msgstr "Pas de tags"
 
-#: templates/zinnia/_entry_detail.html:50
+#: templates/zinnia/_entry_detail.html:54
 #, python-format
 msgid ""
 "\n"
@@ -381,11 +382,11 @@ msgstr[1] ""
 "    %(comment_count)s commentaires\n"
 "    "
 
-#: templates/zinnia/_entry_detail.html:58
+#: templates/zinnia/_entry_detail.html:62
 msgid "Not yet comments."
 msgstr "Pas de commentaires."
 
-#: templates/zinnia/_entry_detail.html:60
+#: templates/zinnia/_entry_detail.html:64
 #: templates/zinnia/entry_detail.html:47
 msgid "Comments are closed."
 msgstr "Les commentaires sont fermés"
@@ -403,6 +404,7 @@ msgid "Zinnia"
 msgstr "Zinnia"
 
 #: templates/zinnia/category_list.html:4
+#: templates/zinnia/entry_archive_base.html:50
 msgid "Categories"
 msgstr "Catégories"
 
@@ -464,15 +466,15 @@ msgstr "Page"
 msgid "More old entries"
 msgstr "Articles plus anciens"
 
-#: templates/zinnia/entry_archive_base.html:50
+#: templates/zinnia/entry_archive_base.html:54
 msgid "Recent entries"
 msgstr "Articles récents"
 
-#: templates/zinnia/entry_archive_base.html:54
+#: templates/zinnia/entry_archive_base.html:58
 msgid "Random entries"
 msgstr "Articles au hasard"
 
-#: templates/zinnia/entry_archive_base.html:58
+#: templates/zinnia/entry_archive_base.html:62
 msgid "Popular entries"
 msgstr "Articles populaire"
 
@@ -511,6 +513,29 @@ msgstr "Résultats de recherche"
 #: templates/zinnia/entry_search.html:16
 msgid "Nothing found."
 msgstr "Aucun article trouvé."
+
+#: templates/zinnia/tags/categories.html:8
+#, python-format
+msgid ""
+"\n"
+"      %(entry_count)s entry\n"
+"    "
+msgid_plural ""
+"\n"
+"      %(entry_count)s entries\n"
+"    "
+msgstr[0] ""
+"\n"
+"      %(entry_count)s article\n"
+"    "
+msgstr[1] ""
+"\n"
+"      %(entry_count)s articles\n"
+"    "
+
+#: templates/zinnia/tags/categories.html:16
+msgid "Not yet categories."
+msgstr "Pas encore de catégories."
 
 #: templates/zinnia/tags/popular_entries.html:8
 msgid "comment"
