@@ -121,7 +121,7 @@ class Entry(models.Model):
     def get_absolute_url(self):
         return ('zinnia_entry_detail', (), {
             'year': self.creation_date.strftime('%Y'),
-            'month': self.creation_date.strftime('%b').lower(),
+            'month': self.creation_date.strftime('%m'),
             'day': self.creation_date.strftime('%d'),
             'slug': self.slug})
 
