@@ -58,6 +58,8 @@ class Entry(models.Model):
 
     tags = TagField()
     categories = models.ManyToManyField(Category, verbose_name=_('categories'))
+    related = models.ManyToManyField('self', verbose_name=_('related entries'),
+                                     blank=True, null=True)
 
     slug = models.SlugField(help_text=_('used for publication'))
     authors = models.ManyToManyField(User, verbose_name=_('authors'),
@@ -102,6 +104,10 @@ class Entry(models.Model):
         return self.is_actual() and self.status == PUBLISHED
     is_visible.boolean = True
     is_visible.short_description = _('is visible')
+
+    def related_published_set(self):
+        """Return only related entries published"""
+        return entries_published(self.related)
 
     def get_short_url(self):
         if not USE_BITLY:

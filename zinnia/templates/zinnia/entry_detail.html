@@ -12,7 +12,17 @@
 
 <div class="entryRelated">
   <h3>{% trans "Related entries" %}</h3>
-  {% get_related_entries 5 %}
+  <ul>
+    {% for entry in object.related_published_set %}
+    <li>
+      <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
+    </li>
+    {% empty %}
+    <li>{% trans "No entries related." %}</li>
+    {% endfor %}
+  </ul>
+  <h3>{% trans "Similar entries" %}</h3>
+  {% get_similar_entries 5 %}
 </div>
 
 <a name="comments"></a>

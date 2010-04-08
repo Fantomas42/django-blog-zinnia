@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-07 10:41+0200\n"
-"PO-Revision-Date: 2010-04-07 10:42+0100\n"
+"POT-Creation-Date: 2010-04-08 14:27+0200\n"
+"PO-Revision-Date: 2010-04-08 14:28+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -164,7 +164,7 @@ msgid "The last comments for the news %s"
 msgstr "Les derniers commentaires sur l'actualité : %s"
 
 #: models.py:25
-#: models.py:62
+#: models.py:64
 msgid "used for publication"
 msgstr "Utilisé pour la publication"
 
@@ -213,59 +213,63 @@ msgstr "extrait"
 msgid "optional element"
 msgstr "Elément optionnel"
 
-#: models.py:63
+#: models.py:61
+msgid "related entries"
+msgstr "articles associés"
+
+#: models.py:65
 msgid "authors"
 msgstr "auteurs"
 
-#: models.py:66
+#: models.py:68
 msgid "comment enabled"
 msgstr "commentaires ?"
 
-#: models.py:68
+#: models.py:70
 msgid "creation date"
 msgstr "date de création"
 
-#: models.py:69
+#: models.py:71
 msgid "last update"
 msgstr "mise à jour"
 
-#: models.py:70
+#: models.py:72
 msgid "start publication"
 msgstr "démarrage"
 
-#: models.py:71
+#: models.py:73
 msgid "date start publish"
 msgstr "Date utilisé pour démarrer la publication"
 
-#: models.py:73
+#: models.py:75
 msgid "end publication"
 msgstr "arrêt"
 
-#: models.py:74
+#: models.py:76
 msgid "date end publish"
 msgstr "Date utilisé pour arrêter la publication"
 
-#: models.py:77
+#: models.py:79
 msgid "sites publication"
 msgstr "sites publiés"
 
-#: models.py:98
+#: models.py:100
 msgid "is actual"
 msgstr "En cours ?"
 
-#: models.py:104
+#: models.py:106
 msgid "is visible"
 msgstr "Visible ?"
 
-#: models.py:115
+#: models.py:121
 msgid "short url"
 msgstr "url raccourcie"
 
-#: models.py:130
+#: models.py:136
 msgid "entry"
 msgstr "article"
 
-#: models.py:131
+#: models.py:137
 msgid "entries"
 msgstr "articles"
 
@@ -387,7 +391,7 @@ msgid "Not yet comments."
 msgstr "Pas de commentaires."
 
 #: templates/zinnia/_entry_detail.html:64
-#: templates/zinnia/entry_detail.html:47
+#: templates/zinnia/entry_detail.html:57
 msgid "Comments are closed."
 msgstr "Les commentaires sont fermés"
 
@@ -489,11 +493,19 @@ msgstr "Archives"
 msgid "Related entries"
 msgstr "Articles associés"
 
-#: templates/zinnia/entry_detail.html:51
+#: templates/zinnia/entry_detail.html:21
+msgid "No entries related."
+msgstr "Pas d'articles associés."
+
+#: templates/zinnia/entry_detail.html:24
+msgid "Similar entries"
+msgstr "Articles similaires"
+
+#: templates/zinnia/entry_detail.html:61
 msgid "Be first to comment !"
 msgstr "Soyez le premier à commenter !"
 
-#: templates/zinnia/entry_detail.html:56
+#: templates/zinnia/entry_detail.html:66
 msgid "Post your comment"
 msgstr "Poster un commentaire"
 
@@ -541,9 +553,9 @@ msgstr "Pas encore de catégories."
 msgid "comment"
 msgstr "commentaire"
 
-#: templates/zinnia/tags/related_entries.html:9
-msgid "No entries related."
-msgstr "Pas d'articles associés."
+#: templates/zinnia/tags/similar_entries.html:9
+msgid "No similar entries."
+msgstr "Pas d'articles similaires."
 
 #~ msgid "<a href=\"%(url)s\" target=\"blank\">%(url)s</a>"
 #~ msgstr "<a href=\"%(url)s\" target=\"blank\">%(url)s</a>"

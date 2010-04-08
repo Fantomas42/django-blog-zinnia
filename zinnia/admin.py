@@ -31,7 +31,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class EntryAdmin(admin.ModelAdmin):
     date_hierarchy = 'creation_date'
     fieldsets = ((_('Content'), {'fields': ('title', 'content', 'image', 'status')}),
-                 (_('Options'), {'fields': ('authors', 'slug', 'excerpt',
+                 (_('Options'), {'fields': ('authors', 'slug', 'excerpt', 'related',
                                             'creation_date', 'start_publication',
                                             'end_publication', 'comment_enabled'),
                                  'classes': ('collapse', 'collapse-closed')}),
@@ -42,7 +42,7 @@ class EntryAdmin(admin.ModelAdmin):
                     'last_update', 'get_categories', 'get_tags', 'get_sites',
                     'comment_enabled', 'is_actual', 'is_visible', 'get_link',
                     'get_short_url')
-    filter_horizontal = ('categories', 'authors')
+    filter_horizontal = ('categories', 'authors', 'related')
     prepopulated_fields = {'slug': ('title', )}
     search_fields = ('title', 'excerpt', 'content', 'tags')
     actions = ['make_mine', 'make_published', 'make_hidden', 'close_comments',

@@ -49,10 +49,10 @@ def get_popular_entries(number=5):
     entries = [entry for entry, n_comments in entries_comment]
     return {'entries': entries}
 
-@register.inclusion_tag('zinnia/tags/related_entries.html',
+@register.inclusion_tag('zinnia/tags/similar_entries.html',
                         takes_context=True)
-def get_related_entries(context, number=5):
-    """Return related entries"""
+def get_similar_entries(context, number=5):
+    """Return similar entries"""
     global vectors
     global cache_entries_related
 

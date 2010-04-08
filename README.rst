@@ -17,7 +17,7 @@ Main features :
   * Search engine
   * Archives views
   * Tags and categories views
-  * Widgets (Popular entries, Related entries, ...)
+  * Widgets (Popular entries, Similar entries, ...)
   * Spam protection with Akismet
   * Ping Directories
   * Bit.ly support
@@ -188,9 +188,9 @@ Display random entries.
 
 Display popular entries.
 
-* get_related_entries [number]
+* get_similar_entries [number]
 
-Display related entries of an entry.
+Display similar entries of an entry.
 
 * get_categories
 
