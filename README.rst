@@ -24,6 +24,7 @@ Main features :
   * Twitter support
   * Gravatar support
   * WYMeditor support
+  * Django-cms plugins
   * Collaborative work
   * Prepublication
 
