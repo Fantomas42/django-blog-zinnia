@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-08 14:27+0200\n"
-"PO-Revision-Date: 2010-04-08 14:28+0100\n"
+"POT-Creation-Date: 2010-04-09 11:09+0200\n"
+"PO-Revision-Date: 2010-04-09 11:10+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -173,6 +173,7 @@ msgid "description"
 msgstr "description"
 
 #: models.py:40
+#: cms/models.py:13
 msgid "category"
 msgstr "catégorie"
 
@@ -270,6 +271,7 @@ msgid "entry"
 msgstr "article"
 
 #: models.py:137
+#: cms/models.py:24
 msgid "entries"
 msgstr "articles"
 
@@ -280,6 +282,30 @@ msgstr "Le motif de recherche est trop court !"
 #: views.py:39
 msgid "no pattern to search found"
 msgstr "Pas de résultats trouvé pour ce motif de recherche."
+
+#: cms/cms_plugins.py:16
+#: templates/zinnia/entry_archive.html:4
+#: templates/zinnia/entry_list.html:4
+msgid "Latest entries"
+msgstr "Derniers articles"
+
+#: cms/cms_plugins.py:41
+msgid "Selected entries"
+msgstr "Selection d'articles"
+
+#: cms/models.py:15
+msgid "author"
+msgstr "auteur"
+
+#: cms/models.py:17
+msgid "number of entries"
+msgstr "nombre d'articles"
+
+#: cms/models.py:20
+#: cms/models.py:27
+#, python-format
+msgid "%s entries"
+msgstr "%s articles"
 
 #: templates/comments/form.html:14
 #: templates/comments/preview.html:43
@@ -435,11 +461,6 @@ msgstr[1] ""
 "      %(entries_published)s articles\n"
 "      "
 
-#: templates/zinnia/entry_archive.html:4
-#: templates/zinnia/entry_list.html:4
-msgid "Latest entries"
-msgstr "Derniers articles"
-
 #: templates/zinnia/entry_archive_base.html:13
 #: templates/zinnia/entry_list.html:4
 msgid "Tag"
@@ -451,6 +472,7 @@ msgid "Entries by %(author)s"
 msgstr "L'actualité par %(author)s"
 
 #: templates/zinnia/entry_archive_base.html:27
+#: templates/zinnia/cms/entries.html:9
 #: templates/zinnia/tags/popular_entries.html:12
 #: templates/zinnia/tags/random_entries.html:9
 #: templates/zinnia/tags/recent_entries.html:9
