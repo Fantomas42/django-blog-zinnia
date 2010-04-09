@@ -6,6 +6,7 @@ from cms.plugin_pool import plugin_pool
 
 from zinnia.models import Entry
 from zinnia.models import Category
+from zinnia.managers import authors_published
 from zinnia.cms.models import LatestEntriesPlugin
 from zinnia.cms.models import SelectedEntriesPlugin
 
@@ -14,12 +15,22 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
     model = LatestEntriesPlugin
     name = _('Latest entries')
     render_template = 'zinnia/cms/entries.html'
+    fields = ('number_of_entries', 'category', 'author')
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'author':
+            kwargs['queryset'] = authors_published()
+            return db_field.formfield(**kwargs)
+        return super(CMSLatestEntriesPlugin, self).formfield_for_foreignkey(
+            db_field, request, **kwargs)
 
     def render(self, context, instance, placeholder):
+        entries = Entry.published.all()
+
         if instance.category:
-            entries = instance.category.entries_published_set()
-        else:
-            entries = Entry.published.all()
+            entries = entries.filter(categories=instance.category)
+        if instance.author:
+            entries = entries.filter(authors=instance.author)
 
         entries = entries[:instance.number_of_entries]
         context.update({'entries': entries,
