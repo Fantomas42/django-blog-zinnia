@@ -100,6 +100,9 @@ Note that the default zinnia urlset is provided for convenient usage, but you ca
   >>> url(r'^weblog/', include('zinnia.urls.entries')),
   >>> url(r'^comments/', include('django.contrib.comments.urls')),
 
+Advanced Configuration
+======================
+
 Sitemap
 -------
 
@@ -171,6 +174,14 @@ Then install `python-twitter
 
 Now in admin, you have the possibilty to post an update containing your entry's title and
 the shortened url of your entry.
+
+Django-CMS
+----------
+
+If you use `django-cms
+<http://www.django-cms.org/>`_, Zinnia can be integrated into your pages, with the plugins system.
+
+For doing that simply register **zinnia.cms** in the INSTALLED_APPS section of your project's settings.
 
 Templatetags
 ============
