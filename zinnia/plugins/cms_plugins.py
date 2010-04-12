@@ -7,8 +7,8 @@ from cms.plugin_pool import plugin_pool
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import authors_published
-from zinnia.cms.models import LatestEntriesPlugin
-from zinnia.cms.models import SelectedEntriesPlugin
+from zinnia.plugins.models import LatestEntriesPlugin
+from zinnia.plugins.models import SelectedEntriesPlugin
 
 
 class CMSLatestEntriesPlugin(CMSPluginBase):

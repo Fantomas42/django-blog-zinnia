@@ -181,7 +181,7 @@ Django-CMS
 If you use `django-cms
 <http://www.django-cms.org/>`_, Zinnia can be integrated into your pages, with the plugins system.
 
-For doing that simply register **zinnia.cms** in the INSTALLED_APPS section of your project's settings.
+For doing that simply register **zinnia.plugins** in the INSTALLED_APPS section of your project's settings.
 
 Templatetags
 ============

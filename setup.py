@@ -14,7 +14,7 @@ setup(name='django-blog-zinnia',
       author_email='fantomas42@gmail.com',
       url='http://github.com/Fantomas42/django-blog-zinnia',
 
-      packages=['zinnia'],
+      packages=find_packages(),
       classifiers=[
           'Development Status :: 4 - Beta',
           'Environment :: Web Environment',
