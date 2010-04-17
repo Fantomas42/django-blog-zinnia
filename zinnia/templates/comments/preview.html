@@ -1,47 +1,41 @@
 {% extends "zinnia/base.html" %}
-{% load i18n comments %}
+{% load i18n zinnia_tags comments %}
 
 {% block title %}{% trans "Comment preview" %}{% endblock %}
 
-{% block navigation %}
-<li>
-  <a href="{% url zinnia_entry_list %}">{% trans "Entries" %}</a>
-</li>
-{% endblock %}
-
 {% block content %}
-
-<form action="{% comment_form_target %}" method="post">
   {% if form.errors %}
-  <h3>
-    {% blocktrans count with form.errors|pluralize as errors %}
+  <h3>{% blocktrans count form.errors|length as errors %}
     Please correct following error.
     {% plural %}
-    Please correct following errors
+    Please correct following errors.
     {% endblocktrans %}
   </h3>
   {% else %}
-  <h3>{% trans "Preview" %}</h3>
-  <div class="comment_box1">
-    <p>{{ comment|escape|linebreaks }}</p>
-  </div>
+  <h3>{% trans "Preview of the comment" %}</h3>
+  <ol id="commentList">
+    <li id="comment_preview" class="comment {% cycle box1,box2 %} span-15 last">
+      <div class="span-2">
+	<img src="{% get_gravatar form.cleaned_data.email 60 "G" %}" class="gravatar" />
+      </div>
+      <div class="comment_body span-13 last">
+	<div class="span-13 last">
+	  {% if form.cleaned_data.url %}
+	  <a href="{{ form.cleaned_data.url }}" target="blank">{{ form.cleaned_data.name }}</a>
+	  {% else %}
+	  {{ form.cleaned_data.name }}
+	  {% endif %}
+	  {% trans "on date" %} {% now "l d F Y H:i" %}
+	</div>
+	<div class="span-13 last">
+	  <cite>
+	    {{ comment }}
+	  </cite>
+	</div>
+      </div>
+    </li>
+  </ol>
   {% endif %}
-
-  <br />
-  <h3>{% trans "Comment" %}</h3>
-  <table>
-    {% for field in form %}
-    {% if field.is_hidden %}{{ field }}{% else %}
-    <tr{% if field.errors %} class="error"{% endif %}{% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
-      <td>{% if field.errors %}{{ field.errors }}{% endif %}{{ field.label_tag }}</td>
-      <td> {{ field }}</td>
-    </tr>
-    {% endif %}
-    {% endfor %}
-  </table>
-  <p class="submit">
-    <input type="submit" name="submit" class="submit-post" value="{% trans "Post" %}">
-    <input type="submit" name="submit" class="submit-preview" value="{% trans "Preview" %}">
-  </p>
-</form>
+  <hr />
+  {% include "comments/form.html" %}
 {% endblock %}

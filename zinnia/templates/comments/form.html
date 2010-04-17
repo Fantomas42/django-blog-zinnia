@@ -1,17 +1,20 @@
 {% load comments i18n %}
 
 <form action="{% comment_form_target %}" method="post">
-  <table>
+  <fieldset>
+    <legend>{% trans "Post your comment" %}</legend>
     {% for field in form %}
     {% if field.is_hidden %}{{ field }}{% else %}
-    <tr{% if field.errors %} class="error"{% endif %}{% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
-      <td>{% if field.errors %}{{ field.errors }}{% endif %}{{ field.label_tag }}</td><td> {{ field }}</td>
-    </tr>
+    <div{% if field.errors %} class="error"{% endif %}{% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+      {{ field.label_tag }}
+      {% if field.errors %}{{ field.errors }}{% else %}<br />{% endif %}
+      {{ field }}
+    </div>
     {% endif %}
     {% endfor %}
-  </table>
-  <p class="submit">
-    <input type="submit" name="submit" class="submit-post" value="{% trans "Post" %}" />
-    <input type="submit" name="submit" class="submit-preview" value="{% trans "Preview" %}" />
-  </p>
+    <p class="submit">
+      <input type="submit" name="submit" class="submit-post" value="{% trans "Post" %}" />
+      <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
+    </p>
+  </fieldset>
 </form>
