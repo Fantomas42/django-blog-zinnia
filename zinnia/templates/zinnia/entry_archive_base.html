@@ -23,6 +23,7 @@
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 </div>
+<hr />
 {% empty %}
   {% trans "Not yet entries." %}
 {% endfor %}
@@ -44,24 +45,6 @@
   {% endif %}
 </div>
 {% endif %}
-
-<div class="widgets">
-  <div class="categories">
-    <h3>{% trans "Categories" %}</h3>
-    {% get_categories %}
-  </div>
-  <div class="recents">
-    <h3>{% trans "Recent entries" %}</h3>
-    {% get_recent_entries 5 %}
-  </div>
-  <div class="randoms">
-    <h3>{% trans "Random entries" %}</h3>
-    {% get_random_entries 5 %}
-  </div>
-  <div class="populars">
-    <h3>{% trans "Popular entries" %}</h3>
-    {% get_popular_entries 5 %}
-  </div>
-</div>
-
 {% endblock %}
+
+

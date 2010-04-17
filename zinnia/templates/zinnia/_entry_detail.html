@@ -4,7 +4,7 @@
   <a href="{{ object.get_absolute_url }}" title="{{ object.title }}">{{ object.title }}</a>
 </h2>
 
-<p class="entryMeta">
+<p class="entryMeta quiet">
   {% trans "Written by" %} 
   {% for author in object.authors.all %}
   <a href="{% url zinnia_author_detail author %}" title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">
@@ -14,20 +14,26 @@
   {% trans "on date" %} {{ object.creation_date|date:"d F Y"|capfirst }}
   {% trans "in" %} 
   {% for category in object.categories.all %}
-  <a href="{{ category.get_absolute_url }}" title="{{ category }}">{{ category }}</a>
+  <a href="{{ category.get_absolute_url }}" title="{{ category }}">
+    <em>{{ category }}</em>
+  </a>
   {% if not forloop.last %}, {% endif %}
-  {% endfor %}
+  {% endfor %}.
 </p>
 
 <div class="entryContent">
   {% if object.image %}
-  <img src="{{ object.image.url }}" alt="{{ object.title }}" />
+  <p>
+    <a href="{{ object.get_absolute_url }}">
+      <img src="{{ object.image.url }}" alt="{{ object.title }}" class="left" />
+    </a>
+  </p>
   {% endif %}
   {{ object_content }}
 </div>
 
 <p class="entryTags">
-  {% trans "Tags" %} :
+  <strong>{% trans "Tags" %}</strong> :
   {% tags_for_object object as tag_list %}
   {% for tag in tag_list %}  
   <a href="{% url zinnia_tag_detail tag %}" title="Tag {{ tag }}">{{ tag }}</a>
@@ -37,7 +43,7 @@
 </p>
 
 <p class="entryShortUrl">
-  {% trans "Short url" %} : 
+  <strong>{% trans "Short url" %}</strong> : 
   {% if object.get_short_url %}
   <a href="{{ object.get_short_url }}" title="{{ object.title }}">
     {{ object.get_short_url }}

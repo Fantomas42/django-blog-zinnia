@@ -3,13 +3,11 @@
 
 {% block title %}{{ object.title }}{% endblock %}
 
-{% block content %}
-<div class="entryPost">
-  {% with object.get_content|safe as object_content %}
-  {% include "zinnia/_entry_detail.html" %}
-  {% endwith %}
+{% block sidebar %}
+<div class="entrySimilar">
+  <h3>{% trans "Similar entries" %}</h3>
+  {% get_similar_entries 5 %}
 </div>
-
 <div class="entryRelated">
   <h3>{% trans "Related entries" %}</h3>
   <ul>
@@ -21,34 +19,44 @@
     <li>{% trans "No entries related." %}</li>
     {% endfor %}
   </ul>
-  <h3>{% trans "Similar entries" %}</h3>
-  {% get_similar_entries 5 %}
 </div>
+{% endblock %}
+
+{% block content %}
+<div class="entryPost">
+  {% with object.get_content|safe as object_content %}
+  {% include "zinnia/_entry_detail.html" %}
+  {% endwith %}
+</div>
+
+<hr />
 
 <a name="comments"></a>
 <div id="comments">
+  <h3>{% trans "Comments" %}</h3>
   {% with object.get_comments as comment_list %}
   {% if comment_list.count %}
   <ol id="commentList">
     {% for comment in comment_list %}
-    <li class="alt {% cycle box1,box2 %}">
-      <a class="gravatar">
-	<img src="{% get_gravatar comment.email 60 "G" %}" />
-      </a>
-      <div class="commentbody">
-	<a name="comment_{{ comment.pk }}"></a>
-	<cite>{{ comment.user_name }}</cite>
-	<br />
-	{% if comment.url %}
-	<small>
-	  <a href="{{ comment.url }}" target="blank">{{ comment.url }}</a>
-	</small>
-	<br />
-	{% endif %}				
-	<small class="commentmetadata">
-	  <a>{{ comment.submit_date|date:"l d F Y \a H:i" }}</a>
-	</small>
-	{{ comment.comment|safe|linebreaks }}
+    <li id="comment_{{ comment.pk }}" class="comment {% cycle box1,box2 %} span-15 last">
+      <a name="comment_{{ comment.pk }}"></a>
+      <div class="span-2">
+	<img src="{% get_gravatar comment.email 60 "G" %}" class="gravatar" />
+      </div>
+      <div class="comment_body span-13 last">
+	<div class="span-13 last">
+	  {% if comment.url %}
+	  <a href="{{ comment.url }}" target="blank">{{ comment.user_name }}</a>
+	  {% else %}
+	  {{ comment.user_name }}
+	  {% endif %}
+	  {% trans "on date" %} {{ comment.submit_date|date:"l d F Y H:i" }}
+	</div>
+	<div class="span-13 last">
+	  <cite>
+	    {{ comment.comment }}
+	  </cite>
+	</div>
       </div>
     </li>
     {% endfor %}
@@ -61,13 +69,14 @@
   <p>{% trans "Be first to comment !" %}</p>
     {% endif %}
   {% endif %}
-
-  {% if object.comment_enabled %}
-  <h3>{% trans "Post your comment" %}</h3>
-  <div class="commentForm">
-    {% render_comment_form for object %}
-  </div>
-  {% endif %}
   {% endwith %}
 </div>
+
+{% if object.comment_enabled %}
+<hr />
+<div class="commentForm">
+  {% render_comment_form for object %}
+</div>
+{% endif %}
+
 {% endblock %}
