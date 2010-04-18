@@ -30,17 +30,15 @@ def search_list(request):
     entries = Entry.published.none()
 
     if request.GET:
-        pattern = request.GET.get('q', '')
+        pattern = request.GET.get('pattern', '')
         if len(pattern) < 3:
-            error = _('the pattern is too short')
+            error = _('The pattern is too short')
         else:
             entries = Entry.published.search(pattern)
     else:
-        error = _('no pattern to search found')
+        error = _('No pattern to search found')
 
     return object_list(request, queryset=entries,
                         template_name='zinnia/entry_search.html',
-                        extra_context={
-                            'error': error,
-                            'pattern': pattern,
-                        })
+                        extra_context={'error': error,
+                                       'pattern': pattern})
