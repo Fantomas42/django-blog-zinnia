@@ -1,6 +1,18 @@
 {% extends "zinnia/base.html" %}
 {% load i18n tagging_tags zinnia_tags %}
 
+{% block link %}
+  {% if category %}
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ category.title }}" href="{% url zinnia_feeds "categories" %}{{ category.slug }}" />
+  {% endif %}
+  {% if tag %}
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ tag.name }}" href="{% url zinnia_feeds "tags" %}{{ tag.name }}" />
+  {% endif %}
+  {% if author %}
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ author.username }}" href="{% url zinnia_feeds "authors" %}{{ author.username }}" />
+  {% endif %}
+{% endblock %}
+
 {% block content %}
 {% if category %}
 <h1>{{ category.title }}</h1>

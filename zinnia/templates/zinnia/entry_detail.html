@@ -3,6 +3,12 @@
 
 {% block title %}{{ object.title }}{% endblock %}
 
+{% block meta-description %}{% if object.excerpt %}{{ object.excerpt|striptags }}{% else %}{{ object.content|striptags|truncatewords:100 }}{% endif %}{% endblock %}
+
+{% block link %}
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'" href="{% url zinnia_feeds "comments" %}{{ object.slug }}/" />
+{% endblock %}
+
 {% block sidebar %}
 <div class="entrySimilar">
   <h3>{% trans "Similar entries" %}</h3>
