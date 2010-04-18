@@ -89,7 +89,14 @@ def get_similar_entries(context, number=5):
 def get_archives_entries():
     """Return archives entries"""
     return {'archives': Entry.published.dates('creation_date', 'month',
-                                              order='DESC')}
+                                              order='DESC'),}
+
+
+@register.inclusion_tag('zinnia/tags/link_archives_entries.html')
+def get_link_archives_entries():
+    """Return archives entries for link markup"""
+    return {'archives': Entry.published.dates('creation_date', 'month',
+                                              order='DESC'),}
 
 
 @register.simple_tag

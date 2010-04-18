@@ -210,7 +210,11 @@ Display all the categories availables.
 
 * get_archives_entries
 
-Display link markups for listing the archives
+Display the archives by month.
+
+* get_link_archives_entries
+
+Display link markups for listing the archives.
 
 Translations
 ============

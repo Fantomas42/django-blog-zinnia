@@ -1,0 +1,3 @@
+{% load i18n %}
+{% for date in archives %}<link rel="archives" title="{% trans "Archives" %} {{ date|date:"F Y"|capfirst }}" href="{% url zinnia_entry_archive_month date|date:"Y" date|date:"m" %}" />
+{% endfor %}

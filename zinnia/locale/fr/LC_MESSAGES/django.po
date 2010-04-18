@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-18 10:48+0200\n"
-"PO-Revision-Date: 2010-04-18 10:50+0100\n"
+"POT-Creation-Date: 2010-04-18 16:09+0200\n"
+"PO-Revision-Date: 2010-04-18 16:10+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -357,7 +357,7 @@ msgstr "Prévisualisation du commentaire"
 
 #: templates/comments/preview.html:28
 #: templates/zinnia/_entry_detail.html:14
-#: templates/zinnia/entry_detail.html:53
+#: templates/zinnia/entry_detail.html:51
 msgid "on date"
 msgstr "à la date du"
 
@@ -416,7 +416,7 @@ msgid "Not yet comments."
 msgstr "Pas de commentaires."
 
 #: templates/zinnia/_entry_detail.html:70
-#: templates/zinnia/entry_detail.html:65
+#: templates/zinnia/entry_detail.html:63
 msgid "Comments are closed."
 msgstr "Les commentaires sont fermés"
 
@@ -428,30 +428,39 @@ msgstr "Auteurs"
 msgid "Author list"
 msgstr "Liste des auteurs"
 
-#: templates/zinnia/base.html:50
+#: templates/zinnia/base.html:52
 msgid "Search"
 msgstr "Recherche"
 
-#: templates/zinnia/base.html:53
+#: templates/zinnia/base.html:55
 msgid "Keywords..."
 msgstr "Mots-clefs..."
 
-#: templates/zinnia/base.html:61
+#: templates/zinnia/base.html:63
 #: templates/zinnia/category_list.html:4
 msgid "Categories"
 msgstr "Catégories"
 
-#: templates/zinnia/base.html:65
+#: templates/zinnia/base.html:67
 msgid "Recent entries"
 msgstr "Articles récents"
 
-#: templates/zinnia/base.html:69
+#: templates/zinnia/base.html:71
 msgid "Random entries"
 msgstr "Articles au hasard"
 
-#: templates/zinnia/base.html:73
+#: templates/zinnia/base.html:75
 msgid "Popular entries"
 msgstr "Articles populaire"
+
+#: templates/zinnia/base.html:79
+#: templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/entry_archive_month.html:4
+#: templates/zinnia/entry_archive_year.html:4
+#: templates/zinnia/tags/archives_entries.html:5
+#: templates/zinnia/tags/link_archives_entries.html:2
+msgid "Archives"
+msgstr "Archives"
 
 #: templates/zinnia/category_list.html:7
 msgid "Category list"
@@ -507,13 +516,6 @@ msgstr "Page"
 msgid "More old entries"
 msgstr "Articles plus anciens"
 
-#: templates/zinnia/entry_archive_day.html:4
-#: templates/zinnia/entry_archive_month.html:4
-#: templates/zinnia/entry_archive_year.html:4
-#: templates/zinnia/tags/archives_entries.html:2
-msgid "Archives"
-msgstr "Archives"
-
 #: templates/zinnia/entry_detail.html:8
 msgid "Similar entries"
 msgstr "Articles similaires"
@@ -526,11 +528,11 @@ msgstr "Articles associés"
 msgid "No entries related."
 msgstr "Pas d'articles associés."
 
-#: templates/zinnia/entry_detail.html:36
+#: templates/zinnia/entry_detail.html:35
 msgid "Comments"
 msgstr "Commentaires"
 
-#: templates/zinnia/entry_detail.html:69
+#: templates/zinnia/entry_detail.html:67
 msgid "Be first to comment !"
 msgstr "Soyez le premier à commenter !"
 
@@ -569,6 +571,10 @@ msgstr[1] ""
 #: templates/zinnia/entry_search.html:31
 msgid "Nothing found."
 msgstr "Aucun article trouvé."
+
+#: templates/zinnia/tags/archives_entries.html:11
+msgid "Not yet archives."
+msgstr "Pas encore d'archives."
 
 #: templates/zinnia/tags/categories.html:6
 #, python-format
