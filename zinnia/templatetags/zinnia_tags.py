@@ -100,4 +100,5 @@ def get_gravatar(email, size, rating, default=None):
     if default:
         options['d'] = default
 
-    return '%s?%s' % (url, urlencode(options))
+    url = '%s?%s' % (url, urlencode(options))
+    return url.replace('&', '&amp;')
