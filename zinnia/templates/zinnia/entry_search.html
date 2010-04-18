@@ -6,13 +6,28 @@
 {% block content %}
 <h1>{% trans "Search results" %} {% if pattern %}'{{ pattern }}'{% endif %}</h1>
 
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+{% if object_list %}
+<p class="success">
+  {% blocktrans count object_list|length as entry_count %}
+  {{ entry_count }} entry found
+  {% plural %}
+  {{ entry_count }} entries found
+  {% endblocktrans %}
+</p>
+{% endif %}
+
 {% for object in object_list %}
 <div class="entry">
   {% with object.get_content|truncatewords_html:100|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 </div>
+<hr />
 {% empty %}
-<p>{% trans "Nothing found." %}</p>
+<p class="notice">{% trans "Nothing found." %}</p>
 {% endfor %}
 {% endblock %}

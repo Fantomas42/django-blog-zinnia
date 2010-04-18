@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-17 22:56+0200\n"
-"PO-Revision-Date: 2010-04-17 22:58+0100\n"
+"POT-Creation-Date: 2010-04-18 10:48+0200\n"
+"PO-Revision-Date: 2010-04-18 10:50+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -276,12 +276,12 @@ msgid "entries"
 msgstr "articles"
 
 #: views.py:35
-msgid "the pattern is too short"
+msgid "The pattern is too short"
 msgstr "Le motif de recherche est trop court !"
 
 #: views.py:39
-msgid "no pattern to search found"
-msgstr "Pas de résultats trouvé pour ce motif de recherche."
+msgid "No pattern to search found"
+msgstr "Aucun motif de recherche !"
 
 #: plugins/cms_plugins.py:16
 #: templates/zinnia/entry_archive.html:4
@@ -547,7 +547,26 @@ msgstr "Auteur"
 msgid "Search results"
 msgstr "Résultats de recherche"
 
-#: templates/zinnia/entry_search.html:16
+#: templates/zinnia/entry_search.html:15
+#, python-format
+msgid ""
+"\n"
+"  %(entry_count)s entry found\n"
+"  "
+msgid_plural ""
+"\n"
+"  %(entry_count)s entries found\n"
+"  "
+msgstr[0] ""
+"\n"
+"      %(entry_count)s article trouvé.\n"
+"    "
+msgstr[1] ""
+"\n"
+"      %(entry_count)s articles trouvés.\n"
+"    "
+
+#: templates/zinnia/entry_search.html:31
 msgid "Nothing found."
 msgstr "Aucun article trouvé."
 
