@@ -1,5 +1,96 @@
-{% extends "base.html" %}
-{% load i18n %}
+{% load zinnia_tags tagging_tags i18n %}
+{% tags_for_model zinnia.entry as tag_entry %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="follow, all" />
+    <meta name="language" content="{{ LANGUAGE_CODE }}" />
+    <meta name="description" content="{% block meta-description %}Demonstration of the Zinnia Blog application.{% endblock %}" />
+    <meta name="keywords" content="django, blog, zinnia, {{ tag_entry|join:", "}}, {% block meta-keywords %}{% endblock %}" />
+    <meta name="author" content="Fantomas42" />
+    <meta name="engine" content="Zinnia 0.5" />
+    {% block meta %}{% endblock %}
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ ZINNIA_MEDIA_URL }}css/screen.css" />
+    <link rel="stylesheet" type="text/css" media="print" href="{{ ZINNIA_MEDIA_URL }}css/print.css" />
+    <!--[if lt IE 8]>
+	<link rel="stylesheet" type="text/css" media="screen, projection" href="{{ ZINNIA_MEDIA_URL }}css/ie.css" />
+    <![endif]-->
+    {% get_link_archives_entries %}
+    {% block link %}{% endblock %}
+    {% block script %}{% endblock %}
+    {% block css %}
+    {% endblock %}
+    {% block javascript %}
+    {% endblock %}
+    <title>Zinnia's Blog - {% block title %}{% endblock %}</title>
+  </head>
+  <body id="zinnia" class="container">
+    <div id="header" class="span-24 last">
+      <h1>
+	<a href="{% url zinnia_entry_archive_index %}" title="Zinnia's Blog">
+	  Zinnia's Blog
+	</a>
+      </h1>
+      <blockquote>
+	<p>Just another Zinnia weblog.</p>
+      </blockquote>
+    </div>
+    <hr />
+    <div id="body" class="span-24 last">
+      <div id="content" class="span-16 border">
+	{% block content %}
+	<h3>The content block need to be overrided !</h3>
+	{% endblock %}
+      </div>
+      <div id="sidebar" class="span-8 last">
+	<h3>Hello World !</h3>
+	<p>
+	  This simple skin is the base template of the Zinnia application,
+	  used for displaying the blog quickly.
+	  <br />
+	  Feel free to override the <em>zinnia/base.html</em> template to change the appearence.
+	</p>
+	<div class="search">
+	  <h3>{% trans "Search" %}</h3>
+	  <form method="get" id="searchform" action="{% url zinnia_entry_search %}">
+            <p>
+              <input type="text" value="{% trans "Keywords..." %}" name="pattern" id="searchbox" onfocus="this.value=''"/>
+              <input type="submit" class="submitbutton" value="OK" />
+            </p>
+          </form>
+	</div>
+	{% block sidebar %}
+	{% endblock %}
+	<div class="categories">
+	  <h3>{% trans "Categories" %}</h3>
+	  {% get_categories %}
+	</div>
+	<div class="recents">
+	  <h3>{% trans "Recent entries" %}</h3>
+	  {% get_recent_entries 5 %}
+	</div>
+	<div class="randoms">
+	  <h3>{% trans "Random entries" %}</h3>
+	  {% get_random_entries 5 %}
+	</div>
+	<div class="populars">
+	  <h3>{% trans "Popular entries" %}</h3>
+	  {% get_popular_entries 5 %}
+	</div>
+	<div class="archives">
+	  <h3>{% trans "Archives" %}</h3>
+	  {% get_archives_entries %}
+	</div>
+      </div>
+    </div>
+    <hr />
+    <div id="footer" class="span-24 last">
+      <p>Powered by <a href="http://www.djangoproject.com">Django</a> and <a href="http://fantomas.willbreak.it">Zinnia</a>.</p>
+    </div>
+  </body>
+</html>
 
-{% block title %}{% trans "Zinnia" %}{% endblock %}
 
