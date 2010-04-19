@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-18 17:52+0200\n"
-"PO-Revision-Date: 2010-04-18 17:53+0100\n"
+"POT-Creation-Date: 2010-04-19 22:34+0200\n"
+"PO-Revision-Date: 2010-04-19 22:35+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -65,12 +65,12 @@ msgid "View on site"
 msgstr "Voir sur le site"
 
 #: admin.py:116
-#: templates/zinnia/_entry_detail.html:52
+#: templates/zinnia/_entry_detail.html:61
 msgid "Unavailable"
 msgstr "Indisponible"
 
 #: admin.py:120
-#: templates/zinnia/_entry_detail.html:46
+#: templates/zinnia/_entry_detail.html:55
 msgid "Short url"
 msgstr "Url raccourcie"
 
@@ -103,62 +103,62 @@ msgstr "%i annuaires pingés avec succès."
 msgid "Ping Directories for selected entries"
 msgstr "Pinger les articles dans les annuaires."
 
-#: feeds.py:77
+#: feeds.py:78
 #, python-format
 msgid "%s - News"
 msgstr "%s | Dernières actualités"
 
-#: feeds.py:78
+#: feeds.py:79
 #, python-format
 msgid "The last news for the site %s"
 msgstr "Les dernières actualités du site %s"
 
-#: feeds.py:102
+#: feeds.py:103
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Actualités pour la catégorie : %s"
 
-#: feeds.py:105
+#: feeds.py:106
 #, python-format
 msgid "The last news for the category %s"
 msgstr "Les dernières actualités pour la catégorie : %s"
 
-#: feeds.py:123
+#: feeds.py:124
 #, python-format
 msgid "Entries for author %s"
 msgstr "L'actualités par %s"
 
-#: feeds.py:126
+#: feeds.py:127
 #, python-format
 msgid "The last news by %s"
 msgstr "Les dernières actualités par %s"
 
-#: feeds.py:144
+#: feeds.py:145
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Actualités pour le tag : %s"
 
-#: feeds.py:147
+#: feeds.py:148
 #, python-format
 msgid "The last news for the tag %s"
 msgstr "Les dernières actualités pour le tag : %s"
 
-#: feeds.py:165
+#: feeds.py:166
 #, python-format
 msgid "Results of the search for %s"
 msgstr "Résultats de recherche pour '%s'"
 
-#: feeds.py:168
+#: feeds.py:169
 #, python-format
 msgid "The news containing the pattern %s"
 msgstr "Les dernières actualités contenant le motif '%s'"
 
-#: feeds.py:189
+#: feeds.py:190
 #, python-format
 msgid "Comments on %s"
 msgstr "Commentaires sur : %s"
 
-#: feeds.py:192
+#: feeds.py:193
 #, python-format
 msgid "The last comments for the news %s"
 msgstr "Les derniers commentaires sur l'actualité : %s"
@@ -307,18 +307,6 @@ msgstr "nombre d'articles"
 msgid "%s entries"
 msgstr "%s articles"
 
-#: templates/comments/form.html:5
-msgid "Post your comment"
-msgstr "Poster un commentaire"
-
-#: templates/comments/form.html:16
-msgid "Post"
-msgstr "Poster"
-
-#: templates/comments/form.html:17
-msgid "Preview"
-msgstr "Prévisualiser"
-
 #: templates/comments/posted.html:4
 #: templates/comments/posted.html.py:7
 msgid "Thanks for your comment"
@@ -329,11 +317,11 @@ msgstr "Merci pour votre commentaire"
 msgid "Return to entry list"
 msgstr "Retourner à la liste des articles"
 
-#: templates/comments/preview.html:4
+#: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
 msgstr "Prévisualiser le commentaire"
 
-#: templates/comments/preview.html:8
+#: templates/comments/zinnia_entry_preview.html:8
 msgid ""
 "\n"
 "    Please correct following error.\n"
@@ -351,15 +339,27 @@ msgstr[1] ""
 "    Veuillez corriger les erreurs suivantes.\n"
 "    "
 
-#: templates/comments/preview.html:15
+#: templates/comments/zinnia_entry_preview.html:15
 msgid "Preview of the comment"
 msgstr "Prévisualisation du commentaire"
 
-#: templates/comments/preview.html:28
-#: templates/zinnia/_entry_detail.html:14
+#: templates/comments/zinnia_entry_preview.html:28
+#: templates/zinnia/_entry_detail.html:16
 #: templates/zinnia/entry_detail.html:57
 msgid "on date"
 msgstr "à la date du"
+
+#: templates/comments/zinnia/entry/form.html:5
+msgid "Post your comment"
+msgstr "Poster un commentaire"
+
+#: templates/comments/zinnia/entry/form.html:16
+msgid "Post"
+msgstr "Poster"
+
+#: templates/comments/zinnia/entry/form.html:17
+msgid "Preview"
+msgstr "Prévisualiser"
 
 #: templates/feeds/comments_title.html:2
 #: templates/zinnia/entry_archive_base.html:51
@@ -367,7 +367,7 @@ msgid "on"
 msgstr "le"
 
 #: templates/tagging/tag_list.html:4
-#: templates/zinnia/_entry_detail.html:36
+#: templates/zinnia/_entry_detail.html:43
 msgid "Tags"
 msgstr "Tags"
 
@@ -375,24 +375,24 @@ msgstr "Tags"
 msgid "Tag list"
 msgstr "Liste des tags"
 
-#: templates/zinnia/_entry_detail.html:8
+#: templates/zinnia/_entry_detail.html:10
 msgid "Written by"
 msgstr "Ecrit par"
 
-#: templates/zinnia/_entry_detail.html:10
+#: templates/zinnia/_entry_detail.html:12
 #, python-format
 msgid "Show %(author)s entries"
 msgstr "Voir les articles de %(author)s"
 
-#: templates/zinnia/_entry_detail.html:15
+#: templates/zinnia/_entry_detail.html:17
 msgid "in"
 msgstr "sous"
 
-#: templates/zinnia/_entry_detail.html:41
+#: templates/zinnia/_entry_detail.html:50
 msgid "No tags"
 msgstr "Pas de tags"
 
-#: templates/zinnia/_entry_detail.html:60
+#: templates/zinnia/_entry_detail.html:69
 #, python-format
 msgid ""
 "\n"
@@ -411,11 +411,15 @@ msgstr[1] ""
 "    %(comment_count)s commentaires\n"
 "    "
 
-#: templates/zinnia/_entry_detail.html:68
+#: templates/zinnia/_entry_detail.html:77
 msgid "Not yet comments."
 msgstr "Pas de commentaires."
 
-#: templates/zinnia/_entry_detail.html:70
+#: templates/zinnia/_entry_detail.html:79
+msgid "Be first to comment !"
+msgstr "Soyez le premier à commenter !"
+
+#: templates/zinnia/_entry_detail.html:82
 #: templates/zinnia/entry_detail.html:69
 msgid "Comments are closed."
 msgstr "Les commentaires sont fermés"
@@ -547,8 +551,8 @@ msgid "Comments"
 msgstr "Commentaires"
 
 #: templates/zinnia/entry_detail.html:73
-msgid "Be first to comment !"
-msgstr "Soyez le premier à commenter !"
+msgid "Not yet comments !"
+msgstr "Pas encore de commentaires !"
 
 #: templates/zinnia/entry_list.html:4
 msgid "Category"
