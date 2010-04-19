@@ -1,48 +1,57 @@
 {% load tagging_tags comments i18n %}
 
-<h2 class="entryTitle">
-  <a href="{{ object.get_absolute_url }}" title="{{ object.title }}">{{ object.title }}</a>
-</h2>
-
-<p class="entryMeta quiet">
-  {% trans "Written by" %} 
-  {% for author in object.authors.all %}
-  <a href="{% url zinnia_author_detail author %}" title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">
-    <strong>{{ author }}</strong>
-  </a>{% if not forloop.last %}, {% endif %}
-  {% endfor %}
-  {% trans "on date" %} {{ object.creation_date|date:"d F Y"|capfirst }}
-  {% trans "in" %} 
-  {% for category in object.categories.all %}
-  <a href="{{ category.get_absolute_url }}" title="{{ category }}">
-    <em>{{ category }}</em>
-  </a>
-  {% if not forloop.last %}, {% endif %}
-  {% endfor %}.
-</p>
-
-<div class="entryContent">
-  {% if object.image %}
-  <p>
-    <a href="{{ object.get_absolute_url }}">
-      <img src="{{ object.image.url }}" alt="{{ object.title }}" class="left" />
+<div class="entryMeta span-16 last">
+  <h2 class="entryTitle">
+    <a href="{{ object.get_absolute_url }}" title="{{ object.title }}">
+      {{ object.title }}
     </a>
+  </h2>
+  <p class="entryInfo quiet">
+    {% trans "Written by" %} 
+    {% for author in object.authors.all %}
+    <a href="{% url zinnia_author_detail author %}" title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">
+      <strong>{{ author }}</strong>
+    </a>{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+    {% trans "on date" %} {{ object.creation_date|date:"d F Y"|capfirst }}
+    {% trans "in" %} 
+    {% for category in object.categories.all %}
+    <a href="{{ category.get_absolute_url }}" title="{{ category }}">
+      <em>{{ category }}</em>
+    </a>
+    {% if not forloop.last %}, {% endif %}
+    {% endfor %}.
   </p>
-  {% endif %}
-  {{ object_content }}
 </div>
 
-<p class="entryTags">
+<div class="entryPost span-16 last">
+  {% if object.image %}
+  <div class="entryImage">
+    <p>
+      <a href="{{ object.get_absolute_url }}">
+	<img src="{{ object.image.url }}" alt="{{ object.title }}" class="left" />
+      </a>
+    </p>
+  </div>
+  {% endif %}
+  <div class="entryContent">
+    {{ object_content }}
+  </div>
+</div>
+
+<p class="entryTags span-16 last">
   <strong>{% trans "Tags" %}</strong> :
   {% tags_for_object object as tag_list %}
   {% for tag in tag_list %}  
-  <a href="{% url zinnia_tag_detail tag %}" title="Tag {{ tag }}">{{ tag }}</a>
+  <a href="{% url zinnia_tag_detail tag %}" title="Tag {{ tag }}">
+    {{ tag }}
+  </a>
   {% empty %}
   <span>{% trans "No tags" %}</span>
   {% endfor %}
 </p>
 
-<p class="entryShortUrl">
+<p class="entryShortUrl span-16 last">
   <strong>{% trans "Short url" %}</strong> : 
   {% if object.get_short_url %}
   <a href="{{ object.get_short_url }}" title="{{ object.title }}">
@@ -53,7 +62,7 @@
   {% endif %}
 </p>
 
-<p class="entryComments">
+<p class="entryComments span-16 last">
   {% with object.get_comments.count as comment_count %}
     {% if comment_count %}
   <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
@@ -66,6 +75,9 @@
     {% else %}
       {% if object.comment_enabled %}
         {% trans "Not yet comments." %}
+        <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
+	  {% trans "Be first to comment !" %}
+	</a>
       {% else %}
         {% trans "Comments are closed." %}
       {% endif %}

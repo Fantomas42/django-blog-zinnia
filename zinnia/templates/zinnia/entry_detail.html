@@ -29,7 +29,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="entryPost">
+<div class="entry span-16 last">
   {% with object.get_content|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
@@ -37,11 +37,11 @@
 
 <hr />
 
-<div id="comments">
+<div id="comments" class="span-16 last">
   <h3>{% trans "Comments" %}</h3>
   {% with object.get_comments as comment_list %}
   {% if comment_list.count %}
-  <ol id="commentList">
+  <ol id="commentList" class="span-15 last">
     {% for comment in comment_list %}
     <li id="comment_{{ comment.pk }}" class="comment {% cycle box1,box2 %} span-15 last">
       <div class="span-2">
@@ -70,15 +70,14 @@
     {% endif %}
   {% else %}
     {% if object.comment_enabled %}
-  <p>{% trans "Be first to comment !" %}</p>
+  <p>{% trans "Not yet comments !" %}</p>
     {% endif %}
   {% endif %}
   {% endwith %}
 </div>
 
 {% if object.comment_enabled %}
-<hr />
-<div class="commentForm">
+<div class="commentForm span-16 last">
   {% render_comment_form for object %}
 </div>
 {% endif %}

@@ -30,7 +30,7 @@
 {% endif %}
 
 {% for object in object_list %}
-<div class="entry">
+<div class="entry span-16 last">
   {% with object.get_content|truncatewords_html:100|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
@@ -41,7 +41,7 @@
 {% endfor %}
 
 {% if is_paginated %}
-<div class="paginator">
+<div class="paginator span-16 last">
   {% if page_obj.has_previous %}
   <span class="previous">
     <a href="{% url zinnia_entry_archive_index_paginated page_obj.previous_page_number %}" class="previous">{% trans "More recent entries" %}</a>
