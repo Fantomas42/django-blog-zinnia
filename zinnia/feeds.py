@@ -55,6 +55,8 @@ class EntryFeed(Feed):
         return current_site.domain
 
     def item_enclosure_url(self, item):
+        if item.image:
+            return item.image.url
         parser = ImgParser()
         parser.feed(item.content)
         if len(parser.img_locations):
