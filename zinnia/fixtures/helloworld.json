@@ -1,11 +1,20 @@
 [
   {
+    "pk": 2, 
+    "model": "zinnia.category", 
+    "fields": {
+      "description": "All entries containing tests.", 
+      "slug": "tests", 
+      "title": "Tests"
+    }
+  }, 
+  {
     "pk": 1, 
     "model": "zinnia.category", 
     "fields": {
-      "description": "Les articles non class\u00e9s.", 
-      "slug": "non-classe", 
-      "title": "Non class\u00e9"
+      "description": "All uncategorized entries.", 
+      "slug": "uncategorized", 
+      "title": "Uncategorized"
     }
   }, 
   {
@@ -15,21 +24,88 @@
       "status": 2, 
       "end_publication": "2042-12-31 00:00:00", 
       "comment_enabled": true, 
-      "tags": "", 
-      "start_publication": "2009-01-01 00:00:00", 
+      "tags": "welcome, blog, test", 
+      "image": "", 
       "title": "Hello World !", 
-      "excerpt": "Bienvenue dans Zinnia. Ceci est votre premier article. Modifiez-le ou supprimer-le, puis lancez-vous !", 
+      "excerpt": "Welcome to the Zinnia blogging application written in Django.This is your first entry, don't hesite to archive or remove it.Or you can simply add a new entry.", 
       "sites": [
         1
       ], 
-      "creation_date": "2009-01-01 00:00:00", 
-      "content": "<p>Bienvenue dans <strong>Zinnia</strong>.</p>\r\n<p>Ceci est votre premier article. Modifiez-le ou supprimer-le, puis lancez-vous !</p>\r\n", 
+      "related": [
+        3
+      ], 
+      "creation_date": "2010-01-01 00:00:00", 
+      "content": "<p>Welcome to the Zinnia blogging application written in Django.</p><p>This is your first entry, don't hesite to <a title=\"Edit this entry.\" href=\"/admin/zinnia/entry/1/\">archive or remove it</a>.</p><p>Or you can simply <a title=\"Add a new entry.\" href=\"/admin/zinnia/entry/add/\">add a new entry</a>.</p>", 
+      "start_publication": "2010-01-01 00:00:00", 
       "authors": [
         1
       ], 
-      "last_update": "2009-05-24 22:27:19", 
+      "last_update": "2010-04-20 15:12:49", 
       "slug": "hello-world", 
       "categories": [
+        1
+      ]
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "zinnia.entry", 
+    "fields": {
+      "status": 2, 
+      "end_publication": "2042-12-31 00:00:00", 
+      "comment_enabled": true, 
+      "tags": "blog, test", 
+      "image": "", 
+      "title": "Lorem ipsum", 
+      "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut commodo mi at massa iaculis at facilisis sem viverra. Aliquam eget odio turpis. Sed luctus, diam sed vehicula auctor, orci tortor auctor turpis, quis bibendum enim odio sed neque. Sed eu justo vitae orci placerat suscipit eu tempus ligula. Ut condimentum, ...", 
+      "sites": [
+        1
+      ], 
+      "related": [
+        1, 
+        2
+      ], 
+      "creation_date": "2009-03-15 00:00:00", 
+      "content": "<div id=\"lipsum\"><p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Ut commodo mi\r\nat massa iaculis at facilisis sem viverra. Aliquam eget odio turpis.\r\nSed luctus, diam sed vehicula auctor, orci tortor auctor turpis, quis\r\nbibendum enim odio sed neque. Sed eu justo vitae orci placerat suscipit\r\neu tempus ligula. Ut condimentum, odio at dignissim egestas, est tortor\r\nlobortis dolor, vel feugiat massa magna non magna. Sed sit amet quam a\r\nturpis tristique auctor. Vestibulum nec sapien sed enim congue varius.\r\nUt vulputate adipiscing neque, a egestas purus euismod nec. Donec\r\nauctor nunc ac massa mattis quis commodo tortor luctus. Integer id sem\r\nnec nisl iaculis imperdiet. Vestibulum ante ipsum primis in faucibus\r\norci luctus et ultrices posuere cubilia Curae; Mauris bibendum augue\r\nvitae nisi volutpat a tempor purus sodales. Nunc quis justo nunc, at\r\ntristique quam. Fusce vitae nibh tellus, quis consequat nisl. Fusce mi\r\nnulla, sollicitudin a auctor et, posuere nec leo. Curabitur vehicula\r\nvelit vel lacus condimentum eget ullamcorper eros faucibus. Curabitur\r\nposuere, magna non rhoncus aliquet, ante sem cursus nibh, a mattis est\r\nlorem et lorem.\r\n</p><p>Nullam metus ligula, sagittis eu consectetur in, pharetra non purus.\r\nInteger non porta tortor. Fusce fringilla mi eget nibh sodales viverra.\r\nVivamus erat urna, pretium eu ornare non, sollicitudin eget urna.\r\nPraesent justo enim, hendrerit at porttitor in, adipiscing vel nulla.\r\nVivamus nunc nisl, fermentum eget tempor nec, convallis sed justo.\r\nPellentesque vel imperdiet leo. Class aptent taciti sociosqu ad litora\r\ntorquent per conubia nostra, per inceptos himenaeos. Etiam lacinia erat\r\nnon nisi sagittis eget mattis dui dictum. Donec id lorem eu quam\r\nfacilisis ultricies. Ut et dolor porta lectus adipiscing aliquam vel at\r\nodio. In hac habitasse platea dictumst. Sed mollis lacus tincidunt\r\nmassa placerat sed tincidunt tortor interdum. Nunc vulputate placerat\r\nnunc eget venenatis. In aliquam rutrum nulla, sed aliquet dolor ornare\r\ninterdum. Etiam fermentum mollis cursus.\r\n</p></div>", 
+      "start_publication": "2010-01-01 00:00:00", 
+      "authors": [
+        1
+      ], 
+      "last_update": "2010-04-20 15:26:02", 
+      "slug": "lorem-ipsum", 
+      "categories": [
+        2, 
+        1
+      ]
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "zinnia.entry", 
+    "fields": {
+      "status": 2, 
+      "end_publication": "2042-12-31 00:00:00", 
+      "comment_enabled": true, 
+      "tags": "html, test, ", 
+      "image": "", 
+      "title": "Testing HTML elements", 
+      "excerpt": "The purpose of this HTML is to help determine what default settings are with CSS and to make sure that all possible HTML Elements are included in this HTML so as to not miss any possible Elements when designing a site.Heading 1Heading 2Heading 3Heading 4Heading 5Heading 6ParagraphLorem ipsum dolor sit ...", 
+      "sites": [
+        1
+      ], 
+      "related": [
+        3
+      ], 
+      "creation_date": "2009-01-01 00:00:00", 
+      "content": "<p>The\r\npurpose of this HTML is to help determine what default settings are\r\nwith CSS and to make sure that all possible HTML Elements are included\r\nin this HTML so as to not miss any possible Elements when designing a\r\nsite.</p><hr /><h1>Heading 1</h1><h2>Heading 2</h2><h3>Heading 3</h3><h4>Heading 4</h4><h5>Heading 5</h5><h6>Heading 6</h6><hr /><h2 id=\"paragraph\">Paragraph</h2><p>Lorem ipsum dolor sit amet, <a href=\"http://wp-themes.com/?p=36#\" title=\"test link\">test link</a>\r\nadipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec\r\nfaucibus. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero\r\nnisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent\r\nmattis, massa quis luctus fermentum, turpis mi volutpat justo, eu\r\nvolutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus\r\neget sapien fringilla nonummy. Mauris a ante. Suspendisse quam sem,\r\nconsequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue\r\nquis tellus.</p><p>Lorem ipsum dolor sit amet, <em>emphasis</em> consectetuer\r\nadipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec\r\nfaucibus. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero\r\nnisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent\r\nmattis, massa quis luctus fermentum, turpis mi volutpat justo, eu\r\nvolutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus\r\neget sapien fringilla nonummy. Mauris a ante. Suspendisse quam sem,\r\nconsequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue\r\nquis tellus.</p><hr /><h2 id=\"list_types\">List Types</h2><h3>Definition List</h3><dl><dt>Definition List Title</dt><dd>This is a definition list division.</dd></dl><h3>Ordered List</h3><ol><li>List Item 1</li><li>List Item 2</li><li>List Item 3</li></ol><h3>Unordered List</h3><ul><li>List Item 1</li><li>List Item 2</li><li>List Item 3</li></ul><hr /><h2 id=\"form_elements\">Forms</h2><fieldset><legend>Legend</legend><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam\r\ndignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis\r\nsuscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at,\r\ntincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis\r\nluctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget\r\nmetus.</p><form><h2>Form Element</h2><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam\r\ndignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis\r\nsuscipit dui.</p><p><label for=\"text_field\">Text Field:</label></p><input id=\"text_field\" type=\"text\" /><p><label for=\"text_area\">Text Area:</label><br /><textarea id=\"text_area\"></textarea></p><p><label for=\"select_element\">Select Element:</label></p><select name=\"select_element\"><optgroup label=\"Option Group 1\"></optgroup><option value=\"1\">Option 1</option><option value=\"2\">Option 2</option><option value=\"3\">Option 3</option><optgroup label=\"Option Group 2\"></optgroup><option value=\"1\">Option 1</option><option value=\"2\">Option 2</option><option value=\"3\">Option 3</option></select><p><label for=\"radio_buttons\">Radio Buttons:</label></p><input class=\"radio\" name=\"radio_button\" value=\"radio_1\" type=\"radio\" /> Radio 1<br /><input class=\"radio\" name=\"radio_button\" value=\"radio_2\" type=\"radio\" /> Radio 2<br /><input class=\"radio\" name=\"radio_button\" value=\"radio_3\" type=\"radio\" /> Radio 3<br /><p><label for=\"checkboxes\">Checkboxes:</label></p><input class=\"checkbox\" name=\"checkboxes\" value=\"check_1\" type=\"checkbox\" /> Radio 1<br /><input class=\"checkbox\" name=\"checkboxes\" value=\"check_2\" type=\"checkbox\" /> Radio 2<br /><input class=\"checkbox\" name=\"checkboxes\" value=\"check_3\" type=\"checkbox\" /> Radio 3<br /><p><label for=\"password\">Password:</label></p><input class=\"password\" name=\"password\" type=\"password\" /><p><label for=\"file\">File Input:</label></p><input class=\"file\" name=\"file\" type=\"file\" /><p><input class=\"button\" value=\"Clear\" type=\"reset\" /><input class=\"button\" value=\"Submit\" type=\"submit\" /></p></form></fieldset><hr /><h2 id=\"tables\">Tables</h2><table><tbody><tr><th>Table Header 1</th><th>Table Header 2</th><th>Table Header 3</th></tr><tr><td>Division 1</td><td>Division 2</td><td>Division 3</td></tr><tr class=\"even\"><td>Division 1</td><td>Division 2</td><td>Division 3</td></tr><tr><td>Division 1</td><td>Division 2</td><td>Division 3</td></tr></tbody></table><hr /><h2 id=\"misc\">Misc Stuff \u2013 abbr, acronym, pre, code, sub, sup, etc.</h2><p>Lorem <sup>superscript</sup> dolor <sub>subscript</sub> amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. <cite>cite</cite>.\r\nNunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi,\r\nimperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis,\r\nmassa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim\r\ndiam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien\r\nfringilla nonummy. <acronym title=\"National Basketball Association\">NBA</acronym> Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.  <abbr title=\"Avenue\">AVE</abbr></p><pre>Lorem ipsum dolor sit amet,<br /> consectetuer adipiscing elit.<br /> Nullam dignissim convallis est.<br /> Quisque aliquam. Donec faucibus.<br />Nunc iaculis suscipit dui.<br />Nam sit amet sem.<br />Aliquam libero nisi, imperdiet at,<br /> tincidunt nec, gravida vehicula,<br /> nisl.<br />Praesent mattis, massa quis<br />luctus fermentum, turpis mi<br />volutpat justo, eu volutpat<br />enim diam eget metus.<br />Maecenas ornare tortor.<br />Donec sed tellus eget sapien<br /> fringilla nonummy.<br /><acronym title=\"National Basketball Association\">NBA</acronym>\r\nMauris a ante. Suspendisse\r\n quam sem, consequat at,\r\ncommodo vitae, feugiat in,\r\nnunc. Morbi imperdiet augue\r\n quis tellus.\r\n<abbr title=\"Avenue\">AVE</abbr></pre><blockquote><p>\r\n\t\u201cThis stylesheet is going to help so freaking much.\u201d <br />-Blockquote\r\n</p></blockquote>\r\n\r\n                    \r\n          \r\n          \r\n\r\n          \r\n        \r\n        ", 
+      "start_publication": "2010-01-01 00:00:00", 
+      "authors": [
+        1
+      ], 
+      "last_update": "2010-04-20 15:26:38", 
+      "slug": "testing-html-elements", 
+      "categories": [
+        2, 
         1
       ]
     }
