@@ -1,5 +1,0 @@
-@import blueprint.sass
-
-+blueprint-print
-a
-  +blueprint-show-link-urls
