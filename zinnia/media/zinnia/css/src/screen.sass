@@ -1,0 +1,55 @@
+@import base.sass
+@import blueprint
+@import blueprint/modules/scaffolding
+@import compass/utilities/lists/bullets.sass
+@import compass/utilities/lists/inline_list.sass
+@import compass/utilities/links/hover_link.sass
+
++blueprint
++blueprint-scaffolding
+
+// Global
+ul
+  :margin 0 1.5em 1.5em 0
+  :padding-left 3.333em
+
+ol
+  :margin 0 1.5em 1.5em 0
+  :padding-left 3.333em
+  li
+    float: left
+a
+  +hover-link
+
+// Content
+#content
+  h1, h2, h3
+    :margin-top 0
+
+// Sidebar
+#sidebar
+  h3
+    :background-color = !box_color
+    :padding 0.5em
+  .welcome h3
+    :margin-top 0
+  .tags 
+    ul
+      +inline-list
+      +no-bullets
+      +tag-cloud(1.5em)
+
+// Entry
+.entry
+  .entryMeta
+    :background-color = !box_color
+    :margin-bottom 1em
+    .entryTitle
+      :margin 0
+    .entryInfo
+      :color = !box_font_color
+      :margin 0
+  .entryTags, .entryShortUrl
+    :margin-bottom 0
+    :color = !box_font_color
+

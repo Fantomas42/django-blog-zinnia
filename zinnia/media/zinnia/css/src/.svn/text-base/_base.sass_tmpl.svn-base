@@ -1,0 +1,27 @@
+// Here is where you can define your constants for your application 
+// and to configure the blueprint framework.
+
+!blueprint_grid_columns = 24
+!blueprint_container_size = 950px
+!blueprint_grid_margin  = 10px
+
+// Use this to calculate the width based on the total width.
+// Or you can set !blueprint_grid_width to a fixed value 
+// and unset !blueprint_container_size -- it will be calculated for you.
+
+!blueprint_grid_width = (!blueprint_container_size + !blueprint_grid_margin) / !blueprint_grid_columns - !blueprint_grid_margin
+
+
+// Colors
+!main_color = #FFFFFF
+!background_color = #F0F0F0
+
+// Declined colors
+!font_color = !main_color - #444
+!container_color = !main_color + #333
+
+!head_color = !container_color - #222
+!column_color = !main_color + #111
+!footer_color = !container_color - #111
+
+!border_color = !main_color

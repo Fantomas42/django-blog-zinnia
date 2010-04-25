@@ -1,0 +1,41 @@
+@import blueprint/reset.sass
+@import base.sass
+@import blueprint
+@import blueprint/modules/scaffolding.sass
+@import compass/utilities/lists.sass
+
++blueprint
++blueprint-scaffolding
+
+body
+  :background = !background_color
+
+  .container
+    :background = !container_color
+
+  #sidebar_left, #sidebar_right
+    :background = !column_color
+
+  #header
+    :background = !head_color
+    :padding 5px
+
+  #footer
+    :background = !footer_color
+    :padding 5px
+    ul
+      +pretty-bullets("/img/bullet.gif", 4px, 8px)
+
+ul.navigation
+  +inline-list
+  :font-size 1.5em
+
+ul.breadcrumb
+  +inline-list
+
+div.colborder
+  +colborder(!border_color, 1px)
+
+div.border
+  +border(!border_color, 1px)
+

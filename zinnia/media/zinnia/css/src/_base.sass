@@ -1,0 +1,42 @@
+// Here is where you can define your constants for your application 
+// and to configure the blueprint framework.
+
+!blueprint_grid_columns = 24
+!blueprint_container_size = 950px
+!blueprint_grid_margin  = 10px
+
+// Use this to calculate the width based on the total width.
+// Or you can set !blueprint_grid_width to a fixed value 
+// and unset !blueprint_container_size -- it will be calculated for you.
+
+!blueprint_grid_width = (!blueprint_container_size + !blueprint_grid_margin) / !blueprint_grid_columns - !blueprint_grid_margin
+
+
+// Colors
+!font_color = #000000
+!link_color = #006699
+!box_color = #eee
+
+// Derived colors
+!box_font_color = !box_color - #555
+!link_hover_color = !link_color - #333
+!link_active_color = !link_color
+!link_visited_color = !link_color
+!header_color = !link_color + #333
+
+// Mixins
+=tag-cloud(!base_size = 1em)
+  :font-size= !base_size
+  :line-height= 1.2 * !base_size
+  .tag_1
+    :font-size= !base_size / 2.0
+  .tag_2
+    :font-size= 2.0 * !base_size / 3.0
+  .tag_3
+    :font-size= 3.0 * !base_size / 4.0
+  .tag_4
+    :font-size= 4.0 * !base_size / 3.0
+  .tag_5
+    :font-size= 3.0 * !base_size / 2.0
+  .tag_6
+    :font-size= 2.0 * !base_size
