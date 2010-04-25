@@ -9,30 +9,32 @@
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'" href="{% url zinnia_feeds "comments" %}{{ object.slug }}/" />
 {% endblock %}
 
-{% block sidebar %}
-<div class="entrySimilar">
-  <h3>{% trans "Similar entries" %}</h3>
-  {% get_similar_entries 5 %}
-</div>
-<div class="entryRelated">
-  <h3>{% trans "Related entries" %}</h3>
-  <ul>
-    {% for entry in object.related_published_set %}
-    <li>
-      <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
-    </li>
-    {% empty %}
-    <li>{% trans "No entries related." %}</li>
-    {% endfor %}
-  </ul>
-</div>
-{% endblock %}
-
 {% block content %}
 <div class="entry span-16 last">
   {% with object.get_content|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
+</div>
+
+<hr />
+
+<div class="entryWidgets">
+  <div class="entrySimilar">
+    <h3>{% trans "Similar entries" %}</h3>
+    {% get_similar_entries 5 %}
+  </div>
+  <div class="entryRelated">
+    <h3>{% trans "Related entries" %}</h3>
+    <ul>
+      {% for entry in object.related_published_set %}
+      <li>
+	<a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
+      </li>
+      {% empty %}
+      <li>{% trans "No entries related." %}</li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 
 <hr />

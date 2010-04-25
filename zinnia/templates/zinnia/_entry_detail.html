@@ -6,7 +6,7 @@
       {{ object.title }}
     </a>
   </h2>
-  <p class="entryInfo quiet">
+  <p class="entryInfo">
     {% trans "Written by" %} 
     {% for author in object.authors.all %}
     <a href="{% url zinnia_author_detail author %}" title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">

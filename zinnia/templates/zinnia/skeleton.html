@@ -1,0 +1,72 @@
+{% load zinnia_tags tagging_tags i18n %}
+{% tags_for_model zinnia.entry as tag_entry %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="follow, all" />
+    <meta name="language" content="{{ LANGUAGE_CODE }}" />
+    <meta name="description" content="{% block meta-description %}Demonstration of the Zinnia Blog application.{% endblock %}" />
+    <meta name="keywords" content="django, blog, zinnia, {{ tag_entry|join:", "}}, {% block meta-keywords %}{% endblock %}" />
+    <meta name="author" content="Fantomas42" />
+    <meta name="engine" content="Zinnia 0.5" />
+    {% block meta %}{% endblock %}
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ ZINNIA_MEDIA_URL }}css/screen.css" />
+    <link rel="stylesheet" type="text/css" media="print" href="{{ ZINNIA_MEDIA_URL }}css/print.css" />
+    <!--[if lt IE 8]>
+	<link rel="stylesheet" type="text/css" media="screen, projection" href="{{ ZINNIA_MEDIA_URL }}css/ie.css" />
+    <![endif]-->
+    {% get_link_archives_entries %}
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of lastest entries" %}" href="{% url zinnia_feeds "latest" %}" />
+    {% block link %}{% endblock %}
+    {% block script %}{% endblock %}
+    {% block css %}
+    {% endblock %}
+    {% block javascript %}
+    {% endblock %}
+    <title>Zinnia's Blog - {% block title %}{% endblock %}</title>
+  </head>
+  <body id="zinnia">
+    <div class="container">
+      <div id="header" class="span-24 last">
+	<h1>
+	  <a href="{% url zinnia_entry_archive_index %}" title="Zinnia's Blog">
+	    Zinnia's Blog
+	  </a>
+	</h1>
+	<blockquote>
+	  <p>Just another Zinnia weblog.</p>
+	</blockquote>
+      </div>
+      <hr />
+      <div id="body" class="span-24 last">
+	<div id="content" class="span-16 border">
+	  {% block content %}
+	  <h3>The content block need to be overrided !</h3>
+	  {% endblock %}
+	</div>
+	<div id="sidebar" class="span-8 last">
+	  <div class="welcome">
+	    <h3>Welcome !</h3>
+	    <p>
+	      This simple skin is the base template of the Zinnia application,
+	      used for displaying the blog quickly.
+	      <br />
+	      Feel free to override the <em>zinnia/base.html</em> template to change the appearence.
+	    </p>
+	  </div>
+	  {% block sidebar %}
+	  {% endblock %}
+	</div>
+      </div>
+      <hr />
+      <div id="footer" class="span-24 last">
+	<p>Powered by <a href="http://www.djangoproject.com">Django</a> and <a href="http://fantomas.willbreak.it">Zinnia</a>.</p>
+      </div>
+    </div>
+  </body>
+</html>
+
+
