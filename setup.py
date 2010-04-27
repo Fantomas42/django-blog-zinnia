@@ -16,7 +16,8 @@ setup(name='django-blog-zinnia',
 
       packages=find_packages(),
       classifiers=[
-          'Development Status :: 4 - Beta',
+          'Framework :: Django',
+          'Development Status :: 5 - Production/Stable',
           'Environment :: Web Environment',
           'Programming Language :: Python',
           'Intended Audience :: Developers',
@@ -26,7 +27,7 @@ setup(name='django-blog-zinnia',
             
       license='BSD License',
       include_package_data=True,
-      zip_safe=True,
+      zip_safe=False,
       install_requires=['django-tagging',
                         'akismet',
                         ])
