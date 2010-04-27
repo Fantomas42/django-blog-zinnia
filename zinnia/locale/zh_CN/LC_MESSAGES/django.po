@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-27 20:48+0200\n"
-"PO-Revision-Date: 2010-04-24 22:04+0100\n"
+"POT-Creation-Date: 2010-04-27 20:52+0200\n"
+"PO-Revision-Date: 2010-04-27 20:45+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -26,11 +26,11 @@ msgstr "选项"
 
 #: admin.py:38
 msgid "Sorting"
-msgstr ""
+msgstr "排序"
 
 #: admin.py:63 models.py:24 models.py:51
 msgid "title"
-msgstr ""
+msgstr "标题"
 
 #: admin.py:75
 msgid "author(s)"
