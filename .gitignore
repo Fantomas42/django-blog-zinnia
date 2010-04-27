@@ -13,4 +13,5 @@ downloads
 src_eggs
 develop-eggs
 .installed.cfg
+.sass-cache
 django_blog_zinnia.egg-info/
