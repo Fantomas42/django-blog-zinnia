@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-21 00:01+0200\n"
+"POT-Creation-Date: 2010-04-27 20:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -259,7 +259,7 @@ msgstr "Kurze URL"
 msgid "entry"
 msgstr "Eintrag"
 
-#: models.py:137 plugins/models.py:24
+#: models.py:137 plugins/models.py:24 templates/zinnia/base.html:24
 msgid "entries"
 msgstr "Einträge"
 
@@ -329,7 +329,7 @@ msgstr "Kommentarvorschau einblenden"
 
 #: templates/comments/zinnia_entry_preview.html:28
 #: templates/zinnia/_entry_detail.html:16
-#: templates/zinnia/entry_detail.html:57
+#: templates/zinnia/entry_detail.html:59
 msgid "on date"
 msgstr "geschrieben"
 
@@ -350,14 +350,6 @@ msgstr "Vorschau"
 msgid "on"
 msgstr "am"
 
-#: templates/tagging/tag_list.html:4 templates/zinnia/_entry_detail.html:43
-msgid "Tags"
-msgstr "Tags"
-
-#: templates/tagging/tag_list.html:7
-msgid "Tag list"
-msgstr "Tag-Liste"
-
 #: templates/zinnia/_entry_detail.html:10
 msgid "Written by"
 msgstr "Geschrieben von"
@@ -370,6 +362,11 @@ msgstr "Zeige Einträge von %(author)s"
 #: templates/zinnia/_entry_detail.html:17
 msgid "in"
 msgstr "in"
+
+#: templates/zinnia/_entry_detail.html:43 templates/zinnia/base.html:19
+#: templates/zinnia/tag_list.html:4
+msgid "Tags"
+msgstr "Tags"
 
 #: templates/zinnia/_entry_detail.html:50
 msgid "No tags"
@@ -403,7 +400,7 @@ msgid "Be first to comment !"
 msgstr "Schreibe den ersten Kommentar!"
 
 #: templates/zinnia/_entry_detail.html:82
-#: templates/zinnia/entry_detail.html:69
+#: templates/zinnia/entry_detail.html:71
 msgid "Comments are closed."
 msgstr "Kommentare deaktiviert."
 
@@ -415,35 +412,31 @@ msgstr "Autoren"
 msgid "Author list"
 msgstr "Autorenliste"
 
-#: templates/zinnia/base.html:22
-msgid "RSS Feed of lastest entries"
-msgstr "RSS-Feed der neusten Einträge"
-
-#: templates/zinnia/base.html:60
+#: templates/zinnia/base.html:6
 msgid "Search"
 msgstr "Suche"
 
-#: templates/zinnia/base.html:63
+#: templates/zinnia/base.html:9
 msgid "Keywords..."
 msgstr "Schlüsselwörter..."
 
-#: templates/zinnia/base.html:71 templates/zinnia/category_list.html:4
+#: templates/zinnia/base.html:15 templates/zinnia/category_list.html:4
 msgid "Categories"
 msgstr "Kategorien"
 
-#: templates/zinnia/base.html:75
+#: templates/zinnia/base.html:32
 msgid "Recent entries"
 msgstr "Neuste Einträge"
 
-#: templates/zinnia/base.html:79
+#: templates/zinnia/base.html:36
 msgid "Random entries"
 msgstr "Zufällige Einträge"
 
-#: templates/zinnia/base.html:83
+#: templates/zinnia/base.html:40
 msgid "Popular entries"
 msgstr "Beliebte Einträge"
 
-#: templates/zinnia/base.html:87 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:44 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/tags/archives_entries.html:5
@@ -455,7 +448,7 @@ msgstr "Archiv"
 msgid "Category list"
 msgstr "Kategorieliste"
 
-#: templates/zinnia/category_list.html:13
+#: templates/zinnia/category_list.html:13 templates/zinnia/tag_list.html:14
 #, python-format
 msgid ""
 "\n"
@@ -515,23 +508,23 @@ msgstr "Mehr alte Einträge"
 msgid "RSS Feed of comments on"
 msgstr "RSS-Feed mit Kommentaren zu"
 
-#: templates/zinnia/entry_detail.html:14
+#: templates/zinnia/entry_detail.html:23
 msgid "Similar entries"
 msgstr "Ähnliche Einträge"
 
-#: templates/zinnia/entry_detail.html:18
+#: templates/zinnia/entry_detail.html:27
 msgid "Related entries"
 msgstr "Verwandte Einträge"
 
-#: templates/zinnia/entry_detail.html:25
+#: templates/zinnia/entry_detail.html:34
 msgid "No entries related."
 msgstr "Keine verwandten Einträge."
 
-#: templates/zinnia/entry_detail.html:41
+#: templates/zinnia/entry_detail.html:43
 msgid "Comments"
 msgstr "Kommentare"
 
-#: templates/zinnia/entry_detail.html:73
+#: templates/zinnia/entry_detail.html:75
 msgid "Not yet comments !"
 msgstr "Noch keine Kommentare vorhanden!"
 
@@ -573,6 +566,14 @@ msgstr[1] ""
 #: templates/zinnia/entry_search.html:35
 msgid "Nothing found."
 msgstr "Nichts gefunden."
+
+#: templates/zinnia/skeleton.html:22
+msgid "RSS Feed of lastest entries"
+msgstr "RSS-Feed der neusten Einträge"
+
+#: templates/zinnia/tag_list.html:7
+msgid "Tag list"
+msgstr "Tag-Liste"
 
 #: templates/zinnia/tags/archives_entries.html:11
 msgid "Not yet archives."
