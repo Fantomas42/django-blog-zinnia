@@ -23,11 +23,13 @@ a
 
 // Sidebar
 #sidebar
+  div:first-child 
+    h3
+      :margin-top 0
   h3
     :background-color = !box_color
     :padding 0.5em
-  .welcome h3
-    :margin-top 0
+
   .tags 
     ul
       +inline-list
@@ -36,7 +38,7 @@ a
 
 // Entry
 .entry
-  .entryMeta
+  .entryHeader
     :background-color = !box_color
     :margin-bottom 1em
     .entryTitle
@@ -44,11 +46,26 @@ a
     .entryInfo
       :color = !box_font_color
       :margin 0
-  .entryTags, .entryShortUrl
-    :margin-bottom 0
-    :color = !box_font_color
+      :padding-left 1.5em
+      :background transparent url(../img/category.png) no-repeat scroll
 
-// Comment
+  .entryFooter
+    p
+      :margin-bottom 0
+      :color = !box_font_color
+      strong
+        :padding-left 1.5em
+    .entryTags
+      strong
+        :background transparent url(../img/tags.png) no-repeat scroll
+    .entryShortUrl
+      strong
+        :background transparent url(../img/shorturl.png) no-repeat scroll
+    .entryComments
+      strong
+        :background transparent url(../img/comments.png) no-repeat scroll
+
+// Comments
 ol#commentList
   li
     float: left

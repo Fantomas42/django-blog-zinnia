@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-27 20:52+0200\n"
-"PO-Revision-Date: 2010-04-27 20:45+0100\n"
+"POT-Creation-Date: 2010-04-28 11:35+0200\n"
+"PO-Revision-Date: 2010-04-28 11:36+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,9 @@ msgstr "选项"
 msgid "Sorting"
 msgstr "排序"
 
-#: admin.py:63 models.py:24 models.py:51
+#: admin.py:63
+#: models.py:24
+#: models.py:51
 msgid "title"
 msgstr "标题"
 
@@ -57,11 +59,13 @@ msgstr "<a href=\"%s\" target=\"blank\">浏览</a>"
 msgid "View on site"
 msgstr "浏览站点"
 
-#: admin.py:116 templates/zinnia/_entry_detail.html:61
+#: admin.py:116
+#: templates/zinnia/_entry_detail.html:62
 msgid "Unavailable"
 msgstr "不存在"
 
-#: admin.py:120 templates/zinnia/_entry_detail.html:55
+#: admin.py:120
+#: templates/zinnia/_entry_detail.html:56
 msgid "Short url"
 msgstr "缩略URL"
 
@@ -154,7 +158,8 @@ msgstr "对于 %s 的评论"
 msgid "The last comments for the news %s"
 msgstr "对于新闻 %s 的最后评论"
 
-#: models.py:25 models.py:64
+#: models.py:25
+#: models.py:64
 msgid "used for publication"
 msgstr "用于发布"
 
@@ -162,11 +167,13 @@ msgstr "用于发布"
 msgid "description"
 msgstr "描述"
 
-#: models.py:40 plugins/models.py:13
+#: models.py:40
+#: plugins/models.py:13
 msgid "category"
 msgstr "类别"
 
-#: models.py:41 models.py:60
+#: models.py:41
+#: models.py:60
 msgid "categories"
 msgstr "类别"
 
@@ -258,7 +265,9 @@ msgstr "缩略URL"
 msgid "entry"
 msgstr "日志"
 
-#: models.py:137 plugins/models.py:24 templates/zinnia/base.html:24
+#: models.py:137
+#: plugins/models.py:24
+#: templates/zinnia/base.html:24
 msgid "entries"
 msgstr "日志"
 
@@ -270,7 +279,8 @@ msgstr "模式长度不够"
 msgid "No pattern to search found"
 msgstr "没有搜索到相关模式"
 
-#: plugins/cms_plugins.py:16 templates/zinnia/entry_archive.html:4
+#: plugins/cms_plugins.py:16
+#: templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "最后日志"
@@ -287,16 +297,19 @@ msgstr "作者"
 msgid "number of entries"
 msgstr "日志数量"
 
-#: plugins/models.py:20 plugins/models.py:27
+#: plugins/models.py:20
+#: plugins/models.py:27
 #, python-format
 msgid "%s entries"
 msgstr "%s 日志"
 
-#: templates/comments/posted.html:4 templates/comments/posted.html.py:7
+#: templates/comments/posted.html:4
+#: templates/comments/posted.html.py:7
 msgid "Thanks for your comment"
 msgstr "感谢你的评论"
 
-#: templates/comments/posted.html:9 templates/comments/posted.html.py:10
+#: templates/comments/posted.html:9
+#: templates/comments/posted.html.py:10
 msgid "Return to entry list"
 msgstr "返回日志列表"
 
@@ -362,25 +375,31 @@ msgstr "显示 %(author)s 的日志"
 msgid "in"
 msgstr "在"
 
-#: templates/zinnia/_entry_detail.html:43 templates/zinnia/base.html:19
+#: templates/zinnia/_entry_detail.html:44
+#: templates/zinnia/base.html:19
 #: templates/zinnia/tag_list.html:4
 msgid "Tags"
 msgstr "标签"
 
-#: templates/zinnia/_entry_detail.html:50
+#: templates/zinnia/_entry_detail.html:51
 msgid "No tags"
 msgstr "没有标签"
 
-#: templates/zinnia/_entry_detail.html:69
+#: templates/zinnia/_entry_detail.html:67
+#: templates/zinnia/entry_detail.html:43
+msgid "Comments"
+msgstr "评论"
+
+#: templates/zinnia/_entry_detail.html:71
 #, python-format
 msgid ""
 "\n"
-"      %(comment_count)s comment\n"
-"    "
+"        %(comment_count)s comment\n"
+"      "
 msgid_plural ""
 "\n"
-"      %(comment_count)s comments\n"
-"    "
+"        %(comment_count)s comments\n"
+"      "
 msgstr[0] ""
 "\n"
 "      %(comment_count)s 评论\n"
@@ -390,15 +409,15 @@ msgstr[1] ""
 "      %(comment_count)s 评论\n"
 "    "
 
-#: templates/zinnia/_entry_detail.html:77
+#: templates/zinnia/_entry_detail.html:79
 msgid "Not yet comments."
 msgstr "尚未有评论"
 
-#: templates/zinnia/_entry_detail.html:79
+#: templates/zinnia/_entry_detail.html:81
 msgid "Be first to comment !"
 msgstr "成为首条评论"
 
-#: templates/zinnia/_entry_detail.html:82
+#: templates/zinnia/_entry_detail.html:84
 #: templates/zinnia/entry_detail.html:71
 msgid "Comments are closed."
 msgstr "评论已关闭"
@@ -419,7 +438,8 @@ msgstr "搜索"
 msgid "Keywords..."
 msgstr "关键词..."
 
-#: templates/zinnia/base.html:15 templates/zinnia/category_list.html:4
+#: templates/zinnia/base.html:15
+#: templates/zinnia/category_list.html:4
 msgid "Categories"
 msgstr "类别"
 
@@ -435,7 +455,8 @@ msgstr "随机日志"
 msgid "Popular entries"
 msgstr "热门日志"
 
-#: templates/zinnia/base.html:44 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:44
+#: templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/tags/archives_entries.html:5
@@ -447,7 +468,8 @@ msgstr "归类"
 msgid "Category list"
 msgstr "类别列表"
 
-#: templates/zinnia/category_list.html:13 templates/zinnia/tag_list.html:14
+#: templates/zinnia/category_list.html:13
+#: templates/zinnia/tag_list.html:14
 #, python-format
 msgid ""
 "\n"
@@ -519,10 +541,6 @@ msgstr "相关日志"
 msgid "No entries related."
 msgstr "没有相关日志"
 
-#: templates/zinnia/entry_detail.html:43
-msgid "Comments"
-msgstr "评论"
-
 #: templates/zinnia/entry_detail.html:75
 msgid "Not yet comments !"
 msgstr "没有评论"
@@ -535,7 +553,8 @@ msgstr "类别"
 msgid "Author"
 msgstr "作者"
 
-#: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:11
+#: templates/zinnia/entry_search.html:4
+#: templates/zinnia/entry_search.html:11
 msgid "Search results"
 msgstr "搜索结果"
 
@@ -608,3 +627,4 @@ msgstr "评论"
 #: templates/zinnia/tags/similar_entries.html:9
 msgid "No similar entries."
 msgstr "没有类似日志"
+

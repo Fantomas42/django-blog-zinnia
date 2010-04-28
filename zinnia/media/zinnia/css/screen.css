@@ -430,8 +430,8 @@ a:hover { text-decoration: underline; }
 
 #content h1, #content h2, #content h3 { margin-top: 0; }
 
+#sidebar div:first-child h3 { margin-top: 0; }
 #sidebar h3 { background-color: #eeeeee; padding: 0.5em; }
-#sidebar .welcome h3 { margin-top: 0; }
 #sidebar .tags ul { list-style-type: none; margin: 0px; padding: 0px; display: inline; font-size: 1.5em; line-height: 1.8em; }
 #sidebar .tags ul li { margin: 0px; padding: 0px; display: inline; }
 #sidebar .tags ul li { list-style-type: none; margin-left: 0px; }
@@ -442,9 +442,13 @@ a:hover { text-decoration: underline; }
 #sidebar .tags ul .tag_5 { font-size: 2.25em; }
 #sidebar .tags ul .tag_6 { font-size: 3em; }
 
-.entry .entryMeta { background-color: #eeeeee; margin-bottom: 1em; }
-.entry .entryMeta .entryTitle { margin: 0; }
-.entry .entryMeta .entryInfo { color: #999999; margin: 0; }
-.entry .entryTags, .entry .entryShortUrl { margin-bottom: 0; color: #999999; }
+.entry .entryHeader { background-color: #eeeeee; margin-bottom: 1em; }
+.entry .entryHeader .entryTitle { margin: 0; }
+.entry .entryHeader .entryInfo { color: #999999; margin: 0; padding-left: 1.5em; background: transparent url(../img/category.png) no-repeat scroll; }
+.entry .entryFooter p { margin-bottom: 0; color: #999999; }
+.entry .entryFooter p strong { padding-left: 1.5em; }
+.entry .entryFooter .entryTags strong { background: transparent url(../img/tags.png) no-repeat scroll; }
+.entry .entryFooter .entryShortUrl strong { background: transparent url(../img/shorturl.png) no-repeat scroll; }
+.entry .entryFooter .entryComments strong { background: transparent url(../img/comments.png) no-repeat scroll; }
 
 ol#commentList li { float: left; }

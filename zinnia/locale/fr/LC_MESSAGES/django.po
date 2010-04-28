@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-27 20:52+0200\n"
-"PO-Revision-Date: 2010-04-19 22:35+0100\n"
+"POT-Creation-Date: 2010-04-28 11:35+0200\n"
+"PO-Revision-Date: 2010-04-28 11:36+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,9 @@ msgstr "Options"
 msgid "Sorting"
 msgstr "Répartition"
 
-#: admin.py:63 models.py:24 models.py:51
+#: admin.py:63
+#: models.py:24
+#: models.py:51
 msgid "title"
 msgstr "titre"
 
@@ -62,11 +64,13 @@ msgstr "<a href=\"%s\" target=\"blank\">Consulter</a>"
 msgid "View on site"
 msgstr "Voir sur le site"
 
-#: admin.py:116 templates/zinnia/_entry_detail.html:61
+#: admin.py:116
+#: templates/zinnia/_entry_detail.html:62
 msgid "Unavailable"
 msgstr "Indisponible"
 
-#: admin.py:120 templates/zinnia/_entry_detail.html:55
+#: admin.py:120
+#: templates/zinnia/_entry_detail.html:56
 msgid "Short url"
 msgstr "Url raccourcie"
 
@@ -159,7 +163,8 @@ msgstr "Commentaires sur : %s"
 msgid "The last comments for the news %s"
 msgstr "Les derniers commentaires sur l'actualité : %s"
 
-#: models.py:25 models.py:64
+#: models.py:25
+#: models.py:64
 msgid "used for publication"
 msgstr "Utilisé pour la publication"
 
@@ -167,11 +172,13 @@ msgstr "Utilisé pour la publication"
 msgid "description"
 msgstr "description"
 
-#: models.py:40 plugins/models.py:13
+#: models.py:40
+#: plugins/models.py:13
 msgid "category"
 msgstr "catégorie"
 
-#: models.py:41 models.py:60
+#: models.py:41
+#: models.py:60
 msgid "categories"
 msgstr "catégories"
 
@@ -263,7 +270,9 @@ msgstr "url raccourcie"
 msgid "entry"
 msgstr "article"
 
-#: models.py:137 plugins/models.py:24 templates/zinnia/base.html:24
+#: models.py:137
+#: plugins/models.py:24
+#: templates/zinnia/base.html:24
 msgid "entries"
 msgstr "articles"
 
@@ -275,7 +284,8 @@ msgstr "Le motif de recherche est trop court !"
 msgid "No pattern to search found"
 msgstr "Aucun motif de recherche !"
 
-#: plugins/cms_plugins.py:16 templates/zinnia/entry_archive.html:4
+#: plugins/cms_plugins.py:16
+#: templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "Derniers articles"
@@ -292,16 +302,19 @@ msgstr "auteur"
 msgid "number of entries"
 msgstr "nombre d'articles"
 
-#: plugins/models.py:20 plugins/models.py:27
+#: plugins/models.py:20
+#: plugins/models.py:27
 #, python-format
 msgid "%s entries"
 msgstr "%s articles"
 
-#: templates/comments/posted.html:4 templates/comments/posted.html.py:7
+#: templates/comments/posted.html:4
+#: templates/comments/posted.html.py:7
 msgid "Thanks for your comment"
 msgstr "Merci pour votre commentaire"
 
-#: templates/comments/posted.html:9 templates/comments/posted.html.py:10
+#: templates/comments/posted.html:9
+#: templates/comments/posted.html.py:10
 msgid "Return to entry list"
 msgstr "Retourner à la liste des articles"
 
@@ -367,25 +380,31 @@ msgstr "Voir les articles de %(author)s"
 msgid "in"
 msgstr "sous"
 
-#: templates/zinnia/_entry_detail.html:43 templates/zinnia/base.html:19
+#: templates/zinnia/_entry_detail.html:44
+#: templates/zinnia/base.html:19
 #: templates/zinnia/tag_list.html:4
 msgid "Tags"
 msgstr "Tags"
 
-#: templates/zinnia/_entry_detail.html:50
+#: templates/zinnia/_entry_detail.html:51
 msgid "No tags"
 msgstr "Pas de tags"
 
-#: templates/zinnia/_entry_detail.html:69
+#: templates/zinnia/_entry_detail.html:67
+#: templates/zinnia/entry_detail.html:43
+msgid "Comments"
+msgstr "Commentaires"
+
+#: templates/zinnia/_entry_detail.html:71
 #, python-format
 msgid ""
 "\n"
-"      %(comment_count)s comment\n"
-"    "
+"        %(comment_count)s comment\n"
+"      "
 msgid_plural ""
 "\n"
-"      %(comment_count)s comments\n"
-"    "
+"        %(comment_count)s comments\n"
+"      "
 msgstr[0] ""
 "\n"
 "    %(comment_count)s commentaire\n"
@@ -395,15 +414,15 @@ msgstr[1] ""
 "    %(comment_count)s commentaires\n"
 "    "
 
-#: templates/zinnia/_entry_detail.html:77
+#: templates/zinnia/_entry_detail.html:79
 msgid "Not yet comments."
 msgstr "Pas de commentaires."
 
-#: templates/zinnia/_entry_detail.html:79
+#: templates/zinnia/_entry_detail.html:81
 msgid "Be first to comment !"
 msgstr "Soyez le premier à commenter !"
 
-#: templates/zinnia/_entry_detail.html:82
+#: templates/zinnia/_entry_detail.html:84
 #: templates/zinnia/entry_detail.html:71
 msgid "Comments are closed."
 msgstr "Les commentaires sont fermés"
@@ -424,7 +443,8 @@ msgstr "Recherche"
 msgid "Keywords..."
 msgstr "Mots-clefs..."
 
-#: templates/zinnia/base.html:15 templates/zinnia/category_list.html:4
+#: templates/zinnia/base.html:15
+#: templates/zinnia/category_list.html:4
 msgid "Categories"
 msgstr "Catégories"
 
@@ -440,7 +460,8 @@ msgstr "Articles au hasard"
 msgid "Popular entries"
 msgstr "Articles populaire"
 
-#: templates/zinnia/base.html:44 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:44
+#: templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/tags/archives_entries.html:5
@@ -452,7 +473,8 @@ msgstr "Archives"
 msgid "Category list"
 msgstr "Liste des catégories"
 
-#: templates/zinnia/category_list.html:13 templates/zinnia/tag_list.html:14
+#: templates/zinnia/category_list.html:13
+#: templates/zinnia/tag_list.html:14
 #, python-format
 msgid ""
 "\n"
@@ -524,10 +546,6 @@ msgstr "Articles associés"
 msgid "No entries related."
 msgstr "Pas d'articles associés."
 
-#: templates/zinnia/entry_detail.html:43
-msgid "Comments"
-msgstr "Commentaires"
-
 #: templates/zinnia/entry_detail.html:75
 msgid "Not yet comments !"
 msgstr "Pas encore de commentaires !"
@@ -540,7 +558,8 @@ msgstr "Catégorie"
 msgid "Author"
 msgstr "Auteur"
 
-#: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:11
+#: templates/zinnia/entry_search.html:4
+#: templates/zinnia/entry_search.html:11
 msgid "Search results"
 msgstr "Résultats de recherche"
 
@@ -616,9 +635,8 @@ msgstr "Pas d'articles similaires."
 
 #~ msgid "Entries"
 #~ msgstr "Articles"
-
 #~ msgid "Zinnia"
 #~ msgstr "Zinnia"
-
 #~ msgid "<a href=\"%(url)s\" target=\"blank\">%(url)s</a>"
 #~ msgstr "<a href=\"%(url)s\" target=\"blank\">%(url)s</a>"
+
