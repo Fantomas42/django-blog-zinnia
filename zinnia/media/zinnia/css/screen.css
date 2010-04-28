@@ -423,6 +423,8 @@ hr { background: #dddddd; color: #dddddd; clear: both; float: none; width: 100%;
 
 hr.space { background: #dddddd; color: #dddddd; clear: both; float: none; width: 100%; height: .1em; margin: 0 0 1.45em; border: none; background: #fff; color: #fff; }
 
+body { background: transparent url(../img/background.gif) repeat-x scroll left top; }
+
 ul, ol { margin: 0 1.5em 1.5em 0; padding-left: 3.333em; }
 
 a { text-decoration: none; }
