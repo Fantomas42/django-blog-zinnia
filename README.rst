@@ -4,6 +4,11 @@ Django Blog Zinnia
 
 Simple yet powerful application for managing a blog within your Django website.
 
+Zinnia has been made for publishing weblog entries and is designed to do it well.
+
+Basically any feature that can be provided by another reusable app has been left out. 
+Why should we re-implement something that is already done and reviewed by others and tested.
+
 .. contents::
 
 Features
@@ -16,7 +21,9 @@ Main features :
   * RSS Feeds
   * Search engine
   * Archives views
+  * Related entries
   * Tags and categories views
+  * Prepublication and expiration
   * Widgets (Popular entries, Similar entries, ...)
   * Spam protection with Akismet
   * Ping Directories
@@ -26,7 +33,8 @@ Main features :
   * WYMeditor support
   * Django-cms plugins
   * Collaborative work
-  * Prepublication
+  * Tags autocompletion
+  * Ready to use and extendables templates
 
 Dependancies
 ============
@@ -46,6 +54,10 @@ You could retrieve the last sources from http://github.com/Fantomas42/django-blo
 or use pip ::
 
   $> pip install -e git://github.com/Fantomas42/django-blog-zinnia.git#egg=django-blog-zinnia
+
+For the latest stable version use easy_install ::
+
+  $> easy_install django-blog-zinnia
 
 Applications
 ------------
@@ -179,9 +191,9 @@ Django-CMS
 ----------
 
 If you use `django-cms
-<http://www.django-cms.org/>`_, Zinnia can be integrated into your pages, with the plugins system.
+<http://www.django-cms.org/>`_, Zinnia can be integrated into your pages, thanks to the plugin system.
 
-For doing that simply register **zinnia.plugins** in the INSTALLED_APPS section of your project's settings.
+Simply register **zinnia.plugins** in the INSTALLED_APPS section of your project's settings.
 
 Templatetags
 ============
@@ -202,11 +214,11 @@ Display popular entries.
 
 * get_similar_entries [number]
 
-Display similar entries of an entry.
+Display entries similar to an existing entry.
 
 * get_categories
 
-Display all the categories availables.
+Display all the categories available.
 
 * get_archives_entries
 
@@ -215,6 +227,35 @@ Display the archives by month.
 * get_link_archives_entries
 
 Display link markups for listing the archives.
+
+Development
+===========
+
+A `Buildout 
+<http://pypi.python.org/pypi/zc.buildout>`_ script is provided to properly initialize the project 
+for anybody who wants to contribute to the project.
+
+First of all, please use `VirtualEnv
+<http://pypi.python.org/pypi/virtualenv>`_ to protect your system.
+
+Follow these steps to start the development : ::
+
+  $> git clone git://github.com/Fantomas42/django-blog-zinnia.git
+  $> virtualenv --no-site-packages django-blog-zinnia
+  $> cd django-blog-zinnia
+  $> source ./bin/activate
+  $> python bootstrap.py
+  $> ./bin/buildout
+
+The buildout script will resolve all the dependancies needed to develop the application.
+
+Once these operations are done, you are ready to develop the zinnia project.
+
+Run this command to launch the tests. ::
+
+  $> ./bin/test
+
+Pretty easy no ?
 
 Translations
 ============
