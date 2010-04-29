@@ -111,51 +111,75 @@ class EntryTestCase(TestCase):
         self.entry = Entry.objects.create(**params)
 
 
-    def test_get_content(self):
-        self.assertEquals(self.entry.get_content(), '<p>My content</p>')
+    def test_html_content(self):
+        self.assertEquals(self.entry.html_content, '<p>My content</p>')
 
         self.entry.content = """Hello world !
         this is my content"""
-        self.assertEquals(self.entry.get_content(),
+        self.assertEquals(self.entry.html_content,
                           '<p>Hello world !<br />        this is my content</p>')
 
-    def test_get_comments(self):
+    def test_comments(self):
         site = Site.objects.get_current()
 
-        self.assertEquals(self.entry.get_comments().count(), 0)
+        self.assertEquals(self.entry.comments.count(), 0)
         Comment.objects.create(comment='My Comment 1',
                                content_object=self.entry,
                                site=site)
-        self.assertEquals(self.entry.get_comments().count(), 1)
+        self.assertEquals(self.entry.comments.count(), 1)
         Comment.objects.create(comment='My Comment 2',
                                content_object=self.entry,
                                site=site, is_public=False)
-        self.assertEquals(self.entry.get_comments().count(), 1)
+        self.assertEquals(self.entry.comments.count(), 1)
         Comment.objects.create(comment='My Comment 3',
                                content_object=self.entry,
                                site=Site.objects.create(domain='http://toto.com',
                                                         name='Toto.com'))
-        self.assertEquals(self.entry.get_comments().count(), 2)
+        self.assertEquals(self.entry.comments.count(), 2)
+
+    def test_word_count(self):
+        self.assertEquals(self.entry.word_count, 2)
 
     def test_is_actual(self):
-        self.assertTrue(self.entry.is_actual())
+        self.assertTrue(self.entry.is_actual)
         self.entry.start_publication = datetime(2020, 3, 15)
-        self.assertFalse(self.entry.is_actual())
+        self.assertFalse(self.entry.is_actual)
         self.entry.start_publication = datetime.now()
-        self.assertTrue(self.entry.is_actual())
+        self.assertTrue(self.entry.is_actual)
         self.entry.end_publication = datetime(2000, 3, 15)
-        self.assertFalse(self.entry.is_actual())
+        self.assertFalse(self.entry.is_actual)
 
     def test_is_visible(self):
-        self.assertFalse(self.entry.is_visible())
+        self.assertFalse(self.entry.is_visible)
         self.entry.status = PUBLISHED
-        self.assertTrue(self.entry.is_visible())
+        self.assertTrue(self.entry.is_visible)
         self.entry.start_publication = datetime(2020, 3, 15)
-        self.assertFalse(self.entry.is_visible())
+        self.assertFalse(self.entry.is_visible)
 
-    def test_get_short_url(self):
+    def test_short_url(self):
         pass
 
+    def test_related_published_set(self):
+        self.assertFalse(self.entry.related_published_set)
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'slug': 'my-second-entry',
+                  'status': PUBLISHED}
+        self.second_entry = Entry.objects.create(**params)
+        self.second_entry.related.add(self.entry)
+        self.assertEquals(len(self.entry.related_published_set), 0)
+        
+        self.second_entry.sites.add(Site.objects.get_current())
+        self.assertEquals(len(self.entry.related_published_set), 1)
+        self.assertEquals(len(self.second_entry.related_published_set), 0)
+        
+        self.entry.status = PUBLISHED
+        self.entry.save()
+        self.entry.sites.add(Site.objects.get_current())
+        self.assertEquals(len(self.entry.related_published_set), 1)
+        self.assertEquals(len(self.second_entry.related_published_set), 1)
+        
 
 class CategoryTestCase(TestCase):
 
