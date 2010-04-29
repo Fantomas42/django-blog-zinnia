@@ -54,9 +54,9 @@
 
   <p class="entryShortUrl span-16 last">
     <strong>{% trans "Short url" %}</strong> : 
-    {% if object.get_short_url %}
-    <a href="{{ object.get_short_url }}" title="{{ object.title }}">
-      {{ object.get_short_url }}
+    {% if object.short_url %}
+    <a href="{{ object.short_url }}" title="{{ object.title }}">
+      {{ object.short_url }}
     </a>
     {% else %}
     {% trans "Unavailable" %}
@@ -65,7 +65,7 @@
   
   <p class="entryComments span-16 last">
     <strong>{% trans "Comments" %}</strong> : 
-    {% with object.get_comments.count as comment_count %}
+    {% with object.comments.count as comment_count %}
     {% if comment_count %}
     <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
       {% blocktrans count comment_count as comment_count %}

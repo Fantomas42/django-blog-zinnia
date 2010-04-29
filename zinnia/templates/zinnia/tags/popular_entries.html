@@ -4,7 +4,7 @@
   <li>
     <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
     <br />
-    <a href="{{ entry.get_absolute_url }}#comments" title="{{ entry.title }}">{{ entry.get_comments.count }} {% trans "comment" %}{{ entry.get_comments.count|pluralize }}</a>
+    <a href="{{ entry.get_absolute_url }}#comments" title="{{ entry.title }}">{{ entry.comments.count }} {% trans "comment" %}{{ entry.comments.count|pluralize }}</a>
   </li>
   {% empty %}
   <li>

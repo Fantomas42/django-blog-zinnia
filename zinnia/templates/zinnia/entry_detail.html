@@ -11,7 +11,7 @@
 
 {% block content %}
 <div class="entry span-16 last">
-  {% with object.get_content|safe as object_content %}
+  {% with object.html_content|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 </div>
@@ -19,10 +19,7 @@
 <hr />
 
 <div class="entryWidgets">
-  <div class="entrySimilar">
-    <h3>{% trans "Similar entries" %}</h3>
-    {% get_similar_entries 5 %}
-  </div>
+  {% if object.related_published_set %}
   <div class="entryRelated">
     <h3>{% trans "Related entries" %}</h3>
     <ul>
@@ -30,10 +27,13 @@
       <li>
 	<a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
       </li>
-      {% empty %}
-      <li>{% trans "No entries related." %}</li>
       {% endfor %}
     </ul>
+  </div>
+  {% endif %}
+  <div class="entrySimilar">
+    <h3>{% trans "Similar entries" %}</h3>
+    {% get_similar_entries 5 %}
   </div>
 </div>
 
@@ -41,7 +41,7 @@
 
 <div id="comments" class="span-16 last">
   <h3>{% trans "Comments" %}</h3>
-  {% with object.get_comments as comment_list %}
+  {% with object.comments as comment_list %}
   {% if comment_list.count %}
   <ol id="commentList" class="span-15 last">
     {% for comment in comment_list %}
