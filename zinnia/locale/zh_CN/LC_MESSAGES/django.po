@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-28 11:35+0200\n"
+"POT-Creation-Date: 2010-04-29 14:17+0200\n"
 "PO-Revision-Date: 2010-04-28 11:36+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -28,9 +28,17 @@ msgstr "选项"
 msgid "Sorting"
 msgstr "排序"
 
-#: admin.py:63
-#: models.py:24
-#: models.py:51
+#: admin.py:56
+#, python-format
+msgid "%(title)s (%(word_count)i words)"
+msgstr ""
+
+#: admin.py:60
+#, python-format
+msgid "%(title)s (%(comments)i comments)"
+msgstr ""
+
+#: admin.py:63 models.py:25 models.py:52
 msgid "title"
 msgstr "标题"
 
@@ -50,51 +58,57 @@ msgstr "标签"
 msgid "site(s)"
 msgstr "网站"
 
-#: admin.py:109
+#: admin.py:111
+msgid "is actual"
+msgstr "是否准确"
+
+#: admin.py:117
+msgid "is visible"
+msgstr "是否可见"
+
+#: admin.py:121
 #, python-format
 msgid "<a href=\"%s\" target=\"blank\">View</a>"
 msgstr "<a href=\"%s\" target=\"blank\">浏览</a>"
 
-#: admin.py:111
+#: admin.py:123
 msgid "View on site"
 msgstr "浏览站点"
 
-#: admin.py:116
-#: templates/zinnia/_entry_detail.html:62
+#: admin.py:128 templates/zinnia/_entry_detail.html:62
 msgid "Unavailable"
 msgstr "不存在"
 
-#: admin.py:120
-#: templates/zinnia/_entry_detail.html:56
-msgid "Short url"
+#: admin.py:132
+msgid "short url"
 msgstr "缩略URL"
 
-#: admin.py:175
+#: admin.py:187
 msgid "Set the entries to the user"
 msgstr "设置日志为此用户"
 
-#: admin.py:180
+#: admin.py:192
 msgid "Set entries selected as published"
 msgstr "设置所选日志为已发布"
 
-#: admin.py:185
+#: admin.py:197
 msgid "Set entries selected as hidden"
 msgstr "设置所选日志为隐藏"
 
-#: admin.py:194
+#: admin.py:206
 msgid "Tweet entries selected"
 msgstr "选中推特记录"
 
-#: admin.py:199
+#: admin.py:211
 msgid "Close the comments for selected entries"
 msgstr "关闭所选日志的评论功能"
 
-#: admin.py:210
+#: admin.py:222
 #, python-format
 msgid "%i directories succesfully pinged."
 msgstr "%i 类别被成功置顶"
 
-#: admin.py:211
+#: admin.py:223
 msgid "Ping Directories for selected entries"
 msgstr "置顶所选日志的目录"
 
@@ -158,116 +172,99 @@ msgstr "对于 %s 的评论"
 msgid "The last comments for the news %s"
 msgstr "对于新闻 %s 的最后评论"
 
-#: models.py:25
-#: models.py:64
+#: models.py:26 models.py:65
 msgid "used for publication"
 msgstr "用于发布"
 
-#: models.py:26
+#: models.py:27
 msgid "description"
 msgstr "描述"
 
-#: models.py:40
-#: plugins/models.py:13
+#: models.py:41 plugins/models.py:13
 msgid "category"
 msgstr "类别"
 
-#: models.py:41
-#: models.py:60
+#: models.py:42 models.py:61
 msgid "categories"
 msgstr "类别"
 
-#: models.py:47
+#: models.py:48
 msgid "draft"
 msgstr "草稿"
 
-#: models.py:48
+#: models.py:49
 msgid "hidden"
 msgstr "隐藏"
 
-#: models.py:49
+#: models.py:50
 msgid "published"
 msgstr "发布"
 
-#: models.py:53
+#: models.py:54
 msgid "image"
 msgstr "图片"
 
-#: models.py:54
+#: models.py:55
 msgid "used for illustration"
 msgstr "用于描述"
 
-#: models.py:55
+#: models.py:56
 msgid "content"
 msgstr "内容"
 
-#: models.py:56
+#: models.py:57
 msgid "excerpt"
 msgstr "例外"
 
-#: models.py:57
+#: models.py:58
 msgid "optional element"
 msgstr "可选项"
 
-#: models.py:61
+#: models.py:62
 msgid "related entries"
 msgstr "相关日志"
 
-#: models.py:65
+#: models.py:66
 msgid "authors"
 msgstr "作者"
 
-#: models.py:68
+#: models.py:69
 msgid "comment enabled"
 msgstr "允许评论"
 
-#: models.py:70
+#: models.py:71
 msgid "creation date"
 msgstr "创建日期"
 
-#: models.py:71
+#: models.py:72
 msgid "last update"
 msgstr "最后更新"
 
-#: models.py:72
+#: models.py:73
 msgid "start publication"
 msgstr "开始发布"
 
-#: models.py:73
+#: models.py:74
 msgid "date start publish"
 msgstr "开始发布日期"
 
-#: models.py:75
+#: models.py:76
 msgid "end publication"
 msgstr "结束发布"
 
-#: models.py:76
+#: models.py:77
 msgid "date end publish"
 msgstr "结束发布日期"
 
-#: models.py:79
+#: models.py:80
 msgid "sites publication"
 msgstr "其他网站发布"
 
-#: models.py:100
-msgid "is actual"
-msgstr "是否准确"
-
-#: models.py:106
-msgid "is visible"
-msgstr "是否可见"
-
-#: models.py:121
-msgid "short url"
-msgstr "缩略URL"
-
-#: models.py:136
+#: models.py:154
 msgid "entry"
 msgstr "日志"
 
-#: models.py:137
-#: plugins/models.py:24
-#: templates/zinnia/base.html:24
+#: models.py:155 plugins/models.py:24 templates/zinnia/base.html:24
 msgid "entries"
 msgstr "日志"
 
@@ -279,8 +276,7 @@ msgstr "模式长度不够"
 msgid "No pattern to search found"
 msgstr "没有搜索到相关模式"
 
-#: plugins/cms_plugins.py:16
-#: templates/zinnia/entry_archive.html:4
+#: plugins/cms_plugins.py:16 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "最后日志"
@@ -297,19 +293,16 @@ msgstr "作者"
 msgid "number of entries"
 msgstr "日志数量"
 
-#: plugins/models.py:20
-#: plugins/models.py:27
+#: plugins/models.py:20 plugins/models.py:27
 #, python-format
 msgid "%s entries"
 msgstr "%s 日志"
 
-#: templates/comments/posted.html:4
-#: templates/comments/posted.html.py:7
+#: templates/comments/posted.html:4 templates/comments/posted.html.py:7
 msgid "Thanks for your comment"
 msgstr "感谢你的评论"
 
-#: templates/comments/posted.html:9
-#: templates/comments/posted.html.py:10
+#: templates/comments/posted.html:9 templates/comments/posted.html.py:10
 msgid "Return to entry list"
 msgstr "返回日志列表"
 
@@ -375,8 +368,7 @@ msgstr "显示 %(author)s 的日志"
 msgid "in"
 msgstr "在"
 
-#: templates/zinnia/_entry_detail.html:44
-#: templates/zinnia/base.html:19
+#: templates/zinnia/_entry_detail.html:44 templates/zinnia/base.html:19
 #: templates/zinnia/tag_list.html:4
 msgid "Tags"
 msgstr "标签"
@@ -384,6 +376,10 @@ msgstr "标签"
 #: templates/zinnia/_entry_detail.html:51
 msgid "No tags"
 msgstr "没有标签"
+
+#: templates/zinnia/_entry_detail.html:56
+msgid "Short url"
+msgstr "缩略URL"
 
 #: templates/zinnia/_entry_detail.html:67
 #: templates/zinnia/entry_detail.html:43
@@ -438,8 +434,7 @@ msgstr "搜索"
 msgid "Keywords..."
 msgstr "关键词..."
 
-#: templates/zinnia/base.html:15
-#: templates/zinnia/category_list.html:4
+#: templates/zinnia/base.html:15 templates/zinnia/category_list.html:4
 msgid "Categories"
 msgstr "类别"
 
@@ -455,8 +450,7 @@ msgstr "随机日志"
 msgid "Popular entries"
 msgstr "热门日志"
 
-#: templates/zinnia/base.html:44
-#: templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:44 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/tags/archives_entries.html:5
@@ -468,8 +462,7 @@ msgstr "归类"
 msgid "Category list"
 msgstr "类别列表"
 
-#: templates/zinnia/category_list.html:13
-#: templates/zinnia/tag_list.html:14
+#: templates/zinnia/category_list.html:13 templates/zinnia/tag_list.html:14
 #, python-format
 msgid ""
 "\n"
@@ -529,17 +522,13 @@ msgstr "更多以前日志"
 msgid "RSS Feed of comments on"
 msgstr "评论的 RSS 种子"
 
-#: templates/zinnia/entry_detail.html:23
-msgid "Similar entries"
-msgstr "类似日志"
-
-#: templates/zinnia/entry_detail.html:27
+#: templates/zinnia/entry_detail.html:24
 msgid "Related entries"
 msgstr "相关日志"
 
-#: templates/zinnia/entry_detail.html:34
-msgid "No entries related."
-msgstr "没有相关日志"
+#: templates/zinnia/entry_detail.html:35
+msgid "Similar entries"
+msgstr "类似日志"
 
 #: templates/zinnia/entry_detail.html:75
 msgid "Not yet comments !"
@@ -553,8 +542,7 @@ msgstr "类别"
 msgid "Author"
 msgstr "作者"
 
-#: templates/zinnia/entry_search.html:4
-#: templates/zinnia/entry_search.html:11
+#: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:11
 msgid "Search results"
 msgstr "搜索结果"
 
@@ -628,3 +616,5 @@ msgstr "评论"
 msgid "No similar entries."
 msgstr "没有类似日志"
 
+#~ msgid "No entries related."
+#~ msgstr "没有相关日志"

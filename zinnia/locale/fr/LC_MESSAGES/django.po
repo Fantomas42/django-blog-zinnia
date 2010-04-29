@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-28 11:35+0200\n"
-"PO-Revision-Date: 2010-04-28 11:36+0100\n"
+"POT-Creation-Date: 2010-04-29 14:17+0200\n"
+"PO-Revision-Date: 2010-04-29 14:18+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -33,9 +33,19 @@ msgstr "Options"
 msgid "Sorting"
 msgstr "Répartition"
 
+#: admin.py:56
+#, python-format
+msgid "%(title)s (%(word_count)i words)"
+msgstr "%(title)s (%(word_count)i mots)"
+
+#: admin.py:60
+#, python-format
+msgid "%(title)s (%(comments)i comments)"
+msgstr "%(title)s (%(comments)i commentaires)"
+
 #: admin.py:63
-#: models.py:24
-#: models.py:51
+#: models.py:25
+#: models.py:52
 msgid "title"
 msgstr "titre"
 
@@ -55,51 +65,58 @@ msgstr "Tag(s)"
 msgid "site(s)"
 msgstr "Site(s)"
 
-#: admin.py:109
+#: admin.py:111
+msgid "is actual"
+msgstr "En cours ?"
+
+#: admin.py:117
+msgid "is visible"
+msgstr "Visible ?"
+
+#: admin.py:121
 #, python-format
 msgid "<a href=\"%s\" target=\"blank\">View</a>"
 msgstr "<a href=\"%s\" target=\"blank\">Consulter</a>"
 
-#: admin.py:111
+#: admin.py:123
 msgid "View on site"
 msgstr "Voir sur le site"
 
-#: admin.py:116
+#: admin.py:128
 #: templates/zinnia/_entry_detail.html:62
 msgid "Unavailable"
 msgstr "Indisponible"
 
-#: admin.py:120
-#: templates/zinnia/_entry_detail.html:56
-msgid "Short url"
-msgstr "Url raccourcie"
+#: admin.py:132
+msgid "short url"
+msgstr "url raccourcie"
 
-#: admin.py:175
+#: admin.py:187
 msgid "Set the entries to the user"
 msgstr "Acquérir les articles"
 
-#: admin.py:180
+#: admin.py:192
 msgid "Set entries selected as published"
 msgstr "Publier les articles sélectionnés"
 
-#: admin.py:185
+#: admin.py:197
 msgid "Set entries selected as hidden"
 msgstr "Masquer les articles sélectionnés"
 
-#: admin.py:194
+#: admin.py:206
 msgid "Tweet entries selected"
 msgstr "Tweeter les articles sélectionnés"
 
-#: admin.py:199
+#: admin.py:211
 msgid "Close the comments for selected entries"
 msgstr "Fermer les commentaires pour les articles sélectionnés"
 
-#: admin.py:210
+#: admin.py:222
 #, python-format
 msgid "%i directories succesfully pinged."
 msgstr "%i annuaires pingés avec succès."
 
-#: admin.py:211
+#: admin.py:223
 msgid "Ping Directories for selected entries"
 msgstr "Pinger les articles dans les annuaires."
 
@@ -163,114 +180,102 @@ msgstr "Commentaires sur : %s"
 msgid "The last comments for the news %s"
 msgstr "Les derniers commentaires sur l'actualité : %s"
 
-#: models.py:25
-#: models.py:64
+#: models.py:26
+#: models.py:65
 msgid "used for publication"
 msgstr "Utilisé pour la publication"
 
-#: models.py:26
+#: models.py:27
 msgid "description"
 msgstr "description"
 
-#: models.py:40
+#: models.py:41
 #: plugins/models.py:13
 msgid "category"
 msgstr "catégorie"
 
-#: models.py:41
-#: models.py:60
+#: models.py:42
+#: models.py:61
 msgid "categories"
 msgstr "catégories"
 
-#: models.py:47
+#: models.py:48
 msgid "draft"
 msgstr "Brouillon"
 
-#: models.py:48
+#: models.py:49
 msgid "hidden"
 msgstr "Non publié"
 
-#: models.py:49
+#: models.py:50
 msgid "published"
 msgstr "Publié"
 
-#: models.py:53
+#: models.py:54
 msgid "image"
 msgstr "image"
 
-#: models.py:54
+#: models.py:55
 msgid "used for illustration"
 msgstr "Utilisée comme illustration"
 
-#: models.py:55
+#: models.py:56
 msgid "content"
 msgstr "contenu"
 
-#: models.py:56
+#: models.py:57
 msgid "excerpt"
 msgstr "extrait"
 
-#: models.py:57
+#: models.py:58
 msgid "optional element"
 msgstr "Elément optionnel"
 
-#: models.py:61
+#: models.py:62
 msgid "related entries"
 msgstr "articles associés"
 
-#: models.py:65
+#: models.py:66
 msgid "authors"
 msgstr "auteurs"
 
-#: models.py:68
+#: models.py:69
 msgid "comment enabled"
 msgstr "commentaires ?"
 
-#: models.py:70
+#: models.py:71
 msgid "creation date"
 msgstr "date de création"
 
-#: models.py:71
+#: models.py:72
 msgid "last update"
 msgstr "mise à jour"
 
-#: models.py:72
+#: models.py:73
 msgid "start publication"
 msgstr "démarrage"
 
-#: models.py:73
+#: models.py:74
 msgid "date start publish"
 msgstr "Date utilisé pour démarrer la publication"
 
-#: models.py:75
+#: models.py:76
 msgid "end publication"
 msgstr "arrêt"
 
-#: models.py:76
+#: models.py:77
 msgid "date end publish"
 msgstr "Date utilisé pour arrêter la publication"
 
-#: models.py:79
+#: models.py:80
 msgid "sites publication"
 msgstr "sites publiés"
 
-#: models.py:100
-msgid "is actual"
-msgstr "En cours ?"
-
-#: models.py:106
-msgid "is visible"
-msgstr "Visible ?"
-
-#: models.py:121
-msgid "short url"
-msgstr "url raccourcie"
-
-#: models.py:136
+#: models.py:154
 msgid "entry"
 msgstr "article"
 
-#: models.py:137
+#: models.py:155
 #: plugins/models.py:24
 #: templates/zinnia/base.html:24
 msgid "entries"
@@ -389,6 +394,10 @@ msgstr "Tags"
 #: templates/zinnia/_entry_detail.html:51
 msgid "No tags"
 msgstr "Pas de tags"
+
+#: templates/zinnia/_entry_detail.html:56
+msgid "Short url"
+msgstr "Url raccourcie"
 
 #: templates/zinnia/_entry_detail.html:67
 #: templates/zinnia/entry_detail.html:43
@@ -534,17 +543,13 @@ msgstr "Articles plus anciens"
 msgid "RSS Feed of comments on"
 msgstr "Flux RSS des commentaires sur"
 
-#: templates/zinnia/entry_detail.html:23
-msgid "Similar entries"
-msgstr "Articles similaires"
-
-#: templates/zinnia/entry_detail.html:27
+#: templates/zinnia/entry_detail.html:24
 msgid "Related entries"
 msgstr "Articles associés"
 
-#: templates/zinnia/entry_detail.html:34
-msgid "No entries related."
-msgstr "Pas d'articles associés."
+#: templates/zinnia/entry_detail.html:35
+msgid "Similar entries"
+msgstr "Articles similaires"
 
 #: templates/zinnia/entry_detail.html:75
 msgid "Not yet comments !"
@@ -633,6 +638,8 @@ msgstr "commentaire"
 msgid "No similar entries."
 msgstr "Pas d'articles similaires."
 
+#~ msgid "No entries related."
+#~ msgstr "Pas d'articles associés."
 #~ msgid "Entries"
 #~ msgstr "Articles"
 #~ msgid "Zinnia"
