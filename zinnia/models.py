@@ -92,12 +92,18 @@ class Entry(models.Model):
     @property
     def previous_entry(self):
         """Return the previous entry"""
-        pass
+        entries = Entry.published.filter(
+            creation_date__lt=self.creation_date)
+        if entries:
+            return entries[0]
 
     @property
     def next_entry(self):
         """Return the next entry"""
-        pass
+        entries = Entry.published.filter(
+            creation_date__gt=self.creation_date).order_by('creation_date')
+        if entries:
+            return entries[0]
 
     @property
     def word_count(self):
@@ -133,7 +139,7 @@ class Entry(models.Model):
             return False
 
         from django_bitly.models import Bittle
-        
+
         bittle = Bittle.objects.bitlify(self)
         url = bittle and bittle.shortUrl or self.get_absolute_url()
         return url

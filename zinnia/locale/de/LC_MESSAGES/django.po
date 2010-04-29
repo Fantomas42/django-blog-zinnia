@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-29 14:17+0200\n"
+"POT-Creation-Date: 2010-04-29 15:02+0200\n"
 "PO-Revision-Date: 2010-04-28 11:36+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -260,11 +260,11 @@ msgstr "Datum des Veröffentlichungsende"
 msgid "sites publication"
 msgstr "Veröffentlich auf Seiten"
 
-#: models.py:154
+#: models.py:160
 msgid "entry"
 msgstr "Eintrag"
 
-#: models.py:155 plugins/models.py:24 templates/zinnia/base.html:24
+#: models.py:161 plugins/models.py:24 templates/zinnia/base.html:24
 msgid "entries"
 msgstr "Einträge"
 
@@ -334,7 +334,7 @@ msgstr "Kommentarvorschau einblenden"
 
 #: templates/comments/zinnia_entry_preview.html:28
 #: templates/zinnia/_entry_detail.html:16
-#: templates/zinnia/entry_detail.html:59
+#: templates/zinnia/entry_detail.html:79
 msgid "on date"
 msgstr "geschrieben"
 
@@ -382,7 +382,7 @@ msgid "Short url"
 msgstr "Kurze URL"
 
 #: templates/zinnia/_entry_detail.html:67
-#: templates/zinnia/entry_detail.html:43
+#: templates/zinnia/entry_detail.html:63
 msgid "Comments"
 msgstr "Kommentare"
 
@@ -414,7 +414,7 @@ msgid "Be first to comment !"
 msgstr "Schreibe den ersten Kommentar!"
 
 #: templates/zinnia/_entry_detail.html:84
-#: templates/zinnia/entry_detail.html:71
+#: templates/zinnia/entry_detail.html:91
 msgid "Comments are closed."
 msgstr "Kommentare deaktiviert."
 
@@ -523,14 +523,23 @@ msgid "RSS Feed of comments on"
 msgstr "RSS-Feed mit Kommentaren zu"
 
 #: templates/zinnia/entry_detail.html:24
+#, fuzzy
+msgid "Next entry"
+msgstr "Eintrag"
+
+#: templates/zinnia/entry_detail.html:34
+msgid "Previous entry"
+msgstr ""
+
+#: templates/zinnia/entry_detail.html:44
 msgid "Related entries"
 msgstr "Verwandte Einträge"
 
-#: templates/zinnia/entry_detail.html:35
+#: templates/zinnia/entry_detail.html:55
 msgid "Similar entries"
 msgstr "Ähnliche Einträge"
 
-#: templates/zinnia/entry_detail.html:75
+#: templates/zinnia/entry_detail.html:95
 msgid "Not yet comments !"
 msgstr "Noch keine Kommentare vorhanden!"
 

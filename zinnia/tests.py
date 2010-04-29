@@ -159,6 +159,50 @@ class EntryTestCase(TestCase):
     def test_short_url(self):
         pass
 
+    def test_previous_entry(self):
+        self.assertFalse(self.entry.previous_entry)
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'slug': 'my-second-entry',
+                  'creation_date': datetime(2000, 1, 1),
+                  'status': PUBLISHED}
+        self.second_entry = Entry.objects.create(**params)
+        self.second_entry.sites.add(Site.objects.get_current())
+        self.assertEquals(self.entry.previous_entry, self.second_entry)
+        params = {'title': 'My third entry',
+                  'content': 'My third content',
+                  'tags': 'zinnia, test',
+                  'slug': 'my-third-entry',
+                  'creation_date': datetime(2001, 1, 1),
+                  'status': PUBLISHED}
+        self.third_entry = Entry.objects.create(**params)
+        self.third_entry.sites.add(Site.objects.get_current())
+        self.assertEquals(self.entry.previous_entry, self.third_entry)
+        self.assertEquals(self.third_entry.previous_entry, self.second_entry)
+
+    def test_next_entry(self):
+        self.assertFalse(self.entry.next_entry)
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'slug': 'my-second-entry',
+                  'creation_date': datetime(2100, 1, 1),
+                  'status': PUBLISHED}
+        self.second_entry = Entry.objects.create(**params)
+        self.second_entry.sites.add(Site.objects.get_current())
+        self.assertEquals(self.entry.next_entry, self.second_entry)
+        params = {'title': 'My third entry',
+                  'content': 'My third content',
+                  'tags': 'zinnia, test',
+                  'slug': 'my-third-entry',
+                  'creation_date': datetime(2050, 1, 1),
+                  'status': PUBLISHED}
+        self.third_entry = Entry.objects.create(**params)
+        self.third_entry.sites.add(Site.objects.get_current())
+        self.assertEquals(self.entry.next_entry, self.third_entry)
+        self.assertEquals(self.third_entry.next_entry, self.second_entry)
+
     def test_related_published_set(self):
         self.assertFalse(self.entry.related_published_set)
         params = {'title': 'My second entry',

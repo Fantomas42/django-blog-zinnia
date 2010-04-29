@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-29 14:17+0200\n"
+"POT-Creation-Date: 2010-04-29 15:02+0200\n"
 "PO-Revision-Date: 2010-04-28 11:36+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -260,11 +260,11 @@ msgstr "结束发布日期"
 msgid "sites publication"
 msgstr "其他网站发布"
 
-#: models.py:154
+#: models.py:160
 msgid "entry"
 msgstr "日志"
 
-#: models.py:155 plugins/models.py:24 templates/zinnia/base.html:24
+#: models.py:161 plugins/models.py:24 templates/zinnia/base.html:24
 msgid "entries"
 msgstr "日志"
 
@@ -334,7 +334,7 @@ msgstr "预览评论"
 
 #: templates/comments/zinnia_entry_preview.html:28
 #: templates/zinnia/_entry_detail.html:16
-#: templates/zinnia/entry_detail.html:59
+#: templates/zinnia/entry_detail.html:79
 msgid "on date"
 msgstr "日期"
 
@@ -382,7 +382,7 @@ msgid "Short url"
 msgstr "缩略URL"
 
 #: templates/zinnia/_entry_detail.html:67
-#: templates/zinnia/entry_detail.html:43
+#: templates/zinnia/entry_detail.html:63
 msgid "Comments"
 msgstr "评论"
 
@@ -414,7 +414,7 @@ msgid "Be first to comment !"
 msgstr "成为首条评论"
 
 #: templates/zinnia/_entry_detail.html:84
-#: templates/zinnia/entry_detail.html:71
+#: templates/zinnia/entry_detail.html:91
 msgid "Comments are closed."
 msgstr "评论已关闭"
 
@@ -523,14 +523,23 @@ msgid "RSS Feed of comments on"
 msgstr "评论的 RSS 种子"
 
 #: templates/zinnia/entry_detail.html:24
+#, fuzzy
+msgid "Next entry"
+msgstr "日志"
+
+#: templates/zinnia/entry_detail.html:34
+msgid "Previous entry"
+msgstr ""
+
+#: templates/zinnia/entry_detail.html:44
 msgid "Related entries"
 msgstr "相关日志"
 
-#: templates/zinnia/entry_detail.html:35
+#: templates/zinnia/entry_detail.html:55
 msgid "Similar entries"
 msgstr "类似日志"
 
-#: templates/zinnia/entry_detail.html:75
+#: templates/zinnia/entry_detail.html:95
 msgid "Not yet comments !"
 msgstr "没有评论"
 
