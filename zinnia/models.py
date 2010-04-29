@@ -4,6 +4,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.template.defaultfilters import striptags
 from django.template.defaultfilters import linebreaks
 from django.contrib.comments.moderation import moderator
 from django.utils.translation import ugettext_lazy as _
@@ -81,35 +82,53 @@ class Entry(models.Model):
     objects = models.Manager()
     published = EntryPublishedManager()
 
-    def get_content(self):
+    @property
+    def html_content(self):
         """Return the content correctly formatted"""
         if not '</p>' in self.content:
             return linebreaks(self.content)
         return self.content
 
-    def get_comments(self):
-        """Return published comments"""
-        from django.contrib.comments.models import Comment
-        return Comment.objects.for_model(self).filter(is_public=True)
+    @property
+    def previous_entry(self):
+        """Return the previous entry"""
+        pass
 
+    @property
+    def next_entry(self):
+        """Return the next entry"""
+        pass
+
+    @property
+    def word_count(self):
+        """Count the words of an entry"""
+        return len(striptags(self.html_content).split())
+
+    @property
     def is_actual(self):
-        """Define is an entry is between the date of publication"""
+        """Check if an entry is within publication period"""
         now = datetime.now()
         return now >= self.start_publication and now < self.end_publication
-    is_actual.boolean = True
-    is_actual.short_description = _('is actual')
 
+    @property
     def is_visible(self):
-        """Define if an entry is visible on site"""
-        return self.is_actual() and self.status == PUBLISHED
-    is_visible.boolean = True
-    is_visible.short_description = _('is visible')
+        """Check if an entry is visible on site"""
+        return self.is_actual and self.status == PUBLISHED
 
+    @property
     def related_published_set(self):
         """Return only related entries published"""
         return entries_published(self.related)
 
-    def get_short_url(self):
+    @property
+    def comments(self):
+        """Return published comments"""
+        from django.contrib.comments.models import Comment
+        return Comment.objects.for_model(self).filter(is_public=True)
+
+    @property
+    def short_url(self):
+        """Return the entry's short url"""
         if not USE_BITLY:
             return False
 
@@ -118,7 +137,6 @@ class Entry(models.Model):
         bittle = Bittle.objects.bitlify(self)
         url = bittle and bittle.shortUrl or self.get_absolute_url()
         return url
-    get_short_url.short_description = _('short url')
 
     def __unicode__(self):
         return '%s: %s' % (self.title, self.get_status_display())

@@ -38,10 +38,10 @@ class EntryAdmin(admin.ModelAdmin):
                  (_('Sorting'), {'fields': ('sites', 'categories', 'tags')}))
     list_filter = ('status', 'creation_date', 'authors', 'comment_enabled',
                     'end_publication')
-    list_display = ('get_title_comments', 'get_authors', 'creation_date',
-                    'last_update', 'get_categories', 'get_tags', 'get_sites',
-                    'comment_enabled', 'is_actual', 'is_visible', 'get_link',
-                    'get_short_url')
+    list_display = ('get_title', 'get_authors', 'get_categories',
+                    'get_tags', 'get_sites', 'comment_enabled',
+                    'get_is_actual', 'get_is_visible', 'get_link',
+                    'get_short_url', 'creation_date', 'last_update')
     filter_horizontal = ('categories', 'authors', 'related')
     prepopulated_fields = {'slug': ('title', )}
     search_fields = ('title', 'excerpt', 'content', 'tags')
@@ -51,16 +51,16 @@ class EntryAdmin(admin.ModelAdmin):
     actions_on_bottom = True
 
     # Custom Display
-    def get_title_comments(self, entry):
-        """Return the title splitted with number of comments"""
-        title = entry.title
-        if len(title) > 30:
-            title = title[:27] + '...'
-        comments = entry.get_comments().count()
+    def get_title(self, entry):
+        """Return the title with word count and number of comments"""
+        title = _('%(title)s (%(word_count)i words)') % \
+                {'title': entry.title, 'word_count': entry.word_count}
+        comments = entry.comments.count()
         if comments:
-            return '%s (%i)' % (title, comments)
+            return _('%(title)s (%(comments)i comments)') % \
+                   {'title': title, 'comments': comments}
         return title
-    get_title_comments.short_description = _('title')
+    get_title.short_description = _('title')
 
     def get_authors(self, entry):
         """Return the authors in HTML"""
@@ -104,6 +104,18 @@ class EntryAdmin(admin.ModelAdmin):
     get_sites.allow_tags = True
     get_sites.short_description = _('site(s)')
 
+    def get_is_actual(self, entry):
+        """Admin wrapper for entry.is_actual"""
+        return entry.is_actual
+    get_is_actual.boolean = True
+    get_is_actual.short_description = _('is actual')
+
+    def get_is_visible(self, entry):
+        """Admin wrapper for entry.is_visible"""
+        return entry.is_visible
+    get_is_visible.boolean = True
+    get_is_visible.short_description = _('is visible')
+
     def get_link(self, entry):
         """Return a formated link to the entry"""
         return _('<a href="%s" target="blank">View</a>') % entry.get_absolute_url()
@@ -111,13 +123,13 @@ class EntryAdmin(admin.ModelAdmin):
     get_link.short_description = _('View on site')
 
     def get_short_url(self, entry):
-        url = entry.get_short_url()
+        url = entry.short_url
         if not url:
             return _('Unavailable')
         return '<a href="%(url)s" target="blank">%(url)s</a>' % \
                {'url': url}
     get_short_url.allow_tags = True
-    get_short_url.short_description = _('Short url')
+    get_short_url.short_description = _('short url')
 
     # Custom Methods
     def save_model(self, request, entry, form, change):
@@ -134,7 +146,7 @@ class EntryAdmin(admin.ModelAdmin):
         entry.last_update = datetime.now()
         entry.save()
 
-        if entry.is_visible() and SAVE_PING_DIRECTORIES:
+        if entry.is_visible and SAVE_PING_DIRECTORIES:
             self.ping_directories(request, [entry])
 
     def queryset(self, request):
@@ -189,7 +201,7 @@ class EntryAdmin(admin.ModelAdmin):
         import twitter
         api = twitter.Api(username=TWITTER_USER, password=TWITTER_PASSWORD)
         for entry in queryset:
-            message = '%s %s' % (entry.title[:119], entry.get_short_url())
+            message = '%s %s' % (entry.title[:119], entry.short_url)
             api.PostUpdate(message)
     make_tweet.short_description = _('Tweet entries selected')
 
