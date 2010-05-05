@@ -84,6 +84,7 @@ Add these following template context processors if not already present. ::
   ...      'django.core.context_processors.request',
   ...      'django.core.context_processors.media',
   ...      'zinnia.context_processors.media',
+  ...      'zinnia.context_processors.version',# Optionnal
   ...	)
 
 Media Files
