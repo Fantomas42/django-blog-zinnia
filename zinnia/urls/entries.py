@@ -2,6 +2,7 @@
 from django.conf.urls.defaults import *
 
 from zinnia.models import Entry
+from zinnia.models import Category
 from zinnia.settings import PAGINATION
 
 entry_conf_list = {'queryset': Entry.published.all(),
@@ -34,4 +35,12 @@ urlpatterns += patterns('django.views.generic.date_based',
                             entry_conf, name='zinnia_entry_archive_day'),
                         url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
                             'object_detail', entry_conf_detail, name='zinnia_entry_detail'),                        
+                        )
+
+urlpatterns += patterns('django.views.generic.simple',
+                        url(r'^sitemap/$', 'direct_to_template',
+                            {'template': 'zinnia/sitemap.html',
+                             'extra_context': {'entries': Entry.published.all(),
+                                               'categories': Category.objects.all()}},
+                            name='zinnia_sitemap'),
                         )

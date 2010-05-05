@@ -1,0 +1,70 @@
+{% extends "zinnia/base.html" %}
+{% load i18n zinnia_tags %}
+
+{% block title %}{% trans "Sitemap" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans "Sitemap" %}</h2>
+
+<div class="entriesbycategories">
+  <h3>{% trans "Entries per categories" %}</h3>
+  {% for category in categories %}
+  <h4>{{ category }}</h4>
+  <ul>
+    {% for entry in category.entries_published_set.all %}
+    <li>
+      <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
+      - {{ entry.comments.count }} {% trans "comment" %}{{ entry.comments.count|pluralize }}
+    </li>
+    {% empty %}
+    <li>
+      {% trans "Not yet entries." %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endfor %}
+</div>
+
+<div class="allentries">
+  <h3>{% trans "All the entries" %}</h3>
+  <ul>
+    {% for entry in entries %}
+    <li>
+      <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
+      - {{ entry.creation_date|date:"d b Y" }}
+      - {{ entry.comments.count }} {% trans "comment" %}{{ entry.comments.count|pluralize }}
+    </li>
+    {% empty %}
+    <li>
+      {% trans "Not yet entries." %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="categories">
+  <h3>{% trans "Categories" %}</h3>
+  <ul>
+    {% for category in categories %}
+    <li>
+      <a href="{{ category.get_absolute_url }}" title="{{ category.title }}">{{ category.title }}</a>
+      -
+      {% blocktrans count category.entries_published_set|length as entry_count %}
+        {{ entry_count }} entry
+      {% plural %}
+        {{ entry_count }} entries
+      {% endblocktrans %}
+    </li>
+    {% empty %}
+    <li>
+      {% trans "Not yet categories." %}
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+
+<div class="montharchives">
+  <h3>{% trans "Monthly archives" %}</h3>
+  {% get_archives_entries %}
+</div>
+{% endblock %}
