@@ -136,8 +136,8 @@ class EntryAdmin(admin.ModelAdmin):
         """Save the authors, update time, make an excerpt"""
         if not form.cleaned_data.get('excerpt'):
             entry.excerpt = truncate_words(strip_tags(entry.content), 50)
-
-        if not request.user.has_perm('zinnia.can_change_author'):
+        
+        if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
             form.cleaned_data['authors'] = entry.authors.all()
 
         if not form.cleaned_data.get('authors'):
@@ -158,10 +158,12 @@ class EntryAdmin(admin.ModelAdmin):
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         """Filters the disposable authors"""
-        if db_field.name == 'authors' and \
-               not request.user.has_perm('zinnia.can_change_author'):
-            kwargs['queryset'] = User.objects.filter(pk=request.user.pk)
-            return db_field.formfield(**kwargs)
+        if db_field.name == 'authors':
+            if request.user.has_perm('zinnia.can_change_author'):
+                kwargs['queryset'] = User.objects.filter(is_staff=True)
+            else:
+                kwargs['queryset'] = User.objects.filter(pk=request.user.pk)
+        
         return super(EntryAdmin, self).formfield_for_manytomany(
             db_field, request, **kwargs)
 
