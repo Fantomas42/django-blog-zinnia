@@ -159,7 +159,7 @@ class Entry(models.Model):
         ordering = ['-creation_date']
         verbose_name = _('entry')
         verbose_name_plural = _('entries')
-        permissions = (('can_view_all', 'Can view all'),
-                       ('can_change_author', 'Can change author'), )
+        permissions = (('can_view_all', _('Can view all')),
+                       ('can_change_author', _('Can change author')), )
 
 moderator.register(Entry, EntryCommentModerator)
