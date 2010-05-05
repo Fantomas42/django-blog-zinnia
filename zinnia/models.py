@@ -57,7 +57,7 @@ class Entry(models.Model):
     excerpt = models.TextField(_('excerpt'), blank=True,
                                 help_text=_('optional element'))
 
-    tags = TagField()
+    tags = TagField(_('tags'))
     categories = models.ManyToManyField(Category, verbose_name=_('categories'))
     related = models.ManyToManyField('self', verbose_name=_('related entries'),
                                      blank=True, null=True)
