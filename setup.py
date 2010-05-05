@@ -1,18 +1,18 @@
-from setuptools import setup, find_packages
 import os
+from setuptools import setup, find_packages
 
-version = '0.5'
+import zinnia
 
 setup(name='django-blog-zinnia',
-      version=version,
+      version=zinnia.__version__,
       
       description='A clear and powerfull weblog application powered with Django',
       long_description=open(os.path.join('README.rst')).read(),
       keywords='django, blog',
 
-      author='Fantomas42',
-      author_email='fantomas42@gmail.com',
-      url='http://github.com/Fantomas42/django-blog-zinnia',
+      author=zinnia.__author__,
+      author_email=zinnia.__email__,
+      url=zinnia.__url__,
 
       packages=find_packages(),
       classifiers=[
@@ -25,7 +25,7 @@ setup(name='django-blog-zinnia',
           'License :: OSI Approved :: BSD License',
           'Topic :: Software Development :: Libraries :: Python Modules',],
             
-      license='BSD License',
+      license=zinnia.__license__,
       include_package_data=True,
       zip_safe=False,
       install_requires=['django-tagging',
