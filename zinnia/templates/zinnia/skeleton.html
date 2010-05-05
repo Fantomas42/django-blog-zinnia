@@ -10,7 +10,7 @@
     <meta name="description" content="{% block meta-description %}Demonstration of the Zinnia Blog application.{% endblock %}" />
     <meta name="keywords" content="django, blog, zinnia, {{ tag_entry|join:", "}}, {% block meta-keywords %}{% endblock %}" />
     <meta name="author" content="Fantomas42" />
-    <meta name="engine" content="Zinnia 0.5" />
+    <meta name="engine" content="Zinnia {{ ZINNIA_VERSION }}" />
     {% block meta %}{% endblock %}
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ ZINNIA_MEDIA_URL }}css/screen.css" />
