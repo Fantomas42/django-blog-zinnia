@@ -229,6 +229,8 @@ Display the archives by month.
 
 Display link markups for listing the archives.
 
+.. include:: ./docs/CONFIGURATION.rst
+
 Development
 ===========
 
