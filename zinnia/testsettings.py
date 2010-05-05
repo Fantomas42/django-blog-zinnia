@@ -7,4 +7,5 @@ INSTALLED_APPS = ['django.contrib.contenttypes',
                   'django.contrib.comments',
                   'django.contrib.sites',
                   'django.contrib.auth',
-                  'tagging', 'zinnia']
+                  'south', 'tagging', 'zinnia']
+
