@@ -430,6 +430,12 @@ ul, ol { margin: 0 1.5em 1.5em 0; padding-left: 3.333em; }
 a { text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+#header .top-navigation { float: right; }
+#header .top-navigation img { border: 0; }
+#header .top-navigation .link { padding-left: 1.5em; }
+#header .top-navigation .sitemap { background: transparent url(../img/sitemap.png) no-repeat scroll left center; }
+#header .top-navigation .feeds { background: transparent url(../img/rss.png) no-repeat scroll left center; }
+
 #content h1, #content h2, #content h3 { margin-top: 0; }
 
 #sidebar div:first-child h3 { margin-top: 0; }
