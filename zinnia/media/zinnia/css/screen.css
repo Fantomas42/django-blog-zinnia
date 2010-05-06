@@ -434,6 +434,10 @@ a:hover { text-decoration: underline; }
 
 #sidebar div:first-child h3 { margin-top: 0; }
 #sidebar h3 { background-color: #eeeeee; padding: 0.5em; }
+#sidebar .calendar h3 { margin-bottom: 0; }
+#sidebar .calendar .month-navigation { padding-bottom: 1.5em; }
+#sidebar .calendar .month-navigation .month-previous { float: left; }
+#sidebar .calendar .month-navigation .month-next { float: right; }
 #sidebar .tags ul { list-style-type: none; margin: 0px; padding: 0px; display: inline; font-size: 1.5em; line-height: 1.8em; }
 #sidebar .tags ul li { margin: 0px; padding: 0px; display: inline; }
 #sidebar .tags ul li { list-style-type: none; margin-left: 0px; }
@@ -443,6 +447,12 @@ a:hover { text-decoration: underline; }
 #sidebar .tags ul .tag_4 { font-size: 2em; }
 #sidebar .tags ul .tag_5 { font-size: 2.25em; }
 #sidebar .tags ul .tag_6 { font-size: 3em; }
+
+table.month { margin-bottom: 0; }
+table.month th.month { text-transform: uppercase; color: #006699; background-color: white; }
+table.month th { text-transform: capitalize; color: #999999; background-color: #eeeeee; }
+table.month td { text-align: center; font-weight: bold; }
+table.month td.entry { background-color: #eeeeee; }
 
 .entry .entryHeader { background-color: #eeeeee; margin-bottom: 1em; }
 .entry .entryHeader .entryTitle { margin: 0; }

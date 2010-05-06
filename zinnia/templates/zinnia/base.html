@@ -15,6 +15,10 @@
   <h3>{% trans "Categories" %}</h3>
   {% get_categories %}
 </div>
+<div class="calendar">
+  <h3>{% trans "Calendar" %}</h3>
+  {% get_calendar_entries %}
+</div>
 <div class="tags">
   <h3>{% trans "Tags" %}</h3>
   {% tag_cloud_for_model zinnia.entry as tag_cloud with steps=6 %}

@@ -33,11 +33,38 @@ a
     :background-color = !box_color
     :padding 0.5em
 
+  .calendar
+    h3
+      :margin-bottom 0
+    .month-navigation
+      :padding-bottom 1.5em
+      .month-previous
+        :float left
+      .month-next
+        :float right
+
   .tags 
     ul
       +inline-list
       +no-bullets
       +tag-cloud(1.5em)
+
+// Calendar
+table.month
+  :margin-bottom 0
+  th.month
+    :text-transform uppercase
+    :color = !link_color
+    :background-color = #fff
+  th
+    :text-transform capitalize
+    :color = !box_font_color
+    :background-color = !box_color
+  td
+    :text-align center
+    :font-weight bold
+    &.entry
+      :background-color = !box_color
 
 // Entry
 .entry
