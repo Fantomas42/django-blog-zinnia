@@ -6,6 +6,7 @@ except ImportError:
 
 from random import sample
 from urllib import urlencode
+from datetime import datetime
 
 from django.template import Library
 
@@ -83,7 +84,7 @@ def get_similar_entries(context, number=5):
 
     entries = cache_entries_related[key][:number]
     return {'entries': entries}
-    
+
 
 @register.inclusion_tag('zinnia/tags/archives_entries.html')
 def get_archives_entries():
@@ -98,6 +99,37 @@ def get_link_archives_entries():
     return {'archives': Entry.published.dates('creation_date', 'month',
                                               order='DESC'),}
 
+@register.inclusion_tag('zinnia/tags/calendar.html',
+                        takes_context=True)
+def get_calendar_entries(context, year=None, month=None):
+    if not year or not month:
+        date_month = context.get('month') or context.get('day') or datetime.today()
+        year, month = date_month.timetuple()[:2]
+
+    try:
+        from zinnia.templatetags.zcalendar import ZinniaCalendar
+    except ImportError:
+        return {'calendar': '<p class="notice">Calendar is unavailable for Python<2.5.</p>'}
+
+    calendar = ZinniaCalendar()
+    current_month = datetime(year, month, 1)
+
+    dates = list(Entry.published.dates('creation_date', 'month'))
+
+    if current_month in dates:
+        index = dates.index(current_month)
+        previous_month = dates[index - 1]
+        try:
+            next_month = dates[index + 1]
+        except IndexError:
+            next_month = None
+    else:
+        previous_month = dates[-1]
+        next_month = None
+
+    return {'next_month': next_month,
+            'previous_month': previous_month,
+            'calendar': calendar.formatmonth(year, month)}
 
 @register.simple_tag
 def get_gravatar(email, size, rating, default=None):
@@ -109,3 +141,4 @@ def get_gravatar(email, size, rating, default=None):
 
     url = '%s?%s' % (url, urlencode(options))
     return url.replace('&', '&amp;')
+
