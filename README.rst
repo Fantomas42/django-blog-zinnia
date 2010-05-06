@@ -217,6 +217,10 @@ Display popular entries.
 
 Display entries similar to an existing entry.
 
+* get_calendar_entries [year, month]
+
+Display an HTML calendar with date of publications.
+
 * get_categories
 
 Display all the categories available.
