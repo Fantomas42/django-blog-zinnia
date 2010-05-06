@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-05 20:47+0200\n"
+"POT-Creation-Date: 2010-05-06 12:12+0200\n"
 "PO-Revision-Date: 2010-04-28 11:36+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -445,18 +445,22 @@ msgid "Categories"
 msgstr "Kategorien"
 
 #: templates/zinnia/base.html:32
+msgid "Calendar"
+msgstr ""
+
+#: templates/zinnia/base.html:36
 msgid "Recent entries"
 msgstr "Neuste Einträge"
 
-#: templates/zinnia/base.html:36
+#: templates/zinnia/base.html:40
 msgid "Random entries"
 msgstr "Zufällige Einträge"
 
-#: templates/zinnia/base.html:40
+#: templates/zinnia/base.html:44
 msgid "Popular entries"
 msgstr "Beliebte Einträge"
 
-#: templates/zinnia/base.html:44 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:48 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/tags/archives_entries.html:5

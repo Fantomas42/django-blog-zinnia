@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-05 20:47+0200\n"
+"POT-Creation-Date: 2010-05-06 12:12+0200\n"
 "PO-Revision-Date: 2010-05-05 20:49+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -38,9 +38,7 @@ msgstr "%(title)s (%(word_count)i 个字符)"
 msgid "%(title)s (%(comments)i comments)"
 msgstr "%(title)s (%(comments)i 条评论)"
 
-#: admin.py:63
-#: models.py:25
-#: models.py:52
+#: admin.py:63 models.py:25 models.py:52
 msgid "title"
 msgstr "标题"
 
@@ -77,8 +75,7 @@ msgstr "<a href=\"%s\" target=\"blank\">浏览</a>"
 msgid "View on site"
 msgstr "浏览站点"
 
-#: admin.py:128
-#: templates/zinnia/_entry_detail.html:62
+#: admin.py:128 templates/zinnia/_entry_detail.html:62
 msgid "Unavailable"
 msgstr "不存在"
 
@@ -175,8 +172,7 @@ msgstr "对于 %s 的评论"
 msgid "The last comments for the news %s"
 msgstr "对于新闻 %s 的最新评论"
 
-#: models.py:26
-#: models.py:65
+#: models.py:26 models.py:65
 msgid "used for publication"
 msgstr "用于发布"
 
@@ -184,13 +180,11 @@ msgstr "用于发布"
 msgid "description"
 msgstr "描述"
 
-#: models.py:41
-#: plugins/models.py:13
+#: models.py:41 plugins/models.py:13
 msgid "category"
 msgstr "类别"
 
-#: models.py:42
-#: models.py:61
+#: models.py:42 models.py:61
 msgid "categories"
 msgstr "类别"
 
@@ -274,9 +268,7 @@ msgstr "发布网站"
 msgid "entry"
 msgstr "日志"
 
-#: models.py:161
-#: plugins/models.py:24
-#: templates/zinnia/base.html:24
+#: models.py:161 plugins/models.py:24 templates/zinnia/base.html:24
 msgid "entries"
 msgstr "日志"
 
@@ -288,8 +280,7 @@ msgstr "模式长度不够"
 msgid "No pattern to search found"
 msgstr "没有搜索到相关模式"
 
-#: plugins/cms_plugins.py:16
-#: templates/zinnia/entry_archive.html:4
+#: plugins/cms_plugins.py:16 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "最新日志"
@@ -306,19 +297,16 @@ msgstr "作者"
 msgid "number of entries"
 msgstr "日志数量"
 
-#: plugins/models.py:20
-#: plugins/models.py:27
+#: plugins/models.py:20 plugins/models.py:27
 #, python-format
 msgid "%s entries"
 msgstr "%s 日志"
 
-#: templates/comments/posted.html:4
-#: templates/comments/posted.html.py:7
+#: templates/comments/posted.html:4 templates/comments/posted.html.py:7
 msgid "Thanks for your comment"
 msgstr "感谢你的评论"
 
-#: templates/comments/posted.html:9
-#: templates/comments/posted.html.py:10
+#: templates/comments/posted.html:9 templates/comments/posted.html.py:10
 msgid "Return to entry list"
 msgstr "返回日志列表"
 
@@ -384,8 +372,7 @@ msgstr "显示 %(author)s 的日志"
 msgid "in"
 msgstr "在"
 
-#: templates/zinnia/_entry_detail.html:44
-#: templates/zinnia/base.html:19
+#: templates/zinnia/_entry_detail.html:44 templates/zinnia/base.html:19
 #: templates/zinnia/tag_list.html:4
 msgid "Tags"
 msgstr "标签"
@@ -451,26 +438,28 @@ msgstr "搜索"
 msgid "Keywords..."
 msgstr "关键词..."
 
-#: templates/zinnia/base.html:15
-#: templates/zinnia/category_list.html:4
+#: templates/zinnia/base.html:15 templates/zinnia/category_list.html:4
 #: templates/zinnia/sitemap.html:46
 msgid "Categories"
 msgstr "类别"
 
 #: templates/zinnia/base.html:32
+msgid "Calendar"
+msgstr ""
+
+#: templates/zinnia/base.html:36
 msgid "Recent entries"
 msgstr "最近日志"
 
-#: templates/zinnia/base.html:36
+#: templates/zinnia/base.html:40
 msgid "Random entries"
 msgstr "随机日志"
 
-#: templates/zinnia/base.html:40
+#: templates/zinnia/base.html:44
 msgid "Popular entries"
 msgstr "热门日志"
 
-#: templates/zinnia/base.html:44
-#: templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:48 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/tags/archives_entries.html:5
@@ -482,8 +471,7 @@ msgstr "归档"
 msgid "Category list"
 msgstr "类别列表"
 
-#: templates/zinnia/category_list.html:13
-#: templates/zinnia/tag_list.html:14
+#: templates/zinnia/category_list.html:13 templates/zinnia/tag_list.html:14
 #, python-format
 msgid ""
 "\n"
@@ -519,8 +507,7 @@ msgid "Entries by %(author)s"
 msgstr "作者 %(author)s 的日志"
 
 #: templates/zinnia/entry_archive_base.html:40
-#: templates/zinnia/sitemap.html:21
-#: templates/zinnia/sitemap.html.py:39
+#: templates/zinnia/sitemap.html:21 templates/zinnia/sitemap.html.py:39
 #: templates/zinnia/cms/entries.html:9
 #: templates/zinnia/tags/popular_entries.html:11
 #: templates/zinnia/tags/random_entries.html:9
@@ -573,8 +560,7 @@ msgstr "类别"
 msgid "Author"
 msgstr "作者"
 
-#: templates/zinnia/entry_search.html:4
-#: templates/zinnia/entry_search.html:11
+#: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:11
 msgid "Search results"
 msgstr "搜索结果"
 
@@ -605,8 +591,7 @@ msgstr[1] ""
 msgid "Nothing found."
 msgstr "没有找到"
 
-#: templates/zinnia/sitemap.html:4
-#: templates/zinnia/sitemap.html.py:7
+#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:7
 msgid "Sitemap"
 msgstr ""
 
@@ -614,8 +599,7 @@ msgstr ""
 msgid "Entries per categories"
 msgstr ""
 
-#: templates/zinnia/sitemap.html:17
-#: templates/zinnia/sitemap.html.py:35
+#: templates/zinnia/sitemap.html:17 templates/zinnia/sitemap.html.py:35
 #: templates/zinnia/tags/popular_entries.html:7
 msgid "comment"
 msgstr "评论"
@@ -643,8 +627,7 @@ msgstr[1] ""
 "      %(entry_count)s 日志\n"
 "    "
 
-#: templates/zinnia/sitemap.html:60
-#: templates/zinnia/tags/categories.html:14
+#: templates/zinnia/sitemap.html:60 templates/zinnia/tags/categories.html:14
 msgid "Not yet categories."
 msgstr "没有的类别"
 
@@ -690,12 +673,15 @@ msgstr "没有类似日志"
 #, fuzzy
 #~ msgid "section"
 #~ msgstr "描述"
+
 #~ msgid "Status"
 #~ msgstr "状态"
+
 #~ msgid "Can view all"
 #~ msgstr "可以查看所有作者日志"
+
 #~ msgid "Can change author"
 #~ msgstr "可以更改日志作者"
+
 #~ msgid "No entries related."
 #~ msgstr "没有相关日志"
-
