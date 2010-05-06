@@ -1,0 +1,17 @@
+{{ calendar|safe }}
+<div class="month-navigation">
+  <div class="month-previous">
+    {% if previous_month %}
+    <a href="{% url zinnia_entry_archive_month previous_month|date:"Y" previous_month|date:"m" %}">
+      &lt;&lt; {{ previous_month|date:"F Y"|capfirst }}
+    </a>
+    {% endif %}
+  </div>
+  <div class="month-next">
+    {% if next_month %}
+    <a href="{% url zinnia_entry_archive_month next_month|date:"Y" next_month|date:"m" %}">
+      {{ next_month|date:"F Y"|capfirst }} &gt;&gt;
+    </a>
+    {% endif %}
+  </div>
+</div>
