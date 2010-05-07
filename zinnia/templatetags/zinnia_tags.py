@@ -102,6 +102,7 @@ def get_link_archives_entries():
 @register.inclusion_tag('zinnia/tags/calendar.html',
                         takes_context=True)
 def get_calendar_entries(context, year=None, month=None):
+    """Return an HTML calendar of entries"""
     if not year or not month:
         date_month = context.get('month') or context.get('day') or datetime.today()
         year, month = date_month.timetuple()[:2]
@@ -130,6 +131,20 @@ def get_calendar_entries(context, year=None, month=None):
     return {'next_month': next_month,
             'previous_month': previous_month,
             'calendar': calendar.formatmonth(year, month)}
+
+@register.inclusion_tag('zinnia/tags/breadcrumbs.html',
+                        takes_context=True)
+def zinnia_breadcrumbs(context, separator='/', root_name='Blog'):                       
+    """Return a breadcrumb for the application"""
+    from zinnia.templatetags.zbreadcrumbs import retrieve_breadcrumbs
+
+    path = context['request'].path
+    page_object = context.get('object') or context.get('category') or \
+                  context.get('tag') or context.get('author')
+    breadcrumbs = retrieve_breadcrumbs(path, page_object, root_name)
+
+    return {'separator': separator,
+            'breadcrumbs': breadcrumbs}
 
 @register.simple_tag
 def get_gravatar(email, size, rating, default=None):
