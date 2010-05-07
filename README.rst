@@ -201,19 +201,19 @@ Templatetags
 
 Zinnia provides several templatetags to create some **widgets** in your website's templates.
 
-* get_recent_entries [number]
+* get_recent_entries [number=5]
 
 Display the latest entries.
 
-* get_random_entries [number]
+* get_random_entries [number=5]
 
 Display random entries.
 
-* get_popular_entries [number]
+* get_popular_entries [number=5]
 
 Display popular entries.
 
-* get_similar_entries [number]
+* get_similar_entries [number=5]
 
 Display entries similar to an existing entry.
 
@@ -232,6 +232,8 @@ Display the archives by month.
 * get_link_archives_entries
 
 Display link markups for listing the archives.
+
+* zinnia_breadcrumbs [separator="/" [root_name="Blog"]]
 
 .. include:: ./docs/CONFIGURATION.rst
 
