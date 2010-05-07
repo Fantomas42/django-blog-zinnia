@@ -34,7 +34,7 @@
 	<div class="top-navigation">	  
 	  <a href="{% url zinnia_sitemap %}" title="{% trans "Sitemap" %}" class="link sitemap">
 	    {% trans "Sitemap" %}
-	  </a> | 
+	  </a> |
 	  <a href="{% url zinnia_feeds "latest" %}" title="{% trans "RSS Feed of lastest entries" %}" class="link feeds">
 	    {% trans "RSS Feed" %}
 	  </a>
@@ -47,6 +47,9 @@
 	<blockquote>
 	  <p>Just another Zinnia weblog.</p>
 	</blockquote>
+	<div id="breadcrumbs" class="span-24 last">
+	  / {% block breadcrumbs %}{% endblock %}
+	</div>
       </div>
       <hr />
       <div id="body" class="span-24 last">

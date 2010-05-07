@@ -1,6 +1,10 @@
 {% extends "zinnia/skeleton.html" %}
 {% load zinnia_tags tagging_tags i18n %}
 
+{% block breadcrumbs %}
+  {% zinnia_breadcrumbs %}
+{% endblock %}
+
 {% block sidebar %}
 <div class="search">
   <h3>{% trans "Search" %}</h3>
