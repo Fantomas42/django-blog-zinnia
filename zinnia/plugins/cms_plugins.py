@@ -9,13 +9,16 @@ from zinnia.models import Category
 from zinnia.managers import authors_published
 from zinnia.plugins.models import LatestEntriesPlugin
 from zinnia.plugins.models import SelectedEntriesPlugin
-
+from zinnia.settings import MEDIA_URL
 
 class CMSLatestEntriesPlugin(CMSPluginBase):
+    module = _('entries')
     model = LatestEntriesPlugin
     name = _('Latest entries')
-    render_template = 'zinnia/cms/entries.html'
-    fields = ('number_of_entries', 'category', 'author')
+    render_template = 'zinnia/cms/entry_list.html'
+    fields = ('number_of_entries', 'category',
+              'author', 'template_to_render')
+    text_enabled = True
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'author':
@@ -34,21 +37,30 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
 
         entries = entries[:instance.number_of_entries]
         context.update({'entries': entries,
-                        'object': instance, 'placeholder': placeholder})
-
+                        'object': instance,
+                        'placeholder': placeholder})
         return context
 
+    def icon_src(self, instance):
+        return MEDIA_URL + u'img/plugin.png'
+
 class CMSSelectedEntriesPlugin(CMSPluginBase):
+    module = _('entries')
     model = SelectedEntriesPlugin
     name = _('Selected entries')
-    render_template = 'zinnia/cms/entries.html'
-    filter_horizontal = ['entries',]
+    render_template = 'zinnia/cms/entry_list.html'
+    fields = ('entries', 'template_to_render')
+    filter_horizontal = ['entries']
+    text_enabled = True
 
     def render(self, context, instance, placeholder):
         context.update({'entries': instance.entries.all(),
-                        'object': instance, 'placeholder': placeholder})
+                        'object': instance,
+                        'placeholder': placeholder})
         return context
 
+    def icon_src(self, instance):
+        return MEDIA_URL + u'img/plugin.png'
 
 plugin_pool.register_plugin(CMSLatestEntriesPlugin)
 plugin_pool.register_plugin(CMSSelectedEntriesPlugin)

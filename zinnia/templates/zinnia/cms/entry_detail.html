@@ -1,0 +1,13 @@
+{% load i18n %}
+{% for entry in entries %}
+<div class="entry">
+  {% with entry as object %}
+  {% with object.html_content|truncatewords_html:100|safe as object_content %}
+  {% include "zinnia/_entry_detail.html" %}
+  {% endwith %}
+  {% endwith %}
+</div>
+<hr />
+{% empty %}
+  {% trans "Not yet entries." %}
+{% endfor %}
