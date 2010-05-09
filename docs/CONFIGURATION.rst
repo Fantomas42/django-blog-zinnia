@@ -64,3 +64,9 @@ ZINNIA_USE_TWITTER
   **Default :** True if python-twitter is in PYTHONPATH
 
   Boolean telling if Zinnia can use Twitter.
+
+ZINNIA_PLUGINS_TEMPLATES
+  **Default :** ()
+
+  List of tuple for extending the cms's plugins rendering templates.
+
