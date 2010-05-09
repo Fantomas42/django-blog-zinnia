@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-06 12:12+0200\n"
+"POT-Creation-Date: 2010-05-09 23:37+0200\n"
 "PO-Revision-Date: 2010-04-28 11:36+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,7 +180,7 @@ msgstr "Für die Veröffentlichung benutzt"
 msgid "description"
 msgstr "Beschreibung"
 
-#: models.py:41 plugins/models.py:13
+#: models.py:41 plugins/models.py:17
 msgid "category"
 msgstr "Kategorie"
 
@@ -269,7 +269,8 @@ msgstr "Veröffentlich auf Seiten"
 msgid "entry"
 msgstr "Eintrag"
 
-#: models.py:161 plugins/models.py:24 templates/zinnia/base.html:24
+#: models.py:161 plugins/cms_plugins.py:15 plugins/cms_plugins.py:48
+#: plugins/models.py:35 templates/zinnia/base.html:32
 msgid "entries"
 msgstr "Einträge"
 
@@ -281,24 +282,40 @@ msgstr "Der Suchbegriff ist zu kurz"
 msgid "No pattern to search found"
 msgstr "Kein Suchbegriff gegeben"
 
-#: plugins/cms_plugins.py:16 templates/zinnia/entry_archive.html:4
+#: plugins/cms_plugins.py:17 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "Neuste Einträge"
 
-#: plugins/cms_plugins.py:43
+#: plugins/cms_plugins.py:50
 msgid "Selected entries"
 msgstr "Ausgewählte Einträge"
 
-#: plugins/models.py:15
+#: plugins/models.py:12
+msgid "Entry list (default)"
+msgstr ""
+
+#: plugins/models.py:13
+msgid "Entry detailed"
+msgstr ""
+
+#: plugins/models.py:19
 msgid "author"
 msgstr "Autor"
 
-#: plugins/models.py:17
+#: plugins/models.py:21
 msgid "number of entries"
 msgstr "Anzahl der Einträge"
 
-#: plugins/models.py:20 plugins/models.py:27
+#: plugins/models.py:22 plugins/models.py:36
+msgid "template"
+msgstr ""
+
+#: plugins/models.py:24 plugins/models.py:38
+msgid "Template used to display the plugin"
+msgstr ""
+
+#: plugins/models.py:31 plugins/models.py:45
 #, python-format
 msgid "%s entries"
 msgstr "%s Einträge"
@@ -373,8 +390,8 @@ msgstr "Zeige Einträge von %(author)s"
 msgid "in"
 msgstr "in"
 
-#: templates/zinnia/_entry_detail.html:44 templates/zinnia/base.html:19
-#: templates/zinnia/tag_list.html:4
+#: templates/zinnia/_entry_detail.html:44 templates/zinnia/base.html:27
+#: templates/zinnia/tag_list.html:4 templatetags/zbreadcrumbs.py:14
 msgid "Tags"
 msgstr "Tags"
 
@@ -423,7 +440,7 @@ msgstr "Schreibe den ersten Kommentar!"
 msgid "Comments are closed."
 msgstr "Kommentare deaktiviert."
 
-#: templates/zinnia/author_list.html:4
+#: templates/zinnia/author_list.html:4 templatetags/zbreadcrumbs.py:15
 msgid "Authors"
 msgstr "Autoren"
 
@@ -431,40 +448,41 @@ msgstr "Autoren"
 msgid "Author list"
 msgstr "Autorenliste"
 
-#: templates/zinnia/base.html:6
+#: templates/zinnia/base.html:10
 msgid "Search"
 msgstr "Suche"
 
-#: templates/zinnia/base.html:9
+#: templates/zinnia/base.html:13
 msgid "Keywords..."
 msgstr "Schlüsselwörter..."
 
-#: templates/zinnia/base.html:15 templates/zinnia/category_list.html:4
-#: templates/zinnia/sitemap.html:46
+#: templates/zinnia/base.html:19 templates/zinnia/category_list.html:4
+#: templates/zinnia/sitemap.html:46 templatetags/zbreadcrumbs.py:16
 msgid "Categories"
 msgstr "Kategorien"
 
-#: templates/zinnia/base.html:32
+#: templates/zinnia/base.html:23
 msgid "Calendar"
 msgstr ""
 
-#: templates/zinnia/base.html:36
+#: templates/zinnia/base.html:40
 msgid "Recent entries"
 msgstr "Neuste Einträge"
 
-#: templates/zinnia/base.html:40
+#: templates/zinnia/base.html:44
 msgid "Random entries"
 msgstr "Zufällige Einträge"
 
-#: templates/zinnia/base.html:44
+#: templates/zinnia/base.html:48
 msgid "Popular entries"
 msgstr "Beliebte Einträge"
 
-#: templates/zinnia/base.html:48 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:52 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/tags/archives_entries.html:5
 #: templates/zinnia/tags/link_archives_entries.html:2
+#: templatetags/zbreadcrumbs.py:13
 msgid "Archives"
 msgstr "Archiv"
 
@@ -494,6 +512,7 @@ msgstr[1] ""
 #: templates/zinnia/entry_archive_base.html:6
 #: templates/zinnia/entry_archive_base.html:9
 #: templates/zinnia/entry_archive_base.html:12
+#: templates/zinnia/skeleton.html:39
 msgid "RSS Feed"
 msgstr "RSS-Feed"
 
@@ -509,7 +528,8 @@ msgstr "Einträge von %(author)s"
 
 #: templates/zinnia/entry_archive_base.html:40
 #: templates/zinnia/sitemap.html:21 templates/zinnia/sitemap.html.py:39
-#: templates/zinnia/cms/entries.html:9
+#: templates/zinnia/cms/entry_detail.html:12
+#: templates/zinnia/cms/entry_list.html:9
 #: templates/zinnia/tags/popular_entries.html:11
 #: templates/zinnia/tags/random_entries.html:9
 #: templates/zinnia/tags/recent_entries.html:9
@@ -594,6 +614,7 @@ msgid "Nothing found."
 msgstr "Nichts gefunden."
 
 #: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:7
+#: templates/zinnia/skeleton.html:35 templates/zinnia/skeleton.html.py:36
 msgid "Sitemap"
 msgstr ""
 
@@ -640,7 +661,7 @@ msgstr "Noch keine Kategorien."
 msgid "Monthly archives"
 msgstr "Noch keine Archive."
 
-#: templates/zinnia/skeleton.html:22
+#: templates/zinnia/skeleton.html:22 templates/zinnia/skeleton.html.py:38
 msgid "RSS Feed of lastest entries"
 msgstr "RSS-Feed der neusten Einträge"
 
