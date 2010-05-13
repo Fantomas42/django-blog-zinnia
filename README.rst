@@ -196,6 +196,8 @@ If you use `django-cms
 
 Simply register **zinnia.plugins** in the INSTALLED_APPS section of your project's settings.
 
+It will provides custom plugins for adding entries into your pages, an App-Hook and Menus for easy integration.
+
 Templatetags
 ============
 
