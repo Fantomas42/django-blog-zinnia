@@ -8,9 +8,7 @@ from zinnia.plugins.settings import APP_MENUS
 
 class ZinniaApphook(CMSApp):
     name = _('Zinnia App Hook')
-    # To be changed when Issue 463 is fixed
-    # urls = ['zinnia.urls']
-    urls = ['zinnia.urls.entries']
+    urls = ['zinnia.urls']
     menus = APP_MENUS
     
 apphook_pool.register(ZinniaApphook)
