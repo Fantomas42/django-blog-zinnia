@@ -21,38 +21,40 @@ vectors = VectorBuilder({'queryset': Entry.published.all(),
                         'fields': ['title', 'excerpt', 'content']})
 cache_entries_related = {}
 
-@register.inclusion_tag('zinnia/tags/categories.html')
-def get_categories():
+@register.inclusion_tag('zinnia/tags/dummy.html')
+def get_categories(template='zinnia/tags/categories.html'):
     """Return the categories"""
-    return {'categories': Category.objects.all()}
+    return {'template': template,
+            'categories': Category.objects.all()}
 
-@register.inclusion_tag('zinnia/tags/recent_entries.html')
-def get_recent_entries(number=5):
+@register.inclusion_tag('zinnia/tags/dummy.html')
+def get_recent_entries(number=5, template='zinnia/tags/recent_entries.html'):
     """Return the most recent entries"""
-    return {'entries': Entry.published.all()[:number]}
+    return {'template': template,
+            'entries': Entry.published.all()[:number]}
 
-
-@register.inclusion_tag('zinnia/tags/random_entries.html')
-def get_random_entries(number=5):
+@register.inclusion_tag('zinnia/tags/dummy.html')
+def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
     """Return random entries"""
     entries = Entry.published.all()
     if number > len(entries):
         number = len(entries)
-    return {'entries': sample(entries, number)}
+    return {'template': template,
+            'entries': sample(entries, number)}
 
-
-@register.inclusion_tag('zinnia/tags/popular_entries.html')
-def get_popular_entries(number=5):
+@register.inclusion_tag('zinnia/tags/dummy.html')
+def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     """Return popular  entries"""
     entries_comment = [(e, e.comments.count()) for e in Entry.published.all()]
     entries_comment = sorted(entries_comment, key=lambda x: (x[1], x[0]),
                              reverse=True)[:number]
     entries = [entry for entry, n_comments in entries_comment]
-    return {'entries': entries}
+    return {'template': template,
+            'entries': entries}
 
-@register.inclusion_tag('zinnia/tags/similar_entries.html',
+@register.inclusion_tag('zinnia/tags/dummy.html',
                         takes_context=True)
-def get_similar_entries(context, number=5):
+def get_similar_entries(context, number=5, template='zinnia/tags/similar_entries.html'):
     """Return similar entries"""
     global vectors
     global cache_entries_related
@@ -83,25 +85,21 @@ def get_similar_entries(context, number=5):
         cache_entries_related[key] = compute_related(object_id, dataset)
 
     entries = cache_entries_related[key][:number]
-    return {'entries': entries}
+    return {'template': template,
+            'entries': entries}
 
 
-@register.inclusion_tag('zinnia/tags/archives_entries.html')
-def get_archives_entries():
+@register.inclusion_tag('zinnia/tags/dummy.html')
+def get_archives_entries(template='zinnia/tags/archives_entries.html'):
     """Return archives entries"""
-    return {'archives': Entry.published.dates('creation_date', 'month',
+    return {'template': template,
+            'archives': Entry.published.dates('creation_date', 'month',
                                               order='DESC'),}
 
-
-@register.inclusion_tag('zinnia/tags/link_archives_entries.html')
-def get_link_archives_entries():
-    """Return archives entries for link markup"""
-    return {'archives': Entry.published.dates('creation_date', 'month',
-                                              order='DESC'),}
-
-@register.inclusion_tag('zinnia/tags/calendar.html',
+@register.inclusion_tag('zinnia/tags/dummy.html',
                         takes_context=True)
-def get_calendar_entries(context, year=None, month=None):
+def get_calendar_entries(context, year=None, month=None,
+                         template='zinnia/tags/calendar.html'):
     """Return an HTML calendar of entries"""
     if not year or not month:
         date_month = context.get('month') or context.get('day') or datetime.today()
@@ -128,13 +126,15 @@ def get_calendar_entries(context, year=None, month=None):
         previous_month = dates[-1]
         next_month = None
 
-    return {'next_month': next_month,
+    return {'template': template,
+            'next_month': next_month,
             'previous_month': previous_month,
             'calendar': calendar.formatmonth(year, month)}
 
-@register.inclusion_tag('zinnia/tags/breadcrumbs.html',
+@register.inclusion_tag('zinnia/tags/dummy.html',
                         takes_context=True)
-def zinnia_breadcrumbs(context, separator='/', root_name='Blog'):                       
+def zinnia_breadcrumbs(context, separator='/', root_name='Blog',
+                       template='zinnia/tags/breadcrumbs.html',):                       
     """Return a breadcrumb for the application"""
     from zinnia.templatetags.zbreadcrumbs import retrieve_breadcrumbs
 
@@ -143,7 +143,8 @@ def zinnia_breadcrumbs(context, separator='/', root_name='Blog'):
                   context.get('tag') or context.get('author')
     breadcrumbs = retrieve_breadcrumbs(path, page_object, root_name)
 
-    return {'separator': separator,
+    return {'template': template,
+            'separator': separator,
             'breadcrumbs': breadcrumbs}
 
 @register.simple_tag

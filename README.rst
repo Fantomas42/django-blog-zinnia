@@ -201,41 +201,43 @@ It will provides custom plugins for adding entries into your pages, an App-Hook 
 Templatetags
 ============
 
-Zinnia provides several templatetags to create some **widgets** in your website's templates.
+Zinnia provides several templatetags based on *inclusion_tag* system to create some **widgets** in your website's templates.
 
-* get_recent_entries [number=5]
+* get_recent_entries(number=5, template="zinnia/tags/recent_entries.html")
 
 Display the latest entries.
 
-* get_random_entries [number=5]
+* get_random_entries(number=5, template="zinnia/tags/random_entries.html")
 
 Display random entries.
 
-* get_popular_entries [number=5]
+* get_popular_entries(number=5, template="zinnia/tags/popular_entries.html")
 
 Display popular entries.
 
-* get_similar_entries [number=5]
+* get_similar_entries(number=5, template="zinnia/tags/similar_entries.html")
 
 Display entries similar to an existing entry.
 
-* get_calendar_entries [year, month]
+* get_calendar_entries(year=auto, month=auto, template="zinnia/tags/calendar.html")
 
 Display an HTML calendar with date of publications.
 
-* get_categories
-
-Display all the categories available.
-
-* get_archives_entries
+* get_archives_entries(template="zinnia/tags/archives_entries.html")
 
 Display the archives by month.
 
-* get_link_archives_entries
+* get_categories(template="zinnia/tags/categories.html")
 
-Display link markups for listing the archives.
+Display all the categories available.
 
-* zinnia_breadcrumbs [separator="/" [root_name="Blog"]]
+* zinnia_breadcrumbs(separator="/", root_name="Blog", template="zinnia/tags/breadcrumbs.html")
+
+Display the breadcrumbs for the pages handled by Zinnia.
+
+* get_gravatar(email, size, rating, default=None)
+
+Display the Gravatar image associated to an email, usefull for comments.
 
 .. include:: ./docs/CONFIGURATION.rst
 

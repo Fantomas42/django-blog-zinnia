@@ -18,7 +18,7 @@
     <!--[if lt IE 8]>
 	<link rel="stylesheet" type="text/css" media="screen, projection" href="{{ ZINNIA_MEDIA_URL }}css/ie.css" />
     <![endif]-->
-    {% get_link_archives_entries %}
+    {% get_archives_entries "zinnia/tags/link_archives_entries.html" %}
     <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of lastest entries" %}" href="{% url zinnia_feeds "latest" %}" />
     {% block link %}{% endblock %}
     {% block script %}{% endblock %}
