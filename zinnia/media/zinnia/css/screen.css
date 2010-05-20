@@ -455,18 +455,22 @@ a:hover { text-decoration: underline; }
 #sidebar .tags ul .tag_6 { font-size: 3em; }
 
 table.month { margin-bottom: 0; }
-table.month th.month { text-transform: uppercase; color: #006699; background-color: white; }
+table.month th.month { text-transform: uppercase; color: #006699; background: none; }
 table.month th { text-transform: capitalize; color: #999999; background-color: #eeeeee; }
 table.month td { text-align: center; font-weight: bold; }
 table.month td.entry { background-color: #eeeeee; }
 
-.entry .entryHeader { background-color: #eeeeee; margin-bottom: 1em; }
+.entry .entryHeader { margin-bottom: 1em; }
 .entry .entryHeader .entryTitle { margin: 0; }
-.entry .entryHeader .entryInfo { color: #999999; margin: 0; padding-left: 1.5em; background: transparent url(../img/category.png) no-repeat scroll; }
-.entry .entryFooter p { margin-bottom: 0; color: #999999; }
+.entry .entryHeader .entryInfo { margin: 0; padding-left: 1.5em; background: transparent url(../img/category.png) no-repeat scroll; }
+.entry .entryBody .entryImage { margin-top: -1.5em; }
+.entry .entryBody .entryImage p img { border: 0; margin: 0 1.5em 1.5em 0; }
+.entry .entryFooter p { margin-bottom: 0; }
 .entry .entryFooter p strong { padding-left: 1.5em; }
 .entry .entryFooter .entryTags strong { background: transparent url(../img/tags.png) no-repeat scroll; }
 .entry .entryFooter .entryShortUrl strong { background: transparent url(../img/shorturl.png) no-repeat scroll; }
 .entry .entryFooter .entryComments strong { background: transparent url(../img/comments.png) no-repeat scroll; }
+.entry .entryHeader { background-color: #eeeeee; }
+.entry .entryFooter p strong { color: #999999; }
 
 ol#commentList li { float: left; }

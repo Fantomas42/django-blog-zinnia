@@ -1,0 +1,16 @@
+=calendar(!head_color, !box_color, !box_font_color)
+  :margin-bottom 0
+  th.month
+    :text-transform uppercase
+    :color = !head_color
+    :background none
+  th
+    :text-transform capitalize
+    :color = !box_font_color
+    :background-color = !box_color
+  td
+    :text-align center
+    :font-weight bold
+    &.entry
+      :background-color = !box_color
+

@@ -64,49 +64,17 @@ a
 
 // Calendar
 table.month
-  :margin-bottom 0
-  th.month
-    :text-transform uppercase
-    :color = !link_color
-    :background-color = #fff
-  th
-    :text-transform capitalize
-    :color = !box_font_color
-    :background-color = !box_color
-  td
-    :text-align center
-    :font-weight bold
-    &.entry
-      :background-color = !box_color
+  +calendar(!link_color, !box_color, !box_font_color)
 
 // Entry
 .entry
+  +entry
   .entryHeader
     :background-color = !box_color
-    :margin-bottom 1em
-    .entryTitle
-      :margin 0
-    .entryInfo
-      :color = !box_font_color
-      :margin 0
-      :padding-left 1.5em
-      :background transparent url(../img/category.png) no-repeat scroll
-
   .entryFooter
-    p
-      :margin-bottom 0
-      :color = !box_font_color
+    p    
       strong
-        :padding-left 1.5em
-    .entryTags
-      strong
-        :background transparent url(../img/tags.png) no-repeat scroll
-    .entryShortUrl
-      strong
-        :background transparent url(../img/shorturl.png) no-repeat scroll
-    .entryComments
-      strong
-        :background transparent url(../img/comments.png) no-repeat scroll
+        :color = !box_font_color
 
 // Comments
 ol#commentList
