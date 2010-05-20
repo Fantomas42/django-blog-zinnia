@@ -5,11 +5,8 @@
 
 {% block content %}
   {% if form.errors %}
-  <h3>{% blocktrans count form.errors|length as errors %}
-    Please correct following error.
-    {% plural %}
-    Please correct following errors.
-    {% endblocktrans %}
+  <h3>
+    {% blocktrans count form.errors|length as errors %}Please correct following error.{% plural %}Please correct following errors.{% endblocktrans %}
   </h3>
   {% else %}
   <h3>{% trans "Preview of the comment" %}</h3>

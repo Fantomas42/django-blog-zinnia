@@ -68,11 +68,7 @@
     {% with object.comments.count as comment_count %}
     {% if comment_count %}
     <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
-      {% blocktrans count comment_count as comment_count %}
-        {{ comment_count }} comment
-      {% plural %}
-        {{ comment_count }} comments
-      {% endblocktrans %}
+      {% blocktrans count comment_count as comment_count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
     </a>
     {% else %}
       {% if object.comment_enabled %}

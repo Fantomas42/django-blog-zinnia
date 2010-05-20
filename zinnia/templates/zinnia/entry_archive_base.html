@@ -43,9 +43,7 @@
 {% if is_paginated %}
 <div class="paginator span-16 last">
   <span class="index">
-    {% blocktrans with page_obj.number as current_page and paginator.num_pages as total_page %}
-Page {{ current_page }} of {{ total_page }}
-    {% endblocktrans %}
+    {% blocktrans with page_obj.number as current_page and paginator.num_pages as total_page %}Page {{ current_page }} of {{ total_page }}{% endblocktrans %}
   </span> |
   {% if page_obj.has_previous %}
   <span class="previous">

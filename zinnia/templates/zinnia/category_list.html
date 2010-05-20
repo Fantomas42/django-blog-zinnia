@@ -10,11 +10,7 @@
     {% for object in object_list %}
     <li>
       <a href="{{ object.get_absolute_url }}" title="{{ object }}">{{ object }}</a> 
-      {% blocktrans count object.entries_published_set|length as entries_published %}
-      {{ entries_published }} entry
-      {% plural %}
-      {{ entries_published }} entries
-      {% endblocktrans %}
+      {% blocktrans count object.entries_published_set|length as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     </li>
     {% endfor %}
   </ul>
