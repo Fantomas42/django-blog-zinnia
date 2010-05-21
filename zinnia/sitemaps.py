@@ -8,6 +8,7 @@ from tagging.models import TaggedItem
 
 from zinnia.models import Entry
 from zinnia.models import Category
+from zinnia.managers import tags_published
 from zinnia.managers import entries_published
 from zinnia.managers import authors_published
 
@@ -82,7 +83,7 @@ class TagSitemap(Sitemap):
             self.cache_tags[tag.pk] = (entries, entries.count() / len_entries)
 
     def items(self):
-        tags = Tag.objects.all()
+        tags = tags_published()
         self.cache(tags)
         return tags
 
@@ -99,4 +100,4 @@ class TagSitemap(Sitemap):
         return '%.1f' % priority
 
     def location(self, obj):
-        return reverse('zinnia_tagged_entry_list', args=[obj.name])
+        return reverse('zinnia_tag_detail', args=[obj.name])

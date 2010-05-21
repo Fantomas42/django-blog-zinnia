@@ -8,11 +8,11 @@ from menus.base import NavigationNode
 from menus.menu_pool import menu_pool
 from cms.menu_bases import CMSAttachMenu
 
-from tagging.models import Tag
-
 from zinnia.models import Entry
 from zinnia.models import Category
+from zinnia.managers import tags_published
 from zinnia.managers import authors_published
+
 
 class EntryMenu(CMSAttachMenu):
     """Menu for the entries organized by archives dates"""
@@ -86,7 +86,7 @@ class TagMenu(CMSAttachMenu):
         nodes = []
         nodes.append(NavigationNode(_('Tags'), reverse('zinnia_tag_list'),
                                     'tags'))
-        for tag in Tag.objects.filter(name__in=[t.name for t in Tag.objects.usage_for_model(Entry)]):
+        for tag in tags_published():
             nodes.append(NavigationNode(tag.name,
                                         reverse('zinnia_tag_detail', args=[tag.name]),
                                         tag.pk, 'tags'))

@@ -9,6 +9,13 @@ DRAFT = 0
 HIDDEN = 1
 PUBLISHED = 2
 
+def tags_published():
+    """Return the pusblished tags"""
+    from tagging.models import Tag
+    from zinnia.models import Entry
+
+    return Tag.objects.filter(name__in=[t.name for t in Tag.objects.usage_for_model(Entry)])
+
 def authors_published():
     """Return the published authors"""
     from django.contrib.auth.models import User

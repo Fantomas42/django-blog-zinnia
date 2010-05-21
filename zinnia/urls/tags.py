@@ -2,9 +2,9 @@
 from django.conf.urls.defaults import *
 
 from zinnia.models import Entry
-from tagging.models import Tag
+from zinnia.managers import tags_published
 
-tag_conf = {'queryset': Tag.objects.filter(name__in=[t.name for t in Tag.objects.usage_for_model(Entry)]),
+tag_conf = {'queryset': tags_published(),
             'template_name': 'zinnia/tag_list.html'}
 
 tag_conf_entry = {'queryset_or_model': Entry.published.all(),}
