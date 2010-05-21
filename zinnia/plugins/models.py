@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
+from tagging.models import Tag
 from cms.models import CMSPlugin
 
 from zinnia.models import Entry
@@ -14,10 +15,13 @@ TEMPLATES = [('zinnia/cms/entry_list.html', _('Entry list (default)')),
 
 class LatestEntriesPlugin(CMSPlugin):
     """CMS Plugin for displaying latest entries"""
-    category = models.ForeignKey(Category, verbose_name=_('category'),
-                                 blank=True, null=True)
-    author = models.ForeignKey(User, verbose_name=_('author'),
-                               blank=True, null=True)
+    categories = models.ManyToManyField(Category, verbose_name=_('categories'),
+                                        blank=True, null=True)
+    authors = models.ManyToManyField(User, verbose_name=_('authors'),
+                                     blank=True, null=True)
+    tags = models.ManyToManyField(Tag, verbose_name=_('tags'),
+                                  blank=True, null=True)
+    
     number_of_entries = models.IntegerField(_('number of entries'), default=5)
     template_to_render = models.CharField(_('template'), blank=True,
                                           max_length=250, choices=TEMPLATES,
