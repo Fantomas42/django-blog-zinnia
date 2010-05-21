@@ -13,8 +13,8 @@ def tags_published():
     """Return the pusblished tags"""
     from tagging.models import Tag
     from zinnia.models import Entry
-
-    return Tag.objects.filter(name__in=[t.name for t in Tag.objects.usage_for_model(Entry)])
+    tags_published = Tag.objects.usage_for_queryset(Entry.published.all())
+    return Tag.objects.filter(name__in=[t.name for t in tags_published])
 
 def authors_published():
     """Return the published authors"""
