@@ -36,9 +36,9 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
         entries = Entry.published.all()
 
         if instance.categories.count():
-            entries = entries.filter(categories=instance.categories.all())
+            entries = entries.filter(categories__in=instance.categories.all())
         if instance.authors.count():
-            entries = entries.filter(authors=instance.authors.all())
+            entries = entries.filter(authors__in=instance.authors.all())
         if instance.tags.count():
             entries = TaggedItem.objects.get_union_by_model(
                 entries, instance.tags.all())
