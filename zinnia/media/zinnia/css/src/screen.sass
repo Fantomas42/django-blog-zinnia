@@ -66,6 +66,26 @@ a
 table.month
   +calendar(!link_color, !box_color, !box_font_color)
 
+// Pagination
+div.paginator
+  :margin-bottom 1.5em
+  span
+    :font-size 1.5em
+    :margin-left 0.3em
+    :padding 0 0.5em 0 0.5em
+    :float left
+    :border = 1px "solid" !box_color
+    &.page, &.next, &.previous
+      &:hover
+        :background-color = !link_color
+        a
+          :color white
+    &.current
+      :border-color = !link_color
+      :background-color = !link_color
+      :color white
+
+
 // Entry
 .entry
   +entry

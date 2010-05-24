@@ -44,10 +44,10 @@
 <div class="paginator span-16 last">
   <span class="index">
     {% blocktrans with page_obj.number as current_page and paginator.num_pages as total_page %}Page {{ current_page }} of {{ total_page }}{% endblocktrans %}
-  </span> |
+  </span>
   {% if page_obj.has_previous %}
   <span class="previous">
-    <a href="{% url zinnia_entry_archive_index_paginated page_obj.previous_page_number %}"
+    <a href="?page={{ page_obj.previous_page_number }}"
        title="{% trans "More recent entries" %}">&laquo;</a>
   </span>
   {% endif %}
@@ -56,14 +56,14 @@
     {% ifequal page_obj.number page %}
     <strong>{{ page }}</strong>
     {% else %}
-    <a href="{% url zinnia_entry_archive_index_paginated page %}" 
+    <a href="?page={{ page }}" 
        title="{% trans "Entries page" %} {{ page }}">{{ page }}</a>
     {% endifequal%}
   </span>
   {% endfor %}
   {% if page_obj.has_next %}
   <span class="next">
-    <a href="{% url zinnia_entry_archive_index_paginated page_obj.next_page_number %}" 
+    <a href="?page={{ page_obj.next_page_number }}" 
        title="{% trans "More old entries" %}">&raquo;</a>
   </span>  
   {% endif %}

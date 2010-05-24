@@ -460,6 +460,12 @@ table.month th { text-transform: capitalize; color: #999999; background-color: #
 table.month td { text-align: center; font-weight: bold; }
 table.month td.entry { background-color: #eeeeee; }
 
+div.paginator { margin-bottom: 1.5em; }
+div.paginator span { font-size: 1.5em; margin-left: 0.3em; padding: 0 0.5em 0 0.5em; float: left; border: 1px solid #eeeeee; }
+div.paginator span.page:hover, div.paginator span.next:hover, div.paginator span.previous:hover { background-color: #006699; }
+div.paginator span.page:hover a, div.paginator span.next:hover a, div.paginator span.previous:hover a { color: white; }
+div.paginator span.current { border-color: #006699; background-color: #006699; color: white; }
+
 .entry .entryHeader { margin-bottom: 1em; }
 .entry .entryHeader .entryTitle { margin: 0; }
 .entry .entryHeader .entryInfo { margin: 0; padding-left: 1.5em; background: transparent url(../img/category.png) no-repeat scroll; }
