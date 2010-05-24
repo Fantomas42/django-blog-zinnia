@@ -7,19 +7,22 @@ from django.views.generic.list_detail import object_list
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import entries_published
+from zinnia.settings import PAGINATION
 
 
-def author_detail(request, username):
+def author_detail(request, username, page=None):
     """Display the entries of an author"""
     author = get_object_or_404(User, username=username)
     return object_list(request, queryset=entries_published(author.entry_set),
+                       paginate_by=PAGINATION, page=page,
                        extra_context={'author': author})
 
 
-def category_detail(request, slug):
+def category_detail(request, slug, page=None):
     """Display the entries of a category"""
     category = get_object_or_404(Category, slug=slug)
     return object_list(request, queryset=category.entries_published_set(),
+                       paginate_by=PAGINATION, page=page,
                        extra_context={'category': category})
 
 

@@ -5,6 +5,7 @@ from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.settings import PAGINATION
 
+
 entry_conf_list = {'queryset': Entry.published.all(),
                    'paginate_by': PAGINATION,}
 
