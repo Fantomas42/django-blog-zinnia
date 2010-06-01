@@ -6,9 +6,11 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
 
+from tagging.models import Tag
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
+from zinnia.managers import tags_published
 from zinnia.managers import entries_published
 from zinnia.managers import authors_published
 
@@ -42,9 +44,12 @@ class ManagersTestCase(TestCase):
         self.entry_2.categories.add(self.categories[0])
         self.entry_2.sites.add(self.sites[0])
 
+    def test_tags_published(self):
+        self.assertEquals(tags_published().count(), Tag.objects.count())
+        Tag.objects.create(name='out')
+        self.assertNotEquals(tags_published().count(), Tag.objects.count())
+
     def test_authors_published(self):
-        user = User.objects.create_user(username='visitor',
-                                        email='visitor@example.com')
         self.assertEquals(authors_published().count(), 1)
         self.entry_2.status = PUBLISHED
         self.entry_2.save()
