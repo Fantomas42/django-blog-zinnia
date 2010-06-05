@@ -36,6 +36,8 @@ Main features :
   * Tags autocompletion
   * Ready to use and extendables templates
 
+Take a look at the online at : http://django-blog-zinnia.com
+
 Dependancies
 ============
 
@@ -282,6 +284,8 @@ http://www.transifex.net/projects/p/django-blog-zinnia/c/master/
 Examples
 ========
 
+  * `Demo of Zinnia
+    <http://django-blog-zinnia.com>`_.
   * `Fantomas' side
     <http://fantomas.willbreak.it>`_.
 
