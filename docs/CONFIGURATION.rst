@@ -10,6 +10,16 @@ ZINNIA_PAGINATION
 
   Integer used to paginate the entries.
 
+ZINNIA_ALLOW_EMPTY
+  **Default :** True
+
+  Used for archives views, raise a 404 error if no entries are present at the specified date.
+
+ZINNIA_ALLOW_FUTURE
+  **Default :** True
+
+  Used for allowing archives views in the future.
+
 ZINNIA_COPYRIGHT
   **Default :** 'Zinnia'
 

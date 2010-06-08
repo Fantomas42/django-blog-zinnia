@@ -6,7 +6,11 @@ SAVE_PING_DIRECTORIES = getattr(settings, 'ZINNIA_AUTO_PING',
                                 bool(PING_DIRECTORIES))
 
 COPYRIGHT = getattr(settings, 'ZINNIA_COPYRIGHT', 'Zinnia')
+
 PAGINATION = getattr(settings, 'ZINNIA_PAGINATION', 10)
+ALLOW_EMPTY = getattr(settings, 'ZINNIA_ALLOW_EMPTY', True)
+ALLOW_FUTURE = getattr(settings, 'ZINNIA_ALLOW_FUTURE', True)
+
 MAIL_COMMENT = getattr(settings, 'ZINNIA_MAIL_COMMENT', True)
 AKISMET_COMMENT = getattr(settings, 'ZINNIA_AKISMET_COMMENT', True)
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads')

@@ -4,6 +4,8 @@ from django.conf.urls.defaults import *
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.settings import PAGINATION
+from zinnia.settings import ALLOW_EMPTY
+from zinnia.settings import ALLOW_FUTURE
 
 
 entry_conf_list = {'queryset': Entry.published.all(),
@@ -11,6 +13,8 @@ entry_conf_list = {'queryset': Entry.published.all(),
 
 entry_conf = {'queryset': Entry.published.all(),
               'date_field': 'creation_date',
+              'allow_empty': ALLOW_EMPTY,
+              'allow_future': ALLOW_FUTURE,
               'month_format': '%m'}
 
 entry_conf_year = entry_conf.copy()
@@ -18,6 +22,7 @@ entry_conf_year['make_object_list'] = True
 del entry_conf_year['month_format']
 
 entry_conf_detail = entry_conf.copy()
+del entry_conf_detail['allow_empty']
 entry_conf_detail['queryset'] = Entry.objects.all()
 
 urlpatterns = patterns('django.views.generic.list_detail',
