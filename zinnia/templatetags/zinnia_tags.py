@@ -123,7 +123,7 @@ def get_calendar_entries(context, year=None, month=None,
         except IndexError:
             next_month = None
     else:
-        previous_month = dates[-1]
+        previous_month = len(dates) and dates[-1] or None
         next_month = None
 
     return {'template': template,
