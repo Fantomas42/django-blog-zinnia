@@ -36,7 +36,7 @@ Main features :
   * Tags autocompletion
   * Ready to use and extendables templates
 
-Take a look at the online at : http://django-blog-zinnia.com
+Take a look at the online demo at : http://django-blog-zinnia.com
 
 Dependancies
 ============
