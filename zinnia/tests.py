@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
+from django.template import TemplateDoesNotExist
 
 from tagging.models import Tag
 from zinnia.models import Entry
@@ -267,5 +268,105 @@ class CategoryTestCase(TestCase):
         self.assertEqual(self.categories[0].entries_published_set().count(), 2)
         self.assertEqual(self.categories[1].entries_published_set().count(), 1)
 
+class ZinniaViewsTestCase(TestCase):
+    """Test cases for generic views used in the application,
+    for reproducing and correcting issue :
+    http://github.com/Fantomas42/django-blog-zinnia/issues#issue/3
+    """
 
+    fixtures = ['zinnia_test_data.json',]
 
+    def create_published_entry(self):
+        params = {'title': 'My test entry',
+                  'content': 'My test content',
+                  'slug': 'my-test-entry',
+                  'tags': 'tests',
+                  'creation_date': datetime(2010, 1, 1),
+                  'status': PUBLISHED}
+        entry = Entry.objects.create(**params)
+        entry.sites.add(Site.objects.get_current())
+        entry.categories.add(Category.objects.get(slug='tests'))
+        entry.authors.add(User.objects.get(username='admin'))
+        return entry
+
+    def check_publishing_context(self, url, first_expected,
+                                 second_expected=None):
+        """Test the numbers of entries in context of an url,"""
+        response = self.client.get(url)
+        self.assertEquals(len(response.context['object_list']), first_expected)
+        if second_expected:
+            self.create_published_entry()
+            response = self.client.get(url)
+            self.assertEquals(len(response.context['object_list']), second_expected)
+
+    # BUG
+    def _test_zinnia_entry_archive_index(self):
+        self.check_publishing_context('/', 2, 3)
+
+    # BUG
+    def _test_zinnia_entry_archive_year(self):
+        self.check_publishing_context('/2010/', 2, 3)
+
+    # BUG
+    def _test_zinnia_entry_archive_month(self):
+        self.check_publishing_context('/2010/01/', 1, 2)
+
+    # BUG
+    def _test_zinnia_entry_archive_day(self):
+        self.check_publishing_context('/2010/01/01/', 1, 2)
+
+    def test_zinnia_entry_detail(self):
+        # Because no 404.html template exists, use a raise
+        self.assertRaises(TemplateDoesNotExist, self.client.get,
+                          '/2010/01/01/my-test-entry/')
+        self.create_published_entry()
+        response = self.client.get('/2010/01/01/my-test-entry/')
+        self.assertEquals(response.status_code, 200)
+
+    def test_zinnia_category_list(self):
+        self.check_publishing_context('/categories/', 1)
+        entry = Entry.objects.all()[0]
+        entry.categories.add(Category.objects.create(title='New category',
+                                                     slug='new-category'))
+        self.check_publishing_context('/categories/', 2)
+
+    def test_zinnia_category_detail(self):
+        self.check_publishing_context('/categories/tests/', 2, 3)
+
+    # BUG
+    def _test_zinnia_author_list(self):
+        self.check_publishing_context('/authors/', 1)
+        entry = Entry.objects.all()[0]
+        entry.authors.add(User.objects.create(username='new user',
+                                              email='new_user@example.com'))
+        self.check_publishing_context('/authors/', 2)
+
+    def test_zinnia_author_detail(self):
+        self.check_publishing_context('/authors/admin/', 2, 3)
+        
+    # BUG
+    def _test_zinnia_tag_list(self):
+        self.check_publishing_context('/tags/', 1)
+        entry = Entry.objects.all()[0]
+        entry.tags = 'tests, tag'
+        entry.save()        
+        self.check_publishing_context('/tags/', 2)
+
+    # BUG
+    def _test_zinnia_tag_detail(self):
+        self.check_publishing_context('/tags/tests/', 2, 3)
+
+    def test_zinnia_entry_search(self):
+        self.check_publishing_context('/search/?pattern=test', 2, 3)
+
+    # BUG
+    def _test_zinnia_sitemap(self):
+        response = self.client.get('/sitemap/')
+        self.assertEquals(len(response.context['entries']), 2)
+        self.assertEquals(len(response.context['categories']), 1)
+        entry = self.create_published_entry()
+        entry.categories.add(Category.objects.create(title='New category',
+                                                     slug='new-category'))
+        response = self.client.get('/sitemap/')
+        self.assertEquals(len(response.context['entries']), 3)
+        self.assertEquals(len(response.context['categories']), 2)
