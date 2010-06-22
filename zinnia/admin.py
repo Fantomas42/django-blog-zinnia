@@ -36,8 +36,8 @@ class EntryAdmin(admin.ModelAdmin):
                                             'end_publication', 'comment_enabled'),
                                  'classes': ('collapse', 'collapse-closed')}),
                  (_('Sorting'), {'fields': ('sites', 'categories', 'tags')}))
-    list_filter = ('status', 'creation_date', 'authors', 'comment_enabled',
-                    'end_publication')
+    list_filter = ('categories', 'authors', 'status', 'comment_enabled',
+                   'creation_date', 'start_publication', 'end_publication')
     list_display = ('get_title', 'get_authors', 'get_categories',
                     'get_tags', 'get_sites', 'comment_enabled',
                     'get_is_actual', 'get_is_visible', 'get_link',
@@ -136,7 +136,7 @@ class EntryAdmin(admin.ModelAdmin):
         """Save the authors, update time, make an excerpt"""
         if not form.cleaned_data.get('excerpt'):
             entry.excerpt = truncate_words(strip_tags(entry.content), 50)
-        
+
         if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
             form.cleaned_data['authors'] = entry.authors.all()
 
@@ -163,7 +163,7 @@ class EntryAdmin(admin.ModelAdmin):
                 kwargs['queryset'] = User.objects.filter(is_staff=True)
             else:
                 kwargs['queryset'] = User.objects.filter(pk=request.user.pk)
-        
+
         return super(EntryAdmin, self).formfield_for_manytomany(
             db_field, request, **kwargs)
 
