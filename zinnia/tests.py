@@ -273,7 +273,7 @@ class ZinniaViewsTestCase(TestCase):
     for reproducing and correcting issue :
     http://github.com/Fantomas42/django-blog-zinnia/issues#issue/3
     """
-
+    urls = 'zinnia.urls.tests'
     fixtures = ['zinnia_test_data.json',]
 
     def create_published_entry(self):
@@ -299,26 +299,27 @@ class ZinniaViewsTestCase(TestCase):
             response = self.client.get(url)
             self.assertEquals(len(response.context['object_list']), second_expected)
 
-    # BUG
-    def _test_zinnia_entry_archive_index(self):
+    def test_zinnia_entry_archive_index(self):
         self.check_publishing_context('/', 2, 3)
 
-    # BUG
-    def _test_zinnia_entry_archive_year(self):
+    def test_zinnia_entry_archive_year(self):
         self.check_publishing_context('/2010/', 2, 3)
 
-    # BUG
-    def _test_zinnia_entry_archive_month(self):
+    def test_zinnia_entry_archive_month(self):
         self.check_publishing_context('/2010/01/', 1, 2)
 
-    # BUG
-    def _test_zinnia_entry_archive_day(self):
+    def test_zinnia_entry_archive_day(self):
         self.check_publishing_context('/2010/01/01/', 1, 2)
 
     def test_zinnia_entry_detail(self):
-        # Because no 404.html template exists, use a raise
-        self.assertRaises(TemplateDoesNotExist, self.client.get,
-                          '/2010/01/01/my-test-entry/')
+        # Check a 404 error, but the 404.html may no exist
+        try:
+            self.assertRaises(TemplateDoesNotExist, self.client.get,
+                              '/2010/01/01/my-test-entry/')
+        except AssertionError:
+            response = self.client.get('/2010/01/01/my-test-entry/')
+            self.assertEquals(response.status_code, 404)
+            
         self.create_published_entry()
         response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertEquals(response.status_code, 200)
@@ -333,34 +334,30 @@ class ZinniaViewsTestCase(TestCase):
     def test_zinnia_category_detail(self):
         self.check_publishing_context('/categories/tests/', 2, 3)
 
-    # BUG
-    def _test_zinnia_author_list(self):
+    def test_zinnia_author_list(self):
         self.check_publishing_context('/authors/', 1)
         entry = Entry.objects.all()[0]
-        entry.authors.add(User.objects.create(username='new user',
+        entry.authors.add(User.objects.create(username='new-user',
                                               email='new_user@example.com'))
         self.check_publishing_context('/authors/', 2)
 
     def test_zinnia_author_detail(self):
         self.check_publishing_context('/authors/admin/', 2, 3)
         
-    # BUG
-    def _test_zinnia_tag_list(self):
+    def test_zinnia_tag_list(self):
         self.check_publishing_context('/tags/', 1)
         entry = Entry.objects.all()[0]
         entry.tags = 'tests, tag'
         entry.save()        
         self.check_publishing_context('/tags/', 2)
 
-    # BUG
-    def _test_zinnia_tag_detail(self):
+    def test_zinnia_tag_detail(self):
         self.check_publishing_context('/tags/tests/', 2, 3)
 
     def test_zinnia_entry_search(self):
         self.check_publishing_context('/search/?pattern=test', 2, 3)
 
-    # BUG
-    def _test_zinnia_sitemap(self):
+    def test_zinnia_sitemap(self):
         response = self.client.get('/sitemap/')
         self.assertEquals(len(response.context['entries']), 2)
         self.assertEquals(len(response.context['categories']), 1)
