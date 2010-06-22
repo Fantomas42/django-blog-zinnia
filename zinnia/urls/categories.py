@@ -9,9 +9,12 @@ category_conf = {'queryset': Category.objects.all(),}
 urlpatterns = patterns('',
                        url(r'^$', 'django.views.generic.list_detail.object_list',
                            category_conf, 'zinnia_category_list'),
-                       url(r'^(?P<slug>[-\w]+)/$', 'zinnia.views.category_detail',
-                           name='zinnia_category_detail'),
-                       url(r'^(?P<slug>[-\w]+)/page/(?P<page>\d+)/$',
-                           'zinnia.views.category_detail',
-                           name='zinnia_category_detail_paginated'),
                        )
+
+urlpatterns += patterns('zinnia.views.categories',
+                        url(r'^(?P<slug>[-\w]+)/$', 'category_detail',
+                            name='zinnia_category_detail'),
+                        url(r'^(?P<slug>[-\w]+)/page/(?P<page>\d+)/$',
+                            'category_detail',
+                            name='zinnia_category_detail_paginated'),
+                        )
