@@ -46,9 +46,9 @@ class EntryCommentModerator(CommentModerator):
                 'referrer': request.META.get('HTTP_REFERER', 'unknown'),
                 'permalink': content_object.get_absolute_url(),
                 'comment_type': 'comment',
-                'comment_author': comment.userinfo.get('name', ''),
-                'comment_author_email': comment.userinfo.get('email', ''),
-                'comment_author_url': comment.userinfo.get('url', ''),
+                'comment_author': smart_str(comment.userinfo.get('name', '')),
+                'comment_author_email': smart_str(comment.userinfo.get('email', '')),
+                'comment_author_url': smart_str(comment.userinfo.get('url', '')),
             }
             return akismet.comment_check(smart_str(comment.comment),
                                          data=akismet_data,
