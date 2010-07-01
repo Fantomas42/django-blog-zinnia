@@ -6,7 +6,7 @@ Simple yet powerful application for managing a blog within your Django website.
 
 Zinnia has been made for publishing weblog entries and is designed to do it well.
 
-Basically any feature that can be provided by another reusable app has been left out. 
+Basically any feature that can be provided by another reusable app has been left out.
 Why should we re-implement something that is already done and reviewed by others and tested.
 
 .. contents::
@@ -35,6 +35,7 @@ Main features :
   * Collaborative work
   * Tags autocompletion
   * Ready to use and extendables templates
+  * WordPress conversion utility
 
 Take a look at the online demo at : http://django-blog-zinnia.com
 
@@ -243,11 +244,13 @@ Display the Gravatar image associated to an email, usefull for comments.
 
 .. include:: ./docs/CONFIGURATION.rst
 
+.. include:: ./docs/WORDPRESS_2_ZINNIA.rst
+
 Development
 ===========
 
-A `Buildout 
-<http://pypi.python.org/pypi/zc.buildout>`_ script is provided to properly initialize the project 
+A `Buildout
+<http://pypi.python.org/pypi/zc.buildout>`_ script is provided to properly initialize the project
 for anybody who wants to contribute to the project.
 
 First of all, please use `VirtualEnv
