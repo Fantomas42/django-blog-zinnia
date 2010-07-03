@@ -4,8 +4,8 @@ Transifex.net Token Verification
 The list of tokens bellow guarantee the respective users to be able to enable 
 submission on components using the following repository url:
 
-git://github.com/Fantomas42/django-blog-zinnia.git
+git@github.com:Fantomas42/django-blog-zinnia.git
 
 Tokens:
 
-3AHeZmTvX6B4BCRnEsz9fTMgA4yUrycR / Fantomas42
+nJMX9SB7AQ9vmptrfweNRb8Y3WGnBJZ2 / Fantomas42
