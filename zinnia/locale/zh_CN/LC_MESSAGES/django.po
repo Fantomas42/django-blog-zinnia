@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-20 22:35+0200\n"
+"POT-Creation-Date: 2010-07-05 17:01+0200\n"
 "PO-Revision-Date: 2010-05-05 20:49+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -24,7 +24,7 @@ msgstr "内容"
 msgid "Options"
 msgstr "选项"
 
-#: admin.py:38
+#: admin.py:38 plugins/cms_plugins.py:23
 msgid "Sorting"
 msgstr "分类"
 
@@ -112,24 +112,24 @@ msgstr "%i次成功提交所选日志到搜索引擎"
 msgid "Ping Directories for selected entries"
 msgstr "提交所选日志到搜索引擎"
 
-#: feeds.py:79
-#, python-format
-msgid "%s - News"
-msgstr "%s - 新闻"
+#: feeds.py:83 plugins/cms_plugins.py:19 templates/zinnia/entry_archive.html:4
+#: templates/zinnia/entry_list.html:4
+msgid "Latest entries"
+msgstr "最新日志"
 
-#: feeds.py:80
-#, python-format
-msgid "The last news for the site %s"
+#: feeds.py:84
+#, fuzzy, python-format
+msgid "The latest entries for the site %s"
 msgstr "站点 %s 的最新新闻"
 
-#: feeds.py:104
+#: feeds.py:106
 #, python-format
 msgid "Entries for the category %s"
 msgstr "类别 %s 的日志"
 
-#: feeds.py:107
-#, python-format
-msgid "The last news for the category %s"
+#: feeds.py:109
+#, fuzzy, python-format
+msgid "The latest entries for the category %s"
 msgstr "类别 %s 的最新日志"
 
 #: feeds.py:125
@@ -138,38 +138,38 @@ msgid "Entries for author %s"
 msgstr "作者 %s 的日志"
 
 #: feeds.py:128
-#, python-format
-msgid "The last news by %s"
+#, fuzzy, python-format
+msgid "The latest entries by %s"
 msgstr "%s 的最近新闻"
 
-#: feeds.py:146
+#: feeds.py:144
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "标签含 %s 的日志"
 
-#: feeds.py:149
-#, python-format
-msgid "The last news for the tag %s"
+#: feeds.py:147
+#, fuzzy, python-format
+msgid "The latest entries for the tag %s"
 msgstr "标签含 %s 的最新日志"
 
-#: feeds.py:167
+#: feeds.py:163
 #, python-format
 msgid "Results of the search for %s"
 msgstr "搜索 %s 的结果"
 
-#: feeds.py:170
-#, python-format
-msgid "The news containing the pattern %s"
+#: feeds.py:166
+#, fuzzy, python-format
+msgid "The entries containing the pattern %s"
 msgstr "含有模式 %s 的新闻"
 
-#: feeds.py:191
+#: feeds.py:200
 #, python-format
 msgid "Comments on %s"
 msgstr "对于 %s 的评论"
 
-#: feeds.py:194
-#, python-format
-msgid "The last comments for the news %s"
+#: feeds.py:203
+#, fuzzy, python-format
+msgid "The latest comments for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
 #: models.py:26 models.py:65
@@ -180,11 +180,11 @@ msgstr "用于发布"
 msgid "description"
 msgstr "描述"
 
-#: models.py:41 plugins/models.py:17
+#: models.py:41
 msgid "category"
 msgstr "类别"
 
-#: models.py:42 models.py:61
+#: models.py:42 models.py:61 plugins/models.py:18
 msgid "categories"
 msgstr "类别"
 
@@ -220,7 +220,7 @@ msgstr "摘要"
 msgid "optional element"
 msgstr "可选项"
 
-#: models.py:60
+#: models.py:60 plugins/models.py:22
 msgid "tags"
 msgstr "标签"
 
@@ -228,7 +228,7 @@ msgstr "标签"
 msgid "related entries"
 msgstr "相关日志"
 
-#: models.py:66
+#: models.py:66 plugins/models.py:20
 msgid "authors"
 msgstr "作者"
 
@@ -268,29 +268,16 @@ msgstr "发布网站"
 msgid "entry"
 msgstr "日志"
 
-#: models.py:161 plugins/cms_plugins.py:15 plugins/cms_plugins.py:48
-#: plugins/models.py:35 templates/zinnia/base.html:32
+#: models.py:161 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
+#: plugins/models.py:39 templates/zinnia/base.html:32
 msgid "entries"
 msgstr "日志"
-
-#: views.py:35
-msgid "The pattern is too short"
-msgstr "模式长度不够"
-
-#: views.py:39
-msgid "No pattern to search found"
-msgstr "没有搜索到相关模式"
 
 #: plugins/cms_app.py:10
 msgid "Zinnia App Hook"
 msgstr ""
 
-#: plugins/cms_plugins.py:17 templates/zinnia/entry_archive.html:4
-#: templates/zinnia/entry_list.html:4
-msgid "Latest entries"
-msgstr "最新日志"
-
-#: plugins/cms_plugins.py:50
+#: plugins/cms_plugins.py:58
 msgid "Selected entries"
 msgstr "所选日志"
 
@@ -327,31 +314,27 @@ msgstr ""
 msgid "Tags"
 msgstr "标签"
 
-#: plugins/models.py:12
+#: plugins/models.py:13
 msgid "Entry list (default)"
 msgstr ""
 
-#: plugins/models.py:13
+#: plugins/models.py:14
 msgid "Entry detailed"
 msgstr ""
 
-#: plugins/models.py:19
-msgid "author"
-msgstr "作者"
-
-#: plugins/models.py:21
+#: plugins/models.py:25
 msgid "number of entries"
 msgstr "日志数量"
 
-#: plugins/models.py:22 plugins/models.py:36
+#: plugins/models.py:26 plugins/models.py:40
 msgid "template"
 msgstr ""
 
-#: plugins/models.py:24 plugins/models.py:38
+#: plugins/models.py:28 plugins/models.py:42
 msgid "Template used to display the plugin"
 msgstr ""
 
-#: plugins/models.py:31 plugins/models.py:45
+#: plugins/models.py:35 plugins/models.py:49
 #, python-format
 msgid "%s entries"
 msgstr "%s 日志"
@@ -391,19 +374,19 @@ msgstr "预览评论"
 msgid "on date"
 msgstr "日期"
 
-#: templates/comments/zinnia/entry/form.html:5
+#: templates/comments/zinnia/entry/form.html:6
 msgid "Post your comment"
 msgstr "发表评论"
 
-#: templates/comments/zinnia/entry/form.html:16
+#: templates/comments/zinnia/entry/form.html:17
 msgid "Post"
 msgstr "发表"
 
-#: templates/comments/zinnia/entry/form.html:17
+#: templates/comments/zinnia/entry/form.html:18
 msgid "Preview"
 msgstr "预览"
 
-#: templates/feeds/comments_title.html:2
+#: templates/feeds/comment_title.html:2
 msgid "on"
 msgstr "在"
 
@@ -661,6 +644,20 @@ msgstr "没有的归档"
 #: templates/zinnia/tags/similar_entries.html:9
 msgid "No similar entries."
 msgstr "没有类似日志"
+
+#: views/search.py:16
+msgid "The pattern is too short"
+msgstr "模式长度不够"
+
+#: views/search.py:20
+msgid "No pattern to search found"
+msgstr "没有搜索到相关模式"
+
+#~ msgid "%s - News"
+#~ msgstr "%s - 新闻"
+
+#~ msgid "author"
+#~ msgstr "作者"
 
 #, fuzzy
 #~ msgid "%(entries_published)s entry"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-20 22:35+0200\n"
+"POT-Creation-Date: 2010-07-05 17:01+0200\n"
 "PO-Revision-Date: 2010-04-28 11:36+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr "Inhalt"
 msgid "Options"
 msgstr "Optionen"
 
-#: admin.py:38
+#: admin.py:38 plugins/cms_plugins.py:23
 msgid "Sorting"
 msgstr "Sortierung"
 
@@ -112,24 +112,24 @@ msgstr "%i Verzeichnisdienste erfolgreich angepingt."
 msgid "Ping Directories for selected entries"
 msgstr "Verzeichnisdienste mit ausgewählten Einträgen anpingen"
 
-#: feeds.py:79
-#, python-format
-msgid "%s - News"
-msgstr "%s - Neuigkeiten"
+#: feeds.py:83 plugins/cms_plugins.py:19 templates/zinnia/entry_archive.html:4
+#: templates/zinnia/entry_list.html:4
+msgid "Latest entries"
+msgstr "Neuste Einträge"
 
-#: feeds.py:80
-#, python-format
-msgid "The last news for the site %s"
+#: feeds.py:84
+#, fuzzy, python-format
+msgid "The latest entries for the site %s"
 msgstr "Die neusten Einträge der Seite %s"
 
-#: feeds.py:104
+#: feeds.py:106
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Einträge der Kategorie %s"
 
-#: feeds.py:107
-#, python-format
-msgid "The last news for the category %s"
+#: feeds.py:109
+#, fuzzy, python-format
+msgid "The latest entries for the category %s"
 msgstr "Die neusten Einträge in Kategorie %s"
 
 #: feeds.py:125
@@ -138,38 +138,38 @@ msgid "Entries for author %s"
 msgstr "Einträge für Autor %s"
 
 #: feeds.py:128
-#, python-format
-msgid "The last news by %s"
+#, fuzzy, python-format
+msgid "The latest entries by %s"
 msgstr "Die neuesten Einträge von %s"
 
-#: feeds.py:146
+#: feeds.py:144
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Einträge für den Tag %s"
 
-#: feeds.py:149
-#, python-format
-msgid "The last news for the tag %s"
+#: feeds.py:147
+#, fuzzy, python-format
+msgid "The latest entries for the tag %s"
 msgstr "Die neuen Einträge für den Tag %s"
 
-#: feeds.py:167
+#: feeds.py:163
 #, python-format
 msgid "Results of the search for %s"
 msgstr "Suchergebnisse für %s"
 
-#: feeds.py:170
-#, python-format
-msgid "The news containing the pattern %s"
+#: feeds.py:166
+#, fuzzy, python-format
+msgid "The entries containing the pattern %s"
 msgstr "Die Einträge die '%s' enthalten"
 
-#: feeds.py:191
+#: feeds.py:200
 #, python-format
 msgid "Comments on %s"
 msgstr "Kommentar für %s"
 
-#: feeds.py:194
-#, python-format
-msgid "The last comments for the news %s"
+#: feeds.py:203
+#, fuzzy, python-format
+msgid "The latest comments for the entry %s"
 msgstr "Die neusten Kommentare für die Einträge %s"
 
 #: models.py:26 models.py:65
@@ -180,11 +180,11 @@ msgstr "Für die Veröffentlichung benutzt"
 msgid "description"
 msgstr "Beschreibung"
 
-#: models.py:41 plugins/models.py:17
+#: models.py:41
 msgid "category"
 msgstr "Kategorie"
 
-#: models.py:42 models.py:61
+#: models.py:42 models.py:61 plugins/models.py:18
 msgid "categories"
 msgstr "Kategorien"
 
@@ -220,7 +220,7 @@ msgstr "Auszug"
 msgid "optional element"
 msgstr "Optionales Element"
 
-#: models.py:60
+#: models.py:60 plugins/models.py:22
 #, fuzzy
 msgid "tags"
 msgstr "Tag(s)"
@@ -229,7 +229,7 @@ msgstr "Tag(s)"
 msgid "related entries"
 msgstr "Verwandte Einträge"
 
-#: models.py:66
+#: models.py:66 plugins/models.py:20
 msgid "authors"
 msgstr "Autoren"
 
@@ -269,29 +269,16 @@ msgstr "Veröffentlich auf Seiten"
 msgid "entry"
 msgstr "Eintrag"
 
-#: models.py:161 plugins/cms_plugins.py:15 plugins/cms_plugins.py:48
-#: plugins/models.py:35 templates/zinnia/base.html:32
+#: models.py:161 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
+#: plugins/models.py:39 templates/zinnia/base.html:32
 msgid "entries"
 msgstr "Einträge"
-
-#: views.py:35
-msgid "The pattern is too short"
-msgstr "Der Suchbegriff ist zu kurz"
-
-#: views.py:39
-msgid "No pattern to search found"
-msgstr "Kein Suchbegriff gegeben"
 
 #: plugins/cms_app.py:10
 msgid "Zinnia App Hook"
 msgstr ""
 
-#: plugins/cms_plugins.py:17 templates/zinnia/entry_archive.html:4
-#: templates/zinnia/entry_list.html:4
-msgid "Latest entries"
-msgstr "Neuste Einträge"
-
-#: plugins/cms_plugins.py:50
+#: plugins/cms_plugins.py:58
 msgid "Selected entries"
 msgstr "Ausgewählte Einträge"
 
@@ -328,31 +315,27 @@ msgstr ""
 msgid "Tags"
 msgstr "Tags"
 
-#: plugins/models.py:12
+#: plugins/models.py:13
 msgid "Entry list (default)"
 msgstr ""
 
-#: plugins/models.py:13
+#: plugins/models.py:14
 msgid "Entry detailed"
 msgstr ""
 
-#: plugins/models.py:19
-msgid "author"
-msgstr "Autor"
-
-#: plugins/models.py:21
+#: plugins/models.py:25
 msgid "number of entries"
 msgstr "Anzahl der Einträge"
 
-#: plugins/models.py:22 plugins/models.py:36
+#: plugins/models.py:26 plugins/models.py:40
 msgid "template"
 msgstr ""
 
-#: plugins/models.py:24 plugins/models.py:38
+#: plugins/models.py:28 plugins/models.py:42
 msgid "Template used to display the plugin"
 msgstr ""
 
-#: plugins/models.py:31 plugins/models.py:45
+#: plugins/models.py:35 plugins/models.py:49
 #, python-format
 msgid "%s entries"
 msgstr "%s Einträge"
@@ -392,19 +375,19 @@ msgstr "Kommentarvorschau einblenden"
 msgid "on date"
 msgstr "geschrieben"
 
-#: templates/comments/zinnia/entry/form.html:5
+#: templates/comments/zinnia/entry/form.html:6
 msgid "Post your comment"
 msgstr "Kommentar schreiben"
 
-#: templates/comments/zinnia/entry/form.html:16
+#: templates/comments/zinnia/entry/form.html:17
 msgid "Post"
 msgstr "Abschicken"
 
-#: templates/comments/zinnia/entry/form.html:17
+#: templates/comments/zinnia/entry/form.html:18
 msgid "Preview"
 msgstr "Vorschau"
 
-#: templates/feeds/comments_title.html:2
+#: templates/feeds/comment_title.html:2
 msgid "on"
 msgstr "am"
 
@@ -666,6 +649,20 @@ msgstr "Noch keine Archive."
 #: templates/zinnia/tags/similar_entries.html:9
 msgid "No similar entries."
 msgstr "Keine ähnlichen Einträge."
+
+#: views/search.py:16
+msgid "The pattern is too short"
+msgstr "Der Suchbegriff ist zu kurz"
+
+#: views/search.py:20
+msgid "No pattern to search found"
+msgstr "Kein Suchbegriff gegeben"
+
+#~ msgid "%s - News"
+#~ msgstr "%s - Neuigkeiten"
+
+#~ msgid "author"
+#~ msgstr "Autor"
 
 #, fuzzy
 #~ msgid "%(entries_published)s entry"
