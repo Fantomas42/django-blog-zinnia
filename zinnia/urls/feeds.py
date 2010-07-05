@@ -8,14 +8,19 @@ from zinnia.feeds import TagEntries
 from zinnia.feeds import CategoryEntries
 from zinnia.feeds import AuthorEntries
 
-feeds = {'latest': LatestEntries,
-         'comments': CommentEntries,
-         'search': SearchEntries,
-         'tags': TagEntries,
-         'authors': AuthorEntries,
-         'categories': CategoryEntries}
 
 urlpatterns = patterns('',
-                       url(r'^(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
-                           {'feed_dict': feeds,}, 'zinnia_feeds'),
+                       url(r'^latest/$', LatestEntries(),
+                           name='zinnia_entry_latest_feed'),
+                       url(r'^tags/(?P<slug>[-\w]+)/$', TagEntries(),
+                           name='zinnia_tag_feed'),
+                       url(r'^authors/(?P<username>[-\w]+)/$', AuthorEntries(),
+                           name='zinnia_author_feed'),
+                       url(r'^categories/(?P<slug>[-\w]+)/$', CategoryEntries(),
+                           name='zinnia_category_feed'),
+                       url(r'^search/(?P<slug>[-\w]+)/$', SearchEntries(),
+                           name='zinnia_entry_search_feed'),
+                       url(r'^comments/(?P<slug>[-\w]+)/$', CommentEntries(),
+                           name='zinnia_entry_comment_feed'),
                        )
+                       
