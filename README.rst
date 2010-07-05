@@ -242,9 +242,6 @@ Display the breadcrumbs for the pages handled by Zinnia.
 
 Display the Gravatar image associated to an email, usefull for comments.
 
-.. include:: ./docs/CONFIGURATION.rst
-
-.. include:: ./docs/WORDPRESS_2_ZINNIA.rst
 
 Development
 ===========
