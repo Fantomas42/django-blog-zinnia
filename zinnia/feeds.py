@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
 from django.core.urlresolvers import reverse
+from django.utils.feedgenerator import Atom1Feed
 from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
 from django.shortcuts import get_object_or_404
@@ -202,4 +203,28 @@ class CommentEntries(Feed):
     def description(self, obj):
         return _('The latest comments for the entry %s') % obj.title
 
+# Atom versions of the feeds
 
+class AtomLatestEntries(LatestEntries):
+    feed_type = Atom1Feed
+    subtitle = LatestEntries.description
+
+class AtomCategoryEntries(CategoryEntries):
+    feed_type = Atom1Feed
+    subtitle = CategoryEntries.description
+
+class AtomAuthorEntries(AuthorEntries):
+    feed_type = Atom1Feed
+    subtitle = AuthorEntries.description
+
+class AtomTagEntries(TagEntries):
+    feed_type = Atom1Feed
+    subtitle = TagEntries.description
+
+class AtomSearchEntries(SearchEntries):
+    feed_type = Atom1Feed
+    subtitle = SearchEntries.description
+
+class AtomCommentEntries(CommentEntries):
+    feed_type = Atom1Feed
+    subtitle = CommentEntries.description

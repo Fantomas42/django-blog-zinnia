@@ -20,10 +20,16 @@ ZINNIA_ALLOW_FUTURE
 
   Used for allowing archives views in the future.
 
+ZINNIA_FEEDS_FORMAT
+  **Default :** 'rss'
+
+  String determining the format of the syndication feeds.
+  Use 'atom' for Atom feeds.
+
 ZINNIA_COPYRIGHT
   **Default :** 'Zinnia'
 
-  String used for copyrighting the RSS feeds. 
+  String used for copyrighting the syndication feeds. 
 
 ZINNIA_UPLOAD_TO
   **Default :** 'uploads'

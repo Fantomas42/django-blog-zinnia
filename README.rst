@@ -18,10 +18,10 @@ Main features :
 
   * Comments
   * Sitemaps
-  * RSS Feeds
   * Search engine
   * Archives views
   * Related entries
+  * RSS or Atom Feeds
   * Tags and categories views
   * Prepublication and expiration
   * Widgets (Popular entries, Similar entries, ...)
