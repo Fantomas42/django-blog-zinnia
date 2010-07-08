@@ -1,7 +1,5 @@
 """Moderator of Zinnia comments
-   Based on Akismet for checking spams
-   Need to override the default Moderator,
-   for getting request in parameters."""
+   Based on Akismet for checking spams."""
 from django.conf import settings
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
@@ -50,8 +48,13 @@ class EntryCommentModerator(CommentModerator):
                 'comment_author_email': smart_str(comment.userinfo.get('email', '')),
                 'comment_author_url': smart_str(comment.userinfo.get('url', '')),
             }
-            return akismet.comment_check(smart_str(comment.comment),
-                                         data=akismet_data,
-                                         build_data=True)
+            is_spam = akismet.comment_check(smart_str(comment.comment),
+                                            data=akismet_data,
+                                            build_data=True)
+            if is_spam:
+                comment.save()
+                user = comment.content_object.authors.all()[0]
+                comment.flags.create(user=user, flag='spam')
+            return is_spam
         raise APIKeyError("Your Akismet API key is invalid.")
 
