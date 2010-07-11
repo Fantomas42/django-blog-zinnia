@@ -19,6 +19,9 @@ MEDIA_URL = getattr(settings, 'ZINNIA_MEDIA_URL', '/zinnia/')
 
 FEEDS_FORMAT = getattr(settings, 'ZINNIA_FEEDS_FORMAT', 'rss')
 
+PINGBACK_CONTENT_LENGTH = getattr(settings,
+                                  'ZINNIA_PINGBACK_CONTENT_LENGTH', 300)
+
 F_MIN = getattr(settings, 'ZINNIA_F_MIN', 0.1)
 F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
 

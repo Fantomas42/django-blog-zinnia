@@ -1,7 +1,13 @@
 """Unit tests for zinnia"""
+import cStringIO
 from datetime import datetime
+from urlparse import urlsplit
+from urllib2 import HTTPError
+from xmlrpclib import Transport
+from xmlrpclib import ServerProxy
 
 from django.test import TestCase
+from django.test.client import Client
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
@@ -14,6 +20,8 @@ from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
 from zinnia.managers import authors_published
+from zinnia.xmlrpc.pingback import generate_pingback_content
+from BeautifulSoup import BeautifulSoup
 
 class ManagersTestCase(TestCase):
 
@@ -219,17 +227,17 @@ class EntryTestCase(TestCase):
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.related.add(self.entry)
         self.assertEquals(len(self.entry.related_published_set), 0)
-        
+
         self.second_entry.sites.add(Site.objects.get_current())
         self.assertEquals(len(self.entry.related_published_set), 1)
         self.assertEquals(len(self.second_entry.related_published_set), 0)
-        
+
         self.entry.status = PUBLISHED
         self.entry.save()
         self.entry.sites.add(Site.objects.get_current())
         self.assertEquals(len(self.entry.related_published_set), 1)
         self.assertEquals(len(self.second_entry.related_published_set), 1)
-        
+
 
 class CategoryTestCase(TestCase):
 
@@ -319,7 +327,7 @@ class ZinniaViewsTestCase(TestCase):
         except AssertionError:
             response = self.client.get('/2010/01/01/my-test-entry/')
             self.assertEquals(response.status_code, 404)
-            
+
         self.create_published_entry()
         response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertEquals(response.status_code, 200)
@@ -343,12 +351,12 @@ class ZinniaViewsTestCase(TestCase):
 
     def test_zinnia_author_detail(self):
         self.check_publishing_context('/authors/admin/', 2, 3)
-        
+
     def test_zinnia_tag_list(self):
         self.check_publishing_context('/tags/', 1)
         entry = Entry.objects.all()[0]
         entry.tags = 'tests, tag'
-        entry.save()        
+        entry.save()
         self.check_publishing_context('/tags/', 2)
 
     def test_zinnia_tag_detail(self):
@@ -367,3 +375,134 @@ class ZinniaViewsTestCase(TestCase):
         response = self.client.get('/sitemap/')
         self.assertEquals(len(response.context['entries']), 3)
         self.assertEquals(len(response.context['categories']), 2)
+
+class TestTransport(Transport):
+    """Handles connections to XML-RPC server
+    through Django test client."""
+
+    def __init__(self, *args, **kwargs):
+        Transport.__init__(self, *args, **kwargs)
+        self.client = Client()
+
+    def request(self, host, handler, request_body, verbose=0):
+        self.verbose = verbose
+        response = self.client.post(handler,
+                                    request_body,
+                                    content_type="text/xml")
+        res = cStringIO.StringIO(response.content)
+        res.seek(0)
+        return self.parse_response(res)
+
+
+class PingBackTestCase(TestCase):
+    """TestCases for pingbacks"""
+
+    def fake_urlopen(self, url):
+        """Fake urlopen using client if domain
+        correspond to current_site else HTTPError"""
+        scheme, netloc, path, query, fragment = urlsplit(url)
+        if not netloc:
+            raise
+        if self.site.domain == netloc:
+            response = cStringIO.StringIO(self.client.get(url).content)
+            return response
+        raise HTTPError(url, 404, 'unavailable url', {}, None)
+
+    def setUp(self):
+        # Set up a stub around urlopen
+        import zinnia.xmlrpc.pingback
+        self.original_urlopen = zinnia.xmlrpc.pingback.urlopen
+        zinnia.xmlrpc.pingback.urlopen = self.fake_urlopen
+        # Preparing site
+        self.site = Site.objects.get_current()
+        self.site.domain = 'localhost:8000'
+        self.site.save()
+        # Creating tests entries
+        self.author = User.objects.create_user(username='webmaster',
+                                               email='webmaster@example.com')
+        self.category = Category.objects.create(title='test', slug='test')
+        params = {'title': 'My first entry',
+                  'content': 'My first content',
+                  'slug': 'my-first-entry',
+                  'creation_date': datetime(2010, 1, 1),
+                  'status': PUBLISHED}
+        self.first_entry = Entry.objects.create(**params)
+        self.first_entry.sites.add(self.site)
+        self.first_entry.categories.add(self.category)
+        self.first_entry.authors.add(self.author)
+
+        params = {'title': 'My second entry',
+                  'content': 'My second content with link ' \
+                  'to <a href="http://%s%s">first entry</a> and other links : %s %s.' % (
+                      self.site.domain,
+                      self.first_entry.get_absolute_url(),
+                      'http://localhost:8000/404/',
+                      'http://example.com/'),
+                  'slug': 'my-second-entry',
+                  'creation_date': datetime(2010, 1, 1),
+                  'status': PUBLISHED}
+        self.second_entry = Entry.objects.create(**params)
+        self.second_entry.sites.add(self.site)
+        self.second_entry.categories.add(self.category)
+        self.second_entry.authors.add(self.author)
+        # Instanciating the server proxy
+        self.server = ServerProxy('http://localhost:8000/xmlrpc/',
+                                  transport=TestTransport())
+
+    def tearDown(self):
+        import zinnia.xmlrpc.pingback
+        zinnia.xmlrpc.pingback.urlopen = self.original_urlopen
+
+    def test_pingback_ping(self):
+        target = 'http://%s%s' % (self.site.domain, self.first_entry.get_absolute_url())
+        source = 'http://%s%s' % (self.site.domain, self.second_entry.get_absolute_url())
+
+        # Error code 0 : A generic fault code
+        response = self.server.pingback.ping('toto', 'titi')
+        self.assertEquals(response, 0)
+        response = self.server.pingback.ping('http://%s/' % self.site.domain,
+                                             'http://%s/' % self.site.domain)
+        self.assertEquals(response, 0)
+
+        # Error code 16 : The source URI does not exist.
+        response = self.server.pingback.ping('http://example.com/', target)
+        self.assertEquals(response, 16)
+
+        # Error code 17 : The source URI does not contain a link to the target URI,
+        # and so cannot be used as a source.
+        response = self.server.pingback.ping(source, 'toto')
+        self.assertEquals(response, 17)
+
+        # Error code 32 : The target URI does not exist.
+        response = self.server.pingback.ping(source, 'http://localhost:8000/404/')
+        self.assertEquals(response, 32)
+        response = self.server.pingback.ping(source, 'http://example.com/')
+        self.assertEquals(response, 32)
+
+        # Error code 33 : The target URI cannot be used as a target.
+        response = self.server.pingback.ping(source, 'http://localhost:8000/')
+        self.assertEquals(response, 33)
+
+        # Valide string pingback
+        self.assertEquals(self.first_entry.comments.count(), 0)
+        response = self.server.pingback.ping(source, target)
+        self.assertEquals(response, 'Pingback from %s to %s registered.' % (source, target))
+        self.assertEquals(self.first_entry.comments.count(), 1)
+        self.assertEquals(self.first_entry.comments[0].user_name,
+                          'Zinnia\'s Blog - %s' % self.second_entry.title)
+
+        # Error code 48 : The pingback has already been registered.
+        response = self.server.pingback.ping(source, target)
+        self.assertEquals(response, 48)
+
+    def test_generate_pingback_content(self):
+        soup = BeautifulSoup(self.second_entry.content)
+        target = 'http://%s%s' % (self.site.domain, self.first_entry.get_absolute_url())
+
+        self.assertEquals(generate_pingback_content(soup, target, 1000),
+                          'My second content with link to first entry and '\
+                          'other links : http://localhost:8000/404/ http://example.com/.')
+
+        self.assertEquals(generate_pingback_content(soup, target, 50),
+                          '...ond content with link to first entry and other link...')
+

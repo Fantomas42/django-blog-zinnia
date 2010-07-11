@@ -27,6 +27,7 @@ Main features :
   * Widgets (Popular entries, Similar entries, ...)
   * Spam protection with Akismet
   * Ping Directories
+  * Pingback support
   * Bit.ly support
   * Twitter support
   * Gravatar support
@@ -147,7 +148,6 @@ so if you want to fill your website's sitemap with the entries of your blog, fol
   ...                          {'sitemaps': sitemaps}),
   ...			      )
 
-
 Akismet
 -------
 
@@ -160,6 +160,27 @@ IMPORTANT : you need an API key. If you don't have any, get one for free at http
 If you don't want spam protection for comments, you can disable it with this setting. ::
 
   >>> ZINNIA_AKISMET_COMMENT = False
+
+Pingback
+--------
+
+If you want to enable the pingbacks on entries, install `django-xmlrpc
+<https://launchpad.net/django-xmlrpc>`_, and `BeautifulSoup
+<http://www.crummy.com/software/BeautifulSoup/>`_.
+
+Register **django_xmlrpc** in your INSTALLED_APPS section of your project's settings.
+
+Then add this line in project's settings. ::
+
+  >>> XMLRPC_METHODS = (('zinnia.xmlrpc.pingback.pingback', 'pingback.ping'),)
+
+Finally we need to register the url of the XML-RPC server. 
+Insert something like this in your project's urls.py: ::
+
+  >>> url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
+
+Now check if your site is enabled for pingback detection. 
+More information at http://hixie.ch/specs/pingback/pingback-1.0#TOC2
 
 Bit.ly
 ------

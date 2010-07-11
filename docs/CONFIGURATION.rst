@@ -61,6 +61,11 @@ ZINNIA_AUTO_PING
 
   Boolean setting for telling if you want to ping directories when saving an entry.
 
+ZINNIA_PINGBACK_CONTENT_LENGTH
+  **Default :**	300
+
+  Size of the excerpt generated on pingback.
+
 ZINNIA_F_MIN
   **Default :** 0.1
 

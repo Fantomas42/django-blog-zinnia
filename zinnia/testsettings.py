@@ -16,5 +16,7 @@ INSTALLED_APPS = ['django.contrib.contenttypes',
                   'django.contrib.sites',
                   'django.contrib.auth',
                   #'south',
+                  'django_xmlrpc',
                   'tagging', 'zinnia']
 
+XMLRPC_METHODS = (('zinnia.xmlrpc.pingback.pingback', 'pingback.ping'),)
