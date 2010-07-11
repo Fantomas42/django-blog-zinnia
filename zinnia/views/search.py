@@ -1,4 +1,5 @@
 """Views for zinnia entries search"""
+from django.utils.translation import ugettext as _
 from django.views.generic.list_detail import object_list
 
 from zinnia.models import Entry
