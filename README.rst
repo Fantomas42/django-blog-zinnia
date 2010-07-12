@@ -172,7 +172,8 @@ Register **django_xmlrpc** in your INSTALLED_APPS section of your project's sett
 
 Then add this line in project's settings. ::
 
-  >>> XMLRPC_METHODS = (('zinnia.xmlrpc.pingback.pingback', 'pingback.ping'),)
+  >>> XMLRPC_METHODS = (('zinnia.xmlrpc.pingback.pingback_ping', 'pingback.ping'),
+  ...                   ('zinnia.xmlrpc.pingback.pingback_extensions_get_pingbacks', 'pingback.extensions.getPingbacks'),)
 
 Finally we need to register the url of the XML-RPC server. 
 Insert something like this in your project's urls.py: ::

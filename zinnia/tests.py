@@ -11,6 +11,7 @@ from django.test.client import Client
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
+from django.contrib.contenttypes.models import ContentType
 from django.template import TemplateDoesNotExist
 
 from tagging.models import Tag
@@ -453,6 +454,17 @@ class PingBackTestCase(TestCase):
         import zinnia.xmlrpc.pingback
         zinnia.xmlrpc.pingback.urlopen = self.original_urlopen
 
+    def test_generate_pingback_content(self):
+        soup = BeautifulSoup(self.second_entry.content)
+        target = 'http://%s%s' % (self.site.domain, self.first_entry.get_absolute_url())
+
+        self.assertEquals(generate_pingback_content(soup, target, 1000),
+                          'My second content with link to first entry and '\
+                          'other links : http://localhost:8000/404/ http://example.com/.')
+
+        self.assertEquals(generate_pingback_content(soup, target, 50),
+                          '...ond content with link to first entry and other link...')
+
     def test_pingback_ping(self):
         target = 'http://%s%s' % (self.site.domain, self.first_entry.get_absolute_url())
         source = 'http://%s%s' % (self.site.domain, self.second_entry.get_absolute_url())
@@ -495,14 +507,34 @@ class PingBackTestCase(TestCase):
         response = self.server.pingback.ping(source, target)
         self.assertEquals(response, 48)
 
-    def test_generate_pingback_content(self):
-        soup = BeautifulSoup(self.second_entry.content)
+    def test_pingback_extensions_get_pingbacks(self):
         target = 'http://%s%s' % (self.site.domain, self.first_entry.get_absolute_url())
+        source = 'http://%s%s' % (self.site.domain, self.second_entry.get_absolute_url())
+        
+        response = self.server.pingback.ping(source, target)
+        self.assertEquals(response, 'Pingback from %s to %s registered.' % (source, target))
 
-        self.assertEquals(generate_pingback_content(soup, target, 1000),
-                          'My second content with link to first entry and '\
-                          'other links : http://localhost:8000/404/ http://example.com/.')
+        response = self.server.pingback.extensions.getPingbacks('http://example.com/')
+        self.assertEquals(response, 32)
 
-        self.assertEquals(generate_pingback_content(soup, target, 50),
-                          '...ond content with link to first entry and other link...')
+        response = self.server.pingback.extensions.getPingbacks('http://localhost:8000/404/')
+        self.assertEquals(response, 32)
 
+        response = self.server.pingback.extensions.getPingbacks('http://localhost:8000/2010/')
+        self.assertEquals(response, 33)
+
+        response = self.server.pingback.extensions.getPingbacks(source)
+        self.assertEquals(response, [])
+
+        response = self.server.pingback.extensions.getPingbacks(target)
+        self.assertEquals(response, ['http://localhost:8000/2010/01/01/my-second-entry/'])
+
+        comment = Comment.objects.create(
+            content_type=ContentType.objects.get_for_model(Entry),
+            object_pk=self.first_entry.pk, site=self.site, comment='Test pingback', 
+            user_url='http://example.com/blog/1/', user_name='Test pingback')
+        comment.flags.create(user=self.author, flag='pingback')
+        
+        response = self.server.pingback.extensions.getPingbacks(target)
+        self.assertEquals(response, ['http://localhost:8000/2010/01/01/my-second-entry/',
+                                     'http://example.com/blog/1/'])

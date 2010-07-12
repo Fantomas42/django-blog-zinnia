@@ -1,4 +1,4 @@
-"""XML-RPC methods of Zinnia"""
+"""XML-RPC methods of Zinnia Pingback"""
 import re
 from urllib2 import urlopen
 from urllib2 import URLError
@@ -44,8 +44,8 @@ def generate_pingback_content(soup, target, max_length):
 
     return content
 
-@xmlrpc_func(returns='string', args=['string, string'])
-def pingback(source, target):
+@xmlrpc_func(returns='string', args=['string', 'string'])
+def pingback_ping(source, target):
     """pingback.ping(sourceURI, targetURI) => 'Pingback message'
 
     Notifies the server that a link has been added to sourceURI, pointing to targetURI.
@@ -99,4 +99,30 @@ def pingback(source, target):
     except:
         return UNDEFINED_ERROR
 
+@xmlrpc_func(returns='string[]', args=['string'])
+def pingback_extensions_get_pingbacks(target):
+    """pingback.extensions.getPingbacks(url) => '[url, url, ...]'
 
+    Returns an array of URLs that link to the specified url.
+
+    See: http://www.aquarionics.com/misc/archives/blogite/0198.html"""
+    site = Site.objects.get_current()
+
+    scheme, netloc, path, query, fragment = urlsplit(target)
+    if netloc != site.domain:
+        return TARGET_DOES_NOT_EXIST
+
+    resolver = get_resolver(None)
+    try:
+        resolver.resolve(path)
+    except Resolver404:
+        return TARGET_DOES_NOT_EXIST
+
+    try:
+        entry_slug = [bit for bit in path.split('/') if bit][-1]
+        entry = Entry.published.get(slug=entry_slug)
+    except (Entry.DoesNotExist, IndexError):
+        return TARGET_IS_NOT_PINGABLE
+    
+    return [pingback.user_url \
+            for pingback in entry.comments.filter(flags__flag='pingback')]
