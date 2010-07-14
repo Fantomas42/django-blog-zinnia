@@ -77,6 +77,8 @@ def pingback_ping(source, target):
         try:
             entry_slug = [bit for bit in path.split('/') if bit][-1]
             entry = Entry.published.get(slug=entry_slug)
+            if not entry.comment_enabled:# Move to pingback_enabled when ready
+                return TARGET_IS_NOT_PINGABLE
         except (Entry.DoesNotExist, IndexError):
             return TARGET_IS_NOT_PINGABLE
 
