@@ -1,4 +1,5 @@
 """Settings for testing zinnia"""
+from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 
 SITE_ID = 1
 
@@ -19,8 +20,4 @@ INSTALLED_APPS = ['django.contrib.contenttypes',
                   'django_xmlrpc',
                   'tagging', 'zinnia']
 
-XMLRPC_METHODS = (('zinnia.xmlrpc.pingback.pingback_ping',
-                   'pingback.ping'),
-                  ('zinnia.xmlrpc.pingback.pingback_extensions_get_pingbacks',
-                   'pingback.extensions.getPingbacks'),
-                  )
+XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS

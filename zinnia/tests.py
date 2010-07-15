@@ -3,6 +3,7 @@ import cStringIO
 from datetime import datetime
 from urlparse import urlsplit
 from urllib2 import HTTPError
+from xmlrpclib import Fault
 from xmlrpclib import Transport
 from xmlrpclib import ServerProxy
 
@@ -21,6 +22,8 @@ from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
 from zinnia.managers import authors_published
+from zinnia.xmlrpc.metaweblog import authenticate
+from zinnia.xmlrpc.metaweblog import post_structure
 from zinnia.xmlrpc.pingback import generate_pingback_content
 from BeautifulSoup import BeautifulSoup
 
@@ -397,6 +400,7 @@ class TestTransport(Transport):
 
 class PingBackTestCase(TestCase):
     """TestCases for pingbacks"""
+    urls = 'zinnia.urls.tests'
 
     def fake_urlopen(self, url):
         """Fake urlopen using client if domain
@@ -494,9 +498,15 @@ class PingBackTestCase(TestCase):
         # Error code 33 : The target URI cannot be used as a target.
         response = self.server.pingback.ping(source, 'http://localhost:8000/')
         self.assertEquals(response, 33)
+        self.first_entry.comment_enabled = False
+        self.first_entry.save()
+        response = self.server.pingback.ping(source, target)
+        self.assertEquals(response, 33)
 
-        # Valide string pingback
+        # Validate pingback
         self.assertEquals(self.first_entry.comments.count(), 0)
+        self.first_entry.comment_enabled = True
+        self.first_entry.save()
         response = self.server.pingback.ping(source, target)
         self.assertEquals(response, 'Pingback from %s to %s registered.' % (source, target))
         self.assertEquals(self.first_entry.comments.count(), 1)
@@ -510,7 +520,7 @@ class PingBackTestCase(TestCase):
     def test_pingback_extensions_get_pingbacks(self):
         target = 'http://%s%s' % (self.site.domain, self.first_entry.get_absolute_url())
         source = 'http://%s%s' % (self.site.domain, self.second_entry.get_absolute_url())
-        
+
         response = self.server.pingback.ping(source, target)
         self.assertEquals(response, 'Pingback from %s to %s registered.' % (source, target))
 
@@ -531,10 +541,178 @@ class PingBackTestCase(TestCase):
 
         comment = Comment.objects.create(
             content_type=ContentType.objects.get_for_model(Entry),
-            object_pk=self.first_entry.pk, site=self.site, comment='Test pingback', 
+            object_pk=self.first_entry.pk, site=self.site, comment='Test pingback',
             user_url='http://example.com/blog/1/', user_name='Test pingback')
         comment.flags.create(user=self.author, flag='pingback')
-        
+
         response = self.server.pingback.extensions.getPingbacks(target)
         self.assertEquals(response, ['http://localhost:8000/2010/01/01/my-second-entry/',
                                      'http://example.com/blog/1/'])
+
+class MetaWeblogTestCase(TestCase):
+    """TestCases for MetaWeblog"""
+    urls = 'zinnia.urls.tests'
+
+    def setUp(self):
+        # Create data
+        self.webmaster = User.objects.create_superuser(username='webmaster',
+                                                       email='webmaster@example.com',
+                                                       password='password')
+        self.contributor = User.objects.create_user(username='contributor',
+                                                    email='contributor@example.com',
+                                                    password='password')
+        self.site = Site.objects.get_current()
+        self.categories = [Category.objects.create(title='Category 1',
+                                                   slug='category-1'),
+                           Category.objects.create(title='Category 2',
+                                                   slug='category-2')]
+        params = {'title': 'My entry 1', 'content': 'My content 1',
+                  'tags': 'zinnia, test', 'slug': 'my-entry-1',
+                  'creation_date': datetime(2010, 1, 1),
+                  'status': PUBLISHED}
+        self.entry_1 = Entry.objects.create(**params)
+        self.entry_1.authors.add(self.webmaster)
+        self.entry_1.categories.add(*self.categories)
+        self.entry_1.sites.add(self.site)
+
+        params = {'title': 'My entry 2', 'content': 'My content 2',
+                  'creation_date': datetime(2010, 3, 15),
+                  'tags': 'zinnia, test', 'slug': 'my-entry-2'}
+        self.entry_2 = Entry.objects.create(**params)
+        self.entry_2.authors.add(self.webmaster)
+        self.entry_2.categories.add(self.categories[0])
+        self.entry_2.sites.add(self.site)
+        # Instanciating the server proxy
+        self.server = ServerProxy('http://localhost:8000/xmlrpc/',
+                                  transport=TestTransport())
+
+    def test_authenticate(self):
+        self.assertRaises(Fault, authenticate, 'badcontributor', 'badpassword')
+        self.assertRaises(Fault, authenticate, 'contributor', 'badpassword')
+        self.assertRaises(Fault, authenticate, 'contributor', 'password')
+        self.contributor.is_staff = True
+        self.contributor.save()
+        self.assertEquals(authenticate('contributor', 'password'), self.contributor)
+        self.assertRaises(Fault, authenticate, 'contributor', 'password', 'zinnia.change_entry')
+        self.assertEquals(authenticate('webmaster', 'password'), self.webmaster)
+        self.assertEquals(authenticate('webmaster', 'password', 'zinnia.change_entry'),
+                          self.webmaster)
+
+    def test_get_users_blogs(self):
+        self.assertRaises(Fault, self.server.blogger.getUsersBlogs,
+                          'apikey', 'contributor', 'password')
+        self.assertEquals(self.server.blogger.getUsersBlogs(
+            'apikey', 'webmaster', 'password'),
+                          [{'url': 'http://example.com/',
+                            'blogid': 1,
+                            'blogName': 'example.com'}])
+
+    def test_get_user_info(self):
+        self.assertRaises(Fault, self.server.blogger.getUserInfo,
+                          'apikey', 'contributor', 'password')
+        self.webmaster.first_name = 'John'
+        self.webmaster.last_name = 'Doe'
+        self.webmaster.save()
+        self.assertEquals(self.server.blogger.getUserInfo(
+            'apikey', 'webmaster', 'password'),
+                          {'firstname': 'John', 'lastname': 'Doe',
+                           'url': 'http://example.com/authors/webmaster/',
+                           'userid': 1, 'nickname': 'webmaster',
+                           'email': 'webmaster@example.com'})
+
+    def test_get_categories(self):
+        self.assertRaises(Fault, self.server.metaWeblog.getCategories,
+                          1, 'contributor', 'password')
+        self.assertEquals(self.server.metaWeblog.getCategories(
+            'apikey', 'webmaster', 'password'),
+                          [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
+                            'description': 'Category 1',
+                            'htmlUrl': 'http://example.com/categories/category-1/'},
+                           {'rssUrl': 'http://example.com/feeds/categories/category-2/',
+                            'description': 'Category 2',
+                            'htmlUrl': 'http://example.com/categories/category-2/'}])
+
+    def test_get_recent_posts(self):
+        self.assertRaises(Fault, self.server.metaWeblog.getRecentPosts,
+                          1, 'contributor', 'password', 10)
+        self.assertEquals(len(self.server.metaWeblog.getRecentPosts(
+            1, 'webmaster', 'password', 10)), 2)
+
+    def test_delete_post(self):
+        self.assertRaises(Fault, self.server.blogger.deletePost,
+                          'apikey', 1, 'contributor', 'password', 'publish')
+        self.assertEquals(Entry.objects.count(), 2)
+        self.assertEquals(self.server.blogger.deletePost(
+            'apikey', 1, 'webmaster', 'password', 'publish'), True)
+        self.assertEquals(Entry.objects.count(), 1)
+
+    def test_get_post(self):
+        self.assertRaises(Fault, self.server.metaWeblog.getPost,
+                          1, 'contributor', 'password')
+        post = self.server.metaWeblog.getPost(
+            1, 'webmaster', 'password')
+        self.assertEquals(post['title'], self.entry_1.title)
+        self.assertEquals(post['description'], '<p>My content 1</p>')
+        self.assertEquals(post['categories'], ['Category 1', 'Category 2'])
+        self.assertEquals(post['dateCreated'].value, '2010-01-01T00:00:00')
+        self.assertEquals(post['link'], 'http://example.com/2010/01/01/my-entry-1/')
+        self.assertEquals(post['permaLink'], 'http://example.com/2010/01/01/my-entry-1/')
+        self.assertEquals(post['postid'], 1)
+        self.assertEquals(post['userid'], 'webmaster')
+        self.assertEquals(post['mt_excerpt'], '')
+        self.assertEquals(post['mt_allow_comments'], 1)
+        self.assertEquals(post['mt_allow_pings'], 1)
+        self.assertEquals(post['mt_keywords'], self.entry_1.tags)
+        self.assertEquals(post['wp_slug'], self.entry_1.slug)
+
+    def test_new_post(self):
+        post = post_structure(self.entry_2, self.site)
+        self.assertRaises(Fault, self.server.metaWeblog.newPost,
+                          1, 'contributor', 'password', post, 1)
+        self.assertEquals(Entry.objects.count(), 2)
+        self.assertEquals(Entry.published.count(), 1)
+        new_post_id = self.server.metaWeblog.newPost(
+            1, 'webmaster', 'password', post, 1)
+        self.assertEquals(Entry.objects.count(), 3)
+        self.assertEquals(Entry.published.count(), 2)
+        new_post_id = self.server.metaWeblog.newPost(
+            1, 'webmaster', 'password', post, 0)
+        self.assertEquals(Entry.objects.count(), 4)
+        self.assertEquals(Entry.published.count(), 2)
+
+    def test_edit_post(self):
+        post = post_structure(self.entry_2, self.site)
+        self.assertRaises(Fault, self.server.metaWeblog.editPost,
+                          1, 'contributor', 'password', post, 1)
+        new_post_id = self.server.metaWeblog.newPost(
+            1, 'webmaster', 'password', post, 0)
+
+        entry = Entry.objects.get(pk=new_post_id)
+        self.assertEquals(entry.title, self.entry_2.title)
+        self.assertEquals(entry.content, self.entry_2.html_content)
+        self.assertEquals(entry.excerpt, self.entry_2.content)
+        self.assertEquals(entry.slug, self.entry_2.slug)
+        self.assertEquals(entry.status, DRAFT)
+        self.assertEquals(entry.categories.count(), 1)
+        self.assertEquals(entry.creation_date, self.entry_2.creation_date)
+
+        entry.title = 'Title edited'
+        entry.creation_date = datetime(2000, 1, 1)
+        post = post_structure(entry, self.site)
+        post['categories'] =  ''
+        post['description'] = 'Content edited'
+        post['wp_slug'] = 'slug-edited'
+
+        response = self.server.metaWeblog.editPost(
+            new_post_id, 'webmaster', 'password', post, 1)
+        self.assertEquals(response, True)
+        entry = Entry.objects.get(pk=new_post_id)
+        self.assertEquals(entry.title, post['title'])
+        self.assertEquals(entry.content, post['description'])
+        self.assertEquals(entry.excerpt, post['description'])
+        self.assertEquals(entry.slug, 'slug-edited')
+        self.assertEquals(entry.status, PUBLISHED)
+        self.assertEquals(entry.categories.count(), 0)
+        self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
+
+

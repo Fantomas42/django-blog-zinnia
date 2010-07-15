@@ -26,6 +26,7 @@ Main features :
   * Prepublication and expiration
   * Widgets (Popular entries, Similar entries, ...)
   * Spam protection with Akismet
+  * MetaWeblog API
   * Ping Directories
   * Pingback support
   * Bit.ly support
@@ -161,28 +162,6 @@ If you don't want spam protection for comments, you can disable it with this set
 
   >>> ZINNIA_AKISMET_COMMENT = False
 
-Pingback
---------
-
-If you want to enable the pingbacks on entries, install `django-xmlrpc
-<https://launchpad.net/django-xmlrpc>`_, and `BeautifulSoup
-<http://www.crummy.com/software/BeautifulSoup/>`_.
-
-Register **django_xmlrpc** in your INSTALLED_APPS section of your project's settings.
-
-Then add this line in project's settings. ::
-
-  >>> XMLRPC_METHODS = (('zinnia.xmlrpc.pingback.pingback_ping', 'pingback.ping'),
-  ...                   ('zinnia.xmlrpc.pingback.pingback_extensions_get_pingbacks', 'pingback.extensions.getPingbacks'),)
-
-Finally we need to register the url of the XML-RPC server. 
-Insert something like this in your project's urls.py: ::
-
-  >>> url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
-
-Now check if your site is enabled for pingback detection. 
-More information at http://hixie.ch/specs/pingback/pingback-1.0#TOC2
-
 Bit.ly
 ------
 
@@ -222,6 +201,50 @@ If you use `django-cms
 Simply register **zinnia.plugins** in the INSTALLED_APPS section of your project's settings.
 
 It will provides custom plugins for adding entries into your pages, an App-Hook and Menus for easy integration.
+
+XML-RPC
+-------
+
+Zinnia provides few webservices via XML-RPC, but before using it,
+you need to install `django-xmlrpc
+<https://launchpad.net/django-xmlrpc>`_, and `BeautifulSoup
+<http://www.crummy.com/software/BeautifulSoup/>`_.
+
+Then register **django_xmlrpc** in your INSTALLED_APPS section of your project's settings.
+
+Now add these lines in your project's settings. ::
+
+  >>> from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
+  >>> XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
+
+*ZINNIA_XMLRPC_METHODS* is a simple list of tuples containing all the webservices embedded in Zinnia.
+
+If you only want to use the Pingback service import *ZINNIA_XMLRPC_PINGBACK*,
+or if you want you just want to enable the `MetaWeblog API
+<http://www.xmlrpc.com/metaWeblogApi>`_ import *ZINNIA_XMLRPC_METAWEBLOG*.
+
+You can also use your own mixins.
+
+Finally we need to register the url of the XML-RPC server. 
+Insert something like this in your project's urls.py: ::
+
+  >>> url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
+
+**Warning** : Since Django 1.2 *django_xmlrpc* will returns a 403 error,
+if *'django.middleware.csrf.CsrfMiddleware'* is enabled, we need to patch it.
+
+Edit the views.py file contained in *django_xmlrpc* and add this import. ::
+
+  >>> from django.views.decorators.csrf import csrf_exempt
+
+Now decorate the *handle_xmlrpc* function with *csrf_exempt* like this. ::
+
+  >>> @csrf_exempt
+  >>> def handle_xmlrpc(request):
+  ...   # code
+
+**Note** : For the Pingback service check if your site is enabled for pingback detection. 
+More information at http://hixie.ch/specs/pingback/pingback-1.0#TOC2
 
 Templatetags
 ============
