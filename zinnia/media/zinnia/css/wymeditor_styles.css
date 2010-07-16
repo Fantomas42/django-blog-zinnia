@@ -1,0 +1,45 @@
+/* EDITOR RELATED STYLES - CUSTOMIZE FOR YOUR NEEDS */
+/*
+    The classes panel, the visual feedback and the preview
+    will be affected by these values.
+    
+    - Commented styles inside style definitions are used for visual 
+      feedback when using the editor.
+    - Comments before opening the style are used as caption.
+    - Comments after the class name and before the style declaration ({)
+      define the jQuery expression that decides whether this 
+      style should be applied or not.
+      
+    Note: the WYMeditor and /WYMeditor comments below are required
+    for the CSS parser to work properly.
+*/
+
+/* WYMeditor */
+
+/* PARA: Highlight */
+p.highlight {
+     background: yellow;
+    /* background: yellow; border: 2px solid orange; */
+}
+
+/* PARA: Hidden note */
+p.hide {
+     display: none;
+    /* color: #999; border: 2px solid #ccc; */
+}
+
+/* IMG: floating left */
+img.left /* img[@class!="right"] */ {
+    display: inline;
+    float: left;    
+    /* float: left; */
+}
+
+/* IMG: floating right */
+img.right /* img[@class!="left"] */ {
+    display: inline;
+    float: right;
+    /* float: right; */
+}
+
+/* /WYMeditor */
