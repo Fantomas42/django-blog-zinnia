@@ -20,6 +20,8 @@
     <![endif]-->
     {% get_archives_entries "zinnia/tags/link_archives_entries.html" %}
     <link rel="pingback" href="/xmlrpc/" />
+    <link rel="EditURI" type="application/rsd+xml" href="{% url zinnia_rsd %}" />
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url zinnia_wlwmanifest %}" />
     <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of lastest entries" %}" href="{% url zinnia_entry_latest_feed %}" />
     {% block link %}{% endblock %}
     {% block script %}{% endblock %}
