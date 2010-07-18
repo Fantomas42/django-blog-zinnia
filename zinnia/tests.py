@@ -690,7 +690,7 @@ class MetaWeblogTestCase(TestCase):
         entry = Entry.objects.get(pk=new_post_id)
         self.assertEquals(entry.title, self.entry_2.title)
         self.assertEquals(entry.content, self.entry_2.html_content)
-        self.assertEquals(entry.excerpt, self.entry_2.content)
+        self.assertEquals(entry.excerpt, self.entry_2.excerpt)
         self.assertEquals(entry.slug, self.entry_2.slug)
         self.assertEquals(entry.status, DRAFT)
         self.assertEquals(entry.categories.count(), 1)
@@ -701,6 +701,7 @@ class MetaWeblogTestCase(TestCase):
         post = post_structure(entry, self.site)
         post['categories'] =  ''
         post['description'] = 'Content edited'
+        post['mt_excerpt'] = 'Content edited'
         post['wp_slug'] = 'slug-edited'
 
         response = self.server.metaWeblog.editPost(
@@ -709,7 +710,7 @@ class MetaWeblogTestCase(TestCase):
         entry = Entry.objects.get(pk=new_post_id)
         self.assertEquals(entry.title, post['title'])
         self.assertEquals(entry.content, post['description'])
-        self.assertEquals(entry.excerpt, post['description'])
+        self.assertEquals(entry.excerpt, post['mt_excerpt'])
         self.assertEquals(entry.slug, 'slug-edited')
         self.assertEquals(entry.status, PUBLISHED)
         self.assertEquals(entry.categories.count(), 0)
