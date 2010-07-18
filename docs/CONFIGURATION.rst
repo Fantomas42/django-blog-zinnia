@@ -86,8 +86,21 @@ ZINNIA_USE_TWITTER
 
   Boolean telling if Zinnia can use Twitter.
 
+CMS settings
+------------
+
 ZINNIA_PLUGINS_TEMPLATES
   **Default :** ()
 
-  List of tuple for extending the cms's plugins rendering templates.
+  List of tuple for extending the CMS's plugins rendering templates.
+
+ZINNIA_APP_MENUS
+  **Default :** (EntryMenu, CategoryMenu, TagMenu, AuthorMenu)
+
+  List of Menu objects provided for the Zinnia AppHook.
+
+ZINNIA_HIDE_ENTRY_MENU
+  **Default :** True
+
+  Boolean used for displaying or not the entries in the EntryMenu object.
 
