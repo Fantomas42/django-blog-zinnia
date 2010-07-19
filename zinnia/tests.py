@@ -693,6 +693,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.excerpt, self.entry_2.excerpt)
         self.assertEquals(entry.slug, self.entry_2.slug)
         self.assertEquals(entry.status, DRAFT)
+        self.assertEquals(entry.comment_enabled, True)
         self.assertEquals(entry.categories.count(), 1)
         self.assertEquals(entry.creation_date, self.entry_2.creation_date)
 
@@ -703,6 +704,7 @@ class MetaWeblogTestCase(TestCase):
         post['description'] = 'Content edited'
         post['mt_excerpt'] = 'Content edited'
         post['wp_slug'] = 'slug-edited'
+        post['mt_allow_comments'] = 2
 
         response = self.server.metaWeblog.editPost(
             new_post_id, 'webmaster', 'password', post, 1)
@@ -713,6 +715,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.excerpt, post['mt_excerpt'])
         self.assertEquals(entry.slug, 'slug-edited')
         self.assertEquals(entry.status, PUBLISHED)
+        self.assertEquals(entry.comment_enabled, False)
         self.assertEquals(entry.categories.count(), 0)
         self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
 

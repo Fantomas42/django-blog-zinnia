@@ -152,7 +152,7 @@ def new_post(blog_id, username, password, post, publish):
                   'excerpt': post.get('mt_excerpt', truncate_words(strip_tags(post['description']), 50)),
                   'creation_date': creation_date,
                   'last_update': creation_date,
-                  'comment_enabled': bool(post.get('mt_allow_comments', True)),
+                  'comment_enabled': post.get('mt_allow_comments', 1) == 1,
                   'tags': post.has_key('mt_keywords') and post['mt_keywords'] or '',
                   'slug': post.has_key('wp_slug') and post['wp_slug'] or slugify(post['title']),
                   'status': publish and PUBLISHED or DRAFT}
@@ -183,7 +183,7 @@ def edit_post(post_id, username, password, post, publish):
     entry.excerpt = post.get('mt_excerpt', truncate_words(strip_tags(post['description']), 50))
     entry.creation_date = creation_date
     entry.last_update = datetime.now()
-    entry.comment_enabled = bool(post.get('mt_allow_comments', True))
+    entry.comment_enabled = post.get('mt_allow_comments', 1) == 1
     entry.tags = post.has_key('mt_keywords') and post['mt_keywords'] or ''
     entry.slug = post.has_key('wp_slug') and post['wp_slug'] or slugify(post['title'])
     entry.status = publish and PUBLISHED or DRAFT

@@ -11,7 +11,7 @@
     <supportsCategoriesInline>Yes</supportsCategoriesInline>
     <supportsMultipleCategories>Yes</supportsMultipleCategories>
     <supportsHierarchicalCategories>No</supportsHierarchicalCategories>
-    <supportsNewCategories>No</supportsNewCategories>
+    <supportsNewCategories>Yes</supportsNewCategories>
     <supportsNewCategoriesInline>Yes</supportsNewCategoriesInline>
     <supportsKeywords>Yes</supportsKeywords>
     <supportsCommentPolicy>Yes</supportsCommentPolicy>
@@ -37,7 +37,7 @@
     <serviceName>{{ site.name }} Blog</serviceName>
     <imageUrl>{{ ZINNIA_MEDIA_URL }}img/wlw/zinnia.png</imageUrl>
     <watermarkImageUrl>{{ ZINNIA_MEDIA_URL }}img/wlw/watermark.png</watermarkImageUrl>
-    <homepageLinkText>{% trans "View on site" %}</homepageLinkText>
+    <homepageLinkText>{% trans "View site" %}</homepageLinkText>
     <adminLinkText>{% trans "Admin. site" %}</adminLinkText>
     <adminUrl><![CDATA[
         {blog-homepage-url}{% url admin:index %}
