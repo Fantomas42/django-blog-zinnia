@@ -80,7 +80,7 @@ def post_structure(entry, site):
             # Usefull Movable Type Extensions
             'mt_excerpt': entry.excerpt,
             'mt_allow_comments': int(entry.comment_enabled),
-            'mt_allow_pings': int(entry.comment_enabled),
+            'mt_allow_pings': int(entry.pingback_enabled),
             'mt_keywords': entry.tags,
             # Usefull Wordpress Extensions
             'wp_slug': entry.slug}
@@ -153,6 +153,7 @@ def new_post(blog_id, username, password, post, publish):
                   'creation_date': creation_date,
                   'last_update': creation_date,
                   'comment_enabled': post.get('mt_allow_comments', 1) == 1,
+                  'pingback_enabled': post.get('mt_allow_pings', 1) == 1,
                   'tags': post.has_key('mt_keywords') and post['mt_keywords'] or '',
                   'slug': post.has_key('wp_slug') and post['wp_slug'] or slugify(post['title']),
                   'status': publish and PUBLISHED or DRAFT}
@@ -184,6 +185,7 @@ def edit_post(post_id, username, password, post, publish):
     entry.creation_date = creation_date
     entry.last_update = datetime.now()
     entry.comment_enabled = post.get('mt_allow_comments', 1) == 1
+    entry.pingback_enabled = post.get('mt_allow_pings', 1) == 1
     entry.tags = post.has_key('mt_keywords') and post['mt_keywords'] or ''
     entry.slug = post.has_key('wp_slug') and post['wp_slug'] or slugify(post['title'])
     entry.status = publish and PUBLISHED or DRAFT

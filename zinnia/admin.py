@@ -31,21 +31,25 @@ class CategoryAdmin(admin.ModelAdmin):
 class EntryAdmin(admin.ModelAdmin):
     date_hierarchy = 'creation_date'
     fieldsets = ((_('Content'), {'fields': ('title', 'content', 'image', 'status')}),
-                 (_('Options'), {'fields': ('authors', 'slug', 'excerpt', 'related',
-                                            'creation_date', 'start_publication',
-                                            'end_publication', 'comment_enabled'),
+                 (_('Options'), {'fields': ('excerpt', 'related',
+                                            'authors', 'creation_date',
+                                            'start_publication', 'end_publication'),
                                  'classes': ('collapse', 'collapse-closed')}),
-                 (_('Sorting'), {'fields': ('sites', 'categories', 'tags')}))
-    list_filter = ('categories', 'authors', 'status', 'comment_enabled',
+                 (_('Discussion'), {'fields': ('comment_enabled', 'pingback_enabled')}),
+                 (_('Publication'), {'fields': ('sites', 'categories', 'tags', 'slug')}))
+    list_filter = ('categories', 'authors', 'status',
+                   'comment_enabled', 'pingback_enabled',
                    'creation_date', 'start_publication', 'end_publication')
     list_display = ('get_title', 'get_authors', 'get_categories',
-                    'get_tags', 'get_sites', 'comment_enabled',
+                    'get_tags', 'get_sites',
+                    'comment_enabled', 'pingback_enabled',
                     'get_is_actual', 'get_is_visible', 'get_link',
-                    'get_short_url', 'creation_date', 'last_update')
+                    'get_short_url', 'creation_date')
     filter_horizontal = ('categories', 'authors', 'related')
     prepopulated_fields = {'slug': ('title', )}
     search_fields = ('title', 'excerpt', 'content', 'tags')
-    actions = ['make_mine', 'make_published', 'make_hidden', 'close_comments',
+    actions = ['make_mine', 'make_published', 'make_hidden',
+               'close_comments', 'close_pingbacks',
                'ping_directories', 'make_tweet']
     actions_on_top = True
     actions_on_bottom = True
@@ -211,6 +215,11 @@ class EntryAdmin(admin.ModelAdmin):
         """Close the comments for selected entries"""
         queryset.update(comment_enabled=False)
     close_comments.short_description = _('Close the comments for selected entries')
+
+    def close_pingbacks(self, request, queryset):
+        """Close the pingbacks for selected entries"""
+        queryset.update(pingback_enabled=False)
+    close_pingbacks.short_description = _('Close the pingbacks for selected entries')
 
     def ping_directories(self, request, queryset):
         """Ping Directories for selected entries"""

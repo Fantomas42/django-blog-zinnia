@@ -127,7 +127,8 @@ class EntryTestCase(TestCase):
                   'tags': 'zinnia, test',
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
-
+        self.author = User.objects.create_user(username='webmaster',
+                                               email='webmaster@example.com')
 
     def test_html_content(self):
         self.assertEquals(self.entry.html_content, '<p>My content</p>')
@@ -137,23 +138,42 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.html_content,
                           '<p>Hello world !<br />        this is my content</p>')
 
-    def test_comments(self):
+    def test_discussions(self):
         site = Site.objects.get_current()
 
+        self.assertEquals(self.entry.discussions.count(), 0)
         self.assertEquals(self.entry.comments.count(), 0)
+        self.assertEquals(self.entry.pingbacks.count(), 0)
+
         Comment.objects.create(comment='My Comment 1',
                                content_object=self.entry,
                                site=site)
+        self.assertEquals(self.entry.discussions.count(), 1)
         self.assertEquals(self.entry.comments.count(), 1)
+        self.assertEquals(self.entry.pingbacks.count(), 0)
+
         Comment.objects.create(comment='My Comment 2',
                                content_object=self.entry,
                                site=site, is_public=False)
+        self.assertEquals(self.entry.discussions.count(), 1)
         self.assertEquals(self.entry.comments.count(), 1)
+        self.assertEquals(self.entry.pingbacks.count(), 0)
+
         Comment.objects.create(comment='My Comment 3',
                                content_object=self.entry,
                                site=Site.objects.create(domain='http://toto.com',
                                                         name='Toto.com'))
+        self.assertEquals(self.entry.discussions.count(), 2)
         self.assertEquals(self.entry.comments.count(), 2)
+        self.assertEquals(self.entry.pingbacks.count(), 0)
+
+        comment = Comment.objects.create(comment='My Pingback 1',
+                                         content_object=self.entry,
+                                         site=site)
+        comment.flags.create(user=self.author, flag='pingback')
+        self.assertEquals(self.entry.discussions.count(), 3)
+        self.assertEquals(self.entry.comments.count(), 2)
+        self.assertEquals(self.entry.pingbacks.count(), 1)
 
     def test_word_count(self):
         self.assertEquals(self.entry.word_count, 2)
@@ -498,19 +518,19 @@ class PingBackTestCase(TestCase):
         # Error code 33 : The target URI cannot be used as a target.
         response = self.server.pingback.ping(source, 'http://localhost:8000/')
         self.assertEquals(response, 33)
-        self.first_entry.comment_enabled = False
+        self.first_entry.pingback_enabled = False
         self.first_entry.save()
         response = self.server.pingback.ping(source, target)
         self.assertEquals(response, 33)
 
         # Validate pingback
         self.assertEquals(self.first_entry.comments.count(), 0)
-        self.first_entry.comment_enabled = True
+        self.first_entry.pingback_enabled = True
         self.first_entry.save()
         response = self.server.pingback.ping(source, target)
         self.assertEquals(response, 'Pingback from %s to %s registered.' % (source, target))
-        self.assertEquals(self.first_entry.comments.count(), 1)
-        self.assertEquals(self.first_entry.comments[0].user_name,
+        self.assertEquals(self.first_entry.pingbacks.count(), 1)
+        self.assertEquals(self.first_entry.pingbacks[0].user_name,
                           'Zinnia\'s Blog - %s' % self.second_entry.title)
 
         # Error code 48 : The pingback has already been registered.
@@ -694,6 +714,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.slug, self.entry_2.slug)
         self.assertEquals(entry.status, DRAFT)
         self.assertEquals(entry.comment_enabled, True)
+        self.assertEquals(entry.pingback_enabled, True)
         self.assertEquals(entry.categories.count(), 1)
         self.assertEquals(entry.creation_date, self.entry_2.creation_date)
 
@@ -705,6 +726,7 @@ class MetaWeblogTestCase(TestCase):
         post['mt_excerpt'] = 'Content edited'
         post['wp_slug'] = 'slug-edited'
         post['mt_allow_comments'] = 2
+        post['mt_allow_pings'] = 0
 
         response = self.server.metaWeblog.editPost(
             new_post_id, 'webmaster', 'password', post, 1)
@@ -716,6 +738,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.slug, 'slug-edited')
         self.assertEquals(entry.status, PUBLISHED)
         self.assertEquals(entry.comment_enabled, False)
+        self.assertEquals(entry.pingback_enabled, False)
         self.assertEquals(entry.categories.count(), 0)
         self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
 

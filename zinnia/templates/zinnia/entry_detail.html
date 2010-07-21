@@ -102,6 +102,31 @@
   {% endwith %}
 </div>
 
+<div id="pingbacks" class="span-16 last">
+  {% with object.pingbacks as pingback_list %}
+  {% if pingback_list.count %}
+  <h3>{% trans "Pingbacks" %}</h3>
+  <ol id="pingbackList" class="span-15 last">
+    {% for pingback in pingback_list %}
+    <li id="pingback_{{ pingback.pk }}" class="pingback {% cycle box1,box2 %} span-15 last">
+      <div class="pingback_body span-15 last">
+	<div class="span-15 last">
+	  <a href="{{ pingback.url }}">{{ pingback.user_name }}</a>
+	  {% trans "on date" %} {{ pingback.submit_date|date:"l d F Y H:i" }}
+	</div>
+	<div class="span-15 last">
+	  <cite>
+	    {{ pingback.comment }}
+	  </cite>
+	</div>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+  {% endwith %}
+</div>
+
 {% if object.comment_enabled %}
 <div class="commentForm span-16 last">
   {% render_comment_form for object %}

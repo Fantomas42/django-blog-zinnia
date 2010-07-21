@@ -15,7 +15,7 @@
     <supportsNewCategoriesInline>Yes</supportsNewCategoriesInline>
     <supportsKeywords>Yes</supportsKeywords>
     <supportsCommentPolicy>Yes</supportsCommentPolicy>
-    <supportsPingPolicy>No</supportsPingPolicy>
+    <supportsPingPolicy>Yes</supportsPingPolicy>
     <supportsAuthor>No</supportsAuthor>
     <supportsSlug>Yes</supportsSlug>
     <supportsPassword>No</supportsPassword>
@@ -30,7 +30,7 @@
     <supportsScripts>Yes</supportsScripts>
     <supportsEmbeds>Yes</supportsEmbeds>
     <characterSet>UTF-8</characterSet>
-    <maxCategoryNameLength>50</maxCategoryNameLength>    
+    <maxCategoryNameLength>50</maxCategoryNameLength>
   </options>
 
   <weblog>

@@ -67,6 +67,7 @@ class Entry(models.Model):
                                      blank=True, null=False)
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
     comment_enabled = models.BooleanField(_('comment enabled'), default=True)
+    pingback_enabled = models.BooleanField(_('pingback enabled'), default=True)
 
     creation_date = models.DateTimeField(_('creation date'), default=datetime.now)
     last_update = models.DateTimeField(_('last update'), default=datetime.now)
@@ -127,10 +128,20 @@ class Entry(models.Model):
         return entries_published(self.related)
 
     @property
-    def comments(self):
-        """Return published comments"""
+    def discussions(self):
+        """Return published discussions"""
         from django.contrib.comments.models import Comment
         return Comment.objects.for_model(self).filter(is_public=True)
+
+    @property
+    def comments(self):
+        """Return published comments"""
+        return self.discussions.exclude(flags__flag='pingback')
+
+    @property
+    def pingbacks(self):
+        """Return published pingbacks"""
+        return self.discussions.filter(flags__flag='pingback')
 
     @property
     def short_url(self):
