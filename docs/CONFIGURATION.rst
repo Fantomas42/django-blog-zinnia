@@ -51,6 +51,11 @@ ZINNIA_AKISMET_COMMENT
 
   Boolean used for protecting your comments with Akismet or not.
 
+ZINNIA_FIRST_WEEK_DAY
+  **Default :** 0
+
+  Integer for setting the first day of the week in the Calendar widget. Ex : use 6 for Sunday.
+
 ZINNIA_PING_DIRECTORIES 
   **Default :** ()
 

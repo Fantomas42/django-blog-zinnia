@@ -12,6 +12,7 @@ from django.template import Library
 
 from zinnia.models import Entry
 from zinnia.models import Category
+from zinnia.settings import FIRST_WEEK_DAY
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
 
@@ -110,7 +111,7 @@ def get_calendar_entries(context, year=None, month=None,
     except ImportError:
         return {'calendar': '<p class="notice">Calendar is unavailable for Python<2.5.</p>'}
 
-    calendar = ZinniaCalendar()
+    calendar = ZinniaCalendar(firstweekday=FIRST_WEEK_DAY)
     current_month = datetime(year, month, 1)
 
     dates = list(Entry.published.dates('creation_date', 'month'))
