@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-21 16:29+0200\n"
+"POT-Creation-Date: 2010-07-22 10:07+0200\n"
 "PO-Revision-Date: 2010-04-28 11:36+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -390,7 +390,7 @@ msgstr "Kommentarvorschau einblenden"
 #: templates/comments/zinnia_entry_preview.html:25
 #: templates/zinnia/_entry_detail.html:16
 #: templates/zinnia/entry_detail.html:83
-#: templates/zinnia/entry_detail.html:115
+#: templates/zinnia/entry_detail.html:118
 msgid "on date"
 msgstr "geschrieben"
 
@@ -432,9 +432,8 @@ msgid "Short url"
 msgstr "Kurze URL"
 
 #: templates/zinnia/_entry_detail.html:67
-#: templates/zinnia/entry_detail.html:67
-msgid "Comments"
-msgstr "Kommentare"
+msgid "Discussions"
+msgstr ""
 
 #: templates/zinnia/_entry_detail.html:71
 #, fuzzy, python-format
@@ -459,8 +458,16 @@ msgstr "Schreibe den ersten Kommentar!"
 
 #: templates/zinnia/_entry_detail.html:80
 #: templates/zinnia/entry_detail.html:95
+#: templates/zinnia/entry_detail.html:101
 msgid "Comments are closed."
 msgstr "Kommentare deaktiviert."
+
+#: templates/zinnia/_entry_detail.html:87
+#, python-format
+msgid "%(pingback_count)s pingback"
+msgid_plural "%(pingback_count)s pingbacks"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/zinnia/author_list.html:7
 msgid "Author list"
@@ -583,13 +590,26 @@ msgstr "Verwandte Einträge"
 msgid "Similar entries"
 msgstr "Ähnliche Einträge"
 
+#: templates/zinnia/entry_detail.html:67
+msgid "Comments"
+msgstr "Kommentare"
+
 #: templates/zinnia/entry_detail.html:99
 msgid "Not yet comments !"
 msgstr "Noch keine Kommentare vorhanden!"
 
-#: templates/zinnia/entry_detail.html:108
+#: templates/zinnia/entry_detail.html:109
 msgid "Pingbacks"
 msgstr ""
+
+#: templates/zinnia/entry_detail.html:131
+msgid "Pingbacks are open."
+msgstr ""
+
+#: templates/zinnia/entry_detail.html:133
+#, fuzzy
+msgid "Pingbacks are closed."
+msgstr "Kommentare deaktiviert."
 
 #: templates/zinnia/entry_list.html:4
 msgid "Category"

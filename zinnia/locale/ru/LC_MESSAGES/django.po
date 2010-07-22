@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-21 16:29+0200\n"
+"POT-Creation-Date: 2010-07-22 10:07+0200\n"
 "PO-Revision-Date: 2010-07-03 HO:MI+ZONE\n"
 "Last-Translator: Pavel Kiper<iwtbarh@gmail.com>\n"
 "Language-Team: Russian <iwtbarh@gmail.com>\n"
@@ -394,7 +394,7 @@ msgstr "Предварительный просмотр комментария"
 #: templates/comments/zinnia_entry_preview.html:25
 #: templates/zinnia/_entry_detail.html:16
 #: templates/zinnia/entry_detail.html:83
-#: templates/zinnia/entry_detail.html:115
+#: templates/zinnia/entry_detail.html:118
 msgid "on date"
 msgstr "на дату"
 
@@ -436,9 +436,8 @@ msgid "Short url"
 msgstr "Короткая ссылка"
 
 #: templates/zinnia/_entry_detail.html:67
-#: templates/zinnia/entry_detail.html:67
-msgid "Comments"
-msgstr "Комментарии"
+msgid "Discussions"
+msgstr ""
 
 #: templates/zinnia/_entry_detail.html:71
 #, fuzzy, python-format
@@ -467,8 +466,17 @@ msgstr "Оставьте первый комментарий"
 
 #: templates/zinnia/_entry_detail.html:80
 #: templates/zinnia/entry_detail.html:95
+#: templates/zinnia/entry_detail.html:101
 msgid "Comments are closed."
 msgstr "Комментирование отключено."
+
+#: templates/zinnia/_entry_detail.html:87
+#, python-format
+msgid "%(pingback_count)s pingback"
+msgid_plural "%(pingback_count)s pingbacks"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: templates/zinnia/author_list.html:7
 msgid "Author list"
@@ -595,13 +603,26 @@ msgstr "Связанные записи"
 msgid "Similar entries"
 msgstr "Похожие записи"
 
+#: templates/zinnia/entry_detail.html:67
+msgid "Comments"
+msgstr "Комментарии"
+
 #: templates/zinnia/entry_detail.html:99
 msgid "Not yet comments !"
 msgstr "Еще нет клмментариев!"
 
-#: templates/zinnia/entry_detail.html:108
+#: templates/zinnia/entry_detail.html:109
 msgid "Pingbacks"
 msgstr ""
+
+#: templates/zinnia/entry_detail.html:131
+msgid "Pingbacks are open."
+msgstr ""
+
+#: templates/zinnia/entry_detail.html:133
+#, fuzzy
+msgid "Pingbacks are closed."
+msgstr "Комментирование отключено."
 
 #: templates/zinnia/entry_list.html:4
 msgid "Category"

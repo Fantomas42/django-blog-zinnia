@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-21 16:29+0200\n"
-"PO-Revision-Date: 2010-07-21 16:33+0100\n"
+"POT-Creation-Date: 2010-07-22 10:07+0200\n"
+"PO-Revision-Date: 2010-07-22 10:08+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -408,7 +408,7 @@ msgstr "Prévisualisation du commentaire"
 #: templates/comments/zinnia_entry_preview.html:25
 #: templates/zinnia/_entry_detail.html:16
 #: templates/zinnia/entry_detail.html:83
-#: templates/zinnia/entry_detail.html:115
+#: templates/zinnia/entry_detail.html:118
 msgid "on date"
 msgstr "à la date du"
 
@@ -450,9 +450,8 @@ msgid "Short url"
 msgstr "Url raccourcie"
 
 #: templates/zinnia/_entry_detail.html:67
-#: templates/zinnia/entry_detail.html:67
-msgid "Comments"
-msgstr "Commentaires"
+msgid "Discussions"
+msgstr "Discussions"
 
 #: templates/zinnia/_entry_detail.html:71
 #, python-format
@@ -471,8 +470,16 @@ msgstr "Soyez le premier à commenter !"
 
 #: templates/zinnia/_entry_detail.html:80
 #: templates/zinnia/entry_detail.html:95
+#: templates/zinnia/entry_detail.html:101
 msgid "Comments are closed."
-msgstr "Les commentaires sont fermés"
+msgstr "Les commentaires sont fermés."
+
+#: templates/zinnia/_entry_detail.html:87
+#, python-format
+msgid "%(pingback_count)s pingback"
+msgid_plural "%(pingback_count)s pingbacks"
+msgstr[0] "%(pingback_count)s pingback"
+msgstr[1] "%(pingback_count)s pingbacks"
 
 #: templates/zinnia/author_list.html:7
 msgid "Author list"
@@ -591,13 +598,25 @@ msgstr "Articles associés"
 msgid "Similar entries"
 msgstr "Articles similaires"
 
+#: templates/zinnia/entry_detail.html:67
+msgid "Comments"
+msgstr "Commentaires"
+
 #: templates/zinnia/entry_detail.html:99
 msgid "Not yet comments !"
 msgstr "Pas encore de commentaires !"
 
-#: templates/zinnia/entry_detail.html:108
+#: templates/zinnia/entry_detail.html:109
 msgid "Pingbacks"
 msgstr "Pingbacks"
+
+#: templates/zinnia/entry_detail.html:131
+msgid "Pingbacks are open."
+msgstr "Les pingbacks sont ouverts."
+
+#: templates/zinnia/entry_detail.html:133
+msgid "Pingbacks are closed."
+msgstr "Les pingbacks sont fermés."
 
 #: templates/zinnia/entry_list.html:4
 msgid "Category"

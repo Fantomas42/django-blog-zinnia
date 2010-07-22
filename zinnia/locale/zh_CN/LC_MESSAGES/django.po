@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-21 16:29+0200\n"
+"POT-Creation-Date: 2010-07-22 10:07+0200\n"
 "PO-Revision-Date: 2010-05-05 20:49+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -389,7 +389,7 @@ msgstr "预览评论"
 #: templates/comments/zinnia_entry_preview.html:25
 #: templates/zinnia/_entry_detail.html:16
 #: templates/zinnia/entry_detail.html:83
-#: templates/zinnia/entry_detail.html:115
+#: templates/zinnia/entry_detail.html:118
 msgid "on date"
 msgstr "日期"
 
@@ -431,9 +431,8 @@ msgid "Short url"
 msgstr "缩略URL"
 
 #: templates/zinnia/_entry_detail.html:67
-#: templates/zinnia/entry_detail.html:67
-msgid "Comments"
-msgstr "评论"
+msgid "Discussions"
+msgstr ""
 
 #: templates/zinnia/_entry_detail.html:71
 #, fuzzy, python-format
@@ -458,8 +457,16 @@ msgstr "首次评论"
 
 #: templates/zinnia/_entry_detail.html:80
 #: templates/zinnia/entry_detail.html:95
+#: templates/zinnia/entry_detail.html:101
 msgid "Comments are closed."
 msgstr "评论已关闭"
+
+#: templates/zinnia/_entry_detail.html:87
+#, python-format
+msgid "%(pingback_count)s pingback"
+msgid_plural "%(pingback_count)s pingbacks"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/zinnia/author_list.html:7
 msgid "Author list"
@@ -581,13 +588,26 @@ msgstr "相关日志"
 msgid "Similar entries"
 msgstr "类似日志"
 
+#: templates/zinnia/entry_detail.html:67
+msgid "Comments"
+msgstr "评论"
+
 #: templates/zinnia/entry_detail.html:99
 msgid "Not yet comments !"
 msgstr "尚未有评论"
 
-#: templates/zinnia/entry_detail.html:108
+#: templates/zinnia/entry_detail.html:109
 msgid "Pingbacks"
 msgstr ""
+
+#: templates/zinnia/entry_detail.html:131
+msgid "Pingbacks are open."
+msgstr ""
+
+#: templates/zinnia/entry_detail.html:133
+#, fuzzy
+msgid "Pingbacks are closed."
+msgstr "评论已关闭"
 
 #: templates/zinnia/entry_list.html:4
 msgid "Category"
