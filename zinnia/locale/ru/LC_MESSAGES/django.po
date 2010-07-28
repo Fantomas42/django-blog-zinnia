@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-22 10:07+0200\n"
+"POT-Creation-Date: 2010-07-28 17:45+0200\n"
 "PO-Revision-Date: 2010-07-03 HO:MI+ZONE\n"
 "Last-Translator: Pavel Kiper<iwtbarh@gmail.com>\n"
 "Language-Team: Russian <iwtbarh@gmail.com>\n"
@@ -174,12 +174,32 @@ msgstr "Новости, содержащие запрос %s"
 
 #: feeds.py:201
 #, python-format
-msgid "Comments on %s"
-msgstr "Комментарии к %s"
+msgid "Discussions on %s"
+msgstr ""
 
 #: feeds.py:204
 #, fuzzy, python-format
+msgid "The latest discussions for the entry %s"
+msgstr "Последние комментарии к %s"
+
+#: feeds.py:218
+#, python-format
+msgid "Comments on %s"
+msgstr "Комментарии к %s"
+
+#: feeds.py:221
+#, fuzzy, python-format
 msgid "The latest comments for the entry %s"
+msgstr "Последние комментарии к %s"
+
+#: feeds.py:234
+#, fuzzy, python-format
+msgid "Pingbacks on %s"
+msgstr "Комментирование отключено."
+
+#: feeds.py:237
+#, fuzzy, python-format
+msgid "The latest pingbacks for the entry %s"
 msgstr "Последние комментарии к %s"
 
 #: models.py:26 models.py:65
@@ -393,8 +413,8 @@ msgstr "Предварительный просмотр комментария"
 
 #: templates/comments/zinnia_entry_preview.html:25
 #: templates/zinnia/_entry_detail.html:16
-#: templates/zinnia/entry_detail.html:83
-#: templates/zinnia/entry_detail.html:118
+#: templates/zinnia/entry_detail.html:85
+#: templates/zinnia/entry_detail.html:120
 msgid "on date"
 msgstr "на дату"
 
@@ -411,6 +431,8 @@ msgid "Preview"
 msgstr "Предпросмотр"
 
 #: templates/feeds/comment_title.html:2
+#: templates/feeds/discussion_title.html:2
+#: templates/feeds/pingback_title.html:2
 msgid "on"
 msgstr "на"
 
@@ -465,8 +487,8 @@ msgid "Be first to comment !"
 msgstr "Оставьте первый комментарий"
 
 #: templates/zinnia/_entry_detail.html:80
-#: templates/zinnia/entry_detail.html:95
-#: templates/zinnia/entry_detail.html:101
+#: templates/zinnia/entry_detail.html:97
+#: templates/zinnia/entry_detail.html:103
 msgid "Comments are closed."
 msgstr "Комментирование отключено."
 
@@ -583,43 +605,53 @@ msgid "More old entries"
 msgstr "Самые старые записи"
 
 #: templates/zinnia/entry_detail.html:9
+#, fuzzy
+msgid "RSS Feed of discussions on"
+msgstr "RSS лента комментариев к"
+
+#: templates/zinnia/entry_detail.html:10
 msgid "RSS Feed of comments on"
 msgstr "RSS лента комментариев к"
 
-#: templates/zinnia/entry_detail.html:24
+#: templates/zinnia/entry_detail.html:11
+#, fuzzy
+msgid "RSS Feed of pingbacks on"
+msgstr "RSS лента комментариев к"
+
+#: templates/zinnia/entry_detail.html:26
 #, fuzzy
 msgid "Next entry"
 msgstr "запись"
 
-#: templates/zinnia/entry_detail.html:36
+#: templates/zinnia/entry_detail.html:38
 msgid "Previous entry"
 msgstr ""
 
-#: templates/zinnia/entry_detail.html:48
+#: templates/zinnia/entry_detail.html:50
 msgid "Related entries"
 msgstr "Связанные записи"
 
-#: templates/zinnia/entry_detail.html:59
+#: templates/zinnia/entry_detail.html:61
 msgid "Similar entries"
 msgstr "Похожие записи"
 
-#: templates/zinnia/entry_detail.html:67
+#: templates/zinnia/entry_detail.html:69
 msgid "Comments"
 msgstr "Комментарии"
 
-#: templates/zinnia/entry_detail.html:99
+#: templates/zinnia/entry_detail.html:101
 msgid "Not yet comments !"
 msgstr "Еще нет клмментариев!"
 
-#: templates/zinnia/entry_detail.html:109
+#: templates/zinnia/entry_detail.html:111
 msgid "Pingbacks"
 msgstr ""
 
-#: templates/zinnia/entry_detail.html:131
+#: templates/zinnia/entry_detail.html:133
 msgid "Pingbacks are open."
 msgstr ""
 
-#: templates/zinnia/entry_detail.html:133
+#: templates/zinnia/entry_detail.html:135
 #, fuzzy
 msgid "Pingbacks are closed."
 msgstr "Комментирование отключено."

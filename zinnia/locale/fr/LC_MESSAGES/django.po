@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-22 10:07+0200\n"
-"PO-Revision-Date: 2010-07-22 10:08+0100\n"
+"POT-Creation-Date: 2010-07-28 17:45+0200\n"
+"PO-Revision-Date: 2010-07-28 17:47+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -182,13 +182,33 @@ msgstr "Les dernières actualités contenant le motif '%s'"
 
 #: feeds.py:201
 #, python-format
-msgid "Comments on %s"
-msgstr "Commentaires sur : %s"
+msgid "Discussions on %s"
+msgstr "Discussions sur %s"
 
 #: feeds.py:204
 #, python-format
+msgid "The latest discussions for the entry %s"
+msgstr "Les dernières discussions sur l'actualité : %s"
+
+#: feeds.py:218
+#, python-format
+msgid "Comments on %s"
+msgstr "Commentaires sur : %s"
+
+#: feeds.py:221
+#, python-format
 msgid "The latest comments for the entry %s"
 msgstr "Les derniers commentaires sur l'actualité : %s"
+
+#: feeds.py:234
+#, python-format
+msgid "Pingbacks on %s"
+msgstr "Pingbacks sur %s"
+
+#: feeds.py:237
+#, python-format
+msgid "The latest pingbacks for the entry %s"
+msgstr "Les derniers pingbacks sur l'actualité : %s"
 
 #: models.py:26
 #: models.py:65
@@ -407,8 +427,8 @@ msgstr "Prévisualisation du commentaire"
 
 #: templates/comments/zinnia_entry_preview.html:25
 #: templates/zinnia/_entry_detail.html:16
-#: templates/zinnia/entry_detail.html:83
-#: templates/zinnia/entry_detail.html:118
+#: templates/zinnia/entry_detail.html:85
+#: templates/zinnia/entry_detail.html:120
 msgid "on date"
 msgstr "à la date du"
 
@@ -425,6 +445,8 @@ msgid "Preview"
 msgstr "Prévisualiser"
 
 #: templates/feeds/comment_title.html:2
+#: templates/feeds/discussion_title.html:2
+#: templates/feeds/pingback_title.html:2
 msgid "on"
 msgstr "le"
 
@@ -469,8 +491,8 @@ msgid "Be first to comment !"
 msgstr "Soyez le premier à commenter !"
 
 #: templates/zinnia/_entry_detail.html:80
-#: templates/zinnia/entry_detail.html:95
-#: templates/zinnia/entry_detail.html:101
+#: templates/zinnia/entry_detail.html:97
+#: templates/zinnia/entry_detail.html:103
 msgid "Comments are closed."
 msgstr "Les commentaires sont fermés."
 
@@ -579,42 +601,50 @@ msgid "More old entries"
 msgstr "Articles plus anciens"
 
 #: templates/zinnia/entry_detail.html:9
+msgid "RSS Feed of discussions on"
+msgstr "Flux RSS des discussions sur"
+
+#: templates/zinnia/entry_detail.html:10
 msgid "RSS Feed of comments on"
 msgstr "Flux RSS des commentaires sur"
 
-#: templates/zinnia/entry_detail.html:24
+#: templates/zinnia/entry_detail.html:11
+msgid "RSS Feed of pingbacks on"
+msgstr "Flux RSS des pingbacks sur"
+
+#: templates/zinnia/entry_detail.html:26
 msgid "Next entry"
 msgstr "Article suivant"
 
-#: templates/zinnia/entry_detail.html:36
+#: templates/zinnia/entry_detail.html:38
 msgid "Previous entry"
 msgstr "Article précèdent"
 
-#: templates/zinnia/entry_detail.html:48
+#: templates/zinnia/entry_detail.html:50
 msgid "Related entries"
 msgstr "Articles associés"
 
-#: templates/zinnia/entry_detail.html:59
+#: templates/zinnia/entry_detail.html:61
 msgid "Similar entries"
 msgstr "Articles similaires"
 
-#: templates/zinnia/entry_detail.html:67
+#: templates/zinnia/entry_detail.html:69
 msgid "Comments"
 msgstr "Commentaires"
 
-#: templates/zinnia/entry_detail.html:99
+#: templates/zinnia/entry_detail.html:101
 msgid "Not yet comments !"
 msgstr "Pas encore de commentaires !"
 
-#: templates/zinnia/entry_detail.html:109
+#: templates/zinnia/entry_detail.html:111
 msgid "Pingbacks"
 msgstr "Pingbacks"
 
-#: templates/zinnia/entry_detail.html:131
+#: templates/zinnia/entry_detail.html:133
 msgid "Pingbacks are open."
 msgstr "Les pingbacks sont ouverts."
 
-#: templates/zinnia/entry_detail.html:133
+#: templates/zinnia/entry_detail.html:135
 msgid "Pingbacks are closed."
 msgstr "Les pingbacks sont fermés."
 

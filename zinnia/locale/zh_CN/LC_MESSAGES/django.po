@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-22 10:07+0200\n"
+"POT-Creation-Date: 2010-07-28 17:45+0200\n"
 "PO-Revision-Date: 2010-05-05 20:49+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -174,12 +174,32 @@ msgstr "含有模式 %s 的新闻"
 
 #: feeds.py:201
 #, python-format
-msgid "Comments on %s"
-msgstr "对于 %s 的评论"
+msgid "Discussions on %s"
+msgstr ""
 
 #: feeds.py:204
 #, fuzzy, python-format
+msgid "The latest discussions for the entry %s"
+msgstr "对于新闻 %s 的最新评论"
+
+#: feeds.py:218
+#, python-format
+msgid "Comments on %s"
+msgstr "对于 %s 的评论"
+
+#: feeds.py:221
+#, fuzzy, python-format
 msgid "The latest comments for the entry %s"
+msgstr "对于新闻 %s 的最新评论"
+
+#: feeds.py:234
+#, fuzzy, python-format
+msgid "Pingbacks on %s"
+msgstr "评论已关闭"
+
+#: feeds.py:237
+#, fuzzy, python-format
+msgid "The latest pingbacks for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
 #: models.py:26 models.py:65
@@ -388,8 +408,8 @@ msgstr "预览评论"
 
 #: templates/comments/zinnia_entry_preview.html:25
 #: templates/zinnia/_entry_detail.html:16
-#: templates/zinnia/entry_detail.html:83
-#: templates/zinnia/entry_detail.html:118
+#: templates/zinnia/entry_detail.html:85
+#: templates/zinnia/entry_detail.html:120
 msgid "on date"
 msgstr "日期"
 
@@ -406,6 +426,8 @@ msgid "Preview"
 msgstr "预览"
 
 #: templates/feeds/comment_title.html:2
+#: templates/feeds/discussion_title.html:2
+#: templates/feeds/pingback_title.html:2
 msgid "on"
 msgstr "在"
 
@@ -456,8 +478,8 @@ msgid "Be first to comment !"
 msgstr "首次评论"
 
 #: templates/zinnia/_entry_detail.html:80
-#: templates/zinnia/entry_detail.html:95
-#: templates/zinnia/entry_detail.html:101
+#: templates/zinnia/entry_detail.html:97
+#: templates/zinnia/entry_detail.html:103
 msgid "Comments are closed."
 msgstr "评论已关闭"
 
@@ -569,42 +591,52 @@ msgid "More old entries"
 msgstr "更多以前日志"
 
 #: templates/zinnia/entry_detail.html:9
+#, fuzzy
+msgid "RSS Feed of discussions on"
+msgstr "RSS 源（基于评论）"
+
+#: templates/zinnia/entry_detail.html:10
 msgid "RSS Feed of comments on"
 msgstr "RSS 源（基于评论）"
 
-#: templates/zinnia/entry_detail.html:24
+#: templates/zinnia/entry_detail.html:11
+#, fuzzy
+msgid "RSS Feed of pingbacks on"
+msgstr "RSS 源（基于评论）"
+
+#: templates/zinnia/entry_detail.html:26
 msgid "Next entry"
 msgstr "下一篇"
 
-#: templates/zinnia/entry_detail.html:36
+#: templates/zinnia/entry_detail.html:38
 msgid "Previous entry"
 msgstr "上一篇"
 
-#: templates/zinnia/entry_detail.html:48
+#: templates/zinnia/entry_detail.html:50
 msgid "Related entries"
 msgstr "相关日志"
 
-#: templates/zinnia/entry_detail.html:59
+#: templates/zinnia/entry_detail.html:61
 msgid "Similar entries"
 msgstr "类似日志"
 
-#: templates/zinnia/entry_detail.html:67
+#: templates/zinnia/entry_detail.html:69
 msgid "Comments"
 msgstr "评论"
 
-#: templates/zinnia/entry_detail.html:99
+#: templates/zinnia/entry_detail.html:101
 msgid "Not yet comments !"
 msgstr "尚未有评论"
 
-#: templates/zinnia/entry_detail.html:109
+#: templates/zinnia/entry_detail.html:111
 msgid "Pingbacks"
 msgstr ""
 
-#: templates/zinnia/entry_detail.html:131
+#: templates/zinnia/entry_detail.html:133
 msgid "Pingbacks are open."
 msgstr ""
 
-#: templates/zinnia/entry_detail.html:133
+#: templates/zinnia/entry_detail.html:135
 #, fuzzy
 msgid "Pingbacks are closed."
 msgstr "评论已关闭"

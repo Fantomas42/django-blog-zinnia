@@ -167,23 +167,23 @@ class SearchEntries(EntryFeed):
         return _("The entries containing the pattern %s") % obj
 
 
-class CommentEntries(Feed):
-    """Feed for comments in an entry"""
-    title_template = 'feeds/comment_title.html'
-    description_template= 'feeds/comment_description.html'
+class EntryDiscussions(Feed):
+    """Feed for discussions in an entry"""
+    title_template = 'feeds/discussion_title.html'
+    description_template= 'feeds/discussion_description.html'
     feed_copyright = COPYRIGHT
 
     def get_object(self, request, slug):
         return get_object_or_404(Entry, slug=slug)
 
     def items(self, obj):
-        return Comment.objects.for_model(obj).order_by('-submit_date')[:10]
+        return obj.discussions
 
     def item_pubdate(self, item):
         return item.submit_date
 
     def item_link(self, item):
-        return item.get_absolute_url('#comment_%(id)s')
+        return item.get_absolute_url()
 
     def link(self, obj):
         return obj.get_absolute_url()
@@ -198,10 +198,43 @@ class CommentEntries(Feed):
         return item.userinfo['url']
 
     def title(self, obj):
+        return _('Discussions on %s') % obj.title
+
+    def description(self, obj):
+        return _('The latest discussions for the entry %s') % obj.title
+    
+
+class EntryComments(EntryDiscussions):
+    title_template = 'feeds/comment_title.html'
+    description_template= 'feeds/comment_description.html'
+
+    def items(self, obj):
+        return obj.comments
+
+    def item_link(self, item):
+        return item.get_absolute_url('#comment_%(id)s')
+
+    def title(self, obj):
         return _('Comments on %s') % obj.title
 
     def description(self, obj):
         return _('The latest comments for the entry %s') % obj.title
+
+class EntryPingbacks(EntryDiscussions):
+    title_template = 'feeds/pingback_title.html'
+    description_template= 'feeds/pingback_description.html'
+
+    def items(self, obj):
+        return obj.pingbacks
+
+    def item_link(self, item):
+        return item.get_absolute_url('#pingback_%(id)s')
+
+    def title(self, obj):
+        return _('Pingbacks on %s') % obj.title
+
+    def description(self, obj):
+        return _('The latest pingbacks for the entry %s') % obj.title
 
 # Atom versions of the feeds
 
@@ -225,6 +258,14 @@ class AtomSearchEntries(SearchEntries):
     feed_type = Atom1Feed
     subtitle = SearchEntries.description
 
-class AtomCommentEntries(CommentEntries):
+class AtomEntryDiscussions(EntryDiscussions):
     feed_type = Atom1Feed
-    subtitle = CommentEntries.description
+    subtitle = EntryDiscussions.description
+
+class AtomEntryComments(EntryComments):
+    feed_type = Atom1Feed
+    subtitle = EntryComments.description
+
+class AtomEntryPingbacks(EntryPingbacks):
+    feed_type = Atom1Feed
+    subtitle = EntryPingbacks.description

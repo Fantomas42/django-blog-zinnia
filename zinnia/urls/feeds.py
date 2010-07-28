@@ -2,7 +2,9 @@
 from django.conf.urls.defaults import *
 
 from zinnia.feeds import LatestEntries, AtomLatestEntries
-from zinnia.feeds import CommentEntries, AtomCommentEntries
+from zinnia.feeds import EntryDiscussions, AtomEntryDiscussions
+from zinnia.feeds import EntryComments, AtomEntryComments
+from zinnia.feeds import EntryPingbacks, AtomEntryPingbacks
 from zinnia.feeds import SearchEntries, AtomSearchEntries
 from zinnia.feeds import TagEntries, AtomTagEntries
 from zinnia.feeds import CategoryEntries, AtomCategoryEntries
@@ -23,8 +25,12 @@ if FEEDS_FORMAT == 'atom':
                                name='zinnia_category_feed'),
                            url(r'^search/(?P<slug>[-\w]+)/$', AtomSearchEntries(),
                                name='zinnia_entry_search_feed'),
-                           url(r'^comments/(?P<slug>[-\w]+)/$', AtomCommentEntries(),
+                           url(r'^discussions/(?P<slug>[-\w]+)/$', AtomEntryDiscussions(),
+                               name='zinnia_entry_discussion_feed'),
+                           url(r'^comments/(?P<slug>[-\w]+)/$', AtomEntryComments(),
                                name='zinnia_entry_comment_feed'),
+                           url(r'^pingbacks/(?P<slug>[-\w]+)/$', AtomEntryPingbacks(),
+                               name='zinnia_entry_pingback_feed'),
                            )
 else:
     urlpatterns = patterns('',
@@ -38,7 +44,11 @@ else:
                                name='zinnia_category_feed'),
                            url(r'^search/(?P<slug>[-\w]+)/$', SearchEntries(),
                                name='zinnia_entry_search_feed'),
-                           url(r'^comments/(?P<slug>[-\w]+)/$', CommentEntries(),
+                           url(r'^discussions/(?P<slug>[-\w]+)/$', EntryDiscussions(),
+                               name='zinnia_entry_discussion_feed'),
+                           url(r'^comments/(?P<slug>[-\w]+)/$', EntryComments(),
                                name='zinnia_entry_comment_feed'),
+                           url(r'^pingbacks/(?P<slug>[-\w]+)/$', EntryPingbacks(),
+                               name='zinnia_entry_pingback_feed'),
                            )
 
