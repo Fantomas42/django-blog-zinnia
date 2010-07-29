@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-07-28 17:45+0200\n"
-"PO-Revision-Date: 2010-07-28 17:47+0100\n"
+"PO-Revision-Date: 2010-07-29 14:56+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -529,7 +529,7 @@ msgstr "Articles au hasard"
 
 #: templates/zinnia/base.html:48
 msgid "Popular entries"
-msgstr "Articles populaire"
+msgstr "Articles populaires"
 
 #: templates/zinnia/base.html:52
 #: templates/zinnia/entry_archive_day.html:4
