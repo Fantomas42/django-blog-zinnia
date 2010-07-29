@@ -280,6 +280,10 @@ Display the archives by month.
 
 Display all the categories available.
 
+* get_recent_comments(number=5, template="zinnia/tags/recent_comments.html")
+
+Display the latest comments.
+
 * zinnia_breadcrumbs(separator="/", root_name="Blog", template="zinnia/tags/breadcrumbs.html")
 
 Display the breadcrumbs for the pages handled by Zinnia.

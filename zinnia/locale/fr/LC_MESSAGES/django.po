@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-28 17:45+0200\n"
-"PO-Revision-Date: 2010-07-29 14:56+0100\n"
+"POT-Creation-Date: 2010-07-29 16:29+0200\n"
+"PO-Revision-Date: 2010-07-29 16:31+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -460,6 +460,7 @@ msgid "Show %(author)s entries"
 msgstr "Voir les articles de %(author)s"
 
 #: templates/zinnia/_entry_detail.html:17
+#: templates/zinnia/tags/recent_comments.html:7
 msgid "in"
 msgstr "sous"
 
@@ -483,6 +484,7 @@ msgstr[0] "%(comment_count)s commentaire    "
 msgstr[1] "%(comment_count)s commentaires"
 
 #: templates/zinnia/_entry_detail.html:75
+#: templates/zinnia/tags/recent_comments.html:16
 msgid "Not yet comments."
 msgstr "Pas de commentaires."
 
@@ -524,14 +526,18 @@ msgid "Recent entries"
 msgstr "Articles récents"
 
 #: templates/zinnia/base.html:44
+msgid "Recent comments"
+msgstr "Commentaires récents"
+
+#: templates/zinnia/base.html:48
 msgid "Random entries"
 msgstr "Articles au hasard"
 
-#: templates/zinnia/base.html:48
+#: templates/zinnia/base.html:52
 msgid "Popular entries"
 msgstr "Articles populaires"
 
-#: templates/zinnia/base.html:52
+#: templates/zinnia/base.html:56
 #: templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_year.html:4
@@ -722,6 +728,10 @@ msgstr "Liste des tags"
 #: templates/zinnia/tags/archives_entries.html:11
 msgid "Not yet archives."
 msgstr "Pas encore d'archives."
+
+#: templates/zinnia/tags/recent_comments.html:9
+msgid "Comment on"
+msgstr "Commentaire sur"
 
 #: templates/zinnia/tags/similar_entries.html:9
 msgid "No similar entries."

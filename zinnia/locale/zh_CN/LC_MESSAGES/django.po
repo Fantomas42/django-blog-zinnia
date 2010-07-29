@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-28 17:45+0200\n"
+"POT-Creation-Date: 2010-07-29 16:29+0200\n"
 "PO-Revision-Date: 2010-05-05 20:49+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -441,6 +441,7 @@ msgid "Show %(author)s entries"
 msgstr "显示 %(author)s 的日志"
 
 #: templates/zinnia/_entry_detail.html:17
+#: templates/zinnia/tags/recent_comments.html:7
 msgid "in"
 msgstr "在"
 
@@ -470,6 +471,7 @@ msgstr[1] ""
 "    "
 
 #: templates/zinnia/_entry_detail.html:75
+#: templates/zinnia/tags/recent_comments.html:16
 msgid "Not yet comments."
 msgstr "尚未有评论"
 
@@ -511,14 +513,19 @@ msgid "Recent entries"
 msgstr "最近日志"
 
 #: templates/zinnia/base.html:44
+#, fuzzy
+msgid "Recent comments"
+msgstr "最近日志"
+
+#: templates/zinnia/base.html:48
 msgid "Random entries"
 msgstr "随机日志"
 
-#: templates/zinnia/base.html:48
+#: templates/zinnia/base.html:52
 msgid "Popular entries"
 msgstr "热门日志"
 
-#: templates/zinnia/base.html:52 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:56 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/tags/archives_entries.html:5
@@ -716,6 +723,11 @@ msgstr "标签列表"
 #: templates/zinnia/tags/archives_entries.html:11
 msgid "Not yet archives."
 msgstr "没有的归档"
+
+#: templates/zinnia/tags/recent_comments.html:9
+#, fuzzy
+msgid "Comment on"
+msgstr "对于 %s 的评论"
 
 #: templates/zinnia/tags/similar_entries.html:9
 msgid "No similar entries."
