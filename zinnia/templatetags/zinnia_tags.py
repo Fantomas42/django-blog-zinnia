@@ -47,7 +47,7 @@ def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
 def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     """Return popular  entries"""
     entries_comment = [(e, e.comments.count()) for e in Entry.published.all()]
-    entries_comment = sorted(entries_comment, key=lambda x: (x[1], x[0]),
+    entries_comment = sorted(entries_comment, key=lambda x: (x[1], x[0].pk),
                              reverse=True)[:number]
     entries = [entry for entry, n_comments in entries_comment]
     return {'template': template,
