@@ -23,7 +23,8 @@ class Category(models.Model):
     """Category object for Entry"""
 
     title = models.CharField(_('title'), max_length=50)
-    slug = models.SlugField(help_text=_('used for publication'))
+    slug = models.SlugField(help_text=_('used for publication'),
+                            unique=True)
     description = models.TextField(_('description'), blank=True)
 
     def entries_published_set(self):
