@@ -32,10 +32,10 @@ Main features :
   * Bit.ly support
   * Twitter support
   * Gravatar support
-  * WYMeditor support
   * Django-cms plugins
   * Collaborative work
   * Tags autocompletion
+  * WYMeditor or TinyMCE support
   * Ready to use and extendables templates
   * WordPress conversion utility
 
@@ -89,6 +89,7 @@ Add these following template context processors if not already present. ::
   ...      'django.core.context_processors.request',
   ...      'django.core.context_processors.media',
   ...      'zinnia.context_processors.media',
+  ...      'zinnia.context_processors.wysiwyg',
   ...      'zinnia.context_processors.version',# Optionnal
   ...	)
 

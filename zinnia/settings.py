@@ -11,6 +11,9 @@ PAGINATION = getattr(settings, 'ZINNIA_PAGINATION', 10)
 ALLOW_EMPTY = getattr(settings, 'ZINNIA_ALLOW_EMPTY', True)
 ALLOW_FUTURE = getattr(settings, 'ZINNIA_ALLOW_FUTURE', True)
 
+WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
+                  'tinymce' in settings.INSTALLED_APPS and 'tinymce' or 'wymeditor')
+
 MAIL_COMMENT = getattr(settings, 'ZINNIA_MAIL_COMMENT', True)
 AKISMET_COMMENT = getattr(settings, 'ZINNIA_AKISMET_COMMENT', True)
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads')
