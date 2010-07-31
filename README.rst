@@ -209,7 +209,7 @@ XML-RPC
 
 Zinnia provides few webservices via XML-RPC, but before using it,
 you need to install `django-xmlrpc
-<https://launchpad.net/django-xmlrpc>`_, and `BeautifulSoup
+<http://github.com/Fantomas42/django-xmlrpc>`_, and `BeautifulSoup
 <http://www.crummy.com/software/BeautifulSoup/>`_.
 
 Then register **django_xmlrpc** in your INSTALLED_APPS section of your project's settings.
@@ -231,19 +231,6 @@ Finally we need to register the url of the XML-RPC server.
 Insert something like this in your project's urls.py: ::
 
   >>> url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
-
-**Warning** : Since Django 1.2 *django_xmlrpc* will returns a 403 error,
-if *'django.middleware.csrf.CsrfMiddleware'* is enabled, we need to patch it.
-
-Edit the views.py file contained in *django_xmlrpc* and add this import. ::
-
-  >>> from django.views.decorators.csrf import csrf_exempt
-
-Now decorate the *handle_xmlrpc* function with *csrf_exempt* like this. ::
-
-  >>> @csrf_exempt
-  >>> def handle_xmlrpc(request):
-  ...   # code
 
 **Note** : For the Pingback service check if your site is enabled for pingback detection. 
 More information at http://hixie.ch/specs/pingback/pingback-1.0#TOC2
