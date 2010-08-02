@@ -1,22 +1,19 @@
 """Admin of Zinnia"""
 from datetime import datetime
 
+from django.forms import Media
 from django.contrib import admin
+from django.conf.urls.defaults import *
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from django.utils.text import truncate_words
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.core.urlresolvers import reverse, NoReverseMatch
 
+from zinnia import settings
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import PUBLISHED
-from zinnia.settings import USE_BITLY
-from zinnia.settings import USE_TWITTER
-from zinnia.settings import TWITTER_USER
-from zinnia.settings import TWITTER_PASSWORD
-from zinnia.settings import PING_DIRECTORIES
-from zinnia.settings import SAVE_PING_DIRECTORIES
 from zinnia.ping import DirectoryPinger
 
 
@@ -150,7 +147,7 @@ class EntryAdmin(admin.ModelAdmin):
         entry.last_update = datetime.now()
         entry.save()
 
-        if entry.is_visible and SAVE_PING_DIRECTORIES:
+        if entry.is_visible and settings.SAVE_PING_DIRECTORIES:
             self.ping_directories(request, [entry])
 
     def queryset(self, request):
@@ -177,9 +174,9 @@ class EntryAdmin(admin.ModelAdmin):
         if not request.user.has_perm('zinnia.can_change_author') \
            or not request.user.has_perm('zinnia.can_view_all'):
             del actions['make_mine']
-        if not PING_DIRECTORIES:
+        if not settings.PING_DIRECTORIES:
             del actions['ping_directories']
-        if not USE_TWITTER or not USE_BITLY:
+        if not settings.USE_TWITTER or not settings.USE_BITLY:
             del actions['make_tweet']
 
         return actions
@@ -205,7 +202,8 @@ class EntryAdmin(admin.ModelAdmin):
     def make_tweet(self, request, queryset):
         """Post an update on Twitter"""
         import twitter
-        api = twitter.Api(username=TWITTER_USER, password=TWITTER_PASSWORD)
+        api = twitter.Api(username=settings.TWITTER_USER,
+                          password=settings.TWITTER_PASSWORD)
         for entry in queryset:
             message = '%s %s' % (entry.title[:119], entry.short_url)
             api.PostUpdate(message)
@@ -224,7 +222,7 @@ class EntryAdmin(admin.ModelAdmin):
     def ping_directories(self, request, queryset):
         """Ping Directories for selected entries"""
         success = 0
-        for directory in PING_DIRECTORIES:
+        for directory in settings.PING_DIRECTORIES:
             pinger = DirectoryPinger(directory)
             for entry in queryset:
                 response = pinger.ping(entry)
@@ -232,6 +230,38 @@ class EntryAdmin(admin.ModelAdmin):
                     success += 1
         self.message_user(request, _('%i directories succesfully pinged.') % success)
     ping_directories.short_description = _('Ping Directories for selected entries')
+
+    def get_urls(self):
+        entry_admin_urls = super(EntryAdmin, self).get_urls()
+        urls = patterns('django.views.generic.simple',
+                        url(r'^autocomplete_tags/$', 'direct_to_template',
+                            {'template': 'admin/zinnia/entry/autocomplete_tags.js',
+                             'mimetype': 'application/javascript'},
+                            name='zinnia_entry_autocomplete_tags'),
+                        url(r'^wymeditor/$', 'direct_to_template',
+                            {'template': 'admin/zinnia/entry/wymeditor.js',
+                             'mimetype': 'application/javascript'},
+                            name='zinnia_entry_wymeditor'),)
+        return urls + entry_admin_urls
+
+    def _media(self):
+        MEDIA_URL = settings.MEDIA_URL
+        media = Media(css={'all': ('%scss/jquery.autocomplete.css' % MEDIA_URL,),},
+                      js=('%sjs/jquery.js' % MEDIA_URL,
+                          '%sjs/jquery.bgiframe.js' % MEDIA_URL,
+                          '%sjs/jquery.autocomplete.js' % MEDIA_URL,
+                          reverse('admin:zinnia_entry_autocomplete_tags'),))
+        
+        if settings.WYSIWYG == 'wymeditor':
+            media += Media(js=('%sjs/wymeditor/jquery.wymeditor.pack.js' % MEDIA_URL,
+                               reverse('admin:zinnia_entry_wymeditor')))
+        elif settings.WYSIWYG == 'tinymce':
+            from tinymce.widgets import TinyMCE
+            media += TinyMCE().media + Media(
+                js=(reverse('tinymce-js', args=('admin/zinnia/entry',)),))
+        return media
+    media = property(_media)
+
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Entry, EntryAdmin)

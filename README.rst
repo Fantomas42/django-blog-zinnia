@@ -89,7 +89,6 @@ Add these following template context processors if not already present. ::
   ...      'django.core.context_processors.request',
   ...      'django.core.context_processors.media',
   ...      'zinnia.context_processors.media',
-  ...      'zinnia.context_processors.wysiwyg',
   ...      'zinnia.context_processors.version',# Optionnal
   ...	)
 
@@ -150,6 +149,15 @@ so if you want to fill your website's sitemap with the entries of your blog, fol
   ...                         (r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
   ...                          {'sitemaps': sitemaps}),
   ...			      )
+
+TinyMCE
+-------
+
+If you want to replace WYMEditor by TinyMCE install `django-tinymce
+<http://code.google.com/p/django-tinymce/>`_ and follow the `installation instructions
+<http://django-tinymce.googlecode.com/svn/trunk/docs/.build/html/index.html>`_.
+
+TinyMCE can be customized by overriding the *admin/zinnia/entry/tinymce_textareas.js* template.
 
 Akismet
 -------
