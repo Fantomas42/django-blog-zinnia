@@ -21,7 +21,7 @@ ZINNIA_ALLOW_FUTURE
   Used for allowing archives views in the future.
 
 ZINNIA_WYSIWYG
-  **Default : ** 'tinymce' if in settings.INSTALLED_APPS else 'wymeditor'
+  **Default :** 'tinymce' if in settings.INSTALLED_APPS else 'wymeditor'
 
   Used for determining the WYSIWYG editor for editing an entry.
   Can also be used for disabling the WYSIWYG functionnality.
