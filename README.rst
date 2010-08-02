@@ -150,15 +150,6 @@ so if you want to fill your website's sitemap with the entries of your blog, fol
   ...                          {'sitemaps': sitemaps}),
   ...			      )
 
-TinyMCE
--------
-
-If you want to replace WYMEditor by TinyMCE install `django-tinymce
-<http://code.google.com/p/django-tinymce/>`_ and follow the `installation instructions
-<http://django-tinymce.googlecode.com/svn/trunk/docs/.build/html/index.html>`_.
-
-TinyMCE can be customized by overriding the *admin/zinnia/entry/tinymce_textareas.js* template.
-
 Akismet
 -------
 
@@ -211,6 +202,15 @@ If you use `django-cms
 Simply register **zinnia.plugins** in the INSTALLED_APPS section of your project's settings.
 
 It will provides custom plugins for adding entries into your pages, an App-Hook and Menus for easy integration.
+
+TinyMCE
+-------
+
+If you want to replace WYMEditor by TinyMCE install `django-tinymce
+<http://code.google.com/p/django-tinymce/>`_ and follow the `installation instructions
+<http://django-tinymce.googlecode.com/svn/trunk/docs/.build/html/index.html>`_.
+
+TinyMCE can be customized by overriding the *admin/zinnia/entry/tinymce_textareas.js* template.
 
 XML-RPC
 -------
