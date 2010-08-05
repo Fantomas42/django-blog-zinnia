@@ -246,7 +246,8 @@ class EntryAdmin(admin.ModelAdmin):
 
     def _media(self):
         MEDIA_URL = settings.MEDIA_URL
-        media = Media(css={'all': ('%scss/jquery.autocomplete.css' % MEDIA_URL,),},
+        media = super(EntryAdmin, self).media + \
+                Media(css={'all': ('%scss/jquery.autocomplete.css' % MEDIA_URL,),},
                       js=('%sjs/jquery.js' % MEDIA_URL,
                           '%sjs/jquery.bgiframe.js' % MEDIA_URL,
                           '%sjs/jquery.autocomplete.js' % MEDIA_URL,
