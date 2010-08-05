@@ -58,6 +58,13 @@ def user_structure(user, site):
             'url': 'http://%s%s' % (
                 site.domain, reverse('zinnia_author_detail', args=[user.username]))}
 
+def author_structure(user):
+    """An author structure"""
+    return {'user_id': user.pk,
+            'user_login': user.username,
+            'display_name': user.username,
+            'user_email': user.email}
+
 def category_structure(category, site):
     """A category structure"""
     return {'description': category.title,
@@ -68,6 +75,7 @@ def category_structure(category, site):
 
 def post_structure(entry, site):
     """A post structure with extensions"""
+    author = entry.authors.all()[0]
     return {'title': entry.title,
             'description': unicode(entry.html_content),
             'link': 'http://%s%s' % (site.domain, entry.get_absolute_url()),
@@ -76,13 +84,16 @@ def post_structure(entry, site):
             'categories': [cat.title for cat in entry.categories.all()],
             'dateCreated': DateTime(entry.creation_date.isoformat()),
             'postid': entry.pk,
-            'userid': entry.authors.all()[0].username,
+            'userid': author.username,
             # Usefull Movable Type Extensions
             'mt_excerpt': entry.excerpt,
             'mt_allow_comments': int(entry.comment_enabled),
             'mt_allow_pings': int(entry.pingback_enabled),
             'mt_keywords': entry.tags,
             # Usefull Wordpress Extensions
+            'wp_author': author.username,
+            'wp_author_id': author.pk,
+            'wp_author_display_name': author.username,
             'wp_slug': entry.slug}
 
 @xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])
@@ -100,6 +111,13 @@ def get_user_info(apikey, username, password):
     user = authenticate(username, password)
     site = Site.objects.get_current()
     return user_structure(user, site)
+
+@xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])
+def get_authors(apikey, username, password):
+    """wp.getAuthors(api_key, username, password)
+    => author structure[]"""
+    user = authenticate(username, password)
+    return [author_structure(author) for author in User.objects.filter(is_staff=True)]
 
 @xmlrpc_func(returns='boolean', args=['string', 'string', 'string', 'string', 'string'])
 def delete_post(apikey, post_id, username, password, publish):
@@ -158,7 +176,13 @@ def new_post(blog_id, username, password, post, publish):
                   'slug': post.has_key('wp_slug') and post['wp_slug'] or slugify(post['title']),
                   'status': publish and PUBLISHED or DRAFT}
     entry = Entry.objects.create(**entry_dict)
-    entry.authors.add(user)
+
+    author = user
+    if post.has_key('wp_author_id') and user.has_perm('zinnia.can_change_author'):
+        if int(post['wp_author_id']) != user.pk:
+            author = User.objects.get(pk=post['wp_author_id'])
+    entry.authors.add(author)
+
     entry.sites.add(Site.objects.get_current())
     if post.has_key('categories'):
         entry.categories.add(*[Category.objects.get_or_create(title=cat, slug=slugify(cat))[0]
@@ -190,6 +214,13 @@ def edit_post(post_id, username, password, post, publish):
     entry.slug = post.has_key('wp_slug') and post['wp_slug'] or slugify(post['title'])
     entry.status = publish and PUBLISHED or DRAFT
     entry.save()
+
+    if post.has_key('wp_author_id') and user.has_perm('zinnia.can_change_author'):
+        if int(post['wp_author_id']) != user.pk:
+            author = User.objects.get(pk=post['wp_author_id'])
+            entry.authors.clear()
+            entry.authors.add(author)
+
     if post.has_key('categories'):
         entry.categories.clear()
         entry.categories.add(*[Category.objects.get_or_create(title=cat, slug=slugify(cat))[0]

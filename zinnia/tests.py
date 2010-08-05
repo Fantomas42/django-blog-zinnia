@@ -640,6 +640,15 @@ class MetaWeblogTestCase(TestCase):
                            'userid': 1, 'nickname': 'webmaster',
                            'email': 'webmaster@example.com'})
 
+    def test_get_authors(self):
+        self.assertRaises(Fault, self.server.wp.getAuthors,
+                          'apikey', 'contributor', 'password')
+        self.assertEquals(self.server.wp.getAuthors(
+            'apikey', 'webmaster', 'password'), [
+                              {'user_login': 'webmaster', 'user_id': 1,
+                               'user_email': 'webmaster@example.com',
+                               'display_name': 'webmaster'}])
+
     def test_get_categories(self):
         self.assertRaises(Fault, self.server.metaWeblog.getCategories,
                           1, 'contributor', 'password')
@@ -683,6 +692,9 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(post['mt_allow_comments'], 1)
         self.assertEquals(post['mt_allow_pings'], 1)
         self.assertEquals(post['mt_keywords'], self.entry_1.tags)
+        self.assertEquals(post['wp_author'], 'webmaster')
+        self.assertEquals(post['wp_author_id'], 1)
+        self.assertEquals(post['wp_author_display_name'], 'webmaster')
         self.assertEquals(post['wp_slug'], self.entry_1.slug)
 
     def test_new_post(self):
@@ -716,6 +728,8 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.comment_enabled, True)
         self.assertEquals(entry.pingback_enabled, True)
         self.assertEquals(entry.categories.count(), 1)
+        self.assertEquals(entry.authors.count(), 1)
+        self.assertEquals(entry.authors.all()[0].pk, 1)
         self.assertEquals(entry.creation_date, self.entry_2.creation_date)
 
         entry.title = 'Title edited'
@@ -725,6 +739,7 @@ class MetaWeblogTestCase(TestCase):
         post['description'] = 'Content edited'
         post['mt_excerpt'] = 'Content edited'
         post['wp_slug'] = 'slug-edited'
+        post['wp_author_id'] = 2
         post['mt_allow_comments'] = 2
         post['mt_allow_pings'] = 0
 
@@ -740,6 +755,8 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.comment_enabled, False)
         self.assertEquals(entry.pingback_enabled, False)
         self.assertEquals(entry.categories.count(), 0)
+        self.assertEquals(entry.authors.count(), 1)
+        self.assertEquals(entry.authors.all()[0].pk, 2)
         self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
 
 

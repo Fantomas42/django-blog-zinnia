@@ -16,7 +16,7 @@
     <supportsKeywords>Yes</supportsKeywords>
     <supportsCommentPolicy>Yes</supportsCommentPolicy>
     <supportsPingPolicy>Yes</supportsPingPolicy>
-    <supportsAuthor>No</supportsAuthor>
+    <supportsAuthor>Yes</supportsAuthor>
     <supportsSlug>Yes</supportsSlug>
     <supportsPassword>No</supportsPassword>
     <supportsExcerpt>Yes</supportsExcerpt>
