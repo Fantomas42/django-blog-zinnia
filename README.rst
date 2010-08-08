@@ -28,13 +28,13 @@ Main features :
   * Spam protection with Akismet
   * MetaWeblog API
   * Ping Directories
-  * Pingback support
   * Bit.ly support
   * Twitter support
   * Gravatar support
   * Django-cms plugins
   * Collaborative work
   * Tags autocompletion
+  * Pingback/Trackback support
   * WYMeditor or TinyMCE support
   * Ready to use and extendables templates
   * WordPress conversion utility
@@ -111,11 +111,14 @@ Add the following lines to your project's urls.py in order to display the blog. 
 
 Note that the default zinnia urlset is provided for convenient usage, but you can customize your urls if you want. Here's how : ::
 
+  >>> url(r'^', include('zinnia.urls.capabilities')),
+  >>> url(r'^search/', include('zinnia.urls.search')),
+  >>> url(r'^sitemap/', include('zinnia.urls.sitemap')),
+  >>> url(r'^trackback/', include('zinnia.urls.trackback')),
+  >>> url(r'^weblog/tags/', include('zinnia.urls.tags')),
   >>> url(r'^weblog/feeds/', include('zinnia.urls.feeds')),
   >>> url(r'^weblog/authors/', include('zinnia.urls.authors')),
   >>> url(r'^weblog/categories/', include('zinnia.urls.categories')),
-  >>> url(r'^weblog/search/', include('zinnia.urls.search')),
-  >>> url(r'^weblog/', include('zinnia.urls.capabilities')),
   >>> url(r'^weblog/', include('zinnia.urls.entries')),
   >>> url(r'^comments/', include('django.contrib.comments.urls')),
 
@@ -326,12 +329,23 @@ it's simple, create a account on Transifex.net and you will have the possibility
 
 http://www.transifex.net/projects/p/django-blog-zinnia/c/master/
 
+Ressources
+==========
+
+  * Online `documentation of Zinnia
+    <http://django-blog-zinnia.com/docs/>`_.
+  * Online `API of Zinnia module
+    <http://django-blog-zinnia.com/docs/api/>`_.
+  * Discussions and help at `Google Group
+    <http://groups.google.com/group/django-blog-zinnia/>`_.
+  * For reporting a bug or submitting a suggestion use `Github Issues
+    <http://github.com/Fantomas42/django-blog-zinnia/issues/>`_.
 
 Examples
 ========
 
-  * `Demo of Zinnia
-    <http://django-blog-zinnia.com>`_.
+  * `Demo site of Zinnia
+    <http://django-blog-zinnia.com/blog/>`_.
   * `Fantomas' side
     <http://fantomas.willbreak.it>`_.
 
