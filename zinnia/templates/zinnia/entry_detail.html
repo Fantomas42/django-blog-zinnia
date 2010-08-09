@@ -22,30 +22,34 @@
 <hr />
 
 <div class="entryWidgets span-16 last">
-  {% if object.next_entry %}
+  {% with object.next_entry as next_entry %}
+  {% if next_entry %}
   <div class="entryNext">
     <h3>{% trans "Next entry" %}</h3>
     <ul>
       <li>
-	<a href="{{ object.next_entry.get_absolute_url }}" title="{{ object.next_entry.title }}">
-	  {{ object.next_entry.title }}
+	<a href="{{ next_entry.get_absolute_url }}" title="{{ next_entry.title }}">
+	  {{ next_entry.title }}
 	</a>
       </li>
     </ul>
   </div>
   {% endif %}
-  {% if object.previous_entry %}
+  {% endwith %}
+  {% with object.previous_entry as previous_entry %}
+  {% if previous_entry %}
   <div class="entryPrevious">
     <h3>{% trans "Previous entry" %}</h3>
     <ul>
       <li>
-	<a href="{{ object.previous_entry.get_absolute_url }}" title="{{ object.previous_entry.title }}">
-	  {{ object.previous_entry.title }}
+	<a href="{{ previous_entry.get_absolute_url }}" title="{{ previous_entry.title }}">
+	  {{ previous_entry.title }}
 	</a>
       </li>
     </ul>
   </div>
   {% endif %}
+  {% endwith %}
   {% if object.related_published_set %}
   <div class="entryRelated">
     <h3>{% trans "Related entries" %}</h3>

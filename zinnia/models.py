@@ -95,7 +95,7 @@ class Entry(models.Model):
     def previous_entry(self):
         """Return the previous entry"""
         entries = Entry.published.filter(
-            creation_date__lt=self.creation_date)
+            creation_date__lt=self.creation_date)[:1]
         if entries:
             return entries[0]
 
@@ -103,7 +103,7 @@ class Entry(models.Model):
     def next_entry(self):
         """Return the next entry"""
         entries = Entry.published.filter(
-            creation_date__gt=self.creation_date).order_by('creation_date')
+            creation_date__gt=self.creation_date).order_by('creation_date')[:1]
         if entries:
             return entries[0]
 
