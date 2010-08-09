@@ -255,10 +255,11 @@ class Command(LabelCommand):
         for comment_node in comment_nodes:
             is_pingback = comment_node.find(
                 '{http://wordpress.org/export/1.0/}comment_type').text == 'pingback'
+            is_trackback = comment_node.find(
+                '{http://wordpress.org/export/1.0/}comment_type').text == 'trackback'
 
-            title = '%s #%s' % (is_pingback and 'Pingback' or 'Comment',
-                                comment_node.find(
-                                    '{http://wordpress.org/export/1.0/}comment_id/').text)
+            title = 'Comment #%s' % (comment_node.find(
+                '{http://wordpress.org/export/1.0/}comment_id/').text)
             self.write_out(' > %s... ' % title)
 
             content = comment_node.find(
@@ -299,5 +300,7 @@ class Command(LabelCommand):
                 comment.flags.create(user=entry.authors.all()[0], flag='spam')
             if is_pingback:
                 comment.flags.create(user=entry.authors.all()[0], flag='pingback')
+            if is_trackback:
+                comment.flags.create(user=entry.authors.all()[0], flag='trackback')
 
             self.write_out(self.style.ITEM('OK\n'))
