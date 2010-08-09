@@ -9,6 +9,7 @@
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of discussions on" %} '{{ object.title }}'" href="{% url zinnia_entry_discussion_feed object.slug %}" />
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'" href="{% url zinnia_entry_comment_feed object.slug %}" />
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of pingbacks on" %} '{{ object.title }}'" href="{% url zinnia_entry_pingback_feed object.slug %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of trackbacks on" %} '{{ object.title }}'" href="{% url zinnia_entry_trackback_feed object.slug %}" />
 {% endblock %}
 
 {% block content %}
@@ -134,8 +135,36 @@
     {% else %}
   <p>{% trans "Pingbacks are closed." %}</p>
     {% endif %}
-  {% endwith %}
-  
+  {% endwith %}  
+</div>
+
+<hr />
+<div id="trackbacks" class="span-16 last">
+  <h3>{% trans "Trackbacks" %}</h3>
+  {% with object.trackbacks as trackback_list %}
+  {% if trackback_list.count %}
+  <ol id="trackbackList" class="span-16 last">
+    {% for trackback in trackback_list %}
+    <li id="trackback_{{ trackback.pk }}" class="trackback {% cycle box1,box2 %} span-16 last">
+      <div class="trackback_body span-16 last">
+	<div class="span-16 last">
+	  <a href="{{ trackback.url }}">{{ trackback.user_name }}</a>
+	  {% trans "on date" %} {{ trackback.submit_date|date:"l d F Y" }}
+	</div>
+	<div class="span-16 last">
+	  <cite>
+	    {{ trackback.comment }}
+	  </cite>
+	</div>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+    {% if object.pingback_enabled %}
+  <p><a href="{% url zinnia_entry_trackback object.slug %}" rel="trackback">{% trans "Trackback URL" %}</a></p>
+    {% endif %}
+  {% endwith %}  
 </div>
 
 {% if object.comment_enabled %}

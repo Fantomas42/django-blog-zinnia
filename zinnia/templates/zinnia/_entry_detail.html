@@ -88,6 +88,13 @@
     </a>
     {% endif %}
     {% endwith %}
+    {% with object.trackbacks.count as trackback_count %}
+    {% if trackback_count %}
+    , <a href="{{ object.get_absolute_url }}#trackbacks" title="{{ object.title }}">
+      {% blocktrans count trackback_count as trackback_count %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}
+    </a>
+    {% endif %}
+    {% endwith %}
   </p>
 </div>
 

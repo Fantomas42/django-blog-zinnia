@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-29 16:29+0200\n"
+"POT-Creation-Date: 2010-08-09 16:18+0200\n"
 "PO-Revision-Date: 2010-05-05 20:49+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -16,109 +16,109 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: admin.py:33
+#: admin.py:30
 msgid "Content"
 msgstr "内容"
 
-#: admin.py:34
+#: admin.py:31
 msgid "Options"
 msgstr "选项"
 
-#: admin.py:38
+#: admin.py:35
 msgid "Discussion"
 msgstr ""
 
-#: admin.py:39
+#: admin.py:36
 #, fuzzy
 msgid "Publication"
 msgstr "结束发布"
 
-#: admin.py:60
+#: admin.py:57
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i 个字符)"
 
-#: admin.py:64
+#: admin.py:61
 #, python-format
 msgid "%(title)s (%(comments)i comments)"
 msgstr "%(title)s (%(comments)i 条评论)"
 
-#: admin.py:67 models.py:25 models.py:52
+#: admin.py:64 models.py:25 models.py:53
 msgid "title"
 msgstr "标题"
 
-#: admin.py:79
+#: admin.py:76
 msgid "author(s)"
 msgstr "作者"
 
-#: admin.py:91
+#: admin.py:88
 msgid "category(s)"
 msgstr "类别"
 
-#: admin.py:102
+#: admin.py:99
 msgid "tag(s)"
 msgstr "标签"
 
-#: admin.py:109
+#: admin.py:106
 msgid "site(s)"
 msgstr "网站"
 
-#: admin.py:115
+#: admin.py:112
 msgid "is actual"
 msgstr "发布期间"
 
-#: admin.py:121
+#: admin.py:118
 msgid "is visible"
 msgstr "是否可见"
 
-#: admin.py:125
+#: admin.py:122
 #, python-format
 msgid "<a href=\"%s\" target=\"blank\">View</a>"
 msgstr "<a href=\"%s\" target=\"blank\">浏览</a>"
 
-#: admin.py:127
+#: admin.py:124
 msgid "View on site"
 msgstr "浏览站点"
 
-#: admin.py:132 templates/zinnia/_entry_detail.html:62
+#: admin.py:129 templates/zinnia/_entry_detail.html:62
 msgid "Unavailable"
 msgstr "不存在"
 
-#: admin.py:136
+#: admin.py:133
 msgid "short url"
 msgstr "缩略URL"
 
-#: admin.py:193
+#: admin.py:190
 msgid "Set the entries to the user"
 msgstr "设置自己为所选日志的作者"
 
-#: admin.py:198
+#: admin.py:195
 msgid "Set entries selected as published"
 msgstr "发布所选日志"
 
-#: admin.py:203
+#: admin.py:200
 msgid "Set entries selected as hidden"
 msgstr "隐藏所选日志"
 
-#: admin.py:212
+#: admin.py:210
 msgid "Tweet entries selected"
 msgstr "推特所选日志"
 
-#: admin.py:217
+#: admin.py:215
 msgid "Close the comments for selected entries"
 msgstr "关闭所选日志的评论功能"
 
-#: admin.py:222
+#: admin.py:220
 #, fuzzy
-msgid "Close the pingbacks for selected entries"
+msgid "Close the linkbacks for selected entries"
 msgstr "关闭所选日志的评论功能"
 
-#: admin.py:233
+#: admin.py:231
 #, python-format
 msgid "%i directories succesfully pinged."
 msgstr "%i次成功提交所选日志到搜索引擎"
 
-#: admin.py:234
+#: admin.py:232
 msgid "Ping Directories for selected entries"
 msgstr "提交所选日志到搜索引擎"
 
@@ -182,127 +182,137 @@ msgstr ""
 msgid "The latest discussions for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
-#: feeds.py:218
+#: feeds.py:219
 #, python-format
 msgid "Comments on %s"
 msgstr "对于 %s 的评论"
 
-#: feeds.py:221
+#: feeds.py:222
 #, fuzzy, python-format
 msgid "The latest comments for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
-#: feeds.py:234
+#: feeds.py:236
 #, fuzzy, python-format
 msgid "Pingbacks on %s"
 msgstr "评论已关闭"
 
-#: feeds.py:237
+#: feeds.py:239
 #, fuzzy, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
-#: models.py:26 models.py:65
+#: feeds.py:253
+#, fuzzy, python-format
+msgid "Trackbacks on %s"
+msgstr "评论已关闭"
+
+#: feeds.py:256
+#, fuzzy, python-format
+msgid "The latest trackbacks for the entry %s"
+msgstr "对于新闻 %s 的最新评论"
+
+#: models.py:26 models.py:66
 msgid "used for publication"
 msgstr "用于发布"
 
-#: models.py:27
+#: models.py:28
 msgid "description"
 msgstr "描述"
 
-#: models.py:41
+#: models.py:42
 msgid "category"
 msgstr "类别"
 
-#: models.py:42 models.py:61 plugins/models.py:18
+#: models.py:43 models.py:62 plugins/models.py:18
 msgid "categories"
 msgstr "类别"
 
-#: models.py:48
+#: models.py:49
 msgid "draft"
 msgstr "草稿"
 
-#: models.py:49
+#: models.py:50
 msgid "hidden"
 msgstr "隐藏"
 
-#: models.py:50
+#: models.py:51
 msgid "published"
 msgstr "发布"
 
-#: models.py:54
+#: models.py:55
 msgid "image"
 msgstr "图片"
 
-#: models.py:55
+#: models.py:56
 msgid "used for illustration"
 msgstr "用于插图"
 
-#: models.py:56
+#: models.py:57
 msgid "content"
 msgstr "内容"
 
-#: models.py:57
+#: models.py:58
 msgid "excerpt"
 msgstr "摘要"
 
-#: models.py:58
+#: models.py:59
 msgid "optional element"
 msgstr "可选项"
 
-#: models.py:60 plugins/models.py:22
+#: models.py:61 plugins/models.py:22
 msgid "tags"
 msgstr "标签"
 
-#: models.py:62
+#: models.py:63
 msgid "related entries"
 msgstr "相关日志"
 
-#: models.py:66 plugins/models.py:20
+#: models.py:67 plugins/models.py:20
 msgid "authors"
 msgstr "作者"
 
-#: models.py:69
+#: models.py:70
 msgid "comment enabled"
 msgstr "允许评论"
 
-#: models.py:70
-msgid "pingback enabled"
+#: models.py:71
+msgid "linkback enabled"
 msgstr ""
 
-#: models.py:72
+#: models.py:73
 msgid "creation date"
 msgstr "创建日期"
 
-#: models.py:73
+#: models.py:74
 msgid "last update"
 msgstr "最后更新"
 
-#: models.py:74
+#: models.py:75
 msgid "start publication"
 msgstr "开始发布"
 
-#: models.py:75
+#: models.py:76
 msgid "date start publish"
 msgstr "开始发布日期"
 
-#: models.py:77
+#: models.py:78
 msgid "end publication"
 msgstr "结束发布"
 
-#: models.py:78
+#: models.py:79
 msgid "date end publish"
 msgstr "结束发布日期"
 
-#: models.py:81
+#: models.py:82
 msgid "sites publication"
 msgstr "发布网站"
 
-#: models.py:171
+#: models.py:177
 msgid "entry"
 msgstr "日志"
 
-#: models.py:172 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
+#: models.py:178 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
 #: plugins/models.py:39 templates/zinnia/base.html:32
 msgid "entries"
 msgstr "日志"
@@ -408,8 +418,9 @@ msgstr "预览评论"
 
 #: templates/comments/zinnia_entry_preview.html:25
 #: templates/zinnia/_entry_detail.html:16
-#: templates/zinnia/entry_detail.html:85
-#: templates/zinnia/entry_detail.html:120
+#: templates/zinnia/entry_detail.html:86
+#: templates/zinnia/entry_detail.html:121
+#: templates/zinnia/entry_detail.html:152
 msgid "on date"
 msgstr "日期"
 
@@ -428,6 +439,7 @@ msgstr "预览"
 #: templates/feeds/comment_title.html:2
 #: templates/feeds/discussion_title.html:2
 #: templates/feeds/pingback_title.html:2
+#: templates/feeds/trackback_title.html:2
 msgid "on"
 msgstr "在"
 
@@ -480,8 +492,8 @@ msgid "Be first to comment !"
 msgstr "首次评论"
 
 #: templates/zinnia/_entry_detail.html:80
-#: templates/zinnia/entry_detail.html:97
-#: templates/zinnia/entry_detail.html:103
+#: templates/zinnia/entry_detail.html:98
+#: templates/zinnia/entry_detail.html:104
 msgid "Comments are closed."
 msgstr "评论已关闭"
 
@@ -491,6 +503,19 @@ msgid "%(pingback_count)s pingback"
 msgid_plural "%(pingback_count)s pingbacks"
 msgstr[0] ""
 msgstr[1] ""
+
+#: templates/zinnia/_entry_detail.html:94
+#, fuzzy, python-format
+msgid "%(trackback_count)s trackback"
+msgid_plural "%(trackback_count)s trackbacks"
+msgstr[0] ""
+"\n"
+"  找到 %(entry_count)s 日志\n"
+"  "
+msgstr[1] ""
+"\n"
+"  找到 %(entry_count)s 日志\n"
+"  "
 
 #: templates/zinnia/author_list.html:7
 msgid "Author list"
@@ -611,42 +636,55 @@ msgstr "RSS 源（基于评论）"
 msgid "RSS Feed of pingbacks on"
 msgstr "RSS 源（基于评论）"
 
-#: templates/zinnia/entry_detail.html:26
+#: templates/zinnia/entry_detail.html:12
+#, fuzzy
+msgid "RSS Feed of trackbacks on"
+msgstr "RSS 源（基于评论）"
+
+#: templates/zinnia/entry_detail.html:27
 msgid "Next entry"
 msgstr "下一篇"
 
-#: templates/zinnia/entry_detail.html:38
+#: templates/zinnia/entry_detail.html:39
 msgid "Previous entry"
 msgstr "上一篇"
 
-#: templates/zinnia/entry_detail.html:50
+#: templates/zinnia/entry_detail.html:51
 msgid "Related entries"
 msgstr "相关日志"
 
-#: templates/zinnia/entry_detail.html:61
+#: templates/zinnia/entry_detail.html:62
 msgid "Similar entries"
 msgstr "类似日志"
 
-#: templates/zinnia/entry_detail.html:69
+#: templates/zinnia/entry_detail.html:70
 msgid "Comments"
 msgstr "评论"
 
-#: templates/zinnia/entry_detail.html:101
+#: templates/zinnia/entry_detail.html:102
 msgid "Not yet comments !"
 msgstr "尚未有评论"
 
-#: templates/zinnia/entry_detail.html:111
+#: templates/zinnia/entry_detail.html:112
 msgid "Pingbacks"
 msgstr ""
 
-#: templates/zinnia/entry_detail.html:133
+#: templates/zinnia/entry_detail.html:134
 msgid "Pingbacks are open."
 msgstr ""
 
-#: templates/zinnia/entry_detail.html:135
+#: templates/zinnia/entry_detail.html:136
 #, fuzzy
 msgid "Pingbacks are closed."
 msgstr "评论已关闭"
+
+#: templates/zinnia/entry_detail.html:143
+msgid "Trackbacks"
+msgstr ""
+
+#: templates/zinnia/entry_detail.html:165
+msgid "Trackback URL"
+msgstr ""
 
 #: templates/zinnia/entry_list.html:4
 msgid "Category"
