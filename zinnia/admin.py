@@ -217,7 +217,7 @@ class EntryAdmin(admin.ModelAdmin):
     def close_pingbacks(self, request, queryset):
         """Close the pingbacks for selected entries"""
         queryset.update(pingback_enabled=False)
-    close_pingbacks.short_description = _('Close the pingbacks for selected entries')
+    close_pingbacks.short_description = _('Close the linkbacks for selected entries')
 
     def ping_directories(self, request, queryset):
         """Ping Directories for selected entries"""
