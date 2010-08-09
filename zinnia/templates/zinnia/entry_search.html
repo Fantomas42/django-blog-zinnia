@@ -16,7 +16,7 @@
 
 {% if object_list %}
 <p class="success">
-  {% blocktrans count object_list|length as entry_count %}{{ entry_count }} entry found{% plural %}{{ entry_count }} entries found{% endblocktrans %}
+  {% blocktrans count object_list.count as entry_count %}{{ entry_count }} entry found{% plural %}{{ entry_count }} entries found{% endblocktrans %}
 </p>
 {% endif %}
 
