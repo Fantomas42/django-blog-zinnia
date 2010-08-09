@@ -8,6 +8,7 @@ urlpatterns = patterns('',
                        url(r'^categories/', include('zinnia.urls.categories')),
                        url(r'^search/', include('zinnia.urls.search')),
                        url(r'^sitemap/', include('zinnia.urls.sitemap')),
+                       url(r'^trackback/', include('zinnia.urls.trackback')),
                        url(r'^', include('zinnia.urls.capabilities')),
                        url(r'^', include('zinnia.urls.entries')),
                        )

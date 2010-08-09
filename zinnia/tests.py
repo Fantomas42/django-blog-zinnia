@@ -144,6 +144,7 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.discussions.count(), 0)
         self.assertEquals(self.entry.comments.count(), 0)
         self.assertEquals(self.entry.pingbacks.count(), 0)
+        self.assertEquals(self.entry.trackbacks.count(), 0)
 
         Comment.objects.create(comment='My Comment 1',
                                content_object=self.entry,
@@ -151,6 +152,7 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.discussions.count(), 1)
         self.assertEquals(self.entry.comments.count(), 1)
         self.assertEquals(self.entry.pingbacks.count(), 0)
+        self.assertEquals(self.entry.trackbacks.count(), 0)
 
         Comment.objects.create(comment='My Comment 2',
                                content_object=self.entry,
@@ -158,6 +160,7 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.discussions.count(), 1)
         self.assertEquals(self.entry.comments.count(), 1)
         self.assertEquals(self.entry.pingbacks.count(), 0)
+        self.assertEquals(self.entry.trackbacks.count(), 0)
 
         Comment.objects.create(comment='My Comment 3',
                                content_object=self.entry,
@@ -166,6 +169,7 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.discussions.count(), 2)
         self.assertEquals(self.entry.comments.count(), 2)
         self.assertEquals(self.entry.pingbacks.count(), 0)
+        self.assertEquals(self.entry.trackbacks.count(), 0)
 
         comment = Comment.objects.create(comment='My Pingback 1',
                                          content_object=self.entry,
@@ -174,6 +178,16 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.discussions.count(), 3)
         self.assertEquals(self.entry.comments.count(), 2)
         self.assertEquals(self.entry.pingbacks.count(), 1)
+        self.assertEquals(self.entry.trackbacks.count(), 0)
+
+        comment = Comment.objects.create(comment='My Trackback 1',
+                                         content_object=self.entry,
+                                         site=site)
+        comment.flags.create(user=self.author, flag='trackback')
+        self.assertEquals(self.entry.discussions.count(), 4)
+        self.assertEquals(self.entry.comments.count(), 2)
+        self.assertEquals(self.entry.pingbacks.count(), 1)
+        self.assertEquals(self.entry.trackbacks.count(), 1)
 
     def test_word_count(self):
         self.assertEquals(self.entry.word_count, 2)
@@ -399,6 +413,30 @@ class ZinniaViewsTestCase(TestCase):
         response = self.client.get('/sitemap/')
         self.assertEquals(len(response.context['entries']), 3)
         self.assertEquals(len(response.context['categories']), 2)
+
+    def test_zinnia_trackback(self):
+        # Check a 404 error, but the 404.html may no exist
+        try:
+            self.assertRaises(TemplateDoesNotExist, self.client.post,
+                              '/trackback/404/')
+        except AssertionError:
+            response = self.client.post('/trackback/404/')
+            self.assertEquals(response.status_code, 404)
+        self.assertEquals(self.client.post('/trackback/test-1/').status_code, 302)
+        self.assertEquals(self.client.get('/trackback/test-1/').status_code, 302)
+        entry = Entry.objects.get(slug='test-1')
+        entry.pingback_enabled = False
+        entry.save()
+        self.assertEquals(self.client.post('/trackback/test-1/', {'url': 'http://example.com'}).content,
+                          '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  <error>1</error>\n  '
+                          '<message>Trackback is not enabled for Test 1</message>\n  \n</response>\n')
+        entry.pingback_enabled = True
+        entry.save()
+        self.assertEquals(self.client.post('/trackback/test-1/', {'url': 'http://example.com'}).content,
+                          '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  <error>0</error>\n  \n</response>\n')
+        self.assertEquals(self.client.post('/trackback/test-1/', {'url': 'http://example.com'}).content,
+                          '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  <error>1</error>\n  '
+                          '<message>Trackback is already registered</message>\n  \n</response>\n')
 
 class TestTransport(Transport):
     """Handles connections to XML-RPC server
