@@ -49,7 +49,7 @@
     <li>
       <a href="{{ category.get_absolute_url }}" title="{{ category.title }}">{{ category.title }}</a>
       -
-      {% blocktrans count category.entries_published_set|length as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+      {% blocktrans count category.entries_published_set.count as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     </li>
     {% empty %}
     <li>
