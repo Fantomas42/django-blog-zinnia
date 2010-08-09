@@ -4,6 +4,7 @@ from django.conf.urls.defaults import *
 from zinnia.feeds import LatestEntries, AtomLatestEntries
 from zinnia.feeds import EntryDiscussions, AtomEntryDiscussions
 from zinnia.feeds import EntryComments, AtomEntryComments
+from zinnia.feeds import EntryTrackbacks, AtomEntryTrackbacks
 from zinnia.feeds import EntryPingbacks, AtomEntryPingbacks
 from zinnia.feeds import SearchEntries, AtomSearchEntries
 from zinnia.feeds import TagEntries, AtomTagEntries
@@ -31,6 +32,8 @@ if FEEDS_FORMAT == 'atom':
                                name='zinnia_entry_comment_feed'),
                            url(r'^pingbacks/(?P<slug>[-\w]+)/$', AtomEntryPingbacks(),
                                name='zinnia_entry_pingback_feed'),
+                           url(r'^trackbacks/(?P<slug>[-\w]+)/$', AtomEntryTrackbacks(),
+                               name='zinnia_entry_trackback_feed'),
                            )
 else:
     urlpatterns = patterns('',
@@ -50,5 +53,7 @@ else:
                                name='zinnia_entry_comment_feed'),
                            url(r'^pingbacks/(?P<slug>[-\w]+)/$', EntryPingbacks(),
                                name='zinnia_entry_pingback_feed'),
+                           url(r'^trackbacks/(?P<slug>[-\w]+)/$', EntryTrackbacks(),
+                               name='zinnia_entry_trackback_feed'),
                            )
 

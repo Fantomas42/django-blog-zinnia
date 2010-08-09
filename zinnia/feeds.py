@@ -205,6 +205,7 @@ class EntryDiscussions(Feed):
     
 
 class EntryComments(EntryDiscussions):
+    """Feed for comments in an entry"""
     title_template = 'feeds/comment_title.html'
     description_template= 'feeds/comment_description.html'
 
@@ -221,6 +222,7 @@ class EntryComments(EntryDiscussions):
         return _('The latest comments for the entry %s') % obj.title
 
 class EntryPingbacks(EntryDiscussions):
+    """Feed for pingbacks in an entry"""
     title_template = 'feeds/pingback_title.html'
     description_template= 'feeds/pingback_description.html'
 
@@ -235,6 +237,23 @@ class EntryPingbacks(EntryDiscussions):
 
     def description(self, obj):
         return _('The latest pingbacks for the entry %s') % obj.title
+
+class EntryTrackbacks(EntryDiscussions):
+    """Feed for trackbacks in an entry"""
+    title_template = 'feeds/trackback_title.html'
+    description_template= 'feeds/trackback_description.html'
+
+    def items(self, obj):
+        return obj.trackbacks
+
+    def item_link(self, item):
+        return item.get_absolute_url('#trackback_%(id)s')
+
+    def title(self, obj):
+        return _('Trackbacks on %s') % obj.title
+
+    def description(self, obj):
+        return _('The latest trackbacks for the entry %s') % obj.title
 
 # Atom versions of the feeds
 
@@ -269,3 +288,7 @@ class AtomEntryComments(EntryComments):
 class AtomEntryPingbacks(EntryPingbacks):
     feed_type = Atom1Feed
     subtitle = EntryPingbacks.description
+
+class AtomEntryTrackbacks(EntryTrackbacks):
+    feed_type = Atom1Feed
+    subtitle = EntryTrackbacks.description
