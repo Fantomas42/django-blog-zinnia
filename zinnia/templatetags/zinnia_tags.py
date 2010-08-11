@@ -47,12 +47,28 @@ def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     """Return popular  entries"""
-    entries_comment = [(e, e.comments.count()) for e in Entry.published.all()]
-    entries_comment = sorted(entries_comment, key=lambda x: (x[1], x[0].pk),
-                             reverse=True)[:number]
-    entries = [entry for entry, n_comments in entries_comment]
+    from django.db import connection
+    from django.contrib.comments.models import Comment
+    from django.contrib.contenttypes.models import ContentType
+
+    ctype = ContentType.objects.get_for_model(Entry)
+    query = """SELECT object_pk, COUNT(*) AS score
+    FROM %s
+    WHERE content_type_id = %%s
+    AND is_public = 1
+    GROUP BY object_pk
+    ORDER BY score DESC""" % Comment._meta.db_table
+    
+    cursor = connection.cursor()
+    cursor.execute(query, [ctype.id])
+    object_ids = [int(row[0]) for row in cursor.fetchall()[:number]]
+    
+    # Use ``in_bulk`` here instead of an ``id__in`` filter, because ``id__in``
+    # would clobber the ordering.
+    object_dict = Entry.published.in_bulk(object_ids)
+    
     return {'template': template,
-            'entries': entries}
+            'entries': [object_dict[object_id] for object_id in object_ids]}
 
 @register.inclusion_tag('zinnia/tags/dummy.html',
                         takes_context=True)
