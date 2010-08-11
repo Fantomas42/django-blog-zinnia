@@ -348,5 +348,8 @@ Examples
     <http://django-blog-zinnia.com/blog/>`_.
   * `Fantomas' side
     <http://fantomas.willbreak.it>`_.
+  * `Professional Web Studio
+    <http://www.professionalwebstudio.com/en/weblog/>`_.
+
 
 If you are a proud user of Zinnia, send me the url of your website and I will add it to the list.
