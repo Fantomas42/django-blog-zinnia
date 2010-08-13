@@ -110,14 +110,53 @@ class ManagersTestCase(TestCase):
         self.entry_1.save()
         self.assertEquals(Entry.published.count(), 2)
 
-    def test_entry_published_manager_search(self):
-        self.assertEquals(Entry.published.search('My ').count(), 1)
+    def test_entry_published_manager_basic_search(self):
+        self.assertEquals(Entry.published.basic_search('My ').count(), 1)
         self.entry_2.status = PUBLISHED
         self.entry_2.save()
-        self.assertEquals(Entry.published.search('My ').count(), 2)
-        self.assertEquals(Entry.published.search('1').count(), 1)
-        self.assertEquals(Entry.published.search('content 1').count(), 2)
+        self.assertEquals(Entry.published.basic_search('My ').count(), 2)
+        self.assertEquals(Entry.published.basic_search('1').count(), 1)
+        self.assertEquals(Entry.published.basic_search('content 1').count(), 2)
 
+    def test_entry_published_manager_advanced_search(self):
+        category = Category.objects.create(title='SimpleCategory', slug='simple')
+        self.entry_2.categories.add(category)
+        self.entry_2.tags = self.entry_2.tags + ', custom'
+        self.entry_2.status = PUBLISHED
+        self.entry_2.save()
+        self.assertEquals(Entry.published.advanced_search('content').count(), 2)
+        search = Entry.published.advanced_search('content 1')
+        self.assertEquals(search.count(), 1)
+        self.assertEquals(search.all()[0].pk, 1)
+        self.assertEquals(Entry.published.advanced_search('content 1 or 2').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('content 1 and 2').count(), 0)
+        self.assertEquals(Entry.published.advanced_search('content 1 2').count(), 0)
+        self.assertEquals(Entry.published.advanced_search('"My content" 1 or 2').count(), 2)
+        search = Entry.published.advanced_search('content -1')
+        self.assertEquals(search.count(), 1)
+        self.assertEquals(search.all()[0].pk, 2)
+        self.assertEquals(Entry.published.advanced_search('content category:SimpleCategory').count(), 1)
+        self.assertEquals(Entry.published.advanced_search('content category:simple').count(), 1)
+        self.assertEquals(Entry.published.advanced_search('content category:"Category 1"').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('content category:"category-1"').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('content category:"category-2"').count(), 1)
+        self.assertEquals(Entry.published.advanced_search('content tag:zinnia').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('content tag:custom').count(), 1)
+        self.assertEquals(Entry.published.advanced_search('content author:webmaster').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('content author:contributor').count(), 1)
+        self.assertEquals(Entry.published.advanced_search('content author:webmaster tag:zinnia').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('content author:webmaster tag:custom').count(), 1)
+        self.assertEquals(Entry.published.advanced_search('content 1 or 2 author:webmaster').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('content 1 or 2 author:webmaster').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('(author:webmaster content) my').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('(author:webmaster) or (author:contributor)').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('(author:webmaster) (author:contributor)').count(), 0)
+        self.assertEquals(Entry.published.advanced_search('(author:webmaster content) 1').count(), 1)
+        self.assertEquals(Entry.published.advanced_search('(author:webmaster content) or 2').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('(author:contributor content) or 1').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('(author:contributor content) or 2').count(), 1)
+        self.assertEquals(Entry.published.advanced_search('(author:webmaster or ("hello world")) and 2').count(), 1)
+        
 
 class EntryTestCase(TestCase):
 

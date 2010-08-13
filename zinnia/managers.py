@@ -4,6 +4,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.sites.models import Site
 
+from zinnia.settings import ADVANCED_SEARCH
 
 DRAFT = 0
 HIDDEN = 1
@@ -42,6 +43,18 @@ class EntryPublishedManager(models.Manager):
             super(EntryPublishedManager, self).get_query_set())
 
     def search(self, pattern):
+        if ADVANCED_SEARCH:
+            try:
+                return self.advanced_search(pattern)
+            except ImportError:
+                return self.basic_search(pattern)
+        return self.basic_search(pattern)
+
+    def advanced_search(self, pattern):
+        from zinnia.search import advanced_search
+        return advanced_search(pattern)
+
+    def basic_search(self, pattern):
         lookup = None
         for pattern in pattern.split():
             q = models.Q(content__icontains=pattern) | \

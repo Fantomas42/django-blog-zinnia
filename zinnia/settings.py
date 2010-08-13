@@ -11,6 +11,8 @@ PAGINATION = getattr(settings, 'ZINNIA_PAGINATION', 10)
 ALLOW_EMPTY = getattr(settings, 'ZINNIA_ALLOW_EMPTY', True)
 ALLOW_FUTURE = getattr(settings, 'ZINNIA_ALLOW_FUTURE', True)
 
+ADVANCED_SEARCH = getattr(settings, 'ZINNIA_ADVANCED_SEARCH', True)
+
 WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
                   'tinymce' in settings.INSTALLED_APPS and 'tinymce' or 'wymeditor')
 

@@ -20,6 +20,12 @@ ZINNIA_ALLOW_FUTURE
 
   Used for allowing archives views in the future.
 
+ZINNIA_ADVANCED_SEARCH
+  **Default :** True
+
+  Used to define the search engine, because Zinnia provides in 2.
+  A basic engine with cumulative terms, and an advanced engine if *pyparsing* is installed.
+
 ZINNIA_WYSIWYG
   **Default :** 'tinymce' if in settings.INSTALLED_APPS else 'wymeditor'
 
