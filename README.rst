@@ -48,6 +48,7 @@ Make sure to install these packages prior to installation :
 
  * akismet
  * django-tagging
+ * BeautifulSoup
 
 Installation
 ============
@@ -220,8 +221,7 @@ XML-RPC
 
 Zinnia provides few webservices via XML-RPC, but before using it,
 you need to install `django-xmlrpc
-<http://github.com/Fantomas42/django-xmlrpc>`_, and `BeautifulSoup
-<http://www.crummy.com/software/BeautifulSoup/>`_.
+<http://github.com/Fantomas42/django-xmlrpc>`_.
 
 Then register **django_xmlrpc** in your INSTALLED_APPS section of your project's settings.
 
