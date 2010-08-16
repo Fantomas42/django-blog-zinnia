@@ -3,10 +3,6 @@
 from django.conf import settings
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
-from django.db.models import signals
-from django.contrib import comments
-from django.contrib.comments.signals import comment_will_be_posted
-from django.contrib.comments.moderation import Moderator
 from django.contrib.comments.moderation import CommentModerator
 
 from zinnia.settings import MAIL_COMMENT
