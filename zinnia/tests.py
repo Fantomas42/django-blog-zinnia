@@ -110,6 +110,14 @@ class ManagersTestCase(TestCase):
         self.entry_1.save()
         self.assertEquals(Entry.published.count(), 2)
 
+    def test_entry_published_manager_on_site(self):
+        self.assertEquals(Entry.published.on_site().count(), 2)
+        self.entry_2.sites.clear()
+        self.entry_2.sites.add(self.sites[1])
+        self.assertEquals(Entry.published.on_site().count(), 1)
+        self.entry_1.sites.clear()
+        self.assertEquals(Entry.published.on_site().count(), 0)
+
     def test_entry_published_manager_basic_search(self):
         self.assertEquals(Entry.published.basic_search('My ').count(), 1)
         self.entry_2.status = PUBLISHED
@@ -156,7 +164,7 @@ class ManagersTestCase(TestCase):
         self.assertEquals(Entry.published.advanced_search('(author:contributor content) or 1').count(), 2)
         self.assertEquals(Entry.published.advanced_search('(author:contributor content) or 2').count(), 1)
         self.assertEquals(Entry.published.advanced_search('(author:webmaster or ("hello world")) and 2').count(), 1)
-        
+
 
 class EntryTestCase(TestCase):
 
@@ -397,6 +405,8 @@ class ZinniaViewsTestCase(TestCase):
         self.check_publishing_context('/2010/01/01/', 1, 2)
 
     def test_zinnia_entry_detail(self):
+        entry = self.create_published_entry()
+        entry.sites.clear()
         # Check a 404 error, but the 404.html may no exist
         try:
             self.assertRaises(TemplateDoesNotExist, self.client.get,
@@ -405,7 +415,7 @@ class ZinniaViewsTestCase(TestCase):
             response = self.client.get('/2010/01/01/my-test-entry/')
             self.assertEquals(response.status_code, 404)
 
-        self.create_published_entry()
+        entry.sites.add(Site.objects.get_current())
         response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertEquals(response.status_code, 200)
 

@@ -42,6 +42,10 @@ class EntryPublishedManager(models.Manager):
         return entries_published(
             super(EntryPublishedManager, self).get_query_set())
 
+    def on_site(self):
+        return super(EntryPublishedManager, self).get_query_set(
+            ).filter(sites=Site.objects.get_current())
+    
     def search(self, pattern):
         if ADVANCED_SEARCH:
             try:

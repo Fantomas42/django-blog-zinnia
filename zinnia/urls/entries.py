@@ -23,7 +23,7 @@ del entry_conf_year['month_format']
 
 entry_conf_detail = entry_conf.copy()
 del entry_conf_detail['allow_empty']
-entry_conf_detail['queryset'] = Entry.objects.all()
+entry_conf_detail['queryset'] = Entry.published.on_site()
 
 
 urlpatterns = patterns('zinnia.views.entries',
