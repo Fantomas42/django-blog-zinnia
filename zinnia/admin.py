@@ -36,7 +36,7 @@ class EntryAdmin(admin.ModelAdmin):
                  (_('Publication'), {'fields': ('sites', 'categories', 'tags', 'slug')}))
     list_filter = ('categories', 'authors', 'status',
                    'comment_enabled', 'pingback_enabled',
-                   'creation_date', 'start_publication', 'end_publication')
+                   'creation_date', 'start_publication', 'end_publication', 'sites')
     list_display = ('get_title', 'get_authors', 'get_categories',
                     'get_tags', 'get_sites',
                     'comment_enabled', 'pingback_enabled',
