@@ -4,6 +4,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.db.models.signals import post_save
 from django.template.defaultfilters import striptags
 from django.template.defaultfilters import linebreaks
 from django.contrib.comments.moderation import moderator
@@ -11,12 +12,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from tagging.fields import TagField
 
-from zinnia.moderator import EntryCommentModerator
+from zinnia.settings import USE_BITLY
+from zinnia.settings import UPLOAD_TO
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
-from zinnia.settings import USE_BITLY
-from zinnia.settings import UPLOAD_TO
+from zinnia.moderator import EntryCommentModerator
+from zinnia.signals import ping_directories_handler
 
 
 class Category(models.Model):
@@ -179,4 +181,5 @@ class Entry(models.Model):
         permissions = (('can_view_all', 'Can view all'),
                        ('can_change_author', 'Can change author'), )
 
+post_save.connect(ping_directories_handler, sender=Entry)
 moderator.register(Entry, EntryCommentModerator)

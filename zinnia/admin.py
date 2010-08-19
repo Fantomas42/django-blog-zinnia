@@ -147,9 +147,6 @@ class EntryAdmin(admin.ModelAdmin):
         entry.last_update = datetime.now()
         entry.save()
 
-        if entry.is_visible and settings.SAVE_PING_DIRECTORIES:
-            self.ping_directories(request, [entry])
-
     def queryset(self, request):
         """Make special filtering by user permissions"""
         queryset = super(EntryAdmin, self).queryset(request)
@@ -221,14 +218,17 @@ class EntryAdmin(admin.ModelAdmin):
 
     def ping_directories(self, request, queryset):
         """Ping Directories for selected entries"""
-        success = 0
         for directory in settings.PING_DIRECTORIES:
-            pinger = DirectoryPinger(directory)
-            for entry in queryset:
-                response = pinger.ping(entry)
-                if not response.get('flerror', True):
+            pinger = DirectoryPinger(directory, queryset)
+            pinger.join()
+            success = 0
+            for result in pinger.results:
+                if not result.get('flerror', True):
                     success += 1
-        self.message_user(request, _('%i directories succesfully pinged.') % success)
+                else:
+                    self.message_user(request, '%s : %s' % (directory, result['message']))
+            if success:
+                self.message_user(request, _('%s directory succesfully pinged %d entries.') % (directory, success))
     ping_directories.short_description = _('Ping Directories for selected entries')
 
     def get_urls(self):
@@ -252,7 +252,7 @@ class EntryAdmin(admin.ModelAdmin):
                           '%sjs/jquery.bgiframe.js' % MEDIA_URL,
                           '%sjs/jquery.autocomplete.js' % MEDIA_URL,
                           reverse('admin:zinnia_entry_autocomplete_tags'),))
-        
+
         if settings.WYSIWYG == 'wymeditor':
             media += Media(js=('%sjs/wymeditor/jquery.wymeditor.pack.js' % MEDIA_URL,
                                reverse('admin:zinnia_entry_wymeditor')))
