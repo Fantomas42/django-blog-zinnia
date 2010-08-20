@@ -28,6 +28,7 @@ Main features :
   * Spam protection with Akismet
   * MetaWeblog API
   * Ping Directories
+  * Ping External links
   * Bit.ly support
   * Twitter support
   * Gravatar support

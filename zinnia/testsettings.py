@@ -21,3 +21,5 @@ INSTALLED_APPS = ['django.contrib.contenttypes',
                   'tagging', 'zinnia']
 
 XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
+
+ZINNIA_PING_EXTERNAL_URLS = False

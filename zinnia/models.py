@@ -19,6 +19,7 @@ from zinnia.managers import EntryPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.moderator import EntryCommentModerator
 from zinnia.signals import ping_directories_handler
+from zinnia.signals import ping_external_urls_handler
 
 
 class Category(models.Model):
@@ -182,4 +183,5 @@ class Entry(models.Model):
                        ('can_change_author', 'Can change author'), )
 
 post_save.connect(ping_directories_handler, sender=Entry)
+post_save.connect(ping_external_urls_handler, sender=Entry)
 moderator.register(Entry, EntryCommentModerator)

@@ -2,8 +2,9 @@
 from django.conf import settings
 
 PING_DIRECTORIES = getattr(settings, 'ZINNIA_PING_DIRECTORIES', ())
-SAVE_PING_DIRECTORIES = getattr(settings, 'ZINNIA_AUTO_PING',
+SAVE_PING_DIRECTORIES = getattr(settings, 'ZINNIA_SAVE_PING_DIRECTORIES',
                                 bool(PING_DIRECTORIES))
+SAVE_PING_EXTERNAL_URLS = getattr(settings, 'ZINNIA_PING_EXTERNAL_URLS', True)
 
 COPYRIGHT = getattr(settings, 'ZINNIA_COPYRIGHT', 'Zinnia')
 

@@ -1,6 +1,7 @@
 """Unit tests for zinnia"""
 import cStringIO
 from datetime import datetime
+from urllib import addinfourl
 from urlparse import urlsplit
 from urllib2 import HTTPError
 from xmlrpclib import Fault
@@ -18,6 +19,7 @@ from django.template import TemplateDoesNotExist
 from tagging.models import Tag
 from zinnia.models import Entry
 from zinnia.models import Category
+from zinnia.ping import ExternalUrlsPinger
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
@@ -506,7 +508,7 @@ class TestTransport(Transport):
 
 
 class PingBackTestCase(TestCase):
-    """TestCases for pingbacks"""
+    """Test cases for pingbacks"""
     urls = 'zinnia.urls.tests'
 
     def fake_urlopen(self, url):
@@ -657,7 +659,7 @@ class PingBackTestCase(TestCase):
                                      'http://example.com/blog/1/'])
 
 class MetaWeblogTestCase(TestCase):
-    """TestCases for MetaWeblog"""
+    """Test cases for MetaWeblog"""
     urls = 'zinnia.urls.tests'
 
     def setUp(self):
@@ -846,4 +848,74 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.authors.all()[0].pk, 2)
         self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
 
+class ExternalUrlsPingerTestCase(TestCase):
+    """Test cases for ExternalUrlsPinger"""
 
+    def setUp(self):
+        params = {'title': 'My entry',
+                  'content': 'My content',
+                  'tags': 'zinnia, test',
+                  'slug': 'my-entry'}
+        self.entry = Entry.objects.create(**params)
+        self.pinger = ExternalUrlsPinger(self.entry, start_now=False)
+
+    def test_is_external_url(self):
+        self.assertEquals(self.pinger.is_external_url('http://example.com/',
+                                                      'http://google.com/'), True)
+        self.assertEquals(self.pinger.is_external_url('http://example.com/toto/',
+                                                      'http://google.com/titi/'), True)
+        self.assertEquals(self.pinger.is_external_url('http://example.com/blog/',
+                                                      'http://example.com/page/'), False)
+        self.assertEquals(self.pinger.is_external_url('http://example.com/blog/'), False)
+        self.assertEquals(self.pinger.is_external_url('http://google.com/'), True)
+        self.assertEquals(self.pinger.is_external_url('/blog/'), False)
+
+    def test_find_external_urls(self):
+        external_urls = self.pinger.find_external_urls(self.entry)
+        self.assertEquals(external_urls, [])
+        self.entry.content = """
+        <p>This is a <a href="http://fantomas.willbreak.it/">link</a> to a site.</p>
+        <p>This is a <a href="http://example.com/blog/">link</a> within my site.</p>
+        <p>This is a <a href="/blog/">relative link</a> within my site.</p>
+        """
+        self.entry.save()
+        external_urls = self.pinger.find_external_urls(self.entry)
+        self.assertEquals(external_urls, ['http://fantomas.willbreak.it/'])
+
+    def test_find_pingback_href(self):
+        result = self.pinger.find_pingback_href('')
+        self.assertEquals(result, None)
+        result = self.pinger.find_pingback_href("""
+        <html><head><link rel="pingback" href="/xmlrpc/" /></head><body></body></html>
+        """)
+        self.assertEquals(result, '/xmlrpc/')
+        result = self.pinger.find_pingback_href("""
+        <html><head><LINK hrEF="/xmlrpc/" REL="PingBack" /></head><body></body></html>
+        """)
+        self.assertEquals(result, '/xmlrpc/')
+        result = self.pinger.find_pingback_href("""
+        <html><head><LINK REL="PingBack" /></head><body></body></html>
+        """)
+        self.assertEquals(result, None)
+
+    def fake_urlopen(self, url):
+        """Fake urlopen using test client"""
+        if 'example' in url:
+            response = cStringIO.StringIO('')
+            return addinfourl(response, {'X-Pingback': '/xmlrpc.php'}, url)
+        else:
+            response = cStringIO.StringIO(self.client.get(url).content)
+            return addinfourl(response, {}, url)
+
+    def test_find_pingback_urls(self):
+        # Set up a stub around urlopen
+        import zinnia.ping
+        self.original_urlopen = zinnia.ping.urlopen
+        zinnia.ping.urlopen = self.fake_urlopen
+
+        urls = ['http://localhost/', 'http://example.com/']
+        self.assertEquals(self.pinger.find_pingback_urls(urls),
+                          {'http://localhost/': 'http://localhost/xmlrpc/',
+                           'http://example.com/': 'http://example.com/xmlrpc.php'})
+        # Remove stub
+        zinnia.ping.urlopen = self.original_urlopen

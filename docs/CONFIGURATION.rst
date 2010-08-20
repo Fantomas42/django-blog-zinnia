@@ -73,10 +73,15 @@ ZINNIA_PING_DIRECTORIES
 
   List of the directories you want to ping.
 
-ZINNIA_AUTO_PING
+ZINNIA_SAVE_PING_DIRECTORIES
   **Default :** bool(ZINNIA_PING_DIRECTORIES)
 
   Boolean setting for telling if you want to ping directories when saving an entry.
+
+ZINNIA_SAVE_PING_EXTERNAL_URLS
+  **Default :** True
+
+  Boolean setting for telling if you want to ping external urls when saving an entry.
 
 ZINNIA_PINGBACK_CONTENT_LENGTH
   **Default :**	300
