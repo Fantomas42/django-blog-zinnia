@@ -71,7 +71,6 @@ class Command(LabelCommand):
                 raise CommandError('Invalid username for default author')
 
         self.write_out(self.style.TITLE('Starting migration from Wordpress to Zinnia %s:\n' % __version__))
-
         tree = ET.parse(wxr_file)
 
         self.authors = self.import_authors(tree)
@@ -201,13 +200,14 @@ class Command(LabelCommand):
                 excerpt = truncate_words(strip_tags(content), 50)
             else:
                 excerpt = ''
-
+        # Prefer use this function than
+        # item_node.find('{http://wordpress.org/export/1.0/}post_name').text
+        # Because slug can be not well formated
+        # maximum length of the slug field == 50 chars
+        slug = slugify(title)[0:50]
         entry_dict = {'content': content,
                       'excerpt': excerpt,
-                      # Prefer use this function than
-                      # item_node.find('{http://wordpress.org/export/1.0/}post_name').text
-                      # Because slug can be not well formated
-                      'slug': slugify(title),
+                      'slug': slug,
                       'tags': ', '.join(self.get_entry_tags(item_node.findall('category'))),
                       'status': self.REVERSE_STATUS[item_node.find('{http://wordpress.org/export/1.0/}status').text],
                       'comment_enabled': item_node.find('{http://wordpress.org/export/1.0/}comment_status').text == 'open',
@@ -215,14 +215,11 @@ class Command(LabelCommand):
                       'creation_date': creation_date,
                       'last_update': datetime.now(),
                       'start_publication': creation_date,}
-
         entry, created = Entry.objects.get_or_create(title=title,
                                                      defaults=entry_dict)
-
         entry.categories.add(*self.get_entry_categories(item_node.findall('category')))
         entry.authors.add(self.authors[item_node.find('{http://purl.org/dc/elements/1.1/}creator').text])
         entry.sites.add(self.SITE)
-
         #current_id = item_node.find('{http://wordpress.org/export/1.0/}post_id').text
         #parent_id = item_node.find('{http://wordpress.org/export/1.0/}post_parent').text
 
@@ -279,11 +276,11 @@ class Command(LabelCommand):
                 is_removed = True
             if approvation == 'spam':
                 is_public = False
-
+            # maximum length of user_name == 50 chars
+            comment_author = comment_node.find('{http://wordpress.org/export/1.0/}comment_author/').text[0:50]
             comment_dict = {'content_object': entry,
                             'site': self.SITE,
-                            'user_name': comment_node.find(
-                                '{http://wordpress.org/export/1.0/}comment_author/').text,
+                            'user_name': comment_author,
                             'user_email': comment_node.find(
                                 '{http://wordpress.org/export/1.0/}comment_author_email/').text or '',
                             'user_url': comment_node.find(
