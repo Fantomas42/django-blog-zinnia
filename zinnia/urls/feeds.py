@@ -2,7 +2,10 @@
 from django.conf.urls.defaults import *
 
 from zinnia.feeds import LatestEntries, AtomLatestEntries
-from zinnia.feeds import CommentEntries, AtomCommentEntries
+from zinnia.feeds import EntryDiscussions, AtomEntryDiscussions
+from zinnia.feeds import EntryComments, AtomEntryComments
+from zinnia.feeds import EntryTrackbacks, AtomEntryTrackbacks
+from zinnia.feeds import EntryPingbacks, AtomEntryPingbacks
 from zinnia.feeds import SearchEntries, AtomSearchEntries
 from zinnia.feeds import TagEntries, AtomTagEntries
 from zinnia.feeds import CategoryEntries, AtomCategoryEntries
@@ -21,10 +24,16 @@ if FEEDS_FORMAT == 'atom':
                                name='zinnia_author_feed'),
                            url(r'^categories/(?P<slug>[-\w]+)/$', AtomCategoryEntries(),
                                name='zinnia_category_feed'),
-                           url(r'^search/(?P<slug>[-\w]+)/$', AtomSearchEntries(),
+                           url(r'^search/(?P<slug>.*)/$', AtomSearchEntries(),
                                name='zinnia_entry_search_feed'),
-                           url(r'^comments/(?P<slug>[-\w]+)/$', AtomCommentEntries(),
+                           url(r'^discussions/(?P<slug>[-\w]+)/$', AtomEntryDiscussions(),
+                               name='zinnia_entry_discussion_feed'),
+                           url(r'^comments/(?P<slug>[-\w]+)/$', AtomEntryComments(),
                                name='zinnia_entry_comment_feed'),
+                           url(r'^pingbacks/(?P<slug>[-\w]+)/$', AtomEntryPingbacks(),
+                               name='zinnia_entry_pingback_feed'),
+                           url(r'^trackbacks/(?P<slug>[-\w]+)/$', AtomEntryTrackbacks(),
+                               name='zinnia_entry_trackback_feed'),
                            )
 else:
     urlpatterns = patterns('',
@@ -36,9 +45,15 @@ else:
                                name='zinnia_author_feed'),
                            url(r'^categories/(?P<slug>[-\w]+)/$', CategoryEntries(),
                                name='zinnia_category_feed'),
-                           url(r'^search/(?P<slug>[-\w]+)/$', SearchEntries(),
+                           url(r'^search/(?P<slug>.*)/$', SearchEntries(),
                                name='zinnia_entry_search_feed'),
-                           url(r'^comments/(?P<slug>[-\w]+)/$', CommentEntries(),
+                           url(r'^discussions/(?P<slug>[-\w]+)/$', EntryDiscussions(),
+                               name='zinnia_entry_discussion_feed'),
+                           url(r'^comments/(?P<slug>[-\w]+)/$', EntryComments(),
                                name='zinnia_entry_comment_feed'),
+                           url(r'^pingbacks/(?P<slug>[-\w]+)/$', EntryPingbacks(),
+                               name='zinnia_entry_pingback_feed'),
+                           url(r'^trackbacks/(?P<slug>[-\w]+)/$', EntryTrackbacks(),
+                               name='zinnia_entry_trackback_feed'),
                            )
 

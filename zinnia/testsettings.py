@@ -1,4 +1,5 @@
 """Settings for testing zinnia"""
+from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 
 SITE_ID = 1
 
@@ -16,5 +17,9 @@ INSTALLED_APPS = ['django.contrib.contenttypes',
                   'django.contrib.sites',
                   'django.contrib.auth',
                   #'south',
+                  'django_xmlrpc',
                   'tagging', 'zinnia']
 
+XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
+
+ZINNIA_PING_EXTERNAL_URLS = False

@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<rsd version="1.0" xmlns="http://archipelago.phrasewise.com/rsd">
+  <service>
+    <engineName>Django Blog Zinnia {{ ZINNIA_VERSION }}</engineName>
+    <engineLink>http://github.com/Fantomas42/django-blog-zinnia</engineLink>
+    <homePageLink>http://{{ site.domain }}/</homePageLink>
+    <apis>
+      <api name="MetaWeblog" preferred="true" apiLink="http://{{ site.domain }}/xmlrpc/" blogID="{{ site.id }}">
+        <settings>
+          <docs>http://www.xmlrpc.com/metaWeblogApi</docs>
+          <notes>MetaWeblog API support + Blogger API partial support</notes>
+        </settings>
+      </api>
+    </apis>
+  </service>
+</rsd>

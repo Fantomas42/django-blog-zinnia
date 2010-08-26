@@ -40,6 +40,10 @@
   <h3>{% trans "Recent entries" %}</h3>
   {% get_recent_entries 5 %}
 </div>
+<div class="comments">
+  <h3>{% trans "Recent comments" %}</h3>
+  {% get_recent_comments 5 %}
+</div>
 <div class="randoms">
   <h3>{% trans "Random entries" %}</h3>
   {% get_random_entries 5 %}

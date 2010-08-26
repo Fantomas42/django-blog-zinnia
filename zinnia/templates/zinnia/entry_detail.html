@@ -6,7 +6,10 @@
 {% block meta-description %}{% if object.excerpt %}{{ object.excerpt|striptags }}{% else %}{{ object.content|striptags|truncatewords:100 }}{% endif %}{% endblock %}
 
 {% block link %}
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of discussions on" %} '{{ object.title }}'" href="{% url zinnia_entry_discussion_feed object.slug %}" />
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'" href="{% url zinnia_entry_comment_feed object.slug %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of pingbacks on" %} '{{ object.title }}'" href="{% url zinnia_entry_pingback_feed object.slug %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of trackbacks on" %} '{{ object.title }}'" href="{% url zinnia_entry_trackback_feed object.slug %}" />
 {% endblock %}
 
 {% block content %}
@@ -19,30 +22,34 @@
 <hr />
 
 <div class="entryWidgets span-16 last">
-  {% if object.next_entry %}
+  {% with object.next_entry as next_entry %}
+  {% if next_entry %}
   <div class="entryNext">
     <h3>{% trans "Next entry" %}</h3>
     <ul>
       <li>
-	<a href="{{ object.next_entry.get_absolute_url }}" title="{{ object.next_entry.title }}">
-	  {{ object.next_entry.title }}
+	<a href="{{ next_entry.get_absolute_url }}" title="{{ next_entry.title }}">
+	  {{ next_entry.title }}
 	</a>
       </li>
     </ul>
   </div>
   {% endif %}
-  {% if object.previous_entry %}
+  {% endwith %}
+  {% with object.previous_entry as previous_entry %}
+  {% if previous_entry %}
   <div class="entryPrevious">
     <h3>{% trans "Previous entry" %}</h3>
     <ul>
       <li>
-	<a href="{{ object.previous_entry.get_absolute_url }}" title="{{ object.previous_entry.title }}">
-	  {{ object.previous_entry.title }}
+	<a href="{{ previous_entry.get_absolute_url }}" title="{{ previous_entry.title }}">
+	  {{ previous_entry.title }}
 	</a>
       </li>
     </ul>
   </div>
   {% endif %}
+  {% endwith %}
   {% if object.related_published_set %}
   <div class="entryRelated">
     <h3>{% trans "Related entries" %}</h3>
@@ -84,7 +91,7 @@
 	</div>
 	<div class="span-13 last">
 	  <cite>
-	    {{ comment.comment|safe }}
+	    {{ comment.comment }}
 	  </cite>
 	</div>
       </div>
@@ -97,9 +104,71 @@
   {% else %}
     {% if object.comment_enabled %}
   <p>{% trans "Not yet comments !" %}</p>
+    {% else %}
+  <p>{% trans "Comments are closed." %}</p>
     {% endif %}
   {% endif %}
   {% endwith %}
+</div>
+
+<hr />
+<div id="pingbacks" class="span-16 last">
+  <h3>{% trans "Pingbacks" %}</h3>
+  {% with object.pingbacks as pingback_list %}
+  {% if pingback_list.count %}
+  <ol id="pingbackList" class="span-16 last">
+    {% for pingback in pingback_list %}
+    <li id="pingback_{{ pingback.pk }}" class="pingback {% cycle box1,box2 %} span-16 last">
+      <div class="pingback_body span-16 last">
+	<div class="span-16 last">
+	  <a href="{{ pingback.url }}">{{ pingback.user_name }}</a>
+	  {% trans "on date" %} {{ pingback.submit_date|date:"l d F Y" }}
+	</div>
+	<div class="span-16 last">
+	  <cite>
+	    {{ pingback.comment }}
+	  </cite>
+	</div>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+    {% if object.pingback_enabled %}
+  <p>{% trans "Pingbacks are open." %}</p>
+    {% else %}
+  <p>{% trans "Pingbacks are closed." %}</p>
+    {% endif %}
+  {% endwith %}  
+</div>
+
+<hr />
+<div id="trackbacks" class="span-16 last">
+  <h3>{% trans "Trackbacks" %}</h3>
+  {% with object.trackbacks as trackback_list %}
+  {% if trackback_list.count %}
+  <ol id="trackbackList" class="span-16 last">
+    {% for trackback in trackback_list %}
+    <li id="trackback_{{ trackback.pk }}" class="trackback {% cycle box1,box2 %} span-16 last">
+      <div class="trackback_body span-16 last">
+	<div class="span-16 last">
+	  <a href="{{ trackback.url }}">{{ trackback.user_name }}</a>
+	  {% trans "on date" %} {{ trackback.submit_date|date:"l d F Y" }}
+	</div>
+	<div class="span-16 last">
+	  <cite>
+	    {{ trackback.comment }}
+	  </cite>
+	</div>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+    {% if object.pingback_enabled %}
+  <p><a href="{% url zinnia_entry_trackback object.slug %}" rel="trackback">{% trans "Trackback URL" %}</a></p>
+    {% endif %}
+  {% endwith %}  
 </div>
 
 {% if object.comment_enabled %}

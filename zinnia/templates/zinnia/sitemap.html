@@ -14,7 +14,9 @@
     {% for entry in category.entries_published_set.all %}
     <li>
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
-      - {{ entry.comments.count }} {% trans "comment" %}{{ entry.comments.count|pluralize }}
+      {% with entry.comments.count as comment_count %}
+      - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
+      {% endwith %}
     </li>
     {% empty %}
     <li>
@@ -32,7 +34,9 @@
     <li>
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
       - {{ entry.creation_date|date:"d b Y" }}
-      - {{ entry.comments.count }} {% trans "comment" %}{{ entry.comments.count|pluralize }}
+      {% with entry.comments.count as comment_count %}
+      - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
+      {% endwith %}
     </li>
     {% empty %}
     <li>
@@ -49,7 +53,7 @@
     <li>
       <a href="{{ category.get_absolute_url }}" title="{{ category.title }}">{{ category.title }}</a>
       -
-      {% blocktrans count category.entries_published_set|length as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+      {% blocktrans count category.entries_published_set.count as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     </li>
     {% empty %}
     <li>

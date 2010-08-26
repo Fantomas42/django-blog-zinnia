@@ -211,6 +211,7 @@ class Command(LabelCommand):
                       'tags': ', '.join(self.get_entry_tags(item_node.findall('category'))),
                       'status': self.REVERSE_STATUS[item_node.find('{http://wordpress.org/export/1.0/}status').text],
                       'comment_enabled': item_node.find('{http://wordpress.org/export/1.0/}comment_status').text == 'open',
+                      'pingback_enabled': item_node.find('{http://wordpress.org/export/1.0/}ping_status').text == 'open',
                       'creation_date': creation_date,
                       'last_update': datetime.now(),
                       'start_publication': creation_date,}
@@ -222,8 +223,8 @@ class Command(LabelCommand):
         entry.authors.add(self.authors[item_node.find('{http://purl.org/dc/elements/1.1/}creator').text])
         entry.sites.add(self.SITE)
 
-        current_id = item_node.find('{http://wordpress.org/export/1.0/}post_id').text
-        parent_id = item_node.find('{http://wordpress.org/export/1.0/}post_parent').text
+        #current_id = item_node.find('{http://wordpress.org/export/1.0/}post_id').text
+        #parent_id = item_node.find('{http://wordpress.org/export/1.0/}post_parent').text
 
         return entry
 
@@ -252,8 +253,13 @@ class Command(LabelCommand):
         """Loops over comments nodes and import then
         in django.contrib.comments"""
         for comment_node in comment_nodes:
-            title = 'Comment #%s' % comment_node.find(
-                '{http://wordpress.org/export/1.0/}comment_id/').text
+            is_pingback = comment_node.find(
+                '{http://wordpress.org/export/1.0/}comment_type').text == 'pingback'
+            is_trackback = comment_node.find(
+                '{http://wordpress.org/export/1.0/}comment_type').text == 'trackback'
+
+            title = 'Comment #%s' % (comment_node.find(
+                '{http://wordpress.org/export/1.0/}comment_id/').text)
             self.write_out(' > %s... ' % title)
 
             content = comment_node.find(
@@ -290,4 +296,11 @@ class Command(LabelCommand):
                             'is_removed': is_removed, }
             comment = Comment(**comment_dict)
             comment.save()
+            if approvation == 'spam':
+                comment.flags.create(user=entry.authors.all()[0], flag='spam')
+            if is_pingback:
+                comment.flags.create(user=entry.authors.all()[0], flag='pingback')
+            if is_trackback:
+                comment.flags.create(user=entry.authors.all()[0], flag='trackback')
+
             self.write_out(self.style.ITEM('OK\n'))

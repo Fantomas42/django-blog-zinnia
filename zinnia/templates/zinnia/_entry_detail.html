@@ -64,7 +64,7 @@
   </p>
   
   <p class="entryComments span-16 last">
-    <strong>{% trans "Comments" %}</strong> : 
+    <strong>{% trans "Discussions" %}</strong> : 
     {% with object.comments.count as comment_count %}
     {% if comment_count %}
     <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
@@ -79,6 +79,20 @@
       {% else %}
       {% trans "Comments are closed." %}
       {% endif %}
+    {% endif %}
+    {% endwith %}
+    {% with object.pingbacks.count as pingback_count %}
+    {% if pingback_count %}
+    , <a href="{{ object.get_absolute_url }}#pingbacks" title="{{ object.title }}">
+      {% blocktrans count pingback_count as pingback_count %}{{ pingback_count }} pingback{% plural %}{{ pingback_count }} pingbacks{% endblocktrans %}
+    </a>
+    {% endif %}
+    {% endwith %}
+    {% with object.trackbacks.count as trackback_count %}
+    {% if trackback_count %}
+    , <a href="{{ object.get_absolute_url }}#trackbacks" title="{{ object.title }}">
+      {% blocktrans count trackback_count as trackback_count %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}
+    </a>
     {% endif %}
     {% endwith %}
   </p>

@@ -4,6 +4,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.db.models.signals import post_save
 from django.template.defaultfilters import striptags
 from django.template.defaultfilters import linebreaks
 from django.contrib.comments.moderation import moderator
@@ -11,19 +12,22 @@ from django.utils.translation import ugettext_lazy as _
 
 from tagging.fields import TagField
 
-from zinnia.moderator import EntryCommentModerator
+from zinnia.settings import USE_BITLY
+from zinnia.settings import UPLOAD_TO
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
-from zinnia.settings import USE_BITLY
-from zinnia.settings import UPLOAD_TO
+from zinnia.moderator import EntryCommentModerator
+from zinnia.signals import ping_directories_handler
+from zinnia.signals import ping_external_urls_handler
 
 
 class Category(models.Model):
     """Category object for Entry"""
 
     title = models.CharField(_('title'), max_length=50)
-    slug = models.SlugField(help_text=_('used for publication'))
+    slug = models.SlugField(help_text=_('used for publication'),
+                            unique=True)
     description = models.TextField(_('description'), blank=True)
 
     def entries_published_set(self):
@@ -67,6 +71,7 @@ class Entry(models.Model):
                                      blank=True, null=False)
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
     comment_enabled = models.BooleanField(_('comment enabled'), default=True)
+    pingback_enabled = models.BooleanField(_('linkback enabled'), default=True)
 
     creation_date = models.DateTimeField(_('creation date'), default=datetime.now)
     last_update = models.DateTimeField(_('last update'), default=datetime.now)
@@ -93,7 +98,7 @@ class Entry(models.Model):
     def previous_entry(self):
         """Return the previous entry"""
         entries = Entry.published.filter(
-            creation_date__lt=self.creation_date)
+            creation_date__lt=self.creation_date)[:1]
         if entries:
             return entries[0]
 
@@ -101,7 +106,7 @@ class Entry(models.Model):
     def next_entry(self):
         """Return the next entry"""
         entries = Entry.published.filter(
-            creation_date__gt=self.creation_date).order_by('creation_date')
+            creation_date__gt=self.creation_date).order_by('creation_date')[:1]
         if entries:
             return entries[0]
 
@@ -127,10 +132,25 @@ class Entry(models.Model):
         return entries_published(self.related)
 
     @property
-    def comments(self):
-        """Return published comments"""
+    def discussions(self):
+        """Return published discussions"""
         from django.contrib.comments.models import Comment
         return Comment.objects.for_model(self).filter(is_public=True)
+
+    @property
+    def comments(self):
+        """Return published comments"""
+        return self.discussions.filter(flags=None)
+
+    @property
+    def pingbacks(self):
+        """Return published pingbacks"""
+        return self.discussions.filter(flags__flag='pingback')
+
+    @property
+    def trackbacks(self):
+        """Return published trackbacks"""
+        return self.discussions.filter(flags__flag='trackback')
 
     @property
     def short_url(self):
@@ -162,4 +182,6 @@ class Entry(models.Model):
         permissions = (('can_view_all', 'Can view all'),
                        ('can_change_author', 'Can change author'), )
 
+post_save.connect(ping_directories_handler, sender=Entry)
+post_save.connect(ping_external_urls_handler, sender=Entry)
 moderator.register(Entry, EntryCommentModerator)

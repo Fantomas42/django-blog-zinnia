@@ -20,6 +20,18 @@ ZINNIA_ALLOW_FUTURE
 
   Used for allowing archives views in the future.
 
+ZINNIA_ADVANCED_SEARCH
+  **Default :** True
+
+  Used to define the search engine, because Zinnia provides in 2.
+  A basic engine with cumulative terms, and an advanced engine if *pyparsing* is installed.
+
+ZINNIA_WYSIWYG
+  **Default :** 'tinymce' if in settings.INSTALLED_APPS else 'wymeditor'
+
+  Used for determining the WYSIWYG editor for editing an entry.
+  Can also be used for disabling the WYSIWYG functionnality.
+
 ZINNIA_FEEDS_FORMAT
   **Default :** 'rss'
 
@@ -51,15 +63,30 @@ ZINNIA_AKISMET_COMMENT
 
   Boolean used for protecting your comments with Akismet or not.
 
+ZINNIA_FIRST_WEEK_DAY
+  **Default :** 0
+
+  Integer for setting the first day of the week in the Calendar widget. Ex : use 6 for Sunday.
+
 ZINNIA_PING_DIRECTORIES 
   **Default :** ()
 
   List of the directories you want to ping.
 
-ZINNIA_AUTO_PING
+ZINNIA_SAVE_PING_DIRECTORIES
   **Default :** bool(ZINNIA_PING_DIRECTORIES)
 
   Boolean setting for telling if you want to ping directories when saving an entry.
+
+ZINNIA_SAVE_PING_EXTERNAL_URLS
+  **Default :** True
+
+  Boolean setting for telling if you want to ping external urls when saving an entry.
+
+ZINNIA_PINGBACK_CONTENT_LENGTH
+  **Default :**	300
+
+  Size of the excerpt generated on pingback.
 
 ZINNIA_F_MIN
   **Default :** 0.1
@@ -81,8 +108,21 @@ ZINNIA_USE_TWITTER
 
   Boolean telling if Zinnia can use Twitter.
 
+CMS settings
+------------
+
 ZINNIA_PLUGINS_TEMPLATES
   **Default :** ()
 
-  List of tuple for extending the cms's plugins rendering templates.
+  List of tuple for extending the CMS's plugins rendering templates.
+
+ZINNIA_APP_MENUS
+  **Default :** (EntryMenu, CategoryMenu, TagMenu, AuthorMenu)
+
+  List of Menu objects provided for the Zinnia AppHook.
+
+ZINNIA_HIDE_ENTRY_MENU
+  **Default :** True
+
+  Boolean used for displaying or not the entries in the EntryMenu object.
 

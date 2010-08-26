@@ -1,6 +1,8 @@
 """Settings of Zinnia.plugins"""
 from django.conf import settings
 
+HIDE_ENTRY_MENU = getattr(settings, 'ZINNIA_HIDE_ENTRY_MENU', True)
+
 PLUGINS_TEMPLATES = getattr(settings, 'ZINNIA_PLUGINS_TEMPLATES', [])
 try:
     from zinnia.plugins.menu import EntryMenu
@@ -12,6 +14,3 @@ try:
                                                        TagMenu, AuthorMenu])
 except ImportError:
     APP_MENUS = []
-
-
-
