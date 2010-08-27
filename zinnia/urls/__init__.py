@@ -9,6 +9,7 @@ urlpatterns = patterns('',
                        url(r'^search/', include('zinnia.urls.search')),
                        url(r'^sitemap/', include('zinnia.urls.sitemap')),
                        url(r'^trackback/', include('zinnia.urls.trackback')),
+                       url(r'^discussion/', include('zinnia.urls.discussion')),
                        url(r'^', include('zinnia.urls.capabilities')),
                        url(r'^', include('zinnia.urls.entries')),
                        )
