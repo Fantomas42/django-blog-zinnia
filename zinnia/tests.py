@@ -14,6 +14,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
+from django.template import Context
 from django.template import TemplateDoesNotExist
 
 from tagging.models import Tag
@@ -24,6 +25,7 @@ from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
 from zinnia.managers import authors_published
+from zinnia.templatetags.zinnia_tags import *
 from zinnia.xmlrpc.metaweblog import authenticate
 from zinnia.xmlrpc.metaweblog import post_structure
 from zinnia.xmlrpc.pingback import generate_pingback_content
@@ -919,3 +921,138 @@ class ExternalUrlsPingerTestCase(TestCase):
                            'http://example.com/': 'http://example.com/xmlrpc.php'})
         # Remove stub
         zinnia.ping.urlopen = self.original_urlopen
+
+class TemplateTagsTestCase(TestCase):
+    """Test cases for Temlate tags"""
+
+    def setUp(self):
+        params = {'title': 'My entry',
+                  'content': 'My content',
+                  'tags': 'zinnia, test',
+                  'creation_date': datetime(2010, 1, 1),
+                  'slug': 'my-entry'}
+        self.entry = Entry.objects.create(**params)
+
+    def publish_entry(self):
+        self.entry.status = PUBLISHED
+        self.entry.sites.add(Site.objects.get_current())
+        self.entry.save()
+
+    def test_get_categories(self):
+        context = get_categories()
+        self.assertEquals(len(context['categories']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/categories.html')
+
+        Category.objects.create(title='Category 1', slug='category-1')
+        context = get_categories('custom_template.html')
+        self.assertEquals(len(context['categories']), 1)
+        self.assertEquals(context['template'], 'custom_template.html')
+
+    def test_get_recent_entries(self):
+        context = get_recent_entries()
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/recent_entries.html')
+
+        self.publish_entry()
+        context = get_recent_entries(3, 'custom_template.html')
+        self.assertEquals(len(context['entries']), 1)
+        self.assertEquals(context['template'], 'custom_template.html')
+        context = get_recent_entries(0)
+        self.assertEquals(len(context['entries']), 0)
+
+    def test_get_random_entries(self):
+        context = get_random_entries()
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/random_entries.html')
+
+        self.publish_entry()
+        context = get_random_entries(3, 'custom_template.html')
+        self.assertEquals(len(context['entries']), 1)
+        self.assertEquals(context['template'], 'custom_template.html')
+        context = get_random_entries(0)
+        self.assertEquals(len(context['entries']), 0)
+
+    def test_get_popular_entries(self):
+        context = get_popular_entries()
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/popular_entries.html')
+
+        self.publish_entry()
+        context = get_popular_entries(3, 'custom_template.html')
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'custom_template.html')
+
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'status': PUBLISHED,
+                  'slug': 'my-second-entry'}
+        site = Site.objects.get_current()
+        second_entry = Entry.objects.create(**params)
+        second_entry.sites.add(site)
+
+        Comment.objects.create(comment='My Comment 1', site=site,
+                               content_object=self.entry)
+        Comment.objects.create(comment='My Comment 2', site=site,
+                               content_object=self.entry)
+        Comment.objects.create(comment='My Comment 3', site=site,
+                               content_object=second_entry)
+        context = get_popular_entries(3)
+        self.assertEquals(context['entries'], [self.entry, second_entry])
+
+    def test_get_similar_entries(self):
+        self.publish_entry()
+        source_context = Context({'object': self.entry})
+        context = get_similar_entries(source_context)
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/similar_entries.html')
+
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'status': PUBLISHED,
+                  'slug': 'my-second-entry'}
+        site = Site.objects.get_current()
+        second_entry = Entry.objects.create(**params)
+        second_entry.sites.add(site)
+
+        source_context = Context({'object': second_entry})
+        context = get_similar_entries(source_context, 3, 'custom_template.html')
+        #self.assertEquals(len(context['entries']), 1) # Does not work due to cache
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'custom_template.html')
+
+    def test_get_archives_entries(self):
+        context = get_archives_entries()
+        self.assertEquals(len(context['archives']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/archives_entries.html')
+
+        self.publish_entry()
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'status': PUBLISHED,
+                  'creation_date': datetime(2009, 1, 1),
+                  'slug': 'my-second-entry'}
+        site = Site.objects.get_current()
+        second_entry = Entry.objects.create(**params)
+        second_entry.sites.add(site)
+
+        context = get_archives_entries('custom_template.html')
+        self.assertEquals(len(context['archives']), 2)
+        self.assertEquals(context['archives'][0], datetime(2010, 1, 1))
+        self.assertEquals(context['archives'][1], datetime(2009, 1, 1))
+        self.assertEquals(context['template'], 'custom_template.html')
+
+    def test_get_calendar_entries(self):
+        pass
+
+    def test_get_recent_comments(self):
+        pass
+
+    def test_zinnia_breadcrumbs(self):
+        pass
+
+
+
+

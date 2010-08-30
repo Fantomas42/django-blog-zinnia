@@ -55,7 +55,7 @@ def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     query = """SELECT object_pk, COUNT(*) AS score
     FROM %s
     WHERE content_type_id = %%s
-    AND is_public = 1
+    AND is_public = '1'
     GROUP BY object_pk
     ORDER BY score DESC""" % Comment._meta.db_table
     
