@@ -227,7 +227,8 @@ class EntryAdmin(admin.ModelAdmin):
                 else:
                     self.message_user(request, '%s : %s' % (directory, result['message']))
             if success:
-                self.message_user(request, _('%s directory succesfully pinged %d entries.') % (directory, success))
+                self.message_user(request, _('%(directory)s directory succesfully pinged %(success)d entries.') %
+                                  {'directory': directory, 'success': success})
     ping_directories.short_description = _('Ping Directories for selected entries')
 
     def get_urls(self):
