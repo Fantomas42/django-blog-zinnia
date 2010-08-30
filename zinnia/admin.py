@@ -20,7 +20,6 @@ from zinnia.ping import DirectoryPinger
 class CategoryAdmin(admin.ModelAdmin):
     fields = ('title', 'slug', 'description')
     list_display = ('title', 'slug', 'description')
-    list_filter = ('title', 'slug')
     prepopulated_fields = {'slug': ('title', )}
     search_fields = ('title', 'description')
 
