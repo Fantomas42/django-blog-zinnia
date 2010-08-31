@@ -10,6 +10,7 @@ from datetime import datetime
 
 from django.template import Library
 from django.contrib.comments.models import Comment
+from django.contrib.contenttypes.models import ContentType
 
 from zinnia.models import Entry
 from zinnia.models import Category
@@ -58,15 +59,15 @@ def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     AND is_public = '1'
     GROUP BY object_pk
     ORDER BY score DESC""" % Comment._meta.db_table
-    
+
     cursor = connection.cursor()
     cursor.execute(query, [ctype.id])
     object_ids = [int(row[0]) for row in cursor.fetchall()[:number]]
-    
+
     # Use ``in_bulk`` here instead of an ``id__in`` filter, because ``id__in``
     # would clobber the ordering.
     object_dict = Entry.published.in_bulk(object_ids)
-    
+
     return {'template': template,
             'entries': [object_dict[object_id] for object_id in object_ids]}
 
@@ -132,16 +133,13 @@ def get_calendar_entries(context, year=None, month=None,
 
     dates = list(Entry.published.dates('creation_date', 'month'))
 
-    if current_month in dates:
-        index = dates.index(current_month)
-        previous_month = dates[index - 1]
-        try:
-            next_month = dates[index + 1]
-        except IndexError:
-            next_month = None
-    else:
-        previous_month = len(dates) and dates[-1] or None
-        next_month = None
+    if not current_month in dates:
+        dates.append(current_month)
+        dates.sort()
+    index = dates.index(current_month)
+
+    previous_month = index > 0 and dates[index - 1] or None
+    next_month = index != len(dates) - 1 and dates[index + 1] or None
 
     return {'template': template,
             'next_month': next_month,
@@ -151,17 +149,21 @@ def get_calendar_entries(context, year=None, month=None,
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
     """Return the most recent comments"""
-    comments = Comment.objects.for_model(Entry).filter(
+    entry_published_pks = Entry.published.values_list('id', flat=True)
+    ct = ContentType.objects.get_for_model(Entry)
+
+    comments = Comment.objects.filter(
+        content_type=ct, object_pk__in=entry_published_pks,
         flags__flag=None, is_public=True).order_by(
         '-submit_date')[:number]
-    
-    return {'template': template, 
+
+    return {'template': template,
             'comments': comments}
 
 @register.inclusion_tag('zinnia/tags/dummy.html',
                         takes_context=True)
 def zinnia_breadcrumbs(context, separator='/', root_name='Blog',
-                       template='zinnia/tags/breadcrumbs.html',):                       
+                       template='zinnia/tags/breadcrumbs.html',):
     """Return a breadcrumb for the application"""
     from zinnia.templatetags.zbreadcrumbs import retrieve_breadcrumbs
 
@@ -175,9 +177,10 @@ def zinnia_breadcrumbs(context, separator='/', root_name='Blog',
             'breadcrumbs': breadcrumbs}
 
 @register.simple_tag
-def get_gravatar(email, size, rating, default=None):
+def get_gravatar(email, size=80, rating='g', default=None):
     """Return url for a Gravatar"""
-    url = 'http://www.gravatar.com/avatar/%s.jpg' % md5(email).hexdigest()
+    url = 'http://www.gravatar.com/avatar/%s.jpg' % \
+          md5(email.strip().lower()).hexdigest()
     options = {'s': size, 'r': rating}
     if default:
         options['d'] = default

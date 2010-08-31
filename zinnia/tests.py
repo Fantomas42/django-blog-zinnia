@@ -923,7 +923,7 @@ class ExternalUrlsPingerTestCase(TestCase):
         zinnia.ping.urlopen = self.original_urlopen
 
 class TemplateTagsTestCase(TestCase):
-    """Test cases for Temlate tags"""
+    """Test cases for Template tags"""
 
     def setUp(self):
         params = {'title': 'My entry',
@@ -1044,15 +1044,95 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['archives'][1], datetime(2009, 1, 1))
         self.assertEquals(context['template'], 'custom_template.html')
 
-#     def test_get_calendar_entries(self):
-#         pass
+    def test_get_calendar_entries(self):
+        source_context = Context()
+        context = get_calendar_entries(source_context)
+        self.assertEquals(context['previous_month'], None)
+        self.assertEquals(context['next_month'], None)
+        self.assertEquals(context['template'], 'zinnia/tags/calendar.html')
 
-#     def test_get_recent_comments(self):
-#         pass
+        self.publish_entry()
+        context = get_calendar_entries(source_context, template='custom_template.html')
+        self.assertEquals(context['previous_month'], datetime(2010, 1, 1))
+        self.assertEquals(context['next_month'], None)
+        self.assertEquals(context['template'], 'custom_template.html')
 
-#     def test_zinnia_breadcrumbs(self):
-#         pass
+        context = get_calendar_entries(source_context, 2009, 1)
+        self.assertEquals(context['previous_month'], None)
+        self.assertEquals(context['next_month'], datetime(2010, 1, 1))
 
-#     def test_get_gravatar(self):
-#         pass
+        source_context = Context({'month': datetime(2009, 1, 1)})
+        context = get_calendar_entries(source_context)
+        self.assertEquals(context['previous_month'], None)
+        self.assertEquals(context['next_month'], datetime(2010, 1, 1))
+
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'status': PUBLISHED,
+                  'creation_date': datetime(2008, 1, 1),
+                  'slug': 'my-second-entry'}
+        site = Site.objects.get_current()
+        second_entry = Entry.objects.create(**params)
+        second_entry.sites.add(site)
+
+        source_context = Context()
+        context = get_calendar_entries(source_context, 2009, 1)
+        self.assertEquals(context['previous_month'], datetime(2008, 1, 1))
+        self.assertEquals(context['next_month'], datetime(2010, 1, 1))
+        context = get_calendar_entries(source_context)
+        self.assertEquals(context['previous_month'], datetime(2010, 1, 1))
+        self.assertEquals(context['next_month'], None)
+
+    def test_get_recent_comments(self):
+        site = Site.objects.get_current()
+        context = get_recent_comments()
+        self.assertEquals(len(context['comments']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/recent_comments.html')
+
+        comment_1 = Comment.objects.create(comment='My Comment 1', site=site,
+                                           content_object=self.entry)
+        context = get_recent_comments(3, 'custom_template.html')
+        self.assertEquals(len(context['comments']), 0)
+        self.assertEquals(context['template'], 'custom_template.html')
+
+        self.publish_entry()
+        context = get_recent_comments()
+        self.assertEquals(len(context['comments']), 1)
+
+        comment_2 = Comment.objects.create(comment='My Comment 2', site=site,
+                                           content_object=self.entry)
+        context = get_recent_comments()
+        self.assertEquals(list(context['comments']), [comment_2, comment_1])
+
+    def test_zinnia_breadcrumbs(self):
+        class FakeRequest(object):
+            def __init__(self, path):
+                self.path = path
+
+        source_context = Context({'request': FakeRequest('/')})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 1)
+        self.assertEquals(context['breadcrumbs'][0].name, 'Blog')
+        self.assertEquals(context['breadcrumbs'][0].url, '/')
+        self.assertEquals(context['separator'], '/')
+        self.assertEquals(context['template'], 'zinnia/tags/breadcrumbs.html')
+
+        context = zinnia_breadcrumbs(source_context, '>', 'Weblog', 'custom_template.html')
+        self.assertEquals(len(context['breadcrumbs']), 1)
+        self.assertEquals(context['breadcrumbs'][0].name, 'Weblog')
+        self.assertEquals(context['separator'], '>')
+        self.assertEquals(context['template'], 'custom_template.html')
+
+        source_context = Context({'request': FakeRequest(self.entry.get_absolute_url()),
+                                  'object': self.entry})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 5)
+        # More tests can be done here, for testing path and objects in context
+
+    def test_get_gravatar(self):
+        self.assertEquals(get_gravatar('webmaster@example.com'),
+                          'http://www.gravatar.com/avatar/86d4fd4a22de452a9228298731a0b592.jpg?s=80&amp;r=g')
+        self.assertEquals(get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404'),
+                          'http://www.gravatar.com/avatar/86d4fd4a22de452a9228298731a0b592.jpg?s=15&amp;r=x&amp;d=404')
 
