@@ -25,9 +25,9 @@ from zinnia.signals import ping_external_urls_handler
 class Category(models.Model):
     """Category object for Entry"""
 
-    title = models.CharField(_('title'), max_length=50)
+    title = models.CharField(_('title'), max_length=255)
     slug = models.SlugField(help_text=_('used for publication'),
-                            unique=True)
+                            unique=True, max_length=255)
     description = models.TextField(_('description'), blank=True)
 
     def entries_published_set(self):
@@ -53,7 +53,7 @@ class Entry(models.Model):
                       (HIDDEN, _('hidden')),
                       (PUBLISHED, _('published')))
 
-    title = models.CharField(_('title'), max_length=100)
+    title = models.CharField(_('title'), max_length=255)
 
     image = models.ImageField(_('image'), upload_to=UPLOAD_TO,
                               blank=True, help_text=_('used for illustration'))
@@ -66,7 +66,10 @@ class Entry(models.Model):
     related = models.ManyToManyField('self', verbose_name=_('related entries'),
                                      blank=True, null=True)
 
-    slug = models.SlugField(help_text=_('used for publication'))
+    slug = models.SlugField(help_text=_('used for publication'),
+                            unique_for_date='creation_date',
+                            max_length=255)
+    
     authors = models.ManyToManyField(User, verbose_name=_('authors'),
                                      blank=True, null=False)
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
