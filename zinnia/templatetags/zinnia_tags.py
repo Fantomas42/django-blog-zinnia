@@ -62,14 +62,14 @@ def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
 
     cursor = connection.cursor()
     cursor.execute(query, [ctype.id])
-    object_ids = [int(row[0]) for row in cursor.fetchall()[:number]]
+    object_ids = [int(row[0]) for row in cursor.fetchall()]
 
     # Use ``in_bulk`` here instead of an ``id__in`` filter, because ``id__in``
     # would clobber the ordering.
     object_dict = Entry.published.in_bulk(object_ids)
 
     return {'template': template,
-            'entries': [object_dict[object_id] for object_id in object_ids]}
+            'entries': object_dict.values()[:number]}
 
 @register.inclusion_tag('zinnia/tags/dummy.html',
                         takes_context=True)

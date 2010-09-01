@@ -999,6 +999,10 @@ class TemplateTagsTestCase(TestCase):
                                content_object=second_entry)
         context = get_popular_entries(3)
         self.assertEquals(context['entries'], [self.entry, second_entry])
+        self.entry.status = DRAFT
+        self.entry.save()
+        context = get_popular_entries(3)
+        self.assertEquals(context['entries'], [second_entry,])
 
     def test_get_similar_entries(self):
         self.publish_entry()
