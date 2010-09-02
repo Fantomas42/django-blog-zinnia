@@ -1,5 +1,5 @@
 """Menus for zinnia.plugins"""
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
 
 from menus.base import Menu
@@ -32,24 +32,27 @@ class EntryMenu(CMSAttachMenu):
             key_archive_year = 'year-%s' % year
             key_archive_month = 'month-%s-%s' % (year, month)
             key_archive_day = 'day-%s-%s-%s' % (year, month, day)
+            
+            try: # ignoring the reverse resolution if the apphook is not attached to a page
+                if not key_archive_year in archives:
+                    nodes.append(NavigationNode(year, reverse('zinnia_entry_archive_year', args=[year]),
+                                                key_archive_year, attr=attributes))
+                    archives.append(key_archive_year)
 
-            if not key_archive_year in archives:
-                nodes.append(NavigationNode(year, reverse('zinnia_entry_archive_year', args=[year]),
-                                            key_archive_year, attr=attributes))
-                archives.append(key_archive_year)
+                if not key_archive_month in archives:
+                    nodes.append(NavigationNode(month_text, reverse('zinnia_entry_archive_month', args=[year, month]),
+                                                key_archive_month, key_archive_year, attr=attributes))
+                    archives.append(key_archive_month)
 
-            if not key_archive_month in archives:
-                nodes.append(NavigationNode(month_text, reverse('zinnia_entry_archive_month', args=[year, month]),
-                                            key_archive_month, key_archive_year, attr=attributes))
-                archives.append(key_archive_month)
+                if not key_archive_day in archives:
+                    nodes.append(NavigationNode(day, reverse('zinnia_entry_archive_day', args=[year, month, day]),
+                                                key_archive_day, key_archive_month, attr=attributes))
+                    archives.append(key_archive_day)
 
-            if not key_archive_day in archives:
-                nodes.append(NavigationNode(day, reverse('zinnia_entry_archive_day', args=[year, month, day]),
-                                            key_archive_day, key_archive_month, attr=attributes))
-                archives.append(key_archive_day)
-
-            nodes.append(NavigationNode(entry.title, entry.get_absolute_url(),
-                                        entry.pk, key_archive_day))
+                nodes.append(NavigationNode(entry.title, entry.get_absolute_url(),
+                                            entry.pk, key_archive_day))
+            except NoReverseMatch:
+                pass
         return nodes
 
 class CategoryMenu(CMSAttachMenu):
@@ -58,11 +61,14 @@ class CategoryMenu(CMSAttachMenu):
 
     def get_nodes(self, request):
         nodes = []
-        nodes.append(NavigationNode(_('Categories'), reverse('zinnia_category_list'),
-                                    'categories'))
-        for category in Category.objects.all():
-            nodes.append(NavigationNode(category.title, category.get_absolute_url(),
-                                        category.pk, 'categories'))
+        try:
+            nodes.append(NavigationNode(_('Categories'), reverse('zinnia_category_list'),
+                                        'categories'))
+            for category in Category.objects.all():
+                nodes.append(NavigationNode(category.title, category.get_absolute_url(),
+                                            category.pk, 'categories'))
+        except NoReverseMatch:
+            pass
         return nodes
 
 class AuthorMenu(CMSAttachMenu):
@@ -71,12 +77,15 @@ class AuthorMenu(CMSAttachMenu):
 
     def get_nodes(self, request):
         nodes = []
-        nodes.append(NavigationNode(_('Authors'), reverse('zinnia_author_list'),
-                                    'authors'))
-        for author in authors_published():
-            nodes.append(NavigationNode(author.username,
-                                        reverse('zinnia_author_detail', args=[author.username]),
-                                        author.pk, 'authors'))
+        try:
+            nodes.append(NavigationNode(_('Authors'), reverse('zinnia_author_list'),
+                                        'authors'))
+            for author in authors_published():
+                nodes.append(NavigationNode(author.username,
+                                            reverse('zinnia_author_detail', args=[author.username]),
+                                            author.pk, 'authors'))
+        except NoReverseMatch:
+            pass
         return nodes
 
 class TagMenu(CMSAttachMenu):
@@ -85,12 +94,15 @@ class TagMenu(CMSAttachMenu):
 
     def get_nodes(self, request):
         nodes = []
-        nodes.append(NavigationNode(_('Tags'), reverse('zinnia_tag_list'),
-                                    'tags'))
-        for tag in tags_published():
-            nodes.append(NavigationNode(tag.name,
-                                        reverse('zinnia_tag_detail', args=[tag.name]),
-                                        tag.pk, 'tags'))
+        try:
+            nodes.append(NavigationNode(_('Tags'), reverse('zinnia_tag_list'),
+                                        'tags'))
+            for tag in tags_published():
+                nodes.append(NavigationNode(tag.name,
+                                            reverse('zinnia_tag_detail', args=[tag.name]),
+                                            tag.pk, 'tags'))
+        except NoReverseMatch:
+            pass
         return nodes
 
 class EntryModifier(Modifier):
