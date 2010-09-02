@@ -82,7 +82,7 @@ class ExternalUrlsPinger(threading.Thread):
         external_urls = self.find_external_urls(self.entry)
         external_urls_pingable = self.find_pingback_urls(external_urls)
 
-        for url, server_name in external_urls_pingable:
+        for url, server_name in external_urls_pingable.items():
             reply = self.pingback_url(server_name, url)
             self.results.append(reply)
 
