@@ -288,7 +288,7 @@ Display the latest comments.
 
 Display the breadcrumbs for the pages handled by Zinnia.
 
-* get_gravatar(email, size, rating, default=None)
+* get_gravatar(email, size=80, rating='g', default=None)
 
 Display the Gravatar image associated to an email, usefull for comments.
 

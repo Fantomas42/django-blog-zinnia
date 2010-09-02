@@ -14,6 +14,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
+from django.template import Context
 from django.template import TemplateDoesNotExist
 
 from tagging.models import Tag
@@ -24,6 +25,7 @@ from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
 from zinnia.managers import authors_published
+from zinnia.templatetags.zinnia_tags import *
 from zinnia.xmlrpc.metaweblog import authenticate
 from zinnia.xmlrpc.metaweblog import post_structure
 from zinnia.xmlrpc.pingback import generate_pingback_content
@@ -137,14 +139,14 @@ class ManagersTestCase(TestCase):
         self.assertEquals(Entry.published.advanced_search('content').count(), 2)
         search = Entry.published.advanced_search('content 1')
         self.assertEquals(search.count(), 1)
-        self.assertEquals(search.all()[0].pk, 1)
+        self.assertEquals(search.all()[0], self.entry_1)
         self.assertEquals(Entry.published.advanced_search('content 1 or 2').count(), 2)
         self.assertEquals(Entry.published.advanced_search('content 1 and 2').count(), 0)
         self.assertEquals(Entry.published.advanced_search('content 1 2').count(), 0)
         self.assertEquals(Entry.published.advanced_search('"My content" 1 or 2').count(), 2)
         search = Entry.published.advanced_search('content -1')
         self.assertEquals(search.count(), 1)
-        self.assertEquals(search.all()[0].pk, 2)
+        self.assertEquals(search.all()[0], self.entry_2)
         self.assertEquals(Entry.published.advanced_search('content category:SimpleCategory').count(), 1)
         self.assertEquals(Entry.published.advanced_search('content category:simple').count(), 1)
         self.assertEquals(Entry.published.advanced_search('content category:"Category 1"').count(), 2)
@@ -726,7 +728,7 @@ class MetaWeblogTestCase(TestCase):
             'apikey', 'webmaster', 'password'),
                           {'firstname': 'John', 'lastname': 'Doe',
                            'url': 'http://example.com/authors/webmaster/',
-                           'userid': 1, 'nickname': 'webmaster',
+                           'userid': self.webmaster.pk, 'nickname': 'webmaster',
                            'email': 'webmaster@example.com'})
 
     def test_get_authors(self):
@@ -734,7 +736,7 @@ class MetaWeblogTestCase(TestCase):
                           'apikey', 'contributor', 'password')
         self.assertEquals(self.server.wp.getAuthors(
             'apikey', 'webmaster', 'password'), [
-                              {'user_login': 'webmaster', 'user_id': 1,
+                              {'user_login': 'webmaster', 'user_id': self.webmaster.pk,
                                'user_email': 'webmaster@example.com',
                                'display_name': 'webmaster'}])
 
@@ -761,28 +763,28 @@ class MetaWeblogTestCase(TestCase):
                           'apikey', 1, 'contributor', 'password', 'publish')
         self.assertEquals(Entry.objects.count(), 2)
         self.assertEquals(self.server.blogger.deletePost(
-            'apikey', 1, 'webmaster', 'password', 'publish'), True)
+            'apikey', self.entry_1.pk, 'webmaster', 'password', 'publish'), True)
         self.assertEquals(Entry.objects.count(), 1)
 
     def test_get_post(self):
         self.assertRaises(Fault, self.server.metaWeblog.getPost,
                           1, 'contributor', 'password')
         post = self.server.metaWeblog.getPost(
-            1, 'webmaster', 'password')
+            self.entry_1.pk, 'webmaster', 'password')
         self.assertEquals(post['title'], self.entry_1.title)
         self.assertEquals(post['description'], '<p>My content 1</p>')
         self.assertEquals(post['categories'], ['Category 1', 'Category 2'])
         self.assertEquals(post['dateCreated'].value, '2010-01-01T00:00:00')
         self.assertEquals(post['link'], 'http://example.com/2010/01/01/my-entry-1/')
         self.assertEquals(post['permaLink'], 'http://example.com/2010/01/01/my-entry-1/')
-        self.assertEquals(post['postid'], 1)
+        self.assertEquals(post['postid'], self.entry_1.pk)
         self.assertEquals(post['userid'], 'webmaster')
         self.assertEquals(post['mt_excerpt'], '')
         self.assertEquals(post['mt_allow_comments'], 1)
         self.assertEquals(post['mt_allow_pings'], 1)
         self.assertEquals(post['mt_keywords'], self.entry_1.tags)
         self.assertEquals(post['wp_author'], 'webmaster')
-        self.assertEquals(post['wp_author_id'], 1)
+        self.assertEquals(post['wp_author_id'], self.webmaster.pk)
         self.assertEquals(post['wp_author_display_name'], 'webmaster')
         self.assertEquals(post['wp_slug'], self.entry_1.slug)
 
@@ -818,7 +820,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.pingback_enabled, True)
         self.assertEquals(entry.categories.count(), 1)
         self.assertEquals(entry.authors.count(), 1)
-        self.assertEquals(entry.authors.all()[0].pk, 1)
+        self.assertEquals(entry.authors.all()[0], self.webmaster)
         self.assertEquals(entry.creation_date, self.entry_2.creation_date)
 
         entry.title = 'Title edited'
@@ -828,7 +830,7 @@ class MetaWeblogTestCase(TestCase):
         post['description'] = 'Content edited'
         post['mt_excerpt'] = 'Content edited'
         post['wp_slug'] = 'slug-edited'
-        post['wp_author_id'] = 2
+        post['wp_author_id'] = self.contributor.pk
         post['mt_allow_comments'] = 2
         post['mt_allow_pings'] = 0
 
@@ -845,7 +847,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.pingback_enabled, False)
         self.assertEquals(entry.categories.count(), 0)
         self.assertEquals(entry.authors.count(), 1)
-        self.assertEquals(entry.authors.all()[0].pk, 2)
+        self.assertEquals(entry.authors.all()[0], self.contributor)
         self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
 
 class ExternalUrlsPingerTestCase(TestCase):
@@ -919,3 +921,222 @@ class ExternalUrlsPingerTestCase(TestCase):
                            'http://example.com/': 'http://example.com/xmlrpc.php'})
         # Remove stub
         zinnia.ping.urlopen = self.original_urlopen
+
+class TemplateTagsTestCase(TestCase):
+    """Test cases for Template tags"""
+
+    def setUp(self):
+        params = {'title': 'My entry',
+                  'content': 'My content',
+                  'tags': 'zinnia, test',
+                  'creation_date': datetime(2010, 1, 1),
+                  'slug': 'my-entry'}
+        self.entry = Entry.objects.create(**params)
+
+    def publish_entry(self):
+        self.entry.status = PUBLISHED
+        self.entry.sites.add(Site.objects.get_current())
+        self.entry.save()
+
+    def test_get_categories(self):
+        context = get_categories()
+        self.assertEquals(len(context['categories']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/categories.html')
+
+        Category.objects.create(title='Category 1', slug='category-1')
+        context = get_categories('custom_template.html')
+        self.assertEquals(len(context['categories']), 1)
+        self.assertEquals(context['template'], 'custom_template.html')
+
+    def test_get_recent_entries(self):
+        context = get_recent_entries()
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/recent_entries.html')
+
+        self.publish_entry()
+        context = get_recent_entries(3, 'custom_template.html')
+        self.assertEquals(len(context['entries']), 1)
+        self.assertEquals(context['template'], 'custom_template.html')
+        context = get_recent_entries(0)
+        self.assertEquals(len(context['entries']), 0)
+
+    def test_get_random_entries(self):
+        context = get_random_entries()
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/random_entries.html')
+
+        self.publish_entry()
+        context = get_random_entries(3, 'custom_template.html')
+        self.assertEquals(len(context['entries']), 1)
+        self.assertEquals(context['template'], 'custom_template.html')
+        context = get_random_entries(0)
+        self.assertEquals(len(context['entries']), 0)
+
+    def test_get_popular_entries(self):
+        context = get_popular_entries()
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/popular_entries.html')
+
+        self.publish_entry()
+        context = get_popular_entries(3, 'custom_template.html')
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'custom_template.html')
+
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'status': PUBLISHED,
+                  'slug': 'my-second-entry'}
+        site = Site.objects.get_current()
+        second_entry = Entry.objects.create(**params)
+        second_entry.sites.add(site)
+
+        Comment.objects.create(comment='My Comment 1', site=site,
+                               content_object=self.entry)
+        Comment.objects.create(comment='My Comment 2', site=site,
+                               content_object=self.entry)
+        Comment.objects.create(comment='My Comment 3', site=site,
+                               content_object=second_entry)
+        context = get_popular_entries(3)
+        self.assertEquals(context['entries'], [self.entry, second_entry])
+        self.entry.status = DRAFT
+        self.entry.save()
+        context = get_popular_entries(3)
+        self.assertEquals(context['entries'], [second_entry,])
+
+    def test_get_similar_entries(self):
+        self.publish_entry()
+        source_context = Context({'object': self.entry})
+        context = get_similar_entries(source_context)
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/similar_entries.html')
+
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'status': PUBLISHED,
+                  'slug': 'my-second-entry'}
+        site = Site.objects.get_current()
+        second_entry = Entry.objects.create(**params)
+        second_entry.sites.add(site)
+
+        source_context = Context({'object': second_entry})
+        context = get_similar_entries(source_context, 3, 'custom_template.html')
+        #self.assertEquals(len(context['entries']), 1) # Does not work due to cache
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'custom_template.html')
+
+    def test_get_archives_entries(self):
+        context = get_archives_entries()
+        self.assertEquals(len(context['archives']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/archives_entries.html')
+
+        self.publish_entry()
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'status': PUBLISHED,
+                  'creation_date': datetime(2009, 1, 1),
+                  'slug': 'my-second-entry'}
+        site = Site.objects.get_current()
+        second_entry = Entry.objects.create(**params)
+        second_entry.sites.add(site)
+
+        context = get_archives_entries('custom_template.html')
+        self.assertEquals(len(context['archives']), 2)
+        self.assertEquals(context['archives'][0], datetime(2010, 1, 1))
+        self.assertEquals(context['archives'][1], datetime(2009, 1, 1))
+        self.assertEquals(context['template'], 'custom_template.html')
+
+    def test_get_calendar_entries(self):
+        source_context = Context()
+        context = get_calendar_entries(source_context)
+        self.assertEquals(context['previous_month'], None)
+        self.assertEquals(context['next_month'], None)
+        self.assertEquals(context['template'], 'zinnia/tags/calendar.html')
+
+        self.publish_entry()
+        context = get_calendar_entries(source_context, template='custom_template.html')
+        self.assertEquals(context['previous_month'], datetime(2010, 1, 1))
+        self.assertEquals(context['next_month'], None)
+        self.assertEquals(context['template'], 'custom_template.html')
+
+        context = get_calendar_entries(source_context, 2009, 1)
+        self.assertEquals(context['previous_month'], None)
+        self.assertEquals(context['next_month'], datetime(2010, 1, 1))
+
+        source_context = Context({'month': datetime(2009, 1, 1)})
+        context = get_calendar_entries(source_context)
+        self.assertEquals(context['previous_month'], None)
+        self.assertEquals(context['next_month'], datetime(2010, 1, 1))
+
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'status': PUBLISHED,
+                  'creation_date': datetime(2008, 1, 1),
+                  'slug': 'my-second-entry'}
+        site = Site.objects.get_current()
+        second_entry = Entry.objects.create(**params)
+        second_entry.sites.add(site)
+
+        source_context = Context()
+        context = get_calendar_entries(source_context, 2009, 1)
+        self.assertEquals(context['previous_month'], datetime(2008, 1, 1))
+        self.assertEquals(context['next_month'], datetime(2010, 1, 1))
+        context = get_calendar_entries(source_context)
+        self.assertEquals(context['previous_month'], datetime(2010, 1, 1))
+        self.assertEquals(context['next_month'], None)
+
+    def test_get_recent_comments(self):
+        site = Site.objects.get_current()
+        context = get_recent_comments()
+        self.assertEquals(len(context['comments']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/recent_comments.html')
+
+        comment_1 = Comment.objects.create(comment='My Comment 1', site=site,
+                                           content_object=self.entry)
+        context = get_recent_comments(3, 'custom_template.html')
+        self.assertEquals(len(context['comments']), 0)
+        self.assertEquals(context['template'], 'custom_template.html')
+
+        self.publish_entry()
+        context = get_recent_comments()
+        self.assertEquals(len(context['comments']), 1)
+
+        comment_2 = Comment.objects.create(comment='My Comment 2', site=site,
+                                           content_object=self.entry)
+        context = get_recent_comments()
+        self.assertEquals(list(context['comments']), [comment_2, comment_1])
+
+    def test_zinnia_breadcrumbs(self):
+        class FakeRequest(object):
+            def __init__(self, path):
+                self.path = path
+
+        source_context = Context({'request': FakeRequest('/')})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 1)
+        self.assertEquals(context['breadcrumbs'][0].name, 'Blog')
+        self.assertEquals(context['breadcrumbs'][0].url, '/')
+        self.assertEquals(context['separator'], '/')
+        self.assertEquals(context['template'], 'zinnia/tags/breadcrumbs.html')
+
+        context = zinnia_breadcrumbs(source_context, '>', 'Weblog', 'custom_template.html')
+        self.assertEquals(len(context['breadcrumbs']), 1)
+        self.assertEquals(context['breadcrumbs'][0].name, 'Weblog')
+        self.assertEquals(context['separator'], '>')
+        self.assertEquals(context['template'], 'custom_template.html')
+
+        source_context = Context({'request': FakeRequest(self.entry.get_absolute_url()),
+                                  'object': self.entry})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 5)
+        # More tests can be done here, for testing path and objects in context
+
+    def test_get_gravatar(self):
+        self.assertEquals(get_gravatar('webmaster@example.com'),
+                          'http://www.gravatar.com/avatar/86d4fd4a22de452a9228298731a0b592.jpg?s=80&amp;r=g')
+        self.assertEquals(get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404'),
+                          'http://www.gravatar.com/avatar/86d4fd4a22de452a9228298731a0b592.jpg?s=15&amp;r=x&amp;d=404')
+

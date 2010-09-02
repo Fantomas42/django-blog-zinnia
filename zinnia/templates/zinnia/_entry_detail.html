@@ -72,9 +72,9 @@
     </a>
     {% else %}
       {% if object.comment_enabled %}
-      {% trans "Not yet comments." %}
+      {% trans "No comments yet." %}
     <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
-      {% trans "Be first to comment !" %}
+      {% trans "Be first to comment!" %}
     </a>
       {% else %}
       {% trans "Comments are closed." %}
