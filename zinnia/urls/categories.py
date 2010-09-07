@@ -12,9 +12,9 @@ urlpatterns = patterns('',
                        )
 
 urlpatterns += patterns('zinnia.views.categories',
-                        url(r'^(?P<slug>[-\w]+)/$', 'category_detail',
+                        url(r'^(?P<path>[-\/\w]+)/$', 'category_detail',
                             name='zinnia_category_detail'),
-                        url(r'^(?P<slug>[-\w]+)/page/(?P<page>\d+)/$',
+                        url(r'^(?P<path>[-\/\w]+)/page/(?P<page>\d+)/$',
                             'category_detail',
                             name='zinnia_category_detail_paginated'),
                         )

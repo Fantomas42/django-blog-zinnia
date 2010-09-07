@@ -39,12 +39,18 @@ class Category(models.Model):
         """Return only the entries published"""
         return entries_published(self.entry_set)
 
+    @property
+    def tree_path(self):
+        if self.parent:
+            return '%s/%s' % (self.parent.tree_path, self.slug)
+        return '%s' % self.slug
+
     def __unicode__(self):
         return self.title
 
     @models.permalink
     def get_absolute_url(self):
-        return ('zinnia_category_detail', (self.slug, ))
+        return ('zinnia_category_detail', (self.tree_path,))
 
     class Meta:
         verbose_name = _('category')
@@ -74,7 +80,7 @@ class Entry(models.Model):
     slug = models.SlugField(help_text=_('used for publication'),
                             unique_for_date='creation_date',
                             max_length=255)
-    
+
     authors = models.ManyToManyField(User, verbose_name=_('authors'),
                                      blank=True, null=False)
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
