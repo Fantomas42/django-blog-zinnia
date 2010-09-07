@@ -48,6 +48,7 @@ Dependancies
 Make sure to install these packages prior to installation :
 
  * akismet
+ * django-mptt
  * django-tagging
  * BeautifulSoup
 
@@ -78,6 +79,7 @@ Then register **zinnia**, and these following applications in the INSTALLED_APPS
   ...   'django.contrib.sites',
   ...   'django.contrib.admin',
   ...   'tagging',
+  ...   'mptt',
   ...   'zinnia',)
 
 Template Context Processors

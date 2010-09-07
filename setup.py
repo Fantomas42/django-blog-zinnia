@@ -29,6 +29,7 @@ setup(name='django-blog-zinnia',
       include_package_data=True,
       zip_safe=False,
       install_requires=['django-tagging',
+                        'django-mptt',
                         'akismet',
                         'BeautifulSoup',
                         ])

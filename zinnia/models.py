@@ -10,6 +10,7 @@ from django.template.defaultfilters import linebreaks
 from django.contrib.comments.moderation import moderator
 from django.utils.translation import ugettext_lazy as _
 
+import mptt
 from tagging.fields import TagField
 
 from zinnia.settings import USE_BITLY
@@ -29,6 +30,10 @@ class Category(models.Model):
     slug = models.SlugField(help_text=_('used for publication'),
                             unique=True, max_length=255)
     description = models.TextField(_('description'), blank=True)
+
+    parent = models.ForeignKey('self', null=True, blank=True,
+                               verbose_name=_('parent category'),
+                               related_name='children')
 
     def entries_published_set(self):
         """Return only the entries published"""
@@ -185,6 +190,7 @@ class Entry(models.Model):
         permissions = (('can_view_all', 'Can view all'),
                        ('can_change_author', 'Can change author'), )
 
+mptt.register(Category)
 post_save.connect(ping_directories_handler, sender=Entry)
 post_save.connect(ping_external_urls_handler, sender=Entry)
 moderator.register(Entry, EntryCommentModerator)
