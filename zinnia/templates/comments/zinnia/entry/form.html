@@ -2,6 +2,7 @@
 
 <form action="{% comment_form_target %}" method="post">
   {% csrf_token %}
+  <input type="hidden" name="next" value="{% url zinnia_discussion_success %}"/>
   <fieldset>
     <legend>{% trans "Post your comment" %}</legend>
     {% for field in form %}
