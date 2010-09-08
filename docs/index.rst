@@ -9,12 +9,14 @@ Welcome to Zinnia's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+    :glob:
+    :maxdepth: 2
 
-   CONFIGURATION
-   SEARCH_ENGINES
-   WORDPRESS_2_ZINNIA
-   FAQ
+    README
+    CONFIGURATION
+    SEARCH_ENGINES
+    WORDPRESS_2_ZINNIA
+    FAQ
 
 Indices and tables
 ==================
