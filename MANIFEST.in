@@ -3,5 +3,5 @@ recursive-include docs *
 recursive-include zinnia/fixtures *.json
 recursive-include zinnia/locale *
 recursive-include zinnia/media *
-recursive-include zinnia/templates *.txt *.html
+recursive-include zinnia/templates *.txt *.html *.js
 prune zinnia/media/zinnia/css/src/.sass-cache
