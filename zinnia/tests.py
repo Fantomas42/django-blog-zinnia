@@ -365,6 +365,13 @@ class CategoryTestCase(TestCase):
         self.assertEqual(self.categories[0].entries_published_set().count(), 2)
         self.assertEqual(self.categories[1].entries_published_set().count(), 1)
 
+    def test_entries_tree_path(self):
+        self.assertEqual(self.categories[0].tree_path, 'category-1')
+        self.assertEqual(self.categories[1].tree_path, 'category-2')
+        self.categories[1].parent = self.categories[0]
+        self.categories[1].save()
+        self.assertEqual(self.categories[1].tree_path, 'category-1/category-2')
+
 class ZinniaViewsTestCase(TestCase):
     """Test cases for generic views used in the application,
     for reproducing and correcting issue :

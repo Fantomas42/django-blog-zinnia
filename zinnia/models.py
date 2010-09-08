@@ -53,9 +53,9 @@ class Category(models.Model):
         return ('zinnia_category_detail', (self.tree_path,))
 
     class Meta:
+        ordering = ['title']
         verbose_name = _('category')
         verbose_name_plural = _('categories')
-        ordering = ['title']
 
 
 class Entry(models.Model):
@@ -196,7 +196,7 @@ class Entry(models.Model):
         permissions = (('can_view_all', 'Can view all'),
                        ('can_change_author', 'Can change author'), )
 
-mptt.register(Category)
+mptt.register(Category, order_insertion_by=['title',])
 post_save.connect(ping_directories_handler, sender=Entry)
 post_save.connect(ping_external_urls_handler, sender=Entry)
 moderator.register(Entry, EntryCommentModerator)
