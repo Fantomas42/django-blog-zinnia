@@ -1,7 +1,8 @@
 List of settings
 ================
 
-Zinnia has several parameters to configure the application according to your needs.
+Zinnia has several parameters to configure the application according to your
+needs.
 
 All settings described here can be found in zinnia/settings.py
 
@@ -13,7 +14,8 @@ ZINNIA_PAGINATION
 ZINNIA_ALLOW_EMPTY
   **Default :** True
 
-  Used for archives views, raise a 404 error if no entries are present at the specified date.
+  Used for archives views, raise a 404 error if no entries are present at the
+  specified date.
 
 ZINNIA_ALLOW_FUTURE
   **Default :** True
@@ -23,8 +25,9 @@ ZINNIA_ALLOW_FUTURE
 ZINNIA_ADVANCED_SEARCH
   **Default :** True
 
-  Used to define the search engine, because Zinnia provides in 2.
-  A basic engine with cumulative terms, and an advanced engine if *pyparsing* is installed.
+  Used to define the search engine, because Zinnia provides in 2. A basic
+  engine with cumulative terms, and an advanced engine if *pyparsing* is
+  installed.
 
 ZINNIA_WYSIWYG
   **Default :** 'tinymce' if in settings.INSTALLED_APPS else 'wymeditor'
@@ -41,7 +44,7 @@ ZINNIA_FEEDS_FORMAT
 ZINNIA_COPYRIGHT
   **Default :** 'Zinnia'
 
-  String used for copyrighting the syndication feeds. 
+  String used for copyrighting the syndication feeds.
 
 ZINNIA_UPLOAD_TO
   **Default :** 'uploads'
@@ -68,7 +71,7 @@ ZINNIA_FIRST_WEEK_DAY
 
   Integer for setting the first day of the week in the Calendar widget. Ex : use 6 for Sunday.
 
-ZINNIA_PING_DIRECTORIES 
+ZINNIA_PING_DIRECTORIES
   **Default :** ()
 
   List of the directories you want to ping.
@@ -76,12 +79,14 @@ ZINNIA_PING_DIRECTORIES
 ZINNIA_SAVE_PING_DIRECTORIES
   **Default :** bool(ZINNIA_PING_DIRECTORIES)
 
-  Boolean setting for telling if you want to ping directories when saving an entry.
+  Boolean setting for telling if you want to ping directories when saving an
+  entry.
 
 ZINNIA_SAVE_PING_EXTERNAL_URLS
   **Default :** True
 
-  Boolean setting for telling if you want to ping external urls when saving an entry.
+  Boolean setting for telling if you want to ping external urls when saving an
+  entry.
 
 ZINNIA_PINGBACK_CONTENT_LENGTH
   **Default :**	300
