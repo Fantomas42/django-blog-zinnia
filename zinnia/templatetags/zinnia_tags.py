@@ -28,7 +28,7 @@ cache_entries_related = {}
 def get_categories(template='zinnia/tags/categories.html'):
     """Return the categories"""
     return {'template': template,
-            'categories': Category.objects.all()}
+            'categories': Category.tree.all()}
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_recent_entries(number=5, template='zinnia/tags/recent_entries.html'):
