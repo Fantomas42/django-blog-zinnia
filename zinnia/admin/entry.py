@@ -13,9 +13,11 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 from zinnia import settings
 from zinnia.managers import PUBLISHED
 from zinnia.ping import DirectoryPinger
+from zinnia.admin.forms import EntryAdminForm
 
 
 class EntryAdmin(admin.ModelAdmin):
+    form = EntryAdminForm
     date_hierarchy = 'creation_date'
     fieldsets = ((_('Content'), {'fields': ('title', 'content', 'image', 'status')}),
                  (_('Options'), {'fields': ('excerpt', 'related',

@@ -1,29 +1,9 @@
 """CategoryAdmin for Zinnia"""
-from django import forms
 from django.contrib import admin
 from django.core.urlresolvers import NoReverseMatch
 from django.utils.translation import ugettext, ugettext_lazy as _
 
-from mptt.forms import TreeNodeChoiceField
-
-from zinnia.models import Category
-
-
-class CategoryAdminForm(forms.ModelForm):
-    parent = TreeNodeChoiceField(label=_('parent category').capitalize(),
-                                 required=False,
-                                 empty_label=_('No parent category'),
-                                 queryset=Category.tree.all(),
-                                 level_indicator=u'|--')
-
-    def clean_parent(self):
-        data = self.cleaned_data['parent']
-        if data == self.instance:
-            raise forms.ValidationError(_('A category cannot be parent of itself.'))
-        return data
-    
-    class Meta:
-        model = Category
+from zinnia.admin.forms import CategoryAdminForm
 
 class CategoryAdmin(admin.ModelAdmin):
     form = CategoryAdminForm
