@@ -39,7 +39,10 @@ categories_crumb = Crumb(_('Categories'), reverse('zinnia_category_list'))
 
 MODEL_BREADCRUMBS = {'Tag': lambda x: [tags_crumb, Crumb(x.name)],
                      'User': lambda x: [authors_crumb, Crumb(x.username)],    
-                     'Category': lambda x: [categories_crumb, Crumb(x.title)],
+                     'Category': lambda x: [categories_crumb] + \
+                                           [Crumb(anc.title, anc.get_absolute_url())
+                                            for anc in x.get_ancestors()] + \
+                                           [Crumb(x.title)],
                      'Entry': lambda x: [year_crumb(x.creation_date),
                                          month_crumb(x.creation_date),
                                          day_crumb(x.creation_date),
