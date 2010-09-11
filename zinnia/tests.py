@@ -365,6 +365,13 @@ class CategoryTestCase(TestCase):
         self.assertEqual(self.categories[0].entries_published_set().count(), 2)
         self.assertEqual(self.categories[1].entries_published_set().count(), 1)
 
+    def test_entries_tree_path(self):
+        self.assertEqual(self.categories[0].tree_path, 'category-1')
+        self.assertEqual(self.categories[1].tree_path, 'category-2')
+        self.categories[1].parent = self.categories[0]
+        self.categories[1].save()
+        self.assertEqual(self.categories[1].tree_path, 'category-1/category-2')
+
 class ZinniaViewsTestCase(TestCase):
     """Test cases for generic views used in the application,
     for reproducing and correcting issue :
@@ -1132,6 +1139,18 @@ class TemplateTagsTestCase(TestCase):
                                   'object': self.entry})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 5)
+
+        cat_1 = Category.objects.create(title='Category 1', slug='category-1')
+        source_context = Context({'request': FakeRequest(cat_1.get_absolute_url()),
+                                  'object': cat_1})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 3)
+        cat_2 = Category.objects.create(title='Category 2', slug='category-2',
+                                        parent=cat_1)
+        source_context = Context({'request': FakeRequest(cat_2.get_absolute_url()),
+                                  'object': cat_2})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 4)
         # More tests can be done here, for testing path and objects in context
 
     def test_get_gravatar(self):

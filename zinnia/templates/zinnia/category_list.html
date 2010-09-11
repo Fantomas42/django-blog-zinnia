@@ -1,18 +1,16 @@
 {% extends "zinnia/base.html" %}
-{% load i18n %}
+{% load i18n mptt_tags %}
 
 {% block title %}{% trans "Categories" %}{% endblock %}
 
 {% block content %}
 <h2>{% trans "Category list" %}</h2>
 <div>
-  <ul>
-    {% for object in object_list %}
-    <li>
+  {% for object, structure in object_list|tree_info %}
+    {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
       <a href="{{ object.get_absolute_url }}" title="{{ object }}">{{ object }}</a> 
       {% blocktrans count object.entries_published_set.count as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
-    </li>
-    {% endfor %}
-  </ul>
+    {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+  {% endfor %}
 </div>
 {% endblock %}

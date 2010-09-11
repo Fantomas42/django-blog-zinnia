@@ -10,6 +10,7 @@ from django.template.defaultfilters import linebreaks
 from django.contrib.comments.moderation import moderator
 from django.utils.translation import ugettext_lazy as _
 
+import mptt
 from tagging.fields import TagField
 
 from zinnia.settings import USE_BITLY
@@ -30,21 +31,31 @@ class Category(models.Model):
                             unique=True, max_length=255)
     description = models.TextField(_('description'), blank=True)
 
+    parent = models.ForeignKey('self', null=True, blank=True,
+                               verbose_name=_('parent category'),
+                               related_name='children')
+
     def entries_published_set(self):
         """Return only the entries published"""
         return entries_published(self.entry_set)
+
+    @property
+    def tree_path(self):
+        if self.parent:
+            return '%s/%s' % (self.parent.tree_path, self.slug)
+        return '%s' % self.slug
 
     def __unicode__(self):
         return self.title
 
     @models.permalink
     def get_absolute_url(self):
-        return ('zinnia_category_detail', (self.slug, ))
+        return ('zinnia_category_detail', (self.tree_path,))
 
     class Meta:
+        ordering = ['title']
         verbose_name = _('category')
         verbose_name_plural = _('categories')
-        ordering = ['title']
 
 
 class Entry(models.Model):
@@ -69,7 +80,7 @@ class Entry(models.Model):
     slug = models.SlugField(help_text=_('used for publication'),
                             unique_for_date='creation_date',
                             max_length=255)
-    
+
     authors = models.ManyToManyField(User, verbose_name=_('authors'),
                                      blank=True, null=False)
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
@@ -185,6 +196,7 @@ class Entry(models.Model):
         permissions = (('can_view_all', 'Can view all'),
                        ('can_change_author', 'Can change author'), )
 
+mptt.register(Category, order_insertion_by=['title',])
 post_save.connect(ping_directories_handler, sender=Entry)
 post_save.connect(ping_external_urls_handler, sender=Entry)
 moderator.register(Entry, EntryCommentModerator)

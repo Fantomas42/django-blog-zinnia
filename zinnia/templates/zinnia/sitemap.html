@@ -1,5 +1,5 @@
 {% extends "zinnia/base.html" %}
-{% load i18n zinnia_tags %}
+{% load i18n zinnia_tags mptt_tags %}
 
 {% block title %}{% trans "Sitemap" %}{% endblock %}
 
@@ -48,19 +48,19 @@
 
 <div class="categories">
   <h3>{% trans "Categories" %}</h3>
-  <ul>
-    {% for category in categories %}
-    <li>
-      <a href="{{ category.get_absolute_url }}" title="{{ category.title }}">{{ category.title }}</a>
+  {% for category, structure in categories|tree_info %}
+    {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
+      <a href="{{ category.get_absolute_url }}" title="{{ category.title }}">{{ category.title }}</a> 
       -
       {% blocktrans count category.entries_published_set.count as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
-    </li>
+    {% for level in structure.closed_levels %}</li></ul>{% endfor %}
     {% empty %}
+  <ul>
     <li>
       {% trans "No categories yet." %}
     </li>
-  {% endfor %}
   </ul>
+  {% endfor %}
 </div>
 
 <div class="montharchives">

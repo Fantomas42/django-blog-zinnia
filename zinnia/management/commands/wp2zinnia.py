@@ -147,9 +147,10 @@ class Command(LabelCommand):
         for category_node in category_nodes:
             title = category_node.find('{http://wordpress.org/export/1.0/}cat_name').text[:255]
             slug = category_node.find('{http://wordpress.org/export/1.0/}category_nicename').text[:255]
+            parent = category_node.find('{http://wordpress.org/export/1.0/}category_parent').text[:255]
             self.write_out('> %s... ' % title)
             category, created = Category.objects.get_or_create(
-                title=title, slug=slug)
+                title=title, slug=slug, parent=categories.get(parent))
             categories[title] = category
             self.write_out(self.style.ITEM('OK\n'))
         return categories

@@ -16,8 +16,9 @@ from tagging.models import TaggedItem
 
 from zinnia.models import Entry
 from zinnia.models import Category
-from zinnia.managers import entries_published
 from zinnia.settings import COPYRIGHT
+from zinnia.managers import entries_published
+from zinnia.views.categories import get_category_or_404
 
 
 current_site = Site.objects.get_current()
@@ -94,8 +95,8 @@ class LatestEntries(EntryFeed):
 class CategoryEntries(EntryFeed):
     """Feed filtered by a category"""
 
-    def get_object(self, request, slug):
-        return get_object_or_404(Category, slug=slug)
+    def get_object(self, request, path):
+        return get_category_or_404(path)
 
     def items(self, obj):
         return obj.entries_published_set()

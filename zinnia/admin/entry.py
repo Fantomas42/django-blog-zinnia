@@ -1,4 +1,4 @@
-"""Admin of Zinnia"""
+"""EntryAdmin for Zinnia"""
 from datetime import datetime
 
 from django.forms import Media
@@ -11,20 +11,13 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 from django.core.urlresolvers import reverse, NoReverseMatch
 
 from zinnia import settings
-from zinnia.models import Entry
-from zinnia.models import Category
 from zinnia.managers import PUBLISHED
 from zinnia.ping import DirectoryPinger
-
-
-class CategoryAdmin(admin.ModelAdmin):
-    fields = ('title', 'slug', 'description')
-    list_display = ('title', 'slug', 'description')
-    prepopulated_fields = {'slug': ('title', )}
-    search_fields = ('title', 'description')
+from zinnia.admin.forms import EntryAdminForm
 
 
 class EntryAdmin(admin.ModelAdmin):
+    form = EntryAdminForm
     date_hierarchy = 'creation_date'
     fieldsets = ((_('Content'), {'fields': ('title', 'content', 'image', 'status')}),
                  (_('Options'), {'fields': ('excerpt', 'related',
@@ -264,5 +257,3 @@ class EntryAdmin(admin.ModelAdmin):
     media = property(_media)
 
 
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Entry, EntryAdmin)
