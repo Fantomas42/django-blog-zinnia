@@ -17,6 +17,7 @@ from django.template.defaultfilters import slugify
 
 from zinnia.models import Entry
 from zinnia.models import Category
+from zinnia.settings import PROTOCOL
 from zinnia.settings import UPLOAD_TO
 from zinnia.managers import DRAFT, PUBLISHED
 from django_xmlrpc.decorators import xmlrpc_func
@@ -43,8 +44,8 @@ def authenticate(username, password, permission=None):
 
 def blog_structure(site):
     """A blog structure"""
-    return {'url': 'http://%s%s' % (
-        site.domain, reverse('zinnia_entry_archive_index')),
+    return {'url': '%s://%s%s' % (
+        PROTOCOL, site.domain, reverse('zinnia_entry_archive_index')),
             'blogid': settings.SITE_ID,
             'blogName': site.name}
 
@@ -55,8 +56,9 @@ def user_structure(user, site):
             'nickname': user.username,
             'lastname': user.last_name,
             'firstname': user.first_name,
-            'url': 'http://%s%s' % (
-                site.domain, reverse('zinnia_author_detail', args=[user.username]))}
+            'url': '%s://%s%s' % (
+                PROTOCOL, site.domain,
+                reverse('zinnia_author_detail', args=[user.username]))}
 
 def author_structure(user):
     """An author structure"""
@@ -67,20 +69,24 @@ def author_structure(user):
 
 def category_structure(category, site):
     """A category structure"""
+    # Add categoryId, parentId, categoryDescription, categoryName
+    # + add new category
     return {'description': category.title,
-            'htmlUrl': 'http://%s%s' % (
-                site.domain, category.get_absolute_url()),
-            'rssUrl': 'http://%s%s' % (
-                site.domain, reverse('zinnia_category_feed', args=[category.slug]))}
+            'htmlUrl': '%s://%s%s' % (
+                PROTOCOL, site.domain,
+                category.get_absolute_url()),
+            'rssUrl': '%s://%s%s' % (
+                PROTOCOL, site.domain,
+                reverse('zinnia_category_feed', args=[category.slug]))}
 
 def post_structure(entry, site):
     """A post structure with extensions"""
     author = entry.authors.all()[0]
     return {'title': entry.title,
             'description': unicode(entry.html_content),
-            'link': 'http://%s%s' % (site.domain, entry.get_absolute_url()),
+            'link': '%s://%s%s' % (PROTOCOL, site.domain, entry.get_absolute_url()),
             # Basic Extensions
-            'permaLink': 'http://%s%s' % (site.domain, entry.get_absolute_url()),
+            'permaLink': '%s://%s%s' % (PROTOCOL, site.domain, entry.get_absolute_url()),
             'categories': [cat.title for cat in entry.categories.all()],
             'dateCreated': DateTime(entry.creation_date.isoformat()),
             'postid': entry.pk,

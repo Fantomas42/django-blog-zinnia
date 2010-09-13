@@ -21,6 +21,7 @@ MAIL_COMMENT = getattr(settings, 'ZINNIA_MAIL_COMMENT', True)
 AKISMET_COMMENT = getattr(settings, 'ZINNIA_AKISMET_COMMENT', True)
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads')
 
+PROTOCOL = getattr(settings, 'ZINNIA_PROTOCOL', 'http')
 MEDIA_URL = getattr(settings, 'ZINNIA_MEDIA_URL', '/zinnia/')
 
 FEEDS_FORMAT = getattr(settings, 'ZINNIA_FEEDS_FORMAT', 'rss')

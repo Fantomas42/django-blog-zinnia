@@ -17,6 +17,7 @@ from tagging.models import TaggedItem
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.settings import COPYRIGHT
+from zinnia.settings import PROTOCOL
 from zinnia.settings import FEEDS_MAX_ITEMS
 from zinnia.managers import entries_published
 from zinnia.views.categories import get_category_or_404
@@ -70,8 +71,9 @@ class EntryFeed(Feed):
             if current_site.domain in parser.img_locations[0]:
                 return parser.img_locations[0]
             else:
-                return 'http://%s%s' % (
-                    current_site.domain, parser.img_locations[0])
+                return '%s://%s%s' % (PROTOCOL,
+                                      current_site.domain,
+                                      parser.img_locations[0])
         return None
 
     def item_enclosure_length(self, item):

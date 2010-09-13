@@ -5,6 +5,7 @@ from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
 from django.contrib.comments.moderation import CommentModerator
 
+from zinnia.settings import PROTOCOL
 from zinnia.settings import MAIL_COMMENT
 from zinnia.settings import AKISMET_COMMENT
 
@@ -32,7 +33,8 @@ class EntryCommentModerator(CommentModerator):
             return False
 
         akismet = Akismet(key=AKISMET_API_KEY,
-                          blog_url='http://%s/' % Site.objects.get_current().domain)
+                          blog_url='%s://%s/' % (
+                              PROTOCOL, Site.objects.get_current().domain))
         if akismet.verify_key():
             akismet_data = {
                 'user_ip': request.META.get('REMOTE_ADDR', ''),

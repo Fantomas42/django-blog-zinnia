@@ -56,6 +56,11 @@ ZINNIA_UPLOAD_TO
 
   String setting that tells Zinnia where to upload entries' images.
 
+ZINNIA_PROTOCOL
+  **Default :** 'http'
+
+  String representing the protocol of the site.
+
 ZINNIA_MEDIA_URL
   **Default :** '/zinnia/'
 

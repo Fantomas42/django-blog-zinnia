@@ -11,9 +11,11 @@ from BeautifulSoup import BeautifulSoup
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 
+from zinnia.settings import PROTOCOL
+
 
 current_site = Site.objects.get_current()
-site = 'http://%s' % current_site.domain
+site = '%s://%s' % (PROTOCOL, current_site.domain)
 blog_url = ''
 blog_feed = ''
 

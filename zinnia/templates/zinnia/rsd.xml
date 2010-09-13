@@ -3,9 +3,9 @@
   <service>
     <engineName>Django Blog Zinnia {{ ZINNIA_VERSION }}</engineName>
     <engineLink>http://github.com/Fantomas42/django-blog-zinnia</engineLink>
-    <homePageLink>http://{{ site.domain }}/</homePageLink>
+    <homePageLink>{{ protocol }}://{{ site.domain }}/</homePageLink>
     <apis>
-      <api name="MetaWeblog" preferred="true" apiLink="http://{{ site.domain }}/xmlrpc/" blogID="{{ site.id }}">
+      <api name="MetaWeblog" preferred="true" apiLink="{{ protocol }}://{{ site.domain }}/xmlrpc/" blogID="{{ site.id }}">
         <settings>
           <docs>http://www.xmlrpc.com/metaWeblogApi</docs>
           <notes>MetaWeblog API support + Blogger API partial support</notes>
