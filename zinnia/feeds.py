@@ -17,6 +17,7 @@ from tagging.models import TaggedItem
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.settings import COPYRIGHT
+from zinnia.settings import FEEDS_MAX_ITEMS
 from zinnia.managers import entries_published
 from zinnia.views.categories import get_category_or_404
 
@@ -89,7 +90,7 @@ class LatestEntries(EntryFeed):
         return reverse('zinnia_entry_archive_index')
 
     def items(self):
-        return Entry.published.all()
+        return Entry.published.all()[:FEEDS_MAX_ITEMS]
 
 
 class CategoryEntries(EntryFeed):
@@ -99,7 +100,7 @@ class CategoryEntries(EntryFeed):
         return get_category_or_404(path)
 
     def items(self, obj):
-        return obj.entries_published_set()
+        return obj.entries_published_set()[:FEEDS_MAX_ITEMS]
 
     def link(self, obj):
         return obj.get_absolute_url()
@@ -118,7 +119,7 @@ class AuthorEntries(EntryFeed):
         return get_object_or_404(User, username=username)
 
     def items(self, obj):
-        return entries_published(obj.entry_set)
+        return entries_published(obj.entry_set)[:FEEDS_MAX_ITEMS]
 
     def link(self, obj):
         return reverse('zinnia_author_detail', args=[obj.username])
@@ -137,7 +138,8 @@ class TagEntries(EntryFeed):
         return get_object_or_404(Tag, name=slug)
 
     def items(self, obj):
-        return TaggedItem.objects.get_by_model(Entry.published.all(), obj)
+        return TaggedItem.objects.get_by_model(
+            Entry.published.all(), obj)[:FEEDS_MAX_ITEMS]
 
     def link(self, obj):
         return reverse('zinnia_tag_detail', args=[obj.name])
@@ -156,7 +158,7 @@ class SearchEntries(EntryFeed):
         return slug
 
     def items(self, obj):
-        return Entry.published.search(obj)
+        return Entry.published.search(obj)[:FEEDS_MAX_ITEMS]
 
     def link(self, obj):
         return '%s?pattern=%s' % (reverse('zinnia_entry_search'), obj)
@@ -178,7 +180,7 @@ class EntryDiscussions(Feed):
         return get_object_or_404(Entry, slug=slug)
 
     def items(self, obj):
-        return obj.discussions
+        return obj.discussions[:FEEDS_MAX_ITEMS]
 
     def item_pubdate(self, item):
         return item.submit_date
@@ -211,7 +213,7 @@ class EntryComments(EntryDiscussions):
     description_template= 'feeds/comment_description.html'
 
     def items(self, obj):
-        return obj.comments
+        return obj.comments[:FEEDS_MAX_ITEMS]
 
     def item_link(self, item):
         return item.get_absolute_url('#comment_%(id)s')
@@ -228,7 +230,7 @@ class EntryPingbacks(EntryDiscussions):
     description_template= 'feeds/pingback_description.html'
 
     def items(self, obj):
-        return obj.pingbacks
+        return obj.pingbacks[:FEEDS_MAX_ITEMS]
 
     def item_link(self, item):
         return item.get_absolute_url('#pingback_%(id)s')
@@ -245,7 +247,7 @@ class EntryTrackbacks(EntryDiscussions):
     description_template= 'feeds/trackback_description.html'
 
     def items(self, obj):
-        return obj.trackbacks
+        return obj.trackbacks[:FEEDS_MAX_ITEMS]
 
     def item_link(self, item):
         return item.get_absolute_url('#trackback_%(id)s')

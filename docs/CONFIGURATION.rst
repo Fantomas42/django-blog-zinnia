@@ -41,6 +41,11 @@ ZINNIA_FEEDS_FORMAT
   String determining the format of the syndication feeds.
   Use 'atom' for Atom feeds.
 
+ZINNIA_FEEDS_MAX_ITEMS
+  **Default :** 15
+
+  Integer used to define the maximum items provided in the syndication feeds.
+
 ZINNIA_COPYRIGHT
   **Default :** 'Zinnia'
 
