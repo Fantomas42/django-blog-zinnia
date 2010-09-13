@@ -10,6 +10,8 @@ from django.utils.text import truncate_words
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.core.urlresolvers import reverse, NoReverseMatch
 
+from tagging.models import Tag
+
 from zinnia import settings
 from zinnia.managers import PUBLISHED
 from zinnia.ping import DirectoryPinger
@@ -83,10 +85,10 @@ class EntryAdmin(admin.ModelAdmin):
         """Return the tags linked in HTML"""
         try:
             return ', '.join(['<a href="%s" target="blank">%s</a>' %
-                              (reverse('zinnia_tag_detail', args=[tag]), tag)
-                              for tag in entry.tags.replace(',', '').split()])
+                              (reverse('zinnia_tag_detail', args=[tag.name]), tag.name)
+                              for tag in Tag.objects.get_for_object(entry)])
         except NoReverseMatch:
-            return ', '.join(entry.tags.replace(',', '').split())
+            return entry.tags
     get_tags.allow_tags = True
     get_tags.short_description = _('tag(s)')
 
