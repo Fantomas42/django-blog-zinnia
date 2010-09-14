@@ -69,15 +69,18 @@ def author_structure(user):
 
 def category_structure(category, site):
     """A category structure"""
-    # Add categoryId, parentId, categoryDescription, categoryName
-    # + add new category
     return {'description': category.title,
             'htmlUrl': '%s://%s%s' % (
                 PROTOCOL, site.domain,
                 category.get_absolute_url()),
             'rssUrl': '%s://%s%s' % (
                 PROTOCOL, site.domain,
-                reverse('zinnia_category_feed', args=[category.slug]))}
+                reverse('zinnia_category_feed', args=[category.tree_path])),
+            # Usefull Wordpress Extensions
+            'categoryId': category.pk,
+            'parentId': category.parent and category.parent.pk or 0,
+            'categoryDescription': category.description,
+            'categoryName': category.title,}
 
 def post_structure(entry, site):
     """A post structure with extensions"""
@@ -159,6 +162,20 @@ def get_categories(blog_id, username, password):
     site = Site.objects.get_current()
     return [category_structure(category, site) \
             for category in Category.objects.all()]
+
+@xmlrpc_func(returns='string', args=['string', 'string', 'string', 'struct'])
+def new_category(blog_id, username, password, category_struct):
+    """wp.newCategory(blog_id, username, password, category)
+    => category_id"""
+    user = authenticate(username, password, 'zinnia.add_category')
+    category_dict = {'title': category_struct['name'],
+                     'description': category_struct['description'],
+                     'slug': category_struct['slug']}
+    if int(category_struct['parent_id']):
+        category_dict['parent'] = Category.objects.get(pk=category_struct['parent_id'])
+    category = Category.objects.create(**category_dict)
+
+    return category.pk
 
 @xmlrpc_func(returns='string', args=['string', 'string', 'string', 'struct', 'boolean'])
 def new_post(blog_id, username, password, post, publish):

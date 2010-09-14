@@ -28,6 +28,7 @@ from zinnia.managers import authors_published
 from zinnia.templatetags.zinnia_tags import *
 from zinnia.xmlrpc.metaweblog import authenticate
 from zinnia.xmlrpc.metaweblog import post_structure
+from zinnia.xmlrpc.metaweblog import category_structure
 from zinnia.xmlrpc.pingback import generate_pingback_content
 from BeautifulSoup import BeautifulSoup
 
@@ -754,10 +755,49 @@ class MetaWeblogTestCase(TestCase):
             'apikey', 'webmaster', 'password'),
                           [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
                             'description': 'Category 1',
-                            'htmlUrl': 'http://example.com/categories/category-1/'},
+                            'htmlUrl': 'http://example.com/categories/category-1/',
+                            'categoryId': 1, 'parentId': 0,
+                            'categoryName': 'Category 1',
+                            'categoryDescription': ''},
                            {'rssUrl': 'http://example.com/feeds/categories/category-2/',
                             'description': 'Category 2',
-                            'htmlUrl': 'http://example.com/categories/category-2/'}])
+                            'htmlUrl': 'http://example.com/categories/category-2/',
+                            'categoryId': 2, 'parentId': 0,
+                            'categoryName': 'Category 2',
+                            'categoryDescription': ''}])
+        self.categories[1].parent = self.categories[0]
+        self.categories[1].description = 'category 2 description'
+        self.categories[1].save()
+        self.assertEquals(self.server.metaWeblog.getCategories(
+            'apikey', 'webmaster', 'password'),
+                          [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
+                            'description': 'Category 1',
+                            'htmlUrl': 'http://example.com/categories/category-1/',
+                            'categoryId': 1, 'parentId': 0,
+                            'categoryName': 'Category 1',
+                            'categoryDescription': ''},
+                           {'rssUrl': 'http://example.com/feeds/categories/category-1/category-2/',
+                            'description': 'Category 2',
+                            'htmlUrl': 'http://example.com/categories/category-1/category-2/',
+                            'categoryId': 2, 'parentId': 1,
+                            'categoryName': 'Category 2',
+                            'categoryDescription': 'category 2 description'}])
+
+    def test_new_category(self):
+        category_struct = {'name': 'Category 3', 'slug': 'category-3',
+                           'description': 'Category 3 description',
+                           'parent_id': self.categories[0].pk}
+        self.assertRaises(Fault, self.server.wp.newCategory,
+                          1, 'contributor', 'password', category_struct)
+        self.assertEquals(Category.objects.count(), 2)
+        new_category_id = self.server.wp.newCategory(
+            1, 'webmaster', 'password', category_struct)
+        self.assertEquals(Category.objects.count(), 3)
+        category = Category.objects.get(pk=new_category_id)
+        self.assertEquals(category.title, 'Category 3')
+        self.assertEquals(category.description, 'Category 3 description')
+        self.assertEquals(category.slug, 'category-3')
+        self.assertEquals(category.parent.pk, 1)
 
     def test_get_recent_posts(self):
         self.assertRaises(Fault, self.server.metaWeblog.getRecentPosts,

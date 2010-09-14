@@ -10,7 +10,7 @@
     <supportsCategories>Yes</supportsCategories>
     <supportsCategoriesInline>Yes</supportsCategoriesInline>
     <supportsMultipleCategories>Yes</supportsMultipleCategories>
-    <supportsHierarchicalCategories>No</supportsHierarchicalCategories>
+    <supportsHierarchicalCategories>Yes</supportsHierarchicalCategories>
     <supportsNewCategories>Yes</supportsNewCategories>
     <supportsNewCategoriesInline>Yes</supportsNewCategoriesInline>
     <supportsKeywords>Yes</supportsKeywords>
