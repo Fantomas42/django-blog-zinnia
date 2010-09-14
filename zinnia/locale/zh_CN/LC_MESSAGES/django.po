@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-30 20:28+0200\n"
+"POT-Creation-Date: 2010-09-14 18:04+0200\n"
 "PO-Revision-Date: 2010-05-05 20:49+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -16,306 +16,324 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: admin.py:29
-msgid "Content"
-msgstr "内容"
-
-#: admin.py:30
-msgid "Options"
-msgstr "选项"
-
-#: admin.py:34
-msgid "Discussion"
-msgstr ""
-
-#: admin.py:35
-#, fuzzy
-msgid "Publication"
-msgstr "结束发布"
-
-#: admin.py:56
-#, python-format
-msgid "%(title)s (%(word_count)i words)"
-msgstr "%(title)s (%(word_count)i 个字符)"
-
-#: admin.py:60
-#, python-format
-msgid "%(title)s (%(comments)i comments)"
-msgstr "%(title)s (%(comments)i 条评论)"
-
-#: admin.py:63 models.py:28 models.py:56
-msgid "title"
-msgstr "标题"
-
-#: admin.py:75
-msgid "author(s)"
-msgstr "作者"
-
-#: admin.py:87
-msgid "category(s)"
-msgstr "类别"
-
-#: admin.py:98
-msgid "tag(s)"
-msgstr "标签"
-
-#: admin.py:105
-msgid "site(s)"
-msgstr "网站"
-
-#: admin.py:111
-msgid "is actual"
-msgstr "发布期间"
-
-#: admin.py:117
-msgid "is visible"
-msgstr "是否可见"
-
-#: admin.py:121
-#, python-format
-msgid "<a href=\"%s\" target=\"blank\">View</a>"
-msgstr "<a href=\"%s\" target=\"blank\">浏览</a>"
-
-#: admin.py:123
-msgid "View on site"
-msgstr "浏览站点"
-
-#: admin.py:128 templates/zinnia/_entry_detail.html:62
-msgid "Unavailable"
-msgstr "不存在"
-
-#: admin.py:132
-msgid "short url"
-msgstr "缩略URL"
-
-#: admin.py:186
-msgid "Set the entries to the user"
-msgstr "设置自己为所选日志的作者"
-
-#: admin.py:191
-msgid "Set entries selected as published"
-msgstr "发布所选日志"
-
-#: admin.py:196
-msgid "Set entries selected as hidden"
-msgstr "隐藏所选日志"
-
-#: admin.py:206
-msgid "Tweet entries selected"
-msgstr "推特所选日志"
-
-#: admin.py:211
-msgid "Close the comments for selected entries"
-msgstr "关闭所选日志的评论功能"
-
-#: admin.py:216
-#, fuzzy
-msgid "Close the linkbacks for selected entries"
-msgstr "关闭所选日志的评论功能"
-
-#: admin.py:230
-#, fuzzy, python-format
-msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr "%i次成功提交所选日志到搜索引擎"
-
-#: admin.py:232
-msgid "Ping Directories for selected entries"
-msgstr "提交所选日志到搜索引擎"
-
-#: feeds.py:84 plugins/cms_plugins.py:19 templates/zinnia/entry_archive.html:4
+#: feeds.py:88 plugins/cms_plugins.py:19 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "最新日志"
 
-#: feeds.py:85
+#: feeds.py:89
 #, fuzzy, python-format
 msgid "The latest entries for the site %s"
 msgstr "站点 %s 的最新新闻"
 
-#: feeds.py:107
+#: feeds.py:111
 #, python-format
 msgid "Entries for the category %s"
 msgstr "类别 %s 的日志"
 
-#: feeds.py:110
+#: feeds.py:114
 #, fuzzy, python-format
 msgid "The latest entries for the category %s"
 msgstr "类别 %s 的最新日志"
 
-#: feeds.py:126
+#: feeds.py:130
 #, python-format
 msgid "Entries for author %s"
 msgstr "作者 %s 的日志"
 
-#: feeds.py:129
+#: feeds.py:133
 #, fuzzy, python-format
 msgid "The latest entries by %s"
 msgstr "%s 的最近新闻"
 
-#: feeds.py:145
+#: feeds.py:150
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "标签含 %s 的日志"
 
-#: feeds.py:148
+#: feeds.py:153
 #, fuzzy, python-format
 msgid "The latest entries for the tag %s"
 msgstr "标签含 %s 的最新日志"
 
-#: feeds.py:164
+#: feeds.py:169
 #, python-format
 msgid "Results of the search for %s"
 msgstr "搜索 %s 的结果"
 
-#: feeds.py:167
+#: feeds.py:172
 #, fuzzy, python-format
 msgid "The entries containing the pattern %s"
 msgstr "含有模式 %s 的新闻"
 
-#: feeds.py:201
+#: feeds.py:206
 #, python-format
 msgid "Discussions on %s"
 msgstr ""
 
-#: feeds.py:204
+#: feeds.py:209
 #, fuzzy, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
-#: feeds.py:219
+#: feeds.py:224
 #, python-format
 msgid "Comments on %s"
 msgstr "对于 %s 的评论"
 
-#: feeds.py:222
+#: feeds.py:227
 #, fuzzy, python-format
 msgid "The latest comments for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
-#: feeds.py:236
+#: feeds.py:241
 #, fuzzy, python-format
 msgid "Pingbacks on %s"
 msgstr "评论已关闭"
 
-#: feeds.py:239
+#: feeds.py:244
 #, fuzzy, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
-#: feeds.py:253
+#: feeds.py:258
 #, fuzzy, python-format
 msgid "Trackbacks on %s"
 msgstr "评论已关闭"
 
-#: feeds.py:256
+#: feeds.py:261
 #, fuzzy, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
-#: models.py:29 models.py:69
+#: models.py:29 models.py:67 admin/entry.py:58
+msgid "title"
+msgstr "标题"
+
+#: models.py:30 models.py:80
 msgid "used for publication"
 msgstr "用于发布"
 
-#: models.py:31
+#: models.py:32
 msgid "description"
 msgstr "描述"
 
-#: models.py:45
+#: models.py:35 admin/forms.py:14
+#, fuzzy
+msgid "parent category"
+msgstr "类别"
+
+#: models.py:57
 msgid "category"
 msgstr "类别"
 
-#: models.py:46 models.py:65 plugins/models.py:18
+#: models.py:58 models.py:76 admin/forms.py:32 plugins/models.py:18
 msgid "categories"
 msgstr "类别"
 
-#: models.py:52
+#: models.py:63
 msgid "draft"
 msgstr "草稿"
 
-#: models.py:53
+#: models.py:64
 msgid "hidden"
 msgstr "隐藏"
 
-#: models.py:54
+#: models.py:65
 msgid "published"
 msgstr "发布"
 
-#: models.py:58
+#: models.py:69
 msgid "image"
 msgstr "图片"
 
-#: models.py:59
+#: models.py:70
 msgid "used for illustration"
 msgstr "用于插图"
 
-#: models.py:60
+#: models.py:71
 msgid "content"
 msgstr "内容"
 
-#: models.py:61
+#: models.py:72
 msgid "excerpt"
 msgstr "摘要"
 
-#: models.py:62
+#: models.py:73
 msgid "optional element"
 msgstr "可选项"
 
-#: models.py:64 plugins/models.py:22
+#: models.py:75 plugins/models.py:22
 msgid "tags"
 msgstr "标签"
 
-#: models.py:66
+#: models.py:77
 msgid "related entries"
 msgstr "相关日志"
 
-#: models.py:70 plugins/models.py:20
+#: models.py:84 plugins/models.py:20
 msgid "authors"
 msgstr "作者"
 
-#: models.py:73
+#: models.py:87
 msgid "comment enabled"
 msgstr "允许评论"
 
-#: models.py:74
+#: models.py:88
 msgid "linkback enabled"
 msgstr ""
 
-#: models.py:76
+#: models.py:90
 msgid "creation date"
 msgstr "创建日期"
 
-#: models.py:77
+#: models.py:91
 msgid "last update"
 msgstr "最后更新"
 
-#: models.py:78
+#: models.py:92
 msgid "start publication"
 msgstr "开始发布"
 
-#: models.py:79
+#: models.py:93
 msgid "date start publish"
 msgstr "开始发布日期"
 
-#: models.py:81
+#: models.py:95
 msgid "end publication"
 msgstr "结束发布"
 
-#: models.py:82
+#: models.py:96
 msgid "date end publish"
 msgstr "结束发布日期"
 
-#: models.py:85
+#: models.py:99
 msgid "sites publication"
 msgstr "发布网站"
 
-#: models.py:180
+#: models.py:194
 msgid "entry"
 msgstr "日志"
 
-#: models.py:181 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
+#: models.py:195 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
 #: plugins/models.py:39 templates/zinnia/base.html:32
 msgid "entries"
 msgstr "日志"
+
+#: admin/category.py:23
+msgid "tree path"
+msgstr ""
+
+#: admin/entry.py:24
+msgid "Content"
+msgstr "内容"
+
+#: admin/entry.py:25
+msgid "Options"
+msgstr "选项"
+
+#: admin/entry.py:29
+msgid "Discussion"
+msgstr ""
+
+#: admin/entry.py:30
+#, fuzzy
+msgid "Publication"
+msgstr "结束发布"
+
+#: admin/entry.py:51
+#, python-format
+msgid "%(title)s (%(word_count)i words)"
+msgstr "%(title)s (%(word_count)i 个字符)"
+
+#: admin/entry.py:55
+#, python-format
+msgid "%(title)s (%(comments)i comments)"
+msgstr "%(title)s (%(comments)i 条评论)"
+
+#: admin/entry.py:70
+msgid "author(s)"
+msgstr "作者"
+
+#: admin/entry.py:82
+msgid "category(s)"
+msgstr "类别"
+
+#: admin/entry.py:93
+msgid "tag(s)"
+msgstr "标签"
+
+#: admin/entry.py:100
+msgid "site(s)"
+msgstr "网站"
+
+#: admin/entry.py:106
+msgid "is actual"
+msgstr "发布期间"
+
+#: admin/entry.py:112
+msgid "is visible"
+msgstr "是否可见"
+
+#: admin/entry.py:116
+#, python-format
+msgid "<a href=\"%s\" target=\"blank\">View</a>"
+msgstr "<a href=\"%s\" target=\"blank\">浏览</a>"
+
+#: admin/entry.py:118
+msgid "View on site"
+msgstr "浏览站点"
+
+#: admin/entry.py:123 templates/zinnia/_entry_detail.html:62
+msgid "Unavailable"
+msgstr "不存在"
+
+#: admin/entry.py:127
+msgid "short url"
+msgstr "缩略URL"
+
+#: admin/entry.py:181
+msgid "Set the entries to the user"
+msgstr "设置自己为所选日志的作者"
+
+#: admin/entry.py:186
+msgid "Set entries selected as published"
+msgstr "发布所选日志"
+
+#: admin/entry.py:191
+msgid "Set entries selected as hidden"
+msgstr "隐藏所选日志"
+
+#: admin/entry.py:201
+msgid "Tweet entries selected"
+msgstr "推特所选日志"
+
+#: admin/entry.py:206
+msgid "Close the comments for selected entries"
+msgstr "关闭所选日志的评论功能"
+
+#: admin/entry.py:211
+#, fuzzy
+msgid "Close the linkbacks for selected entries"
+msgstr "关闭所选日志的评论功能"
+
+#: admin/entry.py:225
+#, fuzzy, python-format
+msgid "%(directory)s directory succesfully pinged %(success)d entries."
+msgstr "%i次成功提交所选日志到搜索引擎"
+
+#: admin/entry.py:227
+msgid "Ping Directories for selected entries"
+msgstr "提交所选日志到搜索引擎"
+
+#: admin/forms.py:16
+#, fuzzy
+msgid "No parent category"
+msgstr "类别"
+
+#: admin/forms.py:23
+msgid "A category cannot be parent of itself."
+msgstr ""
 
 #: plugins/cms_app.py:10
 msgid "Zinnia App Hook"
@@ -387,14 +405,6 @@ msgstr ""
 msgid "%s entries"
 msgstr "%s 日志"
 
-#: templates/comments/posted.html:4 templates/comments/posted.html.py:7
-msgid "Thanks for your comment"
-msgstr "感谢你的评论"
-
-#: templates/comments/posted.html:9 templates/comments/posted.html.py:10
-msgid "Return to entry list"
-msgstr "返回日志列表"
-
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
 msgstr "评论预览"
@@ -424,17 +434,27 @@ msgstr "预览评论"
 msgid "on date"
 msgstr "日期"
 
-#: templates/comments/zinnia/entry/form.html:6
+#: templates/comments/zinnia/entry/form.html:7
 msgid "Post your comment"
 msgstr "发表评论"
 
-#: templates/comments/zinnia/entry/form.html:17
+#: templates/comments/zinnia/entry/form.html:18
 msgid "Post"
 msgstr "发表"
 
-#: templates/comments/zinnia/entry/form.html:18
+#: templates/comments/zinnia/entry/form.html:19
 msgid "Preview"
 msgstr "预览"
+
+#: templates/comments/zinnia/entry/posted.html:4
+#: templates/comments/zinnia/entry/posted.html:7
+msgid "Thanks for your comment"
+msgstr "感谢你的评论"
+
+#: templates/comments/zinnia/entry/posted.html:9
+#: templates/comments/zinnia/entry/posted.html:10
+msgid "Return to entry list"
+msgstr "返回日志列表"
 
 #: templates/feeds/comment_title.html:2
 #: templates/feeds/discussion_title.html:2
@@ -557,7 +577,10 @@ msgstr "热门日志"
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/tags/archives_entries.html:5
-#: templates/zinnia/tags/link_archives_entries.html:2
+#: templates/zinnia/tags/archives_entries_link.html:2
+#: templates/zinnia/tags/archives_entries_tree.html:7
+#: templates/zinnia/tags/archives_entries_tree.html:14
+#: templates/zinnia/tags/archives_entries_tree.html:24
 #: templatetags/zbreadcrumbs.py:35
 msgid "Archives"
 msgstr "归档"
@@ -566,7 +589,7 @@ msgstr "归档"
 msgid "Category list"
 msgstr "类别列表"
 
-#: templates/zinnia/category_list.html:13 templates/zinnia/sitemap.html:56
+#: templates/zinnia/category_list.html:12 templates/zinnia/sitemap.html:55
 #: templates/zinnia/tag_list.html:14 templates/zinnia/tags/categories.html:6
 #, fuzzy, python-format
 msgid "%(entry_count)s entry"
@@ -741,7 +764,7 @@ msgstr "评论"
 msgid "All the entries"
 msgstr ""
 
-#: templates/zinnia/sitemap.html:60 templates/zinnia/tags/categories.html:10
+#: templates/zinnia/sitemap.html:60 templates/zinnia/tags/categories.html:11
 #, fuzzy
 msgid "No categories yet."
 msgstr "没有的类别"
@@ -760,6 +783,7 @@ msgid "Tag list"
 msgstr "标签列表"
 
 #: templates/zinnia/tags/archives_entries.html:11
+#: templates/zinnia/tags/archives_entries_tree.html:38
 #, fuzzy
 msgid "No archives yet."
 msgstr "没有的归档"
@@ -781,20 +805,20 @@ msgstr "模式长度不够"
 msgid "No pattern to search found"
 msgstr "没有搜索到相关模式"
 
-#: xmlrpc/metaweblog.py:34
+#: xmlrpc/metaweblog.py:35
 msgid "Username is incorrect."
 msgstr ""
 
-#: xmlrpc/metaweblog.py:36
+#: xmlrpc/metaweblog.py:37
 msgid "Password is invalid."
 msgstr ""
 
-#: xmlrpc/metaweblog.py:38
+#: xmlrpc/metaweblog.py:39
 #, fuzzy
 msgid "User account unavailable."
 msgstr "不存在"
 
-#: xmlrpc/metaweblog.py:41
+#: xmlrpc/metaweblog.py:42
 #, python-format
 msgid "User cannot %s."
 msgstr ""
