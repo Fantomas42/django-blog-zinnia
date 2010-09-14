@@ -114,6 +114,13 @@ def get_archives_entries(template='zinnia/tags/archives_entries.html'):
             'archives': Entry.published.dates('creation_date', 'month',
                                               order='DESC'),}
 
+@register.inclusion_tag('zinnia/tags/dummy.html')
+def get_archives_entries_tree(template='zinnia/tags/archives_entries_tree.html'):
+    """Return archives entries as a Tree"""
+    return {'template': template,
+            'archives': Entry.published.dates('creation_date', 'day',
+                                              order='ASC'),}
+
 @register.inclusion_tag('zinnia/tags/dummy.html',
                         takes_context=True)
 def get_calendar_entries(context, year=None, month=None,
