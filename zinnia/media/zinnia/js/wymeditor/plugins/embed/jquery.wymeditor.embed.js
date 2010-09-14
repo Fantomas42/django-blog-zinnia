@@ -13,12 +13,7 @@
  *
  * File Authors:
  *        Jonatan Lundin
- *        Tobias von Klipstein (modified 2010-09-14)
- */
-
-/*
- * ISSUES:
- * - The closing object tag seems to be stripped out...
+ *        Tobias von Klipstein (modified 20100914)
  */
 (function() {
     if (WYMeditor && WYMeditor.XhtmlValidator['_tags']['param']['attributes']) {
@@ -30,22 +25,30 @@
                 "height",
                 "src",
                 "type",
-                "width"
-            ]
+                "width",
+                "flashvars",
+                "wmode"
+            ],
+            "inside":"object"
         };
         
-        WYMeditor.XhtmlValidator['_tags']['param']['attributes'] = {
-            '0':'name',
-            '1':'type',
-            'valuetype':/^(data|ref|object)$/,
-            '2':'valuetype',
-            '3':'value'
+        WYMeditor.XhtmlValidator['_tags']['param'] = {
+            "attributes":[
+                "type",
+                "value",
+                "name"
+            ],
+            "required":[
+                "name"
+            ],
+            "inside":"object"
         };
         
         var XhtmlSaxListener = WYMeditor.XhtmlSaxListener;
         WYMeditor.XhtmlSaxListener = function () {
             var listener = XhtmlSaxListener.call(this);
-            listener.block_tags.push('embed');
+            listener.block_tags.splice(listener.block_tags.indexOf("param"), 1);
+            listener.inline_tags.push('embed', 'param', 'object');
             return listener;
         };
         WYMeditor.XhtmlSaxListener.prototype = XhtmlSaxListener.prototype;
