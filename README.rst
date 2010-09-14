@@ -304,6 +304,10 @@ Display an HTML calendar with date of publications.
 
 Display the archives by month.
 
+* get_archives_entries_tree(template="zinnia/tags/archives_entries_tree.html")
+
+Display all the archives as a tree.
+
 * get_categories(template="zinnia/tags/categories.html")
 
 Display all the categories available.

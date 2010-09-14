@@ -1095,6 +1095,28 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['archives'][1], datetime(2009, 1, 1))
         self.assertEquals(context['template'], 'custom_template.html')
 
+    def test_get_archives_tree(self):
+        context = get_archives_entries_tree()
+        self.assertEquals(len(context['archives']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/archives_entries_tree.html')
+
+        self.publish_entry()
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'tags': 'zinnia, test',
+                  'status': PUBLISHED,
+                  'creation_date': datetime(2009, 1, 10),
+                  'slug': 'my-second-entry'}
+        site = Site.objects.get_current()
+        second_entry = Entry.objects.create(**params)
+        second_entry.sites.add(site)
+
+        context = get_archives_entries_tree('custom_template.html')
+        self.assertEquals(len(context['archives']), 2)
+        self.assertEquals(context['archives'][0], datetime(2009, 1, 10))
+        self.assertEquals(context['archives'][1], datetime(2010, 1, 1))
+        self.assertEquals(context['template'], 'custom_template.html')
+
     def test_get_calendar_entries(self):
         source_context = Context()
         context = get_calendar_entries(source_context)
