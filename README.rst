@@ -121,6 +121,7 @@ Note that the default zinnia urlset is provided for convenient usage, but you ca
   >>> url(r'^weblog/feeds/', include('zinnia.urls.feeds')),
   >>> url(r'^weblog/authors/', include('zinnia.urls.authors')),
   >>> url(r'^weblog/categories/', include('zinnia.urls.categories')),
+  >>> url(r'^weblog/discussions/', include('zinnia.urls.discussions')),
   >>> url(r'^weblog/', include('zinnia.urls.entries')),
   >>> url(r'^comments/', include('django.contrib.comments.urls')),
 
