@@ -13,6 +13,7 @@
  *
  * File Authors:
  *        Jonatan Lundin
+ *        Tobias von Klipstein (modified 2010-09-14)
  */
 
 /*
