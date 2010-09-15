@@ -431,6 +431,9 @@ class ZinniaViewsTestCase(TestCase):
         response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertEquals(response.status_code, 200)
 
+    def test_zinnia_entry_channel(self):
+        self.check_publishing_context('/channel-test/', 2, 3)
+
     def test_zinnia_category_list(self):
         self.check_publishing_context('/categories/', 1)
         entry = Entry.objects.all()[0]
