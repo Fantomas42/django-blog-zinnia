@@ -13,7 +13,7 @@ Another usage of the channels is for SEO, for aggregating entries
 under a well-formatted url.
 
 For doing that Zinnia provides a view called
-*zinnia.views.channels.channel*.
+*zinnia.views.channels.entry_channel*.
 
 If we take our first example, we will do like that for customizing
 the weblog homepage in our project's urls.py. ::
