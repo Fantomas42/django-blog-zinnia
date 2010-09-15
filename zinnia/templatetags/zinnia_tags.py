@@ -69,7 +69,9 @@ def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     object_dict = Entry.published.in_bulk(object_ids)
 
     return {'template': template,
-            'entries': object_dict.values()[:number]}
+            'entries': [object_dict[object_id]
+                        for object_id in object_ids
+                        if object_dict.has_key(object_id)][:number]}
 
 @register.inclusion_tag('zinnia/tags/dummy.html',
                         takes_context=True)
