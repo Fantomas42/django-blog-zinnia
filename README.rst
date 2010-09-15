@@ -256,7 +256,7 @@ Now add these lines in your project's settings. ::
   >>> XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
 
 *ZINNIA_XMLRPC_METHODS* is a simple list of tuples containing all the
- webservices embedded in Zinnia.
+webservices embedded in Zinnia.
 
 If you only want to use the Pingback service import
 *ZINNIA_XMLRPC_PINGBACK*, or if you want you just want to enable the
