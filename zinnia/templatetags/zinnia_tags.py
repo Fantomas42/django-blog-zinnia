@@ -11,6 +11,7 @@ from datetime import datetime
 from django.template import Library
 from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
+from django.utils.encoding import smart_unicode
 
 from zinnia.models import Entry
 from zinnia.models import Category
@@ -158,7 +159,7 @@ def get_calendar_entries(context, year=None, month=None,
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
     """Return the most recent comments"""
-    entry_published_pks = Entry.published.values_list('id', flat=True)
+    entry_published_pks = [smart_unicode(e) for e in Entry.published.values_list('id', flat=True)]
     ct = ContentType.objects.get_for_model(Entry)
 
     comments = Comment.objects.filter(
