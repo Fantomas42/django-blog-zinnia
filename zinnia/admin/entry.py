@@ -129,7 +129,7 @@ class EntryAdmin(admin.ModelAdmin):
     # Custom Methods
     def save_model(self, request, entry, form, change):
         """Save the authors, update time, make an excerpt"""
-        if not form.cleaned_data.get('excerpt'):
+        if not form.cleaned_data.get('excerpt') and entry.status == PUBLISHED:
             entry.excerpt = truncate_words(strip_tags(entry.content), 50)
 
         if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
