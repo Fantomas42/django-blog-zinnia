@@ -12,7 +12,7 @@
  *        Experimental embed plugin
  *
  * File Authors:
- *        Jonatan Lundin
+ *        Jonatan Lundin (jonatan.lundin a-t gmail dotcom)
  */
 
 /*
