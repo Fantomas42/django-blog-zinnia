@@ -34,13 +34,14 @@ Main features :
   * Bit.ly support
   * Twitter support
   * Gravatar support
-  * Django-cms plugins
+  * Django-CMS plugins
   * Collaborative work
   * Tags autocompletion
   * Pingback/Trackback support
   * WYMeditor or TinyMCE support
-  * Ready to use and extendables templates
   * WordPress conversion utility
+  * Ready to use and extendables templates
+  * Windows Live Writer compatibility
 
 Take a look at the online demo at : http://django-blog-zinnia.com
 
