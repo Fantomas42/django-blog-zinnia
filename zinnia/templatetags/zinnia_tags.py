@@ -159,7 +159,8 @@ def get_calendar_entries(context, year=None, month=None,
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
     """Return the most recent comments"""
-    entry_published_pks = [smart_unicode(e) for e in Entry.published.values_list('id', flat=True)]
+    # Using map(smart_unicode... fix bug related to issue #8554
+    entry_published_pks = map(smart_unicode, Entry.published.values_list('id', flat=True))
     ct = ContentType.objects.get_for_model(Entry)
 
     comments = Comment.objects.filter(
