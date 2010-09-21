@@ -43,7 +43,7 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
             entries = TaggedItem.objects.get_union_by_model(
                 entries, instance.tags.all())
 
-        entries = entries[:instance.number_of_entries]
+        entries = entries.distinct()[:instance.number_of_entries]
         context.update({'entries': entries,
                         'object': instance,
                         'placeholder': placeholder})
