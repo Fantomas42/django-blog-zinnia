@@ -3,18 +3,28 @@
     "pk": 2, 
     "model": "zinnia.category", 
     "fields": {
+      "rght": 2, 
       "description": "All entries containing tests.", 
+      "parent": null, 
       "slug": "tests", 
-      "title": "Tests"
+      "title": "Tests", 
+      "level": 0, 
+      "lft": 1, 
+      "tree_id": 1
     }
   }, 
   {
     "pk": 1, 
     "model": "zinnia.category", 
     "fields": {
+      "rght": 2, 
       "description": "All uncategorized entries.", 
+      "parent": null, 
       "slug": "uncategorized", 
-      "title": "Uncategorized"
+      "title": "Uncategorized", 
+      "level": 0, 
+      "lft": 1, 
+      "tree_id": 2
     }
   }, 
   {
@@ -22,6 +32,8 @@
     "model": "zinnia.entry", 
     "fields": {
       "status": 2, 
+      "login_required": false, 
+      "password": "", 
       "end_publication": "2042-12-31 00:00:00", 
       "comment_enabled": true, 
       "tags": "welcome, blog, test", 
@@ -52,6 +64,8 @@
     "model": "zinnia.entry", 
     "fields": {
       "status": 2, 
+      "login_required": false, 
+      "password": "", 
       "end_publication": "2042-12-31 00:00:00", 
       "comment_enabled": true, 
       "tags": "blog, test", 
@@ -84,6 +98,8 @@
     "model": "zinnia.entry", 
     "fields": {
       "status": 2, 
+      "login_required": false, 
+      "password": "", 
       "end_publication": "2042-12-31 00:00:00", 
       "comment_enabled": true, 
       "tags": "html, test, ", 

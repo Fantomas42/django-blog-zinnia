@@ -44,6 +44,8 @@
     "model": "zinnia.entry", 
     "fields": {
       "status": 2, 
+      "login_required": false, 
+      "password": "", 
       "end_publication": "2042-03-15 00:00:00", 
       "comment_enabled": true, 
       "tags": "tests, ", 
@@ -72,6 +74,8 @@
     "model": "zinnia.entry", 
     "fields": {
       "status": 2, 
+      "login_required": false, 
+      "password": "", 
       "end_publication": "2042-03-15 00:00:00", 
       "comment_enabled": true, 
       "tags": "tests", 
