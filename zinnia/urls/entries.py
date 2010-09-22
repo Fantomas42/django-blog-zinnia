@@ -41,8 +41,3 @@ urlpatterns = patterns('zinnia.views.entries',
                            'entry_detail', entry_conf_detail, name='zinnia_entry_detail'),
                        )
 
-#urlpatterns += patterns('django.views.generic.date_based',
-#                        url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
-#                            'object_detail', entry_conf_detail, name='zinnia_entry_detail'),
-#                        )
-

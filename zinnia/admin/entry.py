@@ -26,7 +26,7 @@ class EntryAdmin(admin.ModelAdmin):
                                             'authors', 'creation_date',
                                             'start_publication', 'end_publication'),
                                  'classes': ('collapse', 'collapse-closed')}),
-                 (_('Privacy'), {'fields': ('login_required', 'password',),
+                 (_('Privacy'), {'fields': ('password', 'login_required',),
                                  'classes': ('collapse', 'collapse-closed')}),
                  (_('Discussion'), {'fields': ('comment_enabled', 'pingback_enabled')}),
                  (_('Publication'), {'fields': ('sites', 'categories', 'tags', 'slug')}))
