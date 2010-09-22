@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-14 18:04+0200\n"
+"POT-Creation-Date: 2010-09-22 20:41+0200\n"
 "PO-Revision-Date: 2010-05-05 20:49+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -106,7 +106,7 @@ msgstr "评论已关闭"
 msgid "The latest trackbacks for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
-#: models.py:29 models.py:67 admin/entry.py:58
+#: models.py:29 models.py:67 admin/entry.py:60
 msgid "title"
 msgstr "标题"
 
@@ -211,11 +211,27 @@ msgstr "结束发布日期"
 msgid "sites publication"
 msgstr "发布网站"
 
-#: models.py:194
+#: models.py:101
+msgid "login required"
+msgstr ""
+
+#: models.py:102
+msgid "only authenticated users can view the entry"
+msgstr ""
+
+#: models.py:103
+msgid "password"
+msgstr ""
+
+#: models.py:104
+msgid "protect the entry with a password"
+msgstr ""
+
+#: models.py:199
 msgid "entry"
 msgstr "日志"
 
-#: models.py:195 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
+#: models.py:200 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
 #: plugins/models.py:39 templates/zinnia/base.html:32
 msgid "entries"
 msgstr "日志"
@@ -233,96 +249,100 @@ msgid "Options"
 msgstr "选项"
 
 #: admin/entry.py:29
+msgid "Privacy"
+msgstr ""
+
+#: admin/entry.py:31
 msgid "Discussion"
 msgstr ""
 
-#: admin/entry.py:30
+#: admin/entry.py:32
 #, fuzzy
 msgid "Publication"
 msgstr "结束发布"
 
-#: admin/entry.py:51
+#: admin/entry.py:53
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i 个字符)"
 
-#: admin/entry.py:55
+#: admin/entry.py:57
 #, python-format
 msgid "%(title)s (%(comments)i comments)"
 msgstr "%(title)s (%(comments)i 条评论)"
 
-#: admin/entry.py:70
+#: admin/entry.py:72
 msgid "author(s)"
 msgstr "作者"
 
-#: admin/entry.py:82
+#: admin/entry.py:84
 msgid "category(s)"
 msgstr "类别"
 
-#: admin/entry.py:93
+#: admin/entry.py:95
 msgid "tag(s)"
 msgstr "标签"
 
-#: admin/entry.py:100
+#: admin/entry.py:102
 msgid "site(s)"
 msgstr "网站"
 
-#: admin/entry.py:106
+#: admin/entry.py:108
 msgid "is actual"
 msgstr "发布期间"
 
-#: admin/entry.py:112
+#: admin/entry.py:114
 msgid "is visible"
 msgstr "是否可见"
 
-#: admin/entry.py:116
+#: admin/entry.py:118
 #, python-format
 msgid "<a href=\"%s\" target=\"blank\">View</a>"
 msgstr "<a href=\"%s\" target=\"blank\">浏览</a>"
 
-#: admin/entry.py:118
+#: admin/entry.py:120
 msgid "View on site"
 msgstr "浏览站点"
 
-#: admin/entry.py:123 templates/zinnia/_entry_detail.html:62
+#: admin/entry.py:125 templates/zinnia/_entry_detail.html:62
 msgid "Unavailable"
 msgstr "不存在"
 
-#: admin/entry.py:127
+#: admin/entry.py:129
 msgid "short url"
 msgstr "缩略URL"
 
-#: admin/entry.py:181
+#: admin/entry.py:183
 msgid "Set the entries to the user"
 msgstr "设置自己为所选日志的作者"
 
-#: admin/entry.py:186
+#: admin/entry.py:188
 msgid "Set entries selected as published"
 msgstr "发布所选日志"
 
-#: admin/entry.py:191
+#: admin/entry.py:193
 msgid "Set entries selected as hidden"
 msgstr "隐藏所选日志"
 
-#: admin/entry.py:201
+#: admin/entry.py:203
 msgid "Tweet entries selected"
 msgstr "推特所选日志"
 
-#: admin/entry.py:206
+#: admin/entry.py:208
 msgid "Close the comments for selected entries"
 msgstr "关闭所选日志的评论功能"
 
-#: admin/entry.py:211
+#: admin/entry.py:213
 #, fuzzy
 msgid "Close the linkbacks for selected entries"
 msgstr "关闭所选日志的评论功能"
 
-#: admin/entry.py:225
+#: admin/entry.py:227
 #, fuzzy, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%i次成功提交所选日志到搜索引擎"
 
-#: admin/entry.py:227
+#: admin/entry.py:229
 msgid "Ping Directories for selected entries"
 msgstr "提交所选日志到搜索引擎"
 
@@ -745,6 +765,42 @@ msgstr[1] ""
 #: templates/zinnia/entry_search.html:31
 msgid "Nothing found."
 msgstr "没有找到"
+
+#: templates/zinnia/login.html:4 templates/zinnia/login.html.py:7
+msgid "Login required"
+msgstr ""
+
+#: templates/zinnia/login.html:12
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: templates/zinnia/login.html:16
+msgid "You need to be connected to view this entry."
+msgstr ""
+
+#: templates/zinnia/login.html:33
+msgid "Login"
+msgstr ""
+
+#: templates/zinnia/password.html:4 templates/zinnia/password.html.py:7
+msgid "Password required"
+msgstr ""
+
+#: templates/zinnia/password.html:12
+msgid "The password provided is not valid. Please try again."
+msgstr ""
+
+#: templates/zinnia/password.html:16
+msgid "You need to provide a password to view this entry."
+msgstr ""
+
+#: templates/zinnia/password.html:23
+msgid "Password"
+msgstr ""
+
+#: templates/zinnia/password.html:28
+msgid "Valid"
+msgstr ""
 
 #: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:7
 #: templates/zinnia/skeleton.html:34 templates/zinnia/skeleton.html.py:35

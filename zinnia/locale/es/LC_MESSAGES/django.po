@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-14 18:04+0200\n"
+"POT-Creation-Date: 2010-09-22 20:41+0200\n"
 "PO-Revision-Date: 2010-09-01 18:36+0100\n"
 "Last-Translator: Esau Rodriguez <esau.rodriguez@galotecnia.com>\n"
 "Language-Team: Español <kde-i18n-doc@kde.org>\n"
@@ -113,7 +113,7 @@ msgstr ""
 msgid "The latest trackbacks for the entry %s"
 msgstr "Los últimos comentarios de la entrada %s"
 
-#: models.py:29 models.py:67 admin/entry.py:58
+#: models.py:29 models.py:67 admin/entry.py:60
 msgid "title"
 msgstr "título"
 
@@ -218,11 +218,27 @@ msgstr "Fecha de cierre de la publicación"
 msgid "sites publication"
 msgstr "publicaciones del sitio"
 
-#: models.py:194
+#: models.py:101
+msgid "login required"
+msgstr ""
+
+#: models.py:102
+msgid "only authenticated users can view the entry"
+msgstr ""
+
+#: models.py:103
+msgid "password"
+msgstr ""
+
+#: models.py:104
+msgid "protect the entry with a password"
+msgstr ""
+
+#: models.py:199
 msgid "entry"
 msgstr "entrada"
 
-#: models.py:195 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
+#: models.py:200 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
 #: plugins/models.py:39 templates/zinnia/base.html:32
 msgid "entries"
 msgstr "entradas"
@@ -240,96 +256,100 @@ msgid "Options"
 msgstr "Opciones"
 
 #: admin/entry.py:29
+msgid "Privacy"
+msgstr ""
+
+#: admin/entry.py:31
 msgid "Discussion"
 msgstr ""
 
-#: admin/entry.py:30
+#: admin/entry.py:32
 #, fuzzy
 msgid "Publication"
 msgstr "fin de la publicación"
 
-#: admin/entry.py:51
+#: admin/entry.py:53
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i palabras)"
 
-#: admin/entry.py:55
+#: admin/entry.py:57
 #, python-format
 msgid "%(title)s (%(comments)i comments)"
 msgstr "%(title)s (%(comments)i comentarios)"
 
-#: admin/entry.py:70
+#: admin/entry.py:72
 msgid "author(s)"
 msgstr "autor(es)"
 
-#: admin/entry.py:82
+#: admin/entry.py:84
 msgid "category(s)"
 msgstr "Categoría(s)"
 
-#: admin/entry.py:93
+#: admin/entry.py:95
 msgid "tag(s)"
 msgstr "Tag(s)"
 
-#: admin/entry.py:100
+#: admin/entry.py:102
 msgid "site(s)"
 msgstr "Sitio(s)"
 
-#: admin/entry.py:106
+#: admin/entry.py:108
 msgid "is actual"
 msgstr "Es actual?"
 
-#: admin/entry.py:112
+#: admin/entry.py:114
 msgid "is visible"
 msgstr "Visible ?"
 
-#: admin/entry.py:116
+#: admin/entry.py:118
 #, python-format
 msgid "<a href=\"%s\" target=\"blank\">View</a>"
 msgstr "<a href=\"%s\" target=\"blank\">Vista</a>"
 
-#: admin/entry.py:118
+#: admin/entry.py:120
 msgid "View on site"
 msgstr "Ver en el sitio"
 
-#: admin/entry.py:123 templates/zinnia/_entry_detail.html:62
+#: admin/entry.py:125 templates/zinnia/_entry_detail.html:62
 msgid "Unavailable"
 msgstr "No disponible"
 
-#: admin/entry.py:127
+#: admin/entry.py:129
 msgid "short url"
 msgstr "url corta"
 
-#: admin/entry.py:181
+#: admin/entry.py:183
 msgid "Set the entries to the user"
 msgstr "Adquirir los artículos"
 
-#: admin/entry.py:186
+#: admin/entry.py:188
 msgid "Set entries selected as published"
 msgstr "Publicar las entradas seleccionadas"
 
-#: admin/entry.py:191
+#: admin/entry.py:193
 msgid "Set entries selected as hidden"
 msgstr "Marcar las entradas seleccionadas como ocultas"
 
-#: admin/entry.py:201
+#: admin/entry.py:203
 msgid "Tweet entries selected"
 msgstr "Twittear las entradas seleccionadas"
 
-#: admin/entry.py:206
+#: admin/entry.py:208
 msgid "Close the comments for selected entries"
 msgstr "Cerrar los comentarios para las entradas seleccionadas"
 
-#: admin/entry.py:211
+#: admin/entry.py:213
 #, fuzzy
 msgid "Close the linkbacks for selected entries"
 msgstr "Cerrar los comentarios para las entradas seleccionadas"
 
-#: admin/entry.py:225
+#: admin/entry.py:227
 #, fuzzy, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%i directorios pingueados correctamente"
 
-#: admin/entry.py:227
+#: admin/entry.py:229
 msgid "Ping Directories for selected entries"
 msgstr "Ping directorios para las entradas seleccionadas"
 
@@ -720,6 +740,42 @@ msgstr[1] "%(entry_count)s entradas encontradas."
 #: templates/zinnia/entry_search.html:31
 msgid "Nothing found."
 msgstr "Nada encontrado"
+
+#: templates/zinnia/login.html:4 templates/zinnia/login.html.py:7
+msgid "Login required"
+msgstr ""
+
+#: templates/zinnia/login.html:12
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: templates/zinnia/login.html:16
+msgid "You need to be connected to view this entry."
+msgstr ""
+
+#: templates/zinnia/login.html:33
+msgid "Login"
+msgstr ""
+
+#: templates/zinnia/password.html:4 templates/zinnia/password.html.py:7
+msgid "Password required"
+msgstr ""
+
+#: templates/zinnia/password.html:12
+msgid "The password provided is not valid. Please try again."
+msgstr ""
+
+#: templates/zinnia/password.html:16
+msgid "You need to provide a password to view this entry."
+msgstr ""
+
+#: templates/zinnia/password.html:23
+msgid "Password"
+msgstr ""
+
+#: templates/zinnia/password.html:28
+msgid "Valid"
+msgstr ""
 
 #: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:7
 #: templates/zinnia/skeleton.html:34 templates/zinnia/skeleton.html.py:35
