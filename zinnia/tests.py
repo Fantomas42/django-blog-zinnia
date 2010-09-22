@@ -836,6 +836,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(post['wp_author'], 'webmaster')
         self.assertEquals(post['wp_author_id'], self.webmaster.pk)
         self.assertEquals(post['wp_author_display_name'], 'webmaster')
+        self.assertEquals(post['wp_password'], '')
         self.assertEquals(post['wp_slug'], self.entry_1.slug)
 
     def test_new_post(self):
@@ -866,6 +867,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.excerpt, self.entry_2.excerpt)
         self.assertEquals(entry.slug, self.entry_2.slug)
         self.assertEquals(entry.status, DRAFT)
+        self.assertEquals(entry.password, self.entry_2.password)
         self.assertEquals(entry.comment_enabled, True)
         self.assertEquals(entry.pingback_enabled, True)
         self.assertEquals(entry.categories.count(), 1)
@@ -880,6 +882,7 @@ class MetaWeblogTestCase(TestCase):
         post['description'] = 'Content edited'
         post['mt_excerpt'] = 'Content edited'
         post['wp_slug'] = 'slug-edited'
+        post['wp_password'] = 'password'
         post['wp_author_id'] = self.contributor.pk
         post['mt_allow_comments'] = 2
         post['mt_allow_pings'] = 0
@@ -893,6 +896,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.excerpt, post['mt_excerpt'])
         self.assertEquals(entry.slug, 'slug-edited')
         self.assertEquals(entry.status, PUBLISHED)
+        self.assertEquals(entry.password, 'password')
         self.assertEquals(entry.comment_enabled, False)
         self.assertEquals(entry.pingback_enabled, False)
         self.assertEquals(entry.categories.count(), 0)

@@ -18,7 +18,7 @@
     <supportsPingPolicy>Yes</supportsPingPolicy>
     <supportsAuthor>Yes</supportsAuthor>
     <supportsSlug>Yes</supportsSlug>
-    <supportsPassword>No</supportsPassword>
+    <supportsPassword>Yes</supportsPassword>
     <supportsExcerpt>Yes</supportsExcerpt>
     <supportsTrackbacks>No</supportsTrackbacks>
     <supportsPages>No</supportsPages>

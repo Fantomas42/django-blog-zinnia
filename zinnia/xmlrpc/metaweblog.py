@@ -103,6 +103,7 @@ def post_structure(entry, site):
             'wp_author': author.username,
             'wp_author_id': author.pk,
             'wp_author_display_name': author.username,
+            'wp_password': entry.password,
             'wp_slug': entry.slug}
 
 @xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])
@@ -197,6 +198,7 @@ def new_post(blog_id, username, password, post, publish):
                   'pingback_enabled': post.get('mt_allow_pings', 1) == 1,
                   'tags': post.has_key('mt_keywords') and post['mt_keywords'] or '',
                   'slug': post.has_key('wp_slug') and post['wp_slug'] or slugify(post['title']),
+                  'password': post.get('wp_password', ''),
                   'status': publish and PUBLISHED or DRAFT}
     entry = Entry.objects.create(**entry_dict)
 
@@ -236,6 +238,7 @@ def edit_post(post_id, username, password, post, publish):
     entry.tags = post.has_key('mt_keywords') and post['mt_keywords'] or ''
     entry.slug = post.has_key('wp_slug') and post['wp_slug'] or slugify(post['title'])
     entry.status = publish and PUBLISHED or DRAFT
+    entry.password = post.get('wp_password', '')
     entry.save()
 
     if post.has_key('wp_author_id') and user.has_perm('zinnia.can_change_author'):
