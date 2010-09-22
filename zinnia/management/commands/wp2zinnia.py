@@ -45,7 +45,7 @@ class Command(LabelCommand):
                       'publish': PUBLISHED,
                       'future': PUBLISHED,
                       'trash': HIDDEN,
-                      'private': HIDDEN}
+                      'private': PUBLISHED}
 
     def __init__(self):
         """Init the Command and add custom styles"""
@@ -147,7 +147,10 @@ class Command(LabelCommand):
         for category_node in category_nodes:
             title = category_node.find('{http://wordpress.org/export/1.0/}cat_name').text[:255]
             slug = category_node.find('{http://wordpress.org/export/1.0/}category_nicename').text[:255]
-            parent = category_node.find('{http://wordpress.org/export/1.0/}category_parent').text[:255]
+            try:
+                parent = category_node.find('{http://wordpress.org/export/1.0/}category_parent').text[:255]
+            except TypeError:
+                parent = None
             self.write_out('> %s... ' % title)
             category, created = Category.objects.get_or_create(
                 title=title, slug=slug, parent=categories.get(parent))
@@ -213,6 +216,8 @@ class Command(LabelCommand):
                       'status': self.REVERSE_STATUS[item_node.find('{http://wordpress.org/export/1.0/}status').text],
                       'comment_enabled': item_node.find('{http://wordpress.org/export/1.0/}comment_status').text == 'open',
                       'pingback_enabled': item_node.find('{http://wordpress.org/export/1.0/}ping_status').text == 'open',
+                      'password': item_node.find('{http://wordpress.org/export/1.0/}post_password').text or '',
+                      'login_required': item_node.find('{http://wordpress.org/export/1.0/}status').text == 'private',
                       'creation_date': creation_date,
                       'last_update': datetime.now(),
                       'start_publication': creation_date,}
