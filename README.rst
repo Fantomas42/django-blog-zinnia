@@ -22,6 +22,7 @@ Main features :
   * Sitemaps
   * Archives views
   * Related entries
+  * Private entries
   * RSS or Atom Feeds
   * Tags and categories views
   * Advanced search engine

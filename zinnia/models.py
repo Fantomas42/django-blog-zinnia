@@ -98,6 +98,11 @@ class Entry(models.Model):
 
     sites = models.ManyToManyField(Site, verbose_name=_('sites publication'))
 
+    login_required = models.BooleanField(_('login required'), default=False,
+                                         help_text=_('only authenticated users can view the entry'))
+    password = models.CharField(_('password'), max_length=50, blank=True,
+                                help_text=_('protect the entry with a password'))
+
     objects = models.Manager()
     published = EntryPublishedManager()
 

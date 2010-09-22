@@ -26,9 +26,11 @@ class EntryAdmin(admin.ModelAdmin):
                                             'authors', 'creation_date',
                                             'start_publication', 'end_publication'),
                                  'classes': ('collapse', 'collapse-closed')}),
+                 (_('Privacy'), {'fields': ('login_required', 'password',),
+                                 'classes': ('collapse', 'collapse-closed')}),
                  (_('Discussion'), {'fields': ('comment_enabled', 'pingback_enabled')}),
                  (_('Publication'), {'fields': ('sites', 'categories', 'tags', 'slug')}))
-    list_filter = ('categories', 'authors', 'status',
+    list_filter = ('categories', 'authors', 'status', 'login_required',
                    'comment_enabled', 'pingback_enabled',
                    'creation_date', 'start_publication', 'end_publication', 'sites')
     list_display = ('get_title', 'get_authors', 'get_categories',
