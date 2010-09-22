@@ -5,11 +5,11 @@
 
 {% block content %}
   {% if form.errors %}
-  <h3>
+  <h2>
     {% blocktrans count form.errors|length as errors %}Please correct following error.{% plural %}Please correct following errors.{% endblocktrans %}
-  </h3>
+  </h2>
   {% else %}
-  <h3>{% trans "Preview of the comment" %}</h3>
+  <h2>{% trans "Preview of the comment" %}</h2>
   <ol id="commentList">
     <li id="comment_preview" class="comment {% cycle box1,box2 %} span-15 last">
       <div class="span-2">
