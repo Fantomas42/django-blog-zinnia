@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 from tagging.models import Tag
 
 from zinnia import settings
+from zinnia.managers import HIDDEN
 from zinnia.managers import PUBLISHED
 from zinnia.ping import DirectoryPinger
 from zinnia.admin.forms import EntryAdminForm
@@ -189,7 +190,7 @@ class EntryAdmin(admin.ModelAdmin):
 
     def make_hidden(self, request, queryset):
         """Set entries selected as hidden"""
-        queryset.update(status='hidden')
+        queryset.update(status=HIDDEN)
     make_hidden.short_description = _('Set entries selected as hidden')
 
     def make_tweet(self, request, queryset):
