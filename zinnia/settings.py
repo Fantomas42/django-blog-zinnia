@@ -38,11 +38,14 @@ F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
 USE_BITLY = getattr(settings, 'ZINNIA_USE_BITLY', 'django_bitly' in settings.INSTALLED_APPS)
 
 try:
-    import twitter
+    import tweepy
     USE_TWITTER = getattr(settings, 'ZINNIA_USE_TWITTER', True)
 except ImportError:
     USE_TWITTER = False
 
-TWITTER_USER = getattr(settings, 'TWITTER_USER', '')
-TWITTER_PASSWORD = getattr(settings, 'TWITTER_PASSWORD', '')
+TWITTER_CONSUMER_KEY = getattr(settings, 'TWITTER_CONSUMER_KEY', '')
+TWITTER_CONSUMER_SECRET = getattr(settings, 'TWITTER_CONSUMER_SECRET', '')
+TWITTER_ACCESS_KEY = getattr(settings, 'TWITTER_ACCESS_KEY', '')
+TWITTER_ACCESS_SECRET = getattr(settings, 'TWITTER_ACCESS_SECRET', '')
+
 

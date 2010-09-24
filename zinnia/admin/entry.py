@@ -195,12 +195,15 @@ class EntryAdmin(admin.ModelAdmin):
 
     def make_tweet(self, request, queryset):
         """Post an update on Twitter"""
-        import twitter
-        api = twitter.Api(username=settings.TWITTER_USER,
-                          password=settings.TWITTER_PASSWORD)
+        import tweepy
+        auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY,
+                                   settings.TWITTER_CONSUMER_SECRET)
+        auth.set_access_token(settings.TWITTER_ACCESS_KEY,
+                              settings.TWITTER_ACCESS_SECRET)
+        api = tweepy.API(auth)
         for entry in queryset:
             message = '%s %s' % (entry.title[:119], entry.short_url)
-            api.PostUpdate(message)
+            api.update_status(message)
     make_tweet.short_description = _('Tweet entries selected')
 
     def close_comments(self, request, queryset):

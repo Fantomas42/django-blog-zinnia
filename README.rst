@@ -209,11 +209,20 @@ When you post a new entry on your blog you might want to tweet it as well.
 In order to do that, you first need to activate the Bit.ly support like
 described above.
 
-Then install `python-twitter
-<http://code.google.com/p/python-twitter/>`_ and add these settings. ::
+Then install `tweepy
+<http://github.com/joshthecoder/tweepy>`_ and add these settings. ::
 
-  >>> TWITTER_USER = 'your twitter username'
-  >>> TWITTER_PASSWORD = 'your twitter password'
+  >>> TWITTER_CONSUMER_KEY = 'Your Consumer Key'
+  >>> TWITTER_CONSUMER_SECRET = 'Your Consumer Secret'
+  >>> TWITTER_ACCESS_KEY = 'Your Access Key'
+  >>> TWITTER_ACCESS_SECRET = 'Your Access Secret'
+
+Note that the authentification for Twitter has changed since September 2010.
+The actual authentification system is based on oAuth. That's why now you
+need to set these 4 settings. If you don't know how to get these information,
+follow this excellent tutorial at:
+
+http://jmillerinc.com/2010/05/31/twitter-from-the-command-line-in-python-using-oauth/
 
 Now in admin, you have the possibilty to post an update containing your
 entry's title and the shortened url of your entry.
