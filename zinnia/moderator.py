@@ -10,7 +10,7 @@ from zinnia.settings import MAIL_COMMENT
 from zinnia.settings import AKISMET_COMMENT
 
 
-AKISMET_API_KEY = getattr(settings, 'AKISMET_API_KEY', '')
+AKISMET_API_KEY = getattr(settings, 'AKISMET_SECRET_API_KEY', '')
 
 class EntryCommentModerator(CommentModerator):
     """Moderate the comment of Entry"""
