@@ -2,10 +2,9 @@
 from django import forms
 from django.utils.translation import ugettext, ugettext_lazy as _
 
-from mptt.forms import TreeNodeChoiceField
-
 from zinnia.models import Entry
 from zinnia.models import Category
+from zinnia.admin.widgets import TreeNodeChoiceField
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.widgets import MPTTModelMultipleChoiceField
 

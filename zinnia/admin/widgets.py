@@ -11,19 +11,35 @@ from django.utils.encoding import force_unicode
 
 from zinnia.settings import MEDIA_URL
 
+class TreeNodeChoiceField(forms.ModelChoiceField):
+    """Duplicating the TreeNodeChoiceField bundled in django-mptt
+    to avoid conflict with the TreeNodeChoiceField bundled in django-cms..."""
+    def __init__(self, level_indicator=u'---', *args, **kwargs):
+        self.level_indicator = level_indicator
+        if kwargs.get('required', True) and not 'empty_label' in kwargs:
+            kwargs['empty_label'] = None
+        super(TreeNodeChoiceField, self).__init__(*args, **kwargs)
+
+    def label_from_instance(self, obj):
+        """Creates labels which represent the tree level of each node
+        when generating option labels."""
+        return u'%s %s' % (self.level_indicator * getattr(obj,
+                                                          obj._meta.level_attr),
+                           smart_unicode(obj))
+
 
 class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
     def choice(self, obj):
         tree_id = getattr(obj, getattr(self.queryset.model._meta, 'tree_id_atrr', 'tree_id'), 0)
         left = getattr(obj, getattr(self.queryset.model._meta, 'left_atrr', 'lft'), 0)
         return super(MPTTModelChoiceIterator, self).choice(obj) + ((tree_id, left),)
-    
+
 
 class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
     def label_from_instance(self, obj):
         level = getattr(obj, getattr(self.queryset.model._meta, 'level_attr', 'level'), 0)
         return u'%s %s' % ('-'*level, smart_unicode(obj))
-    
+
     def _get_choices(self):
         if hasattr(self, '_choices'):
             return self._choices
@@ -35,7 +51,7 @@ class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
 class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
     def __init__(self, verbose_name, is_stacked, attrs=None, choices=()):
         super(MPTTFilteredSelectMultiple, self).__init__(verbose_name, is_stacked, attrs, choices)
-        
+
     def render_options(self, choices, selected_choices):
         """
         this is copy'n'pasted from django.forms.widgets Select(Widget)
@@ -65,7 +81,7 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
                 output.append(render_option(option_value, option_label, sort_fields))
         return u'\n'.join(output)
 
-    class Media:        
+    class Media:
         js = (settings.ADMIN_MEDIA_PREFIX + 'js/core.js',
               MEDIA_URL + 'js/mptt_m2m_selectbox.js',
               settings.ADMIN_MEDIA_PREFIX + 'js/SelectFilter2.js',)
