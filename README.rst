@@ -46,7 +46,7 @@ Main features :
 
 Take a look at the online demo at : http://django-blog-zinnia.com
 
-Dependancies
+Dependencies
 ============
 
 Make sure to install these packages prior to installation :
@@ -80,7 +80,7 @@ Then register **zinnia**, and these following applications in the
 INSTALLED_APPS section of your project's settings. ::
 
   >>> INSTALLED_APPS = (
-  ...   # Your favorites apps
+  ...   # Your favorite apps
   ...   'django.contrib.contenttypes',
   ...   'django.contrib.comments',
   ...   'django.contrib.sites',
@@ -100,7 +100,7 @@ Add these following template context processors if not already present. ::
   ...      'django.core.context_processors.request',
   ...      'django.core.context_processors.media',
   ...      'zinnia.context_processors.media',
-  ...      'zinnia.context_processors.version',# Optionnal
+  ...      'zinnia.context_processors.version', # Optional
   ...	)
 
 Media Files
@@ -110,9 +110,9 @@ You have to make a symbolic link from zinnia/media/zinnia directory to your
 media directory or make a copy named **zinnia**, but if want to change this
 value, define ZINNIA_MEDIA_URL in the settings.py as appropriate.
 
-And don't forget to serve this url.
+And don't forget to serve this URL.
 
-Urls
+URLs
 ----
 
 Add the following lines to your project's urls.py in order to display the
@@ -122,8 +122,8 @@ blog. ::
   >>> url(r'^comments/', include('django.contrib.comments.urls')),
 
 
-Note that the default zinnia urlset is provided for convenient usage, but
-you can customize your urls if you want. Here's how : ::
+Note that the default zinnia URLset is provided for convenient usage, but
+you can customize your URLs if you want. Here's how : ::
 
   >>> url(r'^', include('zinnia.urls.capabilities')),
   >>> url(r'^search/', include('zinnia.urls.search')),
@@ -148,7 +148,7 @@ want to fill your website's sitemap with the entries of your blog, follow
 these steps.
 
   * Register **django.contrib.sitemaps** in the INSTALLED_APPS section.
-  * Edit your project's urls and add this code :
+  * Edit your project's URLs and add this code :
 
 ::
 
@@ -224,7 +224,7 @@ follow this excellent tutorial at:
 
 http://jmillerinc.com/2010/05/31/twitter-from-the-command-line-in-python-using-oauth/
 
-Now in admin, you have the possibilty to post an update containing your
+Now in the admin, you can post an update containing your
 entry's title and the shortened url of your entry.
 
 Django-CMS
@@ -285,10 +285,10 @@ Insert something like this in your project's urls.py: ::
 pingback detection.
 More information at http://hixie.ch/specs/pingback/pingback-1.0#TOC2
 
-Templatetags
-============
+Template Tags
+=============
 
-Zinnia provides several templatetags based on *inclusion_tag* system to
+Zinnia provides several template tags based on *inclusion_tag* system to
 create some **widgets** in your website's templates.
 
 * get_recent_entries(number=5, template="zinnia/tags/recent_entries.html")
@@ -355,7 +355,7 @@ Follow these steps to start the development : ::
   $> python bootstrap.py
   $> ./bin/buildout
 
-The buildout script will resolve all the dependancies needed to develop the
+The buildout script will resolve all the dependencies needed to develop the
 application.
 
 Once these operations are done, you are ready to develop the zinnia project.
@@ -370,12 +370,12 @@ Translations
 ============
 
 If you want to contribute by updating a translation or adding a translation
-in your language, it's simple, create a account on Transifex.net and you
-will have the possibility to edit the translations at this url :
+in your language, it's simple: create a account on Transifex.net and you
+can edit the translations at this URL :
 
 http://www.transifex.net/projects/p/django-blog-zinnia/c/master/
 
-Ressources
+Resources
 ==========
 
   * Online `documentation of Zinnia
@@ -398,5 +398,5 @@ Examples
     <http://www.professionalwebstudio.com/en/weblog/>`_.
 
 
-If you are a proud user of Zinnia, send me the url of your website and I
+If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
