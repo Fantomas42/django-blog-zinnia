@@ -179,7 +179,7 @@ IMPORTANT : you need an API key. If you don't have any, get one for free at
 http://akismet.com/personal/ then set it in your project's settings like
 this : ::
 
-  >>> AKISMET_API_KEY = 'your key'
+  >>> AKISMET_SECRET_API_KEY = 'your key'
 
 If you don't want spam protection for comments, you can disable it with
 this setting. ::
