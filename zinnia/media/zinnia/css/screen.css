@@ -480,3 +480,5 @@ div.paginator span.current { border-color: #006699; background-color: #006699; c
 .entry .entryFooter p strong { color: #999999; }
 
 ol#commentList li { float: left; }
+ol#commentList li.box1 { background-color: #eeeeee; }
+ol#commentList li.post-author { color: #999999; }

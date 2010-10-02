@@ -76,7 +76,7 @@
   {% if comment_list.count %}
   <ol id="commentList" class="span-15 last">
     {% for comment in comment_list %}
-    <li id="comment_{{ comment.pk }}" class="comment {% cycle box1,box2 %} span-15 last">
+    <li id="comment_{{ comment.pk }}" class="comment {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %} span-15 last">
       <div class="span-2">
 	<img src="{% get_gravatar comment.email 60 "G" %}" class="gravatar" alt="{{ comment.user_name }}"/>
       </div>
