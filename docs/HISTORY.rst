@@ -4,6 +4,7 @@
 * Using signals
 * Trackback support
 * Ping external urls
+* Private posts
 * Hierarchical categories
 * TinyMCE integration
 * Code optimisation
