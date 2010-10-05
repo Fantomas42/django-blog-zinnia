@@ -1,6 +1,14 @@
 Frequently Asked Questions
 ==========================
 
+* The templates does not fit to my wishes. What can I do ?
+
+    The templates provided for Zinnia are simple but complete and
+    as generic as possible. But you can easily change them by
+    `specifying a template directory
+    <http://docs.djangoproject.com/en/dev/ref/templates/api/#loading-templates>`_.
+
+
 * How can I use the image field for fitting to my skin ?
 
     Take a looks at `sorl.thumbnail
@@ -31,6 +39,24 @@ Frequently Asked Questions
     ZINNIA_WYSIWYG setting, and use the the `markup application
     <http://docs.djangoproject.com/en/dev/ref/contrib/markup/>`_ in
     your templates.
+
+
+* Is Zinnia able to allow multiple users to edit it's own blog ?
+
+    Zinnia is designed to be multi-site. That's mean you can publish entries
+    on several sites or share an admin interface for all the sites handled.
+
+    Zinnia also provides a new permission that's allow or not the user to
+    change the authors. Usefull for collaborative works.
+
+    But if you want to restrict the edition of the entries by site,
+    authors or whatever you want, it's your job to implement this
+    functionality in your project.
+
+    The simple way to do that, respecting the Django rules, is to
+    override the admin classes provided by Zinnia, and register
+    those classes in another admin site.
+
 
 * I want an image gallery in my posts, what can I do ?
 
