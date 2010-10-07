@@ -11,6 +11,10 @@ from django.contrib.comments.moderation import moderator
 from django.utils.translation import ugettext_lazy as _
 
 import mptt
+try:
+    from mptt.models import MPTTModel
+except ImportError:
+    MPTTModel = models.Model
 from tagging.fields import TagField
 
 from zinnia.settings import USE_BITLY
@@ -23,7 +27,7 @@ from zinnia.signals import ping_directories_handler
 from zinnia.signals import ping_external_urls_handler
 
 
-class Category(models.Model):
+class Category(MPTTModel):
     """Category object for Entry"""
 
     title = models.CharField(_('title'), max_length=255)
@@ -57,6 +61,8 @@ class Category(models.Model):
         verbose_name = _('category')
         verbose_name_plural = _('categories')
 
+    class MPTTMeta:
+        order_insertion_by = ['title',]
 
 class Entry(models.Model):
     """Base design for publishing entry"""
@@ -201,7 +207,12 @@ class Entry(models.Model):
         permissions = (('can_view_all', 'Can view all'),
                        ('can_change_author', 'Can change author'), )
 
-mptt.register(Category, order_insertion_by=['title',])
+
+if hasattr(mptt, 'register'):
+    mptt.register(Category, **dict([(attr, getattr(Category.MPTTMeta, attr))
+                                    for attr in dir(Category.MPTTMeta)
+                                    if attr[:1] != '_']))
+
 post_save.connect(ping_directories_handler, sender=Entry)
 post_save.connect(ping_external_urls_handler, sender=Entry)
 moderator.register(Entry, EntryCommentModerator)
