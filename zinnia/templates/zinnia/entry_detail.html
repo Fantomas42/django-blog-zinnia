@@ -76,14 +76,14 @@
   {% if comment_list.count %}
   <ol id="commentList" class="span-15 last">
     {% for comment in comment_list %}
-    <li id="comment_{{ comment.pk }}" class="comment {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %} span-15 last">
+    <li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %} span-15 last">
       <div class="span-2">
-	<img src="{% get_gravatar comment.email 60 "G" %}" class="gravatar" alt="{{ comment.user_name }}"/>
+	<img src="{% get_gravatar comment.email 60 "G" %}" class="gravatar photo" alt="{{ comment.user_name }}"/>
       </div>
       <div class="comment_body span-13 last">
 	<div class="span-13 last">
 	  {% if comment.url %}
-	  <a href="{{ comment.url }}">{{ comment.user_name }}</a>
+	  <a href="{{ comment.url }}" class="fn url">{{ comment.user_name }}</a>
 	  {% else %}
 	  {{ comment.user_name }}
 	  {% endif %}
@@ -139,7 +139,7 @@
     {% else %}
   <p>{% trans "Pingbacks are closed." %}</p>
     {% endif %}
-  {% endwith %}  
+  {% endwith %}
 </div>
 
 <hr />
@@ -168,7 +168,7 @@
     {% if object.pingback_enabled %}
   <p><a href="{% url zinnia_entry_trackback object.slug %}" rel="trackback">{% trans "Trackback URL" %}</a></p>
     {% endif %}
-  {% endwith %}  
+  {% endwith %}
 </div>
 
 {% if object.comment_enabled %}

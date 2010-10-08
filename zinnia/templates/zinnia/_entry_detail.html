@@ -7,17 +7,20 @@
     </a>
   </h2>
   <p class="entryInfo">
-    {% trans "Written by" %} 
+    {% trans "Written by" %}
     {% for author in object.authors.all %}
-    <a href="{% url zinnia_author_detail author %}" title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">
-      <strong>{{ author }}</strong>
-    </a>{% if not forloop.last %}, {% endif %}
+    <span class="vcard">
+      <a href="{% url zinnia_author_detail author %}" class="fn nickname url"
+         title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">
+        {{ author }}
+      </a>
+    </span>{% if not forloop.last %}, {% endif %}
     {% endfor %}
     {% trans "on date" %} {{ object.creation_date|date:"d F Y"|capfirst }}
-    {% trans "in" %} 
+    {% trans "in" %}
     {% for category in object.categories.all %}
-    <a href="{{ category.get_absolute_url }}" title="{{ category }}">
-      <em>{{ category }}</em>
+    <a href="{{ category.get_absolute_url }}" title="{{ category }}" rel="tag category">
+      {{ category }}
     </a>
     {% if not forloop.last %}, {% endif %}
     {% endfor %}.
@@ -43,8 +46,8 @@
   <p class="entryTags span-16 last">
     <strong>{% trans "Tags" %}</strong> :
     {% tags_for_object object as tag_list %}
-    {% for tag in tag_list %}  
-    <a href="{% url zinnia_tag_detail tag %}" title="Tag {{ tag }}">
+    {% for tag in tag_list %}
+    <a href="{% url zinnia_tag_detail tag %}" title="Tag {{ tag }}" rel="tag">
       {{ tag }}
     </a>
     {% empty %}
@@ -53,7 +56,7 @@
   </p>
 
   <p class="entryShortUrl span-16 last">
-    <strong>{% trans "Short url" %}</strong> : 
+    <strong>{% trans "Short url" %}</strong> :
     {% if object.short_url %}
     <a href="{{ object.short_url }}" title="{{ object.title }}">
       {{ object.short_url }}
@@ -62,9 +65,9 @@
     {% trans "Unavailable" %}
     {% endif %}
   </p>
-  
+
   <p class="entryComments span-16 last">
-    <strong>{% trans "Discussions" %}</strong> : 
+    <strong>{% trans "Discussions" %}</strong> :
     {% with object.comments.count as comment_count %}
     {% if comment_count %}
     <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
