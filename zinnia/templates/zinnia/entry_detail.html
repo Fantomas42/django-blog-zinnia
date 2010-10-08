@@ -74,7 +74,7 @@
   <h3>{% trans "Comments" %}</h3>
   {% with object.comments as comment_list %}
   {% if comment_list.count %}
-  <ol id="commentList" class="span-15 last">
+  <ol id="comment-list" class="span-15 last">
     {% for comment in comment_list %}
     <li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %} span-15 last">
       <div class="span-2">

@@ -466,19 +466,19 @@ div.paginator span.page:hover, div.paginator span.next:hover, div.paginator span
 div.paginator span.page:hover a, div.paginator span.next:hover a, div.paginator span.previous:hover a { color: white; }
 div.paginator span.current { border-color: #006699; background-color: #006699; color: white; }
 
-.entry .entryHeader { margin-bottom: 1em; }
-.entry .entryHeader .entryTitle { margin: 0; }
-.entry .entryHeader .entryInfo { margin: 0; padding-left: 1.5em; background: transparent url(../img/category.png) no-repeat scroll; }
-.entry .entryBody .entryImage { margin-top: -1.5em; }
-.entry .entryBody .entryImage p img { border: 0; margin: 0 1.5em 1.5em 0; }
-.entry .entryFooter p { margin-bottom: 0; }
-.entry .entryFooter p strong { padding-left: 1.5em; }
-.entry .entryFooter .entryTags strong { background: transparent url(../img/tags.png) no-repeat scroll; }
-.entry .entryFooter .entryShortUrl strong { background: transparent url(../img/shorturl.png) no-repeat scroll; }
-.entry .entryFooter .entryComments strong { background: transparent url(../img/comments.png) no-repeat scroll; }
-.entry .entryHeader { background-color: #eeeeee; }
-.entry .entryFooter p strong { color: #999999; }
+.hentry .entry-header { margin-bottom: 1em; }
+.hentry .entry-header .entry-title { margin: 0; }
+.hentry .entry-header .entry-info { margin: 0; padding-left: 1.5em; background: transparent url(../img/category.png) no-repeat scroll; }
+.hentry .entry-body .entry-image { margin-top: -1.5em; }
+.hentry .entry-body .entry-image p img { border: 0; margin: 0 1.5em 1.5em 0; }
+.hentry .entry-footer p { margin-bottom: 0; }
+.hentry .entry-footer p strong { padding-left: 1.5em; }
+.hentry .entry-footer .entry-tags strong { background: transparent url(../img/tags.png) no-repeat scroll; }
+.hentry .entry-footer .entry-shorturl strong { background: transparent url(../img/shorturl.png) no-repeat scroll; }
+.hentry .entry-footer .entry-comments strong { background: transparent url(../img/comments.png) no-repeat scroll; }
+.hentry .entry-header { background-color: #eeeeee; }
+.hentry .entry-footer p strong { color: #999999; }
 
-ol#commentList li { float: left; }
-ol#commentList li.box1 { background-color: #eeeeee; }
-ol#commentList li.post-author { color: #999999; }
+ol#comment-list li { float: left; }
+ol#comment-list li.box1 { background-color: #eeeeee; }
+ol#comment-list li.post-author { color: #999999; }
