@@ -116,15 +116,15 @@
   <h3>{% trans "Pingbacks" %}</h3>
   {% with object.pingbacks as pingback_list %}
   {% if pingback_list.count %}
-  <ol id="pingbackList" class="span-16 last">
+  <ol id="pingback-list" class="span-15 last">
     {% for pingback in pingback_list %}
-    <li id="pingback_{{ pingback.pk }}" class="pingback {% cycle box1,box2 %} span-16 last">
-      <div class="pingback_body span-16 last">
-	<div class="span-16 last">
+    <li id="pingback_{{ pingback.pk }}" class="pingback {% cycle box1,box2 %} span-15 last">
+      <div class="pingback_body span-15 last">
+	<div class="span-15 last">
 	  <a href="{{ pingback.url }}">{{ pingback.user_name }}</a>
 	  {% trans "on date" %} {{ pingback.submit_date|date:"l d F Y" }}
 	</div>
-	<div class="span-16 last">
+	<div class="span-15 last">
 	  <cite>
 	    {{ pingback.comment }}
 	  </cite>
@@ -147,15 +147,15 @@
   <h3>{% trans "Trackbacks" %}</h3>
   {% with object.trackbacks as trackback_list %}
   {% if trackback_list.count %}
-  <ol id="trackbackList" class="span-16 last">
+  <ol id="trackback-list" class="span-15 last">
     {% for trackback in trackback_list %}
-    <li id="trackback_{{ trackback.pk }}" class="trackback {% cycle box1,box2 %} span-16 last">
-      <div class="trackback_body span-16 last">
-	<div class="span-16 last">
+    <li id="trackback_{{ trackback.pk }}" class="trackback {% cycle box1,box2 %} span-15 last">
+      <div class="trackback_body span-15 last">
+	<div class="span-15 last">
 	  <a href="{{ trackback.url }}">{{ trackback.user_name }}</a>
 	  {% trans "on date" %} {{ trackback.submit_date|date:"l d F Y" }}
 	</div>
-	<div class="span-16 last">
+	<div class="span-15 last">
 	  <cite>
 	    {{ trackback.comment }}
 	  </cite>
