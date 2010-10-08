@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="entry span-16 last">
+<div id="entry-{{ object.pk }}" class="hentry span-16 last">
   {% with object.html_content|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
@@ -21,10 +21,10 @@
 
 <hr />
 
-<div class="entryWidgets span-16 last">
+<div class="entry-widgets span-16 last">
   {% with object.next_entry as next_entry %}
   {% if next_entry %}
-  <div class="entryNext">
+  <div class="entry-next">
     <h3>{% trans "Next entry" %}</h3>
     <ul>
       <li>
@@ -38,7 +38,7 @@
   {% endwith %}
   {% with object.previous_entry as previous_entry %}
   {% if previous_entry %}
-  <div class="entryPrevious">
+  <div class="entry-previous">
     <h3>{% trans "Previous entry" %}</h3>
     <ul>
       <li>
@@ -51,7 +51,7 @@
   {% endif %}
   {% endwith %}
   {% if object.related_published_set %}
-  <div class="entryRelated">
+  <div class="entry-related">
     <h3>{% trans "Related entries" %}</h3>
     <ul>
       {% for entry in object.related_published_set %}
@@ -62,7 +62,7 @@
     </ul>
   </div>
   {% endif %}
-  <div class="entrySimilar">
+  <div class="entry-similar">
     <h3>{% trans "Similar entries" %}</h3>
     {% get_similar_entries 5 %}
   </div>

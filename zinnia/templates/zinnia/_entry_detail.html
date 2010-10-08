@@ -1,22 +1,25 @@
 {% load tagging_tags comments i18n %}
 
-<div class="entryHeader span-16 last">
-  <h2 class="entryTitle">
+<div class="entry-header span-16 last">
+  <h2 class="entry-title">
     <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
       {{ object.title }}
     </a>
   </h2>
-  <p class="entryInfo">
+  <p class="entry-info">
     {% trans "Written by" %}
     {% for author in object.authors.all %}
-    <span class="vcard">
+    <span class="vcard author">
       <a href="{% url zinnia_author_detail author %}" class="fn nickname url"
          title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">
         {{ author }}
       </a>
     </span>{% if not forloop.last %}, {% endif %}
     {% endfor %}
-    {% trans "on date" %} {{ object.creation_date|date:"d F Y"|capfirst }}
+    {% trans "on date" %}
+    <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">
+      {{ object.creation_date|date:"d F Y"|capfirst }}
+    </abbr>
     {% trans "in" %}
     {% for category in object.categories.all %}
     <a href="{{ category.get_absolute_url }}" title="{{ category }}" rel="tag category">
@@ -27,9 +30,9 @@
   </p>
 </div>
 
-<div class="entryBody span-16 last">
+<div class="entry-body span-16 last">
   {% if object.image %}
-  <div class="entryImage">
+  <div class="entry-image">
     <p>
       <a href="{{ object.get_absolute_url }}" rel="bookmark">
 	<img src="{{ object.image.url }}" alt="{{ object.title }}" class="left" />
@@ -37,13 +40,13 @@
     </p>
   </div>
   {% endif %}
-  <div class="entryContent">
+  <div class="entry-content">
     {{ object_content }}
   </div>
 </div>
 
-<div class="entryFooter">
-  <p class="entryTags span-16 last">
+<div class="entry-footer">
+  <p class="entry-tags span-16 last">
     <strong>{% trans "Tags" %}</strong> :
     {% tags_for_object object as tag_list %}
     {% for tag in tag_list %}
@@ -55,7 +58,7 @@
     {% endfor %}
   </p>
 
-  <p class="entryShortUrl span-16 last">
+  <p class="entry-shorturl span-16 last">
     <strong>{% trans "Short url" %}</strong> :
     {% if object.short_url %}
     <a href="{{ object.short_url }}" title="{{ object.title }}">
@@ -66,7 +69,7 @@
     {% endif %}
   </p>
 
-  <p class="entryComments span-16 last">
+  <p class="entry-comments span-16 last">
     <strong>{% trans "Discussions" %}</strong> :
     {% with object.comments.count as comment_count %}
     {% if comment_count %}

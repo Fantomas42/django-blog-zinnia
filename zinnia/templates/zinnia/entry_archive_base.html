@@ -20,17 +20,17 @@
 <p>{{ category.description|striptags|safe }}</p>
 {% endif %}
 {% endif %}
- 
+
 {% if tag %}
 <h1>{% trans "Tag" %} : {{ tag }}</h1>
 {% endif %}
- 
+
 {% if author %}
 <h1>{% blocktrans with author.username as author %}Entries by {{ author }}{% endblocktrans %}</h1>
 {% endif %}
 
 {% for object in object_list %}
-<div class="entry span-16 last">
+<div id="entry-{{ object.pk }}" class="hentry span-16 last">
   {% with object.html_content|truncatewords_html:100|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
@@ -56,16 +56,16 @@
     {% ifequal page_obj.number page %}
     <strong>{{ page }}</strong>
     {% else %}
-    <a href="?page={{ page }}" 
+    <a href="?page={{ page }}"
        title="{% trans "Entries page" %} {{ page }}">{{ page }}</a>
     {% endifequal%}
   </span>
   {% endfor %}
   {% if page_obj.has_next %}
   <span class="next">
-    <a href="?page={{ page_obj.next_page_number }}" 
+    <a href="?page={{ page_obj.next_page_number }}"
        title="{% trans "More old entries" %}">&raquo;</a>
-  </span>  
+  </span>
   {% endif %}
 </div>
 {% endif %}
