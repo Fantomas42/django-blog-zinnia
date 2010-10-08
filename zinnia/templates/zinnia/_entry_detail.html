@@ -2,7 +2,7 @@
 
 <div class="entryHeader span-16 last">
   <h2 class="entryTitle">
-    <a href="{{ object.get_absolute_url }}" title="{{ object.title }}">
+    <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
       {{ object.title }}
     </a>
   </h2>
@@ -31,7 +31,7 @@
   {% if object.image %}
   <div class="entryImage">
     <p>
-      <a href="{{ object.get_absolute_url }}">
+      <a href="{{ object.get_absolute_url }}" rel="bookmark">
 	<img src="{{ object.image.url }}" alt="{{ object.title }}" class="left" />
       </a>
     </p>

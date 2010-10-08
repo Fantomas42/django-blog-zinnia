@@ -13,7 +13,7 @@
   <ul>
     {% for entry in category.entries_published_set.all %}
     <li>
-      <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
+      <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
       {% with entry.comments.count as comment_count %}
       - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
       {% endwith %}
@@ -32,7 +32,7 @@
   <ul>
     {% for entry in entries %}
     <li>
-      <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
+      <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
       - {{ entry.creation_date|date:"d b Y" }}
       {% with entry.comments.count as comment_count %}
       - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
@@ -50,7 +50,7 @@
   <h3>{% trans "Categories" %}</h3>
   {% for category, structure in categories|tree_info %}
     {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
-      <a href="{{ category.get_absolute_url }}" title="{{ category.title }}">{{ category.title }}</a> 
+      <a href="{{ category.get_absolute_url }}" title="{{ category.title }}">{{ category.title }}</a>
       -
       {% blocktrans count category.entries_published_set.count as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     {% for level in structure.closed_levels %}</li></ul>{% endfor %}

@@ -2,7 +2,7 @@
 <ul>
   {% for entry in entries %}
   <li>
-    <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title }}</a>
+    <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
     <br />
     {% with entry.comments.count as comment_count %}
     <a href="{{ entry.get_absolute_url }}#comments" title="{{ entry.title }}">{{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}</a>

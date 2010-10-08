@@ -13,6 +13,7 @@
     <meta name="engine" content="Zinnia {{ ZINNIA_VERSION }}" />
     {% block meta %}{% endblock %}
     <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="home" href="{% url zinnia_entry_archive_index %}" />
     <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ ZINNIA_MEDIA_URL }}css/screen.css" />
     <link rel="stylesheet" type="text/css" media="print" href="{{ ZINNIA_MEDIA_URL }}css/print.css" />
     <!--[if lt IE 8]>
@@ -30,7 +31,7 @@
   <body id="zinnia">
     <div class="container">
       <div id="header" class="span-24 last">
-	<div class="top-navigation">	  
+	<div class="top-navigation">
 	  <a href="{% url zinnia_sitemap %}" title="{% trans "Sitemap" %}" class="link sitemap">
 	    {% trans "Sitemap" %}
 	  </a> |
@@ -39,7 +40,7 @@
 	  </a>
 	</div>
 	<h1>
-	  <a href="{% url zinnia_entry_archive_index %}" title="Zinnia's Blog">
+	  <a href="{% url zinnia_entry_archive_index %}" title="Zinnia's Blog" rel="home">
 	    Zinnia's Blog
 	  </a>
 	</h1>

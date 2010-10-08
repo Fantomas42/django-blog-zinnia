@@ -5,11 +5,11 @@
 
 {% block content %}
 {{ block.super }}
-<!--<ul>  
+<!--<ul>
   {% for date in date_list %}
     <li>
-      <a href="{% url zinnia_entry_archive_year date|date:"Y" %}">{{ date|date:"Y"|capfirst }}</a>
-    </li>  
-  {% endfor %}  
+      <a href="{% url zinnia_entry_archive_year date|date:"Y" %}" rel="archives">{{ date|date:"Y"|capfirst }}</a>
+    </li>
+  {% endfor %}
 </ul>-->
 {% endblock %}
