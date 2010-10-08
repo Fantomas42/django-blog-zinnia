@@ -30,8 +30,8 @@ def entry_trackback(request, slug):
         if not error:
             comment, created = Comment.objects.get_or_create(
                 content_type=ContentType.objects.get_for_model(Entry),
-                object_pk=entry.pk, user_url=url, site=site,
-                defaults={'comment': excerpt, 'user_name': blog_name})
+                object_pk=entry.pk, site=site, user_url=url,
+                user_name=blog_name, defaults={'comment': excerpt})
             if created:
                 user = entry.authors.all()[0]
                 comment.flags.create(user=user, flag='trackback')
