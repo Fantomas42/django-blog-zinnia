@@ -69,7 +69,14 @@ ZINNIA_MEDIA_URL
 ZINNIA_MAIL_COMMENT
   **Default :** True
 
-  Boolean used for sending an email when a comment is posted or not.
+  Boolean used for sending an email to managers when a comment 
+  is posted or not. 
+
+ZINNIA_MAIL_COMMENT_REPLY
+  **Default :** False
+
+  Boolean used for sending an email to comment's authors 
+  when a new comment is posted.
 
 ZINNIA_AKISMET_COMMENT
   **Default :** True

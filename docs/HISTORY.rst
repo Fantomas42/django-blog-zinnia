@@ -1,3 +1,9 @@
+0.8
+===
+
+* Using Microformats
+* Mails for comment reply
+
 0.7
 ===
 

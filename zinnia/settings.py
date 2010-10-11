@@ -18,7 +18,9 @@ WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
                   'tinymce' in settings.INSTALLED_APPS and 'tinymce' or 'wymeditor')
 
 MAIL_COMMENT = getattr(settings, 'ZINNIA_MAIL_COMMENT', True)
+MAIL_COMMENT_REPLY = getattr(settings, 'ZINNIA_MAIL_COMMENT_REPLY', False)
 AKISMET_COMMENT = getattr(settings, 'ZINNIA_AKISMET_COMMENT', True)
+
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads')
 
 PROTOCOL = getattr(settings, 'ZINNIA_PROTOCOL', 'http')
