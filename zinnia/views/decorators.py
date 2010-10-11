@@ -39,7 +39,8 @@ def password(request, entry):
 
 def protect_entry(view):
     """Decorator performing a security check if needed
-    around the generic.date_based.entry_detail view"""
+    around the generic.date_based.entry_detail view
+    and specify the template used to render the entry"""
 
     def wrap(*ka, **kw):
         request = ka[0]
@@ -53,6 +54,6 @@ def protect_entry(view):
         if entry.password and entry.password != \
                request.session.get('zinnia_entry_%s_password' % entry.pk):
             return password(request, entry)
-        return view(*ka, **kw)
+        return view(*ka, template_name=entry.template, **kw)
 
     return wrap

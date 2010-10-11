@@ -19,6 +19,7 @@ from tagging.fields import TagField
 
 from zinnia.settings import USE_BITLY
 from zinnia.settings import UPLOAD_TO
+from zinnia.settings import ENTRY_TEMPLATES
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
@@ -108,6 +109,12 @@ class Entry(models.Model):
                                          help_text=_('only authenticated users can view the entry'))
     password = models.CharField(_('password'), max_length=50, blank=True,
                                 help_text=_('protect the entry with a password'))
+
+    template = models.CharField(_('template'), max_length=250,
+                                choices=[('zinnia/entry_detail.html',
+                                          _('Default template'))] +
+                                ENTRY_TEMPLATES,
+                                help_text=_('template used to display the entry'))
 
     objects = models.Manager()
     published = EntryPublishedManager()

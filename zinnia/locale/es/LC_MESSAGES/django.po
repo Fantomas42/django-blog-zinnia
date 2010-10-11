@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-11 10:28-0500\n"
+"POT-Creation-Date: 2010-10-11 20:08+0200\n"
 "PO-Revision-Date: 2010-09-01 18:36+0100\n"
 "Last-Translator: Esau Rodriguez <esau.rodriguez@galotecnia.com>\n"
 "Language-Team: Español <kde-i18n-doc@kde.org>\n"
@@ -113,132 +113,146 @@ msgstr ""
 msgid "The latest trackbacks for the entry %s"
 msgstr "Los últimos comentarios de la entrada %s"
 
-#: models.py:33 models.py:73 admin/entry.py:61
+#: models.py:34 models.py:74 admin/entry.py:62
 msgid "title"
 msgstr "título"
 
-#: models.py:34 models.py:86
+#: models.py:35 models.py:87
 msgid "used for publication"
 msgstr "usado para la publicación"
 
-#: models.py:36
+#: models.py:37
 msgid "description"
 msgstr "descripción"
 
-#: models.py:39 admin/forms.py:13
+#: models.py:40 admin/forms.py:13
 #, fuzzy
 msgid "parent category"
 msgstr "categoría"
 
-#: models.py:61
+#: models.py:62
 msgid "category"
 msgstr "categoría"
 
-#: models.py:62 models.py:82 admin/forms.py:31 plugins/models.py:18
+#: models.py:63 models.py:83 admin/forms.py:31 plugins/models.py:18
 msgid "categories"
 msgstr "categorías"
 
-#: models.py:69
+#: models.py:70
 msgid "draft"
 msgstr "borrador"
 
-#: models.py:70
+#: models.py:71
 msgid "hidden"
 msgstr "oculto"
 
-#: models.py:71
+#: models.py:72
 msgid "published"
 msgstr "publicado"
 
-#: models.py:75
+#: models.py:76
 msgid "image"
 msgstr "imagen"
 
-#: models.py:76
+#: models.py:77
 msgid "used for illustration"
 msgstr "Utilizado como ilustración"
 
-#: models.py:77
+#: models.py:78
 msgid "content"
 msgstr "contenido"
 
-#: models.py:78
+#: models.py:79
 msgid "excerpt"
 msgstr "extracto"
 
-#: models.py:79
+#: models.py:80
 msgid "optional element"
 msgstr "Elemento opcional"
 
-#: models.py:81 plugins/models.py:22
+#: models.py:82 plugins/models.py:22
 msgid "tags"
 msgstr "tags"
 
-#: models.py:83
+#: models.py:84
 msgid "related entries"
 msgstr "articulos relacionados"
 
-#: models.py:90 plugins/models.py:20
+#: models.py:91 plugins/models.py:20
 msgid "authors"
 msgstr "autores"
 
-#: models.py:93
+#: models.py:94
 msgid "comment enabled"
 msgstr "commentarios habilitados ?"
 
-#: models.py:94
+#: models.py:95
 msgid "linkback enabled"
 msgstr ""
 
-#: models.py:96
+#: models.py:97
 msgid "creation date"
 msgstr "fecha de creación"
 
-#: models.py:97
+#: models.py:98
 msgid "last update"
 msgstr "última actualización"
 
-#: models.py:98
+#: models.py:99
 msgid "start publication"
 msgstr "comienzo de la publicación"
 
-#: models.py:99
+#: models.py:100
 msgid "date start publish"
 msgstr "fecha de comienzo de la publicación"
 
-#: models.py:101
+#: models.py:102
 msgid "end publication"
 msgstr "fin de la publicación"
 
-#: models.py:102
+#: models.py:103
 msgid "date end publish"
 msgstr "Fecha de cierre de la publicación"
 
-#: models.py:105
+#: models.py:106
 msgid "sites publication"
 msgstr "publicaciones del sitio"
 
-#: models.py:107
+#: models.py:108
 msgid "login required"
 msgstr ""
 
-#: models.py:108
+#: models.py:109
 msgid "only authenticated users can view the entry"
 msgstr ""
 
-#: models.py:109
+#: models.py:110
 msgid "password"
 msgstr ""
 
-#: models.py:110
+#: models.py:111
 msgid "protect the entry with a password"
 msgstr ""
 
-#: models.py:205
+#: models.py:113 plugins/models.py:26 plugins/models.py:40
+msgid "template"
+msgstr "plantilla"
+
+#: models.py:115
+#, fuzzy
+msgid "Default template"
+msgstr "plantilla"
+
+#: models.py:117
+#, fuzzy
+msgid "template used to display the entry"
+msgstr "Plantilla utilizada para mostrar el plugin "
+
+#: models.py:212
 msgid "entry"
 msgstr "entrada"
 
-#: models.py:206 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
+#: models.py:213 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
 #: plugins/models.py:39 templates/zinnia/base.html:32
 msgid "entries"
 msgstr "entradas"
@@ -260,101 +274,101 @@ msgstr "Contenido"
 msgid "Options"
 msgstr "Opciones"
 
-#: admin/entry.py:30
+#: admin/entry.py:31
 msgid "Privacy"
 msgstr ""
 
-#: admin/entry.py:32
+#: admin/entry.py:33
 msgid "Discussion"
 msgstr ""
 
-#: admin/entry.py:33
+#: admin/entry.py:34
 #, fuzzy
 msgid "Publication"
 msgstr "fin de la publicación"
 
-#: admin/entry.py:54
+#: admin/entry.py:55
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i palabras)"
 
-#: admin/entry.py:58
+#: admin/entry.py:59
 #, python-format
 msgid "%(title)s (%(comments)i comments)"
 msgstr "%(title)s (%(comments)i comentarios)"
 
-#: admin/entry.py:73
+#: admin/entry.py:74
 msgid "author(s)"
 msgstr "autor(es)"
 
-#: admin/entry.py:85
+#: admin/entry.py:86
 msgid "category(s)"
 msgstr "Categoría(s)"
 
-#: admin/entry.py:96
+#: admin/entry.py:97
 msgid "tag(s)"
 msgstr "Tag(s)"
 
-#: admin/entry.py:103
+#: admin/entry.py:104
 msgid "site(s)"
 msgstr "Sitio(s)"
 
-#: admin/entry.py:109
+#: admin/entry.py:110
 msgid "is actual"
 msgstr "Es actual?"
 
-#: admin/entry.py:115
+#: admin/entry.py:116
 msgid "is visible"
 msgstr "Visible ?"
 
-#: admin/entry.py:119
+#: admin/entry.py:120
 #, python-format
 msgid "<a href=\"%s\" target=\"blank\">View</a>"
 msgstr "<a href=\"%s\" target=\"blank\">Vista</a>"
 
-#: admin/entry.py:121
+#: admin/entry.py:122
 msgid "View on site"
 msgstr "Ver en el sitio"
 
-#: admin/entry.py:126 templates/zinnia/_entry_detail.html:68
+#: admin/entry.py:127 templates/zinnia/_entry_detail.html:68
 msgid "Unavailable"
 msgstr "No disponible"
 
-#: admin/entry.py:130
+#: admin/entry.py:131
 msgid "short url"
 msgstr "url corta"
 
-#: admin/entry.py:184
+#: admin/entry.py:185
 msgid "Set the entries to the user"
 msgstr "Adquirir los artículos"
 
-#: admin/entry.py:189
+#: admin/entry.py:190
 msgid "Set entries selected as published"
 msgstr "Publicar las entradas seleccionadas"
 
-#: admin/entry.py:194
+#: admin/entry.py:195
 msgid "Set entries selected as hidden"
 msgstr "Marcar las entradas seleccionadas como ocultas"
 
-#: admin/entry.py:207
+#: admin/entry.py:208
 msgid "Tweet entries selected"
 msgstr "Twittear las entradas seleccionadas"
 
-#: admin/entry.py:212
+#: admin/entry.py:213
 msgid "Close the comments for selected entries"
 msgstr "Cerrar los comentarios para las entradas seleccionadas"
 
-#: admin/entry.py:217
+#: admin/entry.py:218
 #, fuzzy
 msgid "Close the linkbacks for selected entries"
 msgstr "Cerrar los comentarios para las entradas seleccionadas"
 
-#: admin/entry.py:231
+#: admin/entry.py:232
 #, fuzzy, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%i directorios pingueados correctamente"
 
-#: admin/entry.py:233
+#: admin/entry.py:234
 msgid "Ping Directories for selected entries"
 msgstr "Ping directorios para las entradas seleccionadas"
 
@@ -424,10 +438,6 @@ msgstr "Detalle de la entrada"
 msgid "number of entries"
 msgstr "Número de entradas"
 
-#: plugins/models.py:26 plugins/models.py:40
-msgid "template"
-msgstr "plantilla"
-
 #: plugins/models.py:28 plugins/models.py:42
 msgid "Template used to display the plugin"
 msgstr "Plantilla utilizada para mostrar el plugin "
@@ -436,31 +446,6 @@ msgstr "Plantilla utilizada para mostrar el plugin "
 #, python-format
 msgid "%s entries"
 msgstr "%s entradas"
-
-#: templates/comments/comment_notification_email.txt:2
-#: templates/comments/comment_reply_email.txt:2
-#: templates/zinnia/entry_list.html:4
-msgid "Author"
-msgstr "Autor"
-
-#: templates/comments/comment_notification_email.txt:3
-msgid "Email"
-msgstr ""
-
-#: templates/comments/comment_notification_email.txt:4
-msgid "IP"
-msgstr ""
-
-#: templates/comments/comment_notification_email.txt:6
-#: templates/comments/comment_reply_email.txt:4
-#, fuzzy
-msgid "Comment"
-msgstr "Comentarios"
-
-#: templates/comments/comment_reply_email.txt:7
-#, fuzzy
-msgid "View this comment"
-msgstr "Previsualización del comentario"
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
@@ -745,6 +730,10 @@ msgid "Category"
 msgstr "Categoría"
 
 #: templates/zinnia/entry_list.html:4
+msgid "Author"
+msgstr "Autor"
+
+#: templates/zinnia/entry_list.html:4
 msgid "Page"
 msgstr "Página"
 
@@ -884,6 +873,18 @@ msgstr ""
 #, fuzzy
 msgid "No title"
 msgstr "título"
+
+#, fuzzy
+#~ msgid "template name"
+#~ msgstr "plantilla"
+
+#, fuzzy
+#~ msgid "Comment"
+#~ msgstr "Comentarios"
+
+#, fuzzy
+#~ msgid "View this comment"
+#~ msgstr "Previsualización del comentario"
 
 #~ msgid "Not yet entries."
 #~ msgstr "No hay entradas"

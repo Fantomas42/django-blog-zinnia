@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-11 10:28-0500\n"
+"POT-Creation-Date: 2010-10-11 20:08+0200\n"
 "PO-Revision-Date: 2010-07-03 HO:MI+ZONE\n"
 "Last-Translator: Pavel Kiper<iwtbarh@gmail.com>\n"
 "Language-Team: Russian <iwtbarh@gmail.com>\n"
@@ -106,133 +106,145 @@ msgstr "Комментирование отключено."
 msgid "The latest trackbacks for the entry %s"
 msgstr "Последние комментарии к %s"
 
-#: models.py:33 models.py:73 admin/entry.py:61
+#: models.py:34 models.py:74 admin/entry.py:62
 msgid "title"
 msgstr "заголовок"
 
-#: models.py:34 models.py:86
+#: models.py:35 models.py:87
 msgid "used for publication"
 msgstr "используется при публикации"
 
-#: models.py:36
+#: models.py:37
 msgid "description"
 msgstr "описание"
 
-#: models.py:39 admin/forms.py:13
+#: models.py:40 admin/forms.py:13
 #, fuzzy
 msgid "parent category"
 msgstr "категория"
 
-#: models.py:61
+#: models.py:62
 msgid "category"
 msgstr "категория"
 
-#: models.py:62 models.py:82 admin/forms.py:31 plugins/models.py:18
+#: models.py:63 models.py:83 admin/forms.py:31 plugins/models.py:18
 msgid "categories"
 msgstr "категории"
 
-#: models.py:69
+#: models.py:70
 msgid "draft"
 msgstr "черновик"
 
-#: models.py:70
+#: models.py:71
 msgid "hidden"
 msgstr "скрыта"
 
-#: models.py:71
+#: models.py:72
 msgid "published"
 msgstr "опубликованна"
 
-#: models.py:75
+#: models.py:76
 msgid "image"
 msgstr "изображение"
 
-#: models.py:76
+#: models.py:77
 msgid "used for illustration"
 msgstr "используется для иллюстрации"
 
-#: models.py:77
+#: models.py:78
 msgid "content"
 msgstr "содержимое"
 
-#: models.py:78
+#: models.py:79
 msgid "excerpt"
 msgstr "выдержка"
 
-#: models.py:79
+#: models.py:80
 msgid "optional element"
 msgstr "необязательный элемент"
 
-#: models.py:81 plugins/models.py:22
+#: models.py:82 plugins/models.py:22
 #, fuzzy
 msgid "tags"
 msgstr "тэги"
 
-#: models.py:83
+#: models.py:84
 msgid "related entries"
 msgstr "связанные записи"
 
-#: models.py:90 plugins/models.py:20
+#: models.py:91 plugins/models.py:20
 msgid "authors"
 msgstr "авторы"
 
-#: models.py:93
+#: models.py:94
 msgid "comment enabled"
 msgstr "комментирование включено"
 
-#: models.py:94
+#: models.py:95
 msgid "linkback enabled"
 msgstr ""
 
-#: models.py:96
+#: models.py:97
 msgid "creation date"
 msgstr "дата создания"
 
-#: models.py:97
+#: models.py:98
 msgid "last update"
 msgstr "последнее обновление"
 
-#: models.py:98
+#: models.py:99
 msgid "start publication"
 msgstr "дата публикации"
 
-#: models.py:99
+#: models.py:100
 msgid "date start publish"
 msgstr "когда следует опубликовать запись"
 
-#: models.py:101
+#: models.py:102
 msgid "end publication"
 msgstr "дата прекращения"
 
-#: models.py:102
+#: models.py:103
 msgid "date end publish"
 msgstr "когда следует прекратить публикацию"
 
-#: models.py:105
+#: models.py:106
 msgid "sites publication"
 msgstr "сайты для публикации"
 
-#: models.py:107
+#: models.py:108
 msgid "login required"
 msgstr ""
 
-#: models.py:108
+#: models.py:109
 msgid "only authenticated users can view the entry"
 msgstr ""
 
-#: models.py:109
+#: models.py:110
 msgid "password"
 msgstr ""
 
-#: models.py:110
+#: models.py:111
 msgid "protect the entry with a password"
 msgstr ""
 
-#: models.py:205
+#: models.py:113 plugins/models.py:26 plugins/models.py:40
+msgid "template"
+msgstr ""
+
+#: models.py:115
+msgid "Default template"
+msgstr ""
+
+#: models.py:117
+msgid "template used to display the entry"
+msgstr ""
+
+#: models.py:212
 msgid "entry"
 msgstr "запись"
 
-#: models.py:206 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
+#: models.py:213 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
 #: plugins/models.py:39 templates/zinnia/base.html:32
 msgid "entries"
 msgstr "записи"
@@ -254,101 +266,101 @@ msgstr "Содержимое"
 msgid "Options"
 msgstr "Опции"
 
-#: admin/entry.py:30
+#: admin/entry.py:31
 msgid "Privacy"
 msgstr ""
 
-#: admin/entry.py:32
+#: admin/entry.py:33
 msgid "Discussion"
 msgstr ""
 
-#: admin/entry.py:33
+#: admin/entry.py:34
 #, fuzzy
 msgid "Publication"
 msgstr "дата прекращения"
 
-#: admin/entry.py:54
+#: admin/entry.py:55
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr ""
 
-#: admin/entry.py:58
+#: admin/entry.py:59
 #, python-format
 msgid "%(title)s (%(comments)i comments)"
 msgstr ""
 
-#: admin/entry.py:73
+#: admin/entry.py:74
 msgid "author(s)"
 msgstr "автор(ы)"
 
-#: admin/entry.py:85
+#: admin/entry.py:86
 msgid "category(s)"
 msgstr "категории"
 
-#: admin/entry.py:96
+#: admin/entry.py:97
 msgid "tag(s)"
 msgstr "тэги"
 
-#: admin/entry.py:103
+#: admin/entry.py:104
 msgid "site(s)"
 msgstr "сайты"
 
-#: admin/entry.py:109
+#: admin/entry.py:110
 msgid "is actual"
 msgstr "актуальна"
 
-#: admin/entry.py:115
+#: admin/entry.py:116
 msgid "is visible"
 msgstr "видима"
 
-#: admin/entry.py:119
+#: admin/entry.py:120
 #, python-format
 msgid "<a href=\"%s\" target=\"blank\">View</a>"
 msgstr "<a href=\"%s\" target=\"blank\">Смотреть</a>"
 
-#: admin/entry.py:121
+#: admin/entry.py:122
 msgid "View on site"
 msgstr "Смотреть на сайте"
 
-#: admin/entry.py:126 templates/zinnia/_entry_detail.html:68
+#: admin/entry.py:127 templates/zinnia/_entry_detail.html:68
 msgid "Unavailable"
 msgstr "Недоступно"
 
-#: admin/entry.py:130
+#: admin/entry.py:131
 msgid "short url"
 msgstr "короткая ссылка"
 
-#: admin/entry.py:184
+#: admin/entry.py:185
 msgid "Set the entries to the user"
 msgstr "Пристоить записи пользователю"
 
-#: admin/entry.py:189
+#: admin/entry.py:190
 msgid "Set entries selected as published"
 msgstr "Пометить выделенные записи как опубликованные"
 
-#: admin/entry.py:194
+#: admin/entry.py:195
 msgid "Set entries selected as hidden"
 msgstr "Пометить выделенные записи как скрытые"
 
-#: admin/entry.py:207
+#: admin/entry.py:208
 msgid "Tweet entries selected"
 msgstr "Отправить выбранные записи в твиттер"
 
-#: admin/entry.py:212
+#: admin/entry.py:213
 msgid "Close the comments for selected entries"
 msgstr "Закрыть коментирование для выбранных записей"
 
-#: admin/entry.py:217
+#: admin/entry.py:218
 #, fuzzy
 msgid "Close the linkbacks for selected entries"
 msgstr "Закрыть коментирование для выбранных записей"
 
-#: admin/entry.py:231
+#: admin/entry.py:232
 #, fuzzy, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%i каталогов успешно оповещены."
 
-#: admin/entry.py:233
+#: admin/entry.py:234
 msgid "Ping Directories for selected entries"
 msgstr "Оповестить каталоги о выбранных записях"
 
@@ -418,10 +430,6 @@ msgstr ""
 msgid "number of entries"
 msgstr "количество записей"
 
-#: plugins/models.py:26 plugins/models.py:40
-msgid "template"
-msgstr ""
-
 #: plugins/models.py:28 plugins/models.py:42
 msgid "Template used to display the plugin"
 msgstr ""
@@ -430,31 +438,6 @@ msgstr ""
 #, python-format
 msgid "%s entries"
 msgstr "%s записей"
-
-#: templates/comments/comment_notification_email.txt:2
-#: templates/comments/comment_reply_email.txt:2
-#: templates/zinnia/entry_list.html:4
-msgid "Author"
-msgstr "Автор"
-
-#: templates/comments/comment_notification_email.txt:3
-msgid "Email"
-msgstr ""
-
-#: templates/comments/comment_notification_email.txt:4
-msgid "IP"
-msgstr ""
-
-#: templates/comments/comment_notification_email.txt:6
-#: templates/comments/comment_reply_email.txt:4
-#, fuzzy
-msgid "Comment"
-msgstr "Комментарии"
-
-#: templates/comments/comment_reply_email.txt:7
-#, fuzzy
-msgid "View this comment"
-msgstr "Предварительный просмотр комментария"
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
@@ -783,6 +766,10 @@ msgid "Category"
 msgstr "Категория"
 
 #: templates/zinnia/entry_list.html:4
+msgid "Author"
+msgstr "Автор"
+
+#: templates/zinnia/entry_list.html:4
 msgid "Page"
 msgstr "Страница"
 
@@ -935,6 +922,14 @@ msgstr ""
 #, fuzzy
 msgid "No title"
 msgstr "заголовок"
+
+#, fuzzy
+#~ msgid "Comment"
+#~ msgstr "Комментарии"
+
+#, fuzzy
+#~ msgid "View this comment"
+#~ msgstr "Предварительный просмотр комментария"
 
 #~ msgid "Not yet entries."
 #~ msgstr "Еще нет записей."

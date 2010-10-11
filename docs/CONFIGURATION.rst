@@ -22,6 +22,12 @@ ZINNIA_ALLOW_FUTURE
 
   Used for allowing archives views in the future.
 
+ZINNIA_ENTRY_TEMPLATES
+  **Default :** ()
+
+  List of tuple for extending the list of templates availables for
+  rendering the entry.
+
 ZINNIA_ADVANCED_SEARCH
   **Default :** True
 
@@ -69,13 +75,13 @@ ZINNIA_MEDIA_URL
 ZINNIA_MAIL_COMMENT
   **Default :** True
 
-  Boolean used for sending an email to managers when a comment 
-  is posted or not. 
+  Boolean used for sending an email to managers when a comment
+  is posted or not.
 
 ZINNIA_MAIL_COMMENT_REPLY
   **Default :** False
 
-  Boolean used for sending an email to comment's authors 
+  Boolean used for sending an email to comment's authors
   when a new comment is posted.
 
 ZINNIA_AKISMET_COMMENT
