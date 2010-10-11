@@ -39,6 +39,7 @@ class EntryAdmin(admin.ModelAdmin):
                     'comment_enabled', 'pingback_enabled',
                     'get_is_actual', 'get_is_visible', 'get_link',
                     'get_short_url', 'creation_date')
+    radio_fields = {'template': admin.VERTICAL}
     filter_horizontal = ('categories', 'authors', 'related')
     prepopulated_fields = {'slug': ('title', )}
     search_fields = ('title', 'excerpt', 'content', 'tags')
