@@ -1,4 +1,6 @@
 """Plugins for CMS"""
+import itertools
+
 from django.utils.translation import ugettext as _
 
 from tagging.models import TaggedItem
@@ -19,11 +21,32 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
     name = _('Latest entries')
     render_template = 'zinnia/cms/entry_list.html'
     filter_horizontal = ['categories', 'authors', 'tags']
-    fieldsets = ((None, {'fields': ('number_of_entries', 'template_to_render')}),
-                 (_('Sorting'), {'fields': ('categories', 'authors', 'tags'),
-                                 'classes': ('collapse',)}),)
+    fieldsets = (
+        (None, {
+            'fields': (
+                'number_of_entries',
+                'template_to_render'
+            )
+        }),
+        (_('Sorting'), {
+            'fields': (
+                'categories',
+                'authors',
+                'tags'
+            ),
+            'classes': (
+                'collapse',
+            )
+        }),
+        (_('Advanced'), {
+            'fields': (
+                'subcategories',
+            ),
+        }),
+    )
+    
     text_enabled = True
-
+    
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == 'authors':
             kwargs['queryset'] = authors_published()
@@ -34,9 +57,14 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
 
     def render(self, context, instance, placeholder):
         entries = Entry.published.all()
-
+        
         if instance.categories.count():
-            entries = entries.filter(categories__in=instance.categories.all())
+            cats = instance.categories.all()
+            
+            if instance.subcategories:
+                cats = itertools.chain(cats, *[c.get_descendants() for c in cats])
+            
+            entries = entries.filter(categories__in=cats)
         if instance.authors.count():
             entries = entries.filter(authors__in=instance.authors.all())
         if instance.tags.count():
