@@ -54,6 +54,7 @@ def protect_entry(view):
         if entry.password and entry.password != \
                request.session.get('zinnia_entry_%s_password' % entry.pk):
             return password(request, entry)
-        return view(*ka, template_name=entry.template, **kw)
+        kw['template_name'] = entry.template
+        return view(*ka, **kw)
 
     return wrap
