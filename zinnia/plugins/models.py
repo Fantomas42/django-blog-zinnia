@@ -17,6 +17,7 @@ class LatestEntriesPlugin(CMSPlugin):
     """CMS Plugin for displaying latest entries"""
     categories = models.ManyToManyField(Category, verbose_name=_('categories'),
                                         blank=True, null=True)
+    subcategories = models.BooleanField(default=True, verbose_name=_('include subcategories'))
     authors = models.ManyToManyField(User, verbose_name=_('authors'),
                                      blank=True, null=True)
     tags = models.ManyToManyField(Tag, verbose_name=_('tags'),
