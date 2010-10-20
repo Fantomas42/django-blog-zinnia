@@ -427,9 +427,12 @@ class ZinniaViewsTestCase(TestCase):
             response = self.client.get('/2010/01/01/my-test-entry/')
             self.assertEquals(response.status_code, 404)
 
+        entry.template = 'zinnia/_entry_detail.html'
+        entry.save()
         entry.sites.add(Site.objects.get_current())
         response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'zinnia/_entry_detail.html')
 
     def test_zinnia_entry_channel(self):
         self.check_publishing_context('/channel-test/', 2, 3)
