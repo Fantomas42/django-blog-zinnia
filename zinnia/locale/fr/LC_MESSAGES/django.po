@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-11 20:08+0200\n"
-"PO-Revision-Date: 2010-10-11 20:09+0100\n"
+"POT-Creation-Date: 2010-10-21 20:28+0200\n"
+"PO-Revision-Date: 2010-10-21 20:29+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: feeds.py:88
-#: plugins/cms_plugins.py:19
+#: plugins/cms_plugins.py:21
 #: templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries"
@@ -177,7 +177,7 @@ msgid "optional element"
 msgstr "Elément optionnel."
 
 #: models.py:82
-#: plugins/models.py:22
+#: plugins/models.py:23
 msgid "tags"
 msgstr "tags"
 
@@ -186,7 +186,7 @@ msgid "related entries"
 msgstr "articles associés"
 
 #: models.py:91
-#: plugins/models.py:20
+#: plugins/models.py:21
 msgid "authors"
 msgstr "auteurs"
 
@@ -243,8 +243,8 @@ msgid "protect the entry with a password"
 msgstr "Protège l'article avec un mot de passe."
 
 #: models.py:113
-#: plugins/models.py:26
-#: plugins/models.py:40
+#: plugins/models.py:27
+#: plugins/models.py:41
 msgid "template"
 msgstr "modèle"
 
@@ -261,9 +261,9 @@ msgid "entry"
 msgstr "article"
 
 #: models.py:213
-#: plugins/cms_plugins.py:17
-#: plugins/cms_plugins.py:56
-#: plugins/models.py:39
+#: plugins/cms_plugins.py:19
+#: plugins/cms_plugins.py:84
+#: plugins/models.py:40
 #: templates/zinnia/base.html:32
 msgid "entries"
 msgstr "articles"
@@ -285,15 +285,15 @@ msgstr "Contenu"
 msgid "Options"
 msgstr "Options"
 
-#: admin/entry.py:31
+#: admin/entry.py:30
 msgid "Privacy"
 msgstr "Confidentialité"
 
-#: admin/entry.py:33
+#: admin/entry.py:32
 msgid "Discussion"
 msgstr "Discussion"
 
-#: admin/entry.py:34
+#: admin/entry.py:33
 msgid "Publication"
 msgstr "Publication"
 
@@ -394,11 +394,15 @@ msgstr "Une catégorie ne peut être parente d'elle même."
 msgid "Zinnia App Hook"
 msgstr "Application Zinnia"
 
-#: plugins/cms_plugins.py:23
+#: plugins/cms_plugins.py:31
 msgid "Sorting"
 msgstr "Répartition"
 
-#: plugins/cms_plugins.py:58
+#: plugins/cms_plugins.py:41
+msgid "Advanced"
+msgstr "Avancé"
+
+#: plugins/cms_plugins.py:86
 msgid "Selected entries"
 msgstr "Selection d'articles"
 
@@ -448,20 +452,47 @@ msgstr "Article en liste (par défaut)"
 msgid "Entry detailed"
 msgstr "Article détaillé"
 
-#: plugins/models.py:25
+#: plugins/models.py:20
+msgid "include subcategories"
+msgstr "inclure les sous-catégories ?"
+
+#: plugins/models.py:26
 msgid "number of entries"
 msgstr "nombre d'articles"
 
-#: plugins/models.py:28
-#: plugins/models.py:42
+#: plugins/models.py:29
+#: plugins/models.py:43
 msgid "Template used to display the plugin"
 msgstr "Modèle utilisé pour afficher le plugin."
 
-#: plugins/models.py:35
-#: plugins/models.py:49
+#: plugins/models.py:36
+#: plugins/models.py:50
 #, python-format
 msgid "%s entries"
 msgstr "%s articles"
+
+#: templates/comments/comment_notification_email.txt:2
+#: templates/comments/comment_reply_email.txt:2
+#: templates/zinnia/entry_list.html:4
+msgid "Author"
+msgstr "Auteur"
+
+#: templates/comments/comment_notification_email.txt:3
+msgid "Email"
+msgstr "Email"
+
+#: templates/comments/comment_notification_email.txt:4
+msgid "IP"
+msgstr "IP"
+
+#: templates/comments/comment_notification_email.txt:6
+#: templates/comments/comment_reply_email.txt:4
+msgid "Comment"
+msgstr "Commentaire"
+
+#: templates/comments/comment_reply_email.txt:7
+msgid "View this comment"
+msgstr "Voir le commentaire"
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
@@ -742,10 +773,6 @@ msgid "Category"
 msgstr "Catégorie"
 
 #: templates/zinnia/entry_list.html:4
-msgid "Author"
-msgstr "Auteur"
-
-#: templates/zinnia/entry_list.html:4
 msgid "Page"
 msgstr "Page"
 
@@ -891,14 +918,6 @@ msgstr "Aucun titre"
 #, fuzzy
 #~ msgid "template name"
 #~ msgstr "modèle"
-#~ msgid "Email"
-#~ msgstr "Email"
-#~ msgid "IP"
-#~ msgstr "IP"
-#~ msgid "Comment"
-#~ msgstr "Commentaire"
-#~ msgid "View this comment"
-#~ msgstr "Voir le commentaire"
 #~ msgid "Not yet entries."
 #~ msgstr "Pas d'articles publiés."
 #~ msgid "Not yet comments !"

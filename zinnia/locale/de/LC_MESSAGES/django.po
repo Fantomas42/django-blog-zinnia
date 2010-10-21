@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-11 20:08+0200\n"
+"POT-Creation-Date: 2010-10-21 20:28+0200\n"
 "PO-Revision-Date: 2010-04-28 11:36+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: feeds.py:88 plugins/cms_plugins.py:19 templates/zinnia/entry_archive.html:4
+#: feeds.py:88 plugins/cms_plugins.py:21 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "Neuste Einträge"
@@ -163,7 +163,7 @@ msgstr "Auszug"
 msgid "optional element"
 msgstr "Optionales Element"
 
-#: models.py:82 plugins/models.py:22
+#: models.py:82 plugins/models.py:23
 #, fuzzy
 msgid "tags"
 msgstr "Tag(s)"
@@ -172,7 +172,7 @@ msgstr "Tag(s)"
 msgid "related entries"
 msgstr "Verwandte Einträge"
 
-#: models.py:91 plugins/models.py:20
+#: models.py:91 plugins/models.py:21
 msgid "authors"
 msgstr "Autoren"
 
@@ -228,7 +228,7 @@ msgstr ""
 msgid "protect the entry with a password"
 msgstr ""
 
-#: models.py:113 plugins/models.py:26 plugins/models.py:40
+#: models.py:113 plugins/models.py:27 plugins/models.py:41
 msgid "template"
 msgstr ""
 
@@ -244,8 +244,8 @@ msgstr ""
 msgid "entry"
 msgstr "Eintrag"
 
-#: models.py:213 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
-#: plugins/models.py:39 templates/zinnia/base.html:32
+#: models.py:213 plugins/cms_plugins.py:19 plugins/cms_plugins.py:84
+#: plugins/models.py:40 templates/zinnia/base.html:32
 msgid "entries"
 msgstr "Einträge"
 
@@ -266,15 +266,15 @@ msgstr "Inhalt"
 msgid "Options"
 msgstr "Optionen"
 
-#: admin/entry.py:31
+#: admin/entry.py:30
 msgid "Privacy"
 msgstr ""
 
-#: admin/entry.py:33
+#: admin/entry.py:32
 msgid "Discussion"
 msgstr ""
 
-#: admin/entry.py:34
+#: admin/entry.py:33
 #, fuzzy
 msgid "Publication"
 msgstr "Veröffentlichungsende"
@@ -377,11 +377,15 @@ msgstr ""
 msgid "Zinnia App Hook"
 msgstr ""
 
-#: plugins/cms_plugins.py:23
+#: plugins/cms_plugins.py:31
 msgid "Sorting"
 msgstr "Sortierung"
 
-#: plugins/cms_plugins.py:58
+#: plugins/cms_plugins.py:41
+msgid "Advanced"
+msgstr ""
+
+#: plugins/cms_plugins.py:86
 msgid "Selected entries"
 msgstr "Ausgewählte Einträge"
 
@@ -426,18 +430,48 @@ msgstr ""
 msgid "Entry detailed"
 msgstr ""
 
-#: plugins/models.py:25
+#: plugins/models.py:20
+#, fuzzy
+msgid "include subcategories"
+msgstr "Kategorien"
+
+#: plugins/models.py:26
 msgid "number of entries"
 msgstr "Anzahl der Einträge"
 
-#: plugins/models.py:28 plugins/models.py:42
+#: plugins/models.py:29 plugins/models.py:43
 msgid "Template used to display the plugin"
 msgstr ""
 
-#: plugins/models.py:35 plugins/models.py:49
+#: plugins/models.py:36 plugins/models.py:50
 #, python-format
 msgid "%s entries"
 msgstr "%s Einträge"
+
+#: templates/comments/comment_notification_email.txt:2
+#: templates/comments/comment_reply_email.txt:2
+#: templates/zinnia/entry_list.html:4
+msgid "Author"
+msgstr "Autor"
+
+#: templates/comments/comment_notification_email.txt:3
+msgid "Email"
+msgstr ""
+
+#: templates/comments/comment_notification_email.txt:4
+msgid "IP"
+msgstr ""
+
+#: templates/comments/comment_notification_email.txt:6
+#: templates/comments/comment_reply_email.txt:4
+#, fuzzy
+msgid "Comment"
+msgstr "Kommentare"
+
+#: templates/comments/comment_reply_email.txt:7
+#, fuzzy
+msgid "View this comment"
+msgstr "Kommentarvorschau einblenden"
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
@@ -749,10 +783,6 @@ msgid "Category"
 msgstr "Kategorie"
 
 #: templates/zinnia/entry_list.html:4
-msgid "Author"
-msgstr "Autor"
-
-#: templates/zinnia/entry_list.html:4
 msgid "Page"
 msgstr "Seite"
 
@@ -901,14 +931,6 @@ msgstr ""
 #, fuzzy
 msgid "No title"
 msgstr "Titel"
-
-#, fuzzy
-#~ msgid "Comment"
-#~ msgstr "Kommentare"
-
-#, fuzzy
-#~ msgid "View this comment"
-#~ msgstr "Kommentarvorschau einblenden"
 
 #~ msgid "Not yet entries."
 #~ msgstr "Noch keine Einträge"

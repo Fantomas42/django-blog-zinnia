@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-11 20:08+0200\n"
+"POT-Creation-Date: 2010-10-21 20:28+0200\n"
 "PO-Revision-Date: 2010-09-01 18:36+0100\n"
 "Last-Translator: Esau Rodriguez <esau.rodriguez@galotecnia.com>\n"
 "Language-Team: Español <kde-i18n-doc@kde.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: feeds.py:88 plugins/cms_plugins.py:19 templates/zinnia/entry_archive.html:4
+#: feeds.py:88 plugins/cms_plugins.py:21 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "Últimas entradas"
@@ -170,7 +170,7 @@ msgstr "extracto"
 msgid "optional element"
 msgstr "Elemento opcional"
 
-#: models.py:82 plugins/models.py:22
+#: models.py:82 plugins/models.py:23
 msgid "tags"
 msgstr "tags"
 
@@ -178,7 +178,7 @@ msgstr "tags"
 msgid "related entries"
 msgstr "articulos relacionados"
 
-#: models.py:91 plugins/models.py:20
+#: models.py:91 plugins/models.py:21
 msgid "authors"
 msgstr "autores"
 
@@ -234,7 +234,7 @@ msgstr ""
 msgid "protect the entry with a password"
 msgstr ""
 
-#: models.py:113 plugins/models.py:26 plugins/models.py:40
+#: models.py:113 plugins/models.py:27 plugins/models.py:41
 msgid "template"
 msgstr "plantilla"
 
@@ -252,8 +252,8 @@ msgstr "Plantilla utilizada para mostrar el plugin "
 msgid "entry"
 msgstr "entrada"
 
-#: models.py:213 plugins/cms_plugins.py:17 plugins/cms_plugins.py:56
-#: plugins/models.py:39 templates/zinnia/base.html:32
+#: models.py:213 plugins/cms_plugins.py:19 plugins/cms_plugins.py:84
+#: plugins/models.py:40 templates/zinnia/base.html:32
 msgid "entries"
 msgstr "entradas"
 
@@ -274,15 +274,15 @@ msgstr "Contenido"
 msgid "Options"
 msgstr "Opciones"
 
-#: admin/entry.py:31
+#: admin/entry.py:30
 msgid "Privacy"
 msgstr ""
 
-#: admin/entry.py:33
+#: admin/entry.py:32
 msgid "Discussion"
 msgstr ""
 
-#: admin/entry.py:34
+#: admin/entry.py:33
 #, fuzzy
 msgid "Publication"
 msgstr "fin de la publicación"
@@ -385,11 +385,15 @@ msgstr ""
 msgid "Zinnia App Hook"
 msgstr "Aplicación Zinnia"
 
-#: plugins/cms_plugins.py:23
+#: plugins/cms_plugins.py:31
 msgid "Sorting"
 msgstr "Ordenacion"
 
-#: plugins/cms_plugins.py:58
+#: plugins/cms_plugins.py:41
+msgid "Advanced"
+msgstr ""
+
+#: plugins/cms_plugins.py:86
 msgid "Selected entries"
 msgstr "Entradas seleccionadas"
 
@@ -434,18 +438,48 @@ msgstr "Lista de entradas (por defecto)"
 msgid "Entry detailed"
 msgstr "Detalle de la entrada"
 
-#: plugins/models.py:25
+#: plugins/models.py:20
+#, fuzzy
+msgid "include subcategories"
+msgstr "categorías"
+
+#: plugins/models.py:26
 msgid "number of entries"
 msgstr "Número de entradas"
 
-#: plugins/models.py:28 plugins/models.py:42
+#: plugins/models.py:29 plugins/models.py:43
 msgid "Template used to display the plugin"
 msgstr "Plantilla utilizada para mostrar el plugin "
 
-#: plugins/models.py:35 plugins/models.py:49
+#: plugins/models.py:36 plugins/models.py:50
 #, python-format
 msgid "%s entries"
 msgstr "%s entradas"
+
+#: templates/comments/comment_notification_email.txt:2
+#: templates/comments/comment_reply_email.txt:2
+#: templates/zinnia/entry_list.html:4
+msgid "Author"
+msgstr "Autor"
+
+#: templates/comments/comment_notification_email.txt:3
+msgid "Email"
+msgstr ""
+
+#: templates/comments/comment_notification_email.txt:4
+msgid "IP"
+msgstr ""
+
+#: templates/comments/comment_notification_email.txt:6
+#: templates/comments/comment_reply_email.txt:4
+#, fuzzy
+msgid "Comment"
+msgstr "Comentarios"
+
+#: templates/comments/comment_reply_email.txt:7
+#, fuzzy
+msgid "View this comment"
+msgstr "Previsualización del comentario"
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
@@ -730,10 +764,6 @@ msgid "Category"
 msgstr "Categoría"
 
 #: templates/zinnia/entry_list.html:4
-msgid "Author"
-msgstr "Autor"
-
-#: templates/zinnia/entry_list.html:4
 msgid "Page"
 msgstr "Página"
 
@@ -877,14 +907,6 @@ msgstr "título"
 #, fuzzy
 #~ msgid "template name"
 #~ msgstr "plantilla"
-
-#, fuzzy
-#~ msgid "Comment"
-#~ msgstr "Comentarios"
-
-#, fuzzy
-#~ msgid "View this comment"
-#~ msgstr "Previsualización del comentario"
 
 #~ msgid "Not yet entries."
 #~ msgstr "No hay entradas"
