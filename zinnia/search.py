@@ -1,5 +1,18 @@
 """Search module with complex query parsing for zinnia"""
-from pyparsing import *
+from pyparsing import Word
+from pyparsing import Group
+from pyparsing import Forward
+from pyparsing import Combine
+from pyparsing import Suppress
+from pyparsing import Optional
+from pyparsing import alphas
+from pyparsing import alphanums
+from pyparsing import OneOrMore
+from pyparsing import StringEnd
+from pyparsing import ZeroOrMore
+from pyparsing import removeQuotes
+from pyparsing import dblQuotedString
+from pyparsing import CaselessLiteral
 
 from django.db.models import Q
 

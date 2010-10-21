@@ -1,5 +1,6 @@
 """Urls for the zinnia capabilities"""
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import url
+from django.conf.urls.defaults import patterns
 from django.contrib.sites.models import Site
 
 from zinnia.settings import PROTOCOL

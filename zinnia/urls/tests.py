@@ -1,5 +1,10 @@
 """Test urls for the zinnia project"""
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import url
+from django.conf.urls.defaults import include
+from django.conf.urls.defaults import patterns
+from django.conf.urls.defaults import handler404
+from django.conf.urls.defaults import handler500
+
 from zinnia.urls import urlpatterns
 
 urlpatterns += patterns('',

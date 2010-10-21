@@ -126,7 +126,7 @@ def get_user_info(apikey, username, password):
 def get_authors(apikey, username, password):
     """wp.getAuthors(api_key, username, password)
     => author structure[]"""
-    user = authenticate(username, password)
+    authenticate(username, password)
     return [author_structure(author) for author in User.objects.filter(is_staff=True)]
 
 @xmlrpc_func(returns='boolean', args=['string', 'string', 'string', 'string', 'string'])
@@ -159,7 +159,7 @@ def get_recent_posts(blog_id, username, password, number):
 def get_categories(blog_id, username, password):
     """metaWeblog.getCategories(blog_id, username, password)
     => category structure[]"""
-    user = authenticate(username, password)
+    authenticate(username, password)
     site = Site.objects.get_current()
     return [category_structure(category, site) \
             for category in Category.objects.all()]
@@ -168,7 +168,7 @@ def get_categories(blog_id, username, password):
 def new_category(blog_id, username, password, category_struct):
     """wp.newCategory(blog_id, username, password, category)
     => category_id"""
-    user = authenticate(username, password, 'zinnia.add_category')
+    authenticate(username, password, 'zinnia.add_category')
     category_dict = {'title': category_struct['name'],
                      'description': category_struct['description'],
                      'slug': category_struct['slug']}
@@ -257,9 +257,7 @@ def edit_post(post_id, username, password, post, publish):
 def new_media_object(blog_id, username, password, media):
     """metaWeblog.newMediaObject(blog_id, username, password, media)
     => media structure"""
-    user = authenticate(username, password)
-    site = Site.objects.get_current()
-
+    authenticate(username, password)
     path = default_storage.save(os.path.join(UPLOAD_TO, media['name']),
                                 ContentFile(media['bits'].data))
     return {'url': default_storage.url(path)}

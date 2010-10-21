@@ -1,6 +1,6 @@
 """Forms for Zinnia admin"""
 from django import forms
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from zinnia.models import Entry
 from zinnia.models import Category

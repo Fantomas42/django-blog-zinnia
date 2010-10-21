@@ -1,5 +1,4 @@
 """XML-RPC methods of Zinnia Pingback"""
-import re
 from urllib2 import urlopen
 from urllib2 import URLError
 from urllib2 import HTTPError

@@ -1,10 +1,8 @@
 """Feeds for Zinnia"""
-from datetime import datetime
 from sgmllib import SGMLParser
 
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.contrib.comments.models import Comment
 from django.core.urlresolvers import reverse
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.translation import ugettext as _
@@ -15,7 +13,6 @@ from tagging.models import Tag
 from tagging.models import TaggedItem
 
 from zinnia.models import Entry
-from zinnia.models import Category
 from zinnia.settings import COPYRIGHT
 from zinnia.settings import PROTOCOL
 from zinnia.settings import FEEDS_MAX_ITEMS

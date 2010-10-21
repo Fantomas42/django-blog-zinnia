@@ -2,7 +2,6 @@
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from menus.base import Menu
 from menus.base import Modifier
 from menus.base import NavigationNode
 from menus.menu_pool import menu_pool

@@ -1,5 +1,7 @@
 """Defaults urls for the zinnia project"""
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import url
+from django.conf.urls.defaults import include
+from django.conf.urls.defaults import patterns
 
 urlpatterns = patterns('',
                        url(r'^tags/', include('zinnia.urls.tags',)),

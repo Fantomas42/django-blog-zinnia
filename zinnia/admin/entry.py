@@ -3,11 +3,12 @@ from datetime import datetime
 
 from django.forms import Media
 from django.contrib import admin
-from django.conf.urls.defaults import *
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from django.utils.text import truncate_words
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.conf.urls.defaults import url
+from django.conf.urls.defaults import patterns
+from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse, NoReverseMatch
 
 from tagging.models import Tag
@@ -122,11 +123,11 @@ class EntryAdmin(admin.ModelAdmin):
     get_link.short_description = _('View on site')
 
     def get_short_url(self, entry):
-        url = entry.short_url
-        if not url:
+        short_url = entry.short_url
+        if not short_url:
             return _('Unavailable')
         return '<a href="%(url)s" target="blank">%(url)s</a>' % \
-               {'url': url}
+               {'url': short_url}
     get_short_url.allow_tags = True
     get_short_url.short_description = _('short url')
 

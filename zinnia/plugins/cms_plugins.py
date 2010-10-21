@@ -8,7 +8,6 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
 from zinnia.models import Entry
-from zinnia.models import Category
 from zinnia.managers import tags_published
 from zinnia.managers import authors_published
 from zinnia.plugins.models import LatestEntriesPlugin

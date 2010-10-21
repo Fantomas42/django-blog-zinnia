@@ -1,9 +1,7 @@
 """Sitemaps for Zinnia"""
 from django.contrib.sitemaps import Sitemap
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
 
-from tagging.models import Tag
 from tagging.models import TaggedItem
 
 from zinnia.models import Entry

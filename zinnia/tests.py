@@ -18,19 +18,30 @@ from django.template import Context
 from django.template import TemplateDoesNotExist
 
 from tagging.models import Tag
+from BeautifulSoup import BeautifulSoup
+
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.ping import ExternalUrlsPinger
-from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
+from zinnia.managers import DRAFT, PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
 from zinnia.managers import authors_published
-from zinnia.templatetags.zinnia_tags import *
 from zinnia.xmlrpc.metaweblog import authenticate
 from zinnia.xmlrpc.metaweblog import post_structure
-from zinnia.xmlrpc.metaweblog import category_structure
 from zinnia.xmlrpc.pingback import generate_pingback_content
-from BeautifulSoup import BeautifulSoup
+from zinnia.templatetags.zinnia_tags import get_gravatar
+from zinnia.templatetags.zinnia_tags import get_categories
+from zinnia.templatetags.zinnia_tags import get_recent_entries
+from zinnia.templatetags.zinnia_tags import get_random_entries
+from zinnia.templatetags.zinnia_tags import zinnia_breadcrumbs
+from zinnia.templatetags.zinnia_tags import get_popular_entries
+from zinnia.templatetags.zinnia_tags import get_similar_entries
+from zinnia.templatetags.zinnia_tags import get_recent_comments
+from zinnia.templatetags.zinnia_tags import get_calendar_entries
+from zinnia.templatetags.zinnia_tags import get_archives_entries
+from zinnia.templatetags.zinnia_tags import get_archives_entries_tree
+
 
 class ManagersTestCase(TestCase):
 
@@ -848,11 +859,11 @@ class MetaWeblogTestCase(TestCase):
                           1, 'contributor', 'password', post, 1)
         self.assertEquals(Entry.objects.count(), 2)
         self.assertEquals(Entry.published.count(), 1)
-        new_post_id = self.server.metaWeblog.newPost(
+        self.server.metaWeblog.newPost(
             1, 'webmaster', 'password', post, 1)
         self.assertEquals(Entry.objects.count(), 3)
         self.assertEquals(Entry.published.count(), 2)
-        new_post_id = self.server.metaWeblog.newPost(
+        self.server.metaWeblog.newPost(
             1, 'webmaster', 'password', post, 0)
         self.assertEquals(Entry.objects.count(), 4)
         self.assertEquals(Entry.published.count(), 2)

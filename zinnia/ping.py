@@ -1,5 +1,4 @@
 """Pings utilities for Zinnia"""
-import re
 import socket
 import xmlrpclib
 import threading
@@ -54,12 +53,12 @@ class DirectoryPinger(threading.Thread):
             reply = self.server.weblogUpdates.extendedPing(current_site.name,
                                                            blog_url, entry_url,
                                                            blog_feed, categories)
-        except Exception, ex:
+        except Exception:
             try:
                 reply = self.server.weblogUpdates.ping(current_site.name,
                                                        blog_url, entry_url,
                                                        categories)
-            except xmlrpclib.ProtocolError, ex:
+            except xmlrpclib.ProtocolError:
                 reply = {'message': '%s is an invalid directory.' % self.server_name,
                          'flerror': True}
         return reply
@@ -138,7 +137,7 @@ class ExternalUrlsPinger(threading.Thread):
         try:
             server = xmlrpclib.ServerProxy(server_name)
             reply = server.pingback.ping(self.entry_url, target_url)
-        except (xmlrpclib.Fault, xmlrpclib.ProtocolError), ex:
+        except (xmlrpclib.Fault, xmlrpclib.ProtocolError):
             reply = '%s cannot be pinged.' % target_url
         return reply
 

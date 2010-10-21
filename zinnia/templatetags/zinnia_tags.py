@@ -1,4 +1,4 @@
-"""Template tags for Zinnia"""
+"""Templatetags for Zinnia"""
 try:
     from hashlib import md5
 except ImportError:
@@ -8,6 +8,7 @@ from random import sample
 from urllib import urlencode
 from datetime import datetime
 
+from django.db import connection
 from django.template import Library
 from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
@@ -49,10 +50,6 @@ def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     """Return popular  entries"""
-    from django.db import connection
-    from django.contrib.comments.models import Comment
-    from django.contrib.contenttypes.models import ContentType
-
     ctype = ContentType.objects.get_for_model(Entry)
     query = """SELECT object_pk, COUNT(*) AS score
     FROM %s

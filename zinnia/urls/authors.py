@@ -1,5 +1,6 @@
-"""Urls for the zinnia categories"""
-from django.conf.urls.defaults import *
+"""Urls for the zinnia authors"""
+from django.conf.urls.defaults import url
+from django.conf.urls.defaults import patterns
 
 from zinnia.managers import authors_published
 

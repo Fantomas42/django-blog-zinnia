@@ -6,7 +6,7 @@ from django.template import loader
 from django.core.mail import send_mail
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.comments.moderation import CommentModerator
 
 from zinnia.settings import PROTOCOL

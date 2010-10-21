@@ -1,5 +1,6 @@
 """Urls for the zinnia entries"""
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import url
+from django.conf.urls.defaults import patterns
 
 from zinnia.models import Entry
 from zinnia.settings import PAGINATION
