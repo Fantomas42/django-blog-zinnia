@@ -8,6 +8,12 @@ Frequently Asked Questions
     `specifying a template directory
     <http://docs.djangoproject.com/en/dev/ref/templates/api/#loading-templates>`_.
 
+    You can also create your own app containing some Zinnia's templates
+    based on inheritance. You can find an app example with HTML5 templates
+    for Zinnia which can be a good starting point to make your own at :
+    `Django Blog Quintet
+    <http://github.com/franckbret/django-blog-quintet>`_.
+
 
 * How can I use the image field for fitting to my skin ?
 
