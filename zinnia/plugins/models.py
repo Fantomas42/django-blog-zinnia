@@ -22,7 +22,7 @@ class LatestEntriesPlugin(CMSPlugin):
                                      blank=True, null=True)
     tags = models.ManyToManyField(Tag, verbose_name=_('tags'),
                                   blank=True, null=True)
-    
+
     number_of_entries = models.IntegerField(_('number of entries'), default=5)
     template_to_render = models.CharField(_('template'), blank=True,
                                           max_length=250, choices=TEMPLATES,

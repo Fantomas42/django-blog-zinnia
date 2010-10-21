@@ -44,9 +44,9 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
             ),
         }),
     )
-    
+
     text_enabled = True
-    
+
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == 'authors':
             kwargs['queryset'] = authors_published()
@@ -57,13 +57,13 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
 
     def render(self, context, instance, placeholder):
         entries = Entry.published.all()
-        
+
         if instance.categories.count():
             cats = instance.categories.all()
-            
+
             if instance.subcategories:
                 cats = itertools.chain(cats, *[c.get_descendants() for c in cats])
-            
+
             entries = entries.filter(categories__in=cats)
         if instance.authors.count():
             entries = entries.filter(authors__in=instance.authors.all())

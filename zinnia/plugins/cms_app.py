@@ -10,5 +10,5 @@ class ZinniaApphook(CMSApp):
     name = _('Zinnia App Hook')
     urls = ['zinnia.urls']
     menus = APP_MENUS
-    
+
 apphook_pool.register(ZinniaApphook)
