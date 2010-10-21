@@ -16,3 +16,17 @@ For the options execute this. ::
 
   $> python manage.py help wp2zinnia
 
+From Zinnia to WordPress
+========================
+
+Zinnia also provides a command for exporting your blog to WordPress in the
+case you want to migrate on it.
+
+Simply execute this command : ::
+
+  $> python manage.py zinnia2wp > export.xml
+
+Once you have the XML export, you can import it into your WordPress site.
+
+http://codex.wordpress.org/Importing_Content
+

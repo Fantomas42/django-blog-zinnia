@@ -3,6 +3,7 @@
 
 * Using Microformats
 * Mails for comment reply
+* Zinnia to Wordpress utility command
 
 0.7
 ===
