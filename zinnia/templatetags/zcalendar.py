@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 
 from zinnia.models import Entry
 
+
 class ZinniaCalendar(HTMLCalendar):
     """Override of HTMLCalendar"""
 
@@ -50,4 +51,3 @@ class ZinniaCalendar(HTMLCalendar):
         else:
             s = '%s' % MONTHS[themonth].title()
         return '<tr><th colspan="7" class="month">%s</th></tr>' % s
-

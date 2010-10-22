@@ -4,6 +4,7 @@ from django.views.generic.simple import direct_to_template
 from zinnia.models import Entry
 from zinnia.models import Category
 
+
 def sitemap(*ka, **kw):
     """Wrapper around the direct to template generic view to
     force the update of the extra context"""

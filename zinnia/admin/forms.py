@@ -21,17 +21,16 @@ class CategoryAdminForm(forms.ModelForm):
         if data == self.instance:
             raise forms.ValidationError(_('A category cannot be parent of itself.'))
         return data
-    
+
     class Meta:
         model = Category
+
 
 class EntryAdminForm(forms.ModelForm):
     categories = MPTTModelMultipleChoiceField(
         Category.objects.all(),
-        widget = MPTTFilteredSelectMultiple(_('categories'), False,
-                                            attrs={'rows': '10'}))
-    
+        widget=MPTTFilteredSelectMultiple(_('categories'), False,
+                                          attrs={'rows': '10'}))
+
     class Meta:
         model = Entry
-
-                    

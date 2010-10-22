@@ -14,7 +14,6 @@ from zinnia.feeds import AuthorEntries, AtomAuthorEntries
 
 from zinnia.settings import FEEDS_FORMAT
 
-
 if FEEDS_FORMAT == 'atom':
     urlpatterns = patterns('',
                            url(r'^latest/$', AtomLatestEntries(),
@@ -57,4 +56,3 @@ else:
                            url(r'^trackbacks/(?P<slug>[-\w]+)/$', EntryTrackbacks(),
                                name='zinnia_entry_trackback_feed'),
                            )
-

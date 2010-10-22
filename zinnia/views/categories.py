@@ -11,6 +11,7 @@ def get_category_or_404(path):
     path_bits = [p for p in path.split('/') if p]
     return get_object_or_404(Category, slug=path_bits[-1])
 
+
 def category_detail(request, path, page=None):
     """Display the entries of a category"""
     category = get_category_or_404(path)

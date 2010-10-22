@@ -4,19 +4,18 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding field 'Entry.template'
         db.add_column('zinnia_entry', 'template', self.gf('django.db.models.fields.CharField')(default='zinnia/entry_detail.html', max_length=250), keep_default=False)
 
-
     def backwards(self, orm):
-        
+
         # Deleting field 'Entry.template'
         db.delete_column('zinnia_entry', 'template')
-
 
     models = {
         'auth.group': {

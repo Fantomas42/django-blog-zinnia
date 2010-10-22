@@ -24,4 +24,3 @@ def entry_search(request):
                         template_name='zinnia/entry_search.html',
                         extra_context={'error': error,
                                        'pattern': pattern})
-

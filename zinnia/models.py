@@ -63,7 +63,8 @@ class Category(MPTTModel):
         verbose_name_plural = _('categories')
 
     class MPTTMeta:
-        order_insertion_by = ['title',]
+        order_insertion_by = ['title']
+
 
 class Entry(models.Model):
     """Base design for publishing entry"""

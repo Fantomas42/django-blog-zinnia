@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Changing field 'Category.title'
         db.alter_column('zinnia_category', 'title', self.gf('django.db.models.fields.CharField')(max_length=255))
 
@@ -23,9 +24,8 @@ class Migration(SchemaMigration):
         # Changing field 'Entry.slug'
         db.alter_column('zinnia_entry', 'slug', self.gf('django.db.models.fields.SlugField')(max_length=255))
 
-
     def backwards(self, orm):
-        
+
         # Changing field 'Category.title'
         db.alter_column('zinnia_category', 'title', self.gf('django.db.models.fields.CharField')(max_length=50))
 
@@ -40,7 +40,6 @@ class Migration(SchemaMigration):
 
         # Changing field 'Entry.slug'
         db.alter_column('zinnia_entry', 'slug', self.gf('django.db.models.fields.SlugField')(max_length=50))
-
 
     models = {
         'auth.group': {

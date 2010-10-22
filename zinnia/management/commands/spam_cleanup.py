@@ -5,6 +5,7 @@ from django.core.management.base import NoArgsCommand
 
 from zinnia.models import Entry
 
+
 class Command(NoArgsCommand):
     """Command object for removing comments
     flagged as spam"""
@@ -22,6 +23,3 @@ class Command(NoArgsCommand):
 
         if verbosity:
             print '%i spam comments deleted.' % spams_count
-
-
-

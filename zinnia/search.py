@@ -40,6 +40,7 @@ term = special | single | parenthetical | negative
 terms << term + ZeroOrMore(Optional(operator) + terms)
 query = OneOrMore(terms) + StringEnd()
 
+
 def build_queryset(elements, level=0):
     """Build a queryset based on an grammar"""
     exprs = {}
@@ -93,6 +94,7 @@ def build_queryset(elements, level=0):
     if not level:
         return Entry.published.filter(lookup).distinct()
     return lookup
+
 
 def advanced_search(pattern):
     """Parse the grammar of a pattern

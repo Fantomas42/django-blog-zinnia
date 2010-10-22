@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Deleting field 'LatestEntriesPlugin.category'
         db.delete_column('cmsplugin_latestentriesplugin', 'category_id')
 
@@ -37,10 +38,9 @@ class Migration(SchemaMigration):
             ('user', models.ForeignKey(orm['auth.user'], null=False))
         ))
         db.create_unique('plugins_latestentriesplugin_authors', ['latestentriesplugin_id', 'user_id'])
-    
-    
+
     def backwards(self, orm):
-        
+
         # Adding field 'LatestEntriesPlugin.category'
         db.add_column('cmsplugin_latestentriesplugin', 'category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['zinnia.Category'], null=True, blank=True), keep_default=False)
 
@@ -55,8 +55,7 @@ class Migration(SchemaMigration):
 
         # Removing M2M table for field authors on 'LatestEntriesPlugin'
         db.delete_table('plugins_latestentriesplugin_authors')
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -171,5 +170,5 @@ class Migration(SchemaMigration):
             'title': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         }
     }
-    
+
     complete_apps = ['plugins']

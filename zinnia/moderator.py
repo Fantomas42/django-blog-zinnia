@@ -14,8 +14,8 @@ from zinnia.settings import MAIL_COMMENT
 from zinnia.settings import MAIL_COMMENT_REPLY
 from zinnia.settings import AKISMET_COMMENT
 
-
 AKISMET_API_KEY = getattr(settings, 'AKISMET_SECRET_API_KEY', '')
+
 
 class EntryCommentModerator(CommentModerator):
     """Moderate the comment of Entry"""
@@ -25,7 +25,8 @@ class EntryCommentModerator(CommentModerator):
 
     def email(self, comment, content_object, request):
         if comment.is_public:
-            super(EntryCommentModerator, self).email(comment, content_object, request)
+            super(EntryCommentModerator, self).email(comment, content_object,
+                                                     request)
             self.email_reply(comment, content_object, request)
 
     def email_reply(self, comment, content_object, request):
@@ -35,10 +36,11 @@ class EntryCommentModerator(CommentModerator):
             return
 
         exclude_list = [manager_tuple[1] for manager_tuple
-                        in settings.MANAGERS] + [comment.user_email,]
+                        in settings.MANAGERS] + [comment.user_email]
         recipient_list = set([comment.userinfo['email']
                               for comment in content_object.comments
-                              if comment.userinfo['email']]) ^ set(exclude_list)
+                              if comment.userinfo['email']]) ^ \
+                              set(exclude_list)
 
         if recipient_list:
             site = Site.objects.get_current()
@@ -75,8 +77,10 @@ class EntryCommentModerator(CommentModerator):
                 'permalink': content_object.get_absolute_url(),
                 'comment_type': 'comment',
                 'comment_author': smart_str(comment.userinfo.get('name', '')),
-                'comment_author_email': smart_str(comment.userinfo.get('email', '')),
-                'comment_author_url': smart_str(comment.userinfo.get('url', '')),
+                'comment_author_email': smart_str(comment.userinfo.get(
+                    'email', '')),
+                'comment_author_url': smart_str(comment.userinfo.get(
+                    'url', '')),
             }
             is_spam = akismet.comment_check(smart_str(comment.comment),
                                             data=akismet_data,
@@ -87,4 +91,3 @@ class EntryCommentModerator(CommentModerator):
                 comment.flags.create(user=user, flag='spam')
             return is_spam
         raise APIKeyError("Your Akismet API key is invalid.")
-

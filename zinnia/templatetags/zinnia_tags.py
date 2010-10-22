@@ -26,17 +26,20 @@ vectors = VectorBuilder({'queryset': Entry.published.all(),
                         'fields': ['title', 'excerpt', 'content']})
 cache_entries_related = {}
 
+
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_categories(template='zinnia/tags/categories.html'):
     """Return the categories"""
     return {'template': template,
             'categories': Category.tree.all()}
 
+
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_recent_entries(number=5, template='zinnia/tags/recent_entries.html'):
     """Return the most recent entries"""
     return {'template': template,
             'entries': Entry.published.all()[:number]}
+
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
@@ -46,6 +49,7 @@ def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
         number = len(entries)
     return {'template': template,
             'entries': sample(entries, number)}
+
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
@@ -69,7 +73,8 @@ def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     return {'template': template,
             'entries': [object_dict[object_id]
                         for object_id in object_ids
-                        if object_dict.has_key(object_id)][:number]}
+                        if object_id in object_dict][:number]}
+
 
 @register.inclusion_tag('zinnia/tags/dummy.html',
                         takes_context=True)
@@ -94,7 +99,7 @@ def get_similar_entries(context, number=5, template='zinnia/tags/similar_entries
                 if score:
                     entry_related[entry] = score
 
-        related = sorted(entry_related.items(), key=lambda(k,v):(v,k))
+        related = sorted(entry_related.items(), key=lambda(k, v): (v, k))
         return [i for i, s in related]
 
     object_id = context['object'].pk
@@ -107,19 +112,22 @@ def get_similar_entries(context, number=5, template='zinnia/tags/similar_entries
     return {'template': template,
             'entries': entries}
 
+
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_archives_entries(template='zinnia/tags/archives_entries.html'):
     """Return archives entries"""
     return {'template': template,
             'archives': Entry.published.dates('creation_date', 'month',
-                                              order='DESC'),}
+                                              order='DESC')}
+
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_archives_entries_tree(template='zinnia/tags/archives_entries_tree.html'):
     """Return archives entries as a Tree"""
     return {'template': template,
             'archives': Entry.published.dates('creation_date', 'day',
-                                              order='ASC'),}
+                                              order='ASC')}
+
 
 @register.inclusion_tag('zinnia/tags/dummy.html',
                         takes_context=True)
@@ -153,6 +161,7 @@ def get_calendar_entries(context, year=None, month=None,
             'previous_month': previous_month,
             'calendar': calendar.formatmonth(year, month)}
 
+
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
     """Return the most recent comments"""
@@ -167,6 +176,7 @@ def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
 
     return {'template': template,
             'comments': comments}
+
 
 @register.inclusion_tag('zinnia/tags/dummy.html',
                         takes_context=True)
@@ -184,6 +194,7 @@ def zinnia_breadcrumbs(context, separator='/', root_name='Blog',
             'separator': separator,
             'breadcrumbs': breadcrumbs}
 
+
 @register.simple_tag
 def get_gravatar(email, size=80, rating='g', default=None):
     """Return url for a Gravatar"""
@@ -195,4 +206,3 @@ def get_gravatar(email, size=80, rating='g', default=None):
 
     url = '%s?%s' % (url, urlencode(options))
     return url.replace('&', '&amp;')
-

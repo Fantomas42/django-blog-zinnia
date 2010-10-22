@@ -11,6 +11,7 @@ from django.utils.encoding import force_unicode
 
 from zinnia.settings import MEDIA_URL
 
+
 class TreeNodeChoiceField(forms.ModelChoiceField):
     """Duplicating the TreeNodeChoiceField bundled in django-mptt
     to avoid conflict with the TreeNodeChoiceField bundled in django-cms..."""
@@ -38,7 +39,7 @@ class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
 class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
     def label_from_instance(self, obj):
         level = getattr(obj, getattr(self.queryset.model._meta, 'level_attr', 'level'), 0)
-        return u'%s %s' % ('-'*level, smart_unicode(obj))
+        return u'%s %s' % ('-' * level, smart_unicode(obj))
 
     def _get_choices(self):
         if hasattr(self, '_choices'):
@@ -85,4 +86,3 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         js = (settings.ADMIN_MEDIA_PREFIX + 'js/core.js',
               MEDIA_URL + 'js/mptt_m2m_selectbox.js',
               settings.ADMIN_MEDIA_PREFIX + 'js/SelectFilter2.js',)
-

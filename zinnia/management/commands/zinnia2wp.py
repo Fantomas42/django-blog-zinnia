@@ -12,6 +12,7 @@ from zinnia.settings import PROTOCOL
 from zinnia.models import Entry
 from zinnia.models import Category
 
+
 class Command(NoArgsCommand):
     """Command object for exporting a Zinnia blog
     into WordPress via a WordPress eXtended RSS (WXR) file."""
@@ -29,4 +30,3 @@ class Command(NoArgsCommand):
                         'site_url': '%s://%s' % (PROTOCOL, site.domain)}
         export = render_to_string('zinnia/wxr.xml', blog_context)
         print smart_str(export)
-

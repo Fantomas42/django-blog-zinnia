@@ -14,6 +14,7 @@ from zinnia.plugins.models import LatestEntriesPlugin
 from zinnia.plugins.models import SelectedEntriesPlugin
 from zinnia.settings import MEDIA_URL
 
+
 class CMSLatestEntriesPlugin(CMSPluginBase):
     module = _('entries')
     model = LatestEntriesPlugin
@@ -78,6 +79,7 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
 
     def icon_src(self, instance):
         return MEDIA_URL + u'img/plugin.png'
+
 
 class CMSSelectedEntriesPlugin(CMSPluginBase):
     module = _('entries')

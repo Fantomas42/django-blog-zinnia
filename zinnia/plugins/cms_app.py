@@ -6,6 +6,7 @@ from cms.apphook_pool import apphook_pool
 
 from zinnia.plugins.settings import APP_MENUS
 
+
 class ZinniaApphook(CMSApp):
     name = _('Zinnia App Hook')
     urls = ['zinnia.urls']

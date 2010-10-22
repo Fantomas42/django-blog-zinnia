@@ -9,6 +9,7 @@ from django.views.decorators.cache import never_cache
 
 from zinnia.models import Entry
 
+
 def update_queryset(view, queryset,
                     queryset_parameter='queryset'):
     """Decorator around views based on a queryset
@@ -23,6 +24,7 @@ def update_queryset(view, queryset,
 
     return wrap
 
+
 @csrf_protect
 @never_cache
 def password(request, entry):
@@ -36,6 +38,7 @@ def password(request, entry):
         error = True
     return render_to_response('zinnia/password.html', {'error': error},
                               context_instance=RequestContext(request))
+
 
 def protect_entry(view):
     """Decorator performing a security check if needed

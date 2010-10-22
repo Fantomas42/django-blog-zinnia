@@ -12,11 +12,11 @@ from django.core.urlresolvers import reverse
 
 from zinnia.settings import PROTOCOL
 
-
 current_site = Site.objects.get_current()
 site = '%s://%s' % (PROTOCOL, current_site.domain)
 blog_url = ''
 blog_feed = ''
+
 
 class DirectoryPinger(threading.Thread):
     """Threaded Directory Pinger"""
@@ -52,14 +52,16 @@ class DirectoryPinger(threading.Thread):
         try:
             reply = self.server.weblogUpdates.extendedPing(current_site.name,
                                                            blog_url, entry_url,
-                                                           blog_feed, categories)
+                                                           blog_feed,
+                                                           categories)
         except Exception:
             try:
                 reply = self.server.weblogUpdates.ping(current_site.name,
                                                        blog_url, entry_url,
                                                        categories)
             except xmlrpclib.ProtocolError:
-                reply = {'message': '%s is an invalid directory.' % self.server_name,
+                reply = {'message': '%s is an invalid directory.' % \
+                         self.server_name,
                          'flerror': True}
         return reply
 
@@ -107,7 +109,7 @@ class ExternalUrlsPinger(threading.Thread):
         soup = BeautifulSoup(content)
         for link in soup.findAll('link'):
             dict_attr = dict(link.attrs)
-            if dict_attr.has_key('rel') and dict_attr.has_key('href'):
+            if 'rel' in dict_attr and 'href' in dict_attr:
                 if dict_attr['rel'].lower() == 'pingback':
                     return dict_attr.get('href')
 
@@ -140,4 +142,3 @@ class ExternalUrlsPinger(threading.Thread):
         except (xmlrpclib.Fault, xmlrpclib.ProtocolError):
             reply = '%s cannot be pinged.' % target_url
         return reply
-

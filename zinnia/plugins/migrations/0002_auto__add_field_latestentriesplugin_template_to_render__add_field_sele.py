@@ -4,26 +4,25 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding field 'LatestEntriesPlugin.template_to_render'
         db.add_column('cmsplugin_latestentriesplugin', 'template_to_render', self.gf('django.db.models.fields.CharField')(default='zinnia/cms/entry_list.html', max_length=250, blank=True), keep_default=False)
 
         # Adding field 'SelectedEntriesPlugin.template_to_render'
         db.add_column('cmsplugin_selectedentriesplugin', 'template_to_render', self.gf('django.db.models.fields.CharField')(default='zinnia/cms/entry_list.html', max_length=250, blank=True), keep_default=False)
-    
-    
+
     def backwards(self, orm):
-        
+
         # Deleting field 'LatestEntriesPlugin.template_to_render'
         db.delete_column('cmsplugin_latestentriesplugin', 'template_to_render')
 
         # Deleting field 'SelectedEntriesPlugin.template_to_render'
         db.delete_column('cmsplugin_selectedentriesplugin', 'template_to_render')
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -132,5 +131,5 @@ class Migration(SchemaMigration):
             'title': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         }
     }
-    
+
     complete_apps = ['plugins']

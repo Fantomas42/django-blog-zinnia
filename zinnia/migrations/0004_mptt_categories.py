@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding field 'Category.parent'
         db.add_column('zinnia_category', 'parent', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='children', null=True, to=orm['zinnia.Category']), keep_default=False)
 
@@ -23,9 +24,8 @@ class Migration(SchemaMigration):
         # Adding field 'Category.level'
         db.add_column('zinnia_category', 'level', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, db_index=True), keep_default=False)
 
-
     def backwards(self, orm):
-        
+
         # Deleting field 'Category.parent'
         db.delete_column('zinnia_category', 'parent_id')
 
@@ -40,7 +40,6 @@ class Migration(SchemaMigration):
 
         # Deleting field 'Category.level'
         db.delete_column('zinnia_category', 'level')
-
 
     models = {
         'auth.group': {

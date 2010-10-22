@@ -8,7 +8,7 @@ ROOT_URLCONF = 'zinnia.urls.tests'
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.request',
     'zinnia.context_processors.media',
-    'zinnia.context_processors.version',]
+    'zinnia.context_processors.version']
 
 
 DATABASE_ENGINE = 'sqlite3'

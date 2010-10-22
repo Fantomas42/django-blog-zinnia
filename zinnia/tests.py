@@ -384,13 +384,14 @@ class CategoryTestCase(TestCase):
         self.categories[1].save()
         self.assertEqual(self.categories[1].tree_path, 'category-1/category-2')
 
+
 class ZinniaViewsTestCase(TestCase):
     """Test cases for generic views used in the application,
     for reproducing and correcting issue :
     http://github.com/Fantomas42/django-blog-zinnia/issues#issue/3
     """
     urls = 'zinnia.urls.tests'
-    fixtures = ['zinnia_test_data.json',]
+    fixtures = ['zinnia_test_data.json']
 
     def create_published_entry(self):
         params = {'title': 'My test entry',
@@ -515,6 +516,7 @@ class ZinniaViewsTestCase(TestCase):
         self.assertEquals(self.client.post('/trackback/test-1/', {'url': 'http://example.com'}).content,
                           '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  <error>1</error>\n  '
                           '<message>Trackback is already registered</message>\n  \n</response>\n')
+
 
 class TestTransport(Transport):
     """Handles connections to XML-RPC server
@@ -684,6 +686,7 @@ class PingBackTestCase(TestCase):
         response = self.server.pingback.extensions.getPingbacks(target)
         self.assertEquals(response, ['http://localhost:8000/2010/01/01/my-second-entry/',
                                      'http://example.com/blog/1/'])
+
 
 class MetaWeblogTestCase(TestCase):
     """Test cases for MetaWeblog"""
@@ -892,7 +895,7 @@ class MetaWeblogTestCase(TestCase):
         entry.title = 'Title edited'
         entry.creation_date = datetime(2000, 1, 1)
         post = post_structure(entry, self.site)
-        post['categories'] =  ''
+        post['categories'] = ''
         post['description'] = 'Content edited'
         post['mt_excerpt'] = 'Content edited'
         post['wp_slug'] = 'slug-edited'
@@ -917,6 +920,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.authors.count(), 1)
         self.assertEquals(entry.authors.all()[0], self.contributor)
         self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
+
 
 class ExternalUrlsPingerTestCase(TestCase):
     """Test cases for ExternalUrlsPinger"""
@@ -989,6 +993,7 @@ class ExternalUrlsPingerTestCase(TestCase):
                            'http://example.com/': 'http://example.com/xmlrpc.php'})
         # Remove stub
         zinnia.ping.urlopen = self.original_urlopen
+
 
 class TemplateTagsTestCase(TestCase):
     """Test cases for Template tags"""
@@ -1070,7 +1075,7 @@ class TemplateTagsTestCase(TestCase):
         self.entry.status = DRAFT
         self.entry.save()
         context = get_popular_entries(3)
-        self.assertEquals(context['entries'], [second_entry,])
+        self.assertEquals(context['entries'], [second_entry])
 
     def test_get_similar_entries(self):
         self.publish_entry()
@@ -1241,4 +1246,3 @@ class TemplateTagsTestCase(TestCase):
                           'http://www.gravatar.com/avatar/86d4fd4a22de452a9228298731a0b592.jpg?s=80&amp;r=g')
         self.assertEquals(get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404'),
                           'http://www.gravatar.com/avatar/86d4fd4a22de452a9228298731a0b592.jpg?s=15&amp;r=x&amp;d=404')
-

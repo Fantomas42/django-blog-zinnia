@@ -51,6 +51,7 @@ class EntryMenu(CMSAttachMenu):
                                         entry.pk, key_archive_day))
         return nodes
 
+
 class CategoryMenu(CMSAttachMenu):
     """Menu for the categories"""
     name = _('Zinnia Category Menu')
@@ -63,6 +64,7 @@ class CategoryMenu(CMSAttachMenu):
             nodes.append(NavigationNode(category.title, category.get_absolute_url(),
                                         category.pk, 'categories'))
         return nodes
+
 
 class AuthorMenu(CMSAttachMenu):
     """Menu for the authors"""
@@ -78,6 +80,7 @@ class AuthorMenu(CMSAttachMenu):
                                         author.pk, 'authors'))
         return nodes
 
+
 class TagMenu(CMSAttachMenu):
     """Menu for the tags"""
     name = _('Zinnia Tag Menu')
@@ -91,6 +94,7 @@ class TagMenu(CMSAttachMenu):
                                         reverse('zinnia_tag_detail', args=[tag.name]),
                                         tag.pk, 'tags'))
         return nodes
+
 
 class EntryModifier(Modifier):
     """Menu Modifier for entries,

@@ -5,6 +5,7 @@ from math import sqrt
 from zinnia.settings import F_MIN
 from zinnia.settings import F_MAX
 
+
 def pearson_score(l1, l2):
     """Compute the pearson score between 2 lists of vectors"""
     sum1 = sum(l1)
@@ -26,12 +27,13 @@ class ClusteredModel(object):
 
     def __init__(self, info_dict):
         self.queryset = info_dict.get('queryset', [])
-        self.fields = info_dict.get('fields', ['pk',])
+        self.fields = info_dict.get('fields', ['pk'])
 
     def dataset(self):
         dataset = {}
         for item in self.queryset.filter():
-            dataset[item] = ' '.join([item.__dict__[field] for field in self.fields])
+            dataset[item] = ' '.join([item.__dict__[field]
+                                      for field in self.fields])
         return dataset
 
 
@@ -69,11 +71,13 @@ class VectorBuilder(object):
         self.dataset = {}
         self.columns = top_words
         for instance in data.keys():
-            self.dataset[instance] = [data[instance].get(word, 0) for word in top_words]
+            self.dataset[instance] = [data[instance].get(word, 0)
+                                      for word in top_words]
         self.key = self.generate_key()
 
     def generate_key(self):
-        return '-'.join([str(c.queryset.filter().count()) for c in self.clustered_models])
+        return '-'.join([str(c.queryset.filter().count())
+                         for c in self.clustered_models])
 
     def flush(self):
         if self.key != self.generate_key():
@@ -82,5 +86,3 @@ class VectorBuilder(object):
     def __call__(self):
         self.flush()
         return self.columns, self.dataset
-    
-        

@@ -23,18 +23,23 @@ from zinnia.admin.forms import EntryAdminForm
 class EntryAdmin(admin.ModelAdmin):
     form = EntryAdminForm
     date_hierarchy = 'creation_date'
-    fieldsets = ((_('Content'), {'fields': ('title', 'content', 'image', 'status')}),
+    fieldsets = ((_('Content'), {'fields': ('title', 'content',
+                                            'image', 'status')}),
                  (_('Options'), {'fields': ('excerpt', 'template', 'related',
                                             'authors', 'creation_date',
-                                            'start_publication', 'end_publication'),
+                                            'start_publication',
+                                            'end_publication'),
                                  'classes': ('collapse', 'collapse-closed')}),
                  (_('Privacy'), {'fields': ('password', 'login_required',),
                                  'classes': ('collapse', 'collapse-closed')}),
-                 (_('Discussion'), {'fields': ('comment_enabled', 'pingback_enabled')}),
-                 (_('Publication'), {'fields': ('sites', 'categories', 'tags', 'slug')}))
+                 (_('Discussion'), {'fields': ('comment_enabled',
+                                               'pingback_enabled')}),
+                 (_('Publication'), {'fields': ('sites', 'categories',
+                                                'tags', 'slug')}))
     list_filter = ('categories', 'authors', 'status', 'login_required',
                    'comment_enabled', 'pingback_enabled',
-                   'creation_date', 'start_publication', 'end_publication', 'sites')
+                   'creation_date', 'start_publication',
+                   'end_publication', 'sites')
     list_display = ('get_title', 'get_authors', 'get_categories',
                     'get_tags', 'get_sites',
                     'comment_enabled', 'pingback_enabled',
@@ -66,7 +71,8 @@ class EntryAdmin(admin.ModelAdmin):
         """Return the authors in HTML"""
         try:
             authors = ['<a href="%s" target="blank">%s</a>' %
-                       (reverse('zinnia_author_detail', args=[author.username]),
+                       (reverse('zinnia_author_detail',
+                                args=[author.username]),
                         author.username) for author in entry.authors.all()]
         except NoReverseMatch:
             authors = [author.username for author in entry.authors.all()]
@@ -81,7 +87,8 @@ class EntryAdmin(admin.ModelAdmin):
                           (category.get_absolute_url(), category.title)
                           for category in entry.categories.all()]
         except NoReverseMatch:
-            categories = [category.title for category in entry.categories.all()]
+            categories = [category.title for category in
+                          entry.categories.all()]
         return ', '.join(categories)
     get_categories.allow_tags = True
     get_categories.short_description = _('category(s)')
@@ -90,7 +97,8 @@ class EntryAdmin(admin.ModelAdmin):
         """Return the tags linked in HTML"""
         try:
             return ', '.join(['<a href="%s" target="blank">%s</a>' %
-                              (reverse('zinnia_tag_detail', args=[tag.name]), tag.name)
+                              (reverse('zinnia_tag_detail',
+                                       args=[tag.name]), tag.name)
                               for tag in Tag.objects.get_for_object(entry)])
         except NoReverseMatch:
             return entry.tags
@@ -118,7 +126,8 @@ class EntryAdmin(admin.ModelAdmin):
 
     def get_link(self, entry):
         """Return a formated link to the entry"""
-        return _('<a href="%s" target="blank">View</a>') % entry.get_absolute_url()
+        return _('<a href="%s" target="blank">View</a>') % \
+               entry.get_absolute_url()
     get_link.allow_tags = True
     get_link.short_description = _('View on site')
 
@@ -211,7 +220,8 @@ class EntryAdmin(admin.ModelAdmin):
     def close_comments(self, request, queryset):
         """Close the comments for selected entries"""
         queryset.update(comment_enabled=False)
-    close_comments.short_description = _('Close the comments for selected entries')
+    close_comments.short_description = _('Close the comments for '\
+                                         'selected entries')
 
     def close_pingbacks(self, request, queryset):
         """Close the pingbacks for selected entries"""
@@ -228,11 +238,15 @@ class EntryAdmin(admin.ModelAdmin):
                 if not result.get('flerror', True):
                     success += 1
                 else:
-                    self.message_user(request, '%s : %s' % (directory, result['message']))
+                    self.message_user(request, '%s : %s' % (directory,
+                                                            result['message']))
             if success:
-                self.message_user(request, _('%(directory)s directory succesfully pinged %(success)d entries.') %
+                self.message_user(request,
+                                  _('%(directory)s directory succesfully ' \
+                                    'pinged %(success)d entries.') %
                                   {'directory': directory, 'success': success})
-    ping_directories.short_description = _('Ping Directories for selected entries')
+    ping_directories.short_description = _('Ping Directories for ' \
+                                           'selected entries')
 
     def get_urls(self):
         entry_admin_urls = super(EntryAdmin, self).get_urls()
@@ -250,7 +264,7 @@ class EntryAdmin(admin.ModelAdmin):
     def _media(self):
         MEDIA_URL = settings.MEDIA_URL
         media = super(EntryAdmin, self).media + \
-                Media(css={'all': ('%scss/jquery.autocomplete.css' % MEDIA_URL,),},
+                Media(css={'all': ('%scss/jquery.autocomplete.css' % MEDIA_URL,)},
                       js=('%sjs/jquery.js' % MEDIA_URL,
                           '%sjs/jquery.bgiframe.js' % MEDIA_URL,
                           '%sjs/jquery.autocomplete.js' % MEDIA_URL,
@@ -265,5 +279,3 @@ class EntryAdmin(admin.ModelAdmin):
                 js=(reverse('tinymce-js', args=('admin/zinnia/entry',)),))
         return media
     media = property(_media)
-
-

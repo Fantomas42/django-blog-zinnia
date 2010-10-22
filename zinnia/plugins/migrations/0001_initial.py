@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding model 'LatestEntriesPlugin'
         db.create_table('cmsplugin_latestentriesplugin', (
             ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['zinnia.Category'], null=True, blank=True)),
@@ -30,10 +31,9 @@ class Migration(SchemaMigration):
             ('entry', models.ForeignKey(orm['zinnia.entry'], null=False))
         ))
         db.create_unique('plugins_selectedentriesplugin_entries', ['selectedentriesplugin_id', 'entry_id'])
-    
-    
+
     def backwards(self, orm):
-        
+
         # Deleting model 'LatestEntriesPlugin'
         db.delete_table('cmsplugin_latestentriesplugin')
 
@@ -42,8 +42,7 @@ class Migration(SchemaMigration):
 
         # Removing M2M table for field entries on 'SelectedEntriesPlugin'
         db.delete_table('plugins_selectedentriesplugin_entries')
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -150,5 +149,5 @@ class Migration(SchemaMigration):
             'title': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         }
     }
-    
+
     complete_apps = ['plugins']

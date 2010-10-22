@@ -1,9 +1,10 @@
 """XML-RPC methods for Zinnia"""
 
+
 ZINNIA_XMLRPC_PINGBACK = [('zinnia.xmlrpc.pingback.pingback_ping',
                            'pingback.ping'),
                           ('zinnia.xmlrpc.pingback.pingback_extensions_get_pingbacks',
-                           'pingback.extensions.getPingbacks'),]
+                           'pingback.extensions.getPingbacks')]
 
 ZINNIA_XMLRPC_METAWEBLOG = [('zinnia.xmlrpc.metaweblog.get_users_blogs',
                              'blogger.getUsersBlogs'),
@@ -26,7 +27,6 @@ ZINNIA_XMLRPC_METAWEBLOG = [('zinnia.xmlrpc.metaweblog.get_users_blogs',
                             ('zinnia.xmlrpc.metaweblog.edit_post',
                              'metaWeblog.editPost'),
                             ('zinnia.xmlrpc.metaweblog.new_media_object',
-                             'metaWeblog.newMediaObject'),]
+                             'metaWeblog.newMediaObject')]
 
 ZINNIA_XMLRPC_METHODS = ZINNIA_XMLRPC_PINGBACK + ZINNIA_XMLRPC_METAWEBLOG
-

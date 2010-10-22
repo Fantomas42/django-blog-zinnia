@@ -17,13 +17,13 @@ from zinnia.settings import PINGBACK_CONTENT_LENGTH
 from BeautifulSoup import BeautifulSoup
 from django_xmlrpc.decorators import xmlrpc_func
 
-
 UNDEFINED_ERROR = 0
 SOURCE_DOES_NOT_EXIST = 16
 SOURCE_DOES_NOT_LINK = 17
 TARGET_DOES_NOT_EXIST = 32
 TARGET_IS_NOT_PINGABLE = 33
 PINGBACK_ALREADY_REGISTERED = 48
+
 
 def generate_pingback_content(soup, target, max_length):
     """Generate a description text for the pingback"""
@@ -42,6 +42,7 @@ def generate_pingback_content(soup, target, max_length):
         return '...%s...' % content[start:end]
 
     return content
+
 
 @xmlrpc_func(returns='string', args=['string', 'string'])
 def pingback_ping(source, target):
@@ -81,12 +82,11 @@ def pingback_ping(source, target):
         except (Entry.DoesNotExist, IndexError):
             return TARGET_IS_NOT_PINGABLE
 
-
         soup = BeautifulSoup(document)
         title = soup.find('title')
         title = title and strip_tags(title) or _('No title')
-        description =  generate_pingback_content(soup, target,
-                                                 PINGBACK_CONTENT_LENGTH)
+        description = generate_pingback_content(soup, target,
+                                                PINGBACK_CONTENT_LENGTH)
 
         comment, created = Comment.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Entry),
@@ -99,6 +99,7 @@ def pingback_ping(source, target):
         return PINGBACK_ALREADY_REGISTERED
     except:
         return UNDEFINED_ERROR
+
 
 @xmlrpc_func(returns='string[]', args=['string'])
 def pingback_extensions_get_pingbacks(target):

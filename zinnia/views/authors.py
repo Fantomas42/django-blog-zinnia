@@ -11,6 +11,7 @@ from zinnia.views.decorators import update_queryset
 
 author_list = update_queryset(object_list, authors_published)
 
+
 def author_detail(request, username, page=None):
     """Display the entries of an author"""
     author = get_object_or_404(User, username=username)

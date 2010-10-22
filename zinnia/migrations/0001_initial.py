@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding model 'Category'
         db.create_table('zinnia_category', (
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, db_index=True)),
@@ -66,10 +67,9 @@ class Migration(SchemaMigration):
             ('user', models.ForeignKey(orm['auth.user'], null=False))
         ))
         db.create_unique('zinnia_entry_authors', ['entry_id', 'user_id'])
-    
-    
+
     def backwards(self, orm):
-        
+
         # Deleting model 'Category'
         db.delete_table('zinnia_category')
 
@@ -87,8 +87,7 @@ class Migration(SchemaMigration):
 
         # Removing M2M table for field authors on 'Entry'
         db.delete_table('zinnia_entry_authors')
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -160,5 +159,5 @@ class Migration(SchemaMigration):
             'title': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         }
     }
-    
+
     complete_apps = ['zinnia']

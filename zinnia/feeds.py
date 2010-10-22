@@ -19,8 +19,8 @@ from zinnia.settings import FEEDS_MAX_ITEMS
 from zinnia.managers import entries_published
 from zinnia.views.categories import get_category_or_404
 
-
 current_site = Site.objects.get_current()
+
 
 class ImgParser(SGMLParser):
     """Parser for getting img markups"""
@@ -38,7 +38,7 @@ class ImgParser(SGMLParser):
 class EntryFeed(Feed):
     """Base Entry Feed"""
     title_template = 'feeds/entry_title.html'
-    description_template= 'feeds/entry_description.html'
+    description_template = 'feeds/entry_description.html'
     feed_copyright = COPYRIGHT
 
     def item_pubdate(self, item):
@@ -172,7 +172,7 @@ class SearchEntries(EntryFeed):
 class EntryDiscussions(Feed):
     """Feed for discussions in an entry"""
     title_template = 'feeds/discussion_title.html'
-    description_template= 'feeds/discussion_description.html'
+    description_template = 'feeds/discussion_description.html'
     feed_copyright = COPYRIGHT
 
     def get_object(self, request, slug):
@@ -204,12 +204,12 @@ class EntryDiscussions(Feed):
 
     def description(self, obj):
         return _('The latest discussions for the entry %s') % obj.title
-    
+
 
 class EntryComments(EntryDiscussions):
     """Feed for comments in an entry"""
     title_template = 'feeds/comment_title.html'
-    description_template= 'feeds/comment_description.html'
+    description_template = 'feeds/comment_description.html'
 
     def items(self, obj):
         return obj.comments[:FEEDS_MAX_ITEMS]
@@ -223,10 +223,11 @@ class EntryComments(EntryDiscussions):
     def description(self, obj):
         return _('The latest comments for the entry %s') % obj.title
 
+
 class EntryPingbacks(EntryDiscussions):
     """Feed for pingbacks in an entry"""
     title_template = 'feeds/pingback_title.html'
-    description_template= 'feeds/pingback_description.html'
+    description_template = 'feeds/pingback_description.html'
 
     def items(self, obj):
         return obj.pingbacks[:FEEDS_MAX_ITEMS]
@@ -240,10 +241,11 @@ class EntryPingbacks(EntryDiscussions):
     def description(self, obj):
         return _('The latest pingbacks for the entry %s') % obj.title
 
+
 class EntryTrackbacks(EntryDiscussions):
     """Feed for trackbacks in an entry"""
     title_template = 'feeds/trackback_title.html'
-    description_template= 'feeds/trackback_description.html'
+    description_template = 'feeds/trackback_description.html'
 
     def items(self, obj):
         return obj.trackbacks[:FEEDS_MAX_ITEMS]
@@ -257,39 +259,47 @@ class EntryTrackbacks(EntryDiscussions):
     def description(self, obj):
         return _('The latest trackbacks for the entry %s') % obj.title
 
-# Atom versions of the feeds
 
+# Atom versions of the feeds
 class AtomLatestEntries(LatestEntries):
     feed_type = Atom1Feed
     subtitle = LatestEntries.description
+
 
 class AtomCategoryEntries(CategoryEntries):
     feed_type = Atom1Feed
     subtitle = CategoryEntries.description
 
+
 class AtomAuthorEntries(AuthorEntries):
     feed_type = Atom1Feed
     subtitle = AuthorEntries.description
+
 
 class AtomTagEntries(TagEntries):
     feed_type = Atom1Feed
     subtitle = TagEntries.description
 
+
 class AtomSearchEntries(SearchEntries):
     feed_type = Atom1Feed
     subtitle = SearchEntries.description
+
 
 class AtomEntryDiscussions(EntryDiscussions):
     feed_type = Atom1Feed
     subtitle = EntryDiscussions.description
 
+
 class AtomEntryComments(EntryComments):
     feed_type = Atom1Feed
     subtitle = EntryComments.description
 
+
 class AtomEntryPingbacks(EntryPingbacks):
     feed_type = Atom1Feed
     subtitle = EntryPingbacks.description
+
 
 class AtomEntryTrackbacks(EntryTrackbacks):
     feed_type = Atom1Feed

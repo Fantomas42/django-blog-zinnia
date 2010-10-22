@@ -15,4 +15,3 @@ urlpatterns = patterns('',
                        url(r'^', include('zinnia.urls.capabilities')),
                        url(r'^', include('zinnia.urls.entries')),
                        )
-

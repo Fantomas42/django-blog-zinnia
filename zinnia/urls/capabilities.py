@@ -5,7 +5,6 @@ from django.contrib.sites.models import Site
 
 from zinnia.settings import PROTOCOL
 
-
 extra_context = {'protocol': PROTOCOL,
                  'site': Site.objects.get_current()}
 

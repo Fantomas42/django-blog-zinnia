@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from zinnia.admin.forms import CategoryAdminForm
 
+
 class CategoryAdmin(admin.ModelAdmin):
     form = CategoryAdminForm
     fields = ('title', 'parent', 'description', 'slug')

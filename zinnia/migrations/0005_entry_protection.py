@@ -4,25 +4,24 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding field 'Entry.login_required'
         db.add_column('zinnia_entry', 'login_required', self.gf('django.db.models.fields.BooleanField')(default=False, blank=True), keep_default=False)
 
         # Adding field 'Entry.password'
         db.add_column('zinnia_entry', 'password', self.gf('django.db.models.fields.CharField')(default='', max_length=50, blank=True), keep_default=False)
 
-
     def backwards(self, orm):
-        
+
         # Deleting field 'Entry.login_required'
         db.delete_column('zinnia_entry', 'login_required')
 
         # Deleting field 'Entry.password'
         db.delete_column('zinnia_entry', 'password')
-
 
     models = {
         'auth.group': {

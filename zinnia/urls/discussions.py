@@ -7,4 +7,3 @@ urlpatterns = patterns('',
                            {'template': 'comments/zinnia/entry/posted.html'},
                            name='zinnia_discussion_success'),
                        )
-

@@ -31,7 +31,8 @@ class CategorySitemap(Sitemap):
         len_entries = float(Entry.published.count())
         self.cache_categories = {}
         for cat in categories:
-            self.cache_categories[cat.pk] = cat.entries_published_set().count() / len_entries
+            self.cache_categories[cat.pk] = cat.entries_published_set(
+                ).count() / len_entries
 
     def items(self):
         categories = Category.objects.all()
@@ -77,7 +78,8 @@ class TagSitemap(Sitemap):
         len_entries = float(Entry.published.count())
         self.cache_tags = {}
         for tag in tags:
-            entries = TaggedItem.objects.get_by_model(Entry.published.all(), tag)
+            entries = TaggedItem.objects.get_by_model(
+                Entry.published.all(), tag)
             self.cache_tags[tag.pk] = (entries, entries.count() / len_entries)
 
     def items(self):

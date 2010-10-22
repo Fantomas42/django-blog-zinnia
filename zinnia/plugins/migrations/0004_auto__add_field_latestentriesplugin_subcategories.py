@@ -4,19 +4,18 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding field 'LatestEntriesPlugin.subcategories'
         db.add_column('cmsplugin_latestentriesplugin', 'subcategories', self.gf('django.db.models.fields.BooleanField')(default=True), keep_default=False)
 
-
     def backwards(self, orm):
-        
+
         # Deleting field 'LatestEntriesPlugin.subcategories'
         db.delete_column('cmsplugin_latestentriesplugin', 'subcategories')
-
 
     models = {
         'auth.group': {

@@ -6,12 +6,11 @@ from zinnia.models import Entry
 from zinnia.settings import PAGINATION
 from zinnia.managers import tags_published
 
-
 tag_conf = {'queryset': tags_published(),
             'template_name': 'zinnia/tag_list.html'}
 
 tag_conf_entry = {'queryset_or_model': Entry.published.all(),
-                  'paginate_by': PAGINATION,}
+                  'paginate_by': PAGINATION}
 
 urlpatterns = patterns('zinnia.views.tags',
                        url(r'^$', 'tag_list',

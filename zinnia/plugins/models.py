@@ -11,7 +11,8 @@ from zinnia.models import Category
 from zinnia.plugins.settings import PLUGINS_TEMPLATES
 
 TEMPLATES = [('zinnia/cms/entry_list.html', _('Entry list (default)')),
-             ('zinnia/cms/entry_detail.html', _('Entry detailed')),] + PLUGINS_TEMPLATES
+             ('zinnia/cms/entry_detail.html', _('Entry detailed'))] + PLUGINS_TEMPLATES
+
 
 class LatestEntriesPlugin(CMSPlugin):
     """CMS Plugin for displaying latest entries"""
@@ -35,6 +36,7 @@ class LatestEntriesPlugin(CMSPlugin):
     def __unicode__(self):
         return _('%s entries') % self.number_of_entries
 
+
 class SelectedEntriesPlugin(CMSPlugin):
     """CMS Plugin for displaying custom entries"""
     entries = models.ManyToManyField(Entry, verbose_name=_('entries'))
@@ -48,4 +50,3 @@ class SelectedEntriesPlugin(CMSPlugin):
 
     def __unicode__(self):
         return _('%s entries') % self.entries.count()
-

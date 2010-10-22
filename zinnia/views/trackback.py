@@ -12,17 +12,17 @@ from zinnia.models import Entry
 
 @csrf_exempt
 def entry_trackback(request, slug):
-    """Set a TrackBack for an Entry"""    
+    """Set a TrackBack for an Entry"""
     entry = get_object_or_404(Entry.published, slug=slug)
-    
+
     if request.POST.get('url'):
         error = ''
         url = request.POST['url']
         site = Site.objects.get_current()
-        
+
         if not entry.pingback_enabled:
             error = u'Trackback is not enabled for %s' % entry.title
-        
+
         title = request.POST.get('title') or url
         excerpt = request.POST.get('excerpt') or title
         blog_name = request.POST.get('blog_name') or title
@@ -41,5 +41,5 @@ def entry_trackback(request, slug):
         return direct_to_template(request, 'zinnia/entry_trackback.xml',
                                   mimetype='text/xml',
                                   extra_context={'error': error})
-    
+
     return redirect(entry)

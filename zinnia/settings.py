@@ -17,7 +17,8 @@ ENTRY_TEMPLATES = getattr(settings, 'ZINNIA_ENTRY_TEMPLATES', [])
 ADVANCED_SEARCH = getattr(settings, 'ZINNIA_ADVANCED_SEARCH', True)
 
 WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
-                  'tinymce' in settings.INSTALLED_APPS and 'tinymce' or 'wymeditor')
+                  'tinymce' in settings.INSTALLED_APPS \
+                  and 'tinymce' or 'wymeditor')
 
 MAIL_COMMENT = getattr(settings, 'ZINNIA_MAIL_COMMENT', True)
 MAIL_COMMENT_REPLY = getattr(settings, 'ZINNIA_MAIL_COMMENT_REPLY', False)
@@ -39,7 +40,8 @@ PINGBACK_CONTENT_LENGTH = getattr(settings,
 F_MIN = getattr(settings, 'ZINNIA_F_MIN', 0.1)
 F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
 
-USE_BITLY = getattr(settings, 'ZINNIA_USE_BITLY', 'django_bitly' in settings.INSTALLED_APPS)
+USE_BITLY = getattr(settings, 'ZINNIA_USE_BITLY',
+                    'django_bitly' in settings.INSTALLED_APPS)
 
 try:
     import tweepy
@@ -51,5 +53,3 @@ TWITTER_CONSUMER_KEY = getattr(settings, 'TWITTER_CONSUMER_KEY', '')
 TWITTER_CONSUMER_SECRET = getattr(settings, 'TWITTER_CONSUMER_SECRET', '')
 TWITTER_ACCESS_KEY = getattr(settings, 'TWITTER_ACCESS_KEY', '')
 TWITTER_ACCESS_SECRET = getattr(settings, 'TWITTER_ACCESS_SECRET', '')
-
-
