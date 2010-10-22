@@ -14,7 +14,8 @@ Contents:
    WORDPRESS_2_ZINNIA
    TESTS
    FAQ
-   HISTORY
+   THANKS
+   CHANGELOG
 
 Related
 -------
