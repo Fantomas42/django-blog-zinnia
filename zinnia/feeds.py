@@ -4,6 +4,7 @@ from sgmllib import SGMLParser
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
+from django.core.urlresolvers import NoReverseMatch
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
@@ -60,7 +61,13 @@ class EntryFeed(Feed):
 
     def item_author_link(self, item):
         """Returns the author's URL"""
-        return '%s://%s' % (PROTOCOL, CURRENT_SITE.domain)
+        url = '%s://%s' % (PROTOCOL, CURRENT_SITE.domain)
+        try:
+            author_url = reverse('zinnia_author_detail',
+                                 args=[item.authors.all()[0].username])
+            return url + author_url
+        except NoReverseMatch:
+            return url
 
     def item_enclosure_url(self, item):
         """Returns an image for enclosure"""
