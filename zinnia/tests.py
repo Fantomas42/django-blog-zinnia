@@ -253,6 +253,9 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.pingbacks.count(), 1)
         self.assertEquals(self.entry.trackbacks.count(), 1)
 
+    def test_str(self):
+        self.assertEquals(str(self.entry), 'My entry: draft')
+
     def test_word_count(self):
         self.assertEquals(self.entry.word_count, 2)
 
@@ -482,6 +485,12 @@ class ZinniaViewsTestCase(TestCase):
 
     def test_zinnia_entry_search(self):
         self.check_publishing_context('/search/?pattern=test', 2, 3)
+        response = self.client.get('/search/?pattern=ab')
+        self.assertEquals(len(response.context['object_list']), 0)
+        self.assertEquals(response.context['error'], 'The pattern is too short')
+        response = self.client.get('/search/')
+        self.assertEquals(len(response.context['object_list']), 0)
+        self.assertEquals(response.context['error'], 'No pattern to search found')
 
     def test_zinnia_sitemap(self):
         response = self.client.get('/sitemap/')
