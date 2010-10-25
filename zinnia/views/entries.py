@@ -1,4 +1,4 @@
-"""Views for zinnia entries"""
+"""Views for Zinnia entries"""
 from django.views.generic.list_detail import object_list
 from django.views.generic.date_based import archive_year
 from django.views.generic.date_based import archive_month

@@ -1,4 +1,4 @@
-"""Context Processors for zinnia"""
+"""Context Processors for Zinnia"""
 from zinnia import __version__
 from zinnia.settings import MEDIA_URL
 

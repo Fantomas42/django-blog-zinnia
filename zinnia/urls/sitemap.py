@@ -1,4 +1,4 @@
-"""Urls for the zinnia sitemap"""
+"""Urls for the Zinnia sitemap"""
 from django.conf.urls.defaults import url
 from django.conf.urls.defaults import patterns
 

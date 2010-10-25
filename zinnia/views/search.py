@@ -1,4 +1,4 @@
-"""Views for zinnia entries search"""
+"""Views for Zinnia entries search"""
 from django.utils.translation import ugettext as _
 from django.views.generic.list_detail import object_list
 

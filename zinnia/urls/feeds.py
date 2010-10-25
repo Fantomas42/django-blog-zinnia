@@ -1,4 +1,4 @@
-"""Urls for the zinnia feeds"""
+"""Urls for the Zinnia feeds"""
 from django.conf.urls.defaults import url
 from django.conf.urls.defaults import patterns
 

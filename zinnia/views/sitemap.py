@@ -1,4 +1,4 @@
-"""Views for zinnia sitemap"""
+"""Views for Zinnia sitemap"""
 from django.views.generic.simple import direct_to_template
 
 from zinnia.models import Entry

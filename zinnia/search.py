@@ -1,4 +1,4 @@
-"""Search module with complex query parsing for zinnia"""
+"""Search module with complex query parsing for Zinnia"""
 from pyparsing import Word
 from pyparsing import Group
 from pyparsing import Forward

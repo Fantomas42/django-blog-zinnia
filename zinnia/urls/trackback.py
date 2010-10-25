@@ -1,4 +1,4 @@
-"""Urls for the zinnia trackback"""
+"""Urls for the Zinnia trackback"""
 from django.conf.urls.defaults import url
 from django.conf.urls.defaults import patterns
 

@@ -1,4 +1,4 @@
-"""Views for zinnia entries"""
+"""Views for Zinnia channels"""
 from django.views.generic.list_detail import object_list
 
 from zinnia.models import Entry
