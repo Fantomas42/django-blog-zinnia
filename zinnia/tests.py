@@ -1247,3 +1247,25 @@ class TemplateTagsTestCase(TestCase):
                           'http://www.gravatar.com/avatar/86d4fd4a22de452a9228298731a0b592.jpg?s=80&amp;r=g')
         self.assertEquals(get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404'),
                           'http://www.gravatar.com/avatar/86d4fd4a22de452a9228298731a0b592.jpg?s=15&amp;r=x&amp;d=404')
+
+
+def suite():
+    """Suite of TestCases for Django"""
+    from unittest import TestSuite
+    from unittest import TestLoader
+    from django.conf import settings
+
+    suite = TestSuite()
+    loader = TestLoader()
+
+    test_cases = (ManagersTestCase, EntryTestCase, CategoryTestCase,
+                  ZinniaViewsTestCase, ExternalUrlsPingerTestCase,
+                  TemplateTagsTestCase)
+    if 'django_xmlrpc' in settings.INSTALLED_APPS:
+        test_cases += (PingBackTestCase, MetaWeblogTestCase)
+
+    for test_class in test_cases:
+        tests = loader.loadTestsFromTestCase(test_class)
+        suite.addTests(tests)
+
+    return suite
