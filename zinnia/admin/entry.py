@@ -21,6 +21,7 @@ from zinnia.admin.forms import EntryAdminForm
 
 
 class EntryAdmin(admin.ModelAdmin):
+    """Admin for Entry model"""
     form = EntryAdminForm
     date_hierarchy = 'creation_date'
     fieldsets = ((_('Content'), {'fields': ('title', 'content',
@@ -132,6 +133,7 @@ class EntryAdmin(admin.ModelAdmin):
     get_link.short_description = _('View on site')
 
     def get_short_url(self, entry):
+        """Return the short url in HTML"""
         short_url = entry.short_url
         if not short_url:
             return _('Unavailable')

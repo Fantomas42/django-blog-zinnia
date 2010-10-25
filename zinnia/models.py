@@ -46,6 +46,7 @@ class Category(MPTTModel):
 
     @property
     def tree_path(self):
+        """Return category's tree path, by his ancestors"""
         if self.parent:
             return '%s/%s' % (self.parent.tree_path, self.slug)
         return '%s' % self.slug
@@ -55,14 +56,17 @@ class Category(MPTTModel):
 
     @models.permalink
     def get_absolute_url(self):
+        """Return category's URL"""
         return ('zinnia_category_detail', (self.tree_path,))
 
     class Meta:
+        """Category's Meta"""
         ordering = ['title']
         verbose_name = _('category')
         verbose_name_plural = _('categories')
 
     class MPTTMeta:
+        """Category's MPTTMeta"""
         order_insertion_by = ['title']
 
 
@@ -202,6 +206,7 @@ class Entry(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
+        """Return entry's URL"""
         return ('zinnia_entry_detail', (), {
             'year': self.creation_date.strftime('%Y'),
             'month': self.creation_date.strftime('%m'),
@@ -209,6 +214,7 @@ class Entry(models.Model):
             'slug': self.slug})
 
     class Meta:
+        """Entry's Meta"""
         ordering = ['-creation_date']
         verbose_name = _('entry')
         verbose_name_plural = _('entries')

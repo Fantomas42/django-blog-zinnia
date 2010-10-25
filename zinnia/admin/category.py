@@ -7,6 +7,7 @@ from zinnia.admin.forms import CategoryAdminForm
 
 
 class CategoryAdmin(admin.ModelAdmin):
+    """Admin for Category model"""
     form = CategoryAdminForm
     fields = ('title', 'parent', 'description', 'slug')
     list_display = ('title', 'slug', 'get_tree_path', 'description')
@@ -15,6 +16,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ('parent',)
 
     def get_tree_path(self, category):
+        """Return the category's tree path in HTML"""
         try:
             return '<a href="%s" target="blank">/%s/</a>' % \
                    (category.get_absolute_url(), category.tree_path)

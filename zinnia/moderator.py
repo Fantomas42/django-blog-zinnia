@@ -44,14 +44,14 @@ class EntryCommentModerator(CommentModerator):
 
         if recipient_list:
             site = Site.objects.get_current()
-            t = loader.get_template('comments/comment_reply_email.txt')
-            c = Context({'comment': comment, 'site': site,
-                         'protocol': PROTOCOL,
-                         'content_object': content_object})
+            template = loader.get_template('comments/comment_reply_email.txt')
+            context = Context({'comment': comment, 'site': site,
+                               'protocol': PROTOCOL,
+                               'content_object': content_object})
             subject = _('[%(site)s] New comment posted on "%(title)s"') % \
                       {'site': site.name,
                        'title': content_object.title}
-            message = t.render(c)
+            message = template.render(context)
             send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
                       recipient_list, fail_silently=not settings.DEBUG)
 

@@ -16,6 +16,7 @@ from zinnia.settings import MEDIA_URL
 
 
 class CMSLatestEntriesPlugin(CMSPluginBase):
+    """Django-cms plugin for the latest entries filtered"""
     module = _('entries')
     model = LatestEntriesPlugin
     name = _('Latest entries')
@@ -48,6 +49,7 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
     text_enabled = True
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
+        """Filtering manytomany field"""
         if db_field.name == 'authors':
             kwargs['queryset'] = authors_published()
         if db_field.name == 'tags':
@@ -56,13 +58,15 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
             db_field, request, **kwargs)
 
     def render(self, context, instance, placeholder):
+        """Update the context with plugin's data"""
         entries = Entry.published.all()
 
         if instance.categories.count():
             cats = instance.categories.all()
 
             if instance.subcategories:
-                cats = itertools.chain(cats, *[c.get_descendants() for c in cats])
+                cats = itertools.chain(cats, *[c.get_descendants()
+                                               for c in cats])
 
             entries = entries.filter(categories__in=cats)
         if instance.authors.count():
@@ -78,10 +82,12 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
         return context
 
     def icon_src(self, instance):
+        """Icon source of the plugin"""
         return MEDIA_URL + u'img/plugin.png'
 
 
 class CMSSelectedEntriesPlugin(CMSPluginBase):
+    """Django-cms plugin for a selection of entries"""
     module = _('entries')
     model = SelectedEntriesPlugin
     name = _('Selected entries')
@@ -91,12 +97,14 @@ class CMSSelectedEntriesPlugin(CMSPluginBase):
     text_enabled = True
 
     def render(self, context, instance, placeholder):
+        """Update the context with plugin's data"""
         context.update({'entries': instance.entries.all(),
                         'object': instance,
                         'placeholder': placeholder})
         return context
 
     def icon_src(self, instance):
+        """Icon source of the plugin"""
         return MEDIA_URL + u'img/plugin.png'
 
 plugin_pool.register_plugin(CMSLatestEntriesPlugin)

@@ -30,18 +30,27 @@ class TreeNodeChoiceField(forms.ModelChoiceField):
 
 
 class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
+    """MPTT version of ModelChoiceIterator"""
     def choice(self, obj):
-        tree_id = getattr(obj, getattr(self.queryset.model._meta, 'tree_id_atrr', 'tree_id'), 0)
-        left = getattr(obj, getattr(self.queryset.model._meta, 'left_atrr', 'lft'), 0)
-        return super(MPTTModelChoiceIterator, self).choice(obj) + ((tree_id, left),)
+        """Overriding choice method"""
+        tree_id = getattr(obj, getattr(self.queryset.model._meta,
+                                       'tree_id_atrr', 'tree_id'), 0)
+        left = getattr(obj, getattr(self.queryset.model._meta,
+                                    'left_atrr', 'lft'), 0)
+        return super(MPTTModelChoiceIterator,
+                     self).choice(obj) + ((tree_id, left),)
 
 
 class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
+    """MPTT version of ModelMultipleChoiceField"""
     def label_from_instance(self, obj):
-        level = getattr(obj, getattr(self.queryset.model._meta, 'level_attr', 'level'), 0)
+        """Overriding label_from_instance"""
+        level = getattr(obj, getattr(self.queryset.model._meta,
+                                     'level_attr', 'level'), 0)
         return u'%s %s' % ('-' * level, smart_unicode(obj))
 
     def _get_choices(self):
+        """Overriding _get_choices"""
         if hasattr(self, '_choices'):
             return self._choices
         return MPTTModelChoiceIterator(self)
@@ -50,19 +59,26 @@ class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
 
 
 class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
+    """MPTT version of FilteredSelectMultiple"""
     def __init__(self, verbose_name, is_stacked, attrs=None, choices=()):
-        super(MPTTFilteredSelectMultiple, self).__init__(verbose_name, is_stacked, attrs, choices)
+        super(MPTTFilteredSelectMultiple, self).__init__(
+            verbose_name, is_stacked, attrs, choices)
 
     def render_options(self, choices, selected_choices):
         """
-        this is copy'n'pasted from django.forms.widgets Select(Widget)
-        change to the for loop and render_option so they will unpack and use our extra tuple of mptt sort fields
-        (if you pass in some default choices for this field, make sure they have the extra tuple too!)
+        This is copy'n'pasted from django.forms.widgets Select(Widget)
+        change to the for loop and render_option so they will unpack
+        and use our extra tuple of mptt sort fields (if you pass in
+        some default choices for this field, make sure they have the
+        extra tuple too!)
         """
         def render_option(option_value, option_label, sort_fields):
+            """Inner scope render_option"""
             option_value = force_unicode(option_value)
-            selected_html = (option_value in selected_choices) and u' selected="selected"' or ''
-            return u'<option value="%s" data-tree-id="%s" data-left-value="%s"%s>%s</option>' % (
+            selected_html = (option_value in selected_choices) \
+                            and u' selected="selected"' or ''
+            return u'<option value="%s" data-tree-id="%s" ' \
+                   'data-left-value="%s"%s>%s</option>' % (
                 escape(option_value),
                 sort_fields[0],
                 sort_fields[1],
@@ -72,17 +88,21 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         # Normalize to strings.
         selected_choices = set([force_unicode(v) for v in selected_choices])
         output = []
-        for option_value, option_label, sort_fields in chain(self.choices, choices):
+        for option_value, option_label, sort_fields in chain(
+            self.choices, choices):
             if isinstance(option_label, (list, tuple)):
-                output.append(u'<optgroup label="%s">' % escape(force_unicode(option_value)))
+                output.append(u'<optgroup label="%s">' % escape(
+                    force_unicode(option_value)))
                 for option in option_label:
                     output.append(render_option(*option))
                 output.append(u'</optgroup>')
             else:
-                output.append(render_option(option_value, option_label, sort_fields))
+                output.append(render_option(option_value, option_label,
+                                            sort_fields))
         return u'\n'.join(output)
 
     class Media:
+        """MPTTFilteredSelectMultiple's Media"""
         js = (settings.ADMIN_MEDIA_PREFIX + 'js/core.js',
               MEDIA_URL + 'js/mptt_m2m_selectbox.js',
               settings.ADMIN_MEDIA_PREFIX + 'js/SelectFilter2.js',)

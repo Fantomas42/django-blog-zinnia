@@ -21,7 +21,8 @@ class ZinniaCalendar(HTMLCalendar):
                                       args=[day_date.strftime('%Y'),
                                             day_date.strftime('%m'),
                                             day_date.strftime('%d')])
-            return '<td class="%s entry"><a href="%s" rel="archives">%d</a></td>' % (
+            return '<td class="%s entry"><a href="%s" '\
+                   'rel="archives">%d</a></td>' % (
                 self.cssclasses[weekday], archive_day_url, day)
 
         return super(ZinniaCalendar, self).formatday(day, weekday)
@@ -32,10 +33,12 @@ class ZinniaCalendar(HTMLCalendar):
         self.current_year = theyear
         self.current_month = themonth
         self.day_entries = [entries.creation_date.day for entries in
-                            Entry.published.filter(creation_date__year=theyear,
-                                                   creation_date__month=themonth)]
+                            Entry.published.filter(
+                                creation_date__year=theyear,
+                                creation_date__month=themonth)]
 
-        return super(ZinniaCalendar, self).formatmonth(theyear, themonth, withyear)
+        return super(ZinniaCalendar, self).formatmonth(
+            theyear, themonth, withyear)
 
     def formatweekday(self, day):
         """Return a weekday name translated
@@ -47,7 +50,7 @@ class ZinniaCalendar(HTMLCalendar):
         """Return a month name translated
         as a table row."""
         if withyear:
-            s = '%s %s' % (MONTHS[themonth].title(), theyear)
+            monthname = '%s %s' % (MONTHS[themonth].title(), theyear)
         else:
-            s = '%s' % MONTHS[themonth].title()
-        return '<tr><th colspan="7" class="month">%s</th></tr>' % s
+            monthname = '%s' % MONTHS[themonth].title()
+        return '<tr><th colspan="7" class="month">%s</th></tr>' % monthname

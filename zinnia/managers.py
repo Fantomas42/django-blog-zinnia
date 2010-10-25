@@ -15,8 +15,8 @@ def tags_published():
     """Return the pusblished tags"""
     from tagging.models import Tag
     from zinnia.models import Entry
-    tags_published = Tag.objects.usage_for_queryset(Entry.published.all())
-    return Tag.objects.filter(name__in=[t.name for t in tags_published])
+    tags_entry_published = Tag.objects.usage_for_queryset(Entry.published.all())
+    return Tag.objects.filter(name__in=[t.name for t in tags_entry_published])
 
 
 def authors_published():
@@ -41,14 +41,17 @@ class EntryPublishedManager(models.Manager):
     """Manager to retrieve published entries"""
 
     def get_query_set(self):
+        """Return published entries"""
         return entries_published(
             super(EntryPublishedManager, self).get_query_set())
 
     def on_site(self):
+        """Return entries published on current site"""
         return super(EntryPublishedManager, self).get_query_set(
             ).filter(sites=Site.objects.get_current())
 
     def search(self, pattern):
+        """Top level search method on entries"""
         if ADVANCED_SEARCH:
             try:
                 return self.advanced_search(pattern)
@@ -57,18 +60,20 @@ class EntryPublishedManager(models.Manager):
         return self.basic_search(pattern)
 
     def advanced_search(self, pattern):
+        """Advanced search on entries"""
         from zinnia.search import advanced_search
         return advanced_search(pattern)
 
     def basic_search(self, pattern):
+        """Basic search on entries"""
         lookup = None
         for pattern in pattern.split():
-            q = models.Q(content__icontains=pattern) | \
-                models.Q(excerpt__icontains=pattern) | \
-                models.Q(title__icontains=pattern)
+            query_part = models.Q(content__icontains=pattern) | \
+                         models.Q(excerpt__icontains=pattern) | \
+                         models.Q(title__icontains=pattern)
             if lookup is None:
-                lookup = q
+                lookup = query_part
             else:
-                lookup |= q
+                lookup |= query_part
 
         return self.get_query_set().filter(lookup)

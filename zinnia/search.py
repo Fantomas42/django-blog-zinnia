@@ -20,25 +20,25 @@ from zinnia.models import Entry
 
 
 # Simple tokens
-simple = Word(alphanums)
-quoted = dblQuotedString.setParseAction(removeQuotes)
-single = simple | quoted
-special = Combine(Word(alphas) + ":" + single | quoted)
+SIMPLE = Word(alphanums)
+QUOTED = dblQuotedString.setParseAction(removeQuotes)
+SINGLE = SIMPLE | QUOTED
+SPECIAL = Combine(Word(alphas) + ":" + SINGLE | QUOTED)
 
 # Recursive parenthetical groups
-terms = Forward()
-parenthetical = Suppress("(") + Group(terms) + Suppress(")")
+TERMS = Forward()
+PARENTHETICAL = Suppress("(") + Group(TERMS) + Suppress(")")
 
 # Negative terms
-negative = Combine("-" + (special | single | parenthetical))
+NEGATIVE = Combine("-" + (SPECIAL | SINGLE | PARENTHETICAL))
 
 # Boolean operators
-operator = CaselessLiteral("or") | CaselessLiteral("and")
+OPERATOR = CaselessLiteral("or") | CaselessLiteral("and")
 
 # Bring it all together
-term = special | single | parenthetical | negative
-terms << term + ZeroOrMore(Optional(operator) + terms)
-query = OneOrMore(terms) + StringEnd()
+TERM = SPECIAL | SINGLE | PARENTHETICAL | NEGATIVE
+TERMS << TERM + ZeroOrMore(Optional(OPERATOR) + TERMS)
+QUERY = OneOrMore(TERMS) + StringEnd()
 
 
 def build_queryset(elements, level=0):
@@ -50,46 +50,46 @@ def build_queryset(elements, level=0):
             if elem in ('and', 'or'):
                 continue
             if elem.startswith('category:'):
-                p = elem.replace('category:', '')
-                q = Q(categories__title__iexact=p) | \
-                    Q(categories__slug__iexact=p)
+                pattern = elem.replace('category:', '')
+                query_part = Q(categories__title__iexact=pattern) | \
+                             Q(categories__slug__iexact=pattern)
 
             elif elem.startswith('tag:'):
-                p = elem.replace('tag:', '')
-                q = Q(tags__icontains=p)
+                pattern = elem.replace('tag:', '')
+                query_part = Q(tags__icontains=pattern)
 
             elif elem.startswith('author:'):
-                p = elem.replace('author:', '')
-                q = Q(authors__username__iexact=p)
+                pattern = elem.replace('author:', '')
+                query_part = Q(authors__username__iexact=pattern)
 
             elif elem.startswith('-'):
-                p = elem.replace('-', '')
-                q = ~Q(content__icontains=p) & \
-                    ~Q(excerpt__icontains=p) & \
-                    ~Q(title__icontains=p)
+                pattern = elem.replace('-', '')
+                query_part = ~Q(content__icontains=pattern) & \
+                             ~Q(excerpt__icontains=pattern) & \
+                             ~Q(title__icontains=pattern)
             else:
-                q = Q(content__icontains=elem) | \
-                    Q(excerpt__icontains=elem) | \
-                    Q(title__icontains=elem)
-            exprs[elem] = q
+                query_part = Q(content__icontains=elem) | \
+                             Q(excerpt__icontains=elem) | \
+                             Q(title__icontains=elem)
+            exprs[elem] = query_part
         else:
-            q = build_queryset(elem, level=level + 1)
-            exprs[elem] = q
+            query_part = build_queryset(elem, level=level + 1)
+            exprs[elem] = query_part
 
     lookup = None
     for i in range(len(elements)):
         elem = elements[i]
         if elem in exprs:
-            q = exprs[elem]
+            query_part = exprs[elem]
         else:
             continue
 
         if lookup is None:
-            lookup = q
+            lookup = query_part
         elif elements[i - 1] == 'or':
-            lookup |= q
+            lookup |= query_part
         else:
-            lookup &= q
+            lookup &= query_part
 
     if not level:
         return Entry.published.filter(lookup).distinct()
@@ -99,5 +99,5 @@ def build_queryset(elements, level=0):
 def advanced_search(pattern):
     """Parse the grammar of a pattern
     and build a queryset with it"""
-    query_parsed = query.parseString(pattern)
+    query_parsed = QUERY.parseString(pattern)
     return build_queryset(query_parsed)

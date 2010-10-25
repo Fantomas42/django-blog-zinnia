@@ -10,6 +10,7 @@ from zinnia.admin.widgets import MPTTModelMultipleChoiceField
 
 
 class CategoryAdminForm(forms.ModelForm):
+    """Form for Category's Admin"""
     parent = TreeNodeChoiceField(label=_('parent category').capitalize(),
                                  required=False,
                                  empty_label=_('No parent category'),
@@ -17,20 +18,25 @@ class CategoryAdminForm(forms.ModelForm):
                                  level_indicator=u'|--')
 
     def clean_parent(self):
+        """Check if category parent is not selfish"""
         data = self.cleaned_data['parent']
         if data == self.instance:
-            raise forms.ValidationError(_('A category cannot be parent of itself.'))
+            raise forms.ValidationError(
+                _('A category cannot be parent of itself.'))
         return data
 
     class Meta:
+        """CategoryAdminForm's Meta"""
         model = Category
 
 
 class EntryAdminForm(forms.ModelForm):
+    """Form for Entry's Admin"""
     categories = MPTTModelMultipleChoiceField(
         Category.objects.all(),
         widget=MPTTFilteredSelectMultiple(_('categories'), False,
                                           attrs={'rows': '10'}))
 
     class Meta:
+        """EntryAdminForm's Meta"""
         model = Entry

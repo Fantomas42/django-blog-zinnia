@@ -14,9 +14,9 @@ class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         verbosity = int(options.get('verbosity', 1))
 
-        ct = ContentType.objects.get_for_model(Entry)
+        content_type = ContentType.objects.get_for_model(Entry)
         spams = Comment.objects.filter(is_public=False,
-                                       content_type=ct,
+                                       content_type=content_type,
                                        flags__flag='spam')
         spams_count = spams.count()
         spams.delete()

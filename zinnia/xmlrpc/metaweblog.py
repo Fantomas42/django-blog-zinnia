@@ -92,9 +92,11 @@ def post_structure(entry, site):
     author = entry.authors.all()[0]
     return {'title': entry.title,
             'description': unicode(entry.html_content),
-            'link': '%s://%s%s' % (PROTOCOL, site.domain, entry.get_absolute_url()),
+            'link': '%s://%s%s' % (PROTOCOL, site.domain,
+                                   entry.get_absolute_url()),
             # Basic Extensions
-            'permaLink': '%s://%s%s' % (PROTOCOL, site.domain, entry.get_absolute_url()),
+            'permaLink': '%s://%s%s' % (PROTOCOL, site.domain,
+                                        entry.get_absolute_url()),
             'categories': [cat.title for cat in entry.categories.all()],
             'dateCreated': DateTime(entry.creation_date.isoformat()),
             'postid': entry.pk,
@@ -135,10 +137,12 @@ def get_authors(apikey, username, password):
     """wp.getAuthors(api_key, username, password)
     => author structure[]"""
     authenticate(username, password)
-    return [author_structure(author) for author in User.objects.filter(is_staff=True)]
+    return [author_structure(author)
+            for author in User.objects.filter(is_staff=True)]
 
 
-@xmlrpc_func(returns='boolean', args=['string', 'string', 'string', 'string', 'string'])
+@xmlrpc_func(returns='boolean', args=['string', 'string',
+                                      'string', 'string', 'string'])
 def delete_post(apikey, post_id, username, password, publish):
     """blogger.deletePost(api_key, post_id, username, password, 'publish')
     => boolean"""
@@ -186,32 +190,37 @@ def new_category(blog_id, username, password, category_struct):
                      'description': category_struct['description'],
                      'slug': category_struct['slug']}
     if int(category_struct['parent_id']):
-        category_dict['parent'] = Category.objects.get(pk=category_struct['parent_id'])
+        category_dict['parent'] = Category.objects.get(
+            pk=category_struct['parent_id'])
     category = Category.objects.create(**category_dict)
 
     return category.pk
 
 
-@xmlrpc_func(returns='string', args=['string', 'string', 'string', 'struct', 'boolean'])
+@xmlrpc_func(returns='string', args=['string', 'string', 'string',
+                                     'struct', 'boolean'])
 def new_post(blog_id, username, password, post, publish):
     """metaWeblog.newPost(blog_id, username, password, post, publish)
     => post_id"""
     user = authenticate(username, password, 'zinnia.add_entry')
     if post.get('dateCreated'):
-        creation_date = datetime.strptime(post['dateCreated'].value.replace('Z', '').replace('-', ''),
-                                          '%Y%m%dT%H:%M:%S')
+        creation_date = datetime.strptime(
+            post['dateCreated'].value.replace('Z', '').replace('-', ''),
+            '%Y%m%dT%H:%M:%S')
     else:
         creation_date = datetime.now()
 
     entry_dict = {'title': post['title'],
                   'content': post['description'],
-                  'excerpt': post.get('mt_excerpt', truncate_words(strip_tags(post['description']), 50)),
+                  'excerpt': post.get('mt_excerpt', truncate_words(
+                      strip_tags(post['description']), 50)),
                   'creation_date': creation_date,
                   'last_update': creation_date,
                   'comment_enabled': post.get('mt_allow_comments', 1) == 1,
                   'pingback_enabled': post.get('mt_allow_pings', 1) == 1,
                   'tags': 'mt_keywords' in post and post['mt_keywords'] or '',
-                  'slug': 'wp_slug' in post and post['wp_slug'] or slugify(post['title']),
+                  'slug': 'wp_slug' in post and post['wp_slug'] or slugify(
+                      post['title']),
                   'password': post.get('wp_password', ''),
                   'status': publish and PUBLISHED or DRAFT}
     entry = Entry.objects.create(**entry_dict)
@@ -224,33 +233,38 @@ def new_post(blog_id, username, password, post, publish):
 
     entry.sites.add(Site.objects.get_current())
     if 'categories' in post:
-        entry.categories.add(*[Category.objects.get_or_create(title=cat, slug=slugify(cat))[0]
+        entry.categories.add(*[Category.objects.get_or_create(
+            title=cat, slug=slugify(cat))[0]
                                for cat in post['categories']])
 
     return entry.pk
 
 
-@xmlrpc_func(returns='boolean', args=['string', 'string', 'string', 'struct', 'boolean'])
+@xmlrpc_func(returns='boolean', args=['string', 'string', 'string',
+                                      'struct', 'boolean'])
 def edit_post(post_id, username, password, post, publish):
     """metaWeblog.editPost(post_id, username, password, post, publish)
     => boolean"""
     user = authenticate(username, password, 'zinnia.change_entry')
     entry = Entry.objects.get(id=post_id, authors=user)
     if post.get('dateCreated'):
-        creation_date = datetime.strptime(post['dateCreated'].value.replace('Z', '').replace('-', ''),
-                                          '%Y%m%dT%H:%M:%S')
+        creation_date = datetime.strptime(
+            post['dateCreated'].value.replace('Z', '').replace('-', ''),
+            '%Y%m%dT%H:%M:%S')
     else:
         creation_date = entry.creation_date
 
     entry.title = post['title']
     entry.content = post['description']
-    entry.excerpt = post.get('mt_excerpt', truncate_words(strip_tags(post['description']), 50))
+    entry.excerpt = post.get('mt_excerpt', truncate_words(
+        strip_tags(post['description']), 50))
     entry.creation_date = creation_date
     entry.last_update = datetime.now()
     entry.comment_enabled = post.get('mt_allow_comments', 1) == 1
     entry.pingback_enabled = post.get('mt_allow_pings', 1) == 1
     entry.tags = 'mt_keywords' in post and post['mt_keywords'] or ''
-    entry.slug = 'wp_slug' in post and post['wp_slug'] or slugify(post['title'])
+    entry.slug = 'wp_slug' in post and post['wp_slug'] or slugify(
+        post['title'])
     entry.status = publish and PUBLISHED or DRAFT
     entry.password = post.get('wp_password', '')
     entry.save()
@@ -263,7 +277,8 @@ def edit_post(post_id, username, password, post, publish):
 
     if 'categories' in post:
         entry.categories.clear()
-        entry.categories.add(*[Category.objects.get_or_create(title=cat, slug=slugify(cat))[0]
+        entry.categories.add(*[Category.objects.get_or_create(
+            title=cat, slug=slugify(cat))[0]
                                for cat in post['categories']])
     return True
 

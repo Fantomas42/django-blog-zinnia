@@ -8,6 +8,7 @@ from zinnia.plugins.settings import APP_MENUS
 
 
 class ZinniaApphook(CMSApp):
+    """Zinnia's Apphook"""
     name = _('Zinnia App Hook')
     urls = ['zinnia.urls']
     menus = APP_MENUS

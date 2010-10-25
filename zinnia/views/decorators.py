@@ -33,7 +33,8 @@ def password(request, entry):
     error = False
     if request.method == 'POST':
         if request.POST.get('password') == entry.password:
-            request.session['zinnia_entry_%s_password' % entry.pk] = entry.password
+            request.session[
+                'zinnia_entry_%s_password' % entry.pk] = entry.password
             return redirect(entry)
         error = True
     return render_to_response('zinnia/password.html', {'error': error},
@@ -46,6 +47,7 @@ def protect_entry(view):
     and specify the template used to render the entry"""
 
     def wrap(*ka, **kw):
+        """Do security check and retrieve the template"""
         request = ka[0]
         entry = get_object_or_404(Entry, slug=kw['slug'],
                                   creation_date__year=kw['year'],
