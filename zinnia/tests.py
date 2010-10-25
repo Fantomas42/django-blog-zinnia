@@ -22,6 +22,7 @@ from BeautifulSoup import BeautifulSoup
 
 from zinnia.models import Entry
 from zinnia.models import Category
+from zinnia.ping import SITE
 from zinnia.ping import ExternalUrlsPinger
 from zinnia.managers import DRAFT, PUBLISHED
 from zinnia.managers import tags_published
@@ -940,7 +941,7 @@ class ExternalUrlsPingerTestCase(TestCase):
                                                       'http://google.com/titi/'), True)
         self.assertEquals(self.pinger.is_external_url('http://example.com/blog/',
                                                       'http://example.com/page/'), False)
-        self.assertEquals(self.pinger.is_external_url('http://example.com/blog/'), False)
+        self.assertEquals(self.pinger.is_external_url('%s/blog/' % SITE), False)
         self.assertEquals(self.pinger.is_external_url('http://google.com/'), True)
         self.assertEquals(self.pinger.is_external_url('/blog/'), False)
 
@@ -949,9 +950,9 @@ class ExternalUrlsPingerTestCase(TestCase):
         self.assertEquals(external_urls, [])
         self.entry.content = """
         <p>This is a <a href="http://fantomas.willbreak.it/">link</a> to a site.</p>
-        <p>This is a <a href="http://example.com/blog/">link</a> within my site.</p>
+        <p>This is a <a href="%s/blog/">link</a> within my site.</p>
         <p>This is a <a href="/blog/">relative link</a> within my site.</p>
-        """
+        """ % SITE
         self.entry.save()
         external_urls = self.pinger.find_external_urls(self.entry)
         self.assertEquals(external_urls, ['http://fantomas.willbreak.it/'])
@@ -977,8 +978,8 @@ class ExternalUrlsPingerTestCase(TestCase):
         if 'example' in url:
             response = cStringIO.StringIO('')
             return addinfourl(response, {'X-Pingback': '/xmlrpc.php'}, url)
-        else:
-            response = cStringIO.StringIO(self.client.get(url).content)
+        elif 'localhost' in url:
+            response = cStringIO.StringIO('<link rel="pingback" href="/xmlrpc/">')
             return addinfourl(response, {}, url)
 
     def test_find_pingback_urls(self):
