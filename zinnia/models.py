@@ -116,6 +116,7 @@ class Entry(models.Model):
                                 help_text=_('protect the entry with a password'))
 
     template = models.CharField(_('template'), max_length=250,
+                                default='zinnia/entry_detail.html',
                                 choices=[('zinnia/entry_detail.html',
                                           _('Default template'))] +
                                 ENTRY_TEMPLATES,
