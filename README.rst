@@ -369,6 +369,19 @@ Run this command to launch the tests. ::
 
   $> ./bin/test
 
+To view the code coverage run this command. ::
+
+  $> ./bin/cover
+
+Execute these command to check the code conventions. ::
+
+  $> ./bin/pyflakes zinnia
+  $> ./bin/pep8 --count -r --exclude=tests.py,migrations zinnia
+
+For building the HTML documentation run this. ::
+
+  $> ./bin/docs
+
 Pretty easy no ?
 
 Translations
