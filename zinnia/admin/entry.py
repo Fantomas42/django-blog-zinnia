@@ -56,6 +56,10 @@ class EntryAdmin(admin.ModelAdmin):
     actions_on_top = True
     actions_on_bottom = True
 
+    def __init__(self, model, admin_site):
+        self.form.admin_site = admin_site
+        super(EntryAdmin, self).__init__(model, admin_site)
+
     # Custom Display
     def get_title(self, entry):
         """Return the title with word count and number of comments"""

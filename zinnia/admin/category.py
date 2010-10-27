@@ -15,6 +15,10 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
     list_filter = ('parent',)
 
+    def __init__(self, model, admin_site):
+        self.form.admin_site = admin_site
+        super(CategoryAdmin, self).__init__(model, admin_site)
+
     def get_tree_path(self, category):
         """Return the category's tree path in HTML"""
         try:
