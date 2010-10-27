@@ -615,9 +615,15 @@ class PingBackTestCase(TestCase):
         self.assertEquals(generate_pingback_content(soup, target, 1000),
                           'My second content with link to first entry and '\
                           'other links : http://localhost:8000/404/ http://example.com/.')
-
         self.assertEquals(generate_pingback_content(soup, target, 50),
-                          '...ond content with link to first entry and other link...')
+                          '...ond content with link to first entry and other lin...')
+
+        soup = BeautifulSoup('<a href="%s">test link</a>' % target)
+        self.assertEquals(generate_pingback_content(soup, target, 6), 'test l...')
+
+        soup = BeautifulSoup('test <a href="%s">link</a>' % target)
+        self.assertEquals(generate_pingback_content(soup, target, 8), '...est link')
+        self.assertEquals(generate_pingback_content(soup, target, 9), 'test link')
 
     def test_pingback_ping(self):
         target = 'http://%s%s' % (self.site.domain, self.first_entry.get_absolute_url())

@@ -25,7 +25,7 @@ TARGET_IS_NOT_PINGABLE = 33
 PINGBACK_ALREADY_REGISTERED = 48
 
 
-def generate_pingback_content(soup, target, max_length):
+def generate_pingback_content(soup, target, max_length, trunc_char='...'):
     """Generate a description text for the pingback"""
     link = soup.find('a', href=target)
 
@@ -33,13 +33,19 @@ def generate_pingback_content(soup, target, max_length):
     index = content.index(link.string)
 
     if len(content) > max_length:
-        start = index - max_length / 2
-        if start < 0:
-            start = 0
-        end = index + len(link) + max_length / 2
-        if end > len(content):
-            end = len(content)
-        return '...%s...' % content[start:end]
+        middle = max_length / 2
+        start = index - middle
+        end = index + middle
+
+        if start <= 0:
+            end -= start
+            extract = content[0:end]
+        else:
+            extract = '%s%s' % (trunc_char, content[start:end])
+
+        if end < len(content):
+            extract += trunc_char
+        return extract
 
     return content
 
