@@ -56,6 +56,11 @@ Make sure to install these packages prior to installation :
  * django-tagging
  * BeautifulSoup
 
+The packages below are optionnal but needed for run the full test suite.
+
+ * pyparsing
+ * django-xmlrpc
+
 Installation
 ============
 
@@ -256,7 +261,7 @@ XML-RPC
 
 Zinnia provides few webservices via XML-RPC, but before using it,
 you need to install `django-xmlrpc
-<http://github.com/Fantomas42/django-xmlrpc>`_.
+<http://pypi.python.org/pypi/django-xmlrpc/>`_.
 
 Then register **django_xmlrpc** in your INSTALLED_APPS section of your
 project's settings.

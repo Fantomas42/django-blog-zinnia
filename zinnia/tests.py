@@ -12,7 +12,9 @@ from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
 from django.contrib.comments.models import Comment
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.template import Context
 from django.template import TemplateDoesNotExist
@@ -487,10 +489,10 @@ class ZinniaViewsTestCase(TestCase):
         self.check_publishing_context('/search/?pattern=test', 2, 3)
         response = self.client.get('/search/?pattern=ab')
         self.assertEquals(len(response.context['object_list']), 0)
-        self.assertEquals(response.context['error'], 'The pattern is too short')
+        self.assertEquals(response.context['error'], _('The pattern is too short'))
         response = self.client.get('/search/')
         self.assertEquals(len(response.context['object_list']), 0)
-        self.assertEquals(response.context['error'], 'No pattern to search found')
+        self.assertEquals(response.context['error'], _('No pattern to search found'))
 
     def test_zinnia_sitemap(self):
         response = self.client.get('/sitemap/')
@@ -1223,7 +1225,7 @@ class TemplateTagsTestCase(TestCase):
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 1)
         self.assertEquals(context['breadcrumbs'][0].name, 'Blog')
-        self.assertEquals(context['breadcrumbs'][0].url, '/')
+        self.assertEquals(context['breadcrumbs'][0].url, reverse('zinnia_entry_archive_index'))
         self.assertEquals(context['separator'], '/')
         self.assertEquals(context['template'], 'zinnia/tags/breadcrumbs.html')
 
