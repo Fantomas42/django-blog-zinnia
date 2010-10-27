@@ -14,6 +14,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 DATABASE_ENGINE = 'sqlite3'
 INSTALLED_APPS = ['django.contrib.contenttypes',
                   'django.contrib.comments',
+                  'django.contrib.sessions',
                   'django.contrib.sites',
                   'django.contrib.auth',
                   #'south',

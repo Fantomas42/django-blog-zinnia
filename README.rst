@@ -88,6 +88,7 @@ INSTALLED_APPS section of your project's settings. ::
   ...   # Your favorite apps
   ...   'django.contrib.contenttypes',
   ...   'django.contrib.comments',
+  ...   'django.contrib.sessions',
   ...   'django.contrib.sites',
   ...   'django.contrib.admin',
   ...   'tagging',

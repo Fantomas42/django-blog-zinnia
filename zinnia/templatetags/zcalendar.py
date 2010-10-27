@@ -49,8 +49,5 @@ class ZinniaCalendar(HTMLCalendar):
     def formatmonthname(self, theyear, themonth, withyear=True):
         """Return a month name translated
         as a table row."""
-        if withyear:
-            monthname = '%s %s' % (MONTHS[themonth].title(), theyear)
-        else:
-            monthname = '%s' % MONTHS[themonth].title()
+        monthname = '%s %s' % (MONTHS[themonth].title(), theyear)
         return '<tr><th colspan="7" class="month">%s</th></tr>' % monthname

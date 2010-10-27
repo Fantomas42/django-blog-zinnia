@@ -456,6 +456,28 @@ class ZinniaViewsTestCase(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/_entry_detail.html')
 
+    def test_zinnia_entry_detail_login(self):
+        entry = self.create_published_entry()
+        entry.login_required = True
+        entry.save()
+        response = self.client.get('/2010/01/01/my-test-entry/')
+        self.assertTemplateUsed(response, 'zinnia/login.html')
+
+    def test_zinnia_entry_detail_password(self):
+        entry = self.create_published_entry()
+        entry.password = 'password'
+        entry.save()
+        response = self.client.get('/2010/01/01/my-test-entry/')
+        self.assertTemplateUsed(response, 'zinnia/password.html')
+        self.assertEquals(response.context['error'], False)
+        response = self.client.post('/2010/01/01/my-test-entry/',
+                                    {'password': 'bad_password'})
+        self.assertTemplateUsed(response, 'zinnia/password.html')
+        self.assertEquals(response.context['error'], True)
+        response = self.client.post('/2010/01/01/my-test-entry/',
+                                    {'password': 'password'})
+        self.assertEquals(response.status_code, 302)
+
     def test_zinnia_entry_channel(self):
         self.check_publishing_context('/channel-test/', 2, 3)
 
@@ -959,6 +981,7 @@ class MetaWeblogTestCase(TestCase):
             1, 'webmaster', 'password', media)
         self.assertTrue('/zinnia_test_file' in new_media['url'])
         default_storage.delete('/'.join([UPLOAD_TO, new_media['url'].split('/')[-1]]))
+
 
 class ExternalUrlsPingerTestCase(TestCase):
     """Test cases for ExternalUrlsPinger"""
