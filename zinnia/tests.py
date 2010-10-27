@@ -4,9 +4,11 @@ from datetime import datetime
 from urllib import addinfourl
 from urlparse import urlsplit
 from urllib2 import HTTPError
+from xmlrpclib import Binary
 from xmlrpclib import Fault
 from xmlrpclib import Transport
 from xmlrpclib import ServerProxy
+from tempfile import TemporaryFile
 
 from django.test import TestCase
 from django.test.client import Client
@@ -14,6 +16,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.contrib.comments.models import Comment
+from django.core.files.storage import default_storage
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.template import Context
@@ -24,6 +27,7 @@ from BeautifulSoup import BeautifulSoup
 
 from zinnia.models import Entry
 from zinnia.models import Category
+from zinnia.settings import UPLOAD_TO
 from zinnia.ping import SITE
 from zinnia.ping import ExternalUrlsPinger
 from zinnia.managers import DRAFT, PUBLISHED
@@ -884,6 +888,7 @@ class MetaWeblogTestCase(TestCase):
             1, 'webmaster', 'password', post, 1)
         self.assertEquals(Entry.objects.count(), 3)
         self.assertEquals(Entry.published.count(), 2)
+        del post['dateCreated']
         self.server.metaWeblog.newPost(
             1, 'webmaster', 'password', post, 0)
         self.assertEquals(Entry.objects.count(), 4)
@@ -939,6 +944,21 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.authors.all()[0], self.contributor)
         self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
 
+    def test_new_media_object(self):
+        file_ = TemporaryFile()
+        file_.write('My test content')
+        file_.seek(0)
+        media = {'name': 'zinnia_test_file.txt',
+                 'type': 'text/plain',
+                 'bits': Binary(file_.read())}
+        file_.close()
+
+        self.assertRaises(Fault, self.server.metaWeblog.newMediaObject,
+                          1, 'contributor', 'password', media)
+        new_media = self.server.metaWeblog.newMediaObject(
+            1, 'webmaster', 'password', media)
+        self.assertTrue('/zinnia_test_file' in new_media['url'])
+        default_storage.delete('/'.join([UPLOAD_TO, new_media['url'].split('/')[-1]]))
 
 class ExternalUrlsPingerTestCase(TestCase):
     """Test cases for ExternalUrlsPinger"""
