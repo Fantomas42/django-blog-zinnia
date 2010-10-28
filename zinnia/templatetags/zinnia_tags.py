@@ -19,11 +19,14 @@ from zinnia.models import Category
 from zinnia.settings import FIRST_WEEK_DAY
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
+from zinnia.templatetags.zbreadcrumbs import retrieve_breadcrumbs
 
 register = Library()
 
-VECTORS = VectorBuilder({'queryset': Entry.published.all(),
-                        'fields': ['title', 'excerpt', 'content']})
+VECTORS = None
+VECTORS_FACTORY = lambda: VectorBuilder({'queryset': Entry.published.all(),
+                                          'fields': ['title', 'excerpt',
+                                                     'content']})
 CACHE_ENTRIES_RELATED = {}
 
 
@@ -82,6 +85,9 @@ def get_similar_entries(context, number=5,
     """Return similar entries"""
     global VECTORS
     global CACHE_ENTRIES_RELATED
+
+    if VECTORS is None:
+        VECTORS = VECTORS_FACTORY()
 
     def compute_related(object_id, dataset):
         """Compute related entries to an entry with a dataset"""
@@ -187,8 +193,6 @@ def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
 def zinnia_breadcrumbs(context, separator='/', root_name='Blog',
                        template='zinnia/tags/breadcrumbs.html',):
     """Return a breadcrumb for the application"""
-    from zinnia.templatetags.zbreadcrumbs import retrieve_breadcrumbs
-
     path = context['request'].path
     page_object = context.get('object') or context.get('category') or \
                   context.get('tag') or context.get('author')
