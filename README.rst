@@ -38,6 +38,7 @@ Main features :
   * Django-CMS plugins
   * Collaborative work
   * Tags autocompletion
+  * Entry model extendable
   * Pingback/Trackback support
   * WYMeditor or TinyMCE support
   * WordPress conversion utility
@@ -245,6 +246,13 @@ project's settings.
 
 It will provides custom plugins for adding entries into your pages, an
 App-Hook and Menus for easy integration.
+
+If you want to use the plugin system of django-cms in your entries, an
+extended EntryModel with a **PlaceholderField** is provided.
+
+Add this line in your project's settings. ::
+
+  >>> ZINNIA_ENTRY_BASE_MODEL = 'zinnia.plugins.placeholder.EntryPlaceholder'
 
 TinyMCE
 -------

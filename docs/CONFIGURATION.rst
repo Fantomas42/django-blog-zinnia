@@ -28,6 +28,12 @@ ZINNIA_ENTRY_TEMPLATES
   List of tuple for extending the list of templates availables for
   rendering the entry.
 
+ZINNIA_ENTRY_BASE_MODEL
+  **Default :** ''
+
+  String defining the base Model path for the Entry model. See
+  TODO_REF for more informations.
+
 ZINNIA_ADVANCED_SEARCH
   **Default :** True
 
