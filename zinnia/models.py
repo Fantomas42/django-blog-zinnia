@@ -1,10 +1,12 @@
 """Models of Zinnia"""
+import warnings
 from datetime import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.db.models.signals import post_save
+from django.utils.importlib import import_module
 from django.template.defaultfilters import striptags
 from django.template.defaultfilters import linebreaks
 from django.contrib.comments.moderation import moderator
@@ -20,6 +22,7 @@ from tagging.fields import TagField
 from zinnia.settings import USE_BITLY
 from zinnia.settings import UPLOAD_TO
 from zinnia.settings import ENTRY_TEMPLATES
+from zinnia.settings import ENTRY_BASE_MODEL
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
@@ -70,8 +73,8 @@ class Category(MPTTModel):
         order_insertion_by = ['title']
 
 
-class Entry(models.Model):
-    """Base design for publishing entry"""
+class EntryAbstractClass(models.Model):
+    """Base Model design for publishing entries"""
     STATUS_CHOICES = ((DRAFT, _('draft')),
                       (HIDDEN, _('hidden')),
                       (PUBLISHED, _('published')))
@@ -213,6 +216,29 @@ class Entry(models.Model):
             'month': self.creation_date.strftime('%m'),
             'day': self.creation_date.strftime('%d'),
             'slug': self.slug})
+
+    class Meta:
+        abstract = True
+
+
+def get_base_model():
+    """Determine the base Model to inherit in the
+    Entry Model, this allow to overload it."""
+    if not ENTRY_BASE_MODEL:
+        return EntryAbstractClass
+
+    dot = ENTRY_BASE_MODEL.rindex('.')
+    module_name, class_name = ENTRY_BASE_MODEL[:dot], ENTRY_BASE_MODEL[dot + 1:]
+    try:
+        _class = getattr(import_module(module_name), class_name)
+        return _class
+    except (ImportError, AttributeError):
+        warnings.warn('%s cannot be imported' % ENTRY_BASE_MODEL, RuntimeWarning)
+    return EntryAbstractClass
+
+
+class Entry(get_base_model()):
+    """Final Entry model"""
 
     class Meta:
         """Entry's Meta"""
