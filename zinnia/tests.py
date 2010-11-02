@@ -403,6 +403,11 @@ class ZinniaViewsTestCase(TestCase):
     urls = 'zinnia.urls.tests'
     fixtures = ['zinnia_test_data.json']
 
+    def setUp(self):
+        self.site = Site.objects.get_current()
+        self.author = User.objects.get(username='admin')
+        self.category = Category.objects.get(slug='tests')
+
     def create_published_entry(self):
         params = {'title': 'My test entry',
                   'content': 'My test content',
@@ -411,9 +416,9 @@ class ZinniaViewsTestCase(TestCase):
                   'creation_date': datetime(2010, 1, 1),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
-        entry.sites.add(Site.objects.get_current())
-        entry.categories.add(Category.objects.get(slug='tests'))
-        entry.authors.add(User.objects.get(username='admin'))
+        entry.sites.add(self.site)
+        entry.categories.add(self.category)
+        entry.authors.add(self.author)        
         return entry
 
     def check_publishing_context(self, url, first_expected,
