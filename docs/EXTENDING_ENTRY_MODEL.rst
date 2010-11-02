@@ -1,0 +1,58 @@
+Extending Entry model
+=====================
+
+The Entry model bundled in Zinnia can now be extended and customized.
+
+This feature is useful for who wants to add some fields in the model,
+or change its behavior. It allows Zinnia to be a really generic
+and reusable application.
+
+Imagine that I find Zinnia really great, but that is misses some fields
+or features to be the blog app that I need for my django project.
+For example I need to add a custom field linking to an image gallery,
+2 solutions :
+
+  * I search for another django blogging app fitting my needs.
+  * I make a monkey patch, but I won't be able to upgrade to future releases.
+
+These 2 solutions are really bad, that's why Zinnia provides
+a third solution.
+
+  * Customizing the model noninvasively with the power of inheritance.
+
+How do we do that ?
+
+In fact, simply by creating an abstract model inherited from a
+EntryBaseModel, adding fields or/and overriding his methods, and
+registering it with the ZINNIA_ENTRY_BASE_MODEL setting in your project.
+
+Example for adding the gallery field. ::
+
+  >>> from django.db import models
+  >>> from zinnia.models import EntryBaseModel
+  >>> from galleryapp.models import Gallery
+  >>>
+  >>> class EntryGallery(EntryBaseModel):
+  ...     gallery = models.ForeignKey(Gallery)
+  ...
+  ...     class Meta:
+  ...         abtract = True
+  ...
+
+Now you register the EntryGallery model like this in your project's
+settings.
+
+  >>> ZINNIA_ENTRY_BASE_MODEL = 'galleryapp.zinnia.EntryGallery'
+
+You can see another example in the zinnia/plugins/placeholder.py file.
+
+But you have to note 3 important things :
+
+  * Do not import the Entry model in your file defining the extended model
+    because it will cause a circular importation.
+
+  * Don't forget to tell that your model is abstract. Otherwise it will
+    create the table and the extent will not work as expected.
+
+  * If you extend the Entry model after the syncdb command, you will have
+    to reset the Zinnia application to reflect your changes.

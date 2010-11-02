@@ -108,3 +108,5 @@ Frequently Asked Questions
       admin.site.unregister(Entry)
       admin.site.register(Entry, EntryAdminImage)
 
+    Another solution is to extend the EntryModel
+    :doc:`EXTENDING_ENTRY_MODEL`
