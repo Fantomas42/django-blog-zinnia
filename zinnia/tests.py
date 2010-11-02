@@ -30,6 +30,13 @@ from zinnia.models import Category
 from zinnia.settings import UPLOAD_TO
 from zinnia.ping import SITE
 from zinnia.ping import ExternalUrlsPinger
+from zinnia.feeds import ImgParser
+from zinnia.feeds import EntryFeed
+from zinnia.feeds import LatestEntries
+from zinnia.feeds import CategoryEntries
+from zinnia.feeds import AuthorEntries
+from zinnia.feeds import TagEntries
+from zinnia.feeds import SearchEntries
 from zinnia.managers import DRAFT, PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
@@ -418,7 +425,7 @@ class ZinniaViewsTestCase(TestCase):
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
         entry.categories.add(self.category)
-        entry.authors.add(self.author)        
+        entry.authors.add(self.author)
         return entry
 
     def check_publishing_context(self, url, first_expected,
@@ -559,6 +566,85 @@ class ZinniaViewsTestCase(TestCase):
         self.assertEquals(self.client.post('/trackback/test-1/', {'url': 'http://example.com'}).content,
                           '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  <error>1</error>\n  '
                           '<message>Trackback is already registered</message>\n  \n</response>\n')
+
+
+class ZinniaFeedsTestCase(TestCase):
+
+    def setUp(self):
+        self.site = Site.objects.get_current()
+        self.author = User.objects.create(username='admin',
+                                          email='admin@example.com')
+        self.category = Category.objects.create(title='Tests', slug='tests')
+
+    def test_img_parser(self):
+        parser = ImgParser()
+        parser.feed('')
+        self.assertEquals(len(parser.img_locations), 0)
+        parser.feed('<img title="image title" />')
+        self.assertEquals(len(parser.img_locations), 0)
+        parser.feed('<img src="image.jpg" />' \
+                    '<img src="image2.jpg" />' )
+        self.assertEquals(len(parser.img_locations), 2)
+
+    def create_published_entry(self):
+        params = {'title': 'My test entry',
+                  'content': 'My test content with image <img src="/image.jpg" />',
+                  'slug': 'my-test-entry',
+                  'tags': 'tests',
+                  'creation_date': datetime(2010, 1, 1),
+                  'status': PUBLISHED}
+        entry = Entry.objects.create(**params)
+        entry.sites.add(self.site)
+        entry.categories.add(self.category)
+        entry.authors.add(self.author)
+        return entry
+
+    def test_feed_entry(self):
+        entry = self.create_published_entry()
+        feed = EntryFeed()
+        self.assertEquals(feed.item_pubdate(entry), entry.creation_date)
+        self.assertEquals(feed.item_categories(entry), [self.category.title])
+        self.assertEquals(feed.item_author_name(entry), self.author.username)
+        self.assertEquals(feed.item_author_email(entry), self.author.email)
+        self.assertEquals(feed.item_author_link(entry),
+                          'http://example.com/authors/%s/' % self.author.username)
+        self.assertEquals(feed.item_enclosure_url(entry), 'http://example.com/image.jpg')
+        self.assertEquals(feed.item_enclosure_length(entry), '100000')
+        self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
+
+    def test_latest_entries(self):
+        entry = self.create_published_entry()
+        feed = LatestEntries()
+        self.assertEquals(feed.link(), '/')
+        self.assertEquals(len(feed.items()), 1)
+
+    def test_category_entries(self):
+        entry = self.create_published_entry()
+        feed = CategoryEntries()
+        self.assertEquals(feed.get_object('request', '/tests/'), self.category)
+        self.assertEquals(len(feed.items(self.category)), 1)
+        self.assertEquals(feed.link(self.category), '/categories/tests/')
+
+    def test_author_entries(self):
+        entry = self.create_published_entry()
+        feed = AuthorEntries()
+        self.assertEquals(feed.get_object('request', 'admin'), self.author)
+        self.assertEquals(len(feed.items(self.author)), 1)
+        self.assertEquals(feed.link(self.author), '/authors/admin/')
+
+    def test_tag_entries(self):
+        entry = self.create_published_entry()
+        feed = TagEntries()
+        self.assertEquals(feed.get_object('request', 'tests').name, 'tests')
+        self.assertEquals(len(feed.items('tests')), 1)
+        self.assertEquals(feed.link(Tag(name='tests')), '/tags/tests/')
+
+    def test_search_entries(self):
+        entry = self.create_published_entry()
+        feed = SearchEntries()
+        self.assertEquals(feed.get_object('request', 'test'), 'test')
+        self.assertEquals(len(feed.items('test')), 1)
+        self.assertEquals(feed.link('test'), '/search/?pattern=test')
 
 
 class TestTransport(Transport):
@@ -1324,8 +1410,8 @@ def suite():
     loader = TestLoader()
 
     test_cases = (ManagersTestCase, EntryTestCase, CategoryTestCase,
-                  ZinniaViewsTestCase, ExternalUrlsPingerTestCase,
-                  TemplateTagsTestCase)
+                  ZinniaViewsTestCase, ZinniaFeedsTestCase,
+                  ExternalUrlsPingerTestCase, TemplateTagsTestCase)
     if 'django_xmlrpc' in settings.INSTALLED_APPS:
         test_cases += (PingBackTestCase, MetaWeblogTestCase)
 

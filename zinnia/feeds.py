@@ -53,7 +53,7 @@ class EntryFeed(Feed):
 
     def item_author_name(self, item):
         """Returns the first author of an entry"""
-        return item.authors.all()[0]
+        return item.authors.all()[0].username
 
     def item_author_email(self, item):
         """Returns the first author's email"""
