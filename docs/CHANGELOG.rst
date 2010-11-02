@@ -6,7 +6,9 @@ CHANGELOG
 
 * Using Microformats
 * Mails for comment reply
+* Entry model can be extended
 * Zinnia to Wordpress utility command
+* And a lot of bug fixes
 
 0.7
 ---
