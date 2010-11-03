@@ -349,7 +349,6 @@ Display the breadcrumbs for the pages handled by Zinnia.
 
 Display the Gravatar image associated to an email, usefull for comments.
 
-
 Development
 ===========
 
@@ -382,12 +381,18 @@ To view the code coverage run this command. ::
 
   $> ./bin/cover
 
-Execute these command to check the code conventions. ::
+Execute these commands to check the code conventions. ::
 
   $> ./bin/pyflakes zinnia
   $> ./bin/pep8 --count -r --exclude=tests.py,migrations zinnia
 
-For building the HTML documentation run this. ::
+To launch the demo site, execute these commands. ::
+
+  $> ./bin/demo syncdb
+  $> ./bin/demo loaddata helloworld
+  $> ./bin/demo runserver
+
+And for building the HTML documentation run this. ::
 
   $> ./bin/docs
 
