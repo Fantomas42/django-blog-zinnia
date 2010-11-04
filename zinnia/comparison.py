@@ -29,14 +29,14 @@ class ClusteredModel(object):
 
     def __init__(self, info_dict):
         self.queryset = info_dict.get('queryset', [])
-        self.fields = info_dict.get('fields', ['pk'])
+        self.fields = info_dict.get('fields', ['id'])
 
     def dataset(self):
         """Generate a dataset with the queryset
         and specified fields"""
         dataset = {}
         for item in self.queryset.filter():
-            dataset[item] = ' '.join([item.__dict__[field]
+            dataset[item] = ' '.join([str(item.__dict__[field])
                                       for field in self.fields])
         return dataset
 

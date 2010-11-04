@@ -41,6 +41,9 @@ from zinnia.feeds import EntryDiscussions
 from zinnia.feeds import EntryComments
 from zinnia.feeds import EntryPingbacks
 from zinnia.feeds import EntryTrackbacks
+from zinnia.comparison import pearson_score
+from zinnia.comparison import VectorBuilder
+from zinnia.comparison import ClusteredModel
 from zinnia.managers import DRAFT, PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
@@ -573,6 +576,7 @@ class ZinniaViewsTestCase(TestCase):
 
 
 class ZinniaFeedsTestCase(TestCase):
+    """Test cases for the Feeds class provided"""
 
     def setUp(self):
         self.site = Site.objects.get_current()
@@ -634,34 +638,34 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
 
     def test_latest_entries(self):
-        entry = self.create_published_entry()
+        self.create_published_entry()
         feed = LatestEntries()
         self.assertEquals(feed.link(), '/')
         self.assertEquals(len(feed.items()), 1)
 
     def test_category_entries(self):
-        entry = self.create_published_entry()
+        self.create_published_entry()
         feed = CategoryEntries()
         self.assertEquals(feed.get_object('request', '/tests/'), self.category)
         self.assertEquals(len(feed.items(self.category)), 1)
         self.assertEquals(feed.link(self.category), '/categories/tests/')
 
     def test_author_entries(self):
-        entry = self.create_published_entry()
+        self.create_published_entry()
         feed = AuthorEntries()
         self.assertEquals(feed.get_object('request', 'admin'), self.author)
         self.assertEquals(len(feed.items(self.author)), 1)
         self.assertEquals(feed.link(self.author), '/authors/admin/')
 
     def test_tag_entries(self):
-        entry = self.create_published_entry()
+        self.create_published_entry()
         feed = TagEntries()
         self.assertEquals(feed.get_object('request', 'tests').name, 'tests')
         self.assertEquals(len(feed.items('tests')), 1)
         self.assertEquals(feed.link(Tag(name='tests')), '/tags/tests/')
 
     def test_search_entries(self):
-        entry = self.create_published_entry()
+        self.create_published_entry()
         feed = SearchEntries()
         self.assertEquals(feed.get_object('request', 'test'), 'test')
         self.assertEquals(len(feed.items('test')), 1)
@@ -700,6 +704,48 @@ class ZinniaFeedsTestCase(TestCase):
         feed = EntryTrackbacks()
         self.assertEquals(list(feed.items(entry)), [comments[2]])
         self.assertEquals(feed.item_link(comments[2]), '/comments/cr/13/1/#trackback_3')
+
+
+class ComparisonTestCase(TestCase):
+    """Test cases for comparison tools"""
+
+    def test_pearson_score(self):
+        self.assertEquals(pearson_score([0, 1, 2], [0, 1, 2]), 0.0)
+        self.assertEquals(pearson_score([0, 1, 3], [0, 1, 2]),
+                          0.051316701949486232)
+        self.assertEquals(pearson_score([0, 1, 2], [0, 1, 3]),
+                          0.051316701949486232)
+
+    def test_clustered_model(self):
+        params = {'title': 'My entry 1', 'content': 'My content 1',
+                  'tags': 'zinnia, test', 'slug': 'my-entry-1',}
+        Entry.objects.create(**params)
+        params = {'title': 'My entry 2', 'content': 'My content 2',
+                  'tags': 'zinnia, test', 'slug': 'my-entry-2',}
+        Entry.objects.create(**params)
+        cm = ClusteredModel({'queryset': Entry.objects.all()})
+        self.assertEquals(cm.dataset().values(), ['1', '2'])
+        cm = ClusteredModel({'queryset': Entry.objects.all(),
+                             'fields': ['title', 'excerpt', 'content']})
+        self.assertEquals(cm.dataset().values(), ['My entry 1  My content 1',
+                                                  'My entry 2  My content 2'])
+
+    def test_vector_builder(self):
+        params = {'title': 'My entry 1', 'content':
+                  'This is my first content',
+                  'tags': 'zinnia, test', 'slug': 'my-entry-1',}
+        Entry.objects.create(**params)
+        params = {'title': 'My entry 2', 'content':
+                  'My second entry',
+                  'tags': 'zinnia, test', 'slug': 'my-entry-2',}
+        Entry.objects.create(**params)
+        vectors = VectorBuilder({'queryset': Entry.objects.all(),
+                                 'fields': ['title', 'excerpt', 'content']})
+        columns, dataset = vectors()
+        self.assertEquals(columns, ['content', 'This', 'my', 'is', '1',
+                                    'second', '2', 'first'])
+        self.assertEquals(dataset.values(), [[1, 1, 1, 1, 1, 0, 0, 1],
+                                             [0, 0, 0, 0, 0, 1, 1, 0]])
 
 
 class TestTransport(Transport):
@@ -1466,7 +1512,8 @@ def suite():
 
     test_cases = (ManagersTestCase, EntryTestCase, CategoryTestCase,
                   ZinniaViewsTestCase, ZinniaFeedsTestCase,
-                  ExternalUrlsPingerTestCase, TemplateTagsTestCase)
+                  ComparisonTestCase, ExternalUrlsPingerTestCase,
+                  TemplateTagsTestCase)
     if 'django_xmlrpc' in settings.INSTALLED_APPS:
         test_cases += (PingBackTestCase, MetaWeblogTestCase)
 
