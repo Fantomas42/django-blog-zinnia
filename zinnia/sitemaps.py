@@ -101,8 +101,6 @@ class TagSitemap(Sitemap):
     def lastmod(self, obj):
         """Return last modification of a tag"""
         entries = self.cache_tags[obj.pk][0]
-        if not entries:
-            return None
         return entries[0].creation_date
 
     def priority(self, obj):
