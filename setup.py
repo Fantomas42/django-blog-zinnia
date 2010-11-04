@@ -5,7 +5,7 @@ import zinnia
 
 setup(name='django-blog-zinnia',
       version=zinnia.__version__,
-      
+
       description='A clear and powerfull weblog application powered with Django',
       long_description=open(os.path.join('README.rst')).read(),
       keywords='django, blog',
@@ -14,7 +14,7 @@ setup(name='django-blog-zinnia',
       author_email=zinnia.__email__,
       url=zinnia.__url__,
 
-      packages=find_packages(),
+      packages=find_packages(exclude=['demo']),
       classifiers=[
           'Framework :: Django',
           'Development Status :: 5 - Production/Stable',
@@ -24,7 +24,7 @@ setup(name='django-blog-zinnia',
           'Operating System :: OS Independent',
           'License :: OSI Approved :: BSD License',
           'Topic :: Software Development :: Libraries :: Python Modules',],
-            
+
       license=zinnia.__license__,
       include_package_data=True,
       zip_safe=False,

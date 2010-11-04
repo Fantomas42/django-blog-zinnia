@@ -1,5 +1,8 @@
 include README.rst
+include buildout.cfg
+include bootstrap.py
 recursive-include docs *
+recursive-include patches *
 recursive-include zinnia/fixtures *.json
 recursive-include zinnia/locale *
 recursive-include zinnia/media *
