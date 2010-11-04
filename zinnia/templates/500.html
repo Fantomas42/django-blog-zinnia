@@ -1,0 +1,50 @@
+{% extends "zinnia/skeleton.html" %}
+{% load i18n zinnia_tags %}
+
+{% block meta %}
+<base href="http://localhost:8000/zinnia/" />
+{% endblock %}
+
+{% block breadcrumbs %}
+  {% trans "Error 500" %}
+{% endblock %}
+
+{% block title %}{% trans "Server error" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans "Server error" %}</h2>
+
+<p>{% trans "There's been an error. It's been reported to the site administrators via e-mail and should be fixed shortly. Thanks for your patience." %}</p>
+
+<h3>{% trans "Usefull links" %}</h3>
+<div class="links">
+  <ul>
+    <li>
+      <a href="{% url zinnia_entry_archive_index %}" title="{% trans "Blog index" %}">
+        {% trans "Blog index" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url zinnia_sitemap %}" title="{% trans "Sitemap" %}">
+        {% trans "Sitemap" %}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<h3>{% trans "Recent entries" %}</h3>
+<div class="recents">
+  {% get_recent_entries 5 %}
+</div>
+
+<h3>{% trans "Search" %}</h3>
+<div class="search">
+  <form method="get" id="searchform" action="{% url zinnia_entry_search %}">
+    <p>
+      <input type="text" value="{% trans "Keywords..." %}" name="pattern" id="searchbox" onfocus="this.value=''"/>
+      <input type="submit" class="submitbutton" value="OK" />
+    </p>
+  </form>
+</div>
+
+{% endblock %}
