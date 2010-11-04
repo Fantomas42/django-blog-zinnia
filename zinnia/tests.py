@@ -37,6 +37,10 @@ from zinnia.feeds import CategoryEntries
 from zinnia.feeds import AuthorEntries
 from zinnia.feeds import TagEntries
 from zinnia.feeds import SearchEntries
+from zinnia.feeds import EntryDiscussions
+from zinnia.feeds import EntryComments
+from zinnia.feeds import EntryPingbacks
+from zinnia.feeds import EntryTrackbacks
 from zinnia.managers import DRAFT, PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
@@ -599,6 +603,23 @@ class ZinniaFeedsTestCase(TestCase):
         entry.authors.add(self.author)
         return entry
 
+    def create_discussions(self, entry):
+        comment = Comment.objects.create(comment='My Comment',
+                                         user=self.author,
+                                         content_object=entry,
+                                         site=self.site)
+        pingback = Comment.objects.create(comment='My Pingback',
+                                          user=self.author,
+                                          content_object=entry,
+                                          site=self.site)
+        pingback.flags.create(user=self.author, flag='pingback')
+        trackback = Comment.objects.create(comment='My Trackback',
+                                           user=self.author,
+                                           content_object=entry,
+                                           site=self.site)
+        trackback.flags.create(user=self.author, flag='trackback')
+        return [comment, pingback, trackback]
+
     def test_feed_entry(self):
         entry = self.create_published_entry()
         feed = EntryFeed()
@@ -645,6 +666,40 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(feed.get_object('request', 'test'), 'test')
         self.assertEquals(len(feed.items('test')), 1)
         self.assertEquals(feed.link('test'), '/search/?pattern=test')
+
+    def test_entry_discussions(self):
+        entry = self.create_published_entry()
+        comments = self.create_discussions(entry)
+        feed = EntryDiscussions()
+        self.assertEquals(feed.get_object('request', entry.slug), entry)
+        self.assertEquals(feed.link(entry), '/2010/01/01/my-test-entry/')
+        self.assertEquals(len(feed.items(entry)), 3)
+        self.assertEquals(feed.item_pubdate(comments[0]), comments[0].submit_date)
+        self.assertEquals(feed.item_link(comments[0]), '/comments/cr/13/1/#c1')
+        self.assertEquals(feed.item_author_name(comments[0]), 'admin')
+        self.assertEquals(feed.item_author_email(comments[0]), 'admin@example.com')
+        self.assertEquals(feed.item_author_link(comments[0]), '')
+
+    def test_entry_comments(self):
+        entry = self.create_published_entry()
+        comments = self.create_discussions(entry)
+        feed = EntryComments()
+        self.assertEquals(list(feed.items(entry)), [comments[0]])
+        self.assertEquals(feed.item_link(comments[0]), '/comments/cr/13/1/#comment_1')
+
+    def test_entry_pingbacks(self):
+        entry = self.create_published_entry()
+        comments = self.create_discussions(entry)
+        feed = EntryPingbacks()
+        self.assertEquals(list(feed.items(entry)), [comments[1]])
+        self.assertEquals(feed.item_link(comments[1]), '/comments/cr/13/1/#pingback_2')
+
+    def test_entry_trackbacks(self):
+        entry = self.create_published_entry()
+        comments = self.create_discussions(entry)
+        feed = EntryTrackbacks()
+        self.assertEquals(list(feed.items(entry)), [comments[2]])
+        self.assertEquals(feed.item_link(comments[2]), '/comments/cr/13/1/#trackback_3')
 
 
 class TestTransport(Transport):

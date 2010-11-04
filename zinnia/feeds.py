@@ -200,11 +200,11 @@ class SearchEntries(EntryFeed):
 
     def title(self, obj):
         """Title of the feed"""
-        return _("Results of the search for %s") % obj
+        return _('Results of the search for %s') % obj
 
     def description(self, obj):
         """Description of the feed"""
-        return _("The entries containing the pattern %s") % obj
+        return _('The entries containing the pattern %s') % obj
 
 
 class EntryDiscussions(Feed):
