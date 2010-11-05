@@ -53,7 +53,7 @@ Dependencies
 Make sure to install these packages prior to installation :
 
  * akismet
- * django-mptt
+ * django-mptt (0.4.1)
  * django-tagging
  * BeautifulSoup
 
@@ -408,7 +408,7 @@ can edit the translations at this URL :
 http://www.transifex.net/projects/p/django-blog-zinnia/c/master/
 
 Resources
-==========
+=========
 
   * Online `documentation of Zinnia
     <http://django-blog-zinnia.com/docs/>`_.
