@@ -578,6 +578,7 @@ class ZinniaViewsTestCase(TestCase):
                           '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  <error>1</error>\n  '
                           '<message>Trackback is already registered</message>\n  \n</response>\n')
 
+
 class ZinniaSitemapsTestCase(TestCase):
     """Test cases for Sitemaps classes provided"""
 
@@ -631,6 +632,7 @@ class ZinniaSitemapsTestCase(TestCase):
         self.assertEquals(sitemap.priority(zinnia_tag), '1.0')
         self.assertEquals(sitemap.location(zinnia_tag), '/tags/zinnia/')
 
+
 class ZinniaFeedsTestCase(TestCase):
     """Test cases for the Feed classes provided"""
 
@@ -647,7 +649,7 @@ class ZinniaFeedsTestCase(TestCase):
         parser.feed('<img title="image title" />')
         self.assertEquals(len(parser.img_locations), 0)
         parser.feed('<img src="image.jpg" />' \
-                    '<img src="image2.jpg" />' )
+                    '<img src="image2.jpg" />')
         self.assertEquals(len(parser.img_locations), 2)
 
     def create_published_entry(self):
@@ -774,10 +776,10 @@ class ComparisonTestCase(TestCase):
 
     def test_clustered_model(self):
         params = {'title': 'My entry 1', 'content': 'My content 1',
-                  'tags': 'zinnia, test', 'slug': 'my-entry-1',}
+                  'tags': 'zinnia, test', 'slug': 'my-entry-1'}
         Entry.objects.create(**params)
         params = {'title': 'My entry 2', 'content': 'My content 2',
-                  'tags': 'zinnia, test', 'slug': 'my-entry-2',}
+                  'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         Entry.objects.create(**params)
         cm = ClusteredModel({'queryset': Entry.objects.all()})
         self.assertEquals(cm.dataset().values(), ['1', '2'])
@@ -789,11 +791,11 @@ class ComparisonTestCase(TestCase):
     def test_vector_builder(self):
         params = {'title': 'My entry 1', 'content':
                   'This is my first content',
-                  'tags': 'zinnia, test', 'slug': 'my-entry-1',}
+                  'tags': 'zinnia, test', 'slug': 'my-entry-1'}
         Entry.objects.create(**params)
         params = {'title': 'My entry 2', 'content':
                   'My second entry',
-                  'tags': 'zinnia, test', 'slug': 'my-entry-2',}
+                  'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         Entry.objects.create(**params)
         vectors = VectorBuilder({'queryset': Entry.objects.all(),
                                  'fields': ['title', 'excerpt', 'content']})
