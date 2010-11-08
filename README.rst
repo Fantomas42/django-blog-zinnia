@@ -428,6 +428,8 @@ Examples
     <http://fantomas.willbreak.it>`_.
   * `Professional Web Studio
     <http://www.professionalwebstudio.com/en/weblog/>`_.
+  * `mixedCase
+    <http://www.mixedcase.nl/articles/>`_.
 
 
 If you are a proud user of Zinnia, send me the URL of your website and I
