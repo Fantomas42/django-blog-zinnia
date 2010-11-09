@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-04 15:31+0100\n"
-"PO-Revision-Date: 2010-11-04 15:36+0100\n"
+"POT-Creation-Date: 2010-11-09 14:04+0100\n"
+"PO-Revision-Date: 2010-11-09 14:05+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -273,12 +273,12 @@ msgstr "articles"
 msgid "[%(site)s] New comment posted on \"%(title)s\""
 msgstr "[%(site)s] Nouveau commentaire posté sur \"%(title)s\""
 
-#: tests.py:530
+#: tests.py:541
 #: views/search.py:17
 msgid "The pattern is too short"
 msgstr "Le motif de recherche est trop court !"
 
-#: tests.py:533
+#: tests.py:544
 #: views/search.py:21
 msgid "No pattern to search found"
 msgstr "Aucun motif de recherche !"
@@ -501,7 +501,7 @@ msgstr "Désolé, mais la page demandée est introuvable."
 
 #: templates/404.html:15
 #: templates/500.html:19
-msgid "Usefull links"
+msgid "Useful links"
 msgstr "Liens utiles"
 
 #: templates/404.html:19

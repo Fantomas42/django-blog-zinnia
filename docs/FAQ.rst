@@ -53,7 +53,7 @@ Frequently Asked Questions
     on several sites or share an admin interface for all the sites handled.
 
     Zinnia also provides a new permission that's allow or not the user to
-    change the authors. Usefull for collaborative works.
+    change the authors. Useful for collaborative works.
 
     But if you want to restrict the edition of the entries by site,
     authors or whatever you want, it's your job to implement this

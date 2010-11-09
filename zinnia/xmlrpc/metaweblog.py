@@ -80,7 +80,7 @@ def category_structure(category, site):
             'rssUrl': '%s://%s%s' % (
                 PROTOCOL, site.domain,
                 reverse('zinnia_category_feed', args=[category.tree_path])),
-            # Usefull Wordpress Extensions
+            # Useful Wordpress Extensions
             'categoryId': category.pk,
             'parentId': category.parent and category.parent.pk or 0,
             'categoryDescription': category.description,
@@ -101,12 +101,12 @@ def post_structure(entry, site):
             'dateCreated': DateTime(entry.creation_date.isoformat()),
             'postid': entry.pk,
             'userid': author.username,
-            # Usefull Movable Type Extensions
+            # Useful Movable Type Extensions
             'mt_excerpt': entry.excerpt,
             'mt_allow_comments': int(entry.comment_enabled),
             'mt_allow_pings': int(entry.pingback_enabled),
             'mt_keywords': entry.tags,
-            # Usefull Wordpress Extensions
+            # Useful Wordpress Extensions
             'wp_author': author.username,
             'wp_author_id': author.pk,
             'wp_author_display_name': author.username,

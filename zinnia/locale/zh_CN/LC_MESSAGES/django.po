@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-04 15:31+0100\n"
+"POT-Creation-Date: 2010-11-09 14:04+0100\n"
 "PO-Revision-Date: 2010-05-05 20:49+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -253,11 +253,11 @@ msgstr "日志"
 msgid "[%(site)s] New comment posted on \"%(title)s\""
 msgstr ""
 
-#: tests.py:530 views/search.py:17
+#: tests.py:541 views/search.py:17
 msgid "The pattern is too short"
 msgstr "模式长度不够"
 
-#: tests.py:533 views/search.py:21
+#: tests.py:544 views/search.py:21
 msgid "No pattern to search found"
 msgstr "没有搜索到相关模式"
 
@@ -468,7 +468,7 @@ msgid "Sorry, but the requested page could not be found."
 msgstr ""
 
 #: templates/404.html:15 templates/500.html:19
-msgid "Usefull links"
+msgid "Useful links"
 msgstr ""
 
 #: templates/404.html:19 templates/404.html.py:20 templates/500.html:23

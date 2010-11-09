@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-04 15:31+0100\n"
+"POT-Creation-Date: 2010-11-09 14:04+0100\n"
 "PO-Revision-Date: 2010-07-03 HO:MI+ZONE\n"
 "Last-Translator: Pavel Kiper<iwtbarh@gmail.com>\n"
 "Language-Team: Russian <iwtbarh@gmail.com>\n"
@@ -254,11 +254,11 @@ msgstr "записи"
 msgid "[%(site)s] New comment posted on \"%(title)s\""
 msgstr ""
 
-#: tests.py:530 views/search.py:17
+#: tests.py:541 views/search.py:17
 msgid "The pattern is too short"
 msgstr "Запрос слишкл короткий"
 
-#: tests.py:533 views/search.py:21
+#: tests.py:544 views/search.py:21
 msgid "No pattern to search found"
 msgstr "Нечего искать"
 
@@ -469,7 +469,7 @@ msgid "Sorry, but the requested page could not be found."
 msgstr ""
 
 #: templates/404.html:15 templates/500.html:19
-msgid "Usefull links"
+msgid "Useful links"
 msgstr ""
 
 #: templates/404.html:19 templates/404.html.py:20 templates/500.html:23
