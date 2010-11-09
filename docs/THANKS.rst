@@ -9,6 +9,8 @@ this application greatest each day.
   * Tobias von Klipstein (klipstein)
   * Mark Renton (indexofire)
   * Bill Mill (llimllib)
+  * Kevin Renskers (Bolhoed)
+  * Jonathan Stoppani (GaretJax)
   * Franck Bret
   * Jason Davies
   * Brandon Taylor
@@ -16,6 +18,8 @@ this application greatest each day.
   * esauro
   * 0Chuzz
   * un33K
+  * orblivion
+  * kjikaqawej
   * and You.
 
 
