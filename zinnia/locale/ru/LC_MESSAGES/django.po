@@ -1,4 +1,4 @@
-#, fuzzy
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
@@ -10,11 +10,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Poedit-Language: Russian\n"
-"X-Poedit-Country: RUSSIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Poedit-Country: RUSSIA\n"
 
 #: feeds.py:101 plugins/cms_plugins.py:22
 #: templates/zinnia/entry_archive.html:4 templates/zinnia/entry_list.html:4
@@ -24,7 +23,7 @@ msgstr "Последние записи"
 #: feeds.py:102
 #, fuzzy, python-format
 msgid "The latest entries for the site %s"
-msgstr "По следние новости на %s"
+msgstr "Последние новости на %s"
 
 #: feeds.py:130
 #, python-format
@@ -213,24 +212,27 @@ msgid "sites publication"
 msgstr "сайты для публикации"
 
 #: models.py:116
+#, fuzzy
 msgid "login required"
-msgstr ""
+msgstr "требуется авторизация"
 
 #: models.py:117
 msgid "only authenticated users can view the entry"
 msgstr ""
 
 #: models.py:118
+#, fuzzy
 msgid "password"
-msgstr ""
+msgstr "пароль"
 
 #: models.py:119
 msgid "protect the entry with a password"
 msgstr ""
 
 #: models.py:121 plugins/models.py:31 plugins/models.py:49
+#, fuzzy
 msgid "template"
-msgstr ""
+msgstr "шаблон"
 
 #: models.py:124
 msgid "Default template"
@@ -505,9 +507,7 @@ msgid "Server error"
 msgstr ""
 
 #: templates/500.html:17
-msgid ""
-"There's been an error. It's been reported to the site administrators via e-"
-"mail and should be fixed shortly. Thanks for your patience."
+msgid "There's been an error. It's been reported to the site administrators via e-mail and should be fixed shortly. Thanks for your patience."
 msgstr ""
 
 #: templates/comments/zinnia_entry_preview.html:4
@@ -968,11 +968,9 @@ msgstr ""
 msgid "No title"
 msgstr "заголовок"
 
-#, fuzzy
 #~ msgid "Comment"
 #~ msgstr "Комментарии"
 
-#, fuzzy
 #~ msgid "View this comment"
 #~ msgstr "Предварительный просмотр комментария"
 
