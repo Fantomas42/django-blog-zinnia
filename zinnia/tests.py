@@ -581,6 +581,7 @@ class ZinniaViewsTestCase(TestCase):
 
 class ZinniaSitemapsTestCase(TestCase):
     """Test cases for Sitemaps classes provided"""
+    urls = 'zinnia.urls.tests'
 
     def setUp(self):
         self.site = Site.objects.get_current()
@@ -635,12 +636,14 @@ class ZinniaSitemapsTestCase(TestCase):
 
 class ZinniaFeedsTestCase(TestCase):
     """Test cases for the Feed classes provided"""
+    urls = 'zinnia.urls.tests'
 
     def setUp(self):
         self.site = Site.objects.get_current()
         self.author = User.objects.create(username='admin',
                                           email='admin@example.com')
         self.category = Category.objects.create(title='Tests', slug='tests')
+        self.entry_ct_id = ContentType.objects.get_for_model(Entry).pk
 
     def test_img_parser(self):
         parser = ImgParser()
@@ -737,7 +740,8 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(feed.link(entry), '/2010/01/01/my-test-entry/')
         self.assertEquals(len(feed.items(entry)), 3)
         self.assertEquals(feed.item_pubdate(comments[0]), comments[0].submit_date)
-        self.assertEquals(feed.item_link(comments[0]), '/comments/cr/13/1/#c1')
+        self.assertEquals(feed.item_link(comments[0]),
+                          '/comments/cr/%i/1/#c1' % self.entry_ct_id)
         self.assertEquals(feed.item_author_name(comments[0]), 'admin')
         self.assertEquals(feed.item_author_email(comments[0]), 'admin@example.com')
         self.assertEquals(feed.item_author_link(comments[0]), '')
@@ -747,21 +751,24 @@ class ZinniaFeedsTestCase(TestCase):
         comments = self.create_discussions(entry)
         feed = EntryComments()
         self.assertEquals(list(feed.items(entry)), [comments[0]])
-        self.assertEquals(feed.item_link(comments[0]), '/comments/cr/13/1/#comment_1')
+        self.assertEquals(feed.item_link(comments[0]),
+                          '/comments/cr/%i/1/#comment_1' % self.entry_ct_id)
 
     def test_entry_pingbacks(self):
         entry = self.create_published_entry()
         comments = self.create_discussions(entry)
         feed = EntryPingbacks()
         self.assertEquals(list(feed.items(entry)), [comments[1]])
-        self.assertEquals(feed.item_link(comments[1]), '/comments/cr/13/1/#pingback_2')
+        self.assertEquals(feed.item_link(comments[1]),
+                          '/comments/cr/%i/1/#pingback_2' % self.entry_ct_id)
 
     def test_entry_trackbacks(self):
         entry = self.create_published_entry()
         comments = self.create_discussions(entry)
         feed = EntryTrackbacks()
         self.assertEquals(list(feed.items(entry)), [comments[2]])
-        self.assertEquals(feed.item_link(comments[2]), '/comments/cr/13/1/#trackback_3')
+        self.assertEquals(feed.item_link(comments[2]),
+                          '/comments/cr/%i/1/#trackback_3' % self.entry_ct_id)
 
 
 class ComparisonTestCase(TestCase):
