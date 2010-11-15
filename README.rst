@@ -53,7 +53,7 @@ Dependencies
 Make sure to install these packages prior to installation :
 
  * akismet
- * django-mptt (0.4.1)
+ * django-mptt
  * django-tagging
  * BeautifulSoup
 
