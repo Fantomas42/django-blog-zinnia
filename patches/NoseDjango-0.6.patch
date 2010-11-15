@@ -1,6 +1,6 @@
---- nosedjango/nosedjango.py	2009-10-06 17:29:21.000000000 +0200
-+++ nosedjango/nosedjango.py	2009-09-22 17:43:24.000000000 +0200
-@@ -14,7 +14,10 @@
+--- nosedjango/nosedjango.py
++++ nosedjango/nosedjango.py
+@@ -14,7 +14,10 @@ import nose.case
  # search the current working directory and all parent directories to find
  # the settings file
  from nose.importer import add_path
@@ -12,30 +12,29 @@
  import re
  NT_ROOT = re.compile(r"^[a-zA-Z]:\\$")
  def get_SETTINGS_PATH():
-@@ -66,20 +69,24 @@
-         if not SETTINGS_PATH:
-             sys.stderr.write("Can't find Django settings file!\n")
-             # short circuit if no settings file can be found
+@@ -58,22 +61,9 @@ class NoseDjango(Plugin):
+         connection over to that database. Then call install() to install
+         all apps listed in the loaded settings module.
+         """
+-        # Add the working directory (and any package parents) to sys.path
+-        # before trying to import django modules; otherwise, they won't be
+-        # able to find project.settings if the working dir is project/ or
+-        # project/..
+-
+-        if not SETTINGS_PATH:
+-            sys.stderr.write("Can't find Django settings file!\n")
+-            # short circuit if no settings file can be found
 -            return
-+            #return
- 
-         if self.conf.addPaths:
-             map(add_path, self.conf.where)
- 
-         add_path(SETTINGS_PATH)
-         sys.path.append(SETTINGS_PATH)
+-
+-        if self.conf.addPaths:
+-            map(add_path, self.conf.where)
+-
+-        add_path(SETTINGS_PATH)
+-        sys.path.append(SETTINGS_PATH)
 -        import settings
-+
-+        # use dynamical import: we not necessary use settings.py like settings
-+        # file
++        # use dynamical import: we not necessary use settings.py
 +        __import__(os.environ['DJANGO_SETTINGS_MODULE'])
 +        settings = sys.modules[os.environ['DJANGO_SETTINGS_MODULE']]
  
          # Some Django code paths evaluate differently
          # between DEBUG and not DEBUG.  Example of this include the url
-         # dispatcher when 404's are hit.  Django's own test runner forces DEBUG
-         # to be off.
-         settings.DEBUG = False 
- 
-         from django.core import mail
-         self.mail = mail
