@@ -61,7 +61,7 @@ class DirectoryPinger(threading.Thread):
                 reply = self.server.weblogUpdates.ping(CURRENT_SITE.name,
                                                        BLOG_URL, entry_url,
                                                        categories)
-            except xmlrpclib.ProtocolError:
+            except Exception:
                 reply = {'message': '%s is an invalid directory.' % \
                          self.server_name,
                          'flerror': True}
@@ -143,6 +143,6 @@ class ExternalUrlsPinger(threading.Thread):
         try:
             server = xmlrpclib.ServerProxy(server_name)
             reply = server.pingback.ping(self.entry_url, target_url)
-        except (xmlrpclib.Fault, xmlrpclib.ProtocolError):
+        except xmlrpclib.Error:
             reply = '%s cannot be pinged.' % target_url
         return reply
