@@ -3,7 +3,7 @@ from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 
 SITE_ID = 1
 
-ROOT_URLCONF = 'zinnia.urls.tests'
+ROOT_URLCONF = 'zinnia.tests.urls'
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.request',
