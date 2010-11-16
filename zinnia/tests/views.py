@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import PUBLISHED
+from zinnia.settings import PAGINATION
 
 
 class ZinniaViewsTestCase(TestCase):
@@ -112,6 +113,26 @@ class ZinniaViewsTestCase(TestCase):
 
     def test_zinnia_category_detail(self):
         self.check_publishing_context('/categories/tests/', 2, 3)
+
+    def test_zinnia_category_detail_paginated(self):
+        """Test case reproducing issue #42 on category
+        detail view paginated"""
+        for i in range(PAGINATION):
+            params = {'title': 'My entry %i' % i,
+                      'content': 'My content %i' % i,
+                      'slug': 'my-entry-%i' % i,
+                      'creation_date': datetime(2010, 1, 1),
+                      'status': PUBLISHED}
+            entry = Entry.objects.create(**params)
+            entry.sites.add(self.site)
+            entry.categories.add(self.category)
+            entry.authors.add(self.author)
+        response = self.client.get('/categories/tests/')
+        self.assertEquals(len(response.context['object_list']), PAGINATION)
+        response = self.client.get('/categories/tests/?page=2')
+        self.assertEquals(len(response.context['object_list']), 2)
+        response = self.client.get('/categories/tests/page/2/')
+        self.assertEquals(len(response.context['object_list']), 2)
 
     def test_zinnia_author_list(self):
         self.check_publishing_context('/authors/', 1)

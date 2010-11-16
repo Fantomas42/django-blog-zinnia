@@ -15,6 +15,7 @@ from zinnia.tests.sitemaps import ZinniaSitemapsTestCase
 from zinnia.tests.ping import ExternalUrlsPingerTestCase
 from zinnia.tests.templatetags import TemplateTagsTestCase
 
+
 def suite():
     """Suite of TestCases for Django"""
     suite = TestSuite()
