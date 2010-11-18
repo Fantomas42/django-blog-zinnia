@@ -1,0 +1,32 @@
+body.dashboard #content { width: 75%; }
+
+.module table { width: 100%; }
+
+.left { width: 49%; float: left; clear: both; }
+
+.right { width: 49%; float: right; }
+
+input, textarea, select { border: 1px solid #CCCCCC; }
+
+.vTextField, .vLargeTextField { width: 25em; }
+
+.required label, label.required { color: #333333 !important; font-weight: bold !important; font-size: 12px; }
+
+.button { float: left; margin-right: 5px; }
+
+#contents th { width: 50%; }
+#contents td { padding-left: 10px; }
+#contents td a { font-weight: bold; }
+#contents th, #contents td { font-size: 12px; }
+
+#quickpost th { width: 20%; vertical-align: middle; }
+#quickpost td { width: 100%; }
+
+#comments th { width: 10%; }
+#comments td { width: 100%; }
+#comments td a { display: inline; }
+#comments th, #comments td { font-size: 12px; }
+
+#drafts th, #linkbacks th { font-weight: normal; }
+#drafts th a, #linkbacks th a { font-weight: bold; }
+#drafts th abbr, #linkbacks th abbr { color: #666; }

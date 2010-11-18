@@ -1,0 +1,43 @@
+{% extends "admin/app_index.html" %}
+{% load i18n adminmedia %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{ ZINNIA_MEDIA_URL }}css/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="{{ ZINNIA_MEDIA_URL }}css/dashboard_zinnia.css" />
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.js"></script>
+<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.bgiframe.js"></script>
+<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="{% url admin:zinnia_entry_autocomplete_tags %}"></script>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  {% with "left" as orientation %}
+  {% include "admin/zinnia/widgets/content_stats.html" %}
+  {% endwith %}
+
+  {% with "right" as orientation %}
+  {% include "admin/zinnia/widgets/quickpost.html" %}
+  {% endwith %}
+
+  {% with "left" as orientation %}
+  {% include "admin/zinnia/widgets/recent_comments.html" %}
+  {% endwith %}
+
+  {% with "right" as orientation %}
+  {% include "admin/zinnia/widgets/draft_entries.html" %}
+  {% endwith %}
+
+  {% with "left" as orientation %}
+  {% include "admin/zinnia/widgets/recent_linkbacks.html" %}
+  {% endwith %}
+</div>
+{% endblock %}
+
+
+

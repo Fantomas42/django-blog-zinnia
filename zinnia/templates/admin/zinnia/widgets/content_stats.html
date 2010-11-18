@@ -1,0 +1,12 @@
+{% extends "admin/zinnia/widgets/base.html" %}
+{% load i18n zinnia_admin_tags %}
+
+{% block module_id %}contents{% endblock %}
+
+{% block summary %}{% trans "Your contents" %}{% endblock %}
+{% block title %}{% trans "Your contents" %}{% endblock %}
+
+{% block content %}
+  {% get_content_stats %}
+{% endblock %}
+

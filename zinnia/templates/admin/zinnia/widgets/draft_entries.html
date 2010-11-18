@@ -1,0 +1,12 @@
+{% extends "admin/zinnia/widgets/base.html" %}
+{% load i18n zinnia_admin_tags %}
+
+{% block module_id %}drafts{% endblock %}
+
+{% block summary %}{% trans "Draft entries" %}{% endblock %}
+{% block title %}{% trans "Draft entries" %}{% endblock %}
+
+{% block content %}
+  {% get_draft_entries %}
+{% endblock %}
+

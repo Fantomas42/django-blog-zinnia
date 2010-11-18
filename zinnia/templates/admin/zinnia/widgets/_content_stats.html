@@ -1,0 +1,46 @@
+{% load i18n %}
+
+<tr>
+  <th>{% trans "Contents" %}</th>
+  <th>{% trans "Discussions" %}</th>
+</tr>
+<tr>
+  <td>
+    <a href="{% url admin:zinnia_entry_changelist %}">
+      {% blocktrans %}{{ entries }} entries{% endblocktrans %}
+    </a>
+  </td>
+  <td>
+    <a href="{% url admin:comments_comment_changelist %}?is_public__exact=1">
+      {% blocktrans %}{{ comments }} comments{% endblocktrans %}
+    </a>
+  </td>
+</tr>
+<tr>
+  <td>
+    <a href="{% url admin:zinnia_category_changelist %}">
+      {% blocktrans %}{{ categories }} categories{% endblocktrans %}
+    </a>
+  </td>
+  <td>{% blocktrans %}{{ pingbacks }} pingbacks{% endblocktrans %}</td>
+</tr>
+<tr>
+  <td>
+    <a href="{% url admin:tagging_tag_changelist %}">
+      {% blocktrans %}{{ tags }} tags{% endblocktrans %}
+    </a>
+  </td>
+  <td>{% blocktrans %}{{ trackbacks }} trackbacks{% endblocktrans %}</td>
+</tr>
+<tr>
+  <td>
+    <a href="{% url admin:auth_user_changelist %}">
+      {% blocktrans %}{{ authors }} authors{% endblocktrans %}
+    </a>
+  </td>
+  <td>
+    <a href="{% url admin:comments_comment_changelist %}?is_public__exact=0">
+      {% blocktrans %}{{ rejects }} rejected{% endblocktrans %}
+    </a>
+  </td>
+</tr>

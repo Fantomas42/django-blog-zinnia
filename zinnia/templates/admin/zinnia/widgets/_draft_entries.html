@@ -1,0 +1,35 @@
+{% load i18n zinnia_tags %}
+
+{% for entry in entries %}
+<tr>
+  <th>
+    <a href="{% url admin:zinnia_entry_change entry.pk %}"
+       title="{% trans "Edit the entry" %}">
+      {{ entry.title }}
+    </a>
+    {% trans "on date" %}
+    <abbr>{{ entry.creation_date|date:"d F Y"|capfirst }}</abbr>
+    {{ entry.html_content|truncatewords_html:20|safe }}
+  </th>
+  <td>
+    <a href="{{ entry.get_absolute_url }}">{% trans "Preview" %}</a>
+  </td>
+</tr>
+{% empty %}
+<tr>
+  <th colspan="2">
+    {% trans "No draft entries." %}
+  </th>
+</tr>
+{% endfor %}
+
+{% if entries %}
+<tr>
+  <th colspan="2">
+    <a href="{% url admin:zinnia_entry_changelist %}?status__exact=0"
+       title="{% trans "View all draft entries" %}" class="changelink">
+      {% trans "View all draft entries" %}
+    </a>
+  </th>
+</tr>
+{% endif %}

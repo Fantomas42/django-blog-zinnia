@@ -1,0 +1,40 @@
+{% load i18n %}
+<div id="quickpost" class="module {{ orientation }}">
+  <form method="post" action="{% url zinnia_entry_quick_post %}">
+    {% csrf_token %}
+    <table summary="{% trans "Quick publishing" %}">
+      <caption>{% trans "Quick publishing" %}</caption>
+      <tr>
+        <th>
+          <label for="id_title" class="required">{% trans "Title" %}:</label>
+        </th>
+        <td>
+          <input name="title" class="vTextField" maxlength="255" id="id_title" type="text" />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label for="id_content" class="required">{% trans "Content" %}:</label>
+        </th>
+        <td>
+          <textarea id="id_content" rows="7" name="content" class="vLargeTextField"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label for="id_tags" class="required">{% trans "Tags" %}:</label>
+        </th>
+        <td>
+          <input name="tags" class="vTextField" maxlength="255" id="id_tags" type="text" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input type="submit" value="Save as draft" name="save_draft" class="button" />
+          <input type="reset" value="Reset" class="button" />
+          <input type="submit" value="Publish" class="default" name="save" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
