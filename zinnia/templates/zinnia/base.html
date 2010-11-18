@@ -56,4 +56,32 @@
   <h3>{% trans "Archives" %}</h3>
   {% get_archives_entries_tree %}
 </div>
+{% if user.is_authenticated %}
+<div class="tools">
+  <h3>{% trans "Tools" %}</h3>
+  <ul>
+    {% if perms.zinnia %}
+    <li>
+      <a href="{% url admin:app_list "zinnia" %}" title="{% trans "Dashboard" %}">
+        {% trans "Dashboard" %}
+      </a>
+    </li>
+    {% endif %}
+    {% if perms.zinnia.add_entry %}
+    <li>
+      <a href="{% url admin:zinnia_entry_add %}" title="{% trans "Post an entry" %}">
+        {% trans "Post an entry" %}
+      </a>
+    </li>
+    {% endif %}
+    {% block admin_tools %}
+    {% endblock %}
+    <li>
+      <a href="{% url admin:logout %}" title="{% trans "Logout" %}">
+        {% trans "Logout" %}
+      </a>
+    </li>
+  </ul>
+</div>
+{% endif %}
 {% endblock %}

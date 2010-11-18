@@ -71,4 +71,26 @@
 {% endif %}
 {% endblock %}
 
-
+{% block admin_tools %}
+  {% if category and perms.zinnia.change_category %}
+  <li>
+    <a href="{% url admin:zinnia_category_change category.pk %}" title="{% trans "Edit the category" %}">
+      {% trans "Edit the category" %}
+    </a>
+  </li>
+  {% endif %}
+  {% if tag and perms.tagging.change_tag %}
+  <li>
+    <a href="{% url admin:tagging_tag_change tag.pk %}" title="{% trans "Edit the tag" %}">
+      {% trans "Edit the tag" %}
+    </a>
+  </li>
+  {% endif %}
+  {% if author and perms.auth.change_user %}
+  <li>
+    <a href="{% url admin:auth_user_change author.pk %}" title="{% trans "Edit the author" %}">
+      {% trans "Edit the author" %}
+    </a>
+  </li>
+  {% endif %}
+{% endblock %}

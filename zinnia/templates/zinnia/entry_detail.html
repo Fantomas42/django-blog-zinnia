@@ -178,3 +178,13 @@
 {% endif %}
 
 {% endblock %}
+
+{% block admin_tools %}
+{% if perms.zinnia.change_entry %}
+<li>
+  <a href="{% url admin:zinnia_entry_change object.pk %}" title="{% trans "Edit the entry" %}">
+    {% trans "Edit the entry" %}
+  </a>
+</li>
+{% endif %}
+{% endblock %}
