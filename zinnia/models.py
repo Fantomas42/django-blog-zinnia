@@ -3,12 +3,12 @@ import warnings
 from datetime import datetime
 
 from django.db import models
+from django.utils.html import strip_tags
+from django.utils.html import linebreaks
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.db.models.signals import post_save
 from django.utils.importlib import import_module
-from django.template.defaultfilters import striptags
-from django.template.defaultfilters import linebreaks
 from django.contrib.comments.moderation import moderator
 from django.utils.translation import ugettext_lazy as _
 
@@ -146,7 +146,7 @@ class EntryAbstractClass(models.Model):
     @property
     def word_count(self):
         """Count the words of an entry"""
-        return len(striptags(self.html_content).split())
+        return len(strip_tags(self.html_content).split())
 
     @property
     def is_actual(self):
