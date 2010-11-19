@@ -1,6 +1,5 @@
 """Template tags and filters for Zinnia's admin"""
 from django.template import Library
-from django.utils.encoding import smart_unicode
 from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 
@@ -19,25 +18,6 @@ def get_draft_entries(
     """Return the latest draft entries"""
     return {'template': template,
             'entries': Entry.objects.filter(status=DRAFT)[:number]}
-
-
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def get_recent_linkbacks(
-    number=5, template='admin/zinnia/widgets/_recent_linkbacks.html'):
-    """Return the most recent linkbacks"""
-    entry_published_pks = map(smart_unicode,
-                              Entry.published.values_list('id', flat=True))
-    content_type = ContentType.objects.get_for_model(Entry)
-
-    linkbacks = Comment.objects.filter(
-        content_type=content_type,
-        object_pk__in=entry_published_pks,
-        flags__flag__in=['pingback', 'trackback'],
-        is_public=True).order_by(
-        '-submit_date')[:number]
-
-    return {'template': template,
-            'linkbacks': linkbacks}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')

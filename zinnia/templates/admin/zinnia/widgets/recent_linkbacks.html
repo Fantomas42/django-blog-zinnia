@@ -1,5 +1,5 @@
 {% extends "admin/zinnia/widgets/base.html" %}
-{% load i18n zinnia_admin_tags %}
+{% load i18n zinnia_tags %}
 
 {% block module_id %}linkbacks{% endblock %}
 
@@ -7,6 +7,6 @@
 {% block title %}{% trans "Recent linkbacks" %}{% endblock %}
 
 {% block content %}
-  {% get_recent_linkbacks %}
+  {% get_recent_linkbacks 5 "admin/zinnia/widgets/_recent_linkbacks.html" %}
 {% endblock %}
 

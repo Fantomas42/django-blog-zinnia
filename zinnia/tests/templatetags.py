@@ -4,6 +4,7 @@ from datetime import datetime
 from django.test import TestCase
 from django.template import Context
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
 
@@ -19,6 +20,7 @@ from zinnia.templatetags.zinnia_tags import zinnia_breadcrumbs
 from zinnia.templatetags.zinnia_tags import get_popular_entries
 from zinnia.templatetags.zinnia_tags import get_similar_entries
 from zinnia.templatetags.zinnia_tags import get_recent_comments
+from zinnia.templatetags.zinnia_tags import get_recent_linkbacks
 from zinnia.templatetags.zinnia_tags import get_calendar_entries
 from zinnia.templatetags.zinnia_tags import get_archives_entries
 from zinnia.templatetags.zinnia_tags import get_archives_entries_tree
@@ -232,6 +234,31 @@ class TemplateTagsTestCase(TestCase):
                                            content_object=self.entry)
         context = get_recent_comments()
         self.assertEquals(list(context['comments']), [comment_2, comment_1])
+
+    def test_get_recent_linkbacks(self):
+        user = User.objects.create_user(username='webmaster',
+                                        email='webmaster@example.com')
+        site = Site.objects.get_current()
+        context = get_recent_linkbacks()
+        self.assertEquals(len(context['linkbacks']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/recent_linkbacks.html')
+
+        linkback_1 = Comment.objects.create(comment='My Linkback 1', site=site,
+                                            content_object=self.entry)
+        linkback_1.flags.create(user=user, flag='pingback')
+        context = get_recent_linkbacks(3, 'custom_template.html')
+        self.assertEquals(len(context['linkbacks']), 0)
+        self.assertEquals(context['template'], 'custom_template.html')
+
+        self.publish_entry()
+        context = get_recent_linkbacks()
+        self.assertEquals(len(context['linkbacks']), 1)
+
+        linkback_2 = Comment.objects.create(comment='My Linkback 2', site=site,
+                                            content_object=self.entry)
+        linkback_2.flags.create(user=user, flag='trackback')
+        context = get_recent_linkbacks()
+        self.assertEquals(list(context['linkbacks']), [linkback_2, linkback_1])
 
     def test_zinnia_breadcrumbs(self):
         class FakeRequest(object):

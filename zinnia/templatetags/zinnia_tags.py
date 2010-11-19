@@ -189,6 +189,25 @@ def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
             'comments': comments}
 
 
+@register.inclusion_tag('zinnia/tags/dummy.html')
+def get_recent_linkbacks(number=5,
+                         template='zinnia/tags/recent_linkbacks.html'):
+    """Return the most recent linkbacks"""
+    entry_published_pks = map(smart_unicode,
+                              Entry.published.values_list('id', flat=True))
+    content_type = ContentType.objects.get_for_model(Entry)
+
+    linkbacks = Comment.objects.filter(
+        content_type=content_type,
+        object_pk__in=entry_published_pks,
+        flags__flag__in=['pingback', 'trackback'],
+        is_public=True).order_by(
+        '-submit_date')[:number]
+
+    return {'template': template,
+            'linkbacks': linkbacks}
+
+
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def zinnia_breadcrumbs(context, separator='/', root_name='Blog',
                        template='zinnia/tags/breadcrumbs.html',):

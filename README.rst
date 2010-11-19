@@ -343,6 +343,10 @@ Display all the categories available.
 
 Display the latest comments.
 
+* get_recent_linkbacks(number=5, template="zinnia/tags/recent_linkbacks.html")
+
+Display the latest linkbacks.
+
 * zinnia_breadcrumbs(separator="/", root_name="Blog", template="zinnia/tags/breadcrumbs.html")
 
 Display the breadcrumbs for the pages handled by Zinnia.
