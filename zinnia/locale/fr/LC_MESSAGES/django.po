@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-19 11:12+0100\n"
-"PO-Revision-Date: 2010-11-19 11:12+0100\n"
+"PO-Revision-Date: 2010-11-19 22:24+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -196,7 +196,7 @@ msgstr "commentaires ?"
 
 #: models.py:95
 msgid "linkback enabled"
-msgstr "linkbacks ?"
+msgstr "liens entrants ?"
 
 #: models.py:97
 msgid "creation date"
@@ -377,7 +377,7 @@ msgstr "Fermer les commentaires pour les articles sélectionnés"
 
 #: admin/entry.py:235
 msgid "Close the linkbacks for selected entries"
-msgstr "Fermer les linkbacks pour les articles sélectionnés"
+msgstr "Fermer les liens entrants pour les articles sélectionnés"
 
 #: admin/entry.py:251
 #, python-format
@@ -661,11 +661,11 @@ msgstr "a fait un lien sur"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:17
 msgid "Edit the linkback"
-msgstr "Editer le linkback"
+msgstr "Editer le lien entrant"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:25
 msgid "No linkbacks yet."
-msgstr "Aucun linkback actuellement"
+msgstr "Aucun lien entrant actuellement"
 
 #: templates/admin/zinnia/widgets/content_stats.html:6
 #: templates/admin/zinnia/widgets/content_stats.html:7
@@ -707,7 +707,7 @@ msgstr "Derniers commentaires"
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:6
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:7
 msgid "Recent linkbacks"
-msgstr "Derniers linkbacks"
+msgstr "Derniers liens entrants"
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
