@@ -4,6 +4,10 @@ body.dashboard #content { width: 75%; }
 .module table { width: 100%; }
 .module table th, .module table td { font-size: 12px; }
 
+.managelink { background: url("../img/manage.png") no-repeat scroll 0 0.2em transparent; padding-left: 12px; }
+
+.previewlink { background: url("../img/preview.png") no-repeat scroll 0 0.2em transparent; padding-left: 12px; }
+
 input, textarea, select { border: 1px solid #CCCCCC; }
 
 .vTextField, .vLargeTextField { width: 25em; }

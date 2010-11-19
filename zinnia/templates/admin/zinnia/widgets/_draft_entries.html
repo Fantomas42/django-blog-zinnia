@@ -12,7 +12,9 @@
     {{ entry.html_content|truncatewords_html:20|safe }}
   </th>
   <td>
-    <a href="{{ entry.get_absolute_url }}">{% trans "Preview" %}</a>
+    <a href="{{ entry.get_absolute_url }}" class="previewlink">
+      {% trans "Preview" %}
+    </a>
   </td>
 </tr>
 {% empty %}
@@ -27,7 +29,7 @@
 <tr>
   <th colspan="2">
     <a href="{% url admin:zinnia_entry_changelist %}?status__exact=0"
-       title="{% trans "View all draft entries" %}" class="changelink">
+       title="{% trans "View all draft entries" %}" class="managelink">
       {% trans "View all draft entries" %}
     </a>
   </th>

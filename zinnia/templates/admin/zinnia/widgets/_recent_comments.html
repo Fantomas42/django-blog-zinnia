@@ -9,16 +9,18 @@
   <td>
     {% with comment.content_object as entry %}
     <strong>{{ comment.user_name }}</strong> {% trans "in" %}
-    <a href="{{ entry.get_absolute_url }}#comment_{{ comment.pk }}"
-       title="{% trans "Comment on" %} {{ entry.title }}">
-      {{ entry.title }}
-    </a>
+    <strong>
+      <a href="{{ entry.get_absolute_url }}#comment_{{ comment.pk }}"
+         title="{% trans "Comment on" %} {{ entry.title }}">
+        {{ entry.title }}
+      </a>
+    </strong>
     {% endwith %}
     {{ comment.comment|linebreaks }}
   </td>
   <td>
     <a href="{% url admin:comments_comment_change comment.pk %}"
-       title="{% trans "Edit the comment" %}">
+       title="{% trans "Edit the comment" %}" class="changelink">
       {% trans "Edit" %}
     </a>
   </td>
@@ -35,7 +37,7 @@
 <tr>
   <th colspan="3">
     <a href="{% url admin:comments_comment_changelist %}"
-       title="{% trans "Manage the comments" %}" class="changelink">
+       title="{% trans "Manage the comments" %}" class="managelink">
       {% trans "Manage the comments" %}
     </a>
   </th>
