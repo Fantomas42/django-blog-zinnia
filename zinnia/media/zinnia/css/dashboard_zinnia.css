@@ -1,5 +1,6 @@
 body.dashboard #content { width: 75%; }
 
+.module { margin-right: 5px; }
 .module table { width: 100%; }
 
 .left { width: 49%; float: left; clear: both; }

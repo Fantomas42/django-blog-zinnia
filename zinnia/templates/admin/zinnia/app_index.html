@@ -10,9 +10,17 @@
 {% block extrahead %}
 {{ block.super }}
 <script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.js"></script>
+<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.masonry.js"></script>
 <script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.bgiframe.js"></script>
 <script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.autocomplete.js"></script>
 <script type="text/javascript" src="{% url admin:zinnia_entry_autocomplete_tags %}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#content-main").masonry({
+    singleMode: true, itemSelector: ".module"
+  });
+});
+</script>
 {% endblock %}
 
 {% block content %}
