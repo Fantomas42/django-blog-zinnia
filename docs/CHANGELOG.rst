@@ -4,6 +4,7 @@ CHANGELOG
 0.8
 ---
 
+* Admin dashboard
 * Using Microformats
 * Mails for comment reply
 * Entry model can be extended

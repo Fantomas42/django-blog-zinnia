@@ -1,11 +1,7 @@
 body.dashboard #content { width: 75%; }
 
-.module { margin-right: 5px; }
+.module { width: 49%; margin-right: 5px; }
 .module table { width: 100%; }
-
-.left { width: 49%; float: left; clear: both; }
-
-.right { width: 49%; float: right; }
 
 input, textarea, select { border: 1px solid #CCCCCC; }
 

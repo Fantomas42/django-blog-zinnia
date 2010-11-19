@@ -25,25 +25,15 @@ $(document).ready(function() {
 
 {% block content %}
 <div id="content-main">
-  {% with "left" as orientation %}
   {% include "admin/zinnia/widgets/content_stats.html" %}
-  {% endwith %}
 
-  {% with "right" as orientation %}
   {% include "admin/zinnia/widgets/quickpost.html" %}
-  {% endwith %}
 
-  {% with "left" as orientation %}
   {% include "admin/zinnia/widgets/recent_comments.html" %}
-  {% endwith %}
 
-  {% with "right" as orientation %}
   {% include "admin/zinnia/widgets/draft_entries.html" %}
-  {% endwith %}
 
-  {% with "left" as orientation %}
   {% include "admin/zinnia/widgets/recent_linkbacks.html" %}
-  {% endwith %}
 </div>
 {% endblock %}
 
