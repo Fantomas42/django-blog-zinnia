@@ -1,9 +1,13 @@
 """Views for Zinnia quick entry"""
+from urllib import urlencode
+
 from django import forms
+from django.utils.html import linebreaks
 from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
-from django.template.defaultfilters import linebreaks
+from django.contrib.auth.decorators import permission_required
 
 from zinnia.models import Entry
 from zinnia.managers import DRAFT
@@ -18,6 +22,7 @@ class QuickEntryForm(forms.Form):
     tags = forms.CharField(required=True, max_length=255)
 
 
+@permission_required('zinnia.add_entry')
 def view_quick_entry(request):
     """View for quickly post an Entry"""
     if request.POST:
@@ -34,5 +39,14 @@ def view_quick_entry(request):
             entry.sites.add(Site.objects.get_current())
             entry.authors.add(request.user)
             return redirect(entry)
+
+        data = {'title': request.POST.get('title', ''),
+                'content': linebreaks(request.POST.get('content', '')),
+                'tags': request.POST.get('tags', ''),
+                'slug': slugify(request.POST.get('title', '')),
+                'authors': request.user.pk,
+                'sites': Site.objects.get_current().pk}
+        return redirect('%s?%s' % (reverse('admin:zinnia_entry_add'),
+                                   urlencode(data)))
 
     return redirect('admin:zinnia_entry_add')

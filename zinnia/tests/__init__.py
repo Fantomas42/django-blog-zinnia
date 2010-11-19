@@ -11,6 +11,7 @@ from zinnia.tests.views import ZinniaViewsTestCase
 from zinnia.tests.pingback import PingBackTestCase
 from zinnia.tests.metaweblog import MetaWeblogTestCase
 from zinnia.tests.comparison import ComparisonTestCase
+from zinnia.tests.quick_entry import QuickEntryTestCase
 from zinnia.tests.sitemaps import ZinniaSitemapsTestCase
 from zinnia.tests.ping import ExternalUrlsPingerTestCase
 from zinnia.tests.templatetags import TemplateTagsTestCase
@@ -24,7 +25,8 @@ def suite():
     test_cases = (ManagersTestCase, EntryTestCase, CategoryTestCase,
                   ZinniaViewsTestCase, ZinniaFeedsTestCase,
                   ZinniaSitemapsTestCase, ComparisonTestCase,
-                  ExternalUrlsPingerTestCase, TemplateTagsTestCase)
+                  ExternalUrlsPingerTestCase, TemplateTagsTestCase,
+                  QuickEntryTestCase)
 
     if 'django_xmlrpc' in settings.INSTALLED_APPS:
         test_cases += (PingBackTestCase, MetaWeblogTestCase)
