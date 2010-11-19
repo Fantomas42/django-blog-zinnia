@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
+from django.utils.encoding import smart_str
 from django.contrib.auth.decorators import permission_required
 
 from zinnia.models import Entry
@@ -19,7 +20,7 @@ class QuickEntryForm(forms.Form):
 
     title = forms.CharField(required=True, max_length=255)
     content = forms.CharField(required=True)
-    tags = forms.CharField(required=True, max_length=255)
+    tags = forms.CharField(required=False, max_length=255)
 
 
 @permission_required('zinnia.add_entry')
@@ -40,9 +41,9 @@ def view_quick_entry(request):
             entry.authors.add(request.user)
             return redirect(entry)
 
-        data = {'title': request.POST.get('title', ''),
-                'content': linebreaks(request.POST.get('content', '')),
-                'tags': request.POST.get('tags', ''),
+        data = {'title': smart_str(request.POST.get('title', '')),
+                'content': smart_str(linebreaks(request.POST.get('content', ''))),
+                'tags': smart_str(request.POST.get('tags', '')),
                 'slug': slugify(request.POST.get('title', '')),
                 'authors': request.user.pk,
                 'sites': Site.objects.get_current().pk}

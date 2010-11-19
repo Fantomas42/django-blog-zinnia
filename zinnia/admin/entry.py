@@ -35,8 +35,8 @@ class EntryAdmin(admin.ModelAdmin):
                                  'classes': ('collapse', 'collapse-closed')}),
                  (_('Discussion'), {'fields': ('comment_enabled',
                                                'pingback_enabled')}),
-                 (_('Publication'), {'fields': ('sites', 'categories',
-                                                'tags', 'slug')}))
+                 (_('Publication'), {'fields': ('categories', 'tags',
+                                                'sites', 'slug')}))
     list_filter = ('categories', 'authors', 'status', 'login_required',
                    'comment_enabled', 'pingback_enabled',
                    'creation_date', 'start_publication',

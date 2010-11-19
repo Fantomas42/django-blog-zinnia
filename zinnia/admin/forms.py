@@ -42,7 +42,7 @@ class CategoryAdminForm(forms.ModelForm):
 class EntryAdminForm(forms.ModelForm):
     """Form for Entry's Admin"""
     categories = MPTTModelMultipleChoiceField(
-        Category.objects.all(),
+        Category.objects.all(), required=False, label=_('Categories'),
         widget=MPTTFilteredSelectMultiple(_('categories'), False,
                                           attrs={'rows': '10'}))
 

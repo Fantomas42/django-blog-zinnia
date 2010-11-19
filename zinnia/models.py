@@ -80,7 +80,8 @@ class EntryAbstractClass(models.Model):
                                 help_text=_('optional element'))
 
     tags = TagField(_('tags'))
-    categories = models.ManyToManyField(Category, verbose_name=_('categories'))
+    categories = models.ManyToManyField(Category, verbose_name=_('categories'),
+                                        blank=True, null=True)
     related = models.ManyToManyField('self', verbose_name=_('related entries'),
                                      blank=True, null=True)
 

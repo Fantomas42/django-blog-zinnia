@@ -20,13 +20,15 @@
     <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">
       {{ object.creation_date|date:"d F Y"|capfirst }}
     </abbr>
+    {% if object.categories.count %}
     {% trans "in" %}
     {% for category in object.categories.all %}
     <a href="{{ category.get_absolute_url }}" title="{{ category }}" rel="tag category">
       {{ category }}
     </a>
     {% if not forloop.last %}, {% endif %}
-    {% endfor %}.
+    {% endfor %}
+    {% endif %}.
   </p>
 </div>
 
