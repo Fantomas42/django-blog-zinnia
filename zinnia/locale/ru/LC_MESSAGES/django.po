@@ -68,7 +68,7 @@ msgstr "Новости, содержащие запрос %s"
 #: feeds.py:250
 #, python-format
 msgid "Discussions on %s"
-msgstr ""
+msgstr "Обсуждений %s"
 
 #: feeds.py:254
 #, python-format
@@ -232,7 +232,7 @@ msgstr "шаблон"
 
 #: models.py:116
 msgid "Default template"
-msgstr ""
+msgstr "Шаблон по умолчанию"
 
 #: models.py:118
 msgid "template used to display the entry"
@@ -250,7 +250,7 @@ msgstr "записи"
 #: moderator.py:51
 #, python-format
 msgid "[%(site)s] New comment posted on \"%(title)s\""
-msgstr ""
+msgstr "[%(site)s] Новый комментарий к \"%(title)s\""
 
 #: admin/category.py:30
 msgid "tree path"
@@ -271,7 +271,7 @@ msgstr ""
 
 #: admin/entry.py:36 plugins/admin.py:26
 msgid "Discussion"
-msgstr ""
+msgstr "Обсуждение"
 
 #: admin/entry.py:38 plugins/admin.py:28
 msgid "Publication"
@@ -280,12 +280,12 @@ msgstr "Публикация"
 #: admin/entry.py:66
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
-msgstr ""
+msgstr "%(title)s (%(word_count)i слов)"
 
 #: admin/entry.py:70
 #, python-format
 msgid "%(title)s (%(comments)i comments)"
-msgstr ""
+msgstr "%(title)s (%(comments)i комментариев)"
 
 #: admin/entry.py:86
 msgid "author(s)"
@@ -382,7 +382,7 @@ msgstr "Сортировка"
 
 #: plugins/cms_plugins.py:42
 msgid "Advanced"
-msgstr ""
+msgstr "Расширенный"
 
 #: plugins/cms_plugins.py:93
 msgid "Selected entries"
@@ -423,7 +423,7 @@ msgstr "Теги"
 
 #: plugins/models.py:13
 msgid "Entry list (default)"
-msgstr ""
+msgstr "Список записей (по умолчанию)"
 
 #: plugins/models.py:14
 msgid "Entry detailed"
@@ -439,7 +439,7 @@ msgstr "количество записей"
 
 #: plugins/models.py:33 plugins/models.py:51
 msgid "Template used to display the plugin"
-msgstr ""
+msgstr "Шаблон для отображения плагина"
 
 #: plugins/models.py:42 plugins/models.py:60
 #, python-format
@@ -448,19 +448,19 @@ msgstr "%s записей"
 
 #: templates/404.html:5
 msgid "Error 404"
-msgstr ""
+msgstr "Ошибка 404"
 
 #: templates/404.html:8 templates/404.html.py:11
 msgid "Page not found"
-msgstr ""
+msgstr "Страница не найдена"
 
 #: templates/404.html:13
 msgid "Sorry, but the requested page could not be found."
-msgstr ""
+msgstr "Извините, запрашиваемая страница не найдена."
 
 #: templates/404.html:15 templates/500.html:19
 msgid "Useful links"
-msgstr ""
+msgstr "Полезные ссылки"
 
 #: templates/404.html:19 templates/404.html.py:20 templates/500.html:23
 #: templates/500.html.py:24
@@ -472,7 +472,7 @@ msgstr ""
 #: templates/zinnia/sitemap.html.py:7 templates/zinnia/skeleton.html:35
 #: templates/zinnia/skeleton.html.py:36
 msgid "Sitemap"
-msgstr ""
+msgstr "Карта сайта"
 
 #: templates/404.html:31 templates/500.html:35 templates/zinnia/base.html:40
 msgid "Recent entries"
@@ -488,11 +488,11 @@ msgstr "Ключевые слова..."
 
 #: templates/500.html:9
 msgid "Error 500"
-msgstr ""
+msgstr "Ошибка 500"
 
 #: templates/500.html:12 templates/500.html.py:15
 msgid "Server error"
-msgstr ""
+msgstr "Ошибка сервера"
 
 #: templates/500.html:17
 msgid "There's been an error. It's been reported to the site administrators via e-mail and should be fixed shortly. Thanks for your patience."
@@ -505,7 +505,7 @@ msgstr "Содержимое"
 #: templates/admin/zinnia/widgets/_content_stats.html:5
 #: templates/zinnia/_entry_detail.html:73
 msgid "Discussions"
-msgstr ""
+msgstr "Обсуждения"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:10
 #, python-format
@@ -525,12 +525,12 @@ msgstr "%(categories)s категорий"
 #: templates/admin/zinnia/widgets/_content_stats.html:25
 #, python-format
 msgid "%(pingbacks)s pingbacks"
-msgstr ""
+msgstr "%(pingbacks)s пингбэков"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:30
 #, python-format
 msgid "%(tags)s tags"
-msgstr ""
+msgstr "%(tags)s тегов"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:33
 #, python-format
@@ -594,7 +594,7 @@ msgstr "Редактировать комментарий"
 #: templates/admin/zinnia/widgets/_recent_comments.html:24
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:18
 msgid "Edit"
-msgstr ""
+msgstr "Редактировать"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:31
 #: templates/zinnia/_entry_detail.html:81
@@ -624,7 +624,7 @@ msgstr "Нет записей в архиве."
 #: templates/admin/zinnia/widgets/content_stats.html:6
 #: templates/admin/zinnia/widgets/content_stats.html:7
 msgid "Today"
-msgstr ""
+msgstr "Сегодня"
 
 #: templates/admin/zinnia/widgets/draft_entries.html:6
 #: templates/admin/zinnia/widgets/draft_entries.html:7
@@ -635,19 +635,20 @@ msgstr "связанные записи"
 #: templates/admin/zinnia/widgets/quickpost.html:5
 #: templates/admin/zinnia/widgets/quickpost.html:6
 msgid "Quick publishing"
-msgstr ""
+msgstr "Быстрая публикация"
 
 #: templates/admin/zinnia/widgets/quickpost.html:9
 msgid "Title"
 msgstr "Заголовок"
 
 #: templates/admin/zinnia/widgets/quickpost.html:33
+#, fuzzy
 msgid "Save as draft"
-msgstr ""
+msgstr "Сохранить как черновик"
 
 #: templates/admin/zinnia/widgets/quickpost.html:34
 msgid "Reset"
-msgstr ""
+msgstr "Сброс"
 
 #: templates/admin/zinnia/widgets/quickpost.html:35
 msgid "Publish"
@@ -781,7 +782,7 @@ msgstr "Список авторов"
 
 #: templates/zinnia/base.html:23
 msgid "Calendar"
-msgstr ""
+msgstr "Календарь"
 
 #: templates/zinnia/base.html:48
 msgid "Random entries"
@@ -804,11 +805,12 @@ msgstr "Архив"
 
 #: templates/zinnia/base.html:61
 msgid "Tools"
-msgstr ""
+msgstr "Инструменты"
 
 #: templates/zinnia/base.html:65 templates/zinnia/base.html.py:66
+#, fuzzy
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
 
 #: templates/zinnia/base.html:72 templates/zinnia/base.html.py:73
 #, fuzzy
@@ -817,7 +819,7 @@ msgstr "запись"
 
 #: templates/zinnia/base.html:80 templates/zinnia/base.html.py:81
 msgid "Log out"
-msgstr ""
+msgstr "Выйти"
 
 #: templates/zinnia/category_list.html:7
 msgid "Category list"
@@ -891,12 +893,12 @@ msgstr "Редактировать категорию"
 #: templates/zinnia/entry_archive_base.html:84
 #: templates/zinnia/entry_archive_base.html:85
 msgid "Edit the tag"
-msgstr ""
+msgstr "Редактировать тег"
 
 #: templates/zinnia/entry_archive_base.html:91
 #: templates/zinnia/entry_archive_base.html:92
 msgid "Edit the author"
-msgstr ""
+msgstr "Редактировать автора"
 
 #: templates/zinnia/entry_detail.html:9
 #, fuzzy
@@ -921,7 +923,7 @@ msgstr "Следующая запись"
 
 #: templates/zinnia/entry_detail.html:42
 msgid "Previous entry"
-msgstr ""
+msgstr "Предыдущая запись"
 
 #: templates/zinnia/entry_detail.html:55
 msgid "Related entries"
@@ -937,7 +939,7 @@ msgstr "Комментарии"
 
 #: templates/zinnia/entry_detail.html:116
 msgid "Pingbacks"
-msgstr ""
+msgstr "Пингбэки"
 
 #: templates/zinnia/entry_detail.html:138
 msgid "Pingbacks are open."
@@ -949,7 +951,7 @@ msgstr "Пингбэки отключены."
 
 #: templates/zinnia/entry_detail.html:147
 msgid "Trackbacks"
-msgstr ""
+msgstr "Трэкбэки"
 
 #: templates/zinnia/entry_detail.html:169
 msgid "Trackback URL"
@@ -995,11 +997,11 @@ msgstr "Ничего не найдено."
 
 #: templates/zinnia/login.html:4 templates/zinnia/login.html.py:7
 msgid "Login required"
-msgstr ""
+msgstr "Требуется авторизация"
 
 #: templates/zinnia/login.html:12
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
+msgstr "Имя пользователя и пароль не совпадают. Пожалуйста, попробуйте еще раз."
 
 #: templates/zinnia/login.html:16
 msgid "You need to be connected to view this entry."
@@ -1007,11 +1009,11 @@ msgstr ""
 
 #: templates/zinnia/login.html:33
 msgid "Login"
-msgstr ""
+msgstr "Войти"
 
 #: templates/zinnia/password.html:4 templates/zinnia/password.html.py:7
 msgid "Password required"
-msgstr ""
+msgstr "Требуется пароль"
 
 #: templates/zinnia/password.html:12
 msgid "The password provided is not valid. Please try again."
@@ -1023,7 +1025,7 @@ msgstr ""
 
 #: templates/zinnia/password.html:23
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: templates/zinnia/password.html:28
 msgid "Valid"
@@ -1077,11 +1079,11 @@ msgstr "Нечего искать"
 
 #: xmlrpc/metaweblog.py:35
 msgid "Username is incorrect."
-msgstr ""
+msgstr "Неверное имя пользователя."
 
 #: xmlrpc/metaweblog.py:37
 msgid "Password is invalid."
-msgstr ""
+msgstr "Неверный пароль."
 
 #: xmlrpc/metaweblog.py:39
 msgid "User account unavailable."
