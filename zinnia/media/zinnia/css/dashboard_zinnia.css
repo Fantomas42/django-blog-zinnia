@@ -1,6 +1,6 @@
 body.dashboard #content { width: 75%; }
 
-.module { width: 49%; margin-right: 5px; }
+.module { width: 400px; margin-right: 5px; }
 .module table { width: 100%; }
 .module table th, .module table td { font-size: 12px; }
 
@@ -27,6 +27,6 @@ input, textarea, select { border: 1px solid #CCCCCC; }
 #comments td { width: 100%; }
 #comments td a { display: inline; }
 
-#drafts th, #linkbacks th { font-weight: normal; }
-#drafts th a, #linkbacks th a { font-weight: bold; }
-#drafts th abbr, #linkbacks th abbr { color: #666; }
+#drafts th, #linkbacks th, #comments th { font-weight: normal; }
+#drafts th a, #linkbacks th a, #comments th a { font-weight: bold; }
+#drafts th abbr, #linkbacks th abbr, #comments th abbr { color: #666; }
