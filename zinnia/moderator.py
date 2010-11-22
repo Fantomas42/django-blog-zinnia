@@ -57,7 +57,7 @@ class EntryCommentModerator(CommentModerator):
 
     def moderate(self, comment, content_object, request):
         """Need to pass Akismet test"""
-        if not AKISMET_COMMENT:
+        if not AKISMET_COMMENT or not AKISMET_API_KEY:
             return False
 
         try:
