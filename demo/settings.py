@@ -21,8 +21,10 @@ LANGUAGE_CODE = 'en'
 
 LANGUAGES = (('en', gettext('English')),
              ('fr', gettext('French')),
-             ('es', gettext('Spanish')),
              ('de', gettext('German')),
+             ('es', gettext('Spanish')),
+             ('it', gettext('Italian')),
+             ('nl', gettext('Dutch')),
              ('ru', gettext('Russian')),
              ('zh_CN', gettext('Simplified Chinese')),)
 
