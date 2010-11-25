@@ -3,8 +3,10 @@ import os
 
 gettext = lambda s: s
 
-DATABASE_ENGINE = 'sqlite3'
-DATABASE_NAME = os.path.join(os.path.dirname(__file__), 'demo.db')
+DATABASES = {'default':
+             {'ENGINE': 'django.db.backends.sqlite3',
+              'NAME': os.path.join(os.path.dirname(__file__), 'demo.db')}
+             }
 
 MEDIA_URL = 'http://localhost:8000/'
 

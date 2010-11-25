@@ -10,8 +10,8 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'zinnia.context_processors.media',
     'zinnia.context_processors.version']
 
+DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3'}}
 
-DATABASE_ENGINE = 'sqlite3'
 INSTALLED_APPS = ['django.contrib.contenttypes',
                   'django.contrib.comments',
                   'django.contrib.sessions',
