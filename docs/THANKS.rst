@@ -14,6 +14,7 @@ this application greatest each day.
   * Franck Bret
   * Jason Davies
   * Brandon Taylor
+  * bernhardvallant
   * nl0
   * esauro
   * 0Chuzz
