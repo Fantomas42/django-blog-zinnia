@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.db.models.signals import post_delete
 from django.utils.translation import ugettext_lazy as _
 
 from tagging.models import Tag
@@ -62,10 +63,12 @@ class SelectedEntriesPlugin(CMSPlugin):
         return _('%s entries') % self.entries.count()
 
 
-def post_save_entry(sender, **kwargs):
+def invalidate_menu_cache(sender, **kwargs):
     """Signal receiver to invalidate the menu_pool
     cache when an entry is posted"""
     menu_pool.clear()
 
-post_save.connect(post_save_entry, sender=Entry,
+post_save.connect(invalidate_menu_cache, sender=Entry,
                   dispatch_uid='zinnia.entry.postsave')
+post_delete.connect(invalidate_menu_cache, sender=Entry,
+                    dispatch_uid='zinnia.entry.postdelete')
