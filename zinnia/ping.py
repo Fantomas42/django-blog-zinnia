@@ -4,6 +4,7 @@ import xmlrpclib
 import threading
 from urllib2 import urlopen
 from urlparse import urlsplit
+from logging import getLogger
 
 from BeautifulSoup import BeautifulSoup
 
@@ -40,10 +41,12 @@ class DirectoryPinger(threading.Thread):
 
     def run(self):
         """Ping entries to a Directory in a Thread"""
+        logger = getLogger('zinnia.ping.directory')
         socket.setdefaulttimeout(self.timeout)
         for entry in self.entries:
             reply = self.ping_entry(entry)
             self.results.append(reply)
+            logger.info('%s : %s' % (self.server_name, reply['message']))
         socket.setdefaulttimeout(None)
 
     def ping_entry(self, entry):
@@ -83,6 +86,7 @@ class ExternalUrlsPinger(threading.Thread):
 
     def run(self):
         """Ping external URLS in a Thread"""
+        logger = getLogger('zinnia.ping.external_urls')
         socket.setdefaulttimeout(self.timeout)
 
         external_urls = self.find_external_urls(self.entry)
@@ -91,6 +95,7 @@ class ExternalUrlsPinger(threading.Thread):
         for url, server_name in external_urls_pingable.items():
             reply = self.pingback_url(server_name, url)
             self.results.append(reply)
+            logger.info('%s : %s' % (url, reply))
 
         socket.setdefaulttimeout(None)
 
