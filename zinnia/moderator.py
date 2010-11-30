@@ -35,8 +35,11 @@ class EntryCommentModerator(CommentModerator):
         if not self.email_notification_reply:
             return
 
+        if comment.flags.count():
+            return
+
         exclude_list = [manager_tuple[1] for manager_tuple
-                        in settings.MANAGERS] + [comment.user_email]
+                        in settings.MANAGERS] + [comment.userinfo['email']]
         recipient_list = set([comment.userinfo['email']
                               for comment in content_object.comments
                               if comment.userinfo['email']]) ^ \
