@@ -48,7 +48,7 @@ class Category(models.Model):
         """Return category's tree path, by his ancestors"""
         if self.parent:
             return '%s/%s' % (self.parent.tree_path, self.slug)
-        return '%s' % self.slug
+        return self.slug
 
     def __unicode__(self):
         return self.title
