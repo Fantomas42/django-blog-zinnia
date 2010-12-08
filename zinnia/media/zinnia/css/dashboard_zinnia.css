@@ -24,7 +24,7 @@ input, textarea, select { border: 1px solid #CCCCCC; }
 #quickpost td { width: 100%; }
 
 #comments th { width: 10%; }
-#comments td { width: 100%; }
+#comments td { width: 100%; white-space: normal; }
 #comments td a { display: inline; }
 
 #drafts th, #linkbacks th, #comments th { font-weight: normal; }
