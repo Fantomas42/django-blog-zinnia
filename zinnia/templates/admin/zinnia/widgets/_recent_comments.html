@@ -16,7 +16,7 @@
       </a>
     </strong>
     {% endwith %}
-    {{ comment.comment|linebreaks }}
+    {{ comment.comment|truncatewords:20|linebreaks }}
   </td>
   <td>
     <a href="{% url admin:comments_comment_change comment.pk %}"

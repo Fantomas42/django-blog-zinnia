@@ -11,7 +11,7 @@
       {{ entry.title }}
     </a>
     {% endwith %}
-    {{ linkback.comment|linebreaks }}
+    {{ linkback.comment|truncatewords:20|linebreaks }}
   </th>
   <td>
     <a href="{% url admin:comments_comment_change linkback.pk %}"
