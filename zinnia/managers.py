@@ -24,6 +24,7 @@ def authors_published():
     from django.contrib.auth.models import User
     return User.objects.filter(entry__status=PUBLISHED).distinct()
 
+
 def entries_published(queryset):
     """Return only the entries published"""
     now = datetime.now()
