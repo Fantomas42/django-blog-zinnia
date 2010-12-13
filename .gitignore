@@ -16,7 +16,9 @@ develop-eggs
 .installed.cfg
 .sass-cache
 .coverage
-coverage
+docs/coverage
+docs/api
+docs/html
 demo/demo.db
 docs/_build
 django_blog_zinnia.egg-info/
