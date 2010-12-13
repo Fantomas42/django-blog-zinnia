@@ -102,7 +102,7 @@ ZINNIA_FIRST_WEEK_DAY
   Ex: use 6 for Sunday.
 
 ZINNIA_PING_DIRECTORIES
-  **Default :** ()
+  **Default :** ('http://django-blog-zinnia.com/xmlrpc/',)
 
   List of the directories you want to ping.
 

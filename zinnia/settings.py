@@ -1,7 +1,8 @@
 """Settings of Zinnia"""
 from django.conf import settings
 
-PING_DIRECTORIES = getattr(settings, 'ZINNIA_PING_DIRECTORIES', ())
+PING_DIRECTORIES = getattr(settings, 'ZINNIA_PING_DIRECTORIES',
+                           ('http://django-blog-zinnia.com/xmlrpc/',))
 SAVE_PING_DIRECTORIES = getattr(settings, 'ZINNIA_SAVE_PING_DIRECTORIES',
                                 bool(PING_DIRECTORIES))
 SAVE_PING_EXTERNAL_URLS = getattr(settings, 'ZINNIA_PING_EXTERNAL_URLS', True)
