@@ -6,7 +6,7 @@
 NO_COLOR = \033[0m
 COLOR	 = \033[32;01m
 
-all: kwality test docs clean package
+all: kwalitee test docs clean package
 
 package:
 	@echo "$(COLOR)* Creating source package for Zinnia$(NO_COLOR)"
@@ -31,7 +31,7 @@ sphinx:
 
 docs: coverage epydoc sphinx
 
-kwality:
+kwalitee:
 	@echo "$(COLOR)* Running pyflakes$(NO_COLOR)"
 	@-./bin/pyflakes zinnia
 	@echo "$(COLOR)* Running pep8$(NO_COLOR)"
