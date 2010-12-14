@@ -1,5 +1,8 @@
 """Settings for testing zinnia"""
+import os
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
+
+DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3'}}
 
 SITE_ID = 1
 
@@ -10,7 +13,8 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'zinnia.context_processors.media',
     'zinnia.context_processors.version']
 
-DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3'}}
+TEMPLATE_DIRS = [os.path.join(os.path.dirname(__file__),
+                              'tests', 'templates')]
 
 INSTALLED_APPS = ['django.contrib.contenttypes',
                   'django.contrib.comments',
