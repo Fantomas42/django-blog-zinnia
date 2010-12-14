@@ -55,6 +55,9 @@ class ManagersTestCase(TestCase):
         self.entry_2.status = PUBLISHED
         self.entry_2.save()
         self.assertEquals(authors_published().count(), 2)
+        self.entry_2.sites.remove(self.sites[0])
+        self.entry_2.sites.add(self.sites[1])
+        self.assertEquals(authors_published().count(), 1)
 
     def test_entries_published(self):
         self.assertEquals(entries_published(Entry.objects.all()).count(), 1)

@@ -12,17 +12,24 @@ PUBLISHED = 2
 
 
 def tags_published():
-    """Return the pusblished tags"""
+    """Return the published tags"""
     from tagging.models import Tag
     from zinnia.models import Entry
-    tags_entry_published = Tag.objects.usage_for_queryset(Entry.published.all())
+    tags_entry_published = Tag.objects.usage_for_queryset(
+        Entry.published.all())
+    # Need to do that until the issue #44 of django-tagging is fixed
     return Tag.objects.filter(name__in=[t.name for t in tags_entry_published])
 
 
 def authors_published():
     """Return the published authors"""
     from django.contrib.auth.models import User
-    return User.objects.filter(entry__status=PUBLISHED).distinct()
+    now = datetime.now()
+    return User.objects.filter(entry__status=PUBLISHED,
+                               entry__start_publication__lte=now,
+                               entry__end_publication__gt=now,
+                               entry__sites=Site.objects.get_current()
+                               ).distinct()
 
 
 def entries_published(queryset):
