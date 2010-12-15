@@ -10,6 +10,7 @@ from cms.plugin_pool import plugin_pool
 from zinnia.models import Entry
 from zinnia.models import Author
 from zinnia.managers import tags_published
+from zinnia.plugins.models import RandomEntriesPlugin
 from zinnia.plugins.models import LatestEntriesPlugin
 from zinnia.plugins.models import SelectedEntriesPlugin
 from zinnia.settings import MEDIA_URL
@@ -107,5 +108,27 @@ class CMSSelectedEntriesPlugin(CMSPluginBase):
         """Icon source of the plugin"""
         return MEDIA_URL + u'img/plugin.png'
 
+
+class CMSRandomEntriesPlugin(CMSPluginBase):
+    """Django-cms plugin for random entries"""
+    module = _('entries')
+    model = RandomEntriesPlugin
+    name = _('Random entries')
+    render_template = 'zinnia/cms/random_entries.html'
+    fields = ('number_of_entries', 'template_to_render')
+    text_enabled = True
+
+    def render(self, context, instance, placeholder):
+        """Update the context with plugin's data"""
+        context.update({'number_of_entries': instance.number_of_entries,
+                        'template_to_render': str(instance.template_to_render) or
+                        'zinnia/tags/random_entries.html'})
+        return context
+
+    def icon_src(self, instance):
+        """Icon source of the plugin"""
+        return MEDIA_URL + u'img/plugin.png'
+
 plugin_pool.register_plugin(CMSLatestEntriesPlugin)
 plugin_pool.register_plugin(CMSSelectedEntriesPlugin)
+plugin_pool.register_plugin(CMSRandomEntriesPlugin)
