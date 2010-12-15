@@ -9,6 +9,7 @@ from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.admin.widgets import TreeNodeChoiceField
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
+from django.contrib.sites.models import Site
 from zinnia.admin.widgets import MPTTModelMultipleChoiceField
 
 
@@ -51,6 +52,8 @@ class EntryAdminForm(forms.ModelForm):
         rel = ManyToManyRel(Category, 'id')
         self.fields['categories'].widget = RelatedFieldWidgetWrapper(
             self.fields['categories'].widget, rel, self.admin_site)
+        self.fields['sites'].initial = [Site.objects.get_current()]
+
 
     class Meta:
         """EntryAdminForm's Meta"""
