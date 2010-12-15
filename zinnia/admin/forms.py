@@ -2,6 +2,7 @@
 from django import forms
 from django.db.models import ManyToOneRel
 from django.db.models import ManyToManyRel
+from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 
@@ -9,7 +10,6 @@ from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.admin.widgets import TreeNodeChoiceField
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
-from django.contrib.sites.models import Site
 from zinnia.admin.widgets import MPTTModelMultipleChoiceField
 
 
