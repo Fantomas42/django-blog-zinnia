@@ -15,6 +15,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import smart_unicode
 
 from zinnia.models import Entry
+from zinnia.models import Author
 from zinnia.models import Category
 from zinnia.settings import FIRST_WEEK_DAY
 from zinnia.comparison import VectorBuilder
@@ -35,6 +36,13 @@ def get_categories(template='zinnia/tags/categories.html'):
     """Return the categories"""
     return {'template': template,
             'categories': Category.tree.all()}
+
+
+@register.inclusion_tag('zinnia/tags/dummy.html')
+def get_authors(template='zinnia/tags/authors.html'):
+    """Return the published authors"""
+    return {'template': template,
+            'authors': Author.published.all()}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')

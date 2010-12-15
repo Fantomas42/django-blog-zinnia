@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-25 17:30+0100\n"
+"POT-Creation-Date: 2010-12-15 05:57-0600\n"
 "PO-Revision-Date: 2010-05-05 20:49+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -106,149 +106,149 @@ msgstr "评论已关闭"
 msgid "The latest trackbacks for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
-#: models.py:33 models.py:74 admin/entry.py:73
+#: models.py:48 models.py:89 admin/entry.py:73
 msgid "title"
 msgstr "标题"
 
-#: models.py:34 models.py:88
+#: models.py:49 models.py:103
 msgid "used for publication"
 msgstr "用于发布"
 
-#: models.py:36
+#: models.py:51
 msgid "description"
 msgstr "描述"
 
-#: models.py:39 admin/forms.py:17
+#: models.py:54 admin/forms.py:17
 #, fuzzy
 msgid "parent category"
 msgstr "类别"
 
-#: models.py:64
+#: models.py:79
 msgid "category"
 msgstr "类别"
 
-#: models.py:65 models.py:83 admin/forms.py:46 plugins/models.py:21
+#: models.py:80 models.py:98 admin/forms.py:46 plugins/models.py:24
 msgid "categories"
 msgstr "类别"
 
-#: models.py:70
+#: models.py:85
 msgid "draft"
 msgstr "草稿"
 
-#: models.py:71
+#: models.py:86
 msgid "hidden"
 msgstr "隐藏"
 
-#: models.py:72
+#: models.py:87
 msgid "published"
 msgstr "发布"
 
-#: models.py:76
+#: models.py:91
 msgid "image"
 msgstr "图片"
 
-#: models.py:77
+#: models.py:92
 msgid "used for illustration"
 msgstr "用于插图"
 
-#: models.py:78
+#: models.py:93
 msgid "content"
 msgstr "内容"
 
-#: models.py:79
+#: models.py:94
 msgid "excerpt"
 msgstr "摘要"
 
-#: models.py:80
+#: models.py:95
 msgid "optional element"
 msgstr "可选项"
 
-#: models.py:82 plugins/models.py:27
+#: models.py:97 plugins/models.py:30
 msgid "tags"
 msgstr "标签"
 
-#: models.py:85
+#: models.py:100
 msgid "related entries"
 msgstr "相关日志"
 
-#: models.py:92 plugins/models.py:25
+#: models.py:107 plugins/models.py:28
 msgid "authors"
 msgstr "作者"
 
-#: models.py:95
+#: models.py:110
 msgid "comment enabled"
 msgstr "允许评论"
 
-#: models.py:96
+#: models.py:111
 msgid "linkback enabled"
 msgstr ""
 
-#: models.py:98
+#: models.py:113
 msgid "creation date"
 msgstr "创建日期"
 
-#: models.py:99
+#: models.py:114
 msgid "last update"
 msgstr "最后更新"
 
-#: models.py:100
+#: models.py:115
 msgid "start publication"
 msgstr "开始发布"
 
-#: models.py:101
+#: models.py:116
 msgid "date start publish"
 msgstr "开始发布日期"
 
-#: models.py:103
+#: models.py:118
 msgid "end publication"
 msgstr "结束发布"
 
-#: models.py:104
+#: models.py:119
 msgid "date end publish"
 msgstr "结束发布日期"
 
-#: models.py:107
+#: models.py:122
 msgid "sites publication"
 msgstr "发布网站"
 
-#: models.py:109
+#: models.py:124
 msgid "login required"
 msgstr ""
 
-#: models.py:110
+#: models.py:125
 msgid "only authenticated users can view the entry"
 msgstr ""
 
-#: models.py:111
+#: models.py:126
 msgid "password"
 msgstr ""
 
-#: models.py:112
+#: models.py:127
 msgid "protect the entry with a password"
 msgstr ""
 
-#: models.py:114 plugins/models.py:31 plugins/models.py:49
+#: models.py:129 plugins/models.py:34 plugins/models.py:52
 msgid "template"
 msgstr ""
 
-#: models.py:117
+#: models.py:132
 msgid "Default template"
 msgstr ""
 
-#: models.py:119
+#: models.py:134
 msgid "template used to display the entry"
 msgstr ""
 
-#: models.py:239
+#: models.py:254
 msgid "entry"
 msgstr "日志"
 
-#: models.py:240 plugins/cms_plugins.py:20 plugins/cms_plugins.py:91
-#: plugins/models.py:48 templates/zinnia/base.html:32
+#: models.py:255 plugins/cms_plugins.py:20 plugins/cms_plugins.py:91
+#: plugins/models.py:51 templates/zinnia/base.html:36
 msgid "entries"
 msgstr "日志"
 
-#: moderator.py:51
+#: moderator.py:54
 #, python-format
 msgid "[%(site)s] New comment posted on \"%(title)s\""
 msgstr ""
@@ -408,7 +408,7 @@ msgid "Zinnia Author Menu"
 msgstr ""
 
 #: plugins/menu.py:87 templates/zinnia/author_list.html:4
-#: templatetags/zbreadcrumbs.py:44
+#: templates/zinnia/base.html:23 templatetags/zbreadcrumbs.py:44
 msgid "Authors"
 msgstr "作者"
 
@@ -417,33 +417,33 @@ msgid "Zinnia Tag Menu"
 msgstr ""
 
 #: plugins/menu.py:105 templates/admin/zinnia/widgets/quickpost.html:25
-#: templates/zinnia/_entry_detail.html:52 templates/zinnia/base.html:27
+#: templates/zinnia/_entry_detail.html:52 templates/zinnia/base.html:31
 #: templates/zinnia/tag_list.html:4 templatetags/zbreadcrumbs.py:43
 msgid "Tags"
 msgstr "标签"
 
-#: plugins/models.py:13
+#: plugins/models.py:16
 msgid "Entry list (default)"
 msgstr ""
 
-#: plugins/models.py:14
+#: plugins/models.py:17
 msgid "Entry detailed"
 msgstr ""
 
-#: plugins/models.py:24
+#: plugins/models.py:27
 #, fuzzy
 msgid "include subcategories"
 msgstr "类别"
 
-#: plugins/models.py:30
+#: plugins/models.py:33
 msgid "number of entries"
 msgstr "日志数量"
 
-#: plugins/models.py:33 plugins/models.py:51
+#: plugins/models.py:36 plugins/models.py:54
 msgid "Template used to display the plugin"
 msgstr ""
 
-#: plugins/models.py:42 plugins/models.py:60
+#: plugins/models.py:45 plugins/models.py:63
 #, python-format
 msgid "%s entries"
 msgstr "%s 日志"
@@ -476,7 +476,7 @@ msgstr ""
 msgid "Sitemap"
 msgstr ""
 
-#: templates/404.html:31 templates/500.html:35 templates/zinnia/base.html:40
+#: templates/404.html:31 templates/500.html:35 templates/zinnia/base.html:44
 msgid "Recent entries"
 msgstr "最近日志"
 
@@ -679,14 +679,14 @@ msgstr "发布"
 
 #: templates/admin/zinnia/widgets/recent_comments.html:6
 #: templates/admin/zinnia/widgets/recent_comments.html:7
-#: templates/zinnia/base.html:44
+#: templates/zinnia/base.html:48
 #, fuzzy
 msgid "Recent comments"
 msgstr "最近日志"
 
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:6
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:7
-#: templates/zinnia/base.html:48
+#: templates/zinnia/base.html:52
 #, fuzzy
 msgid "Recent linkbacks"
 msgstr "最近日志"
@@ -802,52 +802,10 @@ msgstr[1] ""
 msgid "Author list"
 msgstr "作者列表"
 
-#: templates/zinnia/base.html:23
-msgid "Calendar"
-msgstr ""
-
-#: templates/zinnia/base.html:52
-msgid "Random entries"
-msgstr "随机日志"
-
-#: templates/zinnia/base.html:56
-msgid "Popular entries"
-msgstr "热门日志"
-
-#: templates/zinnia/base.html:60 templates/zinnia/entry_archive_day.html:4
-#: templates/zinnia/entry_archive_month.html:4
-#: templates/zinnia/entry_archive_year.html:4
-#: templates/zinnia/tags/archives_entries.html:5
-#: templates/zinnia/tags/archives_entries_link.html:2
-#: templates/zinnia/tags/archives_entries_tree.html:7
-#: templates/zinnia/tags/archives_entries_tree.html:14
-#: templates/zinnia/tags/archives_entries_tree.html:24
-msgid "Archives"
-msgstr "归档"
-
-#: templates/zinnia/base.html:65
-msgid "Tools"
-msgstr ""
-
-#: templates/zinnia/base.html:69 templates/zinnia/base.html.py:70
-msgid "Dashboard"
-msgstr ""
-
-#: templates/zinnia/base.html:76 templates/zinnia/base.html.py:77
-#, fuzzy
-msgid "Post an entry"
-msgstr "上一篇"
-
-#: templates/zinnia/base.html:84 templates/zinnia/base.html.py:85
-msgid "Log out"
-msgstr ""
-
-#: templates/zinnia/category_list.html:7
-msgid "Category list"
-msgstr "类别列表"
-
-#: templates/zinnia/category_list.html:12 templates/zinnia/sitemap.html:55
-#: templates/zinnia/tag_list.html:14 templates/zinnia/tags/categories.html:6
+#: templates/zinnia/author_list.html:16 templates/zinnia/category_list.html:12
+#: templates/zinnia/sitemap.html:55 templates/zinnia/tag_list.html:14
+#: templates/zinnia/tags/authors.html:10
+#: templates/zinnia/tags/categories.html:6
 #, fuzzy, python-format
 msgid "%(entry_count)s entry"
 msgid_plural "%(entry_count)s entries"
@@ -859,6 +817,50 @@ msgstr[1] ""
 "\n"
 "  找到 %(entry_count)s 日志\n"
 "  "
+
+#: templates/zinnia/base.html:27
+msgid "Calendar"
+msgstr ""
+
+#: templates/zinnia/base.html:56
+msgid "Random entries"
+msgstr "随机日志"
+
+#: templates/zinnia/base.html:60
+msgid "Popular entries"
+msgstr "热门日志"
+
+#: templates/zinnia/base.html:64 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/entry_archive_month.html:4
+#: templates/zinnia/entry_archive_year.html:4
+#: templates/zinnia/tags/archives_entries.html:5
+#: templates/zinnia/tags/archives_entries_link.html:2
+#: templates/zinnia/tags/archives_entries_tree.html:7
+#: templates/zinnia/tags/archives_entries_tree.html:14
+#: templates/zinnia/tags/archives_entries_tree.html:24
+msgid "Archives"
+msgstr "归档"
+
+#: templates/zinnia/base.html:69
+msgid "Tools"
+msgstr ""
+
+#: templates/zinnia/base.html:73 templates/zinnia/base.html.py:74
+msgid "Dashboard"
+msgstr ""
+
+#: templates/zinnia/base.html:80 templates/zinnia/base.html.py:81
+#, fuzzy
+msgid "Post an entry"
+msgstr "上一篇"
+
+#: templates/zinnia/base.html:88 templates/zinnia/base.html.py:89
+msgid "Log out"
+msgstr ""
+
+#: templates/zinnia/category_list.html:7
+msgid "Category list"
+msgstr "类别列表"
 
 #: templates/zinnia/entry_archive_base.html:6
 #: templates/zinnia/entry_archive_base.html:9
@@ -1092,6 +1094,11 @@ msgstr "标签列表"
 #, fuzzy
 msgid "No archives yet."
 msgstr "没有的归档"
+
+#: templates/zinnia/tags/authors.html:14
+#, fuzzy
+msgid "No authors yet."
+msgstr "没有的类别"
 
 #: templates/zinnia/tags/recent_linkbacks.html:10
 #, fuzzy

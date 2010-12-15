@@ -339,6 +339,10 @@ Display all the archives as a tree.
 
 Display all the categories available.
 
+* get_authors(template="zinnia/tags/authors.html")
+
+Display all the published authors.
+
 * get_recent_comments(number=5, template="zinnia/tags/recent_comments.html")
 
 Display the latest comments.

@@ -13,6 +13,7 @@ from zinnia.models import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 from zinnia.templatetags.zinnia_tags import get_gravatar
+from zinnia.templatetags.zinnia_tags import get_authors
 from zinnia.templatetags.zinnia_tags import get_categories
 from zinnia.templatetags.zinnia_tags import get_recent_entries
 from zinnia.templatetags.zinnia_tags import get_random_entries
@@ -50,6 +51,19 @@ class TemplateTagsTestCase(TestCase):
         Category.objects.create(title='Category 1', slug='category-1')
         context = get_categories('custom_template.html')
         self.assertEquals(len(context['categories']), 1)
+        self.assertEquals(context['template'], 'custom_template.html')
+
+    def test_get_authors(self):
+        context = get_authors()
+        self.assertEquals(len(context['authors']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/authors.html')
+
+        user = User.objects.create_user(username='webmaster',
+                                        email='webmaster@example.com')
+        self.entry.authors.add(user)
+        self.publish_entry()
+        context = get_authors('custom_template.html')
+        self.assertEquals(len(context['authors']), 1)
         self.assertEquals(context['template'], 'custom_template.html')
 
     def test_get_recent_entries(self):
