@@ -5,10 +5,10 @@ from django.core.urlresolvers import reverse
 from tagging.models import TaggedItem
 
 from zinnia.models import Entry
+from zinnia.models import Author
 from zinnia.models import Category
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
-from zinnia.managers import authors_published
 
 
 class EntrySitemap(Sitemap):
@@ -65,7 +65,7 @@ class AuthorSitemap(Sitemap):
 
     def items(self):
         """Return published authors"""
-        return authors_published()
+        return Author.published.all()
 
     def lastmod(self, obj):
         """Return last modification of an author"""

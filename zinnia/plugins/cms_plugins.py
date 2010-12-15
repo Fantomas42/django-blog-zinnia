@@ -8,8 +8,8 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
 from zinnia.models import Entry
+from zinnia.models import Author
 from zinnia.managers import tags_published
-from zinnia.managers import authors_published
 from zinnia.plugins.models import LatestEntriesPlugin
 from zinnia.plugins.models import SelectedEntriesPlugin
 from zinnia.settings import MEDIA_URL
@@ -51,7 +51,7 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         """Filtering manytomany field"""
         if db_field.name == 'authors':
-            kwargs['queryset'] = authors_published()
+            kwargs['queryset'] = Author.published.all()
         if db_field.name == 'tags':
             kwargs['queryset'] = tags_published()
         return super(CMSLatestEntriesPlugin, self).formfield_for_manytomany(

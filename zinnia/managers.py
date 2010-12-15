@@ -21,15 +21,18 @@ def tags_published():
     return Tag.objects.filter(name__in=[t.name for t in tags_entry_published])
 
 
-def authors_published():
-    """Return the published authors"""
-    from django.contrib.auth.models import User
-    now = datetime.now()
-    return User.objects.filter(entry__status=PUBLISHED,
-                               entry__start_publication__lte=now,
-                               entry__end_publication__gt=now,
-                               entry__sites=Site.objects.get_current()
-                               ).distinct()
+class AuthorPublishedManager(models.Manager):
+    """Manager to retrieve published authors"""
+
+    def get_query_set(self):
+        """Return published authors"""
+        now = datetime.now()
+        return super(AuthorPublishedManager, self).get_query_set().filter(
+            entry__status=PUBLISHED,
+            entry__start_publication__lte=now,
+            entry__end_publication__gt=now,
+            entry__sites=Site.objects.get_current()
+            ).distinct()
 
 
 def entries_published(queryset):

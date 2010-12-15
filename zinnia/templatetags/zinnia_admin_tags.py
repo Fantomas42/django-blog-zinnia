@@ -4,10 +4,10 @@ from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 
 from zinnia.models import Entry
+from zinnia.models import Author
 from zinnia.models import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import tags_published
-from zinnia.managers import authors_published
 
 register = Library()
 
@@ -33,7 +33,7 @@ def get_content_stats(
             'entries': Entry.published.count(),
             'categories': Category.objects.count(),
             'tags': tags_published().count(),
-            'authors': authors_published().count(),
+            'authors': Author.published.count(),
             'comments': discussions.filter(flags=None).count(),
             'pingbacks': discussions.filter(flags__flag='pingback').count(),
             'trackbacks': discussions.filter(flags__flag='trackback').count(),

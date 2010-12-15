@@ -8,9 +8,9 @@ from menus.menu_pool import menu_pool
 from cms.menu_bases import CMSAttachMenu
 
 from zinnia.models import Entry
+from zinnia.models import Author
 from zinnia.models import Category
 from zinnia.managers import tags_published
-from zinnia.managers import authors_published
 from zinnia.plugins.settings import HIDE_ENTRY_MENU
 
 
@@ -87,7 +87,7 @@ class AuthorMenu(CMSAttachMenu):
         nodes.append(NavigationNode(_('Authors'),
                                     reverse('zinnia_author_list'),
                                     'authors'))
-        for author in authors_published():
+        for author in Author.published.all():
             nodes.append(NavigationNode(author.username,
                                         reverse('zinnia_author_detail',
                                                 args=[author.username]),

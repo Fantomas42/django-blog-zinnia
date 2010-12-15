@@ -13,6 +13,7 @@
          title="{{ object.username }}" class="fn nickname url">
         {{ object.username }}
       </a>
+      {% blocktrans count object.entries_published_set.count as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     </li>
     {% endfor %}
   </ul>

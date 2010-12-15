@@ -8,11 +8,11 @@ from django.contrib.sites.models import Site
 from tagging.models import Tag
 
 from zinnia.models import Entry
+from zinnia.models import Author
 from zinnia.models import Category
 from zinnia.managers import PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
-from zinnia.managers import authors_published
 
 
 class ManagersTestCase(TestCase):
@@ -50,14 +50,14 @@ class ManagersTestCase(TestCase):
         Tag.objects.create(name='out')
         self.assertNotEquals(tags_published().count(), Tag.objects.count())
 
-    def test_authors_published(self):
-        self.assertEquals(authors_published().count(), 1)
+    def test_author_published_manager_get_query_set(self):
+        self.assertEquals(Author.published.count(), 1)
         self.entry_2.status = PUBLISHED
         self.entry_2.save()
-        self.assertEquals(authors_published().count(), 2)
+        self.assertEquals(Author.published.count(), 2)
         self.entry_2.sites.remove(self.sites[0])
         self.entry_2.sites.add(self.sites[1])
-        self.assertEquals(authors_published().count(), 1)
+        self.assertEquals(Author.published.count(), 1)
 
     def test_entries_published(self):
         self.assertEquals(entries_published(Entry.objects.all()).count(), 1)

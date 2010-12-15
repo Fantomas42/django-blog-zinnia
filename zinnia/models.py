@@ -21,10 +21,25 @@ from zinnia.settings import ENTRY_TEMPLATES
 from zinnia.settings import ENTRY_BASE_MODEL
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
+from zinnia.managers import AuthorPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.moderator import EntryCommentModerator
 from zinnia.signals import ping_directories_handler
 from zinnia.signals import ping_external_urls_handler
+
+
+class Author(User):
+    """Proxy Model around User"""
+
+    objects = models.Manager()
+    published = AuthorPublishedManager()
+
+    def entries_published_set(self):
+        """Return only the entries published"""
+        return entries_published(self.entry_set)
+
+    class Meta:
+        proxy = True
 
 
 class Category(models.Model):
