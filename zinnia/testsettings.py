@@ -22,12 +22,7 @@ INSTALLED_APPS = ['django.contrib.contenttypes',
                   'django.contrib.sites',
                   'django.contrib.admin',
                   'django.contrib.auth',
-                  #'south',
                   'django_xmlrpc',
-                  'mptt',
-                  'tagging', 'zinnia']
+                  'mptt', 'tagging', 'zinnia']
 
 XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
-
-ZINNIA_PING_EXTERNAL_URLS = False
-ZINNIA_SAVE_PING_DIRECTORIES = False
