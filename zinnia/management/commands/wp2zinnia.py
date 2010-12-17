@@ -113,7 +113,7 @@ class Command(LabelCommand):
                              "2. Create a new user ?\n"\
                              "Please select a choice: " % author_name
         while 42:
-            selection = raw_input(select_action_text)
+            selection = raw_input(smart_str(select_action_text))
             if selection in '12':
                 break
         if selection == '1':

@@ -54,7 +54,6 @@ class EntryAdminForm(forms.ModelForm):
             self.fields['categories'].widget, rel, self.admin_site)
         self.fields['sites'].initial = [Site.objects.get_current()]
 
-
     class Meta:
         """EntryAdminForm's Meta"""
         model = Entry
