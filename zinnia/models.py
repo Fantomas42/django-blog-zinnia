@@ -257,7 +257,9 @@ class Entry(get_base_model()):
                        ('can_change_author', 'Can change author'), )
 
 
-mptt.register(Category, order_insertion_by=['title'])
-post_save.connect(ping_directories_handler, sender=Entry)
-post_save.connect(ping_external_urls_handler, sender=Entry)
 moderator.register(Entry, EntryCommentModerator)
+mptt.register(Category, order_insertion_by=['title'])
+post_save.connect(ping_directories_handler, sender=Entry,
+                  dispatch_uid='zinnia.entry.post_save.ping_directories')
+post_save.connect(ping_external_urls_handler, sender=Entry,
+                  dispatch_uid='zinnia.entry.post_save.ping_external_urls')

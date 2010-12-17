@@ -91,6 +91,6 @@ def invalidate_menu_cache(sender, **kwargs):
     menu_pool.clear()
 
 post_save.connect(invalidate_menu_cache, sender=Entry,
-                  dispatch_uid='zinnia.entry.postsave')
+                  dispatch_uid='zinnia.entry.postsave.invalidate_menu_cache')
 post_delete.connect(invalidate_menu_cache, sender=Entry,
-                    dispatch_uid='zinnia.entry.postdelete')
+                    dispatch_uid='zinnia.entry.postdelete.invalidate_menu_cache')
