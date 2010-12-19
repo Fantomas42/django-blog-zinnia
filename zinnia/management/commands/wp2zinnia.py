@@ -7,9 +7,10 @@ from xml.etree import ElementTree as ET
 from django.utils.html import strip_tags
 from django.db.utils import IntegrityError
 from django.utils.encoding import smart_str
-from django.utils.text import truncate_words
-from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
+from django.utils.text import truncate_words
+from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.contrib.comments.models import Comment
 from django.core.management.base import CommandError
@@ -53,6 +54,11 @@ class Command(LabelCommand):
         self.style.TITLE = self.style.SQL_FIELD
         self.style.STEP = self.style.SQL_COLTYPE
         self.style.ITEM = self.style.HTTP_INFO
+        # Disconnecting signals provided by Zinnia
+        post_save.disconnect(sender=Entry,
+                             dispatch_uid='zinnia.entry.post_save.ping_directories')
+        post_save.disconnect(sender=Entry,
+                             dispatch_uid='zinnia.entry.post_save.ping_external_urls')
 
     def write_out(self, message, verbosity_level=1):
         """Convenient method for outputing"""
