@@ -216,7 +216,7 @@ class Command(LabelCommand):
                       # Prefer use this function than
                       # item_node.find('{http://wordpress.org/export/1.0/}post_name').text
                       # Because slug can be not well formated
-                      'slug': slugify(title)[:255],
+                      'slug': slugify(title)[:255] or 'post-%s' % item_node.find('{http://wordpress.org/export/1.0/}post_id').text,
                       'tags': ', '.join(self.get_entry_tags(item_node.findall('category'))),
                       'status': self.REVERSE_STATUS[item_node.find('{http://wordpress.org/export/1.0/}status').text],
                       'comment_enabled': item_node.find('{http://wordpress.org/export/1.0/}comment_status').text == 'open',
