@@ -435,11 +435,13 @@ Examples
   * `Demo site of Zinnia
     <http://django-blog-zinnia.com/blog/>`_.
   * `Fantomas' side
-    <http://fantomas.willbreak.it>`_.
+    <http://fantomas.willbreak.it/blog/>`_.
   * `Professional Web Studio
     <http://www.professionalwebstudio.com/en/weblog/>`_.
   * `mixedCase
     <http://www.mixedcase.nl/articles/>`_.
+  * `Fantomas' mobile side
+    <http://m.fantomas.willbreak.it/blog/>`_.
 
 
 If you are a proud user of Zinnia, send me the URL of your website and I
