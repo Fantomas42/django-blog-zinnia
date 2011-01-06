@@ -4,6 +4,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.db.models import Q
 from django.db.models.signals import post_save
 from django.template.defaultfilters import striptags
 from django.template.defaultfilters import linebreaks
@@ -143,7 +144,9 @@ class Entry(models.Model):
     @property
     def comments(self):
         """Return published comments"""
-        return self.discussions.filter(flags=None)
+        # moderator approval is used by django.contrib.comments admin view, 
+        # when approving a comment
+        return self.discussions.filter(Q(flags=None) | Q(flags__flag='moderator approval')
 
     @property
     def pingbacks(self):
