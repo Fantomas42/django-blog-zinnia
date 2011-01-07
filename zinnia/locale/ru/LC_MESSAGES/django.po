@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-07 09:13-0600\n"
+"POT-Creation-Date: 2011-01-07 12:37-0600\n"
 "PO-Revision-Date: 2010-07-03 HO:MI+ZONE\n"
 "Last-Translator: Pavel Kiper<iwtbarh@gmail.com>\n"
 "Language-Team: Russian <iwtbarh@gmail.com>\n"
@@ -246,7 +246,7 @@ msgstr "запись"
 
 #: models.py:264 plugins/cms_plugins.py:21 plugins/cms_plugins.py:92
 #: plugins/cms_plugins.py:114 plugins/models.py:57
-#: templates/zinnia/base.html:36
+#: templates/zinnia/base.html:39
 msgid "entries"
 msgstr "записи"
 
@@ -375,7 +375,7 @@ msgstr "Отсутствует родительская категория"
 msgid "A category cannot be parent of itself."
 msgstr ""
 
-#: admin/forms.py:46 plugins/menu.py:70 templates/zinnia/base.html:19
+#: admin/forms.py:46 plugins/menu.py:70 templates/zinnia/base.html:22
 #: templates/zinnia/category_list.html:4 templates/zinnia/sitemap.html:50
 #: templatetags/zbreadcrumbs.py:45
 msgid "Categories"
@@ -397,7 +397,7 @@ msgstr "Расширенный"
 msgid "Selected entries"
 msgstr "Выбранные записи"
 
-#: plugins/cms_plugins.py:116 templates/zinnia/base.html:56
+#: plugins/cms_plugins.py:116 templates/zinnia/base.html:59
 msgid "Random entries"
 msgstr "Случайные записи"
 
@@ -414,7 +414,7 @@ msgid "Zinnia Author Menu"
 msgstr ""
 
 #: plugins/menu.py:87 templates/zinnia/author_list.html:4
-#: templates/zinnia/base.html:23 templatetags/zbreadcrumbs.py:44
+#: templates/zinnia/base.html:26 templatetags/zbreadcrumbs.py:44
 msgid "Authors"
 msgstr "Авторы"
 
@@ -423,7 +423,7 @@ msgid "Zinnia Tag Menu"
 msgstr ""
 
 #: plugins/menu.py:105 templates/admin/zinnia/widgets/quickpost.html:25
-#: templates/zinnia/_entry_detail.html:52 templates/zinnia/base.html:31
+#: templates/zinnia/_entry_detail.html:52 templates/zinnia/base.html:34
 #: templates/zinnia/tag_list.html:4 templatetags/zbreadcrumbs.py:43
 msgid "Tags"
 msgstr "Теги"
@@ -481,7 +481,7 @@ msgstr ""
 msgid "Sitemap"
 msgstr "Карта сайта"
 
-#: templates/404.html:31 templates/500.html:35 templates/zinnia/base.html:44
+#: templates/404.html:31 templates/500.html:35 templates/zinnia/base.html:47
 msgid "Recent entries"
 msgstr "Последние записи"
 
@@ -667,13 +667,13 @@ msgstr "Опубликована"
 
 #: templates/admin/zinnia/widgets/recent_comments.html:6
 #: templates/admin/zinnia/widgets/recent_comments.html:7
-#: templates/zinnia/base.html:48
+#: templates/zinnia/base.html:51
 msgid "Recent comments"
 msgstr "Последние комментарии"
 
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:6
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:7
-#: templates/zinnia/base.html:52
+#: templates/zinnia/base.html:55
 #, fuzzy
 msgid "Recent linkbacks"
 msgstr "Последние записи"
@@ -785,15 +785,22 @@ msgstr[0] "%(entry_count)s запись найдена"
 msgstr[1] "%(entry_count)s записи найдены"
 msgstr[2] "%(entry_count)s записей найдены"
 
-#: templates/zinnia/base.html:27
+#: templates/zinnia/base.html:15
+msgid ""
+"You can use - to exclude words or phrases, &quot;double quotes&quot; for "
+"exact phrases and the AND/OR boolean operators combined with parenthesis for "
+"complex searchs."
+msgstr ""
+
+#: templates/zinnia/base.html:30
 msgid "Calendar"
 msgstr "Календарь"
 
-#: templates/zinnia/base.html:60
+#: templates/zinnia/base.html:63
 msgid "Popular entries"
 msgstr "Популярные записи"
 
-#: templates/zinnia/base.html:64 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:67 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/tags/archives_entries.html:5
@@ -804,21 +811,21 @@ msgstr "Популярные записи"
 msgid "Archives"
 msgstr "Архив"
 
-#: templates/zinnia/base.html:69
+#: templates/zinnia/base.html:72
 msgid "Tools"
 msgstr "Инструменты"
 
-#: templates/zinnia/base.html:73 templates/zinnia/base.html.py:74
+#: templates/zinnia/base.html:76 templates/zinnia/base.html.py:77
 #, fuzzy
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: templates/zinnia/base.html:80 templates/zinnia/base.html.py:81
+#: templates/zinnia/base.html:83 templates/zinnia/base.html.py:84
 #, fuzzy
 msgid "Post an entry"
 msgstr "запись"
 
-#: templates/zinnia/base.html:88 templates/zinnia/base.html.py:89
+#: templates/zinnia/base.html:91 templates/zinnia/base.html.py:92
 msgid "Log out"
 msgstr "Выйти"
 
