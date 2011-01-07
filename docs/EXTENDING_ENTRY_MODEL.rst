@@ -22,37 +22,40 @@ a third solution.
 
 How do we do that ?
 
-In fact, simply by creating an abstract model inherited from a
+In fact, simply by creating an abstract model inherited from
 EntryBaseModel, adding fields or/and overriding his methods, and
 registering it with the ZINNIA_ENTRY_BASE_MODEL setting in your project.
 
-Example for adding the gallery field. ::
+Example for adding a gallery field. ::
 
   >>> from django.db import models
-  >>> from zinnia.models import EntryBaseModel
-  >>> from galleryapp.models import Gallery
+  >>> from mygalleryapp.models import Gallery
+  >>> from zinnia.models import EntryAbstractClass
   >>>
-  >>> class EntryGallery(EntryBaseModel):
+  >>> class EntryGallery(EntryAbstractClass):
   ...     gallery = models.ForeignKey(Gallery)
   ...
   ...     class Meta:
-  ...         abtract = True
+  ...         abstract = True
   ...
 
 Now you register the EntryGallery model like this in your project's
 settings.
 
-  >>> ZINNIA_ENTRY_BASE_MODEL = 'galleryapp.zinnia.EntryGallery'
+  >>> ZINNIA_ENTRY_BASE_MODEL = 'full.path.to.EntryGallery'
 
 You can see another example in the zinnia/plugins/placeholder.py file.
 
-But you have to note 3 important things :
+But you have to note 4 important things :
 
   * Do not import the Entry model in your file defining the extended model
     because it will cause a circular importation.
 
-  * Don't forget to tell that your model is abstract. Otherwise it will
-    create the table and the extent will not work as expected.
+  * Do not put your abstract model in a file named models.py,
+    it will not work for a non obvious reason.
+
+  * Don't forget to tell that your model is abstract. Otherwise a table
+    will be created and the extending process will not work as expected.
 
   * If you extend the Entry model after the syncdb command, you will have
     to reset the Zinnia application to reflect your changes.
