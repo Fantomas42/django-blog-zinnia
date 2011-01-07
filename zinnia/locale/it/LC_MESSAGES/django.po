@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-15 05:56-0600\n"
+"POT-Creation-Date: 2011-01-07 09:13-0600\n"
 "PO-Revision-Date: 2010-11-04 15:36+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Poedit-Country: ITALIAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: feeds.py:101 plugins/cms_plugins.py:22
+#: feeds.py:101 plugins/cms_plugins.py:23
 #: templates/zinnia/entry_archive.html:4 templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "Ultimi articoli"
@@ -111,145 +111,147 @@ msgstr "Trackback su %s"
 msgid "The latest trackbacks for the entry %s"
 msgstr "Ultimi trackback sull'articolo %s"
 
-#: models.py:48 models.py:89 admin/entry.py:73
+#: models.py:57 models.py:98 admin/entry.py:73
 msgid "title"
 msgstr "titolo"
 
-#: models.py:49 models.py:103
+#: models.py:58 models.py:112
 msgid "used for publication"
 msgstr "usata per la pubblicazione"
 
-#: models.py:51
+#: models.py:60
 msgid "description"
 msgstr "descrizione"
 
-#: models.py:54 admin/forms.py:17
+#: models.py:63 admin/forms.py:18
 msgid "parent category"
 msgstr "categoria padre"
 
-#: models.py:79
+#: models.py:88
 msgid "category"
 msgstr "categoria"
 
-#: models.py:80 models.py:98 admin/forms.py:46 plugins/models.py:24
+#: models.py:89 models.py:107 admin/forms.py:47 plugins/models.py:24
 #, fuzzy
 msgid "categories"
 msgstr "categorie"
 
-#: models.py:85
+#: models.py:94
 msgid "draft"
 msgstr "bozza"
 
-#: models.py:86
+#: models.py:95
 msgid "hidden"
 msgstr "non pubblicato"
 
-#: models.py:87
+#: models.py:96
 msgid "published"
 msgstr "pubblicato"
 
-#: models.py:91
+#: models.py:100
 msgid "image"
 msgstr "immagine"
 
-#: models.py:92
+#: models.py:101
 msgid "used for illustration"
 msgstr "usata come illustrazione"
 
-#: models.py:93
+#: models.py:102
 msgid "content"
 msgstr "contenuto"
 
-#: models.py:94
+#: models.py:103
 msgid "excerpt"
 msgstr "excerpta"
 
-#: models.py:95
+#: models.py:104
 msgid "optional element"
 msgstr "elemento opzionale"
 
-#: models.py:97 plugins/models.py:30
+#: models.py:106 plugins/models.py:30
 msgid "tags"
 msgstr "tag"
 
-#: models.py:100
+#: models.py:109
 msgid "related entries"
 msgstr "articoli correlati"
 
-#: models.py:107 plugins/models.py:28
+#: models.py:116 plugins/models.py:28
 msgid "authors"
 msgstr "autori"
 
-#: models.py:110
+#: models.py:119
 msgid "comment enabled"
 msgstr "commenti abilitati"
 
-#: models.py:111
+#: models.py:120
 msgid "linkback enabled"
 msgstr "linkback abilitati"
 
-#: models.py:113
+#: models.py:122
 msgid "creation date"
 msgstr "data di creazione"
 
-#: models.py:114
+#: models.py:123
 msgid "last update"
 msgstr "ultimo aggiornamento"
 
-#: models.py:115
+#: models.py:124
 msgid "start publication"
 msgstr "inizio pubblicazione"
 
-#: models.py:116
+#: models.py:125
 msgid "date start publish"
 msgstr "data inizio pubblicazione"
 
-#: models.py:118
+#: models.py:127
 msgid "end publication"
 msgstr "fine pubblicazione"
 
-#: models.py:119
+#: models.py:128
 msgid "date end publish"
 msgstr "data fine pubblicazione"
 
-#: models.py:122
+#: models.py:131
 msgid "sites publication"
 msgstr "pubblicato sui siti"
 
-#: models.py:124
+#: models.py:133
 msgid "login required"
 msgstr "richiesta identificazione"
 
-#: models.py:125
+#: models.py:134
 msgid "only authenticated users can view the entry"
 msgstr "solo i visitatori autenticati possono vedere l'articolo"
 
-#: models.py:126
+#: models.py:135
 msgid "password"
 msgstr "password"
 
-#: models.py:127
+#: models.py:136
 msgid "protect the entry with a password"
 msgstr "proteggi l'articolo con una password"
 
-#: models.py:129 plugins/models.py:34 plugins/models.py:52
+#: models.py:138 plugins/models.py:34 plugins/models.py:58
+#: plugins/models.py:80
 msgid "template"
 msgstr "template"
 
-#: models.py:132
+#: models.py:141
 msgid "Default template"
 msgstr "Template di default"
 
-#: models.py:134
+#: models.py:143
 msgid "template used to display the entry"
 msgstr "Template utilizzato per visualizzare l'articolo"
 
-#: models.py:254
+#: models.py:263
 msgid "entry"
 msgstr "articolo"
 
-#: models.py:255 plugins/cms_plugins.py:20 plugins/cms_plugins.py:91
-#: plugins/models.py:51 templates/zinnia/base.html:36
+#: models.py:264 plugins/cms_plugins.py:21 plugins/cms_plugins.py:92
+#: plugins/cms_plugins.py:114 plugins/models.py:57
+#: templates/zinnia/base.html:36
 msgid "entries"
 msgstr "articoli"
 
@@ -369,15 +371,15 @@ msgstr ""
 msgid "Ping Directories for selected entries"
 msgstr "Pinga le directory per gli articoli selezionati"
 
-#: admin/forms.py:19
+#: admin/forms.py:20
 msgid "No parent category"
 msgstr "Nessuna categoria padre"
 
-#: admin/forms.py:34
+#: admin/forms.py:35
 msgid "A category cannot be parent of itself."
 msgstr "Una categoria non può essere categoria padre di se stessa."
 
-#: admin/forms.py:45 plugins/menu.py:70 templates/zinnia/base.html:19
+#: admin/forms.py:46 plugins/menu.py:70 templates/zinnia/base.html:19
 #: templates/zinnia/category_list.html:4 templates/zinnia/sitemap.html:50
 #: templatetags/zbreadcrumbs.py:45
 msgid "Categories"
@@ -387,17 +389,21 @@ msgstr "Catégories"
 msgid "Zinnia App Hook"
 msgstr "Applicazione Zinnia"
 
-#: plugins/cms_plugins.py:32
+#: plugins/cms_plugins.py:33
 msgid "Sorting"
 msgstr "Ordinamento"
 
-#: plugins/cms_plugins.py:42
+#: plugins/cms_plugins.py:43
 msgid "Advanced"
 msgstr "Avanzato"
 
-#: plugins/cms_plugins.py:93
+#: plugins/cms_plugins.py:94
 msgid "Selected entries"
 msgstr "Articoli selezionati"
+
+#: plugins/cms_plugins.py:116 templates/zinnia/base.html:56
+msgid "Random entries"
+msgstr "Articoli random"
 
 #: plugins/menu.py:19
 msgid "Zinnia Entry Menu"
@@ -438,15 +444,15 @@ msgstr "Dettaglio articolo"
 msgid "include subcategories"
 msgstr "sottocategorie incluse"
 
-#: plugins/models.py:33
+#: plugins/models.py:33 plugins/models.py:79
 msgid "number of entries"
 msgstr "numero di articoli"
 
-#: plugins/models.py:36 plugins/models.py:54
+#: plugins/models.py:36 plugins/models.py:60 plugins/models.py:82
 msgid "Template used to display the plugin"
 msgstr "Modello utilizzato per visualizzare il plugin"
 
-#: plugins/models.py:45 plugins/models.py:63
+#: plugins/models.py:51 plugins/models.py:73 plugins/models.py:85
 #, python-format
 msgid "%s entries"
 msgstr "%s articoli"
@@ -793,10 +799,6 @@ msgstr[1] "%(entry_count)s articoli"
 #: templates/zinnia/base.html:27
 msgid "Calendar"
 msgstr "Calendario"
-
-#: templates/zinnia/base.html:56
-msgid "Random entries"
-msgstr "Articoli random"
 
 #: templates/zinnia/base.html:60
 msgid "Popular entries"

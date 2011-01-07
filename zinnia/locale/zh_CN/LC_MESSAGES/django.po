@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zinnia 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-15 05:57-0600\n"
+"POT-Creation-Date: 2011-01-07 09:13-0600\n"
 "PO-Revision-Date: 2010-05-05 20:49+0100\n"
 "Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
 "Language-Team: Simplified Chinese <indexofire@gmail.com>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: feeds.py:101 plugins/cms_plugins.py:22
+#: feeds.py:101 plugins/cms_plugins.py:23
 #: templates/zinnia/entry_archive.html:4 templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "最新日志"
@@ -106,145 +106,147 @@ msgstr "评论已关闭"
 msgid "The latest trackbacks for the entry %s"
 msgstr "对于新闻 %s 的最新评论"
 
-#: models.py:48 models.py:89 admin/entry.py:73
+#: models.py:57 models.py:98 admin/entry.py:73
 msgid "title"
 msgstr "标题"
 
-#: models.py:49 models.py:103
+#: models.py:58 models.py:112
 msgid "used for publication"
 msgstr "用于发布"
 
-#: models.py:51
+#: models.py:60
 msgid "description"
 msgstr "描述"
 
-#: models.py:54 admin/forms.py:17
+#: models.py:63 admin/forms.py:18
 #, fuzzy
 msgid "parent category"
 msgstr "类别"
 
-#: models.py:79
+#: models.py:88
 msgid "category"
 msgstr "类别"
 
-#: models.py:80 models.py:98 admin/forms.py:46 plugins/models.py:24
+#: models.py:89 models.py:107 admin/forms.py:47 plugins/models.py:24
 msgid "categories"
 msgstr "类别"
 
-#: models.py:85
+#: models.py:94
 msgid "draft"
 msgstr "草稿"
 
-#: models.py:86
+#: models.py:95
 msgid "hidden"
 msgstr "隐藏"
 
-#: models.py:87
+#: models.py:96
 msgid "published"
 msgstr "发布"
 
-#: models.py:91
+#: models.py:100
 msgid "image"
 msgstr "图片"
 
-#: models.py:92
+#: models.py:101
 msgid "used for illustration"
 msgstr "用于插图"
 
-#: models.py:93
+#: models.py:102
 msgid "content"
 msgstr "内容"
 
-#: models.py:94
+#: models.py:103
 msgid "excerpt"
 msgstr "摘要"
 
-#: models.py:95
+#: models.py:104
 msgid "optional element"
 msgstr "可选项"
 
-#: models.py:97 plugins/models.py:30
+#: models.py:106 plugins/models.py:30
 msgid "tags"
 msgstr "标签"
 
-#: models.py:100
+#: models.py:109
 msgid "related entries"
 msgstr "相关日志"
 
-#: models.py:107 plugins/models.py:28
+#: models.py:116 plugins/models.py:28
 msgid "authors"
 msgstr "作者"
 
-#: models.py:110
+#: models.py:119
 msgid "comment enabled"
 msgstr "允许评论"
 
-#: models.py:111
+#: models.py:120
 msgid "linkback enabled"
 msgstr ""
 
-#: models.py:113
+#: models.py:122
 msgid "creation date"
 msgstr "创建日期"
 
-#: models.py:114
+#: models.py:123
 msgid "last update"
 msgstr "最后更新"
 
-#: models.py:115
+#: models.py:124
 msgid "start publication"
 msgstr "开始发布"
 
-#: models.py:116
+#: models.py:125
 msgid "date start publish"
 msgstr "开始发布日期"
 
-#: models.py:118
+#: models.py:127
 msgid "end publication"
 msgstr "结束发布"
 
-#: models.py:119
+#: models.py:128
 msgid "date end publish"
 msgstr "结束发布日期"
 
-#: models.py:122
+#: models.py:131
 msgid "sites publication"
 msgstr "发布网站"
 
-#: models.py:124
+#: models.py:133
 msgid "login required"
 msgstr ""
 
-#: models.py:125
+#: models.py:134
 msgid "only authenticated users can view the entry"
 msgstr ""
 
-#: models.py:126
+#: models.py:135
 msgid "password"
 msgstr ""
 
-#: models.py:127
+#: models.py:136
 msgid "protect the entry with a password"
 msgstr ""
 
-#: models.py:129 plugins/models.py:34 plugins/models.py:52
+#: models.py:138 plugins/models.py:34 plugins/models.py:58
+#: plugins/models.py:80
 msgid "template"
 msgstr ""
 
-#: models.py:132
+#: models.py:141
 msgid "Default template"
 msgstr ""
 
-#: models.py:134
+#: models.py:143
 msgid "template used to display the entry"
 msgstr ""
 
-#: models.py:254
+#: models.py:263
 msgid "entry"
 msgstr "日志"
 
-#: models.py:255 plugins/cms_plugins.py:20 plugins/cms_plugins.py:91
-#: plugins/models.py:51 templates/zinnia/base.html:36
+#: models.py:264 plugins/cms_plugins.py:21 plugins/cms_plugins.py:92
+#: plugins/cms_plugins.py:114 plugins/models.py:57
+#: templates/zinnia/base.html:36
 msgid "entries"
 msgstr "日志"
 
@@ -364,16 +366,16 @@ msgstr "%i次成功提交所选日志到搜索引擎"
 msgid "Ping Directories for selected entries"
 msgstr "提交所选日志到搜索引擎"
 
-#: admin/forms.py:19
+#: admin/forms.py:20
 #, fuzzy
 msgid "No parent category"
 msgstr "类别"
 
-#: admin/forms.py:34
+#: admin/forms.py:35
 msgid "A category cannot be parent of itself."
 msgstr ""
 
-#: admin/forms.py:45 plugins/menu.py:70 templates/zinnia/base.html:19
+#: admin/forms.py:46 plugins/menu.py:70 templates/zinnia/base.html:19
 #: templates/zinnia/category_list.html:4 templates/zinnia/sitemap.html:50
 #: templatetags/zbreadcrumbs.py:45
 msgid "Categories"
@@ -383,17 +385,21 @@ msgstr "类别"
 msgid "Zinnia App Hook"
 msgstr ""
 
-#: plugins/cms_plugins.py:32
+#: plugins/cms_plugins.py:33
 msgid "Sorting"
 msgstr "分类"
 
-#: plugins/cms_plugins.py:42
+#: plugins/cms_plugins.py:43
 msgid "Advanced"
 msgstr ""
 
-#: plugins/cms_plugins.py:93
+#: plugins/cms_plugins.py:94
 msgid "Selected entries"
 msgstr "所选日志"
+
+#: plugins/cms_plugins.py:116 templates/zinnia/base.html:56
+msgid "Random entries"
+msgstr "随机日志"
 
 #: plugins/menu.py:19
 msgid "Zinnia Entry Menu"
@@ -435,15 +441,15 @@ msgstr ""
 msgid "include subcategories"
 msgstr "类别"
 
-#: plugins/models.py:33
+#: plugins/models.py:33 plugins/models.py:79
 msgid "number of entries"
 msgstr "日志数量"
 
-#: plugins/models.py:36 plugins/models.py:54
+#: plugins/models.py:36 plugins/models.py:60 plugins/models.py:82
 msgid "Template used to display the plugin"
 msgstr ""
 
-#: plugins/models.py:45 plugins/models.py:63
+#: plugins/models.py:51 plugins/models.py:73 plugins/models.py:85
 #, python-format
 msgid "%s entries"
 msgstr "%s 日志"
@@ -821,10 +827,6 @@ msgstr[1] ""
 #: templates/zinnia/base.html:27
 msgid "Calendar"
 msgstr ""
-
-#: templates/zinnia/base.html:56
-msgid "Random entries"
-msgstr "随机日志"
 
 #: templates/zinnia/base.html:60
 msgid "Popular entries"
