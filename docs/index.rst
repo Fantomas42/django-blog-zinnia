@@ -7,17 +7,17 @@ Contents:
    :maxdepth: 3
    :numbered:
 
-   OVERVIEW
-   CONFIGURATION
-   SEARCH_ENGINES
-   CHANNELS
-   EXTENDING_ENTRY_MODEL
-   WORDPRESS_2_ZINNIA
-   UPGRADING
-   TESTS
-   FAQ
-   THANKS
-   CHANGELOG
+   overview
+   configuration
+   search_engines
+   channels
+   extending_entry_model
+   wordpress_2_zinnia
+   upgrading
+   tests
+   faq
+   thanks
+   changelog
 
 Related
 -------
