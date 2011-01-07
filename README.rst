@@ -19,7 +19,7 @@ Features
 Main features :
 
   * Comments
-  * Sitemaps
+  * Sitemaps_
   * Archives views
   * Related entries
   * Private entries
@@ -28,20 +28,20 @@ Main features :
   * Advanced search engine
   * Prepublication and expiration
   * Widgets (Popular entries, Similar entries, ...)
-  * Spam protection with Akismet
+  * Spam protection with Akismet_
   * Admin dashboard
   * MetaWeblog API
   * Ping Directories
   * Ping External links
-  * Bit.ly support
-  * Twitter support
+  * Bit.ly_ support
+  * Twitter_ support
   * Gravatar support
-  * Django-CMS plugins
+  * Django-CMS_ plugins
   * Collaborative work
   * Tags autocompletion
   * Entry model extendable
   * Pingback/Trackback support
-  * WYMeditor or TinyMCE support
+  * WYMeditor or TinyMCE_ support
   * WordPress conversion utility
   * Ready to use and extendables templates
   * Windows Live Writer compatibility
@@ -149,8 +149,8 @@ you can customize your URLs if you want. Here's how : ::
 Advanced Configuration
 ======================
 
-Sitemap
--------
+Sitemaps
+--------
 
 One of the cool features of Django is the sitemap application, so if you
 want to fill your website's sitemap with the entries of your blog, follow
@@ -198,8 +198,7 @@ this setting. ::
 Bit.ly
 ------
 
-You find `Bit.ly
-<http://bit.ly>`_ useful and want to use it for your blog entries ?
+You find http://bit.ly useful and want to use it for your blog entries ?
 
 It's simple, install `django_bitly
 <http://bitbucket.org/discovery/django-bitly/>`_ in your project's settings
@@ -239,7 +238,7 @@ entry's title and the shortened url of your entry.
 Django-CMS
 ----------
 
-If you use `django-cms
+If you use `Django-cms 2.0
 <http://www.django-cms.org/>`_, Zinnia can be integrated into your pages,
 thanks to the plugin system.
 
