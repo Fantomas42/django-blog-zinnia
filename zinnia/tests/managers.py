@@ -131,6 +131,7 @@ class ManagersTestCase(TestCase):
         self.assertEquals(Entry.published.advanced_search('content 1 and 2').count(), 0)
         self.assertEquals(Entry.published.advanced_search('content 1 2').count(), 0)
         self.assertEquals(Entry.published.advanced_search('"My content" 1 or 2').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('-"My content" 2').count(), 0)
         search = Entry.published.advanced_search('content -1')
         self.assertEquals(search.count(), 1)
         self.assertEquals(search.all()[0], self.entry_2)
