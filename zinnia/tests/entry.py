@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
+from django.contrib.comments.models import CommentFlag
 
 from zinnia.models import Entry
 from zinnia.managers import PUBLISHED
@@ -53,10 +54,11 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.pingbacks.count(), 0)
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        Comment.objects.create(comment='My Comment 3',
-                               content_object=self.entry,
-                               site=Site.objects.create(domain='http://toto.com',
-                                                        name='Toto.com'))
+        comment = Comment.objects.create(comment='My Comment 3',
+                                         content_object=self.entry,
+                                         site=Site.objects.create(domain='http://toto.com',
+                                                                  name='Toto.com'))
+        comment.flags.create(user=self.author, flag=CommentFlag.MODERATOR_APPROVAL)
         self.assertEquals(self.entry.discussions.count(), 2)
         self.assertEquals(self.entry.comments.count(), 2)
         self.assertEquals(self.entry.pingbacks.count(), 0)

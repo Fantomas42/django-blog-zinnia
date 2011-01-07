@@ -3,12 +3,15 @@ import warnings
 from datetime import datetime
 
 from django.db import models
+from django.db.models import Q
 from django.utils.html import strip_tags
 from django.utils.html import linebreaks
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.db.models.signals import post_save
 from django.utils.importlib import import_module
+from django.contrib.comments.models import Comment
+from django.contrib.comments.models import CommentFlag
 from django.contrib.comments.moderation import moderator
 from django.utils.translation import ugettext_lazy as _
 
@@ -189,13 +192,13 @@ class EntryAbstractClass(models.Model):
     @property
     def discussions(self):
         """Return published discussions"""
-        from django.contrib.comments.models import Comment
         return Comment.objects.for_model(self).filter(is_public=True)
 
     @property
     def comments(self):
         """Return published comments"""
-        return self.discussions.filter(flags=None)
+        return self.discussions.filter(Q(flags=None) | Q(
+            flags__flag=CommentFlag.MODERATOR_APPROVAL))
 
     @property
     def pingbacks(self):
