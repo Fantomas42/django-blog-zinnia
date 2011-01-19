@@ -1,6 +1,9 @@
 Frequently Asked Questions
 ==========================
 
+Templates
+---------
+
 * The templates does not fit to my wishes. What can I do ?
 
     The templates provided for Zinnia are simple but complete and
@@ -15,15 +18,8 @@ Frequently Asked Questions
     <http://github.com/franckbret/django-blog-quintet>`_.
 
 
-* How can I use the image field for fitting to my skin ?
-
-    Take a looks at `sorl.thumbnail
-    <http://code.google.com/p/sorl-thumbnail/>`_ and use his templatetags.
-
-    You can do something like this in your templates : ::
-
-    <img src="{% thumbnail object.image 250x250 %}" />
-
+Comments
+--------
 
 * Is it possible to have a better comment system, with reply feature
   for example ?
@@ -36,6 +32,9 @@ Frequently Asked Questions
     <http://github.com/ericflo/django-threadedcomments>`_ for example.
 
 
+Edition
+-------
+
 * I want to write my entries in `MarkDown
   <http://daringfireball.net/projects/markdown/>`_, `RestructuredTest
   <http://docutils.sourceforge.net/rst.html>`_ or any lightweight
@@ -46,6 +45,9 @@ Frequently Asked Questions
     <http://docs.djangoproject.com/en/dev/ref/contrib/markup/>`_ in
     your templates.
 
+
+Authors
+-------
 
 * Is Zinnia able to allow multiple users to edit it's own blog ?
 
@@ -62,6 +64,18 @@ Frequently Asked Questions
     The simple way to do that, respecting the Django rules, is to
     override the admin classes provided by Zinnia, and register
     those classes in another admin site.
+
+Images
+------
+
+* How can I use the image field for fitting to my skin ?
+
+    Take a looks at `sorl.thumbnail
+    <http://code.google.com/p/sorl-thumbnail/>`_ and use his templatetags.
+
+    You can do something like this in your templates : ::
+
+    <img src="{% thumbnail object.image 250x250 %}" />
 
 
 * I want an image gallery in my posts, what can I do ?

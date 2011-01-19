@@ -28,21 +28,21 @@ registering it with the ZINNIA_ENTRY_BASE_MODEL setting in your project.
 
 Example for adding a gallery field. ::
 
-  >>> from django.db import models
-  >>> from mygalleryapp.models import Gallery
-  >>> from zinnia.models import EntryAbstractClass
-  >>>
-  >>> class EntryGallery(EntryAbstractClass):
-  ...     gallery = models.ForeignKey(Gallery)
-  ...
-  ...     class Meta:
-  ...         abstract = True
-  ...
+  from django.db import models
+  from mygalleryapp.models import Gallery
+  from zinnia.models import EntryAbstractClass
+  
+  class EntryGallery(EntryAbstractClass):
+    gallery = models.ForeignKey(Gallery)
+  
+    class Meta:
+      abstract = True
+  
 
 Now you register the EntryGallery model like this in your project's
-settings.
+settings. ::
 
-  >>> ZINNIA_ENTRY_BASE_MODEL = 'full.path.to.EntryGallery'
+  ZINNIA_ENTRY_BASE_MODEL = 'full.path.to.EntryGallery'
 
 You can see another example in the zinnia/plugins/placeholder.py file.
 

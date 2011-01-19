@@ -18,9 +18,9 @@ For doing that Zinnia provides a view called
 If we take our first example, we will do like that for customizing
 the weblog homepage in our project's urls.py. ::
 
-  >>> url(r'^weblog/$', 'zinnia.views.channels.entry_channel',
-          {'query': 'category:python OR category:django'}),
-  >>> url(r'^weblog/', include('zinnia.urls')),
+  url(r'^weblog/$', 'zinnia.views.channels.entry_channel',
+      {'query': 'category:python OR category:django'}),
+  url(r'^weblog/', include('zinnia.urls')),
 
 The first url will handle the homepage of the blog instead of the default
 url provided by Zinnia.

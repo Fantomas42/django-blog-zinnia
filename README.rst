@@ -70,15 +70,15 @@ You could retrieve the last sources from
 http://github.com/Fantomas42/django-blog-zinnia and run the installation
 script ::
 
-  $> python setup.py install
+  $ python setup.py install
 
 or use pip ::
 
-  $> pip install -e git://github.com/Fantomas42/django-blog-zinnia.git#egg=django-blog-zinnia
+  $ pip install -e git://github.com/Fantomas42/django-blog-zinnia.git#egg=django-blog-zinnia
 
 For the latest stable version use easy_install ::
 
-  $> easy_install django-blog-zinnia
+  $ easy_install django-blog-zinnia
 
 Applications
 ------------
@@ -86,30 +86,29 @@ Applications
 Then register **zinnia**, and these following applications in the
 INSTALLED_APPS section of your project's settings. ::
 
-  >>> INSTALLED_APPS = (
-  ...   # Your favorite apps
-  ...   'django.contrib.contenttypes',
-  ...   'django.contrib.comments',
-  ...   'django.contrib.sessions',
-  ...   'django.contrib.sites',
-  ...   'django.contrib.admin',
-  ...   'tagging',
-  ...   'mptt',
-  ...   'zinnia',)
+  INSTALLED_APPS = (
+    # Your favorite apps
+    'django.contrib.contenttypes',
+    'django.contrib.comments',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.admin',
+    'tagging',
+    'mptt',
+    'zinnia',)
 
 Template Context Processors
 ---------------------------
 
 Add these following template context processors if not already present. ::
 
-  >>> TEMPLATE_CONTEXT_PROCESSORS = (
-  ...      'django.core.context_processors.auth',
-  ...      'django.core.context_processors.i18n',
-  ...      'django.core.context_processors.request',
-  ...      'django.core.context_processors.media',
-  ...      'zinnia.context_processors.media',
-  ...      'zinnia.context_processors.version', # Optional
-  ...	)
+  TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.auth',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.request',
+    'django.core.context_processors.media',
+    'zinnia.context_processors.version', # Optional
+    'zinnia.context_processors.media',)
 
 Media Files
 -----------
@@ -126,25 +125,25 @@ URLs
 Add the following lines to your project's urls.py in order to display the
 blog. ::
 
-  >>> url(r'^weblog/', include('zinnia.urls')),
-  >>> url(r'^comments/', include('django.contrib.comments.urls')),
+  url(r'^weblog/', include('zinnia.urls')),
+  url(r'^comments/', include('django.contrib.comments.urls')),
 
 
 Note that the default zinnia URLset is provided for convenient usage, but
 you can customize your URLs if you want. Here's how : ::
 
-  >>> url(r'^', include('zinnia.urls.capabilities')),
-  >>> url(r'^search/', include('zinnia.urls.search')),
-  >>> url(r'^sitemap/', include('zinnia.urls.sitemap')),
-  >>> url(r'^trackback/', include('zinnia.urls.trackback')),
-  >>> url(r'^weblog/tags/', include('zinnia.urls.tags')),
-  >>> url(r'^weblog/feeds/', include('zinnia.urls.feeds')),
-  >>> url(r'^weblog/authors/', include('zinnia.urls.authors')),
-  >>> url(r'^weblog/categories/', include('zinnia.urls.categories')),
-  >>> url(r'^weblog/discussions/', include('zinnia.urls.discussions')),
-  >>> url(r'^weblog/', include('zinnia.urls.quick_entry')),
-  >>> url(r'^weblog/', include('zinnia.urls.entries')),
-  >>> url(r'^comments/', include('django.contrib.comments.urls')),
+  url(r'^', include('zinnia.urls.capabilities')),
+  url(r'^search/', include('zinnia.urls.search')),
+  url(r'^sitemap/', include('zinnia.urls.sitemap')),
+  url(r'^trackback/', include('zinnia.urls.trackback')),
+  url(r'^weblog/tags/', include('zinnia.urls.tags')),
+  url(r'^weblog/feeds/', include('zinnia.urls.feeds')),
+  url(r'^weblog/authors/', include('zinnia.urls.authors')),
+  url(r'^weblog/categories/', include('zinnia.urls.categories')),
+  url(r'^weblog/discussions/', include('zinnia.urls.discussions')),
+  url(r'^weblog/', include('zinnia.urls.quick_entry')),
+  url(r'^weblog/', include('zinnia.urls.entries')),
+  url(r'^comments/', include('django.contrib.comments.urls')),
 
 Advanced Configuration
 ======================
@@ -161,22 +160,21 @@ these steps.
 
 ::
 
-  >>> from zinnia.sitemaps import TagSitemap
-  >>> from zinnia.sitemaps import EntrySitemap
-  >>> from zinnia.sitemaps import CategorySitemap
-  >>> from zinnia.sitemaps import AuthorSitemap
-  >>>
-  >>> sitemaps = {'tags': TagSitemap,
-  ...             'blog': EntrySitemap,
-  ...             'authors': AuthorSitemap,
-  ...             'categories': CategorySitemap,}
-  ...
-  >>> urlpatterns += patterns('django.contrib.sitemaps.views',
-  ... 	                      (r'^sitemap.xml$', 'index',
-  ...                          {'sitemaps': sitemaps}),
-  ...                         (r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
-  ...                          {'sitemaps': sitemaps}),
-  ...			      )
+   from zinnia.sitemaps import TagSitemap
+   from zinnia.sitemaps import EntrySitemap
+   from zinnia.sitemaps import CategorySitemap
+   from zinnia.sitemaps import AuthorSitemap
+
+   sitemaps = {'tags': TagSitemap,
+               'blog': EntrySitemap,
+               'authors': AuthorSitemap,
+               'categories': CategorySitemap,}
+
+   urlpatterns += patterns('django.contrib.sitemaps.views',
+   	                   url(r'^sitemap.xml$', 'index',
+                               {'sitemaps': sitemaps}),
+                           url(r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
+                               {'sitemaps': sitemaps}),)
 
 Akismet
 -------
@@ -188,12 +186,12 @@ IMPORTANT : you need an API key. If you don't have any, get one for free at
 http://akismet.com/personal/ then set it in your project's settings like
 this : ::
 
-  >>> AKISMET_SECRET_API_KEY = 'your key'
+  AKISMET_SECRET_API_KEY = 'your key'
 
 If you don't want spam protection for comments, you can disable it with
 this setting. ::
 
-  >>> ZINNIA_AKISMET_COMMENT = False
+  ZINNIA_AKISMET_COMMENT = False
 
 Bit.ly
 ------
@@ -204,8 +202,8 @@ It's simple, install `django_bitly
 <http://bitbucket.org/discovery/django-bitly/>`_ in your project's settings
 and add these settings. ::
 
-  >>> BITLY_LOGIN = 'your bit.ly login'
-  >>> BITLY_API_KEY = 'your bit.ly api key'
+  BITLY_LOGIN = 'your bit.ly login'
+  BITLY_API_KEY = 'your bit.ly api key'
 
 Zinnia will do the rest.
 
@@ -220,10 +218,10 @@ described above.
 Then install `tweepy
 <http://github.com/joshthecoder/tweepy>`_ and add these settings. ::
 
-  >>> TWITTER_CONSUMER_KEY = 'Your Consumer Key'
-  >>> TWITTER_CONSUMER_SECRET = 'Your Consumer Secret'
-  >>> TWITTER_ACCESS_KEY = 'Your Access Key'
-  >>> TWITTER_ACCESS_SECRET = 'Your Access Secret'
+  TWITTER_CONSUMER_KEY = 'Your Consumer Key'
+  TWITTER_CONSUMER_SECRET = 'Your Consumer Secret'
+  TWITTER_ACCESS_KEY = 'Your Access Key'
+  TWITTER_ACCESS_SECRET = 'Your Access Secret'
 
 Note that the authentification for Twitter has changed since September 2010.
 The actual authentification system is based on oAuth. That's why now you
@@ -253,7 +251,7 @@ extended EntryModel with a **PlaceholderField** is provided.
 
 Add this line in your project's settings. ::
 
-  >>> ZINNIA_ENTRY_BASE_MODEL = 'zinnia.plugins.placeholder.EntryPlaceholder'
+  ZINNIA_ENTRY_BASE_MODEL = 'zinnia.plugins.placeholder.EntryPlaceholder'
 
 TinyMCE
 -------
@@ -278,8 +276,8 @@ project's settings.
 
 Now add these lines in your project's settings. ::
 
-  >>> from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
-  >>> XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
+  from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
+  XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
 
 *ZINNIA_XMLRPC_METHODS* is a simple list of tuples containing all the
 webservices embedded in Zinnia.
@@ -294,7 +292,7 @@ You can also use your own mixins.
 Finally we need to register the url of the XML-RPC server.
 Insert something like this in your project's urls.py: ::
 
-  >>> url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
+  url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
 
 **Note** : For the Pingback service check if your site is enabled for
 pingback detection.
@@ -370,12 +368,12 @@ First of all, please use `VirtualEnv
 
 Follow these steps to start the development : ::
 
-  $> git clone git://github.com/Fantomas42/django-blog-zinnia.git
-  $> virtualenv --no-site-packages django-blog-zinnia
-  $> cd django-blog-zinnia
-  $> source ./bin/activate
-  $> python bootstrap.py
-  $> ./bin/buildout
+  $ git clone git://github.com/Fantomas42/django-blog-zinnia.git
+  $ virtualenv --no-site-packages django-blog-zinnia
+  $ cd django-blog-zinnia
+  $ source ./bin/activate
+  $ python bootstrap.py
+  $ ./bin/buildout
 
 The buildout script will resolve all the dependencies needed to develop the
 application.
@@ -384,26 +382,26 @@ Once these operations are done, you are ready to develop the zinnia project.
 
 Run this command to launch the tests. ::
 
-  $> ./bin/test
+  $ ./bin/test
 
 To view the code coverage run this command. ::
 
-  $> ./bin/cover
+  $ ./bin/cover
 
 Execute these commands to check the code conventions. ::
 
-  $> ./bin/pyflakes zinnia
-  $> ./bin/pep8 --count -r --exclude=tests.py,migrations zinnia
+  $ ./bin/pyflakes zinnia
+  $ ./bin/pep8 --count -r --exclude=tests.py,migrations zinnia
 
 To launch the demo site, execute these commands. ::
 
-  $> ./bin/demo syncdb
-  $> ./bin/demo loaddata helloworld
-  $> ./bin/demo runserver
+  $ ./bin/demo syncdb
+  $ ./bin/demo loaddata helloworld
+  $ ./bin/demo runserver
 
 And for building the HTML documentation run this. ::
 
-  $> ./bin/docs
+  $ ./bin/docs
 
 Pretty easy no ?
 
@@ -420,7 +418,7 @@ Resources
 =========
 
   * Online `documentation of Zinnia
-    <http://django-blog-zinnia.com/docs/>`_.
+    <http://django-blog-zinnia.com/documentation/>`_.
   * Online `API of Zinnia module
     <http://django-blog-zinnia.com/docs/api/>`_.
   * Discussions and help at `Google Group

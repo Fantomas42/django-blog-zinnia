@@ -21,7 +21,7 @@ under `nose
 <http://somethingaboutorange.com/mrl/projects/nose/0.11.2/>`_ by launching
 this command: ::
 
-  $>./bin/test
+  $ ./bin/test
 
 But the tests can also be launched within a django project with the default
 test runner.
