@@ -1099,7 +1099,6 @@ msgstr "Aucun titre"
 #~ msgid "Comment"
 #~ msgstr "Commentaire"
 
-#, fuzzy
 #~ msgid "template name"
 #~ msgstr "modèle"
 

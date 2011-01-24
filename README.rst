@@ -412,7 +412,7 @@ If you want to contribute by updating a translation or adding a translation
 in your language, it's simple: create a account on Transifex.net and you
 can edit the translations at this URL :
 
-http://www.transifex.net/projects/p/django-blog-zinnia/c/master/
+http://www.transifex.net/projects/p/django-blog-zinnia/resource/djangopo/
 
 Resources
 =========
