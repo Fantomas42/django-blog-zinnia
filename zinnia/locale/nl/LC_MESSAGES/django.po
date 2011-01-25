@@ -1,23 +1,23 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# French translation of Zinnia.
+# Copyright (C) 2008 THE Zinnia'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Zinnia package.
+# Fantomas42 <fantomas42@gmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zinnia\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: django-blog-zinnia\n"
+"Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
 "POT-Creation-Date: 2011-01-24 08:59-0600\n"
-"PO-Revision-Date: 2010-11-25 12:19+0100\n"
-"Last-Translator: Fantomas <Fantomas42@gmail.com>\n"
-"Language-Team: Roald de Vries <roald@go2people.nl>\n"
+"PO-Revision-Date: 2011-01-25 10:25+0000\n"
+"Last-Translator: Fantomas42 <fantomas42@gmail.com>\n"
+"Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-Language: French\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: FRANCE\n"
 
 #: feeds.py:101 plugins/cms_plugins.py:23
 #: templates/zinnia/entry_archive.html:4 templates/zinnia/entry_list.html:4
@@ -235,14 +235,12 @@ msgid "template"
 msgstr "template"
 
 #: models.py:141
-#, fuzzy
 msgid "Default template"
-msgstr "template"
+msgstr ""
 
 #: models.py:143
-#, fuzzy
 msgid "template used to display the entry"
-msgstr "Gebruikte template om de plugin te tonen"
+msgstr ""
 
 #: models.py:263
 msgid "entry"
@@ -438,9 +436,8 @@ msgid "Entry detailed"
 msgstr "Bericht detail"
 
 #: plugins/models.py:27
-#, fuzzy
 msgid "include subcategories"
-msgstr "categorieën"
+msgstr ""
 
 #: plugins/models.py:33 plugins/models.py:79
 msgid "number of entries"
@@ -504,15 +501,12 @@ msgid "Server error"
 msgstr ""
 
 #: templates/500.html:17
-msgid ""
-"There's been an error. It's been reported to the site administrators via e-"
-"mail and should be fixed shortly. Thanks for your patience."
+msgid "There's been an error. It's been reported to the site administrators via e-mail and should be fixed shortly. Thanks for your patience."
 msgstr ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:4
-#, fuzzy
 msgid "Contents"
-msgstr "Inhoud"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:5
 #: templates/zinnia/_entry_detail.html:75
@@ -520,22 +514,19 @@ msgid "Discussions"
 msgstr "Discussies"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:10
-#, fuzzy, python-format
+#, python-format
 msgid "%(entries)s entries"
 msgstr ""
-"\n"
-"      %(entries_published)s Eintrag\n"
-"      "
 
 #: templates/admin/zinnia/widgets/_content_stats.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(comments)s comments"
-msgstr "%(comment_count)s commentaar"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:22
-#, fuzzy, python-format
+#, python-format
 msgid "%(categories)s categories"
-msgstr "Berichten per categorieën"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:25
 #, python-format
@@ -553,9 +544,9 @@ msgid "%(trackbacks)s trackbacks"
 msgstr ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:38
-#, fuzzy, python-format
+#, python-format
 msgid "%(authors)s authors"
-msgstr "Toon berichten van %(author)s"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:43
 #, python-format
@@ -565,9 +556,8 @@ msgstr ""
 #: templates/admin/zinnia/widgets/_draft_entries.html:7
 #: templates/zinnia/entry_detail.html:185
 #: templates/zinnia/entry_detail.html:186
-#, fuzzy
 msgid "Edit the entry"
-msgstr "Alle berichten"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:10
 #: templates/comments/zinnia_entry_preview.html:25
@@ -584,15 +574,13 @@ msgid "Preview"
 msgstr "Voorbeeld"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:23
-#, fuzzy
 msgid "No draft entries."
-msgstr "Noch keine Einträge"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:32
 #: templates/admin/zinnia/widgets/_draft_entries.html:33
-#, fuzzy
 msgid "View all draft entries"
-msgstr "gerelateerde berichten"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:11
 #: templates/zinnia/_entry_detail.html:24
@@ -607,9 +595,8 @@ msgid "Comment on"
 msgstr "Commentaar op"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:23
-#, fuzzy
 msgid "Edit the comment"
-msgstr "Commentaarvoorbeeld"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:24
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:19
@@ -625,9 +612,8 @@ msgstr "Nog geen commentaren"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:40
 #: templates/admin/zinnia/widgets/_recent_comments.html:41
-#, fuzzy
 msgid "Manage the comments"
-msgstr "Nieuwste commentaren"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:8
 msgid "made a linkback on"
@@ -639,9 +625,8 @@ msgstr ""
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:26
 #: templates/zinnia/tags/recent_linkbacks.html:17
-#, fuzzy
 msgid "No linkbacks yet."
-msgstr "Nog geen archieven"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/content_stats.html:6
 #: templates/admin/zinnia/widgets/content_stats.html:7
@@ -650,9 +635,8 @@ msgstr ""
 
 #: templates/admin/zinnia/widgets/draft_entries.html:6
 #: templates/admin/zinnia/widgets/draft_entries.html:7
-#, fuzzy
 msgid "Draft entries"
-msgstr "gerelateerde berichten"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/quickpost.html:5
 #: templates/admin/zinnia/widgets/quickpost.html:6
@@ -660,9 +644,8 @@ msgid "Quick publishing"
 msgstr ""
 
 #: templates/admin/zinnia/widgets/quickpost.html:9
-#, fuzzy
 msgid "Title"
-msgstr "Titel"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/quickpost.html:33
 msgid "Save as draft"
@@ -673,9 +656,8 @@ msgid "Reset"
 msgstr ""
 
 #: templates/admin/zinnia/widgets/quickpost.html:35
-#, fuzzy
 msgid "Publish"
-msgstr "gepubliceerd"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/recent_comments.html:6
 #: templates/admin/zinnia/widgets/recent_comments.html:7
@@ -686,9 +668,8 @@ msgstr "Nieuwste commentaren"
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:6
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:7
 #: templates/zinnia/base.html:55
-#, fuzzy
 msgid "Recent linkbacks"
-msgstr "Nieuwste berichten"
+msgstr ""
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
@@ -792,10 +773,7 @@ msgstr[0] "%(entry_count)s bericht"
 msgstr[1] "%(entry_count)s berichten"
 
 #: templates/zinnia/base.html:15
-msgid ""
-"You can use - to exclude words or phrases, &quot;double quotes&quot; for "
-"exact phrases and the AND/OR boolean operators combined with parenthesis for "
-"complex searchs."
+msgid "You can use - to exclude words or phrases, &quot;double quotes&quot; for exact phrases and the AND/OR boolean operators combined with parenthesis for complex searchs."
 msgstr ""
 
 #: templates/zinnia/base.html:30
@@ -826,9 +804,8 @@ msgid "Dashboard"
 msgstr ""
 
 #: templates/zinnia/base.html:83 templates/zinnia/base.html.py:84
-#, fuzzy
 msgid "Post an entry"
-msgstr "Vorig bericht"
+msgstr ""
 
 #: templates/zinnia/base.html:91 templates/zinnia/base.html.py:92
 msgid "Log out"
@@ -884,9 +861,8 @@ msgstr "Meer oude berichten"
 
 #: templates/zinnia/entry_archive_base.html:77
 #: templates/zinnia/entry_archive_base.html:78
-#, fuzzy
 msgid "Edit the category"
-msgstr "Berichten in de categorie %s"
+msgstr ""
 
 #: templates/zinnia/entry_archive_base.html:84
 #: templates/zinnia/entry_archive_base.html:85
@@ -991,8 +967,7 @@ msgstr "Login verplicht"
 
 #: templates/zinnia/login.html:12
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
-"Uw gebruikersnaam of wachtwoord is niet correct. Probeer het nog een keer."
+msgstr "Uw gebruikersnaam of wachtwoord is niet correct. Probeer het nog een keer."
 
 #: templates/zinnia/login.html:16
 msgid "You need to be connected to view this entry."
@@ -1057,14 +1032,12 @@ msgid "No archives yet."
 msgstr "Nog geen archieven"
 
 #: templates/zinnia/tags/authors.html:14
-#, fuzzy
 msgid "No authors yet."
-msgstr "Nog geen categorieën"
+msgstr ""
 
 #: templates/zinnia/tags/recent_linkbacks.html:10
-#, fuzzy
 msgid "Linkback on"
-msgstr "Pingbacks op %s"
+msgstr ""
 
 #: templates/zinnia/tags/similar_entries.html:9
 msgid "No similar entries."
@@ -1099,8 +1072,26 @@ msgstr "Gebruiker kan niet %s."
 msgid "No title"
 msgstr "Geen titel"
 
+#~ msgid "Your contents"
+#~ msgstr ""
+
+#~ msgid "Email"
+#~ msgstr ""
+
+#~ msgid "IP"
+#~ msgstr ""
+
+#~ msgid "Comment"
+#~ msgstr ""
+
+#~ msgid "template name"
+#~ msgstr ""
+
 #~ msgid "Not yet comments !"
 #~ msgstr "Noch keine Kommentare vorhanden!"
+
+#~ msgid "Allow PingBacks and TrackBacks on the entry"
+#~ msgstr ""
 
 #~ msgid "%s - News"
 #~ msgstr "%s - Neuigkeiten"
@@ -1108,7 +1099,6 @@ msgstr "Geen titel"
 #~ msgid "author"
 #~ msgstr "Autor"
 
-#, fuzzy
 #~ msgid ""
 #~ "\n"
 #~ "        %(entry_count)s entry\n"
@@ -1118,13 +1108,7 @@ msgstr "Geen titel"
 #~ "        %(entry_count)s entries\n"
 #~ "      "
 #~ msgstr[0] ""
-#~ "\n"
-#~ "      %(entry_count)s Eintrag\n"
-#~ "    "
 #~ msgstr[1] ""
-#~ "\n"
-#~ "      %(entry_count)s Einträge\n"
-#~ "    "
 
 #~ msgid ""
 #~ "\n"
@@ -1142,3 +1126,12 @@ msgstr "Geen titel"
 #~ "\n"
 #~ "      %(entry_count)s Einträge\n"
 #~ "    "
+
+#~ msgid "Can view all"
+#~ msgstr ""
+
+#~ msgid "Zinnia"
+#~ msgstr ""
+
+#~ msgid "<a href=\"%(url)s\" target=\"blank\">%(url)s</a>"
+#~ msgstr ""
