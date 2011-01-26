@@ -13,6 +13,7 @@ Contents:
    channels
    extending_entry_model
    wordpress_2_zinnia
+   compatibility
    upgrading
    tests
    faq
