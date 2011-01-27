@@ -414,6 +414,8 @@ can edit the translations at this URL :
 
 http://www.transifex.net/projects/p/django-blog-zinnia/resource/djangopo/
 
+.. image:: http://www.transifex.net/projects/p/django-blog-zinnia/resource/djangopo/chart/image_png
+
 Resources
 =========
 
