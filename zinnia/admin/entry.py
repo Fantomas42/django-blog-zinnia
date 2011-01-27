@@ -52,7 +52,7 @@ class EntryAdmin(admin.ModelAdmin):
     search_fields = ('title', 'excerpt', 'content', 'tags')
     actions = ['make_mine', 'make_published', 'make_hidden',
                'close_comments', 'close_pingbacks',
-               'ping_directories', 'make_tweet']
+               'ping_directories', 'make_tweet', 'put_on_top']
     actions_on_top = True
     actions_on_bottom = True
 
@@ -233,6 +233,11 @@ class EntryAdmin(admin.ModelAdmin):
         """Close the pingbacks for selected entries"""
         queryset.update(pingback_enabled=False)
     close_pingbacks.short_description = _('Close the linkbacks for selected entries')
+
+    def put_on_top(self, request, queryset):
+        """Put the selected entries on top at the current date"""
+        queryset.update(creation_date=datetime.now())
+    put_on_top.short_description = _('Put the selected entries on top at the current date')
 
     def ping_directories(self, request, queryset):
         """Ping Directories for selected entries"""

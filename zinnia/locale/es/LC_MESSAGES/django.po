@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2011-01-24 08:59-0600\n"
-"PO-Revision-Date: 2011-01-25 10:25+0000\n"
+"POT-Creation-Date: 2011-01-27 15:06-0600\n"
+"PO-Revision-Date: 2011-01-27 21:25+0000\n"
 "Last-Translator: Fantomas42 <fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -357,12 +357,16 @@ msgstr "Cerrar los comentarios para las entradas seleccionadas"
 msgid "Close the linkbacks for selected entries"
 msgstr ""
 
-#: admin/entry.py:251
+#: admin/entry.py:240
+msgid "Put the selected entries on top at the current date"
+msgstr ""
+
+#: admin/entry.py:256
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr ""
 
-#: admin/entry.py:254
+#: admin/entry.py:259
 msgid "Ping Directories for selected entries"
 msgstr "Ping directorios para las entradas seleccionadas"
 
