@@ -1,6 +1,6 @@
 {% load i18n %}
 {% for entry in entries %}
-<div class="hentry">
+<div class="hentry{% if entry.featured %} featured{% endif %}">
   {% with entry as object %}
   {% with object.html_content|truncatewords_html:100|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}

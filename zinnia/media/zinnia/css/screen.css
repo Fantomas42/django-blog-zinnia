@@ -479,6 +479,8 @@ div.paginator span.current { border-color: #006699; background-color: #006699; c
 .hentry .entry-header { background-color: #eeeeee; }
 .hentry .entry-footer p strong { color: #999999; }
 
+.featured .entry-header { background-color: #eeffff; }
+
 ol#comment-list li, ol#pingback-list li, ol#trackback-list li { float: left; }
 ol#comment-list li.box2, ol#pingback-list li.box2, ol#trackback-list li.box2 { background-color: #eeeeee; }
 ol#comment-list li.post-author, ol#pingback-list li.post-author, ol#trackback-list li.post-author { color: #999999; }
