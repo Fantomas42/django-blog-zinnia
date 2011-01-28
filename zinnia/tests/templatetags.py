@@ -24,6 +24,7 @@ from zinnia.templatetags.zinnia_tags import get_recent_comments
 from zinnia.templatetags.zinnia_tags import get_recent_linkbacks
 from zinnia.templatetags.zinnia_tags import get_calendar_entries
 from zinnia.templatetags.zinnia_tags import get_archives_entries
+from zinnia.templatetags.zinnia_tags import get_featured_entries
 from zinnia.templatetags.zinnia_tags import get_archives_entries_tree
 
 
@@ -40,6 +41,7 @@ class TemplateTagsTestCase(TestCase):
 
     def publish_entry(self):
         self.entry.status = PUBLISHED
+        self.entry.featured = True
         self.entry.sites.add(Site.objects.get_current())
         self.entry.save()
 
@@ -76,6 +78,18 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(len(context['entries']), 1)
         self.assertEquals(context['template'], 'custom_template.html')
         context = get_recent_entries(0)
+        self.assertEquals(len(context['entries']), 0)
+
+    def test_get_featured_entries(self):
+        context = get_featured_entries()
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/featured_entries.html')
+
+        self.publish_entry()
+        context = get_featured_entries(3, 'custom_template.html')
+        self.assertEquals(len(context['entries']), 1)
+        self.assertEquals(context['template'], 'custom_template.html')
+        context = get_featured_entries(0)
         self.assertEquals(len(context['entries']), 0)
 
     def test_get_random_entries(self):

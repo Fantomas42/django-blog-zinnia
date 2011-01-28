@@ -25,10 +25,10 @@ class EntryAdmin(admin.ModelAdmin):
     form = EntryAdminForm
     date_hierarchy = 'creation_date'
     fieldsets = ((_('Content'), {'fields': ('title', 'content',
-                                            'image', 'featured', 'status')}),
-                 (_('Options'), {'fields': ('excerpt', 'template', 'related',
-                                            'authors', 'creation_date',
-                                            'start_publication',
+                                            'image', 'status')}),
+                 (_('Options'), {'fields': ('featured', 'excerpt', 'template',
+                                            'related', 'authors',
+                                            'creation_date', 'start_publication',
                                             'end_publication'),
                                  'classes': ('collapse', 'collapse-closed')}),
                  (_('Privacy'), {'fields': ('password', 'login_required',),

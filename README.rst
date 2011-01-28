@@ -308,6 +308,10 @@ create some **widgets** in your website's templates.
 
 Display the latest entries.
 
+* get_featured_entries(number=5, template="zinnia/tags/featured_entries.html")
+
+Display the featured entries.
+
 * get_random_entries(number=5, template="zinnia/tags/random_entries.html")
 
 Display random entries.

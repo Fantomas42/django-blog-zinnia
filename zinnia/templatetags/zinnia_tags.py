@@ -53,6 +53,13 @@ def get_recent_entries(number=5, template='zinnia/tags/recent_entries.html'):
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
+def get_featured_entries(number=5, template='zinnia/tags/featured_entries.html'):
+    """Return the featured entries"""
+    return {'template': template,
+            'entries': Entry.published.filter(featured=True)[:number]}
+
+
+@register.inclusion_tag('zinnia/tags/dummy.html')
 def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
     """Return random entries"""
     entries = Entry.published.all()
