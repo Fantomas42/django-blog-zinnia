@@ -221,6 +221,7 @@ class Command(LabelCommand):
                       'status': self.REVERSE_STATUS[item_node.find('{http://wordpress.org/export/1.0/}status').text],
                       'comment_enabled': item_node.find('{http://wordpress.org/export/1.0/}comment_status').text == 'open',
                       'pingback_enabled': item_node.find('{http://wordpress.org/export/1.0/}ping_status').text == 'open',
+                      'featured': item_node.find('{http://wordpress.org/export/1.0/}is_sticky').text == '1',
                       'password': item_node.find('{http://wordpress.org/export/1.0/}post_password').text or '',
                       'login_required': item_node.find('{http://wordpress.org/export/1.0/}status').text == 'private',
                       'creation_date': creation_date,

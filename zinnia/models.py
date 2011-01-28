@@ -116,6 +116,7 @@ class EntryAbstractClass(models.Model):
     authors = models.ManyToManyField(User, verbose_name=_('authors'),
                                      blank=True, null=False)
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
+    featured = models.BooleanField(_('featured'), default=False)
     comment_enabled = models.BooleanField(_('comment enabled'), default=True)
     pingback_enabled = models.BooleanField(_('linkback enabled'), default=True)
 

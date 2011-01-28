@@ -111,7 +111,8 @@ def post_structure(entry, site):
             'wp_author_id': author.pk,
             'wp_author_display_name': author.username,
             'wp_password': entry.password,
-            'wp_slug': entry.slug}
+            'wp_slug': entry.slug,
+            'sticky': entry.featured}
 
 
 @xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])
@@ -218,6 +219,7 @@ def new_post(blog_id, username, password, post, publish):
                   'last_update': creation_date,
                   'comment_enabled': post.get('mt_allow_comments', 1) == 1,
                   'pingback_enabled': post.get('mt_allow_pings', 1) == 1,
+                  'featured': post.get('sticky', 0) == 1,
                   'tags': 'mt_keywords' in post and post['mt_keywords'] or '',
                   'slug': 'wp_slug' in post and post['wp_slug'] or slugify(
                       post['title']),
@@ -262,6 +264,7 @@ def edit_post(post_id, username, password, post, publish):
     entry.last_update = datetime.now()
     entry.comment_enabled = post.get('mt_allow_comments', 1) == 1
     entry.pingback_enabled = post.get('mt_allow_pings', 1) == 1
+    entry.featured = post.get('sticky', 0) == 1
     entry.tags = 'mt_keywords' in post and post['mt_keywords'] or ''
     entry.slug = 'wp_slug' in post and post['wp_slug'] or slugify(
         post['title'])

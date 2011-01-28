@@ -25,7 +25,7 @@ class EntryAdmin(admin.ModelAdmin):
     form = EntryAdminForm
     date_hierarchy = 'creation_date'
     fieldsets = ((_('Content'), {'fields': ('title', 'content',
-                                            'image', 'status')}),
+                                            'image', 'featured', 'status')}),
                  (_('Options'), {'fields': ('excerpt', 'template', 'related',
                                             'authors', 'creation_date',
                                             'start_publication',
@@ -37,8 +37,8 @@ class EntryAdmin(admin.ModelAdmin):
                                                'pingback_enabled')}),
                  (_('Publication'), {'fields': ('categories', 'tags',
                                                 'sites', 'slug')}))
-    list_filter = ('categories', 'authors', 'status', 'login_required',
-                   'comment_enabled', 'pingback_enabled',
+    list_filter = ('categories', 'authors', 'status', 'featured',
+                   'login_required', 'comment_enabled', 'pingback_enabled',
                    'creation_date', 'start_publication',
                    'end_publication', 'sites')
     list_display = ('get_title', 'get_authors', 'get_categories',

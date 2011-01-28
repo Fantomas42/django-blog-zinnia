@@ -60,7 +60,7 @@
       <wp:menu_order>0</wp:menu_order>
       <wp:post_type>post</wp:post_type>
       <wp:post_password>{{ entry.password }}</wp:post_password>
-      <wp:is_sticky>0</wp:is_sticky>
+      <wp:is_sticky>{{ entry.featured|yesno:"1,0" }}</wp:is_sticky>
       <wp:postmeta>
         <wp:meta_key>_last_update</wp:meta_key>
         <wp:meta_value><![CDATA[{{ entry.last_update|date:"c"}}]]></wp:meta_value>
