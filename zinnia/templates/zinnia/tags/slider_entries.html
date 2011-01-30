@@ -1,0 +1,27 @@
+{% if entries %}
+<div id="slider">
+  <ul class="ui-tabs-nav">
+    {% for entry in entries %}
+    <li class="ui-tabs-nav-item{% if forloop.first %} ui-tabs-selected{% endif %}"
+        id="nav-slider-{{ forloop.counter }}">
+      <a href="#entry-slider-{{ forloop.counter }}">
+        <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}" />
+        <span>{{ entry.title }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  {% for entry in entries %}
+  <div id="entry-slider-{{ forloop.counter }}" class="ui-tabs-panel">
+    <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}" />
+    <div class="info">
+      <h2>
+        <a href="{{ entry.get_absolute_url }}" rel="bookmark">{{ entry.title }}</a>
+      </h2>
+      {{ entry.excerpt|linebreaks|truncatewords_html:20 }}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
