@@ -2,6 +2,7 @@ tinyMCE.init({
 	mode: "exact",
 	elements: "id_content",
 	theme: "advanced",
+	relative_urls: false,
 	theme_advanced_toolbar_location : "top",
 	height: "300",
 	plugins: "spellchecker,directionality,paste,searchreplace",
