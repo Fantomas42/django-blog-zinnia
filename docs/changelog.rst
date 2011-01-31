@@ -5,6 +5,7 @@ CHANGELOG
 ---
 
 * Admin dashboard
+* Featured entries
 * Using Microformats
 * Mails for comment reply
 * Entry model can be extended
