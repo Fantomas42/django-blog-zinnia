@@ -22,7 +22,7 @@
 	  {% else %}
 	  {{ form.cleaned_data.name }}
 	  {% endif %}
-	  {% trans "on date" %} {% now "l d F Y H:i" %}
+	  {% trans "on" %} {% now "SHORT_DATETIME_FORMAT" %}
 	</div>
 	<div class="span-13 last">
 	  <cite>

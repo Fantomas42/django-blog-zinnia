@@ -11,9 +11,9 @@
       {% for month in month_list %}
       <li>
         {% with month.list.0 as month_date %}
-        <a title="{% trans "Archives" %} {{ month_date|date:"F Y"|capfirst }}" rel="archives"
+        <a title="{% trans "Archives" %} {{ month_date|date:"YEAR_MONTH_FORMAT" }}" rel="archives"
            href="{% url zinnia_entry_archive_month month_date|date:"Y" month_date|date:"m" %}">
-          {{ month_date|date:"F"|capfirst }}
+          {{ month_date|date:"F" }}
         </a>
         {% endwith %}
         {% regroup month.list by day as day_list %}
@@ -21,9 +21,9 @@
           {% for day in day_list %}
           <li>
             {% with day.list.0 as day_date %}
-            <a title="{% trans "Archives" %} {{ day_date|date:"d F Y" }}" rel="archives"
+            <a title="{% trans "Archives" %} {{ day_date|date:"DATE_FORMAT" }}" rel="archives"
                href="{% url zinnia_entry_archive_day day_date|date:"Y" day_date|date:"m" day_date|date:"d" %}">
-              {{ day_date|date:"d F" }}
+              {{ day_date|date:"MONTH_DAY_FORMAT" }}
             </a>
             {% endwith %}
           </li>

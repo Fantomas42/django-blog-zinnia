@@ -1,17 +1,17 @@
 {% extends "zinnia/entry_archive_base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Archives" %} {{ day|date:"d" }} {{ day|date:"F"|capfirst }} {{ day|date:"Y" }}{% endblock %}
+{% block title %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
 
 {% block content %}
 {{ block.super }}
 <!--<ul>
   <li>
-    <a href="{% url zinnia_entry_archive_day previous_day|date:"Y" previous_day|date:"m" previous_day|date:"d" %}" rel="archives">{{ previous_day|date:"d F Y"|capfirst }}</a>
+    <a href="{% url zinnia_entry_archive_day previous_day|date:"Y" previous_day|date:"m" previous_day|date:"d" %}" rel="archives">{{ previous_day|date:"DATE_FORMAT" }}</a>
   </li>
   {% if next_day %}
   <li>
-    <a href="{% url zinnia_entry_archive_day next_day|date:"Y" next_day|date:"m" next_day|date:"d" %}" rel="archives">{{ next_day|date:"d F Y"|capfirst }}</a>
+    <a href="{% url zinnia_entry_archive_day next_day|date:"Y" next_day|date:"m" next_day|date:"d" %}" rel="archives">{{ next_day|date:"DATE_FORMAT" }}</a>
   </li>
   {% endif %}
 </ul>-->

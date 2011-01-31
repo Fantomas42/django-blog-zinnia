@@ -1,17 +1,17 @@
 {% extends "zinnia/entry_archive_base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Archives" %} {{ month|date:"F Y"|capfirst }}{% endblock %}
+{% block title %}{% trans "Archives" %} {{ month|date:"YEAR_MONTH_FORMAT" }}{% endblock %}
 
 {% block content %}
 {{ block.super }}
 <!--<ul>
   <li>
-    <a href="{% url zinnia_entry_archive_month previous_month|date:"Y" previous_month|date:"m" %}" rel="archives">{{ previous_month|date:"F Y"|capfirst }}</a>
+    <a href="{% url zinnia_entry_archive_month previous_month|date:"Y" previous_month|date:"m" %}" rel="archives">{{ previous_month|date:"YEAR_MONTH_FORMAT" }}</a>
   </li>
   {% if next_month %}
   <li>
-    <a href="{% url zinnia_entry_archive_month next_month|date:"Y" next_month|date:"m" %}" rel="archives">{{ next_month|date:"F Y"|capfirst }}</a>
+    <a href="{% url zinnia_entry_archive_month next_month|date:"Y" next_month|date:"m" %}" rel="archives">{{ next_month|date:"YEAR_MONTH_FORMAT" }}</a>
   </li>
   {% endif %}
 </ul>-->

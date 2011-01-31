@@ -16,9 +16,9 @@
       </a>
     </span>{% if not forloop.last %}, {% endif %}
     {% endfor %}
-    {% trans "on date" %}
+    {% trans "on" %}
     <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">
-      {{ object.creation_date|date:"d F Y"|capfirst }}
+      {{ object.creation_date|date:"DATE_FORMAT" }}
     </abbr>
     {% if object.categories.count %}
     {% trans "in" %}

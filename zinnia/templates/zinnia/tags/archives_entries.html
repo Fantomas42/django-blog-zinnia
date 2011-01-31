@@ -2,9 +2,9 @@
 <ul>
   {% for date in archives %}
   <li>
-    <a title="{% trans "Archives" %} {{ date|date:"F Y"|capfirst }}" rel="archives"
+    <a title="{% trans "Archives" %} {{ date|date:"YEAR_MONTH_FORMAT" }}" rel="archives"
        href="{% url zinnia_entry_archive_month date|date:"Y" date|date:"m" %}">
-      {{ date|date:"F Y"|capfirst }}
+      {{ date|date:"YEAR_MONTH_FORMAT" }}
     </a>
   </li>
   {% empty %}

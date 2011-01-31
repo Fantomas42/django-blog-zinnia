@@ -87,7 +87,7 @@
 	  {% else %}
 	  {{ comment.user_name }}
 	  {% endif %}
-	  {% trans "on date" %} {{ comment.submit_date|date:"l d F Y H:i" }}
+	  {% trans "on" %} {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
 	</div>
 	<div class="span-13 last">
 	  <cite>
@@ -122,7 +122,7 @@
       <div class="pingback_body span-15 last">
 	<div class="span-15 last">
 	  <a href="{{ pingback.url }}">{{ pingback.user_name }}</a>
-	  {% trans "on date" %} {{ pingback.submit_date|date:"l d F Y" }}
+	  {% trans "on" %} {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
 	</div>
 	<div class="span-15 last">
 	  <cite>
@@ -153,7 +153,7 @@
       <div class="trackback_body span-15 last">
 	<div class="span-15 last">
 	  <a href="{{ trackback.url }}">{{ trackback.user_name }}</a>
-	  {% trans "on date" %} {{ trackback.submit_date|date:"l d F Y" }}
+	  {% trans "on" %} {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
 	</div>
 	<div class="span-15 last">
 	  <cite>
