@@ -34,8 +34,6 @@ MEDIA_URL = getattr(settings, 'ZINNIA_MEDIA_URL', '/zinnia/')
 FEEDS_FORMAT = getattr(settings, 'ZINNIA_FEEDS_FORMAT', 'rss')
 FEEDS_MAX_ITEMS = getattr(settings, 'ZINNIA_FEEDS_MAX_ITEMS', 15)
 
-FIRST_WEEK_DAY = getattr(settings, 'ZINNIA_FIRST_WEEK_DAY', 0)
-
 PINGBACK_CONTENT_LENGTH = getattr(settings,
                                   'ZINNIA_PINGBACK_CONTENT_LENGTH', 300)
 

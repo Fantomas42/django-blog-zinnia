@@ -4,6 +4,7 @@ from calendar import HTMLCalendar
 
 from django.utils.dates import MONTHS
 from django.utils.dates import WEEKDAYS_ABBR
+from django.utils.formats import get_format
 from django.core.urlresolvers import reverse
 
 from zinnia.models import Entry
@@ -11,6 +12,15 @@ from zinnia.models import Entry
 
 class ZinniaCalendar(HTMLCalendar):
     """Override of HTMLCalendar"""
+
+    def __init__(self):
+        """Retrieve and convert the localized first week day
+        at initialization"""
+        localized_first_week_day = get_format('FIRST_DAY_OF_WEEK')
+        if not localized_first_week_day:
+            HTMLCalendar.__init__(self, 6)
+        else:
+            HTMLCalendar.__init__(self, localized_first_week_day - 1)
 
     def formatday(self, day, weekday):
         """Return a day as a table cell with a link
