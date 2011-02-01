@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2011-01-27 15:06-0600\n"
-"PO-Revision-Date: 2011-01-27 21:25+0000\n"
+"POT-Creation-Date: 2011-01-31 09:41-0600\n"
+"PO-Revision-Date: 2011-02-01 09:16+0000\n"
 "Last-Translator: Fantomas42 <fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-Country: FRANCE\n"
 
 #: feeds.py:101 plugins/cms_plugins.py:23
-#: templates/zinnia/entry_archive.html:4 templates/zinnia/entry_list.html:4
+#: templates/zinnia/entry_archive.html:23 templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "Nieuwste berichten"
 
@@ -178,75 +178,79 @@ msgid "authors"
 msgstr "autheurs"
 
 #: models.py:119
+msgid "featured"
+msgstr ""
+
+#: models.py:120
 msgid "comment enabled"
 msgstr "commentaar geactiveerd"
 
-#: models.py:120
+#: models.py:121
 msgid "linkback enabled"
 msgstr "linkback geactiveerd"
 
-#: models.py:122
+#: models.py:123
 msgid "creation date"
 msgstr "aanmaakdatum"
 
-#: models.py:123
+#: models.py:124
 msgid "last update"
 msgstr "Letzte Änderung"
 
-#: models.py:124
+#: models.py:125
 msgid "start publication"
 msgstr "begin publicatie"
 
-#: models.py:125
+#: models.py:126
 msgid "date start publish"
 msgstr "publicatiedatum"
 
-#: models.py:127
+#: models.py:128
 msgid "end publication"
 msgstr "eind publicatie"
 
-#: models.py:128
+#: models.py:129
 msgid "date end publish"
 msgstr "einddatum publicatie"
 
-#: models.py:131
+#: models.py:132
 msgid "sites publication"
 msgstr "publicatie op site"
 
-#: models.py:133
+#: models.py:134
 msgid "login required"
 msgstr ""
 
-#: models.py:134
+#: models.py:135
 msgid "only authenticated users can view the entry"
 msgstr "alleen geauthenticeerde gebruikers kunnen dit bericht zien"
 
-#: models.py:135
+#: models.py:136
 msgid "password"
 msgstr "wachtwoord"
 
-#: models.py:136
+#: models.py:137
 msgid "protect the entry with a password"
 msgstr "beveilig het bericht met een wachtwoord"
 
-#: models.py:138 plugins/models.py:34 plugins/models.py:58
+#: models.py:139 plugins/models.py:34 plugins/models.py:58
 #: plugins/models.py:80
 msgid "template"
 msgstr "template"
 
-#: models.py:141
+#: models.py:142
 msgid "Default template"
 msgstr ""
 
-#: models.py:143
+#: models.py:144
 msgid "template used to display the entry"
 msgstr ""
 
-#: models.py:263
+#: models.py:264
 msgid "entry"
 msgstr "bericht"
 
-#: models.py:264 plugins/cms_plugins.py:21 plugins/cms_plugins.py:92
+#: models.py:265 plugins/cms_plugins.py:21 plugins/cms_plugins.py:92
 #: plugins/cms_plugins.py:114 plugins/models.py:57
 #: templates/zinnia/base.html:39
 msgid "entries"
@@ -565,12 +569,16 @@ msgstr ""
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:10
 #: templates/comments/zinnia_entry_preview.html:25
+#: templates/feeds/comment_title.html:2
+#: templates/feeds/discussion_title.html:2
+#: templates/feeds/pingback_title.html:2
+#: templates/feeds/trackback_title.html:2
 #: templates/zinnia/_entry_detail.html:19
 #: templates/zinnia/entry_detail.html:90
 #: templates/zinnia/entry_detail.html:125
 #: templates/zinnia/entry_detail.html:156
-msgid "on date"
-msgstr "op datum"
+msgid "on"
+msgstr "aan"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:16
 #: templates/comments/zinnia/entry/form.html:19
@@ -707,13 +715,6 @@ msgstr "Bedankt voor uw commentaar"
 msgid "Return to entry list"
 msgstr "Ga terug naar de berichtenlijst"
 
-#: templates/feeds/comment_title.html:2
-#: templates/feeds/discussion_title.html:2
-#: templates/feeds/pingback_title.html:2
-#: templates/feeds/trackback_title.html:2
-msgid "on"
-msgstr "aan"
-
 #: templates/zinnia/_entry_detail.html:10
 msgid "Written by"
 msgstr "Geschreven door"
@@ -840,6 +841,7 @@ msgstr "Berichten van %(author)s"
 #: templates/zinnia/sitemap.html:23 templates/zinnia/sitemap.html.py:43
 #: templates/zinnia/cms/entry_detail.html:12
 #: templates/zinnia/cms/entry_list.html:9
+#: templates/zinnia/tags/featured_entries.html:9
 #: templates/zinnia/tags/popular_entries.html:13
 #: templates/zinnia/tags/random_entries.html:9
 #: templates/zinnia/tags/recent_entries.html:9
@@ -1075,6 +1077,9 @@ msgstr "Gebruiker kan niet %s."
 #: xmlrpc/pingback.py:93
 msgid "No title"
 msgstr "Geen titel"
+
+#~ msgid "on date"
+#~ msgstr "op datum"
 
 #~ msgid "Your contents"
 #~ msgstr ""

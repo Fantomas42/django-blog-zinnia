@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2011-01-27 15:06-0600\n"
-"PO-Revision-Date: 2011-01-27 21:25+0000\n"
+"POT-Creation-Date: 2011-01-31 09:41-0600\n"
+"PO-Revision-Date: 2011-02-01 09:16+0000\n"
 "Last-Translator: Fantomas42 <fantomas42@gmail.com>\n"
 "Language-Team: French <fantomas42@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-Country: FRANCE\n"
 
 #: feeds.py:101 plugins/cms_plugins.py:23
-#: templates/zinnia/entry_archive.html:4 templates/zinnia/entry_list.html:4
+#: templates/zinnia/entry_archive.html:23 templates/zinnia/entry_list.html:4
 msgid "Latest entries"
 msgstr "Последние записи"
 
@@ -178,75 +178,79 @@ msgid "authors"
 msgstr "авторы"
 
 #: models.py:119
+msgid "featured"
+msgstr ""
+
+#: models.py:120
 msgid "comment enabled"
 msgstr "комментирование включено"
 
-#: models.py:120
+#: models.py:121
 msgid "linkback enabled"
 msgstr ""
 
-#: models.py:122
+#: models.py:123
 msgid "creation date"
 msgstr "дата создания"
 
-#: models.py:123
+#: models.py:124
 msgid "last update"
 msgstr "последнее обновление"
 
-#: models.py:124
+#: models.py:125
 msgid "start publication"
 msgstr "начало публикации"
 
-#: models.py:125
+#: models.py:126
 msgid "date start publish"
 msgstr "дата начала публикации"
 
-#: models.py:127
+#: models.py:128
 msgid "end publication"
 msgstr "окончание публикации"
 
-#: models.py:128
+#: models.py:129
 msgid "date end publish"
 msgstr "дата окончания публикации"
 
-#: models.py:131
+#: models.py:132
 msgid "sites publication"
 msgstr ""
 
-#: models.py:133
+#: models.py:134
 msgid "login required"
 msgstr "требуется авторизация"
 
-#: models.py:134
+#: models.py:135
 msgid "only authenticated users can view the entry"
 msgstr ""
 
-#: models.py:135
+#: models.py:136
 msgid "password"
 msgstr "пароль"
 
-#: models.py:136
+#: models.py:137
 msgid "protect the entry with a password"
 msgstr ""
 
-#: models.py:138 plugins/models.py:34 plugins/models.py:58
+#: models.py:139 plugins/models.py:34 plugins/models.py:58
 #: plugins/models.py:80
 msgid "template"
 msgstr "шаблон"
 
-#: models.py:141
+#: models.py:142
 msgid "Default template"
 msgstr "Шаблон по умолчанию"
 
-#: models.py:143
+#: models.py:144
 msgid "template used to display the entry"
 msgstr ""
 
-#: models.py:263
+#: models.py:264
 msgid "entry"
 msgstr "запись"
 
-#: models.py:264 plugins/cms_plugins.py:21 plugins/cms_plugins.py:92
+#: models.py:265 plugins/cms_plugins.py:21 plugins/cms_plugins.py:92
 #: plugins/cms_plugins.py:114 plugins/models.py:57
 #: templates/zinnia/base.html:39
 msgid "entries"
@@ -565,12 +569,16 @@ msgstr "Изменить запись"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:10
 #: templates/comments/zinnia_entry_preview.html:25
+#: templates/feeds/comment_title.html:2
+#: templates/feeds/discussion_title.html:2
+#: templates/feeds/pingback_title.html:2
+#: templates/feeds/trackback_title.html:2
 #: templates/zinnia/_entry_detail.html:19
 #: templates/zinnia/entry_detail.html:90
 #: templates/zinnia/entry_detail.html:125
 #: templates/zinnia/entry_detail.html:156
-msgid "on date"
-msgstr "на дату"
+msgid "on"
+msgstr "на"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:16
 #: templates/comments/zinnia/entry/form.html:19
@@ -709,13 +717,6 @@ msgstr "Спасибо за комментарий"
 msgid "Return to entry list"
 msgstr "Вернуться к списку записей"
 
-#: templates/feeds/comment_title.html:2
-#: templates/feeds/discussion_title.html:2
-#: templates/feeds/pingback_title.html:2
-#: templates/feeds/trackback_title.html:2
-msgid "on"
-msgstr "на"
-
 #: templates/zinnia/_entry_detail.html:10
 msgid "Written by"
 msgstr "Автор"
@@ -850,6 +851,7 @@ msgstr "Записи от %(author)s"
 #: templates/zinnia/sitemap.html:23 templates/zinnia/sitemap.html.py:43
 #: templates/zinnia/cms/entry_detail.html:12
 #: templates/zinnia/cms/entry_list.html:9
+#: templates/zinnia/tags/featured_entries.html:9
 #: templates/zinnia/tags/popular_entries.html:13
 #: templates/zinnia/tags/random_entries.html:9
 #: templates/zinnia/tags/recent_entries.html:9
@@ -1087,6 +1089,9 @@ msgstr ""
 #: xmlrpc/pingback.py:93
 msgid "No title"
 msgstr "Заголовок отсутствует"
+
+#~ msgid "on date"
+#~ msgstr "на дату"
 
 #~ msgid "Your contents"
 #~ msgstr "содержимое"
