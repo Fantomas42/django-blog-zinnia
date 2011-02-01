@@ -157,6 +157,7 @@ def get_calendar_entries(context, year=None, month=None,
     """Return an HTML calendar of entries"""
     if not year or not month:
         date_month = context.get('month') or context.get('day') or \
+                     getattr(context.get('object'), 'creation_date', None) or \
                      datetime.today()
         year, month = date_month.timetuple()[:2]
 
