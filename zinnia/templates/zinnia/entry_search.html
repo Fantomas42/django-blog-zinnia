@@ -4,6 +4,7 @@
 {% block title %}{% trans "Search results" %} {% if pattern %}'{{ pattern }}'{% endif %}{% endblock %}
 
 {% block link %}
+  {{ block.super }}
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of search result of" %} '{{ pattern }}'" href="{% url zinnia_entry_search_feed pattern %}" />
 {% endblock %}
 
@@ -21,7 +22,7 @@
 {% endif %}
 
 {% for object in object_list %}
-<div class="entry">
+<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %} span-16 last">
   {% with object.html_content|truncatewords_html:100|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}

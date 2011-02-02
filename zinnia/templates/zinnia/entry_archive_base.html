@@ -2,6 +2,7 @@
 {% load i18n tagging_tags zinnia_tags %}
 
 {% block link %}
+  {{ block.super }}
   {% if category %}
     <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ category.title }}" href="{% url zinnia_category_feed category.tree_path %}" />
   {% endif %}
