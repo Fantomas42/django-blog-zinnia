@@ -25,7 +25,10 @@ LANGUAGES = (('en', gettext('English')),
              ('es', gettext('Spanish')),
              ('it', gettext('Italian')),
              ('nl', gettext('Dutch')),
+             ('hu', gettext('Hungarian')),
              ('ru', gettext('Russian')),
+             ('pl', gettext('Polish')),
+             ('pt_BR', gettext('Brazilian Portuguese')),
              ('zh_CN', gettext('Simplified Chinese')),)
 
 MIDDLEWARE_CLASSES = (
