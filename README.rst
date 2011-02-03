@@ -51,13 +51,12 @@ Take a look at the online demo at : http://django-blog-zinnia.com
 or you can visit these websites who use Zinnia.
 
   * `Fantomas' side
-    <http://fantomas.willbreak.it/blog/>`_.
+    <http://fantomas.willbreak.it/blog/>`_ / `Mobile version
+    <http://m.fantomas.willbreak.it/blog/>`_.
   * `Professional Web Studio
     <http://www.professionalwebstudio.com/en/weblog/>`_.
   * `mixedCase
     <http://www.mixedcase.nl/articles/>`_.
-  * `Fantomas' mobile side
-    <http://m.fantomas.willbreak.it/blog/>`_.
   * `MadCad's Page
     <http://mad-cad.net/blog/>`_.
 

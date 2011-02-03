@@ -55,6 +55,3 @@ CHANGELOG
 
 * The previous versions of Zinnia were not packaged, and were destinated for a
   personnal use. 
-
-
-

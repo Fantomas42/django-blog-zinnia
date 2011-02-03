@@ -6,18 +6,25 @@ Dependencies
 
 Make sure to install these packages prior to installation :
 
- * Django
- * django-mptt
- * django-tagging
- * BeautifulSoup
+ * `Django
+   <http://www.djangoproject.com/>`_ >= 1.2
+ * `django-mptt
+   <https://github.com/django-mptt/django-mptt/>`_ >= 0.4.2
+ * `django-tagging
+   <http://code.google.com/p/django-tagging/>`_ >= 0.3.1
+ * `BeautifulSoup
+   <http://www.crummy.com/software/BeautifulSoup/>`_ >= 3.2.0
 
 The packages below are optionnal but needed for run the full test suite.
 
- * akismet
- * pyparsing
- * django-xmlrpc
+ * `akismet
+   <http://www.voidspace.org.uk/python/modules.shtml#akismet>`_ >= 0.2.0
+ * `pyparsing 
+   <http://pyparsing.wikispaces.com/>`_ >= 1.5.5
+ * `django-xmlrpc
+   <https://github.com/Fantomas42/django-xmlrpc>`_ >= 0.1.3
 
-Getting the code 
+Getting the code
 ----------------
 
 You could retrieve the last sources from
@@ -35,7 +42,7 @@ For the latest stable version use easy_install ::
   $ easy_install django-blog-zinnia
 
 Note that using *easy_install* or *pip* all the dependencies will be
-resolved automaticaly.
+resolved automaticaly excepting Django.
 
 Applications
 ------------

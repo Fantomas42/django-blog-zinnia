@@ -9,4 +9,5 @@ recursive-include zinnia/locale *
 recursive-include zinnia/media *
 recursive-include zinnia/templates *.txt *.html *.js
 prune docs/build
+prune docs/_build
 prune zinnia/media/zinnia/css/src/.sass-cache
