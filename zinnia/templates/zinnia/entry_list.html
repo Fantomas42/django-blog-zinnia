@@ -1,2 +1,100 @@
-{% extends "zinnia/entry_archive_base.html" %}
-{% load i18n %}
+{% extends "zinnia/base.html" %}
+{% load i18n tagging_tags zinnia_tags %}
+
+{% block link %}
+  {{ block.super }}
+  {% if category %}
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ category.title }}" href="{% url zinnia_category_feed category.tree_path %}" />
+  {% endif %}
+  {% if tag %}
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ tag.name }}" href="{% url zinnia_tag_feed tag.name %}" />
+  {% endif %}
+  {% if author %}
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ author.username }}" href="{% url zinnia_author_feed author.username %}" />
+  {% endif %}
+{% endblock %}
+
+{% block title %}{% trans "Latest entries" %} {% if category %}| {% trans "Category" %} {{ category }}{% endif %}{% if tag %}| {% trans "Tag" %} {{ tag }}{% endif %}{% if author %}| {% trans "Author" %} {{ author }}{% endif %}{% if page_obj %}{% ifnotequal page_obj.number 1 %}| {% trans "Page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
+
+{% block content %}
+{% if category %}
+<h1>{{ category.title }}</h1>
+{% if category.description %}
+<p>{{ category.description|striptags|safe }}</p>
+{% endif %}
+{% endif %}
+
+{% if tag %}
+<h1>{% trans "Tag" %} : {{ tag }}</h1>
+{% endif %}
+
+{% if author %}
+<h1>{% blocktrans with author.username as author %}Entries by {{ author }}{% endblocktrans %}</h1>
+{% endif %}
+
+{% for object in object_list %}
+<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %} span-16 last">
+  {% with object.html_content|truncatewords_html:100|safe as object_content %}
+  {% include "zinnia/_entry_detail.html" %}
+  {% endwith %}
+</div>
+<hr />
+{% empty %}
+  {% trans "No entries yet." %}
+{% endfor %}
+
+{% if is_paginated %}
+<div class="paginator span-16 last">
+  <span class="index">
+    {% blocktrans with page_obj.number as current_page and paginator.num_pages as total_page %}Page {{ current_page }} of {{ total_page }}{% endblocktrans %}
+  </span>
+  {% if page_obj.has_previous %}
+  <span class="previous">
+    <a href="?page={{ page_obj.previous_page_number }}"
+       title="{% trans "More recent entries" %}">&laquo;</a>
+  </span>
+  {% endif %}
+  {% for page in page_range %}
+  <span class="page {% ifequal page_obj.number page %}current{% endifequal %}">
+    {% ifequal page_obj.number page %}
+    <strong>{{ page }}</strong>
+    {% else %}
+    <a href="?page={{ page }}"
+       title="{% trans "Entries page" %} {{ page }}">{{ page }}</a>
+    {% endifequal%}
+  </span>
+  {% endfor %}
+  {% if page_obj.has_next %}
+  <span class="next">
+    <a href="?page={{ page_obj.next_page_number }}"
+       title="{% trans "More old entries" %}">&raquo;</a>
+  </span>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block admin_tools %}
+  {% if category and perms.zinnia.change_category %}
+  <li>
+    <a href="{% url admin:zinnia_category_change category.pk %}" title="{% trans "Edit the category" %}">
+      {% trans "Edit the category" %}
+    </a>
+  </li>
+  {% endif %}
+  {% if tag and perms.tagging.change_tag %}
+  <li>
+    <a href="{% url admin:tagging_tag_change tag.pk %}" title="{% trans "Edit the tag" %}">
+      {% trans "Edit the tag" %}
+    </a>
+  </li>
+  {% endif %}
+  {% if author and perms.auth.change_user %}
+  <li>
+    <a href="{% url admin:auth_user_change author.pk %}" title="{% trans "Edit the author" %}">
+      {% trans "Edit the author" %}
+    </a>
+  </li>
+  {% endif %}
+{% endblock %}
+
