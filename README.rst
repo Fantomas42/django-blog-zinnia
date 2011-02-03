@@ -445,6 +445,8 @@ Examples
     <http://www.mixedcase.nl/articles/>`_.
   * `Fantomas' mobile side
     <http://m.fantomas.willbreak.it/blog/>`_.
+  *`MadCad's Page
+    <http://mad-cad.net/blog/>`_.
 
 
 If you are a proud user of Zinnia, send me the URL of your website and I
