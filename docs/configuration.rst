@@ -1,157 +1,152 @@
-List of settings
-================
+Advanced Configuration
+======================
 
-Zinnia has several parameters to configure the application according to
-your needs.
+Sitemaps
+--------
 
-All settings described here can be found in zinnia/settings.py
+One of the cool features of Django is the sitemap application, so if you
+want to fill your website's sitemap with the entries of your blog, follow
+these steps.
 
-ZINNIA_PAGINATION
-  **Default :** 10
+  * Register **django.contrib.sitemaps** in the INSTALLED_APPS section.
+  * Edit your project's URLs and add this code :
 
-  Integer used to paginate the entries.
+::
 
-ZINNIA_ALLOW_EMPTY
-  **Default :** True
+   from zinnia.sitemaps import TagSitemap
+   from zinnia.sitemaps import EntrySitemap
+   from zinnia.sitemaps import CategorySitemap
+   from zinnia.sitemaps import AuthorSitemap
 
-  Used for archives views, raise a 404 error if no entries are present at
-  the specified date.
+   sitemaps = {'tags': TagSitemap,
+               'blog': EntrySitemap,
+               'authors': AuthorSitemap,
+               'categories': CategorySitemap,}
 
-ZINNIA_ALLOW_FUTURE
-  **Default :** True
+   urlpatterns += patterns('django.contrib.sitemaps.views',
+   	                   url(r'^sitemap.xml$', 'index',
+                               {'sitemaps': sitemaps}),
+                           url(r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
+                               {'sitemaps': sitemaps}),)
 
-  Used for allowing archives views in the future.
+Akismet
+-------
 
-ZINNIA_ENTRY_TEMPLATES
-  **Default :** ()
+By default the Akismet spam protection is enabled when anyone leaves a
+comment.
 
-  List of tuple for extending the list of templates availables for
-  rendering the entry.
+IMPORTANT : you need an API key. If you don't have any, get one for free at
+http://akismet.com/personal/ then set it in your project's settings like
+this : ::
 
-ZINNIA_ENTRY_BASE_MODEL
-  **Default :** ''
+  AKISMET_SECRET_API_KEY = 'your key'
 
-  String defining the base Model path for the Entry model. See
-  TODO_REF for more informations.
+If you don't want spam protection for comments, you can disable it with
+this setting. ::
 
-ZINNIA_ADVANCED_SEARCH
-  **Default :** True
+  ZINNIA_AKISMET_COMMENT = False
 
-  Used to define the search engine, because Zinnia provides in 2.
-  A basic engine with cumulative terms, and an advanced engine if
-  *pyparsing* is installed.
+Bit.ly
+------
 
-ZINNIA_WYSIWYG
-  **Default :** 'tinymce' if in settings.INSTALLED_APPS else 'wymeditor'
+You find http://bit.ly useful and want to use it for your blog entries ?
 
-  Used for determining the WYSIWYG editor for editing an entry.
-  Can also be used for disabling the WYSIWYG functionnality.
+It's simple, install `django_bitly
+<http://bitbucket.org/discovery/django-bitly/>`_ in your project's settings
+and add these settings. ::
 
-ZINNIA_FEEDS_FORMAT
-  **Default :** 'rss'
+  BITLY_LOGIN = 'your bit.ly login'
+  BITLY_API_KEY = 'your bit.ly api key'
 
-  String determining the format of the syndication feeds.
-  Use 'atom' for Atom feeds.
+Zinnia will do the rest.
 
-ZINNIA_FEEDS_MAX_ITEMS
-  **Default :** 15
+Twitter
+-------
 
-  Integer used to define the maximum items provided in the syndication feeds.
+When you post a new entry on your blog you might want to tweet it as well.
 
-ZINNIA_COPYRIGHT
-  **Default :** 'Zinnia'
+In order to do that, you first need to activate the Bit.ly support like
+described above.
 
-  String used for copyrighting the syndication feeds.
+Then install `tweepy
+<http://github.com/joshthecoder/tweepy>`_ and add these settings. ::
 
-ZINNIA_UPLOAD_TO
-  **Default :** 'uploads'
+  TWITTER_CONSUMER_KEY = 'Your Consumer Key'
+  TWITTER_CONSUMER_SECRET = 'Your Consumer Secret'
+  TWITTER_ACCESS_KEY = 'Your Access Key'
+  TWITTER_ACCESS_SECRET = 'Your Access Secret'
 
-  String setting that tells Zinnia where to upload entries' images.
+Note that the authentification for Twitter has changed since September 2010.
+The actual authentification system is based on oAuth. That's why now you
+need to set these 4 settings. If you don't know how to get these information,
+follow this excellent tutorial at:
 
-ZINNIA_PROTOCOL
-  **Default :** 'http'
+http://jmillerinc.com/2010/05/31/twitter-from-the-command-line-in-python-using-oauth/
 
-  String representing the protocol of the site.
+Now in the admin, you can post an update containing your
+entry's title and the shortened url of your entry.
 
-ZINNIA_MEDIA_URL
-  **Default :** '/zinnia/'
+Django-CMS
+----------
 
-  String of the url that handles the media files of Zinnia.
+If you use `Django-cms 2.0
+<http://www.django-cms.org/>`_, Zinnia can be integrated into your pages,
+thanks to the plugin system.
 
-ZINNIA_MAIL_COMMENT
-  **Default :** True
+Simply register **zinnia.plugins** in the INSTALLED_APPS section of your
+project's settings.
 
-  Boolean used for sending an email to managers when a comment
-  is posted or not.
+It will provides custom plugins for adding entries into your pages, an
+App-Hook and Menus for easy integration.
 
-ZINNIA_MAIL_COMMENT_REPLY
-  **Default :** False
+If you want to use the plugin system of django-cms in your entries, an
+extended EntryModel with a **PlaceholderField** is provided.
 
-  Boolean used for sending an email to comment's authors
-  when a new comment is posted.
+Add this line in your project's settings. ::
 
-ZINNIA_AKISMET_COMMENT
-  **Default :** True
+  ZINNIA_ENTRY_BASE_MODEL = 'zinnia.plugins.placeholder.EntryPlaceholder'
 
-  Boolean used for protecting your comments with Akismet or not.
+TinyMCE
+-------
 
-ZINNIA_PING_DIRECTORIES
-  **Default :** ('http://django-blog-zinnia.com/xmlrpc/',)
+If you want to replace WYMEditor by TinyMCE install `django-tinymce
+<http://code.google.com/p/django-tinymce/>`_ and follow the
+`installation instructions
+<http://django-tinymce.googlecode.com/svn/trunk/docs/.build/html/index.html>`_.
 
-  List of the directories you want to ping.
+TinyMCE can be customized by overriding the
+*admin/zinnia/entry/tinymce_textareas.js* template.
 
-ZINNIA_SAVE_PING_DIRECTORIES
-  **Default :** bool(ZINNIA_PING_DIRECTORIES)
+XML-RPC
+-------
 
-  Boolean setting for telling if you want to ping directories when saving
-  an entry.
+Zinnia provides few webservices via XML-RPC, but before using it,
+you need to install `django-xmlrpc
+<http://pypi.python.org/pypi/django-xmlrpc/>`_.
 
-ZINNIA_PING_EXTERNAL_URLS
-  **Default :** True
+Then register **django_xmlrpc** in your INSTALLED_APPS section of your
+project's settings.
 
-  Boolean setting for telling if you want to ping external urls when saving
-  an entry.
+Now add these lines in your project's settings. ::
 
-ZINNIA_PINGBACK_CONTENT_LENGTH
-  **Default :**	300
+  from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
+  XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
 
-  Size of the excerpt generated on pingback.
+*ZINNIA_XMLRPC_METHODS* is a simple list of tuples containing all the
+webservices embedded in Zinnia.
 
-ZINNIA_F_MIN
-  **Default :** 0.1
+If you only want to use the Pingback service import
+*ZINNIA_XMLRPC_PINGBACK*, or if you want you just want to enable the
+`MetaWeblog API
+<http://www.xmlrpc.com/metaWeblogApi>`_ import *ZINNIA_XMLRPC_METAWEBLOG*.
 
-  Float setting of the minimal word frequency for similar entries.
+You can also use your own mixins.
 
-ZINNIA_F_MAX
-  **Default :** 1.0
+Finally we need to register the url of the XML-RPC server.
+Insert something like this in your project's urls.py: ::
 
-  Float setting of the minimal word frequency for similar entries.
+  url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
 
-ZINNIA_USE_BITLY
-  **Default :** 'django_bitly' in settings.INSTALLED_APPS
-
-  Boolean telling if Zinnia can use Bit.ly.
-
-ZINNIA_USE_TWITTER
-  **Default :** True if python-twitter is in PYTHONPATH
-
-  Boolean telling if Zinnia can use Twitter.
-
-CMS settings
-------------
-
-ZINNIA_PLUGINS_TEMPLATES
-  **Default :** ()
-
-  List of tuple for extending the CMS's plugins rendering templates.
-
-ZINNIA_APP_MENUS
-  **Default :** (EntryMenu, CategoryMenu, TagMenu, AuthorMenu)
-
-  List of Menu objects provided for the Zinnia AppHook.
-
-ZINNIA_HIDE_ENTRY_MENU
-  **Default :** True
-
-  Boolean used for displaying or not the entries in the EntryMenu object.
-
+**Note** : For the Pingback service check if your site is enabled for
+pingback detection.
+More information at http://hixie.ch/specs/pingback/pingback-1.0#TOC2

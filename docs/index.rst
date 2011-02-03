@@ -8,14 +8,18 @@ Contents:
    :numbered:
 
    overview
+   install
    configuration
+   settings
+   templatetags
    search_engines
    channels
    extending_entry_model
    wordpress_2_zinnia
-   compatibility
+   developers
    upgrading
    tests
+   compatibility
    faq
    thanks
    changelog
@@ -23,8 +27,8 @@ Contents:
 Related
 -------
 
-* `Zinnia's API <http://django-blog-zinnia.com/docs/api/index.html>`_
-* `Code coverage <http://django-blog-zinnia.com/docs/coverage/index.html>`_
+* `Zinnia's API <http://django-blog-zinnia.com/docs/api/>`_
+* `Code coverage <http://django-blog-zinnia.com/documentation/coverage/>`_
 
 Indices and tables
 ==================

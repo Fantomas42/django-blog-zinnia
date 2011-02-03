@@ -39,7 +39,7 @@ future evolutions.
 
 You can check the actual coverage percent at this url:
 
-http://django-blog-zinnia.com/docs/coverage/index.html
+http://django-blog-zinnia.com/documentation/coverage/
 
 I hope that you will write some tests and find some bugs. :)
 
