@@ -17,6 +17,7 @@ develop-eggs
 .sass-cache
 .coverage
 .tx
+.tox
 docs/coverage
 docs/api
 docs/html
