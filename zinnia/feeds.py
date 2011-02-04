@@ -20,8 +20,6 @@ from zinnia.settings import FEEDS_MAX_ITEMS
 from zinnia.managers import entries_published
 from zinnia.views.categories import get_category_or_404
 
-CURRENT_SITE = Site.objects.get_current()
-
 
 class ImgParser(SGMLParser):
     """Parser for getting IMG markups"""
@@ -43,6 +41,9 @@ class EntryFeed(Feed):
     description_template = 'feeds/entry_description.html'
     feed_copyright = COPYRIGHT
 
+    def __init__(self):
+        self.site = Site.objects.get_current()
+
     def item_pubdate(self, item):
         """Publication date of an entry"""
         return item.creation_date
@@ -61,7 +62,7 @@ class EntryFeed(Feed):
 
     def item_author_link(self, item):
         """Returns the author's URL"""
-        url = '%s://%s' % (PROTOCOL, CURRENT_SITE.domain)
+        url = '%s://%s' % (PROTOCOL, self.site.domain)
         try:
             author_url = reverse('zinnia_author_detail',
                                  args=[item.authors.all()[0].username])
@@ -79,11 +80,11 @@ class EntryFeed(Feed):
         except UnicodeEncodeError:
             return
         if len(parser.img_locations):
-            if CURRENT_SITE.domain in parser.img_locations[0]:
+            if self.site.domain in parser.img_locations[0]:
                 return parser.img_locations[0]
             else:
                 return '%s://%s%s' % (PROTOCOL,
-                                      CURRENT_SITE.domain,
+                                      self.site.domain,
                                       parser.img_locations[0])
         return None
 
@@ -99,7 +100,6 @@ class EntryFeed(Feed):
 class LatestEntries(EntryFeed):
     """Feed for the latest entries"""
     title = _('Latest entries')
-    description = _('The latest entries for the site %s') % CURRENT_SITE.domain
 
     def link(self):
         """URL of latest entries"""
@@ -108,6 +108,10 @@ class LatestEntries(EntryFeed):
     def items(self):
         """Items are published entries"""
         return Entry.published.all()[:FEEDS_MAX_ITEMS]
+
+    def description(self, obj):
+        """Description of the feed"""
+        return _('The latest entries for the site %s') % self.site.domain
 
 
 class CategoryEntries(EntryFeed):

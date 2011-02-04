@@ -4,7 +4,7 @@ from urllib import addinfourl
 from django.test import TestCase
 
 from zinnia.models import Entry
-from zinnia.ping import SITE
+from zinnia.ping import URLRessources
 from zinnia.ping import ExternalUrlsPinger
 
 
@@ -20,24 +20,29 @@ class ExternalUrlsPingerTestCase(TestCase):
         self.pinger = ExternalUrlsPinger(self.entry, start_now=False)
 
     def test_is_external_url(self):
-        self.assertEquals(self.pinger.is_external_url('http://example.com/',
-                                                      'http://google.com/'), True)
-        self.assertEquals(self.pinger.is_external_url('http://example.com/toto/',
-                                                      'http://google.com/titi/'), True)
-        self.assertEquals(self.pinger.is_external_url('http://example.com/blog/',
-                                                      'http://example.com/page/'), False)
-        self.assertEquals(self.pinger.is_external_url('%s/blog/' % SITE), False)
-        self.assertEquals(self.pinger.is_external_url('http://google.com/'), True)
-        self.assertEquals(self.pinger.is_external_url('/blog/'), False)
+        r = URLRessources()
+        self.assertEquals(self.pinger.is_external_url(
+            'http://example.com/', 'http://google.com/'), True)
+        self.assertEquals(self.pinger.is_external_url(
+            'http://example.com/toto/', 'http://google.com/titi/'), True)
+        self.assertEquals(self.pinger.is_external_url(
+            'http://example.com/blog/', 'http://example.com/page/'), False)
+        self.assertEquals(self.pinger.is_external_url(
+            '%s/blog/' % r.site_url, r.site_url), False)
+        self.assertEquals(self.pinger.is_external_url(
+            'http://google.com/', r.site_url), True)
+        self.assertEquals(self.pinger.is_external_url(
+            '/blog/', r.site_url), False)
 
     def test_find_external_urls(self):
+        r = URLRessources()
         external_urls = self.pinger.find_external_urls(self.entry)
         self.assertEquals(external_urls, [])
         self.entry.content = """
         <p>This is a <a href="http://fantomas.willbreak.it/">link</a> to a site.</p>
         <p>This is a <a href="%s/blog/">link</a> within my site.</p>
         <p>This is a <a href="/blog/">relative link</a> within my site.</p>
-        """ % SITE
+        """ % r.site_url
         self.entry.save()
         external_urls = self.pinger.find_external_urls(self.entry)
         self.assertEquals(external_urls, ['http://fantomas.willbreak.it/'])

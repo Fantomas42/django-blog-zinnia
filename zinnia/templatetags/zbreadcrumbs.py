@@ -38,15 +38,16 @@ def day_crumb(creation_date):
                               args=[year, month, day]))
 
 
-ZINNIA_ROOT_URL = reverse('zinnia_entry_archive_index')
+ZINNIA_ROOT_URL = lambda: reverse('zinnia_entry_archive_index')
 
-TAGS_CRUMB = Crumb(_('Tags'), reverse('zinnia_tag_list'))
-AUTHORS_CRUMB = Crumb(_('Authors'), reverse('zinnia_author_list'))
-CATEGORIES_CRUMB = Crumb(_('Categories'), reverse('zinnia_category_list'))
-
-MODEL_BREADCRUMBS = {'Tag': lambda x: [TAGS_CRUMB, Crumb(x.name)],
-                     'User': lambda x: [AUTHORS_CRUMB, Crumb(x.username)],
-                     'Category': lambda x: [CATEGORIES_CRUMB] + \
+MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
+                                             reverse('zinnia_tag_list')),
+                                       Crumb(x.name)],
+                     'User': lambda x: [Crumb(_('Authors'),
+                                              reverse('zinnia_author_list')),
+                                        Crumb(x.username)],
+                     'Category': lambda x: [Crumb(_('Categories'),
+                                                  reverse('zinnia_category_list'))] + \
                                            [Crumb(anc.title,
                                                   anc.get_absolute_url())
                                             for anc in x.get_ancestors()] + \
@@ -66,7 +67,7 @@ def retrieve_breadcrumbs(path, model_instance, root_name=''):
     breadcrumbs = []
 
     if root_name:
-        breadcrumbs.append(Crumb(root_name, ZINNIA_ROOT_URL))
+        breadcrumbs.append(Crumb(root_name, ZINNIA_ROOT_URL()))
 
     if model_instance is not None:
         key = model_instance.__class__.__name__
@@ -94,7 +95,7 @@ def retrieve_breadcrumbs(path, model_instance, root_name=''):
         return breadcrumbs
 
     url_components = [comp for comp in
-                      path.replace(ZINNIA_ROOT_URL, '').split('/') if comp]
+                      path.replace(ZINNIA_ROOT_URL(), '').split('/') if comp]
     if len(url_components):
         breadcrumbs.append(Crumb(_(url_components[-1].capitalize())))
 

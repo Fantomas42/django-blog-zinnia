@@ -13,27 +13,29 @@ from django.core.urlresolvers import reverse
 
 from zinnia.settings import PROTOCOL
 
-CURRENT_SITE = Site.objects.get_current()
-SITE = '%s://%s' % (PROTOCOL, CURRENT_SITE.domain)
-BLOG_URL = ''
-BLOG_FEED = ''
+
+class URLRessources(object):
+    """Object defining the ressources of the website"""
+
+    def __init__(self):
+        self.current_site = Site.objects.get_current()
+        self.site_url = '%s://%s' % (PROTOCOL, self.current_site.domain)
+        self.blog_url = '%s%s' % (self.site_url,
+                                  reverse('zinnia_entry_archive_index'))
+        self.blog_feed = '%s%s' % (self.site_url,
+                                   reverse('zinnia_entry_latest_feed'))
 
 
 class DirectoryPinger(threading.Thread):
     """Threaded Directory Pinger"""
 
     def __init__(self, server_name, entries, timeout=10, start_now=True):
-        global BLOG_URL, BLOG_FEED
-
         self.results = []
         self.timeout = timeout
         self.entries = entries
         self.server_name = server_name
         self.server = xmlrpclib.ServerProxy(self.server_name)
-
-        if not BLOG_URL or not BLOG_FEED:
-            BLOG_URL = '%s%s' % (SITE, reverse('zinnia_entry_archive_index'))
-            BLOG_FEED = '%s%s' % (SITE, reverse('zinnia_entry_latest_feed'))
+        self.ressources = URLRessources()
 
         threading.Thread.__init__(self)
         if start_now:
@@ -51,19 +53,21 @@ class DirectoryPinger(threading.Thread):
 
     def ping_entry(self, entry):
         """Ping an entry to a Directory"""
-        entry_url = '%s%s' % (SITE, entry.get_absolute_url())
+        entry_url = '%s%s' % (self.ressources.site_url,
+                              entry.get_absolute_url())
         categories = '|'.join([c.title for c in entry.categories.all()])
 
         try:
-            reply = self.server.weblogUpdates.extendedPing(CURRENT_SITE.name,
-                                                           BLOG_URL, entry_url,
-                                                           BLOG_FEED,
-                                                           categories)
+            reply = self.server.weblogUpdates.extendedPing(
+                self.ressources.current_site.name,
+                self.ressources.blog_url, entry_url,
+                self.ressources.blog_feed, categories)
         except Exception:
             try:
-                reply = self.server.weblogUpdates.ping(CURRENT_SITE.name,
-                                                       BLOG_URL, entry_url,
-                                                       categories)
+                reply = self.server.weblogUpdates.ping(
+                    self.ressources.current_site.name,
+                    self.ressources.blog_url, entry_url,
+                    categories)
             except Exception:
                 reply = {'message': '%s is an invalid directory.' % \
                          self.server_name,
@@ -78,7 +82,9 @@ class ExternalUrlsPinger(threading.Thread):
         self.results = []
         self.entry = entry
         self.timeout = timeout
-        self.entry_url = '%s%s' % (SITE, self.entry.get_absolute_url())
+        self.ressources = URLRessources()
+        self.entry_url = '%s%s' % (self.ressources.site_url,
+                                   self.entry.get_absolute_url())
 
         threading.Thread.__init__(self)
         if start_now:
@@ -99,7 +105,7 @@ class ExternalUrlsPinger(threading.Thread):
 
         socket.setdefaulttimeout(None)
 
-    def is_external_url(self, url, site_url=SITE):
+    def is_external_url(self, url, site_url):
         """Check of the url in an external url"""
         url_splitted = urlsplit(url)
         if not url_splitted.netloc:
@@ -110,7 +116,8 @@ class ExternalUrlsPinger(threading.Thread):
         """Find external urls in an entry"""
         soup = BeautifulSoup(entry.html_content)
         external_urls = [a['href'] for a in soup.findAll('a')
-                         if self.is_external_url(a['href'])]
+                         if self.is_external_url(
+                             a['href'], self.ressources.site_url)]
         return external_urls
 
     def find_pingback_href(self, content):
