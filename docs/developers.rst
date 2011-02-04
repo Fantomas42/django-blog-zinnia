@@ -11,7 +11,8 @@ To increase the speed of the development process a `Buildout
 initialize the project for anybody who wants to contribute to the project.
 
 First of all, please use `VirtualEnv
-<http://pypi.python.org/pypi/virtualenv>`_ to protect your system.
+<http://pypi.python.org/pypi/virtualenv>`_ to protect your system, it's
+not mandatory but handy.
 
 Follow these steps to start the development : ::
 
