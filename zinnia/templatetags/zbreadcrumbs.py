@@ -43,7 +43,7 @@ ZINNIA_ROOT_URL = lambda: reverse('zinnia_entry_archive_index')
 MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
                                              reverse('zinnia_tag_list')),
                                        Crumb(x.name)],
-                     'User': lambda x: [Crumb(_('Authors'),
+                     'Author': lambda x: [Crumb(_('Authors'),
                                               reverse('zinnia_author_list')),
                                         Crumb(x.username)],
                      'Category': lambda x: [Crumb(_('Categories'),

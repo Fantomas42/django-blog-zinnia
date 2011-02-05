@@ -8,7 +8,10 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
 
+from tagging.models import Tag
+
 from zinnia.models import Entry
+from zinnia.models import Author
 from zinnia.models import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
@@ -321,6 +324,36 @@ class TemplateTagsTestCase(TestCase):
                                         parent=cat_1)
         source_context = Context({'request': FakeRequest(cat_2.get_absolute_url()),
                                   'object': cat_2})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 4)
+
+        tag = Tag.objects.get(name='test')
+        source_context = Context({'request': FakeRequest(reverse(
+            'zinnia_tag_detail', args=['test'])),
+                                  'object': tag})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 3)
+
+        User.objects.create_user(username='webmaster',
+                                 email='webmaster@example.com')
+        author = Author.objects.get(username='webmaster')
+        source_context = Context({'request': FakeRequest(author.get_absolute_url()),
+                                  'object': author})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 3)
+
+        source_context = Context({'request': FakeRequest(reverse(
+            'zinnia_entry_archive_year', args=[2011]))})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 2)
+
+        source_context = Context({'request': FakeRequest(reverse(
+            'zinnia_entry_archive_month', args=[2011, '03']))})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 3)
+
+        source_context = Context({'request': FakeRequest(reverse(
+            'zinnia_entry_archive_day', args=[2011, '03', 15]))})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 4)
         # More tests can be done here, for testing path and objects in context
