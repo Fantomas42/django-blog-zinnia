@@ -25,11 +25,4 @@
 {% block content %}
 {% get_featured_entries 5 "zinnia/tags/slider_entries.html" %}
 {{ block.super }}
-<!--<ul>
-  {% for date in date_list %}
-    <li>
-      <a href="{% url zinnia_entry_archive_year date|date:"Y" %}" rel="archives">{{ date|date:"Y" }}</a>
-    </li>
-  {% endfor %}
-</ul>-->
 {% endblock %}

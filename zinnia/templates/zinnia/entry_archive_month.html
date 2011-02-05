@@ -5,6 +5,14 @@
 
 {% block content %}
 {{ block.super }}
+<h2>{% trans "Daily archives" %}</h2>
+<ul>
+  {% for date in date_list %}
+  <li>
+    <a href="{% url zinnia_entry_archive_day date|date:"Y" date|date:"m" date|date:"d" %}" rel="archives">{{ date|date:"DATE_FORMAT" }}</a>
+  </li>
+  {% endfor %}
+</ul>
 <!--<ul>
   <li>
     <a href="{% url zinnia_entry_archive_month previous_month|date:"Y" previous_month|date:"m" %}" rel="archives">{{ previous_month|date:"YEAR_MONTH_FORMAT" }}</a>
