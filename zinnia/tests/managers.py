@@ -158,10 +158,9 @@ class ManagersTestCase(TestCase):
         self.assertEquals(Entry.published.advanced_search('(author:webmaster or ("hello world")) and 2').count(), 1)
 
     def test_entry_published_manager_advanced_search_with_punctuation(self):
-        self.entry_2.content = 'How are you ? Fine thank you !'
+        self.entry_2.content = 'How are you ? Fine thank you ! OK.'
         self.entry_2.status = PUBLISHED
         self.entry_2.save()
         self.assertEquals(Entry.published.advanced_search('you ?').count(), 1)
-        self.assertEquals(Entry.published.advanced_search('you or !').count(), 1)
+        self.assertEquals(Entry.published.advanced_search('you or ! or .').count(), 1)
         self.assertEquals(Entry.published.advanced_search('"you ?"').count(), 1)
-

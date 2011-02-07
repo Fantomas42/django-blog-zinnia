@@ -68,8 +68,13 @@ class EntryPublishedManager(models.Manager):
 
     def advanced_search(self, pattern):
         """Advanced search on entries"""
+        from pyparsing import ParseException
         from zinnia.search import advanced_search
-        return advanced_search(pattern)
+        try:
+            return advanced_search(pattern)
+        except ParseException:
+            # Raise an ImportError to fallback in basic_search
+            raise ImportError
 
     def basic_search(self, pattern):
         """Basic search on entries"""

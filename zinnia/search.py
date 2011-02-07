@@ -6,7 +6,7 @@ from pyparsing import Combine
 from pyparsing import Suppress
 from pyparsing import Optional
 from pyparsing import alphas
-from pyparsing import printables
+from pyparsing import alphanums
 from pyparsing import OneOrMore
 from pyparsing import StringEnd
 from pyparsing import ZeroOrMore
@@ -18,9 +18,9 @@ from django.db.models import Q
 
 from zinnia.models import Entry
 
-
 # Simple tokens
-SIMPLE = Word(printables)
+PUNCTUATION = '#$%&?!.,;:/*+-<=>@_|^~{}[]`\\'
+SIMPLE = Word(alphanums + PUNCTUATION)
 QUOTED = dblQuotedString.setParseAction(removeQuotes)
 SINGLE = SIMPLE | QUOTED
 SPECIAL = Combine(Word(alphas) + ":" + SINGLE | QUOTED)
