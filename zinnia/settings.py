@@ -16,8 +16,6 @@ ALLOW_FUTURE = getattr(settings, 'ZINNIA_ALLOW_FUTURE', True)
 ENTRY_TEMPLATES = getattr(settings, 'ZINNIA_ENTRY_TEMPLATES', [])
 ENTRY_BASE_MODEL = getattr(settings, 'ZINNIA_ENTRY_BASE_MODEL', '')
 
-ADVANCED_SEARCH = getattr(settings, 'ZINNIA_ADVANCED_SEARCH', True)
-
 WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
                   'tinymce' in settings.INSTALLED_APPS \
                   and 'tinymce' or 'wymeditor')

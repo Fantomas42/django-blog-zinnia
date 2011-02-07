@@ -3,8 +3,10 @@ Search Engines
 
 Zinnia like almost all blogging systems contains a search engine feature.
 
-But in fact there are 2 search engines, a basic and an advanced, you can
-choose the engine you want to use, but you can't use both in the same time.
+But in fact there are 2 search engines, a basic and an advanced, the
+advanced search engine is enabled by default, but if he fails the
+basic search engine will resume the job.
+
 
 Basic Search Engine
 -------------------
@@ -91,5 +93,3 @@ Here a list of examples and possibilities :
     This will returns all the entries containing the terms 'paris' or
     'berlin' with the tag 'love' or filled under the category 'meeting'
     also containing the term 'girl' excluding entries with the term 'money'.
-
-

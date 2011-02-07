@@ -34,13 +34,6 @@ ZINNIA_ENTRY_BASE_MODEL
   String defining the base Model path for the Entry model. See
   TODO_REF for more informations.
 
-ZINNIA_ADVANCED_SEARCH
-  **Default :** True
-
-  Used to define the search engine, because Zinnia provides in 2.
-  A basic engine with cumulative terms, and an advanced engine if
-  *pyparsing* is installed.
-
 ZINNIA_WYSIWYG
   **Default :** 'tinymce' if in settings.INSTALLED_APPS else 'wymeditor'
 

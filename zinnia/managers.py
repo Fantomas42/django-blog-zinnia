@@ -4,8 +4,6 @@ from datetime import datetime
 from django.db import models
 from django.contrib.sites.models import Site
 
-from zinnia.settings import ADVANCED_SEARCH
-
 DRAFT = 0
 HIDDEN = 1
 PUBLISHED = 2
@@ -59,12 +57,10 @@ class EntryPublishedManager(models.Manager):
 
     def search(self, pattern):
         """Top level search method on entries"""
-        if ADVANCED_SEARCH:
-            try:
-                return self.advanced_search(pattern)
-            except ImportError:
-                return self.basic_search(pattern)
-        return self.basic_search(pattern)
+        try:
+            return self.advanced_search(pattern)
+        except ImportError:
+            return self.basic_search(pattern)
 
     def advanced_search(self, pattern):
         """Advanced search on entries"""
