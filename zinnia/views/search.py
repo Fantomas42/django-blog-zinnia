@@ -1,4 +1,7 @@
 """Views for Zinnia entries search"""
+
+from pyparsing import ParseException
+
 from django.utils.translation import ugettext as _
 from django.views.generic.list_detail import object_list
 
@@ -16,7 +19,10 @@ def entry_search(request):
         if len(pattern) < 3:
             error = _('The pattern is too short')
         else:
-            entries = Entry.published.search(pattern)
+            try:
+                entries = Entry.published.search(pattern)
+            except ParseException:
+                error = _('There is an error in the search pattern')
     else:
         error = _('No pattern to search found')
 
