@@ -6,7 +6,7 @@ from pyparsing import Combine
 from pyparsing import Suppress
 from pyparsing import Optional
 from pyparsing import alphas
-from pyparsing import alphanums
+from pyparsing import printables
 from pyparsing import OneOrMore
 from pyparsing import StringEnd
 from pyparsing import ZeroOrMore
@@ -20,7 +20,7 @@ from zinnia.models import Entry
 
 
 # Simple tokens
-SIMPLE = Word(alphanums)
+SIMPLE = Word(printables)
 QUOTED = dblQuotedString.setParseAction(removeQuotes)
 SINGLE = SIMPLE | QUOTED
 SPECIAL = Combine(Word(alphas) + ":" + SINGLE | QUOTED)
