@@ -157,6 +157,24 @@ class ManagersTestCase(TestCase):
         self.assertEquals(Entry.published.advanced_search('(author:contributor content) or 2').count(), 1)
         self.assertEquals(Entry.published.advanced_search('(author:webmaster or ("hello world")) and 2').count(), 1)
 
+        # Complex queries
+        self.assertEquals(Entry.published.advanced_search('(author:admin and "content 1") or author:webmaster').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('author:admin and ("content 1" or author:webmaster)').count(), 0)
+        self.assertEquals(Entry.published.advanced_search('author:admin and "content 1" or author:webmaster').count(), 0)
+        self.assertEquals(Entry.published.advanced_search('-(author:webmaster and "content 1")').count(), 1)
+        self.assertEquals(Entry.published.advanced_search('-(-author:webmaster and "content 1")').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('category:"category -1" or author:"web master"').count(), 0)
+        self.assertEquals(Entry.published.advanced_search('category:"category-1" or author:"webmaster"').count(), 2)
+
+        # Wildcards
+        self.assertEquals(Entry.published.advanced_search('author:webm*').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('author:*bmas*').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('author:*master').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('author:*master category:*ory-2').count(), 1)
+        self.assertEquals(Entry.published.advanced_search('author:*master or category:*ory-2').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('author:"webmast*"').count(), 0)
+
+
     def test_entry_published_manager_advanced_search_with_punctuation(self):
         self.entry_2.content = 'How are you ? Fine thank you ! OK.'
         self.entry_2.status = PUBLISHED
