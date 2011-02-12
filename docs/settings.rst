@@ -67,7 +67,7 @@ ZINNIA_PROTOCOL
   String representing the protocol of the site.
 
 ZINNIA_MEDIA_URL
-  **Default :** '/zinnia/'
+  **Default :** os.path.join(settings.MEDIA_URL, 'zinnia/')
 
   String of the url that handles the media files of Zinnia.
 

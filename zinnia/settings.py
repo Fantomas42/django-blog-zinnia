@@ -1,4 +1,5 @@
 """Settings of Zinnia"""
+import os
 from django.conf import settings
 
 PING_DIRECTORIES = getattr(settings, 'ZINNIA_PING_DIRECTORIES',
@@ -27,7 +28,8 @@ AKISMET_COMMENT = getattr(settings, 'ZINNIA_AKISMET_COMMENT', True)
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads')
 
 PROTOCOL = getattr(settings, 'ZINNIA_PROTOCOL', 'http')
-MEDIA_URL = getattr(settings, 'ZINNIA_MEDIA_URL', '/zinnia/')
+MEDIA_URL = getattr(settings, 'ZINNIA_MEDIA_URL',
+                    os.path.join(settings.MEDIA_URL, 'zinnia/'))
 
 FEEDS_FORMAT = getattr(settings, 'ZINNIA_FEEDS_FORMAT', 'rss')
 FEEDS_MAX_ITEMS = getattr(settings, 'ZINNIA_FEEDS_MAX_ITEMS', 15)
