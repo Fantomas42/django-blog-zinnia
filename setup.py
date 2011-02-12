@@ -11,7 +11,7 @@ setup(name='django-blog-zinnia',
                                   open(os.path.join('docs', 'install.rst')).read(),
                                   open(os.path.join('docs', 'developers.rst')).read(),
                                   open(os.path.join('docs', 'changelog.rst')).read(),]),
-      keywords='django, blog, zinnia, post',
+      keywords='django, blog, weblog, zinnia, post, news',
 
       author=zinnia.__author__,
       author_email=zinnia.__email__,
