@@ -21,6 +21,11 @@ a
 
 // Header
 #header
+  h1
+    :font-size 4em
+    :font-weight bold
+    :margin-bottom 0
+
   .top-navigation
     :float right
     img
@@ -46,6 +51,16 @@ a
     :background-color = !box_color
     :padding 0.5em
 
+  p
+    :padding-left 1em
+
+  ul, ol
+    :padding-left 2.5em
+    :list-style-image url(../img/bullet.png)
+
+  li ul, li ol
+    :margin 0 1.5em 0 0
+
   .calendar
     h3
       :margin-bottom 0
@@ -57,10 +72,11 @@ a
         :float right
 
   .tags 
-    ul
+    ul      
       +inline-list
       +no-bullets
       +tag-cloud(1.5em)
+      :padding-left 1em
 
 // Calendar
 table.month
