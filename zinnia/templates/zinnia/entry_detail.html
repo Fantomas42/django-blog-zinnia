@@ -82,7 +82,7 @@
 	<img src="{% get_gravatar comment.email 60 "G" %}" class="gravatar photo" alt="{{ comment.user_name }}"/>
       </div>
       <div class="comment_body span-13 last">
-	<div class="span-13 last">
+	<div class="comment-author span-13 last">
 	  {% if comment.url %}
 	  <a href="{{ comment.url }}" class="fn url">{{ comment.user_name }}</a>
 	  {% else %}
