@@ -486,4 +486,5 @@ ol#comment-list li, ol#pingback-list li, ol#trackback-list li { border: 1px soli
 ol#comment-list li.box2, ol#pingback-list li.box2, ol#trackback-list li.box2 { border-color: #94949e; background-color: #e9e9f3; }
 ol#comment-list li.post-author, ol#pingback-list li.post-author, ol#trackback-list li.post-author { color: #94949e; }
 ol#comment-list li img, ol#pingback-list li img, ol#trackback-list li img { padding: 5px; }
-ol#comment-list li .comment-author, ol#pingback-list li .comment-author, ol#trackback-list li .comment-author { font-size: 1.2em; font-weight: bold; color: #666666; }
+ol#comment-list li .pingback-body, ol#comment-list li trackback-body, ol#pingback-list li .pingback-body, ol#pingback-list li trackback-body, ol#trackback-list li .pingback-body, ol#trackback-list li trackback-body { padding: 5px; }
+ol#comment-list li .comment-author, ol#comment-list li .pingback-author, ol#comment-list li .trackback-author, ol#pingback-list li .comment-author, ol#pingback-list li .pingback-author, ol#pingback-list li .trackback-author, ol#trackback-list li .comment-author, ol#trackback-list li .pingback-author, ol#trackback-list li .trackback-author { font-size: 1.2em; font-weight: bold; color: #666666; }
