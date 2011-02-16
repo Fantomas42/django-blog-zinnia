@@ -3,9 +3,9 @@
 #slider ul.ui-tabs-nav li a { display: block; height: 49px; border-bottom: 1px solid #e9e9f3; }
 #slider ul.ui-tabs-nav li a img { float: left; border: 0; padding: 3px; width: 78.4px; height: 43px; }
 #slider ul.ui-tabs-nav li a:hover { text-decoration: none; background: #e9e9f3; }
-#slider ul.ui-tabs-nav li.ui-tabs-selected a { background: #44aadd; color: #fff; }
+#slider ul.ui-tabs-nav li.ui-tabs-selected a { background: #44aadd; color: white; }
 #slider div.ui-tabs-panel { position: relative; width: 400px; height: 250px; }
-#slider div.ui-tabs-panel .info { left: 0; bottom: 0; position: absolute; height: 70px; padding: 5px; color: #fff; background: url(../img/trans.png); width: 390px; }
+#slider div.ui-tabs-panel .panel_info { left: 0; bottom: 0; position: absolute; height: 70px; padding: 5px; color: white; background: url(../img/trans.png); width: 390px; }
 #slider div.ui-tabs-panel a { color: #44aadd; }
 #slider div.ui-tabs-panel h2 { margin: 0; overflow: hidden; }
 #slider div.ui-tabs-panel img { width: 400px; height: 250px; }

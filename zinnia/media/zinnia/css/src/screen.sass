@@ -1,127 +1,117 @@
-@import base.sass
+@import base
 @import blueprint
-@import blueprint/modules/scaffolding
-@import compass/utilities/lists/bullets.sass
-@import compass/utilities/lists/inline_list.sass
-@import compass/utilities/links/hover_link.sass
+@import compass/utilities/lists/bullets
+@import compass/utilities/lists/inline-list
+@import compass/utilities/links/hover-link
 
 +blueprint
-+blueprint-scaffolding
 
 // Global
 body
-  :background transparent url(../img/background.gif) repeat-x scroll left top
+  background: transparent url(../img/background.gif) repeat-x scroll left top
 
 ul, ol
-  :margin 0 1.5em 1.5em 0
-  :padding-left 3.333em
-
+  margin: 0 1.5em 1.5em 0
+  padding-left: 3.333em
 a
   +hover-link
+hr
+  +colruler
 
 // Header
 #header
   h1
-    :font-size 4em
-    :font-weight bold
-    :margin-bottom 0
-
+    font-size: 4em
+    font-weight: bold
+    margin-bottom: 0
   .top-navigation
-    :float right
+    float: right
     img
       border: 0
     .link
-      :padding-left 1.5em
+      padding-left: 1.5em
     .sitemap
-      :background transparent url(../img/sitemap.png) no-repeat scroll left center
+      background: transparent url(../img/sitemap.png) no-repeat scroll left center
     .feeds
-      :background transparent url(../img/rss.png) no-repeat scroll left center
+      background: transparent url(../img/rss.png) no-repeat scroll left center
 
 // Content
 #content
   h1, h2, h3
-    :margin-top 0
+    margin-top: 0
 
 // Sidebar
 #sidebar
-  div:first-child 
+  div:first-child
     h3
-      :margin-top 0
+      margin-top: 0
   h3
-    :background-color = !box_color
-    :padding 0.5em
-
+    background-color: $box_color
+    padding: 0.5em
   p
-    :padding-left 1em
-
+    padding-left: 1em
   ul, ol
-    :padding-left 2.5em
-    :list-style-image url(../img/bullet.png)
-
+    padding-left: 2.5em
+    list-style-image: url(../img/bullet.png)
   li ul, li ol
-    :margin 0 1.5em 0 0
-
+    margin: 0 1.5em 0 0
+  input
+    width: auto
   .calendar
     h3
-      :margin-bottom 0
+      margin-bottom: 0
     .month-navigation
-      :padding-bottom 1.5em
+      padding-bottom: 1.5em
       .month-previous
-        :float left
+        float: left
       .month-next
-        :float right
-
-  .tags 
-    ul      
+        float: right
+  .tags
+    ul
       +inline-list
       +no-bullets
       +tag-cloud(1.5em)
-      :padding-left 1em
 
 // Calendar
 table.month
-  +calendar(!link_color, !box_color, !box_font_color)
+  +calendar($link_color, $box_color, $box_font_color)
 
 // Pagination
 div.paginator
-  :margin-bottom 1.5em
+  margin-bottom: 1.5em
   span
-    :font-size 1.5em
-    :margin-left 0.3em
-    :padding 0 0.5em 0 0.5em
-    :float left
-    :border = 1px "solid" !box_color
+    margin-left: 0.3em
+    padding: 0 0.5em 0 0.5em
+    float: left
+    border: 1px solid $box_color
     &.page, &.next, &.previous
       &:hover
-        :background-color = !link_color
+        background-color: $link_color
         a
-          :color white
+          color: white
     &.current
-      :border-color = !link_color
-      :background-color = !link_color
-      :color white
-
+      border-color: $link_color
+      background-color: $link_color
+      color: white
 
 // Entry
 .hentry
   +entry
   .entry-header
-    :background-color = !box_color
+    background-color: $box_color
   .entry-footer
-    p    
+    p
       strong
-        :color = !box_font_color
+        color: $box_font_color
 
 .featured
   .entry-header
-    :background-color = !link_color + !box_color
+    background-color: $link_color + $box_color
 
 // Discussions
 ol#comment-list, ol#pingback-list, ol#trackback-list
   li
-    :float left
     &.box2
-      :background-color = !box_color
+      background-color: $box_color
     &.post-author
-      :color = !box_font_color
-      
+      color: $box_font_color

@@ -8,7 +8,7 @@ body.dashboard #content { width: 75%; }
 
 .previewlink { background: url("../img/preview.png") no-repeat scroll 0 0.2em transparent; padding-left: 12px; }
 
-input, textarea, select { border: 1px solid #CCCCCC; }
+input, textarea, select { border: 1px solid #cccccc; }
 
 .vTextField, .vLargeTextField { width: 25em; }
 
@@ -29,4 +29,4 @@ input, textarea, select { border: 1px solid #CCCCCC; }
 
 #drafts th, #linkbacks th, #comments th { font-weight: normal; }
 #drafts th a, #linkbacks th a, #comments th a { font-weight: bold; }
-#drafts th abbr, #linkbacks th abbr, #comments th abbr { color: #666; }
+#drafts th abbr, #linkbacks th abbr, #comments th abbr { color: #666666; }
