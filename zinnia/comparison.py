@@ -19,7 +19,7 @@ def pearson_score(list1, list2):
     den = sqrt((sum_sq1 - pow(sum1, 2) / len(list1)) *
                (sum_sq2 - pow(sum2, 2) / len(list2)))
     if den == 0:
-        return 0
+        return 0.0
     return 1.0 - num / den
 
 

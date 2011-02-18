@@ -11,6 +11,7 @@ class ComparisonTestCase(TestCase):
     """Test cases for comparison tools"""
 
     def test_pearson_score(self):
+        self.assertEquals(pearson_score([42], [42]), 0.0)
         self.assertEquals(pearson_score([0, 1, 2], [0, 1, 2]), 0.0)
         self.assertEquals(pearson_score([0, 1, 3], [0, 1, 2]),
                           0.051316701949486232)
@@ -32,6 +33,8 @@ class ComparisonTestCase(TestCase):
                                                   'My entry 2  My content 2'])
 
     def test_vector_builder(self):
+        vectors = VectorBuilder({'queryset': Entry.objects.all(),
+                                 'fields': ['title', 'excerpt', 'content']})
         params = {'title': 'My entry 1', 'content':
                   'This is my first content',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1'}
@@ -40,8 +43,6 @@ class ComparisonTestCase(TestCase):
                   'My second entry',
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         Entry.objects.create(**params)
-        vectors = VectorBuilder({'queryset': Entry.objects.all(),
-                                 'fields': ['title', 'excerpt', 'content']})
         columns, dataset = vectors()
         self.assertEquals(columns, ['content', 'This', 'my', 'is', '1',
                                     'second', '2', 'first'])
