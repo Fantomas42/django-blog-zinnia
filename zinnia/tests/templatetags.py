@@ -147,7 +147,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['template'], 'zinnia/tags/similar_entries.html')
 
         params = {'title': 'My second entry',
-                  'content': 'My second content',
+                  'content': 'This is the second entry of my tests.',
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
                   'slug': 'my-second-entry'}
@@ -156,9 +156,9 @@ class TemplateTagsTestCase(TestCase):
         second_entry.sites.add(site)
 
         source_context = Context({'object': second_entry})
-        context = get_similar_entries(source_context, 3, 'custom_template.html')
-        #self.assertEquals(len(context['entries']), 1) # Does not work due to cache
-        self.assertEquals(len(context['entries']), 0)
+        context = get_similar_entries(source_context, 3, 'custom_template.html',
+                                      flush=True)
+        self.assertEquals(len(context['entries']), 1)
         self.assertEquals(context['template'], 'custom_template.html')
 
     def test_get_archives_entries(self):

@@ -199,6 +199,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(Entry.objects.count(), 3)
         self.assertEquals(Entry.published.count(), 2)
         del post['dateCreated']
+        post['wp_author_id'] = self.contributor.pk
         self.server.metaWeblog.newPost(
             1, 'webmaster', 'password', post, 0)
         self.assertEquals(Entry.objects.count(), 4)
@@ -233,7 +234,6 @@ class MetaWeblogTestCase(TestCase):
         post['mt_excerpt'] = 'Content edited'
         post['wp_slug'] = 'slug-edited'
         post['wp_password'] = 'password'
-        post['wp_author_id'] = self.contributor.pk
         post['mt_allow_comments'] = 2
         post['mt_allow_pings'] = 0
 
@@ -250,6 +250,14 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.comment_enabled, False)
         self.assertEquals(entry.pingback_enabled, False)
         self.assertEquals(entry.categories.count(), 0)
+        self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
+
+        del post['dateCreated']
+        post['wp_author_id'] = self.contributor.pk
+
+        response = self.server.metaWeblog.editPost(
+            new_post_id, 'webmaster', 'password', post, 1)
+        entry = Entry.objects.get(pk=new_post_id)
         self.assertEquals(entry.authors.count(), 1)
         self.assertEquals(entry.authors.all()[0], self.contributor)
         self.assertEquals(entry.creation_date, datetime(2000, 1, 1))

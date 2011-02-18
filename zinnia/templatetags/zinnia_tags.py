@@ -25,8 +25,8 @@ register = Library()
 
 VECTORS = None
 VECTORS_FACTORY = lambda: VectorBuilder({'queryset': Entry.published.all(),
-                                          'fields': ['title', 'excerpt',
-                                                     'content']})
+                                         'fields': ['title', 'excerpt',
+                                                    'content']})
 CACHE_ENTRIES_RELATED = {}
 
 
@@ -95,13 +95,15 @@ def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_similar_entries(context, number=5,
-                        template='zinnia/tags/similar_entries.html'):
+                        template='zinnia/tags/similar_entries.html',
+                        flush=False):
     """Return similar entries"""
     global VECTORS
     global CACHE_ENTRIES_RELATED
 
-    if VECTORS is None:
+    if VECTORS is None or flush:
         VECTORS = VECTORS_FACTORY()
+        CACHE_ENTRIES_RELATED = {}
 
     def compute_related(object_id, dataset):
         """Compute related entries to an entry with a dataset"""

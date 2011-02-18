@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 from zinnia.models import Entry
+from zinnia.managers import DRAFT
 
 
 class QuickEntryTestCase(TestCase):
@@ -29,7 +30,12 @@ class QuickEntryTestCase(TestCase):
         self.assertEquals(response.redirect_chain,
                           [('http://testserver/admin/zinnia/entry/add/?tags=&title=test&sites=1&content=%3Cp%3E%3C%2Fp%3E&authors=2&slug=test', 302)])
         response = self.client.post('/quick_entry/', {'title': 'test', 'tags': 'test',
-                                                      'content': 'Test content'}, follow=True)
+                                                      'content': 'Test content',
+                                                      'save_draft': ''}, follow=True)
         entry = Entry.objects.get(title='test')
         self.assertEquals(response.redirect_chain,
                           [('http://testserver%s' % entry.get_absolute_url(), 302)])
+        self.assertEquals(entry.status, DRAFT)
+        self.assertEquals(entry.title, 'test')
+        self.assertEquals(entry.tags, 'test')
+        self.assertEquals(entry.content, '<p>Test content</p>')
