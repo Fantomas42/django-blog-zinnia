@@ -26,4 +26,6 @@ INSTALLED_APPS = ['django.contrib.contenttypes',
                   'django_xmlrpc',
                   'mptt', 'tagging', 'zinnia']
 
+ZINNIA_PAGINATION = 3
+
 XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
