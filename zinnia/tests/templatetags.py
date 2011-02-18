@@ -227,6 +227,11 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['previous_month'], None)
         self.assertEquals(context['next_month'], datetime(2010, 1, 1))
 
+        source_context = Context({'month': datetime(2010, 1, 1)})
+        context = get_calendar_entries(source_context)
+        self.assertEquals(context['previous_month'], None)
+        self.assertEquals(context['next_month'], None)
+
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'tags': 'zinnia, test',

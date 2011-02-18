@@ -9,6 +9,8 @@ from django.core.urlresolvers import reverse
 
 from zinnia.models import Entry
 
+AMERICAN_TO_EUROPEAN_WEEK_DAYS = [6, 0, 1, 2, 3, 4, 5]
+
 
 class ZinniaCalendar(HTMLCalendar):
     """Override of HTMLCalendar"""
@@ -16,11 +18,8 @@ class ZinniaCalendar(HTMLCalendar):
     def __init__(self):
         """Retrieve and convert the localized first week day
         at initialization"""
-        localized_first_week_day = get_format('FIRST_DAY_OF_WEEK')
-        if not localized_first_week_day:
-            HTMLCalendar.__init__(self, 6)
-        else:
-            HTMLCalendar.__init__(self, localized_first_week_day - 1)
+        HTMLCalendar.__init__(self, AMERICAN_TO_EUROPEAN_WEEK_DAYS[
+            get_format('FIRST_DAY_OF_WEEK')])
 
     def formatday(self, day, weekday):
         """Return a day as a table cell with a link
