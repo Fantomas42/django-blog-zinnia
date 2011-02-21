@@ -37,7 +37,7 @@ comment if you have installed the `akismet
 <http://www.voidspace.org.uk/python/modules.shtml#akismet>`_ python module.
 
 IMPORTANT : you need an API key. If you don't have any, get one for free at
-http://akismet.com/personal/ then set it in your project's settings like
+http://akismet.com/signup/ then set it in your project's settings like
 this : ::
 
   AKISMET_SECRET_API_KEY = 'your key'

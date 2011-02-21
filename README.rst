@@ -17,32 +17,32 @@ Features
 More than a long speech, here the list of the main features :
 
   * Comments
-  * Sitemaps
+  * `Sitemaps`_
   * Archives views
   * Related entries
   * Private entries
   * RSS or Atom Feeds
   * Tags and categories views
-  * Advanced search engine
+  * `Advanced search engine`_
   * Prepublication and expiration
   * Widgets (Popular entries, Similar entries, ...)
-  * Spam protection with Akismet
+  * Spam protection with `Akismet`_
   * Admin dashboard
-  * MetaWeblog API
+  * `MetaWeblog API`_
   * Ping Directories
   * Ping External links
-  * Bit.ly support
-  * Twitter support
-  * Gravatar support
-  * Django-CMS plugins
+  * `Bit.ly`_ support
+  * `Twitter`_ support
+  * `Gravatar`_ support
+  * `Django-CMS`_ plugins
   * Collaborative work
   * Tags autocompletion
-  * Entry model extendable
+  * `Entry model extendable`_
   * Pingback/Trackback support
-  * WYMeditor or TinyMCE support
-  * WordPress conversion utility
+  * `WYMeditor`_ or `TinyMCE`_ support
+  * `WordPress conversion utility`_
   * Ready to use and extendables templates
-  * Windows Live Writer compatibility
+  * `Windows Live Writer`_ compatibility
 
 Examples
 ========
@@ -62,3 +62,18 @@ or you can visit these websites who use Zinnia.
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
+
+
+.. _`Sitemaps`: http://django-blog-zinnia.com/documentation/configuration/#sitemaps
+.. _`Advanced search engine`: http://django-blog-zinnia.com/documentation/search_engines/#advanced-search-engine
+.. _`Akismet`: http://akismet.com
+.. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi
+.. _`Bit.ly`: http://django-blog-zinnia.com/documentation/configuration/#bit-ly
+.. _`Twitter`: http://django-blog-zinnia.com/documentation/configuration/#twitter
+.. _`Gravatar`: http://gravatar.com/
+.. _`Django-CMS`: http://django-blog-zinnia.com/documentation/configuration/#django-cms
+.. _`Entry model extendable`: http://django-blog-zinnia.com/documentation/extending_entry_model/
+.. _`WYMeditor`: http://www.wymeditor.org/
+.. _`TinyMCE`: http://tinymce.moxiecode.com/
+.. _`WordPress conversion utility`: http://django-blog-zinnia.com/documentation/wordpress_2_zinnia/
+.. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
