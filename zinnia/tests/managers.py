@@ -171,7 +171,8 @@ class ManagersTestCase(TestCase):
         self.assertEquals(Entry.published.advanced_search('author:*bmas*').count(), 2)
         self.assertEquals(Entry.published.advanced_search('author:*master').count(), 2)
         self.assertEquals(Entry.published.advanced_search('author:*master category:*ory-2').count(), 1)
-        self.assertEquals(Entry.published.advanced_search('author:*master or category:*ory-2').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('author:*master or category:cate*').count(), 2)
+        self.assertEquals(Entry.published.advanced_search('category:*ate*').count(), 2)
         self.assertEquals(Entry.published.advanced_search('author:"webmast*"').count(), 0)
 
 
