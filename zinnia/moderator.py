@@ -93,4 +93,4 @@ class EntryCommentModerator(CommentModerator):
                 user = comment.content_object.authors.all()[0]
                 comment.flags.create(user=user, flag='spam')
             return is_spam
-        raise APIKeyError("Your Akismet API key is invalid.")
+        raise APIKeyError('Your Akismet API key is invalid.')

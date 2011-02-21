@@ -17,12 +17,13 @@ Make sure to install these packages prior to installation :
 
 The packages below are optionnal but needed for run the full test suite.
 
- * `akismet
-   <http://www.voidspace.org.uk/python/modules.shtml#akismet>`_ >= 0.2.0
  * `pyparsing 
    <http://pyparsing.wikispaces.com/>`_ >= 1.5.5
  * `django-xmlrpc
    <https://github.com/Fantomas42/django-xmlrpc>`_ >= 0.1.3
+
+Note that all the dependencies will be resolved if you install
+Zinnia with *pip* or *easy_install*, excepting Django.
 
 Getting the code
 ----------------
@@ -40,9 +41,6 @@ or use pip ::
 For the latest stable version use easy_install ::
 
   $ easy_install django-blog-zinnia
-
-Note that using *easy_install* or *pip* all the dependencies will be
-resolved automaticaly excepting Django.
 
 Applications
 ------------
