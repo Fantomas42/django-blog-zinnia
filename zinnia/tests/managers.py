@@ -177,7 +177,6 @@ class ManagersTestCase(TestCase):
         self.assertEquals(Entry.published.advanced_search('tag:"zinnia*"').count(), 0)
         self.assertEquals(Entry.published.advanced_search('tag:*inni*').count(), 2)
 
-
     def test_entry_published_manager_advanced_search_with_punctuation(self):
         self.entry_2.content = 'How are you ? Fine thank you ! OK.'
         self.entry_2.status = PUBLISHED
