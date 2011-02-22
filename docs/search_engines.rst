@@ -88,8 +88,8 @@ Here a list of examples and possibilities :
     'berlin' with the term 'love'.
 
   * Complex example :
-      *((paris or berlin) and (tag:love or category:meeting) girl -money*
+      *((paris or berlin) and (tag:love or category:meet\*) girl -money*
 
     This will returns all the entries containing the terms 'paris' or
-    'berlin' with the tag 'love' or filled under the category 'meeting'
+    'berlin' with the tag 'love' or filled under the categories starting by 'meet'
     also containing the term 'girl' excluding entries with the term 'money'.

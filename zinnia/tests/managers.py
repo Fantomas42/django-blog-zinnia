@@ -174,6 +174,8 @@ class ManagersTestCase(TestCase):
         self.assertEquals(Entry.published.advanced_search('author:*master or category:cate*').count(), 2)
         self.assertEquals(Entry.published.advanced_search('category:*ate*').count(), 2)
         self.assertEquals(Entry.published.advanced_search('author:"webmast*"').count(), 0)
+        self.assertEquals(Entry.published.advanced_search('tag:"zinnia*"').count(), 0)
+        self.assertEquals(Entry.published.advanced_search('tag:*inni*').count(), 2)
 
 
     def test_entry_published_manager_advanced_search_with_punctuation(self):

@@ -25,12 +25,9 @@ def createQ(token):
     query = getattr(token, 'query', '')
     wildcards = None
 
-    # unicode -> Quoted string
-    if isinstance(query, basestring):
+    if isinstance(query, basestring):  # Unicode -> Quoted string
         search = query
-
-    # list -> No quoted string (possible wildcards)
-    else:
+    else:  # List -> No quoted string (possible wildcards)
         if len(query) == 1:
             search = query[0]
         elif len(query) == 3:
@@ -44,8 +41,13 @@ def createQ(token):
                 wildcards = 'END'
                 search = query[0]
 
+    if not meta:
+        return Q(content__icontains=search) | \
+               Q(excerpt__icontains=search) | \
+               Q(title__icontains=search)
+
     if meta == 'category':
-        if wildcards == "BOTH":
+        if wildcards == 'BOTH':
             return Q(categories__title__icontains=search) | \
                     Q(categories__slug__icontains=search)
         elif wildcards == 'START':
@@ -57,15 +59,6 @@ def createQ(token):
         else:
             return Q(categories__title__iexact=search) | \
                     Q(categories__slug__iexact=search)
-    elif meta == 'tag':  # TODO: tags ignore wildcards
-        if wildcards == 'BOTH':
-            return Q(tags__icontains=search)
-        elif wildcards == 'START':
-            return Q(tags__icontains=search)
-        elif wildcards == 'END':
-            return Q(tags__icontains=search)
-        else:
-            return Q(tags__icontains=search)
     elif meta == 'author':
         if wildcards == 'BOTH':
             return Q(authors__username__icontains=search)
@@ -75,10 +68,8 @@ def createQ(token):
             return Q(authors__username__istartswith=search)
         else:
             return Q(authors__username__iexact=search)
-    else:
-        return Q(content__icontains=search) | \
-                Q(excerpt__icontains=search) | \
-                Q(title__icontains=search)
+    elif meta == 'tag':  # TODO: tags ignore wildcards
+        return Q(tags__icontains=search)
 
 
 def unionQ(token):
@@ -88,18 +79,14 @@ def unionQ(token):
     negation = False
 
     for t in token:
-        # See tokens recursively
-        if type(t) is ParseResults:
+        if type(t) is ParseResults:  # See tokens recursively
             query &= unionQ(t)
         else:
-            # Set the new op and go to next token
-            if t in ('or', 'and'):
+            if t in ('or', 'and'):  # Set the new op and go to next token
                 operation = t
-            # Next tokens needs to be negated
-            elif t == '-':
+            elif t == '-':  # Next tokens needs to be negated
                 negation = True
-            # Append to query the token
-            else:
+            else:  # Append to query the token
                 if negation:
                     t = ~t
                 if operation == 'or':
