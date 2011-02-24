@@ -43,6 +43,22 @@ F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
 USE_BITLY = getattr(settings, 'ZINNIA_USE_BITLY',
                     'django_bitly' in settings.INSTALLED_APPS)
 
+STOP_WORDS = getattr(settings, 'ZINNIA_STOP_WORDS',
+                     ('able', 'about', 'across', 'after', 'all', 'almost',
+                      'also', 'among', 'and', 'any', 'are', 'because', 'been',
+                      'but', 'can', 'cannot', 'could', 'dear', 'did', 'does',
+                      'either', 'else', 'ever', 'every', 'for', 'from', 'get',
+                      'got', 'had', 'has', 'have', 'her', 'hers', 'him', 'his',
+                      'how', 'however', 'into', 'its', 'just', 'least', 'let',
+                      'like', 'likely', 'may', 'might', 'most', 'must',
+                      'neither', 'nor', 'not', 'off', 'often', 'only', 'other',
+                      'our', 'own', 'rather', 'said', 'say', 'says', 'she',
+                      'should', 'since', 'some', 'than', 'that', 'the',
+                      'their', 'them', 'then', 'there', 'these', 'they',
+                      'this', 'tis', 'too', 'twas', 'wants', 'was', 'were',
+                      'what', 'when', 'where', 'which', 'while', 'who', 'whom',
+                      'why', 'will', 'with', 'would', 'yet', 'you', 'your'))
+
 try:
     import tweepy
     USE_TWITTER = getattr(settings, 'ZINNIA_USE_TWITTER', True)

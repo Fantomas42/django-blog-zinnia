@@ -83,6 +83,12 @@ ZINNIA_MAIL_COMMENT_REPLY
   Boolean used for sending an email to comment's authors
   when a new comment is posted.
 
+ZINNIA_STOP_WORDS
+  **Default :** See zinnia/settings.py
+
+  List of common words excluded from the advanced search engine
+  to optimize the search querying and the results.
+
 ZINNIA_AKISMET_COMMENT
   **Default :** True
 

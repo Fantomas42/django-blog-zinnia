@@ -93,3 +93,10 @@ Here a list of examples and possibilities :
     This will returns all the entries containing the terms 'paris' or
     'berlin' with the tag 'love' or filled under the categories starting by 'meet'
     also containing the term 'girl' excluding entries with the term 'money'.
+
+
+Note that the query is stripped of common words known as stop words.
+These are words such as *on*, *the* or *which* that are generally
+not meaningful and cause irrelevant results.
+
+The list of stop words is stored in the ZINNIA_STOP_WORDS setting.
