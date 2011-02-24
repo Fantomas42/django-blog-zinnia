@@ -15,9 +15,15 @@ from django.contrib.comments.models import CommentFlag
 from django.contrib.comments.moderation import moderator
 from django.utils.translation import ugettext_lazy as _
 
+from django.contrib.markup.templatetags.markup import markdown
+from django.contrib.markup.templatetags.markup import textile
+from django.contrib.markup.templatetags.markup import restructuredtext
+
 import mptt
 from tagging.fields import TagField
 
+from zinnia.settings import WYSIWYG
+from zinnia.settings import MARKDOWN_EXTENSIONS
 from zinnia.settings import USE_BITLY
 from zinnia.settings import UPLOAD_TO
 from zinnia.settings import ENTRY_TEMPLATES
@@ -149,7 +155,13 @@ class EntryAbstractClass(models.Model):
     @property
     def html_content(self):
         """Return the content correctly formatted"""
-        if not '</p>' in self.content:
+        if WYSIWYG == 'markdown':
+            return markdown(self.content, MARKDOWN_EXTENSIONS)
+        elif WYSIWYG == 'textile':
+            return textile(self.content)
+        elif WYSIWYG == 'restructuredtext':
+            return restructuredtext(self.content)
+        elif not '</p>' in self.content:
             return linebreaks(self.content)
         return self.content
 
