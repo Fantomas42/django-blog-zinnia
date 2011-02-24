@@ -15,6 +15,7 @@ from pyparsing import CaselessLiteral
 from pyparsing import operatorPrecedence
 
 from django.db.models import Q
+from django.conf import settings
 
 from zinnia.models import Entry
 
@@ -40,6 +41,17 @@ def createQ(token):
             else:
                 wildcards = 'END'
                 search = query[0]
+
+
+    # Ignore connective words (of, a, an...)
+    if len(search) < 3 and not search.isdigit():
+        return Q()
+
+    common = getattr(settings, 'ZINNIA_COMMON_WORDS', ('the', 'not'))
+
+    # Ignore common words
+    if search in common:
+        return Q()
 
     if not meta:
         return Q(content__icontains=search) | \
