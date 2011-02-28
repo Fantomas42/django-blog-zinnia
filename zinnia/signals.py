@@ -1,4 +1,6 @@
 """Signal handlers of Zinnia"""
+from django.db.models.signals import post_save
+
 from zinnia import settings
 
 
@@ -21,3 +23,13 @@ def ping_external_urls_handler(sender, **kwargs):
         from zinnia.ping import ExternalUrlsPinger
 
         ExternalUrlsPinger(entry)
+
+
+def disconnect_zinnia_signals():
+    """Disconnect all the signals provided by Zinnia"""
+    from zinnia.models import Entry
+
+    post_save.disconnect(sender=Entry, dispatch_uid=
+                         'zinnia.entry.post_save.ping_directories')
+    post_save.disconnect(sender=Entry, dispatch_uid=
+                         'zinnia.entry.post_save.ping_external_urls')

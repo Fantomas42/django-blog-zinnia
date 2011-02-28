@@ -2,9 +2,7 @@
 from unittest import TestSuite
 from unittest import TestLoader
 from django.conf import settings
-from django.db.models.signals import post_save
 
-from zinnia.models import Entry
 from zinnia.tests.entry import EntryTestCase
 from zinnia.tests.category import CategoryTestCase
 from zinnia.tests.managers import ManagersTestCase
@@ -18,6 +16,7 @@ from zinnia.tests.sitemaps import ZinniaSitemapsTestCase
 from zinnia.tests.ping import ExternalUrlsPingerTestCase
 from zinnia.tests.templatetags import TemplateTagsTestCase
 from zinnia.tests.moderator import EntryCommentModeratorTestCase
+from zinnia.signals import disconnect_zinnia_signals
 
 
 def suite():
@@ -40,8 +39,4 @@ def suite():
 
     return suite
 
-# Disconnecting signals provided by Zinnia
-post_save.disconnect(sender=Entry,
-                     dispatch_uid='zinnia.entry.post_save.ping_directories')
-post_save.disconnect(sender=Entry,
-                     dispatch_uid='zinnia.entry.post_save.ping_external_urls')
+disconnect_zinnia_signals()
