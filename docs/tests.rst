@@ -29,7 +29,7 @@ test runner.
 Despite my best efforts, some functionnalities are not yet tested, that's why
 I need your help !
 
-As I write these lines the **92** tests in Zinnia cover **87%** of the code
+As I write these lines the **93** tests in Zinnia cover **88%** of the code
 bundled in Zinnia. It's not bad, but the goal (*realistic*) is to reach a
 **95%** coverage.
 
