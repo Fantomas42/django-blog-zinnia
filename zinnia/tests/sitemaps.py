@@ -67,3 +67,9 @@ class ZinniaSitemapsTestCase(TestCase):
         self.assertEquals(sitemap.lastmod(zinnia_tag), self.entry_2.creation_date)
         self.assertEquals(sitemap.priority(zinnia_tag), '1.0')
         self.assertEquals(sitemap.location(zinnia_tag), '/tags/zinnia/')
+
+    def test_category_sitemap_zero_division_error(self):
+        Entry.objects.all().delete()
+        category_sitemap = CategorySitemap()
+        category_sitemap.items()
+        self.assertEquals(category_sitemap.priority(self.category), '0.5')

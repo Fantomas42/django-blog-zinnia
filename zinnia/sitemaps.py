@@ -34,8 +34,11 @@ class CategorySitemap(Sitemap):
         len_entries = float(Entry.published.count())
         self.cache_categories = {}
         for cat in categories:
-            self.cache_categories[cat.pk] = cat.entries_published_set(
-                ).count() / len_entries
+            if len_entries:
+                self.cache_categories[cat.pk] = cat.entries_published_set(
+                    ).count() / len_entries
+            else:
+                self.cache_categories[cat.pk] = 0.0
 
     def items(self):
         """Return all categories with coeff"""
