@@ -14,7 +14,7 @@ from zinnia.managers import entries_published
 class EntrySitemap(Sitemap):
     """Sitemap for entries"""
     priority = 0.5
-    changefreq = 'never'
+    changefreq = 'weekly'
 
     def items(self):
         """Return published entries"""
