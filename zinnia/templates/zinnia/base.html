@@ -36,9 +36,9 @@
   <ul>
     {% for tag in tag_cloud %}
     <li>
-      <a href="{% url zinnia_tag_detail tag.name %}" title="{{ tag.count }} {% trans "entries" %}" class="tag_{{ tag.font_size }}">
-	{{ tag }}
-      </a>
+      <a href="{% url zinnia_tag_detail tag.name %}" 
+         title="{{ tag.count }} {% trans "entries" %}" 
+         class="tag_{{ tag.font_size }}">{{ tag }}</a>
     </li>
     {% endfor %}
   </ul>

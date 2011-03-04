@@ -11,9 +11,7 @@
     {% for author in object.authors.all %}
     <span class="vcard author">
       <a href="{% url zinnia_author_detail author %}" class="fn nickname url"
-         title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">
-        {{ author }}
-      </a>
+         title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">{{ author }}</a>
     </span>{% if not forloop.last %}, {% endif %}
     {% endfor %}
     {% trans "on" %}
@@ -23,12 +21,7 @@
     {% if object.categories.count %}
     {% trans "in" %}
     {% for category in object.categories.all %}
-    <a href="{{ category.get_absolute_url }}" title="{{ category }}" rel="tag category">
-      {{ category }}
-    </a>
-    {% if not forloop.last %}, {% endif %}
-    {% endfor %}
-    {% endif %}.
+    <a href="{{ category.get_absolute_url }}" title="{{ category }}" rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.
   </p>
 </div>
 
@@ -52,9 +45,8 @@
     <strong>{% trans "Tags" %}</strong> :
     {% tags_for_object object as tag_list %}
     {% for tag in tag_list %}
-    <a href="{% url zinnia_tag_detail tag %}" title="Tag {{ tag }}" rel="tag">
-      {{ tag }}
-    </a>
+    <a href="{% url zinnia_tag_detail tag %}" 
+       title="Tag {{ tag }}" rel="tag">{{ tag }}</a>
     {% empty %}
     <span>{% trans "No tags" %}</span>
     {% endfor %}
