@@ -44,12 +44,12 @@
 
 /*WYM_HTML*/
         .wym_skin_django .wym_html               { width: 98%;}
-        .wym_skin_django .wym_html textarea      { width: 100%; height: 200px; border: 1px solid #ccc; background: white;  }
+        .wym_skin_django .wym_html textarea      { width: 100%; height: 240px; border: 1px solid #ccc; background: white;  }
 
 
 /*WYM_IFRAME*/
         .wym_skin_django .wym_iframe             { width: 98%;}
-        .wym_skin_django .wym_iframe iframe      { width: 100%; height: 200px; border: 1px solid #ccc; background: white }
+        .wym_skin_django .wym_iframe iframe      { width: 100%; height: 240px; border: 1px solid #ccc; background: white }
 
 
 /*AREAS*/
