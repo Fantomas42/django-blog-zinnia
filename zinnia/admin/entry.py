@@ -203,6 +203,7 @@ class EntryAdmin(admin.ModelAdmin):
     def make_published(self, request, queryset):
         """Set entries selected as published"""
         queryset.update(status=PUBLISHED)
+        self.ping_directories(request, queryset, messages=False)
     make_published.short_description = _('Set entries selected as published')
 
     def make_hidden(self, request, queryset):
@@ -237,25 +238,27 @@ class EntryAdmin(admin.ModelAdmin):
     def put_on_top(self, request, queryset):
         """Put the selected entries on top at the current date"""
         queryset.update(creation_date=datetime.now())
+        self.ping_directories(request, queryset, messages=False)
     put_on_top.short_description = _('Put the selected entries on top at the current date')
 
-    def ping_directories(self, request, queryset):
+    def ping_directories(self, request, queryset, messages=True):
         """Ping Directories for selected entries"""
         for directory in settings.PING_DIRECTORIES:
             pinger = DirectoryPinger(directory, queryset)
             pinger.join()
-            success = 0
-            for result in pinger.results:
-                if not result.get('flerror', True):
-                    success += 1
-                else:
-                    self.message_user(request, '%s : %s' % (directory,
-                                                            result['message']))
-            if success:
-                self.message_user(request,
-                                  _('%(directory)s directory succesfully ' \
-                                    'pinged %(success)d entries.') %
-                                  {'directory': directory, 'success': success})
+            if messages:
+                success = 0
+                for result in pinger.results:
+                    if not result.get('flerror', True):
+                        success += 1
+                    else:
+                        self.message_user(request, '%s : %s' % (directory,
+                                                                result['message']))
+                if success:
+                    self.message_user(request,
+                                      _('%(directory)s directory succesfully ' \
+                                        'pinged %(success)d entries.') %
+                                      {'directory': directory, 'success': success})
     ping_directories.short_description = _('Ping Directories for ' \
                                            'selected entries')
 
