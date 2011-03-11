@@ -198,17 +198,20 @@ class EntryAdmin(admin.ModelAdmin):
         for entry in queryset:
             if request.user not in entry.authors.all():
                 entry.authors.add(request.user)
+        self.message_user(request, _('The selected entries now belong to you.'))
     make_mine.short_description = _('Set the entries to the user')
 
     def make_published(self, request, queryset):
         """Set entries selected as published"""
         queryset.update(status=PUBLISHED)
         self.ping_directories(request, queryset, messages=False)
+        self.message_user(request, _('The selected entries are now marked as published.'))
     make_published.short_description = _('Set entries selected as published')
 
     def make_hidden(self, request, queryset):
         """Set entries selected as hidden"""
         queryset.update(status=HIDDEN)
+        self.message_user(request, _('The selected entries are now marked as hidden.'))
     make_hidden.short_description = _('Set entries selected as hidden')
 
     def make_tweet(self, request, queryset):
@@ -222,23 +225,27 @@ class EntryAdmin(admin.ModelAdmin):
         for entry in queryset:
             message = '%s %s' % (entry.title[:119], entry.short_url)
             api.update_status(message)
+        self.message_user(request, _('The selected entries have been tweeted.'))
     make_tweet.short_description = _('Tweet entries selected')
 
     def close_comments(self, request, queryset):
         """Close the comments for selected entries"""
         queryset.update(comment_enabled=False)
+        self.message_user(request, _('Comments are now closed for selected entries.'))
     close_comments.short_description = _('Close the comments for '\
                                          'selected entries')
 
     def close_pingbacks(self, request, queryset):
         """Close the pingbacks for selected entries"""
         queryset.update(pingback_enabled=False)
+        self.message_user(request, _('Linkbacks are now closed for selected entries.'))
     close_pingbacks.short_description = _('Close the linkbacks for selected entries')
 
     def put_on_top(self, request, queryset):
         """Put the selected entries on top at the current date"""
         queryset.update(creation_date=datetime.now())
         self.ping_directories(request, queryset, messages=False)
+        self.message_user(request, _('The selected entries are now set at the current date.'))
     put_on_top.short_description = _('Put the selected entries on top at the current date')
 
     def ping_directories(self, request, queryset, messages=True):
