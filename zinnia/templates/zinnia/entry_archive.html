@@ -1,6 +1,8 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n zinnia_tags %}
 
+{% block meta-description %}{% trans "Latest entries" %}{% endblock %}
+
 {% block link %}
   {{ block.super }}
   <link rel="stylesheet" type="text/css" href="{{ ZINNIA_MEDIA_URL }}css/slider.css" />
