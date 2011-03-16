@@ -447,12 +447,12 @@ hr { background: #dddddd; color: #dddddd; clear: both; float: none; width: 100%;
 #sidebar .tags ul { list-style-type: none; list-style: none; font-size: 1.5em; line-height: 1.8em; }
 #sidebar .tags ul, #sidebar .tags ul li { margin: 0px; padding: 0px; display: inline; }
 #sidebar .tags ul li { list-style-image: none; list-style-type: none; margin-left: 0px; }
-#sidebar .tags ul .tag_1 { font-size: 0.75em; }
-#sidebar .tags ul .tag_2 { font-size: 1em; }
-#sidebar .tags ul .tag_3 { font-size: 1.125em; }
-#sidebar .tags ul .tag_4 { font-size: 2em; }
-#sidebar .tags ul .tag_5 { font-size: 2.25em; }
-#sidebar .tags ul .tag_6 { font-size: 3em; }
+#sidebar .tags ul .tag_1 { font-size: 0.75em; color: #001e2d; }
+#sidebar .tags ul .tag_2 { font-size: 1em; color: #00334c; }
+#sidebar .tags ul .tag_3 { font-size: 1.125em; color: #005b89; }
+#sidebar .tags ul .tag_4 { font-size: 2em; color: #0070a8; }
+#sidebar .tags ul .tag_5 { font-size: 2.25em; color: #0099e5; }
+#sidebar .tags ul .tag_6 { font-size: 3em; color: #00adff; }
 
 table.month { margin-bottom: 0; }
 table.month th.month { text-transform: uppercase; color: #006699; background: none; }
