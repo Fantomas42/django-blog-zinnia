@@ -467,7 +467,7 @@ div.paginator span.page:hover a, div.paginator span.next:hover a, div.paginator 
 div.paginator span.current { border-color: #006699; background-color: #006699; color: white; }
 
 .hentry .entry-header { margin-bottom: 1em; }
-.hentry .entry-header .entry-title { margin: 0; padding-left: 0.25em; }
+.hentry .entry-header .entry-title { margin: 0; padding-left: 0.25em; padding-right: 0.25em; }
 .hentry .entry-header .entry-info { margin: 0; padding-left: 2em; background: transparent url(../img/category.png) no-repeat scroll 0.5em; }
 .hentry .entry-body .entry-content { padding-left: 1em; padding-right: 1em; }
 .hentry .entry-body .entry-image { margin-top: -1.5em; }
@@ -480,7 +480,7 @@ div.paginator span.current { border-color: #006699; background-color: #006699; c
 .hentry .entry-header { background-color: #e9e9f3; }
 .hentry .entry-footer p strong { color: #94949e; }
 
-.featured .entry-header { background-color: #e9ffff; }
+.featured .entry-header { background-color: #c4d9c4; }
 
 ol#comment-list li, ol#pingback-list li, ol#trackback-list li { border: 1px solid #e9e9f3; margin-bottom: 5px; padding-bottom: 1em; }
 ol#comment-list li.box2, ol#pingback-list li.box2, ol#trackback-list li.box2 { border-color: #94949e; background-color: #e9e9f3; }
