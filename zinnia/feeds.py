@@ -99,7 +99,6 @@ class EntryFeed(Feed):
 
 class LatestEntries(EntryFeed):
     """Feed for the latest entries"""
-    title = _('Latest entries')
 
     def link(self):
         """URL of latest entries"""
@@ -109,9 +108,13 @@ class LatestEntries(EntryFeed):
         """Items are published entries"""
         return Entry.published.all()[:FEEDS_MAX_ITEMS]
 
+    def title(self, obj):
+        """Title of the feed"""
+        return '%s - %s ' % (self.site.name, _('Latest entries'))
+
     def description(self, obj):
         """Description of the feed"""
-        return _('The latest entries for the site %s') % self.site.domain
+        return _('The latest entries for the site %s') % self.site.name
 
 
 class CategoryEntries(EntryFeed):
