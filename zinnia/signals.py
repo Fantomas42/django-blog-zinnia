@@ -29,7 +29,7 @@ def disconnect_zinnia_signals():
     """Disconnect all the signals provided by Zinnia"""
     from zinnia.models import Entry
 
-    post_save.disconnect(sender=Entry, dispatch_uid=
-                         'zinnia.entry.post_save.ping_directories')
-    post_save.disconnect(sender=Entry, dispatch_uid=
-                         'zinnia.entry.post_save.ping_external_urls')
+    post_save.disconnect(
+        sender=Entry, dispatch_uid='zinnia.entry.post_save.ping_directories')
+    post_save.disconnect(
+        sender=Entry, dispatch_uid='zinnia.entry.post_save.ping_external_urls')

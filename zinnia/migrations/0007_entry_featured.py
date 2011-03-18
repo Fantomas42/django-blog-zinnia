@@ -4,6 +4,7 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
@@ -11,12 +12,10 @@ class Migration(SchemaMigration):
         # Adding field 'Entry.featured'
         db.add_column('zinnia_entry', 'featured', self.gf('django.db.models.fields.BooleanField')(default=False), keep_default=False)
 
-
     def backwards(self, orm):
 
         # Deleting field 'Entry.featured'
         db.delete_column('zinnia_entry', 'featured')
-
 
     models = {
         'auth.group': {
