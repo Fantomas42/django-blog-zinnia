@@ -42,7 +42,8 @@ def view_quick_entry(request):
             return redirect(entry)
 
         data = {'title': smart_str(request.POST.get('title', '')),
-                'content': smart_str(linebreaks(request.POST.get('content', ''))),
+                'content': smart_str(linebreaks(request.POST.get(
+                    'content', ''))),
                 'tags': smart_str(request.POST.get('tags', '')),
                 'slug': slugify(request.POST.get('title', '')),
                 'authors': request.user.pk,
