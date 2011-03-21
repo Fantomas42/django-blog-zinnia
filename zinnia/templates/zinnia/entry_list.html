@@ -56,7 +56,7 @@
        title="{% trans "More recent entries" %}">&laquo;</a>
   </span>
   {% endif %}
-  {% for page in page_range %}
+  {% for page in paginator.page_range %}
   <span class="page {% ifequal page_obj.number page %}current{% endifequal %}">
     {% ifequal page_obj.number page %}
     <strong>{{ page }}</strong>
