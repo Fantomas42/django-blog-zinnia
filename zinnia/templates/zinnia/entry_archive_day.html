@@ -1,10 +1,15 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n %}
 
+{% block meta-description %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
+
 {% block title %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
 
 {% block content %}
+<h1>{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}</h1>
+
 {{ block.super }}
+
 <!--<ul>
   <li>
     <a href="{% url zinnia_entry_archive_day previous_day|date:"Y" previous_day|date:"m" previous_day|date:"d" %}" rel="archives">{{ previous_day|date:"DATE_FORMAT" }}</a>

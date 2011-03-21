@@ -1,10 +1,15 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n %}
 
+{% block meta-description %}{% trans "Archives" %} {{ month|date:"YEAR_MONTH_FORMAT" }}{% endblock %}
+
 {% block title %}{% trans "Archives" %} {{ month|date:"YEAR_MONTH_FORMAT" }}{% endblock %}
 
 {% block content %}
+<h1>{% trans "Archives" %} {{ month|date:"YEAR_MONTH_FORMAT" }}</h1>
+
 {{ block.super }}
+
 <h2>{% trans "Daily archives" %}</h2>
 <ul>
   {% for date in date_list %}
