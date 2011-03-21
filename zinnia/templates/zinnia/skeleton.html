@@ -8,7 +8,7 @@
     <meta name="robots" content="follow, all" />
     <meta name="language" content="{{ LANGUAGE_CODE }}" />
     <meta name="description" content="{% block meta-description %}Demonstration of the Zinnia Blog application.{% endblock %}" />
-    <meta name="keywords" content="django, blog, zinnia, {{ tag_entry|join:", "}}, {% block meta-keywords %}{% endblock %}" />
+    <meta name="keywords" content="{% block meta-keywords %}django, blog, zinnia, {{ tag_entry|join:", "}}{% endblock %}" />
     <meta name="author" content="Fantomas42" />
     <meta name="engine" content="Zinnia {{ ZINNIA_VERSION }}" />
     {% block meta %}{% endblock %}
