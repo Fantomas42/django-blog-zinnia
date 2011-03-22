@@ -25,6 +25,7 @@ More than a long speech, here the list of the main features :
   * Tags and categories views
   * `Advanced search engine`_
   * Prepublication and expiration
+  * Edition in `MarkDown`_, `Textile`_ or `reStructuredText`_
   * Widgets (Popular entries, Similar entries, ...)
   * Spam protection with `Akismet`_
   * Admin dashboard
@@ -66,6 +67,9 @@ will add it to the list.
 
 .. _`Sitemaps`: http://django-blog-zinnia.com/documentation/configuration/#sitemaps
 .. _`Advanced search engine`: http://django-blog-zinnia.com/documentation/search_engines/#advanced-search-engine
+.. _`MarkDown`: http://daringfireball.net/projects/markdown/
+.. _`Textile`: http://redcloth.org/hobix.com/textile/
+.. _`reStructuredText`: http://docutils.sourceforge.net/rst.html
 .. _`Akismet`: http://akismet.com
 .. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi
 .. _`Bit.ly`: http://django-blog-zinnia.com/documentation/configuration/#bit-ly

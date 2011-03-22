@@ -34,6 +34,16 @@ ZINNIA_ENTRY_BASE_MODEL
   String defining the base Model path for the Entry model. See
   TODO_REF for more informations.
 
+ZINNIA_MARKUP_LANGUAGE
+  **Default :** 'html'
+
+  String determining the markup language used for writing the entries.
+
+ZINNIA_MARKDOWN_EXTENSIONS
+  **Default :** ''
+
+  Extensions names to be used when rendering entries in MarkDown.
+
 ZINNIA_WYSIWYG
   **Default :** 'tinymce' if in settings.INSTALLED_APPS else 'wymeditor'
 

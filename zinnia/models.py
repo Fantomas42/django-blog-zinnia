@@ -22,7 +22,7 @@ from django.contrib.markup.templatetags.markup import restructuredtext
 import mptt
 from tagging.fields import TagField
 
-from zinnia.settings import WYSIWYG
+from zinnia.settings import MARKUP_LANGUAGE
 from zinnia.settings import MARKDOWN_EXTENSIONS
 from zinnia.settings import USE_BITLY
 from zinnia.settings import UPLOAD_TO
@@ -155,11 +155,11 @@ class EntryAbstractClass(models.Model):
     @property
     def html_content(self):
         """Return the content correctly formatted"""
-        if WYSIWYG == 'markdown':
+        if MARKUP_LANGUAGE == 'markdown':
             return markdown(self.content, MARKDOWN_EXTENSIONS)
-        elif WYSIWYG == 'textile':
+        elif MARKUP_LANGUAGE == 'textile':
             return textile(self.content)
-        elif WYSIWYG == 'restructuredtext':
+        elif MARKUP_LANGUAGE == 'restructuredtext':
             return restructuredtext(self.content)
         elif not '</p>' in self.content:
             return linebreaks(self.content)

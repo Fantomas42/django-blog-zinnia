@@ -118,6 +118,25 @@ If you want to replace WYMEditor by TinyMCE install `django-tinymce
 TinyMCE can be customized by overriding the
 *admin/zinnia/entry/tinymce_textareas.js* template.
 
+Markup languages
+----------------
+
+If you doesn't want to write your entries in HTML, because you are
+an über coder knowing more than 42 programming languages, you have the
+possibility to use a custom markup language for editing the entries.
+
+Currently MarkDown, Textile and reStructuredText are supported,
+so if you want to use one of these languages, simply set this
+variable as appropriate in your project's settings. ::
+
+  ZINNIA_MARKUP_LANGUAGE = 'restructuredtext'
+
+Note that the name of the language must be in lowercase.
+
+More informations about the dependencies at this URL :
+
+http://docs.djangoproject.com/en/1.2/ref/contrib/markup/
+
 XML-RPC
 -------
 

@@ -40,10 +40,11 @@ Edition
   <http://docutils.sourceforge.net/rst.html>`_ or any lightweight
   markup language, is it possible ?
 
-    Yes of course, disable de WYSIWYG in the admin site with the
-    ZINNIA_WYSIWYG setting, and use the the `markup application
-    <http://docs.djangoproject.com/en/dev/ref/contrib/markup/>`_ in
-    your templates.
+    Yes of course, Zinnia currently support MarkDown, Textile and
+    reStructuredText as markup languages, but if you want to write
+    your entries in a custom markup language a solution is to disable
+    the WYSIWYG editor in the admin site with the ZINNIA_WYSIWYG setting,
+    and use the appropriate template filter in your templates.
 
 
 Authors

@@ -17,11 +17,13 @@ ALLOW_FUTURE = getattr(settings, 'ZINNIA_ALLOW_FUTURE', True)
 ENTRY_TEMPLATES = getattr(settings, 'ZINNIA_ENTRY_TEMPLATES', [])
 ENTRY_BASE_MODEL = getattr(settings, 'ZINNIA_ENTRY_BASE_MODEL', '')
 
+MARKUP_LANGUAGE = getattr(settings, 'ZINNIA_MARKUP_LANGUAGE', 'html')
+
+MARKDOWN_EXTENSIONS = getattr(settings, 'ZINNIA_MARKDOWN_EXTENSIONS', '')
+
 WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
                   'tinymce' in settings.INSTALLED_APPS \
                   and 'tinymce' or 'wymeditor')
-
-MARKDOWN_EXTENSIONS = getattr(settings, 'ZINNIA_MARKDOWN_EXTENSIONS', '')
 
 MAIL_COMMENT = getattr(settings, 'ZINNIA_MAIL_COMMENT', True)
 MAIL_COMMENT_REPLY = getattr(settings, 'ZINNIA_MAIL_COMMENT_REPLY', False)
