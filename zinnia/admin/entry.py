@@ -279,7 +279,11 @@ class EntryAdmin(admin.ModelAdmin):
                         url(r'^wymeditor/$', 'direct_to_template',
                             {'template': 'admin/zinnia/entry/wymeditor.js',
                              'mimetype': 'application/javascript'},
-                            name='zinnia_entry_wymeditor'),)
+                            name='zinnia_entry_wymeditor'),
+                        url(r'^markitup/$', 'direct_to_template',
+                            {'template': 'admin/zinnia/entry/markitup.js',
+                             'mimetype': 'application/javascript'},
+                            name='zinnia_entry_markitup'),)
         return urls + entry_admin_urls
 
     def _media(self):
@@ -299,5 +303,13 @@ class EntryAdmin(admin.ModelAdmin):
             from tinymce.widgets import TinyMCE
             media += TinyMCE().media + Media(
                 js=(reverse('tinymce-js', args=('admin/zinnia/entry',)),))
+        elif settings.WYSIWYG == 'markitup':
+            media += Media(js=('%sjs/markitup/jquery.markitup.js' % MEDIA_URL,
+                               '%sjs/markitup/sets/%s/set.js' % (
+                                   MEDIA_URL, settings.MARKUP_LANGUAGE),
+                               reverse('admin:zinnia_entry_markitup')),
+                           css={'all': ('%sjs/markitup/skins/django/style.css' % MEDIA_URL,
+                                        '%sjs/markitup/sets/%s/style.css' % (
+                                            MEDIA_URL, settings.MARKUP_LANGUAGE))})
         return media
     media = property(_media)
