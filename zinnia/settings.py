@@ -21,9 +21,15 @@ MARKUP_LANGUAGE = getattr(settings, 'ZINNIA_MARKUP_LANGUAGE', 'html')
 
 MARKDOWN_EXTENSIONS = getattr(settings, 'ZINNIA_MARKDOWN_EXTENSIONS', '')
 
-WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
-                  'tinymce' in settings.INSTALLED_APPS \
-                  and 'tinymce' or 'wymeditor')
+def wysiwyg_to_use():
+    """Determine which WYSIWYG editor to use"""
+    if MARKUP_LANGUAGE in ('markdown', 'textile',
+                           'restructuredtext'):
+        return 'markitup'
+    return 'tinymce' in settings.INSTALLED_APPS \
+           and 'tinymce' or 'wymeditor'
+
+WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG', wysiwyg_to_use())
 
 MAIL_COMMENT = getattr(settings, 'ZINNIA_MAIL_COMMENT', True)
 MAIL_COMMENT_REPLY = getattr(settings, 'ZINNIA_MAIL_COMMENT_REPLY', False)
