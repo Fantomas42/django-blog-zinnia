@@ -40,8 +40,8 @@ More than a long speech, here the list of the main features :
   * Tags autocompletion
   * `Entry model extendable`_
   * Pingback/Trackback support
-  * `WYMeditor`_ or `TinyMCE`_ support
   * `WordPress conversion utility`_
+  * `WYMeditor`_, `TinyMCE`_ and `MarkItUp`_ support
   * Ready to use and extendables templates
   * `Windows Live Writer`_ compatibility
 
@@ -79,5 +79,6 @@ will add it to the list.
 .. _`Entry model extendable`: http://django-blog-zinnia.com/documentation/extending_entry_model/
 .. _`WYMeditor`: http://www.wymeditor.org/
 .. _`TinyMCE`: http://tinymce.moxiecode.com/
+.. _`MarkItUp`: http://markitup.jaysalvat.com/
 .. _`WordPress conversion utility`: http://django-blog-zinnia.com/documentation/wordpress_2_zinnia/
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
