@@ -46,6 +46,8 @@ ZINNIA_MARKDOWN_EXTENSIONS
 
 ZINNIA_WYSIWYG
   **Default :** 'tinymce' if in settings.INSTALLED_APPS else 'wymeditor'
+  if ZINNIA_MARKUP_LANGUAGE is 'html'. If MarkDown, Textile or reStructuredText
+  are used, the value will be 'markitup'.
 
   Used for determining the WYSIWYG editor for editing an entry.
   Can also be used for disabling the WYSIWYG functionnality.

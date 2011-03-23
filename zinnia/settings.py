@@ -23,11 +23,13 @@ MARKDOWN_EXTENSIONS = getattr(settings, 'ZINNIA_MARKDOWN_EXTENSIONS', '')
 
 def wysiwyg_to_use():
     """Determine which WYSIWYG editor to use"""
+    if MARKUP_LANGUAGE == 'html':
+        return 'tinymce' in settings.INSTALLED_APPS \
+               and 'tinymce' or 'wymeditor'
     if MARKUP_LANGUAGE in ('markdown', 'textile',
                            'restructuredtext'):
         return 'markitup'
-    return 'tinymce' in settings.INSTALLED_APPS \
-           and 'tinymce' or 'wymeditor'
+    return None
 
 WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG', wysiwyg_to_use())
 
