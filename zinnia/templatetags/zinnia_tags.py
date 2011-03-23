@@ -24,9 +24,8 @@ from zinnia.templatetags.zbreadcrumbs import retrieve_breadcrumbs
 register = Library()
 
 VECTORS = None
-VECTORS_FACTORY = lambda: VectorBuilder({'queryset': Entry.published.all(),
-                                         'fields': ['title', 'excerpt',
-                                                    'content']})
+VECTORS_FACTORY = lambda: VectorBuilder(Entry.published.all(),
+                                        ['title', 'excerpt', 'content'])
 CACHE_ENTRIES_RELATED = {}
 
 

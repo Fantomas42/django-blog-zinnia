@@ -27,9 +27,9 @@ class ClusteredModel(object):
     """Wrapper around Model class
     building a dataset of instances"""
 
-    def __init__(self, info_dict):
-        self.queryset = info_dict.get('queryset', [])
-        self.fields = info_dict.get('fields', ['id'])
+    def __init__(self, queryset, fields=['id']):
+        self.fields = fields
+        self.queryset = queryset
 
     def dataset(self):
         """Generate a dataset with the queryset
@@ -44,11 +44,11 @@ class ClusteredModel(object):
 class VectorBuilder(object):
     """Build a list of vectors based on datasets"""
 
-    def __init__(self, *models_conf):
+    def __init__(self, queryset, fields):
         self.key = ''
         self.columns = []
         self.dataset = {}
-        self.clustered_models = [ClusteredModel(conf) for conf in models_conf]
+        self.clustered_model = ClusteredModel(queryset, fields)
         self.build_dataset()
 
     def build_dataset(self):
@@ -56,16 +56,15 @@ class VectorBuilder(object):
         data = {}
         words_total = {}
 
-        for clustered_model in self.clustered_models:
-            model_data = clustered_model.dataset()
-            for instance, words in model_data.items():
-                words_item_total = {}
-                for word in words.split():
-                    words_total.setdefault(word, 0)
-                    words_item_total.setdefault(word, 0)
-                    words_total[word] += 1
-                    words_item_total[word] += 1
-                data[instance] = words_item_total
+        model_data = self.clustered_model.dataset()
+        for instance, words in model_data.items():
+            words_item_total = {}
+            for word in words.split():
+                words_total.setdefault(word, 0)
+                words_item_total.setdefault(word, 0)
+                words_total[word] += 1
+                words_item_total[word] += 1
+            data[instance] = words_item_total
 
         top_words = []
         for word, count in words_total.items():
@@ -82,8 +81,7 @@ class VectorBuilder(object):
 
     def generate_key(self):
         """Generate key for this list of vectors"""
-        return '-'.join([str(c.queryset.filter().count())
-                         for c in self.clustered_models])
+        return self.clustered_model.queryset.count()
 
     def flush(self):
         """Flush the dataset"""
