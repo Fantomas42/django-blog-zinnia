@@ -165,7 +165,7 @@ def get_calendar_entries(context, year=None, month=None,
     try:
         from zinnia.templatetags.zcalendar import ZinniaCalendar
     except ImportError:
-        return {'calendar':
+        return {'template': template, 'calendar':
                 '<p class="notice">Calendar is unavailable for Python<2.5.</p>'}
 
     calendar = ZinniaCalendar()
