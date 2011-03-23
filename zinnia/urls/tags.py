@@ -2,8 +2,6 @@
 from django.conf.urls.defaults import url
 from django.conf.urls.defaults import patterns
 
-from zinnia.managers import tags_published
-
 tag_conf = {'template_name': 'zinnia/tag_list.html'}
 
 urlpatterns = patterns('zinnia.views.tags',

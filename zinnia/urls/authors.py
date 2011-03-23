@@ -2,8 +2,6 @@
 from django.conf.urls.defaults import url
 from django.conf.urls.defaults import patterns
 
-from zinnia.models import Author
-
 
 urlpatterns = patterns('zinnia.views.authors',
                        url(r'^$', 'author_list',
