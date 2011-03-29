@@ -6,6 +6,8 @@ Dependencies
 
 Make sure to install these packages prior to installation :
 
+ * `Python 2.x
+   <http://www.python.org/>`_ >= 2.5
  * `Django
    <http://www.djangoproject.com/>`_ >= 1.2
  * `django-mptt

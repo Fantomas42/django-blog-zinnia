@@ -1,9 +1,5 @@
 """Template tags and filters for Zinnia"""
-try:
-    from hashlib import md5
-except ImportError:
-    from md5 import new as md5
-
+from hashlib import md5
 from random import sample
 from urllib import urlencode
 from datetime import datetime
@@ -19,6 +15,7 @@ from zinnia.models import Author
 from zinnia.models import Category
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
+from zinnia.templatetags.zcalendar import ZinniaCalendar
 from zinnia.templatetags.zbreadcrumbs import retrieve_breadcrumbs
 
 register = Library()
@@ -161,12 +158,6 @@ def get_calendar_entries(context, year=None, month=None,
                      getattr(context.get('object'), 'creation_date', None) or \
                      datetime.today()
         year, month = date_month.timetuple()[:2]
-
-    try:
-        from zinnia.templatetags.zcalendar import ZinniaCalendar
-    except ImportError:
-        return {'template': template, 'calendar':
-                '<p class="notice">Calendar is unavailable for Python<2.5.</p>'}
 
     calendar = ZinniaCalendar()
     current_month = datetime(year, month, 1)
