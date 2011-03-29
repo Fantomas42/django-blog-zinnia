@@ -1,4 +1,5 @@
 """Test cases for Zinnia's Entry"""
+import warnings
 from datetime import datetime
 
 from django.test import TestCase
@@ -10,6 +11,8 @@ from django.contrib.comments.models import CommentFlag
 
 from zinnia.models import Entry
 from zinnia.managers import PUBLISHED
+from zinnia.models import get_base_model
+from zinnia.models import EntryAbstractClass
 from zinnia import models as models_settings
 
 
@@ -235,3 +238,24 @@ class EntryHtmlContentTestCase(TestCase):
                               '<li>Item 2</li>\n</ul>\n')
         except AssertionError:
             self.assertEquals(html_content, self.entry.content)
+
+
+class EntryGetBaseModelTestCase(TestCase):
+
+    def setUp(self):
+        self.original_entry_base_model = models_settings.ENTRY_BASE_MODEL
+
+    def tearDown(self):
+        models_settings.ENTRY_BASE_MODEL = self.original_entry_base_model
+
+    def test_get_base_model(self):
+        models_settings.ENTRY_BASE_MODEL = ''
+        self.assertEquals(get_base_model(), EntryAbstractClass)
+
+        models_settings.ENTRY_BASE_MODEL = 'mymodule.myclass'
+        with warnings.catch_warnings(record=True) as w:
+            self.assertEquals(get_base_model(), EntryAbstractClass)
+            self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
+
+        models_settings.ENTRY_BASE_MODEL = 'zinnia.models.EntryAbstractClass'
+        self.assertEquals(get_base_model(), EntryAbstractClass)

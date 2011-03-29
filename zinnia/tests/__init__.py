@@ -5,6 +5,7 @@ from django.conf import settings
 
 from zinnia.tests.entry import EntryTestCase
 from zinnia.tests.entry import EntryHtmlContentTestCase
+from zinnia.tests.entry import EntryGetBaseModelTestCase
 from zinnia.tests.category import CategoryTestCase
 from zinnia.tests.managers import ManagersTestCase
 from zinnia.tests.feeds import ZinniaFeedsTestCase
@@ -26,6 +27,7 @@ def suite():
     loader = TestLoader()
 
     test_cases = (ManagersTestCase, EntryTestCase,
+                  EntryGetBaseModelTestCase,
                   EntryHtmlContentTestCase, CategoryTestCase,
                   ZinniaViewsTestCase, ZinniaFeedsTestCase,
                   ZinniaSitemapsTestCase, ComparisonTestCase,
