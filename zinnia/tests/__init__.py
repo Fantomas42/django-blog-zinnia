@@ -4,6 +4,7 @@ from unittest import TestLoader
 from django.conf import settings
 
 from zinnia.tests.entry import EntryTestCase
+from zinnia.tests.entry import EntryHtmlContentTestCase
 from zinnia.tests.category import CategoryTestCase
 from zinnia.tests.managers import ManagersTestCase
 from zinnia.tests.feeds import ZinniaFeedsTestCase
@@ -24,7 +25,8 @@ def suite():
     suite = TestSuite()
     loader = TestLoader()
 
-    test_cases = (ManagersTestCase, EntryTestCase, CategoryTestCase,
+    test_cases = (ManagersTestCase, EntryTestCase,
+                  EntryHtmlContentTestCase, CategoryTestCase,
                   ZinniaViewsTestCase, ZinniaFeedsTestCase,
                   ZinniaSitemapsTestCase, ComparisonTestCase,
                   ExternalUrlsPingerTestCase, TemplateTagsTestCase,

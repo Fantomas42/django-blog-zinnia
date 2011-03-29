@@ -2,6 +2,7 @@
 from datetime import datetime
 
 from django.test import TestCase
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
@@ -9,6 +10,7 @@ from django.contrib.comments.models import CommentFlag
 
 from zinnia.models import Entry
 from zinnia.managers import PUBLISHED
+from zinnia import models as models_settings
 
 
 class EntryTestCase(TestCase):
@@ -21,14 +23,6 @@ class EntryTestCase(TestCase):
         self.entry = Entry.objects.create(**params)
         self.author = User.objects.create_user(username='webmaster',
                                                email='webmaster@example.com')
-
-    def test_html_content(self):
-        self.assertEquals(self.entry.html_content, '<p>My content</p>')
-
-        self.entry.content = """Hello world !
-        this is my content"""
-        self.assertEquals(self.entry.html_content,
-                          '<p>Hello world !<br />        this is my content</p>')
 
     def test_discussions(self):
         site = Site.objects.get_current()
@@ -171,3 +165,73 @@ class EntryTestCase(TestCase):
         self.entry.sites.add(Site.objects.get_current())
         self.assertEquals(len(self.entry.related_published_set), 1)
         self.assertEquals(len(self.second_entry.related_published_set), 1)
+
+
+class EntryHtmlContentTestCase(TestCase):
+
+    def setUp(self):
+        params = {'title': 'My entry',
+                  'content': 'My content',
+                  'slug': 'my-entry'}
+        self.entry = Entry(**params)
+        self.original_debug = settings.DEBUG
+        self.original_rendering = models_settings.MARKUP_LANGUAGE
+        settings.DEBUG = False
+
+    def tearDown(self):
+        settings.DEBUG = self.original_debug
+        models_settings.MARKUP_LANGUAGE = self.original_rendering
+
+    def test_html_content_default(self):
+        models_settings.MARKUP_LANGUAGE = None
+        self.assertEquals(self.entry.html_content, '<p>My content</p>')
+
+        self.entry.content = 'Hello world !\n' \
+                             ' this is my content'
+        self.assertEquals(self.entry.html_content,
+                          '<p>Hello world !<br /> this is my content</p>')
+
+    def test_html_content_textitle(self):
+        models_settings.MARKUP_LANGUAGE = 'textile'
+        self.entry.content = 'Hello world !\n\n' \
+                             'this is my content :\n\n' \
+                             '* Item 1\n* Item 2'
+        html_content = self.entry.html_content
+        try:
+            self.assertEquals(html_content,
+                              '\t<p>Hello world !</p>\n\n\t' \
+                              '<p>this is my content :</p>\n\n\t' \
+                              '<ul>\n\t\t<li>Item 1</li>\n\t\t' \
+                              '<li>Item 2</li>\n\t</ul>')
+        except AssertionError:
+            self.assertEquals(html_content, self.entry.content)
+
+    def test_html_content_markdown(self):
+        models_settings.MARKUP_LANGUAGE = 'markdown'
+        self.entry.content = 'Hello world !\n\n' \
+                             'this is my content :\n\n' \
+                             '* Item 1\n* Item 2'
+        html_content = self.entry.html_content
+        try:
+            self.assertEquals(html_content,
+                              '<p>Hello world !</p>\n' \
+                              '<p>this is my content :</p>'\
+                              '\n<ul>\n<li>Item 1</li>\n' \
+                              '<li>Item 2</li>\n</ul>')
+        except AssertionError:
+            self.assertEquals(html_content, self.entry.content)
+
+    def test_html_content_restructuredtext(self):
+        models_settings.MARKUP_LANGUAGE = 'restructuredtext'
+        self.entry.content = 'Hello world !\n\n' \
+                             'this is my content :\n\n' \
+                             '* Item 1\n* Item 2'
+        html_content = self.entry.html_content
+        try:
+            self.assertEquals(html_content,
+                              '<p>Hello world !</p>\n' \
+                              '<p>this is my content :</p>'\
+                              '\n<ul class="simple">\n<li>Item 1</li>\n' \
+                              '<li>Item 2</li>\n</ul>\n')
+        except AssertionError:
+            self.assertEquals(html_content, self.entry.content)
