@@ -73,7 +73,8 @@ def template_name_for_entry_queryset_filtered(model_type, model_name):
     template_name_list = (
         'zinnia/%s/%s/entry_list.html' % (model_type, model_name),
         'zinnia/%s/%s_entry_list.html' % (model_type, model_name),
-        'zinnia/%s/entry_list.html' % model_type)
+        'zinnia/%s/entry_list.html' % model_type,
+        'zinnia/entry_list.html')
 
     for template_name in template_name_list:
         try:
@@ -81,5 +82,3 @@ def template_name_for_entry_queryset_filtered(model_type, model_name):
             return template_name
         except TemplateDoesNotExist:
             continue
-
-    return 'zinnia/entry_list.html'

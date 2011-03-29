@@ -48,6 +48,7 @@ class ZinniaViewsTestCase(TestCase):
             self.create_published_entry()
             response = self.client.get(url)
             self.assertEquals(len(response.context['object_list']), second_expected)
+        return response
 
     def test_zinnia_entry_archive_index(self):
         self.check_publishing_context('/', 2, 3)
@@ -112,7 +113,8 @@ class ZinniaViewsTestCase(TestCase):
         self.check_publishing_context('/categories/', 2)
 
     def test_zinnia_category_detail(self):
-        self.check_publishing_context('/categories/tests/', 2, 3)
+        response = self.check_publishing_context('/categories/tests/', 2, 3)
+        self.assertTemplateUsed(response, 'zinnia/category/entry_list.html')
 
     def test_zinnia_category_detail_paginated(self):
         """Test case reproducing issue #42 on category
@@ -142,7 +144,8 @@ class ZinniaViewsTestCase(TestCase):
         self.check_publishing_context('/authors/', 2)
 
     def test_zinnia_author_detail(self):
-        self.check_publishing_context('/authors/admin/', 2, 3)
+        response = self.check_publishing_context('/authors/admin/', 2, 3)
+        self.assertTemplateUsed(response, 'zinnia/author/entry_list.html')
 
     def test_zinnia_tag_list(self):
         self.check_publishing_context('/tags/', 1)
@@ -152,7 +155,8 @@ class ZinniaViewsTestCase(TestCase):
         self.check_publishing_context('/tags/', 2)
 
     def test_zinnia_tag_detail(self):
-        self.check_publishing_context('/tags/tests/', 2, 3)
+        response = self.check_publishing_context('/tags/tests/', 2, 3)
+        self.assertTemplateUsed(response, 'zinnia/tag/entry_list.html')
 
     def test_zinnia_entry_search(self):
         self.check_publishing_context('/search/?pattern=test', 2, 3)
