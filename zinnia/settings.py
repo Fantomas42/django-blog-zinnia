@@ -2,17 +2,6 @@
 import os
 from django.conf import settings
 
-
-def wysiwyg_to_use():
-    """Determine which WYSIWYG editor to use"""
-    if MARKUP_LANGUAGE == 'html':
-        return 'tinymce' in settings.INSTALLED_APPS \
-               and 'tinymce' or 'wymeditor'
-    if MARKUP_LANGUAGE in ('markdown', 'textile',
-                           'restructuredtext'):
-        return 'markitup'
-    return None
-
 PING_DIRECTORIES = getattr(settings, 'ZINNIA_PING_DIRECTORIES',
                            ('http://django-blog-zinnia.com/xmlrpc/',))
 SAVE_PING_DIRECTORIES = getattr(settings, 'ZINNIA_SAVE_PING_DIRECTORIES',
@@ -32,7 +21,14 @@ MARKUP_LANGUAGE = getattr(settings, 'ZINNIA_MARKUP_LANGUAGE', 'html')
 
 MARKDOWN_EXTENSIONS = getattr(settings, 'ZINNIA_MARKDOWN_EXTENSIONS', '')
 
-WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG', wysiwyg_to_use())
+WYSIWYG_MARKUP_MAPPING = {
+    'textile': 'markitup',
+    'markdown': 'markitup',
+    'restructuredtext': 'markitup',
+    'html': 'tinymce' in settings.INSTALLED_APPS and 'tinymce' or 'wymeditor'}
+
+WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
+                  WYSIWYG_MARKUP_MAPPING.get(MARKUP_LANGUAGE))
 
 MAIL_COMMENT = getattr(settings, 'ZINNIA_MAIL_COMMENT', True)
 MAIL_COMMENT_REPLY = getattr(settings, 'ZINNIA_MAIL_COMMENT_REPLY', False)
