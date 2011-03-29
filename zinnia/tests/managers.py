@@ -184,3 +184,13 @@ class ManagersTestCase(TestCase):
         self.assertEquals(Entry.published.advanced_search('today ?').count(), 1)
         self.assertEquals(Entry.published.advanced_search('today or ! or .').count(), 1)
         self.assertEquals(Entry.published.advanced_search('"you today ?"').count(), 1)
+
+    def test_entry_published_manager_search(self):
+        self.entry_2.content = self.entry_2.content + ' * '
+        self.entry_2.status = PUBLISHED
+        self.entry_2.save()
+        # Be sure that basic_search does not return the same results of advanced_search
+        self.assertNotEquals(Entry.published.basic_search('content 1').count(),
+                             Entry.published.advanced_search('content 1').count())
+        # Now check the fallback with the '*' pattern which will fails advanced search
+        self.assertEquals(Entry.published.search('*').count(), 1)
