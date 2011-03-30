@@ -60,6 +60,8 @@ or you can visit these websites who use Zinnia.
     <http://www.mixedcase.nl/articles/>`_.
   * `MadCad's Page
     <http://mad-cad.net/blog/>`_.
+  * `SysVar
+    <http://sysvar.net/>`_.
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
