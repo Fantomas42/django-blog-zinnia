@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-23 17:05-0500\n"
+"POT-Creation-Date: 2011-03-30 15:32-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,93 +16,94 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: feeds.py:113 plugins/cms_plugins.py:23
+#: feeds.py:118 plugins/cms_plugins.py:23
 #: templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:25 templates/zinnia/entry_list.html:19
+#: tests/feeds.py:98
 msgid "Latest entries"
 msgstr ""
 
-#: feeds.py:117
+#: feeds.py:122 tests/feeds.py:100
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr ""
 
-#: feeds.py:137
+#: feeds.py:142 tests/feeds.py:109
 #, python-format
 msgid "Entries for the category %s"
 msgstr ""
 
-#: feeds.py:141
+#: feeds.py:146 tests/feeds.py:111
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr ""
 
-#: feeds.py:161
+#: feeds.py:166 tests/feeds.py:120
 #, python-format
 msgid "Entries for author %s"
 msgstr ""
 
-#: feeds.py:165
+#: feeds.py:170 tests/feeds.py:122
 #, python-format
 msgid "The latest entries by %s"
 msgstr ""
 
-#: feeds.py:186
+#: feeds.py:191 tests/feeds.py:132
 #, python-format
 msgid "Entries for the tag %s"
 msgstr ""
 
-#: feeds.py:190
+#: feeds.py:195 tests/feeds.py:134
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr ""
 
-#: feeds.py:210
+#: feeds.py:215 tests/feeds.py:143
 #, python-format
-msgid "Results of the search for %s"
+msgid "Results of the search for '%s'"
 msgstr ""
 
-#: feeds.py:214
+#: feeds.py:219 tests/feeds.py:145
 #, python-format
-msgid "The entries containing the pattern %s"
+msgid "The entries containing the pattern '%s'"
 msgstr ""
 
-#: feeds.py:257
+#: feeds.py:261 tests/feeds.py:161
 #, python-format
 msgid "Discussions on %s"
 msgstr ""
 
-#: feeds.py:261
+#: feeds.py:265 tests/feeds.py:163
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr ""
 
-#: feeds.py:279
+#: feeds.py:283 tests/feeds.py:173
 #, python-format
 msgid "Comments on %s"
 msgstr ""
 
-#: feeds.py:283
+#: feeds.py:287 tests/feeds.py:175
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr ""
 
-#: feeds.py:301
+#: feeds.py:305 tests/feeds.py:185
 #, python-format
 msgid "Pingbacks on %s"
 msgstr ""
 
-#: feeds.py:305
+#: feeds.py:309 tests/feeds.py:187
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr ""
 
-#: feeds.py:323
+#: feeds.py:327 tests/feeds.py:197
 #, python-format
 msgid "Trackbacks on %s"
 msgstr ""
 
-#: feeds.py:327
+#: feeds.py:331 tests/feeds.py:199
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr ""
@@ -318,9 +319,8 @@ msgstr ""
 msgid "is visible"
 msgstr ""
 
-#: admin/entry.py:134
-#, python-format
-msgid "<a href=\"%s\" target=\"blank\">View</a>"
+#: admin/entry.py:135
+msgid "View"
 msgstr ""
 
 #: admin/entry.py:137
@@ -1106,11 +1106,11 @@ msgstr ""
 msgid "No similar entries."
 msgstr ""
 
-#: tests/views.py:161 views/search.py:17
+#: tests/views.py:165 views/search.py:17
 msgid "The pattern is too short"
 msgstr ""
 
-#: tests/views.py:164 views/search.py:21
+#: tests/views.py:168 views/search.py:21
 msgid "No pattern to search found"
 msgstr ""
 
