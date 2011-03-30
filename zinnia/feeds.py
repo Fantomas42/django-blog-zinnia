@@ -16,6 +16,7 @@ from tagging.models import TaggedItem
 from zinnia.models import Entry
 from zinnia.settings import COPYRIGHT
 from zinnia.settings import PROTOCOL
+from zinnia.settings import FEEDS_FORMAT
 from zinnia.settings import FEEDS_MAX_ITEMS
 from zinnia.managers import entries_published
 from zinnia.views.categories import get_category_or_404
@@ -35,14 +36,22 @@ class ImgParser(SGMLParser):
             self.img_locations.append(attr['src'])
 
 
-class EntryFeed(Feed):
-    """Base Entry Feed"""
-    title_template = 'feeds/entry_title.html'
-    description_template = 'feeds/entry_description.html'
+class ZinniaFeed(Feed):
+    """Base Feed for Zinnia"""
     feed_copyright = COPYRIGHT
 
     def __init__(self):
         self.site = Site.objects.get_current()
+        self.site_url = '%s://%s' % (PROTOCOL, self.site.domain)
+        if FEEDS_FORMAT == 'atom':
+            self.feed_type = Atom1Feed
+            self.subtitle = self.description
+
+
+class EntryFeed(ZinniaFeed):
+    """Base Entry Feed"""
+    title_template = 'feeds/entry_title.html'
+    description_template = 'feeds/entry_description.html'
 
     def item_pubdate(self, item):
         """Publication date of an entry"""
@@ -62,11 +71,10 @@ class EntryFeed(Feed):
 
     def item_author_link(self, item):
         """Returns the author's URL"""
-        url = '%s://%s' % (PROTOCOL, self.site.domain)
         try:
             author_url = reverse('zinnia_author_detail',
                                  args=[item.authors.all()[0].username])
-            return url + author_url
+            return self.site_url + author_url
         except NoReverseMatch:
             return url
 
@@ -83,9 +91,7 @@ class EntryFeed(Feed):
             if self.site.domain in parser.img_locations[0]:
                 return parser.img_locations[0]
             else:
-                return '%s://%s%s' % (PROTOCOL,
-                                      self.site.domain,
-                                      parser.img_locations[0])
+                return self.site_url + parser.img_locations[0]
         return None
 
     def item_enclosure_length(self, item):
@@ -214,11 +220,10 @@ class SearchEntries(EntryFeed):
         return _('The entries containing the pattern %s') % obj
 
 
-class EntryDiscussions(Feed):
+class EntryDiscussions(ZinniaFeed):
     """Feed for discussions in an entry"""
     title_template = 'feeds/discussion_title.html'
     description_template = 'feeds/discussion_description.html'
-    feed_copyright = COPYRIGHT
 
     def get_object(self, request, slug):
         """Retrieve the discussions by entry's slug"""
@@ -325,58 +330,3 @@ class EntryTrackbacks(EntryDiscussions):
     def description(self, obj):
         """Description of the feed"""
         return _('The latest trackbacks for the entry %s') % obj.title
-
-
-# Atom versions of the feeds
-class AtomLatestEntries(LatestEntries):
-    """Atom feed for the latest entries"""
-    feed_type = Atom1Feed
-    subtitle = LatestEntries.description
-
-
-class AtomCategoryEntries(CategoryEntries):
-    """Atom feed filtered by a category"""
-    feed_type = Atom1Feed
-    subtitle = CategoryEntries.description
-
-
-class AtomAuthorEntries(AuthorEntries):
-    """Atom feed filtered by an author"""
-    feed_type = Atom1Feed
-    subtitle = AuthorEntries.description
-
-
-class AtomTagEntries(TagEntries):
-    """Atom feed filtered by a tag"""
-    feed_type = Atom1Feed
-    subtitle = TagEntries.description
-
-
-class AtomSearchEntries(SearchEntries):
-    """Atom feed filtered by a search pattern"""
-    feed_type = Atom1Feed
-    subtitle = SearchEntries.description
-
-
-class AtomEntryDiscussions(EntryDiscussions):
-    """Atom feed for discussions in an entry"""
-    feed_type = Atom1Feed
-    subtitle = EntryDiscussions.description
-
-
-class AtomEntryComments(EntryComments):
-    """Atom feed for comments in an entry"""
-    feed_type = Atom1Feed
-    subtitle = EntryComments.description
-
-
-class AtomEntryPingbacks(EntryPingbacks):
-    """Atom feed for pingbacks in an entry"""
-    feed_type = Atom1Feed
-    subtitle = EntryPingbacks.description
-
-
-class AtomEntryTrackbacks(EntryTrackbacks):
-    """Atom feed for trackbacks in an entry"""
-    feed_type = Atom1Feed
-    subtitle = EntryTrackbacks.description
