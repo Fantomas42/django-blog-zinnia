@@ -131,8 +131,8 @@ class EntryAdmin(admin.ModelAdmin):
 
     def get_link(self, entry):
         """Return a formated link to the entry"""
-        return _('<a href="%s" target="blank">View</a>') % \
-               entry.get_absolute_url()
+        return u'<a href="%s" target="blank">%s</a>' % (
+            entry.get_absolute_url(), _('View'))
     get_link.allow_tags = True
     get_link.short_description = _('View on site')
 
