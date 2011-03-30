@@ -4,11 +4,11 @@ from sgmllib import SGMLParser
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
-from django.core.urlresolvers import NoReverseMatch
+from django.shortcuts import get_object_or_404
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
-from django.shortcuts import get_object_or_404
+from django.core.urlresolvers import NoReverseMatch
 
 from tagging.models import Tag
 from tagging.models import TaggedItem
@@ -76,7 +76,7 @@ class EntryFeed(ZinniaFeed):
                                  args=[item.authors.all()[0].username])
             return self.site_url + author_url
         except NoReverseMatch:
-            return url
+            return self.site_url
 
     def item_enclosure_url(self, item):
         """Returns an image for enclosure"""
@@ -92,7 +92,6 @@ class EntryFeed(ZinniaFeed):
                 return parser.img_locations[0]
             else:
                 return self.site_url + parser.img_locations[0]
-        return None
 
     def item_enclosure_length(self, item):
         """Hardcoded enclosure length"""
@@ -114,11 +113,11 @@ class LatestEntries(EntryFeed):
         """Items are published entries"""
         return Entry.published.all()[:FEEDS_MAX_ITEMS]
 
-    def title(self, obj):
+    def title(self):
         """Title of the feed"""
-        return '%s - %s ' % (self.site.name, _('Latest entries'))
+        return '%s - %s' % (self.site.name, _('Latest entries'))
 
-    def description(self, obj):
+    def description(self):
         """Description of the feed"""
         return _('The latest entries for the site %s') % self.site.name
 
@@ -213,11 +212,11 @@ class SearchEntries(EntryFeed):
 
     def title(self, obj):
         """Title of the feed"""
-        return _('Results of the search for %s') % obj
+        return _("Results of the search for '%s'") % obj
 
     def description(self, obj):
         """Description of the feed"""
-        return _('The entries containing the pattern %s') % obj
+        return _("The entries containing the pattern '%s'") % obj
 
 
 class EntryDiscussions(ZinniaFeed):

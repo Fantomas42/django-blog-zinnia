@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
+from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 
 from tagging.models import Tag
@@ -94,6 +95,9 @@ class ZinniaFeedsTestCase(TestCase):
         feed = LatestEntries()
         self.assertEquals(feed.link(), '/')
         self.assertEquals(len(feed.items()), 1)
+        self.assertEquals(feed.title(), 'example.com - %s' % _('Latest entries'))
+        self.assertEquals(feed.description(),
+                          _('The latest entries for the site %s') % 'example.com')
 
     def test_category_entries(self):
         self.create_published_entry()
@@ -101,6 +105,10 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(feed.get_object('request', '/tests/'), self.category)
         self.assertEquals(len(feed.items(self.category)), 1)
         self.assertEquals(feed.link(self.category), '/categories/tests/')
+        self.assertEquals(feed.title(self.category),
+                          _('Entries for the category %s') % self.category.title)
+        self.assertEquals(feed.description(self.category),
+                          _('The latest entries for the category %s') % self.category.title)
 
     def test_author_entries(self):
         self.create_published_entry()
@@ -108,13 +116,22 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(feed.get_object('request', 'admin'), self.author)
         self.assertEquals(len(feed.items(self.author)), 1)
         self.assertEquals(feed.link(self.author), '/authors/admin/')
+        self.assertEquals(feed.title(self.author),
+                          _('Entries for author %s') % self.author.username)
+        self.assertEquals(feed.description(self.author),
+                          _('The latest entries by %s') % self.author.username)
 
     def test_tag_entries(self):
         self.create_published_entry()
         feed = TagEntries()
+        tag = Tag(name='tests')
         self.assertEquals(feed.get_object('request', 'tests').name, 'tests')
         self.assertEquals(len(feed.items('tests')), 1)
-        self.assertEquals(feed.link(Tag(name='tests')), '/tags/tests/')
+        self.assertEquals(feed.link(tag), '/tags/tests/')
+        self.assertEquals(feed.title(tag),
+                          _('Entries for the tag %s') % tag.name)
+        self.assertEquals(feed.description(tag),
+                          _('The latest entries for the tag %s') % tag.name)
 
     def test_search_entries(self):
         self.create_published_entry()
@@ -122,6 +139,10 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(feed.get_object('request', 'test'), 'test')
         self.assertEquals(len(feed.items('test')), 1)
         self.assertEquals(feed.link('test'), '/search/?pattern=test')
+        self.assertEquals(feed.title('test'),
+                          _("Results of the search for '%s'") % 'test')
+        self.assertEquals(feed.description('test'),
+                          _("The entries containing the pattern '%s'") % 'test')
 
     def test_entry_discussions(self):
         entry = self.create_published_entry()
@@ -136,6 +157,10 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(feed.item_author_name(comments[0]), 'admin')
         self.assertEquals(feed.item_author_email(comments[0]), 'admin@example.com')
         self.assertEquals(feed.item_author_link(comments[0]), '')
+        self.assertEquals(feed.title(entry),
+                          _('Discussions on %s') % entry.title)
+        self.assertEquals(feed.description(entry),
+                          _('The latest discussions for the entry %s') % entry.title)
 
     def test_entry_comments(self):
         entry = self.create_published_entry()
@@ -144,6 +169,10 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(list(feed.items(entry)), [comments[0]])
         self.assertEquals(feed.item_link(comments[0]),
                           '/comments/cr/%i/1/#comment_1' % self.entry_ct_id)
+        self.assertEquals(feed.title(entry),
+                          _('Comments on %s') % entry.title)
+        self.assertEquals(feed.description(entry),
+                          _('The latest comments for the entry %s') % entry.title)
 
     def test_entry_pingbacks(self):
         entry = self.create_published_entry()
@@ -152,6 +181,10 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(list(feed.items(entry)), [comments[1]])
         self.assertEquals(feed.item_link(comments[1]),
                           '/comments/cr/%i/1/#pingback_2' % self.entry_ct_id)
+        self.assertEquals(feed.title(entry),
+                          _('Pingbacks on %s') % entry.title)
+        self.assertEquals(feed.description(entry),
+                          _('The latest pingbacks for the entry %s') % entry.title)
 
     def test_entry_trackbacks(self):
         entry = self.create_published_entry()
@@ -160,3 +193,7 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(list(feed.items(entry)), [comments[2]])
         self.assertEquals(feed.item_link(comments[2]),
                           '/comments/cr/%i/1/#trackback_3' % self.entry_ct_id)
+        self.assertEquals(feed.title(entry),
+                          _('Trackbacks on %s') % entry.title)
+        self.assertEquals(feed.description(entry),
+                          _('The latest trackbacks for the entry %s') % entry.title)
