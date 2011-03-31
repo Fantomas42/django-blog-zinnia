@@ -1,5 +1,6 @@
 """Feeds for Zinnia"""
-from sgmllib import SGMLParser
+from urlparse import urljoin
+from BeautifulSoup import BeautifulSoup
 
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
@@ -20,20 +21,6 @@ from zinnia.settings import FEEDS_FORMAT
 from zinnia.settings import FEEDS_MAX_ITEMS
 from zinnia.managers import entries_published
 from zinnia.views.categories import get_category_or_404
-
-
-class ImgParser(SGMLParser):
-    """Parser for getting IMG markups"""
-
-    def __init__(self):
-        SGMLParser.__init__(self)
-        self.img_locations = []
-
-    def start_img(self, attr):
-        """Save each image's location"""
-        attr = dict(attr)
-        if attr.get('src', ''):
-            self.img_locations.append(attr['src'])
 
 
 class ZinniaFeed(Feed):
@@ -63,17 +50,19 @@ class EntryFeed(ZinniaFeed):
 
     def item_author_name(self, item):
         """Returns the first author of an entry"""
-        return item.authors.all()[0].username
+        if item.authors.count():
+            self.item_author = item.authors.all()[0]
+            return self.item_author.username
 
     def item_author_email(self, item):
         """Returns the first author's email"""
-        return item.authors.all()[0].email
+        return self.item_author.email
 
     def item_author_link(self, item):
         """Returns the author's URL"""
         try:
             author_url = reverse('zinnia_author_detail',
-                                 args=[item.authors.all()[0].username])
+                                 args=[self.item_author.username])
             return self.site_url + author_url
         except NoReverseMatch:
             return self.site_url
@@ -82,16 +71,10 @@ class EntryFeed(ZinniaFeed):
         """Returns an image for enclosure"""
         if item.image:
             return item.image.url
-        parser = ImgParser()
-        try:
-            parser.feed(item.content)
-        except UnicodeEncodeError:
-            return
-        if len(parser.img_locations):
-            if self.site.domain in parser.img_locations[0]:
-                return parser.img_locations[0]
-            else:
-                return self.site_url + parser.img_locations[0]
+
+        img = BeautifulSoup(item.html_content).find('img')
+        if img:
+            return urljoin(self.site_url, img['src'])
 
     def item_enclosure_length(self, item):
         """Hardcoded enclosure length"""

@@ -2,10 +2,13 @@
 from datetime import datetime
 
 from django.test import TestCase
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
 from django.utils.translation import ugettext as _
+from django.utils.feedgenerator import Atom1Feed
+from django.utils.feedgenerator import DefaultFeed
 from django.contrib.contenttypes.models import ContentType
 
 from tagging.models import Tag
@@ -13,7 +16,7 @@ from tagging.models import Tag
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import PUBLISHED
-from zinnia.feeds import ImgParser
+from zinnia import feeds
 from zinnia.feeds import EntryFeed
 from zinnia.feeds import LatestEntries
 from zinnia.feeds import CategoryEntries
@@ -36,16 +39,6 @@ class ZinniaFeedsTestCase(TestCase):
                                           email='admin@example.com')
         self.category = Category.objects.create(title='Tests', slug='tests')
         self.entry_ct_id = ContentType.objects.get_for_model(Entry).pk
-
-    def test_img_parser(self):
-        parser = ImgParser()
-        parser.feed('')
-        self.assertEquals(len(parser.img_locations), 0)
-        parser.feed('<img title="image title" />')
-        self.assertEquals(len(parser.img_locations), 0)
-        parser.feed('<img src="image.jpg" />' \
-                    '<img src="image2.jpg" />')
-        self.assertEquals(len(parser.img_locations), 2)
 
     def create_published_entry(self):
         params = {'title': 'My test entry',
@@ -77,7 +70,7 @@ class ZinniaFeedsTestCase(TestCase):
         trackback.flags.create(user=self.author, flag='trackback')
         return [comment, pingback, trackback]
 
-    def test_feed_entry(self):
+    def test_entry_feed(self):
         entry = self.create_published_entry()
         feed = EntryFeed()
         self.assertEquals(feed.item_pubdate(entry), entry.creation_date)
@@ -86,7 +79,26 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(feed.item_author_email(entry), self.author.email)
         self.assertEquals(feed.item_author_link(entry),
                           'http://example.com/authors/%s/' % self.author.username)
+        self.author.username = '[]'  # Test a NoReverseMatch for item_author_link
+        self.author.save()
+        feed.item_author_name(entry)
+        self.assertEquals(feed.item_author_link(entry),
+                          'http://example.com')
+
+    def test_entry_feed_enclosure(self):
+        entry = self.create_published_entry()
+        feed = EntryFeed()
         self.assertEquals(feed.item_enclosure_url(entry), 'http://example.com/image.jpg')
+        entry.content = 'My test content with image <img src="image.jpg" />',
+        entry.save()
+        self.assertEquals(feed.item_enclosure_url(entry), 'http://example.com/image.jpg')
+        entry.content = 'My test content with image <img src="http://test.com/image.jpg" />',
+        entry.save()
+        self.assertEquals(feed.item_enclosure_url(entry), 'http://test.com/image.jpg')
+        entry.image = 'image_field.jpg'
+        entry.save()
+        self.assertEquals(feed.item_enclosure_url(entry),
+                          '%simage_field.jpg' % settings.MEDIA_URL)
         self.assertEquals(feed.item_enclosure_length(entry), '100000')
         self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
 
@@ -197,3 +209,20 @@ class ZinniaFeedsTestCase(TestCase):
                           _('Trackbacks on %s') % entry.title)
         self.assertEquals(feed.description(entry),
                           _('The latest trackbacks for the entry %s') % entry.title)
+
+    def test_entry_feed_no_authors(self):
+        entry = self.create_published_entry()
+        entry.authors.clear()
+        feed = EntryFeed()
+        self.assertEquals(feed.item_author_name(entry), None)
+
+    def test_entry_feed_rss_or_atom(self):
+        original_feeds_format = feeds.FEEDS_FORMAT
+        feeds.FEEDS_FORMAT = ''
+        feed = LatestEntries()
+        self.assertEquals(feed.feed_type, DefaultFeed)
+        feeds.FEEDS_FORMAT = 'atom'
+        feed = LatestEntries()
+        self.assertEquals(feed.feed_type, Atom1Feed)
+        self.assertEquals(feed.subtitle, feed.description)
+        feeds.FEEDS_FORMAT = original_feeds_format
