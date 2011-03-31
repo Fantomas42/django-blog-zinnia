@@ -7,6 +7,7 @@
     </a>
   </h2>
   <p class="entry-info">
+    {% if object.authors.count %}
     {% trans "Written by" %}
     {% for author in object.authors.all %}
     <span class="vcard author">
@@ -15,9 +16,10 @@
     </span>{% if not forloop.last %}, {% endif %}
     {% endfor %}
     {% trans "on" %}
-    <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">
-      {{ object.creation_date|date:"DATE_FORMAT" }}
-    </abbr>
+    {% else %}
+    {% trans "Written on" %}
+    {% endif %}
+    <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">{{ object.creation_date|date:"DATE_FORMAT" }}</abbr>
     {% if object.categories.count %}
     {% trans "in" %}
     {% for category in object.categories.all %}
