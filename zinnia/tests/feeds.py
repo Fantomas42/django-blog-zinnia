@@ -71,6 +71,8 @@ class ZinniaFeedsTestCase(TestCase):
         return [comment, pingback, trackback]
 
     def test_entry_feed(self):
+        original_feeds_format = feeds.FEEDS_FORMAT
+        feeds.FEEDS_FORMAT = ''
         entry = self.create_published_entry()
         feed = EntryFeed()
         self.assertEquals(feed.item_pubdate(entry), entry.creation_date)
@@ -82,10 +84,12 @@ class ZinniaFeedsTestCase(TestCase):
         self.author.username = '[]'  # Test a NoReverseMatch for item_author_link
         self.author.save()
         feed.item_author_name(entry)
-        self.assertEquals(feed.item_author_link(entry),
-                          'http://example.com')
+        self.assertEquals(feed.item_author_link(entry), 'http://example.com')
+        feeds.FEEDS_FORMAT = original_feeds_format
 
     def test_entry_feed_enclosure(self):
+        original_feeds_format = feeds.FEEDS_FORMAT
+        feeds.FEEDS_FORMAT = ''
         entry = self.create_published_entry()
         feed = EntryFeed()
         self.assertEquals(feed.item_enclosure_url(entry), 'http://example.com/image.jpg')
@@ -101,6 +105,7 @@ class ZinniaFeedsTestCase(TestCase):
                           '%simage_field.jpg' % settings.MEDIA_URL)
         self.assertEquals(feed.item_enclosure_length(entry), '100000')
         self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
+        feeds.FEEDS_FORMAT = original_feeds_format
 
     def test_latest_entries(self):
         self.create_published_entry()
@@ -215,10 +220,13 @@ class ZinniaFeedsTestCase(TestCase):
                           _('The latest trackbacks for the entry %s') % entry.title)
 
     def test_entry_feed_no_authors(self):
+        original_feeds_format = feeds.FEEDS_FORMAT
+        feeds.FEEDS_FORMAT = ''
         entry = self.create_published_entry()
         entry.authors.clear()
         feed = EntryFeed()
         self.assertEquals(feed.item_author_name(entry), None)
+        feeds.FEEDS_FORMAT = original_feeds_format
 
     def test_entry_feed_rss_or_atom(self):
         original_feeds_format = feeds.FEEDS_FORMAT
