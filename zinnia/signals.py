@@ -1,9 +1,27 @@
 """Signal handlers of Zinnia"""
+import inspect
+
+from django.utils.functional import wraps
 from django.db.models.signals import post_save
 
 from zinnia import settings
 
 
+def disable_for_loaddata(signal_handler):
+    """Decorator for disabling signals sent
+    by 'post_save' on loaddata command.
+    http://code.djangoproject.com/ticket/8399"""
+
+    @wraps(signal_handler)
+    def wrapper(*args, **kwargs):
+        for fr in inspect.stack():
+            if inspect.getmodulename(fr[1]) == 'loaddata':
+                return
+        signal_handler(*args, **kwargs)
+    return wrapper
+
+
+@disable_for_loaddata
 def ping_directories_handler(sender, **kwargs):
     """Ping Directories when an entry is saved"""
     entry = kwargs['instance']
@@ -15,6 +33,7 @@ def ping_directories_handler(sender, **kwargs):
             DirectoryPinger(directory, [entry])
 
 
+@disable_for_loaddata
 def ping_external_urls_handler(sender, **kwargs):
     """Ping Externals URLS when an entry is saved"""
     entry = kwargs['instance']
