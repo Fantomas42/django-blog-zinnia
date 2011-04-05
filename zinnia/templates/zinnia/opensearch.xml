@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{% load tagging_tags %}
+{% tags_for_model zinnia.entry as tag_entry %}
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>{{ site.name }}</ShortName>
+  <LongName>{{ site.name }} - web search</LongName>
+  <Description>Make a search on {{ site.name }}.</Description>
+  <Attribution>{{ copyright }}</Attribution>
+  <Tags>{{ tag_entry|join:" "}}</Tags>
+  <Url type="text/html" template="{{ protocol }}://{{ site.domain }}{% url zinnia_entry_search %}?pattern={searchTerms}" />
+  <Image height="16" width="16" type="image/vnd.microsoft.icon">{{ ZINNIA_MEDIA_URL }}img/favicon.ico</Image>
+  <Query role="example" searchTerms="{{ tag_entry.0 }}" />
+  <Developer>Fantomas42</Developer>
+  <Contact>fantomas42@gmail.com</Contact>
+  <SyndicationRight>open</SyndicationRight>
+  <AdultContent>false</AdultContent>
+  <Language>{{ LANGUAGE_CODE }}</Language>
+  <OutputEncoding>UTF-8</OutputEncoding>
+  <InputEncoding>UTF-8</InputEncoding>
+  <moz:SearchForm>{{ protocol }}://{{ site.domain }}/</moz:SearchForm>
+</OpenSearchDescription>

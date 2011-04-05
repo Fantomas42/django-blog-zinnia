@@ -4,6 +4,7 @@ CHANGELOG
 0.9
 ---
 
+* OpenSearch capabilities
 * Upgraded search engine
 * Feed to Zinnia utility command
 * And a lot of bug fixes

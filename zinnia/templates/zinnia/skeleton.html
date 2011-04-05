@@ -12,7 +12,7 @@
     <meta name="author" content="Fantomas42" />
     <meta name="engine" content="Zinnia {{ ZINNIA_VERSION }}" />
     {% block meta %}{% endblock %}
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="{{ ZINNIA_MEDIA_URL }}img/favicon.ico" />
     <link rel="home" href="{% url zinnia_entry_archive_index %}" />
     <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ ZINNIA_MEDIA_URL }}css/screen.css" />
     <link rel="stylesheet" type="text/css" media="print" href="{{ ZINNIA_MEDIA_URL }}css/print.css" />
@@ -23,6 +23,7 @@
     <link rel="pingback" href="/xmlrpc/" />
     <link rel="EditURI" type="application/rsd+xml" href="{% url zinnia_rsd %}" />
     <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url zinnia_wlwmanifest %}" />
+    <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Blog" href="{% url zinnia_opensearch %}" />
     <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url zinnia_entry_latest_feed %}" />
     {% block link %}{% endblock %}
     {% block script %}{% endblock %}
