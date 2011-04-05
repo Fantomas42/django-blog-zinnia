@@ -42,4 +42,4 @@ def entry_trackback(request, slug):
                                   mimetype='text/xml',
                                   extra_context={'error': error})
 
-    return redirect(entry)
+    return redirect(entry, permanent=True)
