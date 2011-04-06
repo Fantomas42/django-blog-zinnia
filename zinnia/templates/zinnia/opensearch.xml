@@ -7,7 +7,7 @@
   <LongName>{{ site.name }} - web search</LongName>
   <Description>Make a search on {{ site.name }}.</Description>
   <Attribution>{{ copyright }}</Attribution>
-  <Tags>{{ tag_entry|join:" "}}</Tags>
+  <Tags>{{ tag_entry|slice:":15"|join:" " }}</Tags>
   <Url type="text/html" template="{{ protocol }}://{{ site.domain }}{% url zinnia_entry_search %}?pattern={searchTerms}" />
   <Image height="16" width="16" type="image/vnd.microsoft.icon">{{ ZINNIA_MEDIA_URL }}img/favicon.ico</Image>
   <Query role="example" searchTerms="{{ tag_entry.0 }}" />
