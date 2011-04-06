@@ -186,8 +186,8 @@ class ZinniaViewsTestCase(TestCase):
         except AssertionError:
             response = self.client.post('/trackback/404/')
             self.assertEquals(response.status_code, 404)
-        self.assertEquals(self.client.post('/trackback/test-1/').status_code, 302)
-        self.assertEquals(self.client.get('/trackback/test-1/').status_code, 302)
+        self.assertEquals(self.client.post('/trackback/test-1/').status_code, 301)
+        self.assertEquals(self.client.get('/trackback/test-1/').status_code, 301)
         entry = Entry.objects.get(slug='test-1')
         entry.pingback_enabled = False
         entry.save()
