@@ -5,32 +5,29 @@ from getpass import getpass
 from datetime import datetime
 from optparse import make_option
 
-from gdata import service as gdata_service
-
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.contrib.comments.models import Comment
 from django.core.management.base import CommandError
-from django.core.management.base import LabelCommand
+from django.core.management.base import NoArgsCommand
 from django.contrib.contenttypes.models import ContentType
-
 
 from zinnia import __version__
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import DRAFT, PUBLISHED
 
+gdata_service = None
 
-class Command(LabelCommand):
+
+class Command(NoArgsCommand):
     """Command object for importing a Blogger blog
     into Zinnia via Google's gdata API."""
     help = 'Import a Blogger blog into Zinnia.'
 
-    args = ''
-
-    option_list = LabelCommand.option_list + (
+    option_list = NoArgsCommand.option_list + (
         make_option('--blogger-username', dest='blogger_username', default='',
                     help='The username to login to Blogger with'),
         make_option('--category-title', dest='category_title', default='',
@@ -56,11 +53,20 @@ class Command(LabelCommand):
             sys.stdout.write(smart_str(message))
             sys.stdout.flush()
 
-    def handle(self, **options):
+    def handle_noargs(self, **options):
+        global gdata_service
+        try:
+            from gdata import service
+            gdata_service = service
+        except ImportError:
+            raise CommandError('You need to install the gdata module to run this command.')
+
         self.verbosity = int(options.get('verbosity', 1))
         self.blogger_username = options.get('blogger_username')
         self.category_title = options.get('category_title')
         self.blogger_blog_id = options.get('blogger_blog_id')
+
+        self.write_out(self.style.TITLE('Starting migration from Blogger to Zinnia %s\n' % __version__))
 
         if not self.blogger_username:
             self.blogger_username = raw_input('Blogger username: ')
@@ -90,22 +96,20 @@ class Command(LabelCommand):
             if not self.category_title:
                 raise CommandError('Invalid category title')
 
-        self.write_out(self.style.TITLE('Starting migration from Blogger to Zinnia %s\n' % __version__))
         self.import_posts()
-        self.write_out(self.style.TITLE('Finished importing Blogger to Zinnia\n'))
 
     def select_blog_id(self):
+        self.write_out(self.style.STEP('- Requesting your weblogs\n'))
         blogs_list = [blog for blog in self.blogger_manager.get_blogs()]
         while True:
             i = 0
             blogs = {}
-            self.write_out('\n')
             for blog in blogs_list:
                 i += 1
                 blogs[i] = blog
-                self.write_out('\n  %s) %s (%s)' % (i, blog.title.text, get_blog_id(blog)))
+                self.write_out('%s. %s (%s)' % (i, blog.title.text, get_blog_id(blog)))
             try:
-                blog_index = int(raw_input('\n  Select a blog to import: '))
+                blog_index = int(raw_input('\nSelect a blog to import: '))
                 blog = blogs[blog_index]
                 break
             except (ValueError, KeyError):
@@ -125,7 +129,7 @@ class Command(LabelCommand):
 
     def import_posts(self):
         category = self.get_category()
-
+        self.write_out(self.style.STEP('- Importing entries\n'))
         for post in self.blogger_manager.get_posts(self.blogger_blog_id):
             creation_date = convert_blogger_timestamp(post.published.text)
             status = DRAFT if is_draft(post) else PUBLISHED
@@ -141,9 +145,8 @@ class Command(LabelCommand):
                                           content=content,
                                           creation_date=creation_date,
                                           slug=slug)
-                output = self.style.TITLE('Skipped %s (already migrated)\n'
+                output = self.style.NOTICE('> Skipped %s (already migrated)\n'
                     % entry)
-                continue
             except Entry.DoesNotExist:
                 entry = Entry(status=status, title=title, content=content,
                               creation_date=creation_date, slug=slug)
@@ -160,8 +163,8 @@ class Command(LabelCommand):
                 except gdata_service.RequestError:
                     # comments not available for this post
                     pass
-                output = self.style.TITLE('Migrated %s + %s comments\n'
-                    % (entry, len(Comment.objects.for_model(entry))))
+                output = self.style.ITEM('> Migrated %s + %s comments\n'
+                    % (entry.title, len(Comment.objects.for_model(entry))))
 
             self.write_out(output)
 
