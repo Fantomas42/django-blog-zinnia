@@ -15,7 +15,7 @@ Contents:
    search_engines
    channels
    extending_entry_model
-   wordpress_2_zinnia
+   import_export
    developers
    upgrading
    tests
