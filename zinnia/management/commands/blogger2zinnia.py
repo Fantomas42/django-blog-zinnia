@@ -137,13 +137,7 @@ class Command(NoArgsCommand):
             content = post.content.text or ''
             slug = slugify(post.title.text or get_post_id(post))[:255]
             try:
-                entry = Entry.objects.get(sites=self.SITE,
-                                          authors=self.default_author,
-                                          categories=category,
-                                          status=status,
-                                          title=title,
-                                          content=content,
-                                          creation_date=creation_date,
+                entry = Entry.objects.get(creation_date=creation_date,
                                           slug=slug)
                 output = self.style.NOTICE('> Skipped %s (already migrated)\n'
                     % entry)
