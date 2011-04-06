@@ -41,6 +41,7 @@ More than a long speech, here the list of the main features :
   * `Entry model extendable`_
   * Pingback/Trackback support
   * `WordPress conversion utility`_
+  * Blogger conversion utility
   * `WYMeditor`_, `TinyMCE`_ and `MarkItUp`_ support
   * Ready to use and extendables templates
   * `Windows Live Writer`_ compatibility

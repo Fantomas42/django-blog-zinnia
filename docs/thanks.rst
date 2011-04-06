@@ -11,6 +11,7 @@ this application greatest each day.
   * Bill Mill (llimllib)
   * Kevin Renskers (Bolhoed)
   * Jonathan Stoppani (GaretJax)
+  * Elijah Rutschman (elijahr)
   * Franck Bret
   * Jason Davies
   * Brandon Taylor

@@ -4,6 +4,7 @@ CHANGELOG
 0.9
 ---
 
+* Blogger to Zinnia utility command
 * OpenSearch capabilities
 * Upgraded search engine
 * Feed to Zinnia utility command
