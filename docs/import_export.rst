@@ -41,7 +41,7 @@ From Blogger to Zinnia
 ----------------------
 
 If you are comming from Blogger, you can import your posts and comments
-with this simple command :
+with this simple command : ::
 
   $ python manage.py blogger2zinnia
 
