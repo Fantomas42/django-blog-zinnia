@@ -1,34 +1,27 @@
-"""Blogger to Zinnia command module"""
-
-# based on wp2zinnia.py
-
+"""Blogger to Zinnia command module
+Based on Elijah Rutschman's code"""
 import sys
+from getpass import getpass
 from datetime import datetime
 from optparse import make_option
+
 from gdata import service as gdata_service
 
-from django.utils.html import strip_tags
-from django.db.utils import IntegrityError
 from django.utils.encoding import smart_str
-from django.utils.text import truncate_words
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.contrib.comments.models import Comment
 from django.core.management.base import CommandError
 from django.core.management.base import LabelCommand
-
-from tagging.models import Tag
 from django.contrib.contenttypes.models import ContentType
 
 
 from zinnia import __version__
 from zinnia.models import Entry
 from zinnia.models import Category
-from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
+from zinnia.managers import DRAFT, PUBLISHED
 
-from getpass import getpass
-import gdata
 
 class Command(LabelCommand):
     """Command object for importing a Blogger blog
@@ -100,7 +93,6 @@ class Command(LabelCommand):
         self.write_out(self.style.TITLE('Starting migration from Blogger to Zinnia %s\n' % __version__))
         self.import_posts()
         self.write_out(self.style.TITLE('Finished importing Blogger to Zinnia\n'))
-
 
     def select_blog_id(self):
         blogs_list = [blog for blog in self.blogger_manager.get_blogs()]
@@ -178,7 +170,7 @@ class Command(LabelCommand):
         post_id = get_post_id(post)
         comments = self.blogger_manager.get_comments(blog_id, post_id)
         entry_content_type = ContentType.objects.get_for_model(Entry)
-        
+
         for comment in comments:
             submit_date = convert_blogger_timestamp(comment.published.text)
             content = comment.content.text
@@ -207,14 +199,12 @@ class Command(LabelCommand):
             if created:
                 com.save()
 
-# thanks to author of
-# http://github.com/codeape2/python-blogger/tree/master/blogger.py
-# for examples of the Blogger API
 
 def convert_blogger_timestamp(timestamp):
     # parse 2010-12-19T15:37:00.003
     date_string = timestamp[:-6]
     return datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%S.%f')
+
 
 def is_draft(post):
     if post.control:
@@ -223,8 +213,10 @@ def is_draft(post):
                 return True
     return False
 
+
 def get_blog_id(blog):
     return blog.GetSelfLink().href.split('/')[-1]
+
 
 def get_post_id(post):
     return post.GetSelfLink().href.split('/')[-1]
