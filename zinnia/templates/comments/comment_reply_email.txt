@@ -1,5 +1,4 @@
-{% load i18n %}
-{% trans "Author" %}: {{ comment.userinfo.name }} {{ comment.userinfo.url }}
+{% load i18n %}{% trans "Author" %}: {{ comment.userinfo.name }} {{ comment.userinfo.url }}
 
 {% trans "Comment" %}:
 {{ comment.comment }}
