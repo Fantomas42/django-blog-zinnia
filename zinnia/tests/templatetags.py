@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
+from django.contrib.comments.models import CommentFlag
 
 from tagging.models import Tag
 
@@ -266,8 +267,11 @@ class TemplateTagsTestCase(TestCase):
         context = get_recent_comments()
         self.assertEquals(len(context['comments']), 1)
 
+        author = User.objects.create_user(username='webmaster',
+                                          email='webmaster@example.com')
         comment_2 = Comment.objects.create(comment='My Comment 2', site=site,
                                            content_object=self.entry)
+        comment_2.flags.create(user=author, flag=CommentFlag.MODERATOR_APPROVAL)
         context = get_recent_comments()
         self.assertEquals(list(context['comments']), [comment_2, comment_1])
 

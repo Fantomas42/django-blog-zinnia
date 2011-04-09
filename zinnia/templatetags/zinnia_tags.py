@@ -4,9 +4,11 @@ from random import sample
 from urllib import urlencode
 from datetime import datetime
 
+from django.db.models import Q
 from django.db import connection
 from django.template import Library
 from django.contrib.comments.models import Comment
+from django.contrib.comments.models import CommentFlag
 from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import smart_unicode
 
@@ -187,10 +189,9 @@ def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
     content_type = ContentType.objects.get_for_model(Entry)
 
     comments = Comment.objects.filter(
-        content_type=content_type,
-        object_pk__in=entry_published_pks,
-        flags__flag=None, is_public=True).order_by(
-        '-submit_date')[:number]
+        Q(flags=None) | Q(flags__flag=CommentFlag.MODERATOR_APPROVAL),
+        content_type=content_type, object_pk__in=entry_published_pks,
+        is_public=True).order_by('-submit_date')[:number]
 
     return {'template': template,
             'comments': comments}
