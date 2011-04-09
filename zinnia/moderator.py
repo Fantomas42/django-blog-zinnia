@@ -49,7 +49,7 @@ class EntryCommentModerator(CommentModerator):
     def email_reply(self, comment, content_object, request):
         """Send email notification of a new comment to the authors of
         the previous comments when email notifications have been requested."""
-        if not self.email_reply or comment.flags.count():  # TODO try to delete this
+        if not self.email_reply:
             return
 
         exclude_list = MAIL_COMMENT_NOTIFICATION_RECIPIENTS + \

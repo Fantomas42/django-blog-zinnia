@@ -77,11 +77,3 @@ class EntryCommentModeratorTestCase(TestCase):
         self.assertEquals(len(mail.outbox), 2)
         self.assertEquals(mail.outbox[1].to, [u'user_1@example.com',
                                               u'user_2@example.com'])
-
-        pingback = Comment.objects.create(comment='My pingback',
-                                          user=self.author, is_public=True,
-                                          content_object=self.entry,
-                                          site=self.site)
-        pingback.flags.create(user=self.author, flag='pingback')
-        moderator.email_reply(pingback, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 2)
