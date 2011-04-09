@@ -30,8 +30,12 @@ WYSIWYG_MARKUP_MAPPING = {
 WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
                   WYSIWYG_MARKUP_MAPPING.get(MARKUP_LANGUAGE))
 
-MAIL_COMMENT = getattr(settings, 'ZINNIA_MAIL_COMMENT', True)
 MAIL_COMMENT_REPLY = getattr(settings, 'ZINNIA_MAIL_COMMENT_REPLY', False)
+
+MAIL_COMMENT_NOTIFICATION_RECIPIENTS = getattr(
+    settings, 'ZINNIA_MAIL_COMMENT_NOTIFICATION_RECIPIENTS',
+    [manager_tuple[1] for manager_tuple in settings.MANAGERS])
+
 AKISMET_COMMENT = getattr(settings, 'ZINNIA_AKISMET_COMMENT', True)
 
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads')

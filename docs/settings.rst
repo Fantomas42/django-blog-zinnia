@@ -83,11 +83,11 @@ ZINNIA_MEDIA_URL
 
   String of the url that handles the media files of Zinnia.
 
-ZINNIA_MAIL_COMMENT
-  **Default :** True
+ZINNIA_MAIL_COMMENT_NOTIFICATION_RECIPIENTS
+  **Default :** list of emails based on settings.MANAGERS
 
-  Boolean used for sending an email to managers when a comment
-  is posted or not.
+  List of emails used for sending a notification when a
+  new public comment has been posted.
 
 ZINNIA_MAIL_COMMENT_REPLY
   **Default :** False

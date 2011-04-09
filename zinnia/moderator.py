@@ -10,8 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.comments.moderation import CommentModerator
 
 from zinnia.settings import PROTOCOL
-from zinnia.settings import MAIL_COMMENT
 from zinnia.settings import MAIL_COMMENT_REPLY
+from zinnia.settings import MAIL_COMMENT_NOTIFICATION_RECIPIENTS
 from zinnia.settings import AKISMET_COMMENT
 
 AKISMET_API_KEY = getattr(settings, 'AKISMET_SECRET_API_KEY', '')
@@ -19,27 +19,41 @@ AKISMET_API_KEY = getattr(settings, 'AKISMET_SECRET_API_KEY', '')
 
 class EntryCommentModerator(CommentModerator):
     """Moderate the comment of Entry"""
-    email_notification = MAIL_COMMENT
-    email_notification_reply = MAIL_COMMENT_REPLY
+    email_reply = MAIL_COMMENT_REPLY
     enable_field = 'comment_enabled'
 
     def email(self, comment, content_object, request):
         if comment.is_public:
-            super(EntryCommentModerator, self).email(comment, content_object,
-                                                     request)
+            self.email_notification(comment, content_object, request)
             self.email_reply(comment, content_object, request)
 
-    def email_reply(self, comment, content_object, request):
+    def email_notification(self, comment, content_object, request):
         """Send email notification of a new comment to site staff when email
         notifications have been requested."""
-        if not self.email_notification_reply:
+        if not MAIL_COMMENT_NOTIFICATION_RECIPIENTS:
             return
 
-        if comment.flags.count():
+        site = Site.objects.get_current()
+        template = loader.get_template('comments/comment_notification_email.txt')
+        context = Context({'comment': comment, 'site': site,
+                           'protocol': PROTOCOL,
+                           'content_object': content_object})
+        subject = _('[%(site)s] New comment posted on "%(title)s"') % \
+                  {'site': site.name,
+                   'title': content_object.title}
+        message = template.render(context)
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
+                  MAIL_COMMENT_NOTIFICATION_RECIPIENTS,
+                  fail_silently=not settings.DEBUG)
+
+    def email_reply(self, comment, content_object, request):
+        """Send email notification of a new comment to the authors of
+        the previous comments when email notifications have been requested."""
+        if not self.email_reply or comment.flags.count():  # TODO try to delete this
             return
 
-        exclude_list = [manager_tuple[1] for manager_tuple
-                        in settings.MANAGERS] + [comment.userinfo['email']]
+        exclude_list = MAIL_COMMENT_NOTIFICATION_RECIPIENTS + \
+                       [comment.userinfo['email']]
         recipient_list = set([comment.userinfo['email']
                               for comment in content_object.comments
                               if comment.userinfo['email']]) ^ \

@@ -1,12 +1,12 @@
 """Test cases for Zinnia's moderator"""
 from django.core import mail
 from django.test import TestCase
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 
+from zinnia import moderator
 from zinnia.models import Entry
 from zinnia.managers import PUBLISHED
 from zinnia.moderator import EntryCommentModerator
@@ -16,8 +16,8 @@ class EntryCommentModeratorTestCase(TestCase):
     """Test cases for the moderator"""
 
     def setUp(self):
-        self.managers = settings.MANAGERS
-        settings.MANAGERS = (('Admin', 'admin@example.com'),)
+        self.notification_recipients = moderator.MAIL_COMMENT_NOTIFICATION_RECIPIENTS
+        moderator.MAIL_COMMENT_NOTIFICATION_RECIPIENTS = ['admin@example.com']
         self.site = Site.objects.get_current()
         self.author = User.objects.create(username='admin',
                                           email='admin@example.com')
@@ -32,7 +32,7 @@ class EntryCommentModeratorTestCase(TestCase):
         self.entry.authors.add(self.author)
 
     def tearDown(self):
-        settings.MANAGERS = self.managers
+        moderator.MAIL_COMMENT_NOTIFICATION_RECIPIENTS = self.notification_recipients
 
     def test_email(self):
         comment = Comment.objects.create(comment='My Comment',
