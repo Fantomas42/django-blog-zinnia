@@ -4,6 +4,7 @@ CHANGELOG
 0.9
 ---
 
+* Improved moderation system
 * Blogger to Zinnia utility command
 * OpenSearch capabilities
 * Upgraded search engine

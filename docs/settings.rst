@@ -83,6 +83,12 @@ ZINNIA_MEDIA_URL
 
   String of the url that handles the media files of Zinnia.
 
+ZINNIA_AUTO_MODERATE_COMMENTS
+  **Default :** False
+
+  Determine if a new comment should be allowed to show up
+  immediately or should be marked non-public and await approval.
+
 ZINNIA_MAIL_COMMENT_NOTIFICATION_RECIPIENTS
   **Default :** list of emails based on settings.MANAGERS
 

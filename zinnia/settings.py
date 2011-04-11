@@ -30,6 +30,9 @@ WYSIWYG_MARKUP_MAPPING = {
 WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
                   WYSIWYG_MARKUP_MAPPING.get(MARKUP_LANGUAGE))
 
+AUTO_MODERATE_COMMENTS = getattr(settings, 'ZINNIA_AUTO_MODERATE_COMMENTS',
+                                 False)
+
 MAIL_COMMENT_REPLY = getattr(settings, 'ZINNIA_MAIL_COMMENT_REPLY', False)
 
 MAIL_COMMENT_NOTIFICATION_RECIPIENTS = getattr(

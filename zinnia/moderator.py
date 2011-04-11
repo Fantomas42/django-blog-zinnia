@@ -11,6 +11,7 @@ from django.contrib.comments.moderation import CommentModerator
 
 from zinnia.settings import PROTOCOL
 from zinnia.settings import MAIL_COMMENT_REPLY
+from zinnia.settings import AUTO_MODERATE_COMMENTS
 from zinnia.settings import MAIL_COMMENT_NOTIFICATION_RECIPIENTS
 from zinnia.settings import AKISMET_COMMENT
 
@@ -73,7 +74,12 @@ class EntryCommentModerator(CommentModerator):
                       recipient_list, fail_silently=not settings.DEBUG)
 
     def moderate(self, comment, content_object, request):
-        """Need to pass Akismet test"""
+        """Determine whether a given comment on a given object should be
+        allowed to show up immediately, or should be marked non-public
+        and await approval."""
+        if AUTO_MODERATE_COMMENT:
+            return True
+
         if not AKISMET_COMMENT or not AKISMET_API_KEY:
             return False
 
