@@ -43,7 +43,7 @@ class EntryAdmin(admin.ModelAdmin):
                    'end_publication', 'sites')
     list_display = ('get_title', 'get_authors', 'get_categories',
                     'get_tags', 'get_sites',
-                    'comment_enabled', 'pingback_enabled',
+                    'get_comments_are_open', 'pingback_enabled',
                     'get_is_actual', 'get_is_visible', 'get_link',
                     'get_short_url', 'creation_date')
     radio_fields = {'template': admin.VERTICAL}
@@ -116,6 +116,12 @@ class EntryAdmin(admin.ModelAdmin):
                           site.__dict__ for site in entry.sites.all()])
     get_sites.allow_tags = True
     get_sites.short_description = _('site(s)')
+
+    def get_comments_are_open(self, entry):
+        """Admin wrapper for entry.comments_are_open"""
+        return entry.comments_are_open
+    get_comments_are_open.boolean = True
+    get_comments_are_open.short_description = _('comment enabled')
 
     def get_is_actual(self, entry):
         """Admin wrapper for entry.is_actual"""

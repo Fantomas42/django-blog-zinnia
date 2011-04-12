@@ -47,7 +47,7 @@
     <strong>{% trans "Tags" %}</strong> :
     {% tags_for_object object as tag_list %}
     {% for tag in tag_list %}
-    <a href="{% url zinnia_tag_detail tag %}" 
+    <a href="{% url zinnia_tag_detail tag %}"
        title="Tag {{ tag }}" rel="tag">{{ tag }}</a>
     {% empty %}
     <span>{% trans "No tags" %}</span>
@@ -73,7 +73,7 @@
       {% blocktrans count comment_count as comment_count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
     </a>
     {% else %}
-      {% if object.comment_enabled %}
+      {% if object.comments_are_open %}
       {% trans "No comments yet." %}
     <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
       {% trans "Be first to comment!" %}

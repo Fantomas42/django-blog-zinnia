@@ -99,11 +99,11 @@
     </li>
     {% endfor %}
   </ol>
-    {% if not object.comment_enabled %}
+    {% if not object.comments_are_open %}
   <p>{% trans "Comments are closed." %}</p>
     {% endif %}
   {% else %}
-    {% if object.comment_enabled %}
+    {% if object.comments_are_open %}
   <p>{% trans "No comments yet." %}</p>
     {% else %}
   <p>{% trans "Comments are closed." %}</p>
@@ -172,7 +172,7 @@
   {% endwith %}
 </div>
 
-{% if object.comment_enabled %}
+{% if object.comments_are_open %}
 <div class="commentForm span-16 last">
   {% render_comment_form for object %}
 </div>
