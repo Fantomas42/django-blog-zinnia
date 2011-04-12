@@ -22,12 +22,13 @@ from django.contrib.markup.templatetags.markup import restructuredtext
 import mptt
 from tagging.fields import TagField
 
-from zinnia.settings import MARKUP_LANGUAGE
-from zinnia.settings import MARKDOWN_EXTENSIONS
 from zinnia.settings import USE_BITLY
 from zinnia.settings import UPLOAD_TO
+from zinnia.settings import MARKUP_LANGUAGE
 from zinnia.settings import ENTRY_TEMPLATES
 from zinnia.settings import ENTRY_BASE_MODEL
+from zinnia.settings import MARKDOWN_EXTENSIONS
+from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
 from zinnia.managers import AuthorPublishedManager
@@ -222,6 +223,14 @@ class EntryAbstractClass(models.Model):
     def trackbacks(self):
         """Return published trackbacks"""
         return self.discussions.filter(flags__flag='trackback')
+
+    @property
+    def comments_are_open(self):
+        """Check if comments are open"""
+        if AUTO_CLOSE_COMMENTS_AFTER and self.comment_enabled:
+            return (datetime.now() - self.start_publication).days < \
+                   AUTO_CLOSE_COMMENTS_AFTER
+        return self.comment_enabled
 
     @property
     def short_url(self):

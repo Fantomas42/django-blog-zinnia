@@ -1,6 +1,7 @@
 """Test cases for Zinnia's Entry"""
 import warnings
 from datetime import datetime
+from datetime import timedelta
 
 from django.test import TestCase
 from django.conf import settings
@@ -9,6 +10,7 @@ from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
 from django.contrib.comments.models import CommentFlag
 
+from zinnia import models
 from zinnia.models import Entry
 from zinnia.managers import PUBLISHED
 from zinnia.models import get_base_model
@@ -83,6 +85,17 @@ class EntryTestCase(TestCase):
 
     def test_word_count(self):
         self.assertEquals(self.entry.word_count, 2)
+
+    def test_comments_are_open(self):
+        original_auto_close = models.AUTO_CLOSE_COMMENTS_AFTER
+        models.AUTO_CLOSE_COMMENTS_AFTER = None
+        self.assertEquals(self.entry.comments_are_open, True)
+        models.AUTO_CLOSE_COMMENTS_AFTER = 5
+        self.entry.start_publication = datetime.now() - timedelta(days=7)
+        self.entry.save()
+        self.assertEquals(self.entry.comments_are_open, False)
+
+        models.AUTO_CLOSE_COMMENTS_AFTER = original_auto_close
 
     def test_is_actual(self):
         self.assertTrue(self.entry.is_actual)
