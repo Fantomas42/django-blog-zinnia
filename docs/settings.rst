@@ -83,6 +83,11 @@ ZINNIA_MEDIA_URL
 
   String of the url that handles the media files of Zinnia.
 
+ZINNIA_AUTO_CLOSE_COMMENTS_AFTER
+  **Default :** None
+
+  Determine the number of days where comments are open.
+
 ZINNIA_AUTO_MODERATE_COMMENTS
   **Default :** False
 

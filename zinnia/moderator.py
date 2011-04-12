@@ -12,6 +12,7 @@ from django.contrib.comments.moderation import CommentModerator
 from zinnia.settings import PROTOCOL
 from zinnia.settings import MAIL_COMMENT_REPLY
 from zinnia.settings import AUTO_MODERATE_COMMENTS
+from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.settings import MAIL_COMMENT_NOTIFICATION_RECIPIENTS
 from zinnia.settings import AKISMET_COMMENT
 
@@ -22,6 +23,8 @@ class EntryCommentModerator(CommentModerator):
     """Moderate the comment of Entry"""
     email_reply = MAIL_COMMENT_REPLY
     enable_field = 'comment_enabled'
+    auto_close_field = 'start_publication'
+    close_after = AUTO_CLOSE_COMMENTS_AFTER
 
     def email(self, comment, content_object, request):
         if comment.is_public:
@@ -77,7 +80,7 @@ class EntryCommentModerator(CommentModerator):
         """Determine whether a given comment on a given object should be
         allowed to show up immediately, or should be marked non-public
         and await approval."""
-        if AUTO_MODERATE_COMMENT:
+        if AUTO_MODERATE_COMMENTS:
             return True
 
         if not AKISMET_COMMENT or not AKISMET_API_KEY:
