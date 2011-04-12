@@ -50,7 +50,7 @@
   <buttons>
     <button>
       <id>0</id>
-      <text>{% trans "Manage Comments" %}</text>
+      <text>{% trans "Manage comments" %}</text>
       <imageUrl>{{ ZINNIA_MEDIA_URL }}img/wlw/comments.png</imageUrl>
       <clickUrl><![CDATA[
         {blog-homepage-url}{% url admin:comments_comment_changelist %}
