@@ -9,6 +9,7 @@ from django.contrib.comments.models import Comment
 from django.utils.translation import ugettext as _
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.feedgenerator import DefaultFeed
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
 
 from tagging.models import Tag
@@ -152,10 +153,12 @@ class ZinniaFeedsTestCase(TestCase):
 
     def test_search_entries(self):
         class FakeRequest:
-            GET = {'pattern': 'test'}
+            def __init__(self, val):
+                self.GET = {'pattern': val}
         self.create_published_entry()
         feed = SearchEntries()
-        self.assertEquals(feed.get_object(FakeRequest()), 'test')
+        self.assertRaises(ObjectDoesNotExist, feed.get_object, FakeRequest('te'))
+        self.assertEquals(feed.get_object(FakeRequest('test')), 'test')
         self.assertEquals(len(feed.items('test')), 1)
         self.assertEquals(feed.link('test'), '/search/?pattern=test')
         self.assertEquals(feed.title('test'),
