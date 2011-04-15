@@ -151,9 +151,11 @@ class ZinniaFeedsTestCase(TestCase):
                           _('The latest entries for the tag %s') % tag.name)
 
     def test_search_entries(self):
+        class FakeRequest:
+            GET = {'pattern': 'test'}
         self.create_published_entry()
         feed = SearchEntries()
-        self.assertEquals(feed.get_object('request', 'test'), 'test')
+        self.assertEquals(feed.get_object(FakeRequest()), 'test')
         self.assertEquals(len(feed.items('test')), 1)
         self.assertEquals(feed.link('test'), '/search/?pattern=test')
         self.assertEquals(feed.title('test'),

@@ -10,6 +10,7 @@ from django.utils.feedgenerator import Atom1Feed
 from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import NoReverseMatch
+from django.core.exceptions import ObjectDoesNotExist
 
 from tagging.models import Tag
 from tagging.models import TaggedItem
@@ -182,9 +183,12 @@ class TagEntries(EntryFeed):
 class SearchEntries(EntryFeed):
     """Feed filtered by a search pattern"""
 
-    def get_object(self, request, slug):
-        """The slug is the pattern to search"""
-        return slug
+    def get_object(self, request):
+        """The GET parameter 'pattern' is the object"""
+        pattern =  request.GET.get('pattern', '')
+        if len(pattern) < 3:
+            raise ObjectDoesNotExist
+        return pattern
 
     def items(self, obj):
         """Items are the published entries founds"""
