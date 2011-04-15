@@ -7,7 +7,7 @@
 
 {% block link %}
   {{ block.super }}
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of search result of" %} '{{ pattern }}'" href="{% url zinnia_entry_search_feed pattern %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of search result of" %} '{{ pattern }}'" href="{% url zinnia_entry_search_feed %}?pattern={{ pattern }}" />
 {% endblock %}
 
 {% block content %}
