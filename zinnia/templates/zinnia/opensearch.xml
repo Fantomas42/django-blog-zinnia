@@ -9,6 +9,7 @@
   <Attribution>{{ copyright }}</Attribution>
   <Tags>{{ tag_entry|slice:":15"|join:" " }}</Tags>
   <Url type="text/html" template="{{ protocol }}://{{ site.domain }}{% url zinnia_entry_search %}?pattern={searchTerms}" />
+  <Url type="application/{{ feeds_format }}+xml" template="{{ protocol }}://{{ site.domain }}{% url zinnia_entry_search_feed %}?pattern={searchTerms}" />
   <Image height="16" width="16" type="image/vnd.microsoft.icon">{{ ZINNIA_MEDIA_URL }}img/favicon.ico</Image>
   <Query role="example" searchTerms="{{ tag_entry.0 }}" />
   <Developer>Fantomas42</Developer>

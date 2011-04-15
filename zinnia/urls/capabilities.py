@@ -5,12 +5,14 @@ from django.contrib.sites.models import Site
 
 from zinnia.settings import PROTOCOL
 from zinnia.settings import COPYRIGHT
+from zinnia.settings import FEEDS_FORMAT
 
 extra_context = {'protocol': PROTOCOL,
                  'site': Site.objects.get_current()}
 
 extra_context_opensearch = extra_context.copy()
-extra_context_opensearch.update({'copyright': COPYRIGHT})
+extra_context_opensearch.update({'copyright': COPYRIGHT,
+                                 'feeds_format': FEEDS_FORMAT})
 
 urlpatterns = patterns('django.views.generic.simple',
                        url(r'^rsd.xml$', 'direct_to_template',
