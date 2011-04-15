@@ -185,7 +185,7 @@ class SearchEntries(EntryFeed):
 
     def get_object(self, request):
         """The GET parameter 'pattern' is the object"""
-        pattern =  request.GET.get('pattern', '')
+        pattern = request.GET.get('pattern', '')
         if len(pattern) < 3:
             raise ObjectDoesNotExist
         return pattern
