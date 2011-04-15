@@ -25,6 +25,8 @@ class EntryCommentModerator(CommentModerator):
     enable_field = 'comment_enabled'
     auto_close_field = 'start_publication'
     close_after = AUTO_CLOSE_COMMENTS_AFTER
+    auto_moderate_comments = AUTO_MODERATE_COMMENTS
+    mail_comment_notification_recipients = MAIL_COMMENT_NOTIFICATION_RECIPIENTS
 
     def email(self, comment, content_object, request):
         if comment.is_public:
@@ -34,7 +36,7 @@ class EntryCommentModerator(CommentModerator):
     def email_notification(self, comment, content_object, request):
         """Send email notification of a new comment to site staff when email
         notifications have been requested."""
-        if not MAIL_COMMENT_NOTIFICATION_RECIPIENTS:
+        if not self.mail_comment_notification_recipients:
             return
 
         site = Site.objects.get_current()
@@ -47,7 +49,7 @@ class EntryCommentModerator(CommentModerator):
                    'title': content_object.title}
         message = template.render(context)
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
-                  MAIL_COMMENT_NOTIFICATION_RECIPIENTS,
+                  self.mail_comment_notification_recipients,
                   fail_silently=not settings.DEBUG)
 
     def email_reply(self, comment, content_object, request):
@@ -56,7 +58,7 @@ class EntryCommentModerator(CommentModerator):
         if not self.email_reply:
             return
 
-        exclude_list = MAIL_COMMENT_NOTIFICATION_RECIPIENTS + \
+        exclude_list = self.mail_comment_notification_recipients + \
                        [comment.userinfo['email']]
         recipient_list = set([comment.userinfo['email']
                               for comment in content_object.comments
@@ -80,7 +82,7 @@ class EntryCommentModerator(CommentModerator):
         """Determine whether a given comment on a given object should be
         allowed to show up immediately, or should be marked non-public
         and await approval."""
-        if AUTO_MODERATE_COMMENTS:
+        if self.auto_moderate_comments:
             return True
 
         if not AKISMET_COMMENT or not AKISMET_API_KEY:
