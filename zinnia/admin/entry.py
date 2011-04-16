@@ -229,7 +229,8 @@ class EntryAdmin(admin.ModelAdmin):
                               settings.TWITTER_ACCESS_SECRET)
         api = tweepy.API(auth)
         for entry in queryset:
-            message = '%s %s' % (entry.title[:119], entry.short_url)
+            short_url = entry.short_url
+            message = '%s %s' % (entry.title[:139 - len(short_url)], short_url)
             api.update_status(message)
         self.message_user(request, _('The selected entries have been tweeted.'))
     make_tweet.short_description = _('Tweet entries selected')
