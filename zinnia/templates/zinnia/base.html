@@ -1,6 +1,19 @@
 {% extends "zinnia/skeleton.html" %}
 {% load zinnia_tags tagging_tags i18n %}
 
+{% block meta %}
+    <meta name="generator" content="Zinnia {{ ZINNIA_VERSION }}" />
+{% endblock %}
+
+{% block link %}
+    <link rel="index" href="{% url zinnia_entry_archive_index %}" />
+    <link rel="EditURI" type="application/rsd+xml" href="{% url zinnia_rsd %}" />
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url zinnia_wlwmanifest %}" />
+    <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Blog" href="{% url zinnia_opensearch %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url zinnia_entry_latest_feed %}" />
+    {% get_archives_entries "zinnia/tags/archives_entries_link.html" %}
+{% endblock %}
+
 {% block breadcrumbs %}
   {% zinnia_breadcrumbs %}
 {% endblock %}

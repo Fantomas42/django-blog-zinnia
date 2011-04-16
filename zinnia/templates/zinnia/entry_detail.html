@@ -7,6 +7,16 @@
 
 {% block link %}
   {{ block.super }}
+  {% with object.previous_entry as previous_entry %}{% if previous_entry %}
+  <link rel="prev" title="{{ previous_entry.title }}" href="{{ previous_entry.get_absolute_url }}" />
+  {% endif %}{% endwith %}
+  {% with object.next_entry as next_entry %}{% if next_entry %}
+  <link rel="next" title="{{ next_entry.title }}" href="{{ next_entry.get_absolute_url }}" />
+  {% endif %}{% endwith %}
+  {% if object.short_url %}
+  <link rel="shortlink" href="{{ object.short_url }}" />
+  {% endif %}
+  <link rel="canonical" href="{{ object.get_absolute_url }}" />
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of discussions on" %} '{{ object.title }}'" href="{% url zinnia_entry_discussion_feed object.slug %}" />
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'" href="{% url zinnia_entry_comment_feed object.slug %}" />
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of pingbacks on" %} '{{ object.title }}'" href="{% url zinnia_entry_pingback_feed object.slug %}" />
