@@ -35,11 +35,27 @@ class EntryCommentModeratorTestCase(TestCase):
                                          site=self.site)
         self.assertEquals(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
+        moderator.email_reply = False
+        moderator.mail_comment_notification_recipients = []
+        moderator.email(comment, self.entry, 'request')
+        self.assertEquals(len(mail.outbox), 0)
+        moderator.email_reply = True
         moderator.mail_comment_notification_recipients = ['admin@example.com']
         moderator.email(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)
 
-    def test_email_reply(self):
+    def test_do_email_notification(self):
+        comment = Comment.objects.create(comment='My Comment',
+                                         user=self.author, is_public=True,
+                                         content_object=self.entry,
+                                         site=self.site)
+        self.assertEquals(len(mail.outbox), 0)
+        moderator = EntryCommentModerator(Entry)
+        moderator.mail_comment_notification_recipients = ['admin@example.com']
+        moderator.do_email_notification(comment, self.entry, 'request')
+        self.assertEquals(len(mail.outbox), 1)
+
+    def test_do_email_reply(self):
         comment = Comment.objects.create(comment='My Comment 1',
                                          user=self.author, is_public=True,
                                          content_object=self.entry,
@@ -47,21 +63,21 @@ class EntryCommentModeratorTestCase(TestCase):
         moderator = EntryCommentModerator(Entry)
         moderator.email_notification_reply = True
         moderator.mail_comment_notification_recipients = ['admin@example.com']
-        moderator.email_reply(comment, self.entry, 'request')
+        moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 0)
 
         comment = Comment.objects.create(comment='My Comment 2',
                                          user_email='user_1@example.com',
                                          content_object=self.entry,
                                          is_public=True, site=self.site)
-        moderator.email_reply(comment, self.entry, 'request')
+        moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 0)
 
         comment = Comment.objects.create(comment='My Comment 3',
                                          user_email='user_2@example.com',
                                          content_object=self.entry,
                                          is_public=True, site=self.site)
-        moderator.email_reply(comment, self.entry, 'request')
+        moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)
         self.assertEquals(mail.outbox[0].to, [u'user_1@example.com'])
 
@@ -69,7 +85,20 @@ class EntryCommentModeratorTestCase(TestCase):
                                          user=self.author, is_public=True,
                                          content_object=self.entry,
                                          site=self.site)
-        moderator.email_reply(comment, self.entry, 'request')
+        moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 2)
         self.assertEquals(mail.outbox[1].to, [u'user_1@example.com',
                                               u'user_2@example.com'])
+
+    def test_moderate(self):
+        comment = Comment.objects.create(comment='My Comment',
+                                         user=self.author, is_public=True,
+                                         content_object=self.entry,
+                                         site=self.site)
+        moderator = EntryCommentModerator(Entry)
+        moderator.auto_moderate_comments = True
+        self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
+                          True)
+        moderator.auto_moderate_comments = False
+        self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
+                          False)  # Because API key for Akismet is not defined

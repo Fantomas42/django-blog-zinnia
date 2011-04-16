@@ -30,15 +30,14 @@ class EntryCommentModerator(CommentModerator):
 
     def email(self, comment, content_object, request):
         if comment.is_public:
-            self.email_notification(comment, content_object, request)
-            self.email_reply(comment, content_object, request)
+            if self.mail_comment_notification_recipients:
+                self.do_email_notification(comment, content_object, request)
+            if self.email_reply:
+                self.do_email_reply(comment, content_object, request)
 
-    def email_notification(self, comment, content_object, request):
+    def do_email_notification(self, comment, content_object, request):
         """Send email notification of a new comment to site staff when email
         notifications have been requested."""
-        if not self.mail_comment_notification_recipients:
-            return
-
         site = Site.objects.get_current()
         template = loader.get_template('comments/comment_notification_email.txt')
         context = Context({'comment': comment, 'site': site,
@@ -52,12 +51,9 @@ class EntryCommentModerator(CommentModerator):
                   self.mail_comment_notification_recipients,
                   fail_silently=not settings.DEBUG)
 
-    def email_reply(self, comment, content_object, request):
+    def do_email_reply(self, comment, content_object, request):
         """Send email notification of a new comment to the authors of
         the previous comments when email notifications have been requested."""
-        if not self.email_reply:
-            return
-
         exclude_list = self.mail_comment_notification_recipients + \
                        [comment.userinfo['email']]
         recipient_list = set([comment.userinfo['email']
