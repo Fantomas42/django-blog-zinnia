@@ -1,5 +1,6 @@
 """Test cases for Zinnia's ping"""
 import cStringIO
+from urllib2 import URLError
 from urllib import addinfourl
 from django.test import TestCase
 
@@ -71,6 +72,8 @@ class ExternalUrlsPingerTestCase(TestCase):
         elif 'localhost' in url:
             response = cStringIO.StringIO('<link rel="pingback" href="/xmlrpc/">')
             return addinfourl(response, {}, url)
+        elif 'error' in url:
+            raise URLError('Invalid ressource')
 
     def test_find_pingback_urls(self):
         # Set up a stub around urlopen
@@ -78,7 +81,7 @@ class ExternalUrlsPingerTestCase(TestCase):
         self.original_urlopen = zinnia.ping.urlopen
         zinnia.ping.urlopen = self.fake_urlopen
 
-        urls = ['http://localhost/', 'http://example.com/']
+        urls = ['http://localhost/', 'http://example.com/', 'http://error']
         self.assertEquals(self.pinger.find_pingback_urls(urls),
                           {'http://localhost/': 'http://localhost/xmlrpc/',
                            'http://example.com/': 'http://example.com/xmlrpc.php'})
