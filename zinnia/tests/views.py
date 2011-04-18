@@ -12,13 +12,11 @@ from zinnia.models import Category
 from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
 
-
-class ZinniaViewsTestCase(TestCase):
-    """Test cases for generic views used in the application,
-    for reproducing and correcting issue :
-    http://github.com/Fantomas42/django-blog-zinnia/issues#issue/3
+class ViewsBaseCase(TestCase):
     """
-    urls = 'zinnia.tests.urls'
+    Setup and utility function base case.
+
+    """
     fixtures = ['zinnia_test_data.json']
 
     def setUp(self):
@@ -49,6 +47,36 @@ class ZinniaViewsTestCase(TestCase):
             response = self.client.get(url)
             self.assertEquals(len(response.context['object_list']), second_expected)
         return response
+
+
+class CustomTemplateNameDetailViews(ViewsBaseCase):
+    """
+    Tests with an alternate urls.py that modifies how author_detail,
+    tags_detail and categories_detail views to be called with a custom
+    template_name keyword argument.
+
+    """
+
+    urls = 'zinnia.tests.test_view_detail_urls'
+
+    def test_override_template_name_tag_detail(self):
+        response = self.check_publishing_context('/tags/tests/', 2, 3)
+        self.assertTemplateUsed(response, 'zinnia/entry_list.html')
+
+    def test_override_template_name_author_detail(self):
+        response = self.check_publishing_context('/authors/admin/', 2, 3)
+        self.assertTemplateUsed(response, 'zinnia/entry_list.html')
+        
+    def test_override_template_name_category_detail(self):
+        response = self.check_publishing_context('/categories/tests/', 2, 3)
+        self.assertTemplateUsed(response, 'zinnia/entry_list.html')
+
+class ZinniaViewsTestCase(ViewsBaseCase):
+    """Test cases for generic views used in the application,
+    for reproducing and correcting issue :
+    http://github.com/Fantomas42/django-blog-zinnia/issues#issue/3
+    """
+    urls = 'zinnia.tests.urls'
 
     def test_zinnia_entry_archive_index(self):
         self.check_publishing_context('/', 2, 3)
@@ -201,3 +229,4 @@ class ZinniaViewsTestCase(TestCase):
         self.assertEquals(self.client.post('/trackback/test-1/', {'url': 'http://example.com'}).content,
                           '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  <error>1</error>\n  '
                           '<message>Trackback is already registered</message>\n  \n</response>\n')
+
