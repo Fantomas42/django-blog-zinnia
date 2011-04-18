@@ -1,5 +1,5 @@
 """Utils for Zinnia's tests"""
-import cStringIO
+import StringIO
 from xmlrpclib import Transport
 
 from django.test.client import Client
@@ -18,6 +18,7 @@ class TestTransport(Transport):
         response = self.client.post(handler,
                                     request_body,
                                     content_type="text/xml")
-        res = cStringIO.StringIO(response.content)
+        res = StringIO.StringIO(response.content)
+        setattr(res, 'getheader', lambda *args: '')  # For Python >= 2.7
         res.seek(0)
         return self.parse_response(res)
