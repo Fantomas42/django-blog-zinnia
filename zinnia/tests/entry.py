@@ -261,9 +261,13 @@ class EntryGetBaseModelTestCase(TestCase):
         self.assertEquals(get_base_model(), EntryAbstractClass)
 
         models_settings.ENTRY_BASE_MODEL = 'mymodule.myclass'
-        with warnings.catch_warnings(record=True) as w:
-            self.assertEquals(get_base_model(), EntryAbstractClass)
-            self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
+        try:
+            with warnings.catch_warnings(record=True) as w:
+                self.assertEquals(get_base_model(), EntryAbstractClass)
+                self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
+        except AttributeError:
+            # Fail under Python2.5, because of'warnings.catch_warnings'
+            pass
 
         models_settings.ENTRY_BASE_MODEL = 'zinnia.models.EntryAbstractClass'
         self.assertEquals(get_base_model(), EntryAbstractClass)
