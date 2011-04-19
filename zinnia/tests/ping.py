@@ -6,7 +6,26 @@ from django.test import TestCase
 
 from zinnia.models import Entry
 from zinnia.ping import URLRessources
+from zinnia.ping import DirectoryPinger
 from zinnia.ping import ExternalUrlsPinger
+
+
+class DirectoryPingerTestCase(TestCase):
+    """Test cases for DirectoryPinger"""
+    def setUp(self):
+        params = {'title': 'My entry',
+                  'content': 'My content',
+                  'tags': 'zinnia, test',
+                  'slug': 'my-entry'}
+        self.entry = Entry.objects.create(**params)
+        self.pinger = DirectoryPinger('http://localhost', [self.entry],
+                                      start_now=False)
+
+    def test_ping_entry(self):
+        self.assertEquals(
+            self.pinger.ping_entry(self.entry),
+            {'message': 'http://localhost is an invalid directory.',
+             'flerror': True})
 
 
 class ExternalUrlsPingerTestCase(TestCase):
