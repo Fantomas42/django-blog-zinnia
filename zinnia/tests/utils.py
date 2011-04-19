@@ -21,4 +21,6 @@ class TestTransport(Transport):
         res = StringIO.StringIO(response.content)
         setattr(res, 'getheader', lambda *args: '')  # For Python >= 2.7
         res.seek(0)
+        if not hasattr(res, 'getheader'):
+            setattr(res, 'getheader', lambda *args: "")
         return self.parse_response(res)

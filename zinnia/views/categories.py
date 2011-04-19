@@ -13,13 +13,19 @@ def get_category_or_404(path):
     return get_object_or_404(Category, slug=path_bits[-1])
 
 
-def category_detail(request, path, page=None):
+def category_detail(request, path, page=None, **kwargs):
     """Display the entries of a category"""
+    extra_context = kwargs.pop('extra_context', {})
+
     category = get_category_or_404(path)
-    template_name = template_name_for_entry_queryset_filtered(
-        'category', category.slug)
+    if not kwargs.get('template_name'):
+        # populate the template_name if not provided in kwargs.
+        kwargs['template_name'] = template_name_for_entry_queryset_filtered(
+                                    'category', category.slug)
+
+    extra_context.update({'category': category})
+    kwargs['extra_context'] = extra_context
 
     return object_list(request, queryset=category.entries_published_set(),
                        paginate_by=PAGINATION, page=page,
-                       template_name=template_name,
-                       extra_context={'category': category})
+                       **kwargs)
