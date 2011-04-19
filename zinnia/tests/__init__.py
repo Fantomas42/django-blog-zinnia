@@ -4,6 +4,7 @@ from unittest import TestLoader
 from django.conf import settings
 
 from zinnia.tests.entry import EntryTestCase  # ~0.2s
+from zinnia.tests.signals import SignalsTestCase
 from zinnia.tests.entry import EntryHtmlContentTestCase  # ~0.5s
 from zinnia.tests.entry import EntryGetBaseModelTestCase
 from zinnia.tests.category import CategoryTestCase
@@ -28,7 +29,7 @@ def suite():
     loader = TestLoader()
 
     test_cases = (ManagersTestCase, EntryTestCase,
-                  EntryGetBaseModelTestCase,
+                  EntryGetBaseModelTestCase, SignalsTestCase,
                   EntryHtmlContentTestCase, CategoryTestCase,
                   ZinniaViewsTestCase, ZinniaFeedsTestCase,
                   ZinniaSitemapsTestCase, ComparisonTestCase,
