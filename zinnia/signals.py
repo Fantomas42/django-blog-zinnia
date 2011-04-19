@@ -1,7 +1,7 @@
 """Signal handlers of Zinnia"""
 import inspect
+from functools import wraps
 
-from django.utils.functional import wraps
 from django.db.models.signals import post_save
 
 from zinnia import settings
@@ -18,6 +18,7 @@ def disable_for_loaddata(signal_handler):
             if inspect.getmodulename(fr[1]) == 'loaddata':
                 return
         signal_handler(*args, **kwargs)
+
     return wrapper
 
 

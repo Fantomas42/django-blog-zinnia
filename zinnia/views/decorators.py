@@ -1,4 +1,6 @@
 """Decorators for zinnia.views"""
+from functools import wraps
+
 from django.template import RequestContext
 from django.contrib.auth.views import login
 from django.shortcuts import redirect
@@ -19,12 +21,13 @@ def update_queryset(view, queryset,
     of the queryset before executing the view.
     Related to issue http://code.djangoproject.com/ticket/8378"""
 
-    def wrap(*args, **kwargs):
+    @wraps(view)
+    def wrapper(*args, **kwargs):
         """Regenerate the queryset before passing it to the view."""
         kwargs[queryset_parameter] = queryset()
         return view(*args, **kwargs)
 
-    return wrap
+    return wrapper
 
 
 @csrf_protect
@@ -48,7 +51,8 @@ def protect_entry(view):
     around the generic.date_based.entry_detail view
     and specify the template used to render the entry"""
 
-    def wrap(*ka, **kw):
+    @wraps(view)
+    def wrapper(*ka, **kw):
         """Do security check and retrieve the template"""
         request = ka[0]
         entry = get_object_or_404(Entry, slug=kw['slug'],
@@ -64,7 +68,7 @@ def protect_entry(view):
         kw['template_name'] = entry.template
         return view(*ka, **kw)
 
-    return wrap
+    return wrapper
 
 
 def template_name_for_entry_queryset_filtered(model_type, model_name):
