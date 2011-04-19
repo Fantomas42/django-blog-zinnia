@@ -87,3 +87,8 @@ class ExternalUrlsPingerTestCase(TestCase):
                            'http://example.com/': 'http://example.com/xmlrpc.php'})
         # Remove stub
         zinnia.ping.urlopen = self.original_urlopen
+
+    def test_pingback_url(self):
+        self.assertEquals(self.pinger.pingback_url('http://localhost',
+                                                   'http://error.com'),
+                          'http://error.com cannot be pinged.')
