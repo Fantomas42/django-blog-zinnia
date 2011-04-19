@@ -6,6 +6,8 @@ from django.template import loader
 from django.core.mail import send_mail
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
+from django.utils.translation import activate
+from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.comments.moderation import CommentModerator
 
@@ -30,10 +32,16 @@ class EntryCommentModerator(CommentModerator):
 
     def email(self, comment, content_object, request):
         if comment.is_public:
-            if self.mail_comment_notification_recipients:
-                self.do_email_notification(comment, content_object, request)
-            if self.email_reply:
-                self.do_email_reply(comment, content_object, request)
+            current_language = get_language()
+            try:
+                activate(settings.LANGUAGE_CODE)
+                if self.mail_comment_notification_recipients:
+                    self.do_email_notification(comment, content_object,
+                                               request)
+                if self.email_reply:
+                    self.do_email_reply(comment, content_object, request)
+            finally:
+                activate(current_language)
 
     def do_email_notification(self, comment, content_object, request):
         """Send email notification of a new comment to site staff when email
