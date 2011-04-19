@@ -10,8 +10,8 @@ from zinnia.tests.signals import SignalsTestCase
 from zinnia.tests.category import CategoryTestCase
 from zinnia.tests.managers import ManagersTestCase  # ~1.2s
 from zinnia.tests.feeds import ZinniaFeedsTestCase  # ~0.4s
-from zinnia.tests.views import CustomTemplateNameDetailViews
 from zinnia.tests.views import ZinniaViewsTestCase  # ~3s ouch...
+from zinnia.tests.views import ZinniaCustomDetailViews
 from zinnia.tests.pingback import PingBackTestCase  # ~0.3s
 from zinnia.tests.metaweblog import MetaWeblogTestCase  # ~0.6s
 from zinnia.tests.comparison import ComparisonTestCase
@@ -37,7 +37,7 @@ def suite():
                   ZinniaSitemapsTestCase, ComparisonTestCase,
                   DirectoryPingerTestCase, ExternalUrlsPingerTestCase,
                   TemplateTagsTestCase, QuickEntryTestCase,
-                  EntryCommentModeratorTestCase, CustomTemplateNameDetailViews)
+                  EntryCommentModeratorTestCase, ZinniaCustomDetailViews)
 
     if 'django_xmlrpc' in settings.INSTALLED_APPS:
         test_cases += (PingBackTestCase, MetaWeblogTestCase)

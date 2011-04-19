@@ -19,9 +19,8 @@ def category_detail(request, path, page=None, **kwargs):
 
     category = get_category_or_404(path)
     if not kwargs.get('template_name'):
-        # populate the template_name if not provided in kwargs.
         kwargs['template_name'] = template_name_for_entry_queryset_filtered(
-                                    'category', category.slug)
+            'category', category.slug)
 
     extra_context.update({'category': category})
     kwargs['extra_context'] = extra_context

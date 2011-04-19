@@ -17,9 +17,8 @@ def author_detail(request, username, page=None, **kwargs):
 
     author = get_object_or_404(Author, username=username)
     if not kwargs.get('template_name'):
-        # populate the template_name if not provided in kwargs.
         kwargs['template_name'] = template_name_for_entry_queryset_filtered(
-                                  'author', author.username)
+            'author', author.username)
 
     extra_context.update({'author': author})
     kwargs['extra_context'] = extra_context
