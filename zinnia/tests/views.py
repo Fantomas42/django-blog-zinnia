@@ -17,12 +17,34 @@ class ViewsBaseCase(TestCase):
     """
     Setup and utility function base case.
     """
-    fixtures = ['zinnia_test_data.json']
 
     def setUp(self):
         self.site = Site.objects.get_current()
-        self.author = User.objects.get(username='admin')
-        self.category = Category.objects.get(slug='tests')
+        self.author = User.objects.create_superuser(username='admin',
+                                                    email='admin@example.com',
+                                                    password='password')
+        self.category = Category.objects.create(title='Tests', slug='tests')
+        params = {'title': 'Test 1',
+                  'content': 'First test entry published',
+                  'slug': 'test-1',
+                  'tags': 'tests',
+                  'creation_date': datetime(2010, 1, 1),
+                  'status': PUBLISHED}
+        entry = Entry.objects.create(**params)
+        entry.sites.add(self.site)
+        entry.categories.add(self.category)
+        entry.authors.add(self.author)
+
+        params = {'title': 'Test 2',
+                  'content': 'Second test entry published',
+                  'slug': 'test-2',
+                  'tags': 'tests',
+                  'creation_date': datetime(2010, 6, 1),
+                  'status': PUBLISHED}
+        entry = Entry.objects.create(**params)
+        entry.sites.add(self.site)
+        entry.categories.add(self.category)
+        entry.authors.add(self.author)
 
     def create_published_entry(self):
         params = {'title': 'My test entry',
