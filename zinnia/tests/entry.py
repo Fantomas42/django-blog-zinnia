@@ -114,6 +114,9 @@ class EntryTestCase(TestCase):
         self.entry.start_publication = datetime(2020, 3, 15)
         self.assertFalse(self.entry.is_visible)
 
+    def test_short_url(self):
+        self.assertEquals(self.entry.short_url, 'http://example.com/1/')
+
     def test_previous_entry(self):
         site = Site.objects.get_current()
         self.assertFalse(self.entry.previous_entry)
