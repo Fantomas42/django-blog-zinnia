@@ -193,7 +193,7 @@ class EntryAdmin(admin.ModelAdmin):
             del actions['make_mine']
         if not settings.PING_DIRECTORIES:
             del actions['ping_directories']
-        if not settings.USE_TWITTER or not settings.USE_BITLY:
+        if not settings.USE_TWITTER:
             del actions['make_tweet']
 
         return actions

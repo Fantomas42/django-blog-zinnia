@@ -59,8 +59,8 @@ PINGBACK_CONTENT_LENGTH = getattr(settings,
 F_MIN = getattr(settings, 'ZINNIA_F_MIN', 0.1)
 F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
 
-USE_BITLY = getattr(settings, 'ZINNIA_USE_BITLY',
-                    'django_bitly' in settings.INSTALLED_APPS)
+URL_SHORTENER_BACKEND = getattr(settings, 'ZINNIA_URL_SHORTENER_BACKEND',
+                                'zinnia.url_shortener.backends.default')
 
 STOP_WORDS = getattr(settings, 'ZINNIA_STOP_WORDS',
                      ('able', 'about', 'across', 'after', 'all', 'almost',

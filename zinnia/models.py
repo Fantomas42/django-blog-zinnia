@@ -22,7 +22,6 @@ from django.contrib.markup.templatetags.markup import restructuredtext
 import mptt
 from tagging.fields import TagField
 
-from zinnia.settings import USE_BITLY
 from zinnia.settings import UPLOAD_TO
 from zinnia.settings import MARKUP_LANGUAGE
 from zinnia.settings import ENTRY_TEMPLATES
@@ -34,6 +33,7 @@ from zinnia.managers import EntryPublishedManager
 from zinnia.managers import AuthorPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.moderator import EntryCommentModerator
+from zinnia.url_shortener import get_url_shortener
 from zinnia.signals import ping_directories_handler
 from zinnia.signals import ping_external_urls_handler
 
@@ -235,14 +235,7 @@ class EntryAbstractClass(models.Model):
     @property
     def short_url(self):
         """Return the entry's short url"""
-        if not USE_BITLY:
-            return False
-
-        from django_bitly.models import Bittle
-
-        bittle = Bittle.objects.bitlify(self)
-        url = bittle and bittle.shortUrl or self.get_absolute_url()
-        return url
+        return get_url_shortener()(self)
 
     def __unicode__(self):
         return '%s: %s' % (self.title, self.get_status_display())
