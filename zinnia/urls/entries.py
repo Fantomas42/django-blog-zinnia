@@ -43,4 +43,7 @@ urlpatterns = patterns('zinnia.views.entries',
                        url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
                            'entry_detail', entry_conf_detail,
                            name='zinnia_entry_detail'),
+                       url(r'^(?P<object_id>\d+)/$',
+                           'entry_shortlink',
+                           name='zinnia_entry_shortlink'),
                        )

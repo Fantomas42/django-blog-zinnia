@@ -63,7 +63,7 @@ class PingBackTestCase(TestCase):
                   'to <a href="http://%s%s">first entry</a> and other links : %s %s.' % (
                       self.site.domain,
                       self.first_entry.get_absolute_url(),
-                      'http://localhost:8000/404/',
+                      'http://localhost:8000/error-404/',
                       'http://example.com/'),
                   'slug': 'my-second-entry',
                   'creation_date': datetime(2010, 1, 1),
@@ -86,7 +86,7 @@ class PingBackTestCase(TestCase):
 
         self.assertEquals(generate_pingback_content(soup, target, 1000),
                           'My second content with link to first entry and '\
-                          'other links : http://localhost:8000/404/ http://example.com/.')
+                          'other links : http://localhost:8000/error-404/ http://example.com/.')
         self.assertEquals(generate_pingback_content(soup, target, 50),
                           '...ond content with link to first entry and other lin...')
 
@@ -118,7 +118,7 @@ class PingBackTestCase(TestCase):
         self.assertEquals(response, 17)
 
         # Error code 32 : The target URI does not exist.
-        response = self.server.pingback.ping(source, 'http://localhost:8000/404/')
+        response = self.server.pingback.ping(source, 'http://localhost:8000/error-404/')
         self.assertEquals(response, 32)
         response = self.server.pingback.ping(source, 'http://example.com/')
         self.assertEquals(response, 32)
@@ -155,7 +155,7 @@ class PingBackTestCase(TestCase):
         response = self.server.pingback.extensions.getPingbacks('http://example.com/')
         self.assertEquals(response, 32)
 
-        response = self.server.pingback.extensions.getPingbacks('http://localhost:8000/404/')
+        response = self.server.pingback.extensions.getPingbacks('http://localhost:8000/error-404/')
         self.assertEquals(response, 32)
 
         response = self.server.pingback.extensions.getPingbacks('http://localhost:8000/2010/')
