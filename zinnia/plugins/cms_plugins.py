@@ -120,9 +120,10 @@ class CMSRandomEntriesPlugin(CMSPluginBase):
 
     def render(self, context, instance, placeholder):
         """Update the context with plugin's data"""
-        context.update({'number_of_entries': instance.number_of_entries,
-                        'template_to_render': str(instance.template_to_render) or
-                        'zinnia/tags/random_entries.html'})
+        context.update(
+            {'number_of_entries': instance.number_of_entries,
+             'template_to_render': str(instance.template_to_render) or
+             'zinnia/tags/random_entries.html'})
         return context
 
     def icon_src(self, instance):

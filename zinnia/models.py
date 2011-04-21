@@ -127,7 +127,8 @@ class EntryAbstractClass(models.Model):
     comment_enabled = models.BooleanField(_('comment enabled'), default=True)
     pingback_enabled = models.BooleanField(_('linkback enabled'), default=True)
 
-    creation_date = models.DateTimeField(_('creation date'), default=datetime.now)
+    creation_date = models.DateTimeField(_('creation date'),
+                                         default=datetime.now)
     last_update = models.DateTimeField(_('last update'), default=datetime.now)
     start_publication = models.DateTimeField(_('start publication'),
                                              help_text=_('date start publish'),
@@ -138,17 +139,19 @@ class EntryAbstractClass(models.Model):
 
     sites = models.ManyToManyField(Site, verbose_name=_('sites publication'))
 
-    login_required = models.BooleanField(_('login required'), default=False,
-                                         help_text=_('only authenticated users can view the entry'))
-    password = models.CharField(_('password'), max_length=50, blank=True,
-                                help_text=_('protect the entry with a password'))
+    login_required = models.BooleanField(
+        _('login required'), default=False,
+        help_text=_('only authenticated users can view the entry'))
+    password = models.CharField(
+        _('password'), max_length=50, blank=True,
+        help_text=_('protect the entry with a password'))
 
-    template = models.CharField(_('template'), max_length=250,
-                                default='zinnia/entry_detail.html',
-                                choices=[('zinnia/entry_detail.html',
-                                          _('Default template'))] +
-                                ENTRY_TEMPLATES,
-                                help_text=_('template used to display the entry'))
+    template = models.CharField(
+        _('template'), max_length=250,
+        default='zinnia/entry_detail.html',
+        choices=[('zinnia/entry_detail.html', _('Default template'))] + \
+        ENTRY_TEMPLATES,
+        help_text=_('template used to display the entry'))
 
     objects = models.Manager()
     published = EntryPublishedManager()
@@ -260,12 +263,14 @@ def get_base_model():
         return EntryAbstractClass
 
     dot = ENTRY_BASE_MODEL.rindex('.')
-    module_name, class_name = ENTRY_BASE_MODEL[:dot], ENTRY_BASE_MODEL[dot + 1:]
+    module_name = ENTRY_BASE_MODEL[:dot]
+    class_name = ENTRY_BASE_MODEL[dot + 1:]
     try:
         _class = getattr(import_module(module_name), class_name)
         return _class
     except (ImportError, AttributeError):
-        warnings.warn('%s cannot be imported' % ENTRY_BASE_MODEL, RuntimeWarning)
+        warnings.warn('%s cannot be imported' % ENTRY_BASE_MODEL,
+                      RuntimeWarning)
     return EntryAbstractClass
 
 

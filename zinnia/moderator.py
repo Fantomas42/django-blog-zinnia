@@ -47,7 +47,8 @@ class EntryCommentModerator(CommentModerator):
         """Send email notification of a new comment to site staff when email
         notifications have been requested."""
         site = Site.objects.get_current()
-        template = loader.get_template('comments/comment_notification_email.txt')
+        template = loader.get_template(
+            'comments/comment_notification_email.txt')
         context = Context({'comment': comment, 'site': site,
                            'protocol': PROTOCOL,
                            'content_object': content_object})
