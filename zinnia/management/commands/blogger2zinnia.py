@@ -59,14 +59,16 @@ class Command(NoArgsCommand):
             from gdata import service
             gdata_service = service
         except ImportError:
-            raise CommandError('You need to install the gdata module to run this command.')
+            raise CommandError('You need to install the gdata ' \
+                               'module to run this command.')
 
         self.verbosity = int(options.get('verbosity', 1))
         self.blogger_username = options.get('blogger_username')
         self.category_title = options.get('category_title')
         self.blogger_blog_id = options.get('blogger_blog_id')
 
-        self.write_out(self.style.TITLE('Starting migration from Blogger to Zinnia %s\n' % __version__))
+        self.write_out(self.style.TITLE(
+            'Starting migration from Blogger to Zinnia %s\n' % __version__))
 
         if not self.blogger_username:
             self.blogger_username = raw_input('Blogger username: ')
@@ -75,7 +77,8 @@ class Command(NoArgsCommand):
 
         self.blogger_password = getpass('Blogger password: ')
         try:
-            self.blogger_manager = BloggerManager(self.blogger_username, self.blogger_password)
+            self.blogger_manager = BloggerManager(self.blogger_username,
+                                                  self.blogger_password)
         except gdata_service.BadAuthentication:
             raise CommandError('Incorrect Blogger username or password')
 
@@ -84,7 +87,9 @@ class Command(NoArgsCommand):
             try:
                 self.default_author = User.objects.get(username=default_author)
             except User.DoesNotExist:
-                raise CommandError('Invalid Zinnia username for default author "%s"' % default_author)
+                raise CommandError(
+                    'Invalid Zinnia username for default author "%s"' % \
+                    default_author)
         else:
             self.default_author = User.objects.all()[0]
 
@@ -92,7 +97,8 @@ class Command(NoArgsCommand):
             self.select_blog_id()
 
         if not self.category_title:
-            self.category_title = raw_input('Category title for imported entries: ')
+            self.category_title = raw_input(
+                'Category title for imported entries: ')
             if not self.category_title:
                 raise CommandError('Invalid category title')
 
@@ -107,13 +113,15 @@ class Command(NoArgsCommand):
             for blog in blogs_list:
                 i += 1
                 blogs[i] = blog
-                self.write_out('%s. %s (%s)' % (i, blog.title.text, get_blog_id(blog)))
+                self.write_out('%s. %s (%s)' % (i, blog.title.text,
+                                                get_blog_id(blog)))
             try:
                 blog_index = int(raw_input('\nSelect a blog to import: '))
                 blog = blogs[blog_index]
                 break
             except (ValueError, KeyError):
-                self.write_out(self.style.ERROR('Please enter a valid blog number\n'))
+                self.write_out(self.style.ERROR(
+                    'Please enter a valid blog number\n'))
 
         self.blogger_blog_id = get_blog_id(blog)
 
@@ -146,8 +154,10 @@ class Command(NoArgsCommand):
                               creation_date=creation_date, slug=slug)
                 if self.default_author:
                     entry.author = self.default_author
-                entry.tags = ','.join([slugify(cat.term) for cat in post.category])
-                entry.last_update = convert_blogger_timestamp(post.updated.text)
+                entry.tags = ','.join([slugify(cat.term) for
+                                       cat in post.category])
+                entry.last_update = convert_blogger_timestamp(
+                    post.updated.text)
                 entry.save()
                 entry.sites.add(self.SITE)
                 entry.categories.add(category)
@@ -238,6 +248,7 @@ class BloggerManager(object):
             yield post
 
     def get_comments(self, blog_id, post_id):
-        feed = self.service.Get('/feeds/%s/%s/comments/default' % (blog_id, post_id))
+        feed = self.service.Get('/feeds/%s/%s/comments/default' % \
+                                (blog_id, post_id))
         for comment in feed.entry:
             yield comment

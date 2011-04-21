@@ -28,12 +28,14 @@ class Command(LabelCommand):
     args = 'url'
 
     option_list = LabelCommand.option_list + (
-        make_option('--noautoexcerpt', action='store_false', dest='auto_excerpt',
-                    default=True, help='Do NOT generate an excerpt if not present.'),
+        make_option('--noautoexcerpt', action='store_false',
+                    dest='auto_excerpt', default=True,
+                    help='Do NOT generate an excerpt if not present.'),
         make_option('--author', dest='author', default='',
                     help='All imported entries belong to specified author'),
-        make_option('--category-is-tag', action='store_true', dest='category-tag',
-                    default=False, help='Store categories as tags'),
+        make_option('--category-is-tag', action='store_true',
+                    dest='category-tag', default=False,
+                    help='Store categories as tags'),
         )
     SITE = Site.objects.get_current()
 
@@ -55,7 +57,8 @@ class Command(LabelCommand):
         try:
             import feedparser
         except ImportError:
-            raise CommandError('You need to install the feedparser module to run this command.')
+            raise CommandError('You need to install the feedparser ' \
+                               'module to run this command.')
 
         self.verbosity = int(options.get('verbosity', 1))
         self.auto_excerpt = options.get('auto_excerpt', True)
@@ -63,11 +66,13 @@ class Command(LabelCommand):
         self.category_tag = options.get('category-tag', False)
         if self.default_author:
             try:
-                self.default_author = User.objects.get(username=self.default_author)
+                self.default_author = User.objects.get(
+                    username=self.default_author)
             except User.DoesNotExist:
                 raise CommandError('Invalid username for default author')
 
-        self.write_out(self.style.TITLE('Starting importation of %s to Zinnia %s:\n' % (url, __version__)))
+        self.write_out(self.style.TITLE(
+            'Starting importation of %s to Zinnia %s:\n' % (url, __version__)))
 
         feed = feedparser.parse(url)
         self.import_entries(feed.entries)
@@ -83,7 +88,8 @@ class Command(LabelCommand):
                                     creation_date__month=creation_date.month,
                                     creation_date__day=creation_date.day,
                                     slug=slug):
-                self.write_out(self.style.NOTICE('SKIPPED (already imported)\n'))
+                self.write_out(self.style.NOTICE(
+                    'SKIPPED (already imported)\n'))
                 continue
 
             categories = self.import_categories(feed_entry)
@@ -97,7 +103,8 @@ class Command(LabelCommand):
                           'slug': slug}
 
             if not entry_dict['excerpt'] and self.auto_excerpt:
-                entry_dict['excerpt'] = truncate_words(strip_tags(feed_entry.description), 50)
+                entry_dict['excerpt'] = truncate_words(
+                    strip_tags(feed_entry.description), 50)
             if self.category_tag:
                 entry_dict['tags'] = self.import_tags(categories)
 
@@ -110,10 +117,12 @@ class Command(LabelCommand):
                 entry.authors.add(self.default_author)
             elif feed_entry.get('author_detail'):
                 try:
-                    user = User.objects.create_user(slugify(feed_entry.author_detail.get('name')),
-                                                    feed_entry.author_detail.get('email', ''))
+                    user = User.objects.create_user(
+                        slugify(feed_entry.author_detail.get('name')),
+                        feed_entry.author_detail.get('email', ''))
                 except IntegrityError:
-                    user = User.objects.get(username=slugify(feed_entry.author_detail.get('name')))
+                    user = User.objects.get(
+                        username=slugify(feed_entry.author_detail.get('name')))
                 entry.authors.add(user)
 
             self.write_out(self.style.ITEM('OK\n'))
