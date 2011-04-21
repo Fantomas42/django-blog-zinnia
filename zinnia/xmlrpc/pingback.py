@@ -54,7 +54,8 @@ def generate_pingback_content(soup, target, max_length, trunc_char='...'):
 def pingback_ping(source, target):
     """pingback.ping(sourceURI, targetURI) => 'Pingback message'
 
-    Notifies the server that a link has been added to sourceURI, pointing to targetURI.
+    Notifies the server that a link has been added to sourceURI,
+    pointing to targetURI.
 
     See: http://hixie.ch/specs/pingback/pingback-1.0"""
     try:

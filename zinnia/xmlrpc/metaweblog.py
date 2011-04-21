@@ -162,7 +162,8 @@ def get_post(post_id, username, password):
     return post_structure(Entry.objects.get(id=post_id, authors=user), site)
 
 
-@xmlrpc_func(returns='struct[]', args=['string', 'string', 'string', 'integer'])
+@xmlrpc_func(returns='struct[]',
+             args=['string', 'string', 'string', 'integer'])
 def get_recent_posts(blog_id, username, password, number):
     """metaWeblog.getRecentPosts(blog_id, username, password, number)
     => post structure[]"""

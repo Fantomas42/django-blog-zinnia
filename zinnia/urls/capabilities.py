@@ -27,7 +27,8 @@ urlpatterns = patterns('django.views.generic.simple',
                            name='zinnia_wlwmanifest'),
                        url(r'^opensearch.xml$', 'direct_to_template',
                            {'template': 'zinnia/opensearch.xml',
-                            'mimetype': 'application/opensearchdescription+xml',
+                            'mimetype':
+                            'application/opensearchdescription+xml',
                             'extra_context': extra_context_opensearch},
                            name='zinnia_opensearch'),
                        )

@@ -46,12 +46,10 @@ MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
                      'Author': lambda x: [Crumb(_('Authors'),
                                               reverse('zinnia_author_list')),
                                         Crumb(x.username)],
-                     'Category': lambda x: [Crumb(_('Categories'),
-                                                  reverse('zinnia_category_list'))] + \
-                                           [Crumb(anc.title,
-                                                  anc.get_absolute_url())
-                                            for anc in x.get_ancestors()] + \
-                                           [Crumb(x.title)],
+                     'Category': lambda x: [Crumb(
+                         _('Categories'), reverse('zinnia_category_list'))] + \
+                     [Crumb(anc.title, anc.get_absolute_url())
+                      for anc in x.get_ancestors()] + [Crumb(x.title)],
                      'Entry': lambda x: [year_crumb(x.creation_date),
                                          month_crumb(x.creation_date),
                                          day_crumb(x.creation_date),
