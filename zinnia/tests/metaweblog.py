@@ -1,8 +1,8 @@
 """Test cases for Zinnia's MetaWeblog API"""
 from xmlrpclib import Binary
 from xmlrpclib import Fault
-from datetime import datetime
 from xmlrpclib import ServerProxy
+from datetime import datetime
 from tempfile import TemporaryFile
 
 from django.test import TestCase
@@ -26,17 +26,20 @@ class MetaWeblogTestCase(TestCase):
 
     def setUp(self):
         # Create data
-        self.webmaster = User.objects.create_superuser(username='webmaster',
-                                                       email='webmaster@example.com',
-                                                       password='password')
-        self.contributor = User.objects.create_user(username='contributor',
-                                                    email='contributor@example.com',
-                                                    password='password')
+        self.webmaster = User.objects.create_superuser(
+            username='webmaster',
+            email='webmaster@example.com',
+            password='password')
+        self.contributor = User.objects.create_user(
+            username='contributor',
+            email='contributor@example.com',
+            password='password')
         self.site = Site.objects.get_current()
-        self.categories = [Category.objects.create(title='Category 1',
-                                                   slug='category-1'),
-                           Category.objects.create(title='Category 2',
-                                                   slug='category-2')]
+        self.categories = [
+            Category.objects.create(title='Category 1',
+                                    slug='category-1'),
+            Category.objects.create(title='Category 2',
+                                    slug='category-2')]
         params = {'title': 'My entry 1', 'content': 'My content 1',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1',
                   'creation_date': datetime(2010, 1, 1),
@@ -63,10 +66,14 @@ class MetaWeblogTestCase(TestCase):
         self.assertRaises(Fault, authenticate, 'contributor', 'password')
         self.contributor.is_staff = True
         self.contributor.save()
-        self.assertEquals(authenticate('contributor', 'password'), self.contributor)
-        self.assertRaises(Fault, authenticate, 'contributor', 'password', 'zinnia.change_entry')
-        self.assertEquals(authenticate('webmaster', 'password'), self.webmaster)
-        self.assertEquals(authenticate('webmaster', 'password', 'zinnia.change_entry'),
+        self.assertEquals(authenticate('contributor', 'password'),
+                          self.contributor)
+        self.assertRaises(Fault, authenticate, 'contributor',
+                          'password', 'zinnia.change_entry')
+        self.assertEquals(authenticate('webmaster', 'password'),
+                          self.webmaster)
+        self.assertEquals(authenticate('webmaster', 'password',
+                                       'zinnia.change_entry'),
                           self.webmaster)
 
     def test_get_users_blogs(self):
@@ -88,7 +95,8 @@ class MetaWeblogTestCase(TestCase):
             'apikey', 'webmaster', 'password'),
                           {'firstname': 'John', 'lastname': 'Doe',
                            'url': 'http://example.com/authors/webmaster/',
-                           'userid': self.webmaster.pk, 'nickname': 'webmaster',
+                           'userid': self.webmaster.pk,
+                           'nickname': 'webmaster',
                            'email': 'webmaster@example.com'})
 
     def test_get_authors(self):
@@ -96,44 +104,49 @@ class MetaWeblogTestCase(TestCase):
                           'apikey', 'contributor', 'password')
         self.assertEquals(self.server.wp.getAuthors(
             'apikey', 'webmaster', 'password'), [
-                              {'user_login': 'webmaster', 'user_id': self.webmaster.pk,
+                              {'user_login': 'webmaster',
+                               'user_id': self.webmaster.pk,
                                'user_email': 'webmaster@example.com',
                                'display_name': 'webmaster'}])
 
     def test_get_categories(self):
         self.assertRaises(Fault, self.server.metaWeblog.getCategories,
                           1, 'contributor', 'password')
-        self.assertEquals(self.server.metaWeblog.getCategories(
-            'apikey', 'webmaster', 'password'),
-                          [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
-                            'description': 'Category 1',
-                            'htmlUrl': 'http://example.com/categories/category-1/',
-                            'categoryId': 1, 'parentId': 0,
-                            'categoryName': 'Category 1',
-                            'categoryDescription': ''},
-                           {'rssUrl': 'http://example.com/feeds/categories/category-2/',
-                            'description': 'Category 2',
-                            'htmlUrl': 'http://example.com/categories/category-2/',
-                            'categoryId': 2, 'parentId': 0,
-                            'categoryName': 'Category 2',
-                            'categoryDescription': ''}])
+        self.assertEquals(
+            self.server.metaWeblog.getCategories('apikey',
+                                                 'webmaster', 'password'),
+            [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
+              'description': 'Category 1',
+              'htmlUrl': 'http://example.com/categories/category-1/',
+              'categoryId': 1, 'parentId': 0,
+              'categoryName': 'Category 1',
+              'categoryDescription': ''},
+             {'rssUrl': 'http://example.com/feeds/categories/category-2/',
+              'description': 'Category 2',
+              'htmlUrl': 'http://example.com/categories/category-2/',
+              'categoryId': 2, 'parentId': 0,
+              'categoryName': 'Category 2',
+              'categoryDescription': ''}])
         self.categories[1].parent = self.categories[0]
         self.categories[1].description = 'category 2 description'
         self.categories[1].save()
-        self.assertEquals(self.server.metaWeblog.getCategories(
-            'apikey', 'webmaster', 'password'),
-                          [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
-                            'description': 'Category 1',
-                            'htmlUrl': 'http://example.com/categories/category-1/',
-                            'categoryId': 1, 'parentId': 0,
-                            'categoryName': 'Category 1',
-                            'categoryDescription': ''},
-                           {'rssUrl': 'http://example.com/feeds/categories/category-1/category-2/',
-                            'description': 'Category 2',
-                            'htmlUrl': 'http://example.com/categories/category-1/category-2/',
-                            'categoryId': 2, 'parentId': 1,
-                            'categoryName': 'Category 2',
-                            'categoryDescription': 'category 2 description'}])
+        self.assertEquals(
+            self.server.metaWeblog.getCategories('apikey',
+                                                 'webmaster', 'password'),
+            [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
+              'description': 'Category 1',
+              'htmlUrl': 'http://example.com/categories/category-1/',
+              'categoryId': 1, 'parentId': 0,
+              'categoryName': 'Category 1',
+              'categoryDescription': ''},
+             {'rssUrl':
+              'http://example.com/feeds/categories/category-1/category-2/',
+              'description': 'Category 2',
+              'htmlUrl':
+              'http://example.com/categories/category-1/category-2/',
+              'categoryId': 2, 'parentId': 1,
+              'categoryName': 'Category 2',
+              'categoryDescription': 'category 2 description'}])
 
     def test_new_category(self):
         category_struct = {'name': 'Category 3', 'slug': 'category-3',
@@ -161,8 +174,9 @@ class MetaWeblogTestCase(TestCase):
         self.assertRaises(Fault, self.server.blogger.deletePost,
                           'apikey', 1, 'contributor', 'password', 'publish')
         self.assertEquals(Entry.objects.count(), 2)
-        self.assertEquals(self.server.blogger.deletePost(
-            'apikey', self.entry_1.pk, 'webmaster', 'password', 'publish'), True)
+        self.assertTrue(
+            self.server.blogger.deletePost(
+            'apikey', self.entry_1.pk, 'webmaster', 'password', 'publish'))
         self.assertEquals(Entry.objects.count(), 1)
 
     def test_get_post(self):
@@ -174,8 +188,10 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(post['description'], '<p>My content 1</p>')
         self.assertEquals(post['categories'], ['Category 1', 'Category 2'])
         self.assertEquals(post['dateCreated'].value, '2010-01-01T00:00:00')
-        self.assertEquals(post['link'], 'http://example.com/2010/01/01/my-entry-1/')
-        self.assertEquals(post['permaLink'], 'http://example.com/2010/01/01/my-entry-1/')
+        self.assertEquals(post['link'],
+                          'http://example.com/2010/01/01/my-entry-1/')
+        self.assertEquals(post['permaLink'],
+                          'http://example.com/2010/01/01/my-entry-1/')
         self.assertEquals(post['postid'], self.entry_1.pk)
         self.assertEquals(post['userid'], 'webmaster')
         self.assertEquals(post['mt_excerpt'], '')
@@ -276,4 +292,5 @@ class MetaWeblogTestCase(TestCase):
         new_media = self.server.metaWeblog.newMediaObject(
             1, 'webmaster', 'password', media)
         self.assertTrue('/zinnia_test_file' in new_media['url'])
-        default_storage.delete('/'.join([UPLOAD_TO, new_media['url'].split('/')[-1]]))
+        default_storage.delete('/'.join([
+            UPLOAD_TO, new_media['url'].split('/')[-1]]))

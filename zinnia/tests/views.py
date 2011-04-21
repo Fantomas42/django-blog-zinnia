@@ -20,9 +20,8 @@ class ViewsBaseCase(TestCase):
 
     def setUp(self):
         self.site = Site.objects.get_current()
-        self.author = User.objects.create_superuser(username='admin',
-                                                    email='admin@example.com',
-                                                    password='password')
+        self.author = User.objects.create_superuser(
+            username='admin', email='admin@example.com', password='password')
         self.category = Category.objects.create(title='Tests', slug='tests')
         params = {'title': 'Test 1',
                   'content': 'First test entry published',
@@ -67,7 +66,8 @@ class ViewsBaseCase(TestCase):
         if second_expected:
             self.create_published_entry()
             response = self.client.get(url)
-            self.assertEquals(len(response.context['object_list']), second_expected)
+            self.assertEquals(
+                len(response.context['object_list']), second_expected)
         return response
 
 
@@ -200,10 +200,12 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.check_publishing_context('/search/?pattern=test', 2, 3)
         response = self.client.get('/search/?pattern=ab')
         self.assertEquals(len(response.context['object_list']), 0)
-        self.assertEquals(response.context['error'], _('The pattern is too short'))
+        self.assertEquals(response.context['error'],
+                          _('The pattern is too short'))
         response = self.client.get('/search/')
         self.assertEquals(len(response.context['object_list']), 0)
-        self.assertEquals(response.context['error'], _('No pattern to search found'))
+        self.assertEquals(response.context['error'],
+                          _('No pattern to search found'))
 
     def test_zinnia_sitemap(self):
         response = self.client.get('/sitemap/')
@@ -224,21 +226,32 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         except AssertionError:
             response = self.client.post('/trackback/404/')
             self.assertEquals(response.status_code, 404)
-        self.assertEquals(self.client.post('/trackback/test-1/').status_code, 301)
-        self.assertEquals(self.client.get('/trackback/test-1/').status_code, 301)
+        self.assertEquals(
+            self.client.post('/trackback/test-1/').status_code, 301)
+        self.assertEquals(
+            self.client.get('/trackback/test-1/').status_code, 301)
         entry = Entry.objects.get(slug='test-1')
         entry.pingback_enabled = False
         entry.save()
-        self.assertEquals(self.client.post('/trackback/test-1/', {'url': 'http://example.com'}).content,
-                          '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  <error>1</error>\n  '
-                          '<message>Trackback is not enabled for Test 1</message>\n  \n</response>\n')
+        self.assertEquals(
+            self.client.post('/trackback/test-1/',
+                             {'url': 'http://example.com'}).content,
+            '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
+            '<error>1</error>\n  <message>Trackback is not enabled for '
+            'Test 1</message>\n  \n</response>\n')
         entry.pingback_enabled = True
         entry.save()
-        self.assertEquals(self.client.post('/trackback/test-1/', {'url': 'http://example.com'}).content,
-                          '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  <error>0</error>\n  \n</response>\n')
-        self.assertEquals(self.client.post('/trackback/test-1/', {'url': 'http://example.com'}).content,
-                          '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  <error>1</error>\n  '
-                          '<message>Trackback is already registered</message>\n  \n</response>\n')
+        self.assertEquals(
+            self.client.post('/trackback/test-1/',
+                             {'url': 'http://example.com'}).content,
+            '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
+            '<error>0</error>\n  \n</response>\n')
+        self.assertEquals(
+            self.client.post('/trackback/test-1/',
+                             {'url': 'http://example.com'}).content,
+            '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
+            '<error>1</error>\n  <message>Trackback is already registered'
+            '</message>\n  \n</response>\n')
 
 
 class ZinniaCustomDetailViews(ViewsBaseCase):

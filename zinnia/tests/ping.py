@@ -59,7 +59,8 @@ class ExternalUrlsPingerTestCase(TestCase):
         external_urls = self.pinger.find_external_urls(self.entry)
         self.assertEquals(external_urls, [])
         self.entry.content = """
-        <p>This is a <a href="http://fantomas.willbreak.it/">link</a> to a site.</p>
+        <p>This is a <a href="http://fantomas.willbreak.it/">link</a>
+        to a site.</p>
         <p>This is a <a href="%s/blog/">link</a> within my site.</p>
         <p>This is a <a href="/blog/">relative link</a> within my site.</p>
         """ % r.site_url
@@ -71,11 +72,13 @@ class ExternalUrlsPingerTestCase(TestCase):
         result = self.pinger.find_pingback_href('')
         self.assertEquals(result, None)
         result = self.pinger.find_pingback_href("""
-        <html><head><link rel="pingback" href="/xmlrpc/" /></head><body></body></html>
+        <html><head><link rel="pingback" href="/xmlrpc/" /></head>
+        <body></body></html>
         """)
         self.assertEquals(result, '/xmlrpc/')
         result = self.pinger.find_pingback_href("""
-        <html><head><LINK hrEF="/xmlrpc/" REL="PingBack" /></head><body></body></html>
+        <html><head><LINK hrEF="/xmlrpc/" REL="PingBack" /></head>
+        <body></body></html>
         """)
         self.assertEquals(result, '/xmlrpc/')
         result = self.pinger.find_pingback_href("""
@@ -89,7 +92,8 @@ class ExternalUrlsPingerTestCase(TestCase):
             response = cStringIO.StringIO('')
             return addinfourl(response, {'X-Pingback': '/xmlrpc.php'}, url)
         elif 'localhost' in url:
-            response = cStringIO.StringIO('<link rel="pingback" href="/xmlrpc/">')
+            response = cStringIO.StringIO(
+                '<link rel="pingback" href="/xmlrpc/">')
             return addinfourl(response, {}, url)
         elif 'error' in url:
             raise URLError('Invalid ressource')
@@ -101,9 +105,10 @@ class ExternalUrlsPingerTestCase(TestCase):
         zinnia.ping.urlopen = self.fake_urlopen
 
         urls = ['http://localhost/', 'http://example.com/', 'http://error']
-        self.assertEquals(self.pinger.find_pingback_urls(urls),
-                          {'http://localhost/': 'http://localhost/xmlrpc/',
-                           'http://example.com/': 'http://example.com/xmlrpc.php'})
+        self.assertEquals(
+            self.pinger.find_pingback_urls(urls),
+            {'http://localhost/': 'http://localhost/xmlrpc/',
+             'http://example.com/': 'http://example.com/xmlrpc.php'})
         # Remove stub
         zinnia.ping.urlopen = self.original_urlopen
 

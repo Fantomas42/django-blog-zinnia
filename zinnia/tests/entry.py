@@ -53,10 +53,11 @@ class EntryTestCase(TestCase):
         author = User.objects.create_user(username='webmaster',
                                           email='webmaster@example.com')
 
-        comment = Comment.objects.create(comment='My Comment 3',
-                                         content_object=self.entry,
-                                         site=Site.objects.create(domain='http://toto.com',
-                                                                  name='Toto.com'))
+        comment = Comment.objects.create(
+            comment='My Comment 3',
+            content_object=self.entry,
+            site=Site.objects.create(domain='http://toto.com',
+                                     name='Toto.com'))
         comment.flags.create(user=author, flag=CommentFlag.MODERATOR_APPROVAL)
         self.assertEquals(self.entry.discussions.count(), 2)
         self.assertEquals(self.entry.comments.count(), 2)

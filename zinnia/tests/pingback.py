@@ -59,8 +59,9 @@ class PingBackTestCase(TestCase):
         self.first_entry.authors.add(self.author)
 
         params = {'title': 'My second entry',
-                  'content': 'My second content with link ' \
-                  'to <a href="http://%s%s">first entry</a> and other links : %s %s.' % (
+                  'content': 'My second content with link '
+                  'to <a href="http://%s%s">first entry</a>'
+                  ' and other links : %s %s.' % (
                       self.site.domain,
                       self.first_entry.get_absolute_url(),
                       'http://localhost:8000/error-404/',
@@ -82,24 +83,32 @@ class PingBackTestCase(TestCase):
 
     def test_generate_pingback_content(self):
         soup = BeautifulSoup(self.second_entry.content)
-        target = 'http://%s%s' % (self.site.domain, self.first_entry.get_absolute_url())
+        target = 'http://%s%s' % (self.site.domain,
+                                  self.first_entry.get_absolute_url())
 
-        self.assertEquals(generate_pingback_content(soup, target, 1000),
-                          'My second content with link to first entry and '\
-                          'other links : http://localhost:8000/error-404/ http://example.com/.')
-        self.assertEquals(generate_pingback_content(soup, target, 50),
-                          '...ond content with link to first entry and other lin...')
+        self.assertEquals(
+            generate_pingback_content(soup, target, 1000),
+            'My second content with link to first entry and other links : '
+            'http://localhost:8000/error-404/ http://example.com/.')
+        self.assertEquals(
+            generate_pingback_content(soup, target, 50),
+            '...ond content with link to first entry and other lin...')
 
         soup = BeautifulSoup('<a href="%s">test link</a>' % target)
-        self.assertEquals(generate_pingback_content(soup, target, 6), 'test l...')
+        self.assertEquals(
+            generate_pingback_content(soup, target, 6), 'test l...')
 
         soup = BeautifulSoup('test <a href="%s">link</a>' % target)
-        self.assertEquals(generate_pingback_content(soup, target, 8), '...est link')
-        self.assertEquals(generate_pingback_content(soup, target, 9), 'test link')
+        self.assertEquals(
+            generate_pingback_content(soup, target, 8), '...est link')
+        self.assertEquals(
+            generate_pingback_content(soup, target, 9), 'test link')
 
     def test_pingback_ping(self):
-        target = 'http://%s%s' % (self.site.domain, self.first_entry.get_absolute_url())
-        source = 'http://%s%s' % (self.site.domain, self.second_entry.get_absolute_url())
+        target = 'http://%s%s' % (
+            self.site.domain, self.first_entry.get_absolute_url())
+        source = 'http://%s%s' % (
+            self.site.domain, self.second_entry.get_absolute_url())
 
         # Error code 0 : A generic fault code
         response = self.server.pingback.ping('toto', 'titi')
@@ -112,13 +121,14 @@ class PingBackTestCase(TestCase):
         response = self.server.pingback.ping('http://example.com/', target)
         self.assertEquals(response, 16)
 
-        # Error code 17 : The source URI does not contain a link to the target URI,
-        # and so cannot be used as a source.
+        # Error code 17 : The source URI does not contain a link to
+        # the target URI and so cannot be used as a source.
         response = self.server.pingback.ping(source, 'toto')
         self.assertEquals(response, 17)
 
         # Error code 32 : The target URI does not exist.
-        response = self.server.pingback.ping(source, 'http://localhost:8000/error-404/')
+        response = self.server.pingback.ping(
+            source, 'http://localhost:8000/error-404/')
         self.assertEquals(response, 32)
         response = self.server.pingback.ping(source, 'http://example.com/')
         self.assertEquals(response, 32)
@@ -136,7 +146,9 @@ class PingBackTestCase(TestCase):
         self.first_entry.pingback_enabled = True
         self.first_entry.save()
         response = self.server.pingback.ping(source, target)
-        self.assertEquals(response, 'Pingback from %s to %s registered.' % (source, target))
+        self.assertEquals(
+            response,
+            'Pingback from %s to %s registered.' % (source, target))
         self.assertEquals(self.first_entry.pingbacks.count(), 1)
         self.assertEquals(self.first_entry.pingbacks[0].user_name,
                           'Zinnia\'s Blog - %s' % self.second_entry.title)
@@ -146,33 +158,43 @@ class PingBackTestCase(TestCase):
         self.assertEquals(response, 48)
 
     def test_pingback_extensions_get_pingbacks(self):
-        target = 'http://%s%s' % (self.site.domain, self.first_entry.get_absolute_url())
-        source = 'http://%s%s' % (self.site.domain, self.second_entry.get_absolute_url())
+        target = 'http://%s%s' % (
+            self.site.domain, self.first_entry.get_absolute_url())
+        source = 'http://%s%s' % (
+            self.site.domain, self.second_entry.get_absolute_url())
 
         response = self.server.pingback.ping(source, target)
-        self.assertEquals(response, 'Pingback from %s to %s registered.' % (source, target))
+        self.assertEquals(
+            response, 'Pingback from %s to %s registered.' % (source, target))
 
-        response = self.server.pingback.extensions.getPingbacks('http://example.com/')
+        response = self.server.pingback.extensions.getPingbacks(
+            'http://example.com/')
         self.assertEquals(response, 32)
 
-        response = self.server.pingback.extensions.getPingbacks('http://localhost:8000/error-404/')
+        response = self.server.pingback.extensions.getPingbacks(
+            'http://localhost:8000/error-404/')
         self.assertEquals(response, 32)
 
-        response = self.server.pingback.extensions.getPingbacks('http://localhost:8000/2010/')
+        response = self.server.pingback.extensions.getPingbacks(
+            'http://localhost:8000/2010/')
         self.assertEquals(response, 33)
 
         response = self.server.pingback.extensions.getPingbacks(source)
         self.assertEquals(response, [])
 
         response = self.server.pingback.extensions.getPingbacks(target)
-        self.assertEquals(response, ['http://localhost:8000/2010/01/01/my-second-entry/'])
+        self.assertEquals(response, [
+            'http://localhost:8000/2010/01/01/my-second-entry/'])
 
         comment = Comment.objects.create(
             content_type=ContentType.objects.get_for_model(Entry),
-            object_pk=self.first_entry.pk, site=self.site, comment='Test pingback',
-            user_url='http://example.com/blog/1/', user_name='Test pingback')
+            object_pk=self.first_entry.pk,
+            site=self.site, comment='Test pingback',
+            user_url='http://example.com/blog/1/',
+            user_name='Test pingback')
         comment.flags.create(user=self.author, flag='pingback')
 
         response = self.server.pingback.extensions.getPingbacks(target)
-        self.assertEquals(response, ['http://localhost:8000/2010/01/01/my-second-entry/',
-                                     'http://example.com/blog/1/'])
+        self.assertEquals(response, [
+            'http://localhost:8000/2010/01/01/my-second-entry/',
+            'http://example.com/blog/1/'])

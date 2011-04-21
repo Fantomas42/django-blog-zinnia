@@ -42,12 +42,14 @@ class ZinniaSitemapsTestCase(TestCase):
     def test_entry_sitemap(self):
         sitemap = EntrySitemap()
         self.assertEquals(len(sitemap.items()), 2)
-        self.assertEquals(sitemap.lastmod(self.entry_1), self.entry_1.last_update)
+        self.assertEquals(sitemap.lastmod(self.entry_1),
+                          self.entry_1.last_update)
 
     def test_category_sitemap(self):
         sitemap = CategorySitemap()
         self.assertEquals(len(sitemap.items()), 1)
-        self.assertEquals(sitemap.lastmod(self.category), self.entry_2.creation_date)
+        self.assertEquals(sitemap.lastmod(self.category),
+                          self.entry_2.creation_date)
         self.assertEquals(sitemap.lastmod(Category.objects.create(
             title='New', slug='new')), None)
         self.assertEquals(sitemap.priority(self.category), '1.0')
@@ -55,7 +57,8 @@ class ZinniaSitemapsTestCase(TestCase):
     def test_author_sitemap(self):
         sitemap = AuthorSitemap()
         self.assertEquals(len(sitemap.items()), 1)
-        self.assertEquals(sitemap.lastmod(self.author), self.entry_2.creation_date)
+        self.assertEquals(sitemap.lastmod(self.author),
+                          self.entry_2.creation_date)
         self.assertEquals(sitemap.lastmod(User.objects.create(
             username='New', email='new@example.com')), None)
         self.assertEquals(sitemap.location(self.author), '/authors/admin/')
@@ -64,7 +67,8 @@ class ZinniaSitemapsTestCase(TestCase):
         sitemap = TagSitemap()
         zinnia_tag = Tag.objects.get(name='zinnia')
         self.assertEquals(len(sitemap.items()), 2)
-        self.assertEquals(sitemap.lastmod(zinnia_tag), self.entry_2.creation_date)
+        self.assertEquals(sitemap.lastmod(zinnia_tag),
+                          self.entry_2.creation_date)
         self.assertEquals(sitemap.priority(zinnia_tag), '1.0')
         self.assertEquals(sitemap.location(zinnia_tag), '/tags/zinnia/')
 
