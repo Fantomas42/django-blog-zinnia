@@ -74,15 +74,17 @@ class Command(LabelCommand):
 
         self.write_out(self.style.TITLE('Starting migration from Wordpress to Zinnia %s:\n' % __version__))
 
-        tree = ET.parse(wxr_file)
+        self.write_out(self.style.TITLE('Start to parse XML file'))
 
+        tree = ET.parse(wxr_file)
+        print "TREE IS PARSED"
         self.authors = self.import_authors(tree)
 
         self.categories = self.import_categories(
-            tree.findall('channel/{http://wordpress.org/export/1.0/}category'))
+            tree.findall('channel/{http://wordpress.org/export/1.1/}category'))
 
         self.import_tags(
-            tree.findall('channel/{http://wordpress.org/export/1.0/}tag'))
+            tree.findall('channel/{http://wordpress.org/export/1.1/}tag'))
 
         self.import_entries(tree.findall('channel/item'))
 
@@ -91,10 +93,11 @@ class Command(LabelCommand):
         and convert it to new or existing user, and
         return the convertion"""
         self.write_out(self.style.STEP('- Importing authors\n'))
-
+        import pdb
+        pdb.set_trace()
         post_authors = set()
         for item in tree.findall('channel/item'):
-            post_type = item.find('{http://wordpress.org/export/1.0/}post_type').text
+            post_type = item.find('{http://wordpress.org/export/1.1/}post_type').text
             if post_type == 'post':
                 post_authors.add(item.find('{http://purl.org/dc/elements/1.1/}creator').text)
 
@@ -146,10 +149,10 @@ class Command(LabelCommand):
 
         categories = {}
         for category_node in category_nodes:
-            title = category_node.find('{http://wordpress.org/export/1.0/}cat_name').text[:255]
-            slug = category_node.find('{http://wordpress.org/export/1.0/}category_nicename').text[:255]
+            title = category_node.find('{http://wordpress.org/export/1.1/}cat_name').text[:255]
+            slug = category_node.find('{http://wordpress.org/export/1.1/}category_nicename').text[:255]
             try:
-                parent = category_node.find('{http://wordpress.org/export/1.0/}category_parent').text[:255]
+                parent = category_node.find('{http://wordpress.org/export/1.1/}category_parent').text[:255]
             except TypeError:
                 parent = None
             self.write_out('> %s... ' % title)
@@ -166,7 +169,7 @@ class Command(LabelCommand):
         a slug and the true tag name may be not valid for url usage."""
         self.write_out(self.style.STEP('- Importing tags\n'))
         for tag_node in tag_nodes:
-            tag_name = tag_node.find('{http://wordpress.org/export/1.0/}tag_slug').text[:50]
+            tag_name = tag_node.find('{http://wordpress.org/export/1.1/}tag_slug').text[:50]
             self.write_out('> %s... ' % tag_name)
             Tag.objects.get_or_create(name=tag_name)
             self.write_out(self.style.ITEM('OK\n'))
@@ -197,10 +200,10 @@ class Command(LabelCommand):
         start_publication and creation_date will use the same value,
         wich is always in Wordpress $post->post_date"""
         creation_date = datetime.strptime(
-            item_node.find('{http://wordpress.org/export/1.0/}post_date').text,
+            item_node.find('{http://wordpress.org/export/1.1/}post_date').text,
             '%Y-%m-%d %H:%M:%S')
 
-        excerpt = item_node.find('{http://wordpress.org/export/1.0/excerpt/}encoded').text
+        excerpt = item_node.find('{http://wordpress.org/export/1.1/excerpt/}encoded').text
         if not excerpt:
             if self.auto_excerpt:
                 excerpt = truncate_words(strip_tags(content), 50)
@@ -210,16 +213,16 @@ class Command(LabelCommand):
         entry_dict = {'content': content,
                       'excerpt': excerpt,
                       # Prefer use this function than
-                      # item_node.find('{http://wordpress.org/export/1.0/}post_name').text
+                      # item_node.find('{http://wordpress.org/export/1.1/}post_name').text
                       # Because slug can be not well formated
-                      'slug': slugify(title)[:255] or 'post-%s' % item_node.find('{http://wordpress.org/export/1.0/}post_id').text,
+                      'slug': slugify(title)[:255] or 'post-%s' % item_node.find('{http://wordpress.org/export/1.1/}post_id').text,
                       'tags': ', '.join(self.get_entry_tags(item_node.findall('category'))),
-                      'status': self.REVERSE_STATUS[item_node.find('{http://wordpress.org/export/1.0/}status').text],
-                      'comment_enabled': item_node.find('{http://wordpress.org/export/1.0/}comment_status').text == 'open',
-                      'pingback_enabled': item_node.find('{http://wordpress.org/export/1.0/}ping_status').text == 'open',
-                      'featured': item_node.find('{http://wordpress.org/export/1.0/}is_sticky').text == '1',
-                      'password': item_node.find('{http://wordpress.org/export/1.0/}post_password').text or '',
-                      'login_required': item_node.find('{http://wordpress.org/export/1.0/}status').text == 'private',
+                      'status': self.REVERSE_STATUS[item_node.find('{http://wordpress.org/export/1.1/}status').text],
+                      'comment_enabled': item_node.find('{http://wordpress.org/export/1.1/}comment_status').text == 'open',
+                      'pingback_enabled': item_node.find('{http://wordpress.org/export/1.1/}ping_status').text == 'open',
+                      'featured': item_node.find('{http://wordpress.org/export/1.1/}is_sticky').text == '1',
+                      'password': item_node.find('{http://wordpress.org/export/1.1/}post_password').text or '',
+                      'login_required': item_node.find('{http://wordpress.org/export/1.1/}status').text == 'private',
                       'creation_date': creation_date,
                       'last_update': datetime.now(),
                       'start_publication': creation_date}
@@ -231,8 +234,8 @@ class Command(LabelCommand):
         entry.authors.add(self.authors[item_node.find('{http://purl.org/dc/elements/1.1/}creator').text])
         entry.sites.add(self.SITE)
 
-        #current_id = item_node.find('{http://wordpress.org/export/1.0/}post_id').text
-        #parent_id = item_node.find('{http://wordpress.org/export/1.0/}post_parent').text
+        #current_id = item_node.find('{http://wordpress.org/export/1.1/}post_id').text
+        #parent_id = item_node.find('{http://wordpress.org/export/1.1/}post_parent').text
 
         return entry
 
@@ -244,7 +247,7 @@ class Command(LabelCommand):
 
         for item_node in items:
             title = (item_node.find('title').text or '')[:255]
-            post_type = item_node.find('{http://wordpress.org/export/1.0/}post_type').text
+            post_type = item_node.find('{http://wordpress.org/export/1.1/}post_type').text
             content = item_node.find('{http://purl.org/rss/1.0/modules/content/}encoded').text
 
             if post_type == 'post' and content and title:
@@ -252,7 +255,7 @@ class Command(LabelCommand):
                 entry = self.import_entry(title, content, item_node)
                 self.write_out(self.style.ITEM('OK\n'))
                 self.import_comments(entry, item_node.findall(
-                    '{http://wordpress.org/export/1.0/}comment/'))
+                    '{http://wordpress.org/export/1.1/}comment/'))
             else:
                 self.write_out('> %s... ' % title, 2)
                 self.write_out(self.style.NOTICE('SKIPPED (not a post)\n'), 2)
@@ -262,25 +265,25 @@ class Command(LabelCommand):
         in django.contrib.comments"""
         for comment_node in comment_nodes:
             is_pingback = comment_node.find(
-                '{http://wordpress.org/export/1.0/}comment_type').text == 'pingback'
+                '{http://wordpress.org/export/1.1/}comment_type').text == 'pingback'
             is_trackback = comment_node.find(
-                '{http://wordpress.org/export/1.0/}comment_type').text == 'trackback'
+                '{http://wordpress.org/export/1.1/}comment_type').text == 'trackback'
 
             title = 'Comment #%s' % (comment_node.find(
-                '{http://wordpress.org/export/1.0/}comment_id/').text)
+                '{http://wordpress.org/export/1.1/}comment_id/').text)
             self.write_out(' > %s... ' % title)
 
             content = comment_node.find(
-                '{http://wordpress.org/export/1.0/}comment_content/').text
+                '{http://wordpress.org/export/1.1/}comment_content/').text
             if not content:
                 self.write_out(self.style.NOTICE('SKIPPED (unfilled)\n'))
                 return
 
             submit_date = datetime.strptime(
-                comment_node.find('{http://wordpress.org/export/1.0/}comment_date').text,
+                comment_node.find('{http://wordpress.org/export/1.1/}comment_date').text,
                 '%Y-%m-%d %H:%M:%S')
 
-            approvation = comment_node.find('{http://wordpress.org/export/1.0/}comment_approved').text
+            approvation = comment_node.find('{http://wordpress.org/export/1.1/}comment_approved').text
             is_public = True
             is_removed = False
             if approvation != '1':
@@ -291,15 +294,15 @@ class Command(LabelCommand):
             comment_dict = {'content_object': entry,
                             'site': self.SITE,
                             'user_name': comment_node.find(
-                                '{http://wordpress.org/export/1.0/}comment_author/').text[:50],
+                                '{http://wordpress.org/export/1.1/}comment_author/').text[:50],
                             'user_email': comment_node.find(
-                                '{http://wordpress.org/export/1.0/}comment_author_email/').text or '',
+                                '{http://wordpress.org/export/1.1/}comment_author_email/').text or '',
                             'user_url': comment_node.find(
-                                '{http://wordpress.org/export/1.0/}comment_author_url/').text or '',
+                                '{http://wordpress.org/export/1.1/}comment_author_url/').text or '',
                             'comment': content,
                             'submit_date': submit_date,
                             'ip_address': comment_node.find(
-                                '{http://wordpress.org/export/1.0/}comment_author_IP/').text or '',
+                                '{http://wordpress.org/export/1.1/}comment_author_IP/').text or '',
                             'is_public': is_public,
                             'is_removed': is_removed, }
             comment = Comment(**comment_dict)
