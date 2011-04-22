@@ -3,7 +3,7 @@
 
 {% block title %}{% trans "Comment preview" %}{% endblock %}
 
-{% block content %}
+{% block zinnia_content %}
   {% if form.errors %}
   <h2>
     {% blocktrans count form.errors|length as errors %}Please correct following error.{% plural %}Please correct following errors.{% endblocktrans %}

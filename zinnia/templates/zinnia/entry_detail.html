@@ -23,7 +23,7 @@
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of trackbacks on" %} '{{ object.title }}'" href="{% url zinnia_entry_trackback_feed object.slug %}" />
 {% endblock %}
 
-{% block content %}
+{% block zinnia_content %}
 <div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %} span-16 last">
   {% with object.html_content|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}

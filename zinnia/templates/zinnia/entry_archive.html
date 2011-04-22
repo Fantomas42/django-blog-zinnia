@@ -24,7 +24,7 @@
 
 {% block title %}{% trans "Latest entries" %}{% endblock %}
 
-{% block content %}
+{% block zinnia_content %}
 {% get_featured_entries 5 "zinnia/tags/slider_entries.html" %}
 {{ block.super }}
 {% endblock %}

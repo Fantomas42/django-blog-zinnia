@@ -18,7 +18,7 @@
 
 {% block title %}{% trans "Latest entries" %} {% if category %}| {% trans "Category" %} {{ category }}{% endif %}{% if tag %}| {% trans "Tag" %} {{ tag }}{% endif %}{% if author %}| {% trans "Author" %} {{ author }}{% endif %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} | {% trans "Page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
 
-{% block content %}
+{% block zinnia_content %}
 {% if category %}
 <h1>{{ category.title }}</h1>
 {% if category.description %}

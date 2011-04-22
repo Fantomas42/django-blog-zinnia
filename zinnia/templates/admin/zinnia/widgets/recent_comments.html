@@ -6,7 +6,7 @@
 {% block summary %}{% trans "Recent comments" %}{% endblock %}
 {% block title %}{% trans "Recent comments" %}{% endblock %}
 
-{% block content %}
+{% block zinnia_content %}
   {% get_recent_comments 3 "admin/zinnia/widgets/_recent_comments.html" %}
 {% endblock %}
 
