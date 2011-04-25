@@ -23,7 +23,7 @@ from zinnia.models import Category
 from zinnia.signals import disconnect_zinnia_signals
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 
-WP_NS = 'http://wordpress.org/export/1.0/'
+WP_NS = 'http://wordpress.org/export/%s/'
 
 
 class Command(LabelCommand):
@@ -39,6 +39,8 @@ class Command(LabelCommand):
                     help='Do NOT generate an excerpt if not present.'),
         make_option('--author', dest='author', default='',
                     help='All imported entries belong to specified author'),
+        make_option('--wxr_version', dest='wxr_version', default='1.0',
+                    help='Wordpress XML export version'),         
         )
 
     SITE = Site.objects.get_current()
@@ -66,8 +68,10 @@ class Command(LabelCommand):
             sys.stdout.flush()
 
     def handle_label(self, wxr_file, **options):
+        global WP_NS
         self.verbosity = int(options.get('verbosity', 1))
         self.auto_excerpt = options.get('auto_excerpt', True)
+        WP_NS = WP_NS % options.get('wxr_version')
         self.default_author = options.get('author')
         if self.default_author:
             try:
