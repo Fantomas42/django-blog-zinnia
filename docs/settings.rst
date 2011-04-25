@@ -106,6 +106,11 @@ ZINNIA_MAIL_COMMENT_REPLY
   Boolean used for sending an email to comment's authors
   when a new comment is posted.
 
+ZINNIA_URL_SHORTENER_BACKEND
+  **Default :** 'zinnia.url_shortener.backends.default'
+
+  String representing the module path to the url shortener backend.
+
 ZINNIA_STOP_WORDS
   **Default :** See zinnia/settings.py
 
@@ -176,4 +181,3 @@ ZINNIA_HIDE_ENTRY_MENU
   **Default :** True
 
   Boolean used for displaying or not the entries in the EntryMenu object.
-

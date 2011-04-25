@@ -13,6 +13,7 @@ Contents:
    settings
    templatetags
    search_engines
+   url_shortener
    channels
    extending_entry_model
    import_export

@@ -12,6 +12,7 @@ this application greatest each day.
   * Kevin Renskers (Bolhoed)
   * Jonathan Stoppani (GaretJax)
   * Elijah Rutschman (elijahr)
+  * Thomas Bartelmess (tbartelmess)
   * Franck Bret
   * Jason Davies
   * Brandon Taylor

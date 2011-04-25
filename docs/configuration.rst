@@ -58,6 +58,7 @@ and add these settings. ::
 
   BITLY_LOGIN = 'your bit.ly login'
   BITLY_API_KEY = 'your bit.ly api key'
+  ZINNIA_URL_SHORTENER_BACKEND = 'zinnia.url_shortener.backends.bitly'
 
 Zinnia will do the rest.
 
