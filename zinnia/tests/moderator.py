@@ -96,7 +96,7 @@ class EntryCommentModeratorTestCase(TestCase):
                                          is_public=True, site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)
-        self.assertEquals(mail.outbox[0].to, [u'user_1@example.com'])
+        self.assertEquals(mail.outbox[0].bcc, [u'user_1@example.com'])
 
         comment = Comment.objects.create(comment='My Comment 4',
                                          user=self.author, is_public=True,
@@ -104,8 +104,8 @@ class EntryCommentModeratorTestCase(TestCase):
                                          site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 2)
-        self.assertEquals(mail.outbox[1].to, [u'user_1@example.com',
-                                              u'user_2@example.com'])
+        self.assertEquals(mail.outbox[1].bcc, [u'user_1@example.com',
+                                               u'user_2@example.com'])
 
     def test_moderate(self):
         comment = Comment.objects.create(comment='My Comment',

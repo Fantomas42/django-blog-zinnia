@@ -4,6 +4,7 @@ from django.conf import settings
 from django.template import Context
 from django.template import loader
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
@@ -109,8 +110,10 @@ class EntryCommentModerator(CommentModerator):
                       {'site': site.name,
                        'title': content_object.title}
             message = template.render(context)
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
-                      recipient_list, fail_silently=not settings.DEBUG)
+            mail = EmailMessage(subject, message,
+                                settings.DEFAULT_FROM_EMAIL,
+                                bcc=recipient_list)
+            mail.send(fail_silently=not settings.DEBUG)
 
     def moderate(self, comment, content_object, request):
         """Determine whether a given comment on a given object should be
