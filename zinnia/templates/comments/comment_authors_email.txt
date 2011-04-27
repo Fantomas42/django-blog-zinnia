@@ -1,0 +1,6 @@
+{% load i18n %}{% trans "Author" %}: {{ comment.userinfo.name }} {{ comment.userinfo.url }}
+
+{% trans "Comment" %}:
+{{ comment.comment }}
+
+{% trans "View this comment" %}: {{ protocol }}://{{ site }}{{ content_object.get_absolute_url }}#comment_{{ comment.pk }}
