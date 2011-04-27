@@ -40,7 +40,7 @@ class Command(LabelCommand):
         make_option('--author', dest='author', default='',
                     help='All imported entries belong to specified author'),
         make_option('--wxr_version', dest='wxr_version', default='1.0',
-                    help='Wordpress XML export version'),         
+                    help='Wordpress XML export version'),
         )
 
     SITE = Site.objects.get_current()
