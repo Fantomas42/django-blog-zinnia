@@ -38,6 +38,8 @@ AUTO_MODERATE_COMMENTS = getattr(settings, 'ZINNIA_AUTO_MODERATE_COMMENTS',
 
 MAIL_COMMENT_REPLY = getattr(settings, 'ZINNIA_MAIL_COMMENT_REPLY', False)
 
+MAIL_COMMENT_AUTHORS = getattr(settings, 'ZINNIA_MAIL_COMMENT_AUTHORS', True)
+
 MAIL_COMMENT_NOTIFICATION_RECIPIENTS = getattr(
     settings, 'ZINNIA_MAIL_COMMENT_NOTIFICATION_RECIPIENTS',
     [manager_tuple[1] for manager_tuple in settings.MANAGERS])

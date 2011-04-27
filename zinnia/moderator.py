@@ -13,6 +13,7 @@ from django.contrib.comments.moderation import CommentModerator
 
 from zinnia.settings import PROTOCOL
 from zinnia.settings import MAIL_COMMENT_REPLY
+from zinnia.settings import MAIL_COMMENT_AUTHORS
 from zinnia.settings import AUTO_MODERATE_COMMENTS
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.settings import MAIL_COMMENT_NOTIFICATION_RECIPIENTS
@@ -24,6 +25,7 @@ AKISMET_API_KEY = getattr(settings, 'AKISMET_SECRET_API_KEY', '')
 class EntryCommentModerator(CommentModerator):
     """Moderate the comment of Entry"""
     email_reply = MAIL_COMMENT_REPLY
+    email_authors = MAIL_COMMENT_AUTHORS
     enable_field = 'comment_enabled'
     auto_close_field = 'start_publication'
     close_after = AUTO_CLOSE_COMMENTS_AFTER
@@ -38,6 +40,9 @@ class EntryCommentModerator(CommentModerator):
                 if self.mail_comment_notification_recipients:
                     self.do_email_notification(comment, content_object,
                                                request)
+                if self.email_authors:
+                    self.do_email_authors(comment, content_object,
+                                          request)
                 if self.email_reply:
                     self.do_email_reply(comment, content_object, request)
             finally:
@@ -60,10 +65,34 @@ class EntryCommentModerator(CommentModerator):
                   self.mail_comment_notification_recipients,
                   fail_silently=not settings.DEBUG)
 
+    def do_email_authors(self, comment, content_object, request):
+        """Send email notification of a new comment to the authors of the
+        entry when email notifications have been requested."""
+        exclude_list = self.mail_comment_notification_recipients
+        recipient_list = set([author.email
+                              for author in content_object.authors.all()]) ^ \
+                              set(exclude_list)
+
+        if recipient_list:
+            site = Site.objects.get_current()
+            template = loader.get_template(
+                'comments/comment_authors_email.txt')
+            context = Context({'comment': comment, 'site': site,
+                               'protocol': PROTOCOL,
+                               'content_object': content_object})
+            subject = _('[%(site)s] New comment posted on "%(title)s"') % \
+                      {'site': site.name,
+                       'title': content_object.title}
+            message = template.render(context)
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
+                      recipient_list, fail_silently=not settings.DEBUG)
+
     def do_email_reply(self, comment, content_object, request):
         """Send email notification of a new comment to the authors of
         the previous comments when email notifications have been requested."""
         exclude_list = self.mail_comment_notification_recipients + \
+                       [author.email
+                        for author in content_object.authors.all()] + \
                        [comment.userinfo['email']]
         recipient_list = set([comment.userinfo['email']
                               for comment in content_object.comments

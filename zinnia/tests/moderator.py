@@ -36,10 +36,12 @@ class EntryCommentModeratorTestCase(TestCase):
         self.assertEquals(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
         moderator.email_reply = False
+        moderator.email_authors = False
         moderator.mail_comment_notification_recipients = []
         moderator.email(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 0)
         moderator.email_reply = True
+        moderator.email_authors = True
         moderator.mail_comment_notification_recipients = ['admin@example.com']
         moderator.email(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)
@@ -53,6 +55,21 @@ class EntryCommentModeratorTestCase(TestCase):
         moderator = EntryCommentModerator(Entry)
         moderator.mail_comment_notification_recipients = ['admin@example.com']
         moderator.do_email_notification(comment, self.entry, 'request')
+        self.assertEquals(len(mail.outbox), 1)
+
+    def test_do_email_authors(self):
+        comment = Comment.objects.create(comment='My Comment',
+                                         user=self.author, is_public=True,
+                                         content_object=self.entry,
+                                         site=self.site)
+        self.assertEquals(len(mail.outbox), 0)
+        moderator = EntryCommentModerator(Entry)
+        moderator.email_authors = True
+        moderator.mail_comment_notification_recipients = ['admin@example.com']
+        moderator.do_email_authors(comment, self.entry, 'request')
+        self.assertEquals(len(mail.outbox), 0)
+        moderator.mail_comment_notification_recipients = []
+        moderator.do_email_authors(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)
 
     def test_do_email_reply(self):

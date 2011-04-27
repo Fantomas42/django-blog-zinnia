@@ -100,6 +100,12 @@ ZINNIA_MAIL_COMMENT_NOTIFICATION_RECIPIENTS
   List of emails used for sending a notification when a
   new public comment has been posted.
 
+ZINNIA_MAIL_COMMENT_AUTHORS
+  **Default :** True
+
+  Boolean used for sending an email to entry authors
+  when a new comment is posted.
+
 ZINNIA_MAIL_COMMENT_REPLY
   **Default :** False
 
