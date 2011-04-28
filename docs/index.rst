@@ -1,25 +1,46 @@
 Welcome to Django-Blog-Zinnia's documentation!
 ==============================================
 
-Contents:
+.. toctree::
+
+   Presentation <overview>
+
+Getting started
+---------------
 
 .. toctree::
-   :maxdepth: 3
-   :numbered:
 
-   overview
    install
+   upgrading
+
+Advanced usage
+--------------
+
+.. toctree::
+
    configuration
-   settings
-   templatetags
    search_engines
    url_shortener
    channels
    extending_entry_model
    import_export
+
+
+Contributing to Zinnia
+----------------------
+
+.. toctree::
+
    developers
-   upgrading
    tests
+
+Notes and References
+--------------------
+
+.. toctree::
+
+   settings
+   templatetags
    compatibility
    faq
    thanks
