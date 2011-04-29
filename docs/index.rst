@@ -5,7 +5,7 @@ Welcome to Django-Blog-Zinnia's documentation!
 
    Presentation <overview>
 
-Getting started
+Getting Started
 ---------------
 
 .. toctree::
@@ -13,10 +13,12 @@ Getting started
    install
    upgrading
 
-Advanced usage
+Advanced Usage
 --------------
 
 .. toctree::
+   :maxdepth: 2
+   :numbered:
 
    configuration
    search_engines
@@ -25,24 +27,36 @@ Advanced usage
    extending_entry_model
    import_export
 
-
-Contributing to Zinnia
-----------------------
+Development
+-----------
 
 .. toctree::
+   :maxdepth: 2
+   :numbered:
 
-   developers
+   contribution
    tests
+   buildout
 
-Notes and References
---------------------
+References
+----------
 
 .. toctree::
+   :maxdepth: 2
+   :numbered:
 
    settings
    templatetags
-   compatibility
+
+Notes
+-----
+
+.. toctree::
+   :maxdepth: 2
+   :numbered:
+
    faq
+   compatibility
    thanks
    changelog
 

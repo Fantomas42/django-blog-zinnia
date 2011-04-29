@@ -52,20 +52,26 @@ Examples
 Take a look at the online demo at : http://django-blog-zinnia.com
 or you can visit these websites who use Zinnia.
 
-  * `Fantomas' side
-    <http://fantomas.willbreak.it/blog/>`_ / `Mobile version
-    <http://m.fantomas.willbreak.it/blog/>`_.
-  * `Professional Web Studio
-    <http://www.professionalwebstudio.com/en/weblog/>`_.
-  * `mixedCase
-    <http://www.mixedcase.nl/articles/>`_.
-  * `MadCad's Page
-    <http://mad-cad.net/blog/>`_.
-  * `SysVar
-    <http://sysvar.net/>`_.
+  * `Fantomas' side`_  / `Mobile version`_.
+  * `Professional Web Studio`_.
+  * `mixedCase`_.
+  * `MadCad's Page`_.
+  * `SysVar`_.
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
+
+Online resources
+================
+
+More information and help available at these URLs :
+
+  * `Code repository`_.
+  * `Documentation`_.
+  * `API documentation`_.
+  * `Code coverage`_.
+  * Discussions and help at `Google Group`_.
+  * For reporting a bug use `Github Issues`_.
 
 
 .. _`Sitemaps`: http://django-blog-zinnia.com/documentation/configuration/#sitemaps
@@ -86,3 +92,15 @@ will add it to the list.
 .. _`Blogger conversion utility`: http://django-blog-zinnia.com/documentation/import_export/#from-blogger-to-zinnia
 .. _`WordPress conversion utility`: http://django-blog-zinnia.com/documentation/import_export/#from-wordpress-to-zinnia
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
+.. _`Fantomas' side`: http://fantomas.willbreak.it/blog/
+.. _`Mobile version`: http://m.fantomas.willbreak.it/blog/
+.. _`Professional Web Studio`: http://www.professionalwebstudio.com/en/weblog/
+.. _`mixedCase`: http://www.mixedcase.nl/articles/
+.. _`MadCad's Page`: http://mad-cad.net/blog/
+.. _`SysVar`: http://sysvar.net/
+.. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
+.. _`Documentation`: http://django-blog-zinnia.com/documentation/
+.. _`API documentation`: http://django-blog-zinnia.com/docs/api/
+.. _`Code coverage`: http://django-blog-zinnia.com/documentation/coverage/
+.. _`Google Group`: http://groups.google.com/group/django-blog-zinnia/
+.. _`Github Issues`: https://github.com/Fantomas42/django-blog-zinnia/issues/

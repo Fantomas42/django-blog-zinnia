@@ -31,31 +31,33 @@ Example for adding a gallery field. ::
   from django.db import models
   from mygalleryapp.models import Gallery
   from zinnia.models import EntryAbstractClass
-  
+
   class EntryGallery(EntryAbstractClass):
     gallery = models.ForeignKey(Gallery)
-  
+
     class Meta:
       abstract = True
-  
+
 
 Now you register the EntryGallery model like this in your project's
 settings. ::
 
   ZINNIA_ENTRY_BASE_MODEL = 'full.path.to.EntryGallery'
 
-You can see another example in the zinnia/plugins/placeholder.py file.
+You can see another example in the *zinnia/plugins/placeholder.py* file.
 
-But you have to note 4 important things :
+.. note:: But you have to respect 4 important rules :
 
-  * Do not import the Entry model in your file defining the extended model
-    because it will cause a circular importation.
+          #. Do not import the Entry model in your file defining the
+             extended model because it will cause a circular importation.
 
-  * Do not put your abstract model in a file named models.py,
-    it will not work for a non obvious reason.
+          #. Do not put your abstract model in a file named models.py,
+             it will not work for a non obvious reason.
 
-  * Don't forget to tell that your model is abstract. Otherwise a table
-    will be created and the extending process will not work as expected.
+          #. Don't forget to tell that your model is abstract. Otherwise a
+             table will be created and the extending process will not work
+             as expected.
 
-  * If you extend the Entry model after the syncdb command, you will have
-    to reset the Zinnia application to reflect your changes.
+          #. If you extend the Entry model after the syncdb command, you
+             will have to reset the Zinnia application to reflect your
+             changes.

@@ -13,7 +13,7 @@ Another usage of the channels is for SEO, for aggregating entries
 under a well-formatted url.
 
 For doing that Zinnia provides a view called
-*zinnia.views.channels.entry_channel*.
+**zinnia.views.channels.entry_channel**.
 
 If we take our first example, we will do like that for customizing
 the weblog homepage in our project's urls.py. ::
@@ -25,12 +25,12 @@ the weblog homepage in our project's urls.py. ::
 The first url will handle the homepage of the blog instead of the default
 url provided by Zinnia.
 
-As we can see, the only required argument for this view is *query*. This
+As we can see, the only required argument for this view is **query**. This
 parameter represents a query search string. This string will be interpreted
 by the search engine activated in Zinnia and return a list of entries.
 
 So our homepage will only display entries filled under the categories
-'Python' and 'Django'.
+*Python* and *Django*.
 
 The others parameters handled by the channel view are the same that
 the generic `object_list

@@ -30,19 +30,28 @@ Writing your own URL shortener backend
 Writing a backend for using your custom URL shortener is simple as
 possible, you only needs to follows 4 rules.
 
- * In a new python file write a function named **backend** taking an Entry
-   instance in parameters.
+ #. In a new python file write a function named **backend** taking an Entry
+    instance in parameters.
 
- * The **backend** function should returns an URL including the protocol
-   and the domain.
+ #. The **backend** function should returns an URL including the protocol
+    and the domain.
 
- * If the **backend** requires initial configuration you must raise a
-   *django.core.exceptions.ImproperlyConfigured* exception if the
-   configuration is not valid. The error will be displayed in the console.
+ #. If the **backend** requires initial configuration you must raise a
+    *django.core.exceptions.ImproperlyConfigured* exception if the
+    configuration is not valid. The error will be displayed in the console.
 
- * Register your backend to be used in your project with this setting : ::
+ #. Register your backend to be used in your project with this setting : ::
 
-   ZINNIA_URL_SHORTENER_BACKEND = 'path.to.your.url.shortener.module'
+      ZINNIA_URL_SHORTENER_BACKEND = 'path.to.your.url.shortener.module'
 
+Here the source code of the default backend. ::
 
-For a complete examples take a look in this folder : zinnia/url_shortener/backends/.
+    from django.contrib.sites.models import Site
+    from django.core.urlresolvers import reverse
+    from zinnia.settings import PROTOCOL
+
+    def backend(entry):
+        return '%s://%s%s' % (PROTOCOL, Site.objects.get_current().domain,
+                              reverse('zinnia_entry_shortlink', args=[entry.pk]))
+
+For a more examples take a look in this folder : *zinnia/url_shortener/backends/*.

@@ -9,7 +9,6 @@ setup(name='django-blog-zinnia',
       description='A clear and powerfull weblog application powered with Django',
       long_description='\n'.join([open('README.rst').read(),
                                   open(os.path.join('docs', 'install.rst')).read(),
-                                  open(os.path.join('docs', 'developers.rst')).read(),
                                   open(os.path.join('docs', 'changelog.rst')).read(),]),
       keywords='django, blog, weblog, zinnia, post, news',
 
