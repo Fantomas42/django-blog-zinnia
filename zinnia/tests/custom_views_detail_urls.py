@@ -7,6 +7,7 @@ from django.conf.urls.defaults import patterns
 from zinnia.views.tags import tag_detail
 from zinnia.views.authors import author_detail
 from zinnia.views.categories import category_detail
+from zinnia.tests.urls import urlpatterns as test_urlpatterns
 
 
 def call_with_template_and_extra_context(
@@ -40,4 +41,4 @@ urlpatterns = patterns(
         custom_tag_detail, name='zinnia_tag_detail'),
     url(r'^tags/(?P<tag>[- \w]+)/page/(?P<page>\d+)/$',
         custom_tag_detail, name='zinnia_tag_detail_paginated'),
-    )
+    ) + test_urlpatterns

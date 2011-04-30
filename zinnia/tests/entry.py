@@ -8,6 +8,7 @@ from django.test import TestCase
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
 from django.contrib.comments.models import Comment
 from django.contrib.comments.models import CommentFlag
 
@@ -116,7 +117,10 @@ class EntryTestCase(TestCase):
         self.assertFalse(self.entry.is_visible)
 
     def test_short_url(self):
-        self.assertEquals(self.entry.short_url, 'http://example.com/1/')
+        self.assertEquals(self.entry.short_url,
+                          'http://example.com' +
+                          reverse('zinnia_entry_shortlink',
+                                  args=[self.entry.pk]))
 
     def test_previous_entry(self):
         site = Site.objects.get_current()
