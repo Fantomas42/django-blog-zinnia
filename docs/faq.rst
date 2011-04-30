@@ -1,6 +1,8 @@
 Frequently Asked Questions
 ==========================
 
+.. contents::
+
 ---------
 Templates
 ---------
