@@ -3,8 +3,9 @@
 # Aim to simplify development and release process
 # Be sure you have run the buildout, before using this Makefile
 
-NO_COLOR = \033[0m
-COLOR	 = \033[32;01m
+NO_COLOR	= \033[0m
+COLOR	 	= \033[32;01m
+SUCCESS_COLOR	= \033[35;01m
 
 all: kwalitee test docs clean package
 
@@ -33,15 +34,26 @@ docs: coverage epydoc sphinx
 
 kwalitee:
 	@echo "$(COLOR)* Running pyflakes$(NO_COLOR)"
-	@-./bin/pyflakes zinnia
+	@./bin/pyflakes zinnia
 	@echo "$(COLOR)* Running pep8$(NO_COLOR)"
-	@-./bin/pep8 --count --exclude=tests.py,migrations zinnia
+	@./bin/pep8 --count --exclude=migrations zinnia
+	@echo "$(SUCCESS_COLOR)* No kwalitee errors, Congratulations ! :)$(NO_COLOR)"
+
+translations:
+	@echo "$(COLOR)* Generating english translation$(NO_COLOR)"
+	@cd zinnia && ../bin/django makemessages --extension=.html,.txt -l en
+	@echo "$(COLOR)* Pushing translation to Transifex$(NO_COLOR)"
+	@rm -rf .tox
+	@tx push -s
+	@echo "$(COLOR)* Remove english translation$(NO_COLOR)"
+	@rm -rf zinnia/locale/en/
 
 clean:
 	@echo "$(COLOR)* Removing useless files$(NO_COLOR)"
 	@find demo zinnia docs -type f \( -name "*.pyc" -o -name "\#*" -o -name "*~" \) -exec rm -f {} \;
 	@rm -f \#* *~
 	@rm -rf uploads
+	@rm -rf .tox
 
 mrproper: clean
 	@rm -rf docs/build/doctrees
