@@ -50,10 +50,11 @@ TEMPLATE_LOADERS = (
     )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.i18n',
     'django.core.context_processors.request',
     'django.core.context_processors.media',
+    'django.contrib.messages.context_processors.messages',
     'zinnia.context_processors.media',
     'zinnia.context_processors.version',
     )
@@ -64,6 +65,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.admindocs',
