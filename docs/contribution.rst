@@ -13,16 +13,16 @@ code ? You are welcome.
 Process
 -------
 
-   #. `Fork
-      <https://github.com/Fantomas42/django-blog-zinnia/fork>`_ the code on Github.
-   #. Checkout your fork.
-   #. Write unit tests.
-   #. Develop your code.
-   #. Test the code.
-   #. Update the documentation.
-   #. Commit your changes
-   #. Push to your fork.
-   #. Open a pull request.
+#. `Fork
+   <https://github.com/Fantomas42/django-blog-zinnia/fork>`_ the code on Github.
+#. Checkout your fork.
+#. Write unit tests.
+#. Develop your code.
+#. Test the code.
+#. Update the documentation.
+#. Commit your changes
+#. Push to your fork.
+#. Open a pull request.
 
 Conventions
 -----------
@@ -62,14 +62,11 @@ to understand you. We don’t care about style or correctness.
 
 The documentation should :
 
-    * Use **Sphinx** and **restructuredText**.
-
-    * Use **.rst** as file extension.
-
-    * Be written in English.
-
-    * Be accessible. You should assume the reader to be moderately familiar
-      with Python and Django, but not anything else.
+* Use **Sphinx** and **restructuredText**.
+* Use **.rst** as file extension.
+* Be written in English.
+* Be accessible. You should assume the reader to be moderately familiar
+  with Python and Django, but not anything else.
 
 Keep it mind that documenting is most useful than coding, so your
 contribution will be greatly appreciated.

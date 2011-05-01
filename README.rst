@@ -16,35 +16,35 @@ Features
 
 More than a long speech, here the list of the main features :
 
-  * Comments
-  * `Sitemaps`_
-  * Archives views
-  * Related entries
-  * Private entries
-  * RSS or Atom Feeds
-  * Tags and categories views
-  * `Advanced search engine`_
-  * Prepublication and expiration
-  * Edition in `MarkDown`_, `Textile`_ or `reStructuredText`_
-  * Widgets (Popular entries, Similar entries, ...)
-  * Spam protection with `Akismet`_
-  * Admin dashboard
-  * `MetaWeblog API`_
-  * Ping Directories
-  * Ping External links
-  * `Bit.ly`_ support
-  * `Twitter`_ support
-  * `Gravatar`_ support
-  * `Django-CMS`_ plugins
-  * Collaborative work
-  * Tags autocompletion
-  * `Entry model extendable`_
-  * Pingback/Trackback support
-  * `Blogger conversion utility`_
-  * `WordPress conversion utility`_
-  * `WYMeditor`_, `TinyMCE`_ and `MarkItUp`_ support
-  * Ready to use and extendables templates
-  * `Windows Live Writer`_ compatibility
+* Comments
+* `Sitemaps`_
+* Archives views
+* Related entries
+* Private entries
+* RSS or Atom Feeds
+* Tags and categories views
+* `Advanced search engine`_
+* Prepublication and expiration
+* Edition in `MarkDown`_, `Textile`_ or `reStructuredText`_
+* Widgets (Popular entries, Similar entries, ...)
+* Spam protection with `Akismet`_
+* Admin dashboard
+* `MetaWeblog API`_
+* Ping Directories
+* Ping External links
+* `Bit.ly`_ support
+* `Twitter`_ support
+* `Gravatar`_ support
+* `Django-CMS`_ plugins
+* Collaborative work
+* Tags autocompletion
+* `Entry model extendable`_
+* Pingback/Trackback support
+* `Blogger conversion utility`_
+* `WordPress conversion utility`_
+* `WYMeditor`_, `TinyMCE`_ and `MarkItUp`_ support
+* Ready to use and extendables templates
+* `Windows Live Writer`_ compatibility
 
 Examples
 ========
@@ -52,11 +52,11 @@ Examples
 Take a look at the online demo at : http://django-blog-zinnia.com
 or you can visit these websites who use Zinnia.
 
-  * `Fantomas' side`_  / `Mobile version`_.
-  * `Professional Web Studio`_.
-  * `mixedCase`_.
-  * `MadCad's Page`_.
-  * `SysVar`_.
+* `Fantomas' side`_  / `Mobile version`_.
+* `Professional Web Studio`_.
+* `mixedCase`_.
+* `MadCad's Page`_.
+* `SysVar`_.
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
@@ -66,12 +66,12 @@ Online resources
 
 More information and help available at these URLs :
 
-  * `Code repository`_.
-  * `Documentation`_.
-  * `API documentation`_.
-  * `Code coverage`_.
-  * Discussions and help at `Google Group`_.
-  * For reporting a bug use `Github Issues`_.
+* `Code repository`_.
+* `Documentation`_.
+* `API documentation`_.
+* `Code coverage`_.
+* Discussions and help at `Google Group`_.
+* For reporting a bug use `Github Issues`_.
 
 
 .. _`Sitemaps`: http://django-blog-zinnia.com/documentation/configuration/#sitemaps

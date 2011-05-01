@@ -12,13 +12,13 @@ or features to be the blog app that I need for my django project.
 For example I need to add a custom field linking to an image gallery,
 2 solutions :
 
-  * I search for another django blogging app fitting my needs.
-  * I make a monkey patch, but I won't be able to upgrade to future releases.
+* I search for another django blogging app fitting my needs.
+* I make a monkey patch, but I won't be able to upgrade to future releases.
 
 These 2 solutions are really bad, that's why Zinnia provides
 a third solution.
 
-  * Customizing the model noninvasively with the power of inheritance.
+* Customizing the model noninvasively with the power of inheritance.
 
 How do we do that ?
 
@@ -46,7 +46,7 @@ settings. ::
 
 You can see another example in the *zinnia/plugins/placeholder.py* file.
 
-.. note:: But you have to respect 4 important rules :
+.. note:: You have to respect **4 important rules** :
 
           #. Do not import the Entry model in your file defining the
              extended model because it will cause a circular importation.

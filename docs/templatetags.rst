@@ -200,4 +200,3 @@ Examples: ::
 The usage of the **template** argument allow you to reuse and customize the
 rendering of a template tag in a generic way. Like this you can display the
 same template tag many times in your pages but with a different appearance.
-

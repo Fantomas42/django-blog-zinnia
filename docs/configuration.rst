@@ -8,8 +8,8 @@ One of the cool features of Django is the sitemap application, so if you
 want to fill your website's sitemap with the entries of your blog, follow
 these steps.
 
-  * Register **django.contrib.sitemaps** in the INSTALLED_APPS section.
-  * Edit your project's URLs and add this code :
+* Register **django.contrib.sitemaps** in the INSTALLED_APPS section.
+* Edit your project's URLs and add this code :
 
 ::
 
