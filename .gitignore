@@ -16,7 +16,6 @@ develop-eggs
 .installed.cfg
 .sass-cache
 .coverage
-.tx
 .tox
 docs/coverage
 docs/api
