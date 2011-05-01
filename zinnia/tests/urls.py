@@ -8,6 +8,9 @@ from zinnia.urls import urlpatterns
 
 admin.autodiscover()
 
+handler500 = 'django.views.defaults.server_error'
+handler404 = 'django.views.defaults.page_not_found'
+
 urlpatterns += patterns(
     '',
     url(r'^channel-test/$', 'zinnia.views.channels.entry_channel',
