@@ -13,6 +13,13 @@ The templates does not fit to my wishes. What can I do ?
 The templates provided for Zinnia are simple but complete and as generic as
 possible. But you can easily change them by `specifying a template directory`_.
 
+A good starting point is to copy-paste the **zinnia/base.html** template,
+and edit the ``extends`` instruction for fitting to your skin.
+
+.. note::
+	* The main content is displayed in block named ``content``.
+	* Additional datas are displayed in a block named ``sidebar``.
+
 You can also create your own app containing some Zinnia's templates based
 on inheritance. You can find an app example with HTML5 templates for Zinnia
 which can be a good starting point to make your own at :
