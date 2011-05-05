@@ -37,7 +37,7 @@ Coverage
 Despite my best efforts, some functionnalities are not yet tested, that's why
 I need your help !
 
-As I write these lines the **114** tests in Zinnia cover **92%** of the code
+As I write these lines the **115** tests in Zinnia cover **93%** of the code
 bundled in Zinnia. It's not bad, but the goal (*realistic*) is to reach a
 **95%** coverage.
 

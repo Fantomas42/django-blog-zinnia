@@ -44,8 +44,6 @@ MAIL_COMMENT_NOTIFICATION_RECIPIENTS = getattr(
     settings, 'ZINNIA_MAIL_COMMENT_NOTIFICATION_RECIPIENTS',
     [manager_tuple[1] for manager_tuple in settings.MANAGERS])
 
-AKISMET_COMMENT = getattr(settings, 'ZINNIA_AKISMET_COMMENT', True)
-
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads')
 
 PROTOCOL = getattr(settings, 'ZINNIA_PROTOCOL', 'http')
@@ -60,6 +58,9 @@ PINGBACK_CONTENT_LENGTH = getattr(settings,
 
 F_MIN = getattr(settings, 'ZINNIA_F_MIN', 0.1)
 F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
+
+SPAM_CHECKER_BACKENDS = getattr(settings, 'ZINNIA_SPAM_CHECKER_BACKENDS',
+                                ())
 
 URL_SHORTENER_BACKEND = getattr(settings, 'ZINNIA_URL_SHORTENER_BACKEND',
                                 'zinnia.url_shortener.backends.default')

@@ -21,6 +21,7 @@ from zinnia.tests.ping import DirectoryPingerTestCase
 from zinnia.tests.ping import ExternalUrlsPingerTestCase
 from zinnia.tests.templatetags import TemplateTagsTestCase  # ~0.4s
 from zinnia.tests.moderator import EntryCommentModeratorTestCase  # ~0.1s
+from zinnia.tests.spam_checker import SpamCheckerTestCase
 from zinnia.tests.url_shortener import URLShortenerTestCase
 from zinnia.signals import disconnect_zinnia_signals
 # TOTAL ~ 6.6s
@@ -39,7 +40,7 @@ def suite():
                   DirectoryPingerTestCase, ExternalUrlsPingerTestCase,
                   TemplateTagsTestCase, QuickEntryTestCase,
                   URLShortenerTestCase, EntryCommentModeratorTestCase,
-                  ZinniaCustomDetailViews)
+                  ZinniaCustomDetailViews, SpamCheckerTestCase)
 
     if 'django_xmlrpc' in settings.INSTALLED_APPS:
         test_cases += (PingBackTestCase, MetaWeblogTestCase)

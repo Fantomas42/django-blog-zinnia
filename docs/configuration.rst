@@ -32,20 +32,18 @@ these steps.
 Akismet
 -------
 
-By default the Akismet spam protection is enabled when anyone leaves a
-comment if you have installed the `akismet
-<http://www.voidspace.org.uk/python/modules.shtml#akismet>`_ python module.
+If you want to benefit of the Akismet spam protection on your comments,
+it's possible to do it by installing the `akismet
+<http://www.voidspace.org.uk/python/modules.shtml#akismet>`_ python module,
+and add this setting: ::
 
-IMPORTANT : you need an API key. If you don't have any, get one for free at
-http://akismet.com/signup/ then set it in your project's settings like
-this : ::
+  ZINNIA_SPAM_CHECKER_BACKENDS = ('zinnia.spam_checker.backends.akismet',)
 
-  AKISMET_SECRET_API_KEY = 'your key'
+.. important:: You need an API key. If you don't have any, get one for free at
+   	       http://akismet.com/signup/ then set it in your project's
+   	       settings like this: ::
 
-If you don't want spam protection for comments, you can disable it with
-this setting. ::
-
-  ZINNIA_AKISMET_COMMENT = False
+  	         AKISMET_SECRET_API_KEY = 'your key'
 
 Bit.ly
 ------
@@ -54,7 +52,7 @@ You find http://bit.ly useful and want to use it for your blog entries ?
 
 It's simple, install `django_bitly
 <http://bitbucket.org/discovery/django-bitly/>`_ in your project's settings
-and add these settings. ::
+and add these settings: ::
 
   BITLY_LOGIN = 'your bit.ly login'
   BITLY_API_KEY = 'your bit.ly api key'

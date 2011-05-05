@@ -1,11 +1,9 @@
-"""Moderator of Zinnia comments
-   Based on Akismet for checking spams."""
+"""Moderator of Zinnia comments"""
 from django.conf import settings
 from django.template import Context
 from django.template import loader
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
-from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import get_language
@@ -18,9 +16,8 @@ from zinnia.settings import MAIL_COMMENT_AUTHORS
 from zinnia.settings import AUTO_MODERATE_COMMENTS
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.settings import MAIL_COMMENT_NOTIFICATION_RECIPIENTS
-from zinnia.settings import AKISMET_COMMENT
-
-AKISMET_API_KEY = getattr(settings, 'AKISMET_SECRET_API_KEY', '')
+from zinnia.settings import SPAM_CHECKER_BACKENDS
+from zinnia.spam_checker import check_is_spam
 
 
 class EntryCommentModerator(CommentModerator):
@@ -30,6 +27,7 @@ class EntryCommentModerator(CommentModerator):
     enable_field = 'comment_enabled'
     auto_close_field = 'start_publication'
     close_after = AUTO_CLOSE_COMMENTS_AFTER
+    spam_checker_backends = SPAM_CHECKER_BACKENDS
     auto_moderate_comments = AUTO_MODERATE_COMMENTS
     mail_comment_notification_recipients = MAIL_COMMENT_NOTIFICATION_RECIPIENTS
 
@@ -122,37 +120,11 @@ class EntryCommentModerator(CommentModerator):
         if self.auto_moderate_comments:
             return True
 
-        if not AKISMET_COMMENT or not AKISMET_API_KEY:
-            return False
+        if check_is_spam(comment, content_object, request,
+                         self.spam_checker_backends):
+            comment.save()
+            user = comment.content_object.authors.all()[0]
+            comment.flags.create(user=user, flag='spam')
+            return True
 
-        try:
-            from akismet import Akismet
-            from akismet import APIKeyError
-        except ImportError:
-            return False
-
-        akismet = Akismet(key=AKISMET_API_KEY,
-                          blog_url='%s://%s/' % (
-                              PROTOCOL, Site.objects.get_current().domain))
-        if akismet.verify_key():
-            akismet_data = {
-                'user_ip': request.META.get('REMOTE_ADDR', ''),
-                'user_agent': request.META.get('HTTP_USER_AGENT', ''),
-                'referrer': request.META.get('HTTP_REFERER', 'unknown'),
-                'permalink': content_object.get_absolute_url(),
-                'comment_type': 'comment',
-                'comment_author': smart_str(comment.userinfo.get('name', '')),
-                'comment_author_email': smart_str(comment.userinfo.get(
-                    'email', '')),
-                'comment_author_url': smart_str(comment.userinfo.get(
-                    'url', '')),
-            }
-            is_spam = akismet.comment_check(smart_str(comment.comment),
-                                            data=akismet_data,
-                                            build_data=True)
-            if is_spam:
-                comment.save()
-                user = comment.content_object.authors.all()[0]
-                comment.flags.create(user=user, flag='spam')
-            return is_spam
-        raise APIKeyError('Your Akismet API key is invalid.')
+        return False

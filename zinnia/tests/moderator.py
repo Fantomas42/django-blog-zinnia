@@ -114,8 +114,17 @@ class EntryCommentModeratorTestCase(TestCase):
                                          site=self.site)
         moderator = EntryCommentModerator(Entry)
         moderator.auto_moderate_comments = True
+        moderator.spam_checker_backends = ()
         self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
                           True)
         moderator.auto_moderate_comments = False
         self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
-                          False)  # Because API key for Akismet is not defined
+                          False)
+        self.assertEquals(Comment.objects.filter(
+            flags__flag='spam').count(), 0)
+        moderator.spam_checker_backends = (
+            'zinnia.spam_checker.backends.all_is_spam',)
+        self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
+                          True)
+        self.assertEquals(Comment.objects.filter(
+            flags__flag='spam').count(), 1)

@@ -150,11 +150,11 @@ ZINNIA_MAIL_COMMENT_NOTIFICATION_RECIPIENTS
 List of emails used for sending a notification when a
 new public comment has been posted.
 
-ZINNIA_AKISMET_COMMENT
-----------------------
-**Default value:** ``True``
+ZINNIA_SPAM_CHECKER_BACKENDS
+----------------------------
+**Default value:** ``()``
 
-Boolean used for protecting your comments with Akismet or not.
+List of strings representing the module path to a spam checker backend.
 
 -------
 Pinging
