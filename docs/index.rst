@@ -21,9 +21,10 @@ Advanced Usage
    :numbered:
 
    configuration
+   channels
    search_engines
    url_shortener
-   channels
+   spam_checker
    extending_entry_model
    import_export
 

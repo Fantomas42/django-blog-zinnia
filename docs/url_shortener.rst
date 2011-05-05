@@ -6,7 +6,7 @@ transfering long URLs.
 
 And so many URL shortening services exist, each with his own features.
 
-Originaly Zinnia provided a only way to generate short urls for your
+Originally Zinnia provided a only way to generate short urls for your
 entries, and you needed to install *django_bitly*.
 
 One way it's not bad, but it's not enough.

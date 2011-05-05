@@ -27,7 +27,8 @@ url provided by Zinnia.
 
 As we can see, the only required argument for this view is **query**. This
 parameter represents a query search string. This string will be interpreted
-by the search engine activated in Zinnia and return a list of entries.
+by the search engine activated in Zinnia and return a list of entries (See
+:doc:`search_engines` for more informations).
 
 So our homepage will only display entries filled under the categories
 *Python* and *Django*.
