@@ -41,9 +41,11 @@ and add this setting: ::
 
 .. important:: You need an API key. If you don't have any, get one for free at
    	       http://akismet.com/signup/ then set it in your project's
-   	       settings like this: ::
+   	       settings like this: 
 
-  	         AKISMET_SECRET_API_KEY = 'your key'
+::
+
+  AKISMET_SECRET_API_KEY = 'your key'
 
 Bit.ly
 ------
