@@ -3,6 +3,7 @@ from datetime import datetime
 
 from django.test import TestCase
 from django.template import Context
+from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
@@ -19,6 +20,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.templatetags.zinnia_tags import get_gravatar
 from zinnia.templatetags.zinnia_tags import get_authors
 from zinnia.templatetags.zinnia_tags import get_categories
+from zinnia.templatetags.zinnia_tags import zinnia_pagination
 from zinnia.templatetags.zinnia_tags import get_recent_entries
 from zinnia.templatetags.zinnia_tags import get_random_entries
 from zinnia.templatetags.zinnia_tags import zinnia_breadcrumbs
@@ -311,6 +313,72 @@ class TemplateTagsTestCase(TestCase):
         linkback_2.flags.create(user=user, flag='trackback')
         context = get_recent_linkbacks()
         self.assertEquals(list(context['linkbacks']), [linkback_2, linkback_1])
+
+    def test_zinnia_pagination(self):
+        paginator = Paginator(range(200), 10)
+
+        context = zinnia_pagination(paginator.page(1))
+        self.assertEquals(context['page'].number, 1)
+        self.assertEquals(context['begin'], [1, 2, 3])
+        self.assertEquals(context['middle'], [])
+        self.assertEquals(context['end'], [18, 19, 20])
+        self.assertEquals(context['template'], 'zinnia/tags/pagination.html')
+
+        context = zinnia_pagination(paginator.page(2))
+        self.assertEquals(context['page'].number, 2)
+        self.assertEquals(context['begin'], [1, 2, 3, 4])
+        self.assertEquals(context['middle'], [])
+        self.assertEquals(context['end'], [18, 19, 20])
+
+        context = zinnia_pagination(paginator.page(3))
+        self.assertEquals(context['begin'], [1, 2, 3, 4, 5])
+        self.assertEquals(context['middle'], [])
+        self.assertEquals(context['end'], [18, 19, 20])
+
+        context = zinnia_pagination(paginator.page(6))
+        self.assertEquals(context['begin'], [1, 2, 3, 4, 5, 6, 7, 8])
+        self.assertEquals(context['middle'], [])
+        self.assertEquals(context['end'], [18, 19, 20])
+
+        context = zinnia_pagination(paginator.page(11))
+        self.assertEquals(context['begin'], [1, 2, 3])
+        self.assertEquals(context['middle'], [9, 10, 11, 12, 13])
+        self.assertEquals(context['end'], [18, 19, 20])
+
+        context = zinnia_pagination(paginator.page(15))
+        self.assertEquals(context['begin'], [1, 2, 3])
+        self.assertEquals(context['middle'], [])
+        self.assertEquals(context['end'], [13, 14, 15, 16, 17, 18, 19, 20])
+
+        context = zinnia_pagination(paginator.page(18))
+        self.assertEquals(context['begin'], [1, 2, 3])
+        self.assertEquals(context['middle'], [])
+        self.assertEquals(context['end'], [16, 17, 18, 19, 20])
+
+        context = zinnia_pagination(paginator.page(19))
+        self.assertEquals(context['begin'], [1, 2, 3])
+        self.assertEquals(context['middle'], [])
+        self.assertEquals(context['end'], [17, 18, 19, 20])
+
+        context = zinnia_pagination(paginator.page(20))
+        self.assertEquals(context['begin'], [1, 2, 3])
+        self.assertEquals(context['middle'], [])
+        self.assertEquals(context['end'], [18, 19, 20])
+
+        context = zinnia_pagination(paginator.page(10),
+                                    begin_pages=1, end_pages=3,
+                                    before_pages=4, after_pages=3,
+                                    template='custom_template.html')
+        self.assertEquals(context['begin'], [1])
+        self.assertEquals(context['middle'], [6, 7, 8, 9, 10, 11, 12, 13])
+        self.assertEquals(context['end'], [18, 19, 20])
+        self.assertEquals(context['template'], 'custom_template.html')
+
+        paginator = Paginator(range(50), 10)
+        context = zinnia_pagination(paginator.page(1))
+        self.assertEquals(context['begin'], [1, 2, 3, 4, 5])
+        self.assertEquals(context['middle'], [])
+        self.assertEquals(context['end'], [])
 
     def test_zinnia_breadcrumbs(self):
         class FakeRequest(object):

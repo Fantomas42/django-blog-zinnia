@@ -169,6 +169,20 @@ Examples: ::
   {% get_recent_linkbacks 3 %}
   {% get_recent_linkbacks 3 "custom_template.html" %}
 
+zinnia_pagination
+-----------------
+
+Display a Digg-like pagination for long list of pages.
+
+**Prototype:** ``zinnia_pagination(page, begin_pages=3, end_pages=3, before_pages=2, after_pages=2, template="zinnia/tags/pagination.html")``
+
+Examples: ::
+
+  {% zinnia_pagination page_obj %}
+  {% zinnia_pagination page_obj 2 2 %}
+  {% zinnia_pagination page_obj 2 2 3 3 %}
+  {% zinnia_pagination page_obj 2 2 3 3 "custom_template.html" %}
+
 zinnia_breadcrumbs
 ------------------
 

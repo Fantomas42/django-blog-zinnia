@@ -217,6 +217,39 @@ def get_recent_linkbacks(number=5,
             'linkbacks': linkbacks}
 
 
+@register.inclusion_tag('zinnia/tags/dummy.html')
+def zinnia_pagination(page, begin_pages=3, end_pages=3,
+               before_pages=2, after_pages=2,
+               template='zinnia/tags/pagination.html'):
+    """Return a Digg-like pagination, by splitting long list of page
+    into 3 blocks of pages"""
+    begin = page.paginator.page_range[:begin_pages]
+    end = page.paginator.page_range[page.paginator.num_pages - end_pages:]
+    middle_start = page.number - before_pages - 1
+    if middle_start < 0:
+        middle_start = 0
+    middle = page.paginator.page_range[middle_start:page.number + after_pages]
+
+    if set(begin) & set(end):  # [1, 2, 3], [...], [2, 3, 4]
+        begin = sorted(set(begin + end))  # [1, 2, 3, 4]
+        middle, end = [], []
+    elif set(begin) & set(middle):  # [1, 2, 3], [2, 3, 4]
+        begin = sorted(set(begin + middle))  # [1, 2, 3, 4]
+        middle = []
+    elif begin[-1] + 1 == middle[0]:  # [1, 2, 3], [4, 5, 6]
+        begin += middle  # [1, 2, 3, 4, 5, 6]
+        middle = []
+    elif end[0] - 1 == middle[-1]:  # [18, 19, 20], [15, 16, 17]
+        end = middle + end  # [15, 16, 17, 18, 19, 20]
+        middle = []
+    elif set(middle) & set(end):  # [17, 18, 19], [18, 19, 20]
+        end = sorted(set(middle + end))  # [17, 18, 19, 20]
+        middle = []
+
+    return {'template': template, 'page': page,
+            'begin': begin, 'middle': middle, 'end': end}
+
+
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def zinnia_breadcrumbs(context, separator='/', root_name='Blog',
                        template='zinnia/tags/breadcrumbs.html',):
