@@ -380,6 +380,18 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['middle'], [])
         self.assertEquals(context['end'], [])
 
+        paginator = Paginator(range(60), 10)
+        context = zinnia_pagination(paginator.page(1))
+        self.assertEquals(context['begin'], [1, 2, 3, 4, 5, 6])
+        self.assertEquals(context['middle'], [])
+        self.assertEquals(context['end'], [])
+
+        paginator = Paginator(range(70), 10)
+        context = zinnia_pagination(paginator.page(1))
+        self.assertEquals(context['begin'], [1, 2, 3])
+        self.assertEquals(context['middle'], [])
+        self.assertEquals(context['end'], [5, 6, 7])
+
     def test_zinnia_breadcrumbs(self):
         class FakeRequest(object):
             def __init__(self, path):
