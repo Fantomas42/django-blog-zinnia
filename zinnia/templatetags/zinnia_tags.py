@@ -224,11 +224,9 @@ def zinnia_pagination(page, begin_pages=3, end_pages=3,
     """Return a Digg-like pagination, by splitting long list of page
     into 3 blocks of pages"""
     begin = page.paginator.page_range[:begin_pages]
-    end = page.paginator.page_range[page.paginator.num_pages - end_pages:]
-    middle_start = page.number - before_pages - 1
-    if middle_start < 0:
-        middle_start = 0
-    middle = page.paginator.page_range[middle_start:page.number + after_pages]
+    end = page.paginator.page_range[-end_pages:]
+    middle = page.paginator.page_range[max(page.number - before_pages - 1, 0):
+                                       page.number + after_pages]
 
     if set(begin) & set(end):  # [1, 2, 3], [...], [2, 3, 4]
         begin = sorted(set(begin + end))  # [1, 2, 3, 4]
