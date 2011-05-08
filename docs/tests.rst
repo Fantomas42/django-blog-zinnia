@@ -37,13 +37,13 @@ Coverage
 Despite my best efforts, some functionnalities are not yet tested, that's why
 I need your help !
 
-As I write these lines the **115** tests in Zinnia cover **93%** of the code
-bundled in Zinnia. It's not bad, but the goal (*realistic*) is to reach a
-**95%** coverage.
+As I write these lines the **118** tests in Zinnia cover **96%** of the code
+bundled in Zinnia. A real effort has been made to obtain this percentage,
+for ensuring the quality of the code.
 
 I know that a coverage percent does not represent the quality of the tests,
-but increasing this percent will ensure the quality of Zinnia and his
-future evolutions.
+but maintaining or increasing this percentage ensures the quality of
+Zinnia and his future evolutions.
 
 You can check the actual coverage percent at this url:
 
