@@ -8,7 +8,6 @@ from zinnia.models import Entry
 from zinnia.models import Author
 from zinnia.models import Category
 from zinnia.managers import tags_published
-from zinnia.managers import entries_published
 
 
 class EntrySitemap(Sitemap):
@@ -35,7 +34,7 @@ class CategorySitemap(Sitemap):
         self.cache_categories = {}
         for cat in categories:
             if len_entries:
-                self.cache_categories[cat.pk] = cat.entries_published_set(
+                self.cache_categories[cat.pk] = cat.entries_published(
                     ).count() / len_entries
             else:
                 self.cache_categories[cat.pk] = 0.0
@@ -48,7 +47,7 @@ class CategorySitemap(Sitemap):
 
     def lastmod(self, obj):
         """Return last modification of a category"""
-        entries = entries_published(obj.entry_set)
+        entries = obj.entries_published()
         if not entries:
             return None
         return entries[0].creation_date
@@ -72,7 +71,7 @@ class AuthorSitemap(Sitemap):
 
     def lastmod(self, obj):
         """Return last modification of an author"""
-        entries = entries_published(obj.entry_set)
+        entries = obj.entries_published()
         if not entries:
             return None
         return entries[0].creation_date

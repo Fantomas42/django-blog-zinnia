@@ -23,6 +23,6 @@ def author_detail(request, username, page=None, **kwargs):
     extra_context.update({'author': author})
     kwargs['extra_context'] = extra_context
 
-    return object_list(request, queryset=author.entries_published_set(),
+    return object_list(request, queryset=author.entries_published(),
                        paginate_by=PAGINATION, page=page,
                        **kwargs)

@@ -174,7 +174,7 @@ class EntryAdmin(admin.ModelAdmin):
         queryset = super(EntryAdmin, self).queryset(request)
         if request.user.has_perm('zinnia.can_view_all'):
             return queryset
-        return request.user.entry_set.all()
+        return request.user.entries.all()
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         """Filters the disposable authors"""

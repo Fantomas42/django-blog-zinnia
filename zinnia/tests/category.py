@@ -24,12 +24,12 @@ class CategoryTestCase(TestCase):
         self.entry.categories.add(*self.categories)
         self.entry.sites.add(self.site)
 
-    def test_entries_published_set(self):
+    def test_entries_published(self):
         category = self.categories[0]
-        self.assertEqual(category.entries_published_set().count(), 0)
+        self.assertEqual(category.entries_published().count(), 0)
         self.entry.status = PUBLISHED
         self.entry.save()
-        self.assertEqual(category.entries_published_set().count(), 1)
+        self.assertEqual(category.entries_published().count(), 1)
 
         params = {'title': 'My second entry',
                   'content': 'My second content',
@@ -41,8 +41,8 @@ class CategoryTestCase(TestCase):
         new_entry.sites.add(self.site)
         new_entry.categories.add(self.categories[0])
 
-        self.assertEqual(self.categories[0].entries_published_set().count(), 2)
-        self.assertEqual(self.categories[1].entries_published_set().count(), 1)
+        self.assertEqual(self.categories[0].entries_published().count(), 2)
+        self.assertEqual(self.categories[1].entries_published().count(), 1)
 
     def test_entries_tree_path(self):
         self.assertEqual(self.categories[0].tree_path, 'category-1')

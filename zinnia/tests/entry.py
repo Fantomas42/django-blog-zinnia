@@ -164,26 +164,26 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.next_entry, self.third_entry)
         self.assertEquals(self.third_entry.next_entry, self.second_entry)
 
-    def test_related_published_set(self):
+    def test_related_published(self):
         site = Site.objects.get_current()
-        self.assertFalse(self.entry.related_published_set)
+        self.assertFalse(self.entry.related_published)
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'slug': 'my-second-entry',
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.related.add(self.entry)
-        self.assertEquals(len(self.entry.related_published_set), 0)
+        self.assertEquals(len(self.entry.related_published), 0)
 
         self.second_entry.sites.add(site)
-        self.assertEquals(len(self.entry.related_published_set), 1)
-        self.assertEquals(len(self.second_entry.related_published_set), 0)
+        self.assertEquals(len(self.entry.related_published), 1)
+        self.assertEquals(len(self.second_entry.related_published), 0)
 
         self.entry.status = PUBLISHED
         self.entry.save()
         self.entry.sites.add(site)
-        self.assertEquals(len(self.entry.related_published_set), 1)
-        self.assertEquals(len(self.second_entry.related_published_set), 1)
+        self.assertEquals(len(self.entry.related_published), 1)
+        self.assertEquals(len(self.second_entry.related_published), 1)
 
 
 class EntryHtmlContentTestCase(TestCase):

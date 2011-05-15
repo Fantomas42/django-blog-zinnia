@@ -44,9 +44,9 @@ class Author(User):
     objects = models.Manager()
     published = AuthorPublishedManager()
 
-    def entries_published_set(self):
+    def entries_published(self):
         """Return only the entries published"""
-        return entries_published(self.entry_set)
+        return entries_published(self.entries)
 
     @models.permalink
     def get_absolute_url(self):
@@ -70,9 +70,9 @@ class Category(models.Model):
                                verbose_name=_('parent category'),
                                related_name='children')
 
-    def entries_published_set(self):
+    def entries_published(self):
         """Return only the entries published"""
-        return entries_published(self.entry_set)
+        return entries_published(self.entries)
 
     @property
     def tree_path(self):
@@ -112,6 +112,7 @@ class EntryAbstractClass(models.Model):
 
     tags = TagField(_('tags'))
     categories = models.ManyToManyField(Category, verbose_name=_('categories'),
+                                        related_name='entries',
                                         blank=True, null=True)
     related = models.ManyToManyField('self', verbose_name=_('related entries'),
                                      blank=True, null=True)
@@ -121,6 +122,7 @@ class EntryAbstractClass(models.Model):
                             max_length=255)
 
     authors = models.ManyToManyField(User, verbose_name=_('authors'),
+                                     related_name='entries',
                                      blank=True, null=False)
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
     featured = models.BooleanField(_('featured'), default=False)
@@ -137,7 +139,8 @@ class EntryAbstractClass(models.Model):
                                            help_text=_('date end publish'),
                                            default=datetime(2042, 3, 15))
 
-    sites = models.ManyToManyField(Site, verbose_name=_('sites publication'))
+    sites = models.ManyToManyField(Site, verbose_name=_('sites publication'),
+                                   related_name='entries')
 
     login_required = models.BooleanField(
         _('login required'), default=False,
@@ -202,7 +205,7 @@ class EntryAbstractClass(models.Model):
         return self.is_actual and self.status == PUBLISHED
 
     @property
-    def related_published_set(self):
+    def related_published(self):
         """Return only related entries published"""
         return entries_published(self.related)
 

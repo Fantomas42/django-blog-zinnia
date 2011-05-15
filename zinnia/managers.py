@@ -26,10 +26,10 @@ class AuthorPublishedManager(models.Manager):
         """Return published authors"""
         now = datetime.now()
         return super(AuthorPublishedManager, self).get_query_set().filter(
-            entry__status=PUBLISHED,
-            entry__start_publication__lte=now,
-            entry__end_publication__gt=now,
-            entry__sites=Site.objects.get_current()
+            entries__status=PUBLISHED,
+            entries__start_publication__lte=now,
+            entries__end_publication__gt=now,
+            entries__sites=Site.objects.get_current()
             ).distinct()
 
 

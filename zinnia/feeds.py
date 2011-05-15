@@ -116,7 +116,7 @@ class CategoryEntries(EntryFeed):
 
     def items(self, obj):
         """Items are the published entries of the category"""
-        return obj.entries_published_set()[:FEEDS_MAX_ITEMS]
+        return obj.entries_published()[:FEEDS_MAX_ITEMS]
 
     def link(self, obj):
         """URL of the category"""
@@ -140,7 +140,7 @@ class AuthorEntries(EntryFeed):
 
     def items(self, obj):
         """Items are the published entries of the author"""
-        return entries_published(obj.entry_set)[:FEEDS_MAX_ITEMS]
+        return entries_published(obj.entries)[:FEEDS_MAX_ITEMS]
 
     def link(self, obj):
         """URL of the author"""
