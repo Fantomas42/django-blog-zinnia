@@ -36,7 +36,7 @@ If you want to benefit of the Akismet spam protection on your comments,
 it's possible to do it by installing the `akismet`_ python module, and add
 this setting: ::
 
-  ZINNIA_SPAM_CHECKER_BACKENDS = ('zinnia.spam_checker.backends.akismet',)
+  ZINNIA_SPAM_CHECKER_BACKENDS = ('zinnia.spam_checker.backends.automattic',)
 
 .. important:: You need an API key. If you don't have any, get one for free at
    	       http://akismet.com/signup/ then set it in your project's
@@ -44,7 +44,7 @@ this setting: ::
 
 ::
 
-  AKISMET_API_KEY = 'your key'
+  AKISMET_SECRET_API_KEY = 'your key'
 
 TypePad AntiSpam
 ----------------
@@ -63,7 +63,7 @@ The register the TypePad AntiSpam protection with this setting: ::
 
 ::
 
-  TYPEPAD_API_KEY = 'your key'
+  TYPEPAD_SECRET_API_KEY = 'your key'
 
 Bit.ly
 ------

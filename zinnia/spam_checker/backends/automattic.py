@@ -12,10 +12,10 @@ try:
 except ImportError:
     raise ImproperlyConfigured('akismet module is not available')
 
-if not getattr(settings, 'AKISMET_API_KEY', ''):
-    raise ImproperlyConfigured('You have to set a AKISMET_API_KEY setting')
+if not getattr(settings, 'AKISMET_SECRET_API_KEY', ''):
+    raise ImproperlyConfigured('You have to set AKISMET_SECRET_API_KEY')
 
-AKISMET_API_KEY = settings.AKISMET_API_KEY
+AKISMET_API_KEY = settings.AKISMET_SECRET_API_KEY
 
 
 def backend(comment, content_object, request):
