@@ -27,7 +27,7 @@ More than a long speech, here the list of the main features :
 * Prepublication and expiration
 * Edition in `MarkDown`_, `Textile`_ or `reStructuredText`_
 * Widgets (Popular entries, Similar entries, ...)
-* Spam protection with `Akismet`_
+* Spam protection with `Akismet`_ or `TypePad`_
 * Admin dashboard
 * `MetaWeblog API`_
 * Ping Directories
@@ -80,6 +80,7 @@ More information and help available at these URLs :
 .. _`Textile`: http://redcloth.org/hobix.com/textile/
 .. _`reStructuredText`: http://docutils.sourceforge.net/rst.html
 .. _`Akismet`: http://akismet.com
+.. _`TypePad`: http://antispam.typepad.com/
 .. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi
 .. _`Bit.ly`: http://django-blog-zinnia.com/documentation/configuration/#bit-ly
 .. _`Twitter`: http://django-blog-zinnia.com/documentation/configuration/#twitter

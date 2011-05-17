@@ -33,19 +33,37 @@ Akismet
 -------
 
 If you want to benefit of the Akismet spam protection on your comments,
-it's possible to do it by installing the `akismet
-<http://www.voidspace.org.uk/python/modules.shtml#akismet>`_ python module,
-and add this setting: ::
+it's possible to do it by installing the `akismet`_ python module, and add
+this setting: ::
 
   ZINNIA_SPAM_CHECKER_BACKENDS = ('zinnia.spam_checker.backends.akismet',)
 
 .. important:: You need an API key. If you don't have any, get one for free at
    	       http://akismet.com/signup/ then set it in your project's
-   	       settings like this: 
+	       settings like this:
 
 ::
 
-  AKISMET_SECRET_API_KEY = 'your key'
+  AKISMET_API_KEY = 'your key'
+
+TypePad AntiSpam
+----------------
+
+It's also possible to benefit of the `TypePad AntiSpam
+<http://antispam.typepad.com/>`_ service to fight the spam. Like the
+Akismet protection you need to install the `akismet`_ python module.
+
+The register the TypePad AntiSpam protection with this setting: ::
+
+  ZINNIA_SPAM_CHECKER_BACKENDS = ('zinnia.spam_checker.backends.typepad',)
+
+.. important:: You need an API key. If you don't have any, get one for free at
+	       http://antispam.typepad.com/info/get-api-key.html then set
+	       it in your project's settings like this:
+
+::
+
+  TYPEPAD_API_KEY = 'your key'
 
 Bit.ly
 ------
@@ -171,3 +189,7 @@ Insert something like this in your project's urls.py: ::
 **Note** : For the Pingback service check if your site is enabled for
 pingback detection.
 More information at http://hixie.ch/specs/pingback/pingback-1.0#TOC2
+
+
+
+.. `akismet`: http://www.voidspace.org.uk/python/modules.shtml#akismet
