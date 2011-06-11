@@ -255,7 +255,11 @@ def zinnia_pagination(page, begin_pages=3, end_pages=3,
 def zinnia_breadcrumbs(context, separator='/', root_name='Blog',
                        template='zinnia/tags/breadcrumbs.html',):
     """Return a breadcrumb for the application"""
-    path = context['request'].path
+    try:
+        path = context['request'].path
+    except:
+        # No request in context
+        path = ""
     page_object = context.get('object') or context.get('category') or \
                   context.get('tag') or context.get('author')
     breadcrumbs = retrieve_breadcrumbs(path, page_object, root_name)
