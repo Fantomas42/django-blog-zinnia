@@ -150,8 +150,8 @@ class PingBackTestCase(TestCase):
             response,
             'Pingback from %s to %s registered.' % (source, target))
         self.assertEquals(self.first_entry.pingbacks.count(), 1)
-        self.assertEquals(self.first_entry.pingbacks[0].user_name,
-                          'Zinnia\'s Blog - %s' % self.second_entry.title)
+        self.assertTrue(self.second_entry.title in \
+                        self.first_entry.pingbacks[0].user_name)
 
         # Error code 48 : The pingback has already been registered.
         response = self.server.pingback.ping(source, target)

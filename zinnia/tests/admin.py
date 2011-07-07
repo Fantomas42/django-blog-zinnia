@@ -2,6 +2,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 
+from zinnia import settings
 from zinnia.models import Entry
 from zinnia.models import Category
 
@@ -11,12 +12,17 @@ class EntryAdminTestCase(TestCase):
     urls = 'zinnia.tests.urls'
 
     def setUp(self):
+        self.original_wysiwyg = settings.WYSIWYG
+        settings.WYSIWYG = None
         User.objects.create_superuser('admin', 'admin@example.com', 'password')
         category_1 = Category.objects.create(title='Category 1', slug='cat-1')
         Category.objects.create(title='Category 2', slug='cat-2',
                                 parent=category_1)
 
         self.client.login(username='admin', password='password')
+
+    def tearDown(self):
+        settings.WYSIWYG = self.original_wysiwyg
 
     def test_entry_add_and_change(self):
         """Test the insertion of an Entry"""

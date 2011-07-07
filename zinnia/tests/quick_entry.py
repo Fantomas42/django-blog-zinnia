@@ -2,6 +2,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 
+from zinnia import settings
 from zinnia.models import Entry
 from zinnia.managers import DRAFT
 
@@ -9,6 +10,13 @@ from zinnia.managers import DRAFT
 class QuickEntryTestCase(TestCase):
     """Test cases for quick_entry view"""
     urls = 'zinnia.tests.urls'
+
+    def setUp(self):
+        self.original_wysiwyg = settings.WYSIWYG
+        settings.WYSIWYG = None
+
+    def tearDown(self):
+        settings.WYSIWYG = self.original_wysiwyg
 
     def test_quick_entry(self):
         User.objects.create_user('user', 'user@example.com', 'password')
