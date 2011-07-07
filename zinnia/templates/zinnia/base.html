@@ -23,7 +23,7 @@
   <h3>{% trans "Search" %}</h3>
   <form method="get" id="searchform" action="{% url zinnia_entry_search %}">
     <p>
-      <input type="text" value="{% trans "Keywords..." %}" name="pattern" id="searchbox" onfocus="this.value=''"/>
+      <input type="text" value="{% trans "Keywords..." %}" name="pattern" id="searchbox" onfocus="this.value=''" />
       <input type="submit" class="submitbutton" value="OK" />
       <a title="{% trans 'You can use - to exclude words or phrases, &quot;double quotes&quot; for exact phrases and the AND/OR boolean operators combined with parenthesis for complex searchs.' %}">
         <img src="{{ ZINNIA_MEDIA_URL }}img/help.png" alt="?" width="14" height="14" />
@@ -49,8 +49,8 @@
   <ul>
     {% for tag in tag_cloud %}
     <li>
-      <a href="{% url zinnia_tag_detail tag.name %}" 
-         title="{{ tag.count }} {% trans "entries" %}" 
+      <a href="{% url zinnia_tag_detail tag.name %}"
+         title="{{ tag.count }} {% trans "entries" %}"
          class="tag_{{ tag.font_size }}">{{ tag }}</a>
     </li>
     {% endfor %}
