@@ -217,12 +217,17 @@ def get_recent_linkbacks(number=5,
             'linkbacks': linkbacks}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def zinnia_pagination(page, begin_pages=3, end_pages=3,
-               before_pages=2, after_pages=2,
-               template='zinnia/tags/pagination.html'):
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def zinnia_pagination(context, page, begin_pages=3, end_pages=3,
+                      before_pages=2, after_pages=2,
+                      template='zinnia/tags/pagination.html'):
     """Return a Digg-like pagination, by splitting long list of page
     into 3 blocks of pages"""
+    GET_string = ''
+    for key, value in context['request'].GET.items():
+        if key != 'page':
+            GET_string += '&%s=%s' % (key, value)
+
     begin = page.paginator.page_range[:begin_pages]
     end = page.paginator.page_range[-end_pages:]
     middle = page.paginator.page_range[max(page.number - before_pages - 1, 0):
@@ -247,7 +252,7 @@ def zinnia_pagination(page, begin_pages=3, end_pages=3,
         end = sorted(set(middle + end))  # [17, 18, 19, 20]
         middle = []
 
-    return {'template': template, 'page': page,
+    return {'template': template, 'page': page, 'GET_string': GET_string,
             'begin': begin, 'middle': middle, 'end': end}
 
 

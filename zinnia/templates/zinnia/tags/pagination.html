@@ -6,7 +6,7 @@
 
   {% if page.has_previous %}
   <span class="previous">
-    <a href="?page={{ page.previous_page_number }}"
+    <a href="?page={{ page.previous_page_number }}{{ GET_string }}"
        title="{% trans "More recent entries" %}">&laquo;</a>
   </span>
   {% endif %}
@@ -16,7 +16,7 @@
     {% ifequal page.number page_number %}
     <strong>{{ page_number }}</strong>
     {% else %}
-    <a href="?page={{ page_number }}"
+    <a href="?page={{ page_number }}{{ GET_string }}"
        title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
     {% endifequal%}
   </span>
@@ -29,7 +29,7 @@
     {% ifequal page.number page_number %}
     <strong>{{ page_number }}</strong>
     {% else %}
-    <a href="?page={{ page_number }}"
+    <a href="?page={{ page_number }}{{ GET_string }}"
        title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
     {% endifequal%}
   </span>
@@ -43,16 +43,16 @@
     {% ifequal page.number page_number %}
     <strong>{{ page_number }}</strong>
     {% else %}
-    <a href="?page={{ page_number }}"
+    <a href="?page={{ page_number }}{{ GET_string }}"
        title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
     {% endifequal%}
   </span>
   {% endfor %}
   {% endif %}
-  
+
   {% if page.has_next %}
   <span class="next">
-    <a href="?page={{ page.next_page_number }}"
+    <a href="?page={{ page.next_page_number }}{{ GET_string }}"
        title="{% trans "More old entries" %}">&raquo;</a>
   </span>
   {% endif %}
