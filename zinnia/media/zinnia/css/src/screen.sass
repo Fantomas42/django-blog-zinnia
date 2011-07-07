@@ -67,10 +67,12 @@ hr
       .month-next
         float: right
   .tags
-    ul
-      +inline-list
-      +no-bullets
-      +tag-cloud($link_color, 1.5em)
+    div
+      padding: 0 5px 0 18px
+      ul
+        +inline-list
+        +no-bullets
+        +tag-cloud($link_color, 1.5em)
 
 // Calendar
 table.month
@@ -84,6 +86,8 @@ div.paginator
     padding: 0 0.5em 0 0.5em
     float: left
     border: 1px solid $box_color
+    &.index
+      margin-left: 0
     &.page, &.next, &.previous
       &:hover
         background-color: $link_color
@@ -123,9 +127,8 @@ ol#comment-list, ol#pingback-list, ol#trackback-list
       padding: 5px
     .pingback-body, trackback-body
       padding: 5px
-    .comment-author, .pingback-author, .trackback-author, 
+    .comment-author, .pingback-author, .trackback-author,
       font-size: 1.2em
       font-weight: bold
       color: #666
 
-        

@@ -24,4 +24,10 @@ blockquote { margin: 1.5em; padding: 1em; font-style: italic; font-size: 0.9em; 
 
 .hide { display: none; }
 
-a:after { content: " (" attr(href) ")"; font-size: 90%; }
+body { font-size: 2em; }
+body a, body a:link, body a:visited, body a:focus, body a:active, body a:hover { text-decoration: none; color: #006699; }
+
+#sidebar, .top-navigation, .commentForm { display: none; }
+
+#header h1 { margin-bottom: 0; }
+#header h1 a { font-size: 2em; font-weight: bold; }

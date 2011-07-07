@@ -368,7 +368,7 @@ input.span-24, textarea.span-24, select.span-24 { width: 950px; }
 
 .append-bottom { margin-bottom: 1.5em; }
 
-.showgrid { background: url('/../img/grid.png?1297867753'); }
+.showgrid { background: url('/../img/grid.png?1304268753'); }
 
 .feedback, .error, .alert, .notice, .success, .info { padding: 0.8em; margin-bottom: 1em; border: 2px solid #dddddd; }
 
@@ -444,15 +444,16 @@ hr { background: #dddddd; color: #dddddd; clear: both; float: none; width: 100%;
 #sidebar .calendar .month-navigation { padding-bottom: 1.5em; }
 #sidebar .calendar .month-navigation .month-previous { float: left; }
 #sidebar .calendar .month-navigation .month-next { float: right; }
-#sidebar .tags ul { list-style-type: none; list-style: none; font-size: 1.5em; line-height: 1.8em; }
-#sidebar .tags ul, #sidebar .tags ul li { margin: 0px; padding: 0px; display: inline; }
-#sidebar .tags ul li { list-style-image: none; list-style-type: none; margin-left: 0px; }
-#sidebar .tags ul .tag_1 { font-size: 0.75em; color: #001e2d; }
-#sidebar .tags ul .tag_2 { font-size: 1em; color: #00334c; }
-#sidebar .tags ul .tag_3 { font-size: 1.125em; color: #005b89; }
-#sidebar .tags ul .tag_4 { font-size: 2em; color: #0070a8; }
-#sidebar .tags ul .tag_5 { font-size: 2.25em; color: #0099e5; }
-#sidebar .tags ul .tag_6 { font-size: 3em; color: #00adff; }
+#sidebar .tags div { padding: 0 5px 0 18px; }
+#sidebar .tags div ul { list-style-type: none; list-style: none; font-size: 1.5em; line-height: 1.8em; }
+#sidebar .tags div ul, #sidebar .tags div ul li { margin: 0px; padding: 0px; display: inline; }
+#sidebar .tags div ul li { list-style-image: none; list-style-type: none; margin-left: 0px; }
+#sidebar .tags div ul .tag_1 { font-size: 0.75em; color: #001e2d; }
+#sidebar .tags div ul .tag_2 { font-size: 1em; color: #00334c; }
+#sidebar .tags div ul .tag_3 { font-size: 1.125em; color: #005b89; }
+#sidebar .tags div ul .tag_4 { font-size: 2em; color: #0070a8; }
+#sidebar .tags div ul .tag_5 { font-size: 2.25em; color: #0099e5; }
+#sidebar .tags div ul .tag_6 { font-size: 3em; color: #00adff; }
 
 table.month { margin-bottom: 0; }
 table.month th.month { text-transform: uppercase; color: #006699; background: none; }
@@ -462,6 +463,7 @@ table.month td.entry { background-color: #e9e9f3; }
 
 div.paginator { margin-bottom: 1.5em; }
 div.paginator span { margin-left: 0.3em; padding: 0 0.5em 0 0.5em; float: left; border: 1px solid #e9e9f3; }
+div.paginator span.index { margin-left: 0; }
 div.paginator span.page:hover, div.paginator span.next:hover, div.paginator span.previous:hover { background-color: #006699; }
 div.paginator span.page:hover a, div.paginator span.next:hover a, div.paginator span.previous:hover a { color: white; }
 div.paginator span.current { border-color: #006699; background-color: #006699; color: white; }
