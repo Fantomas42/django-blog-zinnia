@@ -480,6 +480,7 @@ div.paginator span.current { border-color: #006699; background-color: #006699; c
 .hentry .entry-footer .entry-shorturl strong { background: transparent url(../img/shorturl.png) no-repeat scroll; }
 .hentry .entry-footer .entry-comments strong { background: transparent url(../img/comments.png) no-repeat scroll; }
 .hentry .entry-header { background-color: #e9e9f3; }
+.hentry .entry-content p { font-size: 1.2em; }
 .hentry .entry-content pre, .hentry .entry-content blockquote { overflow: auto; padding: 1em; clear: none; float: none; margin: 0 0 1.5em 0; width: auto; }
 .hentry .entry-content blockquote { margin: 0 2em 1.5em 2em; border: 1px dashed #94949e; background-color: #fafaff; }
 .hentry .entry-content blockquote p { font-size: 1.5em; margin: 0; }
