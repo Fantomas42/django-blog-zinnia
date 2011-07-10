@@ -29,8 +29,8 @@ these steps.
                            url(r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
                                {'sitemaps': sitemaps}),)
 
-Akismet
--------
+Akismet Anti-Spam
+-----------------
 
 If you want to benefit of the Akismet spam protection on your comments,
 it's possible to do it by installing the `akismet`_ python module, and add
@@ -46,8 +46,8 @@ this setting: ::
 
   AKISMET_SECRET_API_KEY = 'your key'
 
-TypePad AntiSpam
-----------------
+TypePad Anti-Spam
+-----------------
 
 It's also possible to benefit of the `TypePad AntiSpam
 <http://antispam.typepad.com/>`_ service to fight the spam. Like the
@@ -192,4 +192,4 @@ More information at http://hixie.ch/specs/pingback/pingback-1.0#TOC2
 
 
 
-.. `akismet`: http://www.voidspace.org.uk/python/modules.shtml#akismet
+.. _`akismet`: http://www.voidspace.org.uk/python/modules.shtml#akismet
