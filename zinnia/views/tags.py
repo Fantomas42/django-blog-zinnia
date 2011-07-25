@@ -1,16 +1,23 @@
 """Views for Zinnia tags"""
-from django.views.generic.list_detail import object_list
+from django.template import RequestContext
+from django.shortcuts import render_to_response
 
+from tagging.models import Tag
 from tagging.views import tagged_object_list
 
 from zinnia.models import Entry
 from zinnia.settings import PAGINATION
-from zinnia.managers import tags_published
-from zinnia.views.decorators import update_queryset
+
 from zinnia.views.decorators import template_name_for_entry_queryset_filtered
 
 
-tag_list = update_queryset(object_list, tags_published)
+def tag_list(request, template_name='zinnia/tag_list.html'):
+    """Return the list of published tags with counts,
+    try to simulate an object_list view"""
+    tag_list = Tag.objects.usage_for_queryset(
+        Entry.published.all(), counts=True)
+    return render_to_response(template_name, {'object_list': tag_list},
+                              context_instance=RequestContext(request))
 
 
 def tag_detail(request, tag, page=None, **kwargs):
