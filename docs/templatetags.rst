@@ -143,6 +143,15 @@ Examples: ::
   {% get_categories %}
   {% get_categories "custom_template.html" %}
 
+get_tags
+--------
+
+Store in a context variable a queryset of all the published tags.
+
+Example: ::
+
+  {% get_tags as entry_tags %}
+
 get_recent_comments
 -------------------
 

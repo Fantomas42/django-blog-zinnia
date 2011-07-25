@@ -492,7 +492,7 @@ class TemplateTagsTestCase(TestCase):
         Tag.objects.create(name='tag')
         t = Template("""
         {% load zinnia_tags %}
-        {% get_entry_tags as entry_tags %}
+        {% get_tags as entry_tags %}
         {{ entry_tags|join:", " }}
         """)
         html = t.render(Context())
@@ -503,10 +503,10 @@ class TemplateTagsTestCase(TestCase):
 
         template_error_as = """
         {% load zinnia_tags %}
-        {% get_entry_tags a_s entry_tags %}"""
+        {% get_tags a_s entry_tags %}"""
         self.assertRaises(TemplateSyntaxError, Template, template_error_as)
 
         template_error_args = """
         {% load zinnia_tags %}
-        {% get_entry_tags as entry tags %}"""
+        {% get_tags as entry tags %}"""
         self.assertRaises(TemplateSyntaxError, Template, template_error_args)

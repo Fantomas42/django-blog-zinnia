@@ -286,7 +286,7 @@ def get_gravatar(email, size=80, rating='g', default=None):
     return url.replace('&', '&amp;')
 
 
-class EntryTagsNode(Node):
+class TagsNode(Node):
     def __init__(self, context_var):
         self.context_var = context_var
 
@@ -296,7 +296,7 @@ class EntryTagsNode(Node):
 
 
 @register.tag
-def get_entry_tags(parser, token):
+def get_tags(parser, token):
     """{% get_entry_tags as var %}"""
     bits = token.split_contents()
 
@@ -306,4 +306,4 @@ def get_entry_tags(parser, token):
     if bits[1] != 'as':
         raise TemplateSyntaxError(
             "first argument to get_entry_tags tag must be 'as'")
-    return EntryTagsNode(bits[2])
+    return TagsNode(bits[2])
