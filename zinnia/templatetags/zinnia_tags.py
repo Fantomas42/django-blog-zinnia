@@ -6,7 +6,9 @@ from datetime import datetime
 
 from django.db.models import Q
 from django.db import connection
+from django.template import Node
 from django.template import Library
+from django.template import TemplateSyntaxError
 from django.contrib.comments.models import Comment
 from django.contrib.comments.models import CommentFlag
 from django.contrib.contenttypes.models import ContentType
@@ -15,6 +17,7 @@ from django.utils.encoding import smart_unicode
 from zinnia.models import Entry
 from zinnia.models import Author
 from zinnia.models import Category
+from zinnia.managers import tags_published
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
 from zinnia.templatetags.zcalendar import ZinniaCalendar
@@ -281,3 +284,26 @@ def get_gravatar(email, size=80, rating='g', default=None):
 
     url = '%s?%s' % (url, urlencode(options))
     return url.replace('&', '&amp;')
+
+
+class EntryTagsNode(Node):
+    def __init__(self, context_var):
+        self.context_var = context_var
+
+    def render(self, context):
+        context[self.context_var] = tags_published()
+        return ''
+
+
+@register.tag
+def get_entry_tags(parser, token):
+    """{% get_entry_tags as var %}"""
+    bits = token.split_contents()
+
+    if len(bits) != 3:
+        raise TemplateSyntaxError(
+            'get_entry tag takes exactly two arguments')
+    if bits[1] != 'as':
+        raise TemplateSyntaxError(
+            "first argument to get_entry_tags tag must be 'as'")
+    return EntryTagsNode(bits[2])

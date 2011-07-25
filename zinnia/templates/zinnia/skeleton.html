@@ -1,5 +1,5 @@
-{% load zinnia_tags tagging_tags i18n %}
-{% tags_for_model zinnia.entry as tag_entry %}
+{% load zinnia_tags i18n %}
+{% get_entry_tags as entry_tags %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -8,7 +8,7 @@
     <meta name="robots" content="follow, all" />
     <meta name="language" content="{{ LANGUAGE_CODE }}" />
     <meta name="description" content="{% block meta-description %}Demonstration of the Zinnia Blog application.{% endblock %}" />
-    <meta name="keywords" content="{% block meta-keywords %}django, blog, zinnia, {{ tag_entry|join:", "}}{% endblock %}" />
+    <meta name="keywords" content="{% block meta-keywords %}django, blog, zinnia, {{ entry_tags|join:", "}}{% endblock %}" />
     <meta name="author" content="Fantomas42" />
     {% block meta %}{% endblock %}
     <link rel="pingback" href="/xmlrpc/" />
@@ -60,8 +60,8 @@
 	      This simple skin is the base template of the Zinnia application,
 	      used for displaying the blog quickly.
             </p>
-            <p>	    
-	      Feel free to override the <strong>zinnia/base.html</strong> 
+            <p>
+	      Feel free to override the <strong>zinnia/base.html</strong>
               template to <a href="http://django-blog-zinnia.com/documentation/faq/#templates">change the default appearence</a>.
 	    </p>
 	  </div>

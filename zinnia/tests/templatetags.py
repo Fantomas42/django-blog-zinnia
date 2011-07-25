@@ -3,6 +3,8 @@ from datetime import datetime
 
 from django.test import TestCase
 from django.template import Context
+from django.template import Template
+from django.template import TemplateSyntaxError
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
@@ -485,3 +487,26 @@ class TemplateTagsTestCase(TestCase):
             get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404'),
             'http://www.gravatar.com/avatar/86d4fd4a22de452'
             'a9228298731a0b592.jpg?s=15&amp;r=x&amp;d=404')
+
+    def test_get_entry_tags(self):
+        Tag.objects.create(name='tag')
+        t = Template("""
+        {% load zinnia_tags %}
+        {% get_entry_tags as entry_tags %}
+        {{ entry_tags|join:", " }}
+        """)
+        html = t.render(Context())
+        self.assertEquals(html.strip(), '')
+        self.publish_entry()
+        html = t.render(Context())
+        self.assertEquals(html.strip(), 'test, zinnia')
+
+        template_error_as = """
+        {% load zinnia_tags %}
+        {% get_entry_tags a_s entry_tags %}"""
+        self.assertRaises(TemplateSyntaxError, Template, template_error_as)
+
+        template_error_args = """
+        {% load zinnia_tags %}
+        {% get_entry_tags as entry tags %}"""
+        self.assertRaises(TemplateSyntaxError, Template, template_error_args)
