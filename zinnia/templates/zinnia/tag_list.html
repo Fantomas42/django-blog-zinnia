@@ -14,6 +14,10 @@
       <a href="{% url zinnia_tag_detail object %}" title="{{ object }}">{{ object }}</a>
       {% blocktrans count object.count as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     </li>
+    {% empty %}
+    <li>
+      {% trans "No tags yet." %}
+    </li>
     {% endfor %}
   </ul>
 </div>

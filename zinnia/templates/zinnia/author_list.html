@@ -17,6 +17,10 @@
       </a>
       {% blocktrans count object.entries_published.count as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     </li>
+    {% empty %}
+    <li>
+      {% trans "No authors yet." %}
+    </li>
     {% endfor %}
   </ul>
 </div>
