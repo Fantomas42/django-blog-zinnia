@@ -9,10 +9,10 @@ from django.db import connection
 from django.template import Node
 from django.template import Library
 from django.template import TemplateSyntaxError
-from django.contrib.comments.models import Comment
 from django.contrib.comments.models import CommentFlag
 from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import smart_unicode
+from django.contrib.comments import get_model as get_comment_model
 
 from tagging.models import Tag
 from tagging.utils import calculate_cloud
@@ -82,7 +82,7 @@ def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     WHERE content_type_id = %%s
     AND is_public = '1'
     GROUP BY object_pk
-    ORDER BY score DESC""" % Comment._meta.db_table
+    ORDER BY score DESC""" % get_comment_model()._meta.db_table
 
     cursor = connection.cursor()
     cursor.execute(query, [ctype.id])
@@ -195,7 +195,7 @@ def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
                               Entry.published.values_list('id', flat=True))
     content_type = ContentType.objects.get_for_model(Entry)
 
-    comments = Comment.objects.filter(
+    comments = get_comment_model().objects.filter(
         Q(flags=None) | Q(flags__flag=CommentFlag.MODERATOR_APPROVAL),
         content_type=content_type, object_pk__in=entry_published_pks,
         is_public=True).order_by('-submit_date')[:number]
@@ -212,7 +212,7 @@ def get_recent_linkbacks(number=5,
                               Entry.published.values_list('id', flat=True))
     content_type = ContentType.objects.get_for_model(Entry)
 
-    linkbacks = Comment.objects.filter(
+    linkbacks = get_comment_model().objects.filter(
         content_type=content_type,
         object_pk__in=entry_published_pks,
         flags__flag__in=['pingback', 'trackback'],

@@ -3,9 +3,9 @@ from datetime import datetime
 
 from django.test import TestCase
 from django.conf import settings
+from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.contrib.comments.models import Comment
 from django.utils.translation import ugettext as _
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.feedgenerator import DefaultFeed
@@ -56,19 +56,19 @@ class ZinniaFeedsTestCase(TestCase):
         return entry
 
     def create_discussions(self, entry):
-        comment = Comment.objects.create(comment='My Comment',
-                                         user=self.author,
-                                         content_object=entry,
-                                         site=self.site)
-        pingback = Comment.objects.create(comment='My Pingback',
-                                          user=self.author,
-                                          content_object=entry,
-                                          site=self.site)
+        comment = comments.get_model().objects.create(comment='My Comment',
+                                                      user=self.author,
+                                                      content_object=entry,
+                                                      site=self.site)
+        pingback = comments.get_model().objects.create(comment='My Pingback',
+                                                       user=self.author,
+                                                       content_object=entry,
+                                                       site=self.site)
         pingback.flags.create(user=self.author, flag='pingback')
-        trackback = Comment.objects.create(comment='My Trackback',
-                                           user=self.author,
-                                           content_object=entry,
-                                           site=self.site)
+        trackback = comments.get_model().objects.create(comment='My Trackback',
+                                                        user=self.author,
+                                                        content_object=entry,
+                                                        site=self.site)
         trackback.flags.create(user=self.author, flag='trackback')
         return [comment, pingback, trackback]
 

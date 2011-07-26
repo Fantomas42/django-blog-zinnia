@@ -1,5 +1,5 @@
 """Spam cleanup command module for Zinnia"""
-from django.contrib.comments.models import Comment
+from django.contrib import comments
 from django.contrib.contenttypes.models import ContentType
 from django.core.management.base import NoArgsCommand
 
@@ -15,9 +15,9 @@ class Command(NoArgsCommand):
         verbosity = int(options.get('verbosity', 1))
 
         content_type = ContentType.objects.get_for_model(Entry)
-        spams = Comment.objects.filter(is_public=False,
-                                       content_type=content_type,
-                                       flags__flag='spam')
+        spams = comments.get_model().objects.filter(is_public=False,
+                                                    content_type=content_type,
+                                                    flags__flag='spam')
         spams_count = spams.count()
         spams.delete()
 

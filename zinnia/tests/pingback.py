@@ -6,9 +6,9 @@ from urllib2 import HTTPError
 from xmlrpclib import ServerProxy
 
 from django.test import TestCase
+from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 
 from BeautifulSoup import BeautifulSoup
@@ -186,7 +186,7 @@ class PingBackTestCase(TestCase):
         self.assertEquals(response, [
             'http://localhost:8000/2010/01/01/my-second-entry/'])
 
-        comment = Comment.objects.create(
+        comment = comments.get_model().objects.create(
             content_type=ContentType.objects.get_for_model(Entry),
             object_pk=self.first_entry.pk,
             site=self.site, comment='Test pingback',

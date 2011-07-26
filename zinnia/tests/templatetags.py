@@ -5,11 +5,11 @@ from django.test import TestCase
 from django.template import Context
 from django.template import Template
 from django.template import TemplateSyntaxError
+from django.contrib import comments
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.contrib.comments.models import Comment
 from django.contrib.comments.models import CommentFlag
 
 from tagging.models import Tag
@@ -136,12 +136,12 @@ class TemplateTagsTestCase(TestCase):
         second_entry = Entry.objects.create(**params)
         second_entry.sites.add(site)
 
-        Comment.objects.create(comment='My Comment 1', site=site,
-                               content_object=self.entry)
-        Comment.objects.create(comment='My Comment 2', site=site,
-                               content_object=self.entry)
-        Comment.objects.create(comment='My Comment 3', site=site,
-                               content_object=second_entry)
+        comments.get_model().objects.create(comment='My Comment 1', site=site,
+                                            content_object=self.entry)
+        comments.get_model().objects.create(comment='My Comment 2', site=site,
+                                            content_object=self.entry)
+        comments.get_model().objects.create(comment='My Comment 3', site=site,
+                                            content_object=second_entry)
         context = get_popular_entries(3)
         self.assertEquals(context['entries'], [self.entry, second_entry])
         self.entry.status = DRAFT
@@ -272,8 +272,9 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['template'],
                           'zinnia/tags/recent_comments.html')
 
-        comment_1 = Comment.objects.create(comment='My Comment 1', site=site,
-                                           content_object=self.entry)
+        comment_1 = comments.get_model().objects.create(
+            comment='My Comment 1', site=site,
+            content_object=self.entry)
         context = get_recent_comments(3, 'custom_template.html')
         self.assertEquals(len(context['comments']), 0)
         self.assertEquals(context['template'], 'custom_template.html')
@@ -284,8 +285,9 @@ class TemplateTagsTestCase(TestCase):
 
         author = User.objects.create_user(username='webmaster',
                                           email='webmaster@example.com')
-        comment_2 = Comment.objects.create(comment='My Comment 2', site=site,
-                                           content_object=self.entry)
+        comment_2 = comments.get_model().objects.create(
+            comment='My Comment 2', site=site,
+            content_object=self.entry)
         comment_2.flags.create(user=author,
                                flag=CommentFlag.MODERATOR_APPROVAL)
         context = get_recent_comments()
@@ -300,8 +302,9 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['template'],
                           'zinnia/tags/recent_linkbacks.html')
 
-        linkback_1 = Comment.objects.create(comment='My Linkback 1', site=site,
-                                            content_object=self.entry)
+        linkback_1 = comments.get_model().objects.create(
+            comment='My Linkback 1', site=site,
+            content_object=self.entry)
         linkback_1.flags.create(user=user, flag='pingback')
         context = get_recent_linkbacks(3, 'custom_template.html')
         self.assertEquals(len(context['linkbacks']), 0)
@@ -311,8 +314,9 @@ class TemplateTagsTestCase(TestCase):
         context = get_recent_linkbacks()
         self.assertEquals(len(context['linkbacks']), 1)
 
-        linkback_2 = Comment.objects.create(comment='My Linkback 2', site=site,
-                                            content_object=self.entry)
+        linkback_2 = comments.get_model().objects.create(
+            comment='My Linkback 2', site=site,
+            content_object=self.entry)
         linkback_2.flags.create(user=user, flag='trackback')
         context = get_recent_linkbacks()
         self.assertEquals(list(context['linkbacks']), [linkback_2, linkback_1])

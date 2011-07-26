@@ -9,10 +9,10 @@ from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-from django.contrib.comments.models import Comment
 from django.core.management.base import CommandError
 from django.core.management.base import NoArgsCommand
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.comments import get_model as get_comment_model
 
 from zinnia import __version__
 from zinnia.models import Entry
@@ -20,6 +20,7 @@ from zinnia.models import Category
 from zinnia.managers import DRAFT, PUBLISHED
 
 gdata_service = None
+Comment = get_comment_model()
 
 
 class Command(NoArgsCommand):

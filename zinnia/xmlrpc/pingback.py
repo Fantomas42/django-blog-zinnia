@@ -4,11 +4,11 @@ from urllib2 import URLError
 from urllib2 import HTTPError
 from urlparse import urlsplit
 
+from django.contrib import comments
 from django.utils.html import strip_tags
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import Resolver404
 from django.core.urlresolvers import get_resolver
-from django.contrib.comments.models import Comment
 from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 
@@ -95,7 +95,7 @@ def pingback_ping(source, target):
         description = generate_pingback_content(soup, target,
                                                 PINGBACK_CONTENT_LENGTH)
 
-        comment, created = Comment.objects.get_or_create(
+        comment, created = comments.get_model().objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Entry),
             object_pk=entry.pk, user_url=source, site=site,
             defaults={'comment': description, 'user_name': title})

@@ -1,6 +1,6 @@
 """Template tags and filters for Zinnia's admin"""
 from django.template import Library
-from django.contrib.comments.models import Comment
+from django.contrib import comments
 from django.contrib.contenttypes.models import ContentType
 
 from zinnia.models import Entry
@@ -26,7 +26,7 @@ def get_content_stats(
     """Return statistics of the contents"""
     content_type = ContentType.objects.get_for_model(Entry)
 
-    discussions = Comment.objects.filter(
+    discussions = comments.get_model().objects.filter(
         is_public=True, content_type=content_type)
 
     return {'template': template,
@@ -37,6 +37,6 @@ def get_content_stats(
             'comments': discussions.filter(flags=None).count(),
             'pingbacks': discussions.filter(flags__flag='pingback').count(),
             'trackbacks': discussions.filter(flags__flag='trackback').count(),
-            'rejects': Comment.objects.filter(
+            'rejects': comments.get_model().objects.filter(
                 is_public=False, content_type=content_type).count(),
             }

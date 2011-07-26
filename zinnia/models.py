@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.db.models.signals import post_save
 from django.utils.importlib import import_module
-from django.contrib.comments.models import Comment
+from django.contrib import comments
 from django.contrib.comments.models import CommentFlag
 from django.contrib.comments.moderation import moderator
 from django.utils.translation import ugettext_lazy as _
@@ -212,7 +212,8 @@ class EntryAbstractClass(models.Model):
     @property
     def discussions(self):
         """Return published discussions"""
-        return Comment.objects.for_model(self).filter(is_public=True)
+        return comments.get_model().objects.for_model(
+            self).filter(is_public=True)
 
     @property
     def comments(self):

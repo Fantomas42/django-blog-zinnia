@@ -6,10 +6,10 @@ from datetime import timedelta
 
 from django.test import TestCase
 from django.conf import settings
+from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
-from django.contrib.comments.models import Comment
 from django.contrib.comments.models import CommentFlag
 
 from zinnia import models
@@ -35,17 +35,17 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.pingbacks.count(), 0)
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        Comment.objects.create(comment='My Comment 1',
-                               content_object=self.entry,
-                               site=site)
+        comments.get_model().objects.create(comment='My Comment 1',
+                                            content_object=self.entry,
+                                            site=site)
         self.assertEquals(self.entry.discussions.count(), 1)
         self.assertEquals(self.entry.comments.count(), 1)
         self.assertEquals(self.entry.pingbacks.count(), 0)
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        Comment.objects.create(comment='My Comment 2',
-                               content_object=self.entry,
-                               site=site, is_public=False)
+        comments.get_model().objects.create(comment='My Comment 2',
+                                            content_object=self.entry,
+                                            site=site, is_public=False)
         self.assertEquals(self.entry.discussions.count(), 1)
         self.assertEquals(self.entry.comments.count(), 1)
         self.assertEquals(self.entry.pingbacks.count(), 0)
@@ -54,7 +54,7 @@ class EntryTestCase(TestCase):
         author = User.objects.create_user(username='webmaster',
                                           email='webmaster@example.com')
 
-        comment = Comment.objects.create(
+        comment = comments.get_model().objects.create(
             comment='My Comment 3',
             content_object=self.entry,
             site=Site.objects.create(domain='http://toto.com',
@@ -65,18 +65,18 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.pingbacks.count(), 0)
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        comment = Comment.objects.create(comment='My Pingback 1',
-                                         content_object=self.entry,
-                                         site=site)
+        comment = comments.get_model().objects.create(comment='My Pingback 1',
+                                                      content_object=self.entry,
+                                                      site=site)
         comment.flags.create(user=author, flag='pingback')
         self.assertEquals(self.entry.discussions.count(), 3)
         self.assertEquals(self.entry.comments.count(), 2)
         self.assertEquals(self.entry.pingbacks.count(), 1)
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        comment = Comment.objects.create(comment='My Trackback 1',
-                                         content_object=self.entry,
-                                         site=site)
+        comment = comments.get_model().objects.create(comment='My Trackback 1',
+                                                      content_object=self.entry,
+                                                      site=site)
         comment.flags.create(user=author, flag='trackback')
         self.assertEquals(self.entry.discussions.count(), 4)
         self.assertEquals(self.entry.comments.count(), 2)

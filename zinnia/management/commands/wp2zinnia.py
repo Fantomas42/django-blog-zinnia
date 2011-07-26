@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.utils.text import truncate_words
 from django.template.defaultfilters import slugify
-from django.contrib.comments.models import Comment
+from django.contrib import comments
 from django.core.management.base import CommandError
 from django.core.management.base import LabelCommand
 
@@ -327,7 +327,7 @@ class Command(LabelCommand):
                     '{%s}comment_author_IP/' % WP_NS).text or '',
                 'is_public': is_public,
                 'is_removed': is_removed, }
-            comment = Comment(**comment_dict)
+            comment = comments.get_model()(**comment_dict)
             comment.save()
             if approvation == 'spam':
                 comment.flags.create(
