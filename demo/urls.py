@@ -12,7 +12,7 @@ from zinnia.sitemaps import CategorySitemap
 from zinnia.sitemaps import AuthorSitemap
 
 admin.autodiscover()
-handler500 = 'django.views.defaults.server_error'
+handler500 = 'demo.views.server_error'
 handler404 = 'django.views.defaults.page_not_found'
 
 urlpatterns = patterns(
@@ -32,16 +32,24 @@ sitemaps = {'tags': TagSitemap,
             'authors': AuthorSitemap,
             'categories': CategorySitemap}
 
-urlpatterns += patterns('django.contrib.sitemaps.views',
-                        (r'^sitemap.xml$', 'index',
-                         {'sitemaps': sitemaps}),
-                        (r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
-                         {'sitemaps': sitemaps}),
-                        )
+urlpatterns += patterns(
+    'django.contrib.sitemaps.views',
+    (r'^sitemap.xml$', 'index',
+     {'sitemaps': sitemaps}),
+    (r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
+     {'sitemaps': sitemaps}),
+    )
 
-urlpatterns += patterns('django.views.static',
-                        url(r'^zinnia/(?P<path>.*)$', 'serve',
-                            {'document_root': os.path.join(
-                                os.path.dirname(__file__),
-                                '..', 'zinnia', 'media', 'zinnia')}),
-                        )
+urlpatterns += patterns(
+    '',
+    url(r'^404/$', 'django.views.defaults.page_not_found'),
+    url(r'^500/$', 'demo.views.server_error'),
+    )
+
+
+urlpatterns += patterns(
+    'django.views.static',
+    url(r'^zinnia/(?P<path>.*)$', 'serve',
+        {'document_root': os.path.join(
+            os.path.dirname(__file__), '..', 'zinnia', 'media', 'zinnia')}),
+    )
