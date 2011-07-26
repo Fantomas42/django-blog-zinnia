@@ -6,6 +6,7 @@ CHANGELOG
 
 * Improved URL shortening
 * Improved moderation system
+* Better support of django-tagging
 * Blogger to Zinnia utility command
 * OpenSearch capabilities
 * Upgraded search engine

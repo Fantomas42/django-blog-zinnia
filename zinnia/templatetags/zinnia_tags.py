@@ -14,6 +14,9 @@ from django.contrib.comments.models import CommentFlag
 from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import smart_unicode
 
+from tagging.models import Tag
+from tagging.utils import calculate_cloud
+
 from zinnia.models import Entry
 from zinnia.models import Author
 from zinnia.models import Category
@@ -307,3 +310,12 @@ def get_tags(parser, token):
         raise TemplateSyntaxError(
             "first argument to get_entry_tags tag must be 'as'")
     return TagsNode(bits[2])
+
+
+@register.inclusion_tag('zinnia/tags/dummy.html')
+def get_tag_cloud(steps=6, template='zinnia/tags/tag_cloud.html'):
+    """Return a cloud of published tags"""
+    tags = Tag.objects.usage_for_queryset(
+        Entry.published.all(), counts=True)
+    return {'template': template,
+            'tags': calculate_cloud(tags, steps)}

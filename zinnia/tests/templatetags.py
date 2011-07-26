@@ -19,8 +19,9 @@ from zinnia.models import Author
 from zinnia.models import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
-from zinnia.templatetags.zinnia_tags import get_gravatar
 from zinnia.templatetags.zinnia_tags import get_authors
+from zinnia.templatetags.zinnia_tags import get_gravatar
+from zinnia.templatetags.zinnia_tags import get_tag_cloud
 from zinnia.templatetags.zinnia_tags import get_categories
 from zinnia.templatetags.zinnia_tags import zinnia_pagination
 from zinnia.templatetags.zinnia_tags import get_recent_entries
@@ -488,7 +489,7 @@ class TemplateTagsTestCase(TestCase):
             'http://www.gravatar.com/avatar/86d4fd4a22de452'
             'a9228298731a0b592.jpg?s=15&amp;r=x&amp;d=404')
 
-    def test_get_entry_tags(self):
+    def test_get_tags(self):
         Tag.objects.create(name='tag')
         t = Template("""
         {% load zinnia_tags %}
@@ -510,3 +511,12 @@ class TemplateTagsTestCase(TestCase):
         {% load zinnia_tags %}
         {% get_tags as entry tags %}"""
         self.assertRaises(TemplateSyntaxError, Template, template_error_args)
+
+    def test_get_tag_cloud(self):
+        context = get_tag_cloud()
+        self.assertEquals(len(context['tags']), 0)
+        self.assertEquals(context['template'], 'zinnia/tags/tag_cloud.html')
+        self.publish_entry()
+        context = get_tag_cloud(6, 'custom_template.html')
+        self.assertEquals(len(context['tags']), 2)
+        self.assertEquals(context['template'], 'custom_template.html')

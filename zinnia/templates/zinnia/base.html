@@ -45,18 +45,7 @@
 </div>
 <div class="tags">
   <h3>{% trans "Tags" %}</h3>
-  {% tag_cloud_for_model zinnia.entry as tag_cloud with steps=6 %}
-  <div>
-    <ul>
-      {% for tag in tag_cloud %}
-      <li>
-        <a href="{% url zinnia_tag_detail tag.name %}"
-           title="{{ tag.count }} {% trans "entries" %}"
-           class="tag_{{ tag.font_size }}">{{ tag }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+  {% get_tag_cloud %}
 </div>
 <div class="recents">
   <h3>{% trans "Recent entries" %}</h3>

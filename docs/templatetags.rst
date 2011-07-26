@@ -152,6 +152,19 @@ Example: ::
 
   {% get_tags as entry_tags %}
 
+get_tag_cloud
+-------------
+
+Display a cloud of published tags.
+
+**Prototype:** ``get_tag_cloud(steps=6, template="zinnia/tags/tag_cloud.html")``
+
+Examples: ::
+
+  {% get_tag_cloud %}
+  {% get_tag_cloud 9 %}
+  {% get_tag_cloud 9 "custom_template.html" %}
+
 get_recent_comments
 -------------------
 
