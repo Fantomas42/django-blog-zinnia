@@ -239,9 +239,11 @@ All the settings related to the CMS can be found in **zinnia/plugins/settings.py
 
 ZINNIA_APP_MENUS
 ----------------
-**Default value:** ``(EntryMenu, CategoryMenu, TagMenu, AuthorMenu)``
+**Default value:** ``('zinnia.plugins.menu.EntryMenu',
+'zinnia.plugins.menu.CategoryMenu', 'zinnia.plugins.menu.TagMenu', 'zinnia.plugins.menu.AuthorMenu')``
 
-List of Menu objects provided for the Zinnia AppHook.
+List of strings representing the path to the Menu class provided for the
+Zinnia AppHook.
 
 ZINNIA_HIDE_ENTRY_MENU
 ----------------------
