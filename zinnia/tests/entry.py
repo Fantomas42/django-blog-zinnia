@@ -65,18 +65,16 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.pingbacks.count(), 0)
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        comment = comments.get_model().objects.create(comment='My Pingback 1',
-                                                      content_object=self.entry,
-                                                      site=site)
+        comment = comments.get_model().objects.create(
+            comment='My Pingback 1', content_object=self.entry, site=site)
         comment.flags.create(user=author, flag='pingback')
         self.assertEquals(self.entry.discussions.count(), 3)
         self.assertEquals(self.entry.comments.count(), 2)
         self.assertEquals(self.entry.pingbacks.count(), 1)
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        comment = comments.get_model().objects.create(comment='My Trackback 1',
-                                                      content_object=self.entry,
-                                                      site=site)
+        comment = comments.get_model().objects.create(
+            comment='My Trackback 1', content_object=self.entry, site=site)
         comment.flags.create(user=author, flag='trackback')
         self.assertEquals(self.entry.discussions.count(), 4)
         self.assertEquals(self.entry.comments.count(), 2)
