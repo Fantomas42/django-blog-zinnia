@@ -300,15 +300,15 @@ class TagsNode(Node):
 
 @register.tag
 def get_tags(parser, token):
-    """{% get_entry_tags as var %}"""
+    """{% get_tags as var %}"""
     bits = token.split_contents()
 
     if len(bits) != 3:
         raise TemplateSyntaxError(
-            'get_entry tag takes exactly two arguments')
+            'get_tags tag takes exactly two arguments')
     if bits[1] != 'as':
         raise TemplateSyntaxError(
-            "first argument to get_entry_tags tag must be 'as'")
+            "first argument to get_tags tag must be 'as'")
     return TagsNode(bits[2])
 
 
