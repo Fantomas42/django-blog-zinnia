@@ -5,6 +5,8 @@
 
 {% block meta-description %}{% if object.excerpt %}{{ object.excerpt|striptags }}{% else %}{{ object.content|striptags|truncatewords:100 }}{% endif %}{% endblock %}
 
+{% block meta-keywords %}{% if object.tags %}{{ object.tags }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+
 {% block link %}
   {{ block.super }}
   {% with object.previous_entry as previous_entry %}{% if previous_entry %}
