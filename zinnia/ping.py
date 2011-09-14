@@ -136,8 +136,15 @@ class ExternalUrlsPinger(threading.Thread):
         for url in urls:
             try:
                 page = urlopen(url)
-                server_url = page.info().get('X-Pingback') or \
-                             self.find_pingback_href(page.read())
+                headers = page.info()
+
+                if 'text/' not in headers.get('Content-Type', '').lower():
+                    continue
+
+                server_url = headers.get('X-Pingback')
+                if not server_url:
+                    server_url = self.find_pingback_href(page.read())
+
                 if server_url:
                     server_url_splitted = urlsplit(server_url)
                     if not server_url_splitted.netloc:

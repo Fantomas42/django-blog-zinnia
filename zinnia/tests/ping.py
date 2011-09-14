@@ -90,11 +90,15 @@ class ExternalUrlsPingerTestCase(TestCase):
         """Fake urlopen using test client"""
         if 'example' in url:
             response = cStringIO.StringIO('')
-            return addinfourl(response, {'X-Pingback': '/xmlrpc.php'}, url)
+            return addinfourl(response, {'X-Pingback': '/xmlrpc.php',
+                                         'Content-Type': 'text/html'}, url)
         elif 'localhost' in url:
             response = cStringIO.StringIO(
                 '<link rel="pingback" href="/xmlrpc/">')
-            return addinfourl(response, {}, url)
+            return addinfourl(response, {'Content-Type': 'text/xhtml'}, url)
+        elif 'google' in url:
+            response = cStringIO.StringIO('PNG CONTENT')
+            return addinfourl(response, {'content-type': 'image/png'}, url)
         elif 'error' in url:
             raise URLError('Invalid ressource')
 
@@ -104,7 +108,8 @@ class ExternalUrlsPingerTestCase(TestCase):
         self.original_urlopen = zinnia.ping.urlopen
         zinnia.ping.urlopen = self.fake_urlopen
 
-        urls = ['http://localhost/', 'http://example.com/', 'http://error']
+        urls = ['http://localhost/', 'http://example.com/', 'http://error',
+                'http://www.google.co.uk/images/nav_logo72.png']
         self.assertEquals(
             self.pinger.find_pingback_urls(urls),
             {'http://localhost/': 'http://localhost/xmlrpc/',
