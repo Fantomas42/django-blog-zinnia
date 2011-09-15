@@ -264,3 +264,32 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(feed.feed_type, Atom1Feed)
         self.assertEquals(feed.subtitle, feed.description)
         feeds.FEEDS_FORMAT = original_feeds_format
+
+    def test_discussion_feed_with_same_slugs(self):
+        """
+        https://github.com/Fantomas42/django-blog-zinnia/issues/104
+
+        OK, Here I will reproduce the original case: getting a discussion
+        type feed, with a same slug.
+
+        The correction of this case, will need some changes in the
+        get_object method.
+        """
+        entry = self.create_published_entry()
+        comments = self.create_discussions(entry)
+        feed = EntryDiscussions()
+        self.assertEquals(feed.get_object('request', entry.slug), entry)
+
+        params = {'title': 'My test entry, part II',
+                  'content': 'My content ',
+                  'slug': 'my-test-entry',
+                  'tags': 'tests',
+                  'creation_date': datetime(2010, 2, 1),
+                  'status': PUBLISHED}
+        entry_same_slug = Entry.objects.create(**params)
+        entry_same_slug.sites.add(self.site)
+        entry_same_slug.authors.add(self.author)
+
+        self.assertEquals(feed.get_object('request', entry_same_slug.slug),
+                          entry_same_slug)
+
