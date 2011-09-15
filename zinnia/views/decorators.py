@@ -11,8 +11,6 @@ from django.template import TemplateDoesNotExist
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
 
-from zinnia.models import Entry
-
 
 def update_queryset(view, queryset,
                     queryset_parameter='queryset'):
@@ -55,7 +53,7 @@ def protect_entry(view):
     def wrapper(*ka, **kw):
         """Do security check and retrieve the template"""
         request = ka[0]
-        entry = get_object_or_404(Entry, slug=kw['slug'],
+        entry = get_object_or_404(kw['queryset'], slug=kw['slug'],
                                   creation_date__year=kw['year'],
                                   creation_date__month=kw['month'],
                                   creation_date__day=kw['day'])
