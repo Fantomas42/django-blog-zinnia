@@ -189,7 +189,7 @@
   </ol>
   {% endif %}
     {% if object.pingback_enabled %}
-  <p><a href="{% url zinnia_entry_trackback object.slug %}" rel="trackback">{% trans "Trackback URL" %}</a></p>
+  <p><a href="{% url zinnia_entry_trackback object.pk %}" rel="trackback">{% trans "Trackback URL" %}</a></p>
     {% endif %}
   {% endwith %}
 </div>

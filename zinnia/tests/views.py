@@ -227,14 +227,14 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             response = self.client.post('/trackback/404/')
             self.assertEquals(response.status_code, 404)
         self.assertEquals(
-            self.client.post('/trackback/test-1/').status_code, 301)
+            self.client.post('/trackback/1/').status_code, 301)
         self.assertEquals(
-            self.client.get('/trackback/test-1/').status_code, 301)
+            self.client.get('/trackback/1/').status_code, 301)
         entry = Entry.objects.get(slug='test-1')
         entry.pingback_enabled = False
         entry.save()
         self.assertEquals(
-            self.client.post('/trackback/test-1/',
+            self.client.post('/trackback/1/',
                              {'url': 'http://example.com'}).content,
             '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
             '<error>1</error>\n  <message>Trackback is not enabled for '
@@ -242,12 +242,12 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         entry.pingback_enabled = True
         entry.save()
         self.assertEquals(
-            self.client.post('/trackback/test-1/',
+            self.client.post('/trackback/1/',
                              {'url': 'http://example.com'}).content,
             '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
             '<error>0</error>\n  \n</response>\n')
         self.assertEquals(
-            self.client.post('/trackback/test-1/',
+            self.client.post('/trackback/1/',
                              {'url': 'http://example.com'}).content,
             '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
             '<error>1</error>\n  <message>Trackback is already registered'

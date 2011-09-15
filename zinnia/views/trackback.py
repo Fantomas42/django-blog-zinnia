@@ -11,9 +11,9 @@ from zinnia.models import Entry
 
 
 @csrf_exempt
-def entry_trackback(request, slug):
+def entry_trackback(request, object_id):
     """Set a TrackBack for an Entry"""
-    entry = get_object_or_404(Entry.published, slug=slug)
+    entry = get_object_or_404(Entry.published, pk=object_id)
 
     if request.POST.get('url'):
         error = ''
