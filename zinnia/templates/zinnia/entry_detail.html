@@ -19,10 +19,20 @@
   <link rel="shortlink" href="{{ object.short_url }}" />
   {% endif %}
   <link rel="canonical" href="{{ object.get_absolute_url }}" />
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of discussions on" %} '{{ object.title }}'" href="{% url zinnia_entry_discussion_feed object.slug %}" />
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'" href="{% url zinnia_entry_comment_feed object.slug %}" />
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of pingbacks on" %} '{{ object.title }}'" href="{% url zinnia_entry_pingback_feed object.slug %}" />
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of trackbacks on" %} '{{ object.title }}'" href="{% url zinnia_entry_trackback_feed object.slug %}" />
+  {% with object.creation_date|date:"Y" as year %}
+  {% with object.creation_date|date:"m" as month %}
+  {% with object.creation_date|date:"d" as day %}
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of discussions on" %} '{{ object.title }}'"
+        href="{% url zinnia_entry_discussion_feed year month day object.slug %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'"
+        href="{% url zinnia_entry_comment_feed year month day object.slug %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of pingbacks on" %} '{{ object.title }}'"
+        href="{% url zinnia_entry_pingback_feed year month day object.slug %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of trackbacks on" %} '{{ object.title }}'"
+        href="{% url zinnia_entry_trackback_feed year month day object.slug %}" />
+  {% endwith %}
+  {% endwith %}
+  {% endwith %}
 {% endblock %}
 
 {% block content %}

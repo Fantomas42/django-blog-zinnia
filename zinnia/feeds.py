@@ -212,9 +212,12 @@ class EntryDiscussions(ZinniaFeed):
     title_template = 'feeds/discussion_title.html'
     description_template = 'feeds/discussion_description.html'
 
-    def get_object(self, request, slug):
+    def get_object(self, request, year, month, day, slug):
         """Retrieve the discussions by entry's slug"""
-        return get_object_or_404(Entry, slug=slug)
+        return get_object_or_404(Entry.published, slug=slug,
+                                 creation_date__year=year,
+                                 creation_date__month=month,
+                                 creation_date__day=day)
 
     def items(self, obj):
         """Items are the discussions on the entry"""

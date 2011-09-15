@@ -183,7 +183,8 @@ class ZinniaFeedsTestCase(TestCase):
         entry = self.create_published_entry()
         comments = self.create_discussions(entry)
         feed = EntryDiscussions()
-        self.assertEquals(feed.get_object('request', entry.slug), entry)
+        self.assertEquals(feed.get_object(
+            'request', 2010, 1, 1, entry.slug), entry)
         self.assertEquals(feed.link(entry), '/2010/01/01/my-test-entry/')
         self.assertEquals(len(feed.items(entry)), 3)
         self.assertEquals(feed.item_pubdate(comments[0]),
@@ -276,9 +277,10 @@ class ZinniaFeedsTestCase(TestCase):
         get_object method.
         """
         entry = self.create_published_entry()
-        comments = self.create_discussions(entry)
+
         feed = EntryDiscussions()
-        self.assertEquals(feed.get_object('request', entry.slug), entry)
+        self.assertEquals(feed.get_object(
+            'request', 2010, 1, 1, entry.slug), entry)
 
         params = {'title': 'My test entry, part II',
                   'content': 'My content ',
@@ -290,6 +292,5 @@ class ZinniaFeedsTestCase(TestCase):
         entry_same_slug.sites.add(self.site)
         entry_same_slug.authors.add(self.author)
 
-        self.assertEquals(feed.get_object('request', entry_same_slug.slug),
-                          entry_same_slug)
-
+        self.assertEquals(feed.get_object(
+            'request', 2010, 2, 1, entry_same_slug.slug), entry_same_slug)
