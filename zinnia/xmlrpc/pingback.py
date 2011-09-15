@@ -7,8 +7,8 @@ from urlparse import urlsplit
 from django.contrib import comments
 from django.utils.html import strip_tags
 from django.contrib.sites.models import Site
+from django.core.urlresolvers import resolve
 from django.core.urlresolvers import Resolver404
-from django.core.urlresolvers import get_resolver
 from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 
@@ -75,18 +75,20 @@ def pingback_ping(source, target):
         if netloc != site.domain:
             return TARGET_DOES_NOT_EXIST
 
-        resolver = get_resolver(None)
         try:
-            resolver.resolve(path)
+            view, args, kwargs = resolve(path)
         except Resolver404:
             return TARGET_DOES_NOT_EXIST
 
         try:
-            entry_slug = [bit for bit in path.split('/') if bit][-1]
-            entry = Entry.published.get(slug=entry_slug)
+            entry = Entry.published.get(
+                slug=kwargs['slug'],
+                creation_date__year=kwargs['year'],
+                creation_date__month=kwargs['month'],
+                creation_date__day=kwargs['day'])
             if not entry.pingback_enabled:
                 return TARGET_IS_NOT_PINGABLE
-        except (Entry.DoesNotExist, IndexError):
+        except (KeyError, Entry.DoesNotExist):
             return TARGET_IS_NOT_PINGABLE
 
         soup = BeautifulSoup(document)
@@ -121,16 +123,18 @@ def pingback_extensions_get_pingbacks(target):
     if netloc != site.domain:
         return TARGET_DOES_NOT_EXIST
 
-    resolver = get_resolver(None)
     try:
-        resolver.resolve(path)
+        view, args, kwargs = resolve(path)
     except Resolver404:
         return TARGET_DOES_NOT_EXIST
 
     try:
-        entry_slug = [bit for bit in path.split('/') if bit][-1]
-        entry = Entry.published.get(slug=entry_slug)
-    except (Entry.DoesNotExist, IndexError):
+        entry = Entry.published.get(
+            slug=kwargs['slug'],
+            creation_date__year=kwargs['year'],
+            creation_date__month=kwargs['month'],
+            creation_date__day=kwargs['day'])
+    except (KeyError, Entry.DoesNotExist):
         return TARGET_IS_NOT_PINGABLE
 
     return [pingback.user_url for pingback in entry.pingbacks]
