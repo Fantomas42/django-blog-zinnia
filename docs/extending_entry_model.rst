@@ -42,9 +42,26 @@ Example for adding a gallery field. ::
 Now you register the EntryGallery model like this in your project's
 settings. ::
 
-  ZINNIA_ENTRY_BASE_MODEL = 'full.path.to.EntryGallery'
+  ZINNIA_ENTRY_BASE_MODEL = 'appname.custom_entry.EntryGallery'
 
-You can see another example in the *zinnia/plugins/placeholder.py* file.
+
+Finally extend the entry admin class to show your custom field. ::
+
+  from django.contrib import admin
+  from zinnia.admin.entry import EntryAdmin
+  from zinnia.models import Entry
+  from django.utils.translation import ugettext_lazy as _
+  
+  class EntryGalleryAdmin(EntryAdmin):
+    
+    # in our case put the gallery field into the 'Content' fieldset
+    fieldsets = ((_('Content'), {'fields': ('title', 'content', 'image', 'status', 'gallery')}),) + EntryAdmin.fieldsets[1:]
+
+  admin.site.unregister(Entry)
+  admin.site.register(Entry, EntryGalleryAdmin)
+
+
+You can see another example in the files *zinnia/plugins/placeholder.py* and *zinnia/plugins/admin.py*.
 
 .. note:: You have to respect **4 important rules** :
 
