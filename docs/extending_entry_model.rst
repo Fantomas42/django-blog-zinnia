@@ -24,7 +24,7 @@ How do we do that ?
 
 In fact, simply by creating an abstract model inherited from
 EntryBaseModel, adding fields or/and overriding his methods, and
-registering it with the ZINNIA_ENTRY_BASE_MODEL setting in your project.
+registering it with the ``ZINNIA_ENTRY_BASE_MODEL`` setting in your project.
 
 Example for adding a gallery field. ::
 
@@ -45,23 +45,27 @@ settings. ::
   ZINNIA_ENTRY_BASE_MODEL = 'appname.custom_entry.EntryGallery'
 
 
-Finally extend the entry admin class to show your custom field. ::
+Finally extend the entry's admin class to show your custom field. ::
 
   from django.contrib import admin
-  from zinnia.admin.entry import EntryAdmin
   from zinnia.models import Entry
+  from zinnia.admin.entry import EntryAdmin
   from django.utils.translation import ugettext_lazy as _
-  
+
   class EntryGalleryAdmin(EntryAdmin):
-    
-    # in our case put the gallery field into the 'Content' fieldset
-    fieldsets = ((_('Content'), {'fields': ('title', 'content', 'image', 'status', 'gallery')}),) + EntryAdmin.fieldsets[1:]
+
+    # In our case we put the gallery field
+    # into the 'Content' fieldset
+    fieldsets = ((_('Content'), {'fields': (
+      'title', 'content', 'image', 'status', 'gallery')})) + \
+      EntryAdmin.fieldsets[1:]
 
   admin.site.unregister(Entry)
   admin.site.register(Entry, EntryGalleryAdmin)
 
 
-You can see another example in the files *zinnia/plugins/placeholder.py* and *zinnia/plugins/admin.py*.
+You can see another example in the files ``zinnia/plugins/placeholder.py``
+and ``zinnia/plugins/admin.py``.
 
 .. note:: You have to respect **4 important rules** :
 
