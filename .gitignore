@@ -23,3 +23,5 @@ docs/html
 demo/demo.db
 docs/_build
 django_blog_zinnia.egg-info/
+.project
+.pydevproject
