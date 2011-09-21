@@ -34,9 +34,9 @@ class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
     def choice(self, obj):
         """Overriding choice method"""
         tree_id = getattr(obj, getattr(self.queryset.model._meta,
-                                       'tree_id_atrr', 'tree_id'), 0)
+                                       'tree_id_attr', 'tree_id'), 0)
         left = getattr(obj, getattr(self.queryset.model._meta,
-                                    'left_atrr', 'lft'), 0)
+                                    'left_attr', 'lft'), 0)
         return super(MPTTModelChoiceIterator,
                      self).choice(obj) + ((tree_id, left),)
 
