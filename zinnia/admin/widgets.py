@@ -25,7 +25,7 @@ class TreeNodeChoiceField(forms.ModelChoiceField):
         """Creates labels which represent the tree level of each node
         when generating option labels."""
         return u'%s %s' % (self.level_indicator * getattr(
-            obj, obj._meta.level_attr),
+            obj, obj._mptt_meta.level_attr),
                            smart_unicode(obj))
 
 
@@ -33,10 +33,8 @@ class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
     """MPTT version of ModelChoiceIterator"""
     def choice(self, obj):
         """Overriding choice method"""
-        tree_id = getattr(obj, getattr(self.queryset.model._meta,
-                                       'tree_id_attr', 'tree_id'), 0)
-        left = getattr(obj, getattr(self.queryset.model._meta,
-                                    'left_attr', 'lft'), 0)
+        tree_id = getattr(obj, self.queryset.model._mptt_meta.tree_id_attr, 0)
+        left = getattr(obj, self.queryset.model._mptt_meta.left_attr, 0)
         return super(MPTTModelChoiceIterator,
                      self).choice(obj) + ((tree_id, left),)
 
@@ -45,8 +43,7 @@ class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
     """MPTT version of ModelMultipleChoiceField"""
     def label_from_instance(self, obj):
         """Overriding label_from_instance"""
-        level = getattr(obj, getattr(self.queryset.model._meta,
-                                     'level_attr', 'level'), 0)
+        level = getattr(obj, self.queryset.model._mptt_meta.level_attr, 0)
         return u'%s %s' % ('-' * level, smart_unicode(obj))
 
     def _get_choices(self):
