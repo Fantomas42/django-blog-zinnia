@@ -15,11 +15,10 @@ from zinnia.admin.widgets import MPTTModelMultipleChoiceField
 
 class CategoryAdminForm(forms.ModelForm):
     """Form for Category's Admin"""
-    parent = TreeNodeChoiceField(label=_('parent category').capitalize(),
-                                 required=False,
-                                 empty_label=_('No parent category'),
-                                 queryset=Category.tree.all(),
-                                 level_indicator=u'|--')
+    parent = TreeNodeChoiceField(
+        label=_('parent category').capitalize(),
+        required=False, empty_label=_('No parent category'),
+        queryset=Category.tree.all())
 
     def __init__(self, *args, **kwargs):
         super(CategoryAdminForm, self).__init__(*args, **kwargs)
@@ -43,7 +42,8 @@ class CategoryAdminForm(forms.ModelForm):
 class EntryAdminForm(forms.ModelForm):
     """Form for Entry's Admin"""
     categories = MPTTModelMultipleChoiceField(
-        Category.objects.all(), required=False, label=_('Categories'),
+        label=_('Categories'), required=False,
+        queryset=Category.objects.all(),
         widget=MPTTFilteredSelectMultiple(_('categories'), False,
                                           attrs={'rows': '10'}))
 

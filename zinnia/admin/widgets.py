@@ -15,7 +15,7 @@ from zinnia.settings import MEDIA_URL
 class TreeNodeChoiceField(forms.ModelChoiceField):
     """Duplicating the TreeNodeChoiceField bundled in django-mptt
     to avoid conflict with the TreeNodeChoiceField bundled in django-cms..."""
-    def __init__(self, level_indicator=u'---', *args, **kwargs):
+    def __init__(self, level_indicator=u'|--', *args, **kwargs):
         self.level_indicator = level_indicator
         if kwargs.get('required', True) and not 'empty_label' in kwargs:
             kwargs['empty_label'] = None
@@ -25,8 +25,7 @@ class TreeNodeChoiceField(forms.ModelChoiceField):
         """Creates labels which represent the tree level of each node
         when generating option labels."""
         return u'%s %s' % (self.level_indicator * getattr(
-            obj, obj._mptt_meta.level_attr),
-                           smart_unicode(obj))
+            obj, obj._mptt_meta.level_attr), smart_unicode(obj))
 
 
 class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
@@ -41,10 +40,15 @@ class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
 
 class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
     """MPTT version of ModelMultipleChoiceField"""
+    def __init__(self, level_indicator=u'|--', *args, **kwargs):
+        self.level_indicator = level_indicator
+        super(MPTTModelMultipleChoiceField, self).__init__(*args, **kwargs)
+
     def label_from_instance(self, obj):
-        """Overriding label_from_instance"""
-        level = getattr(obj, self.queryset.model._mptt_meta.level_attr, 0)
-        return u'%s %s' % ('-' * level, smart_unicode(obj))
+        """Creates labels which represent the tree level of each node
+        when generating option labels."""
+        return u'%s %s' % (self.level_indicator * getattr(
+            obj, obj._mptt_meta.level_attr), smart_unicode(obj))
 
     def _get_choices(self):
         """Overriding _get_choices"""
