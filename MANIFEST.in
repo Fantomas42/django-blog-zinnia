@@ -8,5 +8,7 @@ recursive-include zinnia/fixtures *.json
 recursive-include zinnia/locale *
 recursive-include zinnia/media *
 recursive-include zinnia/templates *.txt *.html *.xml *.js
+prune docs/api
 prune docs/build
+prune docs/coverage
 prune zinnia/media/zinnia/css/.sass-cache
