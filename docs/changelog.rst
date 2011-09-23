@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+0.10
+----
+
+* Django 1.2 is no longer supported
+
 0.9
 ---
 

@@ -9,7 +9,7 @@ Make sure to install these packages prior to installation :
 * `Python 2.x
   <http://www.python.org/>`_ >= 2.5
 * `Django
-  <http://www.djangoproject.com/>`_ >= 1.2
+  <http://www.djangoproject.com/>`_ >= 1.3
 * `django-mptt
   <https://github.com/django-mptt/django-mptt/>`_ >= 0.4.2
 * `django-tagging
