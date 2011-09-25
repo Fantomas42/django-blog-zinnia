@@ -44,8 +44,8 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'demo.urls'
 
 TEMPLATE_LOADERS = (
-    'django.template.loaders.app_directories.load_template_source',
-    'django.template.loaders.eggs.load_template_source',
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.eggs.Loader',
     )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
