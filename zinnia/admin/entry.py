@@ -8,6 +8,7 @@ from django.utils.html import strip_tags
 from django.utils.text import truncate_words
 from django.conf.urls.defaults import url
 from django.conf.urls.defaults import patterns
+from django.conf import settings as project_settings
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse, NoReverseMatch
 
@@ -308,19 +309,19 @@ class EntryAdmin(admin.ModelAdmin):
         return urls + entry_admin_urls
 
     def _media(self):
-        MEDIA_URL = settings.MEDIA_URL
+        STATIC_URL = project_settings.STATIC_URL
         media = super(EntryAdmin, self).media + Media(
-            css={'all': ('%scss/jquery.autocomplete.css' % MEDIA_URL,)},
-            js=('%sjs/jquery.js' % MEDIA_URL,
-                '%sjs/jquery.bgiframe.js' % MEDIA_URL,
-                '%sjs/jquery.autocomplete.js' % MEDIA_URL,
+            css={'all': ('%scss/jquery.autocomplete.css' % STATIC_URL,)},
+            js=('%sjs/jquery.js' % STATIC_URL,
+                '%sjs/jquery.bgiframe.js' % STATIC_URL,
+                '%sjs/jquery.autocomplete.js' % STATIC_URL,
                 reverse('admin:zinnia_entry_autocomplete_tags'),))
 
         if settings.WYSIWYG == 'wymeditor':
             media += Media(
-                js=('%sjs/wymeditor/jquery.wymeditor.pack.js' % MEDIA_URL,
+                js=('%sjs/wymeditor/jquery.wymeditor.pack.js' % STATIC_URL,
                     '%sjs/wymeditor/plugins/hovertools/'
-                    'jquery.wymeditor.hovertools.js' % MEDIA_URL,
+                    'jquery.wymeditor.hovertools.js' % STATIC_URL,
                     reverse('admin:zinnia_entry_wymeditor')))
         elif settings.WYSIWYG == 'tinymce':
             from tinymce.widgets import TinyMCE
@@ -328,13 +329,13 @@ class EntryAdmin(admin.ModelAdmin):
                 js=(reverse('tinymce-js', args=('admin/zinnia/entry',)),))
         elif settings.WYSIWYG == 'markitup':
             media += Media(
-                js=('%sjs/markitup/jquery.markitup.js' % MEDIA_URL,
+                js=('%sjs/markitup/jquery.markitup.js' % STATIC_URL,
                     '%sjs/markitup/sets/%s/set.js' % (
-                        MEDIA_URL, settings.MARKUP_LANGUAGE),
+                        STATIC_URL, settings.MARKUP_LANGUAGE),
                     reverse('admin:zinnia_entry_markitup')),
                 css={'all': (
-                    '%sjs/markitup/skins/django/style.css' % MEDIA_URL,
+                    '%sjs/markitup/skins/django/style.css' % STATIC_URL,
                     '%sjs/markitup/sets/%s/style.css' % (
-                        MEDIA_URL, settings.MARKUP_LANGUAGE))})
+                        STATIC_URL, settings.MARKUP_LANGUAGE))})
         return media
     media = property(_media)

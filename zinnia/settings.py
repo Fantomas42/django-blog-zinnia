@@ -1,5 +1,4 @@
 """Settings of Zinnia"""
-import os
 from django.conf import settings
 
 PING_DIRECTORIES = getattr(settings, 'ZINNIA_PING_DIRECTORIES',

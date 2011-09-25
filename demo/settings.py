@@ -8,6 +8,8 @@ DATABASES = {'default':
               'NAME': os.path.join(os.path.dirname(__file__), 'demo.db')}
              }
 
+STATIC_URL = '/static/'
+
 MEDIA_URL = 'http://localhost:8000/'
 
 SECRET_KEY = 'jo-1rzm(%sf)3#n+fb7h955yu$3(pt63abhi12_t7e^^5q8dyw'
@@ -54,7 +56,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'django.contrib.messages.context_processors.messages',
-    'zinnia.context_processors.media',
     'zinnia.context_processors.version',
     )
 

@@ -1,6 +1,7 @@
 """Plugins for CMS"""
 import itertools
 
+from django.conf import settings
 from django.utils.translation import ugettext as _
 
 from tagging.models import TaggedItem
@@ -13,7 +14,6 @@ from zinnia.managers import tags_published
 from zinnia.plugins.models import RandomEntriesPlugin
 from zinnia.plugins.models import LatestEntriesPlugin
 from zinnia.plugins.models import SelectedEntriesPlugin
-from zinnia.settings import MEDIA_URL
 
 
 class CMSLatestEntriesPlugin(CMSPluginBase):
@@ -84,7 +84,7 @@ class CMSLatestEntriesPlugin(CMSPluginBase):
 
     def icon_src(self, instance):
         """Icon source of the plugin"""
-        return MEDIA_URL + u'img/plugin.png'
+        return settings.STATIC_URL + u'zinnia/img/plugin.png'
 
 
 class CMSSelectedEntriesPlugin(CMSPluginBase):
@@ -106,7 +106,7 @@ class CMSSelectedEntriesPlugin(CMSPluginBase):
 
     def icon_src(self, instance):
         """Icon source of the plugin"""
-        return MEDIA_URL + u'img/plugin.png'
+        return settings.STATIC_URL + u'zinnia/img/plugin.png'
 
 
 class CMSRandomEntriesPlugin(CMSPluginBase):
@@ -128,7 +128,7 @@ class CMSRandomEntriesPlugin(CMSPluginBase):
 
     def icon_src(self, instance):
         """Icon source of the plugin"""
-        return MEDIA_URL + u'img/plugin.png'
+        return settings.STATIC_URL + u'zinnia/img/plugin.png'
 
 plugin_pool.register_plugin(CMSLatestEntriesPlugin)
 plugin_pool.register_plugin(CMSSelectedEntriesPlugin)

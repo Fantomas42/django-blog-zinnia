@@ -9,8 +9,6 @@ from django.utils.html import conditional_escape
 from django.utils.encoding import smart_unicode
 from django.utils.encoding import force_unicode
 
-from zinnia.settings import MEDIA_URL
-
 
 class TreeNodeChoiceField(forms.ModelChoiceField):
     """Duplicating the TreeNodeChoiceField bundled in django-mptt
@@ -105,5 +103,5 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
     class Media:
         """MPTTFilteredSelectMultiple's Media"""
         js = (settings.ADMIN_MEDIA_PREFIX + 'js/core.js',
-              MEDIA_URL + 'js/mptt_m2m_selectbox.js',
+              settings.STATIC_URL + 'zinnia/js/mptt_m2m_selectbox.js',
               settings.ADMIN_MEDIA_PREFIX + 'js/SelectFilter2.js',)

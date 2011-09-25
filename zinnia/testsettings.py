@@ -7,11 +7,12 @@ DATABASES = {'default': {'NAME': 'zinnia_tests.db',
 
 SITE_ID = 1
 
+STATIC_URL = '/static/'
+
 ROOT_URLCONF = 'zinnia.tests.urls'
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.request',
-    'zinnia.context_processors.media',
     'zinnia.context_processors.version']
 
 TEMPLATE_DIRS = [os.path.join(os.path.dirname(__file__),
