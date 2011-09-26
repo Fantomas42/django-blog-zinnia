@@ -71,17 +71,8 @@ Add these following template context processors if not already present. ::
     'django.core.context_processors.i18n',
     'django.core.context_processors.request',
     'django.core.context_processors.media',
-    'zinnia.context_processors.version', # Optional
-    'zinnia.context_processors.media',)
-
-Media Files
------------
-
-You have to make a symbolic link from zinnia/media/zinnia directory to your
-media directory or make a copy named **zinnia**, but if want to change this
-value, define ZINNIA_MEDIA_URL in the settings.py as appropriate.
-
-And don't forget to serve this URL.
+    'django.core.context_processors.static',
+    'zinnia.context_processors.version',) # Optional
 
 URLs
 ----
@@ -107,3 +98,11 @@ you can customize your URLs if you want. Here's how : ::
   url(r'^weblog/', include('zinnia.urls.quick_entry')),
   url(r'^weblog/', include('zinnia.urls.entries')),
   url(r'^comments/', include('django.contrib.comments.urls')),
+
+Static Files
+------------
+
+Since the version 1.3 of Django, Zinnia uses the
+``django.contrib.staticfiles`` application to serve the static files
+needed. Please refer to
+https://docs.djangoproject.com/en/dev/howto/static-files/ for more informations.
