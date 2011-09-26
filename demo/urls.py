@@ -46,10 +46,3 @@ urlpatterns += patterns(
     url(r'^500/$', 'demo.views.server_error'),
     )
 
-
-urlpatterns += patterns(
-    'django.views.static',
-    url(r'^zinnia/(?P<path>.*)$', 'serve',
-        {'document_root': os.path.join(
-            os.path.dirname(__file__), '..', 'zinnia', 'media', 'zinnia')}),
-    )

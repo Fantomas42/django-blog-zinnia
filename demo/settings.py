@@ -3,6 +3,8 @@ import os
 
 gettext = lambda s: s
 
+DEBUG = True
+
 DATABASES = {'default':
              {'ENGINE': 'django.db.backends.sqlite3',
               'NAME': os.path.join(os.path.dirname(__file__), 'demo.db')}
@@ -10,7 +12,9 @@ DATABASES = {'default':
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = 'http://localhost:8000/'
+MEDIA_URL = '/media/'
+
+ADMIN_MEDIA_PREFIX = '%sadmin/' % STATIC_URL
 
 SECRET_KEY = 'jo-1rzm(%sf)3#n+fb7h955yu$3(pt63abhi12_t7e^^5q8dyw'
 
@@ -55,6 +59,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.request',
     'django.core.context_processors.media',
+    'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
     'zinnia.context_processors.version',
     )
@@ -69,6 +74,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.staticfiles',
     'mptt',
     'zinnia',
     'tagging',
