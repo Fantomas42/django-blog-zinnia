@@ -5,13 +5,13 @@
 
 {% block link %}
   {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{{ ZINNIA_MEDIA_URL }}css/slider.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}zinnia/css/slider.css" />
 {% endblock %}
 
 {% block script %}
   {{ block.super }}
-  <script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.js"></script>
-  <script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.ui.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.ui.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
       $("#slider").tabs({ fx:{ opacity: "toggle"}}).tabs("rotate", 5000, true);

@@ -11,7 +11,7 @@
   <Url type="text/html" template="{{ protocol }}://{{ site.domain }}{% url zinnia_entry_search %}?pattern={searchTerms}" />
   <Url type="application/{{ feeds_format }}+xml" template="{{ protocol }}://{{ site.domain }}{% url zinnia_entry_search_feed %}?pattern={searchTerms}" />
   <Url type="application/opensearchdescription+xml" rel="self" template="{{ protocol }}://{{ site.domain }}{% url zinnia_opensearch %}"/>
-  <Image height="16" width="16" type="image/vnd.microsoft.icon">{{ ZINNIA_MEDIA_URL }}img/favicon.ico</Image>
+  <Image height="16" width="16" type="image/vnd.microsoft.icon">{{ STATIC_URL }}zinnia/img/favicon.ico</Image>
   <Query role="example" searchTerms="{{ entry_tags.0 }}" />
   <Developer>Fantomas42</Developer>
   <Contact>fantomas42@gmail.com</Contact>

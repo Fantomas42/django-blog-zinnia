@@ -35,8 +35,8 @@
 
   <weblog>
     <serviceName>{{ site.name }} Blog</serviceName>
-    <imageUrl>{{ ZINNIA_MEDIA_URL }}img/wlw/zinnia.png</imageUrl>
-    <watermarkImageUrl>{{ ZINNIA_MEDIA_URL }}img/wlw/watermark.png</watermarkImageUrl>
+    <imageUrl>{{ STATIC_URL }}zinnia/img/wlw/zinnia.png</imageUrl>
+    <watermarkImageUrl>{{ STATIC_URL }}zinnia/img/wlw/watermark.png</watermarkImageUrl>
     <homepageLinkText>{% trans "View site" %}</homepageLinkText>
     <adminLinkText>{% trans "Admin. site" %}</adminLinkText>
     <adminUrl><![CDATA[
@@ -51,7 +51,7 @@
     <button>
       <id>0</id>
       <text>{% trans "Manage comments" %}</text>
-      <imageUrl>{{ ZINNIA_MEDIA_URL }}img/wlw/comments.png</imageUrl>
+      <imageUrl>{{ STATIC_URL }}zinnia/img/wlw/comments.png</imageUrl>
       <clickUrl><![CDATA[
         {blog-homepage-url}{% url admin:comments_comment_changelist %}
       ]]></clickUrl>

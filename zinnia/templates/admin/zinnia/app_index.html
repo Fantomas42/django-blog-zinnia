@@ -3,16 +3,16 @@
 
 {% block extrastyle %}
 {{ block.super }}
-<link rel="stylesheet" type="text/css" href="{{ ZINNIA_MEDIA_URL }}css/jquery.autocomplete.css" />
-<link rel="stylesheet" type="text/css" href="{{ ZINNIA_MEDIA_URL }}css/dashboard_zinnia.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}zinnia/css/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}zinnia/css/dashboard_zinnia.css" />
 {% endblock %}
 
 {% block extrahead %}
 {{ block.super }}
-<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.js"></script>
-<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.masonry.js"></script>
-<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.bgiframe.js"></script>
-<script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.masonry.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.bgiframe.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.autocomplete.js"></script>
 <script type="text/javascript" src="{% url admin:zinnia_entry_autocomplete_tags %}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
