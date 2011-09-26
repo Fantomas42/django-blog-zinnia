@@ -309,7 +309,7 @@ class EntryAdmin(admin.ModelAdmin):
         return urls + entry_admin_urls
 
     def _media(self):
-        STATIC_URL = project_settings.STATIC_URL
+        STATIC_URL = '%szinnia/' % project_settings.STATIC_URL
         media = super(EntryAdmin, self).media + Media(
             css={'all': ('%scss/jquery.autocomplete.css' % STATIC_URL,)},
             js=('%sjs/jquery.js' % STATIC_URL,
