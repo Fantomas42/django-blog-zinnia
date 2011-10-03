@@ -80,23 +80,7 @@ table.month
 
 // Pagination
 div.paginator
-  margin-bottom: 1.5em
-  span
-    margin-left: 0.3em
-    padding: 0 0.5em 0 0.5em
-    float: left
-    border: 1px solid $box_color
-    &.index
-      margin-left: 0
-    &.page, &.next, &.previous
-      &:hover
-        background-color: $link_color
-        a
-          color: white
-    &.current
-      border-color: $link_color
-      background-color: $link_color
-      color: white
+  +paginator($link_color, $box_color)
 
 // Entry
 .hentry

@@ -368,7 +368,7 @@ input.span-24, textarea.span-24, select.span-24 { width: 950px; }
 
 .append-bottom { margin-bottom: 1.5em; }
 
-.showgrid { background: url('/../img/grid.png?1304268753'); }
+.showgrid { background: url('/../img/grid.png?1317027277'); }
 
 .feedback, .error, .alert, .notice, .success, .info { padding: 0.8em; margin-bottom: 1em; border: 2px solid #dddddd; }
 
@@ -461,8 +461,8 @@ table.month th { text-transform: capitalize; color: #94949e; background-color: #
 table.month td { text-align: center; font-weight: bold; }
 table.month td.entry { background-color: #e9e9f3; }
 
-div.paginator { margin-bottom: 1.5em; }
-div.paginator span { margin-left: 0.3em; padding: 0 0.5em 0 0.5em; float: left; border: 1px solid #e9e9f3; }
+div.paginator { margin: 1.5em 0; }
+div.paginator span { font-size: 1.2em; margin-left: 0.3em; padding: 0 0.5em 0 0.5em; float: left; border: 1px solid #e9e9f3; }
 div.paginator span.index { margin-left: 0; }
 div.paginator span.page:hover, div.paginator span.next:hover, div.paginator span.previous:hover { background-color: #006699; }
 div.paginator span.page:hover a, div.paginator span.next:hover a, div.paginator span.previous:hover a { color: white; }
