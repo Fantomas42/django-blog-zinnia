@@ -10,19 +10,19 @@
   </h2>
   {% else %}
   <h2>{% trans "Preview of the comment" %}</h2>
-  <ol id="commentList">
-    <li id="comment_preview" class="comment {% cycle box1,box2 %} span-15 last">
+  <ol id="comment-list" class="span-15 last">
+    <li id="comment_preview" class="comment vcard {% cycle box1,box2 %} span-15 last">
       <div class="span-2">
-	<img src="{% get_gravatar form.cleaned_data.email 60 "G" %}" class="gravatar" alt="form.cleaned_data.name" />
+	<img src="{% get_gravatar form.cleaned_data.email 60 "G" %}" class="gravatar photo" alt="form.cleaned_data.name" />
       </div>
-      <div class="comment_body span-13 last">
-	<div class="span-13 last">
+      <div class="comment-body span-13 last">
+	<div class="comment-author span-13 last">
 	  {% if form.cleaned_data.url %}
-	  <a href="{{ form.cleaned_data.url }}">{{ form.cleaned_data.name }}</a>
+	  <a href="{{ form.cleaned_data.url }}" class="fn url">{{ form.cleaned_data.name }}</a>
 	  {% else %}
 	  {{ form.cleaned_data.name }}
 	  {% endif %}
-	  {% trans "on" %} {% now "SHORT_DATETIME_FORMAT" %}
+	  {% trans "on" %} {% now "m/d/Y P" %}
 	</div>
 	<div class="span-13 last">
 	  <cite>
@@ -33,5 +33,7 @@
     </li>
   </ol>
   {% endif %}
-  {% include "comments/zinnia/entry/form.html" %}
+  <div class="commentForm span-16 last">
+    {% include "comments/zinnia/entry/form.html" %}
+  </div>
 {% endblock %}
