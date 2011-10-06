@@ -32,11 +32,10 @@
 {% endblock %}
 
 {% block content %}
-<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %} span-16 last">
-  {% with object.html_content|safe as object_content %}
-  {% include "zinnia/_entry_detail.html" %}
-  {% endwith %}
-</div>
+
+{% with object.html_content|safe as object_content %}
+{% include "zinnia/_entry_detail.html" %}
+{% endwith %}
 
 <div class="entry-widgets span-16 last">
   {% with object.next_entry as next_entry %}

@@ -35,11 +35,9 @@
 {% endif %}
 
 {% for object in object_list %}
-<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %} span-16 last">
   {% with object.html_content|truncatewords_html:100|safe as object_content %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
-</div>
 {% empty %}
   {% trans "No entries yet." %}
 {% endfor %}
