@@ -125,21 +125,28 @@ div.paginator
       strong
         color: $box_font_color
 
+.entry-widgets
+  ul, ol
+    padding-left: 2.5em
+    list-style-image: url(../img/bullet.png)
+
 .featured
   .entry-header
     background-color: #C4D9C4
 
 // Discussions
 ol#comment-list, ol#pingback-list, ol#trackback-list
+  padding-left: 1em
   li
+    margin-bottom: 1em
     border: 1px solid $box_color
-    margin-bottom: 5px
-    padding-bottom: 1em
     &.box2
       border-color: $box_font_color
       background-color: $box_color
     &.post-author
       color: $box_font_color
+    p
+      margin-bottom: 0.5em
     img
       padding: 5px
     .pingback-body, trackback-body

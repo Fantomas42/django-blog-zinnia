@@ -104,9 +104,7 @@
 	  {% trans "on" %} {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
 	</div>
 	<div class="span-13 last">
-	  <cite>
-	    {{ comment.comment|linebreaks }}
-	  </cite>
+	  {{ comment.comment|linebreaks }}
 	</div>
       </div>
     </li>
