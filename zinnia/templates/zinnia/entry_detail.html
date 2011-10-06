@@ -38,8 +38,6 @@
   {% endwith %}
 </div>
 
-<hr />
-
 <div class="entry-widgets span-16 last">
   {% with object.next_entry as next_entry %}
   {% if next_entry %}
@@ -87,8 +85,6 @@
   </div>
 </div>
 
-<hr />
-
 <div id="comments" class="span-16 last">
   <h3>{% trans "Comments" %}</h3>
   {% with object.comments as comment_list %}
@@ -130,7 +126,6 @@
   {% endwith %}
 </div>
 
-<hr />
 <div id="pingbacks" class="span-16 last">
   <h3>{% trans "Pingbacks" %}</h3>
   {% with object.pingbacks as pingback_list %}
@@ -161,7 +156,6 @@
   {% endwith %}
 </div>
 
-<hr />
 <div id="trackbacks" class="span-16 last">
   <h3>{% trans "Trackbacks" %}</h3>
   {% with object.trackbacks as trackback_list %}

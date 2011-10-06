@@ -40,7 +40,6 @@
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 </div>
-{% if not forloop.last %}<hr />{% endif %}
 {% empty %}
   {% trans "No entries yet." %}
 {% endfor %}
