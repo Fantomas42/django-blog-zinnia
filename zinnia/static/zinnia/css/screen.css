@@ -423,14 +423,17 @@ ul, ol { margin: 0 1.5em 1.5em 0; padding-left: 3.333em; }
 a { text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-hr { background: #dddddd; color: #dddddd; clear: both; float: none; width: 100%; height: 0.1em; margin: 0 0 1.45em; border: none; }
-
+#header { margin-bottom: 1em; border-bottom: 1px solid #e9e9f3; }
 #header h1 { font-size: 4em; font-weight: bold; margin-bottom: 0; }
 #header .top-navigation { float: right; }
 #header .top-navigation img { border: 0; }
 #header .top-navigation .link { padding-left: 1.5em; }
 #header .top-navigation .sitemap { background: transparent url(../img/sitemap.png) no-repeat scroll left center; }
 #header .top-navigation .feeds { background: transparent url(../img/rss.png) no-repeat scroll left center; }
+
+#breadcrumbs { font-size: 1.2em; }
+
+#body { margin-bottom: 1em; border-bottom: 1px solid #e9e9f3; }
 
 #content h1, #content h2, #content h3 { margin-top: 0; }
 
@@ -461,13 +464,14 @@ table.month th { text-transform: capitalize; color: #94949e; background-color: #
 table.month td { text-align: center; font-weight: bold; }
 table.month td.entry { background-color: #e9e9f3; }
 
-div.paginator { margin: 1.5em 0; }
+div.paginator { margin-bottom: 1em; }
 div.paginator span { font-size: 1.2em; margin-left: 0.3em; padding: 0 0.5em 0 0.5em; float: left; border: 1px solid #e9e9f3; }
 div.paginator span.index { margin-left: 0; }
 div.paginator span.page:hover, div.paginator span.next:hover, div.paginator span.previous:hover { background-color: #006699; }
 div.paginator span.page:hover a, div.paginator span.next:hover a, div.paginator span.previous:hover a { color: white; }
 div.paginator span.current { border-color: #006699; background-color: #006699; color: white; }
 
+.hentry { margin-bottom: 1em; }
 .hentry .entry-header { margin-bottom: 1em; }
 .hentry .entry-header .entry-title { margin: 0; padding-left: 0.25em; padding-right: 0.25em; }
 .hentry .entry-header .entry-info { margin: 0; padding-left: 2em; background: transparent url(../img/category.png) no-repeat scroll 0.5em; }
