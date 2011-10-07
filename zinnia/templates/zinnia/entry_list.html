@@ -39,7 +39,7 @@
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 {% empty %}
-  {% trans "No entries yet." %}
+  <p class="notice">{% trans "No entries yet." %}</p>
 {% endfor %}
 
 {% if is_paginated %}
