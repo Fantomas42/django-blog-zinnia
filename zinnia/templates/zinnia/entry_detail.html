@@ -33,10 +33,13 @@
 
 {% block content %}
 
-{% with object.html_content|safe as object_content %}
-{% include "zinnia/_entry_detail.html" %}
-{% endwith %}
+{% block entry-content %}
+  {% with object.html_content|safe as object_content %}
+  {% include "zinnia/_entry_detail.html" %}
+  {% endwith %}
+{% endblock %}
 
+{% block entry-widgets %}
 <div class="entry-widgets span-16 last">
   {% with object.next_entry as next_entry %}
   {% if next_entry %}
@@ -83,7 +86,9 @@
     {% get_similar_entries 5 %}
   </div>
 </div>
+{% endblock %}
 
+{% block entry-comments %}
 <div id="comments" class="span-16 last">
   <h3>{% trans "Comments" %}</h3>
   {% with object.comments as comment_list %}
@@ -122,7 +127,9 @@
   {% endif %}
   {% endwith %}
 </div>
+{% endblock %}
 
+{% block entry-pingbacks %}
 <div id="pingbacks" class="span-16 last">
   <h3>{% trans "Pingbacks" %}</h3>
   {% with object.pingbacks as pingback_list %}
@@ -152,10 +159,13 @@
     {% endif %}
   {% endwith %}
 </div>
+{% endblock %}
 
+{% block entry-trackbacks %}
+{% with object.trackbacks as trackback_list %}
+{% if trackback_list.count or object.pingback_enabled %}
 <div id="trackbacks" class="span-16 last">
   <h3>{% trans "Trackbacks" %}</h3>
-  {% with object.trackbacks as trackback_list %}
   {% if trackback_list.count %}
   <ol id="trackback-list" class="span-15 last">
     {% for trackback in trackback_list %}
@@ -176,16 +186,23 @@
   </ol>
   {% endif %}
     {% if object.pingback_enabled %}
-  <p><a href="{% url zinnia_entry_trackback object.pk %}" rel="trackback">{% trans "Trackback URL" %}</a></p>
+  <p>
+    <a href="{% url zinnia_entry_trackback object.pk %}" rel="trackback">
+      {% trans "Trackback URL" %}</a>
+  </p>
     {% endif %}
-  {% endwith %}
 </div>
+{% endif %}
+{% endwith %}
+{% endblock %}
 
+{% block entry-comments-form %}
 {% if object.comments_are_open %}
 <div class="commentForm span-16 last">
   {% render_comment_form for object %}
 </div>
 {% endif %}
+{% endblock %}
 
 {% endblock %}
 
