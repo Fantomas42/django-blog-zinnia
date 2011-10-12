@@ -1,6 +1,5 @@
 """Urls for the demo of Zinnia"""
-import os
-
+from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.defaults import url
 from django.conf.urls.defaults import include
@@ -46,3 +45,9 @@ urlpatterns += patterns(
     url(r'^500/$', 'demo.views.server_error'),
     )
 
+if settings.DEBUG:
+    urlpatterns += patterns(
+        '',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT})
+        )

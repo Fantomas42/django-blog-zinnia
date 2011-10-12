@@ -12,6 +12,7 @@ build
 include
 downloads
 src_eggs
+uploads
 develop-eggs
 .installed.cfg
 .sass-cache
