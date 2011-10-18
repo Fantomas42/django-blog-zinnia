@@ -1,6 +1,7 @@
 """Views for Zinnia tags"""
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.template.defaultfilters import slugify
 
 from tagging.models import Tag
 from tagging.views import tagged_object_list
@@ -24,7 +25,7 @@ def tag_detail(request, tag, page=None, **kwargs):
     """Display the entries of a tag"""
     if not kwargs.get('template_name'):
         kwargs['template_name'] = template_name_for_entry_queryset_filtered(
-            'tag', tag)
+            'tag', slugify(tag))
 
     return tagged_object_list(request, tag=tag,
                               queryset_or_model=Entry.published.all(),
