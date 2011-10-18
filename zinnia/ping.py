@@ -162,6 +162,6 @@ class ExternalUrlsPinger(threading.Thread):
         try:
             server = xmlrpclib.ServerProxy(server_name)
             reply = server.pingback.ping(self.entry_url, target_url)
-        except xmlrpclib.Error:
+        except (xmlrpclib.Error, socket.error):
             reply = '%s cannot be pinged.' % target_url
         return reply
