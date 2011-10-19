@@ -2,6 +2,7 @@
 from django.test import TestCase
 
 from zinnia.models import Entry
+from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 from zinnia.signals import disable_for_loaddata
 from zinnia.signals import ping_directories_handler
@@ -43,13 +44,14 @@ class SignalsTestCase(TestCase):
                   'slug': 'my-entry'}
         entry = Entry.objects.create(**params)
         self.assertEquals(entry.is_visible, True)
-        settings.SAVE_PING_DIRECTORIES = ()
+        settings.PING_DIRECTORIES = ()
         ping_directories_handler('sender', **{'instance': entry})
         self.assertEquals(self.top, 0)
-        settings.SAVE_PING_DIRECTORIES = ('toto',)
+        settings.PING_DIRECTORIES = ('toto',)
+        settings.SAVE_PING_DIRECTORIES = True
         ping_directories_handler('sender', **{'instance': entry})
         self.assertEquals(self.top, 1)
-        entry.status = 0
+        entry.status = DRAFT
         ping_directories_handler('sender', **{'instance': entry})
         self.assertEquals(self.top, 1)
 
