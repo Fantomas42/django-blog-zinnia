@@ -56,13 +56,9 @@
 
     <p class="entry-shorturl span-16 last">
       <strong>{% trans "Short url" %}</strong> :
-      {% if object.short_url %}
       <a href="{{ object.short_url }}" title="{{ object.title }}" rel="shortlink">
         {{ object.short_url }}
       </a>
-      {% else %}
-      {% trans "Unavailable" %}
-      {% endif %}
     </p>
 
     <p class="entry-comments span-16 last">

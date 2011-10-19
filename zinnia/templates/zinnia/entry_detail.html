@@ -15,9 +15,7 @@
   {% with object.next_entry as next_entry %}{% if next_entry %}
   <link rel="next" title="{{ next_entry.title }}" href="{{ next_entry.get_absolute_url }}" />
   {% endif %}{% endwith %}
-  {% if object.short_url %}
   <link rel="shortlink" href="{{ object.short_url }}" />
-  {% endif %}
   <link rel="canonical" href="{{ object.get_absolute_url }}" />
   {% with year=object.creation_date|date:"Y" month=object.creation_date|date:"m" day=object.creation_date|date:"d" %}
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of discussions on" %} '{{ object.title }}'"
