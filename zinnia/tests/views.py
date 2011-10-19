@@ -1,6 +1,7 @@
 """Test cases for Zinnia's views"""
 from datetime import datetime
 
+from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
@@ -19,6 +20,19 @@ class ViewsBaseCase(TestCase):
     """
 
     def setUp(self):
+        self.old_CONTEXT_PROCESSORS = settings.TEMPLATE_CONTEXT_PROCESSORS
+        self.old_TEMPLATE_LOADERS = settings.TEMPLATE_LOADERS
+        settings.TEMPLATE_LOADERS = (
+            ('django.template.loaders.cached.Loader', (
+                'django.template.loaders.app_directories.Loader',
+                'django.template.loaders.eggs.Loader',
+                )
+             ),
+            )
+        settings.TEMPLATE_CONTEXT_PROCESSORS = (
+            'django.core.context_processors.request',
+            )
+
         self.site = Site.objects.get_current()
         self.author = User.objects.create_superuser(
             username='admin', email='admin@example.com', password='password')
@@ -44,6 +58,10 @@ class ViewsBaseCase(TestCase):
         entry.sites.add(self.site)
         entry.categories.add(self.category)
         entry.authors.add(self.author)
+
+    def tearDown(self):
+        settings.TEMPLATE_CONTEXT_PROCESSORS = self.old_CONTEXT_PROCESSORS
+        settings.TEMPLATE_LOADERS = self.old_TEMPLATE_LOADERS
 
     def create_published_entry(self):
         params = {'title': 'My test entry',
