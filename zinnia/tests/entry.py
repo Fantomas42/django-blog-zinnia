@@ -18,6 +18,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.models import get_base_model
 from zinnia.models import EntryAbstractClass
 from zinnia import models as models_settings
+from zinnia import url_shortener as shortener_settings
 
 
 class EntryTestCase(TestCase):
@@ -115,10 +116,14 @@ class EntryTestCase(TestCase):
         self.assertFalse(self.entry.is_visible)
 
     def test_short_url(self):
+        original_shortener = shortener_settings.URL_SHORTENER_BACKEND
+        shortener_settings.URL_SHORTENER_BACKEND = 'zinnia.url_shortener.'\
+                                                   'backends.default'
         self.assertEquals(self.entry.short_url,
                           'http://example.com' +
                           reverse('zinnia_entry_shortlink',
                                   args=[self.entry.pk]))
+        shortener_settings.URL_SHORTENER_BACKEND = original_shortener
 
     def test_previous_entry(self):
         site = Site.objects.get_current()

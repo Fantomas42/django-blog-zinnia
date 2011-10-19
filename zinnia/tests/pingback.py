@@ -18,6 +18,7 @@ from zinnia.models import Category
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import TestTransport
 from zinnia.xmlrpc.pingback import generate_pingback_content
+from zinnia import url_shortener as shortener_settings
 
 
 class PingBackTestCase(TestCase):
@@ -36,6 +37,10 @@ class PingBackTestCase(TestCase):
         raise HTTPError(url, 404, 'unavailable url', {}, None)
 
     def setUp(self):
+        # Use default URL shortener backend, to avoid networks errors
+        self.original_shortener = shortener_settings.URL_SHORTENER_BACKEND
+        shortener_settings.URL_SHORTENER_BACKEND = 'zinnia.url_shortener.'\
+                                                   'backends.default'
         # Set up a stub around urlopen
         import zinnia.xmlrpc.pingback
         self.original_urlopen = zinnia.xmlrpc.pingback.urlopen
@@ -80,6 +85,7 @@ class PingBackTestCase(TestCase):
     def tearDown(self):
         import zinnia.xmlrpc.pingback
         zinnia.xmlrpc.pingback.urlopen = self.original_urlopen
+        shortener_settings.URL_SHORTENER_BACKEND = self.original_shortener
 
     def test_generate_pingback_content(self):
         soup = BeautifulSoup(self.second_entry.content)
