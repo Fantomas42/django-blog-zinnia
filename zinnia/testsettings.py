@@ -15,6 +15,13 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.request',
     'zinnia.context_processors.version']
 
+TEMPLATE_LOADERS = [
+    ['django.template.loaders.cached.Loader', [
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader']
+     ]
+    ]
+
 TEMPLATE_DIRS = [os.path.join(os.path.dirname(__file__),
                               'tests', 'templates')]
 
