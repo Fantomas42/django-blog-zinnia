@@ -29,8 +29,7 @@ Conventions
 
 Code conventions are important in a way where they ensure the lisibility
 of the code in the time, that's why the code try to respect at most the
-`PEP8
-<http://www.python.org/dev/peps/pep-0008/>`_.
+:pep:`8`.
 
 If you have already run the :doc:`buildout` script you can execute this
 Makefile rule to check your code. ::
