@@ -2,11 +2,11 @@ Compatibility
 =============
 
 Zinnia tries to fit a maximum to the Django's standards to gain in
-readability and to be always present when the version 3.4.2 will be
-here. :)
+readability and to be always present when the version 3.4.2 of Django will
+be here. :)
 
-Predicting the future is a good thing, because it will be soon.
-Actually Zinnia is designed to handle the 1.2.x version and will reach the
+Predicting the future is a good thing, because it's coming soon.
+Actually Zinnia is designed to handle the 1.3.x version and will reach the
 release 1.5 easily without major changes.
 
 http://docs.djangoproject.com/en/dev/internals/deprecation/
