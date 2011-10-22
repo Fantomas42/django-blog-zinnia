@@ -1,6 +1,8 @@
 Buildout
 ========
 
+.. highlightlang:: console
+
 To increase the speed of the development process a `Buildout
 <http://pypi.python.org/pypi/zc.buildout>`_ script is provided to properly
 initialize the project for anybody who wants to contribute to the project.
