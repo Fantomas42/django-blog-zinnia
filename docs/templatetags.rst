@@ -1,6 +1,8 @@
 Template Tags
 =============
 
+.. module:: zinnia.templatetags
+
 .. highlightlang:: html+django
 
 Zinnia provides several template tags based on *inclusion_tag* system to
