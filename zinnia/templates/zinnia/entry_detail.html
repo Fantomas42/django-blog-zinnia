@@ -43,13 +43,9 @@
   {% if next_entry %}
   <div class="entry-next">
     <h3>{% trans "Next entry" %}</h3>
-    <ul>
-      <li>
-	<a href="{{ next_entry.get_absolute_url }}" title="{{ next_entry.title }}" rel="next">
-	  {{ next_entry.title }}
-	</a>
-      </li>
-    </ul>
+    <a href="{{ next_entry.get_absolute_url }}" title="{{ next_entry.title }}" rel="next">
+      {{ next_entry.title }}
+    </a>
   </div>
   {% endif %}
   {% endwith %}
@@ -57,13 +53,9 @@
   {% if previous_entry %}
   <div class="entry-previous">
     <h3>{% trans "Previous entry" %}</h3>
-    <ul>
-      <li>
-	<a href="{{ previous_entry.get_absolute_url }}" title="{{ previous_entry.title }}" rel="prev">
-	  {{ previous_entry.title }}
-	</a>
-      </li>
-    </ul>
+    <a href="{{ previous_entry.get_absolute_url }}" title="{{ previous_entry.title }}" rel="prev">
+      {{ previous_entry.title }}
+    </a>
   </div>
   {% endif %}
   {% endwith %}
@@ -94,9 +86,7 @@
   <ol id="comment-list" class="span-15 last">
     {% for comment in comment_list %}
     <li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %} span-15 last">
-      <div class="span-2">
-	<img src="{% get_gravatar comment.email 60 "G" %}" class="gravatar photo" alt="{{ comment.user_name }}"/>
-      </div>
+      <img src="{% get_gravatar comment.email 60 "G" %}" class="gravatar photo" alt="{{ comment.user_name }}"/>
       <div class="comment-body span-13 last">
 	<div class="comment-author span-13 last">
 	  {% if comment.url %}
@@ -106,9 +96,7 @@
 	  {% endif %}
 	  {% trans "on" %} {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
 	</div>
-	<div class="span-13 last">
-	  {{ comment.comment|linebreaks }}
-	</div>
+	{{ comment.comment|linebreaks }}
       </div>
     </li>
     {% endfor %}
@@ -196,9 +184,7 @@
 
 {% block entry-comments-form %}
 {% if object.comments_are_open %}
-<div class="commentForm span-16 last">
   {% render_comment_form for object %}
-</div>
 {% endif %}
 {% endblock %}
 

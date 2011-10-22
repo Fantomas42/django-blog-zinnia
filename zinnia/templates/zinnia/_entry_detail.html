@@ -46,12 +46,18 @@
     <p class="entry-tags span-16 last">
       <strong>{% trans "Tags" %}</strong> :
       {% tags_for_object object as tag_list %}
-      {% for tag in tag_list %}
-      <a href="{% url zinnia_tag_detail tag %}"
-         title="Tag {{ tag }}" rel="tag">{{ tag }}</a>
-      {% empty %}
+      {% if tag_list %}
+      <ul>
+        {% for tag in tag_list %}
+        <li>
+          <a href="{% url zinnia_tag_detail tag %}"
+             title="Tag {{ tag }}" rel="tag">{{ tag }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
       <span>{% trans "No tags" %}</span>
-      {% endfor %}
+      {% endif %}
     </p>
 
     <p class="entry-shorturl span-16 last">

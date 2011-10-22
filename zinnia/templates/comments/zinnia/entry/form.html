@@ -9,7 +9,7 @@
     {% if field.is_hidden %}{{ field }}{% else %}
     <div{% if field.errors %} class="error"{% endif %}{% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
       {{ field.label_tag }}
-      {% if field.errors %}{{ field.errors }}{% else %}<br />{% endif %}
+      {% if field.errors %}{{ field.errors }}{% endif %}
       {{ field }}
     </div>
     {% endif %}
