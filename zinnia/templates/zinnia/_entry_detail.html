@@ -1,6 +1,6 @@
 {% load tagging_tags comments i18n %}
-<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %} span-16 last">
-  <div class="entry-header span-16 last">
+<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}">
+  <div class="entry-header">
     <h2 class="entry-title">
       <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
         {{ object.title }}
@@ -27,7 +27,7 @@
     </p>
   </div>
 
-  <div class="entry-body span-16 last">
+  <div class="entry-body">
     {% if object.image %}
     <div class="entry-image">
       <p>
@@ -43,7 +43,7 @@
   </div>
 
   <div class="entry-footer">
-    <p class="entry-tags span-16 last">
+    <p class="entry-tags">
       <strong>{% trans "Tags" %}</strong> :
       {% tags_for_object object as tag_list %}
       {% for tag in tag_list %}
@@ -54,14 +54,14 @@
       {% endfor %}
     </p>
 
-    <p class="entry-shorturl span-16 last">
+    <p class="entry-shorturl">
       <strong>{% trans "Short url" %}</strong> :
       <a href="{{ object.short_url }}" title="{{ object.title }}" rel="shortlink">
         {{ object.short_url }}
       </a>
     </p>
 
-    <p class="entry-comments span-16 last">
+    <p class="entry-comments">
       <strong>{% trans "Discussions" %}</strong> :
       {% with object.comments.count as comment_count %}
       {% if comment_count %}

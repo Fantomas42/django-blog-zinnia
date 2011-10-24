@@ -38,7 +38,7 @@
 {% endblock %}
 
 {% block entry-widgets %}
-<div class="entry-widgets span-16 last">
+<div class="entry-widgets">
   {% with object.next_entry as next_entry %}
   {% if next_entry %}
   <div class="entry-next">
@@ -79,16 +79,16 @@
 {% endblock %}
 
 {% block entry-comments %}
-<div id="comments" class="span-16 last">
+<div id="comments">
   <h3>{% trans "Comments" %}</h3>
   {% with object.comments as comment_list %}
   {% if comment_list.count %}
-  <ol id="comment-list" class="span-15 last">
+  <ol id="comment-list">
     {% for comment in comment_list %}
-    <li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %} span-15 last">
+    <li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %}">
       <img src="{% get_gravatar comment.email 60 "G" %}" class="gravatar photo" alt="{{ comment.user_name }}"/>
-      <div class="comment-body span-13 last">
-	<div class="comment-author span-13 last">
+      <div class="comment-body">
+	<div class="comment-author">
 	  {% if comment.url %}
 	  <a href="{{ comment.url }}" class="fn url">{{ comment.user_name }}</a>
 	  {% else %}
@@ -116,23 +116,21 @@
 {% endblock %}
 
 {% block entry-pingbacks %}
-<div id="pingbacks" class="span-16 last">
+<div id="pingbacks">
   <h3>{% trans "Pingbacks" %}</h3>
   {% with object.pingbacks as pingback_list %}
   {% if pingback_list.count %}
-  <ol id="pingback-list" class="span-15 last">
+  <ol id="pingback-list">
     {% for pingback in pingback_list %}
-    <li id="pingback_{{ pingback.pk }}" class="pingback {% cycle box1,box2 %} span-15 last">
-      <div class="pingback-body span-15 last">
-	<div class="pingback-author span-15 last">
+    <li id="pingback_{{ pingback.pk }}" class="pingback {% cycle box1,box2 %}">
+      <div class="pingback-body">
+	<div class="pingback-author">
 	  <a href="{{ pingback.url }}">{{ pingback.user_name }}</a>
 	  {% trans "on" %} {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
 	</div>
-	<div class="span-15 last">
-	  <cite>
-	    {{ pingback.comment }}
-	  </cite>
-	</div>
+	<cite>
+	  {{ pingback.comment }}
+	</cite>
       </div>
     </li>
     {% endfor %}
@@ -150,22 +148,18 @@
 {% block entry-trackbacks %}
 {% with object.trackbacks as trackback_list %}
 {% if trackback_list.count or object.pingback_enabled %}
-<div id="trackbacks" class="span-16 last">
+<div id="trackbacks">
   <h3>{% trans "Trackbacks" %}</h3>
   {% if trackback_list.count %}
-  <ol id="trackback-list" class="span-15 last">
+  <ol id="trackback-list">
     {% for trackback in trackback_list %}
-    <li id="trackback_{{ trackback.pk }}" class="trackback {% cycle box1,box2 %} span-15 last">
-      <div class="trackback-body span-15 last">
-	<div class="trackback-author span-15 last">
+    <li id="trackback_{{ trackback.pk }}" class="trackback {% cycle box1,box2 %}">
+      <div class="trackback-body">
+	<div class="trackback-author">
 	  <a href="{{ trackback.url }}">{{ trackback.user_name }}</a>
 	  {% trans "on" %} {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
 	</div>
-	<div class="span-15 last">
-	  <cite>
-	    {{ trackback.comment }}
-	  </cite>
-	</div>
+	{{ trackback.comment }}
       </div>
     </li>
     {% endfor %}

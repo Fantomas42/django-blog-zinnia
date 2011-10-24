@@ -1,5 +1,5 @@
 {% load i18n %}
-<div class="paginator span-16 last">
+<div class="paginator">
   <span class="index">
     {% blocktrans with page.number as current_page and page.paginator.num_pages as total_page %}Page {{ current_page }} of {{ total_page }}{% endblocktrans %}
   </span>
