@@ -1,6 +1,8 @@
 Welcome to Django-Blog-Zinnia's documentation!
 ==============================================
 
+This document refers to the release |release|.
+
 .. toctree::
 
    Presentation <overview>
