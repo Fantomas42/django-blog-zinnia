@@ -1,28 +1,34 @@
+======================
 Contributing to Zinnia
 ======================
 
+.. highlightlang:: console
+
 Zinnia is an open-source project, so yours contributions are welcomed and needed.
 
-------------
+.. _writing-code:
+
 Writing code
-------------
+============
 
 So you have a great idea to program, found a bug or a way to optimize the
 code ? You are welcome.
 
+.. _code-process:
+
 Process
 -------
 
-#. `Fork
-   <https://github.com/Fantomas42/django-blog-zinnia/fork>`_ the code on Github.
-#. Checkout your fork.
-#. Write unit tests.
+#. `Fork`_ the code on Github.
+#. Clone a local copy of your fork.
+#. Write tests.
 #. Develop your code.
-#. Test the code.
-#. Update the documentation.
-#. Commit your changes
-#. Push to your fork.
+#. Test your new code.
+#. Update the documentation if needed.
+#. Commit and push your changes.
 #. Open a pull request.
+
+.. _code-conventions:
 
 Conventions
 -----------
@@ -31,12 +37,14 @@ Code conventions are important in a way where they ensure the lisibility
 of the code in the time, that's why the code try to respect at most the
 :pep:`8`.
 
-If you have already run the :doc:`buildout` script you can execute this
+If you have already :ref:`run the buildout <running-the-buildout>` script you can execute this
 Makefile rule to check your code. ::
 
   $ make kwalitee
 
 With a clear and uniform code, the development is better and faster.
+
+.. _writing-tests:
 
 Tests
 -----
@@ -47,9 +55,10 @@ code will not be reliable and may not be integrated.
 
 See :doc:`tests` for more informations.
 
----------------------
+.. _writing-documentation:
+
 Writing documentation
----------------------
+=====================
 
 Sometimes considered like "annoying" by hard-core coders, documentation is
 more important than the code itself! This is what brings fresh blood to a
@@ -70,7 +79,8 @@ The documentation should :
 Keep it mind that documenting is most useful than coding, so your
 contribution will be greatly appreciated.
 
-------------
+.. _writing-translations:
+
 Translations
 ------------
 
@@ -78,10 +88,12 @@ If you want to contribute by updating a translation or adding a translation
 in your language, it's simple: create a account on Transifex.net and you
 will be able to edit the translations at this URL :
 
-http://www.transifex.net/projects/p/django-blog-zinnia/resource/djangopo/
+https://www.transifex.net/projects/p/django-blog-zinnia/resource/djangopo/
 
 .. image:: http://www.transifex.net/projects/p/django-blog-zinnia/resource/djangopo/chart/image_png
 
 The translations hosted on Transifex.net will be pulled periodically in the
-repository, but if you are in a hurry, `send me a message
-<https://github.com/inbox/new/Fantomas42>`_.
+repository, but if you are in a hurry, `send me a message`_.
+
+.. _`Fork`: https://github.com/Fantomas42/django-blog-zinnia/fork
+.. _`send me a message`: https://github.com/inbox/new/Fantomas42
