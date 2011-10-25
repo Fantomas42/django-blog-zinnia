@@ -17,6 +17,7 @@ import re
 from datetime import date
 
 sys.path.append(os.path.abspath('..'))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'zinnia.testsettings'
 import zinnia
 
 
@@ -32,7 +33,7 @@ import zinnia
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.intersphinx']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx']
 intersphinx_mapping = {
     'python': ('http://docs.python.org/2.6', None),
     'django': ('http://readthedocs.org/docs/django/en/latest/', None),
