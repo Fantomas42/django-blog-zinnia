@@ -39,4 +39,3 @@ So our homepage will only display entries filled under the categories
 The others parameters handled by the channel view are the same that
 the generic view named ``object_list`` bundled in
 :mod:`django.views.generic.list_detail`.
-
