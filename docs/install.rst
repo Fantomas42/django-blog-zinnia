@@ -1,54 +1,66 @@
+============
 Installation
 ============
 
+.. module:: zinnia
+
+.. _dependencies:
+
 Dependencies
-------------
+============
 
 Make sure to install these packages prior to installation :
 
-* `Python 2.x
-  <http://www.python.org/>`_ >= 2.5
-* `Django
-  <http://www.djangoproject.com/>`_ >= 1.3
-* `django-mptt
-  <https://github.com/django-mptt/django-mptt/>`_ >= 0.4.2
-* `django-tagging
-  <http://code.google.com/p/django-tagging/>`_ >= 0.3.1
-* `BeautifulSoup
-  <http://www.crummy.com/software/BeautifulSoup/>`_ >= 3.2.0
+* `Python 2.x`_ >= 2.5
+* `Django`_ >= 1.3
+* `django-mptt`_ >= 0.4.2
+* `django-tagging`_ >= 0.3.1
+* `BeautifulSoup`_ >= 3.2.0
 
 The packages below are optionnal but needed for run the full test suite.
 
-* `pyparsing
-  <http://pyparsing.wikispaces.com/>`_ >= 1.5.5
-* `django-xmlrpc
-  <https://github.com/Fantomas42/django-xmlrpc>`_ >= 0.1.3
+* `pyparsing`_ >= 1.5.5
+* `django-xmlrpc`_ >= 0.1.3
 
 Note that all the dependencies will be resolved if you install
-Zinnia with *pip* or *easy_install*, excepting Django.
+Zinnia with :program:`pip` or :program:`easy_install`, excepting Django.
+
+.. _getting-the-code:
 
 Getting the code
-----------------
+================
+
+.. highlight:: console
 
 You could retrieve the last sources from
-http://github.com/Fantomas42/django-blog-zinnia and run the installation
-script ::
+https://github.com/Fantomas42/django-blog-zinnia, clone the repository
+using :program:`git` and run the installation script: ::
 
+  $ git clone git://github.com/Fantomas42/django-blog-zinnia.git
+  $ cd django-blog-zinnia
   $ python setup.py install
 
-or use pip ::
+or use :program:`pip`: ::
 
   $ pip install -e git://github.com/Fantomas42/django-blog-zinnia.git#egg=django-blog-zinnia
 
-For the latest stable version use easy_install ::
+For the latest stable version of Zinnia use :program:`easy_install`: ::
 
   $ easy_install django-blog-zinnia
 
-Applications
-------------
+or use :program:`pip`: ::
 
-Then register **zinnia**, and these following applications in the
-INSTALLED_APPS section of your project's settings. ::
+  $ pip install django-blog-zinnia
+
+.. _applications:
+
+Applications
+============
+
+.. highlight:: python
+
+Then register :mod:`zinnia`, and these following applications in the
+:setting:`INSTALLED_APPS` section of your project's settings. ::
 
   INSTALLED_APPS = (
     # Your favorite apps
@@ -61,10 +73,14 @@ INSTALLED_APPS section of your project's settings. ::
     'mptt',
     'zinnia',)
 
-Template Context Processors
----------------------------
+.. _template-context-processors:
 
-Add these following template context processors if not already present. ::
+Template Context Processors
+===========================
+
+Add these following
+:setting:`template context processors<TEMPLATE_CONTEXT_PROCESSORS>` if not
+already present. ::
 
   TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.auth',
@@ -74,8 +90,10 @@ Add these following template context processors if not already present. ::
     'django.core.context_processors.static',
     'zinnia.context_processors.version',) # Optional
 
+.. _urls:
+
 URLs
-----
+====
 
 Add the following lines to your project's urls.py in order to display the
 blog. ::
@@ -84,7 +102,7 @@ blog. ::
   url(r'^comments/', include('django.contrib.comments.urls')),
 
 Note that the default zinnia URLset is provided for convenient usage, but
-you can customize your URLs if you want. Here's how : ::
+you can customize your URLs if you want. Here's how: ::
 
   url(r'^', include('zinnia.urls.capabilities')),
   url(r'^search/', include('zinnia.urls.search')),
@@ -99,10 +117,21 @@ you can customize your URLs if you want. Here's how : ::
   url(r'^weblog/', include('zinnia.urls.entries')),
   url(r'^comments/', include('django.contrib.comments.urls')),
 
+.. _static-files:
+
 Static Files
-------------
+============
 
 Since the version 1.3 of Django, Zinnia uses the
-``django.contrib.staticfiles`` application to serve the static files
+:mod:`django.contrib.staticfiles` application to serve the static files
 needed. Please refer to
-https://docs.djangoproject.com/en/dev/howto/static-files/ for more informations.
+https://docs.djangoproject.com/en/dev/howto/static-files/ for more
+informations about serving static files.
+
+.. _`Python 2.x`: http://www.python.org/
+.. _`Django`: http://www.djangoproject.com/
+.. _`django-mptt`: https://github.com/django-mptt/django-mptt/
+.. _`django-tagging`: http://code.google.com/p/django-tagging/
+.. _`BeautifulSoup`: http://www.crummy.com/software/BeautifulSoup/
+.. _`pyparsing`: http://pyparsing.wikispaces.com/
+.. _`django-xmlrpc`: https://github.com/Fantomas42/django-xmlrpc
