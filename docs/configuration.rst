@@ -13,7 +13,7 @@ One of the cool features of Django is the sitemap application, so if you
 want to fill your website's sitemap with the entries of your blog, follow
 these steps.
 
-* Register ``django.contrib.sitemaps`` in the ``INSTALLED_APPS`` section.
+* Register :mod:`django.contrib.sitemaps` in the :setting:`INSTALLED_APPS` section.
 * Edit your project's URLs and add this code: ::
 
    from zinnia.sitemaps import TagSitemap
@@ -132,14 +132,16 @@ Django-CMS
 If you use `django-cms 2.0`_, Zinnia can be integrated into your pages,
 thanks to the plugin system.
 
-Simply register ``zinnia.plugins`` in the ``INSTALLED_APPS`` section of your
-project's settings.
+Simply register :mod:`zinnia.plugins` in the :setting:`INSTALLED_APPS`
+section of your project's settings.
 
-It will provides custom plugins for adding entries into your pages, an
-**App-Hook** and **Menus** for easy integration.
+It will provides :class:`custom plugins<cms.plugin_base.CMSPluginBase>` for
+adding entries into your pages, an :class:`~cms.app_base.CMSApp` and
+:class:`~cms.menu_bases.CMSAttachMenu` classes for easy integration.
 
 If you want to use the plugin system of django-cms in your entries, an
-extended EntryModel with a **PlaceholderField** is provided.
+extended EntryModel with a :class:`~cms.models.fields.PlaceholderField` is
+provided.
 
 Add this line in your project's settings. ::
 
@@ -185,20 +187,20 @@ XML-RPC
 Zinnia provides few webservices via XML-RPC, but before using it,
 you need to install `django-xmlrpc`_.
 
-Then register ``django_xmlrpc`` in your ``INSTALLED_APPS`` section of your
-project's settings.
+Then register :mod:`django_xmlrpc` in your :setting:`INSTALLED_APPS`
+section of your project's settings.
 
 Now add these lines in your project's settings. ::
 
   from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
   XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
 
-``ZINNIA_XMLRPC_METHODS`` is a simple list of tuples containing all the
-webservices embedded in Zinnia.
+:data:`ZINNIA_XMLRPC_METHODS` is a simple list of tuples containing all
+the webservices embedded in Zinnia.
 
 If you only want to use the Pingback service import
-``ZINNIA_XMLRPC_PINGBACK``, or if you want you just want to enable the
-`MetaWeblog API`_ import ``ZINNIA_XMLRPC_METAWEBLOG``.
+:data:`ZINNIA_XMLRPC_PINGBACK`, or if you want you just want to enable the
+`MetaWeblog API`_ import :data:`ZINNIA_XMLRPC_METAWEBLOG`.
 
 You can also use your own mixins.
 

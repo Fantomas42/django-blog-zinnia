@@ -28,17 +28,17 @@ Here a list establishing the compatibility between Zinnia and Django:
 Backward incompatibilities with django v1.2.x due to :
 
 * Migration to the class-based generic views.
-* Intensive usage of ``django.contrib.staticfiles``
-* Usage of the new features provided in the testrunner
+* Intensive usage of :mod:`django.contrib.staticfiles`.
+* Usage of the new features provided in the testrunner.
 
 .. versionchanged:: 0.6
 
 Backward incompatibilities with django v1.1.x due to :
 
-* Migration of the feeds classes of ``django.contrib.syndication``
+* Migration of the feeds classes of :mod:`django.contrib.syndication`.
 
 .. versionchanged:: 0.5
 
 Backward incompatibilities with django v1.0.x due to :
 
-* Intensive usage of the actions in ``django.contrib.admin``
+* Intensive usage of the actions in :mod:`django.contrib.admin`.
