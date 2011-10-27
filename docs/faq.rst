@@ -158,8 +158,8 @@ model like described in :doc:`extending_entry_model`.
 
 
 .. _`specifying a template directory`: http://docs.djangoproject.com/en/dev/ref/templates/api/#loading-templates
-.. _`Django Blog Quintet`: http://github.com/franckbret/django-blog-quintet
-.. _`django-threadcomments`: http://github.com/ericflo/django-threadedcomments
+.. _`Django Blog Quintet`: https://github.com/franckbret/django-blog-quintet
+.. _`django-threadcomments`: https://github.com/HonzaKral/django-threadedcomments
 .. _`MarkDown`: http://daringfireball.net/projects/markdown/
 .. _`Textile`: http://redcloth.org/hobix.com/textile/
 .. _`reStructuredText`: http://docutils.sourceforge.net/rst.html

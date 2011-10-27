@@ -216,9 +216,9 @@ Insert something like this in your project's urls.py: ::
 .. _`akismet`: http://www.voidspace.org.uk/python/modules.shtml#akismet
 .. _`TypePad AntiSpam`: http://antispam.typepad.com/
 .. _`django-bitly`: http://bitbucket.org/discovery/django-bitly/
-.. _`tweepy`: http://github.com/joshthecoder/tweepy
+.. _`tweepy`: https://github.com/tweepy/tweepy
 .. _`django-cms 2.0`: http://www.django-cms.org/
-.. _`django-tinymce`: http://code.google.com/p/django-tinymce/
+.. _`django-tinymce`: https://code.google.com/p/django-tinymce/
 .. _`installation instructions`: http://django-tinymce.googlecode.com/svn/trunk/docs/.build/html/index.html
 .. _`django-xmlrpc`: http://pypi.python.org/pypi/django-xmlrpc/
 .. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi
