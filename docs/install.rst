@@ -32,18 +32,6 @@ Getting the code
 
 .. highlight:: console
 
-You could retrieve the last sources from
-https://github.com/Fantomas42/django-blog-zinnia, clone the repository
-using :program:`git` and run the installation script: ::
-
-  $ git clone git://github.com/Fantomas42/django-blog-zinnia.git
-  $ cd django-blog-zinnia
-  $ python setup.py install
-
-or use :program:`pip`: ::
-
-  $ pip install -e git://github.com/Fantomas42/django-blog-zinnia.git#egg=django-blog-zinnia
-
 For the latest stable version of Zinnia use :program:`easy_install`: ::
 
   $ easy_install django-blog-zinnia
@@ -51,6 +39,18 @@ For the latest stable version of Zinnia use :program:`easy_install`: ::
 or use :program:`pip`: ::
 
   $ pip install django-blog-zinnia
+
+You could also retrieve the last sources from
+https://github.com/Fantomas42/django-blog-zinnia. Clone the repository
+using :program:`git` and run the installation script: ::
+
+  $ git clone git://github.com/Fantomas42/django-blog-zinnia.git
+  $ cd django-blog-zinnia
+  $ python setup.py install
+
+or more easily via :program:`pip`: ::
+
+  $ pip install -e git://github.com/Fantomas42/django-blog-zinnia.git#egg=django-blog-zinnia
 
 .. _applications:
 
