@@ -1,5 +1,10 @@
+============
 Spam Checker
 ============
+
+.. module:: zinnia.spam_checker
+
+.. versionadded:: 0.9
 
 Spam protection is mandatory when you want to let your users to comment
 your entries.
@@ -21,9 +26,10 @@ a white-list of IPs, it's possible by writing a backend.
 Note that you can use multiple backends, they are chained, useful for an
 maximum protection.
 
+.. _writing-spam-checker:
 
 Writing your own spam checker backend
--------------------------------------
+=====================================
 
 Writing a backend for using a custom spam checker is simple as
 possible, you only needs to follows 4 rules.
@@ -35,12 +41,12 @@ possible, you only needs to follows 4 rules.
 #. The **backend** function should returns ``True`` if ``content`` is spam
    and ``False`` otherwhise.
 
-#. If the **backend** requires initial configuration you must raise a
-   *django.core.exceptions.ImproperlyConfigured* exception if the
-   configuration is not valid. The error will be displayed in the console.
+#. If the **backend** requires initial configuration you must raise an
+   :exc:`~django.core.exceptions.ImproperlyConfigured` exception if
+   the configuration is not valid. The error will be displayed in the console.
 
-#. Register your backend to be used in your project with this setting : ::
+#. Register your backend to be used in your project with this setting: ::
 
     ZINNIA_SPAM_CHECKER_BACKENDS = ('path.to.your.spam.checker.module',)
 
-For a more examples take a look in this folder : *zinnia/spam_checker/backends/*.
+For a more examples take a look in this folder : :file:`zinnia/spam_checker/backends/`.

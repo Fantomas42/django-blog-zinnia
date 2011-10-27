@@ -1,8 +1,13 @@
+====================
 Testing and Coverage
 ====================
 
   *"An application without tests, is a dead-born application."*
     Someone very serious
+
+.. module:: zinnia.tests
+
+.. highlightlang:: console
 
 Writing tests is important, maybe more important than coding.
 
@@ -12,17 +17,16 @@ the benefits of software testing, some prophets will do it better than me.
 * http://en.wikipedia.org/wiki/Software_testing
 * http://docs.djangoproject.com/en/dev/topics/testing/
 
-Of course Zinnia is tested using the `unittest
-<http://docs.python.org/library/unittest.html>`_ approach.
-All the tests belong in the directory *zinnia/tests/*.
+Of course Zinnia is tested using the `unittest`_  approach.
+All the tests belong in the directory :file:`zinnia/tests/`.
+
+.. _lauching-test-suite:
 
 Launching the test suite
-------------------------
+========================
 
-If you have run the :doc:`buildout` script bundled in Zinnia, the tests are
-run under `nose
-<http://somethingaboutorange.com/mrl/projects/nose/0.11.2/>`_ by launching
-this command: ::
+If you have :ref:`run the buildout script<running-the-buildout>` bundled in
+Zinnia, the tests are run under `nose`_ by launching this command: ::
 
   $ ./bin/test
 
@@ -31,8 +35,10 @@ test runner: ::
 
   $ django-admin.py test zinnia --settings=zinnia.testsettings
 
+.. _coverage:
+
 Coverage
---------
+========
 
 Despite my best efforts, some functionnalities are not yet tested, that's why
 I need your help !
@@ -50,3 +56,6 @@ You can check the actual coverage percent at this url:
 http://django-blog-zinnia.com/documentation/coverage/
 
 I hope that you will write some tests and find some bugs. :)
+
+.. _`unittest`: http://docs.python.org/library/unittest.html
+.. _`nose`: http://somethingaboutorange.com/mrl/projects/nose/

@@ -1,3 +1,4 @@
+======
 Thanks
 ======
 
@@ -28,8 +29,9 @@ this application greatest each day.
 * and You.
 
 
-I also want to thanks `Transifex.net`_ and `ReadTheDocs.org`_ for their services
-of great quality.
+I also want to thanks `GitHub.com`_, `Transifex.net`_ and
+`ReadTheDocs.org`_ for their services of great quality.
 
+.. _`GitHub.com`: http://www.github.com/
 .. _`Transifex.net`: http://www.transifex.net/
 .. _`ReadTheDocs.org`: http://readthedocs.org/
