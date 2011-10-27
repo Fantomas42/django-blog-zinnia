@@ -15,7 +15,7 @@ And this for a lot of reasons, but I'm not here to convince you about
 the benefits of software testing, some prophets will do it better than me.
 
 * http://en.wikipedia.org/wiki/Software_testing
-* http://docs.djangoproject.com/en/dev/topics/testing/
+* https://docs.djangoproject.com/en/dev/topics/testing/
 
 Of course Zinnia is tested using the `unittest`_  approach.
 All the tests belong in the directory :file:`zinnia/tests/`.

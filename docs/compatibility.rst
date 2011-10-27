@@ -10,7 +10,7 @@ Predicting the future is a good thing, because it's coming soon.
 Actually Zinnia is designed to handle the 1.3.x version and will reach the
 release 1.5 easily without major changes.
 
-http://docs.djangoproject.com/en/dev/internals/deprecation/
+https://docs.djangoproject.com/en/dev/internals/deprecation/
 
 But the evolution of Django causes some backward incompatible changes, so
 for the developers who have to maintain a project with an old version of

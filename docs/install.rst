@@ -129,7 +129,7 @@ https://docs.djangoproject.com/en/dev/howto/static-files/ for more
 informations about serving static files.
 
 .. _`Python 2.x`: http://www.python.org/
-.. _`Django`: http://www.djangoproject.com/
+.. _`Django`: https://www.djangoproject.com/
 .. _`django-mptt`: https://github.com/django-mptt/django-mptt/
 .. _`django-tagging`: https://code.google.com/p/django-tagging/
 .. _`BeautifulSoup`: http://www.crummy.com/software/BeautifulSoup/
