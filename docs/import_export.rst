@@ -65,7 +65,7 @@ From Feed to Zinnia
 ===================
 
 If you don't have the possibility to export your posts but have a RSS or Atom
-feed on your weblog, Zinnia can import it. This command is the most generic
+feed on your Weblog, Zinnia can import it. This command is the most generic
 way to import content into Zinnia. Simply execute this command: ::
 
   $ python manage.py feed2zinnia http://url.of/the/feed

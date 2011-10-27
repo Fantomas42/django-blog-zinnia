@@ -49,7 +49,7 @@ Update Zinnia's code
 We are now ready to upgrade Zinnia. If you want to use the latest stable
 version use :program:`easy_install` with this command: ::
 
-  $ easy_install -U zinnia
+  $ easy_install -U django-blog-zinnia
 
 or if you prefer to upgrade from the development release, use
 :program:`pip` like that: ::
@@ -74,9 +74,9 @@ Check list
 ==========
 
 In order to finish the upgrade process, we must check if everything works
-fine by browsing the website.
+fine by browsing the Web site.
 
 By experience, problems mainly come from customized templates,
-because of changes in the url reverse functions.
+because of changes in the URL reverse functions.
 
 .. _`South`: http://south.aeracode.org/

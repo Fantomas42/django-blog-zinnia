@@ -11,11 +11,11 @@ or change its behavior. It allows Zinnia to be a really generic
 and reusable application.
 
 Imagine that I find Zinnia really great, but that is misses some fields
-or features to be the blog app that I need for my django project.
+or features to be the blog app that I need for my Django project.
 For example I need to add a custom field linking to an image gallery,
 2 solutions:
 
-* I search for another django blogging app fitting my needs.
+* I search for another Django blogging app fitting my needs.
 * I make a monkey patch, but I won't be able to upgrade to future releases.
 
 These 2 solutions are really bad, that's why Zinnia provides

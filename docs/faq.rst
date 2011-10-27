@@ -163,4 +163,4 @@ model like described in :doc:`extending_entry_model`.
 .. _`MarkDown`: http://daringfireball.net/projects/markdown/
 .. _`Textile`: http://redcloth.org/hobix.com/textile/
 .. _`reStructuredText`: http://docutils.sourceforge.net/rst.html
-.. _`sorl.thumbnail`: http://code.google.com/p/sorl-thumbnail/
+.. _`sorl.thumbnail`: http://thumbnail.sorl.net/

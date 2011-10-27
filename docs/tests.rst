@@ -30,7 +30,7 @@ Zinnia, the tests are run under `nose`_ by launching this command: ::
 
   $ ./bin/test
 
-But the tests can also be launched within a django project with the default
+But the tests can also be launched within a Django project with the default
 test runner: ::
 
   $ django-admin.py test zinnia --settings=zinnia.testsettings
@@ -51,7 +51,7 @@ I know that a coverage percent does not represent the quality of the tests,
 but maintaining or increasing this percentage ensures the quality of
 Zinnia and his future evolutions.
 
-You can check the actual coverage percent at this url:
+You can check the actual coverage percent at this URL:
 
 http://django-blog-zinnia.com/documentation/coverage/
 

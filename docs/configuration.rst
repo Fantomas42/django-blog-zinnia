@@ -10,7 +10,7 @@ Sitemaps
 .. module:: zinnia.sitemaps
 
 One of the cool features of Django is the sitemap application, so if you
-want to fill your website's sitemap with the entries of your blog, follow
+want to fill your Web site's sitemap with the entries of your blog, follow
 these steps.
 
 * Register :mod:`django.contrib.sitemaps` in the :setting:`INSTALLED_APPS` section.
@@ -41,7 +41,7 @@ Akismet Anti-Spam
 .. module:: zinnia.spam_checker.backends.automattic
 
 If you want to benefit of the Akismet spam protection on your comments,
-it's possible to do it by installing the `akismet`_ python module, and add
+it's possible to do it by installing the `akismet`_ Python module, and add
 this setting: ::
 
   ZINNIA_SPAM_CHECKER_BACKENDS = ('zinnia.spam_checker.backends.automattic',)
@@ -63,7 +63,7 @@ TypePad Anti-Spam
 
 It's also possible to benefit of the `TypePad AntiSpam`_ service to fight
 the spam. Like the Akismet protection you need to install the `akismet`_
-python module.
+Python module.
 
 The register the TypePad AntiSpam protection with this setting: ::
 
@@ -120,7 +120,7 @@ follow this excellent tutorial at:
 http://jmillerinc.com/2010/05/31/twitter-from-the-command-line-in-python-using-oauth/
 
 Now in the admin, you can post an update containing your
-entry's title and the shortened url of your entry.
+entry's title and the shortened URL of your entry.
 
 .. _zinnia-django-cms:
 
@@ -184,7 +184,7 @@ XML-RPC
 
 .. module:: zinnia.xmlrpc
 
-Zinnia provides few webservices via XML-RPC, but before using it,
+Zinnia provides few Webservices via XML-RPC, but before using it,
 you need to install `django-xmlrpc`_.
 
 Then register :mod:`django_xmlrpc` in your :setting:`INSTALLED_APPS`
@@ -196,7 +196,7 @@ Now add these lines in your project's settings. ::
   XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
 
 :data:`ZINNIA_XMLRPC_METHODS` is a simple list of tuples containing all
-the webservices embedded in Zinnia.
+the Webservices embedded in Zinnia.
 
 If you only want to use the Pingback service import
 :data:`ZINNIA_XMLRPC_PINGBACK`, or if you want you just want to enable the
@@ -204,7 +204,7 @@ If you only want to use the Pingback service import
 
 You can also use your own mixins.
 
-Finally we need to register the url of the XML-RPC server.
+Finally we need to register the URL of the XML-RPC server.
 Insert something like this in your project's urls.py: ::
 
   url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),

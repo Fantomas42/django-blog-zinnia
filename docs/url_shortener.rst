@@ -11,7 +11,7 @@ transfering long URLs.
 
 And so many URL shortening services exist, each with his own features.
 
-Originally Zinnia provided a only way to generate short urls for your
+Originally Zinnia provided a only way to generate short URLs for your
 entries, and you needed to install :ref:`django-bitly<zinnia-bitly>`.
 
 One way it's not bad, but it's not enough.
@@ -37,7 +37,7 @@ Writing your own URL shortener backend
 Writing a backend for using your custom URL shortener is simple as
 possible, you only needs to follows 4 rules.
 
-#. In a new python file write a function named **backend** taking an
+#. In a new Python file write a function named **backend** taking an
    :class:`~zinnia.models.Entry` instance in parameters.
 
 #. The **backend** function should returns an URL including the protocol

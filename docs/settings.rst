@@ -1,18 +1,31 @@
+================
 List of settings
 ================
 
+.. module:: zinnia.settings
+
 Zinnia has a lot of parameters to configure the application accordingly to
-your needs.
+your needs. Knowing this list of settings can save you a lot of time.
 
-All settings described here can be found in **zinnia/settings.py**.
+Here's a full list of all available settings, and their default values.
 
------
+All settings described here can be found in :file:`zinnia/settings.py`.
+
+.. contents::
+    :local:
+    :depth: 1
+
+.. _settings-entry:
+
 Entry
------
+=====
+
+.. setting:: ZINNIA_ENTRY_TEMPLATES
 
 ZINNIA_ENTRY_TEMPLATES
 ----------------------
-**Default value:** ``()``
+
+Default value: ``()`` (Empty tuple)
 
 List of tuple for extending the list of templates availables for
 rendering the entry.
@@ -21,7 +34,7 @@ ZINNIA_ENTRY_BASE_MODEL
 -----------------------
 **Default value:** ``''``
 
-String defining the base Model path for the Entry model. See
+String defining the base model path for the Entry model. See
 :doc:`extending_entry_model` for more informations.
 
 ZINNIA_UPLOAD_TO
@@ -30,9 +43,10 @@ ZINNIA_UPLOAD_TO
 
 String setting that tells Zinnia where to upload entries' images.
 
--------
+.. _settings-edition:
+
 Edition
--------
+=======
 
 ZINNIA_MARKUP_LANGUAGE
 ----------------------
@@ -55,9 +69,10 @@ Textile or reStructuredText are used, the value will be 'markitup'.``
 Used for determining the WYSIWYG editor for editing an entry.
 Can also be used for disabling the WYSIWYG functionnality.
 
------
+.. _settings-views:
+
 Views
------
+=====
 
 ZINNIA_PAGINATION
 -----------------
@@ -79,9 +94,10 @@ ZINNIA_ALLOW_FUTURE
 
 Used for allowing archives views in the future.
 
------
+.. _settings-feeds:
+
 Feeds
------
+=====
 
 ZINNIA_FEEDS_FORMAT
 -------------------
@@ -96,9 +112,10 @@ ZINNIA_FEEDS_MAX_ITEMS
 
 Integer used to define the maximum items provided in the syndication feeds.
 
-----
+.. _settings-urls:
+
 URLs
-----
+====
 
 ZINNIA_PROTOCOL
 ---------------
@@ -110,11 +127,12 @@ ZINNIA_MEDIA_URL
 ----------------
 **Default value:** ``os.path.join(settings.MEDIA_URL, 'zinnia/')``
 
-String of the url that handles the media files of Zinnia.
+String of the URL that handles the media files of Zinnia.
 
-------------------
+.. _settings-comments:
+
 Comment moderation
-------------------
+==================
 
 ZINNIA_AUTO_MODERATE_COMMENTS
 -----------------------------
@@ -156,9 +174,10 @@ ZINNIA_SPAM_CHECKER_BACKENDS
 
 List of strings representing the module path to a spam checker backend.
 
--------
+.. _settings-pinging:
+
 Pinging
--------
+=======
 
 ZINNIA_PING_DIRECTORIES
 -----------------------
@@ -170,7 +189,7 @@ ZINNIA_PING_EXTERNAL_URLS
 -------------------------
 **Default value:** ``True``
 
-Boolean setting for telling if you want to ping external urls when saving
+Boolean setting for telling if you want to ping external URLs when saving
 an entry.
 
 ZINNIA_SAVE_PING_DIRECTORIES
@@ -186,9 +205,10 @@ ZINNIA_PINGBACK_CONTENT_LENGTH
 
 Size of the excerpt generated on pingback.
 
-----------
+.. _settings-similarity:
+
 Similarity
-----------
+==========
 
 ZINNIA_F_MIN
 ------------
@@ -202,9 +222,10 @@ ZINNIA_F_MAX
 
 Float setting of the minimal word frequency for similar entries.
 
--------------
+.. _settings-misc:
+
 Miscellaneous
--------------
+=============
 
 ZINNIA_COPYRIGHT
 ----------------
@@ -223,7 +244,7 @@ ZINNIA_URL_SHORTENER_BACKEND
 ----------------------------
 **Default value:** ``'zinnia.url_shortener.backends.default'``
 
-String representing the module path to the url shortener backend.
+String representing the module path to the URL shortener backend.
 
 ZINNIA_USE_TWITTER
 ------------------
@@ -231,11 +252,12 @@ ZINNIA_USE_TWITTER
 
 Boolean telling if Zinnia can use Twitter.
 
----
-CMS
----
+.. _settings-cms:
 
-All the settings related to the CMS can be found in **zinnia/plugins/settings.py**.
+CMS
+===
+
+All the settings related to the CMS can be found in :file:`zinnia/plugins/settings.py`.
 
 ZINNIA_APP_MENUS
 ----------------

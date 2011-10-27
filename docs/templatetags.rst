@@ -1,3 +1,4 @@
+=============
 Template Tags
 =============
 
@@ -6,7 +7,7 @@ Template Tags
 .. highlightlang:: html+django
 
 Zinnia provides several template tags based on *inclusion_tag* system to
-create some **widgets** in your website's templates.
+create some **widgets** in your Web site's templates.
 
 To use any of the following template tags you need to load them first at
 the top of your template: ::
@@ -14,7 +15,7 @@ the top of your template: ::
   {% load zinnia_tags %}
 
 get_recent_entries
-------------------
+==================
 
 Display the latest entries.
 
@@ -27,7 +28,7 @@ Examples: ::
   {% get_recent_entries 3 "custom_template.html" %}
 
 get_featured_entries
---------------------
+====================
 
 Display the featured entries.
 
@@ -40,7 +41,7 @@ Examples: ::
   {% get_featured_entries 3 "custom_template.html" %}
 
 get_random_entries
-------------------
+==================
 
 Display random entries.
 
@@ -53,7 +54,7 @@ Examples: ::
   {% get_random_entries 3 "custom_template.html" %}
 
 get_popular_entries
--------------------
+===================
 
 Display popular entries.
 
@@ -66,7 +67,7 @@ Examples: ::
   {% get_popular_entries 3 "custom_template.html" %}
 
 get_similar_entries
--------------------
+===================
 
 Display entries similar to an existing entry.
 
@@ -79,7 +80,7 @@ Examples: ::
   {% get_similar_entries 3 "custom_template.html" %}
 
 get_calendar_entries
---------------------
+====================
 
 Display an HTML calendar with date of publications.
 
@@ -98,7 +99,7 @@ Examples: ::
   {% get_calendar_entries 2011 4 "custom_template.html" %}
 
 get_archives_entries
---------------------
+====================
 
 Display the archives by month.
 
@@ -110,7 +111,7 @@ Examples: ::
   {% get_archives_entries "custom_template.html" %}
 
 get_archives_entries_tree
--------------------------
+=========================
 
 Display all the archives as a tree.
 
@@ -122,7 +123,7 @@ Examples: ::
   {% get_archives_entries_tree "custom_template.html" %}
 
 get_authors
------------
+===========
 
 Display all the published authors.
 
@@ -134,7 +135,7 @@ Examples: ::
   {% get_authors "custom_template.html" %}
 
 get_categories
---------------
+==============
 
 Display all the categories available.
 
@@ -146,7 +147,7 @@ Examples: ::
   {% get_categories "custom_template.html" %}
 
 get_tags
---------
+========
 
 Store in a context variable a queryset of all the published tags.
 
@@ -155,7 +156,7 @@ Example: ::
   {% get_tags as entry_tags %}
 
 get_tag_cloud
--------------
+=============
 
 Display a cloud of published tags.
 
@@ -168,7 +169,7 @@ Examples: ::
   {% get_tag_cloud 9 "custom_template.html" %}
 
 get_recent_comments
--------------------
+===================
 
 Display the latest comments.
 
@@ -181,7 +182,7 @@ Examples: ::
   {% get_recent_comments 3 "custom_template.html" %}
 
 get_recent_linkbacks
---------------------
+====================
 
 Display the latest linkbacks.
 
@@ -194,7 +195,7 @@ Examples: ::
   {% get_recent_linkbacks 3 "custom_template.html" %}
 
 zinnia_pagination
------------------
+=================
 
 Display a Digg-like pagination for long list of pages.
 
@@ -208,7 +209,7 @@ Examples: ::
   {% zinnia_pagination page_obj 2 2 3 3 "custom_template.html" %}
 
 zinnia_breadcrumbs
-------------------
+==================
 
 Display the breadcrumbs for the pages handled by Zinnia.
 
@@ -221,7 +222,7 @@ Examples: ::
   {% zinnia_breadcrumbs ">" "News" "custom_template.html" %}
 
 get_gravatar
-------------
+============
 
 Display the `Gravatar
 <http://gravater.com>`_ image associated to an email, useful for comments.

@@ -34,7 +34,7 @@ Writing your own spam checker backend
 Writing a backend for using a custom spam checker is simple as
 possible, you only needs to follows 4 rules.
 
-#. In a new python file write a function named **backend** taking in
+#. In a new Python file write a function named **backend** taking in
    parameter : ``content`` the text to verify, ``content_object`` the object
    related to the text and ``request`` the current request.
 

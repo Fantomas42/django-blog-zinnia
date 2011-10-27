@@ -8,7 +8,7 @@ To increase the speed of the development process a `buildout`_ script is
 provided to properly initialize the project for anybody who wants to
 contribute to the project.
 
-Buildout is a developer oriented tool designed for workings with python
+Buildout is a developer oriented tool designed for workings with Python
 eggs, so can be used for installing egg-based scripts for personal use.
 
 One of the major force of buildout is that is **repeatable**, it should be
@@ -56,7 +56,7 @@ Running the buildout
 ====================
 
 Before running the buildout script we will clone the main development
-repository of django-blog-zinnia, create a virtual python environment to
+repository of django-blog-zinnia, create a virtual Python environment to
 cloisonate the installation of the required librairies,
 then bootstrap the buildout script to finally execute it.
 
