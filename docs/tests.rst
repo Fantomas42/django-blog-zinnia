@@ -35,6 +35,15 @@ test runner: ::
 
   $ django-admin.py test zinnia --settings=zinnia.testsettings
 
+Using the ``./bin/test`` script is usefull when you develop because the tests
+are calibrated to run fast, but testing Zinnia within a Django project even
+if it's slow, can prevent some integration issues.
+
+If you want to make some speed optimizations or compare with your tests
+results, you can check the actual execution time of the tests at this URL:
+
+http://django-blog-zinnia.com/documentation/xunit/
+
 .. _coverage:
 
 Coverage
