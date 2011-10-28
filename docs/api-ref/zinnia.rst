@@ -1,5 +1,7 @@
-zinnia Package
-==============
+Zinnia API
+==========
+
+.. contents::
 
 :mod:`zinnia` Package
 ---------------------

@@ -64,11 +64,3 @@ plugins Package
     :members:
     :undoc-members:
     :show-inheritance:
-
-Subpackages
------------
-
-.. toctree::
-
-    zinnia.plugins.migrations
-

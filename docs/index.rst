@@ -54,7 +54,7 @@ References
 
    settings
    templatetags
-   api-ref/modules
+   api-ref/zinnia
 
 Notes
 -----
