@@ -2,9 +2,9 @@
 Django Blog Zinnia
 ==================
 
-Simple yet powerful application for managing a blog within your Django website.
+Simple yet powerful application for managing a blog within your Django Web site.
 
-Zinnia has been made for publishing weblog entries and designed to do it well.
+Zinnia has been made for publishing Weblog entries and designed to do it well.
 
 Basically any feature that can be provided by another reusable app has been
 left out.
