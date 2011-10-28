@@ -22,6 +22,8 @@ first at the top of your template: ::
 
   {% load zinnia_tags %}
 
+.. module:: zinnia.templatetags.zinnia_tags
+
 .. templatetag:: get_recent_entries
 
 get_recent_entries
@@ -29,9 +31,9 @@ get_recent_entries
 
 Display the latest entries.
 
-**Prototype:** ``get_recent_entries(number=5, template="zinnia/tags/recent_entries.html")``
+.. autofunction:: get_recent_entries
 
-Examples: ::
+Usage examples: ::
 
   {% get_recent_entries %}
   {% get_recent_entries 3 %}
@@ -44,9 +46,9 @@ get_featured_entries
 
 Display the featured entries.
 
-**Prototype:** ``get_featured_entries(number=5, template="zinnia/tags/featured_entries.html")``
+.. autofunction:: get_featured_entries
 
-Examples: ::
+Usage examples: ::
 
   {% get_featured_entries %}
   {% get_featured_entries 3 %}
@@ -59,9 +61,9 @@ get_random_entries
 
 Display random entries.
 
-**Prototype:** ``get_random_entries(number=5, template="zinnia/tags/random_entries.html")``
+.. autofunction:: get_random_entries
 
-Examples: ::
+Usage examples: ::
 
   {% get_random_entries %}
   {% get_random_entries 3 %}
@@ -74,9 +76,9 @@ get_popular_entries
 
 Display popular entries.
 
-**Prototype:** ``get_popular_entries(number=5, template="zinnia/tags/popular_entries.html")``
+.. autofunction:: get_popular_entries
 
-Examples: ::
+Usage examples: ::
 
   {% get_popular_entries %}
   {% get_popular_entries 3 %}
@@ -89,9 +91,9 @@ get_similar_entries
 
 Display entries similar to an existing entry.
 
-**Prototype:** ``get_similar_entries(number=5, template="zinnia/tags/similar_entries.html")``
+.. autofunction:: get_similar_entries
 
-Examples: ::
+Usage examples: ::
 
   {% get_similar_entries %}
   {% get_similar_entries 3 %}
@@ -110,9 +112,9 @@ this order : ``(month, day, object.creation_date)``.
 
 If no one of these variables is found, the current month will be displayed.
 
-**Prototype:** ``get_calendar_entries(year=auto, month=auto, template="zinnia/tags/calendar.html")``
+.. autofunction:: get_calendar_entries
 
-Examples: ::
+Usage examples: ::
 
   {% get_calendar_entries %}
   {% get_calendar_entries 2011 4 %}
@@ -125,9 +127,9 @@ get_archives_entries
 
 Display the archives by month.
 
-**Prototype:** ``get_archives_entries(template="zinnia/tags/archives_entries.html")``
+.. autofunction:: get_archives_entries
 
-Examples: ::
+Usage examples: ::
 
   {% get_archives_entries %}
   {% get_archives_entries "custom_template.html" %}
@@ -139,9 +141,9 @@ get_archives_entries_tree
 
 Display all the archives as a tree.
 
-**Prototype:** ``get_archives_entries_tree(template="zinnia/tags/archives_entries_tree.html")``
+.. autofunction::  get_archives_entries_tree
 
-Examples: ::
+Usage examples: ::
 
   {% get_archives_entries_tree %}
   {% get_archives_entries_tree "custom_template.html" %}
@@ -153,9 +155,9 @@ get_authors
 
 Display all the published authors.
 
-**Prototype:** ``get_authors(template="zinnia/tags/authors.html")``
+.. autofunction:: get_authors
 
-Examples: ::
+Usage examples: ::
 
   {% get_authors %}
   {% get_authors "custom_template.html" %}
@@ -167,9 +169,9 @@ get_categories
 
 Display all the categories available.
 
-**Prototype:** ``get_categories(template="zinnia/tags/categories.html")``
+.. autofunction:: get_categories
 
-Examples: ::
+Usage examples: ::
 
   {% get_categories %}
   {% get_categories "custom_template.html" %}
@@ -181,7 +183,9 @@ get_tags
 
 Store in a context variable a queryset of all the published tags.
 
-Example: ::
+.. autofunction:: get_tags
+
+Usage example: ::
 
   {% get_tags as entry_tags %}
 
@@ -192,9 +196,9 @@ get_tag_cloud
 
 Display a cloud of published tags.
 
-**Prototype:** ``get_tag_cloud(steps=6, template="zinnia/tags/tag_cloud.html")``
+.. autofunction:: get_tag_cloud
 
-Examples: ::
+Usage examples: ::
 
   {% get_tag_cloud %}
   {% get_tag_cloud 9 %}
@@ -207,9 +211,9 @@ get_recent_comments
 
 Display the latest comments.
 
-**Prototype:** ``get_recent_comments(number=5, template="zinnia/tags/recent_comments.html")``
+.. autofunction:: get_recent_comments
 
-Examples: ::
+Usage examples: ::
 
   {% get_recent_comments %}
   {% get_recent_comments 3 %}
@@ -222,9 +226,9 @@ get_recent_linkbacks
 
 Display the latest linkbacks.
 
-**Prototype:** ``get_recent_linkbacks(number=5, template="zinnia/tags/recent_linkbacks.html")``
+.. autofunction:: get_recent_linkbacks
 
-Examples: ::
+Usage examples: ::
 
   {% get_recent_linkbacks %}
   {% get_recent_linkbacks 3 %}
@@ -237,9 +241,9 @@ zinnia_pagination
 
 Display a Digg-like pagination for long list of pages.
 
-**Prototype:** ``zinnia_pagination(page, begin_pages=3, end_pages=3, before_pages=2, after_pages=2, template="zinnia/tags/pagination.html")``
+.. autofunction:: zinnia_pagination
 
-Examples: ::
+Usage examples: ::
 
   {% zinnia_pagination page_obj %}
   {% zinnia_pagination page_obj 2 2 %}
@@ -253,9 +257,9 @@ zinnia_breadcrumbs
 
 Display the breadcrumbs for the pages handled by Zinnia.
 
-**Prototype:** ``zinnia_breadcrumbs(separator="/", root_name="Blog", template="zinnia/tags/breadcrumbs.html")``
+.. autofunction:: zinnia_breadcrumbs
 
-Examples: ::
+Usage examples: ::
 
   {% zinnia_breadcrumbs %}
   {% zinnia_breadcrumbs ">" "News" %}
@@ -269,9 +273,9 @@ get_gravatar
 Display the `Gravatar
 <http://gravater.com>`_ image associated to an email, useful for comments.
 
-**Prototype:** ``get_gravatar(email, size=80, rating='g', default=None)``
+.. autofunction:: get_gravatar
 
-Examples: ::
+Usage examples: ::
 
   {% get_gravatar user.email %}
   {% get_gravatar user.email 50 %}
