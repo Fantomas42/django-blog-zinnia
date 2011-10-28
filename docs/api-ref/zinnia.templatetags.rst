@@ -32,12 +32,3 @@ templatetags Package
     :members:
     :undoc-members:
     :show-inheritance:
-
-:mod:`zinnia_tags` Module
--------------------------
-
-.. automodule:: zinnia.templatetags.zinnia_tags
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
