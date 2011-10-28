@@ -54,6 +54,7 @@ References
 
    settings
    templatetags
+   api-ref/modules
 
 Notes
 -----
