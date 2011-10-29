@@ -1,5 +1,11 @@
-Welcome to Django-Blog-Zinnia's documentation!
-==============================================
+===================================
+Django-Blog-Zinnia's documentation!
+===================================
+
+Welcome to the version |version| of the documentation.
+
+You can also find the differents editions of the
+`documentation online at readthedocs.org`_.
 
 .. toctree::
 
@@ -36,8 +42,8 @@ Development
    :numbered:
 
    contribution
-   tests
    buildout
+   tests
 
 References
 ----------
@@ -48,6 +54,7 @@ References
 
    settings
    templatetags
+   api-ref/zinnia
 
 Notes
 -----
@@ -64,11 +71,18 @@ Notes
 Related
 -------
 
-* `Zinnia's API <http://django-blog-zinnia.com/docs/api/>`_
-* `Code coverage <http://django-blog-zinnia.com/documentation/coverage/>`_
+* `Zinnia's API`_
+* `Code coverage`_
 
 Indices and tables
-==================
+------------------
 
+If you can’t find the information you’re looking for, have a look at the
+index or try to find it using the search function:
+
+* :ref:`genindex`
 * :ref:`search`
 
+.. _`documentation online at readthedocs.org`: http://django-blog-zinnia.readthedocs.org/
+.. _`Zinnia's API`: http://django-blog-zinnia.com/docs/api/
+.. _`Code coverage`: http://django-blog-zinnia.com/documentation/coverage/

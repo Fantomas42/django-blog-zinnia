@@ -37,7 +37,7 @@ CHANGELOG
 
 * Using signals
 * Trackback support
-* Ping external urls
+* Ping external URLs
 * Private posts
 * Hierarchical categories
 * TinyMCE integration

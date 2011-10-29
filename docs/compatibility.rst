@@ -1,3 +1,4 @@
+=============
 Compatibility
 =============
 
@@ -9,20 +10,35 @@ Predicting the future is a good thing, because it's coming soon.
 Actually Zinnia is designed to handle the 1.3.x version and will reach the
 release 1.5 easily without major changes.
 
-http://docs.djangoproject.com/en/dev/internals/deprecation/
+https://docs.djangoproject.com/en/dev/internals/deprecation/
 
-If you are running on the 1.1.x versions you can also use Zinnia
-by applying the patch located in
-**patches/compatibility_django_1.1.patch**.
+But the evolution of Django causes some backward incompatible changes, so
+for the developers who have to maintain a project with an old version of
+Django, it can be difficult  to find which version of Zinnia to choose.
 
-But the patch is not 100% efficient for 1 thing.
+.. _zinnia-django-compatibility:
 
-The feeds API provided by the django.contrib.syndication in the 1.1
-versions is deprecated and the Feed classes provided by has been migrated
-to the new API. This migration is actually incompatible with the 1.1
-versions.
+Compatibility with Django
+=========================
 
-The patch only avoid the generation of errors when the tests are runned.
+Here a list establishing the compatibility between Zinnia and Django:
 
-So if someone find a good solution to this problem, the patch will be
-integrated in the development branch.
+.. versionchanged:: 0.10
+
+Backward incompatibilities with Django v1.2.x due to :
+
+* Migration to the class-based generic views.
+* Intensive usage of :mod:`django.contrib.staticfiles`.
+* Usage of the new features provided in the testrunner.
+
+.. versionchanged:: 0.6
+
+Backward incompatibilities with Django v1.1.x due to :
+
+* Migration of the feeds classes of :mod:`django.contrib.syndication`.
+
+.. versionchanged:: 0.5
+
+Backward incompatibilities with Django v1.0.x due to :
+
+* Intensive usage of the actions in :mod:`django.contrib.admin`.

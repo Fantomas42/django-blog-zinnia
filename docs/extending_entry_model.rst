@@ -1,18 +1,21 @@
+=====================
 Extending Entry model
 =====================
 
-The Entry model bundled in Zinnia can now be extended and customized.
+.. module:: zinnia.models
+
+The :class:`Entry` model bundled in Zinnia can now be extended and customized.
 
 This feature is useful for who wants to add some fields in the model,
 or change its behavior. It allows Zinnia to be a really generic
 and reusable application.
 
 Imagine that I find Zinnia really great, but that is misses some fields
-or features to be the blog app that I need for my django project.
+or features to be the blog app that I need for my Django project.
 For example I need to add a custom field linking to an image gallery,
-2 solutions :
+2 solutions:
 
-* I search for another django blogging app fitting my needs.
+* I search for another Django blogging app fitting my needs.
 * I make a monkey patch, but I won't be able to upgrade to future releases.
 
 These 2 solutions are really bad, that's why Zinnia provides
@@ -20,11 +23,12 @@ a third solution.
 
 * Customizing the model noninvasively with the power of inheritance.
 
-How do we do that ?
+How do we do that?
 
 In fact, simply by creating an abstract model inherited from
-EntryBaseModel, adding fields or/and overriding his methods, and
-registering it with the ``ZINNIA_ENTRY_BASE_MODEL`` setting in your project.
+:class:`EntryBaseModel`, adding fields or/and overriding his methods, and
+registering it with the :setting:`ZINNIA_ENTRY_BASE_MODEL` setting in your
+project.
 
 Example for adding a gallery field. ::
 
@@ -39,8 +43,8 @@ Example for adding a gallery field. ::
       abstract = True
 
 
-Now you register the EntryGallery model like this in your project's
-settings. ::
+Now you register the :class:`EntryGallery` model like this in your
+project's settings. ::
 
   ZINNIA_ENTRY_BASE_MODEL = 'appname.custom_entry.EntryGallery'
 
@@ -64,8 +68,8 @@ Finally extend the entry's admin class to show your custom field. ::
   admin.site.register(Entry, EntryGalleryAdmin)
 
 
-You can see another example in the files ``zinnia/plugins/placeholder.py``
-and ``zinnia/plugins/admin.py``.
+You can see another example in the files :file:`zinnia/plugins/placeholder.py`
+and :file:`zinnia/plugins/admin.py`.
 
 .. note:: You have to respect **4 important rules** :
 
