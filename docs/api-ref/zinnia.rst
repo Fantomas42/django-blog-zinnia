@@ -75,14 +75,6 @@ Zinnia API
     :undoc-members:
     :show-inheritance:
 
-:mod:`settings` Module
-----------------------
-
-.. automodule:: zinnia.settings
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 :mod:`signals` Module
 ---------------------
 
@@ -99,14 +91,6 @@ Zinnia API
     :undoc-members:
     :show-inheritance:
 
-:mod:`testsettings` Module
---------------------------
-
-.. automodule:: zinnia.testsettings
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 Subpackages
 -----------
 
@@ -114,11 +98,9 @@ Subpackages
 
     zinnia.admin
     zinnia.management
-    zinnia.plugins
     zinnia.spam_checker
     zinnia.templatetags
     zinnia.url_shortener
     zinnia.urls
     zinnia.views
     zinnia.xmlrpc
-

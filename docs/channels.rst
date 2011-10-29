@@ -16,8 +16,6 @@ under a well-formatted URL.
 For doing that Zinnia provides a view called
 :func:`~zinnia.views.channels.entry_channel`.
 
-.. autofunction:: entry_channel
-
 If we take our first example, we will do like that for customizing
 the Weblog homepage in our project's urls.py. ::
 

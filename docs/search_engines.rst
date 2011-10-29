@@ -4,9 +4,8 @@ Search Engines
 
 .. module:: zinnia.views.search
 
-Zinnia like almost all blogging systems contains a search engine feature.
-
-.. autofunction:: entry_search
+Zinnia like almost all blogging systems contains a
+:func:`search engine<entry_search>` feature.
 
 But in fact there are 2 search engines, a basic and an advanced, the
 advanced search engine is enabled by default, but if he fails the

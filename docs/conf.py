@@ -18,7 +18,7 @@ from datetime import date
 
 sys.path.append(os.path.abspath('.'))
 sys.path.append(os.path.abspath('..'))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'zinnia.testsettings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'zinniadocs_settings'
 
 import zinnia
 
