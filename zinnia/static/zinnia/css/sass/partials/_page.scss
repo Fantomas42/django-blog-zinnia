@@ -1,0 +1,4 @@
+body#zinnia {
+  @include blueprint-typography(true);
+  @include blueprint-interaction;
+}

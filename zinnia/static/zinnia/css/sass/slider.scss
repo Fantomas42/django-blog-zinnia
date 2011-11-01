@@ -1,0 +1,87 @@
+@import "partials/base";
+
+$max-width: 630px;
+$number-of-items: 5;
+
+$slider-width: 400px;
+$slider-height: 250px;
+$slider-color: $link-color + #444444;
+
+$nav-padding: 3px;
+$info-padding: 5px;
+
+$tab-nav-width: $max-width - $slider-width;
+$tab-nav-height: $slider-height / $number-of-items - 1;
+$tab-nav-img-height: $tab-nav-height - $nav-padding * 2;
+$tab-nav-img-width: $tab-nav-height * $slider-width / $slider-height;
+
+#slider {
+  width: $slider-width;
+  padding-right: $tab-nav-width;
+  position: relative;
+  height: $slider-height overflow hidden;
+  margin-bottom: 5px;
+  ul.ui-tabs-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: $slider-width;
+    width: $tab-nav-width;
+    position: absolute;
+    overflow: hidden;
+    li {
+      a {
+        display: block;
+        height: $tab-nav-height;
+        border-bottom: 1px solid $box-color;
+        img {
+          float: left;
+          border: 0;
+          padding: $nav-padding;
+          width: $tab-nav-img-width;
+          height: $tab-nav-img-height;
+        }
+      }
+      a:hover {
+        text-decoration: none;
+        background: $box-color;
+      }
+      &.ui-tabs-selected {
+        a {
+          background: $slider-color;
+          color: white;
+        }
+      }
+    }
+  }
+  div.ui-tabs-panel {
+    position: relative;
+    width: $slider-width;
+    height: $slider-height;
+    .panel-info {
+      left: 0;
+      bottom: 0;
+      position: absolute;
+      height: 70px;
+      padding: $info-padding;
+      color: white;
+      background: url(../img/trans.png);
+      width: $slider-width - $info-padding * 2;
+    }
+    a {
+      color: $slider-color;
+    }
+    h2 {
+      margin: 0;
+      overflow: hidden;
+    }
+    img {
+      width: $slider-width;
+      height: $slider-height;
+    }
+  }
+  .ui-tabs-hide {
+    display: none;
+  }
+}

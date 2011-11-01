@@ -5,7 +5,7 @@
 #slider ul.ui-tabs-nav li a:hover { text-decoration: none; background: #e9e9f3; }
 #slider ul.ui-tabs-nav li.ui-tabs-selected a { background: #44aadd; color: white; }
 #slider div.ui-tabs-panel { position: relative; width: 400px; height: 250px; }
-#slider div.ui-tabs-panel .panel_info { left: 0; bottom: 0; position: absolute; height: 70px; padding: 5px; color: white; background: url(../img/trans.png); width: 390px; }
+#slider div.ui-tabs-panel .panel-info { left: 0; bottom: 0; position: absolute; height: 70px; padding: 5px; color: white; background: url(../img/trans.png); width: 390px; }
 #slider div.ui-tabs-panel a { color: #44aadd; }
 #slider div.ui-tabs-panel h2 { margin: 0; overflow: hidden; }
 #slider div.ui-tabs-panel img { width: 400px; height: 250px; }

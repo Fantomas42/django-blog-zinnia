@@ -1,0 +1,24 @@
+// Here is where you can define your constants for your application and to configure the blueprint framework.
+// Feel free to delete these if you want keep the defaults:
+
+$blueprint-grid-columns: 24;
+$blueprint-container-size: 950px;
+$blueprint-grid-margin: 10px;
+
+$blueprint-font-size: 12px;
+$blueprint-font-family: unquote("Arial, Helvetica, sans-serif");
+// Use this to calculate the width based on the total width.
+// Or you can set $blueprint-grid-width to a fixed value and unset $blueprint-container-size -- it will be calculated for you.
+$blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $blueprint-grid-columns - $blueprint-grid-margin;
+
+// Colors
+$font-color: #333333;
+$link-color: #006699;
+$box-color: #e9e9f3;
+
+// Derived colors
+$box-font-color: $box-color - #555555;
+$link-hover-color: $link-color - #333333;
+$link-active-color: $link-color;
+$link-visited-color: $link-color;
+$header-color: $link_color + #333333;

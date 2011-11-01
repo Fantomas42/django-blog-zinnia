@@ -1,39 +1,25 @@
-body { text-align: center; }
-* html body legend { margin: 0px -8px 16px 0; padding: 0; }
-html > body p code { *white-space: normal; }
-
-.container { text-align: left; }
-
-sup { vertical-align: text-top; }
-
-sub { vertical-align: text-bottom; }
-
-hr { margin: -8px auto 11px; }
-
-img { -ms-interpolation-mode: bicubic; }
-
-fieldset { padding-top: 0; }
-
-legend { margin-top: -0.2em; margin-bottom: 1em; margin-left: -0.5em; }
-
-fieldset, #IE8#HACK { padding-top: 1.4em; }
-
-legend, #IE8#HACK { margin-top: 0; margin-bottom: 0; }
-
-textarea { overflow: auto; }
-
-label { position: relative; top: -0.25em; }
-
-input.text { margin: 0.5em 0; background-color: white; border: 1px solid #bbbbbb; }
-input.text:focus { border: 1px solid #666666; }
-input.title { margin: 0.5em 0; background-color: white; border: 1px solid #bbbbbb; }
-input.title:focus { border: 1px solid #666666; }
-input.checkbox { position: relative; top: 0.25em; }
-input.radio { position: relative; top: 0.25em; }
-input.button { position: relative; top: 0.25em; }
-
-textarea { margin: 0.5em 0; }
-
-select { margin: 0.5em 0; }
-
-button { position: relative; top: 0.25em; }
+body#zinnia { text-align: center; }
+* html body#zinnia legend { margin: 0px -8px 16px 0; padding: 0; }
+html > body#zinnia p code { *white-space: normal; }
+body#zinnia .container { text-align: left; }
+body#zinnia sup { vertical-align: text-top; }
+body#zinnia sub { vertical-align: text-bottom; }
+body#zinnia hr { margin: -8px auto 11px; }
+body#zinnia img { -ms-interpolation-mode: bicubic; }
+body#zinnia fieldset { padding-top: 0; }
+body#zinnia legend { margin-top: -0.2em; margin-bottom: 1em; margin-left: -0.5em; }
+body#zinnia fieldset, body#zinnia #IE8#HACK { padding-top: 1.4em; }
+body#zinnia legend, body#zinnia #IE8#HACK { margin-top: 0; margin-bottom: 0; }
+body#zinnia textarea { overflow: auto; }
+body#zinnia label { position: relative; top: -0.25em; }
+body#zinnia input.text { margin: 0.5em 0; background-color: white; border: 1px solid #bbbbbb; }
+body#zinnia input.text:focus { border: 1px solid #666666; }
+body#zinnia input.title { margin: 0.5em 0; background-color: white; border: 1px solid #bbbbbb; }
+body#zinnia input.title:focus { border: 1px solid #666666; }
+body#zinnia input.checkbox { position: relative; top: 0.25em; }
+body#zinnia input.radio { position: relative; top: 0.25em; }
+body#zinnia input.button { position: relative; top: 0.25em; }
+body#zinnia textarea { margin: 0.5em 0; }
+body#zinnia select { margin: 0.5em 0; }
+body#zinnia button { position: relative; top: 0.25em; }
+body#zinnia .container { text-align: left; }
