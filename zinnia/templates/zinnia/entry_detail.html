@@ -43,9 +43,11 @@
   {% if next_entry %}
   <div class="entry-next">
     <h3>{% trans "Next entry" %}</h3>
-    <a href="{{ next_entry.get_absolute_url }}" title="{{ next_entry.title }}" rel="next">
-      {{ next_entry.title }}
-    </a>
+    <p>
+      <a href="{{ next_entry.get_absolute_url }}" title="{{ next_entry.title }}" rel="next">
+        {{ next_entry.title }}
+      </a>
+    </p>
   </div>
   {% endif %}
   {% endwith %}
@@ -53,9 +55,11 @@
   {% if previous_entry %}
   <div class="entry-previous">
     <h3>{% trans "Previous entry" %}</h3>
-    <a href="{{ previous_entry.get_absolute_url }}" title="{{ previous_entry.title }}" rel="prev">
-      {{ previous_entry.title }}
-    </a>
+    <p>
+      <a href="{{ previous_entry.get_absolute_url }}" title="{{ previous_entry.title }}" rel="prev">
+        {{ previous_entry.title }}
+      </a>
+    </p>
   </div>
   {% endif %}
   {% endwith %}
