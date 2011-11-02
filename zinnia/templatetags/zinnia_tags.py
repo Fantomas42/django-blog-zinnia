@@ -184,7 +184,9 @@ def get_calendar_entries(context, year=None, month=None,
     return {'template': template,
             'next_month': next_month,
             'previous_month': previous_month,
-            'calendar': calendar.formatmonth(year, month)}
+            'calendar': calendar.formatmonth(
+                year, month, previous_month=previous_month,
+                next_month=next_month)}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
