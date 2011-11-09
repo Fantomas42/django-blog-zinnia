@@ -419,14 +419,12 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['breadcrumbs'][0].name, 'Blog')
         self.assertEquals(context['breadcrumbs'][0].url,
                           reverse('zinnia_entry_archive_index'))
-        self.assertEquals(context['separator'], '/')
         self.assertEquals(context['template'], 'zinnia/tags/breadcrumbs.html')
 
         context = zinnia_breadcrumbs(source_context,
-                                     '>', 'Weblog', 'custom_template.html')
+                                     'Weblog', 'custom_template.html')
         self.assertEquals(len(context['breadcrumbs']), 1)
         self.assertEquals(context['breadcrumbs'][0].name, 'Weblog')
-        self.assertEquals(context['separator'], '>')
         self.assertEquals(context['template'], 'custom_template.html')
 
         source_context = Context(
