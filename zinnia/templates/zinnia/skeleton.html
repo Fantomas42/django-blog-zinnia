@@ -23,7 +23,7 @@
     {% block link %}{% endblock %}
     {% block script %}{% endblock %}
   </head>
-  <body id="zinnia">
+  <body class="zinnia">
     <div class="container">
       <div id="header">
 	<ul class="top-navigation">
@@ -48,27 +48,25 @@
 	</blockquote>
 	{% block breadcrumbs %}{% endblock %}
       </div>
-      <div id="body">
-	<div id="content" class="hfeed">
-	  {% block content %}
-	  <h3>The content block need to be overrided!</h3>
-	  {% endblock %}
+      <div id="content" class="hfeed">
+	{% block content %}
+	<h3>The content block need to be overrided!</h3>
+	{% endblock %}
+      </div>
+      <div id="sidebar">
+	<div class="welcome">
+	  <h3>Welcome!</h3>
+	  <p>
+	    This simple skin is the base template of the Zinnia application,
+	    used for displaying the blog quickly.
+          </p>
+          <p>
+	    Feel free to override the <strong>zinnia/base.html</strong>
+            template to <a href="http://django-blog-zinnia.com/documentation/faq/#templates">change the default appearence</a>.
+	  </p>
 	</div>
-	<div id="sidebar">
-	  <div class="welcome">
-	    <h3>Welcome!</h3>
-	    <p>
-	      This simple skin is the base template of the Zinnia application,
-	      used for displaying the blog quickly.
-            </p>
-            <p>
-	      Feel free to override the <strong>zinnia/base.html</strong>
-              template to <a href="http://django-blog-zinnia.com/documentation/faq/#templates">change the default appearence</a>.
-	    </p>
-	  </div>
-	  {% block sidebar %}
-	  {% endblock %}
-	</div>
+	{% block sidebar %}
+	{% endblock %}
       </div>
       <div id="footer">
 	<p>Powered by <a href="http://www.djangoproject.com">Django</a> and <a href="http://github.com/Fantomas42/django-blog-zinnia">Zinnia {{ ZINNIA_VERSION }}</a>.</p>

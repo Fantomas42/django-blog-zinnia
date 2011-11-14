@@ -1,0 +1,21 @@
+@mixin delimited-list($separator: ", ") {
+  margin: 0;
+  list-style-type: none;
+  li {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    &:after {
+      content: $separator;
+    }
+    &:last-child {
+      &:after {
+        content: "";
+      }
+    }
+    &.last {
+      &:after {
+        content: ""; }
+    }
+  }
+}

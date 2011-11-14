@@ -1,0 +1,54 @@
+// TODO
+@mixin strong-icon($icon) {
+  strong {
+    padding-left: 1.5em;
+    background: transparent url($icon) no-repeat scroll;
+  }
+}
+
+.hentry {
+  margin-bottom: 1em;
+}
+
+h2.entry-title {
+  font-weight: bold;
+  border-bottom: 1px solid $box_color;
+  margin-bottom: 0;
+}
+
+p.entry-info {
+  color: $box-font-color;
+  padding-left: 2em;
+  background: transparent url(../img/category.png) no-repeat scroll 0.5em;
+}
+
+.entry-body {
+  padding: 0 1em;
+  font-size: 1.2em;
+}
+
+.entry-footer p {
+  margin: 0;
+}
+
+.entry-tags {
+  @include strong-icon("../img/tags.png");
+}
+
+.entry-shorturl {
+  @include strong-icon("../img/shorturl.png");
+}
+
+.entry-comments {
+  @include strong-icon("../img/comments.png");
+}
+
+.entry-similar {
+  ul { margin-left: 1em; }
+}
+
+.entry-widgets, #comments, #pingbacks, #trackbacks {
+  padding-top: 1em;
+  border-top: 1px solid $box_color;
+  p { padding-left: 1em; }
+}

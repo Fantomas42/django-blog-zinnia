@@ -1,0 +1,20 @@
+ul.paginator {
+  padding: 0;
+  list-style-type: none;
+  font-size: 1.2em;
+  li {
+    float: left;
+    display: block;
+    margin: 0 0.3em 0 0;
+    padding: 0 0.5em 0 0.5em;
+    border: solid 1px $box-color;
+    &.current {
+      color: white;
+      background-color: $link_color;
+    }
+    &.page:hover {
+      background-color: $link_color;
+      a { color: white; }
+    }
+  }
+}

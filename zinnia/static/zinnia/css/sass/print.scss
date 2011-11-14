@@ -1,7 +1,7 @@
 @import "partials/_base";
 @import "blueprint";
 
-body#zinnia {
+.zinnia {
   @include blueprint-print(true);
   font-size: 2em;
   a, a:link, a:visited, a:focus, a:active, a:hover {

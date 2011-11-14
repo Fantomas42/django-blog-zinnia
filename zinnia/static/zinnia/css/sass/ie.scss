@@ -1,6 +1,6 @@
 @import "blueprint";
 
-body#zinnia {
+.zinnia {
   @include blueprint-ie(true);
   .container {
     text-align: left

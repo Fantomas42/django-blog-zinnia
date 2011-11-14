@@ -1,0 +1,84 @@
+@mixin tag-cloud($base_size:1em) {
+  padding: 0;
+  list-style: none;
+  font-size: $base_size;
+  line-height: 1.2 * $base_size;
+  li {
+    margin: 0;
+    padding: 0;
+    display: inline;
+  }
+  .tag-1 {
+    font-size: $base_size / 2;
+    color: lighten($link-color, 40%);
+  }
+  .tag_2 {
+    font-size: 2 * $base_size / 3;
+    color: lighten($link-color, 20%);
+  }
+  .tag_3 {
+    font-size: 3 * $base_size / 4;
+    color: lighten($link-color, 10%);
+  }
+  .tag_4 {
+    font-size: 4 * $base_size / 3;
+    color: darken($link-color, 10%);
+  }
+  .tag_5 {
+    font-size: 3 * $base_size / 2;
+    color: darken($link-color, 20%);
+  }
+  .tag_6 {
+    font-size: 2 * $base_size;
+    color: darken($link-color, 40%);
+  }
+}
+
+#sidebar {
+  h3 {
+    background-color: $box_color;
+    padding: 0.5em;
+  }
+
+  p { padding-left: 1em; }
+
+  ul, ol {
+    margin-left: 1em;
+  }
+}
+
+#widget-tags {
+  ul { @include tag-cloud(1.4em); }
+}
+
+#widget-populars {
+  a { display: block; }
+}
+
+#widget-search {
+  input { width: auto; }
+}
+
+table.calendar {
+  caption, td, th {
+    text-align: center;
+  }
+  caption {
+    background: none;
+    font-weight: bold;
+    color: $header-color;
+    text-transform: uppercase;
+  }
+  th, tfoot td {
+    background: none repeat scroll 0 0 $box-color;
+    border-bottom: 1px solid darken($box-color, 10%);
+    border-top: 1px solid darken($box-color, 10%);
+  }
+  tfoot td {
+    font-style: normal;
+    text-transform: capitalize;
+  }
+  .entry {
+    font-weight: bold;
+  }
+}
