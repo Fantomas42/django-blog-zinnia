@@ -72,7 +72,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .zinnia .removed { background: #990000; color: white; }
 .zinnia a { text-decoration: none; }
 .zinnia a:hover { text-decoration: underline; }
-.zinnia ul, .zinnia li { list-style-image: url(../img/bullet.png); }
+.zinnia li { list-style-image: url(../img/bullet.png); }
 
 .zinnia .container { width: 950px; margin: 0 auto; overflow: hidden; *zoom: 1; }
 .zinnia #header, .zinnia #footer { display: inline; float: left; margin-right: 10px; width: 950px; }
@@ -88,23 +88,23 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .zinnia form input[type=email], .zinnia form input[type=text], .zinnia form input[type=password] { margin: 0.5em 0; background-color: white; width: 300px; padding: 5px; }
 .zinnia form textarea { margin: 0.5em 0; padding: 5px; width: 450px; height: 300px; }
 .zinnia form select { margin: 0.5em 0; }
-.zinnia form input[type=email], .zinnia form input[type=text], .zinnia form input[type=password], .zinnia form textarea { background-color: #fff; border: 1px solid #e9e9f3; }
+.zinnia form input[type=email], .zinnia form input[type=text], .zinnia form input[type=password], .zinnia form textarea { background-color: white; border: 1px solid #e9e9f3; }
 .zinnia form input[type=email]:focus, .zinnia form input[type=text]:focus, .zinnia form input[type=password]:focus, .zinnia form textarea:focus { border-color: #94949e; }
-.zinnia form ul.errorlist { margin: 0; padding: 0; list-style-type: none; }
-.zinnia form ul.errorlist li { margin: 0px; padding: 0px; display: inline; }
+.zinnia form ul.errorlist { margin: 0; padding: 0; }
+.zinnia form ul.errorlist li { list-style: none; display: inline; }
 
 #header { margin-top: 0.5em; margin-bottom: 1em; border-bottom: 1px solid #e9e9f3; }
 #header h1 { margin-top: 0.5em; margin-bottom: 0; font-size: 4em; font-weight: bold; }
-#header .top-navigation { float: right; margin: 0; list-style-type: none; }
-#header .top-navigation li { margin: 0; padding: 0; display: inline; }
+#header .top-navigation { float: right; }
+#header .top-navigation li { list-style: none; display: inline; }
 #header .top-navigation li:after { content: "|"; }
 #header .top-navigation li:last-child:after { content: ""; }
 #header .top-navigation li.last:after { content: ""; }
 #header .top-navigation .sitemap { background: transparent url("../img/sitemap.png") no-repeat scroll left center; padding-left: 1.5em; }
 #header .top-navigation .feeds { background: transparent url("../img/rss.png") no-repeat scroll left center; padding-left: 1.5em; }
 
-ul.breadcrumbs { margin: 0; list-style-type: none; font-size: 1.2em; background: transparent url(../img/breadcrumb.png) no-repeat scroll left center; }
-ul.breadcrumbs li { margin: 0; padding: 0; display: inline; }
+ul.breadcrumbs { margin: 0; font-size: 1.2em; background: transparent url(../img/breadcrumb.png) no-repeat scroll left center; }
+ul.breadcrumbs li { list-style: none; display: inline; }
 ul.breadcrumbs li:after { content: "/"; }
 ul.breadcrumbs li:last-child:after { content: ""; }
 ul.breadcrumbs li.last:after { content: ""; }
@@ -113,8 +113,8 @@ ul.breadcrumbs li.last:after { content: ""; }
 #sidebar p { padding-left: 1em; }
 #sidebar ul, #sidebar ol { margin-left: 1em; }
 
-#widget-tags ul { padding: 0; list-style: none; font-size: 1.4em; line-height: 1.68em; }
-#widget-tags ul li { margin: 0; padding: 0; display: inline; }
+#widget-tags ul { padding: 0; font-size: 1.4em; line-height: 1.68em; }
+#widget-tags ul li { list-style: none; display: inline; }
 #widget-tags ul .tag-1 { font-size: 0.7em; color: #66ccff; }
 #widget-tags ul .tag_2 { font-size: 0.933em; color: #00aaff; }
 #widget-tags ul .tag_3 { font-size: 1.05em; color: #0088cc; }
@@ -125,6 +125,8 @@ ul.breadcrumbs li.last:after { content: ""; }
 #widget-populars a { display: block; }
 
 #widget-search input { width: auto; }
+
+#widget-archives { text-transform: capitalize; }
 
 table.calendar caption, table.calendar td, table.calendar th { text-align: center; }
 table.calendar caption { background: none; font-weight: bold; color: #3399cc; text-transform: uppercase; }
@@ -148,20 +150,17 @@ p.entry-info { color: #94949e; padding-left: 2em; background: transparent url(..
 
 .entry-comments strong { padding-left: 1.5em; background: transparent url("../img/comments.png") no-repeat scroll; }
 
-.entry-similar ul { margin-left: 1em; }
+.entry-widgets p, .entry-widgets ul { padding-left: 1em; }
 
 .entry-widgets, #comments, #pingbacks, #trackbacks { padding-top: 1em; border-top: 1px solid #e9e9f3; }
-.entry-widgets p, #comments p, #pingbacks p, #trackbacks p { padding-left: 1em; }
 
-#comments ol, #pingbacks ol, #trackbacks ol { margin: 0; padding: 0; list-style: none; }
-#comments ol li, #pingbacks ol li, #trackbacks ol li { margin: 0; padding: 0; list-style-image: none; list-style-type: none; }
+#comments li, #pingbacks li, #trackbacks li { list-style: none; border: 1px solid #e9e9f3; }
+#comments li.box2, #pingbacks li.box2, #trackbacks li.box2 { border-color: #94949e; background-color: #e9e9f3; }
+#comments li.post-author, #pingbacks li.post-author, #trackbacks li.post-author { color: #94949e; }
+#comments img, #pingbacks img, #trackbacks img { padding: 1em; }
 
-/*
-#comments { img { padding: 1em; }
-}
-*/
-ul.paginator { padding: 0; list-style-type: none; font-size: 1.2em; }
-ul.paginator li { display: inline-block; margin: 0 0.3em 0 0; padding: 0 0.5em 0 0.5em; border: solid 1px #e9e9f3; }
+ul.paginator { padding: 0; font-size: 1.2em; }
+ul.paginator li { display: inline-block; padding: 0 0.5em; margin-right: 0.3em; border: solid 1px #e9e9f3; }
 ul.paginator li.current { color: white; background-color: #006699; }
 ul.paginator li.page:hover { background-color: #006699; }
 ul.paginator li.page:hover a { color: white; }

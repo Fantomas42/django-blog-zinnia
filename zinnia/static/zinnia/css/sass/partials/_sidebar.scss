@@ -1,11 +1,9 @@
 @mixin tag-cloud($base_size:1em) {
   padding: 0;
-  list-style: none;
   font-size: $base_size;
   line-height: 1.2 * $base_size;
   li {
-    margin: 0;
-    padding: 0;
+    list-style: none;
     display: inline;
   }
   .tag-1 {
@@ -57,6 +55,10 @@
 
 #widget-search {
   input { width: auto; }
+}
+
+#widget-archives {
+  text-transform: capitalize;
 }
 
 table.calendar {

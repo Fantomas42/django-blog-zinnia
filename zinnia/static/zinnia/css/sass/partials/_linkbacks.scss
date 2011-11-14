@@ -1,20 +1,17 @@
 #comments, #pingbacks, #trackbacks {
-  ol {
-    margin: 0;
-    padding: 0;
+  li {
     list-style: none;
-    li {
-      margin: 0;
-      padding: 0;
-      list-style-image: none;
-      list-style-type: none;
+    border: 1px solid $box-color;
+    &.box2 {
+      border-color: $box-font-color;
+      background-color: $box-color;
+    }
+    &.post-author {
+      color: $box_font_color
     }
   }
-}
-/*
-#comments {
+
   img {
     padding: 1em;
   }
 }
-*/

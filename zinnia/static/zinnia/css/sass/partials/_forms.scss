@@ -29,7 +29,7 @@
   }
   input[type=email], input[type=text], input[type=password],
   textarea {
-    background-color: #fff;
+    background-color: white;
     border: 1px solid $box-color;
       &:focus {
       border-color: $box-font-color;
@@ -38,10 +38,8 @@
   ul.errorlist {
     margin: 0;
     padding: 0;
-    list-style-type: none;
     li {
-      margin: 0px;
-      padding: 0px;
+      list-style: none;
       display: inline;
     }
   }

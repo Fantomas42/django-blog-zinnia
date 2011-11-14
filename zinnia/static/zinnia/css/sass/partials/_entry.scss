@@ -1,4 +1,3 @@
-// TODO
 @mixin strong-icon($icon) {
   strong {
     padding-left: 1.5em;
@@ -43,12 +42,11 @@ p.entry-info {
   @include strong-icon("../img/comments.png");
 }
 
-.entry-similar {
-  ul { margin-left: 1em; }
+.entry-widgets {
+  p, ul { padding-left: 1em; }
 }
 
 .entry-widgets, #comments, #pingbacks, #trackbacks {
   padding-top: 1em;
   border-top: 1px solid $box_color;
-  p { padding-left: 1em; }
 }

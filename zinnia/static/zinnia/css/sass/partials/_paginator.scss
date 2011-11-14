@@ -1,11 +1,10 @@
 ul.paginator {
   padding: 0;
-  list-style-type: none;
   font-size: 1.2em;
   li {
     display: inline-block;
-    margin: 0 0.3em 0 0;
-    padding: 0 0.5em 0 0.5em;
+    padding: 0 0.5em;
+    margin-right: 0.3em;
     border: solid 1px $box-color;
     &.current {
       color: white;
