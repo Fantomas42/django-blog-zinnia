@@ -8,10 +8,10 @@ ul.paginator {
     border: solid 1px $box-color;
     &.current {
       color: white;
-      background-color: $link_color;
+      background-color: $link-color;
     }
     &.page:hover {
-      background-color: $link_color;
+      background-color: $link-color;
       a { color: white; }
     }
   }

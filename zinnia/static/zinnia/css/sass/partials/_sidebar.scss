@@ -1,40 +1,40 @@
-@mixin tag-cloud($base_size:1em) {
+@mixin tag-cloud($base-size:1em) {
   padding: 0;
-  font-size: $base_size;
-  line-height: 1.2 * $base_size;
+  font-size: $base-size;
+  line-height: 1.2 * $base-size;
   li {
     list-style: none;
     display: inline;
   }
   .tag-1 {
-    font-size: $base_size / 2;
+    font-size: $base-size / 2;
     color: lighten($link-color, 40%);
   }
   .tag_2 {
-    font-size: 2 * $base_size / 3;
+    font-size: 2 * $base-size / 3;
     color: lighten($link-color, 20%);
   }
   .tag_3 {
-    font-size: 3 * $base_size / 4;
+    font-size: 3 * $base-size / 4;
     color: lighten($link-color, 10%);
   }
   .tag_4 {
-    font-size: 4 * $base_size / 3;
+    font-size: 4 * $base-size / 3;
     color: darken($link-color, 10%);
   }
   .tag_5 {
-    font-size: 3 * $base_size / 2;
+    font-size: 3 * $base-size / 2;
     color: darken($link-color, 20%);
   }
   .tag_6 {
-    font-size: 2 * $base_size;
+    font-size: 2 * $base-size;
     color: darken($link-color, 40%);
   }
 }
 
 #sidebar {
   h3 {
-    background-color: $box_color;
+    background-color: $box-color;
     padding: 0.5em;
   }
 

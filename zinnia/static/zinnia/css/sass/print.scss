@@ -1,4 +1,4 @@
-@import "partials/_base";
+@import "partials/base";
 @import "blueprint";
 
 .zinnia {
@@ -6,7 +6,7 @@
   font-size: 2em;
   a, a:link, a:visited, a:focus, a:active, a:hover {
     text-decoration: none;
-    color: $link_color;
+    color: $link-color;
   }
 }
 
