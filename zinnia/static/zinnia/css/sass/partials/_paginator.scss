@@ -3,8 +3,7 @@ ul.paginator {
   list-style-type: none;
   font-size: 1.2em;
   li {
-    float: left;
-    display: block;
+    display: inline-block;
     margin: 0 0.3em 0 0;
     padding: 0 0.5em 0 0.5em;
     border: solid 1px $box-color;

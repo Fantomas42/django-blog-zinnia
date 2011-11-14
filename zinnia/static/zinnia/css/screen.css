@@ -161,7 +161,7 @@ p.entry-info { color: #94949e; padding-left: 2em; background: transparent url(..
 }
 */
 ul.paginator { padding: 0; list-style-type: none; font-size: 1.2em; }
-ul.paginator li { float: left; display: block; margin: 0 0.3em 0 0; padding: 0 0.5em 0 0.5em; border: solid 1px #e9e9f3; }
+ul.paginator li { display: inline-block; margin: 0 0.3em 0 0; padding: 0 0.5em 0 0.5em; border: solid 1px #e9e9f3; }
 ul.paginator li.current { color: white; background-color: #006699; }
 ul.paginator li.page:hover { background-color: #006699; }
 ul.paginator li.page:hover a { color: white; }
