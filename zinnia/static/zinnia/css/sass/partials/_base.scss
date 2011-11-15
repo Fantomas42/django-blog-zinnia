@@ -14,13 +14,13 @@ $blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $b
 // Colors
 $font-color:         #333333;
 
-$link-color:         #0066cc;
+$link-color:         #0066AA;
 $link-hover-color:   lighten($link-color, 20%);
 $link-focus-color:   $link-hover-color;
 $link-active-color:  lighten(adjust-hue($link-color, 75deg), 10%);
 $link-visited-color: $link-color;
 
-$header-color:       $link-color + #333333;
+$header-color:       $link-color + $font-color;
 
 $box-color:          #e9e9f3;
-$box-font-color:     darken($box-color, 30%);
+$border-color:       #dddddd;

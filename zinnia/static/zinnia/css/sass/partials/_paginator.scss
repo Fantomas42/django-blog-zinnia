@@ -6,7 +6,7 @@ ul.paginator {
     display: inline-block;
     padding: 0 0.5em;
     margin-right: 0.3em;
-    border: solid 1px $box-color;
+    border: solid 1px $border-color;
     &.current {
       color: white;
       background-color: $link-color;

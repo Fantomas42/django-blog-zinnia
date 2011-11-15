@@ -3,11 +3,10 @@
     list-style: none;
     border: 1px solid $box-color;
     &.box2 {
-      border-color: $box-font-color;
       background-color: $box-color;
     }
     &.post-author {
-      color: $box-font-color;
+      background-color: $box-color;
     }
   }
 

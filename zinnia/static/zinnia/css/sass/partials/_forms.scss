@@ -4,7 +4,7 @@
     font-weight: bold; }
   fieldset {
     padding: 1.4em;
-    border: 1px solid $box-color;
+    border: 1px solid $border-color;
     margin: 0 0 1.5em 0; }
   legend {
     color: $header-color;
@@ -30,9 +30,9 @@
   input[type=email], input[type=text], input[type=password],
   textarea {
     background-color: white;
-    border: 1px solid $box-color;
+    border: 1px solid $border-color;
       &:focus {
-      border-color: $box-font-color;
+      border-color: darken($border-color, 20%);
       }
   }
   ul.errorlist {
