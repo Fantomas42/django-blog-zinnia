@@ -1,16 +1,32 @@
 #comments, #pingbacks, #trackbacks {
   li {
     list-style: none;
-    border: 1px solid $box-color;
-    &.box2 {
-      background-color: $box-color;
-    }
-    &.post-author {
-      background-color: $box-color;
-    }
+    padding: 1em 1em 0 1em;
+    margin-bottom: 1em;
+    border: 1px solid $border-color;
   }
+}
 
+#comments {
+  li {
+    min-height: 90px;
+  }
   img {
-    padding: 1em;
+    float: left;
+    margin-right: 1em;
+    padding: 0.5em;
+    border: 1px solid $border-color;
+  }
+}
+
+.post-author img {
+  background-color: $box-color;
+}
+
+p {
+  &.comment-info, &.trackback-info, &.pingback-info {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
   }
 }

@@ -90,18 +90,21 @@
   <ol id="comment-list">
     {% for comment in comment_list %}
     <li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %}">
-      <img src="{% get_gravatar comment.email 60 "G" %}" class="gravatar photo" alt="{{ comment.user_name }}"/>
-      <div class="comment-body">
-	<div class="comment-author">
-	  {% if comment.url %}
-	  <a href="{{ comment.url }}" class="fn url">{{ comment.user_name }}</a>
-	  {% else %}
-	  {{ comment.user_name }}
-	  {% endif %}
-	  {% trans "on" %} {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-	</div>
-	{{ comment.comment|linebreaks }}
-      </div>
+      <img src="{% get_gravatar comment.email 60 "G" %}"
+           class="gravatar photo" alt="{{ comment.user_name }}"/>
+      <p class="comment-info">
+	{% if comment.url %}
+	<a href="{{ comment.url }}" rel="external nofollow"
+           class="fn url">{{ comment.user_name }}</a>
+	{% else %}
+	{{ comment.user_name }}
+	{% endif %}
+	{% trans "on" %}
+        <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}Z">
+          {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+        </abbr>
+      </p>
+      {{ comment.comment|linebreaks }}
     </li>
     {% endfor %}
   </ol>
@@ -126,16 +129,18 @@
   {% if pingback_list.count %}
   <ol id="pingback-list">
     {% for pingback in pingback_list %}
-    <li id="pingback_{{ pingback.pk }}" class="pingback {% cycle box1,box2 %}">
-      <div class="pingback-body">
-	<div class="pingback-author">
-	  <a href="{{ pingback.url }}">{{ pingback.user_name }}</a>
-	  {% trans "on" %} {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-	</div>
-	<cite>
-	  {{ pingback.comment }}
-	</cite>
-      </div>
+    <li id="pingback_{{ pingback.pk }}" class="pingback vcard {% cycle box1,box2 %}">
+      <p class="pingback-info">
+	<a href="{{ pingback.url }}" rel="external nofollow"
+           class="fn url org">{{ pingback.user_name }}</a>
+	{% trans "on" %}
+        <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}Z">
+          {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+        </abbr>
+      </p>
+      <p class="pingback-content">
+	{{ pingback.comment }}
+      </p>
     </li>
     {% endfor %}
   </ol>
@@ -157,14 +162,18 @@
   {% if trackback_list.count %}
   <ol id="trackback-list">
     {% for trackback in trackback_list %}
-    <li id="trackback_{{ trackback.pk }}" class="trackback {% cycle box1,box2 %}">
-      <div class="trackback-body">
-	<div class="trackback-author">
-	  <a href="{{ trackback.url }}">{{ trackback.user_name }}</a>
-	  {% trans "on" %} {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-	</div>
+    <li id="trackback_{{ trackback.pk }}" class="trackback vcard {% cycle box1,box2 %}">
+      <p class="trackback-info">
+	<a href="{{ trackback.url }}" rel="external nofollow"
+           class="fn url org">{{ trackback.user_name }}</a>
+	{% trans "on" %}
+        <abbr class="trackback-published" title="{{ trackback.submit_date|date:"c" }}Z">
+          {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+        </abbr>
+      </p>
+      <p class="trackback-content">
 	{{ trackback.comment }}
-      </div>
+      </p>
     </li>
     {% endfor %}
   </ol>

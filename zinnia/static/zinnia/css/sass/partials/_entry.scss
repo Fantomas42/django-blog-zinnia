@@ -40,7 +40,6 @@ p.entry-info {
     border: 1px dashed darken($box-color, 20%);
     p {
       margin: 0;
-      font-size: 1.5em;
     }
   }
   pre {
@@ -75,5 +74,5 @@ p.entry-info {
 
 .entry-widgets, #comments, #pingbacks, #trackbacks {
   padding-top: 1em;
-  border-top: 1px solid $box-color;
+  border-top: 1px solid $border-color;
 }

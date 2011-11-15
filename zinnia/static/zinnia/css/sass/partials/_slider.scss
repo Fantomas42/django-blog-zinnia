@@ -17,6 +17,7 @@ $tab-nav-img-width: $tab-nav-height * $slider-width / $slider-height;
   padding-right: $tab-nav-width;
   position: relative;
   height: $slider-height overflow hidden;
+  margin-bottom: 1em;
   ul.ui-tabs-nav {
     list-style: none;
     padding: 0;
@@ -62,11 +63,9 @@ $tab-nav-img-width: $tab-nav-height * $slider-width / $slider-height;
       height: 70px;
       padding: $info-padding;
       color: white;
+      overflow: hidden;
       background: url(../img/trans.png);
       width: $slider-width - $info-padding * 2;
-    }
-    a {
-      color: $link-color;
     }
     h2 {
       margin: 0;
