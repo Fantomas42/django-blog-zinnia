@@ -92,6 +92,19 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .zinnia form ul.errorlist { margin: 0; padding: 0; }
 .zinnia form ul.errorlist li { list-style: none; display: inline; }
 
+#slider { width: 400px; padding-right: 230px; position: relative; height: 250px overflow hidden; }
+#slider ul.ui-tabs-nav { list-style: none; padding: 0; margin: 0; top: 0; left: 400px; width: 230px; position: absolute; overflow: hidden; }
+#slider ul.ui-tabs-nav li a { display: block; height: 49px; border-bottom: 1px solid #e9e9f3; }
+#slider ul.ui-tabs-nav li a img { float: left; border: 0; padding: 3px; width: 78.4px; height: 43px; }
+#slider ul.ui-tabs-nav li a:hover { text-decoration: none; background: #e9e9f3; }
+#slider ul.ui-tabs-nav li.ui-tabs-selected a { color: white; background: #0066aa; }
+#slider div.ui-tabs-panel { position: relative; width: 400px; height: 250px; }
+#slider div.ui-tabs-panel .panel-info { left: 0; bottom: 0; position: absolute; height: 70px; padding: 5px; color: white; background: url(../img/trans.png); width: 390px; }
+#slider div.ui-tabs-panel a { color: #0066aa; }
+#slider div.ui-tabs-panel h2 { margin: 0; overflow: hidden; }
+#slider div.ui-tabs-panel img { width: 400px; height: 250px; }
+#slider .ui-tabs-hide { display: none; }
+
 #header { margin-top: 0.5em; margin-bottom: 1em; border-bottom: 1px solid #dddddd; }
 #header h1 { margin-top: 0.5em; margin-bottom: 0; font-size: 4em; font-weight: bold; }
 #header .top-navigation { float: right; }
