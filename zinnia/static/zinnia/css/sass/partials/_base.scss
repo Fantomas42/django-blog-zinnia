@@ -12,13 +12,15 @@ $blueprint-font-family: unquote("Arial, Helvetica, sans-serif");
 $blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $blueprint-grid-columns - $blueprint-grid-margin;
 
 // Colors
-$font-color: #333333;
-$link-color: #006699;
-$box-color: #e9e9f3;
+$font-color:         #333333;
 
-// Derived colors
-$box-font-color: $box-color - #555555;
-$link-hover-color: $link-color - #333333;
-$link-active-color: $link-color;
+$link-color:         #0066cc;
+$link-hover-color:   lighten($link-color, 20%);
+$link-focus-color:   $link-hover-color;
+$link-active-color:  lighten(adjust-hue($link-color, 75deg), 10%);
 $link-visited-color: $link-color;
-$header-color: $link-color + #333333;
+
+$header-color:       $link-color + #333333;
+
+$box-color:          #e9e9f3;
+$box-font-color:     darken($box-color, 30%);

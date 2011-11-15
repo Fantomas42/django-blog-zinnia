@@ -42,6 +42,9 @@
 
   ul, ol {
     margin-left: 1em;
+    li {
+      list-style-image: url(../img/bullet.png);
+    }
   }
 }
 

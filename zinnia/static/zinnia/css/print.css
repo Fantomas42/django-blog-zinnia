@@ -12,7 +12,7 @@
 .zinnia .large { font-size: 1.1em; }
 .zinnia .quiet { color: #999999; }
 .zinnia .hide { display: none; }
-.zinnia a, .zinnia a:link, .zinnia a:visited, .zinnia a:focus, .zinnia a:active, .zinnia a:hover { text-decoration: none; color: #006699; }
+.zinnia a, .zinnia a:link, .zinnia a:visited, .zinnia a:focus, .zinnia a:active, .zinnia a:hover { text-decoration: none; color: #0066cc; }
 
 #sidebar, .top-navigation, .comment-form { display: none; }
 

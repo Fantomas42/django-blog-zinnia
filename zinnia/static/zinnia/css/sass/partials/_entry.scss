@@ -24,6 +24,30 @@ p.entry-info {
 .entry-body {
   padding: 0 1em;
   font-size: 1.2em;
+  img {
+    margin: 1.5em;
+    float: left;
+  }
+  pre, blockquote {
+    width: auto;
+    overflow: auto;
+    padding: 1em;
+    clear: none;
+    float: none;
+    background-color: $box-color;
+  }
+  blockquote {
+    border: 1px dashed $box-font-color;
+    p {
+      margin: 0;
+      font-size: 1.5em;
+    }
+  }
+  pre {
+    line-height: 110%;
+    border-top: 1px solid $box-font-color;
+    border-bottom: 1px solid $box-font-color;
+  }
 }
 
 .entry-footer p {
@@ -43,7 +67,10 @@ p.entry-info {
 }
 
 .entry-widgets {
-  p, ul { padding-left: 1em; }
+  p, ul { padding-left: 1.5em; }
+  li {
+    list-style-image: url(../img/bullet.png);
+  }
 }
 
 .entry-widgets, #comments, #pingbacks, #trackbacks {
