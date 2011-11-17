@@ -10,23 +10,23 @@
     font-size: $base-size / 2;
     color: lighten($link-color, 40%);
   }
-  .tag_2 {
+  .tag-2 {
     font-size: 2 * $base-size / 3;
     color: lighten($link-color, 20%);
   }
-  .tag_3 {
+  .tag-3 {
     font-size: 3 * $base-size / 4;
     color: lighten($link-color, 10%);
   }
-  .tag_4 {
+  .tag-4 {
     font-size: 4 * $base-size / 3;
     color: darken($link-color, 10%);
   }
-  .tag_5 {
+  .tag-5 {
     font-size: 3 * $base-size / 2;
     color: darken($link-color, 20%);
   }
-  .tag_6 {
+  .tag-6 {
     font-size: 2 * $base-size;
     color: darken($link-color, 40%);
   }
@@ -42,9 +42,6 @@
 
   ul, ol {
     margin-left: 1em;
-    li {
-      list-style-image: url(../img/bullet.png);
-    }
   }
 }
 

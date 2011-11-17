@@ -35,11 +35,21 @@ p.entry-info {
 }
 
 .entry-body {
-  padding: 0 1em;
+  text-align: justify;
+  padding-right: 0.5em;
   font-size: 1.2em;
   img {
-    margin: 1.5em;
+    &, &.left {
+    margin: 0 1.5em 1.5em 0;
     float: left;
+    }
+    &.right {
+      margin: 0 0 1.5em 1.5em;
+      float: right;
+    }
+  }
+  li {
+    list-style-image: none;
   }
   pre, blockquote {
     width: auto;
@@ -80,9 +90,6 @@ p.entry-info {
 
 .entry-widgets {
   p, ul { padding-left: 1.5em; }
-  li {
-    list-style-image: url(../img/bullet.png);
-  }
 }
 
 .entry-widgets, #comments, #pingbacks, #trackbacks {

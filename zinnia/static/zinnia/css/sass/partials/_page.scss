@@ -6,4 +6,7 @@
     text-decoration: none;
     &:hover { text-decoration: underline; }
   }
+  li {
+    list-style-image: url(../img/bullet.png);
+  }
 }
