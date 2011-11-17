@@ -1,0 +1,28 @@
+@mixin header-icon($icon) {
+  background: transparent url($icon) no-repeat scroll left center;
+  padding-left: 1.5em;
+}
+
+#header {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid $border-color;
+
+  h1 {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+    font-size: 4em;
+    font-weight: bold;
+  }
+
+  .top-navigation {
+    float: right;
+    @include delimited-list("|");
+    .sitemap {
+      @include header-icon("../img/sitemap.png");
+    }
+    .feeds {
+      @include header-icon("../img/rss.png");
+    }
+  }
+}

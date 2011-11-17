@@ -15,7 +15,7 @@
   {% for entry in entries %}
   <div id="entry-slider-{{ forloop.counter }}" class="ui-tabs-panel">
     <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}" />
-    <div class="panel_info">
+    <div class="panel-info">
       <h2>
         <a href="{{ entry.get_absolute_url }}" rel="bookmark">{{ entry.title }}</a>
       </h2>

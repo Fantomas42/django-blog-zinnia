@@ -5,18 +5,14 @@
 
 {% block content %}
   {% if form.errors %}
-  <h2>
-    {% blocktrans count form.errors|length as errors %}Please correct following error.{% plural %}Please correct following errors.{% endblocktrans %}
-  </h2>
+  <h2>{% blocktrans count form.errors|length as errors %}Please correct following error.{% plural %}Please correct following errors.{% endblocktrans %}</h2>
   {% else %}
   <h2>{% trans "Preview of the comment" %}</h2>
-  <ol id="comment-list" class="span-15 last">
-    <li id="comment_preview" class="comment vcard {% cycle box1,box2 %} span-15 last">
-      <div class="span-2">
-	<img src="{% get_gravatar form.cleaned_data.email 60 "G" %}" class="gravatar photo" alt="form.cleaned_data.name" />
-      </div>
-      <div class="comment-body span-13 last">
-	<div class="comment-author span-13 last">
+  <ol id="comment-list">
+    <li id="comment_preview" class="comment vcard {% cycle box1,box2 %}">
+      <img src="{% get_gravatar form.cleaned_data.email 60 "G" %}" class="gravatar photo" alt="form.cleaned_data.name" />
+      <div class="comment-body">
+	<div class="comment-author">
 	  {% if form.cleaned_data.url %}
 	  <a href="{{ form.cleaned_data.url }}" class="fn url">{{ form.cleaned_data.name }}</a>
 	  {% else %}
@@ -24,14 +20,10 @@
 	  {% endif %}
 	  {% trans "on" %} {% now "m/d/Y P" %}
 	</div>
-	<div class="span-13 last">
-	  {{ comment|linebreaks }}
-	</div>
+	{{ comment|linebreaks }}
       </div>
     </li>
   </ol>
   {% endif %}
-  <div class="commentForm span-16 last">
-    {% include "comments/zinnia/entry/form.html" %}
-  </div>
+  {% include "comments/zinnia/entry/form.html" %}
 {% endblock %}

@@ -3,11 +3,6 @@
 
 {% block meta-description %}{% trans "Latest entries" %}{% endblock %}
 
-{% block link %}
-  {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}zinnia/css/slider.css" />
-{% endblock %}
-
 {% block script %}
   {{ block.super }}
   <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.js"></script>

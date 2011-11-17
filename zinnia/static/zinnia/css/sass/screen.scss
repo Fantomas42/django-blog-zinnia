@@ -1,0 +1,19 @@
+// Reset the elements.
+@import "compass/reset";
+// Load configurables variables.
+@import "partials/base";
+// Import all the default blueprint and modules so that we can access their mixins.
+@import "blueprint";
+// Combine the partials into a single screen stylesheet.
+@import "partials/delimited-list";
+@import "partials/page";
+@import "partials/two-cols";
+@import "partials/forms";
+@import "partials/slider";
+@import "partials/header";
+@import "partials/breadcrumbs";
+@import "partials/sidebar";
+@import "partials/entry";
+@import "partials/linkbacks";
+@import "partials/paginator";
+@import "partials/footer";

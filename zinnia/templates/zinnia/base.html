@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block sidebar %}
-<div class="search">
+<div id="widget-search" class="widget">
   <h3>{% trans "Search" %}</h3>
   <form method="get" id="searchform" action="{% url zinnia_entry_search %}">
     <p>
@@ -31,48 +31,48 @@
     </p>
   </form>
 </div>
-<div class="categories">
+<div id="widget-categories" class="widget">
   <h3>{% trans "Categories" %}</h3>
   {% get_categories %}
 </div>
-<div class="authors">
+<div id="widget-authors" class="widget">
   <h3>{% trans "Authors" %}</h3>
   {% get_authors %}
 </div>
-<div class="calendar">
+<div id="widget-calendar" class="widget">
   <h3>{% trans "Calendar" %}</h3>
   {% get_calendar_entries %}
 </div>
-<div class="tags">
+<div id="widget-tags" class="widget">
   <h3>{% trans "Tags" %}</h3>
   {% get_tag_cloud %}
 </div>
-<div class="recents">
+<div id="widget-recents" class="widget">
   <h3>{% trans "Recent entries" %}</h3>
   {% get_recent_entries 5 %}
 </div>
-<div class="comments">
+<div id="widget-comments" class="widget">
   <h3>{% trans "Recent comments" %}</h3>
   {% get_recent_comments 5 %}
 </div>
-<div class="linkbacks">
+<div id="widget-linkbacks" class="widget">
   <h3>{% trans "Recent linkbacks" %}</h3>
   {% get_recent_linkbacks 5 %}
 </div>
-<div class="randoms">
+<div id="widget-randoms" class="widget">
   <h3>{% trans "Random entries" %}</h3>
   {% get_random_entries 5 %}
 </div>
-<div class="populars">
+<div id="widget-populars" class="widget">
   <h3>{% trans "Popular entries" %}</h3>
   {% get_popular_entries 5 %}
 </div>
-<div class="archives">
+<div id="widget-archives" class="widget">
   <h3>{% trans "Archives" %}</h3>
   {% get_archives_entries_tree %}
 </div>
 {% if user.is_authenticated %}
-<div class="tools">
+<div id="widget-tools" class="widget">
   <h3>{% trans "Tools" %}</h3>
   <ul>
     {% if perms.zinnia %}

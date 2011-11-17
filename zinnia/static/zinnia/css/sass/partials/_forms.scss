@@ -1,0 +1,46 @@
+.zinnia form {
+  label {
+    display: block;
+    font-weight: bold; }
+  fieldset {
+    padding: 1.4em;
+    border: 1px solid $border-color;
+    margin: 0 0 1.5em 0; }
+  legend {
+    color: $header-color;
+    font-weight: bold;
+    font-size: 1.2em; }
+  input {
+    &[type=email],
+    &[type=text],
+    &[type=password] {
+      margin: 0.5em 0;
+      background-color: white;
+      width: 300px;
+      padding: 5px; }
+  }
+  textarea {
+    margin: 0.5em 0;
+    padding: 5px;
+    width: 450px;
+    height: 300px; }
+  select {
+    margin: 0.5em 0;
+  }
+  input[type=email], input[type=text], input[type=password],
+  textarea {
+    background-color: white;
+    border: 1px solid $border-color;
+      &:focus {
+      border-color: darken($border-color, 20%);
+      }
+  }
+  ul.errorlist {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      display: inline;
+    }
+  }
+}

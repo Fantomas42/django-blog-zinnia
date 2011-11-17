@@ -1,0 +1,25 @@
+@import "partials/base";
+@import "blueprint";
+
+.zinnia {
+  @include blueprint-print(true);
+  font-size: 2em;
+  a, a:link, a:visited, a:focus, a:active, a:hover {
+    text-decoration: none;
+    color: $link-color;
+  }
+}
+
+#sidebar, .top-navigation, .comment-form {
+  display: none;
+}
+
+#header {
+  h1 {
+    margin-bottom: 0;
+    a {
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
+}

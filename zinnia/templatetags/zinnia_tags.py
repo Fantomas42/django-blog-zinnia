@@ -184,7 +184,9 @@ def get_calendar_entries(context, year=None, month=None,
     return {'template': template,
             'next_month': next_month,
             'previous_month': previous_month,
-            'calendar': calendar.formatmonth(year, month)}
+            'calendar': calendar.formatmonth(
+                year, month, previous_month=previous_month,
+                next_month=next_month)}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
@@ -263,7 +265,7 @@ def zinnia_pagination(context, page, begin_pages=3, end_pages=3,
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
-def zinnia_breadcrumbs(context, separator='/', root_name='Blog',
+def zinnia_breadcrumbs(context, root_name='Blog',
                        template='zinnia/tags/breadcrumbs.html',):
     """Return a breadcrumb for the application"""
     path = context['request'].path
@@ -272,7 +274,6 @@ def zinnia_breadcrumbs(context, separator='/', root_name='Blog',
     breadcrumbs = retrieve_breadcrumbs(path, page_object, root_name)
 
     return {'template': template,
-            'separator': separator,
             'breadcrumbs': breadcrumbs}
 
 
