@@ -262,8 +262,8 @@ Display the breadcrumbs for the pages handled by Zinnia.
 Usage examples: ::
 
   {% zinnia_breadcrumbs %}
-  {% zinnia_breadcrumbs ">" "News" %}
-  {% zinnia_breadcrumbs ">" "News" "custom_template.html" %}
+  {% zinnia_breadcrumbs "News" %}
+  {% zinnia_breadcrumbs "News" "custom_template.html" %}
 
 .. templatetag:: get_gravatar
 
