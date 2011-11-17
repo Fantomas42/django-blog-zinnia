@@ -9,6 +9,19 @@
   margin-bottom: 1em;
 }
 
+.featured h2.entry-title a {
+  $featured-color: lighten(adjust-hue($link-color, 180deg), 10%);
+  &:visited, &:link {
+    color: $featured-color;
+  }
+  &:hover {
+    color: lighten($featured-color, 10%);
+  }
+  &:active {
+    color: $link-active-color;
+  }
+}
+
 h2.entry-title {
   font-weight: bold;
   border-bottom: 1px solid $border-color;

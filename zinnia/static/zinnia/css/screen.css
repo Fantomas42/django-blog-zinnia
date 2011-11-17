@@ -148,6 +148,10 @@ table.calendar .entry { font-weight: bold; }
 
 .hentry { margin-bottom: 1em; }
 
+.featured h2.entry-title a:visited, .featured h2.entry-title a:link { color: #dd5800; }
+.featured h2.entry-title a:hover { color: #ff7011; }
+.featured h2.entry-title a:active { color: #9000dd; }
+
 h2.entry-title { font-weight: bold; border-bottom: 1px solid #eeeeee; margin-bottom: 0; }
 
 p.entry-info { color: #666666; padding-left: 2em; background: transparent url(../img/category.png) no-repeat scroll 0.5em; }
