@@ -284,6 +284,7 @@ class Entry(get_base_model()):
     class Meta:
         """Entry's Meta"""
         ordering = ['-creation_date']
+        get_latest_by = 'creation_date'
         verbose_name = _('entry')
         verbose_name_plural = _('entries')
         permissions = (('can_view_all', 'Can view all'),
