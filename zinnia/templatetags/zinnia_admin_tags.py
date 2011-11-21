@@ -24,19 +24,63 @@ def get_draft_entries(
 def get_content_stats(
     template='admin/zinnia/widgets/_content_stats.html'):
     """Return statistics of the contents"""
+
     content_type = ContentType.objects.get_for_model(Entry)
-
     discussions = comments.get_model().objects.filter(
-        is_public=True, content_type=content_type)
+        content_type=content_type)
 
-    return {'template': template,
-            'entries': Entry.published.count(),
-            'categories': Category.objects.count(),
-            'tags': tags_published().count(),
-            'authors': Author.published.count(),
-            'comments': discussions.filter(flags=None).count(),
-            'pingbacks': discussions.filter(flags__flag='pingback').count(),
-            'trackbacks': discussions.filter(flags__flag='trackback').count(),
-            'rejects': comments.get_model().objects.filter(
-                is_public=False, content_type=content_type).count(),
-            }
+    entries = Entry.published
+    categories = Category.objects
+    tags = tags_published()
+    authors = Author.published
+    replies = discussions.filter(
+        flags=None, is_public=True)
+    pingbacks = discussions.filter(
+        flags__flag='pingback', is_public=True)
+    trackbacks = discussions.filter(
+        flags__flag='trackback', is_public=True)
+    rejects = discussions.filter(is_public=False)
+
+    entries_count = entries.count()
+    replies_count = replies.count()
+    pingbacks_count = pingbacks.count()
+    trackbacks_count = trackbacks.count()
+
+    first_entry = entries.order_by('creation_date')[0]
+    last_entry = entries.latest()
+    months_count = (last_entry.creation_date - \
+                    first_entry.creation_date).days / 31.0
+    entries_per_month = months_count / entries_count
+
+    comments_per_entry = replies_count / float(entries_count) or 1.0
+    linkbacks_per_entry = (pingbacks_count + \
+                           trackbacks_count) / float(entries_count) or 1.0
+
+    total_words_entry = 0
+    for e in entries.all():
+        total_words_entry += e.word_count
+    words_per_entry = total_words_entry / entries_count
+
+    total_words_comment = 0
+    for c in replies.all():
+        total_words_comment += len(c.comment.split())
+    words_per_comment = total_words_comment / replies_count
+
+    return {
+        'template': template,
+        'entries': entries_count,
+        'categories': categories.count(),
+        'tags': tags.count(),
+        'authors': authors.count(),
+        'comments': replies_count,
+        'pingbacks': pingbacks_count,
+        'trackbacks': trackbacks_count,
+        'rejects': rejects.count(),
+
+        'entries_per_month': '%.2f' % entries_per_month,
+        'words_per_entry': words_per_entry,
+        'words_per_comment': words_per_comment,
+
+        'comments_per_entry': '%.2f' % comments_per_entry,
+        'linkbacks_per_entry': '%.2f' % linkbacks_per_entry
+        }
