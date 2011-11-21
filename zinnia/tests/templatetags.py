@@ -24,6 +24,7 @@ from zinnia.templatetags.zinnia_tags import get_gravatar
 from zinnia.templatetags.zinnia_tags import get_tag_cloud
 from zinnia.templatetags.zinnia_tags import get_categories
 from zinnia.templatetags.zinnia_tags import zinnia_pagination
+from zinnia.templatetags.zinnia_tags import get_draft_entries
 from zinnia.templatetags.zinnia_tags import get_recent_entries
 from zinnia.templatetags.zinnia_tags import get_random_entries
 from zinnia.templatetags.zinnia_tags import zinnia_breadcrumbs
@@ -101,6 +102,19 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(len(context['entries']), 1)
         self.assertEquals(context['template'], 'custom_template.html')
         context = get_featured_entries(0)
+        self.assertEquals(len(context['entries']), 0)
+
+    def test_draft_entries(self):
+        context = get_draft_entries()
+        self.assertEquals(len(context['entries']), 1)
+        self.assertEquals(context['template'],
+                          'zinnia/tags/draft_entries.html')
+
+        self.publish_entry()
+        context = get_draft_entries(3, 'custom_template.html')
+        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(context['template'], 'custom_template.html')
+        context = get_draft_entries(0)
         self.assertEquals(len(context['entries']), 0)
 
     def test_get_random_entries(self):

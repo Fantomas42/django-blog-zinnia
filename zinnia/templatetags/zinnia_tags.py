@@ -20,6 +20,7 @@ from tagging.utils import calculate_cloud
 from zinnia.models import Entry
 from zinnia.models import Author
 from zinnia.models import Category
+from zinnia.managers import DRAFT
 from zinnia.managers import tags_published
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
@@ -61,6 +62,14 @@ def get_featured_entries(number=5,
     """Return the featured entries"""
     return {'template': template,
             'entries': Entry.published.filter(featured=True)[:number]}
+
+
+@register.inclusion_tag('zinnia/tags/dummy.html')
+def get_draft_entries(number=5,
+                      template='zinnia/tags/draft_entries.html'):
+    """Return the latest draft entries"""
+    return {'template': template,
+            'entries': Entry.objects.filter(status=DRAFT)[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')

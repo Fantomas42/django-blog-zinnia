@@ -56,6 +56,21 @@ Usage examples: ::
 
 .. templatetag:: get_random_entries
 
+get_draft_entries
+====================
+
+Display the latest entries marked as draft.
+
+.. autofunction:: get_draft_entries
+
+Usage examples: ::
+
+  {% get_draft_entries %}
+  {% get_draft_entries 3 %}
+  {% get_draft_entries 3 "custom_template.html" %}
+
+.. templatetag:: get_draft_entries
+
 get_random_entries
 ==================
 

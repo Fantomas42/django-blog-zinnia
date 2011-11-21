@@ -1,0 +1,12 @@
+{% load i18n %}
+<ul>
+  {% for entry in entries %}
+  <li>
+    <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
+  </li>
+  {% empty %}
+  <li>
+    {% trans "No draft entries." %}
+  </li>
+  {% endfor %}
+</ul>

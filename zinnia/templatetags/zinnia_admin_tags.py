@@ -6,18 +6,9 @@ from django.contrib.contenttypes.models import ContentType
 from zinnia.models import Entry
 from zinnia.models import Author
 from zinnia.models import Category
-from zinnia.managers import DRAFT
 from zinnia.managers import tags_published
 
 register = Library()
-
-
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def get_draft_entries(
-    number=5, template='admin/zinnia/widgets/_draft_entries.html'):
-    """Return the latest draft entries"""
-    return {'template': template,
-            'entries': Entry.objects.filter(status=DRAFT)[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
