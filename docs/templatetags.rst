@@ -54,7 +54,7 @@ Usage examples: ::
   {% get_featured_entries 3 %}
   {% get_featured_entries 3 "custom_template.html" %}
 
-.. templatetag:: get_random_entries
+.. templatetag:: get_draft_entries
 
 get_draft_entries
 ====================
@@ -69,7 +69,7 @@ Usage examples: ::
   {% get_draft_entries 3 %}
   {% get_draft_entries 3 "custom_template.html" %}
 
-.. templatetag:: get_draft_entries
+.. templatetag:: get_random_entries
 
 get_random_entries
 ==================
@@ -279,6 +279,20 @@ Usage examples: ::
   {% zinnia_breadcrumbs %}
   {% zinnia_breadcrumbs "News" %}
   {% zinnia_breadcrumbs "News" "custom_template.html" %}
+
+.. templatetag:: zinnia_statistics
+
+zinnia_statistics
+=================
+
+Display the statistics about the contents handled in Zinnia.
+
+.. autofunction:: zinnia_statistics
+
+Usage examples: ::
+
+  {% zinnia_statistics %}
+  {% zinnia_statistics "custom_template.html" %}
 
 .. templatetag:: get_gravatar
 

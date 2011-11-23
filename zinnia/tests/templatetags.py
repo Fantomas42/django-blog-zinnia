@@ -24,6 +24,7 @@ from zinnia.templatetags.zinnia_tags import get_gravatar
 from zinnia.templatetags.zinnia_tags import get_tag_cloud
 from zinnia.templatetags.zinnia_tags import get_categories
 from zinnia.templatetags.zinnia_tags import zinnia_pagination
+from zinnia.templatetags.zinnia_tags import zinnia_statistics
 from zinnia.templatetags.zinnia_tags import get_draft_entries
 from zinnia.templatetags.zinnia_tags import get_recent_entries
 from zinnia.templatetags.zinnia_tags import get_random_entries
@@ -536,3 +537,45 @@ class TemplateTagsTestCase(TestCase):
         context = get_tag_cloud(6, 'custom_template.html')
         self.assertEquals(len(context['tags']), 2)
         self.assertEquals(context['template'], 'custom_template.html')
+
+    def test_zinnia_statistics(self):
+        context = zinnia_statistics()
+        self.assertEquals(context['template'], 'zinnia/tags/statistics.html')
+        self.assertEquals(context['entries'], 0)
+        self.assertEquals(context['categories'], 0)
+        self.assertEquals(context['tags'], 0)
+        self.assertEquals(context['authors'], 0)
+        self.assertEquals(context['comments'], 0)
+        self.assertEquals(context['pingbacks'], 0)
+        self.assertEquals(context['trackbacks'], 0)
+        self.assertEquals(context['rejects'], 0)
+        self.assertEquals(context['words_per_entry'], 0)
+        self.assertEquals(context['words_per_comment'], 0)
+        self.assertEquals(context['entries_per_month'], 0)
+        self.assertEquals(context['comments_per_entry'], 0)
+        self.assertEquals(context['linkbacks_per_entry'], 0)
+
+        site = Site.objects.get_current()
+        Category.objects.create(title='Category 1', slug='category-1')
+        user = User.objects.create_user(username='webmaster',
+                                        email='webmaster@example.com')
+        comments.get_model().objects.create(comment='My Comment 1', site=site,
+                                            content_object=self.entry)
+        self.entry.authors.add(user)
+        self.publish_entry()
+
+        context = zinnia_statistics('custom_template.html')
+        self.assertEquals(context['template'], 'custom_template.html')
+        self.assertEquals(context['entries'], 1)
+        self.assertEquals(context['categories'], 1)
+        self.assertEquals(context['tags'], 2)
+        self.assertEquals(context['authors'], 1)
+        self.assertEquals(context['comments'], 1)
+        self.assertEquals(context['pingbacks'], 0)
+        self.assertEquals(context['trackbacks'], 0)
+        self.assertEquals(context['rejects'], 0)
+        self.assertEquals(context['words_per_entry'], 2)
+        self.assertEquals(context['words_per_comment'], 3)
+        self.assertEquals(context['entries_per_month'], 0)
+        self.assertEquals(context['comments_per_entry'], 1)
+        self.assertEquals(context['linkbacks_per_entry'], 0)

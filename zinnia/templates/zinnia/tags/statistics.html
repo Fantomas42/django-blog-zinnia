@@ -1,0 +1,42 @@
+{% load i18n %}
+<ul>
+  <li>
+    {% blocktrans count authors as author_count %}{{ author_count }} author{% plural %}{{ author_count }} authors{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans count entries as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans count tags as tag_count %}{{ tag_count }} tag{% plural %}{{ tag_count }} tags{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans count categories as category_count %}{{ category_count }} category{% plural %}{{ category_count }} categories{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans count comments as comment_count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans count pingbacks as pingback_count %}{{ pingback_count }} pingback{% plural %}{{ pingback_count }} pingbacks{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans count trackbacks as trackback_count %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans count rejects as reject_count %}{{ reject_count }} rejected item{% plural %}{{ reject_count }} rejected items{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans with entries_per_month=entries_per_month|floatformat:2 %}{{ entries_per_month }} entries per month{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans with words_per_entry=words_per_entry|floatformat:2 %}{{ words_per_entry }} words per entry{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans with words_per_comment=words_per_comment|floatformat:2 %}{{ words_per_comment }} words per comment{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans with comments_per_entry=comments_per_entry|floatformat:2 %}{{ comments_per_entry }} comments per entry{% endblocktrans %}
+  </li>
+  <li>
+    {% blocktrans with linkbacks_per_entry=linkbacks_per_entry|floatformat:2 %}{{ linkbacks_per_entry }} linkbacks per entry{% endblocktrans %}
+  </li>
+</ul>
