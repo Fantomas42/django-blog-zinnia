@@ -50,28 +50,25 @@ def get_content_stats(
     total_words_entry = 0
     for e in entries.all():
         total_words_entry += e.word_count
-    words_per_entry = total_words_entry / entries_count
+    words_per_entry = total_words_entry / float(entries_count) or 1.0
 
     total_words_comment = 0
     for c in replies.all():
         total_words_comment += len(c.comment.split())
-    words_per_comment = total_words_comment / replies_count
+    words_per_comment = total_words_comment / float(replies_count) or 1.0
 
-    return {
-        'template': template,
-        'entries': entries_count,
-        'categories': categories.count(),
-        'tags': tags.count(),
-        'authors': authors.count(),
-        'comments': replies_count,
-        'pingbacks': pingbacks_count,
-        'trackbacks': trackbacks_count,
-        'rejects': rejects.count(),
-
-        'entries_per_month': '%.2f' % entries_per_month,
-        'words_per_entry': words_per_entry,
-        'words_per_comment': words_per_comment,
-
-        'comments_per_entry': '%.2f' % comments_per_entry,
-        'linkbacks_per_entry': '%.2f' % linkbacks_per_entry
-        }
+    return {'template': template,
+            'entries': entries_count,
+            'categories': categories.count(),
+            'tags': tags.count(),
+            'authors': authors.count(),
+            'comments': replies_count,
+            'pingbacks': pingbacks_count,
+            'trackbacks': trackbacks_count,
+            'rejects': rejects.count(),
+            'words_per_entry': words_per_entry,
+            'words_per_comment': words_per_comment,
+            'entries_per_month': entries_per_month,
+            'comments_per_entry': comments_per_entry,
+            'linkbacks_per_entry': linkbacks_per_entry
+            }

@@ -7,62 +7,62 @@
 <tr>
   <td>
     <a href="{% url admin:zinnia_entry_changelist %}">
-      {% blocktrans %}{{ entries }} entries{% endblocktrans %}
+      {% blocktrans count entries as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     </a>
   </td>
   <td>
     <a href="{% url admin:comments_comment_changelist %}?is_public__exact=1">
-      {% blocktrans %}{{ comments }} comments{% endblocktrans %}
+      {% blocktrans count comments as comment_count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
     </a>
   </td>
 </tr>
 <tr>
   <td>
     <a href="{% url admin:zinnia_category_changelist %}">
-      {% blocktrans %}{{ categories }} categories{% endblocktrans %}
+      {% blocktrans count categories as category_count %}{{ category_count }} category{% plural %}{{ category_count }} categories{% endblocktrans %}
     </a>
   </td>
-  <td>{% blocktrans %}{{ pingbacks }} pingbacks{% endblocktrans %}</td>
+  <td>{% blocktrans count pingbacks as pingback_count %}{{ pingback_count }} pingback{% plural %}{{ pingback_count }} pingbacks{% endblocktrans %}</td>
 </tr>
 <tr>
   <td>
     <a href="{% url admin:tagging_tag_changelist %}">
-      {% blocktrans %}{{ tags }} tags{% endblocktrans %}
+      {% blocktrans count tags as tag_count %}{{ tag_count }} tag{% plural %}{{ tag_count }} tags{% endblocktrans %}
     </a>
   </td>
-  <td>{% blocktrans %}{{ trackbacks }} trackbacks{% endblocktrans %}</td>
+  <td>{% blocktrans count trackbacks as trackback_count %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}</td>
 </tr>
 <tr>
   <td>
     <a href="{% url admin:auth_user_changelist %}">
-      {% blocktrans %}{{ authors }} authors{% endblocktrans %}
+      {% blocktrans count authors as author_count %}{{ author_count }} author{% plural %}{{ author_count }} authors{% endblocktrans %}
     </a>
   </td>
   <td>
     <a href="{% url admin:comments_comment_changelist %}?is_public__exact=0">
-      {% blocktrans %}{{ rejects }} rejected{% endblocktrans %}
+      {% blocktrans count rejects as reject_count %}{{ reject_count }} rejected item{% plural %}{{ reject_count }} rejected items{% endblocktrans %}
     </a>
   </td>
 </tr>
 <tr>
   <th>{% trans "Statistics" %}</th>
   <td>
-    {% blocktrans %}{{ entries_per_month }} entries per month{% endblocktrans %}
+    {% blocktrans with entries_per_month=entries_per_month|floatformat:2 %}{{ entries_per_month }} entries per month{% endblocktrans %}
   </td>
 </tr>
 <tr>
   <td>
-    {% blocktrans %}{{ words_per_entry }} words per entry{% endblocktrans %}
+    {% blocktrans with words_per_entry=words_per_entry|floatformat:2 %}{{ words_per_entry }} words per entry{% endblocktrans %}
   </td>
   <td>
-    {% blocktrans %}{{ words_per_comment }} words per comment{% endblocktrans %}
+    {% blocktrans with words_per_comment=words_per_comment|floatformat:2 %}{{ words_per_comment }} words per comment{% endblocktrans %}
   </td>
 </tr>
 <tr>
   <td>
-    {% blocktrans %}{{ comments_per_entry }} comments per entry{% endblocktrans %}
+    {% blocktrans with comments_per_entry=comments_per_entry|floatformat:2 %}{{ comments_per_entry }} comments per entry{% endblocktrans %}
   </td>
   <td>
-    {% blocktrans %}{{ linkbacks_per_entry }} linkbacks per entry{% endblocktrans %}
+    {% blocktrans with linkbacks_per_entry=linkbacks_per_entry|floatformat:2 %}{{ linkbacks_per_entry }} linkbacks per entry{% endblocktrans %}
   </td>
 </tr>
