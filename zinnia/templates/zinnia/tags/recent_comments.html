@@ -1,11 +1,10 @@
 {% load i18n %}
-
 <ul>
   {% for comment in comments %}
   <li>
     {% with comment.content_object as entry %}
     {{ comment.user_name }} {% trans "in" %}
-    <a href="{{ entry.get_absolute_url }}#comment_{{ comment.pk }}" 
+    <a href="{{ entry.get_absolute_url }}#comment_{{ comment.pk }}"
        title="{% trans "Comment on" %} {{ entry.title }}">
       {{ entry.title }}
     </a>
@@ -14,7 +13,6 @@
   {% empty %}
   <li>
     {% trans "No comments yet." %}
-  </li>  
+  </li>
   {% endfor %}
 </ul>
-

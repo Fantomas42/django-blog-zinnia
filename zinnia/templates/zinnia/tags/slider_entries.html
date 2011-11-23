@@ -11,7 +11,6 @@
     </li>
     {% endfor %}
   </ul>
-
   {% for entry in entries %}
   <div id="entry-slider-{{ forloop.counter }}" class="ui-tabs-panel">
     <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}" />

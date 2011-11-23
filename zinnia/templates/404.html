@@ -2,7 +2,9 @@
 {% load i18n zinnia_tags %}
 
 {% block breadcrumbs %}
-  {% trans "Error 404" %}
+<ul class="breadcrumbs">
+  <li>{% trans "Error 404" %}</li>
+</ul>
 {% endblock %}
 
 {% block title %}{% trans "Page not found" %}{% endblock %}
@@ -42,5 +44,4 @@
     </p>
   </form>
 </div>
-
 {% endblock %}

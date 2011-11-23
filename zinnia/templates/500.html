@@ -2,7 +2,9 @@
 {% load i18n zinnia_tags %}
 
 {% block breadcrumbs %}
-  {% trans "Error 500" %}
+<ul class="breadcrumbs">
+  <li>{% trans "Error 500" %}</li>
+</ul>
 {% endblock %}
 
 {% block title %}{% trans "Server error" %}{% endblock %}
@@ -42,5 +44,4 @@
     </p>
   </form>
 </div>
-
 {% endblock %}

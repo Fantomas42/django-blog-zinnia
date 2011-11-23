@@ -4,9 +4,9 @@
 {% block module_id %}linkbacks{% endblock %}
 
 {% block summary %}{% trans "Recent linkbacks" %}{% endblock %}
+
 {% block title %}{% trans "Recent linkbacks" %}{% endblock %}
 
 {% block content %}
   {% get_recent_linkbacks 5 "admin/zinnia/widgets/_recent_linkbacks.html" %}
 {% endblock %}
-
