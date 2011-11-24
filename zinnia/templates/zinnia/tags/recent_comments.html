@@ -2,7 +2,7 @@
 <ul>
   {% for comment in comments %}
   <li>
-    {% with comment.content_object as entry %}
+    {% with entry=comment.content_object %}
     {{ comment.user_name }} {% trans "in" %}
     <a href="{{ entry.get_absolute_url }}#comment_{{ comment.pk }}"
        title="{% trans "Comment on" %} {{ entry.title }}">

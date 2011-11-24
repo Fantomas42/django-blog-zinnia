@@ -31,11 +31,11 @@
 {% endif %}
 
 {% if author %}
-<h1>{% blocktrans with author.username as author %}Entries by {{ author }}{% endblocktrans %}</h1>
+<h1>{% blocktrans %}Entries by {{ author }}{% endblocktrans %}</h1>
 {% endif %}
 
 {% for object in object_list %}
-  {% with object.html_content|truncatewords_html:100|safe as object_content %}
+  {% with object_content=object.html_content|truncatewords_html:100|safe %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 {% empty %}

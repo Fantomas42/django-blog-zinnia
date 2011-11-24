@@ -6,40 +6,40 @@
 <tr>
   <td>
     <a href="{% url admin:zinnia_entry_changelist %}">
-      {% blocktrans count entries as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+      {% blocktrans count entry_count=entries %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     </a>
   </td>
   <td>
     <a href="{% url admin:comments_comment_changelist %}?is_public__exact=1">
-      {% blocktrans count comments as comment_count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
+      {% blocktrans count comment_count=comments %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
     </a>
   </td>
 </tr>
 <tr>
   <td>
     <a href="{% url admin:zinnia_category_changelist %}">
-      {% blocktrans count categories as category_count %}{{ category_count }} category{% plural %}{{ category_count }} categories{% endblocktrans %}
+      {% blocktrans count category_count=categories %}{{ category_count }} category{% plural %}{{ category_count }} categories{% endblocktrans %}
     </a>
   </td>
-  <td>{% blocktrans count pingbacks as pingback_count %}{{ pingback_count }} pingback{% plural %}{{ pingback_count }} pingbacks{% endblocktrans %}</td>
+  <td>{% blocktrans count pingback_count=pingbacks %}{{ pingback_count }} pingback{% plural %}{{ pingback_count }} pingbacks{% endblocktrans %}</td>
 </tr>
 <tr>
   <td>
     <a href="{% url admin:tagging_tag_changelist %}">
-      {% blocktrans count tags as tag_count %}{{ tag_count }} tag{% plural %}{{ tag_count }} tags{% endblocktrans %}
+      {% blocktrans count tag_count=tags %}{{ tag_count }} tag{% plural %}{{ tag_count }} tags{% endblocktrans %}
     </a>
   </td>
-  <td>{% blocktrans count trackbacks as trackback_count %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}</td>
+  <td>{% blocktrans count trackback_count=trackbacks %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}</td>
 </tr>
 <tr>
   <td>
     <a href="{% url admin:auth_user_changelist %}">
-      {% blocktrans count authors as author_count %}{{ author_count }} author{% plural %}{{ author_count }} authors{% endblocktrans %}
+      {% blocktrans count author_count=authors %}{{ author_count }} author{% plural %}{{ author_count }} authors{% endblocktrans %}
     </a>
   </td>
   <td>
     <a href="{% url admin:comments_comment_changelist %}?is_public__exact=0">
-      {% blocktrans count rejects as reject_count %}{{ reject_count }} rejected item{% plural %}{{ reject_count }} rejected items{% endblocktrans %}
+      {% blocktrans count reject_count=rejects %}{{ reject_count }} rejected item{% plural %}{{ reject_count }} rejected items{% endblocktrans %}
     </a>
   </td>
 </tr>

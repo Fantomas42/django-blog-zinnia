@@ -12,7 +12,7 @@
       {% for author in object.authors.all %}
       <span class="vcard author">
         <a href="{% url zinnia_author_detail author %}" class="fn nickname url" rel="author"
-           title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">{{ author }}</a>
+           title="{% blocktrans %}Show {{ author }}'s entries{% endblocktrans %}">{{ author }}</a>
       </span>{% if not forloop.last %}, {% endif %}
       {% endfor %}
       {% trans "on" %}
@@ -63,10 +63,10 @@
 
     <p class="entry-comments">
       <strong>{% trans "Discussions" %}</strong> :
-      {% with object.comments.count as comment_count %}
+      {% with comment_count=object.comments.count %}
       {% if comment_count %}
       <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
-        {% blocktrans count comment_count as comment_count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
+        {% blocktrans count comment_count=comment_count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
       </a>
       {% else %}
       {% if object.comments_are_open %}
@@ -79,17 +79,17 @@
       {% endif %}
       {% endif %}
       {% endwith %}
-      {% with object.pingbacks.count as pingback_count %}
+      {% with pingback_count=object.pingbacks.count %}
       {% if pingback_count %}
       , <a href="{{ object.get_absolute_url }}#pingbacks" title="{{ object.title }}">
-        {% blocktrans count pingback_count as pingback_count %}{{ pingback_count }} pingback{% plural %}{{ pingback_count }} pingbacks{% endblocktrans %}
+        {% blocktrans count pingback_count=pingback_count %}{{ pingback_count }} pingback{% plural %}{{ pingback_count }} pingbacks{% endblocktrans %}
       </a>
       {% endif %}
       {% endwith %}
-      {% with object.trackbacks.count as trackback_count %}
+      {% with trackback_count=object.trackbacks.count %}
       {% if trackback_count %}
       , <a href="{{ object.get_absolute_url }}#trackbacks" title="{{ object.title }}">
-        {% blocktrans count trackback_count as trackback_count %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}
+        {% blocktrans count trackback_count=trackback_count %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}
       </a>
       {% endif %}
       {% endwith %}

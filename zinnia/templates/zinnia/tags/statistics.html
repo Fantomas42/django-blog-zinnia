@@ -1,28 +1,28 @@
 {% load i18n %}
 <ul>
   <li>
-    {% blocktrans count authors as author_count %}{{ author_count }} author{% plural %}{{ author_count }} authors{% endblocktrans %}
+    {% blocktrans count author_count=authors %}{{ author_count }} author{% plural %}{{ author_count }} authors{% endblocktrans %}
   </li>
   <li>
-    {% blocktrans count entries as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+    {% blocktrans count entry_count=entries %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
   </li>
   <li>
-    {% blocktrans count tags as tag_count %}{{ tag_count }} tag{% plural %}{{ tag_count }} tags{% endblocktrans %}
+    {% blocktrans count tag_count=tags %}{{ tag_count }} tag{% plural %}{{ tag_count }} tags{% endblocktrans %}
   </li>
   <li>
-    {% blocktrans count categories as category_count %}{{ category_count }} category{% plural %}{{ category_count }} categories{% endblocktrans %}
+    {% blocktrans count category_count=categories %}{{ category_count }} category{% plural %}{{ category_count }} categories{% endblocktrans %}
   </li>
   <li>
-    {% blocktrans count comments as comment_count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
+    {% blocktrans count comment_count=comments %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
   </li>
   <li>
-    {% blocktrans count pingbacks as pingback_count %}{{ pingback_count }} pingback{% plural %}{{ pingback_count }} pingbacks{% endblocktrans %}
+    {% blocktrans count pingback_count=pingbacks %}{{ pingback_count }} pingback{% plural %}{{ pingback_count }} pingbacks{% endblocktrans %}
   </li>
   <li>
-    {% blocktrans count trackbacks as trackback_count %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}
+    {% blocktrans count trackback_count=trackbacks %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}
   </li>
   <li>
-    {% blocktrans count rejects as reject_count %}{{ reject_count }} rejected item{% plural %}{{ reject_count }} rejected items{% endblocktrans %}
+    {% blocktrans count reject_count=rejects %}{{ reject_count }} rejected item{% plural %}{{ reject_count }} rejected items{% endblocktrans %}
   </li>
   <li>
     {% blocktrans with entries_per_month=entries_per_month|floatformat:2 %}{{ entries_per_month }} entries per month{% endblocktrans %}

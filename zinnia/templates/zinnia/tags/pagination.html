@@ -1,7 +1,7 @@
 {% load i18n %}
 <ul class="paginator">
   <li class="index">
-    {% blocktrans with page.number as current_page and page.paginator.num_pages as total_page %}Page {{ current_page }} of {{ total_page }}{% endblocktrans %}
+    {% blocktrans with current_page=page.number total_page=page.paginator.num_pages %}Page {{ current_page }} of {{ total_page }}{% endblocktrans %}
   </li>
 
   {% if page.has_previous %}

@@ -9,10 +9,10 @@
 
 {% block link %}
   {{ block.super }}
-  {% with object.previous_entry as previous_entry %}{% if previous_entry %}
+  {% with previous_entry=object.previous_entry %}{% if previous_entry %}
   <link rel="prev" title="{{ previous_entry.title }}" href="{{ previous_entry.get_absolute_url }}" />
   {% endif %}{% endwith %}
-  {% with object.next_entry as next_entry %}{% if next_entry %}
+  {% with next_entry=object.next_entry %}{% if next_entry %}
   <link rel="next" title="{{ next_entry.title }}" href="{{ next_entry.get_absolute_url }}" />
   {% endif %}{% endwith %}
   <link rel="shortlink" href="{{ object.short_url }}" />
@@ -32,14 +32,14 @@
 {% block content %}
 
 {% block entry-content %}
-  {% with object.html_content|safe as object_content %}
+  {% with object_content=object.html_content|safe %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 {% endblock %}
 
 {% block entry-widgets %}
 <div class="entry-widgets">
-  {% with object.next_entry as next_entry %}
+  {% with next_entry=object.next_entry %}
   {% if next_entry %}
   <div class="entry-next">
     <h3>{% trans "Next entry" %}</h3>
@@ -51,7 +51,7 @@
   </div>
   {% endif %}
   {% endwith %}
-  {% with object.previous_entry as previous_entry %}
+  {% with previous_entry=object.previous_entry %}
   {% if previous_entry %}
   <div class="entry-previous">
     <h3>{% trans "Previous entry" %}</h3>
@@ -85,7 +85,7 @@
 {% block entry-comments %}
 <div id="comments">
   <h3>{% trans "Comments" %}</h3>
-  {% with object.comments as comment_list %}
+  {% with comment_list=object.comments %}
   {% if comment_list.count %}
   <ol id="comment-list">
     {% for comment in comment_list %}
@@ -125,7 +125,7 @@
 {% block entry-pingbacks %}
 <div id="pingbacks">
   <h3>{% trans "Pingbacks" %}</h3>
-  {% with object.pingbacks as pingback_list %}
+  {% with pingback_list=object.pingbacks %}
   {% if pingback_list.count %}
   <ol id="pingback-list">
     {% for pingback in pingback_list %}
@@ -155,7 +155,7 @@
 {% endblock %}
 
 {% block entry-trackbacks %}
-{% with object.trackbacks as trackback_list %}
+{% with trackback_list=object.trackbacks %}
 {% if trackback_list.count or object.pingback_enabled %}
 <div id="trackbacks">
   <h3>{% trans "Trackbacks" %}</h3>

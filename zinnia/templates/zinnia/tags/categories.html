@@ -2,7 +2,7 @@
 {% for category, structure in categories|tree_info %}
   {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
     <a href="{{ category.get_absolute_url }}" title="{{ category.title }}">{{ category.title }}</a>
-    {% blocktrans count category.entries_published.count as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+    {% blocktrans count entry_count=category.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
   {% for level in structure.closed_levels %}</li></ul>{% endfor %}
   {% empty %}
 <ul>
