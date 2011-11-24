@@ -5,6 +5,7 @@ CHANGELOG
 ----
 
 * Better templates
+* Statistics about the content
 * Django 1.2 is no longer supported
 
 0.9
