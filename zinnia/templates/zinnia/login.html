@@ -3,10 +3,11 @@
 
 {% block title %}{% trans "Login required" %}{% endblock %}
 
+{% block body-class %}login-required{% endblock %}
+
 {% block content %}
 <h2>{% trans "Login required" %}</h2>
-
-<div class="entry_login">
+<div>
   {% if form.errors %}
   <p class="error">
     {% trans "Your username and password didn't match. Please try again." %}

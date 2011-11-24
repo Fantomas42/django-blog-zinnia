@@ -29,6 +29,8 @@
   {% endwith %}
 {% endblock %}
 
+{% block body-class %}entry entry-{{ object.pk }}{% if object.featured %} featured{% endif %}{% endblock %}
+
 {% block content %}
 
 {% block entry-content %}

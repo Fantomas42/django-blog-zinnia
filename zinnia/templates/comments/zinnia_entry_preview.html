@@ -3,6 +3,8 @@
 
 {% block title %}{% trans "Comment preview" %}{% endblock %}
 
+{% block body-class %}comment-preview{% endblock %}
+
 {% block content %}
   {% if form.errors %}
   <h2>{% blocktrans count errors=form.errors|length %}Please correct following error.{% plural %}Please correct following errors.{% endblocktrans %}</h2>

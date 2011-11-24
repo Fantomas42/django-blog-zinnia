@@ -10,6 +10,8 @@
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of search result of" %} '{{ pattern }}'" href="{% url zinnia_entry_search_feed %}?pattern={{ pattern }}" />
 {% endblock %}
 
+{% block body-class %}{{ block.super }} search {% if object_list %}search-results{% else %}search-no-results{% endif %}{% endblock %}
+
 {% block content %}
 <h1>{% trans "Search results for" %} {% if pattern %}'{{ pattern }}'{% endif %}</h1>
 

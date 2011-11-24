@@ -23,7 +23,7 @@
     {% block link %}{% endblock %}
     {% block script %}{% endblock %}
   </head>
-  <body class="zinnia">
+  <body class="zinnia {% block body-class %}{% endblock %}">
     <div class="container">
       <div id="header">
         <ul class="top-navigation">

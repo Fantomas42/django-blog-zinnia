@@ -5,6 +5,8 @@
 
 {% block title %}{% trans "Archives" %} {{ year }}{% endblock %}
 
+{% block body-class %}{{ block.super }} archive date year year-{{ year }}{% endblock %}
+
 {% block content %}
 <h1>{% trans "Archives" %} {{ year }}</h1>
 
