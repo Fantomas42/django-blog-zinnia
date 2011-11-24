@@ -13,6 +13,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 
 from zinnia.models import Entry
+from zinnia.managers import PINGBACK
 from zinnia.settings import PINGBACK_CONTENT_LENGTH
 from BeautifulSoup import BeautifulSoup
 from django_xmlrpc.decorators import xmlrpc_func
@@ -103,7 +104,7 @@ def pingback_ping(source, target):
             defaults={'comment': description, 'user_name': title})
         if created:
             user = entry.authors.all()[0]
-            comment.flags.create(user=user, flag='pingback')
+            comment.flags.create(user=user, flag=PINGBACK)
             return 'Pingback from %s to %s registered.' % (source, target)
         return PINGBACK_ALREADY_REGISTERED
     except:

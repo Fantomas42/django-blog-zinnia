@@ -7,6 +7,8 @@ from django.contrib.sites.models import Site
 DRAFT = 0
 HIDDEN = 1
 PUBLISHED = 2
+PINGBACK = 'pingback'
+TRACKBACK = 'trackback'
 
 
 def tags_published():

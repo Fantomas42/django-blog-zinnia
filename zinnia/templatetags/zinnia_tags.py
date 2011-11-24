@@ -22,6 +22,7 @@ from zinnia.models import Author
 from zinnia.models import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import tags_published
+from zinnia.managers import PINGBACK, TRACKBACK
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
 from zinnia.templatetags.zcalendar import ZinniaCalendar
@@ -226,7 +227,7 @@ def get_recent_linkbacks(number=5,
     linkbacks = get_comment_model().objects.filter(
         content_type=content_type,
         object_pk__in=entry_published_pks,
-        flags__flag__in=['pingback', 'trackback'],
+        flags__flag__in=[PINGBACK, TRACKBACK],
         is_public=True).order_by(
         '-submit_date')[:number]
 
@@ -345,9 +346,9 @@ def zinnia_statistics(template='zinnia/tags/statistics.html'):
     replies = discussions.filter(
         flags=None, is_public=True)
     pingbacks = discussions.filter(
-        flags__flag='pingback', is_public=True)
+        flags__flag=PINGBACK, is_public=True)
     trackbacks = discussions.filter(
-        flags__flag='trackback', is_public=True)
+        flags__flag=TRACKBACK, is_public=True)
     rejects = discussions.filter(is_public=False)
 
     entries_count = entries.count()

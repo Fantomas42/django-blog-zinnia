@@ -17,6 +17,7 @@ from tagging.models import Tag
 from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import PUBLISHED
+from zinnia.managers import PINGBACK, TRACKBACK
 from zinnia import feeds
 from zinnia.feeds import EntryFeed
 from zinnia.feeds import LatestEntries
@@ -64,12 +65,12 @@ class ZinniaFeedsTestCase(TestCase):
                                                        user=self.author,
                                                        content_object=entry,
                                                        site=self.site)
-        pingback.flags.create(user=self.author, flag='pingback')
+        pingback.flags.create(user=self.author, flag=PINGBACK)
         trackback = comments.get_model().objects.create(comment='My Trackback',
                                                         user=self.author,
                                                         content_object=entry,
                                                         site=self.site)
-        trackback.flags.create(user=self.author, flag='trackback')
+        trackback.flags.create(user=self.author, flag=TRACKBACK)
         return [comment, pingback, trackback]
 
     def test_entry_feed(self):

@@ -15,6 +15,7 @@ from BeautifulSoup import BeautifulSoup
 
 from zinnia.models import Entry
 from zinnia.models import Category
+from zinnia.managers import PINGBACK
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import TestTransport
 from zinnia.xmlrpc.pingback import generate_pingback_content
@@ -198,7 +199,7 @@ class PingBackTestCase(TestCase):
             site=self.site, comment='Test pingback',
             user_url='http://example.com/blog/1/',
             user_name='Test pingback')
-        comment.flags.create(user=self.author, flag='pingback')
+        comment.flags.create(user=self.author, flag=PINGBACK)
 
         response = self.server.pingback.extensions.getPingbacks(target)
         self.assertEquals(response, [

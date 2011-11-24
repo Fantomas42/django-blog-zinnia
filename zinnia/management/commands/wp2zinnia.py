@@ -22,6 +22,7 @@ from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.signals import disconnect_zinnia_signals
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
+from zinnia.managers import PINGBACK, TRACKBACK
 
 WP_NS = 'http://wordpress.org/export/%s/'
 
@@ -285,9 +286,9 @@ class Command(LabelCommand):
         in django.contrib.comments"""
         for comment_node in comment_nodes:
             is_pingback = comment_node.find(
-                '{%s}comment_type' % WP_NS).text == 'pingback'
+                '{%s}comment_type' % WP_NS).text == PINGBACK
             is_trackback = comment_node.find(
-                '{%s}comment_type' % WP_NS).text == 'trackback'
+                '{%s}comment_type' % WP_NS).text == TRACKBACK
 
             title = 'Comment #%s' % (comment_node.find(
                 '{%s}comment_id/' % WP_NS).text)
@@ -334,9 +335,9 @@ class Command(LabelCommand):
                     user=entry.authors.all()[0], flag='spam')
             if is_pingback:
                 comment.flags.create(
-                    user=entry.authors.all()[0], flag='pingback')
+                    user=entry.authors.all()[0], flag=PINGBACK)
             if is_trackback:
                 comment.flags.create(
-                    user=entry.authors.all()[0], flag='trackback')
+                    user=entry.authors.all()[0], flag=TRACKBACK)
 
             self.write_out(self.style.ITEM('OK\n'))

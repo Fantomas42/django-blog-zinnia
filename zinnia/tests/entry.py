@@ -15,6 +15,7 @@ from django.contrib.comments.models import CommentFlag
 from zinnia import models
 from zinnia.models import Entry
 from zinnia.managers import PUBLISHED
+from zinnia.managers import PINGBACK, TRACKBACK
 from zinnia.models import get_base_model
 from zinnia.models import EntryAbstractClass
 from zinnia import models as models_settings
@@ -68,7 +69,7 @@ class EntryTestCase(TestCase):
 
         comment = comments.get_model().objects.create(
             comment='My Pingback 1', content_object=self.entry, site=site)
-        comment.flags.create(user=author, flag='pingback')
+        comment.flags.create(user=author, flag=PINGBACK)
         self.assertEquals(self.entry.discussions.count(), 3)
         self.assertEquals(self.entry.comments.count(), 2)
         self.assertEquals(self.entry.pingbacks.count(), 1)
@@ -76,7 +77,7 @@ class EntryTestCase(TestCase):
 
         comment = comments.get_model().objects.create(
             comment='My Trackback 1', content_object=self.entry, site=site)
-        comment.flags.create(user=author, flag='trackback')
+        comment.flags.create(user=author, flag=TRACKBACK)
         self.assertEquals(self.entry.discussions.count(), 4)
         self.assertEquals(self.entry.comments.count(), 2)
         self.assertEquals(self.entry.pingbacks.count(), 1)

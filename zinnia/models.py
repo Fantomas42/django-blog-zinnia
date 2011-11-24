@@ -31,6 +31,7 @@ from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
 from zinnia.managers import AuthorPublishedManager
+from zinnia.managers import PINGBACK, TRACKBACK
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.moderator import EntryCommentModerator
 from zinnia.url_shortener import get_url_shortener
@@ -224,12 +225,12 @@ class EntryAbstractClass(models.Model):
     @property
     def pingbacks(self):
         """Return published pingbacks"""
-        return self.discussions.filter(flags__flag='pingback')
+        return self.discussions.filter(flags__flag=PINGBACK)
 
     @property
     def trackbacks(self):
         """Return published trackbacks"""
-        return self.discussions.filter(flags__flag='trackback')
+        return self.discussions.filter(flags__flag=TRACKBACK)
 
     @property
     def comments_are_open(self):
