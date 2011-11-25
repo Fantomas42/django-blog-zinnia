@@ -24,7 +24,6 @@ class Command(NoArgsCommand):
                         'categories': Category.objects.all(),
                         'tags': Tag.objects.usage_for_model(Entry),
                         'version': __version__,
-                        'description': 'Blog exported for django-blog-zinnia',
                         'language': settings.LANGUAGE_CODE,
                         'site': site,
                         'site_url': '%s://%s' % (PROTOCOL, site.domain)}
