@@ -16,7 +16,7 @@ $tab-nav-img-width: $tab-nav-height * $slider-width / $slider-height;
   width: $slider-width;
   padding-right: $tab-nav-width;
   position: relative;
-  height: $slider-height overflow hidden;
+  height: $slider-height;
   margin-bottom: 1em;
   ul.ui-tabs-nav {
     list-style: none;
