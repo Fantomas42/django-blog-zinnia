@@ -1,6 +1,6 @@
 {% load i18n %}
 {% for entry in entries %}
-  {% with object=entry object_content=entry.html_content|truncatewords_html:100|safe %}
+  {% with object=entry object_content=entry.html_content|truncatewords_html:100|safe continue_reading=1 %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 {% empty %}

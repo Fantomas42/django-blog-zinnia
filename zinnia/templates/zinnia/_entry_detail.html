@@ -39,6 +39,13 @@
     {% endif %}
     <div class="entry-content">
       {{ object_content }}
+      {% if continue_reading %}
+      <p class="continue-reading">
+        <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+          {% trans "Continue reading" %}
+        </a>
+      </p>
+      {% endif %}
     </div>
   </div>
 

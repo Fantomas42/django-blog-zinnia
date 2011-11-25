@@ -72,6 +72,12 @@ p.entry-info {
   }
 }
 
+.continue-reading {
+  a:after {
+    content: "\21d2";
+  }
+}
+
 .entry-footer p {
   margin: 0;
 }
