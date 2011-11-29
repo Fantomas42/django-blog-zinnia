@@ -46,7 +46,7 @@
 }
 
 #widget-tags {
-  ul { @include tag-cloud(1.4em); }
+  ul.tags { @include tag-cloud(1.4em); }
 }
 
 #widget-populars {
