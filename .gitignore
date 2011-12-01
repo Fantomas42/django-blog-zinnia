@@ -22,5 +22,5 @@ docs/api
 docs/build
 docs/coverage
 docs/tests.xml
-demo/demo.db
+demo/demo.db*
 django_blog_zinnia.egg-info/
