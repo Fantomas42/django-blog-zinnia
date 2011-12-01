@@ -1,0 +1,28 @@
+
+  ____..--'.-./`) ,---.   .--.,---.   .--..-./`)    ____
+ |        |\ .-.')|    \  |  ||    \  |  |\ .-.') .'  __ `.
+ |   .-'  '/ `-' \|  ,  \ |  ||  ,  \ |  |/ `-' \/   '  \  \
+ |.-'.'   / `-'`"`|  |\_ \|  ||  |\_ \|  | `-'`"`|___|  /  |
+    /   _/  .---. |  _( )_\  ||  _( )_\  | .---.    _.-`   |
+  .'._( )_  |   | | (_ o _)  || (_ o _)  | |   | .'   _    |
+.'  (_'o._) |   | |  (_,_)\  ||  (_,_)\  | |   | |  _( )_  |
+|    (_,_)| |   | |  |    |  ||  |    |  | |   | \ (_ o _) /
+|_________| '---' '--'    '--''--'    '--' '---'  '.(_,_).' {{ ZINNIA_VERSION }}
+
+                          your Django powered weblog engine.
+
+/* TEAM */
+  Developer: Julien Fache
+  Nickname: Fantomas42
+  Site: http://fantomas.willbreak.it/
+  Twitter: @fantomas42
+  GitHub: https://github.com/Fantomas42/
+  Location: Paris, France
+
+
+/* THANKS */
+  My girlfriend, my mother and my brother for
+  their patience, love and presence.
+
+  All the contributors to the project:
+  http://django-blog-zinnia.com/documentation/thanks/

@@ -15,6 +15,10 @@ extra_context_opensearch.update({'copyright': COPYRIGHT,
                                  'feeds_format': FEEDS_FORMAT})
 
 urlpatterns = patterns('django.views.generic.simple',
+                       url(r'^humans.txt$', 'direct_to_template',
+                           {'template': 'zinnia/humans.txt',
+                            'mimetype': 'text/plain'},
+                           name='zinnia_humans'),
                        url(r'^rsd.xml$', 'direct_to_template',
                            {'template': 'zinnia/rsd.xml',
                             'mimetype': 'application/rsd+xml',
