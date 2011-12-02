@@ -9,6 +9,11 @@ class EntryPlaceholder(EntryAbstractClass):
 
     content_placeholder = PlaceholderField('content')
 
+    @property
+    def html_content(self):
+        """No additional formatting is necessary"""
+        return self.content
+
     class Meta:
         """EntryPlaceholder's Meta"""
         abstract = True
