@@ -72,11 +72,11 @@ class EntryFeed(ZinniaFeed):
     def item_enclosure_url(self, item):
         """Returns an image for enclosure"""
         if item.image:
-            return item.image.url
-
-        img = BeautifulSoup(item.html_content).find('img')
-        if img:
-            return urljoin(self.site_url, img['src'])
+            url = item.image.url
+        else:
+            img = BeautifulSoup(item.html_content).find('img')
+            url = img['src'] if img else None
+        return urljoin(self.site_url, url) if url else None
 
     def item_enclosure_length(self, item):
         """Hardcoded enclosure length"""
