@@ -4,8 +4,10 @@ CHANGELOG
 0.10
 ----
 
-* Better templates
+* Better default templates
+* CSS refactoring with Sass3
 * Statistics about the content
+* Improvement of the documentation
 * Django 1.2 is no longer supported
 
 0.9
