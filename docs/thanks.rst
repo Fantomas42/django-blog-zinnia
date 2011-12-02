@@ -14,6 +14,8 @@ this application greatest each day.
 * Jonathan Stoppani (GaretJax)
 * Elijah Rutschman (elijahr)
 * Thomas Bartelmess (tbartelmess)
+* Matthew Tretter (matthewwithanm)
+* Mohammad Taleb (simul14)
 * Franck Bret
 * Jason Davies
 * Brandon Taylor
