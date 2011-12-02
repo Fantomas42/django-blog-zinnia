@@ -9,19 +9,24 @@
 
 {% block content %}
 <h2>{% trans "Category list" %}</h2>
-<div>
-  {% for object, structure in object_list|tree_info %}
-    {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
-      <a href="{{ object.get_absolute_url }}" title="{{ object }}">{{ object }}</a>
-      {% blocktrans count entry_count=object.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
-      {% if object.description %}<p>{{ object.description|striptags|safe }}</p>{% endif %}
-    {% for level in structure.closed_levels %}</li></ul>{% endfor %}
-  {% empty %}
-  <ul>
-    <li>
-      {% trans "No categories yet." %}
-    </li>
-  </ul>
-  {% endfor %}
-</div>
+
+<ul class="category-root">
+  {% recursetree object_list %}
+  <li>
+    <a href="{{ node.get_absolute_url }}" title="{{ node }}">{{ node }}</a>
+    {% blocktrans count entry_count=node.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+    {% if node.description %}<p>{{ node.description|striptags|safe }}</p>{% endif %}
+    {% if not node.is_leaf_node %}
+    <ul class="category-children category-{{ node.slug }}">
+      {{ children }}
+    </ul>
+    {% endif %}
+  </li>
+  {% endrecursetree %}
+  {% if not object_list %}
+  <li>
+    {% trans "No categories yet." %}
+  </li>
+  {% endif %}
+</ul>
 {% endblock %}

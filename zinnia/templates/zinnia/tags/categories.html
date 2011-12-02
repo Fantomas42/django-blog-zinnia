@@ -1,13 +1,19 @@
 {% load i18n mptt_tags %}
-{% for category, structure in categories|tree_info %}
-  {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
-    <a href="{{ category.get_absolute_url }}" title="{{ category.title }}">{{ category.title }}</a>
-    {% blocktrans count entry_count=category.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
-  {% for level in structure.closed_levels %}</li></ul>{% endfor %}
-  {% empty %}
-<ul>
+<ul class="category-root">
+  {% recursetree categories %}
+  <li>
+    <a href="{{ node.get_absolute_url }}" title="{{ node }}">{{ node }}</a>
+    {% blocktrans count entry_count=node.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+    {% if not node.is_leaf_node %}
+    <ul class="category-children category-{{ node.slug }}">
+      {{ children }}
+    </ul>
+    {% endif %}
+  </li>
+  {% endrecursetree %}
+  {% if not categories %}
   <li>
     {% trans "No categories yet." %}
   </li>
+  {% endif %}
 </ul>
-{% endfor %}
