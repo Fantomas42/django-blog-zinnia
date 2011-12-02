@@ -9,21 +9,20 @@
 
 {% block content %}
 <h2>{% trans "Author list" %}</h2>
-<div>
-  <ul>
-    {% for object in object_list %}
-    <li class="vcard">
-      <a href="{% url zinnia_author_detail object.username %}"
-         title="{{ object.username }}" class="fn nickname url">
-        {{ object.username }}
-      </a>
-      {% blocktrans count entry_count=object.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
-    </li>
-    {% empty %}
-    <li>
-      {% trans "No authors yet." %}
-    </li>
-    {% endfor %}
-  </ul>
-</div>
+
+<ul>
+  {% for object in object_list %}
+  <li class="vcard">
+    <a href="{% url zinnia_author_detail object.username %}"
+       title="{{ object.username }}" class="fn nickname url">
+      {{ object.username }}
+    </a>
+    {% blocktrans count entry_count=object.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+  </li>
+  {% empty %}
+  <li>
+    {% trans "No authors yet." %}
+  </li>
+  {% endfor %}
+</ul>
 {% endblock %}

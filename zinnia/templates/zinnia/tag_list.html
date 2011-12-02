@@ -9,18 +9,17 @@
 
 {% block content %}
 <h2>{% trans "Tag list" %}</h2>
-<div>
-  <ul>
-    {% for object in object_list %}
-    <li>
-      <a href="{% url zinnia_tag_detail object %}" title="{{ object }}">{{ object }}</a>
-      {% blocktrans count entry_count=object.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
-    </li>
-    {% empty %}
-    <li>
-      {% trans "No tags yet." %}
-    </li>
-    {% endfor %}
-  </ul>
-</div>
+
+<ul>
+  {% for object in object_list %}
+  <li>
+    <a href="{% url zinnia_tag_detail object %}" title="{{ object }}">{{ object }}</a>
+    {% blocktrans count entry_count=object.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+  </li>
+  {% empty %}
+  <li>
+    {% trans "No tags yet." %}
+  </li>
+  {% endfor %}
+</ul>
 {% endblock %}
