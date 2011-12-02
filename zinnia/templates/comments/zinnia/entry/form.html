@@ -2,8 +2,8 @@
 <form action="{% comment_form_target %}" method="post">
   {% csrf_token %}
   <fieldset>
-    <input type="hidden" name="next" value="{% url zinnia_discussion_success %}"/>
     <legend>{% trans "Post your comment" %}</legend>
+    <input type="hidden" name="next" value="{% url zinnia_discussion_success %}"/>
     {% for field in form %}
     {% if field.is_hidden %}{{ field }}{% else %}
     <div{% if field.errors %} class="error"{% endif %}{% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
