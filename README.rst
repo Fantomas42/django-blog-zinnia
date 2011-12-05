@@ -44,6 +44,7 @@ More than a long speech, here the list of the main features :
 * `WordPress conversion utility`_
 * `WYMeditor`_, `TinyMCE`_ and `MarkItUp`_ support
 * Ready to use and extendables templates
+* `Compass`_ and `Sass3`_ integration.
 * `Windows Live Writer`_ compatibility
 
 Examples
@@ -56,7 +57,6 @@ or you can visit these websites who use Zinnia.
 * `Professional Web Studio`_.
 * `mixedCase`_.
 * `MadCad's Page`_.
-* `SysVar`_.
 * `Tryolabs`_.
 
 If you are a proud user of Zinnia, send me the URL of your website and I
@@ -93,13 +93,14 @@ More information and help available at these URLs :
 .. _`MarkItUp`: http://markitup.jaysalvat.com/
 .. _`Blogger conversion utility`: http://django-blog-zinnia.com/documentation/import_export/#from-blogger-to-zinnia
 .. _`WordPress conversion utility`: http://django-blog-zinnia.com/documentation/import_export/#from-wordpress-to-zinnia
+.. _`Compass`: http://compass-style.org/
+.. _`Sass3`: http://sass-lang.com/
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
 .. _`Fantomas' side`: http://fantomas.willbreak.it/blog/
 .. _`Mobile version`: http://m.fantomas.willbreak.it/blog/
 .. _`Professional Web Studio`: http://www.professionalwebstudio.com/en/weblog/
 .. _`mixedCase`: http://www.mixedcase.nl/articles/
 .. _`MadCad's Page`: http://mad-cad.net/blog/
-.. _`SysVar`: http://sysvar.net/
 .. _`Tryolabs`: http://www.tryolabs.com/Blog/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://django-blog-zinnia.com/documentation/

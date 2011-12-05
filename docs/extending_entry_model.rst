@@ -73,16 +73,17 @@ and :file:`zinnia/plugins/admin.py`.
 
 .. note:: You have to respect **4 important rules** :
 
-          #. Do not import the Entry model in your file defining the
-             extended model because it will cause a circular importation.
+          #. Do not import the :class:`Entry` model in your file defining
+             the extended model because it will cause a circular
+             importation.
 
-          #. Do not put your abstract model in a file named models.py,
+          #. Do not put your abstract model in a file named :file:`models.py`,
              it will not work for a non obvious reason.
 
-          #. Don't forget to tell that your model is abstract. Otherwise a
+          #. Don't forget to tell that your model is `abstract`. Otherwise a
              table will be created and the extending process will not work
              as expected.
 
-          #. If you extend the Entry model after the syncdb command, you
-             will have to reset the Zinnia application to reflect your
-             changes.
+          #. If you extend the :class:`Entry` model after the syncdb
+             command, you will have to reset the Zinnia application to
+             reflect your changes.

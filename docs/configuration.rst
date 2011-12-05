@@ -129,7 +129,7 @@ Django-CMS
 
 .. module:: zinnia.plugins
 
-If you use `django-cms 2.0`_, Zinnia can be integrated into your pages,
+If you use `django-CMS 2.0`_, Zinnia can be integrated into your pages,
 thanks to the plugin system.
 
 Simply register :mod:`zinnia.plugins` in the :setting:`INSTALLED_APPS`
@@ -139,13 +139,17 @@ It will provides :class:`custom plugins<cms.plugin_base.CMSPluginBase>` for
 adding entries into your pages, an :class:`~cms.app_base.CMSApp` and
 :class:`~cms.menu_bases.CMSAttachMenu` classes for easy integration.
 
-If you want to use the plugin system of django-cms in your entries, an
+If you want to use the plugin system of django-CMS in your entries, an
 extended EntryModel with a :class:`~cms.models.fields.PlaceholderField` is
 provided.
 
-Add this line in your project's settings. ::
+Just add this line in your project's settings to use it. ::
 
   ZINNIA_ENTRY_BASE_MODEL = 'zinnia.plugins.placeholder.EntryPlaceholder'
+
+.. seealso::
+   :doc:`extending_entry_model` for more information about the extension
+   of the entry model.
 
 .. _zinnia-tinymce:
 
@@ -217,7 +221,7 @@ Insert something like this in your project's urls.py: ::
 .. _`TypePad AntiSpam`: http://antispam.typepad.com/
 .. _`django-bitly`: http://bitbucket.org/discovery/django-bitly/
 .. _`tweepy`: https://github.com/tweepy/tweepy
-.. _`django-cms 2.0`: http://www.django-cms.org/
+.. _`django-CMS 2.0`: http://www.django-cms.org/
 .. _`django-tinymce`: https://code.google.com/p/django-tinymce/
 .. _`installation instructions`: http://django-tinymce.googlecode.com/svn/trunk/docs/.build/html/index.html
 .. _`django-xmlrpc`: http://pypi.python.org/pypi/django-xmlrpc/
