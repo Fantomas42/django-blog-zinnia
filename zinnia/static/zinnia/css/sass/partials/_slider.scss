@@ -66,6 +66,9 @@ $tab-nav-img-width: $tab-nav-height * $slider-width / $slider-height;
       overflow: hidden;
       background: url(../img/trans.png);
       width: $slider-width - $info-padding * 2;
+      a {
+        color: lighten($link-color, 30%);
+      }
     }
     h2 {
       margin: 0;
