@@ -16,6 +16,7 @@
   }
 
   .top-navigation {
+    margin: 0;
     float: right;
     @include delimited-list("|");
     .sitemap {
