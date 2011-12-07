@@ -1,15 +1,13 @@
-// Here is where you can define your constants for your application and to configure the blueprint framework.
-// Feel free to delete these if you want keep the defaults:
+// Grid constants used by Susy
+$total-cols             : 12;
+$col-width              : 6em;
+$gutter-width           : 1em;
+$side-gutter-width      : $gutter-width;
+$show-grid-backgrounds  : false;
 
-$blueprint-grid-columns: 24;
-$blueprint-container-size: 950px;
-$blueprint-grid-margin: 10px;
-
+// Blueprint constants
 $blueprint-font-size: 12px;
 $blueprint-font-family: unquote("Arial, Helvetica, sans-serif");
-// Use this to calculate the width based on the total width.
-// Or you can set $blueprint-grid-width to a fixed value and unset $blueprint-container-size -- it will be calculated for you.
-$blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $blueprint-grid-columns - $blueprint-grid-margin;
 
 // Colors
 $font-color:         #333333;
