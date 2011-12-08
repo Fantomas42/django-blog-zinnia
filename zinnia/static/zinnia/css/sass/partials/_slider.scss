@@ -3,6 +3,7 @@ $number-of-items: 5;
 
 $slider-width: 400px;
 $slider-height: 250px;
+$panel-height: 70px;
 
 $nav-padding: 3px;
 $info-padding: 5px;
@@ -60,7 +61,7 @@ $tab-nav-img-width: $tab-nav-height * $slider-width / $slider-height;
       left: 0;
       bottom: 0;
       position: absolute;
-      height: 70px;
+      height: $panel-height;
       padding: $info-padding;
       color: white;
       overflow: hidden;
