@@ -82,7 +82,7 @@ contribution will be greatly appreciated.
 .. _writing-translations:
 
 Translations
-------------
+============
 
 If you want to contribute by updating a translation or adding a translation
 in your language, it's simple: create a account on Transifex.net and you
