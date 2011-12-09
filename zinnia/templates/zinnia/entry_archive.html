@@ -3,25 +3,10 @@
 
 {% block meta-description %}{% trans "Latest entries" %}{% endblock %}
 
-{% block script %}
-  {{ block.super }}
-  <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.ui.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $("#slider").tabs({ fx:{ opacity: "toggle"}}).tabs("rotate", 5000, true);
-      $("#slider").hover(
-        function() { $("#slider").tabs("rotate", 0, true); },
-        function() { $("#slider").tabs("rotate", 5000, true); });
-    });
-  </script>
-{% endblock %}
-
 {% block title %}{% trans "Latest entries" %}{% endblock %}
 
 {% block body-class %}{{ block.super }} archive home{% endblock %}
 
-{% block content %}
-{% get_featured_entries 5 "zinnia/tags/slider_entries.html" %}
-{{ block.super }}
+{% block slider %}
+  {% get_featured_entries 5 "zinnia/tags/slider_entries.html" %}
 {% endblock %}

@@ -13,7 +13,7 @@ $tab-nav-height: $slider-height / $number-of-items - 1;
 $tab-nav-img-height: $tab-nav-height - $nav-padding * 2;
 $tab-nav-img-width: $tab-nav-height * $slider-width / $slider-height;
 
-#slider {
+.slider {
   width: $slider-width;
   padding-right: $tab-nav-width;
   position: relative;

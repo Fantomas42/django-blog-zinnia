@@ -1,5 +1,6 @@
+{% load static %}
 {% if entries %}
-<div id="slider">
+<div class="slider">
   <ul class="ui-tabs-nav">
     {% for entry in entries %}
     <li class="ui-tabs-nav-item{% if forloop.first %} ui-tabs-selected{% endif %}"
@@ -23,4 +24,16 @@
   </div>
   {% endfor %}
 </div>
+
+{% get_static_prefix as STATIC_URL %}
+<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.ui.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $(".slider").tabs({ fx:{ opacity: "toggle"}}).tabs("rotate", 5000, true);
+      $(".slider").hover(
+        function() { $(".slider").tabs("rotate", 0, true); },
+        function() { $(".slider").tabs("rotate", 5000, true); });
+    });
+</script>
 {% endif %}
