@@ -1,13 +1,12 @@
 """Decorators for zinnia.views"""
 from functools import wraps
 
-from django.template import RequestContext
 from django.contrib.auth.views import login
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render_to_response
 from django.template.loader import get_template
 from django.template import TemplateDoesNotExist
+from django.template.response import TemplateResponse
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
 
@@ -40,8 +39,7 @@ def password(request, entry):
                 'zinnia_entry_%s_password' % entry.pk] = entry.password
             return redirect(entry)
         error = True
-    return render_to_response('zinnia/password.html', {'error': error},
-                              context_instance=RequestContext(request))
+    return TemplateResponse(request, 'zinnia/password.html', {'error': error})
 
 
 def protect_entry(view):

@@ -1,7 +1,6 @@
 """Views for Zinnia tags"""
-from django.template import RequestContext
-from django.shortcuts import render_to_response
 from django.template.defaultfilters import slugify
+from django.template.response import TemplateResponse
 
 from tagging.models import Tag
 from tagging.views import tagged_object_list
@@ -17,8 +16,7 @@ def tag_list(request, template_name='zinnia/tag_list.html'):
     try to simulate an object_list view"""
     tag_list = Tag.objects.usage_for_queryset(
         Entry.published.all(), counts=True)
-    return render_to_response(template_name, {'object_list': tag_list},
-                              context_instance=RequestContext(request))
+    return TemplateResponse(request, template_name, {'object_list': tag_list})
 
 
 def tag_detail(request, tag, page=None, **kwargs):
