@@ -34,6 +34,7 @@ LANGUAGES = (('en', gettext('English')),
              ('hu', gettext('Hungarian')),
              ('ru', gettext('Russian')),
              ('pl', gettext('Polish')),
+             ('hr_HR', gettext('Croatian')),
              ('pt_BR', gettext('Brazilian Portuguese')),
              ('zh_CN', gettext('Simplified Chinese')),)
 

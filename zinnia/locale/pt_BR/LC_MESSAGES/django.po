@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Daniel Izelli <izelli@gmail.com>, 2011.
 # rogerio rgrlinux <rgrlinux@gmail.com>, 2011.
 # Seta00 <reuben@seta00.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2011-04-12 13:21-0500\n"
-"PO-Revision-Date: 2011-04-12 18:21+0000\n"
+"POT-Creation-Date: 2011-12-09 08:51-0600\n"
+"PO-Revision-Date: 2011-12-09 14:52+0000\n"
 "Last-Translator: Fantomas42 <fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,246 +20,245 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: feeds.py:102 plugins/cms_plugins.py:23
+#: feeds.py:103 plugins/cms_plugins.py:23
 #: templates/zinnia/entry_archive.html:4
-#: templates/zinnia/entry_archive.html:25 templates/zinnia/entry_list.html:19
-#: tests/feeds.py:115
+#: templates/zinnia/entry_archive.html:20 templates/zinnia/entry_list.html:19
+#: tests/feeds.py:124
 msgid "Latest entries"
 msgstr "Últimos artigos"
 
-#: feeds.py:106 tests/feeds.py:117
+#: feeds.py:107 tests/feeds.py:127
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "Últimos artigos no site %s"
 
-#: feeds.py:126 tests/feeds.py:126
+#: feeds.py:127 tests/feeds.py:137
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Artigos na categoria %s"
 
-#: feeds.py:130 tests/feeds.py:128
+#: feeds.py:131 tests/feeds.py:140
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "Últimos artigos na categoria %s"
 
-#: feeds.py:150 tests/feeds.py:137
+#: feeds.py:151 tests/feeds.py:149
 #, python-format
 msgid "Entries for author %s"
 msgstr "Artigos do autor %s"
 
-#: feeds.py:154 tests/feeds.py:139
+#: feeds.py:155 tests/feeds.py:151
 #, python-format
 msgid "The latest entries by %s"
 msgstr "Últimos artigos por %s"
 
-#: feeds.py:175 tests/feeds.py:149
+#: feeds.py:176 tests/feeds.py:161
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Artigos com a tag %s"
 
-#: feeds.py:179 tests/feeds.py:151
+#: feeds.py:180 tests/feeds.py:163
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "Últimos artigos com a tag %s"
 
-#: feeds.py:199 tests/feeds.py:160
+#: feeds.py:203 tests/feeds.py:177
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr "Resultados da busca por '%s'"
 
-#: feeds.py:203 tests/feeds.py:162
+#: feeds.py:207 tests/feeds.py:180
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr "Os artigos contendo '%s'"
 
-#: feeds.py:245 tests/feeds.py:178
+#: feeds.py:252 tests/feeds.py:199
 #, python-format
 msgid "Discussions on %s"
 msgstr "Discussões sobre %s"
 
-#: feeds.py:249 tests/feeds.py:180
+#: feeds.py:256 tests/feeds.py:202
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "Últimas discussões sobre o artigo %s"
 
-#: feeds.py:267 tests/feeds.py:190
+#: feeds.py:274 tests/feeds.py:212
 #, python-format
 msgid "Comments on %s"
 msgstr "Comentários sobre %s"
 
-#: feeds.py:271 tests/feeds.py:192
+#: feeds.py:278 tests/feeds.py:215
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "Os comentários mais recentes para o artigo  %s"
 
-#: feeds.py:301 tests/feeds.py:206
+#: feeds.py:308 tests/feeds.py:231
 #, python-format
 msgid "Pingbacks on %s"
 msgstr "Pingbacks sobre %s"
 
-#: feeds.py:305 tests/feeds.py:208
+#: feeds.py:312 tests/feeds.py:234
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "Os últimos pingbacks sobre  o artigo %s"
 
-#: feeds.py:323 tests/feeds.py:218
+#: feeds.py:330 tests/feeds.py:244
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "Trackbacks sobre %s"
 
-#: feeds.py:327 tests/feeds.py:220
+#: feeds.py:334 tests/feeds.py:247
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "Os últimos trackbacks sobre o artigo %s"
 
-#: models.py:64 models.py:105 admin/entry.py:73
+#: models.py:65 models.py:106 admin/entry.py:75
 msgid "title"
 msgstr "título"
 
-#: models.py:65 models.py:119
+#: models.py:66 models.py:121
 msgid "used for publication"
 msgstr "utilizados para publicação"
 
-#: models.py:67
+#: models.py:68
 msgid "description"
 msgstr "descrição"
 
-#: models.py:70 admin/forms.py:18
+#: models.py:71 admin/forms.py:19
 msgid "parent category"
 msgstr "categoria pai"
 
-#: models.py:95
+#: models.py:96
 msgid "category"
 msgstr "categoria"
 
-#: models.py:96 models.py:114 admin/forms.py:47 plugins/models.py:24
+#: models.py:97 models.py:115 admin/forms.py:47 plugins/models.py:25
 msgid "categories"
 msgstr "categorias"
 
-#: models.py:101
+#: models.py:102
 msgid "draft"
 msgstr "projeto"
 
-#: models.py:102
+#: models.py:103
 msgid "hidden"
 msgstr "oculto"
 
-#: models.py:103
+#: models.py:104
 msgid "published"
 msgstr "publicado"
 
-#: models.py:107
+#: models.py:108
 msgid "image"
 msgstr "imagem"
 
-#: models.py:108
+#: models.py:109
 msgid "used for illustration"
 msgstr "utilizados para ilustração"
 
-#: models.py:109
+#: models.py:110
 msgid "content"
 msgstr "conteúdo"
 
-#: models.py:110
+#: models.py:111
 msgid "excerpt"
 msgstr "resumo"
 
-#: models.py:111
+#: models.py:112
 msgid "optional element"
 msgstr "elemento opcional"
 
-#: models.py:113 plugins/models.py:30
+#: models.py:114 plugins/models.py:32
 msgid "tags"
 msgstr "tags"
 
-#: models.py:116
+#: models.py:118
 msgid "related entries"
 msgstr "artigos relacionados"
 
-#: models.py:123 plugins/models.py:28
+#: models.py:125 plugins/models.py:30
 msgid "authors"
 msgstr "autores"
 
-#: models.py:126
+#: models.py:129
 msgid "featured"
 msgstr "featured"
 
-#: models.py:127 admin/entry.py:124
+#: models.py:130 admin/entry.py:127
 msgid "comment enabled"
 msgstr "comentário habilitado"
 
-#: models.py:128
+#: models.py:131
 msgid "linkback enabled"
 msgstr "linkback habilitado"
 
-#: models.py:130
+#: models.py:133
 msgid "creation date"
 msgstr "data de criação"
 
-#: models.py:131
+#: models.py:135
 msgid "last update"
 msgstr "última atualização"
 
-#: models.py:132
+#: models.py:136
 msgid "start publication"
 msgstr "início da publicação"
 
-#: models.py:133
+#: models.py:137
 msgid "date start publish"
 msgstr "data de início da publicação"
 
-#: models.py:135
+#: models.py:139
 msgid "end publication"
 msgstr "publicação final"
 
-#: models.py:136
+#: models.py:140
 msgid "date end publish"
 msgstr "data de término da publicação"
 
-#: models.py:139
+#: models.py:143
 msgid "sites publication"
 msgstr "publicação sites"
 
-#: models.py:141
+#: models.py:147
 msgid "login required"
 msgstr "é necessário fazer login"
 
-#: models.py:142
+#: models.py:148
 msgid "only authenticated users can view the entry"
 msgstr "somente os usuários autenticados podem ver este artigo"
 
-#: models.py:143
+#: models.py:150
 msgid "password"
 msgstr "senha"
 
-#: models.py:144
+#: models.py:151
 msgid "protect the entry with a password"
 msgstr "proteger o artigo com uma senha"
 
-#: models.py:146 plugins/models.py:34 plugins/models.py:58
-#: plugins/models.py:80
+#: models.py:154 plugins/models.py:37 plugins/models.py:63
+#: plugins/models.py:87
 msgid "template"
 msgstr "modelo"
 
-#: models.py:149
+#: models.py:156
 msgid "Default template"
 msgstr "modelo padrão"
 
-#: models.py:151
+#: models.py:158
 msgid "template used to display the entry"
 msgstr "modelo usado para exibir o artigo"
 
-#: models.py:285
+#: models.py:289
 msgid "entry"
 msgstr "artigo"
 
-#: models.py:286 plugins/cms_plugins.py:21 plugins/cms_plugins.py:92
-#: plugins/cms_plugins.py:114 plugins/models.py:57
-#: templates/zinnia/base.html:40
+#: models.py:290 plugins/cms_plugins.py:21 plugins/cms_plugins.py:92
+#: plugins/cms_plugins.py:114 plugins/models.py:61
 msgid "entries"
 msgstr "artigos"
 
-#: moderator.py:45 moderator.py:72
+#: moderator.py:59 moderator.py:82 moderator.py:107
 #, python-format
 msgid "[%(site)s] New comment posted on \"%(title)s\""
 msgstr "[ %(site)s ] Novo comentário postado em \" %(title)s \""
@@ -267,139 +267,139 @@ msgstr "[ %(site)s ] Novo comentário postado em \" %(title)s \""
 msgid "tree path"
 msgstr "caminho de árvore"
 
-#: admin/entry.py:27 plugins/admin.py:17
+#: admin/entry.py:28 plugins/admin.py:17
 #: templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "Conteúdo"
 
-#: admin/entry.py:29 plugins/admin.py:19
+#: admin/entry.py:30 plugins/admin.py:20
 msgid "Options"
 msgstr "Opções"
 
-#: admin/entry.py:34 plugins/admin.py:24
+#: admin/entry.py:36 plugins/admin.py:26
 msgid "Privacy"
 msgstr "Privacidade"
 
-#: admin/entry.py:36 plugins/admin.py:26
+#: admin/entry.py:38 plugins/admin.py:28
 msgid "Discussion"
 msgstr "Discussão"
 
-#: admin/entry.py:38 plugins/admin.py:28
+#: admin/entry.py:40 plugins/admin.py:30
 msgid "Publication"
 msgstr "Publicação"
 
-#: admin/entry.py:66
+#: admin/entry.py:68
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i palavras)"
 
-#: admin/entry.py:70
+#: admin/entry.py:72
 #, python-format
 msgid "%(title)s (%(comments)i comments)"
 msgstr "%(title)s (%(comments)i comentários)"
 
-#: admin/entry.py:86
+#: admin/entry.py:88
 msgid "author(s)"
 msgstr "autor (es)"
 
-#: admin/entry.py:99
+#: admin/entry.py:101
 msgid "category(s)"
 msgstr "categoria (s)"
 
-#: admin/entry.py:111
+#: admin/entry.py:113
 msgid "tag(s)"
 msgstr "tag (s)"
 
-#: admin/entry.py:118
+#: admin/entry.py:121
 msgid "site(s)"
 msgstr "site (s)"
 
-#: admin/entry.py:130
+#: admin/entry.py:133
 msgid "is actual"
 msgstr "é atual"
 
-#: admin/entry.py:136
+#: admin/entry.py:139
 msgid "is visible"
 msgstr "é visível"
 
-#: admin/entry.py:141
+#: admin/entry.py:144
 msgid "View"
 msgstr "Ver"
 
-#: admin/entry.py:143
+#: admin/entry.py:146
 msgid "View on site"
 msgstr "Ver no site"
 
-#: admin/entry.py:149 templates/zinnia/_entry_detail.html:64
+#: admin/entry.py:152
 msgid "Unavailable"
 msgstr "Indisponível"
 
-#: admin/entry.py:153
+#: admin/entry.py:156
 msgid "short url"
 msgstr "url curta"
 
-#: admin/entry.py:207
+#: admin/entry.py:211
 msgid "The selected entries now belong to you."
 msgstr "Os artigos selecionados agora pertencem a você."
 
-#: admin/entry.py:208
+#: admin/entry.py:212
 msgid "Set the entries to the user"
 msgstr "Definir os artigos para o usuário"
 
-#: admin/entry.py:214
+#: admin/entry.py:219
 msgid "The selected entries are now marked as published."
 msgstr "Os artigos selecionados foram publicados."
 
-#: admin/entry.py:215
+#: admin/entry.py:220
 msgid "Set entries selected as published"
 msgstr "Definir artigos selecionados conforme publicado"
 
-#: admin/entry.py:220
+#: admin/entry.py:226
 msgid "The selected entries are now marked as hidden."
 msgstr "Os artigos selecionados foram escondidos."
 
-#: admin/entry.py:221
+#: admin/entry.py:227
 msgid "Set entries selected as hidden"
 msgstr "Definir artigos selecionados como oculto"
 
-#: admin/entry.py:234
+#: admin/entry.py:242
 msgid "The selected entries have been tweeted."
 msgstr "Os artigos selecionados foram twitados."
 
-#: admin/entry.py:235
+#: admin/entry.py:243
 msgid "Tweet entries selected"
 msgstr "Tweet artigos selecionados"
 
-#: admin/entry.py:240
+#: admin/entry.py:249
 msgid "Comments are now closed for selected entries."
 msgstr "Comentários foram desativados nos artigos selecionados."
 
-#: admin/entry.py:241
+#: admin/entry.py:250
 msgid "Close the comments for selected entries"
 msgstr "Feche os comentários para os artigos selecionados"
 
-#: admin/entry.py:247
+#: admin/entry.py:257
 msgid "Linkbacks are now closed for selected entries."
 msgstr "Linkbacks foram desativados nos artigos selecionados."
 
-#: admin/entry.py:248
+#: admin/entry.py:259
 msgid "Close the linkbacks for selected entries"
 msgstr "Feche os linkbacks para os artigos selecionados"
 
-#: admin/entry.py:254
+#: admin/entry.py:266
 msgid "The selected entries are now set at the current date."
 msgstr "Os artigos selecionados agora pertencem à data atual."
 
-#: admin/entry.py:255
+#: admin/entry.py:268
 msgid "Put the selected entries on top at the current date"
 msgstr "Colocar os artigos selecionados no topo por hoje"
 
-#: admin/entry.py:272
+#: admin/entry.py:287
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%(directory)s diretório pingado com sucesso %(success)d artigos."
 
-#: admin/entry.py:275
+#: admin/entry.py:291
 msgid "Ping Directories for selected entries"
 msgstr "Pingar diretórios para os artigos selecionados"
 
@@ -407,13 +407,13 @@ msgstr "Pingar diretórios para os artigos selecionados"
 msgid "No parent category"
 msgstr "Nenhuma categoria pai"
 
-#: admin/forms.py:35
+#: admin/forms.py:34
 msgid "A category cannot be parent of itself."
 msgstr "A categoria não pode ser pai de si mesmo."
 
-#: admin/forms.py:46 plugins/menu.py:70 templates/zinnia/base.html:22
-#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:50
-#: templatetags/zbreadcrumbs.py:49
+#: admin/forms.py:45 plugins/menu.py:70 templates/zinnia/base.html:36
+#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
+#: templatetags/zbreadcrumbs.py:50
 msgid "Categories"
 msgstr "Categorias"
 
@@ -433,7 +433,7 @@ msgstr "Avançado"
 msgid "Selected entries"
 msgstr "Artigos selecionados"
 
-#: plugins/cms_plugins.py:116 templates/zinnia/base.html:59
+#: plugins/cms_plugins.py:116 templates/zinnia/base.html:64
 msgid "Random entries"
 msgstr "Artigos aleatórios"
 
@@ -450,7 +450,7 @@ msgid "Zinnia Author Menu"
 msgstr "Zinnia Menu de Autor"
 
 #: plugins/menu.py:87 templates/zinnia/author_list.html:6
-#: templates/zinnia/base.html:26 templatetags/zbreadcrumbs.py:46
+#: templates/zinnia/base.html:40 templatetags/zbreadcrumbs.py:46
 msgid "Authors"
 msgstr "Autores"
 
@@ -459,7 +459,7 @@ msgid "Zinnia Tag Menu"
 msgstr "Zinnia Menu de Tag"
 
 #: plugins/menu.py:105 templates/admin/zinnia/widgets/quickpost.html:25
-#: templates/zinnia/_entry_detail.html:47 templates/zinnia/base.html:34
+#: templates/zinnia/_entry_detail.html:54 templates/zinnia/base.html:48
 #: templates/zinnia/tag_list.html:6 templatetags/zbreadcrumbs.py:43
 msgid "Tags"
 msgstr "Tags"
@@ -472,72 +472,72 @@ msgstr "Lista de artigos (padrão)"
 msgid "Entry detailed"
 msgstr "Artigo detalhado"
 
-#: plugins/models.py:27
+#: plugins/models.py:28
 msgid "include subcategories"
 msgstr "Incluir subcategorias"
 
-#: plugins/models.py:33 plugins/models.py:79
+#: plugins/models.py:35 plugins/models.py:85
 msgid "number of entries"
 msgstr "número de artigos"
 
-#: plugins/models.py:36 plugins/models.py:60 plugins/models.py:82
+#: plugins/models.py:39 plugins/models.py:65 plugins/models.py:89
 msgid "Template used to display the plugin"
 msgstr "Modelo usado para exibir o plugin"
 
-#: plugins/models.py:51 plugins/models.py:73 plugins/models.py:85
+#: plugins/models.py:54 plugins/models.py:78 plugins/models.py:92
 #, python-format
 msgid "%s entries"
 msgstr "%s  artigos"
 
-#: templates/404.html:5
+#: templates/404.html:6
 msgid "Error 404"
 msgstr "Erro 404"
 
-#: templates/404.html:8 templates/404.html.py:11
+#: templates/404.html:10 templates/404.html.py:15
 msgid "Page not found"
 msgstr "Página não encontrada"
 
-#: templates/404.html:13
+#: templates/404.html:17
 msgid "Sorry, but the requested page could not be found."
 msgstr "Desculpe, mas a página solicitada não pode ser encontrada."
 
-#: templates/404.html:15 templates/500.html:20
+#: templates/404.html:19 templates/500.html:19
 msgid "Useful links"
 msgstr "Links úteis"
 
-#: templates/404.html:19 templates/404.html.py:20 templates/500.html:24
-#: templates/500.html.py:25
+#: templates/404.html:23 templates/404.html.py:24 templates/500.html:23
+#: templates/500.html.py:24
 msgid "Blog index"
 msgstr "Índice do Blog"
 
-#: templates/404.html:24 templates/404.html.py:25 templates/500.html:29
-#: templates/500.html.py:30 templates/zinnia/sitemap.html:4
-#: templates/zinnia/sitemap.html.py:7 templates/zinnia/skeleton.html:36
-#: templates/zinnia/skeleton.html.py:37
+#: templates/404.html:28 templates/404.html.py:29 templates/500.html:28
+#: templates/500.html.py:29 templates/zinnia/sitemap.html:4
+#: templates/zinnia/sitemap.html.py:9 templates/zinnia/skeleton.html:31
+#: templates/zinnia/skeleton.html.py:32
 msgid "Sitemap"
 msgstr "Mapa do Site"
 
-#: templates/404.html:31 templates/500.html:36 templates/zinnia/base.html:47
+#: templates/404.html:35 templates/500.html:35 templates/zinnia/base.html:52
 msgid "Recent entries"
 msgstr "Artigos recentes"
 
-#: templates/404.html:36 templates/500.html:41 templates/zinnia/base.html:10
+#: templates/404.html:40 templates/500.html:40 templates/zinnia/base.html:24
 msgid "Search"
 msgstr "Pesquisa"
 
-#: templates/404.html:40 templates/500.html:45 templates/zinnia/base.html:13
+#: templates/404.html:44 templates/500.html:44 templates/zinnia/base.html:27
 msgid "Keywords..."
 msgstr "Palavras-chave ..."
 
-#: templates/500.html:10
+#: templates/500.html:6
 msgid "Error 500"
 msgstr "Erro 500"
 
-#: templates/500.html:13 templates/500.html.py:16
+#: templates/500.html:10 templates/500.html.py:15
 msgid "Server error"
 msgstr "Erro de servidor"
 
-#: templates/500.html:18
+#: templates/500.html:17
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
@@ -545,141 +545,208 @@ msgstr ""
 "Houve um erro. Foi relatado aos administradores do site via e-mail e deve "
 "ser corrigido em breve. Obrigado pela sua paciência."
 
-#: templates/admin/zinnia/widgets/_content_stats.html:4
+#: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
 msgstr "Conteúdos"
 
-#: templates/admin/zinnia/widgets/_content_stats.html:5
-#: templates/zinnia/_entry_detail.html:69
+#: templates/admin/zinnia/widgets/_content_stats.html:4
+#: templates/zinnia/_entry_detail.html:72
 msgid "Discussions"
 msgstr "Discussões"
 
-#: templates/admin/zinnia/widgets/_content_stats.html:10
+#: templates/admin/zinnia/widgets/_content_stats.html:9
+#: templates/zinnia/author_list.html:20 templates/zinnia/category_list.html:17
+#: templates/zinnia/sitemap.html:57 templates/zinnia/tag_list.html:17
+#: templates/zinnia/tags/authors.html:7
+#: templates/zinnia/tags/categories.html:6
+#: templates/zinnia/tags/statistics.html:7
+#: templates/zinnia/tags/tag_cloud.html:6
 #, python-format
-msgid "%(entries)s entries"
-msgstr " %(entries)s  artigos"
+msgid "%(entry_count)s entry"
+msgid_plural "%(entry_count)s entries"
+msgstr[0] "%(entry_count)s artigo"
+msgstr[1] "%(entry_count)s artigos"
 
-#: templates/admin/zinnia/widgets/_content_stats.html:15
+#: templates/admin/zinnia/widgets/_content_stats.html:14
+#: templates/zinnia/_entry_detail.html:76
+#: templates/zinnia/tags/statistics.html:16
 #, python-format
-msgid "%(comments)s comments"
-msgstr "%(comments)s comentários"
+msgid "%(comment_count)s comment"
+msgid_plural "%(comment_count)s comments"
+msgstr[0] "%(comment_count)s comentário"
+msgstr[1] "%(comment_count)s comentários"
 
-#: templates/admin/zinnia/widgets/_content_stats.html:22
+#: templates/admin/zinnia/widgets/_content_stats.html:21
+#: templates/zinnia/tags/statistics.html:13
 #, python-format
-msgid "%(categories)s categories"
-msgstr "%(categories)s categorias"
+msgid "%(category_count)s category"
+msgid_plural "%(category_count)s categories"
+msgstr[0] ""
+msgstr[1] ""
 
-#: templates/admin/zinnia/widgets/_content_stats.html:25
+#: templates/admin/zinnia/widgets/_content_stats.html:24
+#: templates/zinnia/_entry_detail.html:92
+#: templates/zinnia/tags/statistics.html:19
 #, python-format
-msgid "%(pingbacks)s pingbacks"
-msgstr "%(pingbacks)s pingbacks"
+msgid "%(pingback_count)s pingback"
+msgid_plural "%(pingback_count)s pingbacks"
+msgstr[0] "%(pingback_count)s pingbacks"
+msgstr[1] "%(pingback_count)s pingbacks"
 
-#: templates/admin/zinnia/widgets/_content_stats.html:30
+#: templates/admin/zinnia/widgets/_content_stats.html:29
+#: templates/zinnia/tags/statistics.html:10
 #, python-format
-msgid "%(tags)s tags"
-msgstr "%(tags)s tags"
+msgid "%(tag_count)s tag"
+msgid_plural "%(tag_count)s tags"
+msgstr[0] ""
+msgstr[1] ""
 
-#: templates/admin/zinnia/widgets/_content_stats.html:33
+#: templates/admin/zinnia/widgets/_content_stats.html:32
+#: templates/zinnia/_entry_detail.html:99
+#: templates/zinnia/tags/statistics.html:22
 #, python-format
-msgid "%(trackbacks)s trackbacks"
-msgstr "%(trackbacks)s trackbacks"
+msgid "%(trackback_count)s trackback"
+msgid_plural "%(trackback_count)s trackbacks"
+msgstr[0] "%(trackback_count)s trackbacks"
+msgstr[1] "%(trackback_count)s trackbacks"
 
-#: templates/admin/zinnia/widgets/_content_stats.html:38
+#: templates/admin/zinnia/widgets/_content_stats.html:37
+#: templates/zinnia/tags/statistics.html:4
 #, python-format
-msgid "%(authors)s authors"
-msgstr "%(authors)s autores"
+msgid "%(author_count)s author"
+msgid_plural "%(author_count)s authors"
+msgstr[0] ""
+msgstr[1] ""
 
-#: templates/admin/zinnia/widgets/_content_stats.html:43
+#: templates/admin/zinnia/widgets/_content_stats.html:42
+#: templates/zinnia/tags/statistics.html:25
 #, python-format
-msgid "%(rejects)s rejected"
-msgstr "%(rejects)s rejeitados"
+msgid "%(reject_count)s rejected item"
+msgid_plural "%(reject_count)s rejected items"
+msgstr[0] ""
+msgstr[1] ""
 
-#: templates/admin/zinnia/widgets/_draft_entries.html:7
-#: templates/zinnia/entry_detail.html:186
-#: templates/zinnia/entry_detail.html:187
+#: templates/admin/zinnia/widgets/_content_stats.html:47
+msgid "Statistics"
+msgstr ""
+
+#: templates/admin/zinnia/widgets/_content_stats.html:49
+#: templates/zinnia/tags/statistics.html:28
+#, python-format
+msgid "%(entries_per_month)s entries per month"
+msgstr ""
+
+#: templates/admin/zinnia/widgets/_content_stats.html:54
+#: templates/zinnia/tags/statistics.html:31
+#, python-format
+msgid "%(words_per_entry)s words per entry"
+msgstr ""
+
+#: templates/admin/zinnia/widgets/_content_stats.html:57
+#: templates/zinnia/tags/statistics.html:34
+#, python-format
+msgid "%(words_per_comment)s words per comment"
+msgstr ""
+
+#: templates/admin/zinnia/widgets/_content_stats.html:62
+#: templates/zinnia/tags/statistics.html:37
+#, python-format
+msgid "%(comments_per_entry)s comments per entry"
+msgstr ""
+
+#: templates/admin/zinnia/widgets/_content_stats.html:65
+#: templates/zinnia/tags/statistics.html:40
+#, python-format
+msgid "%(linkbacks_per_entry)s linkbacks per entry"
+msgstr ""
+
+#: templates/admin/zinnia/widgets/_draft_entries.html:6
+#: templates/zinnia/entry_detail.html:205
+#: templates/zinnia/entry_detail.html:206
 msgid "Edit the entry"
 msgstr "Editar o artigo"
 
-#: templates/admin/zinnia/widgets/_draft_entries.html:10
-#: templates/comments/zinnia_entry_preview.html:25
+#: templates/admin/zinnia/widgets/_draft_entries.html:9
+#: templates/comments/zinnia_entry_preview.html:23
 #: templates/feeds/comment_title.html:2
 #: templates/feeds/discussion_title.html:2
 #: templates/feeds/pingback_title.html:2
 #: templates/feeds/trackback_title.html:2
 #: templates/zinnia/_entry_detail.html:18
-#: templates/zinnia/entry_detail.html:91
-#: templates/zinnia/entry_detail.html:126
-#: templates/zinnia/entry_detail.html:157
+#: templates/zinnia/entry_detail.html:104
+#: templates/zinnia/entry_detail.html:138
+#: templates/zinnia/entry_detail.html:171
 msgid "on"
 msgstr "em"
 
-#: templates/admin/zinnia/widgets/_draft_entries.html:16
-#: templates/comments/zinnia/entry/form.html:19
+#: templates/admin/zinnia/widgets/_draft_entries.html:15
+#: templates/comments/zinnia/entry/form.html:18
 msgid "Preview"
 msgstr "Visualizar"
 
-#: templates/admin/zinnia/widgets/_draft_entries.html:23
+#: templates/admin/zinnia/widgets/_draft_entries.html:22
+#: templates/zinnia/tags/draft_entries.html:9
 msgid "No draft entries."
 msgstr "Não há entradas de rascunho."
 
+#: templates/admin/zinnia/widgets/_draft_entries.html:31
 #: templates/admin/zinnia/widgets/_draft_entries.html:32
-#: templates/admin/zinnia/widgets/_draft_entries.html:33
 msgid "View all draft entries"
 msgstr "Ver todas as entradas de rascunho"
 
-#: templates/admin/zinnia/widgets/_recent_comments.html:11
+#: templates/admin/zinnia/widgets/_recent_comments.html:10
 #: templates/zinnia/_entry_detail.html:24
-#: templates/zinnia/tags/recent_comments.html:7
-#: templates/zinnia/tags/recent_linkbacks.html:8
+#: templates/zinnia/tags/recent_comments.html:6
+#: templates/zinnia/tags/recent_linkbacks.html:7
 msgid "in"
 msgstr "em"
 
-#: templates/admin/zinnia/widgets/_recent_comments.html:14
-#: templates/zinnia/tags/recent_comments.html:9
+#: templates/admin/zinnia/widgets/_recent_comments.html:13
+#: templates/zinnia/tags/recent_comments.html:8
 msgid "Comment on"
 msgstr "Comentários sobre"
 
-#: templates/admin/zinnia/widgets/_recent_comments.html:23
+#: templates/admin/zinnia/widgets/_recent_comments.html:22
 msgid "Edit the comment"
 msgstr "Editar o comentário"
 
-#: templates/admin/zinnia/widgets/_recent_comments.html:24
-#: templates/admin/zinnia/widgets/_recent_linkbacks.html:19
+#: templates/admin/zinnia/widgets/_recent_comments.html:23
+#: templates/admin/zinnia/widgets/_recent_linkbacks.html:18
 msgid "Edit"
 msgstr "Editar"
 
-#: templates/admin/zinnia/widgets/_recent_comments.html:31
-#: templates/zinnia/_entry_detail.html:77
-#: templates/zinnia/entry_detail.html:107
-#: templates/zinnia/tags/recent_comments.html:16
+#: templates/admin/zinnia/widgets/_recent_comments.html:30
+#: templates/zinnia/_entry_detail.html:80
+#: templates/zinnia/entry_detail.html:118
+#: templates/zinnia/tags/recent_comments.html:15
 msgid "No comments yet."
 msgstr "Ainda não há comentários."
 
+#: templates/admin/zinnia/widgets/_recent_comments.html:39
 #: templates/admin/zinnia/widgets/_recent_comments.html:40
-#: templates/admin/zinnia/widgets/_recent_comments.html:41
 msgid "Manage the comments"
 msgstr "Gerenciar os comentários"
 
-#: templates/admin/zinnia/widgets/_recent_linkbacks.html:8
+#: templates/admin/zinnia/widgets/_recent_linkbacks.html:7
 msgid "made a linkback on"
 msgstr "fez um linkback em"
 
-#: templates/admin/zinnia/widgets/_recent_linkbacks.html:18
+#: templates/admin/zinnia/widgets/_recent_linkbacks.html:17
 msgid "Edit the linkback"
 msgstr "Editar o linkback"
 
-#: templates/admin/zinnia/widgets/_recent_linkbacks.html:26
-#: templates/zinnia/tags/recent_linkbacks.html:17
+#: templates/admin/zinnia/widgets/_recent_linkbacks.html:25
+#: templates/zinnia/tags/recent_linkbacks.html:16
 msgid "No linkbacks yet."
 msgstr "Não linkbacks ainda."
 
 #: templates/admin/zinnia/widgets/content_stats.html:6
-#: templates/admin/zinnia/widgets/content_stats.html:7
+#: templates/admin/zinnia/widgets/content_stats.html:8
 msgid "Today"
 msgstr "Hoje"
 
 #: templates/admin/zinnia/widgets/draft_entries.html:6
-#: templates/admin/zinnia/widgets/draft_entries.html:7
+#: templates/admin/zinnia/widgets/draft_entries.html:8
 msgid "Draft entries"
 msgstr "Rascunho de artigos"
 
@@ -705,58 +772,61 @@ msgid "Publish"
 msgstr "Publicar"
 
 #: templates/admin/zinnia/widgets/recent_comments.html:6
-#: templates/admin/zinnia/widgets/recent_comments.html:7
-#: templates/zinnia/base.html:51
+#: templates/admin/zinnia/widgets/recent_comments.html:8
+#: templates/zinnia/base.html:56
 msgid "Recent comments"
 msgstr "Comentários recentes"
 
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:6
-#: templates/admin/zinnia/widgets/recent_linkbacks.html:7
-#: templates/zinnia/base.html:55
+#: templates/admin/zinnia/widgets/recent_linkbacks.html:8
+#: templates/zinnia/base.html:60
 msgid "Recent linkbacks"
 msgstr "Linkbacks recentes"
 
+#: templates/comments/comment_authors_email.txt:1
 #: templates/comments/comment_notification_email.txt:1
 #: templates/comments/comment_reply_email.txt:1
 #: templates/zinnia/entry_list.html:19
 msgid "Author"
 msgstr "Autor"
 
-#: templates/comments/comment_notification_email.txt:2
-msgid "Email"
-msgstr ""
-
-#: templates/comments/comment_notification_email.txt:3
-msgid "IP"
-msgstr ""
-
+#: templates/comments/comment_authors_email.txt:3
 #: templates/comments/comment_notification_email.txt:5
 #: templates/comments/comment_reply_email.txt:3
 msgid "Comment"
-msgstr ""
+msgstr "Comentário"
 
+#: templates/comments/comment_authors_email.txt:6
 #: templates/comments/comment_notification_email.txt:8
 #: templates/comments/comment_reply_email.txt:6
 msgid "View this comment"
-msgstr ""
+msgstr "Visualizar este comentário"
+
+#: templates/comments/comment_notification_email.txt:2
+msgid "Email"
+msgstr "Email"
+
+#: templates/comments/comment_notification_email.txt:3
+msgid "IP"
+msgstr "IP"
 
 #: templates/comments/comment_notification_email.txt:10
 msgid "Flag this comment"
-msgstr ""
+msgstr "Marcar este comentário"
 
 #: templates/comments/comment_notification_email.txt:12
 msgid "Delete this comment"
-msgstr ""
+msgstr "Apagar este comentário"
 
 #: templates/comments/comment_notification_email.txt:14
 msgid "Approve this comment"
-msgstr ""
+msgstr "Aprovar este comentário"
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
 msgstr "Visualizar comentário"
 
-#: templates/comments/zinnia_entry_preview.html:9
+#: templates/comments/zinnia_entry_preview.html:10
 msgid "Please correct following error."
 msgid_plural "Please correct following errors."
 msgstr[0] "Corrija o seguinte erro."
@@ -766,21 +836,21 @@ msgstr[1] "Corrija os seguintes erros."
 msgid "Preview of the comment"
 msgstr "Visualização do comentário"
 
-#: templates/comments/zinnia/entry/form.html:7
+#: templates/comments/zinnia/entry/form.html:5
 msgid "Post your comment"
 msgstr "Envie seu comentário"
 
-#: templates/comments/zinnia/entry/form.html:18
+#: templates/comments/zinnia/entry/form.html:17
 msgid "Post"
 msgstr "Enviar"
 
 #: templates/comments/zinnia/entry/posted.html:4
-#: templates/comments/zinnia/entry/posted.html:7
+#: templates/comments/zinnia/entry/posted.html:9
 msgid "Thanks for your comment"
 msgstr "Obrigado pelo seu comentário"
 
-#: templates/comments/zinnia/entry/posted.html:9
-#: templates/comments/zinnia/entry/posted.html:10
+#: templates/comments/zinnia/entry/posted.html:11
+#: templates/comments/zinnia/entry/posted.html:12
 msgid "Return to entry list"
 msgstr "Voltar à lista de artigos"
 
@@ -790,67 +860,48 @@ msgstr "Escrito por"
 
 #: templates/zinnia/_entry_detail.html:15
 #, python-format
-msgid "Show %(author)s entries"
-msgstr "Mostrar artigos do %(author)s "
+msgid "Show %(author)s's entries"
+msgstr ""
 
 #: templates/zinnia/_entry_detail.html:20
 msgid "Written on"
 msgstr "Escrito em"
 
-#: templates/zinnia/_entry_detail.html:53
+#: templates/zinnia/_entry_detail.html:45
+msgid "Continue reading"
+msgstr ""
+
+#: templates/zinnia/_entry_detail.html:60
 msgid "No tags"
 msgstr "Não há tags"
 
-#: templates/zinnia/_entry_detail.html:58
+#: templates/zinnia/_entry_detail.html:65
 msgid "Short url"
 msgstr "url curta"
 
-#: templates/zinnia/_entry_detail.html:73
-#, python-format
-msgid "%(comment_count)s comment"
-msgid_plural "%(comment_count)s comments"
-msgstr[0] "%(comment_count)s comentário"
-msgstr[1] "%(comment_count)s comentários"
-
-#: templates/zinnia/_entry_detail.html:79
+#: templates/zinnia/_entry_detail.html:82
 msgid "Be first to comment!"
 msgstr "Seja o primeiro a comentar!"
 
-#: templates/zinnia/_entry_detail.html:82
-#: templates/zinnia/entry_detail.html:103
-#: templates/zinnia/entry_detail.html:109
+#: templates/zinnia/_entry_detail.html:85
+#: templates/zinnia/entry_detail.html:114
+#: templates/zinnia/entry_detail.html:120
 msgid "Comments are closed."
 msgstr "Comentários estão fechados."
 
-#: templates/zinnia/_entry_detail.html:89
-#, python-format
-msgid "%(pingback_count)s pingback"
-msgid_plural "%(pingback_count)s pingbacks"
-msgstr[0] "%(pingback_count)s pingbacks"
-msgstr[1] "%(pingback_count)s pingbacks"
-
-#: templates/zinnia/_entry_detail.html:96
-#, python-format
-msgid "%(trackback_count)s trackback"
-msgid_plural "%(trackback_count)s trackbacks"
-msgstr[0] "%(trackback_count)s trackbacks"
-msgstr[1] "%(trackback_count)s trackbacks"
-
-#: templates/zinnia/author_list.html:4 templates/zinnia/author_list.html:9
+#: templates/zinnia/author_list.html:4 templates/zinnia/author_list.html:11
 msgid "Author list"
 msgstr "Lista de autores"
 
-#: templates/zinnia/author_list.html:18 templates/zinnia/category_list.html:14
-#: templates/zinnia/sitemap.html:55 templates/zinnia/tag_list.html:16
-#: templates/zinnia/tags/authors.html:8
-#: templates/zinnia/tags/categories.html:6
-#, python-format
-msgid "%(entry_count)s entry"
-msgid_plural "%(entry_count)s entries"
-msgstr[0] "%(entry_count)s artigo"
-msgstr[1] "%(entry_count)s artigos"
+#: templates/zinnia/author_list.html:24 templates/zinnia/tags/authors.html:11
+msgid "No authors yet."
+msgstr "Nenhum autor ainda."
 
-#: templates/zinnia/base.html:15
+#: templates/zinnia/base.html:14 templates/zinnia/skeleton.html:36
+msgid "RSS Feed of latest entries"
+msgstr "RSS Feed dos últimos artigos"
+
+#: templates/zinnia/base.html:29 templates/zinnia/entry_search.html:41
 msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
@@ -860,113 +911,119 @@ msgstr ""
 "frases exatas e os operadores AND/OR  combinados com parênteses para uma "
 "busca mais complexa."
 
-#: templates/zinnia/base.html:30
+#: templates/zinnia/base.html:44
 msgid "Calendar"
 msgstr "Calendário"
 
-#: templates/zinnia/base.html:63
+#: templates/zinnia/base.html:68
 msgid "Popular entries"
 msgstr "Artigos mais populares"
 
-#: templates/zinnia/base.html:67 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:72 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_day.html:6
-#: templates/zinnia/entry_archive_day.html:9
+#: templates/zinnia/entry_archive_day.html:11
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_month.html:6
-#: templates/zinnia/entry_archive_month.html:9
+#: templates/zinnia/entry_archive_month.html:11
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/entry_archive_year.html:6
-#: templates/zinnia/entry_archive_year.html:9
+#: templates/zinnia/entry_archive_year.html:11
 #: templates/zinnia/tags/archives_entries.html:5
 #: templates/zinnia/tags/archives_entries_link.html:2
-#: templates/zinnia/tags/archives_entries_tree.html:7
-#: templates/zinnia/tags/archives_entries_tree.html:14
-#: templates/zinnia/tags/archives_entries_tree.html:24
+#: templates/zinnia/tags/archives_entries_tree.html:6
+#: templates/zinnia/tags/archives_entries_tree.html:13
+#: templates/zinnia/tags/archives_entries_tree.html:23
 msgid "Archives"
 msgstr "Arquivos"
 
-#: templates/zinnia/base.html:72
+#: templates/zinnia/base.html:77
 msgid "Tools"
 msgstr "Ferramentas"
 
-#: templates/zinnia/base.html:76 templates/zinnia/base.html.py:77
+#: templates/zinnia/base.html:81 templates/zinnia/base.html.py:82
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: templates/zinnia/base.html:83 templates/zinnia/base.html.py:84
+#: templates/zinnia/base.html:88 templates/zinnia/base.html.py:89
 msgid "Post an entry"
 msgstr "Enviar um comentário"
 
-#: templates/zinnia/base.html:91 templates/zinnia/base.html.py:92
+#: templates/zinnia/base.html:96 templates/zinnia/base.html.py:97
 msgid "Log out"
 msgstr "Sair da sessão"
 
-#: templates/zinnia/category_list.html:4 templates/zinnia/category_list.html:9
+#: templates/zinnia/category_list.html:4
+#: templates/zinnia/category_list.html:11
 msgid "Category list"
 msgstr "Lista de categorias"
 
-#: templates/zinnia/entry_archive_month.html:13
+#: templates/zinnia/category_list.html:28 templates/zinnia/sitemap.html:62
+#: templates/zinnia/tags/categories.html:16
+msgid "No categories yet."
+msgstr "Não há categorias ainda."
+
+#: templates/zinnia/entry_archive_month.html:15
 msgid "Daily archives"
 msgstr "Arquivos diários"
 
-#: templates/zinnia/entry_archive_year.html:13
-#: templates/zinnia/sitemap.html:67
+#: templates/zinnia/entry_archive_year.html:15
+#: templates/zinnia/sitemap.html:69
 msgid "Monthly archives"
 msgstr "Arquivos mensais"
 
-#: templates/zinnia/entry_detail.html:10
+#: templates/zinnia/entry_detail.html:21
 msgid "RSS Feed of discussions on"
 msgstr "RSS Feed das discussões"
 
-#: templates/zinnia/entry_detail.html:11
+#: templates/zinnia/entry_detail.html:23
 msgid "RSS Feed of comments on"
 msgstr "RSS Feed dos comentários"
 
-#: templates/zinnia/entry_detail.html:12
+#: templates/zinnia/entry_detail.html:25
 msgid "RSS Feed of pingbacks on"
 msgstr "RSS Feed das pingbacks"
 
-#: templates/zinnia/entry_detail.html:13
+#: templates/zinnia/entry_detail.html:27
 msgid "RSS Feed of trackbacks on"
 msgstr "RSS Feed dos trackbacks"
 
-#: templates/zinnia/entry_detail.html:29
+#: templates/zinnia/entry_detail.html:47
 msgid "Next entry"
 msgstr "Próximo artigo"
 
-#: templates/zinnia/entry_detail.html:43
+#: templates/zinnia/entry_detail.html:59
 msgid "Previous entry"
 msgstr "Artigo anterior"
 
-#: templates/zinnia/entry_detail.html:56
+#: templates/zinnia/entry_detail.html:70
 msgid "Related entries"
 msgstr "Artigos relacionados"
 
-#: templates/zinnia/entry_detail.html:67
+#: templates/zinnia/entry_detail.html:81
 msgid "Similar entries"
 msgstr "Artigos semelhantes"
 
-#: templates/zinnia/entry_detail.html:75
+#: templates/zinnia/entry_detail.html:89
 msgid "Comments"
 msgstr "Comentários"
 
-#: templates/zinnia/entry_detail.html:117
+#: templates/zinnia/entry_detail.html:129
 msgid "Pingbacks"
 msgstr "Pingbacks"
 
-#: templates/zinnia/entry_detail.html:139
+#: templates/zinnia/entry_detail.html:151
 msgid "Pingbacks are open."
 msgstr "Pingbacks estão abertas."
 
-#: templates/zinnia/entry_detail.html:141
+#: templates/zinnia/entry_detail.html:153
 msgid "Pingbacks are closed."
 msgstr "Pingbacks estão fechados."
 
-#: templates/zinnia/entry_detail.html:148
+#: templates/zinnia/entry_detail.html:163
 msgid "Trackbacks"
 msgstr "Trackbacks"
 
-#: templates/zinnia/entry_detail.html:170
+#: templates/zinnia/entry_detail.html:186
 msgid "Trackback URL"
 msgstr "Trackback URL"
 
@@ -991,7 +1048,7 @@ msgid "page"
 msgstr "na página"
 
 #: templates/zinnia/entry_list.html:9 templates/zinnia/entry_list.html:12
-#: templates/zinnia/entry_list.html:15 templates/zinnia/skeleton.html:40
+#: templates/zinnia/entry_list.html:15 templates/zinnia/skeleton.html:37
 msgid "RSS Feed"
 msgstr "RSS Feed"
 
@@ -999,7 +1056,7 @@ msgstr "RSS Feed"
 msgid "Category"
 msgstr "Categoria"
 
-#: templates/zinnia/entry_list.html:19 templates/zinnia/entry_list.html:30
+#: templates/zinnia/entry_list.html:19 templates/zinnia/entry_list.html:32
 msgid "Tag"
 msgstr "Tag"
 
@@ -1007,53 +1064,36 @@ msgstr "Tag"
 msgid "Page"
 msgstr "Página"
 
-#: templates/zinnia/entry_list.html:34
+#: templates/zinnia/entry_list.html:36
 #, python-format
 msgid "Entries by %(author)s"
 msgstr "Artigos por %(author)s"
 
-#: templates/zinnia/entry_list.html:45 templates/zinnia/sitemap.html:23
-#: templates/zinnia/sitemap.html.py:43
-#: templates/zinnia/cms/entry_detail.html:12
+#: templates/zinnia/entry_list.html:44 templates/zinnia/sitemap.html:25
+#: templates/zinnia/sitemap.html.py:45
+#: templates/zinnia/cms/entry_detail.html:7
 #: templates/zinnia/cms/entry_list.html:9
 #: templates/zinnia/tags/featured_entries.html:9
-#: templates/zinnia/tags/popular_entries.html:13
+#: templates/zinnia/tags/popular_entries.html:12
 #: templates/zinnia/tags/random_entries.html:9
 #: templates/zinnia/tags/recent_entries.html:9
 msgid "No entries yet."
 msgstr "Não há artigos ainda."
 
-#: templates/zinnia/entry_list.html:51 templates/zinnia/entry_search.html:40
-#, python-format
-msgid "Page %(current_page)s of %(total_page)s"
-msgstr "Página %(current_page)s de %(total_page)s"
-
-#: templates/zinnia/entry_list.html:56 templates/zinnia/entry_search.html:45
-msgid "More recent entries"
-msgstr "Artigos mais recentes"
-
-#: templates/zinnia/entry_list.html:65 templates/zinnia/entry_search.html:54
-msgid "Entries page"
-msgstr "Página de artigos"
-
-#: templates/zinnia/entry_list.html:72 templates/zinnia/entry_search.html:61
-msgid "More old entries"
-msgstr "Artigos mais antigos"
-
-#: templates/zinnia/entry_list.html:82 templates/zinnia/entry_list.html:83
+#: templates/zinnia/entry_list.html:55 templates/zinnia/entry_list.html:56
 msgid "Edit the category"
 msgstr "Editar a categoria"
 
-#: templates/zinnia/entry_list.html:89 templates/zinnia/entry_list.html:90
+#: templates/zinnia/entry_list.html:62 templates/zinnia/entry_list.html:63
 msgid "Edit the tag"
 msgstr "Editar o tag"
 
-#: templates/zinnia/entry_list.html:96 templates/zinnia/entry_list.html:97
+#: templates/zinnia/entry_list.html:69 templates/zinnia/entry_list.html:70
 msgid "Edit the author"
 msgstr "Editar o autor"
 
 #: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:6
-#: templates/zinnia/entry_search.html:14
+#: templates/zinnia/entry_search.html:16
 msgid "Search results for"
 msgstr "Resultados da busca por"
 
@@ -1061,101 +1101,100 @@ msgstr "Resultados da busca por"
 msgid "RSS Feed of search result of"
 msgstr "RSS Feed do resultado da pesquisa de"
 
-#: templates/zinnia/entry_search.html:22
+#: templates/zinnia/entry_search.html:24
 #, python-format
 msgid "%(entry_count)s entry found"
 msgid_plural "%(entry_count)s entries found"
 msgstr[0] "%(entry_count)s artigo encontrado"
 msgstr[1] "%(entry_count)s artigos encontrados"
 
-#: templates/zinnia/entry_search.html:34
+#: templates/zinnia/entry_search.html:33
 msgid "Nothing found."
 msgstr "Nada foi encontrado."
 
-#: templates/zinnia/login.html:4 templates/zinnia/login.html.py:7
+#: templates/zinnia/login.html:4 templates/zinnia/login.html.py:9
 msgid "Login required"
 msgstr "Login necessário"
 
-#: templates/zinnia/login.html:12
+#: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 "Seu nome de usuário e a senha não correspondem. Por favor, tente novamente."
 
-#: templates/zinnia/login.html:16
+#: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
 msgstr "Você precisa estar conectado para visualizar este comentário."
 
-#: templates/zinnia/login.html:33
+#: templates/zinnia/login.html:34
 msgid "Login"
 msgstr "Login"
 
-#: templates/zinnia/password.html:4 templates/zinnia/password.html.py:7
+#: templates/zinnia/password.html:4 templates/zinnia/password.html.py:9
 msgid "Password required"
 msgstr "Senha necessária"
 
-#: templates/zinnia/password.html:12
+#: templates/zinnia/password.html:13
 msgid "The password provided is not valid. Please try again."
 msgstr "A senha fornecida não é válida. Por favor, tente novamente."
 
-#: templates/zinnia/password.html:16
+#: templates/zinnia/password.html:17
 msgid "You need to provide a password to view this entry."
 msgstr "É preciso fornecer uma senha para visualizar este artigo."
 
-#: templates/zinnia/password.html:23
+#: templates/zinnia/password.html:24
 msgid "Password"
 msgstr "Senha"
 
-#: templates/zinnia/password.html:28
+#: templates/zinnia/password.html:29
 msgid "Valid"
 msgstr "Válido"
 
-#: templates/zinnia/sitemap.html:10
+#: templates/zinnia/sitemap.html:12
 msgid "Entries per categories"
 msgstr "Artigos por categorias"
 
-#: templates/zinnia/sitemap.html:18 templates/zinnia/sitemap.html.py:38
-#: templates/zinnia/tags/popular_entries.html:8
+#: templates/zinnia/sitemap.html:20 templates/zinnia/sitemap.html.py:40
+#: templates/zinnia/tags/popular_entries.html:7
 msgid "comment"
 msgstr "comentário"
 
-#: templates/zinnia/sitemap.html:31
+#: templates/zinnia/sitemap.html:33
 msgid "All the entries"
 msgstr "Todas os artigos"
 
-#: templates/zinnia/sitemap.html:60 templates/zinnia/tags/categories.html:11
-msgid "No categories yet."
-msgstr "Não há categorias ainda."
-
-#: templates/zinnia/skeleton.html:27 templates/zinnia/skeleton.html.py:39
-msgid "RSS Feed of latest entries"
-msgstr "RSS Feed dos últimos artigos"
-
-#: templates/zinnia/tag_list.html:4 templates/zinnia/tag_list.html.py:9
+#: templates/zinnia/tag_list.html:4 templates/zinnia/tag_list.html.py:11
 msgid "Tag list"
 msgstr "Lista de tags"
 
-#: templates/zinnia/wlwmanifest.xml:40
-msgid "View site"
-msgstr ""
-
-#: templates/zinnia/wlwmanifest.xml:41
-msgid "Admin. site"
-msgstr ""
-
-#: templates/zinnia/wlwmanifest.xml:53
-msgid "Manage comments"
+#: templates/zinnia/tag_list.html:21 templates/zinnia/tags/tag_cloud.html:11
+msgid "No tags yet."
 msgstr ""
 
 #: templates/zinnia/tags/archives_entries.html:12
-#: templates/zinnia/tags/archives_entries_tree.html:38
+#: templates/zinnia/tags/archives_entries_tree.html:37
 msgid "No archives yet."
 msgstr "Não há arquivos ainda."
 
-#: templates/zinnia/tags/authors.html:12
-msgid "No authors yet."
-msgstr "Nenhum autor ainda."
+#: templates/zinnia/tags/pagination.html:4
+#, python-format
+msgid "Page %(current_page)s of %(total_page)s"
+msgstr "Página %(current_page)s de %(total_page)s"
 
-#: templates/zinnia/tags/recent_linkbacks.html:10
+#: templates/zinnia/tags/pagination.html:10
+msgid "More recent entries"
+msgstr "Artigos mais recentes"
+
+#: templates/zinnia/tags/pagination.html:20
+#: templates/zinnia/tags/pagination.html:33
+#: templates/zinnia/tags/pagination.html:47
+msgid "Entries page"
+msgstr "Página de artigos"
+
+#: templates/zinnia/tags/pagination.html:56
+msgid "More old entries"
+msgstr "Artigos mais antigos"
+
+#: templates/zinnia/tags/recent_linkbacks.html:9
 msgid "Linkback on"
 msgstr "Linkback em"
 
@@ -1163,11 +1202,11 @@ msgstr "Linkback em"
 msgid "No similar entries."
 msgstr "Não há artigos semelhantes."
 
-#: tests/views.py:165 views/search.py:18
+#: tests/views.py:222 views/search.py:18
 msgid "The pattern is too short"
 msgstr "O padrão é muito curto"
 
-#: tests/views.py:168 views/search.py:22
+#: tests/views.py:226 views/search.py:22
 msgid "No pattern to search found"
 msgstr "Nenhum padrão encontrado"
 
@@ -1188,7 +1227,7 @@ msgstr "Conta de usuário não disponível."
 msgid "User cannot %s."
 msgstr "Usuário não pode %s."
 
-#: xmlrpc/pingback.py:93
+#: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr "Sem título"
 
