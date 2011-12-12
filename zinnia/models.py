@@ -44,9 +44,9 @@ class Author(User):
     objects = models.Manager()
     published = AuthorPublishedManager()
 
-    def entries_published(self):
+    def entries_published(self, count=None):
         """Return only the entries published"""
-        return entries_published(self.entries)
+        return entries_published(self.entries, count)
 
     @models.permalink
     def get_absolute_url(self):
