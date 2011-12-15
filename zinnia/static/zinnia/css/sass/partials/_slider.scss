@@ -1,17 +1,17 @@
-$max-width: 630px;
+$max-width: 100%;
 $number-of-items: 5;
 
-$slider-width: 400px;
+$slider-width: 80%;
 $slider-height: 250px;
 $panel-height: 70px;
 
 $nav-padding: 3px;
-$info-padding: 5px;
+$info-padding: 3%;
 
 $tab-nav-width: $max-width - $slider-width;
 $tab-nav-height: $slider-height / $number-of-items - 1;
 $tab-nav-img-height: $tab-nav-height - $nav-padding * 2;
-$tab-nav-img-width: $tab-nav-height * $slider-width / $slider-height;
+$tab-nav-img-width: 30%;
 
 .slider {
   width: $slider-width;
@@ -24,11 +24,11 @@ $tab-nav-img-width: $tab-nav-height * $slider-width / $slider-height;
     padding: 0;
     margin: 0;
     top: 0;
-    left: $slider-width;
-    width: $tab-nav-width;
+    left: 64%;
     position: absolute;
     overflow: hidden;
     li {
+      width: 100%;
       a {
         display: block;
         height: $tab-nav-height;
@@ -55,7 +55,7 @@ $tab-nav-img-width: $tab-nav-height * $slider-width / $slider-height;
   }
   div.ui-tabs-panel {
     position: relative;
-    width: $slider-width;
+    width: 100%;
     height: $slider-height;
     .panel-info {
       left: 0;
