@@ -2,7 +2,8 @@
 Django Blog Zinnia
 ==================
 
-Simple yet powerful application for managing a blog within your Django Web site.
+Simple yet powerful and really extendable application for managing a blog
+within your Django Web site.
 
 Zinnia has been made for publishing Weblog entries and designed to do it well.
 
@@ -43,8 +44,8 @@ More than a long speech, here the list of the main features :
 * `Blogger conversion utility`_
 * `WordPress conversion utility`_
 * `WYMeditor`_, `TinyMCE`_ and `MarkItUp`_ support
-* Ready to use and extendables templates
-* `Compass`_ and `Sass3`_ integration.
+* Ready to use and extendable templates
+* `Compass`_ and `Sass3`_ integration
 * `Windows Live Writer`_ compatibility
 
 Examples
