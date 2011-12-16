@@ -42,6 +42,9 @@
 
   ul, ol {
     margin-left: 1em;
+    ul, ol {
+      margin-left: 0em;
+    }
   }
 }
 
@@ -54,7 +57,7 @@
 }
 
 #widget-search {
-  input { width: auto; }
+  input[type=text] { width: 70%; }
 }
 
 #widget-archives {
