@@ -65,6 +65,7 @@
 }
 
 table.calendar {
+  table-layout: fixed;
   caption, td, th {
     padding: 4px 0;
     text-align: center;
