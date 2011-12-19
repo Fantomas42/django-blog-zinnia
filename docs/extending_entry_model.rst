@@ -61,7 +61,7 @@ Finally extend the entry's admin class to show your custom field. ::
     # In our case we put the gallery field
     # into the 'Content' fieldset
     fieldsets = ((_('Content'), {'fields': (
-      'title', 'content', 'image', 'status', 'gallery')})) + \
+      'title', 'content', 'image', 'status', 'gallery')}),) + \
       EntryAdmin.fieldsets[1:]
 
   admin.site.unregister(Entry)
