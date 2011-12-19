@@ -26,7 +26,7 @@
     @include container;
     @include susy-grid-background;
   }
-  #header, #footer {
+  #header, #footer, .slider {
     @include full;
   }
   $third: floor($total-cols / 3);
