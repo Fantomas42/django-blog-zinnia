@@ -7,7 +7,7 @@
       <li class="slide slide-{{ forloop.counter }}">
 	<div class="slide-img">
 	  <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">
-            <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}" width="800" height="350"
+            <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}"
                  class="woo-image slide-image" />
           </a>
         </div>
@@ -30,12 +30,11 @@
 	    </ul>
 	  </header>
 	</article>
-      </li><!--/.slide-->
+      </li>
       {% endfor %}
-    </ul><!-- /.slides -->
-  </section><!-- /#featured -->
-</div><!-- /.slide-container -->
-
+    </ul>
+  </section>
+</div>
 {% get_static_prefix as STATIC_URL %}
 <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.flexslider.js"></script>

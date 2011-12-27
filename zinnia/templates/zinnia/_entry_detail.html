@@ -28,15 +28,7 @@
   </div>
 
   <div class="entry-body">
-    {% if object.image %}
-    <div class="entry-image">
-      <p>
-        <a href="{{ object.get_absolute_url }}" rel="bookmark">
-	  <img src="{{ object.image.url }}" alt="{{ object.title }}" class="left" />
-        </a>
-      </p>
-    </div>
-    {% endif %}
+
     <div class="entry-content">
       {{ object_content }}
       {% if continue_reading %}

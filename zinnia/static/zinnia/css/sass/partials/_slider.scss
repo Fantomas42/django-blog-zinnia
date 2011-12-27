@@ -4,7 +4,6 @@
   width: 100%;
   margin: 0 auto;
   padding: 0;
-  min-height: 350px; /* ARGH */
   background: url(../img/ico-loader.gif) no-repeat center center;
 }
 #featured .loaded {
@@ -66,6 +65,7 @@
     list-style: none outside none;
    }
   @include full;
+  /*@include pad(1, 1);*/
   /* end My customizations */
 }
 .slide-container.no-nav.no-pagi {
@@ -76,7 +76,7 @@
   bottom: 0;
   z-index: 9999;
   width: 100%;
-  margin: 10px auto 0;
+  /*margin: 10px auto 0; REMOVE */
   padding: 0;
   text-align: center;
   display: block;
@@ -157,4 +157,15 @@
 }
 #featured article.not-video header .featured-meta li {
     font-size: 1em;
+}
+
+.fix:before, .fix:after, .col-full:before, .col-full:after {
+   content: " ";
+   display: block;
+   height: 0;
+   overflow: hidden;
+}
+
+.fix:after, .col-full:after {
+    clear:both;
 }
