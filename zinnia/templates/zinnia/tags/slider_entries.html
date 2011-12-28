@@ -1,7 +1,7 @@
-{% load static %}
+{% load i18n static %}
 {% if entries %}
-<div class="slide-container ">
-  <section id="featured">
+<div class="slide-container">
+  <div id="featured">
     <ul class="slides fix">
       {% for entry in entries %}
       <li class="slide slide-{{ forloop.counter }}">
@@ -11,29 +11,34 @@
                  class="woo-image slide-image" />
           </a>
         </div>
-    	<article class="slide-content not-video">
-	  <header>
-	    <h1>
-              <a href="{{ entry.get_absolute_url }}" rel="bookmark"
-                 title="{{ entry.title }}">{{ entry.title }}</a>
-            </h1>
-	    <ul class="featured-meta">
-	      <li class="post-author">
-		<span class="small">by</span>
-		<a href="http://demo2.woothemes.com/currents/author/mjepson/" title="Posts by Magnus Jepson" rel="author">Magnus Jepson</a>
-              </li>
-	      <li class="post-category">
-		<a href="http://demo2.woothemes.com/currents/category/news/global/" title="View all posts in Global"
-                   rel="category tag">Global</a>,
-                <a href="http://demo2.woothemes.com/currents/category/news/politics/" title="View all posts in Politics" rel="category tag">Politics</a>
-              </li>
-	    </ul>
-	  </header>
-	</article>
+    	<div class="slide-content not-video">
+	  <h1>
+            <a href="{{ entry.get_absolute_url }}" rel="bookmark"
+               title="{{ entry.title }}">{{ entry.title }}</a>
+          </h1>
+	  <ul class="featured-meta">
+            {% if entry.authors.count %}
+	    <li class="post-author">
+	      {% trans "Written by" %}
+              {% for author in entry.authors.all %}
+              <a href="{% url zinnia_author_detail author %}" rel="author"
+                 title="{% blocktrans %}Show {{ author }}'s entries{% endblocktrans %}">{{ author }}</a>{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </li>
+            {% endif %}
+            {% if entry.categories.count %}
+	    <li class="post-category">
+              {% for category in entry.categories.all %}
+              <a href="{{ category.get_absolute_url }}" rel="tag category"
+                 title="{{ category }}">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+            </li>
+            {% endif %}
+	  </ul>
+	</div>
       </li>
       {% endfor %}
     </ul>
-  </section>
+  </div>
 </div>
 {% get_static_prefix as STATIC_URL %}
 <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.js"></script>
@@ -42,7 +47,6 @@
    jQuery(window).load(function() {
    	jQuery('#featured').flexslider({
    		controlsContainer: ".slide-container",
-   		slideDirection: "horizontal",
    		animation: "fade",
    		slideshow: true,
    		directionNav: true,
