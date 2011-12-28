@@ -1,56 +1,56 @@
 /* 2.4.1 Featured */
-#featured {
+.slider {
   position: relative;
   width: 100%;
   margin: 0 auto;
   padding: 0;
   background: url(../img/ico-loader.gif) no-repeat center center;
 }
-#featured .loaded {
+.slider .loaded {
   background: none;
 }
-#featured .slides {
+.slider .slides {
   /* Hide the slides before the JS is loaded. Avoids image jumping */
   margin: 0;
 }
-#featured .slide-img img {
+.slider .slide-img img {
   width: 100%;
 }
-#featured .slides li.slide {
+.slider .slides li.slide {
   position: relative;
   display: none;
   list-style: none;
 }
-#featured img {
+.slider img {
   display: block;
 }
 
-#featured .slide-content {
+.slider .slide-content {
   margin: 0;
   padding: 15px 20px 10px;
   background: #000;
   border: none;
   display: block;
 }
-#featured .slide-content h1, #featured .slide-content h1 a {
+.slider .slide-content h1, .slider .slide-content h1 a {
   line-height: 1.2;
   color: #fff;
 }
-#featured .slide-content .featured-meta li {
+.slider .slide-content .featured-meta li {
   display: inline;
   color: #fff;
   font-size: 0.8em;
 }
-#featured .slide-content .featured-meta li a {
+.slider .slide-content .featured-meta li a {
   color: #fff;
 }
-#featured .slide-content .featured-meta .post-author {
+.slider .slide-content .featured-meta .post-author {
   color: #ababab;
   margin: 0 11px 0 0;
   padding: 0 10px 0 0;
   border-right: 1px dotted #fff;
 }
-#featured .slide-content .featured-meta .post-author a {
+.slider .slide-content .featured-meta .post-author a {
   color: #ababab;
 }
 
@@ -68,7 +68,7 @@
   /*@include pad(1, 1);*/
   /* end My customizations */
 }
-.slide-container.no-nav.no-pagi {
+.slide-container .no-nav.no-pagi {
   padding: 0;
 }
 .slide-container .flex-control-nav {
@@ -144,7 +144,7 @@
   }
 }
 
-#featured .slide-content.not-video {
+.slider .slide-content.not-video {
     background-color: rgba(0, 0, 0, 0.7);
     position: absolute;
     bottom: 0;
@@ -152,10 +152,10 @@
     right: 0;
 }
 
-#featured .not-video .featured-meta {
+.slider .not-video .featured-meta {
     margin: 3px 0 5px;
 }
-#featured .not-video .featured-meta li {
+.slider .not-video .featured-meta li {
     font-size: 1em;
 }
 

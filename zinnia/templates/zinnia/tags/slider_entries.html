@@ -1,7 +1,7 @@
 {% load i18n static %}
 {% if entries %}
 <div class="slide-container">
-  <div id="featured">
+  <div class="slider">
     <ul class="slides fix">
       {% for entry in entries %}
       <li class="slide slide-{{ forloop.counter }}">
@@ -45,7 +45,7 @@
 <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.flexslider.js"></script>
 <script type="text/javascript">
    jQuery(window).load(function() {
-   	jQuery('#featured').flexslider({
+   	jQuery('.slider').flexslider({
    		controlsContainer: ".slide-container",
    		animation: "fade",
    		slideshow: true,
@@ -55,7 +55,7 @@
    		slideshowSpeed: 7000,
    		animationDuration: 600
    	});
-   	jQuery('#slides').addClass('loaded');
+   	jQuery('.slider').addClass('loaded');
    });
 </script>
 {% endif %}
