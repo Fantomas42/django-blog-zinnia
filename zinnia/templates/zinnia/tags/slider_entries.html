@@ -1,25 +1,22 @@
 {% load i18n static %}
 {% if entries %}
-<div class="slide-container">
+<div class="slider-container">
   <div class="slider">
-    <ul class="slides fix">
+    <ul class="slides">
       {% for entry in entries %}
       <li class="slide slide-{{ forloop.counter }}">
-	<div class="slide-img">
-	  <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">
-            <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}"
-                 class="woo-image slide-image" />
-          </a>
-        </div>
-    	<div class="slide-content not-video">
-	  <h1>
+        <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">
+          <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}" />
+        </a>
+        <div class="slide-content">
+          <h1>
             <a href="{{ entry.get_absolute_url }}" rel="bookmark"
                title="{{ entry.title }}">{{ entry.title }}</a>
           </h1>
-	  <ul class="featured-meta">
+          <ul class="featured-meta">
             {% if entry.authors.count %}
-	    <li class="post-author">
-	      {% trans "Written by" %}
+            <li class="post-author">
+              {% trans "Written by" %}
               {% for author in entry.authors.all %}
               <a href="{% url zinnia_author_detail author %}" rel="author"
                  title="{% blocktrans %}Show {{ author }}'s entries{% endblocktrans %}">{{ author }}</a>{% if not forloop.last %}, {% endif %}
@@ -27,14 +24,14 @@
             </li>
             {% endif %}
             {% if entry.categories.count %}
-	    <li class="post-category">
+            <li class="post-category">
               {% for category in entry.categories.all %}
               <a href="{{ category.get_absolute_url }}" rel="tag category"
                  title="{{ category }}">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
             </li>
             {% endif %}
-	  </ul>
-	</div>
+          </ul>
+        </div>
       </li>
       {% endfor %}
     </ul>
@@ -44,18 +41,17 @@
 <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.flexslider.js"></script>
 <script type="text/javascript">
-   jQuery(window).load(function() {
-   	jQuery('.slider').flexslider({
-   		controlsContainer: ".slide-container",
-   		animation: "fade",
-   		slideshow: true,
-   		directionNav: true,
-   		controlNav: true,
-   		pauseOnHover: true,
-   		slideshowSpeed: 7000,
-   		animationDuration: 600
-   	});
-   	jQuery('.slider').addClass('loaded');
-   });
+  jQuery(window).load(function() {
+    jQuery(".slider").flexslider({
+           controlsContainer: ".slider-container",
+           animation: "fade",
+           slideshow: true,
+           directionNav: true,
+           controlNav: true,
+           pauseOnHover: true,
+           slideshowSpeed: 7000,
+           animationDuration: 600
+    });
+  });
 </script>
 {% endif %}
