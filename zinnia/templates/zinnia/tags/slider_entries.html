@@ -9,10 +9,10 @@
           <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}" />
         </a>
         <div class="slide-content">
-          <h1>
+          <h2>
             <a href="{{ entry.get_absolute_url }}" rel="bookmark"
                title="{{ entry.title }}">{{ entry.title }}</a>
-          </h1>
+          </h2>
           <ul class="featured-meta">
             {% if entry.authors.count %}
             <li class="post-author">
@@ -43,7 +43,7 @@
 <script type="text/javascript">
   jQuery(window).load(function() {
     jQuery(".slider").flexslider({
-           controlsContainer: ".slider-container",
+           controlsContainer: ".slider",
            animation: "fade",
            slideshow: true,
            directionNav: true,

@@ -1,23 +1,20 @@
+// Layout
 .slider-container {
+  height: auto;
   max-width: 800px;
   position: relative;
-  height: auto;
-  padding: 0 0 2.3em;
-  /* My customizations */
-  ul, ol, li {
-    padding: 0;
-    list-style: none outside none;
-   }
+  margin-bottom: 1em;
   @include full;
-  /*@include pad(1, 1);*/
-  /* end My customizations */
+  ul, ol, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 }
 
 .slider {
-  position: relative;
   width: 100%;
-  margin: 0 auto;
-  padding: 0;
+  position: relative;
   background: url(../img/ico-loader.gif) no-repeat center center;
 }
 
@@ -34,9 +31,8 @@
 }
 
 .slide {
-  position: relative;
   display: none;
-  list-style: none;
+  position: relative;
   img {
     width: 100%;
     display: block;
@@ -44,74 +40,41 @@
 }
 
 .slide-content {
-  margin: 0;
-  padding: 15px 20px 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  border: none;
-  display: block;
-  position: absolute;
-  bottom: 0;
   left: 0;
   right: 0;
-  h1, h1 a {
-    line-height: 1.2;
-    color: #fff;
-  }
-  .featured-meta {
-    margin: 3px 0 5px;
-    li {
-      display: inline;
-      color: #fff;
-      font-size: 1em;
-      a {
-        color: #fff;
-      }
-    }
-  }
-  .post-author {
-    color: #ababab;
-    margin: 0 11px 0 0;
-    padding: 0 10px 0 0;
-    border-right: 1px dotted #fff;
-    a {
-      color: #ababab;
-    }
-  }
+  bottom: 0;
+  position: absolute;
+  padding: 1em 2em;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
-
-// navigation controlers
-.flex-control-nav {
-  position: absolute;
-  bottom: 0;
-  z-index: 9999;
+// Navigation controlers
+ol.flex-control-nav {
   width: 100%;
-  padding: 0;
+  z-index: 9999;
   text-align: center;
-  display: block;
+  margin-top: 1em;
   li {
     display: inline;
-    margin: 0 5px;
-    list-style: none;
+    margin: 0 0.5em;
     a {
-      display: inline-block;
       height: 0;
       width: 8px;
       overflow: hidden;
       padding-top: 8px;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
+      display: inline-block;
       border-radius: 10px;
-      background: #919191;
-      cursor: pointer;
-      &:hover, &.active {
-        background: #222222;
+      -moz-border-radius: 10px;
+      background: lighten($link-color, 50%);
+      &:hover {
+        background: lighten($link-color, 20%);
+      }
+      &.active {
+        background: $link-color;
       }
     }
   }
 }
-
-
 
 // Left/Right controlers
 @mixin nav-direction-button($image-url, $direction) {
@@ -119,30 +82,34 @@
   background: url($image-url) no-repeat center center;
 }
 
-@mixin low-nav-direction-button($direction) {
-  bottom: 65px;
-  #{$direction}: -33px;
+@mixin hd-nav-direction-button($direction) {
+  bottom: 7em;
+  #{$direction}: -2em;
 }
 
 .flex-direction-nav {
   a {
-    display: block;
     height: 0;
     width: 14px;
-    position: absolute;
     padding-top: 22px;
+    display: block;
+    bottom: 0;
+    position: absolute;
     overflow: hidden;
-    opacity: 0.8;
-    bottom: 2px;
+    opacity: 0.7;
     &:hover { opacity: 1; }
   }
   .prev { @include nav-direction-button("../img/ico-featured-prev.png", left); }
   .next { @include nav-direction-button("../img/ico-featured-next.png", right); }
 }
 
+// Responsive
 @media only screen and (min-width: 900px) {
+  .slider-container {
+    @include pad(1, 1);
+  }
   .flex-direction-nav {
-    .prev { @include low-nav-direction-button(left); }
-    .next { @include low-nav-direction-button(right); }
+    .prev { @include hd-nav-direction-button(left); }
+    .next { @include hd-nav-direction-button(right); }
   }
 }
