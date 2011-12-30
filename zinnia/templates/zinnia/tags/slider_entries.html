@@ -13,24 +13,7 @@
             <a href="{{ entry.get_absolute_url }}" rel="bookmark"
                title="{{ entry.title }}">{{ entry.title }}</a>
           </h2>
-          <ul class="featured-meta">
-            {% if entry.authors.count %}
-            <li class="post-author">
-              {% trans "Written by" %}
-              {% for author in entry.authors.all %}
-              <a href="{% url zinnia_author_detail author %}" rel="author"
-                 title="{% blocktrans %}Show {{ author }}'s entries{% endblocktrans %}">{{ author }}</a>{% if not forloop.last %}, {% endif %}
-              {% endfor %}
-            </li>
-            {% endif %}
-            {% if entry.categories.count %}
-            <li class="post-category">
-              {% for category in entry.categories.all %}
-              <a href="{{ category.get_absolute_url }}" rel="tag category"
-                 title="{{ category }}">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
-            </li>
-            {% endif %}
-          </ul>
+          {{ entry.excerpt|linebreaks|truncatewords_html:30 }}
         </div>
       </li>
       {% endfor %}

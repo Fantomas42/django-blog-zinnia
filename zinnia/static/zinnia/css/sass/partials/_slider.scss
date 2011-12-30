@@ -45,7 +45,23 @@
   bottom: 0;
   position: absolute;
   padding: 1em 2em;
-  background-color: rgba(0, 0, 0, 0.7);
+  h2, p {
+    text-shadow: 1px 1px 0 #000000;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  h2 {
+    padding: 0.25em;
+    font-weight: bold;
+    display: inline-block;
+  }
+  a, a:visited {
+    color: lighten($link-color, 40%);
+  }
+  p {
+    color: #fff;
+    padding: 1em;
+    display: none;
+  }
 }
 
 // Navigation controlers
@@ -107,6 +123,10 @@ ol.flex-control-nav {
 @media only screen and (min-width: 900px) {
   .slider-container {
     @include pad(1, 1);
+  }
+  .slide-content {
+    h2 { font-size: 3em; }
+    p { font-size: 1.2em; display: inline-block; }
   }
   .flex-direction-nav {
     .prev { @include hd-nav-direction-button(left); }
