@@ -1,86 +1,135 @@
-$max-width: 100%;
-$number-of-items: 5;
-
-$slider-width: 80%;
-$slider-height: 250px;
-$panel-height: 70px;
-
-$nav-padding: 3px;
-$info-padding: 3%;
-
-$tab-nav-width: $max-width - $slider-width;
-$tab-nav-height: $slider-height / $number-of-items - 1;
-$tab-nav-img-height: $tab-nav-height - $nav-padding * 2;
-$tab-nav-img-width: 30%;
+// Layout
+.slider-container {
+  height: auto;
+  max-width: 800px;
+  position: relative;
+  margin-bottom: 1em;
+  @include full;
+  ul, ol, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
 
 .slider {
-  width: $slider-width;
-  padding-right: $tab-nav-width;
+  width: 100%;
   position: relative;
-  height: $slider-height;
-  margin-bottom: 1em;
-  ul.ui-tabs-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    top: 0;
-    left: 64%;
+  background: url(../img/ico-loader.gif) no-repeat center center;
+}
+
+.slides {
+  &:before, &:after {
+   content: " ";
+   height: 0;
+   display: block;
+   overflow: hidden;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.slide {
+  display: none;
+  position: relative;
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+
+.slide-content {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  padding: 1em 2em;
+  h2, p {
+    text-shadow: 1px 1px 0 #000000;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  h2 {
+    padding: 0.25em;
+    font-weight: bold;
+    display: inline-block;
+  }
+  a, a:visited {
+    color: lighten($link-color, 40%);
+  }
+  p {
+    color: #fff;
+    padding: 1em;
+    display: none;
+  }
+}
+
+// Navigation controlers
+ol.flex-control-nav {
+  width: 100%;
+  z-index: 9999;
+  text-align: center;
+  margin-top: 1em;
+  li {
+    display: inline;
+    margin: 0 0.5em;
+    a {
+      height: 0;
+      width: 8px;
+      overflow: hidden;
+      padding-top: 8px;
+      display: inline-block;
+      border-radius: 10px;
+      -moz-border-radius: 10px;
+      background: lighten($link-color, 50%);
+      &:hover {
+        background: lighten($link-color, 20%);
+      }
+      &.active {
+        background: $link-color;
+      }
+    }
+  }
+}
+
+// Left/Right controlers
+@mixin nav-direction-button($image-url, $direction) {
+  #{$direction}: 0;
+  background: url($image-url) no-repeat center center;
+}
+
+@mixin hd-nav-direction-button($direction) {
+  bottom: 7em;
+  #{$direction}: -2em;
+}
+
+.flex-direction-nav {
+  a {
+    height: 0;
+    width: 14px;
+    padding-top: 22px;
+    display: block;
+    bottom: 0;
     position: absolute;
     overflow: hidden;
-    li {
-      width: 100%;
-      a {
-        display: block;
-        height: $tab-nav-height;
-        border-bottom: 1px solid $box-color;
-        img {
-          float: left;
-          border: 0;
-          padding: $nav-padding;
-          width: $tab-nav-img-width;
-          height: $tab-nav-img-height;
-        }
-      }
-      a:hover {
-        text-decoration: none;
-        background: $box-color;
-      }
-      &.ui-tabs-selected {
-        a {
-          color: white;
-          background: $link-color;
-        }
-      }
-    }
+    opacity: 0.7;
+    &:hover { opacity: 1; }
   }
-  div.ui-tabs-panel {
-    position: relative;
-    width: 100%;
-    height: $slider-height;
-    .panel-info {
-      left: 0;
-      bottom: 0;
-      position: absolute;
-      height: $panel-height;
-      padding: $info-padding;
-      color: white;
-      overflow: hidden;
-      background: url(../img/trans.png);
-      width: $slider-width - $info-padding * 2;
-      a {
-        color: lighten($link-color, 30%);
-      }
-    }
-    h2 {
-      margin: 0;
-      overflow: hidden;
-    }
-    img {
-      width: $slider-width;
-      height: $slider-height;
-    }
+  .prev { @include nav-direction-button("../img/ico-featured-prev.png", left); }
+  .next { @include nav-direction-button("../img/ico-featured-next.png", right); }
+}
+
+// Responsive
+@media only screen and (min-width: 900px) {
+  .slider-container {
+    @include pad(1, 1);
   }
-  .ui-tabs-hide {
-    display: none;
+  .slide-content {
+    h2 { font-size: 3em; }
+    p { font-size: 1.2em; display: inline-block; }
+  }
+  .flex-direction-nav {
+    .prev { @include hd-nav-direction-button(left); }
+    .next { @include hd-nav-direction-button(right); }
   }
 }

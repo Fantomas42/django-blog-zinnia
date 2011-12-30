@@ -7,7 +7,6 @@
 
 {% block body-class %}{{ block.super }} archive home{% endblock %}
 
-{% block content %}
+{% block slider %}
 {% get_featured_entries 5 "zinnia/tags/slider_entries.html" %}
-{{ block.super }}
 {% endblock %}
