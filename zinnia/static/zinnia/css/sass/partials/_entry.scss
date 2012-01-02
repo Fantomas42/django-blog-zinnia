@@ -24,8 +24,9 @@
 
 h2.entry-title {
   font-weight: bold;
-  border-bottom: 1px solid $border-color;
   margin-bottom: 0;
+  border-bottom: 1px solid $border-color;
+  text-shadow: 1px 1px 0 #ccc;
 }
 
 p.entry-info {
