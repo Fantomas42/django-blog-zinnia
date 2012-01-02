@@ -38,4 +38,10 @@
     @include columns($third);
     @include omega;
   }
+  @media (max-width: 650px) {
+    #content, #sidebar {
+      @include full;
+      @include columns($total-cols);
+    }
+  }
 }

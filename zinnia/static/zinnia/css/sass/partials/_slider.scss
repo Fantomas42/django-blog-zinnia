@@ -120,7 +120,7 @@ ol.flex-control-nav {
 }
 
 // Responsive
-@media only screen and (min-width: 900px) {
+@media (min-width: 900px) {
   .slider-container {
     @include pad(1, 1);
   }
