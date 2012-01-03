@@ -15,7 +15,7 @@
 .slider {
   width: 100%;
   position: relative;
-  background: url(../img/ico-loader.gif) no-repeat center center;
+  background: url(../img/loader.gif) no-repeat center center;
 }
 
 .slides {
@@ -67,7 +67,7 @@
 // Navigation controlers
 ol.flex-control-nav {
   width: 100%;
-  z-index: 9999;
+  z-index: 999;
   text-align: center;
   margin-top: 1em;
   li {
@@ -115,8 +115,8 @@ ol.flex-control-nav {
     opacity: 0.7;
     &:hover { opacity: 1; }
   }
-  .prev { @include nav-direction-button("../img/ico-featured-prev.png", left); }
-  .next { @include nav-direction-button("../img/ico-featured-next.png", right); }
+  .prev { @include nav-direction-button("../img/prev.png", left); }
+  .next { @include nav-direction-button("../img/next.png", right); }
 }
 
 // Responsive
