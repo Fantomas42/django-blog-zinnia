@@ -14,6 +14,10 @@
     font-size: 4em;
     font-weight: bold;
     text-shadow: 2px 2px 0 #aaa;
+    &:first-letter {
+      font-size: 120%;
+      color: lighten(adjust-hue($link-color, 120deg), 15%);
+    }
   }
 
   .top-navigation {
