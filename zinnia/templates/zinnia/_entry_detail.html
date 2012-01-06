@@ -12,7 +12,7 @@
       {% for author in object.authors.all %}
       <span class="vcard author">
         <a href="{% url zinnia_author_detail author %}" class="fn nickname url" rel="author"
-           title="{% blocktrans %}Show {{ author }}'s entries{% endblocktrans %}">{{ author }}</a>
+           title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}">{{ author }}</a>
       </span>{% if not forloop.last %}, {% endif %}
       {% endfor %}
       {% trans "on" %}
@@ -23,7 +23,9 @@
       {% if object.categories.count %}
       {% trans "in" %}
       {% for category in object.categories.all %}
-      <a href="{{ category.get_absolute_url }}" title="{{ category }}" rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.
+      <a href="{{ category.get_absolute_url }}"
+         title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
+         rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.
     </p>
   </div>
 
@@ -43,14 +45,16 @@
     {% endif %}
     <div class="entry-content">
       {{ object_content }}
-      {% if continue_reading %}
-      <p class="continue-reading">
-        <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
-          {% trans "Continue reading" %}
-        </a>
-      </p>
-      {% endif %}
     </div>
+    {% if continue_reading %}
+    <p class="continue-reading">
+      <a href="{{ object.get_absolute_url }}"
+         title="{% blocktrans with object=object.title %}Continue reading {{ object }}{% endblocktrans %}"
+         rel="bookmark">
+        {% trans "Continue reading" %}
+      </a>
+    </p>
+    {% endif %}
   </div>
 
   <div class="entry-footer">
@@ -59,7 +63,8 @@
       {% tags_for_object object as tag_list %}
       {% for tag in tag_list %}
       <a href="{% url zinnia_tag_detail tag %}"
-         title="Tag {{ tag }}" rel="tag">{{ tag }}</a>
+         title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
+         rel="tag">{{ tag }}</a>
       {% empty %}
       <span>{% trans "No tags" %}</span>
       {% endfor %}
@@ -67,7 +72,9 @@
 
     <p class="entry-shorturl">
       <strong>{% trans "Short url" %}</strong> :
-      <a href="{{ object.short_url }}" title="{{ object.title }}" rel="shortlink">
+      <a href="{{ object.short_url }}"
+         title="{% blocktrans with object=object.title %}Short URL to {{ object }}{% endblocktrans %}"
+         rel="shortlink">
         {{ object.short_url }}
       </a>
     </p>
@@ -76,13 +83,14 @@
       <strong>{% trans "Discussions" %}</strong> :
       {% with comment_count=object.comments.count %}
       {% if comment_count %}
-      <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
+      <a href="{{ object.get_absolute_url }}#comments"
+         title="{% blocktrans with object=object.title %}Comments on {{ object }}{% endblocktrans %}">
         {% blocktrans count comment_count=comment_count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
       </a>
       {% else %}
       {% if object.comments_are_open %}
       {% trans "No comments yet." %}
-      <a href="{{ object.get_absolute_url }}#comments" title="{{ object.title }}">
+      <a href="{{ object.get_absolute_url }}#comments" title="{% blocktrans with object=object.title %}Leave a comment on {{ object }}{% endblocktrans %}">
         {% trans "Be first to comment!" %}
       </a>
       {% else %}
@@ -92,14 +100,14 @@
       {% endwith %}
       {% with pingback_count=object.pingbacks.count %}
       {% if pingback_count %}
-      , <a href="{{ object.get_absolute_url }}#pingbacks" title="{{ object.title }}">
+      , <a href="{{ object.get_absolute_url }}#pingbacks" title="{% blocktrans with object=object.title %}Pingbacks on {{ object }}{% endblocktrans %}">
         {% blocktrans count pingback_count=pingback_count %}{{ pingback_count }} pingback{% plural %}{{ pingback_count }} pingbacks{% endblocktrans %}
       </a>
       {% endif %}
       {% endwith %}
       {% with trackback_count=object.trackbacks.count %}
       {% if trackback_count %}
-      , <a href="{{ object.get_absolute_url }}#trackbacks" title="{{ object.title }}">
+      , <a href="{{ object.get_absolute_url }}#trackbacks" title="{% blocktrans with object=object.title %}Trackbacks on {{ object }}{% endblocktrans %}">
         {% blocktrans count trackback_count=trackback_count %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}
       </a>
       {% endif %}

@@ -2,7 +2,7 @@
 <ul class="category-root">
   {% recursetree categories %}
   <li>
-    <a href="{{ node.get_absolute_url }}" title="{{ node }}">{{ node }}</a>
+    <a href="{{ node.get_absolute_url }}" title="{% blocktrans %}Show all entries in {{ node }}{% endblocktrans %}">{{ node }}</a>
     {% blocktrans count entry_count=node.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     {% if not node.is_leaf_node %}
     <ul class="category-children category-{{ node.slug }}">
