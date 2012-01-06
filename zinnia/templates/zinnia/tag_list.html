@@ -14,7 +14,7 @@
   {% for object in object_list %}
   <li>
     <a href="{% url zinnia_tag_detail object %}"
-       title="{% blocktrans %}Show all entries tagged by {{ object }}{% endblocktrans %}">{{ object }}</a>
+       title="{% blocktrans with tag=object %}Show all entries tagged by {{ tag }}{% endblocktrans %}">{{ object }}</a>
     {% blocktrans count entry_count=object.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
   </li>
   {% empty %}
