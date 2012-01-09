@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
 "POT-Creation-Date: 2012-01-06 05:43-0600\n"
-"PO-Revision-Date: 2012-01-06 11:42+0000\n"
+"PO-Revision-Date: 2012-01-09 15:59+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,7 @@ msgstr "Les dernières discussions sur l'actualité : %s"
 #: feeds.py:274 tests/feeds.py:212
 #, python-format
 msgid "Comments on %s"
-msgstr "Commentaires sur : %s"
+msgstr "Commentaires sur %s"
 
 #: feeds.py:278 tests/feeds.py:215
 #, python-format

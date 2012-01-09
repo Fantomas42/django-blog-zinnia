@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+#   <dan.samara@gmail.com>, 2012.
 # Julien Fache <fantomas42@gmail.com>, 2011.
 # Max  <makc.kekc@gmail.com>, 2011.
 msgid ""
@@ -10,8 +11,8 @@ msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
 "POT-Creation-Date: 2012-01-06 05:43-0600\n"
-"PO-Revision-Date: 2012-01-06 11:42+0000\n"
-"Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
+"PO-Revision-Date: 2012-01-06 23:08+0000\n"
+"Last-Translator: danSamara <dan.samara@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,12 +64,12 @@ msgstr "Последние новости с тегом %s"
 #: feeds.py:203 tests/feeds.py:177
 #, python-format
 msgid "Results of the search for '%s'"
-msgstr ""
+msgstr "Результаты поиска для запроса '%s'"
 
 #: feeds.py:207 tests/feeds.py:180
 #, python-format
 msgid "The entries containing the pattern '%s'"
-msgstr ""
+msgstr "Записи содержать сочетание '%s'"
 
 #: feeds.py:252 tests/feeds.py:199
 #, python-format
@@ -322,7 +323,7 @@ msgstr "видима"
 
 #: admin/entry.py:144
 msgid "View"
-msgstr ""
+msgstr "Смотреть"
 
 #: admin/entry.py:146
 msgid "View on site"
@@ -338,7 +339,7 @@ msgstr "короткая ссылка"
 
 #: admin/entry.py:211
 msgid "The selected entries now belong to you."
-msgstr ""
+msgstr "Выбранные записи теперь закреплены за вами."
 
 #: admin/entry.py:212
 msgid "Set the entries to the user"
@@ -346,7 +347,7 @@ msgstr "Установить записи пользователю"
 
 #: admin/entry.py:219
 msgid "The selected entries are now marked as published."
-msgstr ""
+msgstr "Выбранные записи отмечены как опубликованные."
 
 #: admin/entry.py:220
 msgid "Set entries selected as published"
@@ -354,7 +355,7 @@ msgstr "Пометить выделенные записи как опублик
 
 #: admin/entry.py:226
 msgid "The selected entries are now marked as hidden."
-msgstr ""
+msgstr "Выбранные записи отмечены как скрытые."
 
 #: admin/entry.py:227
 msgid "Set entries selected as hidden"
@@ -362,7 +363,7 @@ msgstr "Пометить выделенные записи как скрытые
 
 #: admin/entry.py:242
 msgid "The selected entries have been tweeted."
-msgstr ""
+msgstr "Выбранные записи отправлены через twitter."
 
 #: admin/entry.py:243
 msgid "Tweet entries selected"
@@ -370,7 +371,7 @@ msgstr "Отправить выбранные записи в твиттер"
 
 #: admin/entry.py:249
 msgid "Comments are now closed for selected entries."
-msgstr ""
+msgstr "Для выбранных записей комментарии закрыты."
 
 #: admin/entry.py:250
 msgid "Close the comments for selected entries"
@@ -378,7 +379,7 @@ msgstr "Закрыть комментирование для выбранных 
 
 #: admin/entry.py:257
 msgid "Linkbacks are now closed for selected entries."
-msgstr ""
+msgstr "Обратные ссылки для выбранных записей отключены."
 
 #: admin/entry.py:259
 msgid "Close the linkbacks for selected entries"
@@ -386,7 +387,7 @@ msgstr "Запретить обратные ссылки для выбранны
 
 #: admin/entry.py:266
 msgid "The selected entries are now set at the current date."
-msgstr ""
+msgstr "Для выбранных записей установлена текущая дата."
 
 #: admin/entry.py:268
 msgid "Put the selected entries on top at the current date"
@@ -580,9 +581,9 @@ msgstr[2] "%(comment_count)s комментарии"
 #, python-format
 msgid "%(category_count)s category"
 msgid_plural "%(category_count)s categories"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(category_count)s категория"
+msgstr[1] "%(category_count)s категорий"
+msgstr[2] "%(category_count)s категории"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:24
 #: templates/zinnia/_entry_detail.html:104
@@ -599,9 +600,9 @@ msgstr[2] "%(pingback_count)s оповещения"
 #, python-format
 msgid "%(tag_count)s tag"
 msgid_plural "%(tag_count)s tags"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(tag_count)s тэг"
+msgstr[1] "%(tag_count)s тэгов"
+msgstr[2] "%(tag_count)s тэга"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:32
 #: templates/zinnia/_entry_detail.html:111
@@ -618,52 +619,52 @@ msgstr[2] "%(trackback_count)s архивы"
 #, python-format
 msgid "%(author_count)s author"
 msgid_plural "%(author_count)s authors"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(author_count)s автор"
+msgstr[1] "%(author_count)s авторов"
+msgstr[2] "%(author_count)s автора"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:42
 #: templates/zinnia/tags/statistics.html:25
 #, python-format
 msgid "%(reject_count)s rejected item"
 msgid_plural "%(reject_count)s rejected items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(reject_count)s отклонённый элемент"
+msgstr[1] "%(reject_count)s отклонённых элементов"
+msgstr[2] "%(reject_count)s отклонённых элемента"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:47
 msgid "Statistics"
-msgstr ""
+msgstr "Статистика"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:49
 #: templates/zinnia/tags/statistics.html:28
 #, python-format
 msgid "%(entries_per_month)s entries per month"
-msgstr ""
+msgstr "%(entries_per_month)s записей в месяц"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:54
 #: templates/zinnia/tags/statistics.html:31
 #, python-format
 msgid "%(words_per_entry)s words per entry"
-msgstr ""
+msgstr "%(words_per_entry)s слов в записи"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:57
 #: templates/zinnia/tags/statistics.html:34
 #, python-format
 msgid "%(words_per_comment)s words per comment"
-msgstr ""
+msgstr "%(words_per_comment)s слов в комментарии"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:62
 #: templates/zinnia/tags/statistics.html:37
 #, python-format
 msgid "%(comments_per_entry)s comments per entry"
-msgstr ""
+msgstr "%(comments_per_entry)s комментариев в записи"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:65
 #: templates/zinnia/tags/statistics.html:40
 #, python-format
 msgid "%(linkbacks_per_entry)s linkbacks per entry"
-msgstr ""
+msgstr "%(linkbacks_per_entry)s обратных ссылок в записи"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:6
 #: templates/zinnia/entry_detail.html:205
@@ -799,33 +800,33 @@ msgstr "Автор"
 #: templates/comments/comment_notification_email.txt:5
 #: templates/comments/comment_reply_email.txt:3
 msgid "Comment"
-msgstr ""
+msgstr "Комментарий"
 
 #: templates/comments/comment_authors_email.txt:6
 #: templates/comments/comment_notification_email.txt:8
 #: templates/comments/comment_reply_email.txt:6
 msgid "View this comment"
-msgstr ""
+msgstr "Просмотреть комментарий"
 
 #: templates/comments/comment_notification_email.txt:2
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: templates/comments/comment_notification_email.txt:3
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #: templates/comments/comment_notification_email.txt:10
 msgid "Flag this comment"
-msgstr ""
+msgstr "Отметить комментарий"
 
 #: templates/comments/comment_notification_email.txt:12
 msgid "Delete this comment"
-msgstr ""
+msgstr "Удалить комментарий"
 
 #: templates/comments/comment_notification_email.txt:14
 msgid "Approve this comment"
-msgstr ""
+msgstr "Одобрить комментарий"
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
@@ -868,32 +869,32 @@ msgstr "Автор"
 #: templates/zinnia/tags/authors.html:6
 #, python-format
 msgid "Show all %(author)s's entries"
-msgstr ""
+msgstr "%(author)s: показать все записи"
 
 #: templates/zinnia/_entry_detail.html:20
 msgid "Written on"
-msgstr ""
+msgstr "Сохранено"
 
 #: templates/zinnia/_entry_detail.html:27
 #: templates/zinnia/category_list.html:16
 #: templates/zinnia/tags/categories.html:5
 #, python-format
 msgid "Show all entries in %(category)s"
-msgstr ""
+msgstr "Показать все записи в категории %(category)s"
 
 #: templates/zinnia/_entry_detail.html:52
 #, python-format
 msgid "Continue reading %(object)s"
-msgstr ""
+msgstr "Читать %(object)s полностью"
 
 #: templates/zinnia/_entry_detail.html:54
 msgid "Continue reading"
-msgstr ""
+msgstr "Читать далее"
 
 #: templates/zinnia/_entry_detail.html:66 templates/zinnia/tag_list.html:17
 #, python-format
 msgid "Show all entries tagged by %(tag)s"
-msgstr ""
+msgstr "Показать все записи с тэгом %(tag)s"
 
 #: templates/zinnia/_entry_detail.html:69
 msgid "No tags"
@@ -906,18 +907,18 @@ msgstr "Короткая ссылка"
 #: templates/zinnia/_entry_detail.html:76
 #, python-format
 msgid "Short URL to %(object)s"
-msgstr ""
+msgstr "Краткая ссылка для %(object)s"
 
 #: templates/zinnia/_entry_detail.html:87
 #: templates/zinnia/tags/popular_entries.html:8
 #, python-format
 msgid "Comments on %(object)s"
-msgstr ""
+msgstr "Комментарии для %(object)s"
 
 #: templates/zinnia/_entry_detail.html:93
 #, python-format
 msgid "Leave a comment on %(object)s"
-msgstr ""
+msgstr "Оставить комментарий для %(object)s"
 
 #: templates/zinnia/_entry_detail.html:94
 msgid "Be first to comment!"
@@ -932,12 +933,12 @@ msgstr "Комментирование отключено."
 #: templates/zinnia/_entry_detail.html:103
 #, python-format
 msgid "Pingbacks on %(object)s"
-msgstr ""
+msgstr "Пингбэк для %(object)s"
 
 #: templates/zinnia/_entry_detail.html:110
 #, python-format
 msgid "Trackbacks on %(object)s"
-msgstr ""
+msgstr "Трэкбэк для %(object)s"
 
 #: templates/zinnia/author_list.html:4 templates/zinnia/author_list.html:11
 msgid "Author list"
@@ -1078,23 +1079,23 @@ msgstr "URL архива"
 
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries for"
-msgstr ""
+msgstr "Последние записи для"
 
 #: templates/zinnia/entry_list.html:4
 msgid "the category"
-msgstr ""
+msgstr "категории"
 
 #: templates/zinnia/entry_list.html:4
 msgid "the tag"
-msgstr ""
+msgstr "тэга"
 
 #: templates/zinnia/entry_list.html:4
 msgid "the author"
-msgstr ""
+msgstr "автора"
 
 #: templates/zinnia/entry_list.html:4 templates/zinnia/entry_search.html:6
 msgid "page"
-msgstr ""
+msgstr "страницы"
 
 #: templates/zinnia/entry_list.html:9 templates/zinnia/entry_list.html:12
 #: templates/zinnia/entry_list.html:15 templates/zinnia/skeleton.html:38
@@ -1144,7 +1145,7 @@ msgstr "Редактировать автора"
 #: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:6
 #: templates/zinnia/entry_search.html:16
 msgid "Search results for"
-msgstr ""
+msgstr "Найти"
 
 #: templates/zinnia/entry_search.html:10
 msgid "RSS Feed of search result of"
@@ -1218,7 +1219,7 @@ msgstr "Список тегов"
 
 #: templates/zinnia/tag_list.html:22 templates/zinnia/tags/tag_cloud.html:11
 msgid "No tags yet."
-msgstr ""
+msgstr "Тэгов нет."
 
 #: templates/zinnia/tags/archives_entries.html:12
 #: templates/zinnia/tags/archives_entries_tree.html:37
@@ -1256,9 +1257,9 @@ msgstr "Нет похожих записей."
 #, python-format
 msgid "%(entry_count)s entry tagged by %(tag)s"
 msgid_plural "%(entry_count)s entries tagged by %(tag)s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(entry_count)s запись с тэгом %(tag)s"
+msgstr[1] "%(entry_count)s записей с тэгом %(tag)s"
+msgstr[2] "%(entry_count)s записи с тэгом %(tag)s"
 
 #: tests/views.py:222 views/search.py:18
 msgid "The pattern is too short"
