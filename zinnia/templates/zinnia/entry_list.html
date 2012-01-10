@@ -6,10 +6,10 @@
 {% block link %}
   {{ block.super }}
   {% if category %}
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ category.title }}" href="{% url zinnia_category_feed category.tree_path %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ category }}" href="{% url zinnia_category_feed category.tree_path %}" />
   {% endif %}
   {% if tag %}
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ tag.name }}" href="{% url zinnia_tag_feed tag.name %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ tag }}" href="{% url zinnia_tag_feed tag.name %}" />
   {% endif %}
   {% if author %}
     <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ author }}" href="{% url zinnia_author_feed author.username %}" />
@@ -21,19 +21,13 @@
 {% block body-class %}entry-list {% if category %}category category-{{ category.slug }}{% endif %}{% if tag %}tag tag-{{ tag|slugify }}{% endif %}{% if author %}author author-{{ author|slugify }}{% endif %}{% if page_obj %} paginated page-{{ page_obj.number }}{% endif %}{% endblock %}
 
 {% block content %}
-{% if category %}
-<h1>{{ category.title }}</h1>
+<h1>
+  {% if category %}{% blocktrans %}Category archives: {{ category }}{% endblocktrans %}{% endif %}
+  {% if tag %}{% blocktrans %}Tag archives: {{ tag }}{% endblocktrans %}{% endif %}
+  {% if author %}{% blocktrans %}Author archives: {{ author }}{% endblocktrans %}{% endif %}
+</h1>
 {% if category.description %}
 <p>{{ category.description|striptags|safe }}</p>
-{% endif %}
-{% endif %}
-
-{% if tag %}
-<h1>{% trans "Tag" %} : {{ tag }}</h1>
-{% endif %}
-
-{% if author %}
-<h1>{% blocktrans %}Entries by {{ author }}{% endblocktrans %}</h1>
 {% endif %}
 
 {% for object in object_list %}
