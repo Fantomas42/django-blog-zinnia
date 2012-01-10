@@ -5,3 +5,4 @@ host = http://www.transifex.net
 file_filter = zinnia/locale/<lang>/LC_MESSAGES/django.po
 source_file = zinnia/locale/en/LC_MESSAGES/django.po
 source_lang = en
+

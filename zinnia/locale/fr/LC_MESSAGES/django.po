@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2012-01-06 05:43-0600\n"
-"PO-Revision-Date: 2012-01-09 15:59+0000\n"
+"POT-Creation-Date: 2012-01-10 08:46-0600\n"
+"PO-Revision-Date: 2012-01-10 15:06+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,93 +19,93 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: feeds.py:103 plugins/cms_plugins.py:23
+#: feeds.py:111 plugins/cms_plugins.py:23
 #: templates/zinnia/entry_archive.html:4 templates/zinnia/entry_archive.html:6
-#: templates/zinnia/entry_list.html:19 tests/feeds.py:124
+#: templates/zinnia/entry_list.html:19 tests/feeds.py:123
 msgid "Latest entries"
 msgstr "Derniers articles"
 
-#: feeds.py:107 tests/feeds.py:127
+#: feeds.py:115 tests/feeds.py:126
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "Les dernières actualités du site %s"
 
-#: feeds.py:127 tests/feeds.py:137
+#: feeds.py:135 tests/feeds.py:136
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Actualités pour la catégorie : %s"
 
-#: feeds.py:131 tests/feeds.py:140
+#: feeds.py:139 tests/feeds.py:139
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "Les dernières actualités pour la catégorie : %s"
 
-#: feeds.py:151 tests/feeds.py:149
+#: feeds.py:159 tests/feeds.py:148
 #, python-format
 msgid "Entries for author %s"
 msgstr "L'actualité par %s"
 
-#: feeds.py:155 tests/feeds.py:151
+#: feeds.py:163 tests/feeds.py:150
 #, python-format
 msgid "The latest entries by %s"
 msgstr "Les dernières actualités par %s"
 
-#: feeds.py:176 tests/feeds.py:161
+#: feeds.py:184 tests/feeds.py:160
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Actualités pour le tag : %s"
 
-#: feeds.py:180 tests/feeds.py:163
+#: feeds.py:188 tests/feeds.py:162
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "Les dernières actualités pour le tag : %s"
 
-#: feeds.py:203 tests/feeds.py:177
+#: feeds.py:211 tests/feeds.py:176
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr "Résultats de recherche pour '%s'"
 
-#: feeds.py:207 tests/feeds.py:180
+#: feeds.py:215 tests/feeds.py:179
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr "Les dernières actualités contenant le motif '%s'"
 
-#: feeds.py:252 tests/feeds.py:199
+#: feeds.py:260 tests/feeds.py:198
 #, python-format
 msgid "Discussions on %s"
 msgstr "Discussions sur %s"
 
-#: feeds.py:256 tests/feeds.py:202
+#: feeds.py:264 tests/feeds.py:201
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "Les dernières discussions sur l'actualité : %s"
 
-#: feeds.py:274 tests/feeds.py:212
+#: feeds.py:282 tests/feeds.py:211
 #, python-format
 msgid "Comments on %s"
 msgstr "Commentaires sur %s"
 
-#: feeds.py:278 tests/feeds.py:215
+#: feeds.py:286 tests/feeds.py:214
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "Les derniers commentaires sur l'actualité : %s"
 
-#: feeds.py:308 tests/feeds.py:231
+#: feeds.py:316 tests/feeds.py:230
 #, python-format
 msgid "Pingbacks on %s"
 msgstr "Pingbacks sur %s"
 
-#: feeds.py:312 tests/feeds.py:234
+#: feeds.py:320 tests/feeds.py:233
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "Les derniers pingbacks sur l'actualité : %s"
 
-#: feeds.py:330 tests/feeds.py:244
+#: feeds.py:338 tests/feeds.py:243
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "Trackbacks sur %s"
 
-#: feeds.py:334 tests/feeds.py:247
+#: feeds.py:342 tests/feeds.py:246
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "Les derniers trackbacks sur l'actualité : %s"
@@ -1101,7 +1101,7 @@ msgstr "Flux RSS"
 msgid "Category"
 msgstr "Catégorie"
 
-#: templates/zinnia/entry_list.html:19 templates/zinnia/entry_list.html:32
+#: templates/zinnia/entry_list.html:19
 msgid "Tag"
 msgstr "Tag"
 
@@ -1109,12 +1109,22 @@ msgstr "Tag"
 msgid "Page"
 msgstr "Page"
 
-#: templates/zinnia/entry_list.html:36
+#: templates/zinnia/entry_list.html:25
 #, python-format
-msgid "Entries by %(author)s"
-msgstr "L'actualité par %(author)s"
+msgid "Category archives: %(category)s"
+msgstr "Archives de la catégorie %(category)s"
 
-#: templates/zinnia/entry_list.html:44 templates/zinnia/sitemap.html:25
+#: templates/zinnia/entry_list.html:26
+#, python-format
+msgid "Tag archives: %(tag)s"
+msgstr "Archives pour le tag %(tag)s"
+
+#: templates/zinnia/entry_list.html:27
+#, python-format
+msgid "Author archives: %(author)s"
+msgstr "Archives de l'auteur %(author)s"
+
+#: templates/zinnia/entry_list.html:38 templates/zinnia/sitemap.html:25
 #: templates/zinnia/sitemap.html.py:45
 #: templates/zinnia/cms/entry_detail.html:7
 #: templates/zinnia/cms/entry_list.html:9
@@ -1125,15 +1135,15 @@ msgstr "L'actualité par %(author)s"
 msgid "No entries yet."
 msgstr "Pas encore d'articles."
 
-#: templates/zinnia/entry_list.html:55 templates/zinnia/entry_list.html:56
+#: templates/zinnia/entry_list.html:49 templates/zinnia/entry_list.html:50
 msgid "Edit the category"
 msgstr "Editer la catégorie"
 
-#: templates/zinnia/entry_list.html:62 templates/zinnia/entry_list.html:63
+#: templates/zinnia/entry_list.html:56 templates/zinnia/entry_list.html:57
 msgid "Edit the tag"
 msgstr "Editer le tag"
 
-#: templates/zinnia/entry_list.html:69 templates/zinnia/entry_list.html:70
+#: templates/zinnia/entry_list.html:63 templates/zinnia/entry_list.html:64
 msgid "Edit the author"
 msgstr "Editer l'auteur"
 
