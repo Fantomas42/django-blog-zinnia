@@ -1,4 +1,5 @@
 """Test cases for Zinnia's feeds"""
+from urlparse import urljoin
 from datetime import datetime
 
 from django.test import TestCase
@@ -110,7 +111,7 @@ class ZinniaFeedsTestCase(TestCase):
         entry.image = 'image_field.jpg'
         entry.save()
         self.assertEquals(feed.item_enclosure_url(entry),
-                          'http://example.com/image_field.jpg')
+                          urljoin('http://example.com', entry.image.url))
         self.assertEquals(feed.item_enclosure_length(entry), '100000')
         self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
         feeds.FEEDS_FORMAT = original_feeds_format
