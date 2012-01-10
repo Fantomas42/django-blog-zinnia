@@ -258,7 +258,14 @@ class EntryAbstractClass(models.Model):
             'slug': self.slug})
 
     class Meta:
+        """Entry's Meta"""
         abstract = True
+        ordering = ['-creation_date']
+        get_latest_by = 'creation_date'
+        verbose_name = _('entry')
+        verbose_name_plural = _('entries')
+        permissions = (('can_view_all', 'Can view all'),
+                       ('can_change_author', 'Can change author'), )
 
 
 def get_base_model():
@@ -280,16 +287,11 @@ def get_base_model():
 
 
 class Entry(get_base_model()):
-    """Final Entry model"""
-
-    class Meta:
-        """Entry's Meta"""
-        ordering = ['-creation_date']
-        get_latest_by = 'creation_date'
-        verbose_name = _('entry')
-        verbose_name_plural = _('entries')
-        permissions = (('can_view_all', 'Can view all'),
-                       ('can_change_author', 'Can change author'), )
+    """
+    The final Entry model based on inheritence.
+    Check this out for customizing the Entry Model class:
+    http://django-blog-zinnia.com/documentation/extending_entry_model/
+    """
 
 
 moderator.register(Entry, EntryCommentModerator)

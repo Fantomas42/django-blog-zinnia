@@ -39,7 +39,7 @@ Example for adding a gallery field. ::
   class EntryGallery(EntryAbstractClass):
     gallery = models.ForeignKey(Gallery)
 
-    class Meta:
+    class Meta(EntryAbstract.Meta):
       abstract = True
 
 
@@ -87,3 +87,7 @@ and :file:`zinnia/plugins/admin.py`.
           #. If you extend the :class:`Entry` model after the syncdb
              command, you will have to reset the Zinnia application to
              reflect your changes.
+
+.. seealso::
+   :ref:`model-inheritance` for more information about the concepts
+   behind the model inheritence in Django and the limitations.
