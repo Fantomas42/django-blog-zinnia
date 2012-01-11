@@ -21,13 +21,19 @@
 {% block body-class %}entry-list {% if category %}category category-{{ category.slug }}{% endif %}{% if tag %}tag tag-{{ tag|slugify }}{% endif %}{% if author %}author author-{{ author|slugify }}{% endif %}{% if page_obj %} paginated page-{{ page_obj.number }}{% endif %}{% endblock %}
 
 {% block content %}
-<h1>
-  {% if category %}{% blocktrans %}Category archives: {{ category }}{% endblocktrans %}{% endif %}
-  {% if tag %}{% blocktrans %}Tag archives: {{ tag }}{% endblocktrans %}{% endif %}
-  {% if author %}{% blocktrans %}Author archives: {{ author }}{% endblocktrans %}{% endif %}
-</h1>
+{% if category %}
+<h1>{% blocktrans %}Category archives: {{ category }}{% endblocktrans %}</h1>
 {% if category.description %}
 <p>{{ category.description|striptags|safe }}</p>
+{% endif %}
+{% endif %}
+
+{% if tag %}
+<h1>{% blocktrans %}Tag archives: {{ tag }}{% endblocktrans %}</h1>
+{% endif %}
+
+{% if author %}
+<h1>{% blocktrans %}Author archives: {{ author }}{% endblocktrans %}</h1>
 {% endif %}
 
 {% for object in object_list %}
