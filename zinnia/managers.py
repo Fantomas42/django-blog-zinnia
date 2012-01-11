@@ -35,13 +35,13 @@ class AuthorPublishedManager(models.Manager):
             ).distinct()
 
 
-def entries_published(queryset):
+def entries_published(queryset, count=None):
     """Return only the entries published"""
     now = datetime.now()
     return queryset.filter(status=PUBLISHED,
                            start_publication__lte=now,
                            end_publication__gt=now,
-                           sites=Site.objects.get_current())
+                           sites=Site.objects.get_current())[:count]
 
 
 class EntryPublishedManager(models.Manager):
