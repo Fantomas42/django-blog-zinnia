@@ -46,9 +46,12 @@ String defining the base model path for the Entry model. See
 
 ZINNIA_UPLOAD_TO
 ----------------
-**Default value:** ``'uploads'``
+**Default value:** ``'uploads/zinnia'``
 
 String setting that tells Zinnia where to upload entries' images.
+
+.. versionchanged:: 0.10
+Previously the default value was ``'uploads'``
 
 .. _settings-edition:
 
