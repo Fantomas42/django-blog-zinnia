@@ -189,12 +189,20 @@ class EntryAdmin(admin.ModelAdmin):
         return super(EntryAdmin, self).formfield_for_manytomany(
             db_field, request, **kwargs)
 
+    def get_readonly_fields(self, request, obj=None):
+        if not request.user.has_perm('zinnia.can_change_status'):
+            return ['status']
+        return []
+
     def get_actions(self, request):
         """Define user actions by permissions"""
         actions = super(EntryAdmin, self).get_actions(request)
         if not request.user.has_perm('zinnia.can_change_author') \
            or not request.user.has_perm('zinnia.can_view_all'):
             del actions['make_mine']
+        if not request.user.has_perm('zinnia.can_change_status'):
+            del actions['make_hidden']
+            del actions['make_published']
         if not settings.PING_DIRECTORIES:
             del actions['ping_directories']
         if not settings.USE_TWITTER:
