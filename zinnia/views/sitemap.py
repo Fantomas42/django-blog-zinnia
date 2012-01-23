@@ -9,5 +9,5 @@ def sitemap(*ka, **kw):
     """Wrapper around the direct to template generic view to
     force the update of the extra context"""
     kw['extra_context'] = {'entries': Entry.published.all(),
-                           'categories': Category.tree.all()}
+                           'categories': Category.objects.all()}
     return direct_to_template(*ka, **kw)

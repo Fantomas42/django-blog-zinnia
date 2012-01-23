@@ -19,7 +19,8 @@ from django.contrib.markup.templatetags.markup import markdown
 from django.contrib.markup.templatetags.markup import textile
 from django.contrib.markup.templatetags.markup import restructuredtext
 
-import mptt
+from mptt.models import MPTTModel
+from mptt.models import TreeForeignKey
 from tagging.fields import TagField
 
 from zinnia.settings import UPLOAD_TO
@@ -59,7 +60,7 @@ class Author(User):
         proxy = True
 
 
-class Category(models.Model):
+class Category(MPTTModel):
     """Category object for Entry"""
 
     title = models.CharField(_('title'), max_length=255)
@@ -67,9 +68,9 @@ class Category(models.Model):
                             unique=True, max_length=255)
     description = models.TextField(_('description'), blank=True)
 
-    parent = models.ForeignKey('self', null=True, blank=True,
-                               verbose_name=_('parent category'),
-                               related_name='children')
+    parent = TreeForeignKey('self', null=True, blank=True,
+                            verbose_name=_('parent category'),
+                            related_name='children')
 
     def entries_published(self):
         """Return only the entries published"""
@@ -95,6 +96,10 @@ class Category(models.Model):
         ordering = ['title']
         verbose_name = _('category')
         verbose_name_plural = _('categories')
+
+    class MPTTMeta:
+        """Category MPTT's Meta"""
+        order_insertion_by = ['title']
 
 
 class EntryAbstractClass(models.Model):
@@ -295,7 +300,6 @@ class Entry(get_base_model()):
 
 
 moderator.register(Entry, EntryCommentModerator)
-mptt.register(Category, order_insertion_by=['title'])
 post_save.connect(ping_directories_handler, sender=Entry,
                   dispatch_uid='zinnia.entry.post_save.ping_directories')
 post_save.connect(ping_external_urls_handler, sender=Entry,
