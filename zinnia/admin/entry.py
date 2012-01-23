@@ -9,6 +9,7 @@ from django.utils.text import truncate_words
 from django.conf.urls.defaults import url
 from django.conf.urls.defaults import patterns
 from django.conf import settings as project_settings
+from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse, NoReverseMatch
 
@@ -300,7 +301,8 @@ class EntryAdmin(admin.ModelAdmin):
                 name='zinnia_entry_autocomplete_tags'),
             url(r'^wymeditor/$', 'direct_to_template',
                 {'template': 'admin/zinnia/entry/wymeditor.js',
-                 'mimetype': 'application/javascript'},
+                 'mimetype': 'application/javascript',
+                 'extra_context': {'lang': get_language().split('-')[0]}},
                 name='zinnia_entry_wymeditor'),
             url(r'^markitup/$', 'direct_to_template',
                 {'template': 'admin/zinnia/entry/markitup.js',
