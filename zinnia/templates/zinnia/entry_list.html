@@ -41,7 +41,9 @@
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 {% empty %}
-  <p class="notice">{% trans "No entries yet." %}</p>
+  <p class="notice">
+    <a href="{% url admin:zinnia_entry_add %}">{% trans "No entries yet." %}</a>
+  </p>
 {% endfor %}
 
 {% if is_paginated %}
