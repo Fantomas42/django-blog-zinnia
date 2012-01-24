@@ -3,14 +3,15 @@ from django.conf.urls.defaults import url
 from django.conf.urls.defaults import patterns
 
 from zinnia.feeds import LatestEntries
-from zinnia.feeds import EntryDiscussions
-from zinnia.feeds import EntryComments
-from zinnia.feeds import EntryTrackbacks
-from zinnia.feeds import EntryPingbacks
-from zinnia.feeds import SearchEntries
 from zinnia.feeds import TagEntries
-from zinnia.feeds import CategoryEntries
 from zinnia.feeds import AuthorEntries
+from zinnia.feeds import CategoryEntries
+from zinnia.feeds import SearchEntries
+from zinnia.feeds import EntryComments
+from zinnia.feeds import EntryPingbacks
+from zinnia.feeds import EntryTrackbacks
+from zinnia.feeds import EntryDiscussions
+from zinnia.feeds import LatestDiscussions
 
 
 urlpatterns = patterns(
@@ -18,6 +19,9 @@ urlpatterns = patterns(
     url(r'^latest/$',
         LatestEntries(),
         name='zinnia_entry_latest_feed'),
+    url(r'^latest/discussions/$',
+        LatestDiscussions(),
+        name='zinnia_discussion_latest_feed'),
     url(r'^search/$',
         SearchEntries(),
         name='zinnia_entry_search_feed'),

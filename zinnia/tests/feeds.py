@@ -29,6 +29,7 @@ from zinnia.feeds import EntryDiscussions
 from zinnia.feeds import EntryComments
 from zinnia.feeds import EntryPingbacks
 from zinnia.feeds import EntryTrackbacks
+from zinnia.feeds import LatestDiscussions
 
 
 class ZinniaFeedsTestCase(TestCase):
@@ -178,6 +179,18 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(
             feed.description('test'),
             _("The entries containing the pattern '%s'") % 'test')
+
+    def test_latest_discussions(self):
+        entry = self.create_published_entry()
+        comments = self.create_discussions(entry)
+        feed = LatestDiscussions()
+        self.assertEquals(feed.link(), '/')
+        self.assertEquals(len(feed.items()), 3)
+        self.assertEquals(feed.get_title(None), _('Latest discussions'))
+        self.assertEquals(
+            feed.description(),
+            _('The latest discussions for the site %s') % 'example.com')
+
 
     def test_entry_discussions(self):
         entry = self.create_published_entry()

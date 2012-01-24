@@ -2,6 +2,7 @@
 from urlparse import urljoin
 from BeautifulSoup import BeautifulSoup
 
+from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
@@ -11,6 +12,8 @@ from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import NoReverseMatch
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.comments.models import CommentFlag
+from django.contrib.contenttypes.models import ContentType
 
 from tagging.models import Tag
 from tagging.models import TaggedItem
@@ -215,21 +218,10 @@ class SearchEntries(EntryFeed):
         return _("The entries containing the pattern '%s'") % obj
 
 
-class EntryDiscussions(ZinniaFeed):
-    """Feed for discussions in an entry"""
+class DiscussionFeed(ZinniaFeed):
+    """Base class for Discussion Feed"""
     title_template = 'feeds/discussion_title.html'
     description_template = 'feeds/discussion_description.html'
-
-    def get_object(self, request, year, month, day, slug):
-        """Retrieve the discussions by entry's slug"""
-        return get_object_or_404(Entry.published, slug=slug,
-                                 creation_date__year=year,
-                                 creation_date__month=month,
-                                 creation_date__day=day)
-
-    def items(self, obj):
-        """Items are the discussions on the entry"""
-        return obj.discussions[:FEEDS_MAX_ITEMS]
 
     def item_pubdate(self, item):
         """Publication date of a discussion"""
@@ -238,10 +230,6 @@ class EntryDiscussions(ZinniaFeed):
     def item_link(self, item):
         """URL of the discussion"""
         return item.get_absolute_url()
-
-    def link(self, obj):
-        """URL of the entry"""
-        return obj.get_absolute_url()
 
     def item_author_name(self, item):
         """Author of the discussion"""
@@ -254,6 +242,48 @@ class EntryDiscussions(ZinniaFeed):
     def item_author_link(self, item):
         """Author's URL of the discussion"""
         return item.userinfo['url']
+
+
+class LatestDiscussions(DiscussionFeed):
+    """Feed for the latest discussions"""
+
+    def items(self):
+        """Items are the discussions on the entries"""
+        content_type = ContentType.objects.get_for_model(Entry)
+        return comments.get_model().objects.filter(
+            content_type=content_type, is_public=True).order_by(
+            '-submit_date')[:FEEDS_MAX_ITEMS]
+
+    def link(self):
+        """URL of latest discussions"""
+        return reverse('zinnia_entry_archive_index')
+
+    def get_title(self, obj):
+        """Title of the feed"""
+        return _('Latest discussions')
+
+    def description(self):
+        """Description of the feed"""
+        return _('The latest discussions for the site %s') % self.site.name
+
+
+class EntryDiscussions(DiscussionFeed):
+    """Feed for discussions on an entry"""
+
+    def get_object(self, request, year, month, day, slug):
+        """Retrieve the discussions by entry's slug"""
+        return get_object_or_404(Entry.published, slug=slug,
+                                 creation_date__year=year,
+                                 creation_date__month=month,
+                                 creation_date__day=day)
+
+    def items(self, obj):
+        """Items are the discussions on the entry"""
+        return obj.discussions[:FEEDS_MAX_ITEMS]
+
+    def link(self, obj):
+        """URL of the entry"""
+        return obj.get_absolute_url()
 
     def get_title(self, obj):
         """Title of the feed"""
