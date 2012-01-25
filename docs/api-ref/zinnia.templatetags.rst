@@ -24,11 +24,3 @@ templatetags Package
     :members:
     :undoc-members:
     :show-inheritance:
-
-:mod:`zinnia_admin_tags` Module
--------------------------------
-
-.. automodule:: zinnia.templatetags.zinnia_admin_tags
-    :members:
-    :undoc-members:
-    :show-inheritance:

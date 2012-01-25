@@ -97,7 +97,6 @@ Subpackages
 .. toctree::
 
     zinnia.admin
-    zinnia.management
     zinnia.spam_checker
     zinnia.templatetags
     zinnia.url_shortener
