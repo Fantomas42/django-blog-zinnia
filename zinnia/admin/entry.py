@@ -190,9 +190,12 @@ class EntryAdmin(admin.ModelAdmin):
             db_field, request, **kwargs)
 
     def get_readonly_fields(self, request, obj=None):
+        readonly_fields = super(EntryAdmin, self).get_readonly_fields(
+            request, obj)
         if not request.user.has_perm('zinnia.can_change_status'):
-            return ['status']
-        return []
+            readonly_fields = list(readonly_fields)
+            readonly_fields.append('status')
+        return readonly_fields
 
     def get_actions(self, request):
         """Define user actions by permissions"""
