@@ -104,12 +104,38 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'nature'
+html_theme = 'default'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
+text_color = '#33333'
+link_color = '#0066AA'
+box_color = '#e9e9f3'
+background_color = '#FFF'
+text_font = "Arial, Helvetica, sans-serif"
+
+html_theme_options = {
+    'footerbgcolor': background_color,
+    'footertextcolor': text_color,
+    'sidebarbgcolor': background_color,
+    'sidebartextcolor': text_color,
+    'sidebarlinkcolor': link_color,
+    'relbarbgcolor': background_color,
+    'relbartextcolor': text_color,
+    'relbarlinkcolor': link_color,
+    'bgcolor': background_color,
+    'textcolor': text_color,
+    'linkcolor': link_color,
+    'visitedlinkcolor': link_color,
+    'headbgcolor': box_color,
+    'headtextcolor': link_color,
+    'headlinkcolor': link_color,
+    'codebgcolor': box_color,
+    'bodyfont': text_font,
+    'headfont': text_font,
+    'sidebarwidth': 270,
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
