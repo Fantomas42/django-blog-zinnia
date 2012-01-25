@@ -20,6 +20,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.managers import PINGBACK, TRACKBACK
 from zinnia import feeds
 from zinnia.feeds import EntryFeed
+from zinnia.feeds import ZinniaFeed
 from zinnia.feeds import LatestEntries
 from zinnia.feeds import CategoryEntries
 from zinnia.feeds import AuthorEntries
@@ -278,6 +279,12 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(feed.feed_type, Atom1Feed)
         self.assertEquals(feed.subtitle, feed.description)
         feeds.FEEDS_FORMAT = original_feeds_format
+
+    def test_title_with_sitename_implementation(self):
+        feed = ZinniaFeed()
+        self.assertRaises(NotImplementedError, feed.title)
+        feed = LatestEntries()
+        self.assertEquals(feed.title(), 'example.com - ' + _('Latest entries'))
 
     def test_discussion_feed_with_same_slugs(self):
         """
