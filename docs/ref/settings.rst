@@ -40,7 +40,7 @@ ZINNIA_ENTRY_BASE_MODEL
 **Default value:** ``''`` (Empty string)
 
 String defining the base model path for the Entry model. See
-:doc:`extending_entry_model` for more informations.
+:doc:`/how-to/extending_entry_model` for more informations.
 
 .. setting:: ZINNIA_UPLOAD_TO
 
@@ -51,7 +51,8 @@ ZINNIA_UPLOAD_TO
 String setting that tells Zinnia where to upload entries' images.
 
 .. versionchanged:: 0.10
-Previously the default value was ``'uploads'``
+
+Previously the default value was ``'uploads'``.
 
 .. _settings-edition:
 
@@ -247,7 +248,7 @@ ZINNIA_SPAM_CHECKER_BACKENDS
 **Default value:** ``()`` (Empty tuple)
 
 List of strings representing the module path to a spam checker backend.
-See :doc:`spam_checker` for more informations about this setting.
+See :doc:`/topics/spam_checker` for more informations about this setting.
 
 .. _settings-pinging:
 

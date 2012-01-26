@@ -9,30 +9,38 @@ You can also find the differents editions of the
 
 .. toctree::
 
-   Presentation <overview>
+   Presentation <getting-started/overview>
 
 Getting Started
 ---------------
 
 .. toctree::
 
-   install
-   upgrading
+   getting-started/install
+   getting-started/configuration
+   getting-started/upgrading
 
-Advanced Usage
---------------
+Topics
+------
 
 .. toctree::
    :maxdepth: 2
    :numbered:
 
-   configuration
-   channels
-   search_engines
-   url_shortener
-   spam_checker
-   extending_entry_model
-   import_export
+   topics/channels
+   topics/search_engines
+   topics/url_shortener
+   topics/spam_checker
+
+HOW-TOs
+--------
+
+.. toctree::
+   :maxdepth: 2
+   :numbered:
+
+   how-to/extending_entry_model
+   how-to/import_export
 
 Development
 -----------
@@ -41,9 +49,9 @@ Development
    :maxdepth: 2
    :numbered:
 
-   contribution
-   buildout
-   tests
+   development/contribution
+   development/buildout
+   development/tests
 
 References
 ----------
@@ -52,9 +60,9 @@ References
    :maxdepth: 2
    :numbered:
 
-   settings
-   templatetags
-   api-ref/zinnia
+   ref/settings
+   ref/templatetags
+   ref/api/zinnia
 
 Notes
 -----
@@ -63,10 +71,10 @@ Notes
    :maxdepth: 2
    :numbered:
 
-   faq
-   compatibility
-   thanks
-   changelog
+   notes/faq
+   notes/compatibility
+   notes/thanks
+   notes/changelog
 
 Related
 -------

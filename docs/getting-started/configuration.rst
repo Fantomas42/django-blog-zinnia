@@ -148,7 +148,7 @@ Just add this line in your project's settings to use it. ::
   ZINNIA_ENTRY_BASE_MODEL = 'zinnia.plugins.placeholder.EntryPlaceholder'
 
 .. seealso::
-   :doc:`extending_entry_model` for more information about the extension
+   :doc:`/how-to/extending_entry_model` for more information about the extension
    of the entry model.
 
 .. _zinnia-tinymce:

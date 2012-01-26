@@ -167,7 +167,7 @@ Here an simple example : ::
   admin.site.register(Entry, EntryAdminImage)
 
 Another and better solution is to extend the :class:`~zinnia.models.Entry`
-model like described in :doc:`extending_entry_model`.
+model like described in :doc:`/how-to/extending_entry_model`.
 
 
 .. _`specifying a template directory`: https://docs.djangoproject.com/en/dev/ref/templates/api/#loading-templates
