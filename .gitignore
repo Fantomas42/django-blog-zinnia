@@ -18,7 +18,7 @@ develop-eggs
 .sass-cache
 .coverage
 .tox
-docs/api
+docs/epydoc
 docs/build
 docs/coverage
 docs/tests.xml
