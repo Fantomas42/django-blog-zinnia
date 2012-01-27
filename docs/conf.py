@@ -16,9 +16,11 @@ import sys
 import re
 from datetime import date
 
-sys.path.append(os.path.abspath('.'))
-sys.path.append(os.path.abspath('..'))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'zinniadocs_settings'
+HERE = os.path.abspath(os.path.dirname(__file__))
+
+sys.path.append(HERE)
+sys.path.append(os.path.join(HERE, '..'))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'extensions.settings'
 
 import zinnia
 
@@ -31,7 +33,7 @@ import zinnia
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.intersphinx',
-              'zinniadocs']
+              'extensions.zinnia_docs']
 
 intersphinx_mapping = {
     'django': ('http://readthedocs.org/docs/django/en/latest/', None),

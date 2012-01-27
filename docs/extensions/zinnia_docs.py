@@ -1,4 +1,5 @@
-"""Extensions for the documation of zinnia
+"""
+Extensions for the Sphinx documation of Zinnia
 
 Inspired, stealed and needed for
 cross linking the django documentation.

@@ -1,8 +1,10 @@
-"""Settings for testing zinnia"""
+"""Settings for Zinnia documentation"""
 import os
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 
-DATABASES = {'default': {'NAME': ':memory:',
+HERE = os.path.abspath(os.path.dirname(__file__))
+
+DATABASES = {'default': {'NAME': os.path.join(HERE, 'docs.db'),
                          'ENGINE': 'django.db.backends.sqlite3'}}
 
 SITE_ID = 1
