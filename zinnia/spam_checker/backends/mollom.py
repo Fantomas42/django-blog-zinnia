@@ -4,8 +4,8 @@ from django.utils.encoding import smart_str
 from django.core.exceptions import ImproperlyConfigured
 
 try:
-    from pymollom import MollomAPI
-    from pymollom import MollomFault
+    from Mollom import MollomAPI
+    from Mollom import MollomFault
 except ImportError:
     raise ImproperlyConfigured('pymollom module is not available')
 
