@@ -25,7 +25,6 @@ Topics
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
    topics/channels
    topics/search_engines
@@ -37,9 +36,9 @@ HOW-TOs
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
    how-to/extending_entry_model
+   how-to/rewriting_entry_url
    how-to/import_export
 
 Development
@@ -47,7 +46,6 @@ Development
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
    development/contribution
    development/buildout
@@ -58,7 +56,6 @@ References
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
    ref/settings
    ref/templatetags
@@ -69,7 +66,6 @@ Notes
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
    notes/faq
    notes/compatibility
