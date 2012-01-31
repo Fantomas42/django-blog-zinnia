@@ -136,7 +136,7 @@ html_theme_options = {
     'codebgcolor': box_color,
     'bodyfont': text_font,
     'headfont': text_font,
-    'sidebarwidth': 270,
+    'sidebarwidth': 210,
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
