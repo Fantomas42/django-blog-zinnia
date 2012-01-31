@@ -26,9 +26,9 @@ a third solution.
 How do we do that?
 
 In fact, simply by creating an abstract model inherited from
-:class:`EntryBaseModel`, adding fields or/and overriding his methods, and
-registering it with the :setting:`ZINNIA_ENTRY_BASE_MODEL` setting in your
-project.
+:class:`EntryAbstractClass`, adding fields or/and overriding his methods,
+and registering it with the :setting:`ZINNIA_ENTRY_BASE_MODEL` setting in
+your project.
 
 Example for adding a gallery field. ::
 
