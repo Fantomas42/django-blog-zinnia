@@ -24,7 +24,6 @@ Topics
 ------
 
 .. toctree::
-   :maxdepth: 2
 
    topics/channels
    topics/search_engines
@@ -35,7 +34,6 @@ HOW-TOs
 --------
 
 .. toctree::
-   :maxdepth: 2
 
    how-to/extending_entry_model
    how-to/rewriting_entry_url
@@ -45,7 +43,6 @@ Development
 -----------
 
 .. toctree::
-   :maxdepth: 2
 
    development/contribution
    development/buildout
@@ -88,5 +85,5 @@ index or try to find it using the search function:
 * :ref:`search`
 
 .. _`documentation online at readthedocs.org`: http://django-blog-zinnia.readthedocs.org/
-.. _`Zinnia's API`: http://django-blog-zinnia.com/docs/api/
+.. _`Zinnia's API`: http://django-blog-zinnia.com/api/
 .. _`Code coverage`: http://django-blog-zinnia.com/documentation/coverage/

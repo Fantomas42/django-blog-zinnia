@@ -65,7 +65,7 @@ It's also possible to benefit of the `TypePad AntiSpam`_ service to fight
 the spam. Like the Akismet protection you need to install the `akismet`_
 Python module.
 
-The register the TypePad AntiSpam protection with this setting: ::
+Then register the TypePad AntiSpam protection with this setting: ::
 
   ZINNIA_SPAM_CHECKER_BACKENDS = ('zinnia.spam_checker.backends.typepad',)
 
@@ -76,6 +76,29 @@ The register the TypePad AntiSpam protection with this setting: ::
 ::
 
   TYPEPAD_SECRET_API_KEY = 'your key'
+
+.. _zinnia-mollom:
+
+Mollom Anti-Spam
+================
+
+.. module:: zinnia.spam_checker.backends.mollom
+
+Another approach to fight the spam is provided by `Mollom`_, Zinnia
+implement a backend to use this spam filtering service. Before configuring
+the service, you need to install the `PyMollom`_ Python library and then
+register the Mollom spam checking protection with this setting: ::
+
+  ZINNIA_SPAM_CHECKER_BACKENDS = ('zinnia.spam_checker.backends.mollom',)
+
+.. important:: You need a private and public keys to use this service.
+               Get a free account at http://mollom.com/pricing then set
+	       your keys in your project's settings like this:
+
+::
+
+  MOLLOM_PUBLIC_KEY = 'your public key'
+  MOLLOM_PRIVATE_KEY = 'your private key'
 
 .. _zinnia-bitly:
 
@@ -219,6 +242,8 @@ Insert something like this in your project's urls.py: ::
 
 .. _`akismet`: http://www.voidspace.org.uk/python/modules.shtml#akismet
 .. _`TypePad AntiSpam`: http://antispam.typepad.com/
+.. _`Mollom`: http://mollom.com/
+.. _`PyMollom`: https://github.com/itkovian/PyMollom
 .. _`django-bitly`: http://bitbucket.org/discovery/django-bitly/
 .. _`tweepy`: https://github.com/tweepy/tweepy
 .. _`django-CMS 2.0`: http://www.django-cms.org/

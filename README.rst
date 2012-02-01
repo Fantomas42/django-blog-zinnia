@@ -28,7 +28,7 @@ More than a long speech, here the list of the main features :
 * Prepublication and expiration
 * Edition in `MarkDown`_, `Textile`_ or `reStructuredText`_
 * Widgets (Popular entries, Similar entries, ...)
-* Spam protection with `Akismet`_ or `TypePad`_
+* Spam protection with `Akismet`_, `TypePad`_ or `Mollom`_
 * Admin dashboard
 * `MetaWeblog API`_
 * Ping Directories
@@ -51,13 +51,12 @@ More than a long speech, here the list of the main features :
 Examples
 ========
 
-Take a look at the online demo at : http://django-blog-zinnia.com
+Take a look at the online demo at : http://django-blog-zinnia.com/
 or you can visit these websites who use Zinnia.
 
 * `Fantomas' side`_  / `Mobile version`_.
 * `Professional Web Studio`_.
 * `mixedCase`_.
-* `MadCad's Page`_.
 * `Tryolabs`_.
 * `brainbreach`_.
 
@@ -77,24 +76,25 @@ More information and help available at these URLs :
 * For reporting a bug use `Github Issues`_.
 
 
-.. _`Sitemaps`: http://django-blog-zinnia.com/documentation/configuration/#sitemaps
-.. _`Advanced search engine`: http://django-blog-zinnia.com/documentation/search_engines/#advanced-search-engine
+.. _`Sitemaps`: http://django-blog-zinnia.com/documentation/getting-started/configuration/#module-zinnia.sitemaps
+.. _`Advanced search engine`: http://django-blog-zinnia.com/documentation/topics/search_engines/#module-zinnia.search
 .. _`MarkDown`: http://daringfireball.net/projects/markdown/
 .. _`Textile`: http://redcloth.org/hobix.com/textile/
 .. _`reStructuredText`: http://docutils.sourceforge.net/rst.html
 .. _`Akismet`: http://akismet.com
 .. _`TypePad`: http://antispam.typepad.com/
+.. _`Mollom`: http://mollom.com/
 .. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi
-.. _`Bit.ly`: http://django-blog-zinnia.com/documentation/configuration/#bit-ly
-.. _`Twitter`: http://django-blog-zinnia.com/documentation/configuration/#twitter
+.. _`Bit.ly`: http://django-blog-zinnia.com/documentation/getting-started/configuration/#module-zinnia.url_shortener.backends.bitly
+.. _`Twitter`: http://django-blog-zinnia.com/documentation/getting-started/configuration/#twitter
 .. _`Gravatar`: http://gravatar.com/
-.. _`Django-CMS`: http://django-blog-zinnia.com/documentation/configuration/#django-cms
-.. _`Entry model extendable`: http://django-blog-zinnia.com/documentation/extending_entry_model/
+.. _`Django-CMS`: http://django-blog-zinnia.com/documentation/getting-started/configuration/#module-zinnia.plugins
+.. _`Entry model extendable`: http://django-blog-zinnia.com/documentation/how-to/extending_entry_model/
 .. _`WYMeditor`: http://www.wymeditor.org/
 .. _`TinyMCE`: http://tinymce.moxiecode.com/
 .. _`MarkItUp`: http://markitup.jaysalvat.com/
-.. _`Blogger conversion utility`: http://django-blog-zinnia.com/documentation/import_export/#from-blogger-to-zinnia
-.. _`WordPress conversion utility`: http://django-blog-zinnia.com/documentation/import_export/#from-wordpress-to-zinnia
+.. _`Blogger conversion utility`: http://django-blog-zinnia.com/documentation/how-to/import_export/#from-blogger-to-zinnia
+.. _`WordPress conversion utility`: http://django-blog-zinnia.com/documentation/how-to/import_export/#from-wordpress-to-zinnia
 .. _`Compass`: http://compass-style.org/
 .. _`Sass3`: http://sass-lang.com/
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
@@ -102,7 +102,6 @@ More information and help available at these URLs :
 .. _`Mobile version`: http://m.fantomas.willbreak.it/blog/
 .. _`Professional Web Studio`: http://www.professionalwebstudio.com/en/weblog/
 .. _`mixedCase`: http://www.mixedcase.nl/articles/
-.. _`MadCad's Page`: http://mad-cad.net/blog/
 .. _`Tryolabs`: http://www.tryolabs.com/Blog/
 .. _`brainbreach`: http://brainbreach.com/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
