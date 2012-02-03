@@ -37,11 +37,11 @@ class Command(LabelCommand):
         make_option('--no-enclosure', action='store_false',
                     dest='image-enclosure', default=True,
                     help='Do NOT save image enclosure if present.'),
+        make_option('--no-tags', action='store_false',
+                    dest='tags', default=True,
+                    help='Do NOT store categories as tags'),
         make_option('--author', dest='author', default='',
                     help='All imported entries belong to specified author'),
-        make_option('--category-is-tag', action='store_true',
-                    dest='category-tag', default=False,
-                    help='Store categories as tags'),
         )
     SITE = Site.objects.get_current()
 
@@ -66,10 +66,10 @@ class Command(LabelCommand):
             raise CommandError('You need to install the feedparser ' \
                                'module to run this command.')
 
+        self.tags = options.get('tags', True)
+        self.default_author = options.get('author')
         self.verbosity = int(options.get('verbosity', 1))
         self.auto_excerpt = options.get('auto-excerpt', True)
-        self.default_author = options.get('author')
-        self.category_tag = options.get('category-tag', False)
         self.image_enclosure = options.get('image-enclosure', True)
         if self.default_author:
             try:
@@ -112,7 +112,7 @@ class Command(LabelCommand):
             if not entry_dict['excerpt'] and self.auto_excerpt:
                 entry_dict['excerpt'] = truncate_words(
                     strip_tags(feed_entry.description), 50)
-            if self.category_tag:
+            if self.tags:
                 entry_dict['tags'] = self.import_tags(categories)
 
             entry = Entry(**entry_dict)
