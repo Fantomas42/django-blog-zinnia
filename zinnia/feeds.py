@@ -12,7 +12,6 @@ from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import NoReverseMatch
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.comments.models import CommentFlag
 from django.contrib.contenttypes.models import ContentType
 
 from tagging.models import Tag

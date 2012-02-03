@@ -183,7 +183,7 @@ class ZinniaFeedsTestCase(TestCase):
 
     def test_latest_discussions(self):
         entry = self.create_published_entry()
-        comments = self.create_discussions(entry)
+        self.create_discussions(entry)
         feed = LatestDiscussions()
         self.assertEquals(feed.link(), '/')
         self.assertEquals(len(feed.items()), 3)
@@ -191,7 +191,6 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(
             feed.description(),
             _('The latest discussions for the site %s') % 'example.com')
-
 
     def test_entry_discussions(self):
         entry = self.create_published_entry()
