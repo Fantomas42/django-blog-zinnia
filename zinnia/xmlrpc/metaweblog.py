@@ -224,8 +224,10 @@ def new_post(blog_id, username, password, post, publish):
                   'tags': 'mt_keywords' in post and post['mt_keywords'] or '',
                   'slug': 'wp_slug' in post and post['wp_slug'] or slugify(
                       post['title']),
-                  'password': post.get('wp_password', ''),
-                  'status': publish and PUBLISHED or DRAFT}
+                  'password': post.get('wp_password', '')}
+    if user.has_perm('zinnia.can_change_status'):
+        entry_dict['status'] = publish and PUBLISHED or DRAFT
+
     entry = Entry.objects.create(**entry_dict)
 
     author = user
@@ -269,7 +271,8 @@ def edit_post(post_id, username, password, post, publish):
     entry.tags = 'mt_keywords' in post and post['mt_keywords'] or ''
     entry.slug = 'wp_slug' in post and post['wp_slug'] or slugify(
         post['title'])
-    entry.status = publish and PUBLISHED or DRAFT
+    if user.has_perm('zinnia.can_change_status'):
+        entry.status = publish and PUBLISHED or DRAFT
     entry.password = post.get('wp_password', '')
     entry.save()
 
