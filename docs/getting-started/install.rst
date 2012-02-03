@@ -113,8 +113,10 @@ you can customize your URLs if you want. Here's how: ::
   url(r'^weblog/authors/', include('zinnia.urls.authors')),
   url(r'^weblog/categories/', include('zinnia.urls.categories')),
   url(r'^weblog/discussions/', include('zinnia.urls.discussions')),
-  url(r'^weblog/', include('zinnia.urls.quick_entry')),
   url(r'^weblog/', include('zinnia.urls.entries')),
+  url(r'^weblog/', include('zinnia.urls.archives')),
+  url(r'^weblog/', include('zinnia.urls.shortlink')),
+  url(r'^weblog/', include('zinnia.urls.quick_entry')),
   url(r'^comments/', include('django.contrib.comments.urls')),
 
 .. _static-files:
