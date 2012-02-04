@@ -17,13 +17,13 @@ from django.contrib.comments import get_model as get_comment_model
 from tagging.models import Tag
 from tagging.utils import calculate_cloud
 
-from zinnia import settings
 from zinnia.models import Entry
 from zinnia.models import Author
 from zinnia.models import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import tags_published
 from zinnia.managers import PINGBACK, TRACKBACK
+from zinnia.settings import ZINNIA_GRAVATAR_HTTPS
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
 from zinnia.templatetags.zcalendar import ZinniaCalendar
