@@ -23,7 +23,7 @@ from zinnia.models import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import tags_published
 from zinnia.managers import PINGBACK, TRACKBACK
-from zinnia.settings import ZINNIA_GRAVATAR_HTTPS
+from zinnia.settings import GRAVATAR_HTTPS
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
 from zinnia.templatetags.zcalendar import ZinniaCalendar
@@ -292,7 +292,7 @@ def zinnia_breadcrumbs(context, root_name='Blog',
 def get_gravatar(email, size=80, rating='g', default=None):
     """Return url for a Gravatar"""
     url = '%s.gravatar.com/avatar/%s.jpg' % (
-       'https://secure' if settings.GRAVATAR_HTTPS else 'http://www',
+       'https://secure' if GRAVATAR_HTTPS else 'http://www',
        md5(email.strip().lower()).hexdigest()
     )
     options = {'s': size, 'r': rating}
