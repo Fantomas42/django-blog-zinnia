@@ -17,6 +17,7 @@ from django.contrib.comments import get_model as get_comment_model
 from tagging.models import Tag
 from tagging.utils import calculate_cloud
 
+from zinnia import settings
 from zinnia.models import Entry
 from zinnia.models import Author
 from zinnia.models import Category
@@ -290,8 +291,10 @@ def zinnia_breadcrumbs(context, root_name='Blog',
 @register.simple_tag
 def get_gravatar(email, size=80, rating='g', default=None):
     """Return url for a Gravatar"""
-    url = 'http://www.gravatar.com/avatar/%s.jpg' % \
-          md5(email.strip().lower()).hexdigest()
+    url = '%s.gravatar.com/avatar/%s.jpg' % (
+       'https://secure' if settings.GRAVATAR_HTTPS else 'http://www',
+       md5(email.strip().lower()).hexdigest()
+    )
     options = {'s': size, 'r': rating}
     if default:
         options['d'] = default
