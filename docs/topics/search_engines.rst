@@ -104,7 +104,7 @@ Example of e query with parenthesis:
    ``berlin`` with the term ``love``.
 
 Complex example:
-   ``((paris or berlin) and (tag:love or category:meet*) girl -money``
+   ``((paris or berlin) and (tag:love or category:meet*)) girl -money``
 
    This will returns all the entries containing the terms ``paris`` or
    ``berlin`` with the tag ``love`` or filled under the categories starting
