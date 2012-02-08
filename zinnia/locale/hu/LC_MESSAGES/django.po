@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2012-01-10 08:46-0600\n"
-"PO-Revision-Date: 2012-01-10 14:46+0000\n"
+"POT-Creation-Date: 2012-02-08 07:57-0600\n"
+"PO-Revision-Date: 2012-02-08 13:59+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,239 +19,248 @@ msgstr ""
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: feeds.py:111 plugins/cms_plugins.py:23
+#: feeds.py:113 plugins/cms_plugins.py:23
 #: templates/zinnia/entry_archive.html:4 templates/zinnia/entry_archive.html:6
-#: templates/zinnia/entry_list.html:19 tests/feeds.py:123
+#: templates/zinnia/entry_list.html:19 tests/feeds.py:126 tests/feeds.py:286
 msgid "Latest entries"
 msgstr "Legújabb bejegyzések"
 
-#: feeds.py:115 tests/feeds.py:126
+#: feeds.py:117 tests/feeds.py:129
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "A legfrissebb bejegyzések az oldalon:%s"
 
-#: feeds.py:135 tests/feeds.py:136
+#: feeds.py:137 tests/feeds.py:139
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Bejegyzés a kategóriában:%s"
 
-#: feeds.py:139 tests/feeds.py:139
+#: feeds.py:141 tests/feeds.py:142
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "A legfrissebb bejegyzések a kategóriában:%s"
 
-#: feeds.py:159 tests/feeds.py:148
+#: feeds.py:161 tests/feeds.py:151
 #, python-format
 msgid "Entries for author %s"
 msgstr "Bejegyzés szerzője:%s"
 
-#: feeds.py:163 tests/feeds.py:150
+#: feeds.py:165 tests/feeds.py:153
 #, python-format
 msgid "The latest entries by %s"
 msgstr "A legfrissebb bejegyzések:%s"
 
-#: feeds.py:184 tests/feeds.py:160
+#: feeds.py:186 tests/feeds.py:163
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Bejegyzés ezzel a címkével:%s"
 
-#: feeds.py:188 tests/feeds.py:162
+#: feeds.py:190 tests/feeds.py:165
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "A legfrissebb bejegyzések ezzel a címkével:%s"
 
-#: feeds.py:211 tests/feeds.py:176
+#: feeds.py:213 tests/feeds.py:179
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr ""
 
-#: feeds.py:215 tests/feeds.py:179
+#: feeds.py:217 tests/feeds.py:182
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr ""
 
-#: feeds.py:260 tests/feeds.py:198
+#: feeds.py:262 tests/feeds.py:190
+msgid "Latest discussions"
+msgstr ""
+
+#: feeds.py:266 tests/feeds.py:193
+#, python-format
+msgid "The latest discussions for the site %s"
+msgstr ""
+
+#: feeds.py:289 tests/feeds.py:212
 #, python-format
 msgid "Discussions on %s"
 msgstr "Beszélgetések:%s"
 
-#: feeds.py:264 tests/feeds.py:201
+#: feeds.py:293 tests/feeds.py:215
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "A bejegyzés legutóbbi beszélgetései :%s"
 
-#: feeds.py:282 tests/feeds.py:211
+#: feeds.py:311 tests/feeds.py:225
 #, python-format
 msgid "Comments on %s"
 msgstr "Megjegyzések:%s"
 
-#: feeds.py:286 tests/feeds.py:214
+#: feeds.py:315 tests/feeds.py:228
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "A bejegyzés legfrissebb hozzászólásai:%s"
 
-#: feeds.py:316 tests/feeds.py:230
+#: feeds.py:345 tests/feeds.py:244
 #, python-format
 msgid "Pingbacks on %s"
 msgstr "Pingbacks:%s"
 
-#: feeds.py:320 tests/feeds.py:233
+#: feeds.py:349 tests/feeds.py:247
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "Legújabb Pingbacks ebben a bejegyzésben :%s"
 
-#: feeds.py:338 tests/feeds.py:243
+#: feeds.py:367 tests/feeds.py:257
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "Trackbacks:%s"
 
-#: feeds.py:342 tests/feeds.py:246
+#: feeds.py:371 tests/feeds.py:260
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "A legújabb trackbacks ebben a bejegyzésben:%s"
 
-#: models.py:65 models.py:106 admin/entry.py:75
+#: models.py:66 models.py:111 admin/entry.py:76
 msgid "title"
 msgstr "cím"
 
-#: models.py:66 models.py:121
+#: models.py:67 models.py:126
 msgid "used for publication"
 msgstr "közzétételhez használva"
 
-#: models.py:68
+#: models.py:69
 msgid "description"
 msgstr "leírás"
 
-#: models.py:71 admin/forms.py:19
+#: models.py:72 admin/forms.py:19
 msgid "parent category"
 msgstr "főkategória"
 
-#: models.py:96
+#: models.py:97
 msgid "category"
 msgstr "kategória"
 
-#: models.py:97 models.py:115 admin/forms.py:47 plugins/models.py:25
+#: models.py:98 models.py:120 admin/forms.py:47 plugins/models.py:25
 msgid "categories"
 msgstr "kategóriák"
 
-#: models.py:102
+#: models.py:107
 msgid "draft"
 msgstr "tervezet"
 
-#: models.py:103
+#: models.py:108
 msgid "hidden"
 msgstr "rejtett"
 
-#: models.py:104
+#: models.py:109
 msgid "published"
 msgstr "közzétett"
 
-#: models.py:108
+#: models.py:113
 msgid "image"
 msgstr "kép"
 
-#: models.py:109
+#: models.py:114
 msgid "used for illustration"
 msgstr "illusztrációhoz használva"
 
-#: models.py:110
+#: models.py:115
 msgid "content"
 msgstr "tartalom"
 
-#: models.py:111
+#: models.py:116
 msgid "excerpt"
 msgstr "idézet"
 
-#: models.py:112
+#: models.py:117
 msgid "optional element"
 msgstr "választható elem"
 
-#: models.py:114 plugins/models.py:32
+#: models.py:119 plugins/models.py:32
 msgid "tags"
 msgstr "címkék"
 
-#: models.py:118
+#: models.py:123
 msgid "related entries"
 msgstr "kapcsolatos bejegyzések"
 
-#: models.py:125 plugins/models.py:30
+#: models.py:130 plugins/models.py:30
 msgid "authors"
 msgstr "szerzők"
 
-#: models.py:129
+#: models.py:134
 msgid "featured"
 msgstr "Kiemelt"
 
-#: models.py:130 admin/entry.py:127
+#: models.py:135 admin/entry.py:128
 msgid "comment enabled"
 msgstr "megjegyzés engedélyezve"
 
-#: models.py:131
+#: models.py:136
 msgid "linkback enabled"
 msgstr "linkback engedélyezve"
 
-#: models.py:133
+#: models.py:138
 msgid "creation date"
 msgstr "létrehozás dátuma"
 
-#: models.py:135
+#: models.py:140
 msgid "last update"
 msgstr "utolsó frissítés"
 
-#: models.py:136
+#: models.py:141
 msgid "start publication"
 msgstr "közzététel indítása"
 
-#: models.py:137
+#: models.py:142
 msgid "date start publish"
 msgstr "közzététel dátuma"
 
-#: models.py:139
+#: models.py:144
 msgid "end publication"
 msgstr "közzététel vége"
 
-#: models.py:140
+#: models.py:145
 msgid "date end publish"
 msgstr "közzététel befejezésének dátuma"
 
-#: models.py:143
+#: models.py:148
 msgid "sites publication"
 msgstr "oldalak közzététele"
 
-#: models.py:147
+#: models.py:152
 msgid "login required"
 msgstr "bejelentkezés szükséges"
 
-#: models.py:148
+#: models.py:153
 msgid "only authenticated users can view the entry"
 msgstr "a bejegyzést csak hitelesített felhasználók tekinthetik meg"
 
-#: models.py:150
+#: models.py:155
 msgid "password"
 msgstr "jelszó"
 
-#: models.py:151
+#: models.py:156
 msgid "protect the entry with a password"
 msgstr "cikk levédése jelszóval"
 
-#: models.py:154 plugins/models.py:37 plugins/models.py:63
+#: models.py:159 plugins/models.py:37 plugins/models.py:63
 #: plugins/models.py:87
 msgid "template"
 msgstr "sablon"
 
-#: models.py:156
+#: models.py:161
 msgid "Default template"
 msgstr "Alapértelmezett sablon"
 
-#: models.py:158
+#: models.py:163
 msgid "template used to display the entry"
 msgstr "bejegyzéshez használt sablon"
 
-#: models.py:289
+#: models.py:270
 msgid "entry"
 msgstr "bejegyzés"
 
-#: models.py:290 plugins/cms_plugins.py:21 plugins/cms_plugins.py:92
+#: models.py:271 plugins/cms_plugins.py:21 plugins/cms_plugins.py:92
 #: plugins/cms_plugins.py:114 plugins/models.py:61
 msgid "entries"
 msgstr "bejegyzések"
@@ -265,139 +274,139 @@ msgstr "[ %(site)s ] Új hozzászólás érkezett \" %(title)s \""
 msgid "tree path"
 msgstr "fa útvonal"
 
-#: admin/entry.py:28 plugins/admin.py:17
+#: admin/entry.py:29 plugins/admin.py:17
 #: templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "Tartalom"
 
-#: admin/entry.py:30 plugins/admin.py:20
+#: admin/entry.py:31 plugins/admin.py:20
 msgid "Options"
 msgstr "Opciók"
 
-#: admin/entry.py:36 plugins/admin.py:26
+#: admin/entry.py:37 plugins/admin.py:26
 msgid "Privacy"
 msgstr "Adatvédelem"
 
-#: admin/entry.py:38 plugins/admin.py:28
+#: admin/entry.py:39 plugins/admin.py:28
 msgid "Discussion"
 msgstr "Hozzászólás"
 
-#: admin/entry.py:40 plugins/admin.py:30
+#: admin/entry.py:41 plugins/admin.py:30
 msgid "Publication"
 msgstr "Közzététel"
 
-#: admin/entry.py:68
+#: admin/entry.py:69
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr " %(title)s (%(word_count)i szavak)"
 
-#: admin/entry.py:72
+#: admin/entry.py:73
 #, python-format
 msgid "%(title)s (%(comments)i comments)"
 msgstr " %(title)s (%(comments)i hozzászólások)"
 
-#: admin/entry.py:88
+#: admin/entry.py:89
 msgid "author(s)"
 msgstr "szerző(k)"
 
-#: admin/entry.py:101
+#: admin/entry.py:102
 msgid "category(s)"
 msgstr "kategória(ák)"
 
-#: admin/entry.py:113
+#: admin/entry.py:114
 msgid "tag(s)"
 msgstr "tag(ek)"
 
-#: admin/entry.py:121
+#: admin/entry.py:122
 msgid "site(s)"
 msgstr "helyszín(ek)"
 
-#: admin/entry.py:133
+#: admin/entry.py:134
 msgid "is actual"
 msgstr "a tényleges"
 
-#: admin/entry.py:139
+#: admin/entry.py:140
 msgid "is visible"
 msgstr "látható"
 
-#: admin/entry.py:144
+#: admin/entry.py:145
 msgid "View"
 msgstr ""
 
-#: admin/entry.py:146
+#: admin/entry.py:147
 msgid "View on site"
 msgstr "Nézd meg a helyszínen"
 
-#: admin/entry.py:152
+#: admin/entry.py:153
 msgid "Unavailable"
 msgstr "Nem érhető el"
 
-#: admin/entry.py:156
+#: admin/entry.py:157
 msgid "short url"
 msgstr "Rövid url"
 
-#: admin/entry.py:211
+#: admin/entry.py:223
 msgid "The selected entries now belong to you."
 msgstr ""
 
-#: admin/entry.py:212
+#: admin/entry.py:224
 msgid "Set the entries to the user"
 msgstr "Állítsa be a bejegyzéseket a felhasználónak"
 
-#: admin/entry.py:219
+#: admin/entry.py:231
 msgid "The selected entries are now marked as published."
 msgstr ""
 
-#: admin/entry.py:220
+#: admin/entry.py:232
 msgid "Set entries selected as published"
 msgstr "Állítsa be a kiválasztott bejegyzéseket közzétettnek"
 
-#: admin/entry.py:226
+#: admin/entry.py:238
 msgid "The selected entries are now marked as hidden."
 msgstr ""
 
-#: admin/entry.py:227
+#: admin/entry.py:239
 msgid "Set entries selected as hidden"
 msgstr "Állítsa be a kiválasztott bejegyzéseket rejtettnek"
 
-#: admin/entry.py:242
+#: admin/entry.py:254
 msgid "The selected entries have been tweeted."
 msgstr ""
 
-#: admin/entry.py:243
+#: admin/entry.py:255
 msgid "Tweet entries selected"
 msgstr "Tweet a kiválasztott bejegyzéseket"
 
-#: admin/entry.py:249
+#: admin/entry.py:261
 msgid "Comments are now closed for selected entries."
 msgstr ""
 
-#: admin/entry.py:250
+#: admin/entry.py:262
 msgid "Close the comments for selected entries"
 msgstr "Zárja be a megjegyzéseket a kiválasztott bejegyzéseken"
 
-#: admin/entry.py:257
+#: admin/entry.py:269
 msgid "Linkbacks are now closed for selected entries."
 msgstr ""
 
-#: admin/entry.py:259
+#: admin/entry.py:271
 msgid "Close the linkbacks for selected entries"
 msgstr "Zárja be a hivatkozásokat a kiválasztott bejegyzéseken"
 
-#: admin/entry.py:266
+#: admin/entry.py:278
 msgid "The selected entries are now set at the current date."
 msgstr ""
 
-#: admin/entry.py:268
+#: admin/entry.py:280
 msgid "Put the selected entries on top at the current date"
 msgstr "Tegye a kiválasztott bejegyzéseket az aktuális dátum tetejére"
 
-#: admin/entry.py:287
+#: admin/entry.py:299
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%(directory)s könyvtár sikeresen elért %(success)d bejegyzést."
 
-#: admin/entry.py:291
+#: admin/entry.py:303
 msgid "Ping Directories for selected entries"
 msgstr "Ping Könyvtárak a kiválasztott bejegyzésekhez"
 
@@ -409,7 +418,7 @@ msgstr "Nem főkategória"
 msgid "A category cannot be parent of itself."
 msgstr "A kategória nem lehet önmaga szülője."
 
-#: admin/forms.py:45 plugins/menu.py:70 templates/zinnia/base.html:36
+#: admin/forms.py:45 plugins/menu.py:70 templates/zinnia/base.html:37
 #: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
 #: templatetags/zbreadcrumbs.py:50
 msgid "Categories"
@@ -431,7 +440,7 @@ msgstr "Részletes"
 msgid "Selected entries"
 msgstr "Kiválasztott bejegyzések"
 
-#: plugins/cms_plugins.py:116 templates/zinnia/base.html:64
+#: plugins/cms_plugins.py:116 templates/zinnia/base.html:65
 msgid "Random entries"
 msgstr "Véletlen bejegyzések"
 
@@ -448,7 +457,7 @@ msgid "Zinnia Author Menu"
 msgstr "Zinnia Szerző Menü"
 
 #: plugins/menu.py:87 templates/zinnia/author_list.html:6
-#: templates/zinnia/base.html:40 templatetags/zbreadcrumbs.py:46
+#: templates/zinnia/base.html:41 templatetags/zbreadcrumbs.py:46
 msgid "Authors"
 msgstr "Szerzők"
 
@@ -457,7 +466,7 @@ msgid "Zinnia Tag Menu"
 msgstr "Zinnia Címke Menü"
 
 #: plugins/menu.py:105 templates/admin/zinnia/widgets/quickpost.html:25
-#: templates/zinnia/_entry_detail.html:62 templates/zinnia/base.html:48
+#: templates/zinnia/_entry_detail.html:62 templates/zinnia/base.html:49
 #: templates/zinnia/tag_list.html:6 templatetags/zbreadcrumbs.py:43
 msgid "Tags"
 msgstr "Címkék"
@@ -515,15 +524,15 @@ msgstr "Blog-index"
 msgid "Sitemap"
 msgstr "Oldaltérkép"
 
-#: templates/404.html:35 templates/500.html:35 templates/zinnia/base.html:52
+#: templates/404.html:35 templates/500.html:35 templates/zinnia/base.html:53
 msgid "Recent entries"
 msgstr "Legutóbbi bejegyzések"
 
-#: templates/404.html:40 templates/500.html:40 templates/zinnia/base.html:24
+#: templates/404.html:40 templates/500.html:40 templates/zinnia/base.html:25
 msgid "Search"
 msgstr "Keresés"
 
-#: templates/404.html:44 templates/500.html:44 templates/zinnia/base.html:27
+#: templates/404.html:44 templates/500.html:44 templates/zinnia/base.html:28
 msgid "Keywords..."
 msgstr "Kulcsszavak ..."
 
@@ -770,13 +779,13 @@ msgstr "Közzététel"
 
 #: templates/admin/zinnia/widgets/recent_comments.html:6
 #: templates/admin/zinnia/widgets/recent_comments.html:8
-#: templates/zinnia/base.html:56
+#: templates/zinnia/base.html:57
 msgid "Recent comments"
 msgstr "Friss hozzászólások"
 
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:6
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:8
-#: templates/zinnia/base.html:60
+#: templates/zinnia/base.html:61
 msgid "Recent linkbacks"
 msgstr "Friss LinkBacks"
 
@@ -942,7 +951,11 @@ msgstr "Nincsenek még szerzők."
 msgid "RSS Feed of latest entries"
 msgstr "RSS link a legutóbbi bejegyzésekhez"
 
-#: templates/zinnia/base.html:29 templates/zinnia/entry_search.html:41
+#: templates/zinnia/base.html:15
+msgid "RSS Feed of latest discussions"
+msgstr ""
+
+#: templates/zinnia/base.html:30 templates/zinnia/entry_search.html:41
 msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
@@ -952,15 +965,15 @@ msgstr ""
 "&quot;kettős idézőjelet&quot; pontos kifejezések kereséséhez, és az AND/OR "
 "logikai operátorokat zárójelekkel kombinálva az összetett kereséseknél."
 
-#: templates/zinnia/base.html:44
+#: templates/zinnia/base.html:45
 msgid "Calendar"
 msgstr "Naptár"
 
-#: templates/zinnia/base.html:68
+#: templates/zinnia/base.html:69
 msgid "Popular entries"
 msgstr "Népszerű bejegyzések"
 
-#: templates/zinnia/base.html:72 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:73 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_day.html:6
 #: templates/zinnia/entry_archive_day.html:11
 #: templates/zinnia/entry_archive_month.html:4
@@ -977,19 +990,19 @@ msgstr "Népszerű bejegyzések"
 msgid "Archives"
 msgstr "Arhívum"
 
-#: templates/zinnia/base.html:77
+#: templates/zinnia/base.html:78
 msgid "Tools"
 msgstr "Eszközök"
 
-#: templates/zinnia/base.html:81 templates/zinnia/base.html.py:82
+#: templates/zinnia/base.html:82 templates/zinnia/base.html.py:83
 msgid "Dashboard"
 msgstr "Műszerfal"
 
-#: templates/zinnia/base.html:88 templates/zinnia/base.html.py:89
+#: templates/zinnia/base.html:89 templates/zinnia/base.html.py:90
 msgid "Post an entry"
 msgstr "Adj hozzá egy bejegyzést"
 
-#: templates/zinnia/base.html:96 templates/zinnia/base.html.py:97
+#: templates/zinnia/base.html:97 templates/zinnia/base.html.py:98
 msgid "Log out"
 msgstr "Kijelentkezés"
 
@@ -1005,6 +1018,12 @@ msgstr "Nincs még kategória."
 
 #: templates/zinnia/entry_archive_month.html:15
 msgid "Daily archives"
+msgstr ""
+
+#: templates/zinnia/entry_archive_today.html:4
+#: templates/zinnia/entry_archive_today.html:6
+#: templates/zinnia/entry_archive_today.html:11
+msgid "Today archives"
 msgstr ""
 
 #: templates/zinnia/entry_archive_year.html:15
@@ -1110,17 +1129,17 @@ msgstr "Oldal"
 msgid "Category archives: %(category)s"
 msgstr ""
 
-#: templates/zinnia/entry_list.html:26
+#: templates/zinnia/entry_list.html:32
 #, python-format
 msgid "Tag archives: %(tag)s"
 msgstr ""
 
-#: templates/zinnia/entry_list.html:27
+#: templates/zinnia/entry_list.html:36
 #, python-format
 msgid "Author archives: %(author)s"
 msgstr ""
 
-#: templates/zinnia/entry_list.html:38 templates/zinnia/sitemap.html:25
+#: templates/zinnia/entry_list.html:45 templates/zinnia/sitemap.html:25
 #: templates/zinnia/sitemap.html.py:45
 #: templates/zinnia/cms/entry_detail.html:7
 #: templates/zinnia/cms/entry_list.html:9
@@ -1131,15 +1150,15 @@ msgstr ""
 msgid "No entries yet."
 msgstr "Nincs még bejegyzés."
 
-#: templates/zinnia/entry_list.html:49 templates/zinnia/entry_list.html:50
+#: templates/zinnia/entry_list.html:57 templates/zinnia/entry_list.html:58
 msgid "Edit the category"
 msgstr "Kategória szerkesztése"
 
-#: templates/zinnia/entry_list.html:56 templates/zinnia/entry_list.html:57
+#: templates/zinnia/entry_list.html:64 templates/zinnia/entry_list.html:65
 msgid "Edit the tag"
 msgstr "Címke szerkesztése"
 
-#: templates/zinnia/entry_list.html:63 templates/zinnia/entry_list.html:64
+#: templates/zinnia/entry_list.html:71 templates/zinnia/entry_list.html:72
 msgid "Edit the author"
 msgstr "Szerző kijavítása"
 
@@ -1259,11 +1278,11 @@ msgid_plural "%(entry_count)s entries tagged by %(tag)s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tests/views.py:222 views/search.py:18
+#: tests/views.py:227 views/search.py:18
 msgid "The pattern is too short"
 msgstr "A megadott kifejezés túl rövid"
 
-#: tests/views.py:226 views/search.py:22
+#: tests/views.py:231 views/search.py:22
 msgid "No pattern to search found"
 msgstr "Nincs találat a megadott kifejezésre"
 
