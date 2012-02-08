@@ -48,21 +48,21 @@ def protect_entry(view):
     and specify the template used to render the entry"""
 
     @wraps(view)
-    def wrapper(*ka, **kw):
+    def wrapper(*args, **kwargs):
         """Do security check and retrieve the template"""
-        request = ka[0]
-        entry = get_object_or_404(kw['queryset'], slug=kw['slug'],
-                                  creation_date__year=kw['year'],
-                                  creation_date__month=kw['month'],
-                                  creation_date__day=kw['day'])
+        request = args[0]
+        entry = get_object_or_404(kwargs['queryset'], slug=kwargs['slug'],
+                                  creation_date__year=kwargs['year'],
+                                  creation_date__month=kwargs['month'],
+                                  creation_date__day=kwargs['day'])
 
         if entry.login_required and not request.user.is_authenticated():
             return login(request, 'zinnia/login.html')
         if entry.password and entry.password != \
                request.session.get('zinnia_entry_%s_password' % entry.pk):
             return password(request, entry)
-        kw['template_name'] = entry.template
-        return view(*ka, **kw)
+        kwargs['template_name'] = entry.template
+        return view(*args, **kwargs)
 
     return wrapper
 
