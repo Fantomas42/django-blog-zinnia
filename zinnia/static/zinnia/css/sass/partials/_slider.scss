@@ -92,17 +92,6 @@ ol.flex-control-nav {
   }
 }
 
-// Left/Right controlers
-@mixin nav-direction-button($image-url, $direction) {
-  #{$direction}: 0;
-  background: url($image-url) no-repeat center center;
-}
-
-@mixin hd-nav-direction-button($direction) {
-  bottom: 7em;
-  #{$direction}: -2em;
-}
-
 .flex-direction-nav {
   a {
     height: 0;

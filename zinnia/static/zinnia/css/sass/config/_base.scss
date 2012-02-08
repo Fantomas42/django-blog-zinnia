@@ -1,0 +1,24 @@
+// Grid constants used by Susy
+$total-cols             : 12;
+$col-width              : 6em;
+$gutter-width           : 1em;
+$side-gutter-width      : $gutter-width;
+$show-grid-backgrounds  : false;
+
+// Blueprint constants
+$blueprint-font-size    : 12px;
+$blueprint-font-family  : unquote("Arial, Helvetica, sans-serif");
+
+// Colors
+$font-color             : #333333;
+
+$link-color             : #0066AA;
+$link-hover-color       : lighten($link-color, 20%);
+$link-focus-color       : $link-hover-color;
+$link-active-color      : lighten(adjust-hue($link-color, 75deg), 10%);
+$link-visited-color     : $link-color;
+
+$header-color           : $link-color + $font-color;
+
+$box-color              : #e9e9f3;
+$border-color           : #eeeeee;

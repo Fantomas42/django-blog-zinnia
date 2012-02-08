@@ -1,0 +1,35 @@
+// Mixin for generating a tag cloud with
+// different sizes and colors
+@mixin tag-cloud($base-size:1em) {
+  padding: 0;
+  font-size: $base-size;
+  line-height: 1.2 * $base-size;
+  li {
+    list-style: none;
+    display: inline;
+  }
+  .tag-1 {
+    font-size: $base-size / 2;
+    color: lighten($link-color, 40%);
+  }
+  .tag-2 {
+    font-size: 2 * $base-size / 3;
+    color: lighten($link-color, 20%);
+  }
+  .tag-3 {
+    font-size: 3 * $base-size / 4;
+    color: lighten($link-color, 10%);
+  }
+  .tag-4 {
+    font-size: 4 * $base-size / 3;
+    color: darken($link-color, 10%);
+  }
+  .tag-5 {
+    font-size: 3 * $base-size / 2;
+    color: darken($link-color, 20%);
+  }
+  .tag-6 {
+    font-size: 2 * $base-size;
+    color: darken($link-color, 40%);
+  }
+}

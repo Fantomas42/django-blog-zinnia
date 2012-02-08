@@ -1,4 +1,4 @@
-.zinnia {
+& {
   @include blueprint-typography(true);
   @include blueprint-interaction;
   background: transparent url(../img/background.gif) repeat-x scroll left top;
@@ -10,3 +10,4 @@
     list-style-image: url(../img/bullet.png);
   }
 }
+

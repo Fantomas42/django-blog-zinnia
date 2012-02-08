@@ -21,7 +21,7 @@
 //    |        #footer         |
 //    +------------------------+
 
-.zinnia {
+& {
   .container {
     @include container;
     @include susy-grid-background;
