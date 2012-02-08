@@ -109,6 +109,11 @@ class ZinniaViewsTestCase(ViewsBaseCase):
     def test_zinnia_entry_archive_day(self):
         self.check_publishing_context('/2010/01/01/', 1, 2)
 
+    def test_zinnia_entry_archive_today(self):
+        response = self.client.get('/today/')
+        self.assertEquals(response.context['day'], datetime.today().date())
+        self.assertTemplateUsed(response, 'zinnia/entry_archive_today.html')
+
     def test_zinnia_entry_shortlink(self):
         response = self.client.get('/1/', follow=True)
         self.assertEquals(response.redirect_chain,

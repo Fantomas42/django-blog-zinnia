@@ -36,4 +36,7 @@ urlpatterns = patterns(
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/$',
         'entry_day', entry_conf,
         name='zinnia_entry_archive_day'),
+    url(r'^today/$',
+        'entry_today', entry_conf,
+        name='zinnia_entry_archive_today'),
     )

@@ -1,0 +1,15 @@
+{% extends "zinnia/entry_list.html" %}
+{% load i18n %}
+
+{% block meta-description %}{% trans "Today archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
+
+{% block title %}{% trans "Today archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
+
+{% block body-class %}{{ block.super }} archive date day year-{{ day|date:"Y" }} month-{{ day|date:"m" }} day-{{ day|date:"d" }} today{% endblock %}
+
+{% block content %}
+<h1>{% trans "Today archives" %}</h1>
+
+{{ block.super }}
+
+{% endblock %}
