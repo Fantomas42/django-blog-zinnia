@@ -17,6 +17,14 @@ urls Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`archives` Module
+----------------------
+
+.. automodule:: zinnia.urls.archives
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`capabilities` Module
 --------------------------
 
@@ -77,6 +85,14 @@ urls Package
 ---------------------
 
 .. automodule:: zinnia.urls.sitemap
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`shortlink` Module
+-----------------------
+
+.. automodule:: zinnia.urls.shortlink
     :members:
     :undoc-members:
     :show-inheritance:

@@ -17,6 +17,14 @@ views Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`archives` Module
+----------------------
+
+.. automodule:: zinnia.views.archives
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`categories` Module
 ------------------------
 
@@ -69,6 +77,14 @@ views Package
 ---------------------
 
 .. automodule:: zinnia.views.sitemap
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`shortlink` Module
+-----------------------
+
+.. automodule:: zinnia.views.shortlink
     :members:
     :undoc-members:
     :show-inheritance:
