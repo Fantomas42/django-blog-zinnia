@@ -1,0 +1,15 @@
+{% extends "zinnia/entry_list.html" %}
+{% load i18n %}
+
+{% block meta-description %}{% trans "Weekly archives" %} {{ week|date:"DATE_FORMAT" }}{% endblock %}
+
+{% block title %}{% trans "Weekly archives" %} {{ week|date:"DATE_FORMAT" }}{% endblock %}
+
+{% block body-class %}{{ block.super }} archive date week year-{{ week|date:"Y" }} month-{{ week|date:"m" }}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Weekly archives" %} {{ week|date:"DATE_FORMAT" }}</h1>
+
+{{ block.super }}
+
+{% endblock %}

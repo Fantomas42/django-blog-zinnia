@@ -103,6 +103,9 @@ class ZinniaViewsTestCase(ViewsBaseCase):
     def test_zinnia_entry_archive_year(self):
         self.check_publishing_context('/2010/', 2, 3)
 
+    def test_zinnia_entry_archive_week(self):
+        self.check_publishing_context('/2010/week/00/', 1, 2)
+
     def test_zinnia_entry_archive_month(self):
         self.check_publishing_context('/2010/01/', 1, 2)
 
