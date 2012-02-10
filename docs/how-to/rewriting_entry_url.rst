@@ -40,6 +40,8 @@ the pitfalls to avoid.
    are doing. No warranties and no support will be provided for the
    problems encountered if you customize this part of Zinnia.
 
+.. _choosing-your-new-url-pattern:
+
 Choosing your new URL pattern
 =============================
 
@@ -77,6 +79,8 @@ We assume that the code involved in this document belong in the
 :mod:`zinnia_customized` package/application. This package will contain all
 the pieces of code to customize the default behaviour of Zinnia.
 
+.. _the-entry-get-absolute-url-method:
+
 The :meth:`Entry.get_absolute_url` method
 =========================================
 
@@ -102,6 +106,8 @@ recontruct this URL is not a really good idea. That's why an URL pattern
 based on the categories like ``/blog/<category-1>/<category-n>/<slug>/`` is
 really bad.
 
+.. _adding-your-entry-detail-view:
+
 Adding your view
 ================
 
@@ -120,6 +126,8 @@ the :func:`django.views.generic.list_detail.object_detail` view. Note that
 the :func:`~zinnia.views.decorators.protect_entry` function is used like a
 Python decorator for enabling the protections by login or password and it
 allows you template customizations for the view.
+
+.. _reconfigure-urls:
 
 Configuring URLs
 ================
@@ -151,4 +159,3 @@ the text parameters. ::
 
 Actually you should consider Zinnia like a ready to use Weblog application
 and also like a framework to make customized Weblog engines.
-
