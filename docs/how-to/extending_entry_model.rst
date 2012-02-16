@@ -39,7 +39,7 @@ Example for adding a gallery field. ::
   class EntryGallery(EntryAbstractClass):
     gallery = models.ForeignKey(Gallery)
 
-    class Meta(EntryAbstract.Meta):
+    class Meta(EntryAbstractClass.Meta):
       abstract = True
 
 
