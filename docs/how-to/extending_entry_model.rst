@@ -4,74 +4,78 @@ Extending Entry model
 
 .. module:: zinnia.models
 
+.. versionadded:: 0.8
+
 The :class:`Entry` model bundled in Zinnia can now be extended and customized.
 
 This feature is useful for who wants to add some fields in the model,
-or change its behavior. It allows Zinnia to be a really generic
+or change its behavior. It also allows Zinnia to be a really generic
 and reusable application.
 
-Imagine that I find Zinnia really great, but that is misses some fields
-or features to be the blog app that I need for my Django project.
+.. _why-extending:
+
+Why extending ?
+===============
+
+Imagine that I find Zinnia really great for my project but some fields
+or features are missing to be the Weblog app that suits to my project.
 For example I need to add a custom field linking to an image gallery,
-2 solutions:
+two solutions:
 
 * I search for another Django blogging app fitting my needs.
-* I make a monkey patch, but I won't be able to upgrade to future releases.
+* I do a monkey patch, into the Zinnia code base.
 
-These 2 solutions are really bad, that's why Zinnia provides
-a third solution.
+These two solutions are really bad.
 
-* Customizing the model noninvasively with the power of inheritance.
+For the first solution maybe you will not find the desired application and
+also mean that Zinnia is not a reusable application following the Django's
+convention. For the second solution, I don't think that I need to provide
+more explanations about the evil side of monkey patching (evolution,
+reproduction...). That's why Zinnia provides a third generic solution.
 
-How do we do that?
+* Customizing the :class:`Entry` model noninvasively with the power of
+  class inheritance !
 
-In fact, simply by creating an abstract model inherited from
-:class:`EntryAbstractClass`, adding fields or/and overriding his methods,
-and registering it with the :setting:`ZINNIA_ENTRY_BASE_MODEL` setting in
-your project.
+The extension process is done in three main steps:
 
-Example for adding a gallery field. ::
+#. Write a class containing your customizations.
+#. Register your class into Zinnia to be used.
+#. Update the :class:`~zinnia.admin.entry.EntryAdmin` class accordingly.
+
+In the suite of this document we will show how to add an image gallery into
+the :class:`Entry` model to illustrate the concepts involved. We assume that
+the pieces of codes written for this document belong in the
+:mod:`zinnia_gallery` package/application.
+
+.. _writing-model-extension:
+
+Writing model extension
+=======================
+
+The first step to extend the :class:`Entry` model is to define a new class
+inherited from the :class:`EntryAbstractClass` and add your fields or/and
+override the inherited methods if needed. So in :mod:`zinnia_gallery` let's
+write our new class in a file named :file:`entry_gallery.py`. ::
 
   from django.db import models
-  from mygalleryapp.models import Gallery
+  from zinnia_gallery.models import Gallery
   from zinnia.models import EntryAbstractClass
 
   class EntryGallery(EntryAbstractClass):
-    gallery = models.ForeignKey(Gallery)
+      gallery = models.ForeignKey(Gallery)
 
-    class Meta(EntryAbstract.Meta):
-      abstract = True
+      def __unicode__(self):
+          return 'EntryGallery %s' % self.title
 
+      class Meta(EntryAbstractClass.Meta):
+          abstract = True
 
-Now you register the :class:`EntryGallery` model like this in your
-project's settings. ::
+In this code sample, we add a new :class:`~django.db.models.ForeignKey`
+field named ``gallery`` pointing to a :class:`Gallery` model defined in
+:mod:`zinnia_gallery.models` and we override the :meth:`EntryAbstractClass.__unicode__`
+method.
 
-  ZINNIA_ENTRY_BASE_MODEL = 'appname.custom_entry.EntryGallery'
-
-
-Finally extend the entry's admin class to show your custom field. ::
-
-  from django.contrib import admin
-  from zinnia.models import Entry
-  from zinnia.admin.entry import EntryAdmin
-  from django.utils.translation import ugettext_lazy as _
-
-  class EntryGalleryAdmin(EntryAdmin):
-
-    # In our case we put the gallery field
-    # into the 'Content' fieldset
-    fieldsets = ((_('Content'), {'fields': (
-      'title', 'content', 'image', 'status', 'gallery')}),) + \
-      EntryAdmin.fieldsets[1:]
-
-  admin.site.unregister(Entry)
-  admin.site.register(Entry, EntryGalleryAdmin)
-
-
-You can see another example in the files :file:`zinnia/plugins/placeholder.py`
-and :file:`zinnia/plugins/admin.py`.
-
-.. note:: You have to respect **4 important rules** :
+.. note:: You have to respect **3 important rules** to make extending working :
 
           #. Do not import the :class:`Entry` model in your file defining
              the extended model because it will cause a circular
@@ -80,14 +84,80 @@ and :file:`zinnia/plugins/admin.py`.
           #. Do not put your abstract model in a file named :file:`models.py`,
              it will not work for a non obvious reason.
 
-          #. Don't forget to tell that your model is `abstract`. Otherwise a
+          #. Don't forget to tell that your model is ``abstract``. Otherwise a
              table will be created and the extending process will not work
              as expected.
 
-          #. If you extend the :class:`Entry` model after the syncdb
-             command, you will have to reset the Zinnia application to
-             reflect your changes.
+.. note:: Considerations about the database :
+
+          * If you extend the :class:`Entry` model after the ``syncdb``
+            command, you have to reset the Zinnia application to reflect
+            your changes.
+
+          * South cannot be used to write migrations to your new model.
 
 .. seealso::
    :ref:`model-inheritance` for more information about the concepts
    behind the model inheritence in Django and the limitations.
+
+.. _registering-the-extension:
+
+Registering the extension
+=========================
+
+Once your extension class is defined you simply have to register it,
+with the :setting:`ZINNIA_ENTRY_BASE_MODEL` setting in your Django
+settings. The expected value is a string representing the full Python path
+to the extented model's class name. This is the easiest part of the
+process.
+
+Following our example we must add this line in the project's settings. ::
+
+  ZINNIA_ENTRY_BASE_MODEL = 'zinnia_gallery.entry_gallery.EntryGallery'
+
+If an error occurs when your new class is imported a warning will be raised
+and the :class:`EntryAbstractClass` will be used.
+
+.. _updating-admin-interface:
+
+Updating the admin interface
+============================
+
+Now we should update the :class:`Entry`'s admin class to reflect our
+changes and use the new fields.
+
+To do that we will write a new admin class inherited from
+:class:`~zinnia.admin.entry.EntryAdmin` and use the admin site
+register/unregister mechanism for using our new class.
+
+In the file :file:`zinnia_gallery/admin.py` we can write these code lines
+for adding the gallery field: ::
+
+  from django.contrib import admin
+  from django.utils.translation import ugettext_lazy as _
+
+  from zinnia.models import Entry
+  from zinnia.admin.entry import EntryAdmin
+
+  class EntryGalleryAdmin(EntryAdmin):
+    # In our case we put the gallery field
+    # into the 'Content' fieldset
+    fieldsets = ((_('Content'), {'fields': (
+      'title', 'content', 'image', 'status', 'gallery')}),) + \
+      EntryAdmin.fieldsets[1:]
+
+  # Unregister the default EntryAdmin
+  # then register the EntryGalleryAdmin class
+  admin.site.unregister(Entry)
+  admin.site.register(Entry, EntryGalleryAdmin)
+
+
+Note that the :mod:`zinnia_gallery` application must be registered in the
+:setting:`INSTALLED_APPS` setting after the :mod:`zinnia` application for
+applying the register/unregister mechanism in the admin site.
+
+Now we can easily :ref:`customize the templates<customizing-templates>`
+provided by Zinnia to display the gallery field into the Weblog's pages.
+
+You can see another implementation example in the files
+:file:`zinnia/plugins/placeholder.py` and :file:`zinnia/plugins/admin.py`.
