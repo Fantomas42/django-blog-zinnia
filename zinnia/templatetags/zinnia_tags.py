@@ -23,6 +23,7 @@ from zinnia.models import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import tags_published
 from zinnia.managers import PINGBACK, TRACKBACK
+from zinnia.settings import PROTOCOL
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
 from zinnia.templatetags.zcalendar import ZinniaCalendar
@@ -288,10 +289,14 @@ def zinnia_breadcrumbs(context, root_name='Blog',
 
 
 @register.simple_tag
-def get_gravatar(email, size=80, rating='g', default=None):
+def get_gravatar(email, size=80, rating='g', default=None,
+                 protocol=PROTOCOL):
     """Return url for a Gravatar"""
-    url = 'http://www.gravatar.com/avatar/%s.jpg' % \
-          md5(email.strip().lower()).hexdigest()
+    GRAVATAR_PROTOCOLS = {'http': 'http://www',
+                          'https': 'https://secure'}
+    url = '%s.gravatar.com/avatar/%s.jpg' % (
+        GRAVATAR_PROTOCOLS[protocol],
+        md5(email.strip().lower()).hexdigest())
     options = {'s': size, 'r': rating}
     if default:
         options['d'] = default
