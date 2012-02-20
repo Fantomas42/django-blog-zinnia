@@ -35,6 +35,7 @@ HOW-TOs
 
 .. toctree::
 
+   how-to/customize_look_and_feel
    how-to/extending_entry_model
    how-to/rewriting_entry_url
    how-to/import_export
