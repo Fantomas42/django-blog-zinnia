@@ -167,7 +167,7 @@ class EntryAbstractClass(models.Model):
 
     @property
     def html_content(self):
-        """Return the content correctly formatted"""
+        """Return the Entry.content attribute formatted in HTML"""
         if MARKUP_LANGUAGE == 'markdown':
             return markdown(self.content, MARKDOWN_EXTENSIONS)
         elif MARKUP_LANGUAGE == 'textile':
