@@ -9,8 +9,10 @@ from django.utils.text import truncate_words
 from django.conf.urls.defaults import url
 from django.conf.urls.defaults import patterns
 from django.conf import settings as project_settings
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
+from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse, NoReverseMatch
 
 from tagging.models import Tag
@@ -318,8 +320,23 @@ class EntryAdmin(admin.ModelAdmin):
             url(r'^markitup/$', 'direct_to_template',
                 {'template': 'admin/zinnia/entry/markitup.js',
                  'mimetype': 'application/javascript'},
-                name='zinnia_entry_markitup'),)
+                name='zinnia_entry_markitup'))
+        urls += patterns(
+            '',
+            url(r'^markitup/preview/$',
+                self.admin_site.admin_view(self.content_preview),
+                name='zinnia_entry_markitup_preview'),)
         return urls + entry_admin_urls
+
+    @csrf_exempt
+    def content_preview(self, request):
+        """Admin view to preview Entry.content in HTML,
+        useful when using markups to write entries"""
+        data = request.POST.get('data', '')
+        entry = self.model(content=data)
+        return TemplateResponse(request,
+                                'admin/zinnia/entry/preview.html',
+                                {'preview': entry.html_content})
 
     def _media(self):
         STATIC_URL = '%szinnia/' % project_settings.STATIC_URL
