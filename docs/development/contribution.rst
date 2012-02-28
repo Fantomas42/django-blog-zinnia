@@ -79,6 +79,15 @@ The documentation should :
 Keep it mind that documenting is most useful than coding, so your
 contribution will be greatly appreciated.
 
+Contributing Changes
+--------------------
+
+Contribute changes to the documentation in the same fashion as committing to
+source code.  Essentially, you will fork the project on github, make your
+changes to the documentation, commit them, and submit a pull request.
+
+See :ref:`code-process` for more details.
+
 .. _writing-translations:
 
 Translations
