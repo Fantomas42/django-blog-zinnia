@@ -137,3 +137,11 @@ informations about serving static files.
 .. _`BeautifulSoup`: http://www.crummy.com/software/BeautifulSoup/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/
 .. _`django-xmlrpc`: https://github.com/Fantomas42/django-xmlrpc
+
+Syncing the Database
+====================
+
+Now that you have everything set up, simply run the following in your 
+project directory to sync the models with the database::
+
+    python manage.py syncdb
