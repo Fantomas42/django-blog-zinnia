@@ -135,7 +135,7 @@ class CMSRandomEntriesPlugin(CMSPluginBase):
 class CMSSearchPlugin(CMSPluginBase):
     model = CMSPlugin
     module = _('entries')
-    name = _("Entries search plugin")
+    name = _("Entries search form")
     render_template = "zinnia/cms/search.html"
 
     def render(self, context, instance, placeholder):
