@@ -134,6 +134,7 @@ class CMSRandomEntriesPlugin(CMSPluginBase):
         
 class CMSSearchPlugin(CMSPluginBase):
     model = CMSPlugin
+    module = _('entries')
     name = _("Entries search plugin")
     render_template = "zinnia/cms/search.html"
 
