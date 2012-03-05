@@ -1,0 +1,14 @@
+{% load zinnia_tags tagging_tags i18n %}
+
+<div class="search">
+  <h3>{% trans "Search" %}</h3>
+  <form method="get" id="searchform" action="{% url zinnia_entry_search %}">
+    <p>
+      <input type="text" value="{% trans "Keywords..." %}" name="pattern" id="searchbox" onfocus="this.value=''" />
+      <input type="submit" class="submitbutton" value="OK" />
+      <a title="{% trans 'You can use - to exclude words or phrases, &quot;double quotes&quot; for exact phrases and the AND/OR boolean operators combined with parenthesis for complex searchs.' %}">
+        <img src="{{ ZINNIA_MEDIA_URL }}img/help.png" alt="?" width="14" height="14" />
+      </a>
+    </p>
+  </form>
+</div>
