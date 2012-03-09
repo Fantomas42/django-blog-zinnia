@@ -130,8 +130,8 @@ class CMSRandomEntriesPlugin(CMSPluginBase):
     def icon_src(self, instance):
         """Icon source of the plugin"""
         return settings.STATIC_URL + u'zinnia/img/plugin.png'
-        
-        
+
+
 class CMSSearchPlugin(CMSPluginBase):
     model = CMSPlugin
     module = _('entries')
