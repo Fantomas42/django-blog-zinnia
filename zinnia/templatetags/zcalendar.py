@@ -32,7 +32,7 @@ class ZinniaCalendar(HTMLCalendar):
                                             day_date.strftime('%m'),
                                             day_date.strftime('%d')])
             return '<td class="%s entry"><a href="%s" '\
-                   'rel="archives">%d</a></td>' % (
+                   'class="archives">%d</a></td>' % (
                 self.cssclasses[weekday], archive_day_url, day)
 
         return super(ZinniaCalendar, self).formatday(day, weekday)
