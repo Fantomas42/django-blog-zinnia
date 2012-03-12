@@ -25,8 +25,7 @@ class AuthorDetail(EntryQuerysetTemplatesMixin, ListView):
 
     model_type = 'author'
     context_object_name = 'queryset'
-    # paginate_by = PAGINATION
-    paginate_by = 1
+    paginate_by = PAGINATION
 
     def get_model_name(self):
         return self.author.username
