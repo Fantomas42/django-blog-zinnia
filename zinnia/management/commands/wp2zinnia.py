@@ -139,6 +139,9 @@ class Command(LabelCommand):
                 user_selected = raw_input(user_text)
                 if user_selected in usernames:
                     break
+                elif user_selected == '' and author_name in usernames:
+                    user_selected=author_name
+                    break
             return users.get(username=user_selected)
         else:
             create_text = "2. Please type the email of the '%s' user: " % \
@@ -206,7 +209,7 @@ class Command(LabelCommand):
                 categories.append(self.categories[category_node.text])
         return categories
 
-    def import_entry(self, title, content, item_node):
+    def import_entry(self, title, content, item_node, image_url):
         """Importing an entry but some data are missing like
         the image, related entries, start_publication and end_publication.
         start_publication and creation_date will use the same value,
@@ -243,7 +246,8 @@ class Command(LabelCommand):
                 '{%s}status' % WP_NS).text == 'private',
             'creation_date': creation_date,
             'last_update': datetime.now(),
-            'start_publication': creation_date}
+            'start_publication': creation_date,
+            'image': image_url}
 
         entry, created = Entry.objects.get_or_create(title=title,
                                                      defaults=entry_dict)
@@ -278,23 +282,27 @@ class Command(LabelCommand):
 
             if post_type == 'post' and content and title:
                 self.write_out('> %s... ' % title)
-                entry = self.import_entry(title, content, item_node)
+                image_url=self.import_image(items,self.find_image_id(item_node.findall('{%s}postmeta' % WP_NS)))
+                entry = self.import_entry(title, content, item_node, image_url)
                 self.write_out(self.style.ITEM('OK\n'))
                 self.import_comments(entry, item_node.findall(
                     '{%s}comment/' % WP_NS))
-                self.import_image(entry,items,self.find_image_id(item_node.findall('{%s}postmeta' % WP_NS)))
             else:
                 self.write_out('> %s... ' % title, 2)
                 self.write_out(self.style.NOTICE('SKIPPED (not a post)\n'), 2)
 
-    def import_image(self, entry,items,thumbid):
+    def import_image(self, items, thumbid):
         for item in items:
             post_type = item.find('{%s}post_type' % WP_NS).text
             if post_type == 'attachment' and item.find('{%s}post_id' % WP_NS).text == thumbid:
                 for meta_item in item.findall('{%s}postmeta' % WP_NS):
                     if meta_item.find('{%s}meta_key' % WP_NS).text == '_wp_attached_file':
                         self.write_out(self.style.STEP('- found attachment file %s ...') % meta_item.find('{%s}meta_value/' % WP_NS).text)
-                        entry.image = 'uploads/'+meta_item.find('{%s}meta_value/' % WP_NS).text
+                        filename = meta_item.find('{%s}meta_value/' % WP_NS).text
+                        if filename != None:
+                            return 'uploads/' + filename[:90]
+                        else:
+                            return ''
                         self.write_out(self.style.ITEM('OK\n'))
 
     def import_comments(self, entry, comment_nodes):
