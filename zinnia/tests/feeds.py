@@ -118,6 +118,17 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
         feeds.FEEDS_FORMAT = original_feeds_format
 
+    def test_entry_feed_enclosure_issue_134(self):
+        original_feeds_format = feeds.FEEDS_FORMAT
+        feeds.FEEDS_FORMAT = ''
+        entry = self.create_published_entry()
+        feed = EntryFeed()
+        entry.content = 'My test content with image <img xsrc="image.jpg" />',
+        entry.save()
+        self.assertEquals(
+            feed.item_enclosure_url(entry), None)
+        feeds.FEEDS_FORMAT = original_feeds_format
+
     def test_latest_entries(self):
         self.create_published_entry()
         feed = LatestEntries()

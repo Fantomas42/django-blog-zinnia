@@ -6,6 +6,7 @@ from django.utils.translation import ugettext as _
 
 from tagging.models import TaggedItem
 from cms.plugin_base import CMSPluginBase
+from cms.models.pluginmodel import CMSPlugin
 from cms.plugin_pool import plugin_pool
 
 from zinnia.models import Entry
@@ -130,6 +131,17 @@ class CMSRandomEntriesPlugin(CMSPluginBase):
         """Icon source of the plugin"""
         return settings.STATIC_URL + u'zinnia/img/plugin.png'
 
+
+class CMSSearchPlugin(CMSPluginBase):
+    model = CMSPlugin
+    module = _('entries')
+    name = _("Entries search form")
+    render_template = "zinnia/cms/search.html"
+
+    def render(self, context, instance, placeholder):
+        return context
+
 plugin_pool.register_plugin(CMSLatestEntriesPlugin)
 plugin_pool.register_plugin(CMSSelectedEntriesPlugin)
 plugin_pool.register_plugin(CMSRandomEntriesPlugin)
+plugin_pool.register_plugin(CMSSearchPlugin)

@@ -17,6 +17,7 @@ this application greatest each day.
 * Matthew Tretter (matthewwithanm)
 * Mohammad Taleb (simul14)
 * Frederic Le guluche (Bloxboy)
+* Mauro Bianchi (bianchimro)
 * Franck Bret
 * Jason Davies
 * Brandon Taylor
