@@ -1,28 +1,44 @@
 """Views for Zinnia authors"""
 from django.shortcuts import get_object_or_404
-from django.views.generic.list_detail import object_list
+from django.views.generic import ListView
 
 from zinnia.models import Author
 from zinnia.settings import PAGINATION
-from zinnia.views.decorators import update_queryset
-from zinnia.views.decorators import template_name_for_entry_queryset_filtered
+from zinnia.views.mixins import EntryQuerysetTemplatesMixin
+
+class AuthorList(ListView):
+    model = Author
+    context_object_name = 'author'
+
+    def get_object(self,queryset=None):
+        if queryset is None:
+            queryset = self.get_queryset()
+
+        username = self.kwargs.get('username',None)
+
+        if username is not None:
+            queryset = queryset.filter()
 
 
-author_list = update_queryset(object_list, Author.published.all)
-
-
-def author_detail(request, username, page=None, **kwargs):
+class AuthorDetail(EntryQuerysetTemplatesMixin, ListView):
     """Display the entries of an author"""
-    extra_context = kwargs.pop('extra_context', {})
 
-    author = get_object_or_404(Author, username=username)
-    if not kwargs.get('template_name'):
-        kwargs['template_name'] = template_name_for_entry_queryset_filtered(
-            'author', author.username)
+    model_type = 'author'
+    context_object_name = 'queryset'
+    # paginate_by = PAGINATION
+    paginate_by = 1
 
-    extra_context.update({'author': author})
-    kwargs['extra_context'] = extra_context
+    def get_model_name(self):
+        return self.author.username
 
-    return object_list(request, queryset=author.entries_published(),
-                       paginate_by=PAGINATION, page=page,
-                       **kwargs)
+    def get_queryset(self):
+        return self.author.entries_published()
+
+    def get_context_data(self,**kwargs):
+        context = super(AuthorDetail,self).get_context_data(**kwargs)
+        context['author'] = self.author
+        return context
+
+    def get(self,*args,**kwargs):
+        self.author = get_object_or_404(Author,username=kwargs['username'])
+        return super(AuthorDetail,self).get(*args,**kwargs)
