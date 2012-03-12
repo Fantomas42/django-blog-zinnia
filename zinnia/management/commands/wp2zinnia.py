@@ -291,9 +291,11 @@ class Command(LabelCommand):
         for item in items:
             post_type = item.find('{%s}post_type' % WP_NS).text
             if post_type == 'attachment' and item.find('{%s}post_id' % WP_NS).text == thumbid:
-                for meta_item in item.findall('{%s}post_meta'%WP_NS):
-                    if meta_item.find('{%s}meta_key'%WP_NS)=='_wp_attached_file':
-                        entry.image = 'uploads/'+meta_item.find('{%s}meta_value'%WP_NS).text
+                for meta_item in item.findall('{%s}postmeta' % WP_NS):
+                    if meta_item.find('{%s}meta_key' % WP_NS).text == '_wp_attached_file':
+                        self.write_out(self.style.STEP('- found attachment file %s ...') % meta_item.find('{%s}meta_value/' % WP_NS).text)
+                        entry.image = 'uploads/'+meta_item.find('{%s}meta_value/' % WP_NS).text
+                        self.write_out(self.style.ITEM('OK\n'))
 
     def import_comments(self, entry, comment_nodes):
         """Loops over comments nodes and import then
