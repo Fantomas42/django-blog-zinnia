@@ -259,6 +259,11 @@ class Command(LabelCommand):
 
         return entry
 
+    def find_image_id(self,metadata):
+        for meta in metadata:
+            if meta.find('{%s}meta_key' % WP_NS).text == '_thumbnail_id':
+                return meta.find('{%s}meta_value/' % WP_NS).text
+
     def import_entries(self, items):
         """Loops over items and find entry to import,
         an entry need to have 'post_type' set to 'post' and
@@ -277,9 +282,18 @@ class Command(LabelCommand):
                 self.write_out(self.style.ITEM('OK\n'))
                 self.import_comments(entry, item_node.findall(
                     '{%s}comment/' % WP_NS))
+                self.import_image(entry,items,self.find_image_id(item_node.findall('{%s}postmeta' % WP_NS)))
             else:
                 self.write_out('> %s... ' % title, 2)
                 self.write_out(self.style.NOTICE('SKIPPED (not a post)\n'), 2)
+
+    def import_image(self, entry,items,thumbid):
+        for item in items:
+            post_type = item.find('{%s}post_type' % WP_NS).text
+            if post_type == 'attachment' and item.find('{%s}post_id' % WP_NS).text == thumbid:
+                for meta_item in item.findall('{%s}post_meta'%WP_NS):
+                    if meta_item.find('{%s}meta_key'%WP_NS)=='_wp_attached_file':
+                        entry.image = 'uploads/'+meta_item.find('{%s}meta_value'%WP_NS).text
 
     def import_comments(self, entry, comment_nodes):
         """Loops over comments nodes and import then
