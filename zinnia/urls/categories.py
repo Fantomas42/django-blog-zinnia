@@ -2,19 +2,11 @@
 from django.conf.urls.defaults import url
 from django.conf.urls.defaults import patterns
 
-from zinnia.models import Category
+from zinnia.views.categories import CategoryListView, CategoryDetailView
 
-category_conf = {'queryset': Category.objects.all()}
 
-urlpatterns = patterns('django.views.generic.list_detail',
-                       url(r'^$', 'object_list',
-                           category_conf, 'zinnia_category_list'),
-                       )
-
-urlpatterns += patterns('zinnia.views.categories',
-                        url(r'^(?P<path>[-\/\w]+)/page/(?P<page>\d+)/$',
-                            'category_detail',
-                            name='zinnia_category_detail_paginated'),
-                        url(r'^(?P<path>[-\/\w]+)/$', 'category_detail',
-                            name='zinnia_category_detail'),
-                        )
+urlpatterns = patterns('',
+	url(r'^$', CategoryListView.as_view(), name='zinnia_category_list'),
+	url(r'^(?P<path>[-\/\w]+)/page/(?P<page>\d+)/$',CategoryDetailView.as_view(), name='zinnia_category_detail_paginated'),
+    url(r'^(?P<path>[-\/\w]+)/$', CategoryDetailView.as_view(), name='zinnia_category_detail'),
+)
