@@ -5,7 +5,7 @@ from urllib import urlencode
 from datetime import datetime
 
 from django.db.models import Q
-from django.db import connection
+from django.db.models import Count
 from django.template import Node
 from django.template import Library
 from django.template import TemplateSyntaxError
@@ -88,16 +88,10 @@ def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
 def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     """Return popular entries"""
     ctype = ContentType.objects.get_for_model(Entry)
-    query = """SELECT object_pk, COUNT(*) AS score
-    FROM %s
-    WHERE content_type_id = %%s
-    AND is_public = '1'
-    GROUP BY object_pk
-    ORDER BY score DESC""" % get_comment_model()._meta.db_table
-
-    cursor = connection.cursor()
-    cursor.execute(query, [ctype.id])
-    object_ids = [int(row[0]) for row in cursor.fetchall()]
+    objects_by_score = get_comment_model().objects.filter(
+        content_type=ctype, is_public=True).values('object_pk').annotate(
+        score=Count('id')).order_by('-score')
+    object_ids = [int(obj['object_pk']) for obj in objects_by_score]
 
     # Use ``in_bulk`` here instead of an ``id__in`` filter, because ``id__in``
     # would clobber the ordering.
