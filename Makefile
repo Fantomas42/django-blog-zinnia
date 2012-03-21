@@ -22,13 +22,12 @@ coverage:
 	@./bin/cover
 
 epydoc:
-	@echo "$(COLOR)* Generating API documentation$(NO_COLOR)"
-	@export DJANGO_SETTINGS_MODULE='demo.settings' && ./bin/api
+	@echo "$(COLOR)* Generating Epydoc documentation$(NO_COLOR)"
+	@export DJANGO_SETTINGS_MODULE='extensions.settings' && ./bin/epydoc
 
 sphinx:
 	@echo "$(COLOR)* Generating Sphinx documentation$(NO_COLOR)"
 	@./bin/docs
-	@cp -r ./docs/build/html ./docs/
 
 docs: coverage epydoc sphinx
 
@@ -58,7 +57,6 @@ clean:
 mrproper: clean
 	@rm -rf docs/build/doctrees
 	@rm -rf docs/build/html
-	@rm -rf docs/html
 	@rm -rf docs/coverage
-	@rm -rf docs/api
+	@rm -rf docs/epydoc
 
