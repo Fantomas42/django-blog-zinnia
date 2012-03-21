@@ -155,6 +155,7 @@ the text parameters. ::
 
   url(r'^(?P<object_id>\d+)/$',
       'zinnia_customized.views.entry_detail',
+      {'queryset': Entry.published.on_site()},
       name='zinnia_entry_detail')
 
 Actually you should consider Zinnia like a ready to use Weblog application
