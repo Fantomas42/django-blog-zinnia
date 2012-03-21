@@ -50,11 +50,21 @@ Comments
 
 .. _customizing-comments:
 
-Is it possible to have a better comment system, with reply feature for example ?
+Is it possible have a different comment system, with reply feature for example ?
 --------------------------------------------------------------------------------
 
 Yes the comment system integrated in Zinnia is based on
-:mod:`django.contrib.comments` and can be extended or replaced.
+:mod:`django.contrib.comments` and can be extended or replaced if doesn't
+quite fit your needs. You should take a look on the
+`customizing the comments framework`_ documentation for more information.
+
+.. warning::
+
+   The custom comment Model must be inherited from
+   :class:`~django.contrib.comments.models.Comment` and implement the
+   :class:`~django.contrib.comments.managers.CommentManager` to properly
+   work with Zinnia.
+
 
 If you want the ability to reply on comments, you can take a look at
 `django-threadcomments`_ for example.
@@ -172,6 +182,7 @@ model like described in :doc:`/how-to/extending_entry_model`.
 
 .. _`specifying a template directory`: https://docs.djangoproject.com/en/dev/ref/templates/api/#loading-templates
 .. _`customizing the look and feel`: https://docs.djangoproject.com/en/dev/intro/tutorial02/#customize-the-admin-look-and-feel
+.. _`customizing the comments framework`: https://docs.djangoproject.com/en/dev/ref/contrib/comments/custom/
 .. _`Zinnia-theme-html5`: https://github.com/Fantomas42/zinnia-theme-html5
 .. _`Django Blog Quintet`: https://github.com/franckbret/django-blog-quintet
 .. _`django-threadcomments`: https://github.com/HonzaKral/django-threadedcomments
