@@ -174,6 +174,12 @@ Just add this line in your project's settings to use it. ::
    :doc:`/how-to/extending_entry_model` for more information about the extension
    of the entry model.
 
+.. warning::
+   .. versionchanged:: 0.10
+
+   :mod:`zinnia.plugins` is deprecated and will be removed in the future
+   releases of Zinnia. Please use `cmsplugin_zinnia`_ instead.
+
 .. _zinnia-tinymce:
 
 TinyMCE
@@ -246,6 +252,7 @@ Insert something like this in your project's urls.py: ::
 .. _`PyMollom`: https://github.com/itkovian/PyMollom
 .. _`django-bitly`: http://bitbucket.org/discovery/django-bitly/
 .. _`tweepy`: https://github.com/tweepy/tweepy
+.. _`cmsplugin_zinnia`: https://github.com/Fantomas42/cmsplugin-zinnia
 .. _`django-CMS 2.0`: http://www.django-cms.org/
 .. _`django-tinymce`: https://code.google.com/p/django-tinymce/
 .. _`installation instructions`: http://django-tinymce.googlecode.com/svn/trunk/docs/.build/html/index.html
