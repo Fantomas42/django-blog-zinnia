@@ -16,8 +16,8 @@
 
 <p>{% trans "There's been an error. It's been reported to the site administrators via e-mail and should be fixed shortly. Thanks for your patience." %}</p>
 
-<h3>{% trans "Useful links" %}</h3>
 <div class="links">
+  <h3>{% trans "Useful links" %}</h3>
   <ul>
     <li>
       <a href="{% url zinnia_entry_archive_index %}" title="{% trans "Blog index" %}">
@@ -32,18 +32,13 @@
   </ul>
 </div>
 
-<h3>{% trans "Recent entries" %}</h3>
 <div class="recents">
+  <h3>{% trans "Recent entries" %}</h3>
   {% get_recent_entries 5 %}
 </div>
 
-<h3>{% trans "Search" %}</h3>
 <div class="search">
-  <form method="get" id="searchform" action="{% url zinnia_entry_search %}">
-    <p>
-      <input type="text" value="{% trans "Keywords..." %}" name="pattern" id="searchbox" onfocus="this.value=''"/>
-      <input type="submit" class="submitbutton" value="OK" />
-    </p>
-  </form>
+  <h3>{% trans "Search" %}</h3>
+  {% include "zinnia/tags/search_form.html" %}
 </div>
 {% endblock %}
