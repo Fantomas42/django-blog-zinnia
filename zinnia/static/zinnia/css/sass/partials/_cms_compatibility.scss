@@ -1,0 +1,10 @@
+// This partials exists for ensuring compatibility
+// with the Django-CMS toolbar style.
+
+#cms_toolbar {
+  fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
