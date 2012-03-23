@@ -59,6 +59,7 @@ or you can visit these websites who use Zinnia.
 * `mixedCase`_.
 * `Tryolabs`_.
 * `brainbreach`_.
+* `Mauro Bianchi`_.
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
@@ -104,6 +105,7 @@ More information and help available at these URLs :
 .. _`mixedCase`: http://www.mixedcase.nl/articles/
 .. _`Tryolabs`: http://www.tryolabs.com/Blog/
 .. _`brainbreach`: http://brainbreach.com/
+.. _`Mauro Bianchi`: http://www.maurobianchi.it/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://django-blog-zinnia.com/documentation/
 .. _`API documentation`: http://django-blog-zinnia.com/api/
