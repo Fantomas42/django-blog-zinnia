@@ -9,6 +9,8 @@ SITE_ID = 1
 
 STATIC_URL = '/static/'
 
+SECRET_KEY = 'secret-key'
+
 ROOT_URLCONF = 'zinnia.tests.urls'
 
 TEMPLATE_CONTEXT_PROCESSORS = [
