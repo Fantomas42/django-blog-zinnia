@@ -10,6 +10,8 @@ CHANGELOG
 * Improvement of the documentation
 * Entry's Meta options can be extended
 * Django 1.2 is no longer supported
+* ``zinnia.plugins`` is deprecated in flavor of ``cmsplugin_zinnia``
+* And a lot of bug fixes
 
 0.9
 ---
