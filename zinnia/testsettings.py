@@ -13,6 +13,9 @@ SECRET_KEY = 'secret-key'
 
 ROOT_URLCONF = 'zinnia.tests.urls'
 
+LOCALE_PATHS = [os.path.join(os.path.dirname(__file__),
+                             'locale')]
+
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.request',
     'zinnia.context_processors.version']
