@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+0.11
+----
+
+* Django 1.3 is no longer supported
+* ``zinnia.plugins`` is now removed
+
 0.10
 ----
 
