@@ -89,7 +89,7 @@ More information and help available at these URLs :
 .. _`Bit.ly`: http://django-blog-zinnia.com/documentation/getting-started/configuration/#module-zinnia.url_shortener.backends.bitly
 .. _`Twitter`: http://django-blog-zinnia.com/documentation/getting-started/configuration/#twitter
 .. _`Gravatar`: http://gravatar.com/
-.. _`Django-CMS`: http://django-blog-zinnia.com/documentation/getting-started/configuration/#module-zinnia.plugins
+.. _`Django-CMS`: http://django-blog-zinnia.com/documentation/getting-started/configuration/#django-cms
 .. _`Entry model extendable`: http://django-blog-zinnia.com/documentation/how-to/extending_entry_model/
 .. _`WYMeditor`: http://www.wymeditor.org/
 .. _`TinyMCE`: http://tinymce.moxiecode.com/

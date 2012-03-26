@@ -150,35 +150,17 @@ entry's title and the shortened URL of your entry.
 Django-CMS
 ==========
 
-.. module:: zinnia.plugins
 
 If you use `django-CMS 2.0`_, Zinnia can be integrated into your pages,
 thanks to the plugin system.
 
-Simply register :mod:`zinnia.plugins` in the :setting:`INSTALLED_APPS`
-section of your project's settings.
-
-It will provides :class:`custom plugins<cms.plugin_base.CMSPluginBase>` for
-adding entries into your pages, an :class:`~cms.app_base.CMSApp` and
-:class:`~cms.menu_bases.CMSAttachMenu` classes for easy integration.
-
-If you want to use the plugin system of django-CMS in your entries, an
-extended EntryModel with a :class:`~cms.models.fields.PlaceholderField` is
-provided.
-
-Just add this line in your project's settings to use it. ::
-
-  ZINNIA_ENTRY_BASE_MODEL = 'zinnia.plugins.placeholder.EntryPlaceholder'
-
-.. seealso::
-   :doc:`/how-to/extending_entry_model` for more information about the extension
-   of the entry model.
-
 .. warning::
-   .. versionchanged:: 0.10
+   .. versionchanged:: 0.11
 
-   :mod:`zinnia.plugins` is deprecated and will be removed in the future
-   releases of Zinnia. Please use `cmsplugin_zinnia`_ instead.
+   ``zinnia.plugins`` has been removed in flavor of `cmsplugin_zinnia`_.
+
+Simply refer to `cmsplugin_zinnia`_'s documentation for more information
+about the install instructions and possibilities.
 
 .. _zinnia-tinymce:
 

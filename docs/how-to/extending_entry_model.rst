@@ -72,8 +72,8 @@ write our new class in a file named :file:`entry_gallery.py`. ::
 
 In this code sample, we add a new :class:`~django.db.models.ForeignKey`
 field named ``gallery`` pointing to a :class:`Gallery` model defined in
-:mod:`zinnia_gallery.models` and we override the :meth:`EntryAbstractClass.__unicode__`
-method.
+:mod:`zinnia_gallery.models` and we override the
+:meth:`EntryAbstractClass.__unicode__` method.
 
 .. note:: You have to respect **3 important rules** to make extending working :
 
@@ -159,5 +159,7 @@ applying the register/unregister mechanism in the admin site.
 Now we can easily :ref:`customize the templates<customizing-templates>`
 provided by Zinnia to display the gallery field into the Weblog's pages.
 
-You can see another implementation example in the files
-:file:`zinnia/plugins/placeholder.py` and :file:`zinnia/plugins/admin.py`.
+For information you can see another implementation example in the
+`cmsplugin-zinnia`_ package.
+
+.. _`cmsplugin-zinnia`: https://github.com/Fantomas42/cmsplugin-zinnia
