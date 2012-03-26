@@ -13,7 +13,7 @@ msgstr ""
 "POT-Creation-Date: 2012-02-08 07:57-0600\n"
 "PO-Revision-Date: 2012-02-08 13:59+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
-"Language-Team: German (http://www.transifex.net/projects/p/django-blog-zinnia/team/de/)\n"
+"Language-Team: German (http://www.transifex.net/projects/p/django-blog-zinnia/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -405,8 +405,7 @@ msgstr "Setzen Sie die ausgewählten Einträge auf das aktuelle Datum"
 #: admin/entry.py:299
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr ""
-"%(directory)s  Verzeichnis erfolgreich angepingt %(success)d Einträge."
+msgstr "%(directory)s  Verzeichnis erfolgreich angepingt %(success)d Einträge."
 
 #: admin/entry.py:303
 msgid "Ping Directories for selected entries"
@@ -508,8 +507,7 @@ msgstr "Seite nicht gefunden"
 
 #: templates/404.html:17
 msgid "Sorry, but the requested page could not be found."
-msgstr ""
-"Entschuldigung, aber die angeforderte Seite konnte nicht gefunden werden."
+msgstr "Entschuldigung, aber die angeforderte Seite konnte nicht gefunden werden."
 
 #: templates/404.html:19 templates/500.html:19
 msgid "Useful links"
@@ -551,10 +549,7 @@ msgstr "Server-Fehler"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
-"Es ist ein Fehler aufgetreten. Der Server-Admin wurde umgehend benachrichtig"
-" und wird sich in Kürze um den Fehler kümmern. Wir danken für Ihr "
-"Verständnis."
+msgstr "Es ist ein Fehler aufgetreten. Der Server-Admin wurde umgehend benachrichtig und wird sich in Kürze um den Fehler kümmern. Wir danken für Ihr Verständnis."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
@@ -964,10 +959,7 @@ msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex searchs."
-msgstr ""
-"Sie können, um Worte oder Sätze, \"Anführungszeichen\" für genaue Sätze "
-"und/oder die UND / ODER boolschen Operatoren mit Klammern für komplexe Suche"
-" kombiniert verwenden."
+msgstr "Sie können, um Worte oder Sätze, \"Anführungszeichen\" für genaue Sätze und/oder die UND / ODER boolschen Operatoren mit Klammern für komplexe Suche kombiniert verwenden."
 
 #: templates/zinnia/base.html:45
 msgid "Calendar"
@@ -1192,9 +1184,7 @@ msgstr "Anmeldung erforderlich"
 
 #: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
-"Ihr Benutzername und Passwort stimmen nicht überein. Bitte versuchen Sie es "
-"erneut."
+msgstr "Ihr Benutzername und Passwort stimmen nicht überein. Bitte versuchen Sie es erneut."
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
@@ -1312,5 +1302,3 @@ msgstr "Benutzer kann nicht %s."
 #: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr "Kein Titel"
-
-

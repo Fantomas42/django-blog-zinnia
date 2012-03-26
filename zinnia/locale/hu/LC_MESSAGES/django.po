@@ -548,9 +548,7 @@ msgstr "Szerver hiba"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
-"Hiba történt. A hibát a rendszeradminisztrátorok e-mailben jelezték, és "
-"hamarosan elháritják. Köszönjük a türelmét."
+msgstr "Hiba történt. A hibát a rendszeradminisztrátorok e-mailben jelezték, és hamarosan elháritják. Köszönjük a türelmét."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
@@ -960,10 +958,7 @@ msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex searchs."
-msgstr ""
-"Használhatja a - jelet, hogy kizárjon szavakat vagy kifejezéseket, "
-"&quot;kettős idézőjelet&quot; pontos kifejezések kereséséhez, és az AND/OR "
-"logikai operátorokat zárójelekkel kombinálva az összetett kereséseknél."
+msgstr "Használhatja a - jelet, hogy kizárjon szavakat vagy kifejezéseket, &quot;kettős idézőjelet&quot; pontos kifejezések kereséséhez, és az AND/OR logikai operátorokat zárójelekkel kombinálva az összetett kereséseknél."
 
 #: templates/zinnia/base.html:45
 msgid "Calendar"
@@ -1306,5 +1301,3 @@ msgstr "A felhasználó nem %s."
 #: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr "Nincs cím"
-
-

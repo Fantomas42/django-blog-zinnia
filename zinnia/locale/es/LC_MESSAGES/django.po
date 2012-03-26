@@ -395,8 +395,7 @@ msgstr "Cerrar los linkbacks de las entradas seleccionadas"
 
 #: admin/entry.py:278
 msgid "The selected entries are now set at the current date."
-msgstr ""
-"Las fechas de las entradas seleccionadas han sido puestas al momento actual."
+msgstr "Las fechas de las entradas seleccionadas han sido puestas al momento actual."
 
 #: admin/entry.py:280
 msgid "Put the selected entries on top at the current date"
@@ -405,9 +404,7 @@ msgstr "Poner las fechas de las entradas seleccionadas al momento actual"
 #: admin/entry.py:299
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr ""
-"El directorio %(directory)s ha realizado un ping correctamente a %(success)d"
-" entradas."
+msgstr "El directorio %(directory)s ha realizado un ping correctamente a %(success)d entradas."
 
 #: admin/entry.py:303
 msgid "Ping Directories for selected entries"
@@ -551,10 +548,7 @@ msgstr "Error del Servidor"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
-"Ha ocurrido un error. Ha sido reportado al administrador de la web por "
-"email. Intentaremos solucionarlo con la mayor brevedad posible. Gracias por "
-"tu paciencia."
+msgstr "Ha ocurrido un error. Ha sido reportado al administrador de la web por email. Intentaremos solucionarlo con la mayor brevedad posible. Gracias por tu paciencia."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
@@ -964,10 +958,7 @@ msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex searchs."
-msgstr ""
-"Puedes usar - para excluir palabras o frases, &quot;comillas dobles&quot; "
-"para buscar frases exactas, y las operaciones booleanas AND/OR combinada con"
-" paréntesis para realizar búsquedas complejas."
+msgstr "Puedes usar - para excluir palabras o frases, &quot;comillas dobles&quot; para buscar frases exactas, y las operaciones booleanas AND/OR combinada con paréntesis para realizar búsquedas complejas."
 
 #: templates/zinnia/base.html:45
 msgid "Calendar"
@@ -1192,8 +1183,7 @@ msgstr "Identificación requerida"
 
 #: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
-"Tu nombre de usuario y contraseña no son correctos. Vuelve a intentarlo."
+msgstr "Tu nombre de usuario y contraseña no son correctos. Vuelve a intentarlo."
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
@@ -1311,5 +1301,3 @@ msgstr "El usuario no puede ser %s."
 #: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr "No hay título"
-
-

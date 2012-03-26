@@ -549,9 +549,7 @@ msgstr "Erro de servidor"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
-"Houve um erro. Foi relatado aos administradores do site via e-mail e deve "
-"ser corrigido em breve. Obrigado pela sua paciência."
+msgstr "Houve um erro. Foi relatado aos administradores do site via e-mail e deve ser corrigido em breve. Obrigado pela sua paciência."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
@@ -961,10 +959,7 @@ msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex searchs."
-msgstr ""
-"Você pode usar - para excluir palavras ou frases, \"aspas duplas\" para "
-"frases exatas e os operadores AND/OR  combinados com parênteses para uma "
-"busca mais complexa."
+msgstr "Você pode usar - para excluir palavras ou frases, \"aspas duplas\" para frases exatas e os operadores AND/OR  combinados com parênteses para uma busca mais complexa."
 
 #: templates/zinnia/base.html:45
 msgid "Calendar"
@@ -1189,8 +1184,7 @@ msgstr "Login necessário"
 
 #: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
-"Seu nome de usuário e a senha não correspondem. Por favor, tente novamente."
+msgstr "Seu nome de usuário e a senha não correspondem. Por favor, tente novamente."
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
@@ -1308,5 +1302,3 @@ msgstr "Usuário não pode %s."
 #: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr "Sem título"
-
-

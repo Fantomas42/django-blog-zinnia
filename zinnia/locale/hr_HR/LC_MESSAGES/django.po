@@ -547,9 +547,7 @@ msgstr "Greška na serveru"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
-"Došlo je do greške. Ona je prijavljena administratoru e-mailom i uskoro će "
-"biti ispravljena. Zahvaljujemo na strpljenju."
+msgstr "Došlo je do greške. Ona je prijavljena administratoru e-mailom i uskoro će biti ispravljena. Zahvaljujemo na strpljenju."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
@@ -968,10 +966,7 @@ msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex searchs."
-msgstr ""
-"Možete koristiti - (minus) da se isključe riječi ili fraze,&quot;dvostruke "
-"navodnike &quot; za točne fraze i AND/OR operatore u kombinaciji s zagradama"
-" za složene pretrage."
+msgstr "Možete koristiti - (minus) da se isključe riječi ili fraze,&quot;dvostruke navodnike &quot; za točne fraze i AND/OR operatore u kombinaciji s zagradama za složene pretrage."
 
 #: templates/zinnia/base.html:45
 msgid "Calendar"
@@ -1197,8 +1192,7 @@ msgstr "Potrebna prijava"
 
 #: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
-"Vaše korisničko ime i lozinka nisu usklađeni. Molimo pokušajte ponovno."
+msgstr "Vaše korisničko ime i lozinka nisu usklađeni. Molimo pokušajte ponovno."
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
@@ -1317,5 +1311,3 @@ msgstr "Korisnik ne može %s."
 #: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr "Nema naziva"
-
-

@@ -1311,5 +1311,3 @@ msgstr ""
 #: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr ""
-
-

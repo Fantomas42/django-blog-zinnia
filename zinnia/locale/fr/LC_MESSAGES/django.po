@@ -379,8 +379,7 @@ msgstr "Tweeter les articles sélectionnés"
 
 #: admin/entry.py:261
 msgid "Comments are now closed for selected entries."
-msgstr ""
-"Les commentaires sont désormais fermés pour les articles sélectionnés."
+msgstr "Les commentaires sont désormais fermés pour les articles sélectionnés."
 
 #: admin/entry.py:262
 msgid "Close the comments for selected entries"
@@ -388,8 +387,7 @@ msgstr "Fermer les commentaires pour les articles sélectionnés"
 
 #: admin/entry.py:269
 msgid "Linkbacks are now closed for selected entries."
-msgstr ""
-"Les liens entrants sont désormais fermés pour les articles sélectionnés."
+msgstr "Les liens entrants sont désormais fermés pour les articles sélectionnés."
 
 #: admin/entry.py:271
 msgid "Close the linkbacks for selected entries"
@@ -550,10 +548,7 @@ msgstr "Erreur du serveur"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
-"Une erreur est survenue. Elle a été transmise par courriel aux "
-"administrateurs du site et sera corrigée dans les meilleurs délais. Merci "
-"pour votre patience."
+msgstr "Une erreur est survenue. Elle a été transmise par courriel aux administrateurs du site et sera corrigée dans les meilleurs délais. Merci pour votre patience."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
@@ -963,11 +958,7 @@ msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex searchs."
-msgstr ""
-"Vous pouvez utiliser le - pour exclure des mots ou des expressions, les "
-"&quot;double guillemets&quot; pour les expressions exactes et les opérateurs"
-" booléens AND/OR combinés avec des parenthèses pour les recherches "
-"complexes."
+msgstr "Vous pouvez utiliser le - pour exclure des mots ou des expressions, les &quot;double guillemets&quot; pour les expressions exactes et les opérateurs booléens AND/OR combinés avec des parenthèses pour les recherches complexes."
 
 #: templates/zinnia/base.html:45
 msgid "Calendar"
@@ -1192,9 +1183,7 @@ msgstr "Identification requise"
 
 #: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
-"Votre nom d'utilisateur et mot de passe ne correspondent pas. Veuillez "
-"réessayer."
+msgstr "Votre nom d'utilisateur et mot de passe ne correspondent pas. Veuillez réessayer."
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
@@ -1312,5 +1301,3 @@ msgstr "L'utilisateur ne peut %s."
 #: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr "Aucun titre"
-
-

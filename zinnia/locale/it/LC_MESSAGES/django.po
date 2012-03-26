@@ -404,9 +404,7 @@ msgstr ""
 #: admin/entry.py:299
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr ""
-"La directory %(directory)s è stata pingata con successo per %(success)d "
-"articoli."
+msgstr "La directory %(directory)s è stata pingata con successo per %(success)d articoli."
 
 #: admin/entry.py:303
 msgid "Ping Directories for selected entries"
@@ -550,9 +548,7 @@ msgstr "Errore del server"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
-"C'è stato un errore. E' stato riportato agli amministratori del sito per "
-"email e dovrebbe venire risolto a breve. Grazie per la tua pazienza."
+msgstr "C'è stato un errore. E' stato riportato agli amministratori del sito per email e dovrebbe venire risolto a breve. Grazie per la tua pazienza."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
@@ -1187,8 +1183,7 @@ msgstr "Login richiesto"
 
 #: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
-"La tua username e la password non corrispondono. Per cortesia riprova."
+msgstr "La tua username e la password non corrispondono. Per cortesia riprova."
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
@@ -1306,5 +1301,3 @@ msgstr "L'utente non può %s."
 #: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr "Nessun titolo"
-
-
