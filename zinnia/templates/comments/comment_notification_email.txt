@@ -1,4 +1,4 @@
-{% load i18n %}{% trans "Author" %}: {{ comment.userinfo.name }} {{ comment.userinfo.url }}
+{% load i18n %}{% load url from future %}{% trans "Author" %}: {{ comment.userinfo.name }} {{ comment.userinfo.url }}
 {% trans "Email" %}: {{ comment.userinfo.email }}
 {% trans "IP" %}: {{ comment.ip_address }}
 
@@ -7,8 +7,8 @@
 
 {% trans "View this comment" %}: {{ protocol }}://{{ site }}{{ content_object.get_absolute_url }}#comment_{{ comment.pk }}
 
-{% trans "Flag this comment" %}: {{ protocol }}://{{ site }}{% url comments-flag comment.pk %}
+{% trans "Flag this comment" %}: {{ protocol }}://{{ site }}{% url 'comments-flag' comment.pk %}
 
-{% trans "Delete this comment" %}: {{ protocol }}://{{ site }}{% url comments-delete comment.pk %}
+{% trans "Delete this comment" %}: {{ protocol }}://{{ site }}{% url 'comments-delete' comment.pk %}
 
-{% trans "Approve this comment" %}: {{ protocol }}://{{ site }}{% url comments-approve comment.pk %}
+{% trans "Approve this comment" %}: {{ protocol }}://{{ site }}{% url 'comments-approve' comment.pk %}

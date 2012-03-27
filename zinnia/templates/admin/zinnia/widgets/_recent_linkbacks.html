@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load url from future %}
 {% for linkback in linkbacks %}
 <tr>
   <th>
@@ -13,7 +14,7 @@
     {{ linkback.comment|truncatewords:20|linebreaks }}
   </th>
   <td>
-    <a href="{% url admin:comments_comment_change linkback.pk %}"
+    <a href="{% url 'admin:comments_comment_change' linkback.pk %}"
        title="{% trans "Edit the linkback" %}" class="changelink">
       {% trans "Edit" %}
     </a>

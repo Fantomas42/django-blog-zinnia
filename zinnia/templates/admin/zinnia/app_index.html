@@ -1,5 +1,6 @@
 {% extends "admin/app_index.html" %}
 {% load i18n adminmedia %}
+{% load url from future %}
 
 {% block extrastyle %}
 {{ block.super }}
@@ -13,7 +14,7 @@
 <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.masonry.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.bgiframe.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.autocomplete.js"></script>
-<script type="text/javascript" src="{% url admin:zinnia_entry_autocomplete_tags %}"></script>
+<script type="text/javascript" src="{% url 'admin:zinnia_entry_autocomplete_tags' %}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   $("#content-main").masonry({

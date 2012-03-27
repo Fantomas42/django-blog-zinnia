@@ -1,8 +1,9 @@
 {% load i18n %}
+{% load url from future %}
 <ul>
   {% for author in authors %}
   <li class="vcard">
-    <a href="{% url zinnia_author_detail author.username %}"
+    <a href="{% url 'zinnia_author_detail' author.username %}"
        title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}"
        class="fn nickname url">{{ author }}</a>
     {% blocktrans count entry_count=author.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
