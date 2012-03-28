@@ -1,7 +1,6 @@
 {% load i18n %}{% load url from future %}<?xml version="1.0" encoding="utf-8" ?>
 <manifest xmlns="http://schemas.microsoft.com/wlw/manifest/weblog">
   <options>
-    <!-- http://msdn.microsoft.com/en-us/library/bb463260.aspx -->
     <clientType>Metaweblog</clientType>
     <supportsPostAsDraft>Yes</supportsPostAsDraft>
     <supportsFileUpload>Yes</supportsFileUpload>
