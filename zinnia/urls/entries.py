@@ -1,6 +1,6 @@
 """Urls for the Zinnia entries"""
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
+from django.conf.urls import url
+from django.conf.urls import patterns
 
 from zinnia.models import Entry
 from zinnia.settings import ALLOW_FUTURE

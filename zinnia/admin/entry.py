@@ -3,11 +3,11 @@ from datetime import datetime
 
 from django.forms import Media
 from django.contrib import admin
+from django.conf.urls import url
+from django.conf.urls import patterns
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from django.utils.text import truncate_words
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
 from django.conf import settings as project_settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import get_language

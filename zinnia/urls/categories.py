@@ -1,6 +1,6 @@
 """Urls for the Zinnia categories"""
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
+from django.conf.urls import url
+from django.conf.urls import patterns
 
 from zinnia.models import Category
 

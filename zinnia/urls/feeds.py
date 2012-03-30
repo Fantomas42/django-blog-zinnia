@@ -1,6 +1,6 @@
 """Urls for the Zinnia feeds"""
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
+from django.conf.urls import url
+from django.conf.urls import patterns
 
 from zinnia.feeds import LatestEntries
 from zinnia.feeds import TagEntries

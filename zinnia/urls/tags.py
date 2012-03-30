@@ -1,6 +1,6 @@
 """Urls for the Zinnia tags"""
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
+from django.conf.urls import url
+from django.conf.urls import patterns
 
 urlpatterns = patterns('zinnia.views.tags',
                        url(r'^$', 'tag_list',

@@ -1,8 +1,8 @@
 """Test urls for the zinnia project"""
 from functools import wraps
 
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
+from django.conf.urls import url
+from django.conf.urls import patterns
 
 from zinnia.views.tags import tag_detail
 from zinnia.views.authors import author_detail
