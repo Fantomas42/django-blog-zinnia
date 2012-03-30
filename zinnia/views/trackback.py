@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib.sites.models import Site
 from django.contrib import comments
 from django.views.decorators.csrf import csrf_exempt
+from django.template.response import TemplateResponse
 from django.contrib.contenttypes.models import ContentType
-from django.views.generic.simple import direct_to_template
 
 from zinnia.models import Entry
 from zinnia.managers import TRACKBACK
@@ -39,8 +39,7 @@ def entry_trackback(request, object_id):
             else:
                 error = u'Trackback is already registered'
 
-        return direct_to_template(request, 'zinnia/entry_trackback.xml',
-                                  mimetype='text/xml',
-                                  extra_context={'error': error})
+        return TemplateResponse(request, 'zinnia/entry_trackback.xml',
+                                {'error': error}, 'text/xml')
 
     return redirect(entry, permanent=True)
