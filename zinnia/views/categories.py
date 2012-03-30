@@ -1,10 +1,10 @@
 """Views for Zinnia categories"""
 from django.shortcuts import get_object_or_404
-from django.views.generic.list_detail import object_list
+from django.views.generic import ListView
 
 from zinnia.models import Category
 from zinnia.settings import PAGINATION
-from zinnia.views.decorators import template_name_for_entry_queryset_filtered
+from zinnia.views.mixins import EntryQuerysetTemplatesMixin
 
 
 def get_category_or_404(path):
@@ -13,18 +13,25 @@ def get_category_or_404(path):
     return get_object_or_404(Category, slug=path_bits[-1])
 
 
-def category_detail(request, path, page=None, **kwargs):
-    """Display the entries of a category"""
-    extra_context = kwargs.pop('extra_context', {})
+class CategoryListView(ListView):
+    model = Category
 
-    category = get_category_or_404(path)
-    if not kwargs.get('template_name'):
-        kwargs['template_name'] = template_name_for_entry_queryset_filtered(
-            'category', category.slug)
 
-    extra_context.update({'category': category})
-    kwargs['extra_context'] = extra_context
+class CategoryDetailView(EntryQuerysetTemplatesMixin, ListView):
+    model_type = 'category'
+    paginate_by = PAGINATION
 
-    return object_list(request, queryset=category.entries_published(),
-                       paginate_by=PAGINATION, page=page,
-                       **kwargs)
+    def get_model_name(self):
+        return self.category.slug
+
+    def get_queryset(self):
+        return self.category.entries_published()
+
+    def get_context_data(self,**kwargs):
+        context = super(CategoryDetailView,self).get_context_data(**kwargs)
+        context['category'] = self.category
+        return context
+
+    def get(self,*args,**kwargs):
+        self.category = get_category_or_404(self.kwargs['path'])
+        return super(CategoryDetailView,self).get(*args,**kwargs)
