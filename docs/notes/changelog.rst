@@ -8,6 +8,8 @@ CHANGELOG
 
 0.10.1
 ------
+
+* Compatibility with django-mptt >= 5.1
 * ``zinnia.plugins`` is now removed
 
 0.10
