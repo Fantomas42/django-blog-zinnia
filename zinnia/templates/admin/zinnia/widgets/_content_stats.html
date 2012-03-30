@@ -1,23 +1,24 @@
 {% load i18n %}
+{% load url from future %}
 <tr>
   <th>{% trans "Contents" %}</th>
   <th>{% trans "Discussions" %}</th>
 </tr>
 <tr>
   <td>
-    <a href="{% url admin:zinnia_entry_changelist %}">
+    <a href="{% url 'admin:zinnia_entry_changelist' %}">
       {% blocktrans count entry_count=entries %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     </a>
   </td>
   <td>
-    <a href="{% url admin:comments_comment_changelist %}?is_public__exact=1">
+    <a href="{% url 'admin:comments_comment_changelist' %}?is_public__exact=1">
       {% blocktrans count comment_count=comments %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
     </a>
   </td>
 </tr>
 <tr>
   <td>
-    <a href="{% url admin:zinnia_category_changelist %}">
+    <a href="{% url 'admin:zinnia_category_changelist' %}">
       {% blocktrans count category_count=categories %}{{ category_count }} category{% plural %}{{ category_count }} categories{% endblocktrans %}
     </a>
   </td>
@@ -25,7 +26,7 @@
 </tr>
 <tr>
   <td>
-    <a href="{% url admin:tagging_tag_changelist %}">
+    <a href="{% url 'admin:tagging_tag_changelist' %}">
       {% blocktrans count tag_count=tags %}{{ tag_count }} tag{% plural %}{{ tag_count }} tags{% endblocktrans %}
     </a>
   </td>
@@ -33,12 +34,12 @@
 </tr>
 <tr>
   <td>
-    <a href="{% url admin:auth_user_changelist %}">
+    <a href="{% url 'admin:auth_user_changelist' %}">
       {% blocktrans count author_count=authors %}{{ author_count }} author{% plural %}{{ author_count }} authors{% endblocktrans %}
     </a>
   </td>
   <td>
-    <a href="{% url admin:comments_comment_changelist %}?is_public__exact=0">
+    <a href="{% url 'admin:comments_comment_changelist' %}?is_public__exact=0">
       {% blocktrans count reject_count=rejects %}{{ reject_count }} rejected item{% plural %}{{ reject_count }} rejected items{% endblocktrans %}
     </a>
   </td>

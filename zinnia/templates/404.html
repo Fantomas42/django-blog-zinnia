@@ -1,5 +1,6 @@
 {% extends "zinnia/skeleton.html" %}
 {% load i18n zinnia_tags %}
+{% load url from future %}
 
 {% block breadcrumbs %}
 <ul class="breadcrumbs">
@@ -20,12 +21,12 @@
   <h3>{% trans "Useful links" %}</h3>
   <ul>
     <li>
-      <a href="{% url zinnia_entry_archive_index %}" title="{% trans "Blog index" %}">
+      <a href="{% url 'zinnia_entry_archive_index' %}" title="{% trans "Blog index" %}">
         {% trans "Blog index" %}
       </a>
     </li>
     <li>
-      <a href="{% url zinnia_sitemap %}" title="{% trans "Sitemap" %}">
+      <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}">
         {% trans "Sitemap" %}
       </a>
     </li>

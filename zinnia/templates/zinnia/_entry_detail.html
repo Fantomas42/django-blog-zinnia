@@ -1,4 +1,5 @@
 {% load tagging_tags comments i18n %}
+{% load url from future %}
 <div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}">
   <div class="entry-header">
     <h2 class="entry-title">
@@ -11,7 +12,7 @@
       {% trans "Written by" %}
       {% for author in object.authors.all %}
       <span class="vcard author">
-        <a href="{% url zinnia_author_detail author %}" class="fn nickname url" rel="author"
+        <a href="{% url 'zinnia_author_detail' author %}" class="fn nickname url" rel="author"
            title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}">{{ author }}</a>
       </span>{% if not forloop.last %}, {% endif %}
       {% endfor %}
@@ -62,7 +63,7 @@
       <strong>{% trans "Tags" %}</strong> :
       {% tags_for_object object as tag_list %}
       {% for tag in tag_list %}
-      <a href="{% url zinnia_tag_detail tag %}"
+      <a href="{% url 'zinnia_tag_detail' tag %}"
          title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
          rel="tag">{{ tag }}</a>
       {% empty %}

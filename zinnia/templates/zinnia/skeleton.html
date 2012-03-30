@@ -1,4 +1,5 @@
 {% load zinnia_tags i18n %}
+{% load url from future %}
 {% get_tags as entry_tags %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
@@ -15,7 +16,7 @@
     {% block meta %}{% endblock %}
     <link rel="pingback" href="/xmlrpc/" />
     <link rel="shortcut icon" href="{{ STATIC_URL }}zinnia/img/favicon.ico" />
-    <link rel="home" href="{% url zinnia_entry_archive_index %}" />
+    <link rel="home" href="{% url 'zinnia_entry_archive_index' %}" />
     <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ STATIC_URL }}zinnia/css/screen.css" />
     <link rel="stylesheet" type="text/css" media="print" href="{{ STATIC_URL }}zinnia/css/print.css" />
     <!--[if lt IE 8]>
@@ -29,18 +30,18 @@
       <div id="header">
         <ul class="top-navigation">
           <li>
-            <a href="{% url zinnia_sitemap %}" title="{% trans "Sitemap" %}" class="sitemap">
+            <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}" class="sitemap">
               {% trans "Sitemap" %}
             </a>
           </li>
           <li>
-            <a href="{% url zinnia_entry_latest_feed %}" title="{% trans "RSS Feed of latest entries" %}" class="feeds">
+            <a href="{% url 'zinnia_entry_latest_feed' %}" title="{% trans "RSS Feed of latest entries" %}" class="feeds">
               {% trans "RSS Feed" %}
             </a>
           </li>
         </ul>
         <h1>
-          <a href="{% url zinnia_entry_archive_index %}" title="Zinnia's Blog" rel="home">
+          <a href="{% url 'zinnia_entry_archive_index' %}" title="Zinnia's Blog" rel="home">
             Zinnia's Blog
           </a>
         </h1>

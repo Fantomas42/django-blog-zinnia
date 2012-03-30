@@ -1,4 +1,5 @@
 {% load i18n zinnia_tags %}
+{% load url from future %}
 {% for comment in comments %}
 <tr>
   <th>
@@ -18,7 +19,7 @@
     {{ comment.comment|truncatewords:20|linebreaks }}
   </td>
   <td>
-    <a href="{% url admin:comments_comment_change comment.pk %}"
+    <a href="{% url 'admin:comments_comment_change' comment.pk %}"
        title="{% trans "Edit the comment" %}" class="changelink">
       {% trans "Edit" %}
     </a>
@@ -35,7 +36,7 @@
 {% if comments %}
 <tr>
   <th colspan="3">
-    <a href="{% url admin:comments_comment_changelist %}"
+    <a href="{% url 'admin:comments_comment_changelist' %}"
        title="{% trans "Manage the comments" %}" class="managelink">
       {% trans "Manage the comments" %}
     </a>

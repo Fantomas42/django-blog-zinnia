@@ -101,7 +101,7 @@ class ZinniaFeedsTestCase(TestCase):
         feed = EntryFeed()
         self.assertEquals(
             feed.item_enclosure_url(entry), 'http://example.com/image.jpg')
-        entry.content = 'My test content with image <img src="image.jpg" />',
+        entry.content = 'My test content with image <img src="image.jpg" />'
         entry.save()
         self.assertEquals(
             feed.item_enclosure_url(entry), 'http://example.com/image.jpg')
@@ -123,7 +123,7 @@ class ZinniaFeedsTestCase(TestCase):
         feeds.FEEDS_FORMAT = ''
         entry = self.create_published_entry()
         feed = EntryFeed()
-        entry.content = 'My test content with image <img xsrc="image.jpg" />',
+        entry.content = 'My test content with image <img xsrc="image.jpg" />'
         entry.save()
         self.assertEquals(
             feed.item_enclosure_url(entry), None)
