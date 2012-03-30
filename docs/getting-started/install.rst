@@ -12,7 +12,7 @@ Dependencies
 Make sure to install these packages prior to installation :
 
 * `Python 2.x`_ >= 2.5
-* `Django`_ >= 1.3
+* `Django`_ >= 1.4
 * `django-mptt`_ >= 0.5.1 < 0.6
 * `django-tagging`_ >= 0.3.1
 * `BeautifulSoup`_ >= 3.2.0
@@ -24,13 +24,6 @@ The packages below are optionnal but needed for run the full test suite.
 
 Note that all the dependencies will be resolved if you install
 Zinnia with :program:`pip` or :program:`easy_install`, excepting Django.
-
-
-.. warning::
-   .. versionchanged:: 0.10.1
-
-   Django 1.4 is supported by Zinnia but without full time zones
-   support for the now. So it's not recommended to use it.
 
 .. _getting-the-code:
 
