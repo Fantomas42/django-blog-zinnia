@@ -155,9 +155,9 @@ If you use `django-CMS 2.0`_, Zinnia can be integrated into your pages,
 thanks to the plugin system.
 
 .. warning::
-   .. versionchanged:: 0.11
+   .. versionchanged:: 0.10.1
 
-   ``zinnia.plugins`` has been removed in flavor of `cmsplugin_zinnia`_.
+   ``zinnia.plugins`` has been removed in favor of `cmsplugin_zinnia`_.
 
 Simply refer to `cmsplugin_zinnia`_'s documentation for more information
 about the install instructions and possibilities.
