@@ -6,8 +6,24 @@ from django.conf.urls import patterns
 
 from zinnia.views.tags import tag_detail
 from zinnia.views.authors import author_detail
-from zinnia.views.categories import category_detail
+from zinnia.views.categories import CategoryDetail
 from zinnia.tests.urls import urlpatterns as test_urlpatterns
+
+
+class CustomModelDetailMixin(object):
+    """Mixin for changing the template_name
+    and overriding the context"""
+    template_name = 'zinnia/entry_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomModelDetailMixin,
+                        self).get_context_data(**kwargs)
+        context.update({'extra': 'context'})
+        return context
+
+
+class CustomCategoryDetail(CustomModelDetailMixin, CategoryDetail):
+    pass
 
 
 def call_with_template_and_extra_context(
@@ -24,7 +40,6 @@ def call_with_template_and_extra_context(
 
 custom_tag_detail = call_with_template_and_extra_context(tag_detail)
 custom_author_detail = call_with_template_and_extra_context(author_detail)
-custom_category_detail = call_with_template_and_extra_context(category_detail)
 
 
 urlpatterns = patterns(
@@ -34,9 +49,11 @@ urlpatterns = patterns(
     url(r'^authors/(?P<username>[.+-@\w]+)/page/(?P<page>\d+)/$',
         custom_author_detail, name='zinnia_author_detail_paginated'),
     url(r'^categories/(?P<path>[-\/\w]+)/page/(?P<page>\d+)/$',
-        custom_category_detail, name='zinnia_category_detail_paginated'),
+        CustomCategoryDetail.as_view(),
+        name='zinnia_category_detail_paginated'),
     url(r'^categories/(?P<path>[-\/\w]+)/$',
-        custom_category_detail, name='zinnia_category_detail'),
+        CustomCategoryDetail.as_view(),
+        name='zinnia_category_detail'),
     url(r'^tags/(?P<tag>[- \w]+)/$',
         custom_tag_detail, name='zinnia_tag_detail'),
     url(r'^tags/(?P<tag>[- \w]+)/page/(?P<page>\d+)/$',
