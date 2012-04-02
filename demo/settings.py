@@ -39,6 +39,10 @@ LANGUAGES = (('en', gettext('English')),
              ('pt_BR', gettext('Brazilian Portuguese')),
              ('zh_CN', gettext('Simplified Chinese')),)
 
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
+    )
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
