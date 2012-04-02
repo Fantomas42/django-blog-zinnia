@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.conf.urls import include
 from django.conf.urls import patterns
+from django.views.generic.base import RedirectView
 
 from zinnia.sitemaps import TagSitemap
 from zinnia.sitemaps import EntrySitemap
@@ -16,8 +17,7 @@ handler404 = 'django.views.defaults.page_not_found'
 
 urlpatterns = patterns(
     '',
-    (r'^$', 'django.views.generic.simple.redirect_to',
-     {'url': '/blog/'}),
+    url(r'^$', RedirectView.as_view(url='/blog/')),
     url(r'^blog/', include('zinnia.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
