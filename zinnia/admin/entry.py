@@ -6,8 +6,8 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.conf.urls import patterns
 from django.contrib.auth.models import User
+from django.utils.text import Truncator
 from django.utils.html import strip_tags
-from django.utils.text import truncate_words
 from django.conf import settings as project_settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import get_language
@@ -162,7 +162,8 @@ class EntryAdmin(admin.ModelAdmin):
     def save_model(self, request, entry, form, change):
         """Save the authors, update time, make an excerpt"""
         if not form.cleaned_data.get('excerpt') and entry.status == PUBLISHED:
-            entry.excerpt = truncate_words(strip_tags(entry.content), 50)
+            entry.excerpt = Truncator('...').words(
+                50, strip_tags(entry.content))
 
         if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
             form.cleaned_data['authors'] = entry.authors.all()
