@@ -1,6 +1,5 @@
 """Views for Zinnia channels"""
 from django.views.generic.list import ListView
-from django.core.exceptions import ImproperlyConfigured
 
 from zinnia.models import Entry
 

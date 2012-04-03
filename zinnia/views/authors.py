@@ -27,7 +27,8 @@ class AuthorDetail(EntryQuerysetTemplateResponseMixin, BaseListView):
     def get_queryset(self):
         """Return a queryset of entries published
         belonging to the current author"""
-        self.author = get_object_or_404(Author, username=self.kwargs['username'])
+        self.author = get_object_or_404(
+            Author, username=self.kwargs['username'])
         return self.author.entries_published()
 
     def get_context_data(self, **kwargs):
