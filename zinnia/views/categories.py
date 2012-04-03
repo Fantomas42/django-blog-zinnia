@@ -32,6 +32,7 @@ class CategoryDetail(EntryQuerysetTemplateResponseMixin, BaseListView):
     def get_queryset(self):
         """Return a queryset of entries published
         belonging to the current category"""
+        self.category = get_category_or_404(self.kwargs['path'])
         return self.category.entries_published()
 
     def get_context_data(self, **kwargs):
@@ -39,8 +40,3 @@ class CategoryDetail(EntryQuerysetTemplateResponseMixin, BaseListView):
         context = super(CategoryDetail, self).get_context_data(**kwargs)
         context['category'] = self.category
         return context
-
-    def get(self, *args, **kwargs):
-        """Get method retrieving the current category"""
-        self.category = get_category_or_404(kwargs['path'])
-        return super(CategoryDetail, self).get(*args, **kwargs)
