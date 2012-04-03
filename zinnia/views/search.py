@@ -1,32 +1,35 @@
 """Views for Zinnia entries search"""
+from django.views.generic.list import ListView
 from django.utils.translation import ugettext as _
-from django.views.generic.list_detail import object_list
 
 from zinnia.models import Entry
 from zinnia.settings import PAGINATION
 
 
-def entry_search(request, **kwargs):
-    """Search entries matching with a pattern"""
+class EntrySearch(ListView):
+    """View for searching entries"""
+    pattern = ''
     error = None
-    pattern = None
-    entries = Entry.published.none()
-    extra_context = kwargs.pop('extra_context', {})
+    paginate_by = PAGINATION
+    template_name = 'zinnia/entry_search.html'
 
-    if request.GET:
-        pattern = request.GET.get('pattern', '')
-        if len(pattern) < 3:
-            error = _('The pattern is too short')
+    def get_queryset(self):
+        """Overridde the get_queryset method to
+        do some validations and the search queryset"""
+        entries = Entry.published.none()
+
+        if self.request.GET:
+            self.pattern = self.request.GET.get('pattern', '')
+            if len(self.pattern) < 3:
+                self.error = _('The pattern is too short')
+            else:
+                entries = Entry.published.search(self.pattern)
         else:
-            entries = Entry.published.search(pattern)
-    else:
-        error = _('No pattern to search found')
+            self.error = _('No pattern to search found')
+        return entries
 
-    if not kwargs.get('template_name'):
-        kwargs['template_name'] = 'zinnia/entry_search.html'
-
-    extra_context.update({'error': error, 'pattern': pattern})
-    kwargs['extra_context'] = extra_context
-
-    return object_list(request, queryset=entries,
-                       paginate_by=PAGINATION, **kwargs)
+    def get_context_data(self, **kwargs):
+        """Add error and pattern in the context"""
+        context = super(ListView, self).get_context_data(**kwargs)
+        context.update({'error': self.error, 'pattern': self.pattern})
+        return context
