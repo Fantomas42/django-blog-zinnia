@@ -1,7 +1,7 @@
 """Views for Zinnia categories"""
+from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.list import BaseListView
-from django.shortcuts import get_object_or_404
 
 from zinnia.models import Category
 from zinnia.settings import PAGINATION
@@ -40,7 +40,7 @@ class CategoryDetail(EntryQuerysetTemplateResponseMixin, BaseListView):
         context['category'] = self.category
         return context
 
-    def get(self, request, *args, **kwargs):
+    def get(self, *args, **kwargs):
         """Get method retrieving the current category"""
         self.category = get_category_or_404(kwargs['path'])
-        return super(CategoryDetail, self).get(request, *args, **kwargs)
+        return super(CategoryDetail, self).get(*args, **kwargs)

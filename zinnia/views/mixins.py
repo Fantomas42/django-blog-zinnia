@@ -4,6 +4,20 @@ from django.views.generic.base import TemplateResponseMixin
 from django.core.exceptions import ImproperlyConfigured
 
 
+class CallableQuerysetMixin(object):
+    """Mixin for handling a callable queryset.
+    Who will force the update of the queryset.
+    Related to issue http://code.djangoproject.com/ticket/8378"""
+    queryset = None
+
+    def get_queryset(self):
+        """Check that the queryset is defined and call it"""
+        if self.queryset is None:
+            raise ImproperlyConfigured(
+                u"'%s' must define 'queryset'" % self.__class__.__name__)
+        return self.queryset()
+
+
 class MimeTypeMixin(object):
     """Mixin for handling the mimetype parameter"""
     mimetype = None
@@ -12,11 +26,10 @@ class MimeTypeMixin(object):
         """Return the mimetype of the response"""
         if self.mimetype is None:
             raise ImproperlyConfigured(
-                "%s requires either a definition of "
+                u"%s requires either a definition of "
                 "'mimetype' or an implementation of 'get_mimetype()'" % \
                 self.__class__.__name__)
-        else:
-            return self.mimetype
+        return self.mimetype
 
 
 class TemplateMimeTypeView(MimeTypeMixin, TemplateView):
@@ -38,21 +51,19 @@ class EntryQuerysetTemplateResponseMixin(TemplateResponseMixin):
         """Return the model type for templates"""
         if self.model_type is None:
             raise ImproperlyConfigured(
-                "%s requires either a definition of "
+                u"%s requires either a definition of "
                 "'model_type' or an implementation of 'get_model_type()'" % \
                 self.__class__.__name__)
-        else:
-            return self.model_type
+        return self.model_type
 
     def get_model_name(self):
         """Return the model name for templates"""
         if self.model_name is None:
             raise ImproperlyConfigured(
-                "%s requires either a definition of "
+                u"%s requires either a definition of "
                 "'model_name' or an implementation of 'get_model_name()'" % \
                 self.__class__.__name__)
-        else:
-            return self.model_name
+        return self.model_name
 
     def get_template_names(self):
         """Return a list of template names to be used for the view"""

@@ -5,7 +5,7 @@ from django.conf.urls import url
 from django.conf.urls import patterns
 
 from zinnia.views.tags import tag_detail
-from zinnia.views.authors import author_detail
+from zinnia.views.authors import AuthorDetail
 from zinnia.views.categories import CategoryDetail
 from zinnia.tests.urls import urlpatterns as test_urlpatterns
 
@@ -20,6 +20,10 @@ class CustomModelDetailMixin(object):
                         self).get_context_data(**kwargs)
         context.update({'extra': 'context'})
         return context
+
+
+class CustomAuthorDetail(CustomModelDetailMixin, AuthorDetail):
+    pass
 
 
 class CustomCategoryDetail(CustomModelDetailMixin, CategoryDetail):
@@ -39,15 +43,16 @@ def call_with_template_and_extra_context(
     return wrapper
 
 custom_tag_detail = call_with_template_and_extra_context(tag_detail)
-custom_author_detail = call_with_template_and_extra_context(author_detail)
 
 
 urlpatterns = patterns(
     '',
     url(r'^authors/(?P<username>[.+-@\w]+)/$',
-        custom_author_detail, name='zinnia_author_detail'),
+        CustomAuthorDetail.as_view(),
+        name='zinnia_author_detail'),
     url(r'^authors/(?P<username>[.+-@\w]+)/page/(?P<page>\d+)/$',
-        custom_author_detail, name='zinnia_author_detail_paginated'),
+        CustomAuthorDetail.as_view(),
+        name='zinnia_author_detail_paginated'),
     url(r'^categories/(?P<path>[-\/\w]+)/page/(?P<page>\d+)/$',
         CustomCategoryDetail.as_view(),
         name='zinnia_category_detail_paginated'),

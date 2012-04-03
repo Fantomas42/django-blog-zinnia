@@ -200,9 +200,11 @@ class ZinniaViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_author_list(self):
         self.check_publishing_context('/authors/', 1)
+        user = User.objects.create(username='new-user',
+                                   email='new_user@example.com')
+        self.check_publishing_context('/authors/', 1)
         entry = Entry.objects.all()[0]
-        entry.authors.add(User.objects.create(username='new-user',
-                                              email='new_user@example.com'))
+        entry.authors.add(user)
         self.check_publishing_context('/authors/', 2)
 
     def test_zinnia_author_detail(self):
