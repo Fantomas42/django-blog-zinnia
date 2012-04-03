@@ -1,12 +1,15 @@
 """Views for Zinnia channels"""
-from django.views.generic.list_detail import object_list
+from django.views.generic.list import ListView
+from django.core.exceptions import ImproperlyConfigured
 
 from zinnia.models import Entry
 
 
-def entry_channel(request, query, **kwargs):
+class EntryChannel(ListView):
     """View for displaying a custom selection of entries
     based on a search pattern, useful for SEO/SMO pages"""
-    queryset = Entry.published.search(query)
-    return object_list(request, queryset=queryset,
-                       **kwargs)
+    query = ''
+
+    def get_queryset(self):
+        """Override the get_queryset method to do the search"""
+        return Entry.published.search(self.query)
