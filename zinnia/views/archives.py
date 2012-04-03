@@ -11,17 +11,24 @@ TODO: 1. Switch to class-based views
 """
 from datetime import date
 
-from django.views.generic.list_detail import object_list
+from django.views.generic.list import ListView
 from django.views.generic.date_based import archive_year
 from django.views.generic.date_based import archive_week
 from django.views.generic.date_based import archive_month
 from django.views.generic.date_based import archive_day
 
 from zinnia.models import Entry
+from zinnia.settings import PAGINATION
 from zinnia.views.decorators import update_queryset
+from zinnia.views.mixins import CallableQuerysetMixin
 
 
-entry_index = update_queryset(object_list, Entry.published.all)
+class EntryIndex(CallableQuerysetMixin, ListView):
+    """View for the archive index of the Weblog"""
+    paginate_by = PAGINATION
+    template_name = 'zinnia/entry_archive.html'
+    queryset = Entry.published.all
+
 
 entry_year = update_queryset(archive_year, Entry.published.all)
 
