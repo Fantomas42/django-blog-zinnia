@@ -18,6 +18,7 @@ this application greatest each day.
 * Mohammad Taleb (simul14)
 * Frederic Le guluche (Bloxboy)
 * Mauro Bianchi (bianchimro)
+* Arion Sprague (asprague)
 * Franck Bret
 * Jason Davies
 * Brandon Taylor

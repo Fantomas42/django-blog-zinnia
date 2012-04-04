@@ -1,7 +1,12 @@
 """Urls for the Zinnia search"""
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
+from django.conf.urls import url
+from django.conf.urls import patterns
 
-urlpatterns = patterns('zinnia.views.search',
-                       url(r'^$', 'entry_search', name='zinnia_entry_search'),
-                       )
+from zinnia.views.search import EntrySearch
+
+
+urlpatterns = patterns(
+    '',
+    url(r'^$', EntrySearch.as_view(),
+        name='zinnia_entry_search'),
+    )

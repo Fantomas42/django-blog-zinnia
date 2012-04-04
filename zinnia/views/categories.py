@@ -1,30 +1,42 @@
 """Views for Zinnia categories"""
 from django.shortcuts import get_object_or_404
-from django.views.generic.list_detail import object_list
+from django.views.generic.list import ListView
+from django.views.generic.list import BaseListView
 
 from zinnia.models import Category
 from zinnia.settings import PAGINATION
-from zinnia.views.decorators import template_name_for_entry_queryset_filtered
+from zinnia.views.mixins import EntryQuerysetTemplateResponseMixin
 
 
 def get_category_or_404(path):
-    """Retrieve a Category by a path"""
+    """Retrieve a Category instance by a path"""
     path_bits = [p for p in path.split('/') if p]
     return get_object_or_404(Category, slug=path_bits[-1])
 
 
-def category_detail(request, path, page=None, **kwargs):
-    """Display the entries of a category"""
-    extra_context = kwargs.pop('extra_context', {})
+class CategoryList(ListView):
+    """View returning a list of all the categories"""
+    queryset = Category.objects.all()
 
-    category = get_category_or_404(path)
-    if not kwargs.get('template_name'):
-        kwargs['template_name'] = template_name_for_entry_queryset_filtered(
-            'category', category.slug)
 
-    extra_context.update({'category': category})
-    kwargs['extra_context'] = extra_context
+class CategoryDetail(EntryQuerysetTemplateResponseMixin, BaseListView):
+    """View returning a list of all the entries
+    belonging to a category"""
+    model_type = 'category'
+    paginate_by = PAGINATION
 
-    return object_list(request, queryset=category.entries_published(),
-                       paginate_by=PAGINATION, page=page,
-                       **kwargs)
+    def get_model_name(self):
+        """The model name is the category's slug"""
+        return self.category.slug
+
+    def get_queryset(self):
+        """Return a queryset of entries published
+        belonging to the current category"""
+        self.category = get_category_or_404(self.kwargs['path'])
+        return self.category.entries_published()
+
+    def get_context_data(self, **kwargs):
+        """Add the current category in context"""
+        context = super(CategoryDetail, self).get_context_data(**kwargs)
+        context['category'] = self.category
+        return context

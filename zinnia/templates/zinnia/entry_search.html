@@ -14,7 +14,7 @@
 {% block body-class %}{{ block.super }} search {% if object_list %}search-results{% else %}search-no-results{% endif %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Search results for" %} {% if pattern %}'{{ pattern }}'{% endif %}</h1>
+<h1>{% trans "Search results for" %} '{{ pattern }}'</h1>
 
 {% if error %}
 <p class="error">{{ error }}</p>

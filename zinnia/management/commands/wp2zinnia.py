@@ -4,12 +4,12 @@ from datetime import datetime
 from optparse import make_option
 from xml.etree import ElementTree as ET
 
+from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.db.utils import IntegrityError
 from django.utils.encoding import smart_str
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.utils.text import truncate_words
 from django.template.defaultfilters import slugify
 from django.contrib import comments
 from django.core.management.base import CommandError
@@ -217,7 +217,8 @@ class Command(LabelCommand):
         excerpt = item_node.find('{%sexcerpt/}encoded' % WP_NS).text
         if not excerpt:
             if self.auto_excerpt:
-                excerpt = truncate_words(strip_tags(content), 50)
+                excerpt = Truncator('...').words(
+                    50, strip_tags(content))
             else:
                 excerpt = ''
 

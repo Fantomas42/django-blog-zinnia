@@ -1,7 +1,18 @@
 """Views for Zinnia entries"""
-from django.views.generic.date_based import object_detail
+from django.views.generic.dates import DateDetailView
 
-from zinnia.views.decorators import protect_entry
+from zinnia.models import Entry
+from zinnia.views.mixins import ArchiveMixin
+from zinnia.views.mixins import EntryLoginMixin
+from zinnia.views.mixins import EntryPasswordMixin
 
 
-entry_detail = protect_entry(object_detail)
+class EntryDateDetail(ArchiveMixin, DateDetailView):
+    """Base detailled archive view for an Entry"""
+    queryset = Entry.published.on_site()
+    template_name_field = 'template'
+
+
+class EntryDetail(EntryLoginMixin, EntryPasswordMixin, EntryDateDetail):
+    """Detailled view archive view for an Entry
+    with password and login protections"""
