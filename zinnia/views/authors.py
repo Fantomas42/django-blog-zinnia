@@ -12,7 +12,6 @@ from zinnia.views.mixins import EntryQuerysetTemplateResponseMixin
 class AuthorList(CallableQuerysetMixin, ListView):
     """View returning a list of all published authors"""
     queryset = Author.published.all
-    context_object_name = 'author'
 
 
 class AuthorDetail(EntryQuerysetTemplateResponseMixin, BaseListView):

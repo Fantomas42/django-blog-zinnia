@@ -17,6 +17,7 @@ from zinnia.views.mixins import EntryQuerysetTemplateResponseMixin
 class TagList(ListView):
     """View return a list of all published tags"""
     template_name = 'zinnia/tag_list.html'
+    context_object_name = 'tag_list'
 
     def get_queryset(self):
         """Override the get_queryset method to
