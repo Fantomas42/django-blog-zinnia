@@ -102,19 +102,19 @@ class ZinniaViewsTestCase(ViewsBaseCase):
     urls = 'zinnia.tests.urls'
 
     def test_zinnia_entry_archive_index(self):
-        self.check_publishing_context('/', 2, 3)
+        self.check_publishing_context('/', 2, 3, 'entry_list')
 
     def test_zinnia_entry_archive_year(self):
-        self.check_publishing_context('/2010/', 2, 3)
+        self.check_publishing_context('/2010/', 2, 3, 'entry_list')
 
     def test_zinnia_entry_archive_week(self):
-        self.check_publishing_context('/2010/week/00/', 1, 2)
+        self.check_publishing_context('/2010/week/00/', 1, 2, 'entry_list')
 
     def test_zinnia_entry_archive_month(self):
-        self.check_publishing_context('/2010/01/', 1, 2)
+        self.check_publishing_context('/2010/01/', 1, 2, 'entry_list')
 
     def test_zinnia_entry_archive_day(self):
-        self.check_publishing_context('/2010/01/01/', 1, 2)
+        self.check_publishing_context('/2010/01/01/', 1, 2, 'entry_list')
 
     def test_zinnia_entry_archive_today(self):
         response = self.client.get('/today/')

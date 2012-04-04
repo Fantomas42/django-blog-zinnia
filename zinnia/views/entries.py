@@ -8,3 +8,4 @@ from zinnia.views.mixins import ArchiveMixin
 class EntryDetail(ArchiveMixin, DateDetailView):
     """Detailled view for an Entry"""
     queryset = Entry.published.on_site()
+    template_name_field = 'template'

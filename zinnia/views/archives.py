@@ -29,6 +29,7 @@ class ArchiveCallableQuerysetMixin(ArchiveMixin, CallableQuerysetMixin):
 
 class EntryIndex(ArchiveCallableQuerysetMixin, ArchiveIndexView):
     """View returning the archive index"""
+    context_object_name = 'entry_list'
 
 
 class EntryYear(ArchiveCallableQuerysetMixin, YearArchiveView):
