@@ -33,6 +33,14 @@ views Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`capabilities` Module
+--------------------------
+
+.. automodule:: zinnia.views.capabilities
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`channels` Module
 ----------------------
 
@@ -53,6 +61,14 @@ views Package
 ---------------------
 
 .. automodule:: zinnia.views.entries
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`mixins` Module
+--------------------
+
+.. automodule:: zinnia.views.mixins
     :members:
     :undoc-members:
     :show-inheritance:
