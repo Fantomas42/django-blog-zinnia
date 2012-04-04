@@ -16,45 +16,38 @@ from django.views.generic.dates import WeekArchiveView
 from django.views.generic.dates import DayArchiveView
 from django.views.generic.dates import TodayArchiveView
 
-
 from zinnia.models import Entry
-from zinnia.settings import PAGINATION
-from zinnia.settings import ALLOW_EMPTY
-from zinnia.settings import ALLOW_FUTURE
+from zinnia.views.mixins import ArchiveMixin
 from zinnia.views.mixins import CallableQuerysetMixin
 
 
-class ArchiveMixin(CallableQuerysetMixin):
-    """Base configuration for the archives"""
+class ArchiveCallableQuerysetMixin(ArchiveMixin, CallableQuerysetMixin):
+    """Mixin combinating the ArchiveMixin configuration,
+    and a callable queryset to force her update"""
     queryset = Entry.published.all
-    paginate_by = PAGINATION
-    allow_empty = ALLOW_EMPTY
-    allow_future = ALLOW_FUTURE
-    date_field = 'creation_date'
-    month_format = '%m'
 
 
-class EntryIndex(ArchiveMixin, ArchiveIndexView):
+class EntryIndex(ArchiveCallableQuerysetMixin, ArchiveIndexView):
     """View returning the archive index"""
 
 
-class EntryYear(ArchiveMixin, YearArchiveView):
+class EntryYear(ArchiveCallableQuerysetMixin, YearArchiveView):
     """View returning the archive for a year"""
     make_object_list = True
 
 
-class EntryMonth(ArchiveMixin, MonthArchiveView):
+class EntryMonth(ArchiveCallableQuerysetMixin, MonthArchiveView):
     """View returning the archive for a month"""
 
 
-class EntryWeek(ArchiveMixin, WeekArchiveView):
+class EntryWeek(ArchiveCallableQuerysetMixin, WeekArchiveView):
     """View returning the archive for a week"""
 
 
-class EntryDay(ArchiveMixin, DayArchiveView):
+class EntryDay(ArchiveCallableQuerysetMixin, DayArchiveView):
     """View returning the archive for a day"""
 
 
-class EntryToday(ArchiveMixin, TodayArchiveView):
+class EntryToday(ArchiveCallableQuerysetMixin, TodayArchiveView):
     """View returning the archive for the current day"""
     template_name_suffix = '_archive_today'

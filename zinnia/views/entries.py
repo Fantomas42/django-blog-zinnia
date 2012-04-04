@@ -1,7 +1,10 @@
 """Views for Zinnia entries"""
-from django.views.generic.date_based import object_detail
+from django.views.generic.dates import DateDetailView
 
-from zinnia.views.decorators import protect_entry
+from zinnia.models import Entry
+from zinnia.views.mixins import ArchiveMixin
 
 
-entry_detail = protect_entry(object_detail)
+class EntryDetail(ArchiveMixin, DateDetailView):
+    """Detailled view for an Entry"""
+    queryset = Entry.published.on_site()

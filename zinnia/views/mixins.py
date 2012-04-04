@@ -3,6 +3,20 @@ from django.views.generic.base import TemplateView
 from django.views.generic.base import TemplateResponseMixin
 from django.core.exceptions import ImproperlyConfigured
 
+from zinnia.settings import PAGINATION
+from zinnia.settings import ALLOW_EMPTY
+from zinnia.settings import ALLOW_FUTURE
+
+
+class ArchiveMixin(object):
+    """Mixin centralizing the configuration
+    of the archives views"""
+    paginate_by = PAGINATION
+    allow_empty = ALLOW_EMPTY
+    allow_future = ALLOW_FUTURE
+    date_field = 'creation_date'
+    month_format = '%m'
+
 
 class CallableQuerysetMixin(object):
     """Mixin for handling a callable queryset.
