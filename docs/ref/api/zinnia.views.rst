@@ -49,14 +49,6 @@ views Package
     :undoc-members:
     :show-inheritance:
 
-:mod:`decorators` Module
-------------------------
-
-.. automodule:: zinnia.views.decorators
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 :mod:`entries` Module
 ---------------------
 
