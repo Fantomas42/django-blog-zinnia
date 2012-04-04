@@ -9,22 +9,6 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
 
 
-def update_queryset(view, queryset,
-                    queryset_parameter='queryset'):
-    """Decorator around views based on a queryset
-    passed in parameter, who will force the update
-    of the queryset before executing the view.
-    Related to issue http://code.djangoproject.com/ticket/8378"""
-
-    @wraps(view)
-    def wrapper(*args, **kwargs):
-        """Regenerate the queryset before passing it to the view."""
-        kwargs[queryset_parameter] = queryset()
-        return view(*args, **kwargs)
-
-    return wrapper
-
-
 @csrf_protect
 @never_cache
 def password(request, entry):

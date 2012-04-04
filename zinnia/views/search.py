@@ -11,7 +11,7 @@ class EntrySearch(ListView):
     pattern = ''
     error = None
     paginate_by = PAGINATION
-    template_name = 'zinnia/entry_search.html'
+    template_name_suffix = '_search'
 
     def get_queryset(self):
         """Overridde the get_queryset method to

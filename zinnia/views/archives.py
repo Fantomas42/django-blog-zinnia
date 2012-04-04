@@ -1,7 +1,7 @@
 """Views for Zinnia archives
 
-TODO: 1. Switch to class-based views
-      2. Implement pagination
+TODO: 1. Switch to class-based views OK
+      2. Implement pagination OK
       3. Implement custom template name for the date
       4. Better archive_week view
          - Offset -1 from the week URL
@@ -9,44 +9,52 @@ TODO: 1. Switch to class-based views
          - End date in context
          - Review template
 """
-from datetime import date
+from django.views.generic.dates import ArchiveIndexView
+from django.views.generic.dates import YearArchiveView
+from django.views.generic.dates import MonthArchiveView
+from django.views.generic.dates import WeekArchiveView
+from django.views.generic.dates import DayArchiveView
+from django.views.generic.dates import TodayArchiveView
 
-from django.views.generic.list import ListView
-from django.views.generic.date_based import archive_year
-from django.views.generic.date_based import archive_week
-from django.views.generic.date_based import archive_month
-from django.views.generic.date_based import archive_day
 
 from zinnia.models import Entry
 from zinnia.settings import PAGINATION
-from zinnia.views.decorators import update_queryset
+from zinnia.settings import ALLOW_EMPTY
+from zinnia.settings import ALLOW_FUTURE
 from zinnia.views.mixins import CallableQuerysetMixin
 
 
-class EntryIndex(CallableQuerysetMixin, ListView):
-    """View for the archive index of the Weblog"""
-    paginate_by = PAGINATION
-    template_name = 'zinnia/entry_archive.html'
+class ArchiveMixin(CallableQuerysetMixin):
+    """Base configuration for the archives"""
     queryset = Entry.published.all
+    paginate_by = PAGINATION
+    allow_empty = ALLOW_EMPTY
+    allow_future = ALLOW_FUTURE
+    date_field = 'creation_date'
+    month_format = '%m'
 
 
-entry_year = update_queryset(archive_year, Entry.published.all)
-
-entry_week = update_queryset(archive_week, Entry.published.all)
-
-entry_month = update_queryset(archive_month, Entry.published.all)
-
-entry_day = update_queryset(archive_day, Entry.published.all)
+class EntryIndex(ArchiveMixin, ArchiveIndexView):
+    """View returning the archive index"""
 
 
-def entry_today(request, **kwargs):
-    """View for the entries of the day, the entry_day view
-    is just used with the parameters of the current date."""
-    today = date.today()
-    kwargs.update({'year': today.year,
-                   'month': today.month,
-                   'day': today.day})
-    if not kwargs.get('template_name'):
-        kwargs['template_name'] = 'zinnia/entry_archive_today.html'
+class EntryYear(ArchiveMixin, YearArchiveView):
+    """View returning the archive for a year"""
+    make_object_list = True
 
-    return entry_day(request, **kwargs)
+
+class EntryMonth(ArchiveMixin, MonthArchiveView):
+    """View returning the archive for a month"""
+
+
+class EntryWeek(ArchiveMixin, WeekArchiveView):
+    """View returning the archive for a week"""
+
+
+class EntryDay(ArchiveMixin, DayArchiveView):
+    """View returning the archive for a day"""
+
+
+class EntryToday(ArchiveMixin, TodayArchiveView):
+    """View returning the archive for the current day"""
+    template_name_suffix = '_archive_today'
