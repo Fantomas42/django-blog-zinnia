@@ -2,10 +2,12 @@
 from django.conf.urls import url
 from django.conf.urls import patterns
 
+from zinnia.views.shortlink import EntryShortLink
+
 
 urlpatterns = patterns(
-    'zinnia.views.shortlink',
-    url(r'^(?P<object_id>\d+)/$',
-        'entry_shortlink',
+    '',
+    url(r'^(?P<pk>\d+)/$',
+        EntryShortLink.as_view(),
         name='zinnia_entry_shortlink'),
     )

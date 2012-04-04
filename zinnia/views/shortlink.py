@@ -1,14 +1,16 @@
 """Views for Zinnia shortlink"""
-from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
+from django.views.generic.base import RedirectView
 
 from zinnia.models import Entry
 
 
-def entry_shortlink(request, object_id):
-    """
-    Redirect to the 'get_absolute_url' of an Entry,
-    accordingly to 'object_id' argument
-    """
-    entry = get_object_or_404(Entry, pk=object_id)
-    return redirect(entry, permanent=True)
+class EntryShortLink(RedirectView):
+    """View for handling the shortlink of an Entry,
+    simply do a redirection"""
+
+    def get_redirect_url(self, **kwargs):
+        """Get entry corresponding to 'pk' and
+        return the get_absolute_url of the entry"""
+        entry = get_object_or_404(Entry, pk=kwargs['pk'])
+        return entry.get_absolute_url()
