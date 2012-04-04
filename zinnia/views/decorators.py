@@ -65,20 +65,3 @@ def protect_entry(view):
         return view(*args, **kwargs)
 
     return wrapper
-
-
-def template_name_for_entry_queryset_filtered(model_type, model_name):
-    """Return a custom template name for views
-    returning a queryset of Entry filtered by another model."""
-    template_name_list = (
-        'zinnia/%s/%s/entry_list.html' % (model_type, model_name),
-        'zinnia/%s/%s_entry_list.html' % (model_type, model_name),
-        'zinnia/%s/entry_list.html' % model_type,
-        'zinnia/entry_list.html')
-
-    for template_name in template_name_list:
-        try:
-            get_template(template_name)
-            return template_name
-        except TemplateDoesNotExist:
-            continue
