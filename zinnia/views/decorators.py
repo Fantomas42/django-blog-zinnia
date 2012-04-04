@@ -1,11 +1,9 @@
 """Decorators for zinnia.views"""
 from functools import wraps
 
-from django.contrib.auth.views import login
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
-from django.template.loader import get_template
-from django.template import TemplateDoesNotExist
+from django.contrib.auth.views import login
 from django.template.response import TemplateResponse
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
