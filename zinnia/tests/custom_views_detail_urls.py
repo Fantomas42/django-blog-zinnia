@@ -1,10 +1,8 @@
 """Test urls for the zinnia project"""
-from functools import wraps
-
 from django.conf.urls import url
 from django.conf.urls import patterns
 
-from zinnia.views.tags import tag_detail
+from zinnia.views.tags import TagDetail
 from zinnia.views.authors import AuthorDetail
 from zinnia.views.categories import CategoryDetail
 from zinnia.tests.urls import urlpatterns as test_urlpatterns
@@ -22,27 +20,16 @@ class CustomModelDetailMixin(object):
         return context
 
 
+class CustomTagDetail(CustomModelDetailMixin, TagDetail):
+    pass
+
+
 class CustomAuthorDetail(CustomModelDetailMixin, AuthorDetail):
     pass
 
 
 class CustomCategoryDetail(CustomModelDetailMixin, CategoryDetail):
     pass
-
-
-def call_with_template_and_extra_context(
-    view, template_name='zinnia/entry_list.html',
-    extra_context={'extra': 'context'}):
-
-    @wraps(view)
-    def wrapper(*args, **kwargs):
-        return view(template_name=template_name,
-                    extra_context=extra_context,
-                    *args, **kwargs)
-
-    return wrapper
-
-custom_tag_detail = call_with_template_and_extra_context(tag_detail)
 
 
 urlpatterns = patterns(
@@ -60,7 +47,9 @@ urlpatterns = patterns(
         CustomCategoryDetail.as_view(),
         name='zinnia_category_detail'),
     url(r'^tags/(?P<tag>[- \w]+)/$',
-        custom_tag_detail, name='zinnia_tag_detail'),
+        CustomTagDetail.as_view(),
+        name='zinnia_tag_detail'),
     url(r'^tags/(?P<tag>[- \w]+)/page/(?P<page>\d+)/$',
-        custom_tag_detail, name='zinnia_tag_detail_paginated'),
+        CustomTagDetail.as_view(),
+        name='zinnia_tag_detail_paginated'),
     ) + test_urlpatterns
