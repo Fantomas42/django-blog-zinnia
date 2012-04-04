@@ -1,4 +1,6 @@
 """Mixins for Zinnia views"""
+from django.shortcuts import redirect
+from django.contrib.auth.views import login
 from django.views.generic.base import TemplateView
 from django.views.generic.base import TemplateResponseMixin
 from django.core.exceptions import ImproperlyConfigured
@@ -94,3 +96,51 @@ class EntryQuerysetTemplateResponseMixin(TemplateResponseMixin):
             templates.insert(0, self.template_name)
 
         return templates
+
+
+class EntryLoginMixin(object):
+    """Mixin returning a login view if the current
+    entry need authentication"""
+
+    def login(self):
+        """Return the login view"""
+        return login(self.request, 'zinnia/login.html')
+
+    def get(self, request, *args, **kwargs):
+        """Do the login protection"""
+        response = super(EntryLoginMixin, self).get(request, *args, **kwargs)
+        if self.object.login_required and not request.user.is_authenticated():
+            return self.login()
+        return response
+
+
+class EntryPasswordMixin(object):
+    """Mixin returning a password form view if
+    the current entry need it"""
+    error = False
+    session_key = 'zinnia_entry_%s_password'
+
+    def password(self):
+        """Return the password form"""
+        return self.response_class(request=self.request,
+                                   template='zinnia/password.html',
+                                   context={'error': self.error})
+
+    def get(self, *args, **kwargs):
+        """Do a check around the 'get' method to verify if
+        a password is needed"""
+        response = super(EntryPasswordMixin, self).get(*args, **kwargs)
+        if self.object.password and self.object.password != \
+           self.request.session.get(self.session_key % self.object.pk):
+            return self.password()
+        return response
+
+    def post(self, *args, **kwargs):
+        """Set the password in the session if valid"""
+        self.object = self.get_object()
+        if self.request.POST.get('password') == self.object.password:
+            self.request.session[
+                self.session_key % self.object.pk] = self.object.password
+            return redirect(self.object)
+        self.error = True
+        return self.password()
