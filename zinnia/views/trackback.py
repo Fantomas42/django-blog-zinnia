@@ -1,45 +1,58 @@
 """Views for Zinnia trackback"""
-from django.shortcuts import redirect
-from django.shortcuts import get_object_or_404
-from django.contrib.sites.models import Site
 from django.contrib import comments
+from django.contrib.sites.models import Site
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from django.template.response import TemplateResponse
+from django.utils.decorators import method_decorator
+from django.http import HttpResponsePermanentRedirect
 from django.contrib.contenttypes.models import ContentType
 
 from zinnia.models import Entry
 from zinnia.managers import TRACKBACK
+from zinnia.views.mixins import TemplateMimeTypeView
 
 
-@csrf_exempt
-def entry_trackback(request, object_id):
-    """Set a TrackBack for an Entry"""
-    entry = get_object_or_404(Entry.published, pk=object_id)
+class EntryTrackback(TemplateMimeTypeView):
+    """View for handling trackbacks on the entries"""
+    mimetype = 'text/xml'
+    template_name = 'zinnia/entry_trackback.xml'
 
-    if request.POST.get('url'):
-        error = ''
-        url = request.POST['url']
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(EntryTrackback, self).dispatch(*args, **kwargs)
+
+    def get_object(self):
+        return get_object_or_404(Entry.published, pk=self.kwargs['pk'])
+
+    def get(self, request, *args, **kwargs):
+        entry = self.get_object()
+        return HttpResponsePermanentRedirect(entry.get_absolute_url())
+
+    def post(self, request, *args, **kwargs):
+        url = request.POST.get('url')
+
+        if not url:
+            return self.get(request, *args, **kwargs)
+
+        entry = self.get_object()
         site = Site.objects.get_current()
 
         if not entry.pingback_enabled:
-            error = u'Trackback is not enabled for %s' % entry.title
+            return self.render_to_response(
+                {'error': u'Trackback is not enabled for %s' % entry.title})
 
         title = request.POST.get('title') or url
         excerpt = request.POST.get('excerpt') or title
         blog_name = request.POST.get('blog_name') or title
 
-        if not error:
-            comment, created = comments.get_model().objects.get_or_create(
-                content_type=ContentType.objects.get_for_model(Entry),
-                object_pk=entry.pk, site=site, user_url=url,
-                user_name=blog_name, defaults={'comment': excerpt})
-            if created:
-                user = entry.authors.all()[0]
-                comment.flags.create(user=user, flag=TRACKBACK)
-            else:
-                error = u'Trackback is already registered'
-
-        return TemplateResponse(request, 'zinnia/entry_trackback.xml',
-                                {'error': error}, 'text/xml')
-
-    return redirect(entry, permanent=True)
+        comment, created = comments.get_model().objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(Entry),
+            object_pk=entry.pk, site=site, user_url=url,
+            user_name=blog_name, defaults={'comment': excerpt})
+        if created:
+            user = entry.authors.all()[0]
+            comment.flags.create(user=user, flag=TRACKBACK)
+        else:
+            return self.render_to_response(
+                {'error': u'Trackback is already registered'})
+        return self.render_to_response({})
