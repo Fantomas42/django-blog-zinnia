@@ -60,6 +60,7 @@ or you can visit these websites who use Zinnia.
 * `Tryolabs`_.
 * `brainbreach`_.
 * `Mauro Bianchi`_.
+* `AR.Drone Best of User Videos`_.
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
@@ -106,6 +107,7 @@ More information and help available at these URLs :
 .. _`Tryolabs`: http://www.tryolabs.com/Blog/
 .. _`brainbreach`: http://brainbreach.com/
 .. _`Mauro Bianchi`: http://www.maurobianchi.it/
+.. _`AR.Drone Best of User Videos`: http://ardrone.parrot.com/best-of-user-videos/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://django-blog-zinnia.com/documentation/
 .. _`API documentation`: http://django-blog-zinnia.com/api/
