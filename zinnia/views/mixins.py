@@ -1,5 +1,4 @@
 """Mixins for Zinnia views"""
-from django.shortcuts import redirect
 from django.contrib.auth.views import login
 from django.views.generic.base import TemplateView
 from django.views.generic.base import TemplateResponseMixin
@@ -113,6 +112,11 @@ class EntryLoginMixin(object):
             return self.login()
         return response
 
+    def post(self, request, *args, **kwargs):
+        """Do the login protection"""
+        self.login()
+        return super(EntryLoginMixin, self).post(request, *args, **kwargs)
+
 
 class EntryPasswordMixin(object):
     """Mixin returning a password form view if
@@ -138,9 +142,14 @@ class EntryPasswordMixin(object):
     def post(self, *args, **kwargs):
         """Set the password in the session if valid"""
         self.object = self.get_object()
-        if self.request.POST.get('password') == self.object.password:
-            self.request.session[
-                self.session_key % self.object.pk] = self.object.password
-            return redirect(self.object)
-        self.error = True
-        return self.password()
+        if self.object.password:
+            entry_password = self.request.POST.get('entry_password')
+            if entry_password:
+                if entry_password == self.object.password:
+                    self.request.session[self.session_key % \
+                                         self.object.pk] = self.object.password
+                    return super(EntryPasswordMixin, self).get(*args, **kwargs)
+                else:
+                    self.error = True
+            return self.password()
+        return self.get(*args, **kwargs)
