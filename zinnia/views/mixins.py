@@ -17,6 +17,7 @@ class ArchiveMixin(object):
     allow_future = ALLOW_FUTURE
     date_field = 'creation_date'
     month_format = '%m'
+    week_format = '%W'
 
 
 class CallableQuerysetMixin(object):
