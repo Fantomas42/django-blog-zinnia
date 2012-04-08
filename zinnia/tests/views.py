@@ -1,4 +1,5 @@
 """Test cases for Zinnia's views"""
+from datetime import date
 from datetime import datetime
 
 from django.test import TestCase
@@ -108,7 +109,12 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.check_publishing_context('/2010/', 2, 3, 'entry_list')
 
     def test_zinnia_entry_archive_week(self):
-        self.check_publishing_context('/2010/week/00/', 1, 2, 'entry_list')
+        response = self.check_publishing_context('/2010/week/00/', 1, 2,
+                                                 'entry_list')
+        # All days in a new year preceding the first Monday
+        # are considered to be in week 0.
+        self.assertEquals(response.context['week'], date(2009, 12, 28))
+        self.assertEquals(response.context['week_end_day'], date(2010, 1, 3))
 
     def test_zinnia_entry_archive_month(self):
         self.check_publishing_context('/2010/01/', 1, 2, 'entry_list')

@@ -1,14 +1,11 @@
 """Views for Zinnia archives
 
-TODO: 1. Switch to class-based views OK
-      2. Implement pagination OK
-      3. Implement custom template name for the date
-      4. Better archive_week view
-         - Offset -1 from the week URL
-         - Use European convention
-         - End date in context
-         - Review template
+TODO: 1. Implement custom template name for the date
+      2. Review context for each views
+      3. Breadrumbs for week archives
 """
+from datetime import timedelta
+
 from django.views.generic.dates import ArchiveIndexView
 from django.views.generic.dates import YearArchiveView
 from django.views.generic.dates import MonthArchiveView
@@ -43,6 +40,12 @@ class EntryMonth(ArchiveCallableQuerysetMixin, MonthArchiveView):
 
 class EntryWeek(ArchiveCallableQuerysetMixin, WeekArchiveView):
     """View returning the archive for a week"""
+
+    def get_dated_items(self):
+        self.date_list, self.object_list, extra_context = super(
+            EntryWeek, self).get_dated_items()
+        extra_context['week_end_day'] = extra_context['week'] + timedelta(days=6)
+        return self.date_list, self.object_list, extra_context
 
 
 class EntryDay(ArchiveCallableQuerysetMixin, DayArchiveView):
