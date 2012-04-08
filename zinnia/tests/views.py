@@ -117,15 +117,29 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertEquals(response.context['week_end_day'], date(2010, 1, 3))
 
     def test_zinnia_entry_archive_month(self):
-        self.check_publishing_context('/2010/01/', 1, 2, 'entry_list')
+        response = self.check_publishing_context('/2010/01/',
+                                                 1, 2, 'entry_list')
+        self.assertEquals(response.context['previous_month'], None)
+        self.assertEquals(response.context['next_month'], date(2010, 6, 1))
+        response = self.client.get('/2010/06/')
+        self.assertEquals(response.context['previous_month'], date(2010, 1, 1))
+        self.assertEquals(response.context['next_month'], None)
 
     def test_zinnia_entry_archive_day(self):
-        self.check_publishing_context('/2010/01/01/', 1, 2, 'entry_list')
+        response = self.check_publishing_context('/2010/01/01/',
+                                                 1, 2, 'entry_list')
+        self.assertEquals(response.context['previous_month'], None)
+        self.assertEquals(response.context['next_month'], date(2010, 6, 1))
+        response = self.client.get('/2010/06/01/')
+        self.assertEquals(response.context['previous_month'], date(2010, 1, 1))
+        self.assertEquals(response.context['next_month'], None)
 
     def test_zinnia_entry_archive_today(self):
         response = self.client.get('/today/')
         self.assertEquals(response.context['day'], datetime.today().date())
         self.assertTemplateUsed(response, 'zinnia/entry_archive_today.html')
+        self.assertEquals(response.context['previous_month'], date(2010, 6, 1))
+        self.assertEquals(response.context['next_month'], None)
 
     def test_zinnia_entry_shortlink(self):
         response = self.client.get('/1/', follow=True)
