@@ -1,7 +1,7 @@
 """Views for Zinnia archives
 
 TODO: 1. Implement custom template name for the date
-      2. Review context for each views
+      2. Urls for pages
       3. Breadrumbs for week archives
 """
 from datetime import timedelta
@@ -57,10 +57,8 @@ class EntryWeek(ArchiveCallableQuerysetMixin, WeekArchiveView):
 
 class EntryDay(ArchiveCallableQuerysetMixin, DayArchiveView):
     """View returning the archive for a day"""
-    # TODO link to current month
 
 
 class EntryToday(ArchiveCallableQuerysetMixin, TodayArchiveView):
     """View returning the archive for the current day"""
     template_name_suffix = '_archive_today'
-    # The same that EntryDay
