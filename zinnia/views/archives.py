@@ -1,8 +1,7 @@
 """Views for Zinnia archives
 
 TODO: 1. Implement custom template name for the date
-      2. Urls for pages
-      3. Breadrumbs for week archives
+      2. Breadrumbs for week archives
 """
 from datetime import timedelta
 
