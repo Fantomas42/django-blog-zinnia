@@ -130,9 +130,13 @@ class ZinniaViewsTestCase(ViewsBaseCase):
                                                  1, 2, 'entry_list')
         self.assertEquals(response.context['previous_month'], None)
         self.assertEquals(response.context['next_month'], date(2010, 6, 1))
+        self.assertEquals(response.context['previous_day'], None)
+        self.assertEquals(response.context['next_day'], date(2010, 6, 1))
         response = self.client.get('/2010/06/01/')
         self.assertEquals(response.context['previous_month'], date(2010, 1, 1))
         self.assertEquals(response.context['next_month'], None)
+        self.assertEquals(response.context['previous_day'], date(2010, 1, 1))
+        self.assertEquals(response.context['next_day'], None)
 
     def test_zinnia_entry_archive_today(self):
         response = self.client.get('/today/')
@@ -140,6 +144,8 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertTemplateUsed(response, 'zinnia/entry_archive_today.html')
         self.assertEquals(response.context['previous_month'], date(2010, 6, 1))
         self.assertEquals(response.context['next_month'], None)
+        self.assertEquals(response.context['previous_day'], date(2010, 6, 1))
+        self.assertEquals(response.context['next_day'], None)
 
     def test_zinnia_entry_shortlink(self):
         response = self.client.get('/1/', follow=True)

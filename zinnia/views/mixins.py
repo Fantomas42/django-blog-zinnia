@@ -1,4 +1,6 @@
 """Mixins for Zinnia views"""
+from datetime import datetime
+
 from django.contrib.auth.views import login
 from django.views.generic.base import TemplateView
 from django.views.generic.base import TemplateResponseMixin
@@ -32,6 +34,51 @@ class CallableQuerysetMixin(object):
             raise ImproperlyConfigured(
                 u"'%s' must define 'queryset'" % self.__class__.__name__)
         return self.queryset()
+
+
+class PreviousNextPublishedMixin(object):
+    """Mixin for correcting the previous/next
+    context variable to return dates with published datas"""
+
+    def get_previous_next_published(self, date, period, previous=True):
+        """Return the next or previous published date period with Entries"""
+        dates = list(self.get_queryset().dates(
+            'creation_date', period,
+            order=previous and 'ASC' or 'DESC'))
+        try:
+            index = dates.index(date)
+        except ValueError:
+            if previous and dates:
+                return dates[-1].date()
+            else:
+                return None
+        if index == 0:
+            return None
+        return dates[index - 1].date()
+
+    def get_next_month(self, date):
+        """Get the next month with published Entries"""
+        return self.get_previous_next_published(
+            datetime(date.year, date.month, 1), 'month',
+            previous=False)
+
+    def get_previous_month(self, date):
+        """Get the previous month with published Entries"""
+        return self.get_previous_next_published(
+            datetime(date.year, date.month, 1), 'month',
+            previous=True)
+
+    def get_next_day(self, date):
+        """Get the next day with published Entries"""
+        return self.get_previous_next_published(
+            datetime(date.year, date.month, date.day),
+            'day', previous=False)
+
+    def get_previous_day(self, date):
+        """Get the previous day with published Entries"""
+        return self.get_previous_next_published(
+            datetime(date.year, date.month, date.day),
+            'day', previous=True)
 
 
 class MimeTypeMixin(object):
