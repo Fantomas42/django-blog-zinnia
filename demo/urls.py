@@ -14,6 +14,7 @@ from zinnia.sitemaps import AuthorSitemap
 admin.autodiscover()
 handler500 = 'demo.views.server_error'
 handler404 = 'django.views.defaults.page_not_found'
+handler403 = 'django.views.defaults.permission_denied'
 
 urlpatterns = patterns(
     '',
@@ -41,6 +42,7 @@ urlpatterns += patterns(
 
 urlpatterns += patterns(
     '',
+    url(r'^403/$', 'django.views.defaults.permission_denied'),
     url(r'^404/$', 'django.views.defaults.page_not_found'),
     url(r'^500/$', 'demo.views.server_error'),
     )
