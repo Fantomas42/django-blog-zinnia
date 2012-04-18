@@ -3,8 +3,7 @@ from django.views.generic.dates import DateDetailView
 
 from zinnia.models import Entry
 from zinnia.views.mixins import ArchiveMixin
-from zinnia.views.mixins import EntryLoginMixin
-from zinnia.views.mixins import EntryPasswordMixin
+from zinnia.views.mixins import EntryProtectionMixin
 
 
 class EntryDateDetail(ArchiveMixin, DateDetailView):
@@ -13,6 +12,6 @@ class EntryDateDetail(ArchiveMixin, DateDetailView):
     template_name_field = 'template'
 
 
-class EntryDetail(EntryLoginMixin, EntryPasswordMixin, EntryDateDetail):
+class EntryDetail(EntryProtectionMixin, EntryDateDetail):
     """Detailled view archive view for an Entry
     with password and login protections"""

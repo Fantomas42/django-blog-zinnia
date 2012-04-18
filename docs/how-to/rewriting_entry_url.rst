@@ -119,19 +119,17 @@ for handling our new URL. ::
   from django.views.generic.detail import DetailView
 
   from zinnia.models import Entry
-  from zinnia.views.mixins import EntryLoginMixin
-  from zinnia.views.mixins import EntryPasswordMixin
+  from zinnia.views.mixins import EntryProtectionMixin
 
-  class EntryDetail(EntryLoginMixin, EntryPasswordMixin, DetailView):
+  class EntryDetail(EntryProtectionMixin, DetailView):
       queryset = Entry.published.on_site()
       template_name_field = 'template'
 
 
 Pretty easy isn't it ? For more information, check the documentation about
 the :class:`~django.views.generic.detail.DetailView` view. Note that the
-:class:`~zinnia.views.mixins.EntryLoginMixin` and the
-:class:`~zinnia.views.mixins.EntryPasswordMixin` classes are used for
-enabling password and login protections if needed on the entry.
+:class:`~zinnia.views.mixins.EntryProtectionMixin` is used for enabling
+password and login protections if needed on the entry.
 
 .. _reconfigure-urls:
 

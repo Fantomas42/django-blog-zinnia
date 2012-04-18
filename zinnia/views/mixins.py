@@ -145,32 +145,16 @@ class EntryQuerysetTemplateResponseMixin(TemplateResponseMixin):
         return templates
 
 
-class EntryLoginMixin(object):
+class EntryProtectionMixin(object):
     """Mixin returning a login view if the current
-    entry need authentication"""
+    entry need authentication and password view
+    if the entry is protected by a password"""
+    error = False
+    session_key = 'zinnia_entry_%s_password'
 
     def login(self):
         """Return the login view"""
         return login(self.request, 'zinnia/login.html')
-
-    def get(self, request, *args, **kwargs):
-        """Do the login protection"""
-        response = super(EntryLoginMixin, self).get(request, *args, **kwargs)
-        if self.object.login_required and not request.user.is_authenticated():
-            return self.login()
-        return response
-
-    def post(self, request, *args, **kwargs):
-        """Do the login protection"""
-        self.login()
-        return super(EntryLoginMixin, self).post(request, *args, **kwargs)
-
-
-class EntryPasswordMixin(object):
-    """Mixin returning a password form view if
-    the current entry need it"""
-    error = False
-    session_key = 'zinnia_entry_%s_password'
 
     def password(self):
         """Return the password form"""
@@ -178,26 +162,29 @@ class EntryPasswordMixin(object):
                                    template='zinnia/password.html',
                                    context={'error': self.error})
 
-    def get(self, *args, **kwargs):
-        """Do a check around the 'get' method to verify if
-        a password is needed"""
-        response = super(EntryPasswordMixin, self).get(*args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        """Do the login protection"""
+        response = super(EntryProtectionMixin, self).get(
+            request, *args, **kwargs)
+        if self.object.login_required and not request.user.is_authenticated():
+            return self.login()
         if self.object.password and self.object.password != \
            self.request.session.get(self.session_key % self.object.pk):
             return self.password()
         return response
 
-    def post(self, *args, **kwargs):
-        """Set the password in the session if valid"""
+    def post(self, request, *args, **kwargs):
+        """Do the login protection"""
         self.object = self.get_object()
+        self.login()
         if self.object.password:
             entry_password = self.request.POST.get('entry_password')
             if entry_password:
                 if entry_password == self.object.password:
                     self.request.session[self.session_key % \
                                          self.object.pk] = self.object.password
-                    return super(EntryPasswordMixin, self).get(*args, **kwargs)
+                    return self.get(request, *args, **kwargs)
                 else:
                     self.error = True
             return self.password()
-        return self.get(*args, **kwargs)
+        return self.get(request, *args, **kwargs)
