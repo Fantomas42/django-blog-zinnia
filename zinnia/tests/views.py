@@ -14,17 +14,6 @@ from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
 
 
-@override_settings(
-    TEMPLATE_CONTEXT_PROCESSORS=(
-        'django.core.context_processors.request',
-        ),
-    TEMPLATE_LOADERS=(
-        ('django.template.loaders.cached.Loader', (
-            'django.template.loaders.app_directories.Loader',
-            'django.template.loaders.eggs.Loader',
-            )
-         ),
-        ))
 class ViewsBaseCase(TestCase):
     """
     Setup and utility function base case.
@@ -92,6 +81,18 @@ class ViewsBaseCase(TestCase):
         response = self.client.get(url)
         self.assertEquals(response['Content-Type'], mimetype)
         self.assertTrue('protocol' in response.context)
+
+ViewsBaseCase = override_settings(
+    TEMPLATE_CONTEXT_PROCESSORS=(
+        'django.core.context_processors.request',
+        ),
+    TEMPLATE_LOADERS=(
+        ('django.template.loaders.cached.Loader', (
+            'django.template.loaders.app_directories.Loader',
+            'django.template.loaders.eggs.Loader',
+            )
+         ),
+        ))(ViewsBaseCase)
 
 
 class ZinniaViewsTestCase(ViewsBaseCase):
