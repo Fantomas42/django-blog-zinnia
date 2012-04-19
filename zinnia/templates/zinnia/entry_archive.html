@@ -8,5 +8,5 @@
 {% block body-class %}{{ block.super }} archive home{% endblock %}
 
 {% block slider %}
-{% get_featured_entries 5 "zinnia/tags/slider_entries.html" %}
+{% get_featured_entries template="zinnia/tags/slider_entries.html" %}
 {% endblock %}
