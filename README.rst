@@ -74,6 +74,7 @@ More information and help available at these URLs :
 * `Documentation`_.
 * `API documentation`_.
 * `Code coverage`_.
+* `Jenkins CI server`_.
 * Discussions and help at `Google Group`_.
 * For reporting a bug use `Github Issues`_.
 
@@ -112,5 +113,6 @@ More information and help available at these URLs :
 .. _`Documentation`: http://django-blog-zinnia.com/documentation/
 .. _`API documentation`: http://django-blog-zinnia.com/api/
 .. _`Code coverage`: http://django-blog-zinnia.com/documentation/coverage/
+.. _`Jenkins CI server`: https://jenkins.shiningpanda.com/django-blog-zinnia/
 .. _`Google Group`: http://groups.google.com/group/django-blog-zinnia/
 .. _`Github Issues`: https://github.com/Fantomas42/django-blog-zinnia/issues/
