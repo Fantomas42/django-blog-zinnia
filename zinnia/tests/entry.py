@@ -5,7 +5,6 @@ from datetime import datetime
 from datetime import timedelta
 
 from django.test import TestCase
-from django.conf import settings
 from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
@@ -197,12 +196,9 @@ class EntryHtmlContentTestCase(TestCase):
                   'content': 'My content',
                   'slug': 'my-entry'}
         self.entry = Entry(**params)
-        self.original_debug = settings.DEBUG
         self.original_rendering = models_settings.MARKUP_LANGUAGE
-        settings.DEBUG = False
 
     def tearDown(self):
-        settings.DEBUG = self.original_debug
         models_settings.MARKUP_LANGUAGE = self.original_rendering
 
     def test_html_content_default(self):
