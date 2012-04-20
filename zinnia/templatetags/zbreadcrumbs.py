@@ -3,6 +3,7 @@ import re
 from functools import wraps
 from datetime import datetime
 
+from django.utils.dateformat import format
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 
@@ -25,7 +26,7 @@ def month_crumb(creation_date):
     """Crumb for a month"""
     year = creation_date.strftime('%Y')
     month = creation_date.strftime('%m')
-    month_text = creation_date.strftime('%b').capitalize()
+    month_text = format(creation_date, 'b').capitalize()
     return Crumb(month_text, reverse('zinnia_entry_archive_month',
                                      args=[year, month]))
 
