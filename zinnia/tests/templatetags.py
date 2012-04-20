@@ -442,6 +442,10 @@ class TemplateTagsTestCase(TestCase):
             def __init__(self, path):
                 self.path = path
 
+        class FakePage(object):
+            def __init__(self, number):
+                self.number = number
+
         source_context = Context({'request': FakeRequest('/')})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 1)
@@ -505,9 +509,26 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(len(context['breadcrumbs']), 3)
 
         source_context = Context({'request': FakeRequest(reverse(
+            'zinnia_entry_archive_week', args=[2011, 15]))})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 3)
+
+        source_context = Context({'request': FakeRequest(reverse(
             'zinnia_entry_archive_day', args=[2011, '03', 15]))})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 4)
+
+        source_context = Context({'request': FakeRequest('%s?page=2' % reverse(
+            'zinnia_entry_archive_day', args=[2011, '03', 15])),
+                                  'page_obj': FakePage(2)})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 5)
+
+        source_context = Context({'request': FakeRequest(reverse(
+            'zinnia_entry_archive_day_paginated', args=[2011, '03', 15, 2])),
+                                  'page_obj': FakePage(2)})
+        context = zinnia_breadcrumbs(source_context)
+        self.assertEquals(len(context['breadcrumbs']), 5)
         # More tests can be done here, for testing path and objects in context
 
     def test_get_gravatar(self):

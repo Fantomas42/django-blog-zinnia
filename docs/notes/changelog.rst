@@ -7,6 +7,7 @@ CHANGELOG
 * Class-based views
 * Pagination on archives
 * Better archive by week view
+* Update of the breadcrumbs tag
 * No runtime warnings on Django 1.4
 * Django 1.3 is no longer supported
 * And a lot of bug fixes

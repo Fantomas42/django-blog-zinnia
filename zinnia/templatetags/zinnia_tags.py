@@ -272,9 +272,11 @@ def zinnia_breadcrumbs(context, root_name='Blog',
                        template='zinnia/tags/breadcrumbs.html',):
     """Return a breadcrumb for the application"""
     path = context['request'].path
-    page_object = context.get('object') or context.get('category') or \
-                  context.get('tag') or context.get('author')
-    breadcrumbs = retrieve_breadcrumbs(path, page_object, root_name)
+    context_object = context.get('object') or context.get('category') or \
+                     context.get('tag') or context.get('author')
+    context_page = context.get('page_obj')
+    breadcrumbs = retrieve_breadcrumbs(path, context_object,
+                                       context_page, root_name)
 
     return {'template': template,
             'breadcrumbs': breadcrumbs}
