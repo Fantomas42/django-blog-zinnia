@@ -446,6 +446,14 @@ class TemplateTagsTestCase(TestCase):
             def __init__(self, number):
                 self.number = number
 
+        def check_only_last_have_no_url(crumb_list):
+            size = len(crumb_list) - 1
+            for i, crumb in enumerate(crumb_list):
+                if i != size:
+                    self.assertNotEquals(crumb.url, None)
+                else:
+                    self.assertEquals(crumb.url, None)
+
         source_context = Context({'request': FakeRequest('/')})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 1)
@@ -465,6 +473,7 @@ class TemplateTagsTestCase(TestCase):
              'object': self.entry})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 5)
+        check_only_last_have_no_url(context['breadcrumbs'])
 
         cat_1 = Category.objects.create(title='Category 1', slug='category-1')
         source_context = Context(
@@ -472,6 +481,7 @@ class TemplateTagsTestCase(TestCase):
              'object': cat_1})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 3)
+        check_only_last_have_no_url(context['breadcrumbs'])
         cat_2 = Category.objects.create(title='Category 2', slug='category-2',
                                         parent=cat_1)
         source_context = Context(
@@ -479,6 +489,7 @@ class TemplateTagsTestCase(TestCase):
              'object': cat_2})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 4)
+        check_only_last_have_no_url(context['breadcrumbs'])
 
         tag = Tag.objects.get(name='test')
         source_context = Context(
@@ -487,6 +498,7 @@ class TemplateTagsTestCase(TestCase):
              'object': tag})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 3)
+        check_only_last_have_no_url(context['breadcrumbs'])
 
         User.objects.create_user(username='webmaster',
                                  email='webmaster@example.com')
@@ -496,39 +508,46 @@ class TemplateTagsTestCase(TestCase):
              'object': author})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 3)
+        check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context(
             {'request': FakeRequest(reverse(
                 'zinnia_entry_archive_year', args=[2011]))})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 2)
+        check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
             'zinnia_entry_archive_month', args=[2011, '03']))})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 3)
+        check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
             'zinnia_entry_archive_week', args=[2011, 15]))})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 3)
+        check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
             'zinnia_entry_archive_day', args=[2011, '03', 15]))})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 4)
+        check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest('%s?page=2' % reverse(
             'zinnia_entry_archive_day', args=[2011, '03', 15])),
                                   'page_obj': FakePage(2)})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 5)
+        check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
             'zinnia_entry_archive_day_paginated', args=[2011, '03', 15, 2])),
                                   'page_obj': FakePage(2)})
         context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 5)
+        check_only_last_have_no_url(context['breadcrumbs'])
         # More tests can be done here, for testing path and objects in context
 
     def test_get_gravatar(self):

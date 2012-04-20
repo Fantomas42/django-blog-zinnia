@@ -75,6 +75,7 @@ def handle_page_crumb(func):
         breadcrumbs = func(path, model, root_name)
         if page:
             if page.number > 1:
+                breadcrumbs[-1].url = path
                 page_crumb = Crumb(_('Page %s') % page.number)
                 breadcrumbs.append(page_crumb)
         return breadcrumbs
@@ -101,9 +102,7 @@ def retrieve_breadcrumbs(path, model_instance, root_name=''):
         year, week = date_match.groups()
         year_date = datetime(int(year), 1, 1)
         date_breadcrumbs = [year_crumb(year_date),
-                            Crumb(_('Week %s') % week,
-                                  reverse('zinnia_entry_archive_week',
-                                          args=[year, week]))]
+                            Crumb(_('Week %s') % week)]
         breadcrumbs.extend(date_breadcrumbs)
         return breadcrumbs
 
@@ -123,7 +122,7 @@ def retrieve_breadcrumbs(path, model_instance, root_name=''):
         if date_dict['day']:
             date_breadcrumbs.append(day_crumb(path_date))
         breadcrumbs.extend(date_breadcrumbs)
-
+        breadcrumbs[-1].url = None
         return breadcrumbs
 
     url_components = [comp for comp in
