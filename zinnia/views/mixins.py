@@ -104,6 +104,53 @@ class TemplateMimeTypeView(MimeTypeMixin, TemplateView):
             context, mimetype=self.get_mimetype(), **kwargs)
 
 
+class EntryQuerysetArchiveTemplateResponseMixin(TemplateResponseMixin):
+    """Return a custom template name for the archive views based
+    on the type of the archives and the value of the date."""
+    template_name_suffix = '_archive'
+
+    def get_archive_part_value(self, part):
+        try:
+            return getattr(self, 'get_%s' % part)()
+        except AttributeError:
+            return None
+
+    def get_template_names(self):
+        """Return a list of template names to be used for the view"""
+        year = self.get_archive_part_value('year')
+        week = self.get_archive_part_value('week')
+        month = self.get_archive_part_value('month')
+        day = self.get_archive_part_value('day')
+
+        path = 'zinnia/archives'
+        template_name = 'entry%s.html' % self.template_name_suffix
+        templates = ['zinnia/%s' % template_name,
+                     '%s/%s' % (path, template_name)]
+        if year:
+            templates.append(
+                '%s/%s/%s' % (path, year, template_name))
+        if week:
+            templates.extend([
+                '%s/week/%s/%s' % (path, week, template_name),
+                '%s/%s/week/%s/%s' % (path, year, week, template_name)])
+        if month:
+            templates.extend([
+                '%s/month/%s/%s' % (path, month, template_name),
+                '%s/%s/month/%s/%s' % (path, year, month, template_name)])
+        if day:
+            templates.extend([
+                '%s/day/%s/%s' % (path, day, template_name),
+                '%s/%s/day/%s/%s' % (path, year, day, template_name),
+                '%s/month/%s/day/%s/%s' % (path, month, day, template_name),
+                '%s/%s/%s/%s/%s' % (path, year, month, day, template_name)])
+
+        if self.template_name is not None:
+            templates.append(self.template_name)
+
+        templates.reverse()
+        return templates
+
+
 class EntryQuerysetTemplateResponseMixin(TemplateResponseMixin):
     """Return a custom template name for views returning
     a queryset of Entry filtered by another model."""

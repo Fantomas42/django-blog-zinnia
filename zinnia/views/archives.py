@@ -1,9 +1,5 @@
-"""Views for Zinnia archives
-
-TODO: 1. Implement custom template name for the date
-      2. Breadrumbs for week archives
-"""
-from datetime import timedelta
+"""Views for Zinnia archives"""
+import datetime
 
 from django.views.generic.dates import ArchiveIndexView
 from django.views.generic.dates import YearArchiveView
@@ -16,32 +12,39 @@ from zinnia.models import Entry
 from zinnia.views.mixins import ArchiveMixin
 from zinnia.views.mixins import CallableQuerysetMixin
 from zinnia.views.mixins import PreviousNextPublishedMixin
+from zinnia.views.mixins import EntryQuerysetArchiveTemplateResponseMixin
 
 
-class ArchiveCallableQuerysetMixin(ArchiveMixin,
-                                   PreviousNextPublishedMixin,
-                                   CallableQuerysetMixin):
-    """Mixin combinating the ArchiveMixin configuration,
-    and a callable queryset to force her update + some customizations
-    for retrieving next/previous day/month"""
+class EntryArchiveMixin(ArchiveMixin,
+                        PreviousNextPublishedMixin,
+                        CallableQuerysetMixin,
+                        EntryQuerysetArchiveTemplateResponseMixin):
+    """
+    Mixin combinating :
+    - ArchiveMixin configuration centralizing conf for archive views
+    - PreviousNextPublishedMixin for returning published archives
+    - CallableQueryMixin to force the update of the queryset
+    - EntryQuerysetArchiveTemplateResponseMixin to provide a custom
+    templates for archives
+    """
     queryset = Entry.published.all
 
 
-class EntryIndex(ArchiveCallableQuerysetMixin, ArchiveIndexView):
+class EntryIndex(EntryArchiveMixin, ArchiveIndexView):
     """View returning the archive index"""
     context_object_name = 'entry_list'
 
 
-class EntryYear(ArchiveCallableQuerysetMixin, YearArchiveView):
+class EntryYear(EntryArchiveMixin, YearArchiveView):
     """View returning the archive for a year"""
     make_object_list = True
 
 
-class EntryMonth(ArchiveCallableQuerysetMixin, MonthArchiveView):
+class EntryMonth(EntryArchiveMixin, MonthArchiveView):
     """View returning the archive for a month"""
 
 
-class EntryWeek(ArchiveCallableQuerysetMixin, WeekArchiveView):
+class EntryWeek(EntryArchiveMixin, WeekArchiveView):
     """View returning the archive for a week"""
 
     def get_dated_items(self):
@@ -50,14 +53,22 @@ class EntryWeek(ArchiveCallableQuerysetMixin, WeekArchiveView):
         self.date_list, self.object_list, extra_context = super(
             EntryWeek, self).get_dated_items()
         extra_context['week_end_day'] = extra_context[
-            'week'] + timedelta(days=6)
+            'week'] + datetime.timedelta(days=6)
         return self.date_list, self.object_list, extra_context
 
 
-class EntryDay(ArchiveCallableQuerysetMixin, DayArchiveView):
+class EntryDay(EntryArchiveMixin, DayArchiveView):
     """View returning the archive for a day"""
 
 
-class EntryToday(ArchiveCallableQuerysetMixin, TodayArchiveView):
+class EntryToday(EntryArchiveMixin, TodayArchiveView):
     """View returning the archive for the current day"""
     template_name_suffix = '_archive_today'
+
+    def get_dated_items(self):
+        """Return (date_list, items, extra_context) for this request.
+        And defines self.year/month/day for
+        EntryQuerysetArchiveTemplateResponseMixin."""
+        today = datetime.date.today()
+        self.year, self.month, self.day = today.isoformat().split('-')
+        return self._get_dated_items(today)

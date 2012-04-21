@@ -5,6 +5,7 @@ from django.core.exceptions import ImproperlyConfigured
 from zinnia.views.mixins import MimeTypeMixin
 from zinnia.views.mixins import CallableQuerysetMixin
 from zinnia.views.mixins import EntryQuerysetTemplateResponseMixin
+from zinnia.views.mixins import EntryQuerysetArchiveTemplateResponseMixin
 
 
 class MixinTestCase(TestCase):
@@ -55,3 +56,68 @@ class MixinTestCase(TestCase):
                            'zinnia/model/name_entry_list.html',
                            'zinnia/model/entry_list.html',
                            'zinnia/entry_list.html'])
+
+    def test_entry_queryset_archive_template_response_mixin(self):
+        get_year = lambda: 2012
+        get_week = lambda: 16
+        get_month = lambda: '04'
+        get_day = lambda: 21
+        instance = EntryQuerysetArchiveTemplateResponseMixin()
+        self.assertEquals(
+            instance.get_template_names(),
+            ['zinnia/archives/entry_archive.html',
+             'zinnia/entry_archive.html'])
+        instance.get_year = get_year
+        self.assertEquals(
+            instance.get_template_names(),
+            ['zinnia/archives/2012/entry_archive.html',
+             'zinnia/archives/entry_archive.html',
+             'zinnia/entry_archive.html'])
+        instance.get_week = get_week
+        self.assertEquals(
+            instance.get_template_names(),
+            ['zinnia/archives/2012/week/16/entry_archive.html',
+             'zinnia/archives/week/16/entry_archive.html',
+             'zinnia/archives/2012/entry_archive.html',
+             'zinnia/archives/entry_archive.html',
+             'zinnia/entry_archive.html'])
+        instance.get_month = get_month
+        self.assertEquals(
+            instance.get_template_names(),
+            ['zinnia/archives/2012/month/04/entry_archive.html',
+             'zinnia/archives/month/04/entry_archive.html',
+             'zinnia/archives/2012/week/16/entry_archive.html',
+             'zinnia/archives/week/16/entry_archive.html',
+             'zinnia/archives/2012/entry_archive.html',
+             'zinnia/archives/entry_archive.html',
+             'zinnia/entry_archive.html'])
+        instance.get_day = get_day
+        self.assertEquals(
+            instance.get_template_names(),
+            ['zinnia/archives/2012/04/21/entry_archive.html',
+             'zinnia/archives/month/04/day/21/entry_archive.html',
+             'zinnia/archives/2012/day/21/entry_archive.html',
+             'zinnia/archives/day/21/entry_archive.html',
+             'zinnia/archives/2012/month/04/entry_archive.html',
+             'zinnia/archives/month/04/entry_archive.html',
+             'zinnia/archives/2012/week/16/entry_archive.html',
+             'zinnia/archives/week/16/entry_archive.html',
+             'zinnia/archives/2012/entry_archive.html',
+             'zinnia/archives/entry_archive.html',
+             'zinnia/entry_archive.html'])
+
+        instance.template_name = 'zinnia/entry_search.html'
+        self.assertEquals(
+            instance.get_template_names(),
+            ['zinnia/entry_search.html',
+             'zinnia/archives/2012/04/21/entry_archive.html',
+             'zinnia/archives/month/04/day/21/entry_archive.html',
+             'zinnia/archives/2012/day/21/entry_archive.html',
+             'zinnia/archives/day/21/entry_archive.html',
+             'zinnia/archives/2012/month/04/entry_archive.html',
+             'zinnia/archives/month/04/entry_archive.html',
+             'zinnia/archives/2012/week/16/entry_archive.html',
+             'zinnia/archives/week/16/entry_archive.html',
+             'zinnia/archives/2012/entry_archive.html',
+             'zinnia/archives/entry_archive.html',
+             'zinnia/entry_archive.html'])
