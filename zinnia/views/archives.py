@@ -1,12 +1,12 @@
 """Views for Zinnia archives"""
 import datetime
 
-from django.views.generic.dates import ArchiveIndexView
-from django.views.generic.dates import YearArchiveView
-from django.views.generic.dates import MonthArchiveView
-from django.views.generic.dates import WeekArchiveView
-from django.views.generic.dates import DayArchiveView
-from django.views.generic.dates import TodayArchiveView
+from django.views.generic.dates import BaseArchiveIndexView
+from django.views.generic.dates import BaseYearArchiveView
+from django.views.generic.dates import BaseMonthArchiveView
+from django.views.generic.dates import BaseWeekArchiveView
+from django.views.generic.dates import BaseDayArchiveView
+from django.views.generic.dates import BaseTodayArchiveView
 
 from zinnia.models import Entry
 from zinnia.views.mixins.archives import ArchiveMixin
@@ -32,22 +32,25 @@ class EntryArchiveMixin(ArchiveMixin,
     queryset = Entry.published.all
 
 
-class EntryIndex(EntryArchiveMixin, ArchiveIndexView):
+class EntryIndex(EntryArchiveMixin, BaseArchiveIndexView):
     """View returning the archive index"""
     context_object_name = 'entry_list'
 
 
-class EntryYear(EntryArchiveMixin, YearArchiveView):
+class EntryYear(EntryArchiveMixin, BaseYearArchiveView):
     """View returning the archive for a year"""
     make_object_list = True
+    template_name_suffix = '_archive_year'
 
 
-class EntryMonth(EntryArchiveMixin, MonthArchiveView):
+class EntryMonth(EntryArchiveMixin, BaseMonthArchiveView):
     """View returning the archive for a month"""
+    template_name_suffix = '_archive_month'
 
 
-class EntryWeek(EntryArchiveMixin, WeekArchiveView):
+class EntryWeek(EntryArchiveMixin, BaseWeekArchiveView):
     """View returning the archive for a week"""
+    template_name_suffix = '_archive_week'
 
     def get_dated_items(self):
         """Override get_dated_items to add a useful 'week_end_day'
@@ -59,11 +62,12 @@ class EntryWeek(EntryArchiveMixin, WeekArchiveView):
         return self.date_list, self.object_list, extra_context
 
 
-class EntryDay(EntryArchiveMixin, DayArchiveView):
+class EntryDay(EntryArchiveMixin, BaseDayArchiveView):
     """View returning the archive for a day"""
+    template_name_suffix = '_archive_day'
 
 
-class EntryToday(EntryArchiveMixin, TodayArchiveView):
+class EntryToday(EntryArchiveMixin, BaseTodayArchiveView):
     """View returning the archive for the current day"""
     template_name_suffix = '_archive_today'
 
