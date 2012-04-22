@@ -157,8 +157,8 @@ class EntryAbstractClass(models.Model):
 
     template = models.CharField(
         _('template'), max_length=250,
-        default='zinnia/entry_detail.html',
-        choices=[('zinnia/entry_detail.html', _('Default template'))] + \
+        default='entry_detail.html',
+        choices=[('entry_detail.html', _('Default template'))] + \
         ENTRY_TEMPLATES,
         help_text=_('template used to display the entry'))
 

@@ -21,7 +21,7 @@ class EntryArchiveMixin(ArchiveMixin,
                         CallableQuerysetMixin,
                         EntryQuerysetArchiveTemplateResponseMixin):
     """
-    Mixin combinating :
+    Mixin combinating:
 
     - ArchiveMixin configuration centralizing conf for archive views
     - PreviousNextPublishedMixin for returning published archives

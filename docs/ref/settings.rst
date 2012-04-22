@@ -30,7 +30,7 @@ List of tuple for extending the list of templates availables for
 rendering the entry. By using this setting, you can change the look and
 feel of an entry directly in the admin interface. Example: ::
 
-  ZINNIA_ENTRY_TEMPLATES = (('zinnia/entry_detail_alternate.html',
+  ZINNIA_ENTRY_TEMPLATES = (('entry_detail_alternate.html',
                              gettext('Alternative template')),)
 
 .. setting:: ZINNIA_ENTRY_BASE_MODEL

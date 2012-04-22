@@ -5,6 +5,7 @@ from django.core.exceptions import ImproperlyConfigured
 from zinnia.views.mixins.mimetypes import MimeTypeMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
 from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
+from zinnia.views.mixins.templates import EntryArchiveTemplateResponseMixin
 from zinnia.views.mixins.templates import \
      EntryQuerysetArchiveTemplateResponseMixin
 
@@ -67,13 +68,15 @@ class MixinTestCase(TestCase):
         self.assertEquals(
             instance.get_template_names(),
             ['zinnia/archives/entry_archive.html',
-             'zinnia/entry_archive.html'])
+             'zinnia/entry_archive.html',
+             'entry_archive.html'])
         instance.get_year = get_year
         self.assertEquals(
             instance.get_template_names(),
             ['zinnia/archives/2012/entry_archive.html',
              'zinnia/archives/entry_archive.html',
-             'zinnia/entry_archive.html'])
+             'zinnia/entry_archive.html',
+             'entry_archive.html'])
         instance.get_week = get_week
         self.assertEquals(
             instance.get_template_names(),
@@ -81,7 +84,8 @@ class MixinTestCase(TestCase):
              'zinnia/archives/week/16/entry_archive.html',
              'zinnia/archives/2012/entry_archive.html',
              'zinnia/archives/entry_archive.html',
-             'zinnia/entry_archive.html'])
+             'zinnia/entry_archive.html',
+             'entry_archive.html'])
         instance.get_month = get_month
         self.assertEquals(
             instance.get_template_names(),
@@ -91,7 +95,8 @@ class MixinTestCase(TestCase):
              'zinnia/archives/week/16/entry_archive.html',
              'zinnia/archives/2012/entry_archive.html',
              'zinnia/archives/entry_archive.html',
-             'zinnia/entry_archive.html'])
+             'zinnia/entry_archive.html',
+             'entry_archive.html'])
         instance.get_day = get_day
         self.assertEquals(
             instance.get_template_names(),
@@ -105,7 +110,8 @@ class MixinTestCase(TestCase):
              'zinnia/archives/week/16/entry_archive.html',
              'zinnia/archives/2012/entry_archive.html',
              'zinnia/archives/entry_archive.html',
-             'zinnia/entry_archive.html'])
+             'zinnia/entry_archive.html',
+             'entry_archive.html'])
 
         instance.template_name = 'zinnia/entry_search.html'
         self.assertEquals(
@@ -121,4 +127,44 @@ class MixinTestCase(TestCase):
              'zinnia/archives/week/16/entry_archive.html',
              'zinnia/archives/2012/entry_archive.html',
              'zinnia/archives/entry_archive.html',
-             'zinnia/entry_archive.html'])
+             'zinnia/entry_archive.html',
+             'entry_archive.html'])
+
+    def test_entry_archive_template_response_mixin(self):
+        class FakeEntry(object):
+            template = 'entry_detail.html'
+
+        get_year = lambda: 2012
+        get_month = lambda: '04'
+        get_day = lambda: 21
+
+        instance = EntryArchiveTemplateResponseMixin()
+        instance.get_year = get_year
+        instance.get_month = get_month
+        instance.get_day = get_day
+        instance.object = FakeEntry()
+        self.assertEquals(
+            instance.get_template_names(),
+             ['zinnia/archives/2012/04/21/entry_detail.html',
+              'zinnia/archives/month/04/day/21/entry_detail.html',
+              'zinnia/archives/2012/day/21/entry_detail.html',
+              'zinnia/archives/day/21/entry_detail.html',
+              'zinnia/archives/2012/month/04/entry_detail.html',
+              'zinnia/archives/month/04/entry_detail.html',
+              'zinnia/archives/2012/entry_detail.html',
+              'zinnia/archives/entry_detail.html',
+              'zinnia/entry_detail.html',
+              'entry_detail.html'])
+        instance.object.template = 'custom.html'
+        self.assertEquals(
+            instance.get_template_names(),
+             ['zinnia/archives/2012/04/21/custom.html',
+              'zinnia/archives/month/04/day/21/custom.html',
+              'zinnia/archives/2012/day/21/custom.html',
+              'zinnia/archives/day/21/custom.html',
+              'zinnia/archives/2012/month/04/custom.html',
+              'zinnia/archives/month/04/custom.html',
+              'zinnia/archives/2012/custom.html',
+              'zinnia/archives/custom.html',
+              'zinnia/custom.html',
+              'custom.html'])
