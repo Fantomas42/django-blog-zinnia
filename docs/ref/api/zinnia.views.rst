@@ -113,3 +113,10 @@ views Package
     :undoc-members:
     :show-inheritance:
 
+Subpackages
+-----------
+
+.. toctree::
+
+    zinnia.views.mixins
+

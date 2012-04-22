@@ -2,8 +2,8 @@
 from django.views.generic.dates import DateDetailView
 
 from zinnia.models import Entry
-from zinnia.views.mixins import ArchiveMixin
-from zinnia.views.mixins import EntryProtectionMixin
+from zinnia.views.mixins.archives import ArchiveMixin
+from zinnia.views.mixins.entry_protection import EntryProtectionMixin
 
 
 class EntryDateDetail(ArchiveMixin, DateDetailView):

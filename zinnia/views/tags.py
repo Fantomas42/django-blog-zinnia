@@ -11,7 +11,7 @@ from tagging.models import TaggedItem
 
 from zinnia.models import Entry
 from zinnia.settings import PAGINATION
-from zinnia.views.mixins import EntryQuerysetTemplateResponseMixin
+from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 
 
 class TagList(ListView):

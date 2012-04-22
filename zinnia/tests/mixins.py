@@ -2,10 +2,11 @@
 from django.test import TestCase
 from django.core.exceptions import ImproperlyConfigured
 
-from zinnia.views.mixins import MimeTypeMixin
-from zinnia.views.mixins import CallableQuerysetMixin
-from zinnia.views.mixins import EntryQuerysetTemplateResponseMixin
-from zinnia.views.mixins import EntryQuerysetArchiveTemplateResponseMixin
+from zinnia.views.mixins.mimetypes import MimeTypeMixin
+from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
+from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
+from zinnia.views.mixins.templates import \
+     EntryQuerysetArchiveTemplateResponseMixin
 
 
 class MixinTestCase(TestCase):

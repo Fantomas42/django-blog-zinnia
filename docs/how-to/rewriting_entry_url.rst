@@ -119,7 +119,7 @@ for handling our new URL. ::
   from django.views.generic.detail import DetailView
 
   from zinnia.models import Entry
-  from zinnia.views.mixins import EntryProtectionMixin
+  from zinnia.views.mixins.entry_protection import EntryProtectionMixin
 
   class EntryDetail(EntryProtectionMixin, DetailView):
       queryset = Entry.published.on_site()

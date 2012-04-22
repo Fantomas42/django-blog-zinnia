@@ -9,10 +9,11 @@ from django.views.generic.dates import DayArchiveView
 from django.views.generic.dates import TodayArchiveView
 
 from zinnia.models import Entry
-from zinnia.views.mixins import ArchiveMixin
-from zinnia.views.mixins import CallableQuerysetMixin
-from zinnia.views.mixins import PreviousNextPublishedMixin
-from zinnia.views.mixins import EntryQuerysetArchiveTemplateResponseMixin
+from zinnia.views.mixins.archives import ArchiveMixin
+from zinnia.views.mixins.archives import PreviousNextPublishedMixin
+from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
+from zinnia.views.mixins.templates import \
+     EntryQuerysetArchiveTemplateResponseMixin
 
 
 class EntryArchiveMixin(ArchiveMixin,
@@ -21,11 +22,12 @@ class EntryArchiveMixin(ArchiveMixin,
                         EntryQuerysetArchiveTemplateResponseMixin):
     """
     Mixin combinating :
+
     - ArchiveMixin configuration centralizing conf for archive views
     - PreviousNextPublishedMixin for returning published archives
     - CallableQueryMixin to force the update of the queryset
-    - EntryQuerysetArchiveTemplateResponseMixin to provide a custom
-    templates for archives
+    - EntryQuerysetArchiveTemplateResponseMixin to provide a
+      custom templates for archives
     """
     queryset = Entry.published.all
 

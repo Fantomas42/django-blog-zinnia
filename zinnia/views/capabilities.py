@@ -4,7 +4,7 @@ from django.contrib.sites.models import Site
 from zinnia.settings import PROTOCOL
 from zinnia.settings import COPYRIGHT
 from zinnia.settings import FEEDS_FORMAT
-from zinnia.views.mixins import TemplateMimeTypeView
+from zinnia.views.mixins.mimetypes import TemplateMimeTypeView
 
 
 class CapabilityView(TemplateMimeTypeView):

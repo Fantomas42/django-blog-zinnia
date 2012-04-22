@@ -5,7 +5,7 @@ from django.views.generic.list import BaseListView
 
 from zinnia.models import Category
 from zinnia.settings import PAGINATION
-from zinnia.views.mixins import EntryQuerysetTemplateResponseMixin
+from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 
 
 def get_category_or_404(path):
