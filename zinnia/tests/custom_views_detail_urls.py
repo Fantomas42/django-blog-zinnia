@@ -11,7 +11,7 @@ from zinnia.tests.urls import urlpatterns as test_urlpatterns
 class CustomModelDetailMixin(object):
     """Mixin for changing the template_name
     and overriding the context"""
-    template_name = 'zinnia/entry_list.html'
+    template_name = 'zinnia/entry_search.html'
 
     def get_context_data(self, **kwargs):
         context = super(CustomModelDetailMixin,

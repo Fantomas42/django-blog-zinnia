@@ -6,6 +6,8 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
+from django.test.utils import restore_template_loaders
+from django.test.utils import setup_test_template_loader
 from django.utils.translation import ugettext_lazy as _
 
 from zinnia.models import Entry
@@ -108,36 +110,52 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertTemplateUsed(response, 'zinnia/entry_archive.html')
 
     def test_zinnia_entry_archive_year(self):
+        setup_test_template_loader(
+            {'zinnia/archives/2010/entry_archive_year.html': ''})
         response = self.check_publishing_context('/2010/', 2, 3, 'entry_list')
-        self.assertTemplateUsed(response, 'zinnia/entry_archive_year.html')
+        self.assertTemplateUsed(
+            response, 'zinnia/archives/2010/entry_archive_year.html')
+        restore_template_loaders()
 
     def test_zinnia_entry_archive_week(self):
-        response = self.check_publishing_context('/2010/week/00/', 1, 2,
-                                                 'entry_list')
-        self.assertTemplateUsed(response, 'zinnia/entry_archive_week.html')
+        setup_test_template_loader(
+            {'zinnia/archives/2010/week/00/entry_archive_week.html': ''})
+        response = self.check_publishing_context(
+            '/2010/week/00/', 1, 2, 'entry_list')
+        self.assertTemplateUsed(
+            response, 'zinnia/archives/2010/week/00/entry_archive_week.html')
         # All days in a new year preceding the first Monday
         # are considered to be in week 0.
         self.assertEquals(response.context['week'], date(2009, 12, 28))
         self.assertEquals(response.context['week_end_day'], date(2010, 1, 3))
+        restore_template_loaders()
 
     def test_zinnia_entry_archive_month(self):
-        response = self.check_publishing_context('/2010/01/',
-                                                 1, 2, 'entry_list')
-        self.assertTemplateUsed(response, 'zinnia/entry_archive_month.html')
+        setup_test_template_loader(
+            {'zinnia/archives/2010/month/01/entry_archive_month.html': ''})
+        response = self.check_publishing_context(
+            '/2010/01/', 1, 2, 'entry_list')
+        self.assertTemplateUsed(
+            response, 'zinnia/archives/2010/month/01/entry_archive_month.html')
         self.assertEquals(response.context['previous_month'], None)
         self.assertEquals(response.context['next_month'], date(2010, 6, 1))
+        restore_template_loaders()
         response = self.client.get('/2010/06/')
         self.assertEquals(response.context['previous_month'], date(2010, 1, 1))
         self.assertEquals(response.context['next_month'], None)
 
     def test_zinnia_entry_archive_day(self):
-        response = self.check_publishing_context('/2010/01/01/',
-                                                 1, 2, 'entry_list')
-        self.assertTemplateUsed(response, 'zinnia/entry_archive_day.html')
+        setup_test_template_loader(
+            {'zinnia/archives/2010/01/01/entry_archive_day.html': ''})
+        response = self.check_publishing_context(
+            '/2010/01/01/', 1, 2, 'entry_list')
+        self.assertTemplateUsed(
+            response, 'zinnia/archives/2010/01/01/entry_archive_day.html')
         self.assertEquals(response.context['previous_month'], None)
         self.assertEquals(response.context['next_month'], date(2010, 6, 1))
         self.assertEquals(response.context['previous_day'], None)
         self.assertEquals(response.context['next_day'], date(2010, 6, 1))
+        restore_template_loaders()
         response = self.client.get('/2010/06/01/')
         self.assertEquals(response.context['previous_month'], date(2010, 1, 1))
         self.assertEquals(response.context['next_month'], None)
@@ -163,8 +181,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         entry.sites.clear()
         response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertEquals(response.status_code, 404)
-
-        entry.template = 'zinnia/_entry_detail.html'
+        entry.template = '_entry_detail.html'
         entry.save()
         entry.sites.add(Site.objects.get_current())
         response = self.client.get('/2010/01/01/my-test-entry/')
@@ -221,18 +238,22 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.check_publishing_context('/channel-test/', 2, 3)
 
     def test_zinnia_category_list(self):
-        self.check_publishing_context('/categories/', 1,
-                                      friendly_context='category_list')
+        self.check_publishing_context(
+            '/categories/', 1, friendly_context='category_list')
         entry = Entry.objects.all()[0]
-        entry.categories.add(Category.objects.create(title='New category',
-                                                     slug='new-category'))
+        entry.categories.add(Category.objects.create(
+            title='New category', slug='new-category'))
         self.check_publishing_context('/categories/', 2)
 
     def test_zinnia_category_detail(self):
-        response = self.check_publishing_context('/categories/tests/', 2, 3,
-                                                 'entry_list')
-        self.assertTemplateUsed(response, 'zinnia/category/entry_list.html')
+        setup_test_template_loader(
+            {'zinnia/category/tests/entry_list.html': ''})
+        response = self.check_publishing_context(
+            '/categories/tests/', 2, 3, 'entry_list')
+        self.assertTemplateUsed(
+            response, 'zinnia/category/tests/entry_list.html')
         self.assertEquals(response.context['category'].slug, 'tests')
+        restore_template_loaders()
 
     def test_zinnia_category_detail_paginated(self):
         """Test case reproducing issue #42 on category
@@ -256,8 +277,8 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertEquals(response.context['category'].slug, 'tests')
 
     def test_zinnia_author_list(self):
-        self.check_publishing_context('/authors/', 1,
-                                      friendly_context='author_list')
+        self.check_publishing_context(
+            '/authors/', 1, friendly_context='author_list')
         user = User.objects.create(username='new-user',
                                    email='new_user@example.com')
         self.check_publishing_context('/authors/', 1)
@@ -266,30 +287,39 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.check_publishing_context('/authors/', 2)
 
     def test_zinnia_author_detail(self):
-        response = self.check_publishing_context('/authors/admin/', 2, 3,
-                                                 'entry_list')
-        self.assertTemplateUsed(response, 'zinnia/author/entry_list.html')
+        setup_test_template_loader(
+            {'zinnia/author/admin/entry_list.html': ''})
+        response = self.check_publishing_context(
+            '/authors/admin/', 2, 3, 'entry_list')
+        self.assertTemplateUsed(
+            response, 'zinnia/author/admin/entry_list.html')
         self.assertEquals(response.context['author'].username, 'admin')
+        restore_template_loaders()
 
     def test_zinnia_tag_list(self):
-        self.check_publishing_context('/tags/', 1,
-                                      friendly_context='tag_list')
+        self.check_publishing_context(
+            '/tags/', 1, friendly_context='tag_list')
         entry = Entry.objects.all()[0]
         entry.tags = 'tests, tag'
         entry.save()
         self.check_publishing_context('/tags/', 2)
 
     def test_zinnia_tag_detail(self):
-        response = self.check_publishing_context('/tags/tests/', 2, 3,
-                                                 'entry_list')
-        self.assertTemplateUsed(response, 'zinnia/tag/entry_list.html')
+        setup_test_template_loader(
+            {'zinnia/tag/tests/entry_list.html': '',
+             '404.html': ''})
+        response = self.check_publishing_context(
+            '/tags/tests/', 2, 3, 'entry_list')
+        self.assertTemplateUsed(
+            response, 'zinnia/tag/tests/entry_list.html')
         self.assertEquals(response.context['tag'].name, 'tests')
         response = self.client.get('/tags/404/')
         self.assertEquals(response.status_code, 404)
+        restore_template_loaders()
 
     def test_zinnia_entry_search(self):
-        self.check_publishing_context('/search/?pattern=test', 2, 3,
-                                      'entry_list')
+        self.check_publishing_context(
+            '/search/?pattern=test', 2, 3, 'entry_list')
         response = self.client.get('/search/?pattern=ab')
         self.assertEquals(len(response.context['object_list']), 0)
         self.assertEquals(response.context['error'],
@@ -359,18 +389,18 @@ class ZinniaCustomDetailViews(ViewsBaseCase):
 
     def test_custom_category_detail(self):
         response = self.check_publishing_context('/categories/tests/', 2, 3)
-        self.assertTemplateUsed(response, 'zinnia/entry_list.html')
+        self.assertTemplateUsed(response, 'zinnia/entry_search.html')
         self.assertEquals(response.context['category'].slug, 'tests')
         self.assertEquals(response.context['extra'], 'context')
 
     def test_custom_author_detail(self):
         response = self.check_publishing_context('/authors/admin/', 2, 3)
-        self.assertTemplateUsed(response, 'zinnia/entry_list.html')
+        self.assertTemplateUsed(response, 'zinnia/entry_search.html')
         self.assertEquals(response.context['author'].username, 'admin')
         self.assertEquals(response.context['extra'], 'context')
 
     def test_custom_tag_detail(self):
         response = self.check_publishing_context('/tags/tests/', 2, 3)
-        self.assertTemplateUsed(response, 'zinnia/entry_list.html')
+        self.assertTemplateUsed(response, 'zinnia/entry_search.html')
         self.assertEquals(response.context['tag'].name, 'tests')
         self.assertEquals(response.context['extra'], 'context')
