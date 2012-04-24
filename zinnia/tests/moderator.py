@@ -62,7 +62,8 @@ class EntryCommentModeratorTestCase(TestCase):
         self.assertEquals(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
         moderator.email_authors = True
-        moderator.mail_comment_notification_recipients = ['admin@example.com']
+        moderator.mail_comment_notification_recipients = [
+            u'admin@example.com', u'webmaster@example.com']
         moderator.do_email_authors(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 0)
         moderator.mail_comment_notification_recipients = []
@@ -75,7 +76,8 @@ class EntryCommentModeratorTestCase(TestCase):
             content_object=self.entry, site=self.site)
         moderator = EntryCommentModerator(Entry)
         moderator.email_notification_reply = True
-        moderator.mail_comment_notification_recipients = ['admin@example.com']
+        moderator.mail_comment_notification_recipients = [
+            u'admin@example.com', u'webmaster@example.com']
         moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 0)
 

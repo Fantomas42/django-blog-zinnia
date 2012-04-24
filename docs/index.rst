@@ -29,6 +29,7 @@ Topics
    topics/search_engines
    topics/url_shortener
    topics/spam_checker
+   topics/permissions
 
 HOW-TOs
 --------

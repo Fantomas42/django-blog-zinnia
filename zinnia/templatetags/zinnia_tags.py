@@ -5,10 +5,8 @@ from urllib import urlencode
 from datetime import datetime
 
 from django.db.models import Q
-from django.db import connection
-from django.template import Node
+from django.db.models import Count
 from django.template import Library
-from django.template import TemplateSyntaxError
 from django.contrib.comments.models import CommentFlag
 from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import smart_unicode
@@ -23,6 +21,7 @@ from zinnia.models import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import tags_published
 from zinnia.managers import PINGBACK, TRACKBACK
+from zinnia.settings import PROTOCOL
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
 from zinnia.templatetags.zcalendar import ZinniaCalendar
@@ -87,16 +86,10 @@ def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
 def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     """Return popular entries"""
     ctype = ContentType.objects.get_for_model(Entry)
-    query = """SELECT object_pk, COUNT(*) AS score
-    FROM %s
-    WHERE content_type_id = %%s
-    AND is_public = '1'
-    GROUP BY object_pk
-    ORDER BY score DESC""" % get_comment_model()._meta.db_table
-
-    cursor = connection.cursor()
-    cursor.execute(query, [ctype.id])
-    object_ids = [int(row[0]) for row in cursor.fetchall()]
+    objects_by_score = get_comment_model().objects.filter(
+        content_type=ctype, is_public=True).values('object_pk').annotate(
+        score=Count('id')).order_by('-score')
+    object_ids = [int(obj['object_pk']) for obj in objects_by_score]
 
     # Use ``in_bulk`` here instead of an ``id__in`` filter, because ``id__in``
     # would clobber the ordering.
@@ -279,19 +272,25 @@ def zinnia_breadcrumbs(context, root_name='Blog',
                        template='zinnia/tags/breadcrumbs.html',):
     """Return a breadcrumb for the application"""
     path = context['request'].path
-    page_object = context.get('object') or context.get('category') or \
-                  context.get('tag') or context.get('author')
-    breadcrumbs = retrieve_breadcrumbs(path, page_object, root_name)
+    context_object = context.get('object') or context.get('category') or \
+                     context.get('tag') or context.get('author')
+    context_page = context.get('page_obj')
+    breadcrumbs = retrieve_breadcrumbs(path, context_object,
+                                       context_page, root_name)
 
     return {'template': template,
             'breadcrumbs': breadcrumbs}
 
 
 @register.simple_tag
-def get_gravatar(email, size=80, rating='g', default=None):
+def get_gravatar(email, size=80, rating='g', default=None,
+                 protocol=PROTOCOL):
     """Return url for a Gravatar"""
-    url = 'http://www.gravatar.com/avatar/%s.jpg' % \
-          md5(email.strip().lower()).hexdigest()
+    GRAVATAR_PROTOCOLS = {'http': 'http://www',
+                          'https': 'https://secure'}
+    url = '%s.gravatar.com/avatar/%s.jpg' % (
+        GRAVATAR_PROTOCOLS[protocol],
+        md5(email.strip().lower()).hexdigest())
     options = {'s': size, 'r': rating}
     if default:
         options['d'] = default
@@ -300,27 +299,10 @@ def get_gravatar(email, size=80, rating='g', default=None):
     return url.replace('&', '&amp;')
 
 
-class TagsNode(Node):
-    def __init__(self, context_var):
-        self.context_var = context_var
-
-    def render(self, context):
-        context[self.context_var] = tags_published()
-        return ''
-
-
-@register.tag
-def get_tags(parser, token):
-    """{% get_tags as var %}"""
-    bits = token.split_contents()
-
-    if len(bits) != 3:
-        raise TemplateSyntaxError(
-            'get_tags tag takes exactly two arguments')
-    if bits[1] != 'as':
-        raise TemplateSyntaxError(
-            "first argument to get_tags tag must be 'as'")
-    return TagsNode(bits[2])
+@register.assignment_tag
+def get_tags():
+    """Return the published tags"""
+    return tags_published()
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')

@@ -1,8 +1,9 @@
 {% load i18n zinnia_tags %}
+{% load url from future %}
 {% for entry in entries %}
 <tr>
   <th>
-    <a href="{% url admin:zinnia_entry_change entry.pk %}"
+    <a href="{% url 'admin:zinnia_entry_change' entry.pk %}"
        title="{% trans "Edit the entry" %}">
       {{ entry.title }}
     </a>
@@ -27,7 +28,7 @@
 {% if entries %}
 <tr>
   <th colspan="2">
-    <a href="{% url admin:zinnia_entry_changelist %}?status__exact=0"
+    <a href="{% url 'admin:zinnia_entry_changelist' %}?status__exact=0"
        title="{% trans "View all draft entries" %}" class="managelink">
       {% trans "View all draft entries" %}
     </a>

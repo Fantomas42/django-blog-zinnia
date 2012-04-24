@@ -549,10 +549,7 @@ msgstr "Server fout"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
-"Er is een fout opgetreden. De site administrators zijn via e-mail op de "
-"hoogte gesteld, en het zou binnenkort opgelost moeten zijn. Bedankt voor uw "
-"geduld"
+msgstr "Er is een fout opgetreden. De site administrators zijn via e-mail op de hoogte gesteld, en het zou binnenkort opgelost moeten zijn. Bedankt voor uw geduld"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
@@ -962,9 +959,7 @@ msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex searchs."
-msgstr ""
-"Gebruik - om woorden of zinnen uit te sluiten, ' of \" voor exacte woorden "
-"en AND of OR gecombineerd met () voor complexe zoekopdrachten."
+msgstr "Gebruik - om woorden of zinnen uit te sluiten, ' of \" voor exacte woorden en AND of OR gecombineerd met () voor complexe zoekopdrachten."
 
 #: templates/zinnia/base.html:45
 msgid "Calendar"
@@ -1307,5 +1302,3 @@ msgstr "Gebruiker kan niet %s."
 #: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr "Geen titel"
-
-

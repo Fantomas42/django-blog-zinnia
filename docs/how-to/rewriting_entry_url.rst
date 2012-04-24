@@ -98,7 +98,7 @@ To do this override, simply use the method explained in the
       @models.permalink
       def get_absolute_url(self):
           return ('zinnia_entry_detail', (),
-                  {'object_id': self.id})
+                  {'pk': self.id})
 
 Due to the intensive use of this method into the templates, make sure that
 your re-implemention is not too slow. For example hitting the database to
@@ -116,16 +116,20 @@ Now we must write a custom view to handle the detailed view of an
 So in a module called :mod:`zinnia_customized.views` we can write this view
 for handling our new URL. ::
 
-  from zinnia.views.decorators import protect_entry
-  from django.views.generic.list_detail import object_detail
+  from django.views.generic.detail import DetailView
 
-  entry_detail = protect_entry(object_detail)
+  from zinnia.models import Entry
+  from zinnia.views.mixins.entry_protection import EntryProtectionMixin
+
+  class EntryDetail(EntryProtectionMixin, DetailView):
+      queryset = Entry.published.on_site()
+      template_name_field = 'template'
+
 
 Pretty easy isn't it ? For more information, check the documentation about
-the :func:`django.views.generic.list_detail.object_detail` view. Note that
-the :func:`~zinnia.views.decorators.protect_entry` function is used like a
-Python decorator for enabling the protections by login or password and it
-allows you template customizations for the view.
+the :class:`~django.views.generic.detail.DetailView` view. Note that the
+:class:`~zinnia.views.mixins.EntryProtectionMixin` is used for enabling
+password and login protections if needed on the entry.
 
 .. _reconfigure-urls:
 
@@ -153,8 +157,10 @@ canonical URL of your entries and the text parameters. Don't forget to also
 change the path to your view retrieving the :class:`Entry` instance from
 the text parameters. ::
 
-  url(r'^(?P<object_id>\d+)/$',
-      'zinnia_customized.views.entry_detail',
+  from zinnia_customized.views import EntryDetail
+
+  url(r'^(?P<pk>\d+)/$',
+      EntryDetail.as_view(),
       name='zinnia_entry_detail')
 
 Actually you should consider Zinnia like a ready to use Weblog application

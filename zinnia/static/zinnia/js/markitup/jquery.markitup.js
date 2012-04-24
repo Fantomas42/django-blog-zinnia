@@ -3,7 +3,7 @@
 // v 1.1.x
 // Dual licensed under the MIT and GPL licenses.
 // ----------------------------------------------------------------------------
-// Copyright (C) 2007-2010 Jay Salvat
+// Copyright (C) 2007-2011 Jay Salvat
 // http://markitup.jaysalvat.com/
 // ----------------------------------------------------------------------------
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -12,10 +12,10 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,7 +28,7 @@
 	$.fn.markItUp = function(settings, extraSettings) {
 		var options, ctrlKey, shiftKey, altKey;
 		ctrlKey = shiftKey = altKey = false;
-	
+
 		options = {	id:						'',
 					nameSpace:				'',
 					root:					'',
@@ -36,6 +36,7 @@
 					previewAutoRefresh:		true,
 					previewPosition:		'after',
 					previewTemplatePath:	'~/templates/preview.html',
+					previewParser:			false,
 					previewParserPath:		'',
 					previewParserVar:		'data',
 					resizeHandle:			true,
@@ -125,7 +126,7 @@
 
 				// listen key events
 				$$.keydown(keyPressed).keyup(keyPressed);
-				
+
 				// bind an event to catch external calls
 				$$.bind("insertion", function(e, settings) {
 					if (settings.target !== false) {
@@ -164,7 +165,7 @@
 							return false;
 						}).bind("focusin", function(){
                             $$.focus();
-						}).mousedown(function() {
+						}).mouseup(function() {
 							if (button.call) {
 								eval(button.call)();
 							}
@@ -185,7 +186,7 @@
 							$(li).addClass('markItUpDropMenu').append(dropMenus(button.dropMenu));
 						}
 					}
-				}); 
+				});
 				levels.pop();
 				return ul;
 			}
@@ -233,25 +234,41 @@
 
 			// build block to insert
 			function build(string) {
-				var openWith 	= prepare(clicked.openWith);
-				var placeHolder = prepare(clicked.placeHolder);
-				var replaceWith = prepare(clicked.replaceWith);
-				var closeWith 	= prepare(clicked.closeWith);
+				var openWith 			= prepare(clicked.openWith);
+				var placeHolder 		= prepare(clicked.placeHolder);
+				var replaceWith 		= prepare(clicked.replaceWith);
+				var closeWith 			= prepare(clicked.closeWith);
+				var openBlockWith 		= prepare(clicked.openBlockWith);
+				var closeBlockWith 		= prepare(clicked.closeBlockWith);
+				var multiline 			= clicked.multiline;
+
 				if (replaceWith !== "") {
 					block = openWith + replaceWith + closeWith;
 				} else if (selection === '' && placeHolder !== '') {
 					block = openWith + placeHolder + closeWith;
 				} else {
-					string = string || selection;						
-					if (string.match(/ $/)) {
-						block = openWith + string.replace(/ $/, '') + closeWith + ' ';
-					} else {
-						block = openWith + string + closeWith;
+					string = string || selection;
+
+					var lines = selection.split(/\r?\n/), blocks = [];
+
+					for (var l=0; l < lines.length; l++) {
+						line = lines[l];
+						var trailingSpaces;
+						if (trailingSpaces = line.match(/ *$/)) {
+							blocks.push(openWith + line.replace(/ *$/g, '') + closeWith + trailingSpaces);
+						} else {
+							blocks.push(openWith + line + closeWith);
+						}
 					}
+
+					block = blocks.join("\n");
 				}
-				return {	block:block, 
-							openWith:openWith, 
-							replaceWith:replaceWith, 
+
+				block = openBlockWith + block + closeBlockWith;
+
+				return {	block:block,
+							openWith:openWith,
+							replaceWith:replaceWith,
 							placeHolder:placeHolder,
 							closeWith:closeWith
 					};
@@ -262,26 +279,25 @@
 				var len, j, n, i;
 				hash = clicked = button;
 				get();
-
-				$.extend(hash, {	line:"", 
+				$.extend(hash, {	line:"",
 						 			root:options.root,
-									textarea:textarea, 
-									selection:(selection||''), 
+									textarea:textarea,
+									selection:(selection||''),
 									caretPosition:caretPosition,
-									ctrlKey:ctrlKey, 
-									shiftKey:shiftKey, 
+									ctrlKey:ctrlKey,
+									shiftKey:shiftKey,
 									altKey:altKey
 								}
 							);
 				// callbacks before insertion
 				prepare(options.beforeInsert);
 				prepare(clicked.beforeInsert);
-				if (ctrlKey === true && shiftKey === true) {
+				if ((ctrlKey === true && shiftKey === true) || button.multiline === true) {
 					prepare(clicked.beforeMultiInsert);
-				}			
+				}
 				$.extend(hash, { line:1 });
-				
-				if (ctrlKey === true && shiftKey === true) {
+
+				if ((ctrlKey === true && shiftKey === true)) {
 					lines = selection.split(/\r?\n/);
 					for (j = 0, n = lines.length, i = 0; i < n; i++) {
 						if ($.trim(lines[i]) !== '') {
@@ -313,7 +329,7 @@
 				}
 				if ((selection === '' && string.replaceWith === '')) {
 					caretOffset += fixOperaBug(string.block);
-					
+
 					start = caretPosition + string.openWith.length;
 					len = string.block.length - string.openWith.length - string.closeWith.length;
 
@@ -333,7 +349,7 @@
 				$.extend(hash, { line:'', selection:selection });
 
 				// callbacks after insertion
-				if (ctrlKey === true && shiftKey === true) {
+				if ((ctrlKey === true && shiftKey === true) || button.multiline === true) {
 					prepare(clicked.afterMultiInsert);
 				}
 				prepare(clicked.afterInsert);
@@ -341,9 +357,9 @@
 
 				// refresh preview if opened
 				if (previewWindow && options.previewAutoRefresh) {
-					refreshPreview(); 
+					refreshPreview();
 				}
-																									
+
 				// reinit keyevent
 				shiftKey = altKey = ctrlKey = abort = false;
 			}
@@ -358,13 +374,13 @@
 			// Substract linefeed in IE
 			function fixIeBug(string) {
 				if ($.browser.msie) {
-					return string.length - string.replace(/\r/g, '').length;
+					return string.length - string.replace(/\r*/g, '').length;
 				}
 				return 0;
 			}
-				
+
 			// add markup
-			function insert(block) {	
+			function insert(block) {
 				if (document.selection) {
 					var newSelection = document.selection.createRange();
 					newSelection.text = block;
@@ -382,8 +398,8 @@
 					}
 					range = textarea.createTextRange();
 					range.collapse(true);
-					range.moveStart('character', start); 
-					range.moveEnd('character', len); 
+					range.moveStart('character', start);
+					range.moveEnd('character', len);
 					range.select();
 				} else if (textarea.setSelectionRange ){
 					textarea.setSelectionRange(start, start + len);
@@ -398,23 +414,23 @@
 
 				scrollPosition = textarea.scrollTop;
 				if (document.selection) {
-					selection = document.selection;	
-					if ($.browser.msie) { // ie	
-						var range = selection.createRange();
-						var stored_range = range.duplicate();
-						stored_range.moveToElementText(textarea);
-						stored_range.setEndPoint('EndToEnd', range);
-						var s = stored_range.text.length - range.text.length;
-	
-						caretPosition = s - (textarea.value.substr(0, s).length - textarea.value.substr(0, s).replace(/\r/g, '').length);
-						selection = range.text;
+					selection = document.selection.createRange().text;
+					if ($.browser.msie) { // ie
+						var range = document.selection.createRange(), rangeCopy = range.duplicate();
+						rangeCopy.moveToElementText(textarea);
+						caretPosition = -1;
+						while(rangeCopy.inRange(range)) {
+							rangeCopy.moveStart('character');
+							caretPosition ++;
+						}
 					} else { // opera
 						caretPosition = textarea.selectionStart;
 					}
 				} else { // gecko & webkit
 					caretPosition = textarea.selectionStart;
+
 					selection = textarea.value.substring(caretPosition, textarea.selectionEnd);
-				} 
+				}
 				return selection;
 			}
 
@@ -432,7 +448,7 @@
 							iFrame.insertAfter(footer);
 						} else {
 							iFrame.insertBefore(header);
-						}	
+						}
 						previewWindow = iFrame[iFrame.length - 1].contentWindow || frame[iFrame.length - 1];
 					}
 				} else if (altKey === true) {
@@ -444,7 +460,7 @@
 					previewWindow = iFrame = false;
 				}
 				if (!options.previewAutoRefresh) {
-					refreshPreview(); 
+					refreshPreview();
 				}
 				if (options.previewInWindow) {
 					previewWindow.focus();
@@ -456,9 +472,12 @@
  				renderPreview();
 			}
 
-			function renderPreview() {		
+			function renderPreview() {
 				var phtml;
-				if (options.previewParserPath !== '') {
+				if (options.previewParser && typeof options.previewParser === 'function') {
+					var data = options.previewParser( $$.val() );
+					writeInPreview( localize(data, 1) );
+				} else if (options.previewParserPath !== '') {
 					$.ajax({
 						type: 'POST',
 						dataType: 'text',
@@ -466,7 +485,7 @@
 						url: options.previewParserPath,
 						data: options.previewParserVar+'='+encodeURIComponent($$.val()),
 						success: function(data) {
-							writeInPreview( localize(data, 1) ); 
+							writeInPreview( localize(data, 1) );
 						}
 					});
 				} else {
@@ -483,34 +502,34 @@
 				}
 				return false;
 			}
-			
+
 			function writeInPreview(data) {
-				if (previewWindow.document) {			
+				if (previewWindow.document) {
 					try {
 						sp = previewWindow.document.documentElement.scrollTop
 					} catch(e) {
 						sp = 0;
-					}	
+					}
 					previewWindow.document.open();
 					previewWindow.document.write(data);
 					previewWindow.document.close();
 					previewWindow.document.documentElement.scrollTop = sp;
 				}
 			}
-			
+
 			// set keys pressed
-			function keyPressed(e) { 
+			function keyPressed(e) {
 				shiftKey = e.shiftKey;
 				altKey = e.altKey;
-				ctrlKey = (!(e.altKey && e.ctrlKey)) ? e.ctrlKey : false;
+				ctrlKey = (!(e.altKey && e.ctrlKey)) ? (e.ctrlKey || e.metaKey) : false;
 
 				if (e.type === 'keydown') {
 					if (ctrlKey === true) {
-						li = $("a[accesskey="+String.fromCharCode(e.keyCode)+"]", header).parent('li');
+						li = $('a[accesskey="'+String.fromCharCode(e.keyCode)+'"]', header).parent('li');
 						if (li.length !== 0) {
 							ctrlKey = false;
 							setTimeout(function() {
-								li.triggerHandler('mousedown');
+								li.triggerHandler('mouseup');
 							},1);
 							return false;
 						}
@@ -531,7 +550,7 @@
 					}
 					if (e.keyCode === 9) { // Tab key
 						if (shiftKey == true || ctrlKey == true || altKey == true) {
-							return false; 
+							return false;
 						}
 						if (caretOffset !== -1) {
 							get();

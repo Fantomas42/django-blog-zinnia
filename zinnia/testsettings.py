@@ -9,7 +9,16 @@ SITE_ID = 1
 
 STATIC_URL = '/static/'
 
+SECRET_KEY = 'secret-key'
+
 ROOT_URLCONF = 'zinnia.tests.urls'
+
+LOCALE_PATHS = [os.path.join(os.path.dirname(__file__),
+                             'locale')]
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
+    ]
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.request',

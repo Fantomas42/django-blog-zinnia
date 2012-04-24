@@ -1,15 +1,26 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n %}
+{% load url from future %}
 
-{% block meta-description %}{% trans "Weekly archives" %} {{ week|date:"DATE_FORMAT" }}{% endblock %}
+{% block meta-description %}{% blocktrans with year=week|date:"Y" week_number=week|date:"W"%}Archives week {{ week_number }} of {{ year }}{% endblocktrans %}{% endblock %}
 
-{% block title %}{% trans "Weekly archives" %} {{ week|date:"DATE_FORMAT" }}{% endblock %}
+{% block title %}{% blocktrans with year=week|date:"Y" week_number=week|date:"W"%}Archives week {{ week_number }} of {{ year }}{% endblocktrans %}{% endblock %}
 
-{% block body-class %}{{ block.super }} archive date week year-{{ week|date:"Y" }} month-{{ week|date:"m" }}{% endblock %}
+{% block body-class %}{{ block.super }} archive date week year-{{ week|date:"Y" }} month-{{ week|date:"m" }} week-{{ week|date:"W" }}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Weekly archives" %} {{ week|date:"DATE_FORMAT" }}</h1>
+<h1>{% blocktrans with year=week|date:"Y" week_number=week|date:"W"%}Archives week {{ week_number }} of {{ year }}{% endblocktrans %}</h1>
+<h2>{{ week|date:"DATE_FORMAT" }} - {{ week_end_day|date:"DATE_FORMAT" }}</h2>
 
 {{ block.super }}
 
+<h3>{% trans "Archives" %}</h3>
+<ul>
+  <li>
+    <a href="{% url 'zinnia_entry_archive_year' week|date:"Y" %}" rel="archives">{{ week|date:"Y" }}</a>
+  </li>
+  <li>
+    <a href="{% url 'zinnia_entry_archive_month' week|date:"Y" week|date:"m" %}" rel="archives">{{ week|date:"YEAR_MONTH_FORMAT" }}</a>
+  </li>
+<ul>
 {% endblock %}

@@ -1,44 +1,55 @@
 """Test urls for the zinnia project"""
-from functools import wraps
+from django.conf.urls import url
+from django.conf.urls import patterns
 
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
-
-from zinnia.views.tags import tag_detail
-from zinnia.views.authors import author_detail
-from zinnia.views.categories import category_detail
+from zinnia.views.tags import TagDetail
+from zinnia.views.authors import AuthorDetail
+from zinnia.views.categories import CategoryDetail
 from zinnia.tests.urls import urlpatterns as test_urlpatterns
 
 
-def call_with_template_and_extra_context(
-    view, template_name='zinnia/entry_list.html',
-    extra_context={'extra': 'context'}):
+class CustomModelDetailMixin(object):
+    """Mixin for changing the template_name
+    and overriding the context"""
+    template_name = 'zinnia/entry_search.html'
 
-    @wraps(view)
-    def wrapper(*args, **kwargs):
-        return view(template_name=template_name,
-                    extra_context=extra_context,
-                    *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(CustomModelDetailMixin,
+                        self).get_context_data(**kwargs)
+        context.update({'extra': 'context'})
+        return context
 
-    return wrapper
 
-custom_tag_detail = call_with_template_and_extra_context(tag_detail)
-custom_author_detail = call_with_template_and_extra_context(author_detail)
-custom_category_detail = call_with_template_and_extra_context(category_detail)
+class CustomTagDetail(CustomModelDetailMixin, TagDetail):
+    pass
+
+
+class CustomAuthorDetail(CustomModelDetailMixin, AuthorDetail):
+    pass
+
+
+class CustomCategoryDetail(CustomModelDetailMixin, CategoryDetail):
+    pass
 
 
 urlpatterns = patterns(
     '',
     url(r'^authors/(?P<username>[.+-@\w]+)/$',
-        custom_author_detail, name='zinnia_author_detail'),
+        CustomAuthorDetail.as_view(),
+        name='zinnia_author_detail'),
     url(r'^authors/(?P<username>[.+-@\w]+)/page/(?P<page>\d+)/$',
-        custom_author_detail, name='zinnia_author_detail_paginated'),
+        CustomAuthorDetail.as_view(),
+        name='zinnia_author_detail_paginated'),
     url(r'^categories/(?P<path>[-\/\w]+)/page/(?P<page>\d+)/$',
-        custom_category_detail, name='zinnia_category_detail_paginated'),
+        CustomCategoryDetail.as_view(),
+        name='zinnia_category_detail_paginated'),
     url(r'^categories/(?P<path>[-\/\w]+)/$',
-        custom_category_detail, name='zinnia_category_detail'),
+        CustomCategoryDetail.as_view(),
+        name='zinnia_category_detail'),
     url(r'^tags/(?P<tag>[- \w]+)/$',
-        custom_tag_detail, name='zinnia_tag_detail'),
+        CustomTagDetail.as_view(),
+        name='zinnia_tag_detail'),
     url(r'^tags/(?P<tag>[- \w]+)/page/(?P<page>\d+)/$',
-        custom_tag_detail, name='zinnia_tag_detail_paginated'),
+        CustomTagDetail.as_view(),
+        name='zinnia_tag_detail_paginated'),
     ) + test_urlpatterns

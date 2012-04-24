@@ -69,7 +69,7 @@ class EntryCommentModerator(CommentModerator):
         entry when email notifications have been requested."""
         exclude_list = self.mail_comment_notification_recipients
         recipient_list = set([author.email
-                              for author in content_object.authors.all()]) ^ \
+                              for author in content_object.authors.all()]) - \
                               set(exclude_list)
 
         if recipient_list:
@@ -95,7 +95,7 @@ class EntryCommentModerator(CommentModerator):
                        [comment.userinfo['email']]
         recipient_list = set([comment.userinfo['email']
                               for comment in content_object.comments
-                              if comment.userinfo['email']]) ^ \
+                              if comment.userinfo['email']]) - \
                               set(exclude_list)
 
         if recipient_list:

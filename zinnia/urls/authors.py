@@ -1,14 +1,20 @@
 """Urls for the Zinnia authors"""
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
+from django.conf.urls import url
+from django.conf.urls import patterns
+
+from zinnia.views.authors import AuthorList
+from zinnia.views.authors import AuthorDetail
 
 
-urlpatterns = patterns('zinnia.views.authors',
-                       url(r'^$', 'author_list',
-                           name='zinnia_author_list'),
-                       url(r'^(?P<username>[.+-@\w]+)/$', 'author_detail',
-                           name='zinnia_author_detail'),
-                       url(r'^(?P<username>[.+-@\w]+)/page/(?P<page>\d+)/$',
-                           'author_detail',
-                           name='zinnia_author_detail_paginated'),
-                       )
+urlpatterns = patterns(
+    '',
+    url(r'^$',
+        AuthorList.as_view(),
+        name='zinnia_author_list'),
+    url(r'^(?P<username>[.+-@\w]+)/$',
+        AuthorDetail.as_view(),
+        name='zinnia_author_detail'),
+    url(r'^(?P<username>[.+-@\w]+)/page/(?P<page>\d+)/$',
+        AuthorDetail.as_view(),
+        name='zinnia_author_detail_paginated'),
+    )

@@ -1,18 +1,19 @@
 {% extends "zinnia/skeleton.html" %}
 {% load zinnia_tags i18n %}
+{% load url from future %}
 
 {% block meta %}
     <meta name="generator" content="Zinnia {{ ZINNIA_VERSION }}" />
 {% endblock %}
 
 {% block link %}
-    <link rel="index" href="{% url zinnia_entry_archive_index %}" />
-    <link rel="author" type="text/plain" href="{% url zinnia_humans %}" />
-    <link rel="EditURI" type="application/rsd+xml" href="{% url zinnia_rsd %}" />
-    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url zinnia_wlwmanifest %}" />
-    <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Blog" href="{% url zinnia_opensearch %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url zinnia_entry_latest_feed %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest discussions" %}" href="{% url zinnia_discussion_latest_feed %}" />
+    <link rel="index" href="{% url 'zinnia_entry_archive_index' %}" />
+    <link rel="author" type="text/plain" href="{% url 'zinnia_humans' %}" />
+    <link rel="EditURI" type="application/rsd+xml" href="{% url 'zinnia_rsd' %}" />
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url 'zinnia_wlwmanifest' %}" />
+    <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Blog" href="{% url 'zinnia_opensearch' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url 'zinnia_entry_latest_feed' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest discussions" %}" href="{% url 'zinnia_discussion_latest_feed' %}" />
     {% get_archives_entries "zinnia/tags/archives_entries_link.html" %}
 {% endblock %}
 
@@ -23,15 +24,7 @@
 {% block sidebar %}
 <div id="widget-search" class="widget">
   <h3>{% trans "Search" %}</h3>
-  <form method="get" id="searchform" action="{% url zinnia_entry_search %}">
-    <p>
-      <input type="text" value="{% trans "Keywords..." %}" name="pattern" id="searchbox" onfocus="this.value=''" />
-      <input type="submit" class="submitbutton" value="OK" />
-      <a title="{% trans 'You can use - to exclude words or phrases, &quot;double quotes&quot; for exact phrases and the AND/OR boolean operators combined with parenthesis for complex searchs.' %}">
-        <img src="{{ STATIC_URL }}zinnia/img/help.png" alt="?" width="14" height="14" />
-      </a>
-    </p>
-  </form>
+  {% include "zinnia/tags/search_form.html" %}
 </div>
 <div id="widget-categories" class="widget">
   <h3>{% trans "Categories" %}</h3>
@@ -51,23 +44,23 @@
 </div>
 <div id="widget-recents" class="widget">
   <h3>{% trans "Recent entries" %}</h3>
-  {% get_recent_entries 5 %}
+  {% get_recent_entries %}
 </div>
 <div id="widget-comments" class="widget">
   <h3>{% trans "Recent comments" %}</h3>
-  {% get_recent_comments 5 %}
+  {% get_recent_comments %}
 </div>
 <div id="widget-linkbacks" class="widget">
   <h3>{% trans "Recent linkbacks" %}</h3>
-  {% get_recent_linkbacks 5 %}
+  {% get_recent_linkbacks %}
 </div>
 <div id="widget-randoms" class="widget">
   <h3>{% trans "Random entries" %}</h3>
-  {% get_random_entries 5 %}
+  {% get_random_entries %}
 </div>
 <div id="widget-populars" class="widget">
   <h3>{% trans "Popular entries" %}</h3>
-  {% get_popular_entries 5 %}
+  {% get_popular_entries %}
 </div>
 <div id="widget-archives" class="widget">
   <h3>{% trans "Archives" %}</h3>
@@ -79,14 +72,14 @@
   <ul>
     {% if perms.zinnia %}
     <li>
-      <a href="{% url admin:app_list "zinnia" %}" title="{% trans "Dashboard" %}">
+      <a href="{% url 'admin:app_list' 'zinnia' %}" title="{% trans "Dashboard" %}">
         {% trans "Dashboard" %}
       </a>
     </li>
     {% endif %}
     {% if perms.zinnia.add_entry %}
     <li>
-      <a href="{% url admin:zinnia_entry_add %}" title="{% trans "Post an entry" %}">
+      <a href="{% url 'admin:zinnia_entry_add' %}" title="{% trans "Post an entry" %}">
         {% trans "Post an entry" %}
       </a>
     </li>
@@ -94,7 +87,7 @@
     {% block admin_tools %}
     {% endblock %}
     <li>
-      <a href="{% url admin:logout %}" title="{% trans "Log out" %}">
+      <a href="{% url 'admin:logout' %}" title="{% trans "Log out" %}">
         {% trans "Log out" %}
       </a>
     </li>

@@ -1,5 +1,6 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n zinnia_tags %}
+{% load url from future %}
 
 {% block title %}{% trans "Search results for" %} {% if pattern %}'{{ pattern }}'{% endif %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} | {% trans "Page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
 
@@ -7,13 +8,13 @@
 
 {% block link %}
   {{ block.super }}
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of search result of" %} '{{ pattern }}'" href="{% url zinnia_entry_search_feed %}?pattern={{ pattern }}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of search result of" %} '{{ pattern }}'" href="{% url 'zinnia_entry_search_feed' %}?pattern={{ pattern }}" />
 {% endblock %}
 
 {% block body-class %}{{ block.super }} search {% if object_list %}search-results{% else %}search-no-results{% endif %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Search results for" %} {% if pattern %}'{{ pattern }}'{% endif %}</h1>
+<h1>{% trans "Search results for" %} '{{ pattern }}'</h1>
 
 {% if error %}
 <p class="error">{{ error }}</p>
@@ -34,7 +35,7 @@
 {% endfor %}
 
 <div class="search">
-  <form method="get" id="main_searchform" action="{% url zinnia_entry_search %}">
+  <form method="get" id="main_searchform" action="{% url 'zinnia_entry_search' %}">
     <p>
       <input type="text" value="{{ pattern }}" name="pattern" id="main_searchbox" />
       <input type="submit" class="submitbutton" value="OK" />

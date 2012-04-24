@@ -548,9 +548,7 @@ msgstr "Errorea zerbitzarian"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
-"Errore bat egon da. Kudeatzaileari email bat bidali zaio eta gutxi barru "
-"konponduta beharko luke. Ezkerrik asko zure pazientziarengatik."
+msgstr "Errore bat egon da. Kudeatzaileari email bat bidali zaio eta gutxi barru konponduta beharko luke. Ezkerrik asko zure pazientziarengatik."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
@@ -960,10 +958,7 @@ msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex searchs."
-msgstr ""
-"Bilaketa konplexuak egiteko &quot;-&quot; erabili dezakezu hitz edo esaldiak"
-" kentzeko, &quot;komatxo bikoitzak&quot; esaldi zehatzetarako eta AND/OR "
-"eragileak parentesiekin konbinatu."
+msgstr "Bilaketa konplexuak egiteko &quot;-&quot; erabili dezakezu hitz edo esaldiak kentzeko, &quot;komatxo bikoitzak&quot; esaldi zehatzetarako eta AND/OR eragileak parentesiekin konbinatu."
 
 #: templates/zinnia/base.html:45
 msgid "Calendar"
@@ -1188,8 +1183,7 @@ msgstr "Saioa hasi behar da"
 
 #: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
-"Zure erabiltzailea eta pasahitza ez datoz bat. Saiatu berriro mesedez."
+msgstr "Zure erabiltzailea eta pasahitza ez datoz bat. Saiatu berriro mesedez."
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
@@ -1307,5 +1301,3 @@ msgstr "Erabiltzaileak ezin du %s."
 #: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr "Izenbururik ez"
-
-

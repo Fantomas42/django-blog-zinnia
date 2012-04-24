@@ -1,6 +1,25 @@
 CHANGELOG
 =========
 
+0.11
+----
+
+* Class-based views
+* Pagination on archives
+* Better archive by week view
+* Update of the breadcrumbs tag
+* Custom templates for archive views
+* No runtime warnings on Django 1.4
+* Django 1.3 is no longer supported
+* And a lot of bug fixes
+
+0.10.1
+------
+
+* Django 1.4 compatibility support
+* Compatibility with django-mptt >= 5.1
+* ``zinnia.plugins`` is now removed
+
 0.10
 ----
 
@@ -10,6 +29,8 @@ CHANGELOG
 * Improvement of the documentation
 * Entry's Meta options can be extended
 * Django 1.2 is no longer supported
+* ``zinnia.plugins`` is deprecated in favor of ``cmsplugin_zinnia``
+* And a lot of bug fixes
 
 0.9
 ---

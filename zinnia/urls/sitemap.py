@@ -1,8 +1,12 @@
 """Urls for the Zinnia sitemap"""
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
+from django.conf.urls import url
+from django.conf.urls import patterns
 
-urlpatterns = patterns('zinnia.views.sitemap',
-                       url(r'^$', 'sitemap',
-                           name='zinnia_sitemap'),
-                       )
+from zinnia.views.sitemap import Sitemap
+
+
+urlpatterns = patterns(
+    '',
+    url(r'^$', Sitemap.as_view(),
+        name='zinnia_sitemap'),
+    )

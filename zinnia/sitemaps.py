@@ -7,10 +7,16 @@ from tagging.models import TaggedItem
 from zinnia.models import Entry
 from zinnia.models import Author
 from zinnia.models import Category
+from zinnia.settings import PROTOCOL
 from zinnia.managers import tags_published
 
 
-class EntrySitemap(Sitemap):
+class ZinniaSitemap(Sitemap):
+    """Base Sitemap class for Zinnia"""
+    protocol = PROTOCOL
+
+
+class EntrySitemap(ZinniaSitemap):
     """Sitemap for entries"""
     priority = 0.5
     changefreq = 'weekly'
@@ -24,7 +30,7 @@ class EntrySitemap(Sitemap):
         return obj.last_update
 
 
-class CategorySitemap(Sitemap):
+class CategorySitemap(ZinniaSitemap):
     """Sitemap for categories"""
     changefreq = 'monthly'
 
@@ -60,7 +66,7 @@ class CategorySitemap(Sitemap):
         return '%.1f' % priority
 
 
-class AuthorSitemap(Sitemap):
+class AuthorSitemap(ZinniaSitemap):
     """Sitemap for authors"""
     priority = 0.5
     changefreq = 'monthly'
@@ -81,7 +87,7 @@ class AuthorSitemap(Sitemap):
         return reverse('zinnia_author_detail', args=[obj.username])
 
 
-class TagSitemap(Sitemap):
+class TagSitemap(ZinniaSitemap):
     """Sitemap for tags"""
     changefreq = 'monthly'
 

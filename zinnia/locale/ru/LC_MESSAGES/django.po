@@ -549,9 +549,7 @@ msgstr "Ошибка сервера"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
-"Произошла ошибка. Администраторы сайта получили уведомление на e-mail, и "
-"решают проблему. Спасибо за ваше терпение."
+msgstr "Произошла ошибка. Администраторы сайта получили уведомление на e-mail, и решают проблему. Спасибо за ваше терпение."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
@@ -970,9 +968,7 @@ msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex searchs."
-msgstr ""
-"Для комплексного поиска вы можете использовать кавычки и двойные кавычки, а "
-"также операторы AND/OR."
+msgstr "Для комплексного поиска вы можете использовать кавычки и двойные кавычки, а также операторы AND/OR."
 
 #: templates/zinnia/base.html:45
 msgid "Calendar"
@@ -1198,8 +1194,7 @@ msgstr "Требуется авторизация"
 
 #: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
-"Имя пользователя и пароль не совпадают. Пожалуйста, попробуйте еще раз."
+msgstr "Имя пользователя и пароль не совпадают. Пожалуйста, попробуйте еще раз."
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
@@ -1318,5 +1313,3 @@ msgstr "Пользователь не может %s."
 #: xmlrpc/pingback.py:97
 msgid "No title"
 msgstr "Заголовок отсутствует"
-
-

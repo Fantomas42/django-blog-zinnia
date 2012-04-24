@@ -12,8 +12,8 @@ Dependencies
 Make sure to install these packages prior to installation :
 
 * `Python 2.x`_ >= 2.5
-* `Django`_ >= 1.3
-* `django-mptt`_ >= 0.5.2
+* `Django`_ >= 1.4
+* `django-mptt`_ >= 0.5.1 < 0.6
 * `django-tagging`_ >= 0.3.1
 * `BeautifulSoup`_ >= 3.2.0
 

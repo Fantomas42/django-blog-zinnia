@@ -3,14 +3,16 @@ from datetime import datetime
 
 from django.forms import Media
 from django.contrib import admin
+from django.conf.urls import url
+from django.conf.urls import patterns
 from django.contrib.auth.models import User
+from django.utils.text import Truncator
 from django.utils.html import strip_tags
-from django.utils.text import truncate_words
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
 from django.conf import settings as project_settings
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
+from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse, NoReverseMatch
 
 from tagging.models import Tag
@@ -160,7 +162,8 @@ class EntryAdmin(admin.ModelAdmin):
     def save_model(self, request, entry, form, change):
         """Save the authors, update time, make an excerpt"""
         if not form.cleaned_data.get('excerpt') and entry.status == PUBLISHED:
-            entry.excerpt = truncate_words(strip_tags(entry.content), 50)
+            entry.excerpt = Truncator('...').words(
+                50, strip_tags(entry.content))
 
         if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
             form.cleaned_data['authors'] = entry.authors.all()
@@ -305,21 +308,49 @@ class EntryAdmin(admin.ModelAdmin):
     def get_urls(self):
         entry_admin_urls = super(EntryAdmin, self).get_urls()
         urls = patterns(
-            'django.views.generic.simple',
-            url(r'^autocomplete_tags/$', 'direct_to_template',
-                {'template': 'admin/zinnia/entry/autocomplete_tags.js',
-                 'mimetype': 'application/javascript'},
+            '',
+            url(r'^autocomplete_tags/$',
+                self.admin_site.admin_view(self.autocomplete_tags),
                 name='zinnia_entry_autocomplete_tags'),
-            url(r'^wymeditor/$', 'direct_to_template',
-                {'template': 'admin/zinnia/entry/wymeditor.js',
-                 'mimetype': 'application/javascript',
-                 'extra_context': {'lang': get_language().split('-')[0]}},
+            url(r'^wymeditor/$',
+                self.admin_site.admin_view(self.wymeditor),
                 name='zinnia_entry_wymeditor'),
-            url(r'^markitup/$', 'direct_to_template',
-                {'template': 'admin/zinnia/entry/markitup.js',
-                 'mimetype': 'application/javascript'},
-                name='zinnia_entry_markitup'),)
+            url(r'^markitup/$',
+                self.admin_site.admin_view(self.markitup),
+                name='zinnia_entry_markitup'),
+            url(r'^markitup/preview/$',
+                self.admin_site.admin_view(self.content_preview),
+                name='zinnia_entry_markitup_preview'),)
         return urls + entry_admin_urls
+
+    def autocomplete_tags(self, request):
+        """View for tag autocompletion"""
+        return TemplateResponse(
+            request, 'admin/zinnia/entry/autocomplete_tags.js',
+            mimetype='application/javascript')
+
+    def wymeditor(self, request):
+        """View for serving the config of WYMEditor"""
+        return TemplateResponse(
+            request, 'admin/zinnia/entry/wymeditor.js',
+            {'lang': get_language().split('-')[0]},
+            'application/javascript')
+
+    def markitup(self, request):
+        """View for serving the config of MarkItUp"""
+        return TemplateResponse(
+            request, 'admin/zinnia/entry/markitup.js',
+            mimetype='application/javascript')
+
+    @csrf_exempt
+    def content_preview(self, request):
+        """Admin view to preview Entry.content in HTML,
+        useful when using markups to write entries"""
+        data = request.POST.get('data', '')
+        entry = self.model(content=data)
+        return TemplateResponse(
+            request, 'admin/zinnia/entry/preview.html',
+            {'preview': entry.html_content})
 
     def _media(self):
         STATIC_URL = '%szinnia/' % project_settings.STATIC_URL

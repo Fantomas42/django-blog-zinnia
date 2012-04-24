@@ -14,13 +14,15 @@ Another usage of the channels is for SEO, for aggregating entries
 under a well-formatted URL.
 
 For doing that Zinnia provides a view called
-:func:`~zinnia.views.channels.entry_channel`.
+:class:`~zinnia.views.channels.EntryChannel`.
 
 If we take our first example, we will do like that for customizing
 the Weblog homepage in our project's urls.py. ::
 
-  url(r'^weblog/$', 'zinnia.views.channels.entry_channel',
-      {'query': 'category:python OR category:django'}),
+  from zinnia.views.channels import EntryChannel
+
+  url(r'^weblog/$', EntryChannel.as_view(
+      query='category:python OR category:django'),
   url(r'^weblog/', include('zinnia.urls')),
 
 The first URL will handle the homepage of the blog instead of the default
@@ -35,5 +37,4 @@ So our homepage will only display entries filled under the categories
 **Python** or **Django**.
 
 The others parameters handled by the channel view are the same that
-the generic view named :func:`~django.views.generic.list_detail.object_list`
-bundled in :mod:`django.views.generic.list_detail`.
+the generic view named :class:`~django.views.generic.list.ListView`.

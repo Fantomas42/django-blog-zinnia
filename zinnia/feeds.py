@@ -85,7 +85,7 @@ class EntryFeed(ZinniaFeed):
             url = item.image.url
         else:
             img = BeautifulSoup(item.html_content).find('img')
-            url = img['src'] if img else None
+            url = img.get('src') if img else None
         return urljoin(self.site_url, url) if url else None
 
     def item_enclosure_length(self, item):

@@ -28,7 +28,7 @@ class EntryAdminTestCase(TestCase):
         """Test the insertion of an Entry"""
         self.assertEquals(Entry.objects.count(), 0)
         post_data = {'title': u'New entry',
-                     'template': u'zinnia/entry_detail.html',
+                     'template': u'entry_detail.html',
                      'creation_date_0': u'2011-01-01',
                      'creation_date_1': u'12:00:00',
                      'start_publication_0': u'2011-01-01',

@@ -14,8 +14,6 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
-ADMIN_MEDIA_PREFIX = '%sadmin/' % STATIC_URL
-
 SECRET_KEY = 'jo-1rzm(%sf)3#n+fb7h955yu$3(pt63abhi12_t7e^^5q8dyw'
 
 USE_I18N = True
@@ -32,12 +30,18 @@ LANGUAGES = (('en', gettext('English')),
              ('it', gettext('Italian')),
              ('nl', gettext('Dutch')),
              ('hu', gettext('Hungarian')),
+             ('cs', gettext('Czech')),
+             ('sk', gettext('Slovak')),
              ('ru', gettext('Russian')),
              ('pl', gettext('Polish')),
              ('eu', gettext('Basque')),
              ('hr_HR', gettext('Croatian')),
              ('pt_BR', gettext('Brazilian Portuguese')),
              ('zh_CN', gettext('Simplified Chinese')),)
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
+    )
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',

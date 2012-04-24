@@ -38,6 +38,7 @@ Usage examples: ::
   {% get_recent_entries %}
   {% get_recent_entries 3 %}
   {% get_recent_entries 3 "custom_template.html" %}
+  {% get_recent_entries template="custom_template.html" %}
 
 .. templatetag:: get_featured_entries
 
@@ -53,6 +54,7 @@ Usage examples: ::
   {% get_featured_entries %}
   {% get_featured_entries 3 %}
   {% get_featured_entries 3 "custom_template.html" %}
+  {% get_featured_entries template="custom_template.html" %}
 
 .. templatetag:: get_draft_entries
 
@@ -68,6 +70,7 @@ Usage examples: ::
   {% get_draft_entries %}
   {% get_draft_entries 3 %}
   {% get_draft_entries 3 "custom_template.html" %}
+  {% get_draft_entries template="custom_template.html" %}
 
 .. templatetag:: get_random_entries
 
@@ -83,6 +86,7 @@ Usage examples: ::
   {% get_random_entries %}
   {% get_random_entries 3 %}
   {% get_random_entries 3 "custom_template.html" %}
+  {% get_random_entries template="custom_template.html" %}
 
 .. templatetag:: get_popular_entries
 
@@ -98,6 +102,7 @@ Usage examples: ::
   {% get_popular_entries %}
   {% get_popular_entries 3 %}
   {% get_popular_entries 3 "custom_template.html" %}
+  {% get_popular_entries template="custom_template.html" %}
 
 .. templatetag:: get_similar_entries
 
@@ -113,6 +118,7 @@ Usage examples: ::
   {% get_similar_entries %}
   {% get_similar_entries 3 %}
   {% get_similar_entries 3 "custom_template.html" %}
+  {% get_similar_entries template="custom_template.html" %}
 
 .. templatetag:: get_calendar_entries
 
@@ -134,6 +140,8 @@ Usage examples: ::
   {% get_calendar_entries %}
   {% get_calendar_entries 2011 4 %}
   {% get_calendar_entries 2011 4 "custom_template.html" %}
+  {% get_calendar_entries template="custom_template.html" %}
+  {% get_calendar_entries year=object.creation_date|date:"Y" month=12 %}
 
 .. templatetag:: get_archives_entries
 
@@ -218,6 +226,7 @@ Usage examples: ::
   {% get_tag_cloud %}
   {% get_tag_cloud 9 %}
   {% get_tag_cloud 9 "custom_template.html" %}
+  {% get_tag_cloud template="custom_template.html" %}
 
 .. templatetag:: get_recent_comments
 
@@ -233,6 +242,7 @@ Usage examples: ::
   {% get_recent_comments %}
   {% get_recent_comments 3 %}
   {% get_recent_comments 3 "custom_template.html" %}
+  {% get_recent_comments template="custom_template.html" %}
 
 .. templatetag:: get_recent_linkbacks
 
@@ -248,6 +258,7 @@ Usage examples: ::
   {% get_recent_linkbacks %}
   {% get_recent_linkbacks 3 %}
   {% get_recent_linkbacks 3 "custom_template.html" %}
+  {% get_recent_linkbacks template="custom_template.html" %}
 
 .. templatetag:: zinnia_pagination
 
@@ -264,6 +275,7 @@ Usage examples: ::
   {% zinnia_pagination page_obj 2 2 %}
   {% zinnia_pagination page_obj 2 2 3 3 %}
   {% zinnia_pagination page_obj 2 2 3 3 "custom_template.html" %}
+  {% zinnia_pagination page_obj begin_pages=2 template="custom_template.html" %}
 
 .. templatetag:: zinnia_breadcrumbs
 
@@ -279,6 +291,7 @@ Usage examples: ::
   {% zinnia_breadcrumbs %}
   {% zinnia_breadcrumbs "News" %}
   {% zinnia_breadcrumbs "News" "custom_template.html" %}
+  {% zinnia_breadcrumbs template="custom_template.html" %}
 
 .. templatetag:: zinnia_statistics
 
@@ -309,5 +322,6 @@ Usage examples: ::
   {% get_gravatar user.email %}
   {% get_gravatar user.email 50 %}
   {% get_gravatar user.email 50 "PG" %}
-  {% get_gravatar user.email 50 "PG" "identicon" %}
+  {% get_gravatar user.email 50 "PG" "identicon" "https" %}
+  {% get_gravatar user.email rating="PG" protocol="https" %}
 

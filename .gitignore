@@ -20,6 +20,5 @@ develop-eggs
 .tox
 docs/epydoc
 docs/build
-docs/coverage
 demo/demo.db*
 django_blog_zinnia.egg-info/

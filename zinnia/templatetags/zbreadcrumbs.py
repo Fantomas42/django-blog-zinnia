@@ -1,7 +1,9 @@
 """Breadcrumb module for Zinnia templatetags"""
 import re
+from functools import wraps
 from datetime import datetime
 
+from django.utils.dateformat import format
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 
@@ -24,7 +26,7 @@ def month_crumb(creation_date):
     """Crumb for a month"""
     year = creation_date.strftime('%Y')
     month = creation_date.strftime('%m')
-    month_text = creation_date.strftime('%b').capitalize()
+    month_text = format(creation_date, 'b').capitalize()
     return Crumb(month_text, reverse('zinnia_entry_archive_month',
                                      args=[year, month]))
 
@@ -55,10 +57,33 @@ MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
                                          day_crumb(x.creation_date),
                                          Crumb(x.title)]}
 
-DATE_REGEXP = re.compile(
+ARCHIVE_REGEXP = re.compile(
     r'.*(?P<year>\d{4})/(?P<month>\d{2})?/(?P<day>\d{2})?.*')
 
+ARCHIVE_WEEK_REGEXP = re.compile(
+    r'.*(?P<year>\d{4})/week/(?P<week>\d{2})?.*')
 
+PAGE_REGEXP = re.compile(r'page/(?P<page>\d+).*$')
+
+
+def handle_page_crumb(func):
+    """Decorator for handling the
+    current page in the breadcrumbs"""
+
+    @wraps(func)
+    def wrapper(path, model, page, root_name):
+        path = PAGE_REGEXP.sub('', path)
+        breadcrumbs = func(path, model, root_name)
+        if page:
+            if page.number > 1:
+                breadcrumbs[-1].url = path
+                page_crumb = Crumb(_('Page %s') % page.number)
+                breadcrumbs.append(page_crumb)
+        return breadcrumbs
+    return wrapper
+
+
+@handle_page_crumb
 def retrieve_breadcrumbs(path, model_instance, root_name=''):
     """Build a semi-hardcoded breadcrumbs
     based of the model's url handled by Zinnia"""
@@ -73,7 +98,16 @@ def retrieve_breadcrumbs(path, model_instance, root_name=''):
             breadcrumbs.extend(MODEL_BREADCRUMBS[key](model_instance))
             return breadcrumbs
 
-    date_match = DATE_REGEXP.match(path)
+    date_match = ARCHIVE_WEEK_REGEXP.match(path)
+    if date_match:
+        year, week = date_match.groups()
+        year_date = datetime(int(year), 1, 1)
+        date_breadcrumbs = [year_crumb(year_date),
+                            Crumb(_('Week %s') % week)]
+        breadcrumbs.extend(date_breadcrumbs)
+        return breadcrumbs
+
+    date_match = ARCHIVE_REGEXP.match(path)
     if date_match:
         date_dict = date_match.groupdict()
         path_date = datetime(
@@ -89,7 +123,7 @@ def retrieve_breadcrumbs(path, model_instance, root_name=''):
         if date_dict['day']:
             date_breadcrumbs.append(day_crumb(path_date))
         breadcrumbs.extend(date_breadcrumbs)
-
+        breadcrumbs[-1].url = None
         return breadcrumbs
 
     url_components = [comp for comp in
