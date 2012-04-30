@@ -1,0 +1,9 @@
+// This partial will contains some fixes related to Django
+
+// When a translated month or a translated month abbrev is displayed
+// the month is not capitalized because of weird translations.
+a {
+  &[rel=archives] {
+      text-transform: capitalize;
+  }
+}
