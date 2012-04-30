@@ -10,6 +10,12 @@ from django.db import models
 from django.utils.html import strip_tags
 from django.utils.encoding import force_unicode
 
+def skip_model_member(app, what, name, obj, skip, options):
+    # These fields always fails !
+    if name in ('tags', 'image'):
+        return True
+    return skip
+
 
 def process_model_docstring(app, what, name, obj, options, lines):
     if inspect.isclass(obj) and issubclass(obj, models.Model):
@@ -45,3 +51,5 @@ def setup(app):
     )
     app.connect('autodoc-process-docstring',
                 process_model_docstring)
+    app.connect('autodoc-skip-member',
+                skip_model_member)
