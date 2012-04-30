@@ -1,5 +1,4 @@
 """Settings for Zinnia documentation"""
-import os
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 
 DATABASES = {'default': {'NAME': ':memory:',
