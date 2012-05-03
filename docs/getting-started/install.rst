@@ -63,15 +63,17 @@ Then register :mod:`zinnia`, and these following applications in the
 :setting:`INSTALLED_APPS` section of your project's settings. ::
 
   INSTALLED_APPS = (
-    # Your favorite apps
-    'django.contrib.contenttypes',
+    'django.contrib.auth',
+    'django.contrib.admin',
+    'django.contrib.sites',
     'django.contrib.comments',
     'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.admin',
+    'django.contrib.messages',
+    'django.contrib.contenttypes',
     'tagging',
     'mptt',
-    'zinnia',)
+    'zinnia',
+  )
 
 .. _template-context-processors:
 
