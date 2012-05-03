@@ -21,15 +21,11 @@ coverage:
 	@echo "$(COLOR)* Generating coverage report$(NO_COLOR)"
 	@./bin/cover
 
-epydoc:
-	@echo "$(COLOR)* Generating Epydoc documentation$(NO_COLOR)"
-	@export DJANGO_SETTINGS_MODULE='extensions.settings' && ./bin/epydoc
-
 sphinx:
 	@echo "$(COLOR)* Generating Sphinx documentation$(NO_COLOR)"
 	@./bin/docs
 
-docs: coverage epydoc sphinx
+docs: coverage sphinx
 
 kwalitee:
 	@echo "$(COLOR)* Running pyflakes$(NO_COLOR)"
@@ -58,5 +54,4 @@ mrproper: clean
 	@rm -rf docs/build/doctrees
 	@rm -rf docs/build/html
 	@rm -rf docs/coverage
-	@rm -rf docs/epydoc
 
