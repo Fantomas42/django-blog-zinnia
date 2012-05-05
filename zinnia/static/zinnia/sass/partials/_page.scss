@@ -1,13 +1,13 @@
 & {
   @include blueprint-typography(true);
   @include blueprint-interaction;
-  background: transparent url(../img/background.gif) repeat-x scroll left top;
+  background: transparent image-url("background.gif") repeat-x scroll left top;
   a {
     text-decoration: none;
     &:hover { text-decoration: underline; }
   }
   li {
-    list-style-image: url(../img/bullet.png);
+    list-style-image: image-url("bullet.png");
   }
 }
 

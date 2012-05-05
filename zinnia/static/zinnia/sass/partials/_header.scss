@@ -20,10 +20,10 @@
     float: right;
     @include delimited-list("|");
     .sitemap {
-      @include header-icon("../img/sitemap.png");
+      @include header-icon("sitemap.png");
     }
     .feeds {
-      @include header-icon("../img/rss.png");
+      @include header-icon("rss.png");
     }
   }
 }

@@ -14,12 +14,12 @@ body.dashboard #content {
 }
 
 .managelink {
-  background: url("../img/manage.png") no-repeat scroll 0 0.2em transparent;
+  background: image-url("manage.png") no-repeat scroll 0 0.2em transparent;
   padding-left: 12px;
 }
 
 .previewlink {
-  background: url("../img/preview.png") no-repeat scroll 0 0.2em transparent;
+  background: image-url("preview.png") no-repeat scroll 0 0.2em transparent;
   padding-left: 12px;
 }
 

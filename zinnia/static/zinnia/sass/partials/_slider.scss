@@ -15,7 +15,7 @@
 .slider {
   width: 100%;
   position: relative;
-  background: url(../img/loader.gif) no-repeat center center;
+  background: image-url("loader.gif") no-repeat center center;
 }
 
 .slides {
@@ -104,8 +104,8 @@ ol.flex-control-nav {
     opacity: 0.7;
     &:hover { opacity: 1; }
   }
-  .prev { @include nav-direction-button("../img/prev.png", left); }
-  .next { @include nav-direction-button("../img/next.png", right); }
+  .prev { @include nav-direction-button("prev.png", left); }
+  .next { @include nav-direction-button("next.png", right); }
 }
 
 // Responsive

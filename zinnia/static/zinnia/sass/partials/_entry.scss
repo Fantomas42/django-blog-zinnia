@@ -12,7 +12,7 @@ h2.entry-title {
 p.entry-info {
   color: $quiet-color;
   padding-left: 2em;
-  background: transparent url(../img/category.png) no-repeat scroll 0.5em;
+  background: transparent image-url("category.png") no-repeat scroll 0.5em;
 }
 
 .entry-body {
@@ -65,15 +65,15 @@ p.entry-info {
 }
 
 .entry-tags {
-  @include strong-icon("../img/tags.png");
+  @include strong-icon("tags.png");
 }
 
 .entry-shorturl {
-  @include strong-icon("../img/shorturl.png");
+  @include strong-icon("shorturl.png");
 }
 
 .entry-comments {
-  @include strong-icon("../img/comments.png");
+  @include strong-icon("comments.png");
 }
 
 .entry-widgets {
