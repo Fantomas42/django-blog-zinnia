@@ -1,0 +1,11 @@
+@mixin header-icon($icon) {
+  background: transparent image-url($icon) no-repeat scroll left center;
+  padding-left: 1.5em;
+}
+
+@mixin strong-icon($icon) {
+  strong {
+    padding-left: 1.5em;
+    background: transparent image-url($icon) no-repeat scroll;
+  }
+}

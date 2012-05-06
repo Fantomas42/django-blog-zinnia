@@ -22,6 +22,9 @@ sys.path.append(HERE)
 sys.path.append(os.path.join(HERE, '..'))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'extensions.settings'
 
+from django.core.management import call_command
+call_command('syncdb', verbosity=0, interactive=False)
+
 import zinnia
 
 # -- General configuration -----------------------------------------------------

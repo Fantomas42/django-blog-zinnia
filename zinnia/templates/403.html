@@ -17,29 +17,5 @@
 
 <p>{% trans "Sorry but you don't have the permission to do this action." %}</p>
 
-<div class="links">
-  <h3>{% trans "Useful links" %}</h3>
-  <ul>
-    <li>
-      <a href="{% url 'zinnia_entry_archive_index' %}" title="{% trans "Blog index" %}">
-        {% trans "Blog index" %}
-      </a>
-    </li>
-    <li>
-      <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}">
-        {% trans "Sitemap" %}
-      </a>
-    </li>
-  </ul>
-</div>
-
-<div class="recents">
-  <h3>{% trans "Recent entries" %}</h3>
-  {% get_recent_entries %}
-</div>
-
-<div class="search">
-  <h3>{% trans "Search" %}</h3>
-  {% include "zinnia/tags/search_form.html" %}
-</div>
+{{ block.super }}
 {% endblock %}
