@@ -17,12 +17,12 @@ entries, and you needed to install :ref:`django-bitly<zinnia-bitly>`.
 One way it's not bad, but it's not enough.
 
 First of all Zinnia now provides his own short URLs for the entries,
-exemple:
+example:
 
   http://mydomain.com/blog/1/
 
 Of course the URL is short (and can be shorter) but if you have a long
-domain, the URL can be not so short, exemple:
+domain, the URL can be not so short, example:
 
   http://mysuperverylongdomain.com/blog/1/ (40 characters !)
 

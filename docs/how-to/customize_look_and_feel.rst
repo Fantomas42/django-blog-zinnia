@@ -280,7 +280,7 @@ starting point of a packaged theme.
 
 
 .. _`specifying a template directory`: https://docs.djangoproject.com/en/dev/ref/templates/api/#loading-templates
-.. _`customizing the look and feel`: https://docs.djangoproject.com/en/dev/intro/tutorial02/#customize-the-admin-look-and-feel
+.. _`customize the look and feel`: https://docs.djangoproject.com/en/dev/intro/tutorial02/#customize-the-admin-look-and-feel
 .. _`Zinnia-theme-html5`: https://github.com/Fantomas42/zinnia-theme-html5
 .. _`Django Blog Quintet`: https://github.com/franckbret/django-blog-quintet
 .. _`Compass`: http://compass-style.org/

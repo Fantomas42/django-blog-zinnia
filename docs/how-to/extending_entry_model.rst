@@ -156,7 +156,8 @@ Note that the :mod:`zinnia_gallery` application must be registered in the
 :setting:`INSTALLED_APPS` setting after the :mod:`zinnia` application for
 applying the register/unregister mechanism in the admin site.
 
-Now we can easily :ref:`customize the templates<customizing-templates>`
+Now we can easily
+:doc:`customize the templates</how-to/customize_look_and_feel>`
 provided by Zinnia to display the gallery field into the Weblog's pages.
 
 For information you can see another implementation example in the
