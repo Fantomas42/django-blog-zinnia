@@ -139,11 +139,11 @@ class EntryAbstractClass(models.Model):
                                          default=datetime.now)
     last_update = models.DateTimeField(_('last update'), default=datetime.now)
     start_publication = models.DateTimeField(_('start publication'),
-                                             help_text=_('date start publish'),
-                                             default=datetime.now)
+                                             blank=True, null=True,
+                                             help_text=_('date start publish'))
     end_publication = models.DateTimeField(_('end publication'),
-                                           help_text=_('date end publish'),
-                                           default=datetime(2042, 3, 15))
+                                           blank=True, null=True,
+                                           help_text=_('date end publish'))
 
     sites = models.ManyToManyField(Site, verbose_name=_('sites publication'),
                                    related_name='entries')
