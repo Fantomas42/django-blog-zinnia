@@ -106,8 +106,13 @@ class ZinniaViewsTestCase(ViewsBaseCase):
     urls = 'zinnia.tests.urls'
 
     def test_zinnia_entry_archive_index(self):
+        template_name_today = 'zinnia/archives/%s/entry_archive.html' % \
+                              date.today().strftime('%Y/%m/%d')
+        setup_test_template_loader(
+            {template_name_today: ''})
         response = self.check_publishing_context('/', 2, 3, 'entry_list')
-        self.assertTemplateUsed(response, 'zinnia/entry_archive.html')
+        self.assertTemplateUsed(response, template_name_today)
+        restore_template_loaders()
 
     def test_zinnia_entry_archive_year(self):
         setup_test_template_loader(

@@ -14,6 +14,8 @@ from zinnia.views.mixins.archives import PreviousNextPublishedMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
 from zinnia.views.mixins.templates import \
      EntryQuerysetArchiveTemplateResponseMixin
+from zinnia.views.mixins.templates import \
+     EntryQuerysetArchiveTodayTemplateResponseMixin
 
 
 class EntryArchiveMixin(ArchiveMixin,
@@ -32,7 +34,9 @@ class EntryArchiveMixin(ArchiveMixin,
     queryset = Entry.published.all
 
 
-class EntryIndex(EntryArchiveMixin, BaseArchiveIndexView):
+class EntryIndex(EntryArchiveMixin,
+                 EntryQuerysetArchiveTodayTemplateResponseMixin,
+                 BaseArchiveIndexView):
     """View returning the archive index"""
     context_object_name = 'entry_list'
 

@@ -1,4 +1,6 @@
 """Template mixins for Zinnia views"""
+from datetime import date
+
 from django.core.exceptions import ImproperlyConfigured
 from django.views.generic.base import TemplateResponseMixin
 
@@ -110,3 +112,21 @@ class EntryArchiveTemplateResponseMixin(
     def get_default_base_template_name(self):
         """Return the Entry.template value"""
         return self.object.template
+
+
+class EntryQuerysetArchiveTodayTemplateResponseMixin(
+    EntryQuerysetArchiveTemplateResponseMixin):
+    """Same as EntryQuerysetArchivetemplateResponseMixin
+    but use the current date of the day when getting
+    archive part values"""
+    today = None
+
+    def get_archive_part_value(self, part):
+        """Return archive part for today"""
+        parts_dict = {'year': '%Y',
+                      'month': self.month_format,
+                      'week': self.week_format,
+                      'day': '%d'}
+        if self.today is None:
+            self.today = date.today()
+        return self.today.strftime(parts_dict[part])
