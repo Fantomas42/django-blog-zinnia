@@ -203,7 +203,12 @@ class EntryAbstractClass(models.Model):
     def is_actual(self):
         """Check if an entry is within publication period"""
         now = datetime.now()
-        return now >= self.start_publication and now < self.end_publication
+        if self.start_publication and now < self.start_publication:
+            return False
+
+        if self.end_publication and now >= self.end_publication:
+            return False
+        return True
 
     @property
     def is_visible(self):
