@@ -9,6 +9,7 @@ CHANGELOG
 * Better archive by week view
 * Update of the breadcrumbs tag
 * Custom templates for archive views
+* Publication dates become unrequired
 * No runtime warnings on Django 1.4
 * Django 1.3 is no longer supported
 * And a lot of bug fixes
