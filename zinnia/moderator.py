@@ -67,11 +67,10 @@ class EntryCommentModerator(CommentModerator):
     def do_email_authors(self, comment, content_object, request):
         """Send email notification of a new comment to the authors of the
         entry when email notifications have been requested."""
-        exclude_list = self.mail_comment_notification_recipients
+        exclude_list = self.mail_comment_notification_recipients + ['']
         recipient_list = set([author.email
                               for author in content_object.authors.all()]) - \
                               set(exclude_list)
-
         if recipient_list:
             site = Site.objects.get_current()
             template = loader.get_template(

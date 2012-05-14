@@ -70,6 +70,31 @@ class EntryCommentModeratorTestCase(TestCase):
         moderator.do_email_authors(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)
 
+    def test_do_email_authors_without_email(self):
+        """
+        https://github.com/Fantomas42/django-blog-zinnia/issues/145
+        """
+        comment = comments.get_model().objects.create(
+            comment='My Comment', user=self.author, is_public=True,
+            content_object=self.entry, site=self.site)
+        self.assertEquals(len(mail.outbox), 0)
+        moderator = EntryCommentModerator(Entry)
+        moderator.email_authors = True
+        moderator.mail_comment_notification_recipients = []
+        contributor = User.objects.create(username='contributor',
+                                          email='contrib@example.com')
+        self.entry.authors.add(contributor)
+        moderator.do_email_authors(comment, self.entry, 'request')
+        self.assertEquals(len(mail.outbox), 1)
+        self.assertEquals(mail.outbox[0].to,
+                          [u'admin@example.com', u'contrib@example.com'])
+        mail.outbox = []
+        contributor.email = ''
+        contributor.save()
+        moderator.do_email_authors(comment, self.entry, 'request')
+        self.assertEquals(len(mail.outbox), 1)
+        self.assertEquals(mail.outbox[0].to, [u'admin@example.com'])
+
     def test_do_email_reply(self):
         comment = comments.get_model().objects.create(
             comment='My Comment 1', user=self.author, is_public=True,
