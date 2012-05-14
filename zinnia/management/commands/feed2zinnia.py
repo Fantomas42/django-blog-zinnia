@@ -88,7 +88,10 @@ class Command(LabelCommand):
         """Import entries"""
         for feed_entry in feed_entries:
             self.write_out('> %s... ' % feed_entry.title)
-            creation_date = datetime(*feed_entry.date_parsed[:6])
+            if feed_entry.get('publised_parsed'):
+                creation_date = datetime(*feed_entry.published_parsed[:6])
+            else:
+                creation_date = datetime.now()
             slug = slugify(feed_entry.title)[:255]
 
             if Entry.objects.filter(creation_date__year=creation_date.year,
