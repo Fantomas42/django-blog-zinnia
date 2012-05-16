@@ -105,6 +105,15 @@ class ZinniaViewsTestCase(ViewsBaseCase):
     """
     urls = 'zinnia.tests.urls'
 
+    def tearDown(self):
+        """Always try to restore the initial template loaders
+        even if the test_template_loader has not been enabled,
+        to avoid cascading errors if a test fails"""
+        try:
+            restore_template_loaders()
+        except AttributeError:
+            pass
+
     def test_zinnia_entry_archive_index(self):
         template_name_today = 'zinnia/archives/%s/entry_archive.html' % \
                               date.today().strftime('%Y/%m/%d')
