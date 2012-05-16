@@ -1,13 +1,13 @@
 """EntryAdmin for Zinnia"""
-from datetime import datetime
 
 from django.forms import Media
 from django.contrib import admin
 from django.conf.urls import url
 from django.conf.urls import patterns
-from django.contrib.auth.models import User
+from django.utils import timezone
 from django.utils.text import Truncator
 from django.utils.html import strip_tags
+from django.contrib.auth.models import User
 from django.conf import settings as project_settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import get_language
@@ -171,7 +171,7 @@ class EntryAdmin(admin.ModelAdmin):
         if not form.cleaned_data.get('authors'):
             form.cleaned_data['authors'].append(request.user)
 
-        entry.last_update = datetime.now()
+        entry.last_update = timezone.now()
         entry.save()
 
     def queryset(self, request):
@@ -275,7 +275,7 @@ class EntryAdmin(admin.ModelAdmin):
 
     def put_on_top(self, request, queryset):
         """Put the selected entries on top at the current date"""
-        queryset.update(creation_date=datetime.now())
+        queryset.update(creation_date=timezone.now())
         self.ping_directories(request, queryset, messages=False)
         self.message_user(request, _(
             'The selected entries are now set at the current date.'))

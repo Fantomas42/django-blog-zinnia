@@ -1,7 +1,6 @@
 """Managers of Zinnia"""
-from datetime import datetime
-
 from django.db import models
+from django.utils import timezone
 from django.contrib.sites.models import Site
 
 DRAFT = 0
@@ -26,7 +25,7 @@ class AuthorPublishedManager(models.Manager):
 
     def get_query_set(self):
         """Return published authors"""
-        now = datetime.now()
+        now = timezone.now()
         return super(AuthorPublishedManager, self).get_query_set().filter(
             models.Q(entries__start_publication__lte=now) | \
             models.Q(entries__start_publication=None),
@@ -39,7 +38,7 @@ class AuthorPublishedManager(models.Manager):
 
 def entries_published(queryset):
     """Return only the entries published"""
-    now = datetime.now()
+    now = timezone.now()
     return queryset.filter(
         models.Q(start_publication__lte=now) | \
         models.Q(start_publication=None),
