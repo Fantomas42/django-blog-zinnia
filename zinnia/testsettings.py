@@ -7,6 +7,8 @@ DATABASES = {'default': {'NAME': 'zinnia_tests.db',
 
 SITE_ID = 1
 
+USE_TZ = True
+
 STATIC_URL = '/static/'
 
 SECRET_KEY = 'secret-key'

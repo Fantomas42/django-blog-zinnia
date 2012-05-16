@@ -19,6 +19,7 @@ Make sure to install these packages prior to installation :
 
 The packages below are optionnal but needed for run the full test suite.
 
+* `pytz`_
 * `pyparsing`_ >= 1.5.5
 * `django-xmlrpc`_ >= 0.1.3
 
@@ -137,5 +138,6 @@ informations about serving static files.
 .. _`django-mptt`: https://github.com/django-mptt/django-mptt/
 .. _`django-tagging`: https://code.google.com/p/django-tagging/
 .. _`BeautifulSoup`: http://www.crummy.com/software/BeautifulSoup/
+.. _`pytz`: http://pytz.sourceforge.net/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/
 .. _`django-xmlrpc`: https://github.com/Fantomas42/django-xmlrpc
