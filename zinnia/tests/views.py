@@ -85,6 +85,9 @@ class ViewsBaseCase(TestCase):
         self.assertTrue('protocol' in response.context)
 
 ViewsBaseCase = override_settings(
+    # Cannot enable TZ support until #18217 is fixed
+    # https://code.djangoproject.com/ticket/18217
+    USE_TZ=False,
     TEMPLATE_CONTEXT_PROCESSORS=(
         'django.core.context_processors.request',
         ),

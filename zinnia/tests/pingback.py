@@ -9,6 +9,7 @@ from django.test import TestCase
 from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.test.utils import override_settings
 from django.contrib.contenttypes.models import ContentType
 
 from BeautifulSoup import BeautifulSoup
@@ -205,3 +206,8 @@ class PingBackTestCase(TestCase):
         self.assertEquals(response, [
             'http://localhost:8000/2010/01/01/my-second-entry/',
             'http://example.com/blog/1/'])
+
+PingBackTestCase = override_settings(
+    # Cannot enable TZ support until #18217 is fixed
+    # https://code.djangoproject.com/ticket/18217
+    USE_TZ=False)(PingBackTestCase)

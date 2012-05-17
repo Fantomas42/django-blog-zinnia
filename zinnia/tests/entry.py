@@ -5,10 +5,12 @@ from datetime import datetime
 from datetime import timedelta
 
 from django.test import TestCase
+from django.utils import timezone
 from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
+from django.test.utils import override_settings
 from django.contrib.comments.models import CommentFlag
 
 from zinnia import models
@@ -93,7 +95,7 @@ class EntryTestCase(TestCase):
         models.AUTO_CLOSE_COMMENTS_AFTER = None
         self.assertEquals(self.entry.comments_are_open, True)
         models.AUTO_CLOSE_COMMENTS_AFTER = 5
-        self.entry.start_publication = datetime.now() - timedelta(days=7)
+        self.entry.start_publication = timezone.now() - timedelta(days=7)
         self.entry.save()
         self.assertEquals(self.entry.comments_are_open, False)
 
@@ -101,18 +103,21 @@ class EntryTestCase(TestCase):
 
     def test_is_actual(self):
         self.assertTrue(self.entry.is_actual)
-        self.entry.start_publication = datetime(2020, 3, 15)
+        self.entry.start_publication = datetime(
+            2020, 3, 15, tzinfo=timezone.utc)
         self.assertFalse(self.entry.is_actual)
-        self.entry.start_publication = datetime.now()
+        self.entry.start_publication = timezone.now()
         self.assertTrue(self.entry.is_actual)
-        self.entry.end_publication = datetime(2000, 3, 15)
+        self.entry.end_publication = datetime(
+            2000, 3, 15, tzinfo=timezone.utc)
         self.assertFalse(self.entry.is_actual)
 
     def test_is_visible(self):
         self.assertFalse(self.entry.is_visible)
         self.entry.status = PUBLISHED
         self.assertTrue(self.entry.is_visible)
-        self.entry.start_publication = datetime(2020, 3, 15)
+        self.entry.start_publication = datetime(
+            2020, 3, 15, tzinfo=timezone.utc)
         self.assertFalse(self.entry.is_visible)
 
     def test_short_url(self):
@@ -131,7 +136,8 @@ class EntryTestCase(TestCase):
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'slug': 'my-second-entry',
-                  'creation_date': datetime(2000, 1, 1),
+                  'creation_date': datetime(
+                      2000, 1, 1, tzinfo=timezone.utc),
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
@@ -139,7 +145,8 @@ class EntryTestCase(TestCase):
         params = {'title': 'My third entry',
                   'content': 'My third content',
                   'slug': 'my-third-entry',
-                  'creation_date': datetime(2001, 1, 1),
+                  'creation_date': datetime(
+                      2001, 1, 1, tzinfo=timezone.utc),
                   'status': PUBLISHED}
         self.third_entry = Entry.objects.create(**params)
         self.third_entry.sites.add(site)
@@ -152,7 +159,8 @@ class EntryTestCase(TestCase):
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'slug': 'my-second-entry',
-                  'creation_date': datetime(2100, 1, 1),
+                  'creation_date': datetime(
+                      2100, 1, 1, tzinfo=timezone.utc),
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
@@ -160,7 +168,8 @@ class EntryTestCase(TestCase):
         params = {'title': 'My third entry',
                   'content': 'My third content',
                   'slug': 'my-third-entry',
-                  'creation_date': datetime(2050, 1, 1),
+                  'creation_date': datetime(
+                      2050, 1, 1, tzinfo=timezone.utc),
                   'status': PUBLISHED}
         self.third_entry = Entry.objects.create(**params)
         self.third_entry.sites.add(site)
@@ -187,6 +196,9 @@ class EntryTestCase(TestCase):
         self.entry.sites.add(site)
         self.assertEquals(len(self.entry.related_published), 1)
         self.assertEquals(len(self.second_entry.related_published), 1)
+
+EntryTestCase = override_settings(
+    USE_TZ=True)(EntryTestCase)
 
 
 class EntryHtmlContentTestCase(TestCase):

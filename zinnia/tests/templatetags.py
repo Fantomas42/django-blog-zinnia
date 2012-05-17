@@ -2,16 +2,17 @@
 from datetime import datetime
 
 from django.test import TestCase
+from django.utils import timezone
 from django.template import Context
 from django.template import Template
 from django.template import TemplateSyntaxError
+from django.test.utils import override_settings
 from django.contrib import comments
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import CommentFlag
-
 from tagging.models import Tag
 
 from zinnia.models import Entry
@@ -47,7 +48,8 @@ class TemplateTagsTestCase(TestCase):
         params = {'title': 'My entry',
                   'content': 'My content',
                   'tags': 'zinnia, test',
-                  'creation_date': datetime(2010, 1, 1),
+                  'creation_date': datetime(
+                      2010, 1, 1, tzinfo=timezone.utc),
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
 
@@ -213,7 +215,8 @@ class TemplateTagsTestCase(TestCase):
                   'content': 'My second content',
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
-                  'creation_date': datetime(2009, 1, 1),
+                  'creation_date': datetime(
+                      2009, 1, 1, tzinfo=timezone.utc),
                   'slug': 'my-second-entry'}
         site = Site.objects.get_current()
         second_entry = Entry.objects.create(**params)
@@ -221,8 +224,10 @@ class TemplateTagsTestCase(TestCase):
 
         context = get_archives_entries('custom_template.html')
         self.assertEquals(len(context['archives']), 2)
-        self.assertEquals(context['archives'][0], datetime(2010, 1, 1))
-        self.assertEquals(context['archives'][1], datetime(2009, 1, 1))
+        self.assertEquals(context['archives'][0], datetime(
+            2010, 1, 1, tzinfo=timezone.utc))
+        self.assertEquals(context['archives'][1], datetime(
+            2009, 1, 1, tzinfo=timezone.utc))
         self.assertEquals(context['template'], 'custom_template.html')
 
     def test_get_archives_tree(self):
@@ -236,7 +241,8 @@ class TemplateTagsTestCase(TestCase):
                   'content': 'My second content',
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
-                  'creation_date': datetime(2009, 1, 10),
+                  'creation_date': datetime(
+                      2009, 1, 10, tzinfo=timezone.utc),
                   'slug': 'my-second-entry'}
         site = Site.objects.get_current()
         second_entry = Entry.objects.create(**params)
@@ -244,8 +250,10 @@ class TemplateTagsTestCase(TestCase):
 
         context = get_archives_entries_tree('custom_template.html')
         self.assertEquals(len(context['archives']), 2)
-        self.assertEquals(context['archives'][0], datetime(2009, 1, 10))
-        self.assertEquals(context['archives'][1], datetime(2010, 1, 1))
+        self.assertEquals(context['archives'][0], datetime(
+            2009, 1, 10, tzinfo=timezone.utc))
+        self.assertEquals(context['archives'][1], datetime(
+            2010, 1, 1, tzinfo=timezone.utc))
         self.assertEquals(context['template'], 'custom_template.html')
 
     def test_get_calendar_entries(self):
@@ -258,18 +266,21 @@ class TemplateTagsTestCase(TestCase):
         self.publish_entry()
         context = get_calendar_entries(source_context,
                                        template='custom_template.html')
-        self.assertEquals(context['previous_month'], datetime(2010, 1, 1))
+        self.assertEquals(context['previous_month'], datetime(
+            2010, 1, 1, tzinfo=timezone.utc))
         self.assertEquals(context['next_month'], None)
         self.assertEquals(context['template'], 'custom_template.html')
 
         context = get_calendar_entries(source_context, 2009, 1)
         self.assertEquals(context['previous_month'], None)
-        self.assertEquals(context['next_month'], datetime(2010, 1, 1))
+        self.assertEquals(context['next_month'], datetime(
+            2010, 1, 1, tzinfo=timezone.utc))
 
         source_context = Context({'month': datetime(2009, 1, 1)})
         context = get_calendar_entries(source_context)
         self.assertEquals(context['previous_month'], None)
-        self.assertEquals(context['next_month'], datetime(2010, 1, 1))
+        self.assertEquals(context['next_month'], datetime(
+            2010, 1, 1, tzinfo=timezone.utc))
 
         source_context = Context({'month': datetime(2010, 1, 1)})
         context = get_calendar_entries(source_context)
@@ -280,7 +291,8 @@ class TemplateTagsTestCase(TestCase):
                   'content': 'My second content',
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
-                  'creation_date': datetime(2008, 1, 1),
+                  'creation_date': datetime(
+                      2008, 1, 1, tzinfo=timezone.utc),
                   'slug': 'my-second-entry'}
         site = Site.objects.get_current()
         second_entry = Entry.objects.create(**params)
@@ -288,10 +300,13 @@ class TemplateTagsTestCase(TestCase):
 
         source_context = Context()
         context = get_calendar_entries(source_context, 2009, 1)
-        self.assertEquals(context['previous_month'], datetime(2008, 1, 1))
-        self.assertEquals(context['next_month'], datetime(2010, 1, 1))
+        self.assertEquals(context['previous_month'], datetime(
+            2008, 1, 1, tzinfo=timezone.utc))
+        self.assertEquals(context['next_month'], datetime(
+            2010, 1, 1, tzinfo=timezone.utc))
         context = get_calendar_entries(source_context)
-        self.assertEquals(context['previous_month'], datetime(2010, 1, 1))
+        self.assertEquals(context['previous_month'], datetime(
+            2010, 1, 1, tzinfo=timezone.utc))
         self.assertEquals(context['next_month'], None)
 
     def test_get_recent_comments(self):
@@ -637,3 +652,6 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['entries_per_month'], 0)
         self.assertEquals(context['comments_per_entry'], 1)
         self.assertEquals(context['linkbacks_per_entry'], 0)
+
+TemplateTagsTestCase = override_settings(
+    USE_TZ=True)(TemplateTagsTestCase)

@@ -45,11 +45,9 @@ class QuickEntryTestCase(TestCase):
         response = self.client.post('/quick_entry/',
                                     {'title': 'test', 'tags': 'test',
                                      'content': 'Test content',
-                                     'save_draft': ''}, follow=True)
+                                     'save_draft': ''})
         entry = Entry.objects.get(title='test')
-        self.assertEquals(response.redirect_chain,
-                          [('http://testserver%s' % entry.get_absolute_url(),
-                            302)])
+        self.assertEquals(response.status_code, 302)
         self.assertEquals(entry.status, DRAFT)
         self.assertEquals(entry.title, 'test')
         self.assertEquals(entry.tags, 'test')

@@ -6,8 +6,10 @@ from datetime import datetime
 from tempfile import TemporaryFile
 
 from django.test import TestCase
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.test.utils import override_settings
 from django.core.files.storage import default_storage
 
 from zinnia.models import Entry
@@ -42,7 +44,8 @@ class MetaWeblogTestCase(TestCase):
                                     slug='category-2')]
         params = {'title': 'My entry 1', 'content': 'My content 1',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1',
-                  'creation_date': datetime(2010, 1, 1),
+                  'creation_date': datetime(
+                      2010, 1, 1, tzinfo=timezone.utc),
                   'status': PUBLISHED}
         self.entry_1 = Entry.objects.create(**params)
         self.entry_1.authors.add(self.webmaster)
@@ -50,7 +53,7 @@ class MetaWeblogTestCase(TestCase):
         self.entry_1.sites.add(self.site)
 
         params = {'title': 'My entry 2', 'content': 'My content 2',
-                  'creation_date': datetime(2010, 3, 15),
+                  'creation_date': datetime(2010, 3, 15, tzinfo=timezone.utc),
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         self.entry_2 = Entry.objects.create(**params)
         self.entry_2.authors.add(self.webmaster)
@@ -187,7 +190,8 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(post['title'], self.entry_1.title)
         self.assertEquals(post['description'], '<p>My content 1</p>')
         self.assertEquals(post['categories'], ['Category 1', 'Category 2'])
-        self.assertEquals(post['dateCreated'].value, '2010-01-01T00:00:00')
+        self.assertEquals(post['dateCreated'].value,
+                          '2010-01-01T00:00:00+00:00')
         self.assertEquals(post['link'],
                           'http://example.com/2010/01/01/my-entry-1/')
         self.assertEquals(post['permaLink'],
@@ -243,7 +247,8 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.creation_date, self.entry_2.creation_date)
 
         entry.title = 'Title edited'
-        entry.creation_date = datetime(2000, 1, 1)
+        entry.creation_date = datetime(
+            2000, 1, 1, tzinfo=timezone.utc)
         post = post_structure(entry, self.site)
         post['categories'] = ''
         post['description'] = 'Content edited'
@@ -266,7 +271,8 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(entry.comment_enabled, False)
         self.assertEquals(entry.pingback_enabled, False)
         self.assertEquals(entry.categories.count(), 0)
-        self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
+        self.assertEquals(entry.creation_date, datetime(
+            2000, 1, 1, tzinfo=timezone.utc))
 
         del post['dateCreated']
         post['wp_author_id'] = self.contributor.pk
@@ -276,7 +282,8 @@ class MetaWeblogTestCase(TestCase):
         entry = Entry.objects.get(pk=new_post_id)
         self.assertEquals(entry.authors.count(), 1)
         self.assertEquals(entry.authors.all()[0], self.contributor)
-        self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
+        self.assertEquals(entry.creation_date, datetime(
+            2000, 1, 1, tzinfo=timezone.utc))
 
     def test_new_media_object(self):
         file_ = TemporaryFile()
@@ -294,3 +301,6 @@ class MetaWeblogTestCase(TestCase):
         self.assertTrue('/zinnia_test_file' in new_media['url'])
         default_storage.delete('/'.join([
             UPLOAD_TO, new_media['url'].split('/')[-1]]))
+
+MetaWeblogTestCase = override_settings(
+    USE_TZ=True)(MetaWeblogTestCase)
