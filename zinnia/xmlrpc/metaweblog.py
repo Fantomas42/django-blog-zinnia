@@ -5,6 +5,7 @@ from xmlrpclib import Fault
 from xmlrpclib import DateTime
 
 from django.conf import settings
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
@@ -207,10 +208,12 @@ def new_post(blog_id, username, password, post, publish):
     user = authenticate(username, password, 'zinnia.add_entry')
     if post.get('dateCreated'):
         creation_date = datetime.strptime(
-            post['dateCreated'].value.replace('Z', '').replace('-', ''),
-            '%Y%m%dT%H:%M:%S')
+            post['dateCreated'].value[:18], '%Y-%m-%dT%H:%M:%S')
+        if settings.USE_TZ:
+            creation_date = timezone.make_aware(
+                creation_date, timezone.utc)
     else:
-        creation_date = datetime.now()
+        creation_date = timezone.now()
 
     entry_dict = {'title': post['title'],
                   'content': post['description'],
@@ -254,8 +257,10 @@ def edit_post(post_id, username, password, post, publish):
     entry = Entry.objects.get(id=post_id, authors=user)
     if post.get('dateCreated'):
         creation_date = datetime.strptime(
-            post['dateCreated'].value.replace('Z', '').replace('-', ''),
-            '%Y%m%dT%H:%M:%S')
+            post['dateCreated'].value[:18], '%Y-%m-%dT%H:%M:%S')
+        if settings.USE_TZ:
+            creation_date = timezone.make_aware(
+                creation_date, timezone.utc)
     else:
         creation_date = entry.creation_date
 
@@ -264,7 +269,7 @@ def edit_post(post_id, username, password, post, publish):
     entry.excerpt = post.get('mt_excerpt', Truncator('...').words(
         50, strip_tags(post['description'])))
     entry.creation_date = creation_date
-    entry.last_update = datetime.now()
+    entry.last_update = timezone.now()
     entry.comment_enabled = post.get('mt_allow_comments', 1) == 1
     entry.pingback_enabled = post.get('mt_allow_pings', 1) == 1
     entry.featured = post.get('sticky', 0) == 1

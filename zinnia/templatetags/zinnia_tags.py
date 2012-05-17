@@ -6,6 +6,8 @@ from datetime import datetime
 
 from django.db.models import Q
 from django.db.models import Count
+from django.conf import settings
+from django.utils import timezone
 from django.template import Library
 from django.contrib.comments.models import CommentFlag
 from django.contrib.contenttypes.models import ContentType
@@ -168,11 +170,14 @@ def get_calendar_entries(context, year=None, month=None,
     if not year or not month:
         date_month = context.get('month') or context.get('day') or \
                      getattr(context.get('object'), 'creation_date', None) or \
-                     datetime.today()
+                     timezone.now().date()
         year, month = date_month.timetuple()[:2]
 
     calendar = ZinniaCalendar()
     current_month = datetime(year, month, 1)
+    if settings.USE_TZ:
+        current_month = timezone.make_aware(
+            current_month, timezone.utc)
 
     dates = list(Entry.published.dates('creation_date', 'month'))
 
