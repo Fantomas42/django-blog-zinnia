@@ -1,8 +1,8 @@
 """Test cases for Zinnia's views"""
 from datetime import date
-from datetime import datetime
 
 from django.test import TestCase
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
@@ -14,6 +14,7 @@ from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
+from zinnia.tests.utils import datetime
 
 
 class ViewsBaseCase(TestCase):
@@ -30,7 +31,7 @@ class ViewsBaseCase(TestCase):
                   'content': 'First test entry published',
                   'slug': 'test-1',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 1, 1),
+                  'creation_date': datetime(2010, 1, 1, 13, 25),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
@@ -41,7 +42,7 @@ class ViewsBaseCase(TestCase):
                   'content': 'Second test entry published',
                   'slug': 'test-2',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 6, 1),
+                  'creation_date': datetime(2010, 6, 1, 12, 12),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
@@ -53,7 +54,7 @@ class ViewsBaseCase(TestCase):
                   'content': 'My test content',
                   'slug': 'my-test-entry',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 1, 1),
+                  'creation_date': datetime(2010, 1, 1, 15, 15),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
@@ -85,9 +86,6 @@ class ViewsBaseCase(TestCase):
         self.assertTrue('protocol' in response.context)
 
 ViewsBaseCase = override_settings(
-    # Cannot enable TZ support until #18217 is fixed
-    # https://code.djangoproject.com/ticket/18217
-    USE_TZ=False,
     TEMPLATE_CONTEXT_PROCESSORS=(
         'django.core.context_processors.request',
         ),
@@ -181,7 +179,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_entry_archive_today(self):
         response = self.client.get('/today/')
-        self.assertEquals(response.context['day'], datetime.today().date())
+        self.assertEquals(response.context['day'], timezone.now().date())
         self.assertTemplateUsed(response, 'zinnia/entry_archive_today.html')
         self.assertEquals(response.context['previous_month'], date(2010, 6, 1))
         self.assertEquals(response.context['next_month'], None)

@@ -1,13 +1,10 @@
 """Test cases for Zinnia's feeds"""
 from urlparse import urljoin
-from datetime import datetime
 
 from django.test import TestCase
-from django.utils import timezone
 from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.test.utils import override_settings
 from django.utils.translation import ugettext as _
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.feedgenerator import DefaultFeed
@@ -20,6 +17,7 @@ from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import PUBLISHED
 from zinnia.managers import PINGBACK, TRACKBACK
+from zinnia.tests.utils import datetime
 from zinnia import feeds
 from zinnia.feeds import EntryFeed
 from zinnia.feeds import ZinniaFeed
@@ -52,8 +50,7 @@ class ZinniaFeedsTestCase(TestCase):
                   '<img src="/image.jpg" />',
                   'slug': 'my-test-entry',
                   'tags': 'tests',
-                  'creation_date': datetime(
-                      2010, 1, 1, tzinfo=timezone.utc),
+                  'creation_date': datetime(2010, 1, 1),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
@@ -319,8 +316,7 @@ class ZinniaFeedsTestCase(TestCase):
                   'content': 'My content ',
                   'slug': 'my-test-entry',
                   'tags': 'tests',
-                  'creation_date': datetime(
-                      2010, 2, 1, tzinfo=timezone.utc),
+                  'creation_date': datetime(2010, 2, 1),
                   'status': PUBLISHED}
         entry_same_slug = Entry.objects.create(**params)
         entry_same_slug.sites.add(self.site)
@@ -328,6 +324,3 @@ class ZinniaFeedsTestCase(TestCase):
 
         self.assertEquals(feed.get_object(
             'request', 2010, 2, 1, entry_same_slug.slug), entry_same_slug)
-
-ZinniaFeedsTestCase = override_settings(
-    USE_TZ=True)(ZinniaFeedsTestCase)

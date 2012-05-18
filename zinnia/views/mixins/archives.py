@@ -1,5 +1,7 @@
 """Mixins for Zinnia archive views"""
 from datetime import datetime
+from django.conf import settings
+from django.utils import timezone
 
 from zinnia.settings import PAGINATION
 from zinnia.settings import ALLOW_EMPTY
@@ -23,6 +25,9 @@ class PreviousNextPublishedMixin(object):
 
     def get_previous_next_published(self, date, period, previous=True):
         """Return the next or previous published date period with Entries"""
+        if settings.USE_TZ:
+            date = timezone.make_aware(date, timezone.utc)
+
         dates = list(self.get_queryset().dates(
             'creation_date', period,
             order=previous and 'ASC' or 'DESC'))

@@ -1,17 +1,14 @@
 """Test cases for Zinnia's managers"""
-from datetime import datetime
-
 from django.test import TestCase
-from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.test.utils import override_settings
 
 from tagging.models import Tag
 
 from zinnia.models import Entry
 from zinnia.models import Author
 from zinnia.models import Category
+from zinnia.tests.utils import datetime
 from zinnia.managers import PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
@@ -72,20 +69,16 @@ class ManagersTestCase(TestCase):
         self.entry_1.sites.clear()
         self.assertEquals(entries_published(Entry.objects.all()).count(), 1)
         self.entry_1.sites.add(*self.sites)
-        self.entry_1.start_publication = datetime(
-            2020, 1, 1, tzinfo=timezone.utc)
+        self.entry_1.start_publication = datetime(2020, 1, 1)
         self.entry_1.save()
         self.assertEquals(entries_published(Entry.objects.all()).count(), 1)
-        self.entry_1.start_publication = datetime(
-            2000, 1, 1, tzinfo=timezone.utc)
+        self.entry_1.start_publication = datetime(2000, 1, 1)
         self.entry_1.save()
         self.assertEquals(entries_published(Entry.objects.all()).count(), 2)
-        self.entry_1.end_publication = datetime(
-            2000, 1, 1, tzinfo=timezone.utc)
+        self.entry_1.end_publication = datetime(2000, 1, 1)
         self.entry_1.save()
         self.assertEquals(entries_published(Entry.objects.all()).count(), 1)
-        self.entry_1.end_publication = datetime(
-            2020, 1, 1, tzinfo=timezone.utc)
+        self.entry_1.end_publication = datetime(2020, 1, 1)
         self.entry_1.save()
         self.assertEquals(entries_published(Entry.objects.all()).count(), 2)
 
@@ -97,20 +90,16 @@ class ManagersTestCase(TestCase):
         self.entry_1.sites.clear()
         self.assertEquals(Entry.published.count(), 1)
         self.entry_1.sites.add(*self.sites)
-        self.entry_1.start_publication = datetime(
-            2020, 1, 1, tzinfo=timezone.utc)
+        self.entry_1.start_publication = datetime(2020, 1, 1)
         self.entry_1.save()
         self.assertEquals(Entry.published.count(), 1)
-        self.entry_1.start_publication = datetime(
-            2000, 1, 1, tzinfo=timezone.utc)
+        self.entry_1.start_publication = datetime(2000, 1, 1)
         self.entry_1.save()
         self.assertEquals(Entry.published.count(), 2)
-        self.entry_1.end_publication = datetime(
-            2000, 1, 1, tzinfo=timezone.utc)
+        self.entry_1.end_publication = datetime(2000, 1, 1)
         self.entry_1.save()
         self.assertEquals(Entry.published.count(), 1)
-        self.entry_1.end_publication = datetime(
-            2020, 1, 1, tzinfo=timezone.utc)
+        self.entry_1.end_publication = datetime(2020, 1, 1)
         self.entry_1.save()
         self.assertEquals(Entry.published.count(), 2)
 
@@ -257,6 +246,3 @@ class ManagersTestCase(TestCase):
         # Now check the fallback with the '*' pattern
         # which will fails advanced search
         self.assertEquals(Entry.published.search('*').count(), 1)
-
-ManagersTestCase = override_settings(
-    USE_TZ=True)(ManagersTestCase)
