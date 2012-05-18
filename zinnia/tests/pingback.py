@@ -1,6 +1,5 @@
 """Test cases for Zinnia's PingBack API"""
 import cStringIO
-from datetime import datetime
 from urlparse import urlsplit
 from urllib2 import HTTPError
 from xmlrpclib import ServerProxy
@@ -9,7 +8,8 @@ from django.test import TestCase
 from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.test.utils import override_settings
+from django.test.utils import restore_template_loaders
+from django.test.utils import setup_test_template_loader
 from django.contrib.contenttypes.models import ContentType
 
 from BeautifulSoup import BeautifulSoup
@@ -18,6 +18,7 @@ from zinnia.models import Entry
 from zinnia.models import Category
 from zinnia.managers import PINGBACK
 from zinnia.managers import PUBLISHED
+from zinnia.tests.utils import datetime
 from zinnia.tests.utils import TestTransport
 from zinnia.xmlrpc.pingback import generate_pingback_content
 from zinnia import url_shortener as shortener_settings
@@ -47,6 +48,12 @@ class PingBackTestCase(TestCase):
         import zinnia.xmlrpc.pingback
         self.original_urlopen = zinnia.xmlrpc.pingback.urlopen
         zinnia.xmlrpc.pingback.urlopen = self.fake_urlopen
+        # Set a short template for entry_detail to avoid rendering errors
+        setup_test_template_loader(
+            {'zinnia/entry_detail.html':
+             '<html><head><title>{{ object.title }}</title></head>' \
+             '<body>{{ object.html_content|safe }}</body></html>',
+             '404.html': '404'})
         # Preparing site
         self.site = Site.objects.get_current()
         self.site.domain = 'localhost:8000'
@@ -58,7 +65,7 @@ class PingBackTestCase(TestCase):
         params = {'title': 'My first entry',
                   'content': 'My first content',
                   'slug': 'my-first-entry',
-                  'creation_date': datetime(2010, 1, 1),
+                  'creation_date': datetime(2010, 1, 1, 12),
                   'status': PUBLISHED}
         self.first_entry = Entry.objects.create(**params)
         self.first_entry.sites.add(self.site)
@@ -74,7 +81,7 @@ class PingBackTestCase(TestCase):
                       'http://localhost:8000/error-404/',
                       'http://example.com/'),
                   'slug': 'my-second-entry',
-                  'creation_date': datetime(2010, 1, 1),
+                  'creation_date': datetime(2010, 1, 1, 12),
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(self.site)
@@ -88,6 +95,7 @@ class PingBackTestCase(TestCase):
         import zinnia.xmlrpc.pingback
         zinnia.xmlrpc.pingback.urlopen = self.original_urlopen
         shortener_settings.URL_SHORTENER_BACKEND = self.original_shortener
+        restore_template_loaders()
 
     def test_generate_pingback_content(self):
         soup = BeautifulSoup(self.second_entry.content)
@@ -206,8 +214,3 @@ class PingBackTestCase(TestCase):
         self.assertEquals(response, [
             'http://localhost:8000/2010/01/01/my-second-entry/',
             'http://example.com/blog/1/'])
-
-PingBackTestCase = override_settings(
-    # Cannot enable TZ support until #18217 is fixed
-    # https://code.djangoproject.com/ticket/18217
-    USE_TZ=False)(PingBackTestCase)

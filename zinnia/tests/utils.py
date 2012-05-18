@@ -1,7 +1,10 @@
 """Utils for Zinnia's tests"""
 import StringIO
 from xmlrpclib import Transport
+from datetime import datetime as original_datetime
 
+from django.conf import settings
+from django.utils import timezone
 from django.test.client import Client
 
 
@@ -24,3 +27,14 @@ class TestTransport(Transport):
         if not hasattr(res, 'getheader'):
             setattr(res, 'getheader', lambda *args: "")
         return self.parse_response(res)
+
+
+def test_datetime(*args):
+    """Generating a datetime aware or naive
+    depending of USE_TZ"""
+    d = original_datetime(*args)
+    if settings.USE_TZ:
+        d = timezone.make_aware(d, timezone.utc)
+    return d
+
+datetime = test_datetime
