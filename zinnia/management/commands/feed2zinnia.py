@@ -4,6 +4,8 @@ from urllib2 import urlopen
 from datetime import datetime
 from optparse import make_option
 
+from django.conf import settings
+from django.utils import timezone
 from django.core.files import File
 from django.utils.text import Truncator
 from django.utils.html import strip_tags
@@ -90,8 +92,11 @@ class Command(LabelCommand):
             self.write_out('> %s... ' % feed_entry.title)
             if feed_entry.get('publised_parsed'):
                 creation_date = datetime(*feed_entry.published_parsed[:6])
+                if settings.USE_TZ:
+                    creation_date = timezone.make_aware(
+                        creation_date, timezone.utc)
             else:
-                creation_date = datetime.now()
+                creation_date = timezone.now()
             slug = slugify(feed_entry.title)[:255]
 
             if Entry.objects.filter(creation_date__year=creation_date.year,
@@ -109,7 +114,7 @@ class Command(LabelCommand):
                           'status': PUBLISHED,
                           'creation_date': creation_date,
                           'start_publication': creation_date,
-                          'last_update': datetime.now(),
+                          'last_update': timezone.now(),
                           'slug': slug}
 
             if not entry_dict['excerpt'] and self.auto_excerpt:

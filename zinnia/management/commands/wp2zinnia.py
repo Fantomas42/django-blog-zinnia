@@ -4,6 +4,8 @@ from datetime import datetime
 from optparse import make_option
 from xml.etree import ElementTree as ET
 
+from django.conf import settings
+from django.utils import timezone
 from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.db.utils import IntegrityError
@@ -213,6 +215,8 @@ class Command(LabelCommand):
         wich is always in Wordpress $post->post_date"""
         creation_date = datetime.strptime(
             item_node.find('{%s}post_date' % WP_NS).text, '%Y-%m-%d %H:%M:%S')
+        if settings.USE_TZ:
+            creation_date = timezone.make_aware(creation_date, timezone.utc)
 
         excerpt = item_node.find('{%sexcerpt/}encoded' % WP_NS).text
         if not excerpt:
@@ -243,7 +247,7 @@ class Command(LabelCommand):
             'login_required': item_node.find(
                 '{%s}status' % WP_NS).text == 'private',
             'creation_date': creation_date,
-            'last_update': datetime.now(),
+            'last_update': timezone.now(),
             'start_publication': creation_date}
 
         entry, created = Entry.objects.get_or_create(title=title,
@@ -304,6 +308,8 @@ class Command(LabelCommand):
             submit_date = datetime.strptime(
                 comment_node.find('{%s}comment_date' % WP_NS).text,
                 '%Y-%m-%d %H:%M:%S')
+            if settings.USE_TZ:
+                submit_date = timezone.make_aware(submit_date, timezone.utc)
 
             approvation = comment_node.find(
                 '{%s}comment_approved' % WP_NS).text

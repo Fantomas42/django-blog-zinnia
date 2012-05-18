@@ -5,6 +5,8 @@ from getpass import getpass
 from datetime import datetime
 from optparse import make_option
 
+from django.conf import settings
+from django.utils import timezone
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
@@ -211,7 +213,10 @@ class Command(NoArgsCommand):
 def convert_blogger_timestamp(timestamp):
     # parse 2010-12-19T15:37:00.003
     date_string = timestamp[:-6]
-    return datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%S.%f')
+    dt = datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%S.%f')
+    if settings.USE_TZ:
+        dt = timezone.make_aware(dt, timezone.utc)
+    return dt
 
 
 def is_draft(post):
