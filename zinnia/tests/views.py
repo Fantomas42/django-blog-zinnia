@@ -187,9 +187,10 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertEquals(response.context['next_day'], None)
 
     def test_zinnia_entry_shortlink(self):
-        response = self.client.get('/1/', follow=True)
-        self.assertEquals(response.redirect_chain,
-                          [('http://testserver/2010/01/01/test-1/', 301)])
+        response = self.client.get('/1/')
+        self.assertEquals(response.status_code, 301)
+        self.assertEquals(response['Location'],
+                          'http://testserver/2010/01/01/test-1/')
 
     def test_zinnia_entry_detail(self):
         entry = self.create_published_entry()
