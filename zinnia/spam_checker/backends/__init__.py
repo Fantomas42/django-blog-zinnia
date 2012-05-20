@@ -1,1 +1,1 @@
-"""Shortlink backends for Zinnia"""
+"""Spam checker backends for Zinnia"""

@@ -4,7 +4,6 @@ from django.test import TestCase
 from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.contrib.contenttypes.models import ContentType
 
 from zinnia.models import Entry
 from zinnia.managers import PUBLISHED
@@ -18,8 +17,6 @@ class EntryCommentModeratorTestCase(TestCase):
         self.site = Site.objects.get_current()
         self.author = User.objects.create(username='admin',
                                           email='admin@example.com')
-        self.entry_ct_id = ContentType.objects.get_for_model(Entry).pk
-
         params = {'title': 'My test entry',
                   'content': 'My test entry',
                   'slug': 'my-test-entry',
