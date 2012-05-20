@@ -5,9 +5,11 @@ CHANGELOG
 ----
 
 * Class-based views
+* Time zones support
 * Pagination on archives
 * Better archive by week view
 * Update of the breadcrumbs tag
+* New ``long_enough`` spam checker
 * Custom templates for archive views
 * Publication dates become unrequired
 * No runtime warnings on Django 1.4

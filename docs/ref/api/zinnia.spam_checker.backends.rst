@@ -25,6 +25,14 @@ backends Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`long_enough` Module
+-------------------------
+
+.. automodule:: zinnia.spam_checker.backends.long_enough
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`mollom` Module
 --------------------
 

@@ -250,6 +250,16 @@ ZINNIA_SPAM_CHECKER_BACKENDS
 List of strings representing the module path to a spam checker backend.
 See :doc:`/topics/spam_checker` for more informations about this setting.
 
+.. setting:: ZINNIA_COMMENT_MIN_WORDS
+
+ZINNIA_COMMENT_MIN_WORDS
+------------------------
+**Default value:** ``4``
+
+Minimal number of words required to post a comment if
+:func:`zinnia.spam_checker.backends.long_enough.backend` is enabled in
+:setting:`ZINNIA_SPAM_CHECKER_BACKENDS`.
+
 .. _settings-pinging:
 
 Pinging

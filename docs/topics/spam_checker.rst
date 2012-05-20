@@ -23,8 +23,28 @@ moderation your comments.
 We can imagine for example that you want to authorize comments from
 a white-list of IPs, it's possible by writing a backend.
 
-Note that you can use multiple backends, they are chained, useful for an
-maximum protection.
+.. note:: You can use multiple backends for checking the content, because
+          they are chained, useful for a maximum protection.
+
+Configuration example: ::
+
+  ZINNIA_SPAM_CHECKER_BACKENDS = (
+      'path.to.your.spam.checker.module',
+      'path.to.your.other.spam.checker.module',
+  )
+
+.. seealso:: :setting:`ZINNIA_SPAM_CHECKER_BACKENDS`
+
+.. _builtin-spam-checkers:
+
+Built-in spam checkers
+======================
+
+- :mod:`zinnia.spam_checker.backends.all_is_spam`
+- :mod:`zinnia.spam_checker.backends.automattic`
+- :mod:`zinnia.spam_checker.backends.long_enough`
+- :mod:`zinnia.spam_checker.backends.mollom`
+- :mod:`zinnia.spam_checker.backends.typepad`
 
 .. _writing-spam-checker:
 
