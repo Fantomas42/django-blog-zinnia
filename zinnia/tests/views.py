@@ -1,4 +1,5 @@
 """Test cases for Zinnia's views"""
+from __future__ import with_statement
 from datetime import date
 
 from django.test import TestCase
@@ -64,15 +65,21 @@ class ViewsBaseCase(TestCase):
 
     def check_publishing_context(self, url, first_expected,
                                  second_expected=None,
-                                 friendly_context=None):
+                                 friendly_context=None,
+                                 queries=0):
         """Test the numbers of entries in context of an url,"""
-        response = self.client.get(url)
-        self.assertEquals(len(response.context['object_list']), first_expected)
+        if queries:
+            with self.assertNumQueries(queries):
+                response = self.client.get(url)
+        else:
+            response = self.client.get(url)
+        self.assertEquals(len(response.context['object_list']),
+                          first_expected)
         if second_expected:
             self.create_published_entry()
             response = self.client.get(url)
-            self.assertEquals(
-                len(response.context['object_list']), second_expected)
+            self.assertEquals(len(response.context['object_list']),
+                              second_expected)
         if friendly_context:
             self.assertEquals(
                 response.context['object_list'],
