@@ -16,6 +16,9 @@ from zinnia.views.mixins.templates import \
      EntryQuerysetArchiveTemplateResponseMixin
 from zinnia.views.mixins.templates import \
      EntryQuerysetArchiveTodayTemplateResponseMixin
+from zinnia.views.mixins.tz_fixes import EntryDayTZFix
+from zinnia.views.mixins.tz_fixes import EntryWeekTZFix
+from zinnia.views.mixins.tz_fixes import EntryMonthTZFix
 
 
 class EntryArchiveMixin(ArchiveMixin,
@@ -47,12 +50,12 @@ class EntryYear(EntryArchiveMixin, BaseYearArchiveView):
     template_name_suffix = '_archive_year'
 
 
-class EntryMonth(EntryArchiveMixin, BaseMonthArchiveView):
+class EntryMonth(EntryMonthTZFix, EntryArchiveMixin, BaseMonthArchiveView):
     """View returning the archive for a month"""
     template_name_suffix = '_archive_month'
 
 
-class EntryWeek(EntryArchiveMixin, BaseWeekArchiveView):
+class EntryWeek(EntryWeekTZFix, EntryArchiveMixin, BaseWeekArchiveView):
     """View returning the archive for a week"""
     template_name_suffix = '_archive_week'
 
@@ -66,12 +69,12 @@ class EntryWeek(EntryArchiveMixin, BaseWeekArchiveView):
         return self.date_list, self.object_list, extra_context
 
 
-class EntryDay(EntryArchiveMixin, BaseDayArchiveView):
+class EntryDay(EntryDayTZFix, EntryArchiveMixin, BaseDayArchiveView):
     """View returning the archive for a day"""
     template_name_suffix = '_archive_day'
 
 
-class EntryToday(EntryArchiveMixin, BaseTodayArchiveView):
+class EntryToday(EntryDayTZFix, EntryArchiveMixin, BaseTodayArchiveView):
     """View returning the archive for the current day"""
     template_name_suffix = '_archive_today'
 

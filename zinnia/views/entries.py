@@ -5,9 +5,11 @@ from zinnia.models import Entry
 from zinnia.views.mixins.archives import ArchiveMixin
 from zinnia.views.mixins.entry_protection import EntryProtectionMixin
 from zinnia.views.mixins.templates import EntryArchiveTemplateResponseMixin
+from zinnia.views.mixins.tz_fixes import EntryDateDetailTZFix
 
 
-class EntryDateDetail(ArchiveMixin,
+class EntryDateDetail(EntryDateDetailTZFix,
+                      ArchiveMixin,
                       EntryArchiveTemplateResponseMixin,
                       BaseDateDetailView):
     """
@@ -17,6 +19,8 @@ class EntryDateDetail(ArchiveMixin,
     - EntryArchiveTemplateResponseMixin to provide a
       custom templates depending on the date
     - BaseDateDetailView to retrieve the entry with date and slug
+    - EntryDateDetailTZFix for handing the time-zones correctly
+      in Django 1.4.
     """
     queryset = Entry.published.on_site()
 
