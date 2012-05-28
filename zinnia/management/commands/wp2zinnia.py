@@ -42,7 +42,7 @@ class Command(LabelCommand):
                     help='Do NOT generate an excerpt if not present.'),
         make_option('--author', dest='author', default='',
                     help='All imported entries belong to specified author'),
-        make_option('--wxr_version', dest='wxr_version', default='1.0',
+        make_option('--wxr_version', dest='wxr_version', default='1.1',
                     help='Wordpress XML export version'),
         )
 
