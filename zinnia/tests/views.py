@@ -66,9 +66,9 @@ class ViewsBaseCase(TestCase):
     def check_publishing_context(self, url, first_expected,
                                  second_expected=None,
                                  friendly_context=None,
-                                 queries=0):
+                                 queries=None):
         """Test the numbers of entries in context of an url,"""
-        if queries:
+        if queries is not None:
             with self.assertNumQueries(queries):
                 response = self.client.get(url)
         else:
@@ -86,9 +86,10 @@ class ViewsBaseCase(TestCase):
                 response.context[friendly_context])
         return response
 
-    def check_capabilities(self, url, mimetype):
+    def check_capabilities(self, url, mimetype, queries=0):
         """Test simple views for the Weblog capabilities"""
-        response = self.client.get(url)
+        with self.assertNumQueries(queries):
+            response = self.client.get(url)
         self.assertEquals(response['Content-Type'], mimetype)
         self.assertTrue('protocol' in response.context)
 
@@ -127,14 +128,16 @@ class ZinniaViewsTestCase(ViewsBaseCase):
                               date.today().strftime('%Y/%m/%d')
         setup_test_template_loader(
             {template_name_today: ''})
-        response = self.check_publishing_context('/', 2, 3, 'entry_list')
+        response = self.check_publishing_context(
+            '/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(response, template_name_today)
         restore_template_loaders()
 
     def test_zinnia_entry_archive_year(self):
         setup_test_template_loader(
             {'zinnia/archives/2010/entry_archive_year.html': ''})
-        response = self.check_publishing_context('/2010/', 2, 3, 'entry_list')
+        response = self.check_publishing_context(
+            '/2010/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(
             response, 'zinnia/archives/2010/entry_archive_year.html')
         restore_template_loaders()
@@ -143,7 +146,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         setup_test_template_loader(
             {'zinnia/archives/2010/week/00/entry_archive_week.html': ''})
         response = self.check_publishing_context(
-            '/2010/week/00/', 1, 2, 'entry_list')
+            '/2010/week/00/', 1, 2, 'entry_list', 1)
         self.assertTemplateUsed(
             response, 'zinnia/archives/2010/week/00/entry_archive_week.html')
         # All days in a new year preceding the first Monday
@@ -156,7 +159,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         setup_test_template_loader(
             {'zinnia/archives/2010/month/01/entry_archive_month.html': ''})
         response = self.check_publishing_context(
-            '/2010/01/', 1, 2, 'entry_list')
+            '/2010/01/', 1, 2, 'entry_list', 4)
         self.assertTemplateUsed(
             response, 'zinnia/archives/2010/month/01/entry_archive_month.html')
         self.assertEquals(response.context['previous_month'], None)
@@ -170,7 +173,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         setup_test_template_loader(
             {'zinnia/archives/2010/01/01/entry_archive_day.html': ''})
         response = self.check_publishing_context(
-            '/2010/01/01/', 1, 2, 'entry_list')
+            '/2010/01/01/', 1, 2, 'entry_list', 5)
         self.assertTemplateUsed(
             response, 'zinnia/archives/2010/01/01/entry_archive_day.html')
         self.assertEquals(response.context['previous_month'], None)
@@ -185,7 +188,8 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertEquals(response.context['next_day'], None)
 
     def test_zinnia_entry_archive_today(self):
-        response = self.client.get('/today/')
+        with self.assertNumQueries(5):
+            response = self.client.get('/today/')
         self.assertEquals(response.context['day'], timezone.now().date())
         self.assertTemplateUsed(response, 'zinnia/entry_archive_today.html')
         self.assertEquals(response.context['previous_month'], date(2010, 6, 1))
@@ -194,7 +198,8 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertEquals(response.context['next_day'], None)
 
     def test_zinnia_entry_shortlink(self):
-        response = self.client.get('/1/')
+        with self.assertNumQueries(1):
+            response = self.client.get('/1/')
         self.assertEquals(response.status_code, 301)
         self.assertEquals(response['Location'],
                           'http://testserver/2010/01/01/test-1/')
@@ -207,7 +212,8 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         entry.template = '_entry_detail.html'
         entry.save()
         entry.sites.add(Site.objects.get_current())
-        response = self.client.get('/2010/01/01/my-test-entry/')
+        with self.assertNumQueries(1):
+            response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/_entry_detail.html')
 
@@ -215,7 +221,8 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         entry = self.create_published_entry()
         entry.login_required = True
         entry.save()
-        response = self.client.get('/2010/01/01/my-test-entry/')
+        with self.assertNumQueries(4):
+            response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertTemplateUsed(response, 'zinnia/login.html')
         response = self.client.post('/2010/01/01/my-test-entry/',
                                     {'username': 'admin',
@@ -227,15 +234,18 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         entry = self.create_published_entry()
         entry.password = 'password'
         entry.save()
-        response = self.client.get('/2010/01/01/my-test-entry/')
+        with self.assertNumQueries(1):
+            response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEquals(response.context['error'], False)
-        response = self.client.post('/2010/01/01/my-test-entry/',
-                                    {'entry_password': 'bad_password'})
+        with self.assertNumQueries(4):
+            response = self.client.post('/2010/01/01/my-test-entry/',
+                                        {'entry_password': 'bad_password'})
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEquals(response.context['error'], True)
-        response = self.client.post('/2010/01/01/my-test-entry/',
-                                    {'entry_password': 'password'})
+        with self.assertNumQueries(5):
+            response = self.client.post('/2010/01/01/my-test-entry/',
+                                        {'entry_password': 'password'})
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/entry_detail.html')
 
@@ -244,25 +254,31 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         entry.password = 'password'
         entry.login_required = True
         entry.save()
-        response = self.client.get('/2010/01/01/my-test-entry/')
+        with self.assertNumQueries(4):
+            response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertTemplateUsed(response, 'zinnia/login.html')
-        response = self.client.post('/2010/01/01/my-test-entry/',
-                                    {'username': 'admin',
-                                     'password': 'password'})
+        with self.assertNumQueries(11):
+            response = self.client.post('/2010/01/01/my-test-entry/',
+                                        {'username': 'admin',
+                                         'password': 'password'})
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEquals(response.context['error'], False)
-        response = self.client.post('/2010/01/01/my-test-entry/',
-                                    {'entry_password': 'password'})
+        with self.assertNumQueries(6):
+            response = self.client.post('/2010/01/01/my-test-entry/',
+                                        {'entry_password': 'password'})
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/entry_detail.html')
 
     def test_zinnia_entry_channel(self):
-        self.check_publishing_context('/channel-test/', 2, 3)
+        self.check_publishing_context(
+            '/channel-test/', 2, 3, 'entry_list', 1)
 
     def test_zinnia_category_list(self):
         self.check_publishing_context(
-            '/categories/', 1, friendly_context='category_list')
+            '/categories/', 1,
+            friendly_context='category_list',
+            queries=3)
         entry = Entry.objects.all()[0]
         entry.categories.add(Category.objects.create(
             title='New category', slug='new-category'))
@@ -272,7 +288,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         setup_test_template_loader(
             {'zinnia/category/tests/entry_list.html': ''})
         response = self.check_publishing_context(
-            '/categories/tests/', 2, 3, 'entry_list')
+            '/categories/tests/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(
             response, 'zinnia/category/tests/entry_list.html')
         self.assertEquals(response.context['category'].slug, 'tests')
@@ -301,7 +317,9 @@ class ZinniaViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_author_list(self):
         self.check_publishing_context(
-            '/authors/', 1, friendly_context='author_list')
+            '/authors/', 1,
+            friendly_context='author_list',
+            queries=2)
         user = User.objects.create(username='new-user',
                                    email='new_user@example.com')
         self.check_publishing_context('/authors/', 1)
@@ -313,7 +331,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         setup_test_template_loader(
             {'zinnia/author/admin/entry_list.html': ''})
         response = self.check_publishing_context(
-            '/authors/admin/', 2, 3, 'entry_list')
+            '/authors/admin/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(
             response, 'zinnia/author/admin/entry_list.html')
         self.assertEquals(response.context['author'].username, 'admin')
@@ -321,7 +339,9 @@ class ZinniaViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_tag_list(self):
         self.check_publishing_context(
-            '/tags/', 1, friendly_context='tag_list')
+            '/tags/', 1,
+            friendly_context='tag_list',
+            queries=1)
         entry = Entry.objects.all()[0]
         entry.tags = 'tests, tag'
         entry.save()
@@ -332,7 +352,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             {'zinnia/tag/tests/entry_list.html': '',
              '404.html': ''})
         response = self.check_publishing_context(
-            '/tags/tests/', 2, 3, 'entry_list')
+            '/tags/tests/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(
             response, 'zinnia/tag/tests/entry_list.html')
         self.assertEquals(response.context['tag'].name, 'tests')
@@ -342,7 +362,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_entry_search(self):
         self.check_publishing_context(
-            '/search/?pattern=test', 2, 3, 'entry_list')
+            '/search/?pattern=test', 2, 3, 'entry_list', 2)
         response = self.client.get('/search/?pattern=ab')
         self.assertEquals(len(response.context['object_list']), 0)
         self.assertEquals(response.context['error'],
@@ -353,7 +373,8 @@ class ZinniaViewsTestCase(ViewsBaseCase):
                           _('No pattern to search found'))
 
     def test_zinnia_sitemap(self):
-        response = self.client.get('/sitemap/')
+        with self.assertNumQueries(9):
+            response = self.client.get('/sitemap/')
         self.assertEquals(len(response.context['entries']), 2)
         self.assertEquals(len(response.context['categories']), 1)
         entry = self.create_published_entry()
@@ -381,11 +402,12 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             'Test 1</message>\n  \n</response>\n')
         entry.pingback_enabled = True
         entry.save()
-        self.assertEquals(
-            self.client.post('/trackback/1/',
-                             {'url': 'http://example.com'}).content,
-            '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
-            '<error>0</error>\n  \n</response>\n')
+        with self.assertNumQueries(5):
+            self.assertEquals(
+                self.client.post('/trackback/1/',
+                                 {'url': 'http://example.com'}).content,
+                '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
+                '<error>0</error>\n  \n</response>\n')
         self.assertEquals(
             self.client.post('/trackback/1/',
                              {'url': 'http://example.com'}).content,
@@ -394,12 +416,12 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             '</message>\n  \n</response>\n')
 
     def test_capabilities(self):
-        self.check_capabilities('/humans.txt', 'text/plain')
-        self.check_capabilities('/rsd.xml', 'application/rsd+xml')
+        self.check_capabilities('/humans.txt', 'text/plain', 0)
+        self.check_capabilities('/rsd.xml', 'application/rsd+xml', 0)
         self.check_capabilities('/wlwmanifest.xml',
-                                'application/wlwmanifest+xml')
+                                'application/wlwmanifest+xml', 0)
         self.check_capabilities('/opensearch.xml',
-                                'application/opensearchdescription+xml')
+                                'application/opensearchdescription+xml', 3)
 
 
 class ZinniaCustomDetailViews(ViewsBaseCase):
