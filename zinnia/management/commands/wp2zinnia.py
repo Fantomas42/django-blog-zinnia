@@ -136,16 +136,20 @@ class Command(LabelCommand):
             while 42:
                 user_text = "1. Select your user, by typing " \
                             "one of theses usernames:\n"\
-                            "[%s]\n"\
+                            "[%s] or 'back'\n"\
                             "Please select a choice: " % ', '.join(usernames)
                 user_selected = raw_input(user_text)
                 if user_selected in usernames:
                     break
+                if user_selected.strip() == 'back':
+                    return self.migrate_author(author_name)
             return users.get(username=user_selected)
         else:
-            create_text = "2. Please type the email of the '%s' user: " % \
-                          author_name
+            create_text = "2. Please type the email of " \
+                          "the '%s' user or 'back': " % author_name
             author_mail = raw_input(create_text)
+            if author_mail.strip() == 'back':
+                return self.migrate_author(author_name)
             try:
                 return User.objects.create_user(author_name, author_mail)
             except IntegrityError:
