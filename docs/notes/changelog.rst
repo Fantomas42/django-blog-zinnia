@@ -9,6 +9,7 @@ CHANGELOG
 * Pagination on archives
 * Better archive by week view
 * Update of the breadcrumbs tag
+* Improving ``wp2zinnia`` command
 * New ``long_enough`` spam checker
 * Custom templates for archive views
 * Publication dates become unrequired

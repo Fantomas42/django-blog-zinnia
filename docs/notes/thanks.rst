@@ -19,6 +19,7 @@ this application greatest each day.
 * Frederic Le guluche (Bloxboy)
 * Mauro Bianchi (bianchimro)
 * Arion Sprague (asprague)
+* Tom Träskbäck (Noobidoo)
 * Franck Bret
 * Jason Davies
 * Brandon Taylor

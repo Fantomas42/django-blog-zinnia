@@ -1,11 +1,14 @@
 """WordPress to Zinnia command module"""
+import os
 import sys
+from urllib2 import urlopen
 from datetime import datetime
 from optparse import make_option
 from xml.etree import ElementTree as ET
 
 from django.conf import settings
 from django.utils import timezone
+from django.core.files import File
 from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.db.utils import IntegrityError
@@ -16,6 +19,7 @@ from django.template.defaultfilters import slugify
 from django.contrib import comments
 from django.core.management.base import CommandError
 from django.core.management.base import LabelCommand
+from django.core.files.temp import NamedTemporaryFile
 
 from tagging.models import Tag
 
@@ -226,9 +230,9 @@ class Command(LabelCommand):
                 categories.append(self.categories[category_node.text])
         return categories
 
-    def import_entry(self, title, content, item_node, image_url):
+    def import_entry(self, title, content, item_node):
         """Importing an entry but some data are missing like
-        the image, related entries, start_publication and end_publication.
+        related entries, start_publication and end_publication.
         start_publication and creation_date will use the same value,
         wich is always in Wordpress $post->post_date"""
         creation_date = datetime.strptime(
@@ -265,12 +269,10 @@ class Command(LabelCommand):
             'login_required': item_node.find(
                 '{%s}status' % WP_NS).text == 'private',
             'creation_date': creation_date,
-            'last_update': timezone.now(),
-            'start_publication': creation_date,
-            'image': image_url}
+            'last_update': timezone.now()}
 
-        entry, created = Entry.objects.get_or_create(title=title,
-                                                     defaults=entry_dict)
+        entry, created = Entry.objects.get_or_create(
+            title=title, defaults=entry_dict)
 
         entry.categories.add(*self.get_entry_categories(
             item_node.findall('category')))
@@ -283,8 +285,8 @@ class Command(LabelCommand):
 
         return entry
 
-    def find_image_id(self,metadata):
-        for meta in metadata:
+    def find_image_id(self, metadatas):
+        for meta in metadatas:
             if meta.find('{%s}meta_key' % WP_NS).text == '_thumbnail_id':
                 return meta.find('{%s}meta_value/' % WP_NS).text
 
@@ -302,28 +304,32 @@ class Command(LabelCommand):
 
             if post_type == 'post' and content and title:
                 self.write_out('> %s... ' % title)
-                image_url=self.import_image(items,self.find_image_id(item_node.findall('{%s}postmeta' % WP_NS)))
-                entry = self.import_entry(title, content, item_node, image_url)
+                entry = self.import_entry(title, content, item_node)
                 self.write_out(self.style.ITEM('OK\n'))
+                image_id = self.find_image_id(
+                    item_node.findall('{%s}postmeta' % WP_NS))
+                if image_id:
+                    self.import_image(entry, items, image_id)
                 self.import_comments(entry, item_node.findall(
                     '{%s}comment/' % WP_NS))
             else:
                 self.write_out('> %s... ' % title, 2)
                 self.write_out(self.style.NOTICE('SKIPPED (not a post)\n'), 2)
 
-    def import_image(self, items, thumbid):
+    def import_image(self, entry, items, image_id):
         for item in items:
             post_type = item.find('{%s}post_type' % WP_NS).text
-            if post_type == 'attachment' and item.find('{%s}post_id' % WP_NS).text == thumbid:
-                for meta_item in item.findall('{%s}postmeta' % WP_NS):
-                    if meta_item.find('{%s}meta_key' % WP_NS).text == '_wp_attached_file':
-                        self.write_out(self.style.STEP('- found attachment file %s ...') % meta_item.find('{%s}meta_value/' % WP_NS).text)
-                        filename = meta_item.find('{%s}meta_value/' % WP_NS).text
-                        if filename != None:
-                            return 'uploads/' + filename[:90]
-                        else:
-                            return ''
-                        self.write_out(self.style.ITEM('OK\n'))
+            if post_type == 'attachment' and \
+                   item.find('{%s}post_id' % WP_NS).text == image_id:
+                title = 'Attachment %s' % item.find('title').text
+                self.write_out(' > %s... ' % title)
+                image_url = item.find('{%s}attachment_url' % WP_NS).text
+                img_tmp = NamedTemporaryFile(delete=True)
+                img_tmp.write(urlopen(image_url).read())
+                img_tmp.flush()
+                entry.image.save(os.path.basename(image_url),
+                                 File(img_tmp))
+                self.write_out(self.style.ITEM('OK\n'))
 
     def import_comments(self, entry, comment_nodes):
         """Loops over comments nodes and import then
