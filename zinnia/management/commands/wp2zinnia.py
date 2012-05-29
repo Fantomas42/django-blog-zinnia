@@ -110,7 +110,7 @@ class Command(LabelCommand):
                 post_authors.add(item.find(
                     '{http://purl.org/dc/elements/1.1/}creator').text)
 
-        self.write_out('%i authors found.\n' % len(post_authors))
+        self.write_out('> %i authors found.\n' % len(post_authors))
 
         authors = {}
         for post_author in post_authors:
@@ -125,21 +125,35 @@ class Command(LabelCommand):
         action_text = "The author '%s' needs to be migrated to an User:\n"\
                       "1. Use an existing user ?\n"\
                       "2. Create a new user ?\n"\
-                      "Please select a choice: " % author_name
+                      "Please select a choice: " % self.style.ITEM(author_name)
         while 42:
             selection = raw_input(smart_str(action_text))
             if selection in '12':
                 break
         if selection == '1':
             users = User.objects.all()
-            usernames = [user.username for user in users]
+            if users.count() == 1:
+                preselected_user = None
+                usernames = ['[%s]' % users[0].username]
+            else:
+                usernames = []
+                preselected_user = None
+                for user in users:
+                    if user.username == author_name:
+                        usernames.append('[%s]' % user.username)
+                        preselected_user = author_name
+                    else:
+                        usernames.append(user.username)
             while 42:
                 user_text = "1. Select your user, by typing " \
                             "one of theses usernames:\n"\
-                            "[%s] or 'back'\n"\
+                            "%s or 'back'\n"\
                             "Please select a choice: " % ', '.join(usernames)
                 user_selected = raw_input(user_text)
                 if user_selected in usernames:
+                    break
+                if user_selected == '' and preselected_user:
+                    user_selected = preselected_user
                     break
                 if user_selected.strip() == 'back':
                     return self.migrate_author(author_name)
