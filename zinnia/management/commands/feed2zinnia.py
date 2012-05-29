@@ -1,4 +1,5 @@
 """Feed to Zinnia command module"""
+import os
 import sys
 from urllib2 import urlopen
 from datetime import datetime
@@ -136,7 +137,8 @@ class Command(LabelCommand):
                         img_tmp = NamedTemporaryFile(delete=True)
                         img_tmp.write(urlopen(enclosure['href']).read())
                         img_tmp.flush()
-                        entry.image.save(slug, File(img_tmp))
+                        entry.image.save(os.path.basename(enclosure['href']),
+                                         File(img_tmp))
                         break
 
             if self.default_author:
