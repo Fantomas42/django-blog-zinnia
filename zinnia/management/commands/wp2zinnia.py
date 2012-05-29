@@ -46,8 +46,6 @@ class Command(LabelCommand):
                     help='Do NOT generate an excerpt if not present.'),
         make_option('--author', dest='author', default='',
                     help='All imported entries belong to specified author'),
-        make_option('--wxr_version', dest='wxr_version', default='1.1',
-                    help='Wordpress XML export version'),
         )
 
     SITE = Site.objects.get_current()
@@ -78,7 +76,6 @@ class Command(LabelCommand):
         global WP_NS
         self.verbosity = int(options.get('verbosity', 1))
         self.auto_excerpt = options.get('auto_excerpt', True)
-        WP_NS = WP_NS % options.get('wxr_version')
         self.default_author = options.get('author')
         if self.default_author:
             try:
@@ -91,6 +88,7 @@ class Command(LabelCommand):
             'Starting migration from Wordpress to Zinnia %s:\n' % __version__))
 
         tree = ET.parse(wxr_file)
+        WP_NS = WP_NS % self.guess_wxr_version(tree)
 
         self.authors = self.import_authors(tree)
 
@@ -100,6 +98,17 @@ class Command(LabelCommand):
         self.import_tags(tree.findall('channel/{%s}tag' % WP_NS))
 
         self.import_entries(tree.findall('channel/item'))
+
+    def guess_wxr_version(self, tree):
+        """We will try to guess the wxr version used
+        to complete the wordpress xml namespace name"""
+        for v in ('1.1', '1.0'):
+            try:
+                tree.find('channel/{%s}wxr_version' % (WP_NS % v)).text
+                return v
+            except AttributeError:
+                pass
+        raise CommandError('Cannot resolve the wordpress namespace')
 
     def import_authors(self, tree):
         """Retrieve all the authors used in posts
@@ -132,7 +141,7 @@ class Command(LabelCommand):
                       "Please select a choice: " % self.style.ITEM(author_name)
         while 42:
             selection = raw_input(smart_str(action_text))
-            if selection in '12':
+            if selection and selection in '12':
                 break
         if selection == '1':
             users = User.objects.all()
