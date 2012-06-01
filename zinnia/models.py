@@ -261,10 +261,11 @@ class EntryAbstractClass(models.Model):
     @models.permalink
     def get_absolute_url(self):
         """Return entry's URL"""
+        creation_date = timezone.localtime(self.creation_date)
         return ('zinnia_entry_detail', (), {
-            'year': self.creation_date.strftime('%Y'),
-            'month': self.creation_date.strftime('%m'),
-            'day': self.creation_date.strftime('%d'),
+            'year': creation_date.strftime('%Y'),
+            'month': creation_date.strftime('%m'),
+            'day': creation_date.strftime('%d'),
             'slug': self.slug})
 
     class Meta:
