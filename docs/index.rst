@@ -74,7 +74,7 @@ Notes
 Related
 -------
 
-* `Zinnia's API`_
+* `Test report`_
 * `Code coverage`_
 
 Indices and tables
@@ -87,5 +87,5 @@ index or try to find it using the search function:
 * :ref:`search`
 
 .. _`documentation online at readthedocs.org`: http://django-blog-zinnia.readthedocs.org/
-.. _`Zinnia's API`: http://django-blog-zinnia.com/api/
+.. _`Test report`: http://django-blog-zinnia.com/documentation/xunit/
 .. _`Code coverage`: http://django-blog-zinnia.com/documentation/coverage/
