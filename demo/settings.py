@@ -10,6 +10,8 @@ DATABASES = {'default':
               'NAME': os.path.join(os.path.dirname(__file__), 'demo.db')}
              }
 
+TIME_ZONE = 'Europe/Paris'
+
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
