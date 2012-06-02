@@ -4,6 +4,7 @@ from functools import wraps
 from datetime import datetime
 
 from django.utils.dateformat import format
+from django.utils.timezone import localtime
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 
@@ -52,10 +53,11 @@ MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
                          _('Categories'), reverse('zinnia_category_list'))] + \
                      [Crumb(anc.title, anc.get_absolute_url())
                       for anc in x.get_ancestors()] + [Crumb(x.title)],
-                     'Entry': lambda x: [year_crumb(x.creation_date),
-                                         month_crumb(x.creation_date),
-                                         day_crumb(x.creation_date),
-                                         Crumb(x.title)]}
+                     'Entry': lambda x: [
+                         year_crumb(localtime(x.creation_date)),
+                         month_crumb(localtime(x.creation_date)),
+                         day_crumb(localtime(x.creation_date)),
+                         Crumb(x.title)]}
 
 ARCHIVE_REGEXP = re.compile(
     r'.*(?P<year>\d{4})/(?P<month>\d{2})?/(?P<day>\d{2})?.*')
