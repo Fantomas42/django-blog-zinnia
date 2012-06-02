@@ -50,7 +50,7 @@ class ZinniaFeedsTestCase(TestCase):
                   '<img src="/image.jpg" />',
                   'slug': 'my-test-entry',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 1, 1),
+                  'creation_date': datetime(2010, 1, 1, 12),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)

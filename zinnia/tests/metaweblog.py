@@ -42,7 +42,7 @@ class MetaWeblogTestCase(TestCase):
                                     slug='category-2')]
         params = {'title': 'My entry 1', 'content': 'My content 1',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1',
-                  'creation_date': datetime(2010, 1, 1),
+                  'creation_date': datetime(2010, 1, 1, 12),
                   'status': PUBLISHED}
         self.entry_1 = Entry.objects.create(**params)
         self.entry_1.authors.add(self.webmaster)
@@ -187,7 +187,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(post['title'], self.entry_1.title)
         self.assertEquals(post['description'], '<p>My content 1</p>')
         self.assertEquals(post['categories'], ['Category 1', 'Category 2'])
-        self.assertTrue('2010-01-01T00:00:00' in post['dateCreated'].value)
+        self.assertTrue('2010-01-01T12:00:00' in post['dateCreated'].value)
         self.assertEquals(post['link'],
                           'http://example.com/2010/01/01/my-entry-1/')
         self.assertEquals(post['permaLink'],
