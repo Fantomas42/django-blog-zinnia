@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+0.11.1
+------
+
+* Fix issues with ``get_absolute_url`` and ``zbreadcrumbs``
+  when time-zone support is enabled.
+
 0.11
 ----
 
