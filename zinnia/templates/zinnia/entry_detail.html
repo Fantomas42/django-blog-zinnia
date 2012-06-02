@@ -103,7 +103,7 @@
 	{{ comment.user_name }}
 	{% endif %}
 	{% trans "on" %}
-        <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}Z">
+        <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
           {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
       </p>
@@ -137,7 +137,7 @@
 	<a href="{{ pingback.url }}" rel="external nofollow"
            class="fn url org">{{ pingback.user_name }}</a>
 	{% trans "on" %}
-        <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}Z">
+        <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}">
           {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
       </p>
@@ -170,7 +170,7 @@
 	<a href="{{ trackback.url }}" rel="external nofollow"
            class="fn url org">{{ trackback.user_name }}</a>
 	{% trans "on" %}
-        <abbr class="trackback-published" title="{{ trackback.submit_date|date:"c" }}Z">
+        <abbr class="trackback-published" title="{{ trackback.submit_date|date:"c" }}">
           {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
       </p>
