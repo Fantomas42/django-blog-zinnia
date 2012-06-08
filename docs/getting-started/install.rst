@@ -133,6 +133,23 @@ needed. Please refer to
 https://docs.djangoproject.com/en/dev/howto/static-files/ for more
 informations about serving static files.
 
+.. _syncing-database:
+
+Syncing the database
+====================
+
+.. highlight:: console
+
+Now that you have everything set up, simply run the following in your
+project directory to sync the models with the database. ::
+
+  $ python manage.py syncdb
+
+If you are using South to manage your database, you will have to do the
+following. ::
+
+  $ python manage.py syncdb --migrate
+
 .. _`Python 2.x`: http://www.python.org/
 .. _`Django`: https://www.djangoproject.com/
 .. _`django-mptt`: https://github.com/django-mptt/django-mptt/
@@ -141,17 +158,3 @@ informations about serving static files.
 .. _`pytz`: http://pytz.sourceforge.net/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/
 .. _`django-xmlrpc`: https://github.com/Fantomas42/django-xmlrpc
-
-Syncing the Database
-====================
-
-Now that you have everything set up, simply run the following in your 
-project directory to sync the models with the database::
-
-    python manage.py syncdb
-
-If you are using South to manage your database, you will have to do the
-following::
-
-    python manage.py schemamigration zinnia --initial
-    python manage.py migrate zinnia

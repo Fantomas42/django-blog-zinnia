@@ -37,7 +37,7 @@ Code conventions are important in a way where they ensure the lisibility
 of the code in the time, that's why the code try to respect at most the
 :pep:`8`.
 
-If you have already :ref:`run the buildout <running-the-buildout>` script
+If you have already :ref:`run the buildout<running-the-buildout>` script
 you can execute this Makefile rule to check your code. ::
 
   $ make kwalitee
@@ -79,14 +79,16 @@ The documentation should :
 Keep it mind that documenting is most useful than coding, so your
 contribution will be greatly appreciated.
 
-Contributing Changes
+.. _contributing-changes-documentation:
+
+Contributing changes
 --------------------
 
 Contribute changes to the documentation in the same fashion as committing to
 source code.  Essentially, you will fork the project on github, make your
 changes to the documentation, commit them, and submit a pull request.
 
-See :ref:`code-process` for more details.
+See :ref:`code process<code-process>` for more details.
 
 .. _writing-translations:
 
