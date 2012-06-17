@@ -256,7 +256,7 @@ class EntryAbstractClass(models.Model):
         return get_url_shortener()(self)
 
     def __unicode__(self):
-        return '%s: %s' % (self.title, self.get_status_display())
+        return u'%s: %s' % (self.title, self.get_status_display())
 
     @models.permalink
     def get_absolute_url(self):
