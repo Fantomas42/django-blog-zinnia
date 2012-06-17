@@ -466,6 +466,16 @@ class ZinniaCustomDetailViews(ViewsBaseCase):
     """
     urls = 'zinnia.tests.custom_views_detail_urls'
 
+    def setUp(self):
+        """We don't need to generate the full template
+        to make the tests working"""
+        super(ZinniaCustomDetailViews, self).setUp()
+        setup_test_template_loader(
+            {'zinnia/entry_search.html': ''})
+
+    def tearDown(self):
+        restore_template_loaders()
+
     def test_custom_category_detail(self):
         response = self.check_publishing_context('/categories/tests/', 2, 3)
         self.assertTemplateUsed(response, 'zinnia/entry_search.html')
