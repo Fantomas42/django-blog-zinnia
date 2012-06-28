@@ -27,6 +27,7 @@ from zinnia.tests.spam_checker import SpamCheckerTestCase
 from zinnia.tests.url_shortener import URLShortenerTestCase
 from zinnia.tests.long_enough import LongEnoughTestCase
 from zinnia.tests.mixins import MixinTestCase
+from zinnia.tests.author import AuthorTestCase
 from zinnia.signals import disconnect_zinnia_signals
 
 
@@ -45,7 +46,8 @@ def suite():
                   URLShortenerTestCase, EntryCommentModeratorTestCase,
                   ZinniaCustomDetailViews, SpamCheckerTestCase,
                   EntryAdminTestCase, CategoryAdminTestCase,
-                  MixinTestCase, LongEnoughTestCase)
+                  MixinTestCase, LongEnoughTestCase,
+                  AuthorTestCase)
 
     if 'django_xmlrpc' in settings.INSTALLED_APPS:
         test_cases += (PingBackTestCase, MetaWeblogTestCase)

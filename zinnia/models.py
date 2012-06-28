@@ -50,6 +50,11 @@ class Author(User):
         """Return only the entries published"""
         return entries_published(self.entries)
 
+    def __unicode__(self):
+        if self.first_name and self.last_name:
+            return u'%s %s' % (self.first_name, self.last_name)
+        return self.username
+
     @models.permalink
     def get_absolute_url(self):
         """Return author's URL"""
