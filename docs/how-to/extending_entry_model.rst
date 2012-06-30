@@ -65,7 +65,7 @@ write our new class in a file named :file:`entry_gallery.py`. ::
       gallery = models.ForeignKey(Gallery)
 
       def __unicode__(self):
-          return 'EntryGallery %s' % self.title
+          return u'EntryGallery %s' % self.title
 
       class Meta(EntryAbstractClass.Meta):
           abstract = True
@@ -88,17 +88,37 @@ field named ``gallery`` pointing to a :class:`Gallery` model defined in
              table will be created and the extending process will not work
              as expected.
 
-.. note:: Considerations about the database :
-
-          * If you extend the :class:`Entry` model after the ``syncdb``
-            command, you have to reset the Zinnia application to reflect
-            your changes.
-
-          * South cannot be used to write migrations to your new model.
-
 .. seealso::
    :ref:`model-inheritance` for more information about the concepts
    behind the model inheritence in Django and the limitations.
+
+.. _database-considerations:
+
+Considerations about the database
+---------------------------------
+
+If you do the extension of the :class:`Entry` model after the ``syncdb``
+command, you have to manually alter the Zinnia's tables for reflecting your
+changes made on the model class. In the case where your database is empty,
+you can simply execute the ``reset`` command on the Zinnia application for
+destroying the old database schema and installing the new one.
+
+Now if you are using `South`_ and try to write a new migration for
+reflecting your changes, the migration script will be written in the
+:mod:`zinnia.migrations` module, which is not recommended because the
+result is not replicable for multiple installations and breaks the
+migration system with future releases of Zinnia.
+
+Fortunatly `South`_ provides an elegant solution with the
+`SOUTH_MIGRATION_MODULES`_ setting. Once this setting done for the
+``'zinnia'`` key, because you are now out the Zinnia's default migrations
+flow, you have to delete the ghost migrations for Zinnia. At this step you
+can now start to write new migrations.
+
+It's recommended that the new initial migration represents the default
+:class:`Entry` schema provided by Zinnia, because after that, you just have
+to write a new migration for reflecting your changes, and you can alter
+your database schema with the ``migrate`` command.
 
 .. _registering-the-extension:
 
@@ -163,4 +183,6 @@ provided by Zinnia to display the gallery field into the Weblog's pages.
 For information you can see another implementation example in the
 `cmsplugin-zinnia`_ package.
 
+.. _`South`: http://south.aeracode.org/
+.. _`SOUTH_MIGRATION_MODULES`: http://south.readthedocs.org/en/latest/settings.html#south-migration-modules
 .. _`cmsplugin-zinnia`: https://github.com/Fantomas42/cmsplugin-zinnia
