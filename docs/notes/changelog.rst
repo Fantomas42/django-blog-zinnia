@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+0.11.2
+------
+
+* Customization of the templates with ease.
+* Fix ``collectstatic`` with ``CachedStaticFilesStorage``.
+
 0.11.1
 ------
 
