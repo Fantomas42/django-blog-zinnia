@@ -8,11 +8,11 @@
 
 {% block body-class %}{{ block.super }} archive date year year-{{ year }}{% endblock %}
 
-{% block content %}
+{% block content-title %}
 <h1>{% trans "Archives" %} {{ year }}</h1>
+{% endblock %}
 
-{{ block.super }}
-
+{% block content-related %}
 <h2>{% trans "Monthly archives" %}</h2>
 <ul>
   {% for date in date_list %}

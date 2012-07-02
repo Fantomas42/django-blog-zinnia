@@ -8,11 +8,11 @@
 
 {% block body-class %}{{ block.super }} archive date day year-{{ day|date:"Y" }} month-{{ day|date:"m" }} day-{{ day|date:"d" }} today{% endblock %}
 
-{% block content %}
+{% block content-title %}
 <h1>{% trans "Today archives" %}</h1>
+{% endblock %}
 
-{{ block.super }}
-
+{% block content-related %}
 {% if previous_day %}
 <h3>{% trans "Previous day" %}</h3>
 <p>

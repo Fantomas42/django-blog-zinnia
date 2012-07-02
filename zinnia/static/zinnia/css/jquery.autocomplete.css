@@ -34,10 +34,6 @@
 	overflow: hidden;
 }
 
-.ac_loading {
-	background: white url('indicator.gif') right center no-repeat;
-}
-
 .ac_odd {
 	background-color: #eee;
 }

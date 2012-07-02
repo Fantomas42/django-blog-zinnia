@@ -13,7 +13,7 @@
 
 {% block body-class %}{{ block.super }} search {% if object_list %}search-results{% else %}search-no-results{% endif %}{% endblock %}
 
-{% block content %}
+{% block content-title %}
 <h1>{% trans "Search results for" %} '{{ pattern }}'</h1>
 
 {% if error %}
@@ -25,7 +25,9 @@
   {% blocktrans count entry_count=paginator.count %}{{ entry_count }} entry found{% plural %}{{ entry_count }} entries found{% endblocktrans %}
 </p>
 {% endif %}
+{% endblock %}
 
+{% block content-loop %}
 {% for object in object_list %}
   {% with object_content=object.html_content|truncatewords_html:100|safe continue_reading=1 %}
   {% include "zinnia/_entry_detail.html" %}
@@ -33,7 +35,9 @@
 {% empty %}
 <p class="notice">{% trans "Nothing found." %}</p>
 {% endfor %}
+{% endblock %}
 
+{% block content-related %}
 <div class="search">
   <form method="get" id="main_searchform" action="{% url 'zinnia_entry_search' %}">
     <p>
@@ -45,8 +49,4 @@
     </p>
   </form>
 </div>
-
-{% if is_paginated %}
-  {% zinnia_pagination page_obj %}
-{% endif %}
 {% endblock %}
