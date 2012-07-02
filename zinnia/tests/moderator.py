@@ -4,6 +4,9 @@ from django.test import TestCase
 from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
+from django.contrib.comments.forms import CommentForm
+from django.contrib.comments.moderation import moderator as moderator_stack
 
 from zinnia.models import Entry
 from zinnia.managers import PUBLISHED
@@ -144,3 +147,24 @@ class EntryCommentModeratorTestCase(TestCase):
                           True)
         self.assertEquals(comments.get_model().objects.filter(
             flags__flag='spam').count(), 1)
+
+    def test_integrity_error_on_duplicate_spam_comments(self):
+        class AllIsSpamModerator(EntryCommentModerator):
+            spam_checker_backends = [
+                'zinnia.spam_checker.backends.all_is_spam']
+
+        moderator_stack.unregister(Entry)
+        moderator_stack.register(Entry, AllIsSpamModerator)
+
+        datas = {'name': 'Jim Bob',
+                 'email': 'jim.bob@example.com',
+                 'url': '',
+                 'comment': 'This is my comment'}
+
+        f = CommentForm(self.entry)
+        datas.update(f.initial)
+        url = reverse('comments-post-comment')
+
+        self.client.post(url, datas)
+        self.client.post(url, datas)
+        self.assertEqual(comments.get_model().objects.count(), 1)
