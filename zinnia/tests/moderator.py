@@ -168,3 +168,5 @@ class EntryCommentModeratorTestCase(TestCase):
         self.client.post(url, datas)
         self.client.post(url, datas)
         self.assertEqual(comments.get_model().objects.count(), 1)
+        self.assertEqual(
+            comments.get_model().objects.all()[0].flags.count(), 1)
