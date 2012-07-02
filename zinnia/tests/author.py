@@ -8,7 +8,6 @@ from zinnia.models import Author
 from zinnia.managers import PUBLISHED
 
 
-
 class AuthorTestCase(TestCase):
 
     def setUp(self):
