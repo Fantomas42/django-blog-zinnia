@@ -102,7 +102,7 @@ class Command(LabelCommand):
     def guess_wxr_version(self, tree):
         """We will try to guess the wxr version used
         to complete the wordpress xml namespace name"""
-        for v in ('1.1', '1.0'):
+        for v in ('1.2', '1.1', '1.0'):
             try:
                 tree.find('channel/{%s}wxr_version' % (WP_NS % v)).text
                 return v
