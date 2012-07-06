@@ -161,6 +161,9 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         response = self.client.get('/2010/06/')
         self.assertEquals(response.context['previous_month'], date(2010, 1, 1))
         self.assertEquals(response.context['next_month'], None)
+        response = self.client.get('/2009/12/')
+        self.assertEquals(response.context['previous_month'], None)
+        self.assertEquals(response.context['next_month'], date(2010, 1, 1))
 
     def test_zinnia_entry_archive_day(self):
         setup_test_template_loader(
