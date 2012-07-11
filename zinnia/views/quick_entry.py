@@ -11,19 +11,17 @@ from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import permission_required
+from django.utils import timezone
 
 from zinnia.models import Entry
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 
-
-class QuickEntryForm(forms.Form):
+class QuickEntryForm(forms.ModelForm):
     """Form for posting an entry quickly"""
 
-    title = forms.CharField(required=True, max_length=255)
-    content = forms.CharField(required=True)
-    tags = forms.CharField(required=False, max_length=255)
-
+    class Meta:
+        model = Entry
 
 class QuickEntry(View):
     """View handling the quick post of a short Entry"""
@@ -41,18 +39,22 @@ class QuickEntry(View):
         """Handle the datas for posting a quick entry,
         and redirect to the admin in case of error or
         to the entry's page in case of success"""
-        form = QuickEntryForm(request.POST)
+        data = {
+            'title': request.POST.get('title'),
+            'slug': slugify(request.POST.get('title')),
+            'status': DRAFT if 'save_draft' in request.POST else PUBLISHED,
+            'sites': [Site.objects.get_current().pk],
+            'authors': [request.user.pk],
+            'template': 'entry_detail.html',
+            'creation_date': timezone.now(),
+            'last_update': timezone.now(),
+            'content': request.POST.get('content'),
+            'tags': request.POST.get('tags')
+        }
+        form = QuickEntryForm(data)
         if form.is_valid():
-            entry_dict = form.cleaned_data
-            status = PUBLISHED
-            if 'save_draft' in request.POST:
-                status = DRAFT
-            entry_dict['content'] = linebreaks(entry_dict['content'])
-            entry_dict['slug'] = slugify(entry_dict['title'])
-            entry_dict['status'] = status
-            entry = Entry.objects.create(**entry_dict)
-            entry.sites.add(Site.objects.get_current())
-            entry.authors.add(request.user)
+            form.instance.content = linebreaks(form.cleaned_data['content'])
+            entry = form.save()
             return redirect(entry)
 
         data = {'title': smart_str(request.POST.get('title', '')),

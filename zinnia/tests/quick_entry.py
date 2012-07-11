@@ -1,3 +1,4 @@
+# coding=utf-8
 """Test cases for Zinnia's quick entry"""
 from django.test import TestCase
 from django.contrib.auth.models import User
@@ -52,3 +53,23 @@ class QuickEntryTestCase(TestCase):
         self.assertEquals(entry.title, 'test')
         self.assertEquals(entry.tags, 'test')
         self.assertEquals(entry.content, '<p>Test content</p>')
+
+        response = self.client.post('/quick_entry/',
+                                    {'title': 'test', 'tags': 'test-2',
+                                     'content': 'Test content',
+                                     'save_draft': ''}, follow=True)
+        self.assertEquals(response.redirect_chain,
+                          [('http://testserver/admin/zinnia/entry/add/'\
+                            '?tags=test-2&title=test&sites=1&'\
+                            'content=%3Cp%3ETest+content%3C%2Fp%3E'\
+                            '&authors=2&slug=test', 302)])
+
+        response = self.client.post('/quick_entry/',
+                                    {'title': u'тест', 'tags': 'test-2',
+                                     'content': 'Test content',
+                                     'save_draft': ''}, follow=True)
+        self.assertEquals(response.redirect_chain,
+                          [('http://testserver/admin/zinnia/entry/add/'\
+                            '?tags=test-2&title=%D1%82%D0%B5%D1%81%D1%82'
+                            '&sites=1&content=%3Cp%3ETest+content%3C%2Fp%3E'\
+                            '&authors=2&slug=', 302)])
