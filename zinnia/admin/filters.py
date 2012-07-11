@@ -1,6 +1,7 @@
 """Filters for Zinnia admin"""
 from django.contrib.admin import SimpleListFilter
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ungettext_lazy as __
 
 from zinnia.models import Author
 from django.db.models import Count
@@ -13,14 +14,17 @@ class AuthorListFilter(SimpleListFilter):
     parameter_name = 'author'
 
     def lookups(self, request, model_admin):
-        """Return published auhtors choicex"""
+        """Return published authors choices with their entries number"""
         active_authors = Author.published.all().annotate(
             number_of_entries=Count('entries'))
         for author in active_authors:
-            yield (str(author.pk), _('%s (%i entries)') % (
-                author.__unicode__(), author.number_of_entries))
+            yield (str(author.pk), __('%(author)s (%(count)i entry)',
+                                      '%(author)s (%(count)i entries)',
+                                      author.number_of_entries) % {
+                       'author': author.__unicode__(),
+                       'count': author.number_of_entries})
 
     def queryset(self, request, queryset):
-        """Return the author's entries"""
+        """Return the author's entries if a value is set"""
         if self.value():
             return queryset.filter(authors__id=self.value())
