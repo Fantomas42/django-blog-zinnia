@@ -1,5 +1,4 @@
 """EntryAdmin for Zinnia"""
-
 from django.forms import Media
 from django.contrib import admin
 from django.conf.urls import url
@@ -22,6 +21,7 @@ from zinnia.managers import HIDDEN
 from zinnia.managers import PUBLISHED
 from zinnia.ping import DirectoryPinger
 from zinnia.admin.forms import EntryAdminForm
+from zinnia.admin.filters import AuthorListFilter
 
 
 class EntryAdmin(admin.ModelAdmin):
@@ -42,7 +42,7 @@ class EntryAdmin(admin.ModelAdmin):
                                                'pingback_enabled')}),
                  (_('Publication'), {'fields': ('categories', 'tags',
                                                 'sites', 'slug')}))
-    list_filter = ('categories', 'authors', 'status', 'featured',
+    list_filter = ('categories', AuthorListFilter, 'status', 'featured',
                    'login_required', 'comment_enabled', 'pingback_enabled',
                    'creation_date', 'start_publication',
                    'end_publication', 'sites')
