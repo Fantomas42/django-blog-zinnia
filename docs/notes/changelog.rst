@@ -4,6 +4,7 @@ CHANGELOG
 0.11.2
 ------
 
+* New admin filter for authors?
 * Customization of the templates with ease.
 * Fix ``collectstatic`` with ``CachedStaticFilesStorage``.
 
