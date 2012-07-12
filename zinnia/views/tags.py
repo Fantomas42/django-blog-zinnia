@@ -41,7 +41,8 @@ class TagDetail(EntryQuerysetTemplateResponseMixin, BaseListView):
         belonging to the current tag"""
         self.tag = get_tag(self.kwargs['tag'])
         if self.tag is None:
-            raise Http404(_('No Tag found matching "%s".') % self.kwargs['tag'])
+            raise Http404(_('No Tag found matching "%s".') %
+                          self.kwargs['tag'])
         return TaggedItem.objects.get_by_model(
             Entry.published.all(), self.tag)
 
