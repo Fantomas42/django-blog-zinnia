@@ -7,12 +7,14 @@ from django.utils import timezone
 from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.core.urlresolvers import NoReverseMatch
 from django.conf import settings as project_settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import get_language
-from django.utils.translation import ugettext_lazy as _
 from django.template.response import TemplateResponse
-from django.core.urlresolvers import reverse, NoReverseMatch
+from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ungettext_lazy as __
 
 from tagging.models import Tag
 
@@ -72,8 +74,10 @@ class EntryAdmin(admin.ModelAdmin):
                 {'title': entry.title, 'word_count': entry.word_count}
         comments = entry.comments.count()
         if comments:
-            return _('%(title)s (%(comments)i comments)') % \
-                   {'title': title, 'comments': comments}
+            return __('%(title)s (%(comments)i comment)',
+                      '%(title)s (%(comments)i comments)',
+                      comments) % \
+                      {'title': title, 'comments': comments}
         return title
     get_title.short_description = _('title')
 
