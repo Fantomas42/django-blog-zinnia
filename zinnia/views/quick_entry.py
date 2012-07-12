@@ -17,11 +17,13 @@ from zinnia.models import Entry
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 
+
 class QuickEntryForm(forms.ModelForm):
     """Form for posting an entry quickly"""
 
     class Meta:
         model = Entry
+
 
 class QuickEntry(View):
     """View handling the quick post of a short Entry"""

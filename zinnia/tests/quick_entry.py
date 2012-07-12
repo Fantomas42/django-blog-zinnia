@@ -15,14 +15,13 @@ class QuickEntryTestCase(TestCase):
     def setUp(self):
         self.original_wysiwyg = settings.WYSIWYG
         settings.WYSIWYG = None
+        User.objects.create_user('user', 'user@example.com', 'password')
+        User.objects.create_superuser('admin', 'admin@example.com', 'password')
 
     def tearDown(self):
         settings.WYSIWYG = self.original_wysiwyg
 
     def test_quick_entry(self):
-        User.objects.create_user('user', 'user@example.com', 'password')
-        User.objects.create_superuser('admin', 'admin@example.com', 'password')
-
         response = self.client.get('/quick_entry/', follow=True)
         self.assertEquals(
             response.redirect_chain,
@@ -46,14 +45,14 @@ class QuickEntryTestCase(TestCase):
         response = self.client.post('/quick_entry/',
                                     {'title': 'test', 'tags': 'test',
                                      'content': 'Test content',
-                                     'save_draft': ''})
+                                     'save_draft': ''}, follow=True)
+        self.assertEquals(response.redirect_chain,
+                          [('http://testserver/2012/07/12/test/', 302)])
         entry = Entry.objects.get(title='test')
-        self.assertEquals(response.status_code, 302)
         self.assertEquals(entry.status, DRAFT)
         self.assertEquals(entry.title, 'test')
         self.assertEquals(entry.tags, 'test')
         self.assertEquals(entry.content, '<p>Test content</p>')
-
         response = self.client.post('/quick_entry/',
                                     {'title': 'test', 'tags': 'test-2',
                                      'content': 'Test content',
@@ -64,6 +63,8 @@ class QuickEntryTestCase(TestCase):
                             'content=%3Cp%3ETest+content%3C%2Fp%3E'\
                             '&authors=2&slug=test', 302)])
 
+    def test_quick_entry_non_ascii_title_issue_153(self):
+        self.client.login(username='admin', password='password')
         response = self.client.post('/quick_entry/',
                                     {'title': u'тест', 'tags': 'test-2',
                                      'content': 'Test content',
