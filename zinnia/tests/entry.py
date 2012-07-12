@@ -9,6 +9,8 @@ from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
+from django.utils.translation import activate
+from django.utils.translation import deactivate
 from django.contrib.comments.models import CommentFlag
 
 from zinnia import models
@@ -84,7 +86,9 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.trackbacks.count(), 1)
 
     def test_str(self):
+        activate('en')
         self.assertEquals(str(self.entry), 'My entry: draft')
+        deactivate()
 
     def test_word_count(self):
         self.assertEquals(self.entry.word_count, 2)

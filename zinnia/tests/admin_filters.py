@@ -7,6 +7,7 @@ from django.contrib.admin import site
 from django.contrib.admin import ModelAdmin
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.admin.views.main import ChangeList
 
@@ -24,6 +25,7 @@ class AuthorListFilterTestCase(TestCase):
     urls = 'zinnia.tests.urls'
 
     def setUp(self):
+        activate('en')
         self.request_factory = RequestFactory()
 
         self.site = Site.objects.get_current()
@@ -51,6 +53,9 @@ class AuthorListFilterTestCase(TestCase):
         self.entry_2.authors.add(*self.authors[:-1])
         self.entry_2.sites.add(self.site)
 
+    def tearDown(self):
+        deactivate()
+
     def get_changelist(self, request, model, modeladmin):
         return ChangeList(
             request, model, modeladmin.list_display,
@@ -72,7 +77,6 @@ class AuthorListFilterTestCase(TestCase):
         queryset = changelist.get_query_set(request)
         self.assertEqual(queryset.count(), 1)
 
-        deactivate()
         with self.assertNumQueries(1):
             filterspec = changelist.get_filters(request)[0][0]
             self.assertEquals(filterspec.title, 'author')
