@@ -13,8 +13,8 @@ from django.conf import settings as project_settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import get_language
 from django.template.response import TemplateResponse
+from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ungettext_lazy as __
 
 from tagging.models import Tag
 
@@ -74,10 +74,10 @@ class EntryAdmin(admin.ModelAdmin):
                 {'title': entry.title, 'word_count': entry.word_count}
         comments = entry.comments.count()
         if comments:
-            return __('%(title)s (%(comments)i comment)',
-                      '%(title)s (%(comments)i comments)',
-                      comments) % \
-                      {'title': title, 'comments': comments}
+            return ungettext_lazy('%(title)s (%(comments)i comment)',
+                                  '%(title)s (%(comments)i comments)',
+                                  comments) % \
+                                  {'title': title, 'comments': comments}
         return title
     get_title.short_description = _('title')
 

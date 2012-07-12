@@ -1,7 +1,7 @@
 """Filters for Zinnia admin"""
 from django.contrib.admin import SimpleListFilter
+from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ungettext_lazy as __
 
 from zinnia.models import Author
 from django.db.models import Count
@@ -18,9 +18,10 @@ class AuthorListFilter(SimpleListFilter):
         active_authors = Author.published.all().annotate(
             number_of_entries=Count('entries'))
         for author in active_authors:
-            yield (str(author.pk), __('%(author)s (%(count)i entry)',
-                                      '%(author)s (%(count)i entries)',
-                                      author.number_of_entries) % {
+            yield (str(author.pk), ungettext_lazy(
+                '%(author)s (%(count)i entry)',
+                '%(author)s (%(count)i entries)',
+                author.number_of_entries) % {
                        'author': author.__unicode__(),
                        'count': author.number_of_entries})
 
