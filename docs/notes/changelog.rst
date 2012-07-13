@@ -4,9 +4,14 @@ CHANGELOG
 0.11.2
 ------
 
-* New admin filter for authors.
+* New admin filter for authors
 * Minor translation improvements
-* Customization of the templates with ease
+* Minor documentation improvements
+* ``wp2zinnia`` handle wxr version 1.2
+* Customizations of the templates with ease
+* Define a custom ``Author.__unicode__`` method
+* Fix issue with duplicate spam comments
+* Fix bug in ``PreviousNextPublishedMixin``
 * Fix bug in ``QuickEntry`` with non ascii title
 * Fix ``collectstatic`` with ``CachedStaticFilesStorage``
 
