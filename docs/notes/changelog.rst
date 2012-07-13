@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+0.11.2
+------
+
+* New admin filter for authors.
+* Minor translation improvements
+* Customization of the templates with ease
+* Fix bug in ``QuickEntry`` with non ascii title
+* Fix ``collectstatic`` with ``CachedStaticFilesStorage``
+
 0.11.1
 ------
 
