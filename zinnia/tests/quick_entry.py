@@ -46,9 +46,10 @@ class QuickEntryTestCase(TestCase):
                                     {'title': 'test', 'tags': 'test',
                                      'content': 'Test content',
                                      'save_draft': ''}, follow=True)
-        self.assertEquals(response.redirect_chain,
-                          [('http://testserver/2012/07/12/test/', 302)])
         entry = Entry.objects.get(title='test')
+        self.assertEquals(response.redirect_chain,
+                          [('http://testserver%s' %
+                            entry.get_absolute_url(), 302)])
         self.assertEquals(entry.status, DRAFT)
         self.assertEquals(entry.title, 'test')
         self.assertEquals(entry.tags, 'test')
