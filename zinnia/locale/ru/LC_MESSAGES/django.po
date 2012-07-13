@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2012-04-28 05:19-0500\n"
-"PO-Revision-Date: 2012-04-28 19:29+0000\n"
+"POT-Creation-Date: 2012-07-12 05:31-0500\n"
+"PO-Revision-Date: 2012-07-12 11:46+0000\n"
 "Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,249 +23,248 @@ msgstr ""
 
 #: feeds.py:113 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:6 templates/zinnia/entry_list.html:20
-#: tests/feeds.py:137 tests/feeds.py:297
 msgid "Latest entries"
 msgstr "Последние записи"
 
-#: feeds.py:117 tests/feeds.py:140
+#: feeds.py:117
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "Последние новости сайта %s"
 
-#: feeds.py:137 tests/feeds.py:150
+#: feeds.py:137
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Записи в категории %s"
 
-#: feeds.py:141 tests/feeds.py:153
+#: feeds.py:141
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "Последние новости в категории %s"
 
-#: feeds.py:161 tests/feeds.py:162
+#: feeds.py:161
 #, python-format
 msgid "Entries for author %s"
 msgstr "Записи от %s"
 
-#: feeds.py:165 tests/feeds.py:164
+#: feeds.py:165
 #, python-format
 msgid "The latest entries by %s"
 msgstr "Последние новости от %s"
 
-#: feeds.py:186 tests/feeds.py:174
+#: feeds.py:186
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Записи с тегом %s"
 
-#: feeds.py:190 tests/feeds.py:176
+#: feeds.py:190
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "Последние новости с тегом %s"
 
-#: feeds.py:213 tests/feeds.py:190
+#: feeds.py:213
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr "Результаты поиска для запроса '%s'"
 
-#: feeds.py:217 tests/feeds.py:193
+#: feeds.py:217
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr "Записи содержать сочетание '%s'"
 
-#: feeds.py:262 tests/feeds.py:201
+#: feeds.py:262
 msgid "Latest discussions"
 msgstr "Последние обсуждения"
 
-#: feeds.py:266 tests/feeds.py:204
+#: feeds.py:266
 #, python-format
 msgid "The latest discussions for the site %s"
 msgstr "Последнее обсуждение на сайте %s"
 
-#: feeds.py:289 tests/feeds.py:223
+#: feeds.py:289
 #, python-format
 msgid "Discussions on %s"
 msgstr "Обсуждений %s"
 
-#: feeds.py:293 tests/feeds.py:226
+#: feeds.py:293
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "Последние комментарии к %s"
 
-#: feeds.py:311 tests/feeds.py:236
+#: feeds.py:311
 #, python-format
 msgid "Comments on %s"
 msgstr "Комментарии к %s"
 
-#: feeds.py:315 tests/feeds.py:239
+#: feeds.py:315
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "Последние комментарии к %s"
 
-#: feeds.py:345 tests/feeds.py:255
+#: feeds.py:345
 #, python-format
 msgid "Pingbacks on %s"
 msgstr "Пингбэки к %s"
 
-#: feeds.py:349 tests/feeds.py:258
+#: feeds.py:349
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "Последние пингбэки к %s"
 
-#: feeds.py:367 tests/feeds.py:268
+#: feeds.py:367
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "Трэкбэки к %s"
 
-#: feeds.py:371 tests/feeds.py:271
+#: feeds.py:371
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "Последние трэкбэки к %s"
 
-#: models.py:66 models.py:111 admin/entry.py:78
+#: models.py:71 models.py:116 admin/entry.py:82
 msgid "title"
 msgstr "заголовок"
 
-#: models.py:67 models.py:126
+#: models.py:72 models.py:131
 msgid "used for publication"
 msgstr "используется при публикации"
 
-#: models.py:69
+#: models.py:74
 msgid "description"
 msgstr "описание"
 
-#: models.py:72 admin/forms.py:19
+#: models.py:77 admin/forms.py:19
 msgid "parent category"
 msgstr "родительская категория"
 
-#: models.py:97
+#: models.py:102
 msgid "category"
 msgstr "категория"
 
-#: models.py:98 models.py:120 admin/forms.py:47
+#: models.py:103 models.py:125 admin/forms.py:47
 msgid "categories"
 msgstr "категории"
 
-#: models.py:107
+#: models.py:112
 msgid "draft"
 msgstr "черновик"
 
-#: models.py:108
+#: models.py:113
 msgid "hidden"
 msgstr "скрыта"
 
-#: models.py:109
+#: models.py:114
 msgid "published"
 msgstr "опубликована"
 
-#: models.py:113
+#: models.py:118
 msgid "image"
 msgstr "изображение"
 
-#: models.py:114
+#: models.py:119
 msgid "used for illustration"
 msgstr "используется для иллюстрации"
 
-#: models.py:115
+#: models.py:120
 msgid "content"
 msgstr "содержимое"
 
-#: models.py:116
+#: models.py:121
 msgid "excerpt"
 msgstr "выдержка"
 
-#: models.py:117
+#: models.py:122
 msgid "optional element"
 msgstr "необязательный элемент"
 
-#: models.py:119
+#: models.py:124
 msgid "tags"
-msgstr "тэги"
+msgstr "теги"
 
-#: models.py:123
+#: models.py:128
 msgid "related entries"
 msgstr "связанные записи"
 
-#: models.py:130
+#: models.py:135
 msgid "authors"
 msgstr "авторы"
 
-#: models.py:134
+#: models.py:139
 msgid "featured"
 msgstr "Популярные"
 
-#: models.py:135 admin/entry.py:130
+#: models.py:140 admin/entry.py:134
 msgid "comment enabled"
 msgstr "комментирование включено"
 
-#: models.py:136
+#: models.py:141
 msgid "linkback enabled"
 msgstr "обратные ссылки включены"
 
-#: models.py:138
+#: models.py:143
 msgid "creation date"
 msgstr "дата создания"
 
-#: models.py:140
+#: models.py:145
 msgid "last update"
 msgstr "последнее обновление"
 
-#: models.py:141
+#: models.py:146
 msgid "start publication"
 msgstr "начало публикации"
 
-#: models.py:142
+#: models.py:148
 msgid "date start publish"
 msgstr "дата начала публикации"
 
-#: models.py:144
+#: models.py:149
 msgid "end publication"
 msgstr "окончание публикации"
 
-#: models.py:145
+#: models.py:151
 msgid "date end publish"
 msgstr "дата окончания публикации"
 
-#: models.py:148
+#: models.py:153
 msgid "sites publication"
 msgstr "сайты для публикации"
 
-#: models.py:152
+#: models.py:157
 msgid "login required"
 msgstr "требуется авторизация"
 
-#: models.py:153
+#: models.py:158
 msgid "only authenticated users can view the entry"
 msgstr "только авторизованные пользователи могут просматривать запись"
 
-#: models.py:155
+#: models.py:160
 msgid "password"
 msgstr "пароль"
 
-#: models.py:156
+#: models.py:161
 msgid "protect the entry with a password"
 msgstr "защитить запись паролем"
 
-#: models.py:159
+#: models.py:164
 msgid "template"
 msgstr "шаблон"
 
-#: models.py:161
+#: models.py:166
 msgid "Default template"
 msgstr "Шаблон по умолчанию"
 
-#: models.py:163
+#: models.py:168
 msgid "template used to display the entry"
 msgstr "шаблон, используемый для отображения записи"
 
-#: models.py:270
+#: models.py:281
 msgid "entry"
 msgstr "запись"
 
-#: models.py:271
+#: models.py:282
 msgid "entries"
 msgstr "записи"
 
-#: moderator.py:59 moderator.py:82 moderator.py:107
+#: moderator.py:61 moderator.py:83 moderator.py:108
 #, python-format
 msgid "[%(site)s] New comment posted on \"%(title)s\""
 msgstr "[%(site)s] Новый комментарий к \"%(title)s\""
@@ -274,140 +273,155 @@ msgstr "[%(site)s] Новый комментарий к \"%(title)s\""
 msgid "tree path"
 msgstr "путь"
 
-#: admin/entry.py:31 templates/admin/zinnia/widgets/quickpost.html:18
+#: admin/entry.py:33 templates/admin/zinnia/widgets/quickpost.html:18
 msgid "Content"
 msgstr "Содержимое"
 
-#: admin/entry.py:33
+#: admin/entry.py:35
 msgid "Options"
 msgstr "Опции"
 
-#: admin/entry.py:39
-msgid "Privacy"
-msgstr "приватность"
-
 #: admin/entry.py:41
+msgid "Privacy"
+msgstr "Приватность"
+
+#: admin/entry.py:43
 msgid "Discussion"
 msgstr "Обсуждение"
 
-#: admin/entry.py:43
+#: admin/entry.py:45
 msgid "Publication"
 msgstr "Публикация"
 
-#: admin/entry.py:71
+#: admin/entry.py:73
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i слов)"
 
-#: admin/entry.py:75
+#: admin/entry.py:77
 #, python-format
-msgid "%(title)s (%(comments)i comments)"
-msgstr "%(title)s (%(comments)i комментариев)"
+msgid "%(title)s (%(comments)i comment)"
+msgid_plural "%(title)s (%(comments)i comments)"
+msgstr[0] "(%(comments)i комментарий) %(title)s "
+msgstr[1] "(%(comments)i комментария) %(title)s "
+msgstr[2] "(%(comments)i комментариев) %(title)s "
 
-#: admin/entry.py:91
+#: admin/entry.py:95
 msgid "author(s)"
 msgstr "автор(ы)"
 
-#: admin/entry.py:104
+#: admin/entry.py:108
 msgid "category(s)"
 msgstr "категория(категории)"
 
-#: admin/entry.py:116
+#: admin/entry.py:120
 msgid "tag(s)"
-msgstr "тэг(и)"
+msgstr "тег(и)"
 
-#: admin/entry.py:124
+#: admin/entry.py:128
 msgid "site(s)"
 msgstr "сайт(ы)"
 
-#: admin/entry.py:136
+#: admin/entry.py:140
 msgid "is actual"
 msgstr "актуальна"
 
-#: admin/entry.py:142
+#: admin/entry.py:146
 msgid "is visible"
 msgstr "видима"
 
-#: admin/entry.py:147
+#: admin/entry.py:151
 msgid "View"
 msgstr "Смотреть"
 
-#: admin/entry.py:149
+#: admin/entry.py:153
 msgid "View on site"
 msgstr "Смотреть на сайте"
 
-#: admin/entry.py:155
+#: admin/entry.py:159
 msgid "Unavailable"
 msgstr "Недоступно"
 
-#: admin/entry.py:159
+#: admin/entry.py:163
 msgid "short url"
-msgstr "короткая ссылка"
+msgstr "краткая ссылка"
 
-#: admin/entry.py:226
+#: admin/entry.py:230
 msgid "The selected entries now belong to you."
 msgstr "Выбранные записи теперь закреплены за вами."
 
-#: admin/entry.py:227
+#: admin/entry.py:231
 msgid "Set the entries to the user"
 msgstr "Установить записи пользователю"
 
-#: admin/entry.py:234
+#: admin/entry.py:238
 msgid "The selected entries are now marked as published."
 msgstr "Выбранные записи отмечены как опубликованные."
 
-#: admin/entry.py:235
+#: admin/entry.py:239
 msgid "Set entries selected as published"
 msgstr "Пометить выделенные записи как опубликованные"
 
-#: admin/entry.py:241
+#: admin/entry.py:245
 msgid "The selected entries are now marked as hidden."
 msgstr "Выбранные записи отмечены как скрытые."
 
-#: admin/entry.py:242
+#: admin/entry.py:246
 msgid "Set entries selected as hidden"
 msgstr "Пометить выделенные записи как скрытые"
 
-#: admin/entry.py:257
+#: admin/entry.py:261
 msgid "The selected entries have been tweeted."
 msgstr "Выбранные записи отправлены через twitter."
 
-#: admin/entry.py:258
+#: admin/entry.py:262
 msgid "Tweet entries selected"
 msgstr "Отправить выбранные записи в твиттер"
 
-#: admin/entry.py:264
+#: admin/entry.py:268
 msgid "Comments are now closed for selected entries."
 msgstr "Для выбранных записей комментарии закрыты."
 
-#: admin/entry.py:265
+#: admin/entry.py:269
 msgid "Close the comments for selected entries"
 msgstr "Закрыть комментирование для выбранных записей"
 
-#: admin/entry.py:272
+#: admin/entry.py:276
 msgid "Linkbacks are now closed for selected entries."
 msgstr "Обратные ссылки для выбранных записей отключены."
 
-#: admin/entry.py:274
+#: admin/entry.py:278
 msgid "Close the linkbacks for selected entries"
 msgstr "Запретить обратные ссылки для выбранных записей"
 
-#: admin/entry.py:281
+#: admin/entry.py:285
 msgid "The selected entries are now set at the current date."
 msgstr "Для выбранных записей установлена текущая дата."
 
-#: admin/entry.py:283
+#: admin/entry.py:287
 msgid "Put the selected entries on top at the current date"
 msgstr "Поднять выбранные записи на текущую дату"
 
-#: admin/entry.py:302
+#: admin/entry.py:306
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%(directory)s успешно оповещены о %(success)d записей"
 
-#: admin/entry.py:306
+#: admin/entry.py:310
 msgid "Ping Directories for selected entries"
 msgstr "Оповестить каталоги о выбранных записях"
+
+#: admin/filters.py:13
+msgid "author"
+msgstr "автор"
+
+#: admin/filters.py:22
+#, python-format
+msgid "%(author)s (%(count)i entry)"
+msgid_plural "%(author)s (%(count)i entries)"
+msgstr[0] "(%(count)i запись) %(author)s"
+msgstr[1] "(%(count)i записи) %(author)s"
+msgstr[2] "(%(count)i записей) %(author)s"
 
 #: admin/forms.py:20
 msgid "No parent category"
@@ -419,69 +433,43 @@ msgstr "Категория не может быть унаследована о�
 
 #: admin/forms.py:45 templates/zinnia/base.html:30
 #: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
-#: templatetags/zbreadcrumbs.py:52
+#: templatetags/zbreadcrumbs.py:53
 msgid "Categories"
 msgstr "Категории"
 
-#: templates/403.html:7
+#: templates/403.html:6
 msgid "Error 403"
 msgstr "Ошибка 403"
 
-#: templates/403.html:11 templates/403.html.py:16
+#: templates/403.html:10 templates/403.html.py:15
 msgid "Permission denied"
 msgstr "Доступ запрещен"
 
-#: templates/403.html:18
+#: templates/403.html:17
 msgid "Sorry but you don't have the permission to do this action."
 msgstr "Извините, и вас нет прав для выполнения этой операции."
 
-#: templates/403.html:21 templates/404.html:21 templates/500.html:21
-msgid "Useful links"
-msgstr "Полезные ссылки"
-
-#: templates/403.html:24 templates/403.html.py:25 templates/404.html:24
-#: templates/404.html.py:25 templates/500.html:24 templates/500.html.py:25
-msgid "Blog index"
-msgstr "Содержание блога"
-
-#: templates/403.html:29 templates/403.html.py:30 templates/404.html:29
-#: templates/404.html.py:30 templates/500.html:29 templates/500.html.py:30
-#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:9
-#: templates/zinnia/skeleton.html:33 templates/zinnia/skeleton.html.py:34
-msgid "Sitemap"
-msgstr "Карта сайта"
-
-#: templates/403.html:37 templates/404.html:37 templates/500.html:37
-#: templates/zinnia/base.html:46
-msgid "Recent entries"
-msgstr "Последние записи"
-
-#: templates/403.html:42 templates/404.html:42 templates/500.html:42
-#: templates/zinnia/base.html:26
-msgid "Search"
-msgstr "Поиск"
-
-#: templates/404.html:7
+#: templates/404.html:6
 msgid "Error 404"
 msgstr "Ошибка 404"
 
-#: templates/404.html:11 templates/404.html.py:16
+#: templates/404.html:10 templates/404.html.py:15
 msgid "Page not found"
 msgstr "Страница не найдена"
 
-#: templates/404.html:18
+#: templates/404.html:17
 msgid "Sorry, but the requested page could not be found."
 msgstr "Извините, запрашиваемая страница не найдена."
 
-#: templates/500.html:7
+#: templates/500.html:6
 msgid "Error 500"
 msgstr "Ошибка 500"
 
-#: templates/500.html:11 templates/500.html.py:16
+#: templates/500.html:10 templates/500.html.py:15
 msgid "Server error"
 msgstr "Ошибка сервера"
 
-#: templates/500.html:18
+#: templates/500.html:17
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
@@ -544,9 +532,9 @@ msgstr[2] "%(pingback_count)s оповещений"
 #, python-format
 msgid "%(tag_count)s tag"
 msgid_plural "%(tag_count)s tags"
-msgstr[0] "%(tag_count)s тэг"
-msgstr[1] "%(tag_count)s тэга"
-msgstr[2] "%(tag_count)s тэгов"
+msgstr[0] "%(tag_count)s тег"
+msgstr[1] "%(tag_count)s тега"
+msgstr[2] "%(tag_count)s тегов"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:33
 #: templates/zinnia/_entry_detail.html:112
@@ -611,8 +599,8 @@ msgid "%(linkbacks_per_entry)s linkbacks per entry"
 msgstr "%(linkbacks_per_entry)s обратных ссылок в записи"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:7
-#: templates/zinnia/entry_detail.html:206
-#: templates/zinnia/entry_detail.html:207
+#: templates/zinnia/entry_detail_base.html:212
+#: templates/zinnia/entry_detail_base.html:213
 msgid "Edit the entry"
 msgstr "Изменить запись"
 
@@ -623,9 +611,9 @@ msgstr "Изменить запись"
 #: templates/feeds/pingback_title.html:2
 #: templates/feeds/trackback_title.html:2
 #: templates/zinnia/_entry_detail.html:19
-#: templates/zinnia/entry_detail.html:105
-#: templates/zinnia/entry_detail.html:139
-#: templates/zinnia/entry_detail.html:172
+#: templates/zinnia/entry_detail_base.html:105
+#: templates/zinnia/entry_detail_base.html:141
+#: templates/zinnia/entry_detail_base.html:176
 msgid "on"
 msgstr "на"
 
@@ -667,7 +655,7 @@ msgstr "Редактировать"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:31
 #: templates/zinnia/_entry_detail.html:93
-#: templates/zinnia/entry_detail.html:119
+#: templates/zinnia/entry_detail_base.html:121
 #: templates/zinnia/tags/recent_comments.html:15
 msgid "No comments yet."
 msgstr "Еще нет комментариев."
@@ -711,7 +699,7 @@ msgstr "Заголовок"
 
 #: templates/admin/zinnia/widgets/quickpost.html:26
 #: templates/zinnia/_entry_detail.html:63 templates/zinnia/base.html:42
-#: templates/zinnia/tag_list.html:7 templatetags/zbreadcrumbs.py:45
+#: templates/zinnia/tag_list.html:7 templatetags/zbreadcrumbs.py:46
 msgid "Tags"
 msgstr "Теги"
 
@@ -852,7 +840,7 @@ msgstr "Нет тегов"
 
 #: templates/zinnia/_entry_detail.html:75
 msgid "Short url"
-msgstr "Короткая ссылка"
+msgstr "Краткая ссылка"
 
 #: templates/zinnia/_entry_detail.html:77
 #, python-format
@@ -875,8 +863,8 @@ msgid "Be first to comment!"
 msgstr "Оставьте первый комментарий"
 
 #: templates/zinnia/_entry_detail.html:98
-#: templates/zinnia/entry_detail.html:115
-#: templates/zinnia/entry_detail.html:121
+#: templates/zinnia/entry_detail_base.html:117
+#: templates/zinnia/entry_detail_base.html:123
 msgid "Comments are closed."
 msgstr "Комментирование отключено."
 
@@ -895,7 +883,7 @@ msgid "Author list"
 msgstr "Список авторов"
 
 #: templates/zinnia/author_list.html:7 templates/zinnia/base.html:34
-#: templatetags/zbreadcrumbs.py:48
+#: templatetags/zbreadcrumbs.py:49
 msgid "Authors"
 msgstr "Авторы"
 
@@ -911,9 +899,17 @@ msgstr "RSS лента последних записей"
 msgid "RSS Feed of latest discussions"
 msgstr "RSS лента с последними обсуждениями"
 
+#: templates/zinnia/base.html:26 templates/zinnia/skeleton.html:76
+msgid "Search"
+msgstr "Поиск"
+
 #: templates/zinnia/base.html:38
 msgid "Calendar"
 msgstr "Календарь"
+
+#: templates/zinnia/base.html:46 templates/zinnia/skeleton.html:72
+msgid "Recent entries"
+msgstr "Последние записи"
 
 #: templates/zinnia/base.html:58
 msgid "Random entries"
@@ -1009,59 +1005,71 @@ msgstr "Недельные архивы %(week_number)s из %(year)s"
 msgid "Monthly archives"
 msgstr "Архив за месяц"
 
-#: templates/zinnia/entry_detail.html:22
+#: templates/zinnia/entry_detail_base.html:22
 msgid "RSS Feed of discussions on"
 msgstr "Включена RSS рассылка обсуждений"
 
-#: templates/zinnia/entry_detail.html:24
+#: templates/zinnia/entry_detail_base.html:24
 msgid "RSS Feed of comments on"
 msgstr "RSS лента комментариев к"
 
-#: templates/zinnia/entry_detail.html:26
+#: templates/zinnia/entry_detail_base.html:26
 msgid "RSS Feed of pingbacks on"
 msgstr "RSS лента пинбэков к"
 
-#: templates/zinnia/entry_detail.html:28
+#: templates/zinnia/entry_detail_base.html:28
 msgid "RSS Feed of trackbacks on"
 msgstr "RSS лента трэкбэков к"
 
-#: templates/zinnia/entry_detail.html:48
+#: templates/zinnia/entry_detail_base.html:48
 msgid "Next entry"
 msgstr "Следующая запись"
 
-#: templates/zinnia/entry_detail.html:60
+#: templates/zinnia/entry_detail_base.html:60
 msgid "Previous entry"
 msgstr "Предыдущая запись"
 
-#: templates/zinnia/entry_detail.html:71
+#: templates/zinnia/entry_detail_base.html:71
 msgid "Related entries"
 msgstr "Связанные записи"
 
-#: templates/zinnia/entry_detail.html:82
+#: templates/zinnia/entry_detail_base.html:82
 msgid "Similar entries"
 msgstr "Похожие записи"
 
-#: templates/zinnia/entry_detail.html:90
+#: templates/zinnia/entry_detail_base.html:90
 msgid "Comments"
 msgstr "Комментарии"
 
-#: templates/zinnia/entry_detail.html:130
+#: templates/zinnia/entry_detail_base.html:110
+msgid "Direct link to this comment"
+msgstr "Абсолютная ссылка на этот  комментарий"
+
+#: templates/zinnia/entry_detail_base.html:132
 msgid "Pingbacks"
 msgstr "Пингбэки"
 
-#: templates/zinnia/entry_detail.html:152
+#: templates/zinnia/entry_detail_base.html:146
+msgid "Direct link to this pingback"
+msgstr "Абсолютная ссылка на этот пингбэк"
+
+#: templates/zinnia/entry_detail_base.html:156
 msgid "Pingbacks are open."
 msgstr "Оповещения открыты."
 
-#: templates/zinnia/entry_detail.html:154
+#: templates/zinnia/entry_detail_base.html:158
 msgid "Pingbacks are closed."
 msgstr "Пингбэки отключены."
 
-#: templates/zinnia/entry_detail.html:164
+#: templates/zinnia/entry_detail_base.html:168
 msgid "Trackbacks"
 msgstr "Трэкбэки"
 
-#: templates/zinnia/entry_detail.html:187
+#: templates/zinnia/entry_detail_base.html:181
+msgid "Direct link to this trackback"
+msgstr "Абсолютная ссылка на этот трэкбэк"
+
+#: templates/zinnia/entry_detail_base.html:193
 msgid "Trackback URL"
 msgstr "URL архива"
 
@@ -1075,7 +1083,7 @@ msgstr "категории"
 
 #: templates/zinnia/entry_list.html:5
 msgid "the tag"
-msgstr "тэга"
+msgstr "тега"
 
 #: templates/zinnia/entry_list.html:5
 msgid "the author"
@@ -1102,22 +1110,22 @@ msgstr "Тег"
 msgid "Page"
 msgstr "Страница"
 
-#: templates/zinnia/entry_list.html:26
+#: templates/zinnia/entry_list.html:28
 #, python-format
 msgid "Category archives: %(category)s"
 msgstr "Категория архивов:%(category)s"
 
-#: templates/zinnia/entry_list.html:33
+#: templates/zinnia/entry_list.html:35
 #, python-format
 msgid "Tag archives: %(tag)s"
 msgstr "Тег архивов:%(tag)s"
 
-#: templates/zinnia/entry_list.html:37
+#: templates/zinnia/entry_list.html:39
 #, python-format
 msgid "Author archives: %(author)s"
 msgstr "Автор архивов:%(author)s"
 
-#: templates/zinnia/entry_list.html:46 templates/zinnia/sitemap.html:25
+#: templates/zinnia/entry_list.html:50 templates/zinnia/sitemap.html:25
 #: templates/zinnia/sitemap.html.py:45
 #: templates/zinnia/tags/featured_entries.html:9
 #: templates/zinnia/tags/popular_entries.html:12
@@ -1126,15 +1134,15 @@ msgstr "Автор архивов:%(author)s"
 msgid "No entries yet."
 msgstr "Записей еще нет."
 
-#: templates/zinnia/entry_list.html:58 templates/zinnia/entry_list.html:59
+#: templates/zinnia/entry_list.html:69 templates/zinnia/entry_list.html:70
 msgid "Edit the category"
 msgstr "Редактировать категорию"
 
-#: templates/zinnia/entry_list.html:65 templates/zinnia/entry_list.html:66
+#: templates/zinnia/entry_list.html:76 templates/zinnia/entry_list.html:77
 msgid "Edit the tag"
 msgstr "Редактировать тег"
 
-#: templates/zinnia/entry_list.html:72 templates/zinnia/entry_list.html:73
+#: templates/zinnia/entry_list.html:83 templates/zinnia/entry_list.html:84
 msgid "Edit the author"
 msgstr "Редактировать автора"
 
@@ -1155,11 +1163,11 @@ msgstr[0] "%(entry_count)s запись найдена"
 msgstr[1] "%(entry_count)s записи найдено"
 msgstr[2] "%(entry_count)s записей найдено"
 
-#: templates/zinnia/entry_search.html:34
+#: templates/zinnia/entry_search.html:36
 msgid "Nothing found."
 msgstr "Ничего не найдено."
 
-#: templates/zinnia/entry_search.html:42
+#: templates/zinnia/entry_search.html:46
 msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
@@ -1202,6 +1210,12 @@ msgstr "Пароль"
 msgid "Valid"
 msgstr "Проверка пройдена"
 
+#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:9
+#: templates/zinnia/skeleton.html:33 templates/zinnia/skeleton.html.py:34
+#: templates/zinnia/skeleton.html:65 templates/zinnia/skeleton.html.py:66
+msgid "Sitemap"
+msgstr "Карта сайта"
+
 #: templates/zinnia/sitemap.html:12
 msgid "Entries per categories"
 msgstr "Записи в категории"
@@ -1214,13 +1228,21 @@ msgstr "комментарий"
 msgid "All the entries"
 msgstr "Все записи"
 
+#: templates/zinnia/skeleton.html:57
+msgid "Useful links"
+msgstr "Полезные ссылки"
+
+#: templates/zinnia/skeleton.html:60 templates/zinnia/skeleton.html.py:61
+msgid "Blog index"
+msgstr "Содержание блога"
+
 #: templates/zinnia/tag_list.html:5 templates/zinnia/tag_list.html.py:12
 msgid "Tag list"
 msgstr "Список тегов"
 
 #: templates/zinnia/tag_list.html:23 templates/zinnia/tags/tag_cloud.html:12
 msgid "No tags yet."
-msgstr "Тэгов нет."
+msgstr "Тегов нет."
 
 #: templates/zinnia/tags/archives_entries.html:13
 #: templates/zinnia/tags/archives_entries_tree.html:38
@@ -1269,25 +1291,25 @@ msgstr "Нет похожих записей."
 #, python-format
 msgid "%(entry_count)s entry tagged by %(tag)s"
 msgid_plural "%(entry_count)s entries tagged by %(tag)s"
-msgstr[0] "%(entry_count)s запись с тэгом %(tag)s"
-msgstr[1] "%(entry_count)s записи с тэгом %(tag)s"
-msgstr[2] "%(entry_count)s записей с тэгом %(tag)s"
+msgstr[0] "%(entry_count)s запись с тегом %(tag)s"
+msgstr[1] "%(entry_count)s записи с тегом %(tag)s"
+msgstr[2] "%(entry_count)s записей с тегом %(tag)s"
 
-#: templatetags/zbreadcrumbs.py:80
+#: templatetags/zbreadcrumbs.py:82
 #, python-format
 msgid "Page %s"
 msgstr "Страница %s"
 
-#: templatetags/zbreadcrumbs.py:106
+#: templatetags/zbreadcrumbs.py:108
 #, python-format
 msgid "Week %s"
 msgstr "Неделя %s"
 
-#: tests/views.py:326 views/search.py:24
+#: tests/views.py:399 views/search.py:24
 msgid "The pattern is too short"
 msgstr "Запрос слишком короткий"
 
-#: tests/views.py:330 views/search.py:28
+#: tests/views.py:403 views/search.py:28
 msgid "No pattern to search found"
 msgstr "Нечего искать"
 
@@ -1296,19 +1318,19 @@ msgstr "Нечего искать"
 msgid "No Tag found matching \"%s\"."
 msgstr "Не найдено тегов содержащих \"%s\"."
 
-#: xmlrpc/metaweblog.py:35
+#: xmlrpc/metaweblog.py:36
 msgid "Username is incorrect."
 msgstr "Неверное имя пользователя."
 
-#: xmlrpc/metaweblog.py:37
+#: xmlrpc/metaweblog.py:38
 msgid "Password is invalid."
 msgstr "Неверный пароль."
 
-#: xmlrpc/metaweblog.py:39
+#: xmlrpc/metaweblog.py:40
 msgid "User account unavailable."
 msgstr "Учетная запись пользователя отсутствует"
 
-#: xmlrpc/metaweblog.py:42
+#: xmlrpc/metaweblog.py:43
 #, python-format
 msgid "User cannot %s."
 msgstr "Пользователь не может %s."

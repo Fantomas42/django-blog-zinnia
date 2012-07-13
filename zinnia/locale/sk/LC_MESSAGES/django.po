@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2012-04-28 05:19-0500\n"
-"PO-Revision-Date: 2012-04-28 10:20+0000\n"
+"POT-Creation-Date: 2012-07-12 05:31-0500\n"
+"PO-Revision-Date: 2012-07-12 10:31+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,249 +21,248 @@ msgstr ""
 
 #: feeds.py:113 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:6 templates/zinnia/entry_list.html:20
-#: tests/feeds.py:137 tests/feeds.py:297
 msgid "Latest entries"
 msgstr "Aktuálne články"
 
-#: feeds.py:117 tests/feeds.py:140
+#: feeds.py:117
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "Aktuálne články pre stránku %s"
 
-#: feeds.py:137 tests/feeds.py:150
+#: feeds.py:137
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Články z kategórie %s"
 
-#: feeds.py:141 tests/feeds.py:153
+#: feeds.py:141
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "Aktuálne články z kategórie %s"
 
-#: feeds.py:161 tests/feeds.py:162
+#: feeds.py:161
 #, python-format
 msgid "Entries for author %s"
 msgstr "Články od autora %s"
 
-#: feeds.py:165 tests/feeds.py:164
+#: feeds.py:165
 #, python-format
 msgid "The latest entries by %s"
 msgstr "Aktuálne články od %s"
 
-#: feeds.py:186 tests/feeds.py:174
+#: feeds.py:186
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Články s tagom %s"
 
-#: feeds.py:190 tests/feeds.py:176
+#: feeds.py:190
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "Aktuálne články s tagom %s"
 
-#: feeds.py:213 tests/feeds.py:190
+#: feeds.py:213
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr "Výsledky vyhľadávania pre '%s'"
 
-#: feeds.py:217 tests/feeds.py:193
+#: feeds.py:217
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr "Články obsahujúce vzor '%s'"
 
-#: feeds.py:262 tests/feeds.py:201
+#: feeds.py:262
 msgid "Latest discussions"
 msgstr "Aktuálne diskusie"
 
-#: feeds.py:266 tests/feeds.py:204
+#: feeds.py:266
 #, python-format
 msgid "The latest discussions for the site %s"
 msgstr "Aktuálne diskusie pre stránku %s"
 
-#: feeds.py:289 tests/feeds.py:223
+#: feeds.py:289
 #, python-format
 msgid "Discussions on %s"
 msgstr "Diskusie k %s"
 
-#: feeds.py:293 tests/feeds.py:226
+#: feeds.py:293
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "Aktuálne diskusie k článku %s"
 
-#: feeds.py:311 tests/feeds.py:236
+#: feeds.py:311
 #, python-format
 msgid "Comments on %s"
 msgstr "Komentáre k %s"
 
-#: feeds.py:315 tests/feeds.py:239
+#: feeds.py:315
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "Aktuálne komentare k článku %s"
 
-#: feeds.py:345 tests/feeds.py:255
+#: feeds.py:345
 #, python-format
 msgid "Pingbacks on %s"
 msgstr ""
 
-#: feeds.py:349 tests/feeds.py:258
+#: feeds.py:349
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "Aktuálne pingbacky na článok %s"
 
-#: feeds.py:367 tests/feeds.py:268
+#: feeds.py:367
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "Spätné odkazy na %s"
 
-#: feeds.py:371 tests/feeds.py:271
+#: feeds.py:371
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "Aktuálne spätné odkazy na článok %s"
 
-#: models.py:66 models.py:111 admin/entry.py:78
+#: models.py:71 models.py:116 admin/entry.py:82
 msgid "title"
 msgstr "nadpis"
 
-#: models.py:67 models.py:126
+#: models.py:72 models.py:131
 msgid "used for publication"
 msgstr "použitý na zverejnenie"
 
-#: models.py:69
+#: models.py:74
 msgid "description"
 msgstr "popis"
 
-#: models.py:72 admin/forms.py:19
+#: models.py:77 admin/forms.py:19
 msgid "parent category"
 msgstr "rodičovská kategória"
 
-#: models.py:97
+#: models.py:102
 msgid "category"
 msgstr "kategória"
 
-#: models.py:98 models.py:120 admin/forms.py:47
+#: models.py:103 models.py:125 admin/forms.py:47
 msgid "categories"
 msgstr "kategórie"
 
-#: models.py:107
+#: models.py:112
 msgid "draft"
 msgstr "návrh"
 
-#: models.py:108
+#: models.py:113
 msgid "hidden"
 msgstr "skrytý"
 
-#: models.py:109
+#: models.py:114
 msgid "published"
 msgstr "publikovaný"
 
-#: models.py:113
+#: models.py:118
 msgid "image"
 msgstr "obrázok"
 
-#: models.py:114
+#: models.py:119
 msgid "used for illustration"
 msgstr "použitý pre ilustráciu"
 
-#: models.py:115
+#: models.py:120
 msgid "content"
 msgstr "obsah"
 
-#: models.py:116
+#: models.py:121
 msgid "excerpt"
 msgstr "výňatok"
 
-#: models.py:117
+#: models.py:122
 msgid "optional element"
 msgstr "voliteľný element"
 
-#: models.py:119
+#: models.py:124
 msgid "tags"
 msgstr "tagy"
 
-#: models.py:123
+#: models.py:128
 msgid "related entries"
 msgstr "podobné články"
 
-#: models.py:130
+#: models.py:135
 msgid "authors"
 msgstr "autori"
 
-#: models.py:134
+#: models.py:139
 msgid "featured"
 msgstr "hlavné"
 
-#: models.py:135 admin/entry.py:130
+#: models.py:140 admin/entry.py:134
 msgid "comment enabled"
 msgstr "povoliť komentáre"
 
-#: models.py:136
+#: models.py:141
 msgid "linkback enabled"
 msgstr "povoliť príspevky"
 
-#: models.py:138
+#: models.py:143
 msgid "creation date"
 msgstr "dátum vytvorenia"
 
-#: models.py:140
+#: models.py:145
 msgid "last update"
 msgstr "posledná úprava"
 
-#: models.py:141
+#: models.py:146
 msgid "start publication"
 msgstr "uverejni od"
 
-#: models.py:142
+#: models.py:148
 msgid "date start publish"
 msgstr "dátum odkedy uverejňovať"
 
-#: models.py:144
+#: models.py:149
 msgid "end publication"
 msgstr "ukonči uverejňovanie"
 
-#: models.py:145
+#: models.py:151
 msgid "date end publish"
 msgstr "dátum ukončenia uverejnia"
 
-#: models.py:148
+#: models.py:153
 msgid "sites publication"
 msgstr "uverejnené na stránkach"
 
-#: models.py:152
+#: models.py:157
 msgid "login required"
 msgstr "prihlásenie vyždované"
 
-#: models.py:153
+#: models.py:158
 msgid "only authenticated users can view the entry"
 msgstr "iba prihlásený užívatelia mǒžu vidieť tento článok"
 
-#: models.py:155
+#: models.py:160
 msgid "password"
 msgstr "heslo"
 
-#: models.py:156
+#: models.py:161
 msgid "protect the entry with a password"
 msgstr "uzamkni článok heslom"
 
-#: models.py:159
+#: models.py:164
 msgid "template"
 msgstr "šablóna"
 
-#: models.py:161
+#: models.py:166
 msgid "Default template"
 msgstr "Štandardná šablóna"
 
-#: models.py:163
+#: models.py:168
 msgid "template used to display the entry"
 msgstr "šablóna použitá pre zobrazenie článku"
 
-#: models.py:270
+#: models.py:281
 msgid "entry"
 msgstr "článok"
 
-#: models.py:271
+#: models.py:282
 msgid "entries"
 msgstr "článok"
 
-#: moderator.py:59 moderator.py:82 moderator.py:107
+#: moderator.py:61 moderator.py:83 moderator.py:108
 #, python-format
 msgid "[%(site)s] New comment posted on \"%(title)s\""
 msgstr "[%(site)s] Nové komentáre k \"%(title)s\""
@@ -272,140 +271,155 @@ msgstr "[%(site)s] Nové komentáre k \"%(title)s\""
 msgid "tree path"
 msgstr ""
 
-#: admin/entry.py:31 templates/admin/zinnia/widgets/quickpost.html:18
+#: admin/entry.py:33 templates/admin/zinnia/widgets/quickpost.html:18
 msgid "Content"
 msgstr "Obsah"
 
-#: admin/entry.py:33
+#: admin/entry.py:35
 msgid "Options"
 msgstr "Voľby"
 
-#: admin/entry.py:39
+#: admin/entry.py:41
 msgid "Privacy"
 msgstr "Súkromie"
 
-#: admin/entry.py:41
+#: admin/entry.py:43
 msgid "Discussion"
 msgstr "Diskusie"
 
-#: admin/entry.py:43
+#: admin/entry.py:45
 msgid "Publication"
 msgstr "Uverejnenie"
 
-#: admin/entry.py:71
+#: admin/entry.py:73
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr ""
 
-#: admin/entry.py:75
+#: admin/entry.py:77
 #, python-format
-msgid "%(title)s (%(comments)i comments)"
-msgstr ""
+msgid "%(title)s (%(comments)i comment)"
+msgid_plural "%(title)s (%(comments)i comments)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
-#: admin/entry.py:91
+#: admin/entry.py:95
 msgid "author(s)"
 msgstr "autor(i)"
 
-#: admin/entry.py:104
+#: admin/entry.py:108
 msgid "category(s)"
 msgstr "kategória(e)"
 
-#: admin/entry.py:116
+#: admin/entry.py:120
 msgid "tag(s)"
 msgstr "tag(y)"
 
-#: admin/entry.py:124
+#: admin/entry.py:128
 msgid "site(s)"
 msgstr "stránka(y)"
 
-#: admin/entry.py:136
+#: admin/entry.py:140
 msgid "is actual"
 msgstr "je v skutočnosti"
 
-#: admin/entry.py:142
+#: admin/entry.py:146
 msgid "is visible"
 msgstr "je viditeľný"
 
-#: admin/entry.py:147
+#: admin/entry.py:151
 msgid "View"
 msgstr "Pohľad"
 
-#: admin/entry.py:149
+#: admin/entry.py:153
 msgid "View on site"
 msgstr "Zobraziť na stránke"
 
-#: admin/entry.py:155
+#: admin/entry.py:159
 msgid "Unavailable"
 msgstr "Neprístupný"
 
-#: admin/entry.py:159
+#: admin/entry.py:163
 msgid "short url"
 msgstr "skrátená url"
 
-#: admin/entry.py:226
+#: admin/entry.py:230
 msgid "The selected entries now belong to you."
 msgstr "Označené články od teraz patria vám."
 
-#: admin/entry.py:227
+#: admin/entry.py:231
 msgid "Set the entries to the user"
 msgstr "Priraď články k užívateľovi"
 
-#: admin/entry.py:234
+#: admin/entry.py:238
 msgid "The selected entries are now marked as published."
 msgstr "Označené články sú odteraz uverejnené."
 
-#: admin/entry.py:235
+#: admin/entry.py:239
 msgid "Set entries selected as published"
 msgstr "Nastav označené články ako uverejnené"
 
-#: admin/entry.py:241
+#: admin/entry.py:245
 msgid "The selected entries are now marked as hidden."
 msgstr "Označené články sú odteraz skryté."
 
-#: admin/entry.py:242
+#: admin/entry.py:246
 msgid "Set entries selected as hidden"
 msgstr "Nastav označené články ako skryté"
 
-#: admin/entry.py:257
+#: admin/entry.py:261
 msgid "The selected entries have been tweeted."
 msgstr "Označené články boli tweetované."
 
-#: admin/entry.py:258
+#: admin/entry.py:262
 msgid "Tweet entries selected"
 msgstr "Tweetuj označené články"
 
-#: admin/entry.py:264
+#: admin/entry.py:268
 msgid "Comments are now closed for selected entries."
 msgstr "Komentáre boli zakázané pre označené články."
 
-#: admin/entry.py:265
+#: admin/entry.py:269
 msgid "Close the comments for selected entries"
 msgstr "Zakáž komentáre pre označené články"
 
-#: admin/entry.py:272
+#: admin/entry.py:276
 msgid "Linkbacks are now closed for selected entries."
 msgstr "Príspevky sú odteraz zakázané pre označené články."
 
-#: admin/entry.py:274
+#: admin/entry.py:278
 msgid "Close the linkbacks for selected entries"
 msgstr "Zakáž príspevky pre označené články"
 
-#: admin/entry.py:281
+#: admin/entry.py:285
 msgid "The selected entries are now set at the current date."
 msgstr "Označené články sú nastavené na dnešný dátum"
 
-#: admin/entry.py:283
+#: admin/entry.py:287
 msgid "Put the selected entries on top at the current date"
 msgstr "Daj vybrané články na vrchol na aktuálny deň."
 
-#: admin/entry.py:302
+#: admin/entry.py:306
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr ""
 
-#: admin/entry.py:306
+#: admin/entry.py:310
 msgid "Ping Directories for selected entries"
 msgstr ""
+
+#: admin/filters.py:13
+msgid "author"
+msgstr ""
+
+#: admin/filters.py:22
+#, python-format
+msgid "%(author)s (%(count)i entry)"
+msgid_plural "%(author)s (%(count)i entries)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: admin/forms.py:20
 msgid "No parent category"
@@ -417,69 +431,43 @@ msgstr "Kategória nemǒže byť rodič sama sebe."
 
 #: admin/forms.py:45 templates/zinnia/base.html:30
 #: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
-#: templatetags/zbreadcrumbs.py:52
+#: templatetags/zbreadcrumbs.py:53
 msgid "Categories"
 msgstr "Kategórie"
 
-#: templates/403.html:7
+#: templates/403.html:6
 msgid "Error 403"
-msgstr ""
+msgstr "Chyba 403"
 
-#: templates/403.html:11 templates/403.html.py:16
+#: templates/403.html:10 templates/403.html.py:15
 msgid "Permission denied"
-msgstr ""
+msgstr "Prístup odmietnutý"
 
-#: templates/403.html:18
+#: templates/403.html:17
 msgid "Sorry but you don't have the permission to do this action."
-msgstr ""
+msgstr "Prepáčte ale nemáte povolenie vykonať túto akciu."
 
-#: templates/403.html:21 templates/404.html:21 templates/500.html:21
-msgid "Useful links"
-msgstr "Užitočné odkazy"
-
-#: templates/403.html:24 templates/403.html.py:25 templates/404.html:24
-#: templates/404.html.py:25 templates/500.html:24 templates/500.html.py:25
-msgid "Blog index"
-msgstr "Index blogu"
-
-#: templates/403.html:29 templates/403.html.py:30 templates/404.html:29
-#: templates/404.html.py:30 templates/500.html:29 templates/500.html.py:30
-#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:9
-#: templates/zinnia/skeleton.html:33 templates/zinnia/skeleton.html.py:34
-msgid "Sitemap"
-msgstr "Mapa stránky"
-
-#: templates/403.html:37 templates/404.html:37 templates/500.html:37
-#: templates/zinnia/base.html:46
-msgid "Recent entries"
-msgstr "Aktuálne články"
-
-#: templates/403.html:42 templates/404.html:42 templates/500.html:42
-#: templates/zinnia/base.html:26
-msgid "Search"
-msgstr "Vyhľadávanie"
-
-#: templates/404.html:7
+#: templates/404.html:6
 msgid "Error 404"
 msgstr "Chyba 404"
 
-#: templates/404.html:11 templates/404.html.py:16
+#: templates/404.html:10 templates/404.html.py:15
 msgid "Page not found"
 msgstr "Stránka sa nenašla"
 
-#: templates/404.html:18
+#: templates/404.html:17
 msgid "Sorry, but the requested page could not be found."
 msgstr "Prepáčte ale stránka ktorú hľadáte sa nepodarilo nájsť."
 
-#: templates/500.html:7
+#: templates/500.html:6
 msgid "Error 500"
 msgstr "Chyba 500"
 
-#: templates/500.html:11 templates/500.html.py:16
+#: templates/500.html:10 templates/500.html.py:15
 msgid "Server error"
 msgstr "Chyba servera"
 
-#: templates/500.html:18
+#: templates/500.html:17
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
@@ -609,8 +597,8 @@ msgid "%(linkbacks_per_entry)s linkbacks per entry"
 msgstr "%(linkbacks_per_entry)s príspevkov na článok"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:7
-#: templates/zinnia/entry_detail.html:206
-#: templates/zinnia/entry_detail.html:207
+#: templates/zinnia/entry_detail_base.html:212
+#: templates/zinnia/entry_detail_base.html:213
 msgid "Edit the entry"
 msgstr "Uprav článok"
 
@@ -621,9 +609,9 @@ msgstr "Uprav článok"
 #: templates/feeds/pingback_title.html:2
 #: templates/feeds/trackback_title.html:2
 #: templates/zinnia/_entry_detail.html:19
-#: templates/zinnia/entry_detail.html:105
-#: templates/zinnia/entry_detail.html:139
-#: templates/zinnia/entry_detail.html:172
+#: templates/zinnia/entry_detail_base.html:105
+#: templates/zinnia/entry_detail_base.html:141
+#: templates/zinnia/entry_detail_base.html:176
 msgid "on"
 msgstr "dňa"
 
@@ -665,7 +653,7 @@ msgstr "Uprav"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:31
 #: templates/zinnia/_entry_detail.html:93
-#: templates/zinnia/entry_detail.html:119
+#: templates/zinnia/entry_detail_base.html:121
 #: templates/zinnia/tags/recent_comments.html:15
 msgid "No comments yet."
 msgstr "Zatiaľ žiadne komentáre."
@@ -709,7 +697,7 @@ msgstr "Titulok"
 
 #: templates/admin/zinnia/widgets/quickpost.html:26
 #: templates/zinnia/_entry_detail.html:63 templates/zinnia/base.html:42
-#: templates/zinnia/tag_list.html:7 templatetags/zbreadcrumbs.py:45
+#: templates/zinnia/tag_list.html:7 templatetags/zbreadcrumbs.py:46
 msgid "Tags"
 msgstr "Tagy"
 
@@ -719,7 +707,7 @@ msgstr "Ulož ako nedokončené"
 
 #: templates/admin/zinnia/widgets/quickpost.html:35
 msgid "Reset"
-msgstr ""
+msgstr "Reset"
 
 #: templates/admin/zinnia/widgets/quickpost.html:36
 msgid "Publish"
@@ -873,8 +861,8 @@ msgid "Be first to comment!"
 msgstr "Buď prvý kto napíše komentár!"
 
 #: templates/zinnia/_entry_detail.html:98
-#: templates/zinnia/entry_detail.html:115
-#: templates/zinnia/entry_detail.html:121
+#: templates/zinnia/entry_detail_base.html:117
+#: templates/zinnia/entry_detail_base.html:123
 msgid "Comments are closed."
 msgstr "Komentáre nie sú povolené."
 
@@ -893,7 +881,7 @@ msgid "Author list"
 msgstr "Zoznam autorov"
 
 #: templates/zinnia/author_list.html:7 templates/zinnia/base.html:34
-#: templatetags/zbreadcrumbs.py:48
+#: templatetags/zbreadcrumbs.py:49
 msgid "Authors"
 msgstr "Autori"
 
@@ -909,9 +897,17 @@ msgstr "RSS feed aktuálnych článkov"
 msgid "RSS Feed of latest discussions"
 msgstr "RSS kanál nedávnych diskusií"
 
+#: templates/zinnia/base.html:26 templates/zinnia/skeleton.html:76
+msgid "Search"
+msgstr "Vyhľadávanie"
+
 #: templates/zinnia/base.html:38
 msgid "Calendar"
 msgstr "Kalendár"
+
+#: templates/zinnia/base.html:46 templates/zinnia/skeleton.html:72
+msgid "Recent entries"
+msgstr "Aktuálne články"
 
 #: templates/zinnia/base.html:58
 msgid "Random entries"
@@ -971,11 +967,11 @@ msgstr "Zatiaľ žiadne kategórie."
 #: templates/zinnia/entry_archive_day.html:17
 #: templates/zinnia/entry_archive_today.html:17
 msgid "Previous day"
-msgstr ""
+msgstr "Predošlý deň"
 
 #: templates/zinnia/entry_archive_day.html:23
 msgid "Next day"
-msgstr ""
+msgstr "Nasledujúci deň"
 
 #: templates/zinnia/entry_archive_month.html:16
 msgid "Daily archives"
@@ -983,11 +979,11 @@ msgstr "Denný archív"
 
 #: templates/zinnia/entry_archive_month.html:26
 msgid "Previous month"
-msgstr ""
+msgstr "Predošlý mesiac"
 
 #: templates/zinnia/entry_archive_month.html:32
 msgid "Next month"
-msgstr ""
+msgstr "Nasledujúci mesiac"
 
 #: templates/zinnia/entry_archive_today.html:5
 #: templates/zinnia/entry_archive_today.html:7
@@ -1000,66 +996,78 @@ msgstr "Dnešný archív"
 #: templates/zinnia/entry_archive_week.html:12
 #, python-format
 msgid "Archives week %(week_number)s of %(year)s"
-msgstr ""
+msgstr "Archývy týždňov %(week_number)s z %(year)s"
 
 #: templates/zinnia/entry_archive_year.html:16
 #: templates/zinnia/sitemap.html:69
 msgid "Monthly archives"
 msgstr "Mesačné archívy"
 
-#: templates/zinnia/entry_detail.html:22
+#: templates/zinnia/entry_detail_base.html:22
 msgid "RSS Feed of discussions on"
 msgstr "RSS kanál diskusií zapnutý"
 
-#: templates/zinnia/entry_detail.html:24
+#: templates/zinnia/entry_detail_base.html:24
 msgid "RSS Feed of comments on"
 msgstr "RSS kanaĺ komentárov zapnutý"
 
-#: templates/zinnia/entry_detail.html:26
+#: templates/zinnia/entry_detail_base.html:26
 msgid "RSS Feed of pingbacks on"
 msgstr ""
 
-#: templates/zinnia/entry_detail.html:28
+#: templates/zinnia/entry_detail_base.html:28
 msgid "RSS Feed of trackbacks on"
 msgstr "RSS kanál spätných odkazov"
 
-#: templates/zinnia/entry_detail.html:48
+#: templates/zinnia/entry_detail_base.html:48
 msgid "Next entry"
 msgstr "Ďalší článok"
 
-#: templates/zinnia/entry_detail.html:60
+#: templates/zinnia/entry_detail_base.html:60
 msgid "Previous entry"
 msgstr "Predchádzajúci článok"
 
-#: templates/zinnia/entry_detail.html:71
+#: templates/zinnia/entry_detail_base.html:71
 msgid "Related entries"
 msgstr "Súvisiace články"
 
-#: templates/zinnia/entry_detail.html:82
+#: templates/zinnia/entry_detail_base.html:82
 msgid "Similar entries"
 msgstr "Podobné články"
 
-#: templates/zinnia/entry_detail.html:90
+#: templates/zinnia/entry_detail_base.html:90
 msgid "Comments"
 msgstr "Komentáre"
 
-#: templates/zinnia/entry_detail.html:130
+#: templates/zinnia/entry_detail_base.html:110
+msgid "Direct link to this comment"
+msgstr ""
+
+#: templates/zinnia/entry_detail_base.html:132
 msgid "Pingbacks"
 msgstr ""
 
-#: templates/zinnia/entry_detail.html:152
+#: templates/zinnia/entry_detail_base.html:146
+msgid "Direct link to this pingback"
+msgstr ""
+
+#: templates/zinnia/entry_detail_base.html:156
 msgid "Pingbacks are open."
 msgstr ""
 
-#: templates/zinnia/entry_detail.html:154
+#: templates/zinnia/entry_detail_base.html:158
 msgid "Pingbacks are closed."
 msgstr ""
 
-#: templates/zinnia/entry_detail.html:164
+#: templates/zinnia/entry_detail_base.html:168
 msgid "Trackbacks"
 msgstr "Spätné odkazy"
 
-#: templates/zinnia/entry_detail.html:187
+#: templates/zinnia/entry_detail_base.html:181
+msgid "Direct link to this trackback"
+msgstr ""
+
+#: templates/zinnia/entry_detail_base.html:193
 msgid "Trackback URL"
 msgstr "URL spätného odkazu"
 
@@ -1100,22 +1108,22 @@ msgstr "Tag"
 msgid "Page"
 msgstr "Stránka"
 
-#: templates/zinnia/entry_list.html:26
+#: templates/zinnia/entry_list.html:28
 #, python-format
 msgid "Category archives: %(category)s"
 msgstr "Archív kategórie: %(category)s"
 
-#: templates/zinnia/entry_list.html:33
+#: templates/zinnia/entry_list.html:35
 #, python-format
 msgid "Tag archives: %(tag)s"
 msgstr "Archív tagu: %(tag)s"
 
-#: templates/zinnia/entry_list.html:37
+#: templates/zinnia/entry_list.html:39
 #, python-format
 msgid "Author archives: %(author)s"
 msgstr "Archív autora: %(author)s"
 
-#: templates/zinnia/entry_list.html:46 templates/zinnia/sitemap.html:25
+#: templates/zinnia/entry_list.html:50 templates/zinnia/sitemap.html:25
 #: templates/zinnia/sitemap.html.py:45
 #: templates/zinnia/tags/featured_entries.html:9
 #: templates/zinnia/tags/popular_entries.html:12
@@ -1124,15 +1132,15 @@ msgstr "Archív autora: %(author)s"
 msgid "No entries yet."
 msgstr "Zatiaľ žiadne články."
 
-#: templates/zinnia/entry_list.html:58 templates/zinnia/entry_list.html:59
+#: templates/zinnia/entry_list.html:69 templates/zinnia/entry_list.html:70
 msgid "Edit the category"
 msgstr "Uprav kategóriu"
 
-#: templates/zinnia/entry_list.html:65 templates/zinnia/entry_list.html:66
+#: templates/zinnia/entry_list.html:76 templates/zinnia/entry_list.html:77
 msgid "Edit the tag"
 msgstr "Uprav tag"
 
-#: templates/zinnia/entry_list.html:72 templates/zinnia/entry_list.html:73
+#: templates/zinnia/entry_list.html:83 templates/zinnia/entry_list.html:84
 msgid "Edit the author"
 msgstr "Uprav autora"
 
@@ -1143,7 +1151,7 @@ msgstr "Výsledky vyhľadávania pre"
 
 #: templates/zinnia/entry_search.html:11
 msgid "RSS Feed of search result of"
-msgstr ""
+msgstr "RSS feed výsledkov vyhľadávania"
 
 #: templates/zinnia/entry_search.html:25
 #, python-format
@@ -1153,11 +1161,11 @@ msgstr[0] " %(entry_count)s článok nájdený"
 msgstr[1] " %(entry_count)s články nájdené"
 msgstr[2] " %(entry_count)s článkov nájdených"
 
-#: templates/zinnia/entry_search.html:34
+#: templates/zinnia/entry_search.html:36
 msgid "Nothing found."
 msgstr "Nič nenájdené."
 
-#: templates/zinnia/entry_search.html:42
+#: templates/zinnia/entry_search.html:46
 msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
@@ -1200,6 +1208,12 @@ msgstr "Heslo"
 msgid "Valid"
 msgstr "Platný"
 
+#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:9
+#: templates/zinnia/skeleton.html:33 templates/zinnia/skeleton.html.py:34
+#: templates/zinnia/skeleton.html:65 templates/zinnia/skeleton.html.py:66
+msgid "Sitemap"
+msgstr "Mapa stránky"
+
 #: templates/zinnia/sitemap.html:12
 msgid "Entries per categories"
 msgstr "Články z kategórie"
@@ -1211,6 +1225,14 @@ msgstr "komentáre"
 #: templates/zinnia/sitemap.html:33
 msgid "All the entries"
 msgstr "Všetky články"
+
+#: templates/zinnia/skeleton.html:57
+msgid "Useful links"
+msgstr "Užitočné odkazy"
+
+#: templates/zinnia/skeleton.html:60 templates/zinnia/skeleton.html.py:61
+msgid "Blog index"
+msgstr "Index blogu"
 
 #: templates/zinnia/tag_list.html:5 templates/zinnia/tag_list.html.py:12
 msgid "Tag list"
@@ -1257,7 +1279,7 @@ msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex queries."
-msgstr ""
+msgstr "Môžete použiť - (mínus) pre vylúčenie slova alebo frázy, \"úvodzovky\" pre presnú frázu a AND/OR boolean operátory kombinované so zátvorkami pre komplexnejšie dotazy."
 
 #: templates/zinnia/tags/similar_entries.html:9
 msgid "No similar entries."
@@ -1271,21 +1293,21 @@ msgstr[0] "%(entry_count)s článok otagovaný s %(tag)s"
 msgstr[1] "%(entry_count)s článoky otagované s %(tag)s"
 msgstr[2] "%(entry_count)s článkov otagovaných s %(tag)s"
 
-#: templatetags/zbreadcrumbs.py:80
+#: templatetags/zbreadcrumbs.py:82
 #, python-format
 msgid "Page %s"
-msgstr ""
+msgstr "Stránka %s"
 
-#: templatetags/zbreadcrumbs.py:106
+#: templatetags/zbreadcrumbs.py:108
 #, python-format
 msgid "Week %s"
-msgstr ""
+msgstr "Týždeň %s"
 
-#: tests/views.py:326 views/search.py:24
+#: tests/views.py:399 views/search.py:24
 msgid "The pattern is too short"
 msgstr "Vzor je príliš krátky"
 
-#: tests/views.py:330 views/search.py:28
+#: tests/views.py:403 views/search.py:28
 msgid "No pattern to search found"
 msgstr "Žiadny vzor pre vyhľadávanie nájdený"
 
@@ -1294,19 +1316,19 @@ msgstr "Žiadny vzor pre vyhľadávanie nájdený"
 msgid "No Tag found matching \"%s\"."
 msgstr "Žiadny Tag sa nezhoduje s \"%s\"."
 
-#: xmlrpc/metaweblog.py:35
+#: xmlrpc/metaweblog.py:36
 msgid "Username is incorrect."
 msgstr "Užívateľské meno je nesprávne."
 
-#: xmlrpc/metaweblog.py:37
+#: xmlrpc/metaweblog.py:38
 msgid "Password is invalid."
 msgstr "Heslo je nesprávne."
 
-#: xmlrpc/metaweblog.py:39
+#: xmlrpc/metaweblog.py:40
 msgid "User account unavailable."
 msgstr "Užívateľský účet je neprístupný."
 
-#: xmlrpc/metaweblog.py:42
+#: xmlrpc/metaweblog.py:43
 #, python-format
 msgid "User cannot %s."
 msgstr "Užívateľ nemǒže %s."
