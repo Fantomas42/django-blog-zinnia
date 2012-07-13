@@ -28,19 +28,21 @@ class PreviousNextPublishedMixin(object):
         if settings.USE_TZ:
             date = timezone.make_aware(date, timezone.utc)
 
-        dates = list(self.get_queryset().dates(
-            'creation_date', period,
-            order=previous and 'ASC' or 'DESC'))
-        try:
-            index = dates.index(date)
-        except ValueError:
-            if previous and dates:
-                return dates[-1].date()
-            else:
-                return None
-        if index == 0:
-            return None
-        return dates[index - 1].date()
+        if previous:
+            filters = {'creation_date__lt': date}
+            ordering = 'DESC'
+        else:
+            filters = {'creation_date__gt': date}
+            ordering = 'ASC'
+
+        dates = list(self.get_queryset().filter(
+            **filters).dates('creation_date', period, order=ordering))
+
+        if date in dates:
+            dates.remove(date)
+
+        if dates:
+            return dates[0].date()
 
     def get_next_month(self, date):
         """Get the next month with published Entries"""
