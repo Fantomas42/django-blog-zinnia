@@ -1,8 +1,15 @@
 """Test cases for Zinnia's mixins"""
+from datetime import date
+
 from django.test import TestCase
+from django.contrib.sites.models import Site
 from django.core.exceptions import ImproperlyConfigured
 
+from zinnia.models import Entry
+from zinnia.managers import PUBLISHED
+from zinnia.tests.utils import datetime
 from zinnia.views.mixins.mimetypes import MimeTypeMixin
+from zinnia.views.mixins.archives import PreviousNextPublishedMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
 from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 from zinnia.views.mixins.templates import EntryArchiveTemplateResponseMixin
@@ -168,3 +175,59 @@ class MixinTestCase(TestCase):
               'zinnia/archives/custom.html',
               'zinnia/custom.html',
               'custom.html'])
+
+    def test_previous_next_published_mixin(self):
+        site = Site.objects.get_current()
+
+        params = {'title': 'Entry 1', 'content': 'Entry 1',
+                  'slug': 'entry-1', 'status': PUBLISHED,
+                  'creation_date': datetime(2012, 1, 1, 12)}
+        entry_1 = Entry.objects.create(**params)
+        entry_1.sites.add(site)
+
+        params = {'title': 'Entry 2', 'content': 'Entry 2',
+                  'slug': 'entry-2', 'status': PUBLISHED,
+                  'creation_date': datetime(2012, 3, 15, 12)}
+        entry_2 = Entry.objects.create(**params)
+        entry_2.sites.add(site)
+
+        params = {'title': 'Entry 3', 'content': 'Entry 3',
+                  'slug': 'entry-3', 'status': PUBLISHED,
+                  'creation_date': datetime(2012, 6, 2, 12)}
+        entry_3 = Entry.objects.create(**params)
+        entry_3.sites.add(site)
+
+        class EntryPreviousNextPublished(PreviousNextPublishedMixin):
+            def get_queryset(self):
+                return Entry.published.all()
+        epnp = EntryPreviousNextPublished()
+
+        test_date = datetime(2009, 12, 1)
+        self.assertEquals(epnp.get_previous_month(test_date), None)
+        self.assertEquals(epnp.get_previous_day(test_date), None)
+        self.assertEquals(epnp.get_next_month(test_date), date(2012, 1, 1))
+        self.assertEquals(epnp.get_next_day(test_date), date(2012, 1, 1))
+
+        test_date = datetime(2012, 1, 1)
+        self.assertEquals(epnp.get_previous_month(test_date), None)
+        self.assertEquals(epnp.get_previous_day(test_date), None)
+        self.assertEquals(epnp.get_next_month(test_date), date(2012, 3, 1))
+        self.assertEquals(epnp.get_next_day(test_date), date(2012, 3, 15))
+
+        test_date = datetime(2012, 3, 15)
+        self.assertEquals(epnp.get_previous_month(test_date), date(2012, 1, 1))
+        self.assertEquals(epnp.get_previous_day(test_date), date(2012, 1, 1))
+        self.assertEquals(epnp.get_next_month(test_date), date(2012, 6, 1))
+        self.assertEquals(epnp.get_next_day(test_date), date(2012, 6, 2))
+
+        test_date = datetime(2012, 6, 2)
+        self.assertEquals(epnp.get_previous_month(test_date), date(2012, 3, 1))
+        self.assertEquals(epnp.get_previous_day(test_date), date(2012, 3, 15))
+        self.assertEquals(epnp.get_next_month(test_date), None)
+        self.assertEquals(epnp.get_next_day(test_date), None)
+
+        test_date = datetime(2013, 5, 1)
+        self.assertEquals(epnp.get_previous_month(test_date), date(2012, 6, 1))
+        self.assertEquals(epnp.get_previous_day(test_date), date(2012, 6, 2))
+        self.assertEquals(epnp.get_next_month(test_date), None)
+        self.assertEquals(epnp.get_next_day(test_date), None)
