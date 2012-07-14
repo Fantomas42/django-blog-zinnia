@@ -150,24 +150,26 @@ class ZinniaViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_entry_archive_month(self):
         setup_test_template_loader(
-            {'zinnia/archives/2010/month/01/entry_archive_month.html': ''})
+            {'zinnia/archives/2010/month/01/entry_archive_month.html': '',
+             'zinnia/entry_archive_month.html': ''})
         response = self.check_publishing_context(
             '/2010/01/', 1, 2, 'entry_list', 4)
         self.assertTemplateUsed(
             response, 'zinnia/archives/2010/month/01/entry_archive_month.html')
         self.assertEquals(response.context['previous_month'], None)
         self.assertEquals(response.context['next_month'], date(2010, 6, 1))
-        restore_template_loaders()
         response = self.client.get('/2010/06/')
         self.assertEquals(response.context['previous_month'], date(2010, 1, 1))
         self.assertEquals(response.context['next_month'], None)
         response = self.client.get('/2009/12/')
         self.assertEquals(response.context['previous_month'], None)
         self.assertEquals(response.context['next_month'], date(2010, 1, 1))
+        restore_template_loaders()
 
     def test_zinnia_entry_archive_day(self):
         setup_test_template_loader(
-            {'zinnia/archives/2010/01/01/entry_archive_day.html': ''})
+            {'zinnia/archives/2010/01/01/entry_archive_day.html': '',
+             'zinnia/entry_archive_day.html': ''})
         response = self.check_publishing_context(
             '/2010/01/01/', 1, 2, 'entry_list', 5)
         self.assertTemplateUsed(
@@ -176,12 +178,12 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertEquals(response.context['next_month'], date(2010, 6, 1))
         self.assertEquals(response.context['previous_day'], None)
         self.assertEquals(response.context['next_day'], date(2010, 6, 1))
-        restore_template_loaders()
         response = self.client.get('/2010/06/01/')
         self.assertEquals(response.context['previous_month'], date(2010, 1, 1))
         self.assertEquals(response.context['next_month'], None)
         self.assertEquals(response.context['previous_day'], date(2010, 1, 1))
         self.assertEquals(response.context['next_day'], None)
+        restore_template_loaders()
 
     def test_zinnia_entry_archive_today(self):
         setup_test_template_loader(
@@ -422,8 +424,11 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         restore_template_loaders()
 
     def test_zinnia_trackback(self):
+        setup_test_template_loader(
+            {'404.html': ''})
         response = self.client.post('/trackback/404/')
         self.assertEquals(response.status_code, 404)
+        restore_template_loaders()
         self.assertEquals(
             self.client.post('/trackback/1/').status_code, 301)
         self.assertEquals(

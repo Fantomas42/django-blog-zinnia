@@ -2,6 +2,8 @@
 """Test cases for Zinnia's quick entry"""
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django.test.utils import restore_template_loaders
+from django.test.utils import setup_test_template_loader
 
 from zinnia import settings
 from zinnia.models import Entry
@@ -13,6 +15,11 @@ class QuickEntryTestCase(TestCase):
     urls = 'zinnia.tests.urls'
 
     def setUp(self):
+        setup_test_template_loader(
+            {'404.html': '',
+             'admin/change_form.html': '',
+             'zinnia/entry_detail.html': ''})
+
         self.original_wysiwyg = settings.WYSIWYG
         settings.WYSIWYG = None
         User.objects.create_user('user', 'user@example.com', 'password')
@@ -20,6 +27,7 @@ class QuickEntryTestCase(TestCase):
 
     def tearDown(self):
         settings.WYSIWYG = self.original_wysiwyg
+        restore_template_loaders()
 
     def test_quick_entry(self):
         response = self.client.get('/quick_entry/', follow=True)
