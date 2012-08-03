@@ -146,22 +146,28 @@ class Command(LabelCommand):
         if selection == '1':
             users = User.objects.all()
             if users.count() == 1:
-                preselected_user = None
-                usernames = ['[%s]' % users[0].username]
+                username = users[0].username
+                preselected_user = username
+                usernames = [username]
+                usernames_display = ['[%s]' % username]
             else:
                 usernames = []
+                usernames_display = []
                 preselected_user = None
                 for user in users:
-                    if user.username == author_name:
-                        usernames.append('[%s]' % user.username)
-                        preselected_user = author_name
+                    username = user.username
+                    if username == author_name:
+                        usernames_display.append('[%s]' % username)
+                        preselected_user = username
                     else:
-                        usernames.append(user.username)
+                        usernames_display.append(username)
+                    usernames.append(username)
             while 42:
                 user_text = "1. Select your user, by typing " \
                             "one of theses usernames:\n"\
                             "%s or 'back'\n"\
-                            "Please select a choice: " % ', '.join(usernames)
+                            "Please select a choice: " % \
+                            ', '.join(usernames_display)
                 user_selected = raw_input(user_text)
                 if user_selected in usernames:
                     break
