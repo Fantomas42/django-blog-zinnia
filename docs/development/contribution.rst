@@ -107,4 +107,4 @@ The translations hosted on Transifex.net will be pulled periodically in the
 repository, but if you are in a hurry, `send me a message`_.
 
 .. _`Fork`: https://github.com/Fantomas42/django-blog-zinnia/fork
-.. _`send me a message`: https://github.com/inbox/new/Fantomas42
+.. _`send me a message`: https://github.com/Fantomas42
