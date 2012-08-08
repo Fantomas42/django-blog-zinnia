@@ -43,14 +43,6 @@ Zinnia API
     :undoc-members:
     :show-inheritance:
 
-:mod:`models` Module
---------------------
-
-.. automodule:: zinnia.models
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 :mod:`moderator` Module
 -----------------------
 
@@ -97,6 +89,7 @@ Subpackages
 .. toctree::
 
     zinnia.admin
+    zinnia.models
     zinnia.spam_checker
     zinnia.templatetags
     zinnia.url_shortener

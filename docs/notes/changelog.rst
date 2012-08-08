@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+0.12.dev
+--------
+
+* Updating ``helloworld.json`` fixture
+* Fix issues with authors in ``wp2zinnia``
+* Models has been splitted into differents modules
+
+.. warning::
+   If you are upgrading from a previous version of Zinnia with
+   extensions, you needs to update your imports of the models.
+
 0.11.2
 ------
 
