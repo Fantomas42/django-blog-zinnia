@@ -1,4 +1,4 @@
-"""Models of Zinnia"""
+"""Entry model for Zinnia"""
 import warnings
 
 from django.db import models
@@ -19,10 +19,9 @@ from django.contrib.markup.templatetags.markup import markdown
 from django.contrib.markup.templatetags.markup import textile
 from django.contrib.markup.templatetags.markup import restructuredtext
 
-from mptt.models import MPTTModel
-from mptt.models import TreeForeignKey
 from tagging.fields import TagField
 
+from zinnia.models.category import Category
 from zinnia.settings import UPLOAD_TO
 from zinnia.settings import MARKUP_LANGUAGE
 from zinnia.settings import ENTRY_TEMPLATES
@@ -31,80 +30,12 @@ from zinnia.settings import MARKDOWN_EXTENSIONS
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
-from zinnia.managers import AuthorPublishedManager
 from zinnia.managers import PINGBACK, TRACKBACK
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.moderator import EntryCommentModerator
 from zinnia.url_shortener import get_url_shortener
 from zinnia.signals import ping_directories_handler
 from zinnia.signals import ping_external_urls_handler
-
-
-class Author(User):
-    """Proxy Model around User"""
-
-    objects = models.Manager()
-    published = AuthorPublishedManager()
-
-    def entries_published(self):
-        """Return only the entries published"""
-        return entries_published(self.entries)
-
-    def __unicode__(self):
-        if self.first_name and self.last_name:
-            return u'%s %s' % (self.first_name, self.last_name)
-        return self.username
-
-    @models.permalink
-    def get_absolute_url(self):
-        """Return author's URL"""
-        return ('zinnia_author_detail', (self.username,))
-
-    class Meta:
-        """Author's Meta"""
-        proxy = True
-
-
-class Category(MPTTModel):
-    """Category object for Entry"""
-
-    title = models.CharField(_('title'), max_length=255)
-    slug = models.SlugField(help_text=_('used for publication'),
-                            unique=True, max_length=255)
-    description = models.TextField(_('description'), blank=True)
-
-    parent = TreeForeignKey('self', null=True, blank=True,
-                            verbose_name=_('parent category'),
-                            related_name='children')
-
-    def entries_published(self):
-        """Return only the entries published"""
-        return entries_published(self.entries)
-
-    @property
-    def tree_path(self):
-        """Return category's tree path, by his ancestors"""
-        if self.parent:
-            return '%s/%s' % (self.parent.tree_path, self.slug)
-        return self.slug
-
-    def __unicode__(self):
-        return self.title
-
-    @models.permalink
-    def get_absolute_url(self):
-        """Return category's URL"""
-        return ('zinnia_category_detail', (self.tree_path,))
-
-    class Meta:
-        """Category's Meta"""
-        ordering = ['title']
-        verbose_name = _('category')
-        verbose_name_plural = _('categories')
-
-    class MPTTMeta:
-        """Category MPTT's Meta"""
-        order_insertion_by = ['title']
 
 
 class EntryAbstractClass(models.Model):
@@ -276,6 +207,7 @@ class EntryAbstractClass(models.Model):
     class Meta:
         """Entry's Meta"""
         abstract = True
+        app_label = 'zinnia'
         ordering = ['-creation_date']
         get_latest_by = 'creation_date'
         verbose_name = _('entry')
