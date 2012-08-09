@@ -24,8 +24,8 @@ from django.core.files.temp import NamedTemporaryFile
 from tagging.models import Tag
 
 from zinnia import __version__
-from zinnia.models import Entry
-from zinnia.models import Category
+from zinnia.models.entry import Entry
+from zinnia.models.category import Category
 from zinnia.signals import disconnect_zinnia_signals
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.managers import PINGBACK, TRACKBACK

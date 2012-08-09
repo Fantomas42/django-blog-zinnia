@@ -3,8 +3,8 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 from zinnia import settings
-from zinnia.models import Entry
-from zinnia.models import Category
+from zinnia.models.entry import Entry
+from zinnia.models.category import Category
 
 
 class EntryAdminTestCase(TestCase):

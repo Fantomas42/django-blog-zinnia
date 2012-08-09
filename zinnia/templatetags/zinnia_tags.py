@@ -17,9 +17,9 @@ from django.contrib.comments import get_model as get_comment_model
 from tagging.models import Tag
 from tagging.utils import calculate_cloud
 
-from zinnia.models import Entry
-from zinnia.models import Author
-from zinnia.models import Category
+from zinnia.models.entry import Entry
+from zinnia.models.author import Author
+from zinnia.models.category import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import tags_published
 from zinnia.managers import PINGBACK, TRACKBACK

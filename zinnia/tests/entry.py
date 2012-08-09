@@ -13,14 +13,13 @@ from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.comments.models import CommentFlag
 
-from zinnia import models
-from zinnia.models import Entry
+from zinnia.models import entry
+from zinnia.models.entry import Entry
 from zinnia.managers import PUBLISHED
 from zinnia.managers import PINGBACK, TRACKBACK
-from zinnia.models import get_base_model
-from zinnia.models import EntryAbstractClass
+from zinnia.models.entry import get_base_model
+from zinnia.models.entry import EntryAbstractClass
 from zinnia.tests.utils import datetime
-from zinnia import models as models_settings
 from zinnia import url_shortener as shortener_settings
 
 
@@ -94,15 +93,14 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.word_count, 2)
 
     def test_comments_are_open(self):
-        original_auto_close = models.AUTO_CLOSE_COMMENTS_AFTER
-        models.AUTO_CLOSE_COMMENTS_AFTER = None
+        original_auto_close = entry.AUTO_CLOSE_COMMENTS_AFTER
+        entry.AUTO_CLOSE_COMMENTS_AFTER = None
         self.assertEquals(self.entry.comments_are_open, True)
-        models.AUTO_CLOSE_COMMENTS_AFTER = 5
+        entry.AUTO_CLOSE_COMMENTS_AFTER = 5
         self.entry.start_publication = timezone.now() - timedelta(days=7)
         self.entry.save()
         self.assertEquals(self.entry.comments_are_open, False)
-
-        models.AUTO_CLOSE_COMMENTS_AFTER = original_auto_close
+        entry.AUTO_CLOSE_COMMENTS_AFTER = original_auto_close
 
     def test_is_actual(self):
         self.assertTrue(self.entry.is_actual)
@@ -201,13 +199,13 @@ class EntryHtmlContentTestCase(TestCase):
                   'content': 'My content',
                   'slug': 'my-entry'}
         self.entry = Entry(**params)
-        self.original_rendering = models_settings.MARKUP_LANGUAGE
+        self.original_rendering = entry.MARKUP_LANGUAGE
 
     def tearDown(self):
-        models_settings.MARKUP_LANGUAGE = self.original_rendering
+        entry.MARKUP_LANGUAGE = self.original_rendering
 
     def test_html_content_default(self):
-        models_settings.MARKUP_LANGUAGE = None
+        entry.MARKUP_LANGUAGE = None
         self.assertEquals(self.entry.html_content, '<p>My content</p>')
 
         self.entry.content = 'Hello world !\n' \
@@ -216,7 +214,7 @@ class EntryHtmlContentTestCase(TestCase):
                           '<p>Hello world !<br /> this is my content</p>')
 
     def test_html_content_textitle(self):
-        models_settings.MARKUP_LANGUAGE = 'textile'
+        entry.MARKUP_LANGUAGE = 'textile'
         self.entry.content = 'Hello world !\n\n' \
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
@@ -231,7 +229,7 @@ class EntryHtmlContentTestCase(TestCase):
             self.assertEquals(html_content, self.entry.content)
 
     def test_html_content_markdown(self):
-        models_settings.MARKUP_LANGUAGE = 'markdown'
+        entry.MARKUP_LANGUAGE = 'markdown'
         self.entry.content = 'Hello world !\n\n' \
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
@@ -246,7 +244,7 @@ class EntryHtmlContentTestCase(TestCase):
             self.assertEquals(html_content, self.entry.content)
 
     def test_html_content_restructuredtext(self):
-        models_settings.MARKUP_LANGUAGE = 'restructuredtext'
+        entry.MARKUP_LANGUAGE = 'restructuredtext'
         self.entry.content = 'Hello world !\n\n' \
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
@@ -264,16 +262,16 @@ class EntryHtmlContentTestCase(TestCase):
 class EntryGetBaseModelTestCase(TestCase):
 
     def setUp(self):
-        self.original_entry_base_model = models_settings.ENTRY_BASE_MODEL
+        self.original_entry_base_model = entry.ENTRY_BASE_MODEL
 
     def tearDown(self):
-        models_settings.ENTRY_BASE_MODEL = self.original_entry_base_model
+        entry.ENTRY_BASE_MODEL = self.original_entry_base_model
 
     def test_get_base_model(self):
-        models_settings.ENTRY_BASE_MODEL = ''
+        entry.ENTRY_BASE_MODEL = ''
         self.assertEquals(get_base_model(), EntryAbstractClass)
 
-        models_settings.ENTRY_BASE_MODEL = 'mymodule.myclass'
+        entry.ENTRY_BASE_MODEL = 'mymodule.myclass'
         try:
             with warnings.catch_warnings(record=True) as w:
                 self.assertEquals(get_base_model(), EntryAbstractClass)
@@ -282,5 +280,5 @@ class EntryGetBaseModelTestCase(TestCase):
             # Fail under Python2.5, because of'warnings.catch_warnings'
             pass
 
-        models_settings.ENTRY_BASE_MODEL = 'zinnia.models.EntryAbstractClass'
+        entry.ENTRY_BASE_MODEL = 'zinnia.models.entry.EntryAbstractClass'
         self.assertEquals(get_base_model(), EntryAbstractClass)

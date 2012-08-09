@@ -11,7 +11,7 @@ from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.admin.views.main import ChangeList
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.managers import PUBLISHED
 from zinnia.admin.filters import AuthorListFilter
 

@@ -17,8 +17,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments import get_model as get_comment_model
 
 from zinnia import __version__
-from zinnia.models import Entry
-from zinnia.models import Category
+from zinnia.models.entry import Entry
+from zinnia.models.category import Category
 from zinnia.managers import DRAFT, PUBLISHED
 
 gdata_service = None

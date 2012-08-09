@@ -2,7 +2,7 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 
 
 class EntryShortLink(RedirectView):

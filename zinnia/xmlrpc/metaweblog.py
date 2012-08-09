@@ -16,8 +16,8 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.template.defaultfilters import slugify
 
-from zinnia.models import Entry
-from zinnia.models import Category
+from zinnia.models.entry import Entry
+from zinnia.models.category import Category
 from zinnia.settings import PROTOCOL
 from zinnia.settings import UPLOAD_TO
 from zinnia.managers import DRAFT, PUBLISHED

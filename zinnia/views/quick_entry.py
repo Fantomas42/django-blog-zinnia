@@ -13,7 +13,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import permission_required
 from django.utils import timezone
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 

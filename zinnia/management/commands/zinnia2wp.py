@@ -9,8 +9,8 @@ from tagging.models import Tag
 
 from zinnia import __version__
 from zinnia.settings import PROTOCOL
-from zinnia.models import Entry
-from zinnia.models import Category
+from zinnia.models.entry import Entry
+from zinnia.models.category import Category
 
 
 class Command(NoArgsCommand):

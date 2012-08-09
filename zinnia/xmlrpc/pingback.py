@@ -12,7 +12,7 @@ from django.core.urlresolvers import Resolver404
 from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.managers import PINGBACK
 from zinnia.settings import PINGBACK_CONTENT_LENGTH
 from BeautifulSoup import BeautifulSoup

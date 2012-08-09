@@ -3,8 +3,8 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
-from zinnia.models import Entry
-from zinnia.models import Author
+from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
 
 

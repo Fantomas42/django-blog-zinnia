@@ -8,7 +8,7 @@ from django.views.generic.dates import BaseWeekArchiveView
 from django.views.generic.dates import BaseDayArchiveView
 from django.views.generic.dates import BaseTodayArchiveView
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.views.mixins.archives import ArchiveMixin
 from zinnia.views.mixins.archives import PreviousNextPublishedMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin

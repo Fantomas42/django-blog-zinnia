@@ -13,9 +13,9 @@ from django.contrib.sites.models import Site
 from django.contrib.comments.models import CommentFlag
 from tagging.models import Tag
 
-from zinnia.models import Entry
-from zinnia.models import Author
-from zinnia.models import Category
+from zinnia.models.entry import Entry
+from zinnia.models.author import Author
+from zinnia.models.category import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 from zinnia.managers import PINGBACK, TRACKBACK

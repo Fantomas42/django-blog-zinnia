@@ -14,8 +14,8 @@ from django.contrib.contenttypes.models import ContentType
 
 from BeautifulSoup import BeautifulSoup
 
-from zinnia.models import Entry
-from zinnia.models import Category
+from zinnia.models.entry import Entry
+from zinnia.models.category import Category
 from zinnia.managers import PINGBACK
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime

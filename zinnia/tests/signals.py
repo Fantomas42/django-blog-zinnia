@@ -1,7 +1,7 @@
 """Test cases for Zinnia's signals"""
 from django.test import TestCase
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 from zinnia.signals import disable_for_loaddata

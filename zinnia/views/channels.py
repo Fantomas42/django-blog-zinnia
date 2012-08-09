@@ -1,7 +1,7 @@
 """Views for Zinnia channels"""
 from django.views.generic.list import ListView
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.settings import PAGINATION
 
 

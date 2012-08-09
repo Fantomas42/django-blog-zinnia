@@ -6,7 +6,7 @@ from django.test.utils import restore_template_loaders
 from django.test.utils import setup_test_template_loader
 
 from zinnia import settings
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.managers import DRAFT
 
 

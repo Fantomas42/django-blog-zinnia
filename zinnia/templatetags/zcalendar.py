@@ -8,7 +8,7 @@ from django.utils.formats import get_format
 from django.utils.formats import date_format
 from django.core.urlresolvers import reverse
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 
 AMERICAN_TO_EUROPEAN_WEEK_DAYS = [6, 0, 1, 2, 3, 4, 5]
 

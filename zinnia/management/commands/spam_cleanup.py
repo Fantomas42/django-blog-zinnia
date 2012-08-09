@@ -3,7 +3,7 @@ from django.contrib import comments
 from django.contrib.contenttypes.models import ContentType
 from django.core.management.base import NoArgsCommand
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 
 
 class Command(NoArgsCommand):

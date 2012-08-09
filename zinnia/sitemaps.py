@@ -4,9 +4,9 @@ from django.core.urlresolvers import reverse
 
 from tagging.models import TaggedItem
 
-from zinnia.models import Entry
-from zinnia.models import Author
-from zinnia.models import Category
+from zinnia.models.entry import Entry
+from zinnia.models.author import Author
+from zinnia.models.category import Category
 from zinnia.settings import PROTOCOL
 from zinnia.managers import tags_published
 

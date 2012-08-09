@@ -3,7 +3,7 @@ from django.contrib.admin import SimpleListFilter
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
 
-from zinnia.models import Author
+from zinnia.models.author import Author
 from django.db.models import Count
 
 

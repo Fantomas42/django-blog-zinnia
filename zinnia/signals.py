@@ -47,7 +47,7 @@ def ping_external_urls_handler(sender, **kwargs):
 
 def disconnect_zinnia_signals():
     """Disconnect all the signals provided by Zinnia"""
-    from zinnia.models import Entry
+    from zinnia.models.entry import Entry
 
     post_save.disconnect(
         sender=Entry, dispatch_uid='zinnia.entry.post_save.ping_directories')

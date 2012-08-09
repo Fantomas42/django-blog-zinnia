@@ -4,7 +4,7 @@ from django.contrib import comments
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.managers import PUBLISHED
 from zinnia.spam_checker.backends.long_enough import backend
 

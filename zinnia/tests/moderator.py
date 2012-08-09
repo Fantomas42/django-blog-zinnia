@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.moderation import moderator as moderator_stack
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.managers import PUBLISHED
 from zinnia.moderator import EntryCommentModerator
 

@@ -9,8 +9,8 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.files.storage import default_storage
 
-from zinnia.models import Entry
-from zinnia.models import Category
+from zinnia.models.entry import Entry
+from zinnia.models.category import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 from zinnia.settings import UPLOAD_TO

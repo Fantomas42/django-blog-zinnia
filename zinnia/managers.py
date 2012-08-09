@@ -13,7 +13,7 @@ TRACKBACK = 'trackback'
 def tags_published():
     """Return the published tags"""
     from tagging.models import Tag
-    from zinnia.models import Entry
+    from zinnia.models.entry import Entry
     tags_entry_published = Tag.objects.usage_for_queryset(
         Entry.published.all())
     # Need to do that until the issue #44 of django-tagging is fixed

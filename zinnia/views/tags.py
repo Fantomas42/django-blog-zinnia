@@ -9,7 +9,7 @@ from tagging.utils import get_tag
 from tagging.models import Tag
 from tagging.models import TaggedItem
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.settings import PAGINATION
 from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 

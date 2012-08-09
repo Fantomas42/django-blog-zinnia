@@ -7,7 +7,7 @@ from zinnia.managers import AuthorPublishedManager
 
 
 class Author(User):
-    """Proxy Model around django.contrib.auth.models.User"""
+    """Proxy model around :class:`django.contrib.auth.models.User`"""
 
     objects = models.Manager()
     published = AuthorPublishedManager()
@@ -30,4 +30,3 @@ class Author(User):
         """Author's Meta"""
         app_label = 'zinnia'
         proxy = True
-

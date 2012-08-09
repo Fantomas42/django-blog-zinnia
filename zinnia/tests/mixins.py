@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.core.exceptions import ImproperlyConfigured
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime
 from zinnia.views.mixins.mimetypes import MimeTypeMixin

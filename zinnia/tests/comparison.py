@@ -1,7 +1,7 @@
 """Test cases for Zinnia's comparison"""
 from django.test import TestCase
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.comparison import pearson_score
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import ClusteredModel

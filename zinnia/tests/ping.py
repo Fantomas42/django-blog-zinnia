@@ -4,7 +4,7 @@ from urllib2 import URLError
 from urllib import addinfourl
 from django.test import TestCase
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.ping import URLRessources
 from zinnia.ping import DirectoryPinger
 from zinnia.ping import ExternalUrlsPinger

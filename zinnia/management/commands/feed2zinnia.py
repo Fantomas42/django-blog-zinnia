@@ -20,8 +20,8 @@ from django.core.management.base import LabelCommand
 from django.core.files.temp import NamedTemporaryFile
 
 from zinnia import __version__
-from zinnia.models import Entry
-from zinnia.models import Category
+from zinnia.models.entry import Entry
+from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.signals import disconnect_zinnia_signals
 

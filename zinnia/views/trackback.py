@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.http import HttpResponsePermanentRedirect
 from django.contrib.contenttypes.models import ContentType
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.managers import TRACKBACK
 from zinnia.views.mixins.mimetypes import TemplateMimeTypeView
 

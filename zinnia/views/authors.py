@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.list import BaseListView
 
-from zinnia.models import Author
+from zinnia.models.author import Author
 from zinnia.settings import PAGINATION
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
 from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin

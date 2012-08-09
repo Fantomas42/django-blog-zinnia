@@ -1,7 +1,7 @@
 """Views for Zinnia entries"""
 from django.views.generic.dates import BaseDateDetailView
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.views.mixins.archives import ArchiveMixin
 from zinnia.views.mixins.entry_protection import EntryProtectionMixin
 from zinnia.views.mixins.templates import EntryArchiveTemplateResponseMixin

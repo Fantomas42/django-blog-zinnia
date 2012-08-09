@@ -16,7 +16,7 @@ from pyparsing import operatorPrecedence
 
 from django.db.models import Q
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.settings import STOP_WORDS
 
 

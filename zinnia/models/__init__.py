@@ -1,3 +1,1 @@
-"""Models of Zinnia"""
-
-
+"""Models for Zinnia"""

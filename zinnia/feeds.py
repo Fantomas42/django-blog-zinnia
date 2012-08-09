@@ -17,7 +17,7 @@ from django.contrib.contenttypes.models import ContentType
 from tagging.models import Tag
 from tagging.models import TaggedItem
 
-from zinnia.models import Entry
+from zinnia.models.entry import Entry
 from zinnia.settings import COPYRIGHT
 from zinnia.settings import PROTOCOL
 from zinnia.settings import FEEDS_FORMAT
