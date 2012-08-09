@@ -4,6 +4,8 @@ CHANGELOG
 0.12.dev
 --------
 
+* ``get_authors`` context improved.
+* ``get_categories`` context improved.
 * Updating ``helloworld.json`` fixture
 * Fix issues with authors in ``wp2zinnia``
 * Models has been splitted into differents modules
