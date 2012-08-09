@@ -37,18 +37,20 @@ VECTORS_FACTORY = lambda: VectorBuilder(Entry.published.all(),
 CACHE_ENTRIES_RELATED = {}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def get_categories(template='zinnia/tags/categories.html'):
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def get_categories(context, template='zinnia/tags/categories.html'):
     """Return the categories"""
     return {'template': template,
-            'categories': Category.objects.all()}
+            'categories': Category.objects.all(),
+            'context_category': context.get('category')}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def get_authors(template='zinnia/tags/authors.html'):
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def get_authors(context, template='zinnia/tags/authors.html'):
     """Return the published authors"""
     return {'template': template,
-            'authors': Author.published.all()}
+            'authors': Author.published.all(),
+            'context_author': context.get('author')}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')

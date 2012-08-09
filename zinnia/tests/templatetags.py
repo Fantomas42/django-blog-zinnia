@@ -58,31 +58,39 @@ class TemplateTagsTestCase(TestCase):
         self.entry.save()
 
     def test_get_categories(self):
+        source_context = Context({})
         with self.assertNumQueries(0):
-            context = get_categories()
+            context = get_categories(source_context)
         self.assertEquals(len(context['categories']), 0)
         self.assertEquals(context['template'], 'zinnia/tags/categories.html')
+        self.assertEquals(context['context_category'], None)
 
-        Category.objects.create(title='Category 1', slug='category-1')
+        category = Category.objects.create(title='Category 1',
+                                           slug='category-1')
+        source_context = Context({'category': category})
         with self.assertNumQueries(0):
-            context = get_categories('custom_template.html')
+            context = get_categories(source_context, 'custom_template.html')
         self.assertEquals(len(context['categories']), 1)
         self.assertEquals(context['template'], 'custom_template.html')
+        self.assertEquals(context['context_category'], category)
 
     def test_get_authors(self):
+        source_context = Context({})
         with self.assertNumQueries(1):
-            context = get_authors()
+            context = get_authors(source_context)
         self.assertEquals(len(context['authors']), 0)
         self.assertEquals(context['template'], 'zinnia/tags/authors.html')
-
+        self.assertEquals(context['context_author'], None)
         user = User.objects.create_user(username='webmaster',
                                         email='webmaster@example.com')
         self.entry.authors.add(user)
         self.publish_entry()
+        source_context = Context({'author': user})
         with self.assertNumQueries(0):
-            context = get_authors('custom_template.html')
+            context = get_authors(source_context, 'custom_template.html')
         self.assertEquals(len(context['authors']), 1)
         self.assertEquals(context['template'], 'custom_template.html')
+        self.assertEquals(context['context_author'], user)
 
     def test_get_recent_entries(self):
         with self.assertNumQueries(1):

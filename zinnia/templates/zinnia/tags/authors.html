@@ -2,7 +2,7 @@
 {% load url from future %}
 <ul>
   {% for author in authors %}
-  <li class="vcard">
+  <li class="vcard{% if author.username == context_author.username %} current{% endif %}>">
     <a href="{% url 'zinnia_author_detail' author.username %}"
        title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}"
        class="fn nickname url">{{ author }}</a>
