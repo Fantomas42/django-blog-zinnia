@@ -106,8 +106,8 @@ I want an image gallery in my posts, what can I do ?
 ----------------------------------------------------
 
 Simply create a new application with a model named :class:`EntryImage` with a
-:class:`~django.db.models.ForeignKey` to the :class:`~zinnia.models.Entry`
-model.
+:class:`~django.db.models.ForeignKey` to the
+:class:`~zinnia.models.entry.Entry` model.
 
 Then in the admin module of your app, unregister the
 :class:`~zinnia.admin.entry.EntryAdmin` class, and use
@@ -119,7 +119,7 @@ Here an simple example : ::
   from django.db import models
   from django.utils.translation import ugettext_lazy as _
 
-  from zinnia.models import Entry
+  from zinnia.models.entry import Entry
 
   class EntryImage(models.Model):
       """Image Model"""
@@ -136,8 +136,8 @@ Here an simple example : ::
 
   from django.contrib import admin
 
-  from zinnia.models import Entry
   from zinnia.admin import EntryAdmin
+  from zinnia.models.entry import Entry
   from gallery.models import EntryImage
 
   class EntryImageInline(admin.TabularInline):
@@ -149,7 +149,7 @@ Here an simple example : ::
   admin.site.unregister(Entry)
   admin.site.register(Entry, EntryAdminImage)
 
-Another and better solution is to extend the :class:`~zinnia.models.Entry`
+Another and better solution is to extend the :class:`~zinnia.models.entry.Entry`
 model like described in :doc:`/how-to/extending_entry_model`.
 
 

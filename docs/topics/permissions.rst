@@ -2,7 +2,7 @@
 Permissions
 ===========
 
-.. module:: zinnia.models
+.. module:: zinnia.models.entry
 
 In addition to the **add**, **change** and **delete** permissions
 automatically created, the default :class:`Entry` model provides three

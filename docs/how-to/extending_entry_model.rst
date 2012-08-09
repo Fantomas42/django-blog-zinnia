@@ -2,7 +2,7 @@
 Extending Entry model
 =====================
 
-.. module:: zinnia.models
+.. module:: zinnia.models.entry
 
 .. versionadded:: 0.8
 
@@ -59,7 +59,7 @@ write our new class in a file named :file:`entry_gallery.py`. ::
 
   from django.db import models
   from zinnia_gallery.models import Gallery
-  from zinnia.models import EntryAbstractClass
+  from zinnia.models.entry import EntryAbstractClass
 
   class EntryGallery(EntryAbstractClass):
       gallery = models.ForeignKey(Gallery)
@@ -156,7 +156,7 @@ for adding the gallery field: ::
   from django.contrib import admin
   from django.utils.translation import ugettext_lazy as _
 
-  from zinnia.models import Entry
+  from zinnia.models.entry import Entry
   from zinnia.admin.entry import EntryAdmin
 
   class EntryGalleryAdmin(EntryAdmin):

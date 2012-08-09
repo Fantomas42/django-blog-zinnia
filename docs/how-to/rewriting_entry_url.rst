@@ -2,7 +2,7 @@
 Rewriting Entry's URL
 =====================
 
-.. module:: zinnia.models
+.. module:: zinnia.models.entry
 
 By default the :class:`Entry` model implements a default
 :meth:`~Entry.get_absolute_url` method to retrieve the canonical URL for an
@@ -121,7 +121,7 @@ for handling our new URL. ::
 
   from django.views.generic.detail import DetailView
 
-  from zinnia.models import Entry
+  from zinnia.models.entry import Entry
   from zinnia.views.mixins.entry_protection import EntryProtectionMixin
 
   class EntryDetail(EntryProtectionMixin, DetailView):

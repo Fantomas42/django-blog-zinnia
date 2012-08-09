@@ -38,7 +38,7 @@ Writing a backend for using your custom URL shortener is simple as
 possible, you only needs to follows 4 rules.
 
 #. In a new Python file write a function named **backend** taking an
-   :class:`~zinnia.models.Entry` instance in parameters.
+   :class:`~zinnia.models.entry.Entry` instance in parameters.
 
 #. The **backend** function should returns an URL including the protocol
    and the domain.
