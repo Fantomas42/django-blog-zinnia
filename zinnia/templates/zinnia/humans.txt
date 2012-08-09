@@ -25,4 +25,4 @@
   their patience, love and presence.
 
   All the contributors to the project:
-  http://django-blog-zinnia.com/documentation/notes/thanks/
+  http://django-blog-zinnia.rtfd.org/thanks
