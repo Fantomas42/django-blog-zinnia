@@ -723,6 +723,6 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['rejects'], 0)
         self.assertEquals(context['words_per_entry'], 2)
         self.assertEquals(context['words_per_comment'], 3)
-        self.assertEquals(context['entries_per_month'], 0)
+        self.assertEquals(context['entries_per_month'], 1)
         self.assertEquals(context['comments_per_entry'], 1)
         self.assertEquals(context['linkbacks_per_entry'], 0)

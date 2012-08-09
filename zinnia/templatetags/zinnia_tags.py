@@ -350,7 +350,10 @@ def zinnia_statistics(template='zinnia/tags/statistics.html'):
         last_entry = entries.latest()
         months_count = (last_entry.creation_date - \
                         first_entry.creation_date).days / 31.0
-        entries_per_month = months_count / entries_count
+        if months_count:
+            entries_per_month = entries_count / months_count
+        else:
+            entries_per_month = entries_count / 1.0
 
         comments_per_entry = float(replies_count) / entries_count
         linkbacks_per_entry = float(pingbacks_count + trackbacks_count) / \
