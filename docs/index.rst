@@ -75,8 +75,8 @@ Notes
 Related
 -------
 
-* `Test report`_
-* `Code coverage`_
+* `Testing and coverage reports`_
+
 
 Indices and tables
 ------------------
@@ -88,5 +88,5 @@ index or try to find it using the search function:
 * :ref:`search`
 
 .. _`documentation online at readthedocs.org`: http://django-blog-zinnia.readthedocs.org/
-.. _`Test report`: http://django-blog-zinnia.com/documentation/xunit/
-.. _`Code coverage`: http://django-blog-zinnia.com/documentation/coverage/
+.. _`Testing and coverage reports`: https://jenkins.shiningpanda.com/django-blog-zinnia/job/Django-Blog-Zinnia/
+

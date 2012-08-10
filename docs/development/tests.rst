@@ -40,9 +40,8 @@ are calibrated to run fast, but testing Zinnia within a Django project even
 if it's slow, can prevent some integration issues.
 
 If you want to make some speed optimizations or compare with your tests
-results, you can check the actual execution time of the tests at this URL:
-
-http://django-blog-zinnia.com/documentation/xunit/
+results, you can check the actual execution time of the
+`tests on Python 2.7`_  online.
 
 .. _coverage:
 
@@ -58,13 +57,12 @@ for ensuring the quality of the code.
 
 I know that a coverage percent does not represent the quality of the tests,
 but maintaining or increasing this percentage ensures the quality of
-Zinnia and his future evolutions.
-
-You can check the actual coverage percent at this URL:
-
-http://django-blog-zinnia.com/documentation/coverage/
+Zinnia and his future evolutions. For information, you can check the actual
+`coverage percent on Python 2.7`_ online.
 
 I hope that you will write some tests and find some bugs. :)
 
 .. _`unittest`: http://docs.python.org/library/unittest.html
 .. _`nose`: http://somethingaboutorange.com/mrl/projects/nose/
+.. _`tests on Python 2.7`: https://jenkins.shiningpanda.com/django-blog-zinnia/job/Django-Blog-Zinnia/PLATFORM=debian6,PYTHON=StacklessPython-2.7/lastCompletedBuild/testReport/zinnia.tests/
+.. _`coverage percent on Python 2.7`: https://jenkins.shiningpanda.com/django-blog-zinnia/job/Django-Blog-Zinnia/PLATFORM=debian6,PYTHON=StacklessPython-2.7/lastCompletedBuild/cobertura/
