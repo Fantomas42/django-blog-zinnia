@@ -151,7 +151,7 @@ Django-CMS
 ==========
 
 
-If you use `django-CMS 2.0`_, Zinnia can be integrated into your pages,
+If you use `django-CMS`_, Zinnia can be integrated into your pages,
 thanks to the plugin system.
 
 .. warning::
@@ -235,7 +235,7 @@ Insert something like this in your project's urls.py: ::
 .. _`django-bitly`: http://bitbucket.org/discovery/django-bitly/
 .. _`tweepy`: https://github.com/tweepy/tweepy
 .. _`cmsplugin_zinnia`: https://github.com/Fantomas42/cmsplugin-zinnia
-.. _`django-CMS 2.0`: http://www.django-cms.org/
+.. _`django-CMS`: http://www.django-cms.org/
 .. _`django-tinymce`: https://code.google.com/p/django-tinymce/
 .. _`installation instructions`: http://django-tinymce.googlecode.com/svn/trunk/docs/.build/html/index.html
 .. _`django-xmlrpc`: http://pypi.python.org/pypi/django-xmlrpc/
