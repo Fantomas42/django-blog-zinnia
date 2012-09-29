@@ -217,8 +217,8 @@ def new_post(blog_id, username, password, post, publish):
 
     entry_dict = {'title': post['title'],
                   'content': post['description'],
-                  'excerpt': post.get('mt_excerpt', Truncator('...').words(
-                      50, strip_tags(post['description']))),
+                  'excerpt': post.get('mt_excerpt', Truncator(
+                      strip_tags(post['description'])).words(50)),
                   'creation_date': creation_date,
                   'last_update': creation_date,
                   'comment_enabled': post.get('mt_allow_comments', 1) == 1,
@@ -266,8 +266,8 @@ def edit_post(post_id, username, password, post, publish):
 
     entry.title = post['title']
     entry.content = post['description']
-    entry.excerpt = post.get('mt_excerpt', Truncator('...').words(
-        50, strip_tags(post['description'])))
+    entry.excerpt = post.get('mt_excerpt', Truncator(
+        strip_tags(post['description'])).words(50))
     entry.creation_date = creation_date
     entry.last_update = timezone.now()
     entry.comment_enabled = post.get('mt_allow_comments', 1) == 1

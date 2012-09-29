@@ -119,8 +119,8 @@ class Command(LabelCommand):
                           'slug': slug}
 
             if not entry_dict['excerpt'] and self.auto_excerpt:
-                entry_dict['excerpt'] = Truncator('...').words(
-                      50, strip_tags(feed_entry.description))
+                entry_dict['excerpt'] = Truncator(
+                    strip_tags(feed_entry.description)).words(50)
 
             if self.tags:
                 entry_dict['tags'] = self.import_tags(categories)

@@ -258,8 +258,7 @@ class Command(LabelCommand):
         excerpt = item_node.find('{%sexcerpt/}encoded' % WP_NS).text
         if not excerpt:
             if self.auto_excerpt:
-                excerpt = Truncator('...').words(
-                    50, strip_tags(content))
+                excerpt = Truncator(strip_tags(content)).words(50)
             else:
                 excerpt = ''
 

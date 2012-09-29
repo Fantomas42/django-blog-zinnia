@@ -166,8 +166,7 @@ class EntryAdmin(admin.ModelAdmin):
     def save_model(self, request, entry, form, change):
         """Save the authors, update time, make an excerpt"""
         if not form.cleaned_data.get('excerpt') and entry.status == PUBLISHED:
-            entry.excerpt = Truncator('...').words(
-                50, strip_tags(entry.content))
+            entry.excerpt = Truncator(strip_tags(entry.content)).words(50)
 
         if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
             form.cleaned_data['authors'] = entry.authors.all()
