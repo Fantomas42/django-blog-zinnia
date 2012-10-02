@@ -457,6 +457,15 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             '<error>1</error>\n  <message>Trackback is already registered'
             '</message>\n  \n</response>\n')
 
+    def test_zinnia_trackback_on_entry_without_author(self):
+        entry = Entry.objects.get(slug='test-1')
+        entry.authors.clear()
+        self.assertEquals(
+            self.client.post('/trackback/1/',
+                             {'url': 'http://example.com'}).content,
+            '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
+            '<error>0</error>\n  \n</response>\n')
+
     def test_capabilities(self):
         self.check_capabilities('/humans.txt', 'text/plain', 0)
         self.check_capabilities('/rsd.xml', 'application/rsd+xml', 0)

@@ -148,6 +148,20 @@ class EntryCommentModeratorTestCase(TestCase):
         self.assertEquals(comments.get_model().objects.filter(
             flags__flag='spam').count(), 1)
 
+    def test_moderate_comment_on_entry_without_author(self):
+        self.entry.authors.clear()
+        comment = comments.get_model().objects.create(
+            comment='My Comment', user=self.author, is_public=True,
+            content_object=self.entry, site=self.site)
+        moderator = EntryCommentModerator(Entry)
+        moderator.auto_moderate_comments = False
+        moderator.spam_checker_backends = (
+            'zinnia.spam_checker.backends.all_is_spam',)
+        self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
+                          True)
+        self.assertEquals(comments.get_model().objects.filter(
+            flags__flag='spam').count(), 1)
+
     def test_integrity_error_on_duplicate_spam_comments(self):
         class AllIsSpamModerator(EntryCommentModerator):
             spam_checker_backends = [

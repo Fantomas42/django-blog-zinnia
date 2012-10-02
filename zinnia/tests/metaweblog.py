@@ -294,3 +294,8 @@ class MetaWeblogTestCase(TestCase):
         self.assertTrue('/zinnia_test_file' in new_media['url'])
         default_storage.delete('/'.join([
             UPLOAD_TO, new_media['url'].split('/')[-1]]))
+
+    def test_post_structure_without_author(self):
+        self.entry_1.authors.clear()
+        post = post_structure(self.entry_1, self.site)
+        self.assertEquals(post, {})

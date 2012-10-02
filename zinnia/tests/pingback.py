@@ -173,6 +173,22 @@ class PingBackTestCase(TestCase):
         response = self.server.pingback.ping(source, target)
         self.assertEquals(response, 48)
 
+    def test_pingback_ping_on_entry_without_author(self):
+        target = 'http://%s%s' % (
+            self.site.domain, self.first_entry.get_absolute_url())
+        source = 'http://%s%s' % (
+            self.site.domain, self.second_entry.get_absolute_url())
+        self.first_entry.pingback_enabled = True
+        self.first_entry.save()
+        self.first_entry.authors.clear()
+        response = self.server.pingback.ping(source, target)
+        self.assertEquals(
+            response,
+            'Pingback from %s to %s registered.' % (source, target))
+        self.assertEquals(self.first_entry.pingbacks.count(), 1)
+        self.assertTrue(self.second_entry.title in \
+                        self.first_entry.pingbacks[0].user_name)
+
     def test_pingback_extensions_get_pingbacks(self):
         target = 'http://%s%s' % (
             self.site.domain, self.first_entry.get_absolute_url())
