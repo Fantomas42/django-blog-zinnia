@@ -45,6 +45,8 @@ MAIL_COMMENT_NOTIFICATION_RECIPIENTS = getattr(
 
 COMMENT_MIN_WORDS = getattr(settings, 'ZINNIA_COMMENT_MIN_WORDS', 4)
 
+COMMENT_FLAG_USER_ID = getattr(settings, 'ZINNIA_COMMENT_FLAG_USER_ID', 1)
+
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads/zinnia')
 
 PROTOCOL = getattr(settings, 'ZINNIA_PROTOCOL', 'http')

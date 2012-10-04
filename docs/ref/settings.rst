@@ -260,6 +260,15 @@ Minimal number of words required to post a comment if
 :func:`zinnia.spam_checker.backends.long_enough.backend` is enabled in
 :setting:`ZINNIA_SPAM_CHECKER_BACKENDS`.
 
+.. setting:: ZINNIA_DEFAULT_USER_ID
+
+ZINNIA_COMMENT_FLAG_USER_ID
+---------------------------
+**Default value:** ``1``
+
+The ID of the User to be used when flagging the comments as spam, pingback
+or trackback.
+
 .. _settings-pinging:
 
 Pinging
