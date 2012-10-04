@@ -17,7 +17,7 @@ from tagging.models import Tag
 from zinnia.models.entry import Entry
 from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
-from zinnia.managers import PINGBACK, TRACKBACK
+from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
 from zinnia import feeds
 from zinnia.feeds import EntryFeed

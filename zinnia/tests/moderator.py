@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.moderation import moderator as moderator_stack
 
+from zinnia.flags import SPAM
 from zinnia.models.entry import Entry
 from zinnia.managers import PUBLISHED
 from zinnia.moderator import EntryCommentModerator
@@ -140,13 +141,13 @@ class EntryCommentModeratorTestCase(TestCase):
         self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
                           False)
         self.assertEquals(comments.get_model().objects.filter(
-            flags__flag='spam').count(), 0)
+            flags__flag=SPAM).count(), 0)
         moderator.spam_checker_backends = (
             'zinnia.spam_checker.backends.all_is_spam',)
         self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
                           True)
         self.assertEquals(comments.get_model().objects.filter(
-            flags__flag='spam').count(), 1)
+            flags__flag=SPAM).count(), 1)
 
     def test_moderate_comment_on_entry_without_author(self):
         self.entry.authors.clear()
@@ -160,7 +161,7 @@ class EntryCommentModeratorTestCase(TestCase):
         self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
                           True)
         self.assertEquals(comments.get_model().objects.filter(
-            flags__flag='spam').count(), 1)
+            flags__flag=SPAM).count(), 1)
 
     def test_integrity_error_on_duplicate_spam_comments(self):
         class AllIsSpamModerator(EntryCommentModerator):

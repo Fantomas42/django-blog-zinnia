@@ -18,7 +18,7 @@ from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
-from zinnia.managers import PINGBACK, TRACKBACK
+from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
 from zinnia.templatetags.zinnia_tags import get_authors
 from zinnia.templatetags.zinnia_tags import get_gravatar

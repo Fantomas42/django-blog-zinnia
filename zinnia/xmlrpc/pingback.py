@@ -13,7 +13,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 
 from zinnia.models.entry import Entry
-from zinnia.managers import PINGBACK
+from zinnia.flags import PINGBACK
 from zinnia.flags import get_user_flagger
 from zinnia.settings import PINGBACK_CONTENT_LENGTH
 

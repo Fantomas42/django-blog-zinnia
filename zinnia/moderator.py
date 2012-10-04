@@ -12,6 +12,8 @@ from django.contrib.comments import signals
 from django.contrib.comments.models import CommentFlag
 from django.contrib.comments.moderation import CommentModerator
 
+from zinnia.flags import SPAM
+from zinnia.flags import get_user_flagger
 from zinnia.settings import PROTOCOL
 from zinnia.settings import MAIL_COMMENT_REPLY
 from zinnia.settings import MAIL_COMMENT_AUTHORS
@@ -19,7 +21,6 @@ from zinnia.settings import AUTO_MODERATE_COMMENTS
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.settings import MAIL_COMMENT_NOTIFICATION_RECIPIENTS
 from zinnia.settings import SPAM_CHECKER_BACKENDS
-from zinnia.flags import get_user_flagger
 from zinnia.spam_checker import check_is_spam
 
 
@@ -126,7 +127,7 @@ class EntryCommentModerator(CommentModerator):
                          self.spam_checker_backends):
             comment.save()
             flag, created = CommentFlag.objects.get_or_create(
-                comment=comment, user=get_user_flagger(), flag='spam')
+                comment=comment, user=get_user_flagger(), flag=SPAM)
             signals.comment_was_flagged.send(
                 sender=comment.__class__, comment=comment,
                 flag=flag, created=created, request=request)

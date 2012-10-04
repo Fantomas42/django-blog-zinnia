@@ -8,7 +8,7 @@ from django.http import HttpResponsePermanentRedirect
 from django.contrib.contenttypes.models import ContentType
 
 from zinnia.models.entry import Entry
-from zinnia.managers import TRACKBACK
+from zinnia.flags import TRACKBACK
 from zinnia.flags import get_user_flagger
 from zinnia.views.mixins.mimetypes import TemplateMimeTypeView
 

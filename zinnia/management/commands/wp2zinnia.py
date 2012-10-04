@@ -26,9 +26,9 @@ from tagging.models import Tag
 from zinnia import __version__
 from zinnia.models.entry import Entry
 from zinnia.models.category import Category
+from zinnia.flags import PINGBACK, TRACKBACK, SPAM
 from zinnia.signals import disconnect_zinnia_signals
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
-from zinnia.managers import PINGBACK, TRACKBACK
 
 WP_NS = 'http://wordpress.org/export/%s/'
 
@@ -398,7 +398,7 @@ class Command(LabelCommand):
             comment.save()
             if approvation == 'spam':
                 comment.flags.create(
-                    user=entry.authors.all()[0], flag='spam')
+                    user=entry.authors.all()[0], flag=SPAM)
             if is_pingback:
                 comment.flags.create(
                     user=entry.authors.all()[0], flag=PINGBACK)

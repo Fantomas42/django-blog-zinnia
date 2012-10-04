@@ -16,7 +16,7 @@ from django.contrib.comments.models import CommentFlag
 from zinnia.models import entry
 from zinnia.models.entry import Entry
 from zinnia.managers import PUBLISHED
-from zinnia.managers import PINGBACK, TRACKBACK
+from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.models.entry import get_base_model
 from zinnia.models.entry import EntryAbstractClass
 from zinnia.tests.utils import datetime

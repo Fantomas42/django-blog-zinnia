@@ -16,7 +16,7 @@ from BeautifulSoup import BeautifulSoup
 
 from zinnia.models.entry import Entry
 from zinnia.models.category import Category
-from zinnia.managers import PINGBACK
+from zinnia.flags import PINGBACK
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import TestTransport

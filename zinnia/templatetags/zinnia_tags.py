@@ -22,7 +22,7 @@ from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import tags_published
-from zinnia.managers import PINGBACK, TRACKBACK
+from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import PROTOCOL
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score

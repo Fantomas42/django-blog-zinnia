@@ -22,6 +22,7 @@ from django.contrib.markup.templatetags.markup import restructuredtext
 from tagging.fields import TagField
 
 from zinnia.models.category import Category
+from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import UPLOAD_TO
 from zinnia.settings import MARKUP_LANGUAGE
 from zinnia.settings import ENTRY_TEMPLATES
@@ -30,7 +31,6 @@ from zinnia.settings import MARKDOWN_EXTENSIONS
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
-from zinnia.managers import PINGBACK, TRACKBACK
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.moderator import EntryCommentModerator
 from zinnia.url_shortener import get_url_shortener
