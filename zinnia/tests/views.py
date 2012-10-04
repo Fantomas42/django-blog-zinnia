@@ -444,7 +444,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             'Test 1</message>\n  \n</response>\n')
         entry.pingback_enabled = True
         entry.save()
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(4):
             self.assertEquals(
                 self.client.post('/trackback/1/',
                                  {'url': 'http://example.com'}).content,

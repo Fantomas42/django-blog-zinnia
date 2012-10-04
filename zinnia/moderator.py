@@ -19,6 +19,7 @@ from zinnia.settings import AUTO_MODERATE_COMMENTS
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.settings import MAIL_COMMENT_NOTIFICATION_RECIPIENTS
 from zinnia.settings import SPAM_CHECKER_BACKENDS
+from zinnia.flags import get_user_flagger
 from zinnia.spam_checker import check_is_spam
 
 
@@ -124,9 +125,8 @@ class EntryCommentModerator(CommentModerator):
         if check_is_spam(comment, content_object, request,
                          self.spam_checker_backends):
             comment.save()
-            user = comment.content_object.authors.all()[0]
             flag, created = CommentFlag.objects.get_or_create(
-                comment=comment, user=user, flag='spam')
+                comment=comment, user=get_user_flagger(), flag='spam')
             signals.comment_was_flagged.send(
                 sender=comment.__class__, comment=comment,
                 flag=flag, created=created, request=request)
