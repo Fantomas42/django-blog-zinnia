@@ -21,27 +21,26 @@
 //    |        #footer         |
 //    +------------------------+
 
+
 & {
   .container {
-    @include container;
+    @include container($total-columns, $screen-layout);
     @include susy-grid-background;
   }
+
   #header, #footer {
-    @include full;
+    clear: both;
   }
-  $third: floor($total-cols / 3);
-  #content {
-    @include columns(2 * $third);
-    @include alpha;
-  }
-  #sidebar {
-    @include columns($third);
-    @include omega;
-  }
-  @media (max-width: 650px) {
-    #content, #sidebar {
-      @include full;
-      @include columns($total-cols);
+
+  @include at-breakpoint($screen-layout) {
+    $third: floor($total-columns / 3);
+
+    #content {
+      @include span-columns(2 * $third);
+    }
+
+    #sidebar {
+      @include span-columns($third omega);
     }
   }
 }

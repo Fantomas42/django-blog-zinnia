@@ -15,9 +15,8 @@
 // under the body.zinnia class to avoid interferences
 .zinnia {
   @import "partials/page";
-  @import "partials/two-cols";
+  @import "partials/layouts";
   @import "partials/forms";
-  @import "partials/slider";
   @import "partials/header";
   @import "partials/footer";
   @import "partials/breadcrumbs";
@@ -25,5 +24,6 @@
   @import "partials/entry";
   @import "partials/linkbacks";
   @import "partials/paginator";
+  @import "partials/slider";
   @import "partials/django-fixes";
 }
