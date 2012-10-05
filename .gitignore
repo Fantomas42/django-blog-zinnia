@@ -18,6 +18,7 @@ develop-eggs
 .sass-cache
 .coverage
 .tox
+gems
 docs/epydoc
 docs/build
 demo/demo.db*
