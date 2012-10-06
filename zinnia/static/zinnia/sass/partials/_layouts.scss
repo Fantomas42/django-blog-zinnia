@@ -31,16 +31,28 @@
   #header, #footer {
     clear: both;
   }
+}
 
-  @include at-breakpoint($screen-layout) {
-    $third: floor($total-columns / 3);
 
+@include at-breakpoint($screen-layout) {
+  $third: floor($total-columns / 3);
+
+  &, &.sidebar-right {
     #content {
       @include span-columns(2 * $third);
     }
 
     #sidebar {
       @include span-columns($third omega);
+    }
+  }
+
+  &.sidebar-left {
+    #content {
+      @include span-columns(2 * $third omega);
+    }
+    #sidebar {
+      @include span-columns($third);
     }
   }
 }
