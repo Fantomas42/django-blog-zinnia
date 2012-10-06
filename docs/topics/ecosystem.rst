@@ -64,7 +64,15 @@ HTML5 ready.
 
 URL: https://github.com/Fantomas42/zinnia-theme-html5
 
+zinnia-theme-bootstrap
+======================
+
+Zinnia-theme-bootstrap is an extension theme for your Weblog based on
+`Bootstrap`_.
+
+URL: https://github.com/Fantomas42/zinnia-theme-bootstrap
 
 .. _`message`: https://github.com/Fantomas42
 .. _`Django-CMS`: http://www.django-cms.org/
 .. _`django-admin-tools`: http://django-admin-tools.readthedocs.org/en/latest/index.html
+.. _`Bootstraop`: http://twitter.github.com/bootstrap/
