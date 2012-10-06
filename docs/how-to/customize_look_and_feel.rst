@@ -89,20 +89,32 @@ Aside of ``zinnia/static/zinnia/css`` directory, you can see another
 directory named ``sass`` which is organized like this: ::
 
   sass/
-  |-- screen.scss
-  |-- config
-  |-- mixins
-  `-- partials
+  |-- config/
+  |-- mixins/
+  |-- partials/
+  `-- screen.scss
 
 The ``partials`` folder contains all the **partials** used to build the
 CSS, the ``mixins`` folder contains reusable mixins like the tag-cloud and
-finally the ``config`` folder contains all the configurable
-variables. :file:`screen.scss` will include all these files into a single
-CSS document.
+finally the ``config`` folder contains all the configurable variables. For
+example the :file:`screen.scss` file will include at the end all the files
+who belong in these directories into a single compiled CSS document, named
+:file:`screen.css`.
 
 This organization allow you to easily customize the default Zinnia's CSS by
 doing a copy of these files or reuse some parts of the Zinnia's CSS into
 third-party templates.
+
+Here the actual versions of the librairies used to build the CSS documents:
+::
+
+  $ gem list
+  *** LOCAL GEMS ***
+  chunky_png (1.2.6)
+  compass (0.12.2)
+  fssm (0.2.9)
+  sass (3.2.1)
+  susy (1.0.1)
 
 .. _special-templates:
 
