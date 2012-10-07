@@ -1,9 +1,12 @@
 @import "config/base";
-@import "blueprint";
 
 .zinnia {
-  @include blueprint-print(true);
-  font-size: 2em;
+  line-height: 1.5;
+  font-family: $font-family;
+  color: black;
+  background: none;
+  font-size: 10pt;
+
   a, a:link, a:visited, a:focus, a:active, a:hover {
     text-decoration: none;
     color: $link-color;
