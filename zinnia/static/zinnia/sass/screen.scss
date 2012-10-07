@@ -2,9 +2,7 @@
 @import "compass/reset";
 // Load configurables variables.
 @import "config/base";
-// Import all the default Blueprint and Susy modules
-// so that we can access their mixins.
-@import "blueprint";
+// Load librairies configured.
 @import "susy";
 @import "compass";
 // Import the mixins

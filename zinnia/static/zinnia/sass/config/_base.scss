@@ -8,9 +8,11 @@ $show-grid-backgrounds  : false;
 // At 40em available, we pass at 12 columns
 $screen-layout          : 50em 12;
 
-// Blueprint constants
-$blueprint-font-size    : 12px;
-$blueprint-font-family  : unquote("Arial, Helvetica, sans-serif");
+// Fonts constants
+$font-size              : 12px;
+$font-family            : unquote("Arial, Helvetica, sans-serif");
+$font-family-fixed      : "andale mono", "lucida console", monospace !default;
+
 
 // Colors
 $font-color             : #333333;
