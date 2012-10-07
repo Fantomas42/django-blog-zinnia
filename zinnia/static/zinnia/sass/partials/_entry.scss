@@ -32,25 +32,6 @@ p.entry-info {
   li {
     list-style-image: none;
   }
-  pre, blockquote {
-    width: auto;
-    overflow: auto;
-    padding: 1em;
-    clear: none;
-    float: none;
-    background-color: $box-color;
-  }
-  blockquote {
-    border: 1px dashed darken($box-color, 20%);
-    p {
-      margin: 0;
-    }
-  }
-  pre {
-    line-height: 110%;
-    border-top: 1px solid darken($box-color, 20%);
-    border-bottom: 1px solid darken($box-color, 20%);
-  }
 }
 
 .continue-reading {

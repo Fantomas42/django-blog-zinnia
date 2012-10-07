@@ -2,6 +2,7 @@
   @mixin normal-text      { font-family: $font-family; color: $font-color; }
   @mixin fixed-width-text { font: 1em $font-family-fixed; line-height: 1.5; }
   @mixin header-text      { font-weight: normal; color: $header-color; }
+  @mixin cite-text        { padding: 1em; background-color: $box-color; }
 
   line-height: 1.5;
   @include normal-text;
@@ -22,15 +23,21 @@
   a               { text-decoration: none;
                     @include link-colors($link-color, $link-hover-color, $link-active-color, $link-visited-color, $link-focus-color);
     &:hover       { text-decoration: underline }  }
-  blockquote      { margin: 1.5em; color: $quiet-color; font-style: italic; }
+  blockquote      { margin: 1.5em; color: $quiet-color; font-style: italic;
+                    border: 1px dashed darken($box-color, 20%);
+                    @include cite-text;
+    p             { margin: 0; } }
   strong, dfn     { font-weight: bold; }
   em, dfn         { font-style: italic; }
   sup, sub        { line-height: 0; }
   abbr, acronym   { border-bottom: 1px dotted #666666; }
   address         { margin: 0 0 1.5em; font-style: italic; }
   del             { color: $quiet-color; }
-  pre             { margin: 1.5em 0; white-space: pre; }
   pre, code, tt   { @include fixed-width-text; }
+  pre             { margin: 1.5em 0; white-space: pre; line-height: 110%;
+                    border-top: 1px solid darken($box-color, 20%);
+                    border-bottom: 1px solid darken($box-color, 20%);
+                    @include cite-text; }
   li ul, li ol    { margin: 0; }
   ul, ol          { margin: 0 1.5em 1.5em 0; padding-left: 1.5em; }
   ul              { list-style-type: disc; }
