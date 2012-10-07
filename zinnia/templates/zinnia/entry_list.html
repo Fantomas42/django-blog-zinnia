@@ -46,7 +46,7 @@
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 {% empty %}
-  <p class="notice">
+  <p class="info">
     <a href="{% url 'admin:zinnia_entry_add' %}">{% trans "No entries yet." %}</a>
   </p>
 {% endfor %}

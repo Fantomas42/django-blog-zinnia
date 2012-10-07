@@ -28,13 +28,15 @@
 {% endblock %}
 
 {% block content-loop %}
+{% if not error %}
 {% for object in object_list %}
   {% with object_content=object.html_content|truncatewords_html:100|safe continue_reading=1 %}
   {% include "zinnia/_entry_detail.html" %}
   {% endwith %}
 {% empty %}
-<p class="notice">{% trans "Nothing found." %}</p>
+<p class="info">{% trans "Nothing found." %}</p>
 {% endfor %}
+{% endif %}
 {% endblock %}
 
 {% block content-related %}
