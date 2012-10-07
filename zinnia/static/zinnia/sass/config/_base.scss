@@ -14,6 +14,7 @@ $blueprint-font-family  : unquote("Arial, Helvetica, sans-serif");
 
 // Colors
 $font-color             : #333333;
+$quiet-color            : lighten($font-color, 20%);
 
 $link-color             : #0066AA;
 $link-hover-color       : lighten($link-color, 20%);
