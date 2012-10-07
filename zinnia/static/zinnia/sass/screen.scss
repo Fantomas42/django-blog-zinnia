@@ -6,9 +6,11 @@
 // so that we can access their mixins.
 @import "blueprint";
 @import "susy";
+@import "compass";
 // Import the mixins
 @import "mixins/icons";
 @import "mixins/tag-cloud";
+@import "mixins/alert-box";
 @import "mixins/delimited-list";
 @import "mixins/slider-buttons";
 // Combine the partials into a single screen stylesheet.
@@ -17,6 +19,7 @@
   @import "partials/page";
   @import "partials/layouts";
   @import "partials/forms";
+  @import "partials/interactions";
   @import "partials/header";
   @import "partials/footer";
   @import "partials/breadcrumbs";

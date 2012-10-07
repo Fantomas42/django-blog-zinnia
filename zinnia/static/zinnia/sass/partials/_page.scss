@@ -1,6 +1,5 @@
 & {
   @include blueprint-typography(true);
-  @include blueprint-interaction;
   background: transparent image-url("background.gif") repeat-x scroll left top;
   a {
     text-decoration: none;

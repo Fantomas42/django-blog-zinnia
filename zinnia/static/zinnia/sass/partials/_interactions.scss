@@ -1,0 +1,11 @@
+& {
+  .info {
+    @include alert-box($info-color);
+  }
+  .error {
+    @include alert-box($error-color);
+  }
+  .success {
+    @include alert-box($success-color);
+  }
+}
