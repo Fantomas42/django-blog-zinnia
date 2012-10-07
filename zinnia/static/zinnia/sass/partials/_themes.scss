@@ -1,4 +1,4 @@
-&, &.light {
+&.light {
   @include rebase($base3, $base2, $base1, $base0,
                   $base00, $base01, $base02, $base03);
 }
