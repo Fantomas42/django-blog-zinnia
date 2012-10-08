@@ -10,26 +10,41 @@
   }
   .tag-1 {
     font-size: $base-size / 2;
-    color: lighten($link-color, 40%);
   }
   .tag-2 {
     font-size: 2 * $base-size / 3;
-    color: lighten($link-color, 20%);
   }
   .tag-3 {
     font-size: 3 * $base-size / 4;
-    color: lighten($link-color, 10%);
   }
   .tag-4 {
     font-size: 4 * $base-size / 3;
-    color: darken($link-color, 10%);
   }
   .tag-5 {
     font-size: 3 * $base-size / 2;
-    color: darken($link-color, 20%);
   }
   .tag-6 {
     font-size: 2 * $base-size;
-    color: darken($link-color, 40%);
+  }
+}
+
+@mixin tag-cloud-colors($color) {
+  .tag-1 {
+    color: lighten($color, 40%);
+  }
+  .tag-2 {
+    color: lighten($color, 20%);
+  }
+  .tag-3 {
+    color: lighten($color, 10%);
+  }
+  .tag-4 {
+    color: darken($color, 10%);
+  }
+  .tag-5 {
+    color: darken($color, 20%);
+  }
+  .tag-6 {
+    color: darken($color, 40%);
   }
 }

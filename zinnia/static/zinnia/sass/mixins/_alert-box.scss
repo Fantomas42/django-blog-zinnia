@@ -1,5 +1,6 @@
 @mixin alert-box($color) {
   $font-color: white;
+
   color: $font-color;
   background: $color;
   font-weight: bold;
