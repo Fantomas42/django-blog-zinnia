@@ -5,12 +5,9 @@
 h2.entry-title {
   font-weight: bold;
   margin-bottom: 0;
-  border-bottom: 1px solid $border-color;
-  text-shadow: 1px 1px 0 #ccc;
 }
 
 p.entry-info {
-  color: $quiet-color;
   padding-left: 2em;
   background: transparent image-url("category.png") no-repeat scroll 0.5em;
 }
@@ -63,5 +60,4 @@ p.entry-info {
 
 .entry-widgets, #comments, #pingbacks, #trackbacks {
   padding-top: 1em;
-  border-top: 1px solid $border-color;
 }

@@ -1,3 +1,99 @@
+@mixin rebase($rebase03, $rebase02, $rebase01, $rebase00,
+              $rebase0, $rebase1, $rebase2, $rebase3)
+{
+    color: $rebase1;
+    background-color: $rebase03;
+    .container { background-color: $rebase02; }
+    // Typography
+    #{headers(all)} { color: $rebase2; }
+    a { @include link-colors($rebase1, $rebase2,
+                             $rebase2, $rebase1, $rebase1); }
+    blockquote, pre { background-color: $rebase01;
+                      color: $rebase2; }
+    blockquote { border: 1px dashed $rebase03; }
+    pre { border-top: 1px solid $rebase03;
+          border-bottom: 1px solid $rebase03; }
+    abbr, acronym { border-bottom: 1px dotted $rebase3; }
+    del { color: $rebase3; }
+    // Entry
+    h2.entry-title {
+      border-bottom: 1px solid $rebase03;
+      text-shadow: 1px 1px 0 $rebase00;
+    }
+    .entry-info { color: $rebase0; }
+    .entry-content { color: $rebase2; }
+    .entry-footer strong { color: $rebase0; }
+    .entry-widgets, #comments, #pingbacks, #trackbacks, #footer {
+      border-top: 1px solid $rebase03;
+    }
+    // Comments
+    #comments, #pingbacks, #trackbacks {
+      li, img { border: 1px solid $rebase03; }
+    }
+    .post-author img { background-color: $rebase02; }
+    // Header
+    #header {
+      border-bottom: 1px solid $rebase03;
+      h1 {
+        text-shadow: 2px 2px 2px $rebase00;
+        &:first-letter {
+          color: $rebase00;
+        }
+      }
+    }
+    // Forms
+    fieldset { border: 1px solid $rebase03; }
+    legend, caption { color: $rebase2; }
+    input[type=email], input[type=text], input[type=password],
+    textarea {
+      background-color: $rebase03;
+      border: 1px solid $rebase2;
+      &:focus {
+        border-color: $rebase01;
+      }
+    }
+    // Slider
+    ol.flex-control-nav li a {
+      background: $rebase03;
+      &:hover {
+        background: $rebase02;
+      }
+      &.active {
+        background: $rebase01;
+      }
+    }
+    // Sidebar
+    #sidebar h3 { background-color: $rebase03; }
+    table.calendar {
+      th, tfoot td {
+        background: none repeat scroll 0 0 $rebase03;
+        border-bottom: 1px solid $rebase00;
+        border-top: 1px solid $rebase00;
+      }
+    }
+    // Pagination
+    .paginator {
+      li {
+        border: solid 1px $rebase03;
+        &.current {
+          color: $rebase1;
+          background-color: $rebase02;
+        }
+        &.page:hover {
+          background-color: $rebase1;
+          a { color: $rebase03; }
+        }
+      }
+    }
+}
+
+@mixin accentize($accent) {
+    #{headers(all)} { color: $accent; }
+    a { @include link-colors($accent, $accent,
+                             $accent, $accent, $accent); }
+}
+
+
 &.light {
   @include rebase($base3, $base2, $base1, $base0,
                   $base00, $base01, $base02, $base03);
@@ -7,3 +103,12 @@
   @include rebase($base03, $base02, $base01, $base00,
                   $base0, $base1, $base2, $base3);
 }
+
+&.yellow { @include accentize($yellow); }
+&.orange { @include accentize($orange); }
+&.red { @include accentize($red); }
+&.magenta { @include accentize($magenta); }
+&.violet { @include accentize($violet); }
+&.blue { @include accentize($blue); }
+&.cyan { @include accentize($cyan); }
+&.green { @include accentize($green); }

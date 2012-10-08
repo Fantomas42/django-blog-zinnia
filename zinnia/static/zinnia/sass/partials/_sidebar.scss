@@ -1,7 +1,6 @@
 #sidebar {
   h3 {
     padding: 0.5em;
-    background-color: $box-color;
   }
 
   p { padding-left: 1em; }
@@ -33,15 +32,8 @@ table.calendar {
     text-align: center;
   }
   caption {
-    background: none;
     font-weight: bold;
-    color: $header-color;
     text-transform: uppercase;
-  }
-  th, tfoot td {
-    background: none repeat scroll 0 0 $box-color;
-    border-bottom: 1px solid darken($box-color, 10%);
-    border-top: 1px solid darken($box-color, 10%);
   }
   tfoot td {
     font-style: normal;

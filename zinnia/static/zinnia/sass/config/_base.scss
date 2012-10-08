@@ -11,23 +11,7 @@ $screen-layout          : 50em 12;
 // Fonts constants
 $font-size              : 12px;
 $font-family            : unquote("Arial, Helvetica, sans-serif");
-$font-family-fixed      : "andale mono", "lucida console", monospace !default;
-
-
-// Colors
-$font-color             : #333333;
-$quiet-color            : lighten($font-color, 20%);
-
-$link-color             : #0066AA;
-$link-hover-color       : lighten($link-color, 20%);
-$link-focus-color       : $link-hover-color;
-$link-active-color      : lighten(adjust-hue($link-color, 75deg), 10%);
-$link-visited-color     : $link-color;
-
-$header-color           : $link-color + $font-color;
-
-$box-color              : #e9e9f3;
-$border-color           : #eeeeee;
+$font-family-fixed      : unquote("andale mono, lucida console, monospace");
 
 // UI Colors
 $info-color             : #2BA6CB;
