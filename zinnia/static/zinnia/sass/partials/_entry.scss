@@ -38,8 +38,9 @@ p.entry-info {
   }
 }
 
-.entry-footer p {
-  margin: 0;
+.entry-footer {
+  clear: both;
+  p { margin: 0; }
 }
 
 .entry-tags {
