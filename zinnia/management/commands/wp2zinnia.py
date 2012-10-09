@@ -130,7 +130,8 @@ class Command(LabelCommand):
             if self.default_author:
                 authors[post_author] = self.default_author
             else:
-                authors[post_author] = self.migrate_author(post_author)
+                authors[post_author] = self.migrate_author(
+                    post_author.replace(' ', '-'))
         return authors
 
     def migrate_author(self, author_name):
