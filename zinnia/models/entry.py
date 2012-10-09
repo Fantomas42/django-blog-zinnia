@@ -59,7 +59,7 @@ class EntryAbstractClass(models.Model):
     related = models.ManyToManyField('self', verbose_name=_('related entries'),
                                      blank=True, null=True)
 
-    slug = models.SlugField(help_text=_('used for publication'),
+    slug = models.SlugField(help_text=_("used to build the entry's URL"),
                             unique_for_date='creation_date',
                             max_length=255)
 
@@ -71,8 +71,9 @@ class EntryAbstractClass(models.Model):
     comment_enabled = models.BooleanField(_('comment enabled'), default=True)
     pingback_enabled = models.BooleanField(_('linkback enabled'), default=True)
 
-    creation_date = models.DateTimeField(_('creation date'),
-                                         default=timezone.now)
+    creation_date = models.DateTimeField(
+        _('creation date'), default=timezone.now,
+        help_text=_("used to build the entry's URL"))
     last_update = models.DateTimeField(_('last update'), default=timezone.now)
     start_publication = models.DateTimeField(_('start publication'),
                                              blank=True, null=True,
