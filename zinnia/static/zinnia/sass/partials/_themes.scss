@@ -81,9 +81,10 @@
 }
 
 @mixin accentize($accent) {
-    #{headers(all)} { color: $accent; }
-    a { @include link-colors($accent, $accent,
-                             $accent, $accent, $accent); }
+    #{headers(all)} { color: darken($accent, 10%); }
+    a { @include link-colors($accent, lighten($accent, 10%),
+                             lighten(adjust-hue($accent, 75deg), 10%),
+                             $accent, $accent); }
 }
 
 &.default {
@@ -98,6 +99,18 @@
   fieldset { border: 1px solid $color; }
   #comments, #pingbacks, #trackbacks {
     li, img { border: 1px solid $color; }
+  }
+  table.calendar {
+    th, tfoot td {
+      background: none repeat scroll 0 0 $color;
+      border-bottom: 1px solid darken($color, 10%);
+      border-top: 1px solid darken($color, 10%);
+    }
+  }
+  .paginator {
+    li {
+      border: solid 1px $color;
+    }
   }
 }
 
