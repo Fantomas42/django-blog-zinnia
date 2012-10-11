@@ -31,10 +31,9 @@ class ZinniaFeed(Feed):
     """Base Feed class for the Zinnia application,
     enriched for a more convenient usage."""
     feed_copyright = COPYRIGHT
+    _site = None
 
     def __init__(self):
-        self.site = Site.objects.get_current()
-        self.site_url = '%s://%s' % (PROTOCOL, self.site.domain)
         if FEEDS_FORMAT == 'atom':
             self.feed_type = Atom1Feed
             self.subtitle = self.description
@@ -45,6 +44,16 @@ class ZinniaFeed(Feed):
 
     def get_title(self, obj):
         raise NotImplementedError
+
+    @property
+    def site(self):
+        if self._site is None:
+            self._site = Site.objects.get_current()
+        return self._site
+
+    @property
+    def site_url(self):
+        return '%s://%s' % (PROTOCOL, self.site.domain)
 
 
 class EntryFeed(ZinniaFeed):
