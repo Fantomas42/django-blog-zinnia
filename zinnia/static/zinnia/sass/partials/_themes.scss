@@ -7,7 +7,7 @@
     #{headers(all)} { color: $rebase2; }
     a { @include link-colors($rebase1, $rebase2,
                              $rebase2, $rebase1, $rebase1); }
-    blockquote, pre { background-color: $rebase01;
+    blockquote, pre { background-color: $rebase02;
                       color: $rebase2; }
     blockquote { border: 1px dashed $rebase00; }
     pre { border-top: 1px solid $rebase00;
@@ -16,6 +16,7 @@
     // Entry
     h2.entry-title {
       border-bottom: 1px solid $rebase01;
+      text-shadow: 1px 1px 0 $rebase01;
     }
     .entry-info { color: $rebase1; }
     .entry-content { color: $rebase2; }
@@ -31,6 +32,7 @@
     // Header
     #header {
       border-bottom: 1px solid $rebase01;
+      h1 { text-shadow: 2px 2px 2px $rebase01; }
     }
     // Forms
     fieldset { border: 1px solid $rebase01; }
@@ -56,13 +58,13 @@
       }
     }
     // Sidebar
-    #sidebar h3 { background-color: $rebase01; }
+    #sidebar h3 { background-color: $rebase02; }
     table.calendar {
       th, tfoot td {
-        color: $rebase2;
-        background: none repeat scroll 0 0 $rebase01;
-        border-bottom: 1px solid $rebase00;
-        border-top: 1px solid $rebase00;
+        color: $rebase1;
+        background: none repeat scroll 0 0 $rebase02;
+        border-bottom: 1px solid $rebase01;
+        border-top: 1px solid $rebase01;
       }
     }
     // Pagination
@@ -79,14 +81,15 @@
 
 @mixin accentize($accent) {
     #{headers(all)} { color: $accent; }
-    a { @include link-colors(lighten($accent, 5%), lighten($accent, 10%),
+    a { @include link-colors($accent, lighten($accent, 5%),
                              lighten(adjust-hue($accent, 75deg), 10%),
-                             lighten($accent, 5%), $accent); }
+                             $accent, $accent); }
 }
 
 &.default {
-  @include rebase(#fff, #fff, #eee, #ccc,
+  @include rebase(#fff, #eee, #ddd, #ccc,
                   #333, #666, #333, #000);
+  background: transparent image-url("background.gif") repeat-x scroll left top;
 }
 
 &.light {
