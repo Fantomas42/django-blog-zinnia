@@ -1,18 +1,24 @@
 #header {
   margin-top: 0.5em;
   margin-bottom: 1em;
-  border-bottom: 1px solid $border-color;
 
   h1 {
     margin-top: 0.5em;
     margin-bottom: 0;
     font-size: 4em;
     font-weight: bold;
-    text-shadow: 2px 2px 2px #aaa;
     &:first-letter {
-      font-size: 120%;
-      color: lighten(adjust-hue($link-color, 120deg), 15%);
+      font-size: 130%;
     }
+    background: transparent image-url("logo.png") no-repeat scroll left center;
+    padding-left: 1.5em;
+  }
+
+  blockquote {
+    border: none;
+    background: none;
+    margin: 0 0 0 6em;
+    padding: 0 0 1.5em 0;
   }
 
   .top-navigation {

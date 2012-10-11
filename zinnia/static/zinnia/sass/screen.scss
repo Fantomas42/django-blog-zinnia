@@ -2,6 +2,7 @@
 @import "compass/reset";
 // Load configurables variables.
 @import "config/base";
+@import "config/solarized";
 // Load librairies configured.
 @import "susy";
 @import "compass";
@@ -11,11 +12,13 @@
 @import "mixins/alert-box";
 @import "mixins/delimited-list";
 @import "mixins/slider-buttons";
+//
 // Combine the partials into a single screen stylesheet.
 // under the body.zinnia class to avoid interferences
 .zinnia {
   @import "partials/page";
   @import "partials/layouts";
+  @import "partials/themes";
   @import "partials/forms";
   @import "partials/interactions";
   @import "partials/header";

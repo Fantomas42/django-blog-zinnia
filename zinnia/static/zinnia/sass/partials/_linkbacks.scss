@@ -3,7 +3,6 @@
     list-style: none;
     padding: 1em 1em 0 1em;
     margin-bottom: 1em;
-    border: 1px solid $border-color;
   }
 }
 
@@ -15,12 +14,7 @@
     float: left;
     margin-right: 1em;
     padding: 0.5em;
-    border: 1px solid $border-color;
   }
-}
-
-.post-author img.photo {
-  background-color: $box-color;
 }
 
 p {

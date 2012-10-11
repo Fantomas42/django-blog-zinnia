@@ -54,9 +54,6 @@
     font-weight: bold;
     display: inline-block;
   }
-  a, a:visited {
-    color: lighten($link-color, 40%);
-  }
   p {
     color: #fff;
     padding: 1em;
@@ -81,13 +78,6 @@ ol.flex-control-nav {
       display: inline-block;
       border-radius: 10px;
       -moz-border-radius: 10px;
-      background: lighten($link-color, 50%);
-      &:hover {
-        background: lighten($link-color, 20%);
-      }
-      &.active {
-        background: $link-color;
-      }
     }
   }
 }

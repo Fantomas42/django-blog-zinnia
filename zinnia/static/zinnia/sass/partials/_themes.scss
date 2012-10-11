@@ -1,0 +1,112 @@
+@mixin rebase($rebase03, $rebase02, $rebase01, $rebase00, // Background colors
+              $rebase0, $rebase1, $rebase2, $rebase3)     // Font colors
+{
+    color: $rebase0;
+    background-color: $rebase03;
+    // Typography
+    #{headers(all)} { color: $rebase2; }
+    a { @include link-colors($rebase1, $rebase2,
+                             $rebase2, $rebase1, $rebase1); }
+    blockquote, pre { background-color: $rebase02;
+                      color: $rebase2; }
+    blockquote { border: 1px dashed $rebase00; }
+    pre { border-top: 1px solid $rebase00;
+          border-bottom: 1px solid $rebase00; }
+    abbr, acronym { border-bottom: 1px dotted $rebase00; }
+    // Entry
+    h2.entry-title {
+      border-bottom: 1px solid $rebase01;
+      text-shadow: 1px 1px 0 $rebase01;
+    }
+    .entry-info { color: $rebase1; }
+    .entry-content { color: $rebase2; }
+    .entry-footer strong { color: $rebase1; }
+    .entry-widgets, #comments, #pingbacks, #trackbacks, #footer {
+      border-top: 1px solid $rebase01;
+    }
+    // Comments
+    #comments, #pingbacks, #trackbacks {
+      li, img { border: 1px solid $rebase01; }
+    }
+    .post-author img { background-color: $rebase01; }
+    // Header
+    #header {
+      border-bottom: 1px solid $rebase01;
+      h1 { text-shadow: 2px 2px 2px $rebase01; }
+    }
+    // Forms
+    fieldset { border: 1px solid $rebase01; }
+    legend, caption { color: $rebase1; }
+    input[type=email], input[type=text], input[type=password],
+    textarea {
+      color: $rebase1;
+      background-color: $rebase02;
+      border: 1px solid $rebase01;
+      &:focus {
+        border-color: $rebase00;
+        color: $rebase3;
+      }
+    }
+    // Slider
+    ol.flex-control-nav li a {
+      background: $rebase03;
+      &:hover {
+        background: $rebase02;
+      }
+      &.active {
+        background: $rebase01;
+      }
+    }
+    // Sidebar
+    #sidebar h3 { background-color: $rebase02; }
+    table.calendar {
+      th, tfoot td {
+        color: $rebase1;
+        background: none repeat scroll 0 0 $rebase02;
+        border-bottom: 1px solid $rebase01;
+        border-top: 1px solid $rebase01;
+      }
+    }
+    // Pagination
+    .paginator {
+      li {
+        border: solid 1px $rebase01;
+        &.page:hover {
+          background-color: $rebase00;
+          a { color: $rebase2; }
+        }
+      }
+    }
+}
+
+@mixin accentize($accent) {
+    #{headers(all)} { color: $accent; }
+    a { @include link-colors($accent, lighten($accent, 5%),
+                             lighten(adjust-hue($accent, 75deg), 10%),
+                             $accent, $accent); }
+}
+
+&.default {
+  @include rebase(#fff, #eee, #ddd, #ccc,
+                  #333, #666, #333, #000);
+  background: transparent image-url("background.gif") repeat-x scroll left top;
+}
+
+&.light {
+  @include rebase($base3, $base2, $base1, $base0,
+                  $base00, $base01, $base02, $base03);
+}
+
+&.dark  {
+  @include rebase($base03, $base02, $base01, $base00,
+                  $base0, $base1, $base2, $base3);
+}
+
+&.yellow { @include accentize($yellow); }
+&.orange { @include accentize($orange); }
+&.red { @include accentize($red); }
+&.magenta { @include accentize($magenta); }
+&.violet { @include accentize($violet); }
+&.blue { @include accentize($blue); }
+&.cyan { @include accentize($cyan); }
+&.green { @include accentize($green); }
