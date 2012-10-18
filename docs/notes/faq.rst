@@ -94,7 +94,7 @@ How can I use the image field for fitting to my skin ?
 
 Take a looks at `sorl.thumbnail`_ and use his templatetags.
 
-You can do something like this in your templates :
+You can do something like this in your templates:
 
 .. code-block:: html+django
 
