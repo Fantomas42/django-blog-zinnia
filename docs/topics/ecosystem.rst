@@ -83,4 +83,4 @@ URL: https://bitbucket.org/resplin/byteflow2zinnia
 .. _`message`: https://github.com/Fantomas42
 .. _`Django-CMS`: http://www.django-cms.org/
 .. _`django-admin-tools`: http://django-admin-tools.readthedocs.org/en/latest/index.html
-.. _`Bootstraop`: http://twitter.github.com/bootstrap/
+.. _`Bootstrap`: http://twitter.github.com/bootstrap/
