@@ -72,6 +72,14 @@ Zinnia-theme-bootstrap is an extension theme for your Weblog based on
 
 URL: https://github.com/Fantomas42/zinnia-theme-bootstrap
 
+byteflow2zinnia
+===============
+
+Migrate your users, tags, command and posts from Byteflow to Zinnia by
+Richard Espelin.
+
+URL: https://bitbucket.org/resplin/byteflow2zinnia
+
 .. _`message`: https://github.com/Fantomas42
 .. _`Django-CMS`: http://www.django-cms.org/
 .. _`django-admin-tools`: http://django-admin-tools.readthedocs.org/en/latest/index.html
