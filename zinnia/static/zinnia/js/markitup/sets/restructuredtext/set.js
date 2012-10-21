@@ -28,7 +28,7 @@ mySettings = {
 		{name:'Numeric list', openWith:'# '},
 		{separator:'---------------' },
 		{name:'Picture', key:'P', openWith:'\n\n.. image:: ', closeWith:'\n\n', placeHolder:'Your picture here...'},
-		{name:'Link', key:'L', openWith:'`', closeWith:' [![Link:!:http://]!]`_', placeHolder:'Your text to link here...'},
+		{name:'Link', key:'L', openWith:'`', closeWith:' <[![Link:!:http://]!]>`_', placeHolder:'Your text to link here...'},
 		{separator:'---------------'},
 		{name:'Quote', openWith:'\t'},
 		{name:'Code', openWith:'``', closeWith:'``'},
