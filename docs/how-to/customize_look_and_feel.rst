@@ -76,28 +76,29 @@ Variations on the default theme
 
 .. versionadded:: 0.12
 
-Aside the ``zinnia`` class name in the ``<body>`` markup in the
-``zinnia/skeleton.html`` template, three other class names are used:
+Beside the ``zinnia`` class name in the ``<body>`` tag of the
+``zinnia/skeleton.html`` template, three other class names are available:
 
 .. code-block:: html+django
 
   <body class="zinnia default blue sidebar-right {% block body-class %}{% endblock %}">
 
-The ``default`` class name represents the historical and default theme
- of Zinnia. Of course you can remove this class, but you can also
-substitute this class with ``light`` or ``dark`` to activate the
-variations with high readability and contrasts, thanks to the `Solarized`_
-project.
+The ``default`` class name represents the original default theme of
+Zinnia. You can remove this class, or replace with the classes ``light`` or
+``dark`` to activate the variations with high readability and contrast,
+thanks to the `Solarized`_ project.
 
-The ``blue`` class represents the accentuation applied on the theme. The
-accent colors available are: ``yellow``, ``orange``, ``red``, ``magenta``,
+The ``blue`` class represents the main color used within the
+theme. Available color are: ``yellow``, ``orange``, ``red``, ``magenta``,
 ``violet``, ``blue``, ``cyan``, ``green``.
 
-THe ``sidebar-right`` class sets the sidebar, either left or right in
-combination with ``sidebar-left``.
+The ``sidebar-right`` class sets the sidebar at right and ``sidebar-left``
+at left, by default if none of these classes are present, the sidebar is
+set at right.
 
-With these three sets of classes in the CSS, you have 4*9*2=72 variations on the
-default theme available. Now try and choose yours.
+With these 3 sets of classes available in the CSS, you now have 4*9*2=72
+variations of the default theme available. Try them and choose your
+favorite!
 
 .. _compass-customization:
 
