@@ -20,6 +20,22 @@
     padding: 0 0 1.5em 0;
   }
 
+  form {
+    float: right;
+    clear: both;
+    input[type=text] {
+      width: 85%;
+      background-image: image-url("search.png");
+      background-repeat: no-repeat;
+      background-position: 5px center;
+      padding-left: 25px;
+      @include border-radius(5px);
+    }
+    input[type=submit] {
+      display: none;
+    }
+  }
+
   .top-navigation {
     margin: 0;
     float: right;

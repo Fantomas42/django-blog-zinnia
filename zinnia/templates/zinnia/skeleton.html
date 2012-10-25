@@ -40,6 +40,12 @@
             </a>
           </li>
         </ul>
+        <form method="get" action="{% url 'zinnia_entry_search' %}">
+          <p>
+            <input type="text" value="{% trans "Keywords..." %}" name="pattern" onfocus="this.value=''" />
+            <input type="submit" class="submitbutton" value="OK" />
+          </p>
+        </form>
         <h1>
           <a href="{% url 'zinnia_entry_archive_index' %}" title="Zinnia's Blog" rel="home">
             Zinnia's Blog

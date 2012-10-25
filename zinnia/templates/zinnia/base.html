@@ -22,10 +22,6 @@
 {% endblock %}
 
 {% block sidebar %}
-<div id="widget-search" class="widget">
-  <h3>{% trans "Search" %}</h3>
-  {% include "zinnia/tags/search_form.html" %}
-</div>
 <div id="widget-categories" class="widget">
   <h3>{% trans "Categories" %}</h3>
   {% get_categories %}

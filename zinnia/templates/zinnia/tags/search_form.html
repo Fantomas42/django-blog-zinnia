@@ -2,7 +2,7 @@
 {% load url from future %}
 <form method="get" id="searchform" action="{% url 'zinnia_entry_search' %}">
   <p>
-    <input type="text" value="{% trans "Keywords..." %}" name="pattern" id="searchbox" onfocus="this.value=''" />
+    <input type="text" value="{% if pattern %}{{ pattern }}{% else %}{% trans "Keywords..." %}{% endif %}" name="pattern" id="searchbox" onfocus="this.value=''" />
     <input type="submit" class="submitbutton" value="OK" />
     <a title="{% trans 'You can use - to exclude words or phrases, &quot;double quotes&quot; for exact phrases and the AND/OR boolean operators combined with parenthesis for complex queries.' %}">
       <img src="{{ STATIC_URL }}zinnia/img/help.png" alt="?" class="help" width="14" height="14" />
