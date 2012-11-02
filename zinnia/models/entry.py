@@ -6,7 +6,6 @@ from django.db.models import Q
 from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.html import linebreaks
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.db.models.signals import post_save
 from django.utils.importlib import import_module
@@ -21,6 +20,7 @@ from django.contrib.markup.templatetags.markup import restructuredtext
 
 from tagging.fields import TagField
 
+from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import UPLOAD_TO
@@ -63,9 +63,10 @@ class EntryAbstractClass(models.Model):
                             unique_for_date='creation_date',
                             max_length=255)
 
-    authors = models.ManyToManyField(User, verbose_name=_('authors'),
+    authors = models.ManyToManyField(Author, verbose_name=_('authors'),
                                      related_name='entries',
                                      blank=True, null=False)
+
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
     featured = models.BooleanField(_('featured'), default=False)
     comment_enabled = models.BooleanField(_('comment enabled'), default=True)
