@@ -12,7 +12,7 @@
       {% trans "Written by" %}
       {% for author in object.authors.all %}
       <span class="vcard author">
-        <a href="{% url 'zinnia_author_detail' author %}" class="fn nickname url" rel="author"
+        <a href="{% url 'zinnia_author_detail' author.username %}" class="fn nickname url" rel="author"
            title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}">{{ author }}</a>
       </span>{% if not forloop.last %}, {% endif %}
       {% endfor %}
