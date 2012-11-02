@@ -5,11 +5,11 @@ from xmlrpclib import ServerProxy
 from tempfile import TemporaryFile
 
 from django.test import TestCase
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.files.storage import default_storage
 
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
@@ -26,11 +26,11 @@ class MetaWeblogTestCase(TestCase):
 
     def setUp(self):
         # Create data
-        self.webmaster = User.objects.create_superuser(
+        self.webmaster = Author.objects.create_superuser(
             username='webmaster',
             email='webmaster@example.com',
             password='password')
-        self.contributor = User.objects.create_user(
+        self.contributor = Author.objects.create_user(
             username='contributor',
             email='contributor@example.com',
             password='password')

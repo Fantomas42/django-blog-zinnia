@@ -6,7 +6,6 @@ from django.conf.urls import patterns
 from django.utils import timezone
 from django.utils.text import Truncator
 from django.utils.html import strip_tags
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
 from django.conf import settings as project_settings
@@ -21,6 +20,7 @@ from tagging.models import Tag
 from zinnia import settings
 from zinnia.managers import HIDDEN
 from zinnia.managers import PUBLISHED
+from zinnia.models.author import Author
 from zinnia.ping import DirectoryPinger
 from zinnia.admin.forms import EntryAdminForm
 from zinnia.admin.filters import AuthorListFilter
@@ -172,7 +172,8 @@ class EntryAdmin(admin.ModelAdmin):
             form.cleaned_data['authors'] = entry.authors.all()
 
         if not form.cleaned_data.get('authors'):
-            form.cleaned_data['authors'].append(request.user)
+            form.cleaned_data['authors'].append(
+                Author.objects.get(pk=request.user.pk))
 
         entry.last_update = timezone.now()
         entry.save()
@@ -188,9 +189,9 @@ class EntryAdmin(admin.ModelAdmin):
         """Filters the disposable authors"""
         if db_field.name == 'authors':
             if request.user.has_perm('zinnia.can_change_author'):
-                kwargs['queryset'] = User.objects.filter(is_staff=True)
+                kwargs['queryset'] = Author.objects.filter(is_staff=True)
             else:
-                kwargs['queryset'] = User.objects.filter(pk=request.user.pk)
+                kwargs['queryset'] = Author.objects.filter(pk=request.user.pk)
 
         return super(EntryAdmin, self).formfield_for_manytomany(
             db_field, request, **kwargs)

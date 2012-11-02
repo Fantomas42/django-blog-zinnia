@@ -5,13 +5,13 @@ from django.test import TestCase
 from django.test import RequestFactory
 from django.contrib.admin import site
 from django.contrib.admin import ModelAdmin
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.admin.views.main import ChangeList
 
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
 from zinnia.admin.filters import AuthorListFilter
 
@@ -30,12 +30,12 @@ class AuthorListFilterTestCase(TestCase):
 
         self.site = Site.objects.get_current()
         self.authors = [
-            User.objects.create_user(username='webmaster',
-                                     email='webmaster@example.com'),
-            User.objects.create_user(username='contributor',
-                                     email='contributor@example.com'),
-            User.objects.create_user(username='reader',
-                                     email='reader@example.com')]
+            Author.objects.create_user(username='webmaster',
+                                       email='webmaster@example.com'),
+            Author.objects.create_user(username='contributor',
+                                       email='contributor@example.com'),
+            Author.objects.create_user(username='reader',
+                                       email='reader@example.com')]
 
         params = {'title': 'My entry 1',
                   'content': 'My content 1',

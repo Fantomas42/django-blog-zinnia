@@ -3,7 +3,6 @@ from urlparse import urljoin
 from BeautifulSoup import BeautifulSoup
 
 from django.contrib import comments
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
@@ -18,11 +17,11 @@ from tagging.models import Tag
 from tagging.models import TaggedItem
 
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.settings import COPYRIGHT
 from zinnia.settings import PROTOCOL
 from zinnia.settings import FEEDS_FORMAT
 from zinnia.settings import FEEDS_MAX_ITEMS
-from zinnia.managers import entries_published
 from zinnia.views.categories import get_category_or_404
 from zinnia.templatetags.zinnia_tags import get_gravatar
 
@@ -155,11 +154,11 @@ class AuthorEntries(EntryFeed):
 
     def get_object(self, request, username):
         """Retrieve the author by his username"""
-        return get_object_or_404(User, username=username)
+        return get_object_or_404(Author, username=username)
 
     def items(self, obj):
         """Items are the published entries of the author"""
-        return entries_published(obj.entries)[:FEEDS_MAX_ITEMS]
+        return obj.entries_published()[:FEEDS_MAX_ITEMS]
 
     def link(self, obj):
         """URL of the author"""

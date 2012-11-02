@@ -2,7 +2,6 @@
 from django.core import mail
 from django.test import TestCase
 from django.contrib import comments
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.contrib.comments.forms import CommentForm
@@ -10,6 +9,7 @@ from django.contrib.comments.moderation import moderator as moderator_stack
 
 from zinnia.flags import SPAM
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
 from zinnia.moderator import EntryCommentModerator
 
@@ -19,8 +19,8 @@ class EntryCommentModeratorTestCase(TestCase):
 
     def setUp(self):
         self.site = Site.objects.get_current()
-        self.author = User.objects.create(username='admin',
-                                          email='admin@example.com')
+        self.author = Author.objects.create(username='admin',
+                                            email='admin@example.com')
         params = {'title': 'My test entry',
                   'content': 'My test entry',
                   'slug': 'my-test-entry',
@@ -82,8 +82,8 @@ class EntryCommentModeratorTestCase(TestCase):
         moderator = EntryCommentModerator(Entry)
         moderator.email_authors = True
         moderator.mail_comment_notification_recipients = []
-        contributor = User.objects.create(username='contributor',
-                                          email='contrib@example.com')
+        contributor = Author.objects.create(username='contributor',
+                                            email='contrib@example.com')
         self.entry.authors.add(contributor)
         moderator.do_email_authors(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)

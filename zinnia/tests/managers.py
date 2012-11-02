@@ -1,6 +1,5 @@
 """Test cases for Zinnia's managers"""
 from django.test import TestCase
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
 from tagging.models import Tag
@@ -22,10 +21,10 @@ class ManagersTestCase(TestCase):
             Site.objects.create(domain='http://domain.com',
                                 name='Domain.com')]
         self.authors = [
-            User.objects.create_user(username='webmaster',
-                                     email='webmaster@example.com'),
-            User.objects.create_user(username='contributor',
-                                     email='contributor@example.com')]
+            Author.objects.create_user(username='webmaster',
+                                       email='webmaster@example.com'),
+            Author.objects.create_user(username='contributor',
+                                       email='contributor@example.com')]
         self.categories = [
             Category.objects.create(title='Category 1',
                                     slug='category-1'),

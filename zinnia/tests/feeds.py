@@ -3,7 +3,6 @@ from urlparse import urljoin
 
 from django.test import TestCase
 from django.contrib import comments
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
@@ -15,6 +14,7 @@ from django.contrib.contenttypes.models import ContentType
 from tagging.models import Tag
 
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.flags import PINGBACK, TRACKBACK
@@ -41,8 +41,8 @@ class ZinniaFeedsTestCase(TestCase):
     def setUp(self):
         activate('en')
         self.site = Site.objects.get_current()
-        self.author = User.objects.create(username='admin',
-                                          email='admin@example.com')
+        self.author = Author.objects.create(username='admin',
+                                            email='admin@example.com')
         self.category = Category.objects.create(title='Tests', slug='tests')
         self.entry_ct_id = ContentType.objects.get_for_model(Entry).pk
 

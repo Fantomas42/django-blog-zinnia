@@ -81,16 +81,16 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(len(context['authors']), 0)
         self.assertEquals(context['template'], 'zinnia/tags/authors.html')
         self.assertEquals(context['context_author'], None)
-        user = User.objects.create_user(username='webmaster',
-                                        email='webmaster@example.com')
-        self.entry.authors.add(user)
+        author = Author.objects.create_user(username='webmaster',
+                                            email='webmaster@example.com')
+        self.entry.authors.add(author)
         self.publish_entry()
-        source_context = Context({'author': user})
+        source_context = Context({'author': author})
         with self.assertNumQueries(0):
             context = get_authors(source_context, 'custom_template.html')
         self.assertEquals(len(context['authors']), 1)
         self.assertEquals(context['template'], 'custom_template.html')
-        self.assertEquals(context['context_author'], user)
+        self.assertEquals(context['context_author'], author)
 
     def test_get_recent_entries(self):
         with self.assertNumQueries(1):
@@ -703,11 +703,11 @@ class TemplateTagsTestCase(TestCase):
 
         site = Site.objects.get_current()
         Category.objects.create(title='Category 1', slug='category-1')
-        user = User.objects.create_user(username='webmaster',
-                                        email='webmaster@example.com')
+        author = Author.objects.create_user(username='webmaster',
+                                            email='webmaster@example.com')
         comments.get_model().objects.create(comment='My Comment 1', site=site,
                                             content_object=self.entry)
-        self.entry.authors.add(user)
+        self.entry.authors.add(author)
         self.publish_entry()
 
         with self.assertNumQueries(13):

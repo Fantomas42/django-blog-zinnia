@@ -6,7 +6,6 @@ from xmlrpclib import ServerProxy
 
 from django.test import TestCase
 from django.contrib import comments
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.test.utils import restore_template_loaders
 from django.test.utils import setup_test_template_loader
@@ -15,6 +14,7 @@ from django.contrib.contenttypes.models import ContentType
 from BeautifulSoup import BeautifulSoup
 
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.flags import PINGBACK
 from zinnia.managers import PUBLISHED
@@ -59,8 +59,8 @@ class PingBackTestCase(TestCase):
         self.site.domain = 'localhost:8000'
         self.site.save()
         # Creating tests entries
-        self.author = User.objects.create_user(username='webmaster',
-                                               email='webmaster@example.com')
+        self.author = Author.objects.create_user(username='webmaster',
+                                                 email='webmaster@example.com')
         self.category = Category.objects.create(title='test', slug='test')
         params = {'title': 'My first entry',
                   'content': 'My first content',

@@ -1,6 +1,5 @@
 """Test cases for Zinnia's sitemaps"""
 from django.test import TestCase
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
 from tagging.models import Tag
@@ -21,8 +20,8 @@ class ZinniaSitemapsTestCase(TestCase):
 
     def setUp(self):
         self.site = Site.objects.get_current()
-        self.author = User.objects.create(username='admin',
-                                          email='admin@example.com')
+        self.author = Author.objects.create(username='admin',
+                                             email='admin@example.com')
         self.category = Category.objects.create(title='Tests', slug='tests')
         params = {'title': 'My entry 1', 'content': 'My content 1',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1',

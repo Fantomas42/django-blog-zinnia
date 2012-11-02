@@ -1,10 +1,10 @@
 """Test cases for Zinnia's long_enought spam checker"""
 from django.test import TestCase
 from django.contrib import comments
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
 from zinnia.spam_checker.backends.long_enough import backend
 
@@ -14,8 +14,8 @@ class LongEnoughTestCase(TestCase):
 
     def setUp(self):
         self.site = Site.objects.get_current()
-        self.author = User.objects.create(username='admin',
-                                          email='admin@example.com')
+        self.author = Author.objects.create(username='admin',
+                                            email='admin@example.com')
 
         params = {'title': 'My test entry',
                   'content': 'My test entry',

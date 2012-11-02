@@ -4,7 +4,6 @@ from datetime import date
 
 from django.test import TestCase
 from django.utils import timezone
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
 from django.test.utils import restore_template_loaders
@@ -12,6 +11,7 @@ from django.test.utils import setup_test_template_loader
 from django.utils.translation import ugettext_lazy as _
 
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
@@ -25,8 +25,9 @@ class ViewsBaseCase(TestCase):
 
     def setUp(self):
         self.site = Site.objects.get_current()
-        self.author = User.objects.create_superuser(
-            username='admin', email='admin@example.com', password='password')
+        self.author = Author.objects.create_user(username='admin',
+                                                 email='admin@example.com',
+                                                 password='password')
         self.category = Category.objects.create(title='Tests', slug='tests')
         params = {'title': 'Test 1',
                   'content': 'First test entry published',
@@ -349,8 +350,8 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             '/authors/', 1,
             friendly_context='author_list',
             queries=0)
-        user = User.objects.create(username='new-user',
-                                   email='new_user@example.com')
+        user = Author.objects.create(username='new-user',
+                                     email='new_user@example.com')
         self.check_publishing_context('/authors/', 1)
         entry = Entry.objects.all()[0]
         entry.authors.add(user)

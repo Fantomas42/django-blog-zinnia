@@ -6,7 +6,6 @@ from xmlrpclib import DateTime
 
 from django.conf import settings
 from django.utils import timezone
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils.translation import gettext as _
@@ -17,6 +16,7 @@ from django.core.files.storage import default_storage
 from django.template.defaultfilters import slugify
 
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.settings import PROTOCOL
 from zinnia.settings import UPLOAD_TO
@@ -31,17 +31,17 @@ PERMISSION_DENIED = 803
 def authenticate(username, password, permission=None):
     """Authenticate staff_user with permission"""
     try:
-        user = User.objects.get(username__exact=username)
-    except User.DoesNotExist:
+        author = Author.objects.get(username__exact=username)
+    except Author.DoesNotExist:
         raise Fault(LOGIN_ERROR, _('Username is incorrect.'))
-    if not user.check_password(password):
+    if not author.check_password(password):
         raise Fault(LOGIN_ERROR, _('Password is invalid.'))
-    if not user.is_staff or not user.is_active:
+    if not author.is_staff or not author.is_active:
         raise Fault(PERMISSION_DENIED, _('User account unavailable.'))
     if permission:
-        if not user.has_perm(permission):
+        if not author.has_perm(permission):
             raise Fault(PERMISSION_DENIED, _('User cannot %s.') % permission)
-    return user
+    return author
 
 
 def blog_structure(site):
@@ -140,7 +140,7 @@ def get_authors(apikey, username, password):
     => author structure[]"""
     authenticate(username, password)
     return [author_structure(author)
-            for author in User.objects.filter(is_staff=True)]
+            for author in Author.objects.filter(is_staff=True)]
 
 
 @xmlrpc_func(returns='boolean', args=['string', 'string',
@@ -236,7 +236,7 @@ def new_post(blog_id, username, password, post, publish):
     author = user
     if 'wp_author_id' in post and user.has_perm('zinnia.can_change_author'):
         if int(post['wp_author_id']) != user.pk:
-            author = User.objects.get(pk=post['wp_author_id'])
+            author = Author.objects.get(pk=post['wp_author_id'])
     entry.authors.add(author)
 
     entry.sites.add(Site.objects.get_current())
@@ -283,7 +283,7 @@ def edit_post(post_id, username, password, post, publish):
 
     if 'wp_author_id' in post and user.has_perm('zinnia.can_change_author'):
         if int(post['wp_author_id']) != user.pk:
-            author = User.objects.get(pk=post['wp_author_id'])
+            author = Author.objects.get(pk=post['wp_author_id'])
             entry.authors.clear()
             entry.authors.add(author)
 
