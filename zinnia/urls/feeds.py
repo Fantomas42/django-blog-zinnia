@@ -25,7 +25,7 @@ urlpatterns = patterns(
     url(r'^search/$',
         SearchEntries(),
         name='zinnia_entry_search_feed'),
-    url(r'^tags/(?P<slug>[- \w]+)/$',
+    url(r'^tags/(?P<tag>[^/]+(?u))/$',
         TagEntries(),
         name='zinnia_tag_feed'),
     url(r'^authors/(?P<username>[.+-@\w]+)/$',

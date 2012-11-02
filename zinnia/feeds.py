@@ -177,9 +177,9 @@ class AuthorEntries(EntryFeed):
 class TagEntries(EntryFeed):
     """Feed filtered by a tag"""
 
-    def get_object(self, request, slug):
+    def get_object(self, request, tag):
         """Retrieve the tag by his name"""
-        return get_object_or_404(Tag, name=slug)
+        return get_object_or_404(Tag, name=tag)
 
     def items(self, obj):
         """Items are the published entries of the tag"""
