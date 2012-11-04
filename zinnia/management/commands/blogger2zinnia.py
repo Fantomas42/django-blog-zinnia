@@ -9,7 +9,6 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
-from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.core.management.base import CommandError
 from django.core.management.base import NoArgsCommand
@@ -18,6 +17,7 @@ from django.contrib.comments import get_model as get_comment_model
 
 from zinnia import __version__
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import DRAFT, PUBLISHED
 
@@ -88,13 +88,14 @@ class Command(NoArgsCommand):
         default_author = options.get('author')
         if default_author:
             try:
-                self.default_author = User.objects.get(username=default_author)
-            except User.DoesNotExist:
+                self.default_author = Author.objects.get(
+                    username=default_author)
+            except Author.DoesNotExist:
                 raise CommandError(
                     'Invalid Zinnia username for default author "%s"' % \
                     default_author)
         else:
-            self.default_author = User.objects.all()[0]
+            self.default_author = Author.objects.all()[0]
 
         if not self.blogger_blog_id:
             self.select_blog_id()

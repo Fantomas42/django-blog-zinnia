@@ -13,7 +13,6 @@ from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.db.utils import IntegrityError
 from django.utils.encoding import smart_str
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
 from django.contrib import comments
@@ -25,7 +24,9 @@ from tagging.models import Tag
 
 from zinnia import __version__
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.models.category import Category
+from zinnia.flags import get_user_flagger
 from zinnia.flags import PINGBACK, TRACKBACK, SPAM
 from zinnia.signals import disconnect_zinnia_signals
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
@@ -79,9 +80,9 @@ class Command(LabelCommand):
         self.default_author = options.get('author')
         if self.default_author:
             try:
-                self.default_author = User.objects.get(
+                self.default_author = Author.objects.get(
                     username=self.default_author)
-            except User.DoesNotExist:
+            except Author.DoesNotExist:
                 raise CommandError('Invalid username for default author')
 
         self.write_out(self.style.TITLE(
@@ -112,8 +113,8 @@ class Command(LabelCommand):
 
     def import_authors(self, tree):
         """Retrieve all the authors used in posts
-        and convert it to new or existing user, and
-        return the convertion"""
+        and convert it to new or existing author and
+        return the conversion"""
         self.write_out(self.style.STEP('- Importing authors\n'))
 
         post_authors = set()
@@ -135,7 +136,7 @@ class Command(LabelCommand):
         return authors
 
     def migrate_author(self, author_name):
-        """Handle actions for migrating the users"""
+        """Handle actions for migrating the authors"""
         action_text = "The author '%s' needs to be migrated to an User:\n"\
                       "1. Use an existing user ?\n"\
                       "2. Create a new user ?\n"\
@@ -145,7 +146,7 @@ class Command(LabelCommand):
             if selection and selection in '12':
                 break
         if selection == '1':
-            users = User.objects.all()
+            users = Author.objects.all()
             if users.count() == 1:
                 username = users[0].username
                 preselected_user = username
@@ -185,9 +186,9 @@ class Command(LabelCommand):
             if author_mail.strip() == 'back':
                 return self.migrate_author(author_name)
             try:
-                return User.objects.create_user(author_name, author_mail)
+                return Author.objects.create_user(author_name, author_mail)
             except IntegrityError:
-                return User.objects.get(username=author_name)
+                return Author.objects.get(username=author_name)
 
     def import_categories(self, category_nodes):
         """Import all the categories from 'wp:category' nodes,
@@ -399,12 +400,12 @@ class Command(LabelCommand):
             comment.save()
             if approvation == 'spam':
                 comment.flags.create(
-                    user=entry.authors.all()[0], flag=SPAM)
+                    user=get_user_flagger(), flag=SPAM)
             if is_pingback:
                 comment.flags.create(
-                    user=entry.authors.all()[0], flag=PINGBACK)
+                    user=get_user_flagger(), flag=PINGBACK)
             if is_trackback:
                 comment.flags.create(
-                    user=entry.authors.all()[0], flag=TRACKBACK)
+                    user=get_user_flagger(), flag=TRACKBACK)
 
             self.write_out(self.style.ITEM('OK\n'))

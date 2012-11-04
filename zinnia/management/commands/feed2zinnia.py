@@ -12,7 +12,6 @@ from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.db.utils import IntegrityError
 from django.utils.encoding import smart_str
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
 from django.core.management.base import CommandError
@@ -21,6 +20,7 @@ from django.core.files.temp import NamedTemporaryFile
 
 from zinnia import __version__
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.signals import disconnect_zinnia_signals
@@ -76,9 +76,9 @@ class Command(LabelCommand):
         self.image_enclosure = options.get('image-enclosure', True)
         if self.default_author:
             try:
-                self.default_author = User.objects.get(
+                self.default_author = Author.objects.get(
                     username=self.default_author)
-            except User.DoesNotExist:
+            except Author.DoesNotExist:
                 raise CommandError('Invalid username for default author')
 
         self.write_out(self.style.TITLE(
@@ -145,13 +145,13 @@ class Command(LabelCommand):
                 entry.authors.add(self.default_author)
             elif feed_entry.get('author_detail'):
                 try:
-                    user = User.objects.create_user(
+                    author = Author.objects.create_user(
                         slugify(feed_entry.author_detail.get('name')),
                         feed_entry.author_detail.get('email', ''))
                 except IntegrityError:
-                    user = User.objects.get(
+                    author = Author.objects.get(
                         username=slugify(feed_entry.author_detail.get('name')))
-                entry.authors.add(user)
+                entry.authors.add(author)
 
             self.write_out(self.style.ITEM('OK\n'))
 
