@@ -1,4 +1,4 @@
-#comments, #pingbacks, #trackbacks {
+#comment-list, #pingback-list, #trackback-list {
   li {
     list-style: none;
     padding: 1em 1em 0 1em;
@@ -6,7 +6,7 @@
   }
 }
 
-#comments {
+#comment-list {
   li {
     min-height: 90px;
   }

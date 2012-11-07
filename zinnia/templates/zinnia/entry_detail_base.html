@@ -94,7 +94,7 @@
     {% for comment in comment_list %}
     <li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %}">
       <img src="{% get_gravatar comment.email 60 "G" %}"
-           class="gravatar photo" alt="{{ comment.user_name }}"/>
+           class="gravatar photo" alt="{{ comment.user_name }}" />
       <p class="comment-info">
 	{% if comment.url %}
 	<a href="{{ comment.url }}" rel="external nofollow"
