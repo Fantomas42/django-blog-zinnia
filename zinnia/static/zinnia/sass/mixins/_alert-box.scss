@@ -10,5 +10,9 @@
   @include border-radius(3px);
   padding: 0.5em;
   margin-bottom: 1em;
-  a { color: $font-color; }
+  a {
+    @include link-colors(
+      $font-color, $font-color, $font-color,
+      $font-color, $font-color);
+  }
 }
