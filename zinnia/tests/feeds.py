@@ -66,6 +66,7 @@ class ZinniaFeedsTestCase(TestCase):
     def create_discussions(self, entry):
         comment = comments.get_model().objects.create(comment='My Comment',
                                                       user=self.author,
+                                                      user_name='admin',
                                                       content_object=entry,
                                                       site=self.site)
         pingback = comments.get_model().objects.create(comment='My Pingback',
@@ -236,7 +237,8 @@ class ZinniaFeedsTestCase(TestCase):
         feed = EntryComments()
         self.assertEquals(list(feed.items(entry)), [comments[0]])
         self.assertEquals(feed.item_link(comments[0]),
-                          '/comments/cr/%i/1/#comment_1' % self.entry_ct_id)
+                          '/comments/cr/%i/1/#comment-1-by-admin' %
+                          self.entry_ct_id)
         self.assertEquals(feed.get_title(entry),
                           'Comments on %s' % entry.title)
         self.assertEquals(
@@ -255,7 +257,7 @@ class ZinniaFeedsTestCase(TestCase):
         feed = EntryPingbacks()
         self.assertEquals(list(feed.items(entry)), [comments[1]])
         self.assertEquals(feed.item_link(comments[1]),
-                          '/comments/cr/%i/1/#pingback_2' % self.entry_ct_id)
+                          '/comments/cr/%i/1/#pingback-2' % self.entry_ct_id)
         self.assertEquals(feed.get_title(entry),
                           'Pingbacks on %s' % entry.title)
         self.assertEquals(
@@ -268,7 +270,7 @@ class ZinniaFeedsTestCase(TestCase):
         feed = EntryTrackbacks()
         self.assertEquals(list(feed.items(entry)), [comments[2]])
         self.assertEquals(feed.item_link(comments[2]),
-                          '/comments/cr/%i/1/#trackback_3' % self.entry_ct_id)
+                          '/comments/cr/%i/1/#trackback-3' % self.entry_ct_id)
         self.assertEquals(feed.get_title(entry),
                           'Trackbacks on %s' % entry.title)
         self.assertEquals(

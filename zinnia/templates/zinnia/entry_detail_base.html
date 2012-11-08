@@ -92,7 +92,7 @@
   {% if comment_list.count %}
   <ol id="comment-list">
     {% for comment in comment_list %}
-    <li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %}">
+    <li id="comment-{{ comment.pk }}-by-{{ comment.user_name }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %}">
       <img src="{% get_gravatar comment.email 60 "G" %}"
            class="gravatar photo" alt="{{ comment.user_name }}" />
       <p class="comment-info">
@@ -134,7 +134,7 @@
   {% if pingback_list.count %}
   <ol id="pingback-list">
     {% for pingback in pingback_list %}
-    <li id="pingback_{{ pingback.pk }}" class="pingback vcard {% cycle box1,box2 %}">
+    <li id="pingback-{{ pingback.pk }}" class="pingback vcard {% cycle box1,box2 %}">
       <p class="pingback-info">
 	<a href="{{ pingback.url }}" rel="external nofollow"
            class="fn url org">{{ pingback.user_name }}</a>
@@ -169,7 +169,7 @@
   {% if trackback_list.count %}
   <ol id="trackback-list">
     {% for trackback in trackback_list %}
-    <li id="trackback_{{ trackback.pk }}" class="trackback vcard {% cycle box1,box2 %}">
+    <li id="trackback-{{ trackback.pk }}" class="trackback vcard {% cycle box1,box2 %}">
       <p class="trackback-info">
 	<a href="{{ trackback.url }}" rel="external nofollow"
            class="fn url org">{{ trackback.user_name }}</a>

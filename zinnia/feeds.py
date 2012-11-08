@@ -312,7 +312,7 @@ class EntryComments(EntryDiscussions):
 
     def item_link(self, item):
         """URL of the comment"""
-        return item.get_absolute_url('#comment_%(id)s')
+        return item.get_absolute_url('#comment-%(id)s-by-%(user_name)s')
 
     def get_title(self, obj):
         """Title of the feed"""
@@ -346,7 +346,7 @@ class EntryPingbacks(EntryDiscussions):
 
     def item_link(self, item):
         """URL of the pingback"""
-        return item.get_absolute_url('#pingback_%(id)s')
+        return item.get_absolute_url('#pingback-%(id)s')
 
     def get_title(self, obj):
         """Title of the feed"""
@@ -368,7 +368,7 @@ class EntryTrackbacks(EntryDiscussions):
 
     def item_link(self, item):
         """URL of the trackback"""
-        return item.get_absolute_url('#trackback_%(id)s')
+        return item.get_absolute_url('#trackback-%(id)s')
 
     def get_title(self, obj):
         """Title of the feed"""
