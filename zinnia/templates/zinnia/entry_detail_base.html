@@ -106,7 +106,7 @@
         <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
           {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
-        <a href="#comment_{{ comment.pk }}" class="anchor-link"
+        <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name }}" class="anchor-link"
            title="{% trans "Direct link to this comment" %}">#</a>
       </p>
       {{ comment.comment|linebreaks }}
@@ -142,7 +142,7 @@
         <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}">
           {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
-        <a href="#pingback_{{ pingback.pk }}" class="anchor-link"
+        <a href="#pingback-{{ pingback.pk }}" class="anchor-link"
            title="{% trans "Direct link to this pingback" %}">#</a>
       </p>
       <p class="pingback-content">
@@ -152,11 +152,11 @@
     {% endfor %}
   </ol>
   {% endif %}
-    {% if object.pingback_enabled %}
+  {% if object.pingback_enabled %}
   <p>{% trans "Pingbacks are open." %}</p>
-    {% else %}
+  {% else %}
   <p>{% trans "Pingbacks are closed." %}</p>
-    {% endif %}
+  {% endif %}
   {% endwith %}
 </div>
 {% endblock %}
@@ -177,7 +177,7 @@
         <abbr class="trackback-published" title="{{ trackback.submit_date|date:"c" }}">
           {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
-        <a href="#trackback_{{ trackback.pk }}" class="anchor-link"
+        <a href="#trackback-{{ trackback.pk }}" class="anchor-link"
            title="{% trans "Direct link to this trackback" %}">#</a>
       </p>
       <p class="trackback-content">
@@ -187,12 +187,12 @@
     {% endfor %}
   </ol>
   {% endif %}
-    {% if object.pingback_enabled %}
+  {% if object.pingback_enabled %}
   <p>
     <a href="{% url 'zinnia_entry_trackback' object.pk %}" rel="trackback">
       {% trans "Trackback URL" %}</a>
   </p>
-    {% endif %}
+  {% endif %}
 </div>
 {% endif %}
 {% endwith %}

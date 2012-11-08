@@ -10,7 +10,7 @@
     {% with entry=comment.content_object %}
     <strong>{{ comment.user_name }}</strong> {% trans "in" %}
     <strong>
-      <a href="{{ entry.get_absolute_url }}#comment_{{ comment.pk }}"
+      <a href="{{ entry.get_absolute_url }}#comment-{{ comment.pk }}-by-{{ comment.user_name }}"
          title="{% trans "Comment on" %} {{ entry.title }}">
         {{ entry.title }}
       </a>
