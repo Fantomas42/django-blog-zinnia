@@ -106,7 +106,8 @@
         <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
           {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
-        <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name }}" class="anchor-link"
+        <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name }}"
+           id="c{{ comment.pk }}" class="anchor-link"
            title="{% trans "Direct link to this comment" %}">#</a>
       </p>
       {{ comment.comment|linebreaks }}
@@ -142,7 +143,8 @@
         <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}">
           {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
-        <a href="#pingback-{{ pingback.pk }}" class="anchor-link"
+        <a href="#pingback-{{ pingback.pk }}"
+           id="c{{ comment.pk }}" class="anchor-link"
            title="{% trans "Direct link to this pingback" %}">#</a>
       </p>
       <p class="pingback-content">
@@ -177,7 +179,8 @@
         <abbr class="trackback-published" title="{{ trackback.submit_date|date:"c" }}">
           {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
-        <a href="#trackback-{{ trackback.pk }}" class="anchor-link"
+        <a href="#trackback-{{ trackback.pk }}"
+           id="c{{ comment.pk }}" class="anchor-link"
            title="{% trans "Direct link to this trackback" %}">#</a>
       </p>
       <p class="trackback-content">
