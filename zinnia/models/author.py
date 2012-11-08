@@ -18,9 +18,8 @@ class Author(User):
         return entries_published(self.entries)
 
     def __unicode__(self):
-        if self.first_name and self.last_name:
-            return u'%s %s' % (self.first_name, self.last_name)
-        return self.username
+        """If the user has a full name, use that or else the username"""
+        return self.get_full_name() or self.username
 
     @models.permalink
     def get_absolute_url(self):
