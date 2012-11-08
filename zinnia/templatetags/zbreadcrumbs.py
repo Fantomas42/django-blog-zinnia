@@ -129,7 +129,8 @@ def retrieve_breadcrumbs(path, model_instance, root_name=''):
         return breadcrumbs
 
     url_components = [comp for comp in
-                      path.replace(ZINNIA_ROOT_URL(), '').split('/') if comp]
+                      path.replace(ZINNIA_ROOT_URL(), '', 1).split('/')
+                      if comp]
     if len(url_components):
         breadcrumbs.append(Crumb(_(url_components[-1].capitalize())))
 
