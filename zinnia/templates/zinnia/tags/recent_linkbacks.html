@@ -3,9 +3,9 @@
   {% for linkback in linkbacks %}
   <li>
     {% with entry=linkback.content_object %}
-    <a href="{{ linkback.url }}">{{ linkback.user_name }}</a>
+    <a href="{{ linkback.url }}">{{ linkback.name }}</a>
     {% trans "in" %}
-    <a href="{{ entry.get_absolute_url }}#{{ linkback.flags.all.0.flag }}_{{ linkback.pk }}"
+    <a href="{{ entry.get_absolute_url }}#{{ linkback.flags.all.0.flag }}-{{ linkback.pk }}"
        title="{% trans "Linkback on" %} {{ entry.title }}">
       {{ entry.title }}
     </a>

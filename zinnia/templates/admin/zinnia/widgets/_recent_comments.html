@@ -4,11 +4,11 @@
 <tr>
   <th>
     <img src="{% get_gravatar comment.email 40 "G" %}"
-         class="gravatar photo" alt="{{ comment.user_name }}" />
+         class="gravatar photo" alt="{{ comment.name }}" />
   </th>
   <td>
     {% with entry=comment.content_object %}
-    <strong>{{ comment.user_name }}</strong> {% trans "in" %}
+    <strong>{{ comment.name }}</strong> {% trans "in" %}
     <strong>
       <a href="{{ entry.get_absolute_url }}#comment-{{ comment.pk }}-by-{{ comment.user_name }}"
          title="{% trans "Comment on" %} {{ entry.title }}">

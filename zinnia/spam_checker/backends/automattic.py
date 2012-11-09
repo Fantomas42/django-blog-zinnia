@@ -33,9 +33,9 @@ def backend(comment, content_object, request):
         'referrer': request.META.get('HTTP_REFERER', 'unknown'),
         'permalink': content_object.get_absolute_url(),
         'comment_type': 'comment',
-        'comment_author': smart_str(comment.userinfo.get('name', '')),
-        'comment_author_email': smart_str(comment.userinfo.get('email', '')),
-        'comment_author_url': smart_str(comment.userinfo.get('url', '')),
+        'comment_author': smart_str(comment.name),
+        'comment_author_email': smart_str(comment.email),
+        'comment_author_url': smart_str(comment.url),
     }
     is_spam = akismet.comment_check(smart_str(comment.comment),
                                     data=akismet_data, build_data=True)

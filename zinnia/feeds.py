@@ -240,15 +240,15 @@ class DiscussionFeed(ZinniaFeed):
 
     def item_author_name(self, item):
         """Author of the discussion"""
-        return item.userinfo['name']
+        return item.name
 
     def item_author_email(self, item):
         """Author's email of the discussion"""
-        return item.userinfo['email']
+        return item.email
 
     def item_author_link(self, item):
         """Author's URL of the discussion"""
-        return item.userinfo['url']
+        return item.url
 
 
 class LatestDiscussions(DiscussionFeed):
@@ -324,7 +324,7 @@ class EntryComments(EntryDiscussions):
 
     def item_enclosure_url(self, item):
         """Returns a gravatar image for enclosure"""
-        return get_gravatar(item.userinfo['email'])
+        return get_gravatar(item.email)
 
     def item_enclosure_length(self, item):
         """Hardcoded enclosure length"""

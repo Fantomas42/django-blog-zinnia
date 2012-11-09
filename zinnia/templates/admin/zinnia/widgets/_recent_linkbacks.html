@@ -4,7 +4,7 @@
 <tr>
   <th>
     {% with entry=linkback.content_object %}
-    <a href="{{ linkback.url }}">{{ linkback.user_name }}</a>
+    <a href="{{ linkback.url }}">{{ linkback.name }}</a>
     {% trans "made a linkback on" %}
     <a href="{{ entry.get_absolute_url }}#{{ linkback.flags.all.0.flag }}_{{ linkback.pk }}"
        title="{{ entry.title }}">

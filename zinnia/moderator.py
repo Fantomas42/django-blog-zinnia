@@ -95,10 +95,10 @@ class EntryCommentModerator(CommentModerator):
         exclude_list = self.mail_comment_notification_recipients + \
                        [author.email
                         for author in content_object.authors.all()] + \
-                       [comment.userinfo['email']]
-        recipient_list = set([comment.userinfo['email']
+                       [comment.email]
+        recipient_list = set([comment.email
                               for comment in content_object.comments
-                              if comment.userinfo['email']]) - \
+                              if comment.email]) - \
                               set(exclude_list)
 
         if recipient_list:

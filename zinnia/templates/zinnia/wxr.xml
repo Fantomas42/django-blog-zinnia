@@ -75,9 +75,9 @@
       {% for comment in entry.comments %}
       <wp:comment>
         <wp:comment_id>{{ comment.id }}</wp:comment_id>
-        <wp:comment_author><![CDATA[{{ comment.userinfo.name }}]]></wp:comment_author>
-        <wp:comment_author_email>{{ comment.userinfo.email }}</wp:comment_author_email>
-        <wp:comment_author_url>{{ comment.userinfo.url }}</wp:comment_author_url>
+        <wp:comment_author><![CDATA[{{ comment.name }}]]></wp:comment_author>
+        <wp:comment_author_email>{{ comment.email }}</wp:comment_author_email>
+        <wp:comment_author_url>{{ comment.url }}</wp:comment_author_url>
         <wp:comment_author_IP>{{ comment.ip_address }}</wp:comment_author_IP>
         <wp:comment_date>{{ comment.submit_date|date:"Y-m-d H:i:s" }}</wp:comment_date>
         <wp:comment_date_gmt>{{ comment.submit_date|date:"Y-m-d H:i:s" }}</wp:comment_date_gmt>
@@ -90,9 +90,9 @@
       {% endfor %}{% for comment in entry.pingbacks %}
       <wp:comment>
         <wp:comment_id>{{ comment.id }}</wp:comment_id>
-        <wp:comment_author><![CDATA[{{ comment.userinfo.name }}]]></wp:comment_author>
-        <wp:comment_author_email>{{ comment.userinfo.email }}</wp:comment_author_email>
-        <wp:comment_author_url>{{ comment.userinfo.url }}</wp:comment_author_url>
+        <wp:comment_author><![CDATA[{{ comment.name }}]]></wp:comment_author>
+        <wp:comment_author_email>{{ comment.email }}</wp:comment_author_email>
+        <wp:comment_author_url>{{ comment.url }}</wp:comment_author_url>
         <wp:comment_author_IP>{{ comment.ip_address }}</wp:comment_author_IP>
         <wp:comment_date>{{ comment.submit_date|date:"Y-m-d H:i:s" }}</wp:comment_date>
         <wp:comment_date_gmt>{{ comment.submit_date|date:"Y-m-d H:i:s" }}</wp:comment_date_gmt>
@@ -105,9 +105,9 @@
       {% endfor %}{% for comment in entry.trackbacks %}
       <wp:comment>
         <wp:comment_id>{{ comment.id }}</wp:comment_id>
-        <wp:comment_author><![CDATA[{{ comment.userinfo.name }}]]></wp:comment_author>
-        <wp:comment_author_email>{{ comment.userinfo.email }}</wp:comment_author_email>
-        <wp:comment_author_url>{{ comment.userinfo.url }}</wp:comment_author_url>
+        <wp:comment_author><![CDATA[{{ comment.name }}]]></wp:comment_author>
+        <wp:comment_author_email>{{ comment.email }}</wp:comment_author_email>
+        <wp:comment_author_url>{{ comment.url }}</wp:comment_author_url>
         <wp:comment_author_IP>{{ comment.ip_address }}</wp:comment_author_IP>
         <wp:comment_date>{{ comment.submit_date|date:"Y-m-d H:i:s" }}</wp:comment_date>
         <wp:comment_date_gmt>{{ comment.submit_date|date:"Y-m-d H:i:s" }}</wp:comment_date_gmt>

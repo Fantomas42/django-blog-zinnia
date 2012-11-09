@@ -1,5 +1,5 @@
-{% load i18n %}{% load url from future %}{% trans "Author" %}: {{ comment.userinfo.name }} {{ comment.userinfo.url }}
-{% trans "Email" %}: {{ comment.userinfo.email }}
+{% load i18n %}{% load url from future %}{% trans "Author" %}: {{ comment.name }} {{ comment.url }}
+{% trans "Email" %}: {{ comment.email }}
 {% trans "IP" %}: {{ comment.ip_address }}
 
 {% trans "Comment" %}:
