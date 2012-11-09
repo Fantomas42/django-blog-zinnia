@@ -8,9 +8,25 @@
 
 {% block content %}
 <h2>{% trans "Thanks for your comment" %}</h2>
-<p>
-  <a href="{% url 'zinnia_entry_archive_index' %}" title="{% trans "Return to entry list" %}">
-    {% trans "Return to entry list" %}
-  </a>
-</p>
+
+<p>{% trans "Your comment needs to be approved before getting displayed." %}</p>
+
+<ul>
+  {% if comment %}
+  <li>
+    {% with entry=comment.content_object %}
+    <a href="{{ entry.get_absolute_url }}"
+       title="{{ entry.title }}">
+      {% blocktrans with title=entry.title %}Back to {{ title }}{% endblocktrans %}
+    </a>
+    {% endwith %}
+  </li>
+  {% endif %}
+  <li>
+    <a href="{% url 'zinnia_entry_archive_index' %}"
+       title="{% trans "Return to entry list" %}">
+      {% trans "Return to entry list" %}
+    </a>
+  </li>
+</ul>
 {% endblock %}

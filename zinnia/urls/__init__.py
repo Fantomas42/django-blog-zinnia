@@ -12,7 +12,7 @@ urlpatterns = patterns(
     url(r'^search/', include('zinnia.urls.search')),
     url(r'^sitemap/', include('zinnia.urls.sitemap')),
     url(r'^trackback/', include('zinnia.urls.trackback')),
-    url(r'^discussions/', include('zinnia.urls.discussions')),
+    url(r'^comments/', include('zinnia.urls.comments')),
     url(r'^', include('zinnia.urls.entries')),
     url(r'^', include('zinnia.urls.archives')),
     url(r'^', include('zinnia.urls.shortlink')),
