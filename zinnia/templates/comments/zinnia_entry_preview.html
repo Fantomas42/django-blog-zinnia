@@ -11,23 +11,25 @@
   {% else %}
   <h2>{% trans "Preview of the comment" %}</h2>
   <ol id="comment-list">
-    <li id="comment_preview" class="comment vcard box1">
-      <img src="{% get_gravatar form.cleaned_data.email 60 "G" %}"
-           class="gravatar photo" alt="form.cleaned_data.name" />
+    {% with comment=form.get_comment_object %}
+    <li id="comment-preview" class="comment vcard box1">
+      <img src="{% get_gravatar comment.email 60 "G" %}"
+           class="gravatar photo" alt="{{ comment.name }}" />
       <p class="comment-info">
-	{% if form.cleaned_data.url %}
-	<a href="{{ form.cleaned_data.url }}" rel="external nofollow"
-           class="fn url">{{ form.cleaned_data.name }}</a>
+	{% if comment.url %}
+	<a href="{{ comment.url }}" rel="external nofollow"
+           class="fn url">{{ comment.name }}</a>
 	{% else %}
-	{{ form.cleaned_data.name }}
+	{{ comment.name }}
 	{% endif %}
 	{% trans "on" %}
-        <abbr class="comment-published" title="{% now "c" %}">
-          {% now "SHORT_DATETIME_FORMAT" %}
+        <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
+          {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
       </p>
-      {{ comment|linebreaks }}
+      {{ comment.comment|linebreaks }}
     </li>
+    {% endwith %}
   </ol>
   {% endif %}
   {% include "comments/zinnia/entry/form.html" %}
