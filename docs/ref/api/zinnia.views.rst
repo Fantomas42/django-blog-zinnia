@@ -49,18 +49,18 @@ views Package
     :undoc-members:
     :show-inheritance:
 
-:mod:`entries` Module
----------------------
+:mod:`comments` Module
+----------------------
 
-.. automodule:: zinnia.views.entries
+.. automodule:: zinnia.views.comments
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`mixins` Module
---------------------
+:mod:`entries` Module
+---------------------
 
-.. automodule:: zinnia.views.mixins
+.. automodule:: zinnia.views.entries
     :members:
     :undoc-members:
     :show-inheritance:

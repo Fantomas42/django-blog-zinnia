@@ -41,10 +41,10 @@ urls Package
     :undoc-members:
     :show-inheritance:
 
-:mod:`discussions` Module
--------------------------
+:mod:`comments` Module
+----------------------
 
-.. automodule:: zinnia.urls.discussions
+.. automodule:: zinnia.urls.comments
     :members:
     :undoc-members:
     :show-inheritance:
