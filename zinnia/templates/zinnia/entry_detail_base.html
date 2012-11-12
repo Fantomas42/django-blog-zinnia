@@ -92,7 +92,8 @@
   {% if comment_list.count %}
   <ol id="comment-list">
     {% for comment in comment_list %}
-    <li id="comment-{{ comment.pk }}-by-{{ comment.user_name }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %}">
+    <li id="comment-{{ comment.pk }}-by-{{ comment.user_name }}"
+        class="comment vcard {% cycle box1,box2 %}{% if comment.user %} authenticated-comment{% if comment.user.is_staff %} staff-comment{% endif %}{% if comment.user.is_superuser %} superuser-comment{% endif %}{% endif %}">
       <img src="{% get_gravatar comment.email 60 "G" %}"
            class="gravatar photo" alt="{{ comment.name }}" />
       <p class="comment-info">
