@@ -23,7 +23,7 @@ use the appropriate template filter in your templates.
 I want to have multilingual support on the entries, is it possible ?
 --------------------------------------------------------------------
 
-Due to the extending cpabilities of Zinnia, many solutions on this
+Due to the extending capabilities of Zinnia, many solutions on this
 problematic are possible, but you must keep in mind that multiplingual
 entries is just a concept, the needs and the implementations can differ
 from a project to another. But you should take a look on this excellent
