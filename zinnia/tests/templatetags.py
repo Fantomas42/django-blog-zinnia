@@ -673,15 +673,20 @@ class TemplateTagsTestCase(TestCase):
         self.assertRaises(TemplateSyntaxError, Template, template_error_args)
 
     def test_get_tag_cloud(self):
+        source_context = Context({})
         with self.assertNumQueries(2):
-            context = get_tag_cloud()
+            context = get_tag_cloud(source_context)
         self.assertEquals(len(context['tags']), 0)
         self.assertEquals(context['template'], 'zinnia/tags/tag_cloud.html')
+        self.assertEquals(context['context_tag'], None)
         self.publish_entry()
+        tag = Tag.objects.get(name='test')
+        source_context = Context({'tag': tag})
         with self.assertNumQueries(1):
-            context = get_tag_cloud(6, 'custom_template.html')
+            context = get_tag_cloud(source_context, 6, 'custom_template.html')
         self.assertEquals(len(context['tags']), 2)
         self.assertEquals(context['template'], 'custom_template.html')
+        self.assertEquals(context['context_tag'], tag)
 
     def test_zinnia_statistics(self):
         with self.assertNumQueries(9):

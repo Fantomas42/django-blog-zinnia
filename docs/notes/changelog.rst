@@ -4,15 +4,14 @@ CHANGELOG
 0.12.dev
 --------
 
-* ``get_authors`` context improved.
-* ``get_categories`` context improved.
+* ``get_tag_cloud`` context improved
+* ``get_authors`` context improved
+* ``get_categories`` context improved
+* Update of the templates provided
 * Updating ``helloworld.json`` fixture
 * Fix issues with authors in ``wp2zinnia``
+* Better integration of the comments system
 * Models has been splitted into differents modules
-
-.. warning::
-   If you are upgrading from a previous version of Zinnia with
-   extensions, you needs to update your imports of the models.
 
 0.11.2
 ------
