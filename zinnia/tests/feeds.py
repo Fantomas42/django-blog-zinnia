@@ -42,6 +42,8 @@ class ZinniaFeedsTestCase(TestCase):
         activate('en')
         self.site = Site.objects.get_current()
         self.author = Author.objects.create(username='admin',
+                                            first_name='Root',
+                                            last_name='Bloody',
                                             email='admin@example.com')
         self.category = Category.objects.create(title='Tests', slug='tests')
         self.entry_ct_id = ContentType.objects.get_for_model(Entry).pk
@@ -88,7 +90,8 @@ class ZinniaFeedsTestCase(TestCase):
         feed = EntryFeed()
         self.assertEquals(feed.item_pubdate(entry), entry.creation_date)
         self.assertEquals(feed.item_categories(entry), [self.category.title])
-        self.assertEquals(feed.item_author_name(entry), self.author.username)
+        self.assertEquals(feed.item_author_name(entry),
+                          self.author.__unicode__())
         self.assertEquals(feed.item_author_email(entry), self.author.email)
         self.assertEquals(
             feed.item_author_link(entry),
@@ -165,9 +168,11 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(len(feed.items(self.author)), 1)
         self.assertEquals(feed.link(self.author), '/authors/admin/')
         self.assertEquals(feed.get_title(self.author),
-                          'Entries for author %s' % self.author.username)
+                          'Entries for author %s' %
+                          self.author.__unicode__())
         self.assertEquals(feed.description(self.author),
-                          'The latest entries by %s' % self.author.username)
+                          'The latest entries by %s' %
+                          self.author.__unicode__())
 
     def test_tag_entries(self):
         self.create_published_entry()
@@ -221,7 +226,8 @@ class ZinniaFeedsTestCase(TestCase):
                           comments[0].submit_date)
         self.assertEquals(feed.item_link(comments[0]),
                           '/comments/cr/%i/1/#c1' % self.entry_ct_id)
-        self.assertEquals(feed.item_author_name(comments[0]), 'admin')
+        self.assertEquals(feed.item_author_name(comments[0]),
+                          self.author.__unicode__())
         self.assertEquals(feed.item_author_email(comments[0]),
                           'admin@example.com')
         self.assertEquals(feed.item_author_link(comments[0]), '')
