@@ -49,7 +49,8 @@ def get_categories(context, template='zinnia/tags/categories.html'):
 def get_authors(context, template='zinnia/tags/authors.html'):
     """Return the published authors"""
     return {'template': template,
-            'authors': Author.published.all(),
+            'authors': Author.published.all().annotate(
+                count_entries_published=Count('entries')),
             'context_author': context.get('author')}
 
 

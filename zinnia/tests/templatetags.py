@@ -89,6 +89,7 @@ class TemplateTagsTestCase(TestCase):
         with self.assertNumQueries(0):
             context = get_authors(source_context, 'custom_template.html')
         self.assertEquals(len(context['authors']), 1)
+        self.assertEquals(context['authors'][0].count_entries_published, 1)
         self.assertEquals(context['template'], 'custom_template.html')
         self.assertEquals(context['context_author'], author)
 
