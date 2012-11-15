@@ -63,15 +63,15 @@
       <wp:postmeta>
         <wp:meta_key>_last_update</wp:meta_key>
         <wp:meta_value><![CDATA[{{ entry.last_update|date:"c"}}]]></wp:meta_value>
-      </wp:postmeta>
+      </wp:postmeta>{% if entry.start_publication %}
       <wp:postmeta>
         <wp:meta_key>_start_publication</wp:meta_key>
         <wp:meta_value><![CDATA[{{ entry.start_publication|date:"c"}}]]></wp:meta_value>
-      </wp:postmeta>
+      </wp:postmeta>{% endif %}{% if entry.end_publication %}
       <wp:postmeta>
         <wp:meta_key>_end_publication</wp:meta_key>
         <wp:meta_value><![CDATA[{{ entry.end_publication|date:"c"}}]]></wp:meta_value>
-      </wp:postmeta>
+      </wp:postmeta>{% endif %}
       {% for comment in entry.comments %}
       <wp:comment>
         <wp:comment_id>{{ comment.id }}</wp:comment_id>
