@@ -1,6 +1,5 @@
 """Template tags and filters for Zinnia"""
 from hashlib import md5
-from random import sample
 from urllib import urlencode
 from datetime import datetime
 
@@ -80,11 +79,8 @@ def get_draft_entries(number=5,
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
     """Return random entries"""
-    entries = Entry.published.all()
-    if number > len(entries):
-        number = len(entries)
     return {'template': template,
-            'entries': sample(entries, number)}
+            'entries': Entry.published.order_by('?')[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')

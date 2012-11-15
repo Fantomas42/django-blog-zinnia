@@ -142,18 +142,18 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(len(context['entries']), 0)
 
     def test_get_random_entries(self):
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(1):
             context = get_random_entries()
         self.assertEquals(len(context['entries']), 0)
         self.assertEquals(context['template'],
                           'zinnia/tags/random_entries.html')
 
         self.publish_entry()
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_random_entries(3, 'custom_template.html')
         self.assertEquals(len(context['entries']), 1)
         self.assertEquals(context['template'], 'custom_template.html')
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_random_entries(0)
         self.assertEquals(len(context['entries']), 0)
 
