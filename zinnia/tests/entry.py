@@ -97,6 +97,7 @@ class EntryTestCase(TestCase):
         entry.AUTO_CLOSE_COMMENTS_AFTER = None
         self.assertEquals(self.entry.comments_are_open, True)
         entry.AUTO_CLOSE_COMMENTS_AFTER = 5
+        self.assertEquals(self.entry.comments_are_open, True)
         self.entry.start_publication = timezone.now() - timedelta(days=7)
         self.entry.save()
         self.assertEquals(self.entry.comments_are_open, False)
