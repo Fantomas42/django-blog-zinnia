@@ -8,9 +8,10 @@
       </a>
     </h2>
     <p class="entry-info">
-      {% if object.authors.count %}
+      {% with authors=object.authors.all %}
+      {% if authors|length %}
       {% trans "Written by" %}
-      {% for author in object.authors.all %}
+      {% for author in authors %}
       <span class="vcard author">
         <a href="{% url 'zinnia_author_detail' author.username %}" class="fn nickname url" rel="author"
            title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}">{{ author }}</a>
@@ -20,13 +21,15 @@
       {% else %}
       {% trans "Written on" %}
       {% endif %}
+      {% endwith %}
       <abbr class="published" title="{{ object.creation_date|date:"c" }}">{{ object.creation_date|date:"DATE_FORMAT" }}</abbr>
-      {% if object.categories.count %}
+      {% with categories=object.categories.all %}
+      {% if categories|length %}
       {% trans "in" %}
-      {% for category in object.categories.all %}
+      {% for category in categories %}
       <a href="{{ category.get_absolute_url }}"
          title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
-         rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.
+         rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.{% endwith %}
     </p>
   </div>
 
