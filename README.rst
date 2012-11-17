@@ -62,6 +62,7 @@ or you can visit these websites who use Zinnia.
 * `mixedCase`_.
 * `brainbreach`_.
 * `Mauro Bianchi`_.
+* `Sergey Miracle`_.
 
 
 If you are a proud user of Zinnia, send me the URL of your website and I
@@ -108,6 +109,7 @@ More information and help available at these URLs :
 .. _`Tryolabs`: http://www.tryolabs.com/Blog/
 .. _`brainbreach`: http://brainbreach.com/
 .. _`Mauro Bianchi`: http://www.maurobianchi.it/
+.. _`Sergey Miracle`: http://sergeymiracle.com/weblog/
 .. _`AR.Drone Best of User Videos`: http://ardrone.parrot.com/best-of-user-videos/
 .. _`ShiningPanda`: http://www.shiningpanda.com/blog/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
