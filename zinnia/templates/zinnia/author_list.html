@@ -17,7 +17,7 @@
     <a href="{% url 'zinnia_author_detail' object.username %}"
        title="{% blocktrans with author=object %}Show all {{ author }}'s entries{% endblocktrans %}"
        class="fn nickname url">{{ object }}</a>
-    {% blocktrans count entry_count=object.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+    {% blocktrans count entry_count=object.count_entries_published %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
   </li>
   {% empty %}
   <li>

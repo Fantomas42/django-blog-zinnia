@@ -1,17 +1,23 @@
 """Views for Zinnia authors"""
+from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.list import BaseListView
 
-from zinnia.models.author import Author
 from zinnia.settings import PAGINATION
-from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
+from zinnia.models.author import Author
 from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 
 
-class AuthorList(CallableQuerysetMixin, ListView):
+
+class AuthorList(ListView):
     """View returning a list of all published authors"""
-    queryset = Author.published.all
+
+    def get_queryset(self):
+        """Return a queryset of published authors,
+        with a count of their entries published."""
+        return Author.published.all().annotate(
+            count_entries_published=Count('entries'))
 
 
 class AuthorDetail(EntryQuerysetTemplateResponseMixin, BaseListView):
