@@ -2,6 +2,8 @@
 {% load zinnia_tags i18n %}
 {% load url from future %}
 
+{% block meta-keywords %}{% get_tags as entry_tags %}{{ entry_tags|join:", "}}{% endblock %}
+
 {% block meta %}
     <meta name="generator" content="Zinnia {{ ZINNIA_VERSION }}" />
 {% endblock %}

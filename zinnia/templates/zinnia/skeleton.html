@@ -1,6 +1,5 @@
-{% load zinnia_tags i18n %}
+{% load i18n %}
 {% load url from future %}
-{% get_tags as entry_tags %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -11,7 +10,7 @@
     <meta name="language" content="{{ LANGUAGE_CODE }}" />
     <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
     <meta name="description" content="{% block meta-description %}Demonstration of the Zinnia Blog application.{% endblock %}" />
-    <meta name="keywords" content="{% block meta-keywords %}django, blog, zinnia, {{ entry_tags|join:", "}}{% endblock %}" />
+    <meta name="keywords" content="{% block meta-keywords %}django, blog, zinnia{% endblock %}" />
     <meta name="author" content="Fantomas42" />
     {% block meta %}{% endblock %}
     <link rel="pingback" href="/xmlrpc/" />
@@ -73,10 +72,6 @@
               </a>
             </li>
           </ul>
-        </div>
-        <div class="recents">
-          <h3>{% trans "Recent entries" %}</h3>
-          {% get_recent_entries %}
         </div>
         <div class="search">
           <h3>{% trans "Search" %}</h3>
