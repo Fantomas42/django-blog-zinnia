@@ -147,7 +147,7 @@
           {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
         <a href="#pingback-{{ pingback.pk }}"
-           id="c{{ comment.pk }}" class="anchor-link"
+           id="c{{ pingback.pk }}" class="anchor-link"
            title="{% trans "Direct link to this pingback" %}">#</a>
       </p>
       <p class="pingback-content">
@@ -183,7 +183,7 @@
           {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
         <a href="#trackback-{{ trackback.pk }}"
-           id="c{{ comment.pk }}" class="anchor-link"
+           id="c{{ trackback.pk }}" class="anchor-link"
            title="{% trans "Direct link to this trackback" %}">#</a>
       </p>
       <p class="trackback-content">
