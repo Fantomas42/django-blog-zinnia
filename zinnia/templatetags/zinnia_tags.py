@@ -306,7 +306,8 @@ def get_gravatar(email, size=80, rating='g', default=None,
 @register.assignment_tag
 def get_tags():
     """Return the published tags"""
-    return tags_published()
+    return Tag.objects.usage_for_queryset(
+        Entry.published.all())
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)

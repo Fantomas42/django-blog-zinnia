@@ -473,7 +473,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.check_capabilities('/wlwmanifest.xml',
                                 'application/wlwmanifest+xml', 0)
         self.check_capabilities('/opensearch.xml',
-                                'application/opensearchdescription+xml', 3)
+                                'application/opensearchdescription+xml', 1)
 
 
 class ZinniaCustomDetailViews(ViewsBaseCase):
