@@ -66,11 +66,12 @@
   </div>
   {% endif %}
   {% endwith %}
-  {% if object.related_published %}
+  {% with entry_related=object.related_published %}
+  {% if entry_related %}
   <div class="entry-related">
     <h3>{% trans "Related entries" %}</h3>
     <ul>
-      {% for entry in object.related_published %}
+      {% for entry in entry_related %}
       <li>
 	<a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
       </li>
@@ -78,6 +79,7 @@
     </ul>
   </div>
   {% endif %}
+  {% endwith %}
   <div class="entry-similar">
     <h3>{% trans "Similar entries" %}</h3>
     {% get_similar_entries %}
@@ -89,7 +91,7 @@
 <div id="comments">
   <h3>{% trans "Comments" %}</h3>
   {% with comment_list=object.comments %}
-  {% if comment_list.count %}
+  {% if comment_list|length %}
   <ol id="comment-list">
     {% for comment in comment_list %}
     <li id="comment-{{ comment.pk }}-by-{{ comment.user_name }}"
@@ -133,7 +135,7 @@
 <div id="pingbacks">
   <h3>{% trans "Pingbacks" %}</h3>
   {% with pingback_list=object.pingbacks %}
-  {% if pingback_list.count %}
+  {% if pingback_list|length %}
   <ol id="pingback-list">
     {% for pingback in pingback_list %}
     <li id="pingback-{{ pingback.pk }}" class="pingback vcard {% cycle box1,box2 %}">
@@ -166,10 +168,10 @@
 
 {% block entry-trackbacks %}
 {% with trackback_list=object.trackbacks %}
-{% if trackback_list.count or object.pingback_enabled %}
+{% if trackback_list|length or object.pingback_enabled %}
 <div id="trackbacks">
   <h3>{% trans "Trackbacks" %}</h3>
-  {% if trackback_list.count %}
+  {% if trackback_list|length %}
   <ol id="trackback-list">
     {% for trackback in trackback_list %}
     <li id="trackback-{{ trackback.pk }}" class="trackback vcard {% cycle box1,box2 %}">
