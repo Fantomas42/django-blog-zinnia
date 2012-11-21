@@ -9,7 +9,6 @@ from zinnia.models.author import Author
 from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 
 
-
 class AuthorList(ListView):
     """View returning a list of all published authors"""
 
