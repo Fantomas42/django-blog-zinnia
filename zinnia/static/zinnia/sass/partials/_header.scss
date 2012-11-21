@@ -4,25 +4,22 @@
   h1 {
     margin-top: 0.5em;
     margin-bottom: 0;
-    font-size: 4em;
     font-weight: bold;
     &:first-letter {
       font-size: 130%;
     }
-    background: transparent image-url("logo.png") no-repeat scroll left center;
-    padding-left: 1.5em;
   }
 
   blockquote {
     border: none;
     background: none;
-    margin: 0 0 0 6em;
-    padding: 0 0 1.5em 0;
+    padding: 0 1.5em 0 0;
   }
 
   form {
     float: right;
     clear: both;
+    display: none;
     input[type=text] {
       width: 85%;
       background-image: image-url("search.png");
@@ -39,12 +36,33 @@
   .top-navigation {
     margin: 0;
     float: right;
+    display: none;
     @include delimited-list("|");
     .sitemap {
       @include header-icon("sitemap.png");
     }
     .feeds {
       @include header-icon("rss.png");
+    }
+  }
+
+  @media (min-width: 480px) {
+    form, .top-navigation {
+      display: block;
+    }
+  }
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 4em;
+    }
+  }
+  @media (min-width: 1024px) {
+    h1 {
+      background: transparent image-url("logo.png") no-repeat scroll left center;
+      padding-left: 1.5em;
+    }
+    blockquote {
+      margin-left: 6em;
     }
   }
 }
