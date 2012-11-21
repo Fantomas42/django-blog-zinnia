@@ -139,6 +139,7 @@ class EntryTestCase(TestCase):
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
+        del self.entry.previous_entry  # Invalidate the cached_property
         self.assertEquals(self.entry.previous_entry, self.second_entry)
         params = {'title': 'My third entry',
                   'content': 'My third content',
@@ -147,6 +148,7 @@ class EntryTestCase(TestCase):
                   'status': PUBLISHED}
         self.third_entry = Entry.objects.create(**params)
         self.third_entry.sites.add(site)
+        del self.entry.previous_entry
         self.assertEquals(self.entry.previous_entry, self.third_entry)
         self.assertEquals(self.third_entry.previous_entry, self.second_entry)
 
@@ -160,6 +162,7 @@ class EntryTestCase(TestCase):
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
+        del self.entry.next_entry  # Invalidate the cached_property
         self.assertEquals(self.entry.next_entry, self.second_entry)
         params = {'title': 'My third entry',
                   'content': 'My third content',
@@ -168,6 +171,7 @@ class EntryTestCase(TestCase):
                   'status': PUBLISHED}
         self.third_entry = Entry.objects.create(**params)
         self.third_entry.sites.add(site)
+        del self.entry.next_entry
         self.assertEquals(self.entry.next_entry, self.third_entry)
         self.assertEquals(self.third_entry.next_entry, self.second_entry)
 

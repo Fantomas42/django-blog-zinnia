@@ -9,6 +9,7 @@ from django.utils.html import linebreaks
 from django.contrib.sites.models import Site
 from django.db.models.signals import post_save
 from django.utils.importlib import import_module
+from django.utils.functional import cached_property
 from django.contrib import comments
 from django.contrib.comments.models import CommentFlag
 from django.contrib.comments.moderation import moderator
@@ -116,7 +117,7 @@ class EntryAbstractClass(models.Model):
             return linebreaks(self.content)
         return self.content
 
-    @property
+    @cached_property
     def previous_entry(self):
         """Return the previous entry"""
         entries = Entry.published.filter(
@@ -124,7 +125,7 @@ class EntryAbstractClass(models.Model):
         if entries:
             return entries[0]
 
-    @property
+    @cached_property
     def next_entry(self):
         """Return the next entry"""
         entries = Entry.published.filter(
