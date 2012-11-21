@@ -72,7 +72,7 @@ class EntryAdmin(admin.ModelAdmin):
         """Return the title with word count and number of comments"""
         title = _('%(title)s (%(word_count)i words)') % \
                 {'title': entry.title, 'word_count': entry.word_count}
-        comments = entry.comments.count()
+        comments = entry.comments_qs.count()
         if comments:
             return ungettext_lazy('%(title)s (%(comments)i comment)',
                                   '%(title)s (%(comments)i comments)',

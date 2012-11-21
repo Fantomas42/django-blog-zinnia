@@ -158,14 +158,14 @@ class PingBackTestCase(TestCase):
         self.assertEquals(response, 33)
 
         # Validate pingback
-        self.assertEquals(self.first_entry.comments.count(), 0)
+        self.assertEquals(self.first_entry.comments_qs.count(), 0)
         self.first_entry.pingback_enabled = True
         self.first_entry.save()
         response = self.server.pingback.ping(source, target)
         self.assertEquals(
             response,
             'Pingback from %s to %s registered.' % (source, target))
-        self.assertEquals(self.first_entry.pingbacks.count(), 1)
+        self.assertEquals(self.first_entry.pingbacks_qs.count(), 1)
         self.assertTrue(self.second_entry.title in \
                         self.first_entry.pingbacks[0].user_name)
 
@@ -185,7 +185,7 @@ class PingBackTestCase(TestCase):
         self.assertEquals(
             response,
             'Pingback from %s to %s registered.' % (source, target))
-        self.assertEquals(self.first_entry.pingbacks.count(), 1)
+        self.assertEquals(self.first_entry.pingbacks_qs.count(), 1)
         self.assertTrue(self.second_entry.title in \
                         self.first_entry.pingbacks[0].user_name)
 

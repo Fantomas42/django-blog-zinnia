@@ -33,26 +33,26 @@ class EntryTestCase(TestCase):
 
     def test_discussions(self):
         site = Site.objects.get_current()
-        self.assertEquals(self.entry.discussions.count(), 0)
-        self.assertEquals(self.entry.comments.count(), 0)
-        self.assertEquals(self.entry.pingbacks.count(), 0)
-        self.assertEquals(self.entry.trackbacks.count(), 0)
+        self.assertEquals(self.entry.discussions_qs.count(), 0)
+        self.assertEquals(self.entry.comments_qs.count(), 0)
+        self.assertEquals(self.entry.pingbacks_qs.count(), 0)
+        self.assertEquals(self.entry.trackbacks_qs.count(), 0)
 
         comments.get_model().objects.create(comment='My Comment 1',
                                             content_object=self.entry,
                                             site=site)
-        self.assertEquals(self.entry.discussions.count(), 1)
-        self.assertEquals(self.entry.comments.count(), 1)
-        self.assertEquals(self.entry.pingbacks.count(), 0)
-        self.assertEquals(self.entry.trackbacks.count(), 0)
+        self.assertEquals(self.entry.discussions_qs.count(), 1)
+        self.assertEquals(self.entry.comments_qs.count(), 1)
+        self.assertEquals(self.entry.pingbacks_qs.count(), 0)
+        self.assertEquals(self.entry.trackbacks_qs.count(), 0)
 
         comments.get_model().objects.create(comment='My Comment 2',
                                             content_object=self.entry,
                                             site=site, is_public=False)
-        self.assertEquals(self.entry.discussions.count(), 1)
-        self.assertEquals(self.entry.comments.count(), 1)
-        self.assertEquals(self.entry.pingbacks.count(), 0)
-        self.assertEquals(self.entry.trackbacks.count(), 0)
+        self.assertEquals(self.entry.discussions_qs.count(), 1)
+        self.assertEquals(self.entry.comments_qs.count(), 1)
+        self.assertEquals(self.entry.pingbacks_qs.count(), 0)
+        self.assertEquals(self.entry.trackbacks_qs.count(), 0)
 
         author = User.objects.create_user(username='webmaster',
                                           email='webmaster@example.com')
@@ -63,26 +63,26 @@ class EntryTestCase(TestCase):
             site=Site.objects.create(domain='http://toto.com',
                                      name='Toto.com'))
         comment.flags.create(user=author, flag=CommentFlag.MODERATOR_APPROVAL)
-        self.assertEquals(self.entry.discussions.count(), 2)
-        self.assertEquals(self.entry.comments.count(), 2)
-        self.assertEquals(self.entry.pingbacks.count(), 0)
-        self.assertEquals(self.entry.trackbacks.count(), 0)
+        self.assertEquals(self.entry.discussions_qs.count(), 2)
+        self.assertEquals(self.entry.comments_qs.count(), 2)
+        self.assertEquals(self.entry.pingbacks_qs.count(), 0)
+        self.assertEquals(self.entry.trackbacks_qs.count(), 0)
 
         comment = comments.get_model().objects.create(
             comment='My Pingback 1', content_object=self.entry, site=site)
         comment.flags.create(user=author, flag=PINGBACK)
-        self.assertEquals(self.entry.discussions.count(), 3)
-        self.assertEquals(self.entry.comments.count(), 2)
-        self.assertEquals(self.entry.pingbacks.count(), 1)
-        self.assertEquals(self.entry.trackbacks.count(), 0)
+        self.assertEquals(self.entry.discussions_qs.count(), 3)
+        self.assertEquals(self.entry.comments_qs.count(), 2)
+        self.assertEquals(self.entry.pingbacks_qs.count(), 1)
+        self.assertEquals(self.entry.trackbacks_qs.count(), 0)
 
         comment = comments.get_model().objects.create(
             comment='My Trackback 1', content_object=self.entry, site=site)
         comment.flags.create(user=author, flag=TRACKBACK)
-        self.assertEquals(self.entry.discussions.count(), 4)
-        self.assertEquals(self.entry.comments.count(), 2)
-        self.assertEquals(self.entry.pingbacks.count(), 1)
-        self.assertEquals(self.entry.trackbacks.count(), 1)
+        self.assertEquals(self.entry.discussions_qs.count(), 4)
+        self.assertEquals(self.entry.comments_qs.count(), 2)
+        self.assertEquals(self.entry.pingbacks_qs.count(), 1)
+        self.assertEquals(self.entry.trackbacks_qs.count(), 1)
 
     def test_str(self):
         activate('en')

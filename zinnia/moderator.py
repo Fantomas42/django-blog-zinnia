@@ -97,7 +97,7 @@ class EntryCommentModerator(CommentModerator):
                         for author in content_object.authors.all()] + \
                        [comment.email]
         recipient_list = set([comment.email
-                              for comment in content_object.comments
+                              for comment in content_object.comments_qs
                               if comment.email]) - \
                               set(exclude_list)
 

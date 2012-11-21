@@ -308,7 +308,7 @@ class EntryComments(EntryDiscussions):
 
     def items(self, obj):
         """Items are the comments on the entry"""
-        return obj.comments[:FEEDS_MAX_ITEMS]
+        return obj.comments_qs[:FEEDS_MAX_ITEMS]
 
     def item_link(self, item):
         """URL of the comment"""
@@ -342,7 +342,7 @@ class EntryPingbacks(EntryDiscussions):
 
     def items(self, obj):
         """Items are the pingbacks on the entry"""
-        return obj.pingbacks[:FEEDS_MAX_ITEMS]
+        return obj.pingbacks_qs[:FEEDS_MAX_ITEMS]
 
     def item_link(self, item):
         """URL of the pingback"""
@@ -364,7 +364,7 @@ class EntryTrackbacks(EntryDiscussions):
 
     def items(self, obj):
         """Items are the trackbacks on the entry"""
-        return obj.trackbacks[:FEEDS_MAX_ITEMS]
+        return obj.trackbacks_qs[:FEEDS_MAX_ITEMS]
 
     def item_link(self, item):
         """URL of the trackback"""

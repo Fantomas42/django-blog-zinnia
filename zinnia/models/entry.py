@@ -160,26 +160,46 @@ class EntryAbstractClass(models.Model):
         return entries_published(self.related)
 
     @property
-    def discussions(self):
-        """Return published discussions"""
+    def discussions_qs(self):
+        """Return queryset of published discussions"""
         return comments.get_model().objects.for_model(
             self).filter(is_public=True)
 
+    @cached_property
+    def discussions(self):
+        """Return list of published discussions"""
+        return list(self.discussions_qs)
+
     @property
-    def comments(self):
-        """Return published comments"""
-        return self.discussions.filter(Q(flags=None) | Q(
+    def comments_qs(self):
+        """Return queryset of published comments"""
+        return self.discussions_qs.filter(Q(flags=None) | Q(
             flags__flag=CommentFlag.MODERATOR_APPROVAL))
 
-    @property
-    def pingbacks(self):
-        """Return published pingbacks"""
-        return self.discussions.filter(flags__flag=PINGBACK)
+    @cached_property
+    def comments(self):
+        """Return list of published comments"""
+        return list(self.comments_qs)
 
     @property
+    def pingbacks_qs(self):
+        """Return queryset of published pingbacks"""
+        return self.discussions_qs.filter(flags__flag=PINGBACK)
+
+    @cached_property
+    def pingbacks(self):
+        """Return list of published pingbacks"""
+        return list(self.pingbacks_qs)
+
+    @property
+    def trackbacks_qs(self):
+        """Return queryset of published trackbacks"""
+        return self.discussions_qs.filter(flags__flag=TRACKBACK)
+
+    @cached_property
     def trackbacks(self):
-        """Return published trackbacks"""
-        return self.discussions.filter(flags__flag=TRACKBACK)
+        """Return list of published trackbacks"""
+        return list(self.trackbacks_qs)
 
     @property
     def comments_are_open(self):
