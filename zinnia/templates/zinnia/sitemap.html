@@ -16,7 +16,7 @@
     {% for entry in category.entries_published.all %}
     <li>
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
-      {% with comment_count=entry.comments.count %}
+      {% with comment_count=entry.comments_qs.count %}
       - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
       {% endwith %}
     </li>
@@ -36,7 +36,7 @@
     <li>
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
       - {{ entry.creation_date|date:"SHORT_DATE_FORMAT" }}
-      {% with comment_count=entry.comments.count %}
+      {% with comment_count=entry.comments_qs.count %}
       - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
       {% endwith %}
     </li>
