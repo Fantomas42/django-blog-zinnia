@@ -362,9 +362,11 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['template'], 'custom_template.html')
 
         self.publish_entry()
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(3):
             context = get_recent_comments()
-        self.assertEquals(len(context['comments']), 1)
+            self.assertEquals(len(context['comments']), 1)
+            self.assertEquals(context['comments'][0].content_object,
+                              self.entry)
 
         author = User.objects.create_user(username='webmaster',
                                           email='webmaster@example.com')
@@ -373,9 +375,14 @@ class TemplateTagsTestCase(TestCase):
             content_object=self.entry)
         comment_2.flags.create(user=author,
                                flag=CommentFlag.MODERATOR_APPROVAL)
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(3):
             context = get_recent_comments()
-        self.assertEquals(list(context['comments']), [comment_2, comment_1])
+            self.assertEquals(list(context['comments']),
+                              [comment_2, comment_1])
+            self.assertEquals(context['comments'][0].content_object,
+                              self.entry)
+            self.assertEquals(context['comments'][1].content_object,
+                              self.entry)
 
     def test_get_recent_linkbacks(self):
         user = User.objects.create_user(username='webmaster',
@@ -397,17 +404,24 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['template'], 'custom_template.html')
 
         self.publish_entry()
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(3):
             context = get_recent_linkbacks()
-        self.assertEquals(len(context['linkbacks']), 1)
+            self.assertEquals(len(context['linkbacks']), 1)
+            self.assertEquals(context['linkbacks'][0].content_object,
+                              self.entry)
 
         linkback_2 = comments.get_model().objects.create(
             comment='My Linkback 2', site=site,
             content_object=self.entry)
         linkback_2.flags.create(user=user, flag=TRACKBACK)
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(3):
             context = get_recent_linkbacks()
-        self.assertEquals(list(context['linkbacks']), [linkback_2, linkback_1])
+            self.assertEquals(list(context['linkbacks']),
+                              [linkback_2, linkback_1])
+            self.assertEquals(context['linkbacks'][0].content_object,
+                              self.entry)
+            self.assertEquals(context['linkbacks'][1].content_object,
+                              self.entry)
 
     def test_zinnia_pagination(self):
         class FakeRequest(object):

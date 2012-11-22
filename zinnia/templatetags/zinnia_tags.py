@@ -196,6 +196,19 @@ def get_calendar_entries(context, year=None, month=None,
                 next_month=next_month)}
 
 
+def cache_content_object_entries(queryset):
+    """
+    Cache the generic relation field of all
+    the comments in the queryset.
+    """
+    entries_related = set()
+    for item in queryset:
+        entries_related.add(item.object_pk)
+    entries = Entry.objects.in_bulk(list(entries_related))
+    for item in queryset:
+        setattr(item, '_content_object_cache', entries[int(item.object_pk)])
+
+
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
     """Return the most recent comments"""
@@ -208,6 +221,8 @@ def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
         Q(flags=None) | Q(flags__flag=CommentFlag.MODERATOR_APPROVAL),
         content_type=content_type, object_pk__in=entry_published_pks,
         is_public=True).order_by('-submit_date')[:number]
+
+    cache_content_object_entries(comments)
 
     return {'template': template,
             'comments': comments}
@@ -227,6 +242,8 @@ def get_recent_linkbacks(number=5,
         flags__flag__in=[PINGBACK, TRACKBACK],
         is_public=True).order_by(
         '-submit_date')[:number]
+
+    cache_content_object_entries(linkbacks)
 
     return {'template': template,
             'linkbacks': linkbacks}
