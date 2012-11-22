@@ -4,6 +4,7 @@ from datetime import date
 
 from django.test import TestCase
 from django.utils import timezone
+from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
 from django.test.utils import restore_template_loaders
@@ -474,6 +475,35 @@ class ZinniaViewsTestCase(ViewsBaseCase):
                                 'application/wlwmanifest+xml', 0)
         self.check_capabilities('/opensearch.xml',
                                 'application/opensearchdescription+xml', 1)
+
+    def test_comment_success(self):
+        with self.assertNumQueries(0):
+            response = self.client.get('/comments/success/')
+        self.assertTemplateUsed(response, 'comments/zinnia/entry/posted.html')
+        self.assertEquals(response.context['comment'], None)
+
+        with self.assertNumQueries(1):
+            response = self.client.get('/comments/success/?c=42')
+        self.assertEquals(response.context['comment'], None)
+
+        comment = comments.get_model().objects.create(
+            comment='My Comment 1', content_object=self.category,
+            site=self.site, is_public=False)
+        setup_test_template_loader(
+            {'comments/zinnia/entry/posted.html': '',
+             'zinnia/entry_list.html': ''})
+        with self.assertNumQueries(1):
+            response = self.client.get('/comments/success/?c=1')
+        self.assertEquals(response.context['comment'], comment)
+        comment.is_public = True
+        comment.save()
+        with self.assertNumQueries(5):
+            response = self.client.get('/comments/success/?c=1', follow=True)
+        self.assertEquals(
+            response.redirect_chain,
+            [('http://testserver/comments/cr/13/1/#comment-1-by-', 301),
+             ('http://example.com/categories/tests/', 302)])
+        restore_template_loaders()
 
 
 class ZinniaCustomDetailViews(ViewsBaseCase):

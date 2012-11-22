@@ -24,11 +24,10 @@ class CommentSuccess(TemplateResponseMixin, View):
                     pk=request.GET['c'])
             except ObjectDoesNotExist:
                 pass
-        if self.comment:
-            if self.comment.is_public:
-                return HttpResponsePermanentRedirect(
-                    self.comment.get_absolute_url(
-                        '#comment-%(id)s-by-%(user_name)s'))
+        if self.comment and self.comment.is_public:
+            return HttpResponsePermanentRedirect(
+                self.comment.get_absolute_url(
+                    '#comment-%(id)s-by-%(user_name)s'))
 
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
