@@ -7,6 +7,9 @@ CHANGELOG
 * ``get_tag_cloud`` context improved
 * ``get_authors`` context improved
 * ``get_categories`` context improved
+* Default more responsive
+* Default theme declinations
+* Optimizations of the templates
 * Update of the templates provided
 * Updating ``helloworld.json`` fixture
 * Fix issues with authors in ``wp2zinnia``
