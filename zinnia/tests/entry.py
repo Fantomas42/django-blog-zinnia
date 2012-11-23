@@ -76,6 +76,11 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.pingbacks_qs.count(), 1)
         self.assertEquals(self.entry.trackbacks_qs.count(), 0)
 
+        self.assertEquals(len(self.entry.discussions), 3)
+        self.assertEquals(len(self.entry.comments), 2)
+        self.assertEquals(len(self.entry.pingbacks), 1)
+        self.assertEquals(len(self.entry.trackbacks), 0)
+
         comment = comments.get_model().objects.create(
             comment='My Trackback 1', content_object=self.entry, site=site)
         comment.flags.create(user=author, flag=TRACKBACK)
@@ -83,6 +88,13 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.comments_qs.count(), 2)
         self.assertEquals(self.entry.pingbacks_qs.count(), 1)
         self.assertEquals(self.entry.trackbacks_qs.count(), 1)
+
+        with self.assertNumQueries(0):
+            # No queries will be performed and the results are outdated
+            self.assertEquals(len(self.entry.discussions), 3)
+            self.assertEquals(len(self.entry.comments), 2)
+            self.assertEquals(len(self.entry.pingbacks), 1)
+            self.assertEquals(len(self.entry.trackbacks), 0)
 
     def test_str(self):
         activate('en')
