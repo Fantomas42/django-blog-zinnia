@@ -27,8 +27,10 @@ class Category(MPTTModel):
     @property
     def tree_path(self):
         """Return category's tree path, by his ancestors"""
-        if self.parent:
-            return '%s/%s' % (self.parent.tree_path, self.slug)
+        if self.parent_id:
+            return '/'.join(
+                [ancestor.slug for ancestor in self.get_ancestors()] +
+                [self.slug])
         return self.slug
 
     def __unicode__(self):

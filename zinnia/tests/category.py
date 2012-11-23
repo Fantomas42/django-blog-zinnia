@@ -1,4 +1,6 @@
 """Test cases for Zinnia's Category"""
+from __future__ import with_statement
+
 from django.test import TestCase
 from django.contrib.sites.models import Site
 
@@ -45,8 +47,29 @@ class CategoryTestCase(TestCase):
         self.assertEqual(self.categories[1].entries_published().count(), 1)
 
     def test_entries_tree_path(self):
-        self.assertEqual(self.categories[0].tree_path, 'category-1')
-        self.assertEqual(self.categories[1].tree_path, 'category-2')
+        self.categories.extend([Category.objects.create(title='Category 3',
+                                                        slug='category-3'),
+                                Category.objects.create(title='Category 4',
+                                                        slug='category-4')])
+        with self.assertNumQueries(0):
+            self.assertEqual(self.categories[0].tree_path, 'category-1')
+            self.assertEqual(self.categories[1].tree_path, 'category-2')
+
         self.categories[1].parent = self.categories[0]
         self.categories[1].save()
-        self.assertEqual(self.categories[1].tree_path, 'category-1/category-2')
+        self.categories[1].parent = self.categories[0]
+        self.categories[1].save()
+        self.categories[2].parent = self.categories[1]
+        self.categories[2].save()
+        self.categories[3].parent = self.categories[2]
+        self.categories[3].save()
+
+        category = Category.objects.get(slug='category-2')
+        with self.assertNumQueries(1):
+            self.assertEqual(category.tree_path, 'category-1/category-2')
+
+        category = Category.objects.get(slug='category-4')
+        with self.assertNumQueries(1):
+            self.assertEqual(category.tree_path,
+                             'category-1/category-2/category-3/category-4')
+
