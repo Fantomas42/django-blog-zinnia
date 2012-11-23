@@ -199,7 +199,7 @@ Examples:
   :class:`~zinnia.views.authors.AuthorDetail` view will be called and
   return this list of template names: ::
 
-    ['zinnia/auhtor/keneda/entry_list.html',
+    ['zinnia/author/keneda/entry_list.html',
      'zinnia/author/keneda_entry_list.html',
      'zinnia/author/entry_list.html',
      'zinnia/entry_list.html']
