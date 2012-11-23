@@ -20,6 +20,7 @@ from django.contrib.markup.templatetags.markup import textile
 from django.contrib.markup.templatetags.markup import restructuredtext
 
 from tagging.fields import TagField
+from tagging.utils import parse_tag_input
 
 from zinnia.models.author import Author
 from zinnia.models.category import Category
@@ -153,6 +154,11 @@ class EntryAbstractClass(models.Model):
     def is_visible(self):
         """Check if an entry is visible on site"""
         return self.is_actual and self.status == PUBLISHED
+
+    @cached_property
+    def tag_list(self):
+        """Return iterable list of tags"""
+        return parse_tag_input(self.tags)
 
     @property
     def related_published(self):

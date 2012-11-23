@@ -1,4 +1,4 @@
-{% load tagging_tags comments i18n %}
+{% load comments i18n %}
 {% load url from future %}
 <div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}">
   <div class="entry-header">
@@ -64,8 +64,7 @@
   <div class="entry-footer">
     <p class="entry-tags">
       <strong>{% trans "Tags" %}</strong> :
-      {% tags_for_object object as tag_list %}
-      {% for tag in tag_list %}
+      {% for tag in object.tag_list %}
       <a href="{% url 'zinnia_tag_detail' tag %}"
          title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
          rel="tag">{{ tag }}</a>

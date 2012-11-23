@@ -208,6 +208,14 @@ class EntryTestCase(TestCase):
         self.assertEquals(len(self.entry.related_published), 1)
         self.assertEquals(len(self.second_entry.related_published), 1)
 
+    def test_tag_list(self):
+        self.assertEquals(self.entry.tag_list, [])
+        self.entry.tags = 'tag-1, tag-2'
+        # Results are cached so it's still empty
+        self.assertEquals(self.entry.tag_list, [])
+        del self.entry.tag_list
+        self.assertEquals(self.entry.tag_list, ['tag-1', 'tag-2'])
+
 
 class EntryHtmlContentTestCase(TestCase):
 

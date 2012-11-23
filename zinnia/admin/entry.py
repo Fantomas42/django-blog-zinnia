@@ -15,8 +15,6 @@ from django.template.response import TemplateResponse
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
 
-from tagging.models import Tag
-
 from zinnia import settings
 from zinnia.managers import HIDDEN
 from zinnia.managers import PUBLISHED
@@ -111,9 +109,8 @@ class EntryAdmin(admin.ModelAdmin):
         """Return the tags linked in HTML"""
         try:
             return ', '.join(['<a href="%s" target="blank">%s</a>' %
-                              (reverse('zinnia_tag_detail',
-                                       args=[tag.name]), tag.name)
-                              for tag in Tag.objects.get_for_object(entry)])
+                              (reverse('zinnia_tag_detail', args=[tag]), tag)
+                              for tag in entry.tag_list])
         except NoReverseMatch:
             return entry.tags
     get_tags.allow_tags = True
