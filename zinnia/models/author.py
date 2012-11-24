@@ -4,14 +4,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import UserManager
 
 from zinnia.managers import entries_published
-from zinnia.managers import AuthorPublishedManager
+from zinnia.managers import EntryRelatedPublishedManager
 
 
 class Author(User):
     """Proxy model around :class:`django.contrib.auth.models.User`"""
 
     objects = UserManager()
-    published = AuthorPublishedManager()
+    published = EntryRelatedPublishedManager()
 
     def entries_published(self):
         """Return only the entries published"""
