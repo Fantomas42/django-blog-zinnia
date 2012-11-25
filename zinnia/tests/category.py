@@ -72,4 +72,3 @@ class CategoryTestCase(TestCase):
         with self.assertNumQueries(1):
             self.assertEqual(category.tree_path,
                              'category-1/category-2/category-3/category-4')
-

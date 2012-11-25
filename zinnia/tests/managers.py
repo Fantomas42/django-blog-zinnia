@@ -60,6 +60,15 @@ class ManagersTestCase(TestCase):
         self.entry_2.sites.add(self.sites[1])
         self.assertEquals(Author.published.count(), 1)
 
+    def test_category_published_manager_get_query_set(self):
+        category = Category.objects.create(
+            title='Third Category', slug='third-category')
+        self.assertEquals(Category.published.count(), 2)
+        self.entry_2.categories.add(category)
+        self.entry_2.status = PUBLISHED
+        self.entry_2.save()
+        self.assertEquals(Category.published.count(), 3)
+
     def test_entries_published(self):
         self.assertEquals(entries_published(Entry.objects.all()).count(), 1)
         self.entry_2.status = PUBLISHED

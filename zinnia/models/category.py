@@ -4,8 +4,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from mptt.models import MPTTModel
 from mptt.models import TreeForeignKey
+from mptt.managers import TreeManager
 
 from zinnia.managers import entries_published
+from zinnia.managers import EntryRelatedPublishedManager
 
 
 class Category(MPTTModel):
@@ -19,6 +21,9 @@ class Category(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True,
                             verbose_name=_('parent category'),
                             related_name='children')
+
+    objects = TreeManager()
+    published = EntryRelatedPublishedManager()
 
     def entries_published(self):
         """Return only the entries published"""
