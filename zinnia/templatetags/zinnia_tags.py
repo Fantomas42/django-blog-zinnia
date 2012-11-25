@@ -38,7 +38,16 @@ CACHE_ENTRIES_RELATED = {}
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_categories(context, template='zinnia/tags/categories.html'):
-    """Return the categories"""
+    """Return the published categories"""
+    return {'template': template,
+            'categories': Category.published.all().annotate(
+                count_entries_published=Count('entries')),
+            'context_category': context.get('category')}
+
+
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def get_categories_tree(context, template='zinnia/tags/categories_tree.html'):
+    """Return the categories as a tree"""
     return {'template': template,
             'categories': Category.objects.all(),
             'context_category': context.get('category')}

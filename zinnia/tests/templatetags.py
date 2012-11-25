@@ -24,6 +24,7 @@ from zinnia.templatetags.zinnia_tags import get_authors
 from zinnia.templatetags.zinnia_tags import get_gravatar
 from zinnia.templatetags.zinnia_tags import get_tag_cloud
 from zinnia.templatetags.zinnia_tags import get_categories
+from zinnia.templatetags.zinnia_tags import get_categories_tree
 from zinnia.templatetags.zinnia_tags import zinnia_pagination
 from zinnia.templatetags.zinnia_tags import zinnia_statistics
 from zinnia.templatetags.zinnia_tags import get_draft_entries
@@ -59,17 +60,38 @@ class TemplateTagsTestCase(TestCase):
 
     def test_get_categories(self):
         source_context = Context({})
-        with self.assertNumQueries(0):
+        with self.assertNumQueries(1):
             context = get_categories(source_context)
         self.assertEquals(len(context['categories']), 0)
         self.assertEquals(context['template'], 'zinnia/tags/categories.html')
+        self.assertEquals(context['context_category'], None)
+        category = Category.objects.create(title='Category 1',
+                                           slug='category-1')
+        self.entry.categories.add(category)
+        self.publish_entry()
+        source_context = Context({'category': category})
+        with self.assertNumQueries(0):
+            context = get_categories(source_context, 'custom_template.html')
+        self.assertEquals(len(context['categories']), 1)
+        self.assertEquals(context['categories'][0].count_entries_published, 1)
+        self.assertEquals(context['template'], 'custom_template.html')
+        self.assertEquals(context['context_category'], category)
+
+    def test_get_categories_tree(self):
+        source_context = Context({})
+        with self.assertNumQueries(0):
+            context = get_categories_tree(source_context)
+        self.assertEquals(len(context['categories']), 0)
+        self.assertEquals(context['template'],
+                          'zinnia/tags/categories_tree.html')
         self.assertEquals(context['context_category'], None)
 
         category = Category.objects.create(title='Category 1',
                                            slug='category-1')
         source_context = Context({'category': category})
         with self.assertNumQueries(0):
-            context = get_categories(source_context, 'custom_template.html')
+            context = get_categories_tree(
+                source_context, 'custom_template.html')
         self.assertEquals(len(context['categories']), 1)
         self.assertEquals(context['template'], 'custom_template.html')
         self.assertEquals(context['context_category'], category)

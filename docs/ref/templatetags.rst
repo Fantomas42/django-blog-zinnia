@@ -190,13 +190,27 @@ Usage examples: ::
 get_categories
 ==============
 
-Display all the categories available.
+Display all the published categories.
 
 .. autofunction:: get_categories
 
 Usage examples: ::
 
   {% get_categories %}
+  {% get_categories "custom_template.html" %}
+
+.. templatetag:: get_categories_tree
+
+get_categories_tree
+===================
+
+Display a hierarchical tree of all the categories available.
+
+.. autofunction:: get_categories_tree
+
+Usage examples: ::
+
+  {% get_categories_tree %}
   {% get_categories "custom_template.html" %}
 
 .. templatetag:: get_tags
