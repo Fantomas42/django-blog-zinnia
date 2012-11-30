@@ -47,15 +47,13 @@ class CategorySitemap(ZinniaSitemap):
 
     def items(self):
         """Return all categories with coeff"""
-        categories = Category.objects.all()
+        categories = Category.published.all()
         self.cache(categories)
         return categories
 
     def lastmod(self, obj):
         """Return last modification of a category"""
         entries = obj.entries_published()
-        if not entries:
-            return None
         return entries[0].creation_date
 
     def priority(self, obj):

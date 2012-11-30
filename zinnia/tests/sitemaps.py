@@ -50,8 +50,6 @@ class ZinniaSitemapsTestCase(TestCase):
         self.assertEquals(len(sitemap.items()), 1)
         self.assertEquals(sitemap.lastmod(self.category),
                           self.entry_2.creation_date)
-        self.assertEquals(sitemap.lastmod(Category.objects.create(
-            title='New', slug='new')), None)
         self.assertEquals(sitemap.priority(self.category), '1.0')
 
     def test_author_sitemap(self):
@@ -70,9 +68,3 @@ class ZinniaSitemapsTestCase(TestCase):
                           self.entry_2.creation_date)
         self.assertEquals(sitemap.priority(zinnia_tag), '1.0')
         self.assertEquals(sitemap.location(zinnia_tag), '/tags/zinnia/')
-
-    def test_category_sitemap_zero_division_error(self):
-        Entry.objects.all().delete()
-        category_sitemap = CategorySitemap()
-        category_sitemap.items()
-        self.assertEquals(category_sitemap.priority(self.category), '0.5')
