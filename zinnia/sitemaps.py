@@ -78,13 +78,7 @@ class AuthorSitemap(ZinniaSitemap):
     def lastmod(self, obj):
         """Return last modification of an author"""
         entries = obj.entries_published()
-        if not entries:
-            return None
         return entries[0].creation_date
-
-    def location(self, obj):
-        """Return url of an author"""
-        return reverse('zinnia_author_detail', args=[obj.username])
 
 
 class TagSitemap(ZinniaSitemap):

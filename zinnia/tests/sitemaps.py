@@ -60,8 +60,6 @@ class ZinniaSitemapsTestCase(TestCase):
         self.assertEquals(len(authors), 1)
         self.assertEquals(sitemap.lastmod(authors[0]),
                           self.entry_2.creation_date)
-        self.assertEquals(sitemap.lastmod(Author.objects.create(
-            username='New', email='new@example.com')), None)
         self.assertEquals(sitemap.location(self.author), '/authors/admin/')
 
     def test_tag_sitemap(self):
