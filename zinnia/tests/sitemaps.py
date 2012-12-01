@@ -2,12 +2,10 @@
 from django.test import TestCase
 from django.contrib.sites.models import Site
 
-from tagging.models import Tag
-
+from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
-from zinnia.managers import PUBLISHED
 from zinnia.sitemaps import EntrySitemap
 from zinnia.sitemaps import CategorySitemap
 from zinnia.sitemaps import AuthorSitemap
@@ -20,23 +18,26 @@ class ZinniaSitemapsTestCase(TestCase):
 
     def setUp(self):
         self.site = Site.objects.get_current()
-        self.author = Author.objects.create(username='admin',
-                                             email='admin@example.com')
-        self.category = Category.objects.create(title='Tests', slug='tests')
+        self.authors = [
+            Author.objects.create(username='admin', email='admin@example.com'),
+            Author.objects.create(username='user', email='user@example.com')]
+        self.categories = [
+            Category.objects.create(title='Category 1', slug='cat-1'),
+            Category.objects.create(title='Category 2', slug='cat-2')]
         params = {'title': 'My entry 1', 'content': 'My content 1',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1',
                   'status': PUBLISHED}
         self.entry_1 = Entry.objects.create(**params)
-        self.entry_1.authors.add(self.author)
-        self.entry_1.categories.add(self.category)
+        self.entry_1.authors.add(*self.authors)
+        self.entry_1.categories.add(*self.categories)
         self.entry_1.sites.add(self.site)
 
         params = {'title': 'My entry 2', 'content': 'My content 2',
                   'tags': 'zinnia', 'slug': 'my-entry-2',
                   'status': PUBLISHED}
         self.entry_2 = Entry.objects.create(**params)
-        self.entry_2.authors.add(self.author)
-        self.entry_2.categories.add(self.category)
+        self.entry_2.authors.add(self.authors[0])
+        self.entry_2.categories.add(self.categories[0])
         self.entry_2.sites.add(self.site)
 
     def test_entry_sitemap(self):
@@ -47,24 +48,35 @@ class ZinniaSitemapsTestCase(TestCase):
 
     def test_category_sitemap(self):
         sitemap = CategorySitemap()
-        self.assertEquals(len(sitemap.items()), 1)
-        self.assertEquals(sitemap.lastmod(self.category),
-                          self.entry_2.creation_date)
-        self.assertEquals(sitemap.priority(self.category), '1.0')
+        items = sitemap.items()
+        self.assertEquals(len(items), 2)
+        self.assertEquals(sitemap.lastmod(items[0]),
+                          self.entry_2.last_update)
+        self.assertEquals(sitemap.lastmod(items[1]),
+                          self.entry_1.last_update)
+        self.assertEquals(sitemap.priority(items[0]), '1.0')
+        self.assertEquals(sitemap.priority(items[1]), '0.5')
 
     def test_author_sitemap(self):
         sitemap = AuthorSitemap()
-        authors = sitemap.items()
-        self.assertEquals(len(authors), 1)
-        self.assertEquals(sitemap.lastmod(authors[0]),
-                          self.entry_2.creation_date)
-        self.assertEquals(sitemap.location(self.author), '/authors/admin/')
+        items = sitemap.items()
+        self.assertEquals(len(items), 2)
+        self.assertEquals(sitemap.lastmod(items[0]),
+                          self.entry_2.last_update)
+        self.assertEquals(sitemap.lastmod(items[1]),
+                          self.entry_1.last_update)
+        self.assertEquals(sitemap.priority(items[0]), '1.0')
+        self.assertEquals(sitemap.priority(items[1]), '0.5')
 
     def test_tag_sitemap(self):
         sitemap = TagSitemap()
-        zinnia_tag = Tag.objects.get(name='zinnia')
-        self.assertEquals(len(sitemap.items()), 2)
-        self.assertEquals(sitemap.lastmod(zinnia_tag),
-                          self.entry_2.creation_date)
-        self.assertEquals(sitemap.priority(zinnia_tag), '1.0')
-        self.assertEquals(sitemap.location(zinnia_tag), '/tags/zinnia/')
+        items = sitemap.items()
+        self.assertEquals(len(items), 2)
+        self.assertEquals(sitemap.lastmod(items[1]),
+                          self.entry_2.last_update)
+        self.assertEquals(sitemap.lastmod(items[0]),
+                          self.entry_1.last_update)
+        self.assertEquals(sitemap.priority(items[1]), '1.0')
+        self.assertEquals(sitemap.priority(items[0]), '0.5')
+        self.assertEquals(sitemap.location(items[1]), '/tags/zinnia/')
+        self.assertEquals(sitemap.location(items[0]), '/tags/test/')
