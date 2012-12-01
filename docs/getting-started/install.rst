@@ -99,29 +99,32 @@ already present. ::
 URLs
 ====
 
-Add the following lines to your project's urls.py in order to display the
-blog. ::
+Add at least these following lines to your project's urls.py in order to
+display the Weblog. ::
 
   url(r'^weblog/', include('zinnia.urls')),
   url(r'^comments/', include('django.contrib.comments.urls')),
 
-Note that the default zinnia URLset is provided for convenient usage, but
-you can customize your URLs if you want. Here's how: ::
+Remember to enable the :mod:`~django.contrib.admin` site in the urls.py of
+your project if you haven't done it yet for having the edition capabilities.
+
+Note that the default Zinnia URLset :mod:`zinnia.urls` is calibrated for
+convenient usage, but you can customize your Weblog URLs as you
+want. Here's a custom implementation of the URLs provided by Zinnia: ::
 
   url(r'^', include('zinnia.urls.capabilities')),
   url(r'^search/', include('zinnia.urls.search')),
   url(r'^sitemap/', include('zinnia.urls.sitemap')),
   url(r'^trackback/', include('zinnia.urls.trackback')),
-  url(r'^weblog/tags/', include('zinnia.urls.tags')),
-  url(r'^weblog/feeds/', include('zinnia.urls.feeds')),
-  url(r'^weblog/authors/', include('zinnia.urls.authors')),
-  url(r'^weblog/categories/', include('zinnia.urls.categories')),
-  url(r'^weblog/comments/', include('zinnia.urls.comments')),
-  url(r'^weblog/', include('zinnia.urls.entries')),
-  url(r'^weblog/', include('zinnia.urls.archives')),
-  url(r'^weblog/', include('zinnia.urls.shortlink')),
-  url(r'^weblog/', include('zinnia.urls.quick_entry')),
-  url(r'^comments/', include('django.contrib.comments.urls')),
+  url(r'^blog/tags/', include('zinnia.urls.tags')),
+  url(r'^blog/feeds/', include('zinnia.urls.feeds')),
+  url(r'^blog/authors/', include('zinnia.urls.authors')),
+  url(r'^blog/categories/', include('zinnia.urls.categories')),
+  url(r'^blog/comments/', include('zinnia.urls.comments')),
+  url(r'^blog/', include('zinnia.urls.entries')),
+  url(r'^blog/', include('zinnia.urls.archives')),
+  url(r'^blog/', include('zinnia.urls.shortlink')),
+  url(r'^blog/', include('zinnia.urls.quick_entry')),
 
 .. _static-files:
 
@@ -129,7 +132,7 @@ Static Files
 ============
 
 Since the version 1.3 of Django, Zinnia uses the
-:mod:`django.contrib.staticfiles` application to serve the static files
+:mod:`~django.contrib.staticfiles` application to serve the static files
 needed. Please refer to
 https://docs.djangoproject.com/en/dev/howto/static-files/ for more
 informations about serving static files.
