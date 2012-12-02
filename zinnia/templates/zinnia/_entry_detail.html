@@ -8,7 +8,7 @@
       </a>
     </h2>
     <p class="entry-info">
-      {% with authors=object.authors.all %}
+      {% with authors=object.authors_list %}
       {% if authors|length %}
       {% trans "Written by" %}
       {% for author in authors %}
@@ -23,7 +23,7 @@
       {% endif %}
       {% endwith %}
       <abbr class="published" title="{{ object.creation_date|date:"c" }}">{{ object.creation_date|date:"DATE_FORMAT" }}</abbr>
-      {% with categories=object.categories.all %}
+      {% with categories=object.categories_list %}
       {% if categories|length %}
       {% trans "in" %}
       {% for category in categories %}
@@ -84,7 +84,7 @@
 
     <p class="entry-comments">
       <strong>{% trans "Discussions" %}</strong> :
-      {% with comment_count=object.comments|length %}
+      {% with comment_count=object.comments_list|length %}
       {% if comment_count %}
       <a href="{{ object.get_absolute_url }}#comments"
          title="{% blocktrans with object=object.title %}Comments on {{ object }}{% endblocktrans %}">
@@ -101,14 +101,14 @@
       {% endif %}
       {% endif %}
       {% endwith %}
-      {% with pingback_count=object.pingbacks|length %}
+      {% with pingback_count=object.pingbacks_list|length %}
       {% if pingback_count %}
       , <a href="{{ object.get_absolute_url }}#pingbacks" title="{% blocktrans with object=object.title %}Pingbacks on {{ object }}{% endblocktrans %}">
         {% blocktrans count pingback_count=pingback_count %}{{ pingback_count }} pingback{% plural %}{{ pingback_count }} pingbacks{% endblocktrans %}
       </a>
       {% endif %}
       {% endwith %}
-      {% with trackback_count=object.trackbacks|length %}
+      {% with trackback_count=object.trackbacks_list|length %}
       {% if trackback_count %}
       , <a href="{{ object.get_absolute_url }}#trackbacks" title="{% blocktrans with object=object.title %}Trackbacks on {{ object }}{% endblocktrans %}">
         {% blocktrans count trackback_count=trackback_count %}{{ trackback_count }} trackback{% plural %}{{ trackback_count }} trackbacks{% endblocktrans %}

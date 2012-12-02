@@ -90,7 +90,7 @@
 {% block entry-comments %}
 <div id="comments">
   <h3>{% trans "Comments" %}</h3>
-  {% with comment_list=object.comments %}
+  {% with comment_list=object.comments_list %}
   {% if comment_list|length %}
   <ol id="comment-list">
     {% for comment in comment_list %}
@@ -134,7 +134,7 @@
 {% block entry-pingbacks %}
 <div id="pingbacks">
   <h3>{% trans "Pingbacks" %}</h3>
-  {% with pingback_list=object.pingbacks %}
+  {% with pingback_list=object.pingbacks_list %}
   {% if pingback_list|length %}
   <ol id="pingback-list">
     {% for pingback in pingback_list %}
@@ -167,7 +167,7 @@
 {% endblock %}
 
 {% block entry-trackbacks %}
-{% with trackback_list=object.trackbacks %}
+{% with trackback_list=object.trackbacks_list %}
 {% if trackback_list|length or object.pingback_enabled %}
 <div id="trackbacks">
   <h3>{% trans "Trackbacks" %}</h3>

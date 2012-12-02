@@ -17,6 +17,8 @@ from zinnia.models import entry
 from zinnia.models.entry import Entry
 from zinnia.managers import PUBLISHED
 from zinnia.flags import PINGBACK, TRACKBACK
+from zinnia.models.author import Author
+from zinnia.models.category import Category
 from zinnia.models.entry import get_base_model
 from zinnia.models.entry import EntryAbstractClass
 from zinnia.tests.utils import datetime
@@ -33,26 +35,26 @@ class EntryTestCase(TestCase):
 
     def test_discussions(self):
         site = Site.objects.get_current()
-        self.assertEquals(self.entry.discussions_qs.count(), 0)
-        self.assertEquals(self.entry.comments_qs.count(), 0)
-        self.assertEquals(self.entry.pingbacks_qs.count(), 0)
-        self.assertEquals(self.entry.trackbacks_qs.count(), 0)
+        self.assertEquals(self.entry.discussions.count(), 0)
+        self.assertEquals(self.entry.comments.count(), 0)
+        self.assertEquals(self.entry.pingbacks.count(), 0)
+        self.assertEquals(self.entry.trackbacks.count(), 0)
 
         comments.get_model().objects.create(comment='My Comment 1',
                                             content_object=self.entry,
                                             site=site)
-        self.assertEquals(self.entry.discussions_qs.count(), 1)
-        self.assertEquals(self.entry.comments_qs.count(), 1)
-        self.assertEquals(self.entry.pingbacks_qs.count(), 0)
-        self.assertEquals(self.entry.trackbacks_qs.count(), 0)
+        self.assertEquals(self.entry.discussions.count(), 1)
+        self.assertEquals(self.entry.comments.count(), 1)
+        self.assertEquals(self.entry.pingbacks.count(), 0)
+        self.assertEquals(self.entry.trackbacks.count(), 0)
 
         comments.get_model().objects.create(comment='My Comment 2',
                                             content_object=self.entry,
                                             site=site, is_public=False)
-        self.assertEquals(self.entry.discussions_qs.count(), 1)
-        self.assertEquals(self.entry.comments_qs.count(), 1)
-        self.assertEquals(self.entry.pingbacks_qs.count(), 0)
-        self.assertEquals(self.entry.trackbacks_qs.count(), 0)
+        self.assertEquals(self.entry.discussions.count(), 1)
+        self.assertEquals(self.entry.comments.count(), 1)
+        self.assertEquals(self.entry.pingbacks.count(), 0)
+        self.assertEquals(self.entry.trackbacks.count(), 0)
 
         author = User.objects.create_user(username='webmaster',
                                           email='webmaster@example.com')
@@ -63,38 +65,38 @@ class EntryTestCase(TestCase):
             site=Site.objects.create(domain='http://toto.com',
                                      name='Toto.com'))
         comment.flags.create(user=author, flag=CommentFlag.MODERATOR_APPROVAL)
-        self.assertEquals(self.entry.discussions_qs.count(), 2)
-        self.assertEquals(self.entry.comments_qs.count(), 2)
-        self.assertEquals(self.entry.pingbacks_qs.count(), 0)
-        self.assertEquals(self.entry.trackbacks_qs.count(), 0)
+        self.assertEquals(self.entry.discussions.count(), 2)
+        self.assertEquals(self.entry.comments.count(), 2)
+        self.assertEquals(self.entry.pingbacks.count(), 0)
+        self.assertEquals(self.entry.trackbacks.count(), 0)
 
         comment = comments.get_model().objects.create(
             comment='My Pingback 1', content_object=self.entry, site=site)
         comment.flags.create(user=author, flag=PINGBACK)
-        self.assertEquals(self.entry.discussions_qs.count(), 3)
-        self.assertEquals(self.entry.comments_qs.count(), 2)
-        self.assertEquals(self.entry.pingbacks_qs.count(), 1)
-        self.assertEquals(self.entry.trackbacks_qs.count(), 0)
+        self.assertEquals(self.entry.discussions.count(), 3)
+        self.assertEquals(self.entry.comments.count(), 2)
+        self.assertEquals(self.entry.pingbacks.count(), 1)
+        self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        self.assertEquals(len(self.entry.discussions), 3)
-        self.assertEquals(len(self.entry.comments), 2)
-        self.assertEquals(len(self.entry.pingbacks), 1)
-        self.assertEquals(len(self.entry.trackbacks), 0)
+        self.assertEquals(len(self.entry.discussions_list), 3)
+        self.assertEquals(len(self.entry.comments_list), 2)
+        self.assertEquals(len(self.entry.pingbacks_list), 1)
+        self.assertEquals(len(self.entry.trackbacks_list), 0)
 
         comment = comments.get_model().objects.create(
             comment='My Trackback 1', content_object=self.entry, site=site)
         comment.flags.create(user=author, flag=TRACKBACK)
-        self.assertEquals(self.entry.discussions_qs.count(), 4)
-        self.assertEquals(self.entry.comments_qs.count(), 2)
-        self.assertEquals(self.entry.pingbacks_qs.count(), 1)
-        self.assertEquals(self.entry.trackbacks_qs.count(), 1)
+        self.assertEquals(self.entry.discussions.count(), 4)
+        self.assertEquals(self.entry.comments.count(), 2)
+        self.assertEquals(self.entry.pingbacks.count(), 1)
+        self.assertEquals(self.entry.trackbacks.count(), 1)
 
         with self.assertNumQueries(0):
             # No queries will be performed and the results are outdated
-            self.assertEquals(len(self.entry.discussions), 3)
-            self.assertEquals(len(self.entry.comments), 2)
-            self.assertEquals(len(self.entry.pingbacks), 1)
-            self.assertEquals(len(self.entry.trackbacks), 0)
+            self.assertEquals(len(self.entry.discussions_list), 3)
+            self.assertEquals(len(self.entry.comments_list), 2)
+            self.assertEquals(len(self.entry.pingbacks_list), 1)
+            self.assertEquals(len(self.entry.trackbacks_list), 0)
 
     def test_str(self):
         activate('en')
@@ -208,13 +210,32 @@ class EntryTestCase(TestCase):
         self.assertEquals(len(self.entry.related_published), 1)
         self.assertEquals(len(self.second_entry.related_published), 1)
 
-    def test_tag_list(self):
-        self.assertEquals(self.entry.tag_list, [])
+    def test_tags_list(self):
+        self.assertEquals(self.entry.tags_list, [])
         self.entry.tags = 'tag-1, tag-2'
         # Results are cached so it's still empty
-        self.assertEquals(self.entry.tag_list, [])
-        del self.entry.tag_list
-        self.assertEquals(self.entry.tag_list, ['tag-1', 'tag-2'])
+        self.assertEquals(self.entry.tags_list, [])
+        del self.entry.tags_list
+        self.assertEquals(self.entry.tags_list, ['tag-1', 'tag-2'])
+
+    def test_authors_list(self):
+        self.assertEquals(self.entry.authors_list, [])
+        author = Author.objects.create_user('author', 'author@eample.com')
+        self.entry.authors.add(author)
+        # Results are cached so it's still empty
+        self.assertEquals(self.entry.authors_list, [])
+        del self.entry.authors_list
+        self.assertEquals(len(self.entry.authors_list), 1)
+
+    def test_categories_list(self):
+        self.assertEquals(self.entry.categories_list, [])
+        category = Category.objects.create(title='Category 1',
+                                           slug='category-1')
+        self.entry.categories.add(category)
+        # Results are cached so it's still empty
+        self.assertEquals(self.entry.categories_list, [])
+        del self.entry.categories_list
+        self.assertEquals(len(self.entry.categories_list), 1)
 
 
 class EntryHtmlContentTestCase(TestCase):

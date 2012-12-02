@@ -155,57 +155,67 @@ class EntryAbstractClass(models.Model):
         """Check if an entry is visible on site"""
         return self.is_actual and self.status == PUBLISHED
 
-    @cached_property
-    def tag_list(self):
-        """Return iterable list of tags"""
-        return parse_tag_input(self.tags)
-
     @property
     def related_published(self):
         """Return only related entries published"""
         return entries_published(self.related)
 
+    @cached_property
+    def authors_list(self):
+        """Return iterable list of authors"""
+        return list(self.authors.all())
+
+    @cached_property
+    def categories_list(self):
+        """Return iterable list of categories"""
+        return list(self.categories.all())
+
+    @cached_property
+    def tags_list(self):
+        """Return iterable list of tags"""
+        return parse_tag_input(self.tags)
+
     @property
-    def discussions_qs(self):
+    def discussions(self):
         """Return queryset of published discussions"""
         return comments.get_model().objects.for_model(
             self).filter(is_public=True)
 
     @cached_property
-    def discussions(self):
+    def discussions_list(self):
         """Return list of published discussions"""
-        return list(self.discussions_qs)
+        return list(self.discussions)
 
     @property
-    def comments_qs(self):
+    def comments(self):
         """Return queryset of published comments"""
-        return self.discussions_qs.filter(Q(flags=None) | Q(
+        return self.discussions.filter(Q(flags=None) | Q(
             flags__flag=CommentFlag.MODERATOR_APPROVAL))
 
     @cached_property
-    def comments(self):
+    def comments_list(self):
         """Return list of published comments"""
-        return list(self.comments_qs)
+        return list(self.comments)
 
     @property
-    def pingbacks_qs(self):
-        """Return queryset of published pingbacks"""
-        return self.discussions_qs.filter(flags__flag=PINGBACK)
-
-    @cached_property
     def pingbacks(self):
-        """Return list of published pingbacks"""
-        return list(self.pingbacks_qs)
-
-    @property
-    def trackbacks_qs(self):
-        """Return queryset of published trackbacks"""
-        return self.discussions_qs.filter(flags__flag=TRACKBACK)
+        """Return queryset of published pingbacks"""
+        return self.discussions.filter(flags__flag=PINGBACK)
 
     @cached_property
+    def pingbacks_list(self):
+        """Return list of published pingbacks"""
+        return list(self.pingbacks)
+
+    @property
     def trackbacks(self):
+        """Return queryset of published trackbacks"""
+        return self.discussions.filter(flags__flag=TRACKBACK)
+
+    @cached_property
+    def trackbacks_list(self):
         """Return list of published trackbacks"""
-        return list(self.trackbacks_qs)
+        return list(self.trackbacks)
 
     @property
     def comments_are_open(self):

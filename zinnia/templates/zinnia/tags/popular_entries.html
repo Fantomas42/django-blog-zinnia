@@ -5,7 +5,7 @@
     <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
     <a href="{{ entry.get_absolute_url }}#comments"
        title="{% blocktrans with object=entry.title %}Comments on {{ object }}{% endblocktrans %}">
-      {% blocktrans count comment_count=entry.comments_qs.count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}</a>
+      {% blocktrans count comment_count=entry.comments.count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}</a>
   </li>
   {% empty %}
   <li>
