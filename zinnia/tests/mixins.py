@@ -140,6 +140,7 @@ class MixinTestCase(TestCase):
     def test_entry_archive_template_response_mixin(self):
         class FakeEntry(object):
             template = 'entry_detail.html'
+            slug = 'my-fake-entry'
 
         get_year = lambda: 2012
         get_month = lambda: '04'
@@ -152,26 +153,67 @@ class MixinTestCase(TestCase):
         instance.object = FakeEntry()
         self.assertEquals(
             instance.get_template_names(),
-             ['zinnia/archives/2012/04/21/entry_detail.html',
-              'zinnia/archives/month/04/day/21/entry_detail.html',
-              'zinnia/archives/2012/day/21/entry_detail.html',
-              'zinnia/archives/day/21/entry_detail.html',
-              'zinnia/archives/2012/month/04/entry_detail.html',
-              'zinnia/archives/month/04/entry_detail.html',
-              'zinnia/archives/2012/entry_detail.html',
-              'zinnia/archives/entry_detail.html',
-              'zinnia/entry_detail.html',
-              'entry_detail.html'])
+            ['zinnia/archives/2012/04/21/my-fake-entry_entry_detail.html',
+             'zinnia/archives/month/04/day/21/my-fake-entry_entry_detail.html',
+             'zinnia/archives/2012/day/21/my-fake-entry_entry_detail.html',
+             'zinnia/archives/day/21/my-fake-entry_entry_detail.html',
+             'zinnia/archives/2012/04/21/my-fake-entry.html',
+             'zinnia/archives/month/04/day/21/my-fake-entry.html',
+             'zinnia/archives/2012/day/21/my-fake-entry.html',
+             'zinnia/archives/day/21/my-fake-entry.html',
+             'zinnia/archives/2012/04/21/entry_detail.html',
+             'zinnia/archives/month/04/day/21/entry_detail.html',
+             'zinnia/archives/2012/day/21/entry_detail.html',
+             'zinnia/archives/day/21/entry_detail.html',
+             'zinnia/archives/2012/month/04/my-fake-entry_entry_detail.html',
+             'zinnia/archives/month/04/my-fake-entry_entry_detail.html',
+             'zinnia/archives/2012/month/04/my-fake-entry.html',
+             'zinnia/archives/month/04/my-fake-entry.html',
+             'zinnia/archives/2012/month/04/entry_detail.html',
+             'zinnia/archives/month/04/entry_detail.html',
+             'zinnia/archives/2012/my-fake-entry_entry_detail.html',
+             'zinnia/archives/2012/my-fake-entry.html',
+             'zinnia/archives/2012/entry_detail.html',
+             'zinnia/archives/my-fake-entry_entry_detail.html',
+             'zinnia/my-fake-entry_entry_detail.html',
+             'my-fake-entry_entry_detail.html',
+             'zinnia/archives/my-fake-entry.html',
+             'zinnia/my-fake-entry.html',
+             'my-fake-entry.html',
+             'zinnia/archives/entry_detail.html',
+             'zinnia/entry_detail.html',
+             'entry_detail.html'])
+
         instance.object.template = 'custom.html'
         self.assertEquals(
             instance.get_template_names(),
-             ['zinnia/archives/2012/04/21/custom.html',
+            ['zinnia/archives/2012/04/21/my-fake-entry_custom.html',
+              'zinnia/archives/month/04/day/21/my-fake-entry_custom.html',
+              'zinnia/archives/2012/day/21/my-fake-entry_custom.html',
+              'zinnia/archives/day/21/my-fake-entry_custom.html',
+              'zinnia/archives/2012/04/21/my-fake-entry.html',
+              'zinnia/archives/month/04/day/21/my-fake-entry.html',
+              'zinnia/archives/2012/day/21/my-fake-entry.html',
+              'zinnia/archives/day/21/my-fake-entry.html',
+              'zinnia/archives/2012/04/21/custom.html',
               'zinnia/archives/month/04/day/21/custom.html',
               'zinnia/archives/2012/day/21/custom.html',
               'zinnia/archives/day/21/custom.html',
+              'zinnia/archives/2012/month/04/my-fake-entry_custom.html',
+              'zinnia/archives/month/04/my-fake-entry_custom.html',
+              'zinnia/archives/2012/month/04/my-fake-entry.html',
+              'zinnia/archives/month/04/my-fake-entry.html',
               'zinnia/archives/2012/month/04/custom.html',
               'zinnia/archives/month/04/custom.html',
+              'zinnia/archives/2012/my-fake-entry_custom.html',
+              'zinnia/archives/2012/my-fake-entry.html',
               'zinnia/archives/2012/custom.html',
+              'zinnia/archives/my-fake-entry_custom.html',
+              'zinnia/my-fake-entry_custom.html',
+              'my-fake-entry_custom.html',
+              'zinnia/archives/my-fake-entry.html',
+              'zinnia/my-fake-entry.html',
+              'my-fake-entry.html',
               'zinnia/archives/custom.html',
               'zinnia/custom.html',
               'custom.html'])

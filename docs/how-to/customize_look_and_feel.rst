@@ -221,6 +221,15 @@ templates will still be used.
 
 Examples:
 
+* For the URL ``/blog/2012/`` the
+  :class:`~zinnia.views.archives.EntryYear` view will be called and
+  return this list of template names: ::
+
+    ['zinnia/archives/2012/entry_archive_year.html',
+     'zinnia/archives/entry_archive_year.html',
+     'zinnia/entry_archive_year.html',
+     'entry_archive_year.html']
+
 * For the URL ``/blog/2012/week/16/`` the
   :class:`~zinnia.views.archives.EntryWeek` view will be called and
   return this list of template names: ::
@@ -232,20 +241,20 @@ Examples:
      'zinnia/entry_archive_week.html',
      'entry_archive_week.html']
 
-* For the URL ``/blog/2012/04/21/my-entry/`` the
-  :class:`~zinnia.views.entries.EntryDetail` view will be called and
+* For the URL ``/blog/2012/04/21/`` the
+  :class:`~zinnia.views.entries.EntryDay` view will be called and
   return this list of template names: ::
 
-    ['zinnia/archives/2012/04/21/entry_detail.html',
-     'zinnia/archives/month/04/day/21/entry_detail.html',
-     'zinnia/archives/2012/day/21/entry_detail.html',
-     'zinnia/archives/day/21/entry_detail.html',
-     'zinnia/archives/2012/month/04/entry_detail.html',
-     'zinnia/archives/month/04/entry_detail.html',
-     'zinnia/archives/2012/entry_detail.html',
-     'zinnia/archives/entry_detail.html',
-     'zinnia/entry_detail.html',
-     'entry_detail.html']
+    ['zinnia/archives/2012/04/21/entry_archive_day.html',
+     'zinnia/archives/month/04/day/21/entry_archive_day.html',
+     'zinnia/archives/2012/day/21/entry_archive_day.html',
+     'zinnia/archives/day/21/entry_archive_day.html',
+     'zinnia/archives/2012/month/04/entry_archive_day.html',
+     'zinnia/archives/month/04/entry_archive_day.html',
+     'zinnia/archives/2012/entry_archive_day.html',
+     'zinnia/archives/entry_archive_day.html',
+     'zinnia/entry_archive_day.html',
+     'entry_archive_day.html']
 
 .. _detail-templates:
 
@@ -254,26 +263,48 @@ Templates for entry detail
 
 Each entries of the Weblog has the possibility to have his own template to
 be rendered by using the :setting:`ZINNIA_ENTRY_TEMPLATES` settings, so
-with this option you can handle multiple presentation of your entries.
+with this option you can handle multiple presentation for your entries. And
+because :class:`~zinnia.views.entries.EntryDetail` is based on an archive
+view a custom list of templates is built uppon the publication date.
+The entry's slug is also used to build the template list for having
+maximal customization capabilities with ease.
 
-But if you have followed the latest example about the archives templates,
-you must have seen that even the :class:`~zinnia.views.entries.EntryDetail`
-view implement a custom list of templates, because this view is based on
-the archives.
+For example if I use the ``custom.html`` template to render the entry
+located at the URL ``/blog/2012/04/21/my-entry/`` the list of template
+names will be: ::
 
-So if I use the ``custom.html`` template to render the entry located at the
-URL ``/blog/2012/04/21/my-entry/`` the list of template names will be: ::
-
-  ['zinnia/archives/2012/04/21/custom.html',
+  ['zinnia/archives/2012/04/21/my-entry_custom.html',
+   'zinnia/archives/month/04/day/21/my-entry_custom.html',
+   'zinnia/archives/2012/day/21/my-entry_custom.html',
+   'zinnia/archives/day/21/my-entry_custom.html',
+   'zinnia/archives/2012/04/21/my-entry.html',
+   'zinnia/archives/month/04/day/21/my-entry.html',
+   'zinnia/archives/2012/day/21/my-entry.html',
+   'zinnia/archives/day/21/my-entry.html',
+   'zinnia/archives/2012/04/21/custom.html',
    'zinnia/archives/month/04/day/21/custom.html',
    'zinnia/archives/2012/day/21/custom.html',
    'zinnia/archives/day/21/custom.html',
+   'zinnia/archives/2012/month/04/my-entry_custom.html',
+   'zinnia/archives/month/04/my-entry_custom.html',
+   'zinnia/archives/2012/month/04/my-entry.html',
+   'zinnia/archives/month/04/my-entry.html',
    'zinnia/archives/2012/month/04/custom.html',
    'zinnia/archives/month/04/custom.html',
+   'zinnia/archives/2012/my-entry_custom.html',
+   'zinnia/archives/2012/my-entry.html',
    'zinnia/archives/2012/custom.html',
+   'zinnia/archives/my-entry_custom.html',
+   'zinnia/my-entry_custom.html',
+   'my-entry_custom.html',
+   'zinnia/archives/my-entry.html',
+   'zinnia/my-entry.html',
+   'my-entry.html',
    'zinnia/archives/custom.html',
    'zinnia/custom.html',
    'custom.html']
+
+Now you have the choice !
 
 .. _changing-templates:
 
