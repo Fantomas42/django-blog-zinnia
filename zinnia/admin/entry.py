@@ -21,6 +21,7 @@ from zinnia.models.author import Author
 from zinnia.ping import DirectoryPinger
 from zinnia.admin.forms import EntryAdminForm
 from zinnia.admin.filters import AuthorListFilter
+from zinnia.admin.filters import CategoryListFilter
 
 
 class EntryAdmin(admin.ModelAdmin):
@@ -41,7 +42,7 @@ class EntryAdmin(admin.ModelAdmin):
                                                'pingback_enabled')}),
                  (_('Publication'), {'fields': ('categories', 'tags',
                                                 'sites', 'slug')}))
-    list_filter = ('categories', AuthorListFilter, 'status', 'featured',
+    list_filter = (CategoryListFilter, AuthorListFilter, 'status', 'featured',
                    'login_required', 'comment_enabled', 'pingback_enabled',
                    'creation_date', 'start_publication',
                    'end_publication', 'sites')
@@ -170,10 +171,11 @@ class EntryAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         """Make special filtering by user permissions"""
-        queryset = super(EntryAdmin, self).queryset(request)
-        if request.user.has_perm('zinnia.can_view_all'):
-            return queryset.prefetch_related('categories', 'authors', 'sites')
-        return request.user.entries.all().prefetch_related('categories', 'authors', 'sites')
+        if not request.user.has_perm('zinnia.can_view_all'):
+            queryset = request.user.entries.all()
+        else:
+            queryset = super(EntryAdmin, self).queryset(request)
+        return queryset.prefetch_related('categories', 'authors', 'sites')
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         """Filters the disposable authors"""
