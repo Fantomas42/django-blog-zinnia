@@ -22,7 +22,7 @@ the Weblog homepage in our project's urls.py. ::
   from zinnia.views.channels import EntryChannel
 
   url(r'^weblog/$', EntryChannel.as_view(
-      query='category:python OR category:django'),
+      query='category:python OR category:django')),
   url(r'^weblog/', include('zinnia.urls')),
 
 The first URL will handle the homepage of the blog instead of the default
