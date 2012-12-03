@@ -1,4 +1,5 @@
 """Test cases for Zinnia's mixins"""
+from __future__ import with_statement
 from datetime import date
 
 from django.test import TestCase
@@ -6,11 +7,15 @@ from django.contrib.sites.models import Site
 from django.core.exceptions import ImproperlyConfigured
 
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
+from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime
 from zinnia.views.mixins.mimetypes import MimeTypeMixin
 from zinnia.views.mixins.archives import PreviousNextPublishedMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
+from zinnia.views.mixins.prefetch_related import PrefetchRelatedMixin
+from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
 from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 from zinnia.views.mixins.templates import EntryArchiveTemplateResponseMixin
 from zinnia.views.mixins.templates import \
@@ -273,3 +278,42 @@ class MixinTestCase(TestCase):
         self.assertEquals(epnp.get_previous_day(test_date), date(2012, 6, 2))
         self.assertEquals(epnp.get_next_month(test_date), None)
         self.assertEquals(epnp.get_next_day(test_date), None)
+
+    def test_prefetch_related_mixin(self):
+        instance = PrefetchRelatedMixin()
+        self.assertRaises(ImproperlyConfigured,
+                          instance.get_queryset)
+        instance.relation_names = 'string'
+        self.assertRaises(ImproperlyConfigured,
+                          instance.get_queryset)
+
+    def test_prefetch_categories_authors_mixin(self):
+        author = Author.objects.create_user(username='author',
+                                            email='author@example.com')
+        category = Category.objects.create(title='Category',
+                                           slug='category')
+        for i in range(3):
+            params = {'title': 'My entry',
+                      'content': 'My content',
+                      'slug': 'my-entry-%s' % i}
+            entry = Entry.objects.create(**params)
+            entry.authors.add(author)
+            entry.categories.add(category)
+
+        class View(object):
+            def get_queryset(self):
+                return Entry.objects.all()
+
+        class ViewCategoriesAuthorsPrefetched(
+            PrefetchCategoriesAuthorsMixin, View):
+            pass
+
+        with self.assertNumQueries(7):
+            for entry in View().get_queryset():
+                entry.authors.count()
+                entry.categories.count()
+
+        with self.assertNumQueries(3):
+            for entry in ViewCategoriesAuthorsPrefetched().get_queryset():
+                entry.authors.count()
+                entry.categories.count()
