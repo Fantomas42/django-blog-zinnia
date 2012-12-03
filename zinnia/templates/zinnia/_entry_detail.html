@@ -93,7 +93,8 @@
       {% else %}
       {% if object.comments_are_open %}
       {% trans "No comments yet." %}
-      <a href="{{ object.get_absolute_url }}#comments" title="{% blocktrans with object=object.title %}Leave a comment on {{ object }}{% endblocktrans %}">
+      <a href="{{ object.get_absolute_url }}#comment-form"
+         title="{% blocktrans with object=object.title %}Leave a comment on {{ object }}{% endblocktrans %}">
         {% trans "Be first to comment!" %}
       </a>
       {% else %}
