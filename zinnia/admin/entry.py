@@ -12,7 +12,6 @@ from django.conf import settings as project_settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import get_language
 from django.template.response import TemplateResponse
-from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
 
 from zinnia import settings
@@ -70,12 +69,6 @@ class EntryAdmin(admin.ModelAdmin):
         """Return the title with word count and number of comments"""
         title = _('%(title)s (%(word_count)i words)') % \
                 {'title': entry.title, 'word_count': entry.word_count}
-        comments = entry.comments.count()
-        if comments:
-            return ungettext_lazy('%(title)s (%(comments)i comment)',
-                                  '%(title)s (%(comments)i comments)',
-                                  comments) % \
-                                  {'title': title, 'comments': comments}
         return title
     get_title.short_description = _('title')
 
@@ -179,8 +172,8 @@ class EntryAdmin(admin.ModelAdmin):
         """Make special filtering by user permissions"""
         queryset = super(EntryAdmin, self).queryset(request)
         if request.user.has_perm('zinnia.can_view_all'):
-            return queryset
-        return request.user.entries.all()
+            return queryset.prefetch_related('categories', 'authors', 'sites')
+        return request.user.entries.all().prefetch_related('categories', 'authors', 'sites')
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         """Filters the disposable authors"""
