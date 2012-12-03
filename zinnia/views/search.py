@@ -4,18 +4,24 @@ from django.utils.translation import ugettext as _
 
 from zinnia.models.entry import Entry
 from zinnia.settings import PAGINATION
+from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
 
 
-class EntrySearch(ListView):
-    """View for searching entries"""
+class BaseEntrySearch(object):
+    """
+    Mixin providing the behavior of the entry search view,
+    by returning in the context the pattern searched, the
+    error if something wrong has happened and finally the
+    the queryset of published entries matching the pattern.
+    """
     pattern = ''
     error = None
-    paginate_by = PAGINATION
-    template_name_suffix = '_search'
 
     def get_queryset(self):
-        """Overridde the get_queryset method to
-        do some validations and the search queryset"""
+        """
+        Overridde the get_queryset method to
+        do some validations and build the search queryset.
+        """
         entries = Entry.published.none()
 
         if self.request.GET:
@@ -29,7 +35,24 @@ class EntrySearch(ListView):
         return entries
 
     def get_context_data(self, **kwargs):
-        """Add error and pattern in the context"""
-        context = super(ListView, self).get_context_data(**kwargs)
+        """
+        Add error and pattern in context.
+        """
+        context = super(BaseEntrySearch, self).get_context_data(**kwargs)
         context.update({'error': self.error, 'pattern': self.pattern})
         return context
+
+
+class EntrySearch(PrefetchCategoriesAuthorsMixin,
+                  BaseEntrySearch,
+                  ListView):
+    """
+    Search view for entries combinating these mixins:
+
+    - PrefetchCategoriesAuthorsMixin to prefetch related Categories
+      and Authors to belonging the entry list.
+    - BaseEntrySearch to provide the behavior of the view.
+    - ListView to implement the ListView and template name resolution.
+    """
+    paginate_by = PAGINATION
+    template_name_suffix = '_search'
