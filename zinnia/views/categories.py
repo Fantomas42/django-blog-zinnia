@@ -26,7 +26,7 @@ class BaseCategoryDetail(object):
     """
     Mixin providing the behavior of the category detail view,
     by returning in the context the current category and a
-    queryset containing the entries belonging into.
+    queryset containing the entries published under it.
     """
 
     def get_queryset(self):
@@ -39,7 +39,7 @@ class BaseCategoryDetail(object):
 
     def get_context_data(self, **kwargs):
         """
-        Add the current category in context
+        Add the current category in context.
         """
         context = super(BaseCategoryDetail, self).get_context_data(**kwargs)
         context['category'] = self.category
@@ -54,7 +54,7 @@ class CategoryDetail(EntryQuerysetTemplateResponseMixin,
     Detailed view for a Category combinating these mixins:
 
     - EntryQuerysetTemplateResponseMixin to provide custom templates
-      for the category display.
+      for the category display page.
     - PrefetchCategoriesAuthorsMixin to prefetch related Categories
       and Authors to belonging the entry list.
     - BaseCategoryDetail to provide the behavior of the view.
@@ -64,5 +64,7 @@ class CategoryDetail(EntryQuerysetTemplateResponseMixin,
     paginate_by = PAGINATION
 
     def get_model_name(self):
-        """The model name is the category's slug"""
+        """
+        The model name is the category's slug.
+        """
         return self.category.slug
