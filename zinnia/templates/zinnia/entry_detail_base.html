@@ -35,9 +35,7 @@
 {% block content %}
 
 {% block entry-content %}
-  {% with object_content=object.html_content|safe %}
-  {% include "zinnia/_entry_detail.html" %}
-  {% endwith %}
+  {% include "zinnia/_entry_detail.html" with object_content=object.html_content|safe %}
 {% endblock %}
 
 {% block entry-widgets %}
