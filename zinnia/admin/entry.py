@@ -12,6 +12,7 @@ from django.conf import settings as project_settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import get_language
 from django.template.response import TemplateResponse
+from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
 
 from zinnia import settings
@@ -70,6 +71,12 @@ class EntryAdmin(admin.ModelAdmin):
         """Return the title with word count and number of comments"""
         title = _('%(title)s (%(word_count)i words)') % \
                 {'title': entry.title, 'word_count': entry.word_count}
+        if entry.comment_count:
+            return ungettext_lazy('%(title)s (%(comments)i comment)',
+                                  '%(title)s (%(comments)i comments)',
+                                  entry.comment_count) % \
+                                  {'title': title,
+                                   'comments': entry.comment_count}
         return title
     get_title.short_description = _('title')
 
