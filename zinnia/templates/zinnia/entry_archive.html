@@ -1,5 +1,6 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n zinnia_tags %}
+{% load url from future %}
 
 {% block meta-description %}{% trans "Latest entries" %}{% endblock %}
 
@@ -9,4 +10,15 @@
 
 {% block slider %}
 {% get_featured_entries template="zinnia/tags/slider_entries.html" %}
+{% endblock %}
+
+{% block content-related %}
+<h2>{% trans "Yearly archives" %}</h2>
+<ul>
+  {% for date in date_list %}
+  <li>
+    <a href="{% url 'zinnia_entry_archive_year' date|date:"Y" %}" rel="archives">{{ date|date:"Y" }}</a>
+  </li>
+  {% endfor %}
+</ul>
 {% endblock %}
