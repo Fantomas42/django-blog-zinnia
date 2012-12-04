@@ -102,6 +102,10 @@ class EntryAbstractClass(models.Model):
         ENTRY_TEMPLATES,
         help_text=_('template used to display the entry'))
 
+    comment_count = models.IntegerField(_('comment count'), default=0)
+    pingback_count = models.IntegerField(_('pingback count'), default=0)
+    trackback_count = models.IntegerField(_('trackback count'), default=0)
+
     objects = models.Manager()
     published = EntryPublishedManager()
 
