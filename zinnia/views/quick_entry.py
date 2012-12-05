@@ -23,6 +23,9 @@ class QuickEntryForm(forms.ModelForm):
 
     class Meta:
         model = Entry
+        exclude = ('comment_count',
+                   'pingback_count',
+                   'trackback_count')
 
 
 class QuickEntry(View):
@@ -52,7 +55,7 @@ class QuickEntry(View):
             'last_update': timezone.now(),
             'content': request.POST.get('content'),
             'tags': request.POST.get('tags')
-        }
+            }
         form = QuickEntryForm(data)
         if form.is_valid():
             form.instance.content = linebreaks(form.cleaned_data['content'])
