@@ -171,8 +171,10 @@ class Command(NoArgsCommand):
                 except gdata_service.RequestError:
                     # comments not available for this post
                     pass
+                entry.comment_count = entry.comments.count()
+                entry.save()
                 output = self.style.ITEM('> Migrated %s + %s comments\n'
-                    % (entry.title, len(Comment.objects.for_model(entry))))
+                    % (entry.title, entry.comment_count))
 
             self.write_out(output)
 

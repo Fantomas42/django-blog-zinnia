@@ -409,3 +409,7 @@ class Command(LabelCommand):
                     user=get_user_flagger(), flag=TRACKBACK)
 
             self.write_out(self.style.ITEM('OK\n'))
+        entry.comment_count = entry.comments.count()
+        entry.pingback_count = entry.pingbacks.count()
+        entry.trackback_count = entry.trackbacks.count()
+        entry.save()
