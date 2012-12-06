@@ -180,14 +180,14 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(len(context['entries']), 0)
 
     def test_get_popular_entries(self):
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(1):
             context = get_popular_entries()
         self.assertEquals(len(context['entries']), 0)
         self.assertEquals(context['template'],
                           'zinnia/tags/popular_entries.html')
 
         self.publish_entry()
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_popular_entries(3, 'custom_template.html')
         self.assertEquals(len(context['entries']), 0)
         self.assertEquals(context['template'], 'custom_template.html')
@@ -196,47 +196,28 @@ class TemplateTagsTestCase(TestCase):
                   'content': 'My second content',
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
+                  'comment_count': 2,
                   'slug': 'my-second-entry'}
         site = Site.objects.get_current()
         second_entry = Entry.objects.create(**params)
         second_entry.sites.add(site)
+        self.entry.comment_count = 1
+        self.entry.save()
+        with self.assertNumQueries(0):
+            context = get_popular_entries(3)
+        self.assertEquals(list(context['entries']), [second_entry, self.entry])
 
-        c1 = comments.get_model().objects.create(
-            comment='My Comment 1', site=site,
-            content_object=self.entry,
-            is_public=False)
-        c2 = comments.get_model().objects.create(
-            comment='My Comment 2', site=site,
-            content_object=self.entry,
-            is_public=False)
-        comments.get_model().objects.create(comment='My Comment 3', site=site,
-                                            content_object=self.entry,
-                                            is_public=True)
-        comments.get_model().objects.create(comment='My Comment 4', site=site,
-                                            content_object=second_entry,
-                                            is_public=True)
-        comments.get_model().objects.create(comment='My Comment 5', site=site,
-                                            content_object=second_entry,
-                                            is_public=True)
+        self.entry.comment_count = 2
+        self.entry.save()
+        with self.assertNumQueries(0):
+            context = get_popular_entries(3)
+        self.assertEquals(list(context['entries']), [self.entry, second_entry])
 
-        with self.assertNumQueries(2):
-            context = get_popular_entries(3)
-        self.assertEquals(context['entries'], [second_entry, self.entry])
-        c1.is_public = True
-        c1.save()
-        with self.assertNumQueries(2):
-            context = get_popular_entries(3)
-        self.assertEquals(context['entries'], [self.entry, second_entry])
-        c2.is_public = True
-        c2.save()
-        with self.assertNumQueries(2):
-            context = get_popular_entries(3)
-        self.assertEquals(context['entries'], [self.entry, second_entry])
         self.entry.status = DRAFT
         self.entry.save()
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(0):
             context = get_popular_entries(3)
-        self.assertEquals(context['entries'], [second_entry])
+        self.assertEquals(list(context['entries']), [second_entry])
 
     def test_get_similar_entries(self):
         self.publish_entry()

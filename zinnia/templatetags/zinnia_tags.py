@@ -95,20 +95,10 @@ def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     """Return popular entries"""
-    ctype = ContentType.objects.get_for_model(Entry)
-    objects_by_score = get_comment_model().objects.filter(
-        content_type=ctype, is_public=True).values('object_pk').annotate(
-        score=Count('id')).order_by('-score')
-    object_ids = [int(obj['object_pk']) for obj in objects_by_score]
-
-    # Use ``in_bulk`` here instead of an ``id__in`` filter, because ``id__in``
-    # would clobber the ordering.
-    object_dict = Entry.published.in_bulk(object_ids)
-
     return {'template': template,
-            'entries': [object_dict[object_id]
-                        for object_id in object_ids
-                        if object_id in object_dict][:number]}
+            'entries': Entry.published.filter(
+                comment_count__gt=0).order_by(
+                '-comment_count')[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
