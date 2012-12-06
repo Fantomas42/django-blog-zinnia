@@ -15,7 +15,7 @@ class Migration(DataMigration):
         for entry in orm['zinnia.Entry'].objects.all():
             discussion_qs = orm['comments.Comment'].objects.filter(
                 content_type=entry_content_type, object_pk=entry.pk,
-                is_public=True)
+                is_public=True, is_removed=False)
             entry.comment_count = discussion_qs.filter(
                 Q(flags=None) | \
                 Q(flags__flag=CommentFlag.MODERATOR_APPROVAL)).count()

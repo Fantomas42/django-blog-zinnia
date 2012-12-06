@@ -183,7 +183,7 @@ class EntryAbstractClass(models.Model):
     def discussions(self):
         """Return queryset of published discussions"""
         return comments.get_model().objects.for_model(
-            self).filter(is_public=True)
+            self).filter(is_public=True, is_removed=False)
 
     @cached_property
     def discussions_list(self):
