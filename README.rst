@@ -44,6 +44,7 @@ More than a long speech, here the list of the main features :
 * `Blogger conversion utility`_
 * `WordPress conversion utility`_
 * `WYMeditor`_, `TinyMCE`_ and `MarkItUp`_ support
+* Efficient database queries
 * Ready to use and extendable templates
 * `Compass`_ and `Sass3`_ integration
 * `Windows Live Writer`_ compatibility
