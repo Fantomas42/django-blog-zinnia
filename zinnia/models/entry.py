@@ -7,12 +7,10 @@ from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.html import linebreaks
 from django.contrib.sites.models import Site
-from django.db.models.signals import post_save
 from django.utils.importlib import import_module
 from django.utils.functional import cached_property
 from django.contrib import comments
 from django.contrib.comments.models import CommentFlag
-from django.contrib.comments.moderation import moderator
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.markup.templatetags.markup import markdown
@@ -34,10 +32,7 @@ from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
-from zinnia.moderator import EntryCommentModerator
 from zinnia.url_shortener import get_url_shortener
-from zinnia.signals import ping_directories_handler
-from zinnia.signals import ping_external_urls_handler
 
 
 class EntryAbstractClass(models.Model):
@@ -286,9 +281,3 @@ class Entry(get_base_model()):
     http://django-blog-zinnia.rtfd.org/extending-entry
     """
 
-
-moderator.register(Entry, EntryCommentModerator)
-post_save.connect(ping_directories_handler, sender=Entry,
-                  dispatch_uid='zinnia.entry.post_save.ping_directories')
-post_save.connect(ping_external_urls_handler, sender=Entry,
-                  dispatch_uid='zinnia.entry.post_save.ping_external_urls')
