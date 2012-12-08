@@ -20,6 +20,8 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import DRAFT, PUBLISHED
+from zinnia.signals import disconnect_entry_signals
+from zinnia.signals import disconnect_comment_signals
 
 gdata_service = None
 Comment = get_comment_model()
@@ -49,6 +51,8 @@ class Command(NoArgsCommand):
         self.style.TITLE = self.style.SQL_FIELD
         self.style.STEP = self.style.SQL_COLTYPE
         self.style.ITEM = self.style.HTTP_INFO
+        disconnect_entry_signals()
+        disconnect_comment_signals()
 
     def write_out(self, message, verbosity_level=1):
         """Convenient method for outputing"""
@@ -172,7 +176,7 @@ class Command(NoArgsCommand):
                     # comments not available for this post
                     pass
                 entry.comment_count = entry.comments.count()
-                entry.save()
+                entry.save(force_update=True)
                 output = self.style.ITEM('> Migrated %s + %s comments\n'
                     % (entry.title, entry.comment_count))
 

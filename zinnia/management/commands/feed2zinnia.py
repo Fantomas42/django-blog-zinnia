@@ -23,7 +23,8 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
-from zinnia.signals import disconnect_zinnia_signals
+from zinnia.signals import disconnect_entry_signals
+from zinnia.signals import disconnect_comment_signals
 
 
 class Command(LabelCommand):
@@ -54,7 +55,8 @@ class Command(LabelCommand):
         self.style.TITLE = self.style.SQL_FIELD
         self.style.STEP = self.style.SQL_COLTYPE
         self.style.ITEM = self.style.HTTP_INFO
-        disconnect_zinnia_signals()
+        disconnect_entry_signals()
+        disconnect_comment_signals()
 
     def write_out(self, message, verbosity_level=1):
         """Convenient method for outputing"""

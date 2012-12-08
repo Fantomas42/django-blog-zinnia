@@ -27,9 +27,10 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.flags import get_user_flagger
-from zinnia.flags import PINGBACK, TRACKBACK, SPAM
-from zinnia.signals import disconnect_zinnia_signals
+from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
+from zinnia.signals import disconnect_entry_signals
+from zinnia.signals import disconnect_comment_signals
 
 WP_NS = 'http://wordpress.org/export/%s/'
 
@@ -65,7 +66,8 @@ class Command(LabelCommand):
         self.style.TITLE = self.style.SQL_FIELD
         self.style.STEP = self.style.SQL_COLTYPE
         self.style.ITEM = self.style.HTTP_INFO
-        disconnect_zinnia_signals()
+        disconnect_entry_signals()
+        disconnect_comment_signals()
 
     def write_out(self, message, verbosity_level=1):
         """Convenient method for outputing"""
@@ -398,9 +400,6 @@ class Command(LabelCommand):
                 'is_removed': is_removed, }
             comment = comments.get_model()(**comment_dict)
             comment.save()
-            if approvation == 'spam':
-                comment.flags.create(
-                    user=get_user_flagger(), flag=SPAM)
             if is_pingback:
                 comment.flags.create(
                     user=get_user_flagger(), flag=PINGBACK)
@@ -412,4 +411,4 @@ class Command(LabelCommand):
         entry.comment_count = entry.comments.count()
         entry.pingback_count = entry.pingbacks.count()
         entry.trackback_count = entry.trackbacks.count()
-        entry.save()
+        entry.save(force_update=True)
