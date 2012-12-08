@@ -6,6 +6,7 @@ CHANGELOG
 
 * Optimizations on the templates
 * Optimizations on the database queries
+* Denormalization of the comments
 * ``get_authors`` context improved
 * ``get_tag_cloud`` context improved
 * ``get_categories`` context improved
