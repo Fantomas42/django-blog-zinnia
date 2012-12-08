@@ -6,7 +6,7 @@
 
 {% block title %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
 
-{% block body-class %}{{ block.super }} archive date day year-{{ day|date:"Y" }} month-{{ day|date:"m" }} day-{{ day|date:"d" }}{% endblock %}
+{% block body-class %}{{ block.super }} archive date day year-{{ day|date:"Y" }} month-{{ day|date:"m" }} week-{{ day|date:"W" }} day-{{ day|date:"d" }}{% endblock %}
 
 {% block content-title %}
 <h1>{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}</h1>

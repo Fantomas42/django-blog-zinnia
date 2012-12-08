@@ -30,7 +30,7 @@
   {% endwith %}
 {% endblock %}
 
-{% block body-class %}entry entry-{{ object.pk }}{% if object.featured %} featured{% endif %}{% endblock %}
+{% block body-class %}entry entry-{{ object.pk }}{% if object.featured %} featured{% endif %} year-{{ object.creation_date|date:"Y" }} month-{{ object.creation_date|date:"m" }} week-{{ object.creation_date|date:"W" }} day-{{ object.creation_date|date:"d" }}{% endblock %}
 
 {% block content %}
 
