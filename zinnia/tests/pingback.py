@@ -22,6 +22,8 @@ from zinnia.tests.utils import datetime
 from zinnia.tests.utils import TestTransport
 from zinnia.xmlrpc.pingback import generate_pingback_content
 from zinnia import url_shortener as shortener_settings
+from zinnia.signals import connect_discussion_signals
+from zinnia.signals import disconnect_discussion_signals
 
 
 class PingBackTestCase(TestCase):
@@ -161,7 +163,9 @@ class PingBackTestCase(TestCase):
         self.assertEquals(self.first_entry.pingback_count, 0)
         self.first_entry.pingback_enabled = True
         self.first_entry.save()
+        connect_discussion_signals()
         response = self.server.pingback.ping(source, target)
+        disconnect_discussion_signals()
         self.assertEquals(
             response,
             'Pingback from %s to %s registered.' % (source, target))
@@ -182,7 +186,9 @@ class PingBackTestCase(TestCase):
         self.first_entry.pingback_enabled = True
         self.first_entry.save()
         self.first_entry.authors.clear()
+        connect_discussion_signals()
         response = self.server.pingback.ping(source, target)
+        disconnect_discussion_signals()
         self.assertEquals(
             response,
             'Pingback from %s to %s registered.' % (source, target))

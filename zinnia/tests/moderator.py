@@ -11,6 +11,8 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
 from zinnia.moderator import EntryCommentModerator
+from zinnia.signals import connect_discussion_signals
+from zinnia.signals import disconnect_discussion_signals
 
 
 class EntryCommentModeratorTestCase(TestCase):
@@ -173,8 +175,10 @@ class EntryCommentModeratorTestCase(TestCase):
         datas.update(f.initial)
         url = reverse('comments-post-comment')
         self.assertEquals(self.entry.comment_count, 0)
+        connect_discussion_signals()
         self.client.post(url, datas)
         self.client.post(url, datas)
+        disconnect_discussion_signals()
         self.assertEqual(comments.get_model().objects.count(), 1)
         entry = Entry.objects.get(pk=self.entry.pk)
         self.assertEquals(entry.comment_count, 1)

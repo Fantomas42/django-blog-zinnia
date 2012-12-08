@@ -17,6 +17,8 @@ from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
 from zinnia.tests.utils import datetime
+from zinnia.signals import connect_discussion_signals
+from zinnia.signals import disconnect_discussion_signals
 
 
 class ViewsBaseCase(TestCase):
@@ -447,12 +449,14 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             'Test 1</message>\n  \n</response>\n')
         entry.pingback_enabled = True
         entry.save()
+        connect_discussion_signals()
         with self.assertNumQueries(6):
             self.assertEquals(
                 self.client.post('/trackback/1/',
                                  {'url': 'http://example.com'}).content,
                 '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
                 '<error>0</error>\n  \n</response>\n')
+        disconnect_discussion_signals()
         entry = Entry.objects.get(pk=entry.pk)
         self.assertEquals(entry.trackback_count, 1)
         self.assertEquals(
