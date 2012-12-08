@@ -11,7 +11,7 @@ class Command(NoArgsCommand):
     Command object for removing comments
     marked as non-public and removed.
     """
-    help = 'Delete the comments on Entry model marked as non-public and removed.'
+    help = "Delete the entries's comments marked as non-public and removed."
 
     def handle_noargs(self, **options):
         verbosity = int(options.get('verbosity', 1))
