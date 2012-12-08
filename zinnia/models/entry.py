@@ -280,4 +280,3 @@ class Entry(get_base_model()):
     Check this out for customizing the Entry Model class:
     http://django-blog-zinnia.rtfd.org/extending-entry
     """
-
