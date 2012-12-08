@@ -4,7 +4,6 @@ from django.utils.functional import memoize
 
 from zinnia.settings import COMMENT_FLAG_USER_ID
 
-SPAM = 'spam'
 PINGBACK = 'pingback'
 TRACKBACK = 'trackback'
 
