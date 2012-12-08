@@ -8,12 +8,8 @@ from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.comments import signals
-from django.contrib.comments.models import CommentFlag
 from django.contrib.comments.moderation import CommentModerator
 
-from zinnia.flags import SPAM
-from zinnia.flags import get_user_flagger
 from zinnia.settings import PROTOCOL
 from zinnia.settings import MAIL_COMMENT_REPLY
 from zinnia.settings import MAIL_COMMENT_AUTHORS
@@ -125,12 +121,6 @@ class EntryCommentModerator(CommentModerator):
 
         if check_is_spam(comment, content_object, request,
                          self.spam_checker_backends):
-            comment.save()
-            flag, created = CommentFlag.objects.get_or_create(
-                comment=comment, user=get_user_flagger(), flag=SPAM)
-            signals.comment_was_flagged.send(
-                sender=comment.__class__, comment=comment,
-                flag=flag, created=created, request=request)
             return True
 
         return False
