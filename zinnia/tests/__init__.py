@@ -31,7 +31,7 @@ from zinnia.tests.author import AuthorTestCase
 from zinnia.tests.admin_filters import AuthorListFilterTestCase
 from zinnia.tests.admin_filters import CategoryListFilterTestCase
 from zinnia.tests.flags import FlagsTestCase
-from zinnia.signals import disconnect_zinnia_signals
+from zinnia.signals import disconnect_entry_signals
 
 
 def suite():
@@ -62,4 +62,4 @@ def suite():
 
     return suite
 
-disconnect_zinnia_signals()
+disconnect_entry_signals()

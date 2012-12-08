@@ -15,6 +15,7 @@ from django.contrib.contenttypes.models import ContentType
 from zinnia.models.entry import Entry
 from zinnia.flags import PINGBACK
 from zinnia.flags import get_user_flagger
+from zinnia.signals import pingback_was_posted
 from zinnia.settings import PINGBACK_CONTENT_LENGTH
 
 from BeautifulSoup import BeautifulSoup
@@ -100,12 +101,15 @@ def pingback_ping(source, target):
         description = generate_pingback_content(soup, target,
                                                 PINGBACK_CONTENT_LENGTH)
 
-        comment, created = comments.get_model().objects.get_or_create(
+        pingback, created = comments.get_model().objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Entry),
             object_pk=entry.pk, user_url=source, site=site,
             defaults={'comment': description, 'user_name': title})
         if created:
-            comment.flags.create(user=get_user_flagger(), flag=PINGBACK)
+            pingback.flags.create(user=get_user_flagger(), flag=PINGBACK)
+            pingback_was_posted.send(pingback.__class__,
+                                     pingback=pingback,
+                                     entry=entry)
             return 'Pingback from %s to %s registered.' % (source, target)
         return PINGBACK_ALREADY_REGISTERED
     except:

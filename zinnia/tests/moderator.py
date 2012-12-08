@@ -7,7 +7,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.moderation import moderator as moderator_stack
 
-from zinnia.flags import SPAM
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
@@ -140,14 +139,10 @@ class EntryCommentModeratorTestCase(TestCase):
         moderator.auto_moderate_comments = False
         self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
                           False)
-        self.assertEquals(comments.get_model().objects.filter(
-            flags__flag=SPAM).count(), 0)
         moderator.spam_checker_backends = (
             'zinnia.spam_checker.backends.all_is_spam',)
         self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
                           True)
-        self.assertEquals(comments.get_model().objects.filter(
-            flags__flag=SPAM).count(), 1)
 
     def test_moderate_comment_on_entry_without_author(self):
         self.entry.authors.clear()
@@ -160,8 +155,6 @@ class EntryCommentModeratorTestCase(TestCase):
             'zinnia.spam_checker.backends.all_is_spam',)
         self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
                           True)
-        self.assertEquals(comments.get_model().objects.filter(
-            flags__flag=SPAM).count(), 1)
 
     def test_integrity_error_on_duplicate_spam_comments(self):
         class AllIsSpamModerator(EntryCommentModerator):
@@ -179,9 +172,9 @@ class EntryCommentModeratorTestCase(TestCase):
         f = CommentForm(self.entry)
         datas.update(f.initial)
         url = reverse('comments-post-comment')
-
+        self.assertEquals(self.entry.comment_count, 0)
         self.client.post(url, datas)
         self.client.post(url, datas)
         self.assertEqual(comments.get_model().objects.count(), 1)
-        self.assertEqual(
-            comments.get_model().objects.all()[0].flags.count(), 1)
+        entry = Entry.objects.get(pk=self.entry.pk)
+        self.assertEquals(entry.comment_count, 1)

@@ -10,6 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 from zinnia.models.entry import Entry
 from zinnia.flags import TRACKBACK
 from zinnia.flags import get_user_flagger
+from zinnia.signals import trackback_was_posted
 from zinnia.views.mixins.mimetypes import TemplateMimeTypeView
 
 
@@ -52,12 +53,15 @@ class EntryTrackback(TemplateMimeTypeView):
         excerpt = request.POST.get('excerpt') or title
         blog_name = request.POST.get('blog_name') or title
 
-        comment, created = comments.get_model().objects.get_or_create(
+        trackback, created = comments.get_model().objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Entry),
             object_pk=entry.pk, site=site, user_url=url,
             user_name=blog_name, defaults={'comment': excerpt})
         if created:
-            comment.flags.create(user=get_user_flagger(), flag=TRACKBACK)
+            trackback.flags.create(user=get_user_flagger(), flag=TRACKBACK)
+            trackback_was_posted.send(trackback.__class__,
+                                      trackback=trackback,
+                                      entry=entry)
         else:
             return self.render_to_response(
                 {'error': u'Trackback is already registered'})

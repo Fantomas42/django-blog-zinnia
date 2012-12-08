@@ -436,6 +436,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertEquals(
             self.client.get('/trackback/1/').status_code, 301)
         entry = Entry.objects.get(slug='test-1')
+        self.assertEquals(entry.trackback_count, 0)
         entry.pingback_enabled = False
         entry.save()
         self.assertEquals(
@@ -446,12 +447,14 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             'Test 1</message>\n  \n</response>\n')
         entry.pingback_enabled = True
         entry.save()
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(6):
             self.assertEquals(
                 self.client.post('/trackback/1/',
                                  {'url': 'http://example.com'}).content,
                 '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
                 '<error>0</error>\n  \n</response>\n')
+        entry = Entry.objects.get(pk=entry.pk)
+        self.assertEquals(entry.trackback_count, 1)
         self.assertEquals(
             self.client.post('/trackback/1/',
                              {'url': 'http://example.com'}).content,
