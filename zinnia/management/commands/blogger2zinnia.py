@@ -21,7 +21,7 @@ from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import DRAFT, PUBLISHED
 from zinnia.signals import disconnect_entry_signals
-from zinnia.signals import disconnect_comment_signals
+from zinnia.signals import disconnect_discussion_signals
 
 gdata_service = None
 Comment = get_comment_model()
@@ -52,7 +52,7 @@ class Command(NoArgsCommand):
         self.style.STEP = self.style.SQL_COLTYPE
         self.style.ITEM = self.style.HTTP_INFO
         disconnect_entry_signals()
-        disconnect_comment_signals()
+        disconnect_discussion_signals()
 
     def write_out(self, message, verbosity_level=1):
         """Convenient method for outputing"""

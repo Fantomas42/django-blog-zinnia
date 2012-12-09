@@ -30,7 +30,7 @@ from zinnia.flags import get_user_flagger
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.signals import disconnect_entry_signals
-from zinnia.signals import disconnect_comment_signals
+from zinnia.signals import disconnect_discussion_signals
 
 WP_NS = 'http://wordpress.org/export/%s/'
 
@@ -67,7 +67,7 @@ class Command(LabelCommand):
         self.style.STEP = self.style.SQL_COLTYPE
         self.style.ITEM = self.style.HTTP_INFO
         disconnect_entry_signals()
-        disconnect_comment_signals()
+        disconnect_discussion_signals()
 
     def write_out(self, message, verbosity_level=1):
         """Convenient method for outputing"""
