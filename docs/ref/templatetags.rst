@@ -239,7 +239,8 @@ Usage examples: ::
 
   {% get_tag_cloud %}
   {% get_tag_cloud 9 %}
-  {% get_tag_cloud 9 "custom_template.html" %}
+  {% get_tag_cloud 9 3 %}
+  {% get_tag_cloud 9 3 "custom_template.html" %}
   {% get_tag_cloud template="custom_template.html" %}
 
 .. templatetag:: get_recent_comments

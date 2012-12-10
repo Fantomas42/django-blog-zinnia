@@ -314,10 +314,12 @@ def get_tags():
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
-def get_tag_cloud(context, steps=6, template='zinnia/tags/tag_cloud.html'):
+def get_tag_cloud(context, steps=6, min_count=None,
+                  template='zinnia/tags/tag_cloud.html'):
     """Return a cloud of published tags"""
     tags = Tag.objects.usage_for_queryset(
-        Entry.published.all(), counts=True)
+        Entry.published.all(), counts=True,
+        min_count=min_count)
     return {'template': template,
             'tags': calculate_cloud(tags, steps),
             'context_tag': context.get('tag')}

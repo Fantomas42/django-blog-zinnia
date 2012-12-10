@@ -701,7 +701,8 @@ class TemplateTagsTestCase(TestCase):
         tag = Tag.objects.get(name='test')
         source_context = Context({'tag': tag})
         with self.assertNumQueries(1):
-            context = get_tag_cloud(source_context, 6, 'custom_template.html')
+            context = get_tag_cloud(source_context, 6, 1,
+                                    'custom_template.html')
         self.assertEquals(len(context['tags']), 2)
         self.assertEquals(context['template'], 'custom_template.html')
         self.assertEquals(context['context_tag'], tag)
