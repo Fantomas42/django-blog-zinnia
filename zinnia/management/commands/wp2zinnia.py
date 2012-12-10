@@ -211,7 +211,8 @@ class Command(LabelCommand):
                 parent = None
             self.write_out('> %s... ' % title)
             category, created = Category.objects.get_or_create(
-                title=title, slug=slug, parent=categories.get(parent))
+                slug=slug, defaults={'title': title,
+                                     'parent': categories.get(parent)})
             categories[title] = category
             self.write_out(self.style.ITEM('OK\n'))
         return categories
@@ -266,14 +267,16 @@ class Command(LabelCommand):
             else:
                 excerpt = ''
 
+        # Prefer use this function than
+        # item_node.find('{%s}post_name' % WP_NS).text
+        # Because slug can be not well formated
+        slug = slugify(title)[:255] or 'post-%s' % item_node.find(
+            '{%s}post_id' % WP_NS).text
+
         entry_dict = {
+            'title': title,
             'content': content,
             'excerpt': excerpt,
-            # Prefer use this function than
-            # item_node.find('{%s}post_name' % WP_NS).text
-            # Because slug can be not well formated
-            'slug': slugify(title)[:255] or 'post-%s' % item_node.find(
-                '{%s}post_id' % WP_NS).text,
             'tags': ', '.join(self.get_entry_tags(item_node.findall(
                 'category'))),
             'status': self.REVERSE_STATUS[item_node.find(
@@ -286,22 +289,19 @@ class Command(LabelCommand):
             'password': item_node.find('{%s}post_password' % WP_NS).text or '',
             'login_required': item_node.find(
                 '{%s}status' % WP_NS).text == 'private',
-            'creation_date': creation_date,
             'last_update': timezone.now()}
 
         entry, created = Entry.objects.get_or_create(
-            title=title, defaults=entry_dict)
+            slug=slug, creation_date=creation_date,
+            defaults=entry_dict)
+        if created:
+            entry.categories.add(*self.get_entry_categories(
+                item_node.findall('category')))
+            entry.authors.add(self.authors[item_node.find(
+                '{http://purl.org/dc/elements/1.1/}creator').text])
+            entry.sites.add(self.SITE)
 
-        entry.categories.add(*self.get_entry_categories(
-            item_node.findall('category')))
-        entry.authors.add(self.authors[item_node.find(
-            '{http://purl.org/dc/elements/1.1/}creator').text])
-        entry.sites.add(self.SITE)
-
-        #current_id = item_node.find('{%s}post_id' % WP_NS).text
-        #parent_id = item_node.find('%s}post_parent' % WP_NS).text
-
-        return entry
+        return entry, created
 
     def find_image_id(self, metadatas):
         for meta in metadatas:
@@ -322,14 +322,17 @@ class Command(LabelCommand):
 
             if post_type == 'post' and content and title:
                 self.write_out('> %s... ' % title)
-                entry = self.import_entry(title, content, item_node)
-                self.write_out(self.style.ITEM('OK\n'))
-                image_id = self.find_image_id(
-                    item_node.findall('{%s}postmeta' % WP_NS))
-                if image_id:
-                    self.import_image(entry, items, image_id)
-                self.import_comments(entry, item_node.findall(
-                    '{%s}comment/' % WP_NS))
+                entry, created = self.import_entry(title, content, item_node)
+                if created:
+                    self.write_out(self.style.ITEM('OK\n'))
+                    image_id = self.find_image_id(
+                        item_node.findall('{%s}postmeta' % WP_NS))
+                    if image_id:
+                        self.import_image(entry, items, image_id)
+                    self.import_comments(entry, item_node.findall(
+                        '{%s}comment/' % WP_NS))
+                else:
+                    self.write_out(self.style.NOTICE('SKIPPED (already imported)\n'))
             else:
                 self.write_out('> %s... ' % title, 2)
                 self.write_out(self.style.NOTICE('SKIPPED (not a post)\n'), 2)

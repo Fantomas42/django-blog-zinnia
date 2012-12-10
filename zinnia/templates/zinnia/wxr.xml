@@ -38,7 +38,7 @@
       <title>{{ entry.title }}</title>
       <link>{{ site_url }}{{ entry.get_absolute_url }}</link>
       <pubDate>{{ entry.publication_date|date:"r" }}</pubDate>
-      <dc:creator><![CDATA[{{ entry.authors.all.0 }}]]></dc:creator>
+      <dc:creator><![CDATA[{% with author=entry.authors.all.0 %}{% if author %}{{ author }}{% else %}Anonymous{% endif %}{% endwith %}]]></dc:creator>
       {% for category in entry.categories.all %}
       <category domain="category" nicename="{{ category.slug }}"><![CDATA[{{ category.title }}]]></category>
       {% endfor %}{% tags_for_object entry as tag_list %}{% for tag in tag_list %}
@@ -49,7 +49,7 @@
       <content:encoded><![CDATA[{{ entry.html_content|safe }}]]></content:encoded>
       <excerpt:encoded><![CDATA[{{ entry.excerpt }}]]></excerpt:encoded>
       <wp:post_id>{{ entry.pk }}</wp:post_id>
-      <wp:post_date>{{ entry.publication_date|date:"Y-m-d H:i:s"}}</wp:post_date>
+      <wp:post_date>{{ entry.creation_date|date:"Y-m-d H:i:s" }}</wp:post_date>
       <wp:post_date_gmt>0000-00-00 00:00:00</wp:post_date_gmt>
       <wp:comment_status>{% if entry.comment_enabled %}open{% else %}closed{% endif %}</wp:comment_status>
       <wp:ping_status>{% if entry.pingback_enabled %}open{% else %}closed{% endif %}</wp:ping_status>
