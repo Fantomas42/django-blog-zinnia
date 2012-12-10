@@ -332,7 +332,8 @@ class Command(LabelCommand):
                     self.import_comments(entry, item_node.findall(
                         '{%s}comment/' % WP_NS))
                 else:
-                    self.write_out(self.style.NOTICE('SKIPPED (already imported)\n'))
+                    self.write_out(self.style.NOTICE(
+                        'SKIPPED (already imported)\n'))
             else:
                 self.write_out('> %s... ' % title, 2)
                 self.write_out(self.style.NOTICE('SKIPPED (not a post)\n'), 2)
