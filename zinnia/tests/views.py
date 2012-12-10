@@ -194,7 +194,8 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             {'zinnia/entry_archive_today.html': ''})
         with self.assertNumQueries(5):
             response = self.client.get('/today/')
-        self.assertEquals(response.context['day'], timezone.now().date())
+        self.assertEquals(response.context['day'], timezone.localtime(
+            timezone.now().date()))
         self.assertTemplateUsed(response, 'zinnia/entry_archive_today.html')
         self.assertEquals(response.context['previous_month'], date(2010, 6, 1))
         self.assertEquals(response.context['next_month'], None)

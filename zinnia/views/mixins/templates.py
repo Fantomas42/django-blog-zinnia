@@ -1,6 +1,5 @@
 """Template mixins for Zinnia views"""
-from datetime import date
-
+from django.utils import timezone
 from django.core.exceptions import ImproperlyConfigured
 from django.views.generic.base import TemplateResponseMixin
 
@@ -138,5 +137,5 @@ class EntryQuerysetArchiveTodayTemplateResponseMixin(
                       'week': self.week_format,
                       'day': '%d'}
         if self.today is None:
-            self.today = date.today()
+            self.today = timezone.localtime(timezone.now().date())
         return self.today.strftime(parts_dict[part])

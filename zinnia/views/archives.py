@@ -1,6 +1,7 @@
 """Views for Zinnia archives"""
 import datetime
 
+from django.utils import timezone
 from django.views.generic.dates import BaseArchiveIndexView
 from django.views.generic.dates import BaseYearArchiveView
 from django.views.generic.dates import BaseMonthArchiveView
@@ -101,6 +102,6 @@ class EntryToday(EntryDayTZFix, EntryArchiveMixin, BaseTodayArchiveView):
         And defines self.year/month/day for
         EntryQuerysetArchiveTemplateResponseMixin.
         """
-        today = datetime.date.today()
+        today = timezone.localtime(timezone.now().date())
         self.year, self.month, self.day = today.isoformat().split('-')
         return self._get_dated_items(today)
