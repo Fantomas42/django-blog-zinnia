@@ -111,7 +111,7 @@ class EntryAdmin(admin.ModelAdmin):
         try:
             return ', '.join(['<a href="%s" target="blank">%s</a>' %
                               (reverse('zinnia_tag_detail', args=[tag]), tag)
-                              for tag in entry.tag_list])
+                              for tag in entry.tags_list])
         except NoReverseMatch:
             return entry.tags
     get_tags.allow_tags = True

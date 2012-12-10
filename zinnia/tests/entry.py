@@ -78,11 +78,6 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.pingbacks.count(), 1)
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        self.assertEquals(len(self.entry.discussions_list), 3)
-        self.assertEquals(len(self.entry.comments_list), 2)
-        self.assertEquals(len(self.entry.pingbacks_list), 1)
-        self.assertEquals(len(self.entry.trackbacks_list), 0)
-
         comment = comments.get_model().objects.create(
             comment='My Trackback 1', content_object=self.entry, site=site)
         comment.flags.create(user=author, flag=TRACKBACK)
@@ -90,13 +85,6 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.comments.count(), 2)
         self.assertEquals(self.entry.pingbacks.count(), 1)
         self.assertEquals(self.entry.trackbacks.count(), 1)
-
-        with self.assertNumQueries(0):
-            # No queries will be performed and the results are outdated
-            self.assertEquals(len(self.entry.discussions_list), 3)
-            self.assertEquals(len(self.entry.comments_list), 2)
-            self.assertEquals(len(self.entry.pingbacks_list), 1)
-            self.assertEquals(len(self.entry.trackbacks_list), 0)
 
     def test_str(self):
         activate('en')
@@ -213,29 +201,7 @@ class EntryTestCase(TestCase):
     def test_tags_list(self):
         self.assertEquals(self.entry.tags_list, [])
         self.entry.tags = 'tag-1, tag-2'
-        # Results are cached so it's still empty
-        self.assertEquals(self.entry.tags_list, [])
-        del self.entry.tags_list
         self.assertEquals(self.entry.tags_list, ['tag-1', 'tag-2'])
-
-    def test_authors_list(self):
-        self.assertEquals(self.entry.authors_list, [])
-        author = Author.objects.create_user('author', 'author@eample.com')
-        self.entry.authors.add(author)
-        # Results are cached so it's still empty
-        self.assertEquals(self.entry.authors_list, [])
-        del self.entry.authors_list
-        self.assertEquals(len(self.entry.authors_list), 1)
-
-    def test_categories_list(self):
-        self.assertEquals(self.entry.categories_list, [])
-        category = Category.objects.create(title='Category 1',
-                                           slug='category-1')
-        self.entry.categories.add(category)
-        # Results are cached so it's still empty
-        self.assertEquals(self.entry.categories_list, [])
-        del self.entry.categories_list
-        self.assertEquals(len(self.entry.categories_list), 1)
 
 
 class EntryHtmlContentTestCase(TestCase):

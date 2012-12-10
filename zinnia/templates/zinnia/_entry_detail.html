@@ -8,7 +8,7 @@
       </a>
     </h2>
     <p class="entry-info">
-      {% with authors=object.authors_list %}
+      {% with authors=object.authors.all %}
       {% if authors|length %}
       {% trans "Written by" %}
       {% for author in authors %}
@@ -23,7 +23,7 @@
       {% endif %}
       {% endwith %}
       <abbr class="published" title="{{ object.creation_date|date:"c" }}">{{ object.creation_date|date:"DATE_FORMAT" }}</abbr>
-      {% with categories=object.categories_list %}
+      {% with categories=object.categories.all %}
       {% if categories|length %}
       {% trans "in" %}
       {% for category in categories %}
@@ -64,7 +64,7 @@
   <div class="entry-footer">
     <p class="entry-tags">
       <strong>{% trans "Tags" %}</strong> :
-      {% for tag in object.tag_list %}
+      {% for tag in object.tags_list %}
       <a href="{% url 'zinnia_tag_detail' tag %}"
          title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
          rel="tag">{{ tag }}</a>

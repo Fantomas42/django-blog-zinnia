@@ -159,17 +159,7 @@ class EntryAbstractClass(models.Model):
         """Return only related entries published"""
         return entries_published(self.related)
 
-    @cached_property
-    def authors_list(self):
-        """Return iterable list of authors"""
-        return list(self.authors.all())
-
-    @cached_property
-    def categories_list(self):
-        """Return iterable list of categories"""
-        return list(self.categories.all())
-
-    @cached_property
+    @property
     def tags_list(self):
         """Return iterable list of tags"""
         return parse_tag_input(self.tags)
@@ -180,41 +170,21 @@ class EntryAbstractClass(models.Model):
         return comments.get_model().objects.for_model(
             self).filter(is_public=True, is_removed=False)
 
-    @cached_property
-    def discussions_list(self):
-        """Return list of published discussions"""
-        return list(self.discussions)
-
     @property
     def comments(self):
         """Return queryset of published comments"""
         return self.discussions.filter(Q(flags=None) | Q(
             flags__flag=CommentFlag.MODERATOR_APPROVAL))
 
-    @cached_property
-    def comments_list(self):
-        """Return list of published comments"""
-        return list(self.comments)
-
     @property
     def pingbacks(self):
         """Return queryset of published pingbacks"""
         return self.discussions.filter(flags__flag=PINGBACK)
 
-    @cached_property
-    def pingbacks_list(self):
-        """Return list of published pingbacks"""
-        return list(self.pingbacks)
-
     @property
     def trackbacks(self):
         """Return queryset of published trackbacks"""
         return self.discussions.filter(flags__flag=TRACKBACK)
-
-    @cached_property
-    def trackbacks_list(self):
-        """Return list of published trackbacks"""
-        return list(self.trackbacks)
 
     @property
     def comments_are_open(self):
