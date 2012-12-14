@@ -44,7 +44,7 @@ class AuthorListFilter(RelatedPublishedFilter):
     """
     model = Author
     lookup_key = 'authors__id'
-    title = _('published author')
+    title = _('published authors')
     parameter_name = 'author'
 
 
