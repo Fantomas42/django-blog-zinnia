@@ -85,7 +85,7 @@ class AuthorListFilterTestCase(TestCase):
 
         with self.assertNumQueries(1):
             filterspec = changelist.get_filters(request)[0][0]
-            self.assertEquals(filterspec.title, 'published author')
+            self.assertEquals(filterspec.title, 'published authors')
             self.assertEquals(filterspec.used_parameters, {'author': u'2'})
             self.assertEquals(filterspec.lookup_choices,
                               [('1', u'webmaster (2 entries)'),
