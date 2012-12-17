@@ -71,7 +71,8 @@ class EntryRelatedSitemap(ZinniaSitemap):
         Define the maximum of entries for computing the priority
         of each items later.
         """
-        self.max_entries = float(max([i[0] for i in self.cache.values()]))
+        if self.cache:
+            self.max_entries = float(max([i[0] for i in self.cache.values()]))
 
     def lastmod(self, item):
         """

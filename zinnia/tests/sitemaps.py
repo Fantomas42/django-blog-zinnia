@@ -80,3 +80,14 @@ class ZinniaSitemapsTestCase(TestCase):
         self.assertEquals(sitemap.priority(items[0]), '0.5')
         self.assertEquals(sitemap.location(items[1]), '/tags/zinnia/')
         self.assertEquals(sitemap.location(items[0]), '/tags/test/')
+
+    def test_empty_sitemap_issue_188(self):
+        Entry.objects.all().delete()
+        entry_sitemap = EntrySitemap()
+        category_sitemap = CategorySitemap()
+        author_sitemap = AuthorSitemap()
+        tag_sitemap = TagSitemap()
+        self.assertEquals(len(entry_sitemap.items()), 0)
+        self.assertEquals(len(category_sitemap.items()), 0)
+        self.assertEquals(len(author_sitemap.items()), 0)
+        self.assertEquals(len(tag_sitemap.items()), 0)
