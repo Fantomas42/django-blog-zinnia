@@ -13,6 +13,7 @@
 {% endblock %}
 
 {% block content-related %}
+{% if date_list %}
 <h2>{% trans "Yearly archives" %}</h2>
 <ul>
   {% for date in date_list %}
@@ -21,4 +22,5 @@
   </li>
   {% endfor %}
 </ul>
+{% endif %}
 {% endblock %}
