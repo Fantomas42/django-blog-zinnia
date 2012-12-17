@@ -36,7 +36,7 @@ class ClusteredModel(object):
         and specified fields"""
         dataset = {}
         for item in self.queryset.filter():
-            dataset[item] = ' '.join([unicode(item.__dict__[field])
+            dataset[item] = ' '.join([unicode(getattr(item, field))
                                       for field in self.fields])
         return dataset
 
