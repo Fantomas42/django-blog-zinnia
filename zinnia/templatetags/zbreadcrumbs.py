@@ -47,8 +47,8 @@ MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
                                              reverse('zinnia_tag_list')),
                                        Crumb(x.name)],
                      'Author': lambda x: [Crumb(_('Authors'),
-                                              reverse('zinnia_author_list')),
-                                        Crumb(x.username)],
+                                                reverse('zinnia_author_list')),
+                                          Crumb(x.username)],
                      'Category': lambda x: [Crumb(
                          _('Categories'), reverse('zinnia_category_list'))] +
                      [Crumb(anc.title, anc.get_absolute_url())

@@ -156,7 +156,7 @@ class Command(NoArgsCommand):
                 entry = Entry.objects.get(creation_date=creation_date,
                                           slug=slug)
                 output = self.style.NOTICE('> Skipped %s (already migrated)\n'
-                    % entry)
+                                           % entry)
             except Entry.DoesNotExist:
                 entry = Entry(status=status, title=title, content=content,
                               creation_date=creation_date, slug=slug)
@@ -178,7 +178,7 @@ class Command(NoArgsCommand):
                 entry.comment_count = entry.comments.count()
                 entry.save(force_update=True)
                 output = self.style.ITEM('> Migrated %s + %s comments\n'
-                    % (entry.title, entry.comment_count))
+                                         % (entry.title, entry.comment_count))
 
             self.write_out(output)
 
