@@ -22,12 +22,13 @@ class RelatedPublishedFilter(SimpleListFilter):
         active_objects = self.model.published.all().annotate(
             number_of_entries=Count('entries'))
         for active_object in active_objects:
-            yield (str(active_object.pk), ungettext_lazy(
-                '%(item)s (%(count)i entry)',
-                '%(item)s (%(count)i entries)',
-                active_object.number_of_entries) % {
-                        'item': active_object.__unicode__(),
-                        'count': active_object.number_of_entries})
+            yield (
+                str(active_object.pk), ungettext_lazy(
+                    '%(item)s (%(count)i entry)',
+                    '%(item)s (%(count)i entries)',
+                    active_object.number_of_entries) % {
+                    'item': active_object.__unicode__(),
+                    'count': active_object.number_of_entries})
 
     def queryset(self, request, queryset):
         """
