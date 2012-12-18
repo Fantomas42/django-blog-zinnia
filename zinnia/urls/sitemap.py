@@ -9,4 +9,4 @@ urlpatterns = patterns(
     '',
     url(r'^$', Sitemap.as_view(),
         name='zinnia_sitemap'),
-    )
+)

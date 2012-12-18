@@ -3,6 +3,7 @@ from django.conf.urls import url
 from django.conf.urls import include
 from django.conf.urls import patterns
 
+
 urlpatterns = patterns(
     '',
     url(r'^tags/', include('zinnia.urls.tags',)),
@@ -18,4 +19,4 @@ urlpatterns = patterns(
     url(r'^', include('zinnia.urls.shortlink')),
     url(r'^', include('zinnia.urls.quick_entry')),
     url(r'^', include('zinnia.urls.capabilities')),
-    )
+)

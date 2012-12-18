@@ -5,6 +5,7 @@ from django.conf.urls import patterns
 from zinnia.views.categories import CategoryList
 from zinnia.views.categories import CategoryDetail
 
+
 urlpatterns = patterns(
     '',
     url(r'^$',
@@ -16,4 +17,4 @@ urlpatterns = patterns(
     url(r'^(?P<path>[-\/\w]+)/$',
         CategoryDetail.as_view(),
         name='zinnia_category_detail'),
-    )
+)

@@ -45,8 +45,7 @@ class Command(LabelCommand):
                     dest='tags', default=True,
                     help='Do NOT store categories as tags'),
         make_option('--author', dest='author', default='',
-                    help='All imported entries belong to specified author'),
-        )
+                    help='All imported entries belong to specified author'))
     SITE = Site.objects.get_current()
 
     def __init__(self):

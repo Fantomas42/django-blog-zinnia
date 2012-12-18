@@ -40,8 +40,7 @@ class Command(NoArgsCommand):
         make_option('--blogger-blog-id', dest='blogger_blog_id', default='',
                     help='The id of the Blogger blog to import'),
         make_option('--author', dest='author', default='',
-                    help='All imported entries belong to specified author')
-        )
+                    help='All imported entries belong to specified author'))
 
     SITE = Site.objects.get_current()
 

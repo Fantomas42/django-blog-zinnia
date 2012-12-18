@@ -54,8 +54,7 @@ class QuickEntry(View):
             'creation_date': timezone.now(),
             'last_update': timezone.now(),
             'content': request.POST.get('content'),
-            'tags': request.POST.get('tags')
-            }
+            'tags': request.POST.get('tags')}
         form = QuickEntryForm(data)
         if form.is_valid():
             form.instance.content = linebreaks(form.cleaned_data['content'])

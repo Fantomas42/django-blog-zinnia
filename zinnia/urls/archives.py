@@ -17,7 +17,7 @@ index_patterns = [
     url(r'^page/(?P<page>\d+)/$',
         EntryIndex.as_view(),
         name='zinnia_entry_archive_index_paginated')
-    ]
+]
 
 year_patterns = [
     url(r'^(?P<year>\d{4})/$',
@@ -26,7 +26,7 @@ year_patterns = [
     url(r'^(?P<year>\d{4})/page/(?P<page>\d+)/$',
         EntryYear.as_view(),
         name='zinnia_entry_archive_year_paginated'),
-    ]
+]
 
 week_patterns = [
     url(r'^(?P<year>\d{4})/week/(?P<week>\d{2})/$',
@@ -35,7 +35,7 @@ week_patterns = [
     url(r'^(?P<year>\d{4})/week/(?P<week>\d{2})/page/(?P<page>\d+)/$',
         EntryWeek.as_view(),
         name='zinnia_entry_archive_week_paginated'),
-    ]
+]
 
 month_patterns = [
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/$',
@@ -44,7 +44,7 @@ month_patterns = [
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/page/(?P<page>\d+)/$',
         EntryMonth.as_view(),
         name='zinnia_entry_archive_month_paginated'),
-    ]
+]
 
 day_patterns = [
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/$',
@@ -54,7 +54,7 @@ day_patterns = [
         '(?P<day>\d{2})/page/(?P<page>\d+)/$',
         EntryDay.as_view(),
         name='zinnia_entry_archive_day_paginated'),
-    ]
+]
 
 today_patterns = [
     url(r'^today/$',
@@ -63,7 +63,7 @@ today_patterns = [
     url(r'^today/page/(?P<page>\d+)/$',
         EntryToday.as_view(),
         name='zinnia_entry_archive_today_paginated'),
-    ]
+]
 
 archive_patterns = (index_patterns + year_patterns +
                     week_patterns + month_patterns +
@@ -71,4 +71,4 @@ archive_patterns = (index_patterns + year_patterns +
 
 urlpatterns = patterns(
     '', *archive_patterns
-    )
+)

@@ -18,4 +18,4 @@ urlpatterns = patterns(
         name='zinnia_opensearch'),
     url(r'^wlwmanifest.xml$', WLWManifestXml.as_view(),
         name='zinnia_wlwmanifest')
-    )
+)

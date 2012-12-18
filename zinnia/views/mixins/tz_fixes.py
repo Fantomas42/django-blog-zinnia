@@ -50,8 +50,7 @@ class EntryMonthTZFix(object):
                 datetime.date(date.year, date.month + 1, 1))
         lookup_kwargs = {
             'creation_date__gte': since,
-            'creation_date__lt': until,
-            }
+            'creation_date__lt': until}
 
         qs = self.get_dated_queryset(**lookup_kwargs)
         date_list = self.get_date_list(qs, 'day')
@@ -59,8 +58,7 @@ class EntryMonthTZFix(object):
         return (date_list, qs, {
             'month': date,
             'next_month': self.get_next_month(date),
-            'previous_month': self.get_previous_month(date),
-            })
+            'previous_month': self.get_previous_month(date)})
 
 
 class EntryWeekTZFix(object):
@@ -72,10 +70,7 @@ class EntryWeekTZFix(object):
         year = self.get_year()
         week = self.get_week()
         week_format = self.get_week_format()
-        week_start = {
-            '%W': '1',
-            '%U': '0',
-            }[week_format]
+        week_start = {'%W': '1', '%U': '0'}[week_format]
         date = _date_from_string(year, self.get_year_format(),
                                  week_start, '%w',
                                  week, week_format)
@@ -105,8 +100,7 @@ class EntryDayTZFix(object):
             'previous_day': self.get_previous_day(date),
             'next_day': self.get_next_day(date),
             'previous_month': self.get_previous_month(date),
-            'next_month': self.get_next_month(date)
-            })
+            'next_month': self.get_next_month(date)})
 
 
 class EntryDateDetailTZFix(object):

@@ -19,8 +19,7 @@ LOCALE_PATHS = [os.path.join(os.path.dirname(__file__),
                              'locale')]
 
 PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
-    ]
+    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher']
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.request',
@@ -31,7 +30,7 @@ TEMPLATE_LOADERS = [
         'django.template.loaders.filesystem.Loader',
         'django.template.loaders.app_directories.Loader']
      ]
-    ]
+]
 
 TEMPLATE_DIRS = [os.path.join(os.path.dirname(__file__),
                               'tests', 'templates')]

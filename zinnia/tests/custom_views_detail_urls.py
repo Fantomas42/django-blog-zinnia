@@ -52,4 +52,4 @@ urlpatterns = patterns(
     url(r'^tags/(?P<tag>[- \w]+)/page/(?P<page>\d+)/$',
         CustomTagDetail.as_view(),
         name='zinnia_tag_detail_paginated'),
-    ) + test_urlpatterns
+) + test_urlpatterns

@@ -100,7 +100,7 @@ class ViewsBaseCase(TestCase):
 ViewsBaseCase = override_settings(
     TEMPLATE_CONTEXT_PROCESSORS=(
         'django.core.context_processors.request',
-        ))(ViewsBaseCase)
+    ))(ViewsBaseCase)
 
 
 class ZinniaViewsTestCase(ViewsBaseCase):

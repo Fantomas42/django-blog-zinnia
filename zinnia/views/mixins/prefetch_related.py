@@ -22,8 +22,8 @@ class PrefetchRelatedMixin(object):
             raise ImproperlyConfigured(
                 u"%s's relation_names property must be a tuple or list." %
                 self.__class__.__name__)
-        return super(PrefetchRelatedMixin, self).get_queryset(
-            ).prefetch_related(*self.relation_names)
+        return super(PrefetchRelatedMixin, self
+                     ).get_queryset().prefetch_related(*self.relation_names)
 
 
 class PrefetchCategoriesAuthorsMixin(PrefetchRelatedMixin):

@@ -47,8 +47,7 @@ class Command(LabelCommand):
                     dest='auto_excerpt', default=True,
                     help='Do NOT generate an excerpt if not present.'),
         make_option('--author', dest='author', default='',
-                    help='All imported entries belong to specified author'),
-        )
+                    help='All imported entries belong to specified author'))
 
     SITE = Site.objects.get_current()
     REVERSE_STATUS = {'pending': DRAFT,
