@@ -65,9 +65,9 @@ today_patterns = [
         name='zinnia_entry_archive_today_paginated'),
     ]
 
-archive_patterns = [index_patterns + year_patterns +
+archive_patterns = (index_patterns + year_patterns +
                     week_patterns + month_patterns +
-                    day_patterns + today_patterns]
+                    day_patterns + today_patterns)
 
 urlpatterns = patterns(
     '', *archive_patterns
