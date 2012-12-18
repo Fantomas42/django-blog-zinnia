@@ -305,7 +305,7 @@ class MixinTestCase(TestCase):
                 return Entry.objects.all()
 
         class ViewCategoriesAuthorsPrefetched(
-            PrefetchCategoriesAuthorsMixin, View):
+                PrefetchCategoriesAuthorsMixin, View):
             pass
 
         with self.assertNumQueries(7):

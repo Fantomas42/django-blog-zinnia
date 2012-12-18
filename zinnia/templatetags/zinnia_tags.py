@@ -154,7 +154,7 @@ def get_archives_entries(template='zinnia/tags/archives_entries.html'):
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_archives_entries_tree(
-    template='zinnia/tags/archives_entries_tree.html'):
+        template='zinnia/tags/archives_entries_tree.html'):
     """Return archives entries as a Tree"""
     return {'template': template,
             'archives': Entry.published.dates('creation_date', 'day',

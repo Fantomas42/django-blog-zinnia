@@ -111,7 +111,7 @@ class EntryQuerysetArchiveTemplateResponseMixin(TemplateResponseMixin):
 
 
 class EntryArchiveTemplateResponseMixin(
-    EntryQuerysetArchiveTemplateResponseMixin):
+        EntryQuerysetArchiveTemplateResponseMixin):
     """Same as EntryQuerysetArchivetemplateResponseMixin
     but use the template defined in the Entr instance
     as the base template name."""
@@ -124,7 +124,7 @@ class EntryArchiveTemplateResponseMixin(
 
 
 class EntryQuerysetArchiveTodayTemplateResponseMixin(
-    EntryQuerysetArchiveTemplateResponseMixin):
+        EntryQuerysetArchiveTemplateResponseMixin):
     """Same as EntryQuerysetArchivetemplateResponseMixin
     but use the current date of the day when getting
     archive part values"""

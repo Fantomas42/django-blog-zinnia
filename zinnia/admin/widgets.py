@@ -88,7 +88,7 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         selected_choices = set([force_unicode(v) for v in selected_choices])
         output = []
         for option_value, option_label, sort_fields in chain(
-            self.choices, choices):
+                self.choices, choices):
             if isinstance(option_label, (list, tuple)):
                 output.append(u'<optgroup label="%s">' % escape(
                     force_unicode(option_value)))
