@@ -39,8 +39,8 @@ class EntryPublishedManager(models.Manager):
 
     def on_site(self):
         """Return entries published on current site"""
-        return super(EntryPublishedManager, self).get_query_set(
-            ).filter(sites=Site.objects.get_current())
+        return super(EntryPublishedManager, self).get_query_set().filter(
+            sites=Site.objects.get_current())
 
     def search(self, pattern):
         """Top level search method on entries"""
@@ -77,10 +77,10 @@ class EntryRelatedPublishedManager(models.Manager):
         now = timezone.now()
         return super(
             EntryRelatedPublishedManager, self).get_query_set().filter(
-            models.Q(entries__start_publication__lte=now) |
-            models.Q(entries__start_publication=None),
-            models.Q(entries__end_publication__gt=now) |
-            models.Q(entries__end_publication=None),
-            entries__status=PUBLISHED,
-            entries__sites=Site.objects.get_current()
+                models.Q(entries__start_publication__lte=now) |
+                models.Q(entries__start_publication=None),
+                models.Q(entries__end_publication__gt=now) |
+                models.Q(entries__end_publication=None),
+                entries__status=PUBLISHED,
+                entries__sites=Site.objects.get_current()
             ).distinct()

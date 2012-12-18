@@ -98,7 +98,7 @@ def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     return {'template': template,
             'entries': Entry.published.filter(
                 comment_count__gt=0).order_by(
-                '-comment_count')[:number]}
+                    '-comment_count')[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -226,8 +226,7 @@ def get_recent_linkbacks(number=5,
         content_type=content_type,
         object_pk__in=entry_published_pks,
         flags__flag__in=[PINGBACK, TRACKBACK],
-        is_public=True).order_by(
-        '-submit_date')[:number]
+        is_public=True).order_by('-submit_date')[:number]
 
     linkbacks = linkbacks.prefetch_related('content_object')
 

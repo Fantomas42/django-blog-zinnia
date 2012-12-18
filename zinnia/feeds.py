@@ -259,7 +259,7 @@ class LatestDiscussions(DiscussionFeed):
         content_type = ContentType.objects.get_for_model(Entry)
         return comments.get_model().objects.filter(
             content_type=content_type, is_public=True).order_by(
-            '-submit_date')[:FEEDS_MAX_ITEMS]
+                '-submit_date')[:FEEDS_MAX_ITEMS]
 
     def link(self):
         """URL of latest discussions"""

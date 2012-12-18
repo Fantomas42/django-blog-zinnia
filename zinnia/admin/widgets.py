@@ -78,12 +78,9 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
                             and u' selected="selected"' or ''
             return u'<option value="%s" data-tree-id="%s" ' \
                    'data-left-value="%s"%s>%s</option>' % (
-                escape(option_value),
-                sort_fields[0],
-                sort_fields[1],
-                selected_html,
-                conditional_escape(force_unicode(option_label)),
-                )
+                       escape(option_value),
+                       sort_fields[0], sort_fields[1], selected_html,
+                       conditional_escape(force_unicode(option_label)))
         # Normalize to strings.
         selected_choices = set([force_unicode(v) for v in selected_choices])
         output = []

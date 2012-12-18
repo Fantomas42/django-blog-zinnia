@@ -79,11 +79,12 @@ class MetaWeblogTestCase(TestCase):
     def test_get_users_blogs(self):
         self.assertRaises(Fault, self.server.blogger.getUsersBlogs,
                           'apikey', 'contributor', 'password')
-        self.assertEquals(self.server.blogger.getUsersBlogs(
-            'apikey', 'webmaster', 'password'), [
-            {'url': 'http://example.com/',
-             'blogid': 1,
-             'blogName': 'example.com'}])
+        self.assertEquals(
+            self.server.blogger.getUsersBlogs(
+                'apikey', 'webmaster', 'password'),
+            [{'url': 'http://example.com/',
+              'blogid': 1,
+              'blogName': 'example.com'}])
 
     def test_get_user_info(self):
         self.assertRaises(Fault, self.server.blogger.getUserInfo,
@@ -102,12 +103,13 @@ class MetaWeblogTestCase(TestCase):
     def test_get_authors(self):
         self.assertRaises(Fault, self.server.wp.getAuthors,
                           'apikey', 'contributor', 'password')
-        self.assertEquals(self.server.wp.getAuthors(
-            'apikey', 'webmaster', 'password'), [
-            {'user_login': 'webmaster',
-             'user_id': self.webmaster.pk,
-             'user_email': 'webmaster@example.com',
-             'display_name': 'webmaster'}])
+        self.assertEquals(
+            self.server.wp.getAuthors(
+                'apikey', 'webmaster', 'password'),
+            [{'user_login': 'webmaster',
+              'user_id': self.webmaster.pk,
+              'user_email': 'webmaster@example.com',
+              'display_name': 'webmaster'}])
 
     def test_get_categories(self):
         self.assertRaises(Fault, self.server.metaWeblog.getCategories,
@@ -176,7 +178,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEquals(Entry.objects.count(), 2)
         self.assertTrue(
             self.server.blogger.deletePost(
-            'apikey', self.entry_1.pk, 'webmaster', 'password', 'publish'))
+                'apikey', self.entry_1.pk, 'webmaster', 'password', 'publish'))
         self.assertEquals(Entry.objects.count(), 1)
 
     def test_get_post(self):

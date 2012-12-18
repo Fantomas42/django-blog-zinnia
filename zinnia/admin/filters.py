@@ -27,8 +27,8 @@ class RelatedPublishedFilter(SimpleListFilter):
                     '%(item)s (%(count)i entry)',
                     '%(item)s (%(count)i entries)',
                     active_object.number_of_entries) % {
-                    'item': active_object.__unicode__(),
-                    'count': active_object.number_of_entries})
+                        'item': active_object.__unicode__(),
+                        'count': active_object.number_of_entries})
 
     def queryset(self, request, queryset):
         """
