@@ -81,9 +81,9 @@ class MetaWeblogTestCase(TestCase):
                           'apikey', 'contributor', 'password')
         self.assertEquals(self.server.blogger.getUsersBlogs(
             'apikey', 'webmaster', 'password'),
-                          [{'url': 'http://example.com/',
-                            'blogid': 1,
-                            'blogName': 'example.com'}])
+                        [{'url': 'http://example.com/',
+                          'blogid': 1,
+                          'blogName': 'example.com'}])
 
     def test_get_user_info(self):
         self.assertRaises(Fault, self.server.blogger.getUserInfo,
@@ -93,21 +93,21 @@ class MetaWeblogTestCase(TestCase):
         self.webmaster.save()
         self.assertEquals(self.server.blogger.getUserInfo(
             'apikey', 'webmaster', 'password'),
-                          {'firstname': 'John', 'lastname': 'Doe',
-                           'url': 'http://example.com/authors/webmaster/',
-                           'userid': self.webmaster.pk,
-                           'nickname': 'webmaster',
-                           'email': 'webmaster@example.com'})
+                        {'firstname': 'John', 'lastname': 'Doe',
+                         'url': 'http://example.com/authors/webmaster/',
+                         'userid': self.webmaster.pk,
+                         'nickname': 'webmaster',
+                         'email': 'webmaster@example.com'})
 
     def test_get_authors(self):
         self.assertRaises(Fault, self.server.wp.getAuthors,
                           'apikey', 'contributor', 'password')
         self.assertEquals(self.server.wp.getAuthors(
             'apikey', 'webmaster', 'password'), [
-                              {'user_login': 'webmaster',
-                               'user_id': self.webmaster.pk,
-                               'user_email': 'webmaster@example.com',
-                               'display_name': 'webmaster'}])
+                            {'user_login': 'webmaster',
+                             'user_id': self.webmaster.pk,
+                             'user_email': 'webmaster@example.com',
+                             'display_name': 'webmaster'}])
 
     def test_get_categories(self):
         self.assertRaises(Fault, self.server.metaWeblog.getCategories,

@@ -15,9 +15,9 @@ from zinnia.views.mixins.archives import PreviousNextPublishedMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
 from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
 from zinnia.views.mixins.templates import \
-     EntryQuerysetArchiveTemplateResponseMixin
+    EntryQuerysetArchiveTemplateResponseMixin
 from zinnia.views.mixins.templates import \
-     EntryQuerysetArchiveTodayTemplateResponseMixin
+    EntryQuerysetArchiveTodayTemplateResponseMixin
 from zinnia.views.mixins.tz_fixes import EntryDayTZFix
 from zinnia.views.mixins.tz_fixes import EntryWeekTZFix
 from zinnia.views.mixins.tz_fixes import EntryMonthTZFix

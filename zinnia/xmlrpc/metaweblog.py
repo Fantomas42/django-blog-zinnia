@@ -47,8 +47,8 @@ def authenticate(username, password, permission=None):
 def blog_structure(site):
     """A blog structure"""
     return {'url': '%s://%s%s' % (
-             PROTOCOL, site.domain,
-             reverse('zinnia_entry_archive_index')),
+        PROTOCOL, site.domain,
+        reverse('zinnia_entry_archive_index')),
             'blogid': settings.SITE_ID,
             'blogName': site.name}
 
@@ -244,7 +244,7 @@ def new_post(blog_id, username, password, post, publish):
     if 'categories' in post:
         entry.categories.add(*[Category.objects.get_or_create(
             title=cat, slug=slugify(cat))[0]
-                               for cat in post['categories']])
+                            for cat in post['categories']])
 
     return entry.pk
 
@@ -292,7 +292,7 @@ def edit_post(post_id, username, password, post, publish):
         entry.categories.clear()
         entry.categories.add(*[Category.objects.get_or_create(
             title=cat, slug=slugify(cat))[0]
-                               for cat in post['categories']])
+                            for cat in post['categories']])
     return True
 
 

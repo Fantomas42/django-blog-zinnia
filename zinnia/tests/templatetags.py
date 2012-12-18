@@ -637,7 +637,7 @@ class TemplateTagsTestCase(TestCase):
 
         source_context = Context({'request': FakeRequest('%s?page=2' % reverse(
             'zinnia_entry_archive_day', args=[2011, '03', 15])),
-                                  'page_obj': FakePage(2)})
+                                'page_obj': FakePage(2)})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 5)
@@ -645,7 +645,7 @@ class TemplateTagsTestCase(TestCase):
 
         source_context = Context({'request': FakeRequest(reverse(
             'zinnia_entry_archive_day_paginated', args=[2011, '03', 15, 2])),
-                                  'page_obj': FakePage(2)})
+                                'page_obj': FakePage(2)})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
         self.assertEquals(len(context['breadcrumbs']), 5)

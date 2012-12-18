@@ -19,7 +19,7 @@ from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
 from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 from zinnia.views.mixins.templates import EntryArchiveTemplateResponseMixin
 from zinnia.views.mixins.templates import \
-     EntryQuerysetArchiveTemplateResponseMixin
+    EntryQuerysetArchiveTemplateResponseMixin
 
 
 class MixinTestCase(TestCase):
