@@ -15,7 +15,7 @@ class EntryQuerysetTemplateResponseMixin(TemplateResponseMixin):
         if self.model_type is None:
             raise ImproperlyConfigured(
                 u"%s requires either a definition of "
-                "'model_type' or an implementation of 'get_model_type()'" % \
+                "'model_type' or an implementation of 'get_model_type()'" %
                 self.__class__.__name__)
         return self.model_type
 
@@ -24,7 +24,7 @@ class EntryQuerysetTemplateResponseMixin(TemplateResponseMixin):
         if self.model_name is None:
             raise ImproperlyConfigured(
                 u"%s requires either a definition of "
-                "'model_name' or an implementation of 'get_model_name()'" % \
+                "'model_name' or an implementation of 'get_model_name()'" %
                 self.__class__.__name__)
         return self.model_name
 

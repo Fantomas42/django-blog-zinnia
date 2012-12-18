@@ -12,7 +12,7 @@ class MimeTypeMixin(object):
         if self.mimetype is None:
             raise ImproperlyConfigured(
                 u"%s requires either a definition of "
-                "'mimetype' or an implementation of 'get_mimetype()'" % \
+                "'mimetype' or an implementation of 'get_mimetype()'" %
                 self.__class__.__name__)
         return self.mimetype
 

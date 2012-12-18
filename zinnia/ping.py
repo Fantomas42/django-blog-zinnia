@@ -70,7 +70,7 @@ class DirectoryPinger(threading.Thread):
                     self.ressources.blog_url, entry_url,
                     categories)
             except Exception:
-                reply = {'message': '%s is an invalid directory.' % \
+                reply = {'message': '%s is an invalid directory.' %
                          self.server_name,
                          'flerror': True}
         return reply

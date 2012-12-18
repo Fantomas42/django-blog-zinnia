@@ -352,7 +352,7 @@ def zinnia_statistics(template='zinnia/tags/statistics.html'):
     if entries_count:
         first_entry = entries.order_by('creation_date')[0]
         last_entry = entries.latest()
-        months_count = (last_entry.creation_date - \
+        months_count = (last_entry.creation_date -
                         first_entry.creation_date).days / 31.0
         if months_count:
             entries_per_month = entries_count / months_count

@@ -34,20 +34,20 @@ urlpatterns = patterns(
     url(r'^categories/(?P<path>[-\/\w]+)/$',
         CategoryEntries(),
         name='zinnia_category_feed'),
-    url(r'^discussions/(?P<year>\d{4})/(?P<month>\d{2})/' \
+    url(r'^discussions/(?P<year>\d{4})/(?P<month>\d{2})/'
         '(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
         EntryDiscussions(),
         name='zinnia_entry_discussion_feed'),
-    url(r'^comments/(?P<year>\d{4})/(?P<month>\d{2})/' \
+    url(r'^comments/(?P<year>\d{4})/(?P<month>\d{2})/'
         '(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
         EntryComments(),
         name='zinnia_entry_comment_feed'),
-    url(r'^pingbacks/(?P<year>\d{4})/(?P<month>\d{2})/' \
+    url(r'^pingbacks/(?P<year>\d{4})/(?P<month>\d{2})/'
         '(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
         EntryPingbacks(),
         name='zinnia_entry_pingback_feed'),
-    url(r'^trackbacks/(?P<year>\d{4})/(?P<month>\d{2})/' \
+    url(r'^trackbacks/(?P<year>\d{4})/(?P<month>\d{2})/'
         '(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
         EntryTrackbacks(),
         name='zinnia_entry_trackback_feed'),
-    )
+)

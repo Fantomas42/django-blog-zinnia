@@ -68,7 +68,7 @@ class Command(LabelCommand):
         try:
             import feedparser
         except ImportError:
-            raise CommandError('You need to install the feedparser ' \
+            raise CommandError('You need to install the feedparser '
                                'module to run this command.')
 
         self.tags = options.get('tags', True)

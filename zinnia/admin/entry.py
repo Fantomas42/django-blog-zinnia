@@ -265,7 +265,7 @@ class EntryAdmin(admin.ModelAdmin):
         queryset.update(comment_enabled=False)
         self.message_user(
             request, _('Comments are now closed for selected entries.'))
-    close_comments.short_description = _('Close the comments for '\
+    close_comments.short_description = _('Close the comments for '
                                          'selected entries')
 
     def close_pingbacks(self, request, queryset):
@@ -302,7 +302,7 @@ class EntryAdmin(admin.ModelAdmin):
                 if success:
                     self.message_user(
                         request,
-                        _('%(directory)s directory succesfully ' \
+                        _('%(directory)s directory succesfully '
                           'pinged %(success)d entries.') %
                         {'directory': directory, 'success': success})
     ping_directories.short_description = _(

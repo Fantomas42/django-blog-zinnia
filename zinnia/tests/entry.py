@@ -231,9 +231,9 @@ class EntryHtmlContentTestCase(TestCase):
         html_content = self.entry.html_content
         try:
             self.assertEquals(html_content,
-                              '\t<p>Hello world !</p>\n\n\t' \
-                              '<p>this is my content :</p>\n\n\t' \
-                              '<ul>\n\t\t<li>Item 1</li>\n\t\t' \
+                              '\t<p>Hello world !</p>\n\n\t'
+                              '<p>this is my content :</p>\n\n\t'
+                              '<ul>\n\t\t<li>Item 1</li>\n\t\t'
                               '<li>Item 2</li>\n\t</ul>')
         except AssertionError:
             self.assertEquals(html_content, self.entry.content)
@@ -246,9 +246,9 @@ class EntryHtmlContentTestCase(TestCase):
         html_content = self.entry.html_content
         try:
             self.assertEquals(html_content,
-                              '<p>Hello world !</p>\n' \
-                              '<p>this is my content :</p>'\
-                              '\n<ul>\n<li>Item 1</li>\n' \
+                              '<p>Hello world !</p>\n'
+                              '<p>this is my content :</p>'
+                              '\n<ul>\n<li>Item 1</li>\n'
                               '<li>Item 2</li>\n</ul>')
         except AssertionError:
             self.assertEquals(html_content, self.entry.content)
@@ -261,9 +261,9 @@ class EntryHtmlContentTestCase(TestCase):
         html_content = self.entry.html_content
         try:
             self.assertEquals(html_content,
-                              '<p>Hello world !</p>\n' \
-                              '<p>this is my content :</p>'\
-                              '\n<ul class="simple">\n<li>Item 1</li>\n' \
+                              '<p>Hello world !</p>\n'
+                              '<p>this is my content :</p>'
+                              '\n<ul class="simple">\n<li>Item 1</li>\n'
                               '<li>Item 2</li>\n</ul>\n')
         except AssertionError:
             self.assertEquals(html_content, self.entry.content)

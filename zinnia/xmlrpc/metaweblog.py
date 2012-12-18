@@ -47,7 +47,8 @@ def authenticate(username, password, permission=None):
 def blog_structure(site):
     """A blog structure"""
     return {'url': '%s://%s%s' % (
-        PROTOCOL, site.domain, reverse('zinnia_entry_archive_index')),
+             PROTOCOL, site.domain,
+             reverse('zinnia_entry_archive_index')),
             'blogid': settings.SITE_ID,
             'blogName': site.name}
 
@@ -170,7 +171,7 @@ def get_recent_posts(blog_id, username, password, number):
     => post structure[]"""
     user = authenticate(username, password)
     site = Site.objects.get_current()
-    return [post_structure(entry, site) \
+    return [post_structure(entry, site)
             for entry in Entry.objects.filter(authors=user)[:number]]
 
 
@@ -180,7 +181,7 @@ def get_categories(blog_id, username, password):
     => category structure[]"""
     authenticate(username, password)
     site = Site.objects.get_current()
-    return [category_structure(category, site) \
+    return [category_structure(category, site)
             for category in Category.objects.all()]
 
 

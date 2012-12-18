@@ -47,8 +47,8 @@ class QuickEntryTestCase(TestCase):
         response = self.client.post('/quick_entry/', {'title': 'test'},
                                     follow=True)
         self.assertEquals(response.redirect_chain,
-                          [('http://testserver/admin/zinnia/entry/add/' \
-                            '?tags=&title=test&sites=1&content=' \
+                          [('http://testserver/admin/zinnia/entry/add/'
+                            '?tags=&title=test&sites=1&content='
                             '%3Cp%3E%3C%2Fp%3E&authors=2&slug=test', 302)])
         response = self.client.post('/quick_entry/',
                                     {'title': 'test', 'tags': 'test',
@@ -67,9 +67,9 @@ class QuickEntryTestCase(TestCase):
                                      'content': 'Test content',
                                      'save_draft': ''}, follow=True)
         self.assertEquals(response.redirect_chain,
-                          [('http://testserver/admin/zinnia/entry/add/'\
-                            '?tags=test-2&title=test&sites=1&'\
-                            'content=%3Cp%3ETest+content%3C%2Fp%3E'\
+                          [('http://testserver/admin/zinnia/entry/add/'
+                            '?tags=test-2&title=test&sites=1&'
+                            'content=%3Cp%3ETest+content%3C%2Fp%3E'
                             '&authors=2&slug=test', 302)])
 
     def test_quick_entry_non_ascii_title_issue_153(self):
@@ -79,7 +79,7 @@ class QuickEntryTestCase(TestCase):
                                      'content': 'Test content',
                                      'save_draft': ''}, follow=True)
         self.assertEquals(response.redirect_chain,
-                          [('http://testserver/admin/zinnia/entry/add/'\
+                          [('http://testserver/admin/zinnia/entry/add/'
                             '?tags=test-2&title=%D1%82%D0%B5%D1%81%D1%82'
-                            '&sites=1&content=%3Cp%3ETest+content%3C%2Fp%3E'\
+                            '&sites=1&content=%3Cp%3ETest+content%3C%2Fp%3E'
                             '&authors=2&slug=', 302)])

@@ -66,7 +66,7 @@ class Command(NoArgsCommand):
             from gdata import service
             gdata_service = service
         except ImportError:
-            raise CommandError('You need to install the gdata ' \
+            raise CommandError('You need to install the gdata '
                                'module to run this command.')
 
         self.verbosity = int(options.get('verbosity', 1))
@@ -96,7 +96,7 @@ class Command(NoArgsCommand):
                     username=default_author)
             except Author.DoesNotExist:
                 raise CommandError(
-                    'Invalid Zinnia username for default author "%s"' % \
+                    'Invalid Zinnia username for default author "%s"' %
                     default_author)
         else:
             self.default_author = Author.objects.all()[0]
@@ -261,7 +261,7 @@ class BloggerManager(object):
             yield post
 
     def get_comments(self, blog_id, post_id):
-        feed = self.service.Get('/feeds/%s/%s/comments/default' % \
+        feed = self.service.Get('/feeds/%s/%s/comments/default' %
                                 (blog_id, post_id))
         for comment in feed.entry:
             yield comment

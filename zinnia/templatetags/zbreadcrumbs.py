@@ -50,7 +50,7 @@ MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
                                               reverse('zinnia_author_list')),
                                         Crumb(x.username)],
                      'Category': lambda x: [Crumb(
-                         _('Categories'), reverse('zinnia_category_list'))] + \
+                         _('Categories'), reverse('zinnia_category_list'))] +
                      [Crumb(anc.title, anc.get_absolute_url())
                       for anc in x.get_ancestors()] + [Crumb(x.title)],
                      'Entry': lambda x: [
@@ -114,9 +114,9 @@ def retrieve_breadcrumbs(path, model_instance, root_name=''):
         date_dict = date_match.groupdict()
         path_date = datetime(
             int(date_dict['year']),
-            date_dict.get('month') is not None and \
+            date_dict.get('month') is not None and
             int(date_dict.get('month')) or 1,
-            date_dict.get('day') is not None and \
+            date_dict.get('day') is not None and
             int(date_dict.get('day')) or 1)
 
         date_breadcrumbs = [year_crumb(path_date)]

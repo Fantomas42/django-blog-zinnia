@@ -17,4 +17,4 @@ urlpatterns = patterns(
     url(r'^(?P<tag>[^/]+(?u))/page/(?P<page>\d+)/$',
         TagDetail.as_view(),
         name='zinnia_tag_detail_paginated'),
-    )
+)

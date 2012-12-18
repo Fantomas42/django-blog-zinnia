@@ -38,7 +38,7 @@ class EntryProtectionMixin(object):
             entry_password = self.request.POST.get('entry_password')
             if entry_password:
                 if entry_password == self.object.password:
-                    self.request.session[self.session_key % \
+                    self.request.session[self.session_key %
                                          self.object.pk] = self.object.password
                     return self.get(request, *args, **kwargs)
                 else:

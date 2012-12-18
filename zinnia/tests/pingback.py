@@ -53,7 +53,7 @@ class PingBackTestCase(TestCase):
         # Set a short template for entry_detail to avoid rendering errors
         setup_test_template_loader(
             {'zinnia/entry_detail.html':
-             '<html><head><title>{{ object.title }}</title></head>' \
+             '<html><head><title>{{ object.title }}</title></head>'
              '<body>{{ object.html_content|safe }}</body></html>',
              '404.html': '404'})
         # Preparing site
@@ -171,7 +171,7 @@ class PingBackTestCase(TestCase):
             'Pingback from %s to %s registered.' % (source, target))
         first_entry_reloaded = Entry.objects.get(pk=self.first_entry.pk)
         self.assertEquals(first_entry_reloaded.pingback_count, 1)
-        self.assertTrue(self.second_entry.title in \
+        self.assertTrue(self.second_entry.title in
                         self.first_entry.pingbacks[0].user_name)
 
         # Error code 48 : The pingback has already been registered.
@@ -194,7 +194,7 @@ class PingBackTestCase(TestCase):
             'Pingback from %s to %s registered.' % (source, target))
         first_entry_reloaded = Entry.objects.get(pk=self.first_entry.pk)
         self.assertEquals(first_entry_reloaded.pingback_count, 1)
-        self.assertTrue(self.second_entry.title in \
+        self.assertTrue(self.second_entry.title in
                         self.first_entry.pingbacks[0].user_name)
 
     def test_pingback_extensions_get_pingbacks(self):
