@@ -47,7 +47,7 @@ class EntryAbstractClass(models.Model):
                               blank=True, help_text=_('used for illustration'))
     content = models.TextField(_('content'))
     excerpt = models.TextField(_('excerpt'), blank=True,
-                                help_text=_('optional element'))
+                               help_text=_('optional element'))
 
     tags = TagField(_('tags'))
     categories = models.ManyToManyField(Category, verbose_name=_('categories'),
@@ -190,9 +190,9 @@ class EntryAbstractClass(models.Model):
     def comments_are_open(self):
         """Check if comments are open"""
         if AUTO_CLOSE_COMMENTS_AFTER and self.comment_enabled:
-            return (timezone.now() - (self.start_publication or
-                                      self.creation_date)).days < \
-                                      AUTO_CLOSE_COMMENTS_AFTER
+            return (timezone.now() - (
+                self.start_publication or self.creation_date)).days < \
+                AUTO_CLOSE_COMMENTS_AFTER
         return self.comment_enabled
 
     @property

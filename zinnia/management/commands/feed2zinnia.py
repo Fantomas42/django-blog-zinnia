@@ -133,8 +133,8 @@ class Command(LabelCommand):
 
             if self.image_enclosure:
                 for enclosure in feed_entry.enclosures:
-                    if 'image' in enclosure.get('type') \
-                           and enclosure.get('href'):
+                    if ('image' in enclosure.get('type') and
+                            enclosure.get('href')):
                         img_tmp = NamedTemporaryFile(delete=True)
                         img_tmp.write(urlopen(enclosure['href']).read())
                         img_tmp.flush()

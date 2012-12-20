@@ -340,8 +340,8 @@ class Command(LabelCommand):
     def import_image(self, entry, items, image_id):
         for item in items:
             post_type = item.find('{%s}post_type' % WP_NS).text
-            if post_type == 'attachment' and \
-                   item.find('{%s}post_id' % WP_NS).text == image_id:
+            if (post_type == 'attachment' and
+                    item.find('{%s}post_id' % WP_NS).text == image_id):
                 title = 'Attachment %s' % item.find('title').text
                 self.write_out(' > %s... ' % title)
                 image_url = item.find('{%s}attachment_url' % WP_NS).text

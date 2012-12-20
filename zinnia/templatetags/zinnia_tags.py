@@ -167,8 +167,8 @@ def get_calendar_entries(context, year=None, month=None,
     """Return an HTML calendar of entries"""
     if not year or not month:
         date_month = context.get('month') or context.get('day') or \
-                     getattr(context.get('object'), 'creation_date', None) or \
-                     timezone.now().date()
+            getattr(context.get('object'), 'creation_date', None) or \
+            timezone.now().date()
         year, month = date_month.timetuple()[:2]
 
     calendar = ZinniaCalendar()
@@ -279,7 +279,7 @@ def zinnia_breadcrumbs(context, root_name='Blog',
     """Return a breadcrumb for the application"""
     path = context['request'].path
     context_object = context.get('object') or context.get('category') or \
-                     context.get('tag') or context.get('author')
+        context.get('tag') or context.get('author')
     context_page = context.get('page_obj')
     breadcrumbs = retrieve_breadcrumbs(path, context_object,
                                        context_page, root_name)
@@ -360,7 +360,7 @@ def zinnia_statistics(template='zinnia/tags/statistics.html'):
 
         comments_per_entry = float(replies_count) / entries_count
         linkbacks_per_entry = float(pingbacks_count + trackbacks_count) / \
-                              entries_count
+            entries_count
 
         total_words_entry = 0
         for e in entries.all():
@@ -376,7 +376,7 @@ def zinnia_statistics(template='zinnia/tags/statistics.html'):
             words_per_comment = 0.0
     else:
         words_per_entry = words_per_comment = entries_per_month = \
-                          comments_per_entry = linkbacks_per_entry = 0.0
+            comments_per_entry = linkbacks_per_entry = 0.0
 
     return {'template': template,
             'entries': entries_count,

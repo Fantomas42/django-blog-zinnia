@@ -70,13 +70,13 @@ class EntryAdmin(admin.ModelAdmin):
     def get_title(self, entry):
         """Return the title with word count and number of comments"""
         title = _('%(title)s (%(word_count)i words)') % \
-                {'title': entry.title, 'word_count': entry.word_count}
+            {'title': entry.title, 'word_count': entry.word_count}
         if entry.comment_count:
-            return ungettext_lazy('%(title)s (%(comments)i comment)',
-                                  '%(title)s (%(comments)i comments)',
-                                  entry.comment_count) % \
-                                  {'title': title,
-                                   'comments': entry.comment_count}
+            return ungettext_lazy(
+                '%(title)s (%(comments)i comment)',
+                '%(title)s (%(comments)i comments)', entry.comment_count) % \
+                {'title': title,
+                 'comments': entry.comment_count}
         return title
     get_title.short_description = _('title')
 
@@ -206,8 +206,8 @@ class EntryAdmin(admin.ModelAdmin):
     def get_actions(self, request):
         """Define user actions by permissions"""
         actions = super(EntryAdmin, self).get_actions(request)
-        if not request.user.has_perm('zinnia.can_change_author') \
-           or not request.user.has_perm('zinnia.can_view_all'):
+        if (not request.user.has_perm('zinnia.can_change_author') or
+                not request.user.has_perm('zinnia.can_view_all')):
             del actions['make_mine']
         if not request.user.has_perm('zinnia.can_change_status'):
             del actions['make_hidden']

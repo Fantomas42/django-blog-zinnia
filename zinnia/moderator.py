@@ -57,8 +57,7 @@ class EntryCommentModerator(CommentModerator):
                            'protocol': PROTOCOL,
                            'content_object': content_object})
         subject = _('[%(site)s] New comment posted on "%(title)s"') % \
-                  {'site': site.name,
-                   'title': content_object.title}
+            {'site': site.name, 'title': content_object.title}
         message = template.render(context)
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
                   self.mail_comment_notification_recipients,
@@ -68,9 +67,9 @@ class EntryCommentModerator(CommentModerator):
         """Send email notification of a new comment to the authors of the
         entry when email notifications have been requested."""
         exclude_list = self.mail_comment_notification_recipients + ['']
-        recipient_list = set([author.email
-                              for author in content_object.authors.all()]) - \
-                              set(exclude_list)
+        recipient_list = set(
+            [author.email for author in content_object.authors.all()]) - \
+            set(exclude_list)
         if recipient_list:
             site = Site.objects.get_current()
             template = loader.get_template(
@@ -79,8 +78,7 @@ class EntryCommentModerator(CommentModerator):
                                'protocol': PROTOCOL,
                                'content_object': content_object})
             subject = _('[%(site)s] New comment posted on "%(title)s"') % \
-                      {'site': site.name,
-                       'title': content_object.title}
+                {'site': site.name, 'title': content_object.title}
             message = template.render(context)
             send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
                       recipient_list, fail_silently=not settings.DEBUG)
@@ -89,14 +87,11 @@ class EntryCommentModerator(CommentModerator):
         """Send email notification of a new comment to the authors of
         the previous comments when email notifications have been requested."""
         exclude_list = self.mail_comment_notification_recipients + \
-                       [author.email
-                        for author in content_object.authors.all()] + \
-                       [comment.email]
-        recipient_list = set([comment.email
-                              for comment in content_object.comments
-                              if comment.email]) - \
-                              set(exclude_list)
-
+            [author.email for author in content_object.authors.all()] + \
+            [comment.email]
+        recipient_list = set(
+            [comment.email for comment in content_object.comments
+             if comment.email]) - set(exclude_list)
         if recipient_list:
             site = Site.objects.get_current()
             template = loader.get_template('comments/comment_reply_email.txt')
@@ -104,8 +99,7 @@ class EntryCommentModerator(CommentModerator):
                                'protocol': PROTOCOL,
                                'content_object': content_object})
             subject = _('[%(site)s] New comment posted on "%(title)s"') % \
-                      {'site': site.name,
-                       'title': content_object.title}
+                {'site': site.name, 'title': content_object.title}
             message = template.render(context)
             mail = EmailMessage(subject, message,
                                 settings.DEFAULT_FROM_EMAIL,

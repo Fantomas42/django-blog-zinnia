@@ -74,8 +74,8 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         def render_option(option_value, option_label, sort_fields):
             """Inner scope render_option"""
             option_value = force_unicode(option_value)
-            selected_html = (option_value in selected_choices) \
-                            and u' selected="selected"' or ''
+            selected_html = (option_value in selected_choices) and \
+                u' selected="selected"' or ''
             return u'<option value="%s" data-tree-id="%s" ' \
                    'data-left-value="%s"%s>%s</option>' % (
                        escape(option_value),

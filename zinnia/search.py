@@ -43,28 +43,27 @@ def createQ(token):
                 search = query[0]
 
     # Ignore connective words (of, a, an...) and STOP_WORDS
-    if (len(search) < 3 and not search.isdigit()) or \
-           search in STOP_WORDS:
+    if (len(search) < 3 and not search.isdigit()) or search in STOP_WORDS:
         return Q()
 
     if not meta:
         return Q(content__icontains=search) | \
-               Q(excerpt__icontains=search) | \
-               Q(title__icontains=search)
+            Q(excerpt__icontains=search) | \
+            Q(title__icontains=search)
 
     if meta == 'category':
         if wildcards == 'BOTH':
             return Q(categories__title__icontains=search) | \
-                    Q(categories__slug__icontains=search)
+                Q(categories__slug__icontains=search)
         elif wildcards == 'START':
             return Q(categories__title__iendswith=search) | \
-                    Q(categories__slug__iendswith=search)
+                Q(categories__slug__iendswith=search)
         elif wildcards == 'END':
             return Q(categories__title__istartswith=search) | \
-                    Q(categories__slug__istartswith=search)
+                Q(categories__slug__istartswith=search)
         else:
             return Q(categories__title__iexact=search) | \
-                    Q(categories__slug__iexact=search)
+                Q(categories__slug__iexact=search)
     elif meta == 'author':
         if wildcards == 'BOTH':
             return Q(authors__username__icontains=search)

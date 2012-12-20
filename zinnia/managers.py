@@ -59,8 +59,8 @@ class EntryPublishedManager(models.Manager):
         lookup = None
         for pattern in pattern.split():
             query_part = models.Q(content__icontains=pattern) | \
-                         models.Q(excerpt__icontains=pattern) | \
-                         models.Q(title__icontains=pattern)
+                models.Q(excerpt__icontains=pattern) | \
+                models.Q(title__icontains=pattern)
             if lookup is None:
                 lookup = query_part
             else:
