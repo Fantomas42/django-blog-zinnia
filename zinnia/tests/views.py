@@ -17,6 +17,7 @@ from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
 from zinnia.tests.utils import datetime
+from zinnia.flags import get_user_flagger
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_discussion_signals
 
@@ -451,6 +452,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         entry.pingback_enabled = True
         entry.save()
         connect_discussion_signals()
+        get_user_flagger()  # Memoize user flagger for stable query number
         with self.assertNumQueries(6):
             self.assertEquals(
                 self.client.post('/trackback/1/',
@@ -485,6 +487,9 @@ class ZinniaViewsTestCase(ViewsBaseCase):
                                 'application/opensearchdescription+xml', 1)
 
     def test_comment_success(self):
+        setup_test_template_loader(
+            {'comments/zinnia/entry/posted.html': '',
+             'zinnia/entry_list.html': ''})
         with self.assertNumQueries(0):
             response = self.client.get('/comments/success/')
         self.assertTemplateUsed(response, 'comments/zinnia/entry/posted.html')
@@ -497,9 +502,6 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         comment = comments.get_model().objects.create(
             comment='My Comment 1', content_object=self.category,
             site=self.site, is_public=False)
-        setup_test_template_loader(
-            {'comments/zinnia/entry/posted.html': '',
-             'zinnia/entry_list.html': ''})
         with self.assertNumQueries(1):
             response = self.client.get('/comments/success/?c=1')
         self.assertEquals(response.context['comment'], comment)
@@ -508,9 +510,8 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         with self.assertNumQueries(5):
             response = self.client.get('/comments/success/?c=1', follow=True)
         self.assertEquals(
-            response.redirect_chain,
-            [('http://testserver/comments/cr/13/1/#comment-1-by-', 301),
-             ('http://example.com/categories/tests/', 302)])
+            response.redirect_chain[1],
+            ('http://example.com/categories/tests/', 302))
         restore_template_loaders()
 
 
