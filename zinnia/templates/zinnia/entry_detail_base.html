@@ -92,7 +92,7 @@
   {% with comment_list=object.comments %}
   <ol id="comment-list">
     {% for comment in comment_list %}
-    <li id="comment-{{ comment.pk }}-by-{{ comment.user_name }}"
+    <li id="comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
         class="comment vcard {% cycle box1,box2 %}{% if comment.user %} authenticated-comment{% if comment.user.is_staff %} staff-comment{% endif %}{% if comment.user.is_superuser %} superuser-comment{% endif %}{% endif %}">
       <img src="{% get_gravatar comment.email 60 "G" %}"
            class="gravatar photo" alt="{{ comment.name }}" />
@@ -107,7 +107,7 @@
         <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
           {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
-        <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name }}"
+        <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
            id="c{{ comment.pk }}" class="anchor-link"
            title="{% trans "Direct link to this comment" %}">#</a>
       </p>

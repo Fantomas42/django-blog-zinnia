@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
+from django.template.defaultfilters import slugify
 from django.core.urlresolvers import NoReverseMatch
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
@@ -312,7 +313,8 @@ class EntryComments(EntryDiscussions):
 
     def item_link(self, item):
         """URL of the comment"""
-        return item.get_absolute_url('#comment-%(id)s-by-%(user_name)s')
+        return item.get_absolute_url('#comment-%(id)s-by-'
+                                     ) + slugify(item.user_name)
 
     def get_title(self, obj):
         """Title of the feed"""

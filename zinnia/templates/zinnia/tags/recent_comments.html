@@ -4,7 +4,7 @@
   <li>
     {% with entry=comment.content_object %}
     {{ comment.name }} {% trans "in" %}
-    <a href="{{ entry.get_absolute_url }}#comment-{{ comment.pk }}-by-{{ comment.user_name }}"
+    <a href="{{ entry.get_absolute_url }}#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
        title="{% trans "Comment on" %} {{ entry.title }}">
       {{ entry.title }}
     </a>

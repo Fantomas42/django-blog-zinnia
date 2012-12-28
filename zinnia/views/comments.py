@@ -1,5 +1,6 @@
 """Views for Zinnia comments"""
 from django.contrib import comments
+from django.template.defaultfilters import slugify
 from django.http import HttpResponsePermanentRedirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic.base import View
@@ -27,7 +28,7 @@ class CommentSuccess(TemplateResponseMixin, View):
         if self.comment and self.comment.is_public:
             return HttpResponsePermanentRedirect(
                 self.comment.get_absolute_url(
-                    '#comment-%(id)s-by-%(user_name)s'))
+                    '#comment-%(id)s-by-') + slugify(self.comment.user_name))
 
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
