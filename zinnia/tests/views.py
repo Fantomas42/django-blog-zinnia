@@ -10,6 +10,8 @@ from django.test.utils import override_settings
 from django.test.utils import restore_template_loaders
 from django.test.utils import setup_test_template_loader
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.signals import user_logged_in
+from django.contrib.auth.models import update_last_login
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -196,7 +198,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         with self.assertNumQueries(5):
             response = self.client.get('/today/')
         self.assertEquals(response.context['day'], timezone.localtime(
-            timezone.now().date()))
+            timezone.now()).date())
         self.assertTemplateUsed(response, 'zinnia/entry_archive_today.html')
         self.assertEquals(response.context['previous_month'], date(2010, 6, 1))
         self.assertEquals(response.context['next_month'], None)
@@ -269,6 +271,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         restore_template_loaders()
 
     def test_zinnia_entry_detail_login_password(self):
+        user_logged_in.disconnect(update_last_login)
         setup_test_template_loader(
             {'zinnia/entry_detail.html': '',
              'zinnia/login.html': '',
@@ -280,7 +283,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         with self.assertNumQueries(4):
             response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertTemplateUsed(response, 'zinnia/login.html')
-        with self.assertNumQueries(11):
+        with self.assertNumQueries(9):
             response = self.client.post('/2010/01/01/my-test-entry/',
                                         {'username': 'admin',
                                          'password': 'password'})
@@ -293,6 +296,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/entry_detail.html')
         restore_template_loaders()
+        user_logged_in.connect(update_last_login)
 
     def test_zinnia_entry_channel(self):
         setup_test_template_loader(

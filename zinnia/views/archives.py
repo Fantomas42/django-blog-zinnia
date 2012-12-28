@@ -102,6 +102,6 @@ class EntryToday(EntryDayTZFix, EntryArchiveMixin, BaseTodayArchiveView):
         And defines self.year/month/day for
         EntryQuerysetArchiveTemplateResponseMixin.
         """
-        today = timezone.localtime(timezone.now().date())
+        today = timezone.localtime(timezone.now()).date()
         self.year, self.month, self.day = today.isoformat().split('-')
         return self._get_dated_items(today)

@@ -137,5 +137,5 @@ class EntryQuerysetArchiveTodayTemplateResponseMixin(
                       'week': self.week_format,
                       'day': '%d'}
         if self.today is None:
-            self.today = timezone.localtime(timezone.now().date())
+            self.today = timezone.localtime(timezone.now()).date()
         return self.today.strftime(parts_dict[part])

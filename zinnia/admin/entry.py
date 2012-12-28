@@ -170,8 +170,8 @@ class EntryAdmin(admin.ModelAdmin):
             form.cleaned_data['authors'] = entry.authors.all()
 
         if not form.cleaned_data.get('authors'):
-            form.cleaned_data['authors'].append(
-                Author.objects.get(pk=request.user.pk))
+            form.cleaned_data['authors'] = Author.objects.filter(
+                pk=request.user.pk)
 
         entry.last_update = timezone.now()
         entry.save()
