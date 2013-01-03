@@ -3,10 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Daniel Izelli <izelli@gmail.com>, 2011.
-#   <fernandogferreira@gmail.com>, 2012.
-# rogerio rgrlinux <rgrlinux@gmail.com>, 2011.
-# Seta00 <reuben@seta00.com>, 2011.
+# Roger Pons <rogerpons@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
@@ -18,192 +15,192 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: feeds.py:121 templates/zinnia/entry_archive.html:5
 #: templates/zinnia/entry_archive.html:7 templates/zinnia/entry_list.html:20
 msgid "Latest entries"
-msgstr "Últimos artigos"
+msgstr "Últimes entrades"
 
 #: feeds.py:125
 #, python-format
 msgid "The latest entries for the site %s"
-msgstr "Últimos artigos no site %s"
+msgstr "Últimes entrades del lloc %s"
 
 #: feeds.py:145
 #, python-format
 msgid "Entries for the category %s"
-msgstr "Artigos na categoria %s"
+msgstr "Entrades de la categoria %s"
 
 #: feeds.py:149
 #, python-format
 msgid "The latest entries for the category %s"
-msgstr "Últimos artigos na categoria %s"
+msgstr "Últimes entrades de la categoria %s"
 
 #: feeds.py:169
 #, python-format
 msgid "Entries for author %s"
-msgstr "Artigos do autor %s"
+msgstr "Entrades de l'autor %s"
 
 #: feeds.py:173
 #, python-format
 msgid "The latest entries by %s"
-msgstr "Últimos artigos por %s"
+msgstr "Últimes entrades de %s"
 
 #: feeds.py:194
 #, python-format
 msgid "Entries for the tag %s"
-msgstr "Artigos com a tag %s"
+msgstr "Entrades amb l'etiqueta %s"
 
 #: feeds.py:198
 #, python-format
 msgid "The latest entries for the tag %s"
-msgstr "Últimos artigos com a tag %s"
+msgstr "Últimes entrades amb l'etiqueta %s"
 
 #: feeds.py:221
 #, python-format
 msgid "Results of the search for '%s'"
-msgstr "Resultados da busca por '%s'"
+msgstr "Resultats de cerca per '%s'"
 
 #: feeds.py:225
 #, python-format
 msgid "The entries containing the pattern '%s'"
-msgstr "Os artigos contendo '%s'"
+msgstr "Entrades que contenen el patró '%s'"
 
 #: feeds.py:270
 msgid "Latest discussions"
-msgstr "As últimas discussões"
+msgstr "Últims debats"
 
 #: feeds.py:274
 #, python-format
 msgid "The latest discussions for the site %s"
-msgstr "As últimas discussões para o site %s"
+msgstr "Últims debats del lloc %s"
 
 #: feeds.py:297
 #, python-format
 msgid "Discussions on %s"
-msgstr "Discussões sobre %s"
+msgstr "Debats de %s"
 
 #: feeds.py:301
 #, python-format
 msgid "The latest discussions for the entry %s"
-msgstr "Últimas discussões sobre o artigo %s"
+msgstr "Últims debats de l'entrada %s"
 
 #: feeds.py:319
 #, python-format
 msgid "Comments on %s"
-msgstr "Comentários sobre %s"
+msgstr "Comentaris de %s"
 
 #: feeds.py:323
 #, python-format
 msgid "The latest comments for the entry %s"
-msgstr "Os comentários mais recentes para o artigo  %s"
+msgstr "Últimes comentaris de l'entrada %s"
 
 #: feeds.py:353
 #, python-format
 msgid "Pingbacks on %s"
-msgstr "Pingbacks sobre %s"
+msgstr "Pingbacks a %s"
 
 #: feeds.py:357
 #, python-format
 msgid "The latest pingbacks for the entry %s"
-msgstr "Os últimos pingbacks sobre  o artigo %s"
+msgstr "Últims pingbacks de l'entrada %s"
 
 #: feeds.py:375
 #, python-format
 msgid "Trackbacks on %s"
-msgstr "Trackbacks sobre %s"
+msgstr "Trackbacks a %s"
 
 #: feeds.py:379
 #, python-format
 msgid "The latest trackbacks for the entry %s"
-msgstr "Os últimos trackbacks sobre o artigo %s"
+msgstr "Últims trackbacks de l'entrada %s"
 
 #: moderator.py:59 moderator.py:81 moderator.py:106
 #, python-format
 msgid "[%(site)s] New comment posted on \"%(title)s\""
-msgstr "[ %(site)s ] Novo comentário postado em \" %(title)s \""
+msgstr "[%(site)s] Nou comentari a \"%(title)s\""
 
 #: admin/category.py:30
 msgid "tree path"
-msgstr "caminho de árvore"
+msgstr "arbre de categories"
 
 #: admin/entry.py:32 templates/admin/zinnia/widgets/quickpost.html:18
 msgid "Content"
-msgstr "Conteúdo"
+msgstr "Contingut"
 
 #: admin/entry.py:34
 msgid "Options"
-msgstr "Opções"
+msgstr "Opcions"
 
 #: admin/entry.py:40
 msgid "Privacy"
-msgstr "Privacidade"
+msgstr "Privacitat"
 
 #: admin/entry.py:42
 msgid "Discussion"
-msgstr "Discussão"
+msgstr "Debat"
 
 #: admin/entry.py:44
 msgid "Publication"
-msgstr "Publicação"
+msgstr "Publicació"
 
 #: admin/entry.py:72
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
-msgstr "%(title)s (%(word_count)i palavras)"
+msgstr "%(title)s (%(word_count)i paraules)"
 
 #: admin/entry.py:75
 #, python-format
 msgid "%(title)s (%(comments)i comment)"
 msgid_plural "%(title)s (%(comments)i comments)"
-msgstr[0] " %(title)s (%(comments)i comentário)"
-msgstr[1] " %(title)s (%(comments)i comentários)"
+msgstr[0] ""
+msgstr[1] ""
 
 #: admin/entry.py:81 models/category.py:16 models/entry.py:43
 msgid "title"
-msgstr "título"
+msgstr "títol"
 
 #: admin/entry.py:94
 msgid "author(s)"
-msgstr "autor (es)"
+msgstr "autor/s"
 
 #: admin/entry.py:107
 msgid "category(s)"
-msgstr "categoria (s)"
+msgstr "categoria/es"
 
 #: admin/entry.py:118
 msgid "tag(s)"
-msgstr "tag (s)"
+msgstr "etiqueta/es"
 
 #: admin/entry.py:126
 msgid "site(s)"
-msgstr "site (s)"
+msgstr "lloc/s"
 
 #: admin/entry.py:132 models/entry.py:170
 msgid "comment enabled"
-msgstr "comentário habilitado"
+msgstr "comentaris habilitats"
 
 #: admin/entry.py:138
 msgid "is actual"
-msgstr "é atual"
+msgstr "és real"
 
 #: admin/entry.py:144
 msgid "is visible"
-msgstr "é visível"
+msgstr "és visible"
 
 #: admin/entry.py:149
 msgid "View"
-msgstr "Ver"
+msgstr "Veure"
 
 #: admin/entry.py:151
 msgid "View on site"
-msgstr "Ver no site"
+msgstr "Veure al lloc"
 
 #: admin/entry.py:157
 msgid "Unavailable"
-msgstr "Indisponível"
+msgstr "No disponible"
 
 #: admin/entry.py:161
 msgid "short url"
@@ -211,68 +208,68 @@ msgstr "url curta"
 
 #: admin/entry.py:229
 msgid "The selected entries now belong to you."
-msgstr "Os artigos selecionados agora pertencem a você."
+msgstr "Les entrades seleccionades ara pertanyen a l'usuari actiu."
 
 #: admin/entry.py:230
 msgid "Set the entries to the user"
-msgstr "Definir os artigos para o usuário"
+msgstr "Assignar les entrades a l'usuari"
 
 #: admin/entry.py:237
 msgid "The selected entries are now marked as published."
-msgstr "Os artigos selecionados foram publicados."
+msgstr "S'han publicat les entrades seleccionades."
 
 #: admin/entry.py:238
 msgid "Set entries selected as published"
-msgstr "Definir artigos selecionados conforme publicado"
+msgstr "Publicar les entrades seleccionades"
 
 #: admin/entry.py:244
 msgid "The selected entries are now marked as hidden."
-msgstr "Os artigos selecionados foram escondidos."
+msgstr "S'han amagat les entrades seleccionades."
 
 #: admin/entry.py:245
 msgid "Set entries selected as hidden"
-msgstr "Definir artigos selecionados como oculto"
+msgstr "Amagar les entrades seleccionades"
 
 #: admin/entry.py:260
 msgid "The selected entries have been tweeted."
-msgstr "Os artigos selecionados foram twitados."
+msgstr "S'han twittejat les entrades seleccionades."
 
 #: admin/entry.py:261
 msgid "Tweet entries selected"
-msgstr "Tweet artigos selecionados"
+msgstr "Twittejar les entrades seleccionades"
 
 #: admin/entry.py:267
 msgid "Comments are now closed for selected entries."
-msgstr "Comentários foram desativados nos artigos selecionados."
+msgstr "S'han tancat els comentaris per a les entrades seleccionades."
 
 #: admin/entry.py:268
 msgid "Close the comments for selected entries"
-msgstr "Feche os comentários para os artigos selecionados"
+msgstr "Tancar els comentaris de les entrades seleccionades"
 
 #: admin/entry.py:275
 msgid "Linkbacks are now closed for selected entries."
-msgstr "Linkbacks foram desativados nos artigos selecionados."
+msgstr "S'han tancat els linkbacks per a les entrades seleccionades."
 
 #: admin/entry.py:277
 msgid "Close the linkbacks for selected entries"
-msgstr "Feche os linkbacks para os artigos selecionados"
+msgstr "Tancar els linkbacks de les entrades seleccionades"
 
 #: admin/entry.py:284
 msgid "The selected entries are now set at the current date."
-msgstr "Os artigos selecionados agora pertencem à data atual."
+msgstr "S'ha informat la data actual per a les entrades seleccionades."
 
 #: admin/entry.py:286
 msgid "Put the selected entries on top at the current date"
-msgstr "Colocar os artigos selecionados no topo por hoje"
+msgstr "Posar les entrades seleccionades a la data actual."
 
 #: admin/entry.py:305
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr "%(directory)s diretório pingado com sucesso %(success)d artigos."
+msgstr "El directori %(directory)s ha realitzat un ping correctament a %(success)d entradas."
 
 #: admin/entry.py:309
 msgid "Ping Directories for selected entries"
-msgstr "Pingar diretórios para os artigos selecionados"
+msgstr "Directoris de ping de les entrades seleccionades"
 
 #: admin/filters.py:26
 #, python-format
@@ -291,33 +288,33 @@ msgstr ""
 
 #: admin/forms.py:19 models/category.py:22
 msgid "parent category"
-msgstr "categoria pai"
+msgstr "categoria pare"
 
 #: admin/forms.py:20
 msgid "No parent category"
-msgstr "Nenhuma categoria pai"
+msgstr "Sense categoria pare"
 
 #: admin/forms.py:34
 msgid "A category cannot be parent of itself."
-msgstr "A categoria não pode ser pai de si mesmo."
+msgstr "Una categoria no pot ser pare d'ella mateixa"
 
 #: admin/forms.py:45 templates/zinnia/base.html:28
 #: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
 #: templatetags/zbreadcrumbs.py:53
 msgid "Categories"
-msgstr "Categorias"
+msgstr "Categories"
 
 #: admin/forms.py:47 models/category.py:54 models/entry.py:118
 msgid "categories"
-msgstr "categorias"
+msgstr "categories"
 
 #: models/category.py:17
 msgid "used for publication"
-msgstr "utilizados para publicação"
+msgstr "utilitzat per a la publicació"
 
 #: models/category.py:19
 msgid "description"
-msgstr "descrição"
+msgstr "descripció"
 
 #: models/category.py:53
 msgid "category"
@@ -325,7 +322,7 @@ msgstr "categoria"
 
 #: models/entry.py:45
 msgid "content"
-msgstr "conteúdo"
+msgstr "contingut"
 
 #: models/entry.py:49 models/entry.py:53
 msgid "used to build the entry's URL"
@@ -333,59 +330,59 @@ msgstr ""
 
 #: models/entry.py:52
 msgid "creation date"
-msgstr "data de criação"
+msgstr "data de creació"
 
 #: models/entry.py:56
 msgid "last update"
-msgstr "última atualização"
+msgstr "última actualització"
 
 #: models/entry.py:66
 msgid "excerpt"
-msgstr "resumo"
+msgstr "resum"
 
 #: models/entry.py:67
 msgid "optional element"
-msgstr "elemento opcional"
+msgstr "element opcional"
 
 #: models/entry.py:77
 msgid "image"
-msgstr "imagem"
+msgstr "imatge"
 
 #: models/entry.py:78
 msgid "used for illustration"
-msgstr "utilizados para ilustração"
+msgstr "utilitzat per a la il·lustració"
 
 #: models/entry.py:87
 msgid "featured"
-msgstr "featured"
+msgstr "destacada"
 
 #: models/entry.py:97
 msgid "related entries"
-msgstr "artigos relacionados"
+msgstr "entrades relacionades"
 
 #: models/entry.py:108
 msgid "authors"
-msgstr "autores"
+msgstr "autors"
 
 #: models/entry.py:128
 msgid "tags"
-msgstr "tags"
+msgstr "etiquetes"
 
 #: models/entry.py:138
 msgid "sites publication"
-msgstr "publicação sites"
+msgstr "publicació a llocs"
 
 #: models/entry.py:147
 msgid "draft"
-msgstr "projeto"
+msgstr "esborrany"
 
 #: models/entry.py:148
 msgid "hidden"
-msgstr "oculto"
+msgstr "ocult"
 
 #: models/entry.py:149
 msgid "published"
-msgstr "publicado"
+msgstr "publicat"
 
 #: models/entry.py:152
 msgid "status"
@@ -393,51 +390,51 @@ msgstr ""
 
 #: models/entry.py:171
 msgid "linkback enabled"
-msgstr "linkback habilitado"
+msgstr "linkbacks habilitats"
 
 #: models/entry.py:173
 msgid "start publication"
-msgstr "início da publicação"
+msgstr "iniciar publicació"
 
 #: models/entry.py:175
 msgid "date start publish"
-msgstr "data de início da publicação"
+msgstr "data d'inici de publicació"
 
 #: models/entry.py:176
 msgid "end publication"
-msgstr "publicação final"
+msgstr "finalitzar publicació"
 
 #: models/entry.py:178
 msgid "date end publish"
-msgstr "data de término da publicação"
+msgstr "data de fi de publicació"
 
 #: models/entry.py:181
 msgid "login required"
-msgstr "é necessário fazer login"
+msgstr "identificació requerida"
 
 #: models/entry.py:182
 msgid "only authenticated users can view the entry"
-msgstr "somente os usuários autenticados podem ver este artigo"
+msgstr "només els usuaris autenticats poden veure l'entrada"
 
 #: models/entry.py:184
 msgid "password"
-msgstr "senha"
+msgstr "contrasenya"
 
 #: models/entry.py:185
 msgid "protect the entry with a password"
-msgstr "proteger o artigo com uma senha"
+msgstr "protegir l'entrada amb una contrasenya"
 
 #: models/entry.py:188
 msgid "template"
-msgstr "modelo"
+msgstr "plantilla"
 
 #: models/entry.py:190
 msgid "Default template"
-msgstr "modelo padrão"
+msgstr "Plantilla per defecte"
 
 #: models/entry.py:192
 msgid "template used to display the entry"
-msgstr "modelo usado para exibir o artigo"
+msgstr "plantilla utilitzada per mostrar l'entrada"
 
 #: models/entry.py:194
 msgid "comment count"
@@ -453,58 +450,58 @@ msgstr ""
 
 #: models/entry.py:316
 msgid "entry"
-msgstr "artigo"
+msgstr "entrada"
 
 #: models/entry.py:317
 msgid "entries"
-msgstr "artigos"
+msgstr "entrades"
 
 #: templates/403.html:6
 msgid "Error 403"
-msgstr "Erro 403"
+msgstr "Error 403"
 
 #: templates/403.html:10 templates/403.html.py:15
 msgid "Permission denied"
-msgstr "Permissão negada"
+msgstr "Permís denegat"
 
 #: templates/403.html:17
 msgid "Sorry but you don't have the permission to do this action."
-msgstr "Desculpe, mas você não possui as permissões necessárias para executar essa ação"
+msgstr "Sense permisos per portar a terme aquesta acció."
 
 #: templates/404.html:6
 msgid "Error 404"
-msgstr "Erro 404"
+msgstr "Error 404"
 
 #: templates/404.html:10 templates/404.html.py:15
 msgid "Page not found"
-msgstr "Página não encontrada"
+msgstr "Pàgina no trobada"
 
 #: templates/404.html:17
 msgid "Sorry, but the requested page could not be found."
-msgstr "Desculpe, mas a página solicitada não pode ser encontrada."
+msgstr "La pàgina sol·licitada no s'ha trobat"
 
 #: templates/500.html:6
 msgid "Error 500"
-msgstr "Erro 500"
+msgstr "Error 505"
 
 #: templates/500.html:10 templates/500.html.py:15
 msgid "Server error"
-msgstr "Erro de servidor"
+msgstr "Error del servidor"
 
 #: templates/500.html:17
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr "Houve um erro. Foi relatado aos administradores do site via e-mail e deve ser corrigido em breve. Obrigado pela sua paciência."
+msgstr "S'ha produït un error. S'ha informat als administradors del lloc via e-mail i serà solucionat el més aviat possible. Sentim les molèsties."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:4
 msgid "Contents"
-msgstr "Conteúdos"
+msgstr "Continguts"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:5
 #: templates/zinnia/_entry_detail.html:86
 msgid "Discussions"
-msgstr "Discussões"
+msgstr "Debats"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:10
 #: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:17
@@ -516,8 +513,8 @@ msgstr "Discussões"
 #, python-format
 msgid "%(entry_count)s entry"
 msgid_plural "%(entry_count)s entries"
-msgstr[0] "%(entry_count)s artigo"
-msgstr[1] "%(entry_count)s artigos"
+msgstr[0] "%(entry_count)s entrada"
+msgstr[1] "%(entry_count)s entrades"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:15
 #: templates/zinnia/_entry_detail.html:91
@@ -526,8 +523,8 @@ msgstr[1] "%(entry_count)s artigos"
 #, python-format
 msgid "%(comment_count)s comment"
 msgid_plural "%(comment_count)s comments"
-msgstr[0] "%(comment_count)s comentário"
-msgstr[1] "%(comment_count)s comentários"
+msgstr[0] "%(comment_count)s comentari"
+msgstr[1] "%(comment_count)s comentaris"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:22
 #: templates/zinnia/tags/statistics.html:13
@@ -535,7 +532,7 @@ msgstr[1] "%(comment_count)s comentários"
 msgid "%(category_count)s category"
 msgid_plural "%(category_count)s categories"
 msgstr[0] "%(category_count)s categoria"
-msgstr[1] "%(category_count)s categorias"
+msgstr[1] "%(category_count)s categories"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:25
 #: templates/zinnia/_entry_detail.html:108
@@ -543,7 +540,7 @@ msgstr[1] "%(category_count)s categorias"
 #, python-format
 msgid "%(pingback_count)s pingback"
 msgid_plural "%(pingback_count)s pingbacks"
-msgstr[0] "%(pingback_count)s pingbacks"
+msgstr[0] "%(pingback_count)s pingback"
 msgstr[1] "%(pingback_count)s pingbacks"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:30
@@ -551,8 +548,8 @@ msgstr[1] "%(pingback_count)s pingbacks"
 #, python-format
 msgid "%(tag_count)s tag"
 msgid_plural "%(tag_count)s tags"
-msgstr[0] "%(tag_count)s tag"
-msgstr[1] "%(tag_count)s tags"
+msgstr[0] "%(tag_count)s etiqueta"
+msgstr[1] "%(tag_count)s etiquetes"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:33
 #: templates/zinnia/_entry_detail.html:115
@@ -560,7 +557,7 @@ msgstr[1] "%(tag_count)s tags"
 #, python-format
 msgid "%(trackback_count)s trackback"
 msgid_plural "%(trackback_count)s trackbacks"
-msgstr[0] "%(trackback_count)s trackbacks"
+msgstr[0] "%(trackback_count)s trackback"
 msgstr[1] "%(trackback_count)s trackbacks"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:38
@@ -569,55 +566,55 @@ msgstr[1] "%(trackback_count)s trackbacks"
 msgid "%(author_count)s author"
 msgid_plural "%(author_count)s authors"
 msgstr[0] "%(author_count)s autor"
-msgstr[1] "%(author_count)s autores"
+msgstr[1] "%(author_count)s autors"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:43
 #: templates/zinnia/tags/statistics.html:25
 #, python-format
 msgid "%(reject_count)s rejected item"
 msgid_plural "%(reject_count)s rejected items"
-msgstr[0] "%(reject_count)s item rejeitado"
-msgstr[1] "%(reject_count)s itens rejeitados"
+msgstr[0] "%(reject_count)s element rebutjat"
+msgstr[1] "%(reject_count)s elements rebutjats"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:48
 msgid "Statistics"
-msgstr "Estatísticas"
+msgstr "Estadístiques"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:50
 #: templates/zinnia/tags/statistics.html:28
 #, python-format
 msgid "%(entries_per_month)s entries per month"
-msgstr "%(entries_per_month)s posts por mês"
+msgstr "%(entries_per_month)s entrades per mes"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:55
 #: templates/zinnia/tags/statistics.html:31
 #, python-format
 msgid "%(words_per_entry)s words per entry"
-msgstr "%(words_per_entry)s palavras por post"
+msgstr "%(words_per_entry)s paraules per entrada"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:58
 #: templates/zinnia/tags/statistics.html:34
 #, python-format
 msgid "%(words_per_comment)s words per comment"
-msgstr "%(words_per_comment)s palavras por comentário"
+msgstr "%(words_per_comment)s paraules per comentari"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:63
 #: templates/zinnia/tags/statistics.html:37
 #, python-format
 msgid "%(comments_per_entry)s comments per entry"
-msgstr "%(comments_per_entry)s comentário por post"
+msgstr "%(comments_per_entry)s comentaris per entrada"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:66
 #: templates/zinnia/tags/statistics.html:40
 #, python-format
 msgid "%(linkbacks_per_entry)s linkbacks per entry"
-msgstr "%(linkbacks_per_entry)s linkbacks per entry"
+msgstr "%(linkbacks_per_entry)s linkbacks per entrada"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:7
 #: templates/zinnia/entry_detail_base.html:216
 #: templates/zinnia/entry_detail_base.html:217
 msgid "Edit the entry"
-msgstr "Editar o artigo"
+msgstr "Editar l'entrada"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:10
 #: templates/comments/zinnia_entry_preview.html:25
@@ -630,38 +627,38 @@ msgstr "Editar o artigo"
 #: templates/zinnia/entry_detail_base.html:143
 #: templates/zinnia/entry_detail_base.html:179
 msgid "on"
-msgstr "em"
+msgstr "a"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:16
 #: templates/comments/zinnia/entry/form.html:26
 msgid "Preview"
-msgstr "Visualizar"
+msgstr "Visualització prèvia"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:23
 #: templates/zinnia/tags/draft_entries.html:9
 msgid "No draft entries."
-msgstr "Não há entradas de rascunho."
+msgstr "No hi ha esborranys."
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:32
 #: templates/admin/zinnia/widgets/_draft_entries.html:33
 msgid "View all draft entries"
-msgstr "Ver todas as entradas de rascunho"
+msgstr "Veure tots els esborranys."
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:11
 #: templates/zinnia/_entry_detail.html:28
 #: templates/zinnia/tags/recent_comments.html:6
 #: templates/zinnia/tags/recent_linkbacks.html:7
 msgid "in"
-msgstr "em"
+msgstr "a"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:14
 #: templates/zinnia/tags/recent_comments.html:8
 msgid "Comment on"
-msgstr "Comentários sobre"
+msgstr "Comentari a"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:23
 msgid "Edit the comment"
-msgstr "Editar o comentário"
+msgstr "Editar el comentari"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:24
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:19
@@ -673,58 +670,58 @@ msgstr "Editar"
 #: templates/zinnia/entry_detail_base.html:124
 #: templates/zinnia/tags/recent_comments.html:15
 msgid "No comments yet."
-msgstr "Ainda não há comentários."
+msgstr "No hi ha comentaris."
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:40
 #: templates/admin/zinnia/widgets/_recent_comments.html:41
 msgid "Manage the comments"
-msgstr "Gerenciar os comentários"
+msgstr "Administrar els comentaris"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:8
 msgid "made a linkback on"
-msgstr "fez um linkback em"
+msgstr "fet un linkback de"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:18
 msgid "Edit the linkback"
-msgstr "Editar o linkback"
+msgstr "Editar el linkback"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:26
 #: templates/zinnia/tags/recent_linkbacks.html:16
 msgid "No linkbacks yet."
-msgstr "Não linkbacks ainda."
+msgstr "No hi ha linkbacks."
 
 #: templates/admin/zinnia/widgets/content_stats.html:6
 #: templates/admin/zinnia/widgets/content_stats.html:8
 msgid "Today"
-msgstr "Hoje"
+msgstr "Avui"
 
 #: templates/admin/zinnia/widgets/draft_entries.html:6
 #: templates/admin/zinnia/widgets/draft_entries.html:8
 msgid "Draft entries"
-msgstr "Rascunho de artigos"
+msgstr "Esborranys"
 
 #: templates/admin/zinnia/widgets/quickpost.html:6
 #: templates/admin/zinnia/widgets/quickpost.html:7
 msgid "Quick publishing"
-msgstr "Publicação rápida"
+msgstr "Publicació ràpida"
 
 #: templates/admin/zinnia/widgets/quickpost.html:10
 msgid "Title"
-msgstr "Título"
+msgstr "Títol"
 
 #: templates/admin/zinnia/widgets/quickpost.html:26
 #: templates/zinnia/_entry_detail.html:66 templates/zinnia/base.html:40
 #: templates/zinnia/tag_list.html:7 templatetags/zbreadcrumbs.py:46
 msgid "Tags"
-msgstr "Tags"
+msgstr "Etiquetes"
 
 #: templates/admin/zinnia/widgets/quickpost.html:34
 msgid "Save as draft"
-msgstr "Salvar como rascunho"
+msgstr "Guardar l'esborrany"
 
 #: templates/admin/zinnia/widgets/quickpost.html:35
 msgid "Reset"
-msgstr "Reset"
+msgstr "Reiniciar"
 
 #: templates/admin/zinnia/widgets/quickpost.html:36
 msgid "Publish"
@@ -734,13 +731,13 @@ msgstr "Publicar"
 #: templates/admin/zinnia/widgets/recent_comments.html:8
 #: templates/zinnia/base.html:48
 msgid "Recent comments"
-msgstr "Comentários recentes"
+msgstr "Últims comentaris"
 
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:6
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:8
 #: templates/zinnia/base.html:52
 msgid "Recent linkbacks"
-msgstr "Linkbacks recentes"
+msgstr "Últims linkbacks"
 
 #: templates/comments/comment_authors_email.txt:1
 #: templates/comments/comment_notification_email.txt:1
@@ -753,13 +750,13 @@ msgstr "Autor"
 #: templates/comments/comment_notification_email.txt:5
 #: templates/comments/comment_reply_email.txt:3
 msgid "Comment"
-msgstr "Comentário"
+msgstr "Comentari"
 
 #: templates/comments/comment_authors_email.txt:6
 #: templates/comments/comment_notification_email.txt:8
 #: templates/comments/comment_reply_email.txt:6
 msgid "View this comment"
-msgstr "Visualizar este comentário"
+msgstr "Veure aquest comentari"
 
 #: templates/comments/comment_notification_email.txt:2
 msgid "Email"
@@ -771,33 +768,33 @@ msgstr "IP"
 
 #: templates/comments/comment_notification_email.txt:10
 msgid "Flag this comment"
-msgstr "Marcar este comentário"
+msgstr "Marcar aquest comentari"
 
 #: templates/comments/comment_notification_email.txt:12
 msgid "Delete this comment"
-msgstr "Apagar este comentário"
+msgstr "Esborrar aquest comentari"
 
 #: templates/comments/comment_notification_email.txt:14
 msgid "Approve this comment"
-msgstr "Aprovar este comentário"
+msgstr "Aprovar aquest comentari"
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
-msgstr "Visualizar comentário"
+msgstr "Visualització prèvia del comentari"
 
 #: templates/comments/zinnia_entry_preview.html:10
 msgid "Please correct following error."
 msgid_plural "Please correct following errors."
-msgstr[0] "Corrija o seguinte erro."
-msgstr[1] "Corrija os seguintes erros."
+msgstr[0] "Corregir el següent error."
+msgstr[1] "Corregir els següents errors."
 
 #: templates/comments/zinnia_entry_preview.html:12
 msgid "Preview of the comment"
-msgstr "Visualização do comentário"
+msgstr "Visualització prèvia del comentari"
 
 #: templates/comments/zinnia/entry/form.html:6
 msgid "Post your comment"
-msgstr "Envie seu comentário"
+msgstr "Publicar un comentari"
 
 #: templates/comments/zinnia/entry/form.html:21
 msgid "Comment as"
@@ -806,16 +803,16 @@ msgstr ""
 #: templates/comments/zinnia/entry/form.html:21 templates/zinnia/base.html:88
 #: templates/zinnia/base.html.py:89
 msgid "Log out"
-msgstr "Sair da sessão"
+msgstr "Desconnectar"
 
 #: templates/comments/zinnia/entry/form.html:25
 msgid "Post"
-msgstr "Enviar"
+msgstr "Publicar"
 
 #: templates/comments/zinnia/entry/posted.html:5
 #: templates/comments/zinnia/entry/posted.html:10
 msgid "Thanks for your comment"
-msgstr "Obrigado pelo seu comentário"
+msgstr "Gràcies pel comentari"
 
 #: templates/comments/zinnia/entry/posted.html:12
 msgid "Your comment needs to be approved before getting displayed."
@@ -829,21 +826,21 @@ msgstr ""
 #: templates/comments/zinnia/entry/posted.html:27
 #: templates/comments/zinnia/entry/posted.html:28
 msgid "Return to entry list"
-msgstr "Voltar à lista de artigos"
+msgstr "Tornar a la llista d'entrades"
 
 #: templates/zinnia/_entry_detail.html:13
 msgid "Written by"
-msgstr "Escrito por"
+msgstr "Escrit per"
 
 #: templates/zinnia/_entry_detail.html:17 templates/zinnia/author_list.html:17
 #: templates/zinnia/tags/authors.html:6
 #, python-format
 msgid "Show all %(author)s's entries"
-msgstr "Mostre todos os posts de %(author)s"
+msgstr "Mostrar totes les entrades de l'autor %(author)s"
 
 #: templates/zinnia/_entry_detail.html:22
 msgid "Written on"
-msgstr "Escrito em"
+msgstr "Escrit el"
 
 #: templates/zinnia/_entry_detail.html:31
 #: templates/zinnia/category_list.html:16
@@ -851,102 +848,102 @@ msgstr "Escrito em"
 #: templates/zinnia/tags/categories_tree.html:5
 #, python-format
 msgid "Show all entries in %(category)s"
-msgstr "Mostre todos os posts sobre %(category)s"
+msgstr "Mostrar totes les entrades a %(category)s"
 
 #: templates/zinnia/_entry_detail.html:56
 #, python-format
 msgid "Continue reading %(object)s"
-msgstr "Leia mais %(object)s"
+msgstr "Continuar llegint %(object)s"
 
 #: templates/zinnia/_entry_detail.html:58
 msgid "Continue reading"
-msgstr "Leia mais"
+msgstr "Continuar llegint"
 
 #: templates/zinnia/_entry_detail.html:69 templates/zinnia/tag_list.html:18
 #, python-format
 msgid "Show all entries tagged by %(tag)s"
-msgstr "Mostre todos os posts marcados por %(tag)s"
+msgstr "Mostrar totes les entrades etiquetades amb %(tag)s"
 
 #: templates/zinnia/_entry_detail.html:72
 msgid "No tags"
-msgstr "Não há tags"
+msgstr "Sense etiquetes"
 
 #: templates/zinnia/_entry_detail.html:77
 msgid "Short url"
-msgstr "url curta"
+msgstr "Url curta"
 
 #: templates/zinnia/_entry_detail.html:79
 #, python-format
 msgid "Short URL to %(object)s"
-msgstr "URL Curta para %(object)s"
+msgstr "URL curta a %(object)s"
 
 #: templates/zinnia/_entry_detail.html:90
 #: templates/zinnia/tags/popular_entries.html:7
 #, python-format
 msgid "Comments on %(object)s"
-msgstr "Comentários sobre %(object)s"
+msgstr "Comentaris a %(object)s"
 
 #: templates/zinnia/_entry_detail.html:97
 #, python-format
 msgid "Leave a comment on %(object)s"
-msgstr "Deixe seu comentário sobre %(object)s"
+msgstr "Deixar un comentari a %(object)s"
 
 #: templates/zinnia/_entry_detail.html:98
 msgid "Be first to comment!"
-msgstr "Seja o primeiro a comentar!"
+msgstr "Sigues el primer a comentar!"
 
 #: templates/zinnia/_entry_detail.html:101
 #: templates/zinnia/entry_detail_base.html:120
 #: templates/zinnia/entry_detail_base.html:126
 msgid "Comments are closed."
-msgstr "Comentários estão fechados."
+msgstr "Els comentaris estan tancats."
 
 #: templates/zinnia/_entry_detail.html:107
 #, python-format
 msgid "Pingbacks on %(object)s"
-msgstr "Pingbacks sobre %(object)s"
+msgstr "Pingbacks a %(object)s"
 
 #: templates/zinnia/_entry_detail.html:114
 #, python-format
 msgid "Trackbacks on %(object)s"
-msgstr "Trilhas sobre %(object)s"
+msgstr "Trackbacks a %(object)s"
 
 #: templates/zinnia/author_list.html:4 templates/zinnia/author_list.html:11
 msgid "Author list"
-msgstr "Lista de autores"
+msgstr "Llista d'autors"
 
 #: templates/zinnia/author_list.html:6 templates/zinnia/base.html:32
 #: templatetags/zbreadcrumbs.py:49
 msgid "Authors"
-msgstr "Autores"
+msgstr "Autors"
 
 #: templates/zinnia/author_list.html:23 templates/zinnia/tags/authors.html:12
 msgid "No authors yet."
-msgstr "Nenhum autor ainda."
+msgstr "No hi ha autors."
 
 #: templates/zinnia/base.html:17 templates/zinnia/skeleton.html:37
 msgid "RSS Feed of latest entries"
-msgstr "RSS Feed dos últimos artigos"
+msgstr "Feed RSS de les últimes entrades"
 
 #: templates/zinnia/base.html:18
 msgid "RSS Feed of latest discussions"
-msgstr "RSS Feed"
+msgstr "RSS Feed dels últims debats"
 
 #: templates/zinnia/base.html:36
 msgid "Calendar"
-msgstr "Calendário"
+msgstr "Calendari"
 
 #: templates/zinnia/base.html:44
 msgid "Recent entries"
-msgstr "Artigos recentes"
+msgstr "Entrades recents"
 
 #: templates/zinnia/base.html:56
 msgid "Random entries"
-msgstr "Artigos aleatórios"
+msgstr "Entrades a l'atzar"
 
 #: templates/zinnia/base.html:60
 msgid "Popular entries"
-msgstr "Artigos mais populares"
+msgstr "Entrades populars"
 
 #: templates/zinnia/base.html:64 templates/zinnia/entry_archive_day.html:5
 #: templates/zinnia/entry_archive_day.html:7
@@ -967,30 +964,30 @@ msgstr "Artigos mais populares"
 #: templates/zinnia/tags/archives_entries_tree.html:14
 #: templates/zinnia/tags/archives_entries_tree.html:24
 msgid "Archives"
-msgstr "Arquivos"
+msgstr "Arxiu"
 
 #: templates/zinnia/base.html:69
 msgid "Tools"
-msgstr "Ferramentas"
+msgstr "Eines"
 
 #: templates/zinnia/base.html:73 templates/zinnia/base.html.py:74
 msgid "Dashboard"
-msgstr "Dashboard"
+msgstr "entrada"
 
 #: templates/zinnia/base.html:80 templates/zinnia/base.html.py:81
 msgid "Post an entry"
-msgstr "Enviar um comentário"
+msgstr "Penja una entrada"
 
 #: templates/zinnia/category_list.html:4
 #: templates/zinnia/category_list.html:11
 msgid "Category list"
-msgstr "Lista de categorias"
+msgstr "Llista de categories"
 
 #: templates/zinnia/category_list.html:28 templates/zinnia/sitemap.html:62
 #: templates/zinnia/tags/categories.html:11
 #: templates/zinnia/tags/categories_tree.html:16
 msgid "No categories yet."
-msgstr "Não há categorias ainda."
+msgstr "No hi ha categories."
 
 #: templates/zinnia/entry_archive.html:16
 msgid "Yearly archives"
@@ -1003,77 +1000,77 @@ msgstr "Dia anterior"
 
 #: templates/zinnia/entry_archive_day.html:23
 msgid "Next day"
-msgstr "Próximo dia"
+msgstr "Dia següent"
 
 #: templates/zinnia/entry_archive_month.html:16
 msgid "Daily archives"
-msgstr "Arquivos diários"
+msgstr "Arxiu diari"
 
 #: templates/zinnia/entry_archive_month.html:26
 msgid "Previous month"
-msgstr "Mês anterior"
+msgstr "Mes anterior"
 
 #: templates/zinnia/entry_archive_month.html:32
 msgid "Next month"
-msgstr "Próximo mês"
+msgstr "Mes següent"
 
 #: templates/zinnia/entry_archive_today.html:5
 #: templates/zinnia/entry_archive_today.html:7
 #: templates/zinnia/entry_archive_today.html:12
 msgid "Today archives"
-msgstr "Arquivos de hoje "
+msgstr "Arxiu d'avui"
 
 #: templates/zinnia/entry_archive_week.html:5
 #: templates/zinnia/entry_archive_week.html:7
 #: templates/zinnia/entry_archive_week.html:12
 #, python-format
 msgid "Archives week %(week_number)s of %(year)s"
-msgstr "Semana %(week_number)s de %(year)s"
+msgstr "Arxiu de la setmana %(week_number)s de %(year)s"
 
 #: templates/zinnia/entry_archive_year.html:16
 #: templates/zinnia/sitemap.html:69
 msgid "Monthly archives"
-msgstr "Arquivos mensais"
+msgstr "Arxiu mensual"
 
 #: templates/zinnia/entry_detail_base.html:22
 msgid "RSS Feed of discussions on"
-msgstr "RSS Feed das discussões"
+msgstr "Feed RSS Feed de debats de"
 
 #: templates/zinnia/entry_detail_base.html:24
 msgid "RSS Feed of comments on"
-msgstr "RSS Feed dos comentários"
+msgstr "Feed RSS de comentaris de"
 
 #: templates/zinnia/entry_detail_base.html:26
 msgid "RSS Feed of pingbacks on"
-msgstr "RSS Feed das pingbacks"
+msgstr "Feed RSS Feed de pingbacks de"
 
 #: templates/zinnia/entry_detail_base.html:28
 msgid "RSS Feed of trackbacks on"
-msgstr "RSS Feed dos trackbacks"
+msgstr "Feed RSS de trackbacks de"
 
 #: templates/zinnia/entry_detail_base.html:46
 msgid "Next entry"
-msgstr "Próximo artigo"
+msgstr "Entrada següent"
 
 #: templates/zinnia/entry_detail_base.html:58
 msgid "Previous entry"
-msgstr "Artigo anterior"
+msgstr "Entrada anterior"
 
 #: templates/zinnia/entry_detail_base.html:70
 msgid "Related entries"
-msgstr "Artigos relacionados"
+msgstr "Entrades relacionades"
 
 #: templates/zinnia/entry_detail_base.html:82
 msgid "Similar entries"
-msgstr "Artigos semelhantes"
+msgstr "Entrades similars"
 
 #: templates/zinnia/entry_detail_base.html:90
 msgid "Comments"
-msgstr "Comentários"
+msgstr "Comentaris"
 
 #: templates/zinnia/entry_detail_base.html:112
 msgid "Direct link to this comment"
-msgstr "Link direto para esse comentário"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:134
 msgid "Pingbacks"
@@ -1081,15 +1078,15 @@ msgstr "Pingbacks"
 
 #: templates/zinnia/entry_detail_base.html:149
 msgid "Direct link to this pingback"
-msgstr "Link direto para esse pingback"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:160
 msgid "Pingbacks are open."
-msgstr "Pingbacks estão abertas."
+msgstr "Els pingbacks estan oberts."
 
 #: templates/zinnia/entry_detail_base.html:162
 msgid "Pingbacks are closed."
-msgstr "Pingbacks estão fechados."
+msgstr "Els pingbacks estan tancats."
 
 #: templates/zinnia/entry_detail_base.html:170
 msgid "Trackbacks"
@@ -1097,7 +1094,7 @@ msgstr "Trackbacks"
 
 #: templates/zinnia/entry_detail_base.html:185
 msgid "Direct link to this trackback"
-msgstr "Link direto paara esse trackback"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:198
 msgid "Trackback URL"
@@ -1105,28 +1102,28 @@ msgstr "Trackback URL"
 
 #: templates/zinnia/entry_list.html:5
 msgid "Latest entries for"
-msgstr "Ultimos artigos"
+msgstr "Últimes entrades de"
 
 #: templates/zinnia/entry_list.html:5
 msgid "the category"
-msgstr "na categoria"
+msgstr "la categoria"
 
 #: templates/zinnia/entry_list.html:5
 msgid "the tag"
-msgstr "na tag"
+msgstr "l'etiqueta"
 
 #: templates/zinnia/entry_list.html:5
 msgid "the author"
-msgstr "do autor"
+msgstr "l'autor"
 
 #: templates/zinnia/entry_list.html:5 templates/zinnia/entry_search.html:7
 msgid "page"
-msgstr "na página"
+msgstr "pàgina"
 
 #: templates/zinnia/entry_list.html:10 templates/zinnia/entry_list.html:13
 #: templates/zinnia/entry_list.html:16 templates/zinnia/skeleton.html:38
 msgid "RSS Feed"
-msgstr "RSS Feed"
+msgstr "Feed RSS"
 
 #: templates/zinnia/entry_list.html:20
 msgid "Category"
@@ -1134,26 +1131,26 @@ msgstr "Categoria"
 
 #: templates/zinnia/entry_list.html:20
 msgid "Tag"
-msgstr "Tag"
+msgstr "Etiqueta"
 
 #: templates/zinnia/entry_list.html:20 templates/zinnia/entry_search.html:5
 msgid "Page"
-msgstr "Página"
+msgstr "Pàgina"
 
 #: templates/zinnia/entry_list.html:28
 #, python-format
 msgid "Category archives: %(category)s"
-msgstr "Categoria: %(category)s"
+msgstr "Arxiu de categories: %(category)s"
 
 #: templates/zinnia/entry_list.html:35
 #, python-format
 msgid "Tag archives: %(tag)s"
-msgstr "Tag: %(tag)s"
+msgstr "Arxiu d'etiquetes: %(tag)s"
 
 #: templates/zinnia/entry_list.html:39
 #, python-format
 msgid "Author archives: %(author)s"
-msgstr "Autor: %(author)s"
+msgstr "Arxiu d'autors: %(author)s"
 
 #: templates/zinnia/entry_list.html:48 templates/zinnia/sitemap.html:25
 #: templates/zinnia/sitemap.html.py:45
@@ -1162,204 +1159,204 @@ msgstr "Autor: %(author)s"
 #: templates/zinnia/tags/random_entries.html:9
 #: templates/zinnia/tags/recent_entries.html:9
 msgid "No entries yet."
-msgstr "Não há artigos ainda."
+msgstr "No hi ha entrades."
 
 #: templates/zinnia/entry_list.html:67 templates/zinnia/entry_list.html:68
 msgid "Edit the category"
-msgstr "Editar a categoria"
+msgstr "Edita la categoria"
 
 #: templates/zinnia/entry_list.html:74 templates/zinnia/entry_list.html:75
 msgid "Edit the tag"
-msgstr "Editar o tag"
+msgstr "Edita l'etiqueta"
 
 #: templates/zinnia/entry_list.html:81 templates/zinnia/entry_list.html:82
 msgid "Edit the author"
-msgstr "Editar o autor"
+msgstr "Edita l'autor"
 
 #: templates/zinnia/entry_search.html:5 templates/zinnia/entry_search.html:7
 #: templates/zinnia/entry_search.html:17
 msgid "Search results for"
-msgstr "Resultados da busca por"
+msgstr "Resultats de cerca per"
 
 #: templates/zinnia/entry_search.html:11
 msgid "RSS Feed of search result of"
-msgstr "RSS Feed do resultado da pesquisa de"
+msgstr "Feed RSS de resultat de cerca de"
 
 #: templates/zinnia/entry_search.html:25
 #, python-format
 msgid "%(entry_count)s entry found"
 msgid_plural "%(entry_count)s entries found"
-msgstr[0] "%(entry_count)s artigo encontrado"
-msgstr[1] "%(entry_count)s artigos encontrados"
+msgstr[0] "%(entry_count)s entrada trobada"
+msgstr[1] "%(entry_count)s entrades trobades"
 
 #: templates/zinnia/entry_search.html:35
 msgid "Nothing found."
-msgstr "Nada foi encontrado."
+msgstr "No s'han trobat resultats."
 
 #: templates/zinnia/login.html:4 templates/zinnia/login.html.py:9
 msgid "Login required"
-msgstr "Login necessário"
+msgstr "Identificació requerida"
 
 #: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr "Seu nome de usuário e a senha não correspondem. Por favor, tente novamente."
+msgstr "El teu usuari i contrasenya no coincideixen. Prova de nou."
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
-msgstr "Você precisa estar conectado para visualizar este comentário."
+msgstr "Cal estar connectat per veure aquesta entrada."
 
 #: templates/zinnia/login.html:34
 msgid "Login"
-msgstr "Login"
+msgstr "Identificar-se"
 
 #: templates/zinnia/password.html:4 templates/zinnia/password.html.py:9
 msgid "Password required"
-msgstr "Senha necessária"
+msgstr "Contrasenya necessària"
 
 #: templates/zinnia/password.html:13
 msgid "The password provided is not valid. Please try again."
-msgstr "A senha fornecida não é válida. Por favor, tente novamente."
+msgstr "La contrasenya proporcionada no és vàlida. Tornar-ho a provar."
 
 #: templates/zinnia/password.html:17
 msgid "You need to provide a password to view this entry."
-msgstr "É preciso fornecer uma senha para visualizar este artigo."
+msgstr "Cal proporcionar una contrasenya per veure aquesta entrada."
 
 #: templates/zinnia/password.html:24
 msgid "Password"
-msgstr "Senha"
+msgstr "Contrasenya"
 
 #: templates/zinnia/password.html:29
 msgid "Valid"
-msgstr "Válido"
+msgstr "Vàlid"
 
 #: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:9
 #: templates/zinnia/skeleton.html:32 templates/zinnia/skeleton.html.py:33
 #: templates/zinnia/skeleton.html:70 templates/zinnia/skeleton.html.py:71
 msgid "Sitemap"
-msgstr "Mapa do Site"
+msgstr "Mapa del lloc"
 
 #: templates/zinnia/sitemap.html:12
 msgid "Entries per categories"
-msgstr "Artigos por categorias"
+msgstr "Entrades per categories"
 
 #: templates/zinnia/sitemap.html:20 templates/zinnia/sitemap.html.py:40
 msgid "comment"
-msgstr "comentário"
+msgstr "comentari"
 
 #: templates/zinnia/sitemap.html:33
 msgid "All the entries"
-msgstr "Todas os artigos"
+msgstr "Totes les entrades"
 
 #: templates/zinnia/skeleton.html:44 templates/zinnia/tags/search_form.html:5
 msgid "Keywords..."
-msgstr "Palavras-chave ..."
+msgstr "Paraules clau"
 
 #: templates/zinnia/skeleton.html:62
 msgid "Useful links"
-msgstr "Links úteis"
+msgstr "Enllaços d'interés"
 
 #: templates/zinnia/skeleton.html:65 templates/zinnia/skeleton.html.py:66
 msgid "Blog index"
-msgstr "Índice do Blog"
+msgstr "Índex del blog"
 
 #: templates/zinnia/skeleton.html:77
 msgid "Search"
-msgstr "Pesquisa"
+msgstr "Cerca"
 
 #: templates/zinnia/tag_list.html:5 templates/zinnia/tag_list.html.py:12
 msgid "Tag list"
-msgstr "Lista de tags"
+msgstr "Llista d'etiquetes"
 
 #: templates/zinnia/tag_list.html:23 templates/zinnia/tags/tag_cloud.html:12
 msgid "No tags yet."
-msgstr "Nenhuma tag ainda"
+msgstr "No hi ha etiquetes."
 
 #: templates/zinnia/tags/archives_entries.html:13
 #: templates/zinnia/tags/archives_entries_tree.html:38
 msgid "No archives yet."
-msgstr "Não há arquivos ainda."
+msgstr "No hi ha arxiu."
 
 #: templates/zinnia/tags/pagination.html:4
 #, python-format
 msgid "Page %(current_page)s of %(total_page)s"
-msgstr "Página %(current_page)s de %(total_page)s"
+msgstr "Pàgina %(current_page)s de %(total_page)s"
 
 #: templates/zinnia/tags/pagination.html:10
 msgid "More recent entries"
-msgstr "Artigos mais recentes"
+msgstr "Entrades més recents"
 
 #: templates/zinnia/tags/pagination.html:20
 #: templates/zinnia/tags/pagination.html:33
 #: templates/zinnia/tags/pagination.html:47
 msgid "Entries page"
-msgstr "Página de artigos"
+msgstr "Pàgina d'entrades"
 
 #: templates/zinnia/tags/pagination.html:56
 msgid "More old entries"
-msgstr "Artigos mais antigos"
+msgstr "Entrades més antigues"
 
 #: templates/zinnia/tags/recent_linkbacks.html:9
 msgid "Linkback on"
-msgstr "Linkback em"
+msgstr "Linkback a"
 
 #: templates/zinnia/tags/search_form.html:7
 msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex queries."
-msgstr "Você pode usar - para excluir palavras ou frases &quot;double quotes&quot; para frases exatas e os operadores AND/OR combinados com parenteses para buscas complexas."
+msgstr "Es pot utilitzar - per excloure paraules o frases, \"comilles dobles\" per frases exactes i els operadors lògics AND/OR combinats amb parèntesis per cerques complexes."
 
 #: templates/zinnia/tags/similar_entries.html:9
 msgid "No similar entries."
-msgstr "Não há artigos semelhantes."
+msgstr "No hi ha entrades similars."
 
 #: templates/zinnia/tags/tag_cloud.html:7
 #, python-format
 msgid "%(entry_count)s entry tagged by %(tag)s"
 msgid_plural "%(entry_count)s entries tagged by %(tag)s"
-msgstr[0] "%(entry_count)s post marcado por %(tag)s"
-msgstr[1] "%(entry_count)s posts marcados por %(tag)s"
+msgstr[0] "%(entry_count)s entrada etiquetada amb %(tag)s"
+msgstr[1] "%(entry_count)s entrades etiquetades amb %(tag)s"
 
 #: templatetags/zbreadcrumbs.py:82
 #, python-format
 msgid "Page %s"
-msgstr "Página %s"
+msgstr "Pàgina %s"
 
 #: templatetags/zbreadcrumbs.py:108
 #, python-format
 msgid "Week %s"
-msgstr "Semana %s"
+msgstr "Setmana %s"
 
 #: tests/views.py:409 views/search.py:30
 msgid "The pattern is too short"
-msgstr "O padrão é muito curto"
+msgstr "El patró és massa curt"
 
 #: tests/views.py:413 views/search.py:34
 msgid "No pattern to search found"
-msgstr "Nenhum padrão encontrado"
+msgstr "No s'ha trobat cap patró de cerca"
 
 #: views/tags.py:48
 #, python-format
 msgid "No Tag found matching \"%s\"."
-msgstr "Nenhuma Tag encontrada com \"%s\""
+msgstr "No s'han trobat etiquetes que concordin amb \"%s\"."
 
 #: xmlrpc/metaweblog.py:36
 msgid "Username is incorrect."
-msgstr "Nome de usuário está incorreto."
+msgstr "El nom d'usuari és incorrecte"
 
 #: xmlrpc/metaweblog.py:38
 msgid "Password is invalid."
-msgstr "A senha é inválida."
+msgstr "La contrasenya és incorrecta"
 
 #: xmlrpc/metaweblog.py:40
 msgid "User account unavailable."
-msgstr "Conta de usuário não disponível."
+msgstr "El compte d'usuari no està disponible"
 
 #: xmlrpc/metaweblog.py:43
 #, python-format
 msgid "User cannot %s."
-msgstr "Usuário não pode %s."
+msgstr "L'usuari no pot %s."
 
 #: xmlrpc/pingback.py:100
 msgid "No title"
-msgstr "Sem título"
+msgstr "No hi ha títol."

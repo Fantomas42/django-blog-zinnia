@@ -38,8 +38,11 @@ LANGUAGES = (('en', gettext('English')),
              ('ru', gettext('Russian')),
              ('pl', gettext('Polish')),
              ('eu', gettext('Basque')),
+             ('ca', gettext('Catalan')),
+             ('tr', gettext('Turkish')),
              ('hr_HR', gettext('Croatian')),
              ('pt_BR', gettext('Brazilian Portuguese')),
+             ('fi_FI', gettext('Finnish (Finland)')),
              ('zh_CN', gettext('Simplified Chinese')),)
 
 PASSWORD_HASHERS = (
