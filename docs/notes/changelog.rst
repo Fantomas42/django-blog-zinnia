@@ -1,8 +1,8 @@
 CHANGELOG
 =========
 
-0.12.dev
---------
+0.12
+----
 
 * Optimizations on the templates
 * Optimizations on the database queries
