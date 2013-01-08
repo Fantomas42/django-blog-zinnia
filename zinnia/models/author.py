@@ -8,25 +8,35 @@ from zinnia.managers import EntryRelatedPublishedManager
 
 
 class Author(User):
-    """Proxy model around :class:`django.contrib.auth.models.User`"""
+    """
+    Proxy model around :class:`django.contrib.auth.models.User`.
+    """
 
     objects = UserManager()
     published = EntryRelatedPublishedManager()
 
     def entries_published(self):
-        """Return only the entries published"""
+        """
+        Returns author's published entries.
+        """
         return entries_published(self.entries)
-
-    def __unicode__(self):
-        """If the user has a full name, use that or else the username"""
-        return self.get_full_name() or self.username
 
     @models.permalink
     def get_absolute_url(self):
-        """Return author's URL"""
+        """
+        Builds and returns the author's URL based on his username.
+        """
         return ('zinnia_author_detail', (self.username,))
 
+    def __unicode__(self):
+        """
+        If the user has a full name, use it instead of the username.
+        """
+        return self.get_full_name() or self.username
+
     class Meta:
-        """Author's Meta"""
+        """
+        Author's meta informations.
+        """
         app_label = 'zinnia'
         proxy = True
