@@ -125,10 +125,8 @@ Twitter
 
 When you post a new entry on your blog you might want to tweet it as well.
 
-In order to do that, you first need to activate the :ref:`zinnia-bitly` support like
-described above.
-
-Then install `tweepy`_ and add these settings. ::
+In order to do that, you first need to install `tweepy`_ and add these
+settings. ::
 
   TWITTER_CONSUMER_KEY = 'Your Consumer Key'
   TWITTER_CONSUMER_SECRET = 'Your Consumer Secret'
@@ -142,8 +140,8 @@ follow this excellent tutorial at:
 
 http://jmillerinc.com/2010/05/31/twitter-from-the-command-line-in-python-using-oauth/
 
-Now in the admin, you can post an update containing your
-entry's title and the shortened URL of your entry.
+Now in the admin, you can post an update containing your entry's title and
+the shortened URL of your entry.
 
 .. _zinnia-django-cms:
 

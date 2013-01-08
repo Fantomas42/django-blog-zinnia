@@ -356,6 +356,7 @@ to optimize the search querying and the results.
 
 ZINNIA_USE_TWITTER
 ------------------
-**Default value:** ``True if python-twitter is in the PYTHONPATH``
+**Default value:** ``True if the crendentials of Twitter have been defined``
 
-Boolean telling if Zinnia can use Twitter.
+Boolean telling if the credentials of a Twitter account have been set and
+if Zinnia can post on Twitter.
