@@ -289,6 +289,7 @@ class Command(LabelCommand):
             'login_required': item_node.find(
                 '{%s}status' % WP_NS).text == 'private',
             'last_update': timezone.now()}
+        entry_dict['trackback_enabled'] = entry_dict['pingback_enabled']
 
         entry, created = Entry.objects.get_or_create(
             slug=slug, creation_date=creation_date,
