@@ -31,6 +31,9 @@
          title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
          rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.{% endwith %}
     </p>
+    <p class="entry-last-update">
+      {% trans "Last update on" %} <abbr class="updated" title="{{ object.last_update|date:"c" }}">{{ object.last_update|date:"DATE_FORMAT" }}</abbr>.
+    </p>
   </div>
 
   <div class="entry-body">
