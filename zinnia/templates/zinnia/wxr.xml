@@ -53,6 +53,7 @@
       <wp:post_date_gmt>0000-00-00 00:00:00</wp:post_date_gmt>
       <wp:comment_status>{% if entry.comment_enabled %}open{% else %}closed{% endif %}</wp:comment_status>
       <wp:ping_status>{% if entry.pingback_enabled %}open{% else %}closed{% endif %}</wp:ping_status>
+      <wp:track_status>{% if entry.trackback_enabled %}open{% else %}closed{% endif %}</wp:track_status>
       <wp:post_name>{{ entry.slug }}</wp:post_name>
       <wp:status>{% if entry.is_visible %}{% if entry.login_required %}private{% else %}publish{% endif %}{% else %}draft{% endif %}</wp:status>
       <wp:post_parent>0</wp:post_parent>
