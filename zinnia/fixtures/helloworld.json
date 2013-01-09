@@ -52,6 +52,7 @@
       "featured": false,
       "start_publication": null,
       "pingback_enabled": true,
+      "trackback_enabled": true,
       "authors": [
         1
       ],
@@ -88,6 +89,7 @@
       "featured": false,
       "start_publication": null,
       "pingback_enabled": true,
+      "trackback_enabled": true,
       "authors": [
         1
       ],
@@ -124,6 +126,7 @@
       "featured": false,
       "start_publication": null,
       "pingback_enabled": true,
+      "trackback_enabled": true,
       "authors": [
         1
       ],
