@@ -445,7 +445,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             self.client.get('/trackback/1/').status_code, 301)
         entry = Entry.objects.get(slug='test-1')
         self.assertEquals(entry.trackback_count, 0)
-        entry.pingback_enabled = False
+        entry.trackback_enabled = False
         entry.save()
         self.assertEquals(
             self.client.post('/trackback/1/',
@@ -453,7 +453,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
             '<error>1</error>\n  <message>Trackback is not enabled for '
             'Test 1</message>\n  \n</response>\n')
-        entry.pingback_enabled = True
+        entry.trackback_enabled = True
         entry.save()
         connect_discussion_signals()
         get_user_flagger()  # Memoize user flagger for stable query number
