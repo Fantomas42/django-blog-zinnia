@@ -106,7 +106,8 @@ def post_structure(entry, site):
             # Useful Movable Type Extensions
             'mt_excerpt': entry.excerpt,
             'mt_allow_comments': int(entry.comment_enabled),
-            'mt_allow_pings': int(entry.pingback_enabled),
+            'mt_allow_pings': (int(entry.pingback_enabled) or
+                               int(entry.trackback_enabled)),
             'mt_keywords': entry.tags,
             # Useful Wordpress Extensions
             'wp_author': author.username,
@@ -224,6 +225,7 @@ def new_post(blog_id, username, password, post, publish):
                   'last_update': creation_date,
                   'comment_enabled': post.get('mt_allow_comments', 1) == 1,
                   'pingback_enabled': post.get('mt_allow_pings', 1) == 1,
+                  'trackback_enabled': post.get('mt_allow_pings', 1) == 1,
                   'featured': post.get('sticky', 0) == 1,
                   'tags': 'mt_keywords' in post and post['mt_keywords'] or '',
                   'slug': 'wp_slug' in post and post['wp_slug'] or slugify(
@@ -274,6 +276,7 @@ def edit_post(post_id, username, password, post, publish):
     entry.last_update = timezone.now()
     entry.comment_enabled = post.get('mt_allow_comments', 1) == 1
     entry.pingback_enabled = post.get('mt_allow_pings', 1) == 1
+    entry.trackback_enabled = post.get('mt_allow_pings', 1) == 1
     entry.featured = post.get('sticky', 0) == 1
     entry.tags = 'mt_keywords' in post and post['mt_keywords'] or ''
     entry.slug = 'wp_slug' in post and post['wp_slug'] or slugify(
