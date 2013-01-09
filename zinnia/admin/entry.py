@@ -39,25 +39,26 @@ class EntryAdmin(admin.ModelAdmin):
                                  'classes': ('collapse', 'collapse-closed')}),
                  (_('Privacy'), {'fields': ('password', 'login_required',),
                                  'classes': ('collapse', 'collapse-closed')}),
-                 (_('Discussion'), {'fields': ('comment_enabled',
-                                               'pingback_enabled')}),
+                 (_('Discussions'), {'fields': ('comment_enabled',
+                                                'pingback_enabled',
+                                                'trackback_enabled'),
+                                     'classes': ('collapse',
+                                                 'collapse-closed')}),
                  (_('Publication'), {'fields': ('categories', 'tags',
                                                 'sites', 'slug')}))
     list_filter = (CategoryListFilter, AuthorListFilter, 'status', 'featured',
                    'login_required', 'comment_enabled', 'pingback_enabled',
-                   'creation_date', 'start_publication',
+                   'trackback_enabled', 'creation_date', 'start_publication',
                    'end_publication', 'sites')
     list_display = ('get_title', 'get_authors', 'get_categories',
-                    'get_tags', 'get_sites',
-                    'get_comments_are_open', 'pingback_enabled',
-                    'get_is_actual', 'get_is_visible', 'get_link',
+                    'get_tags', 'get_sites', 'get_is_visible',
                     'get_short_url', 'creation_date')
     radio_fields = {'template': admin.VERTICAL}
     filter_horizontal = ('categories', 'authors', 'related')
     prepopulated_fields = {'slug': ('title', )}
     search_fields = ('title', 'excerpt', 'content', 'tags')
     actions = ['make_mine', 'make_published', 'make_hidden',
-               'close_comments', 'close_pingbacks',
+               'close_comments', 'close_pingbacks', 'close_trackbacks',
                'ping_directories', 'make_tweet', 'put_on_top']
     actions_on_top = True
     actions_on_bottom = True
@@ -71,12 +72,15 @@ class EntryAdmin(admin.ModelAdmin):
         """Return the title with word count and number of comments"""
         title = _('%(title)s (%(word_count)i words)') % \
             {'title': entry.title, 'word_count': entry.word_count}
-        if entry.comment_count:
+        reaction_count = (entry.comment_count +
+                          entry.pingback_count +
+                          entry.trackback_count)
+        if reaction_count:
             return ungettext_lazy(
-                '%(title)s (%(comments)i comment)',
-                '%(title)s (%(comments)i comments)', entry.comment_count) % \
+                '%(title)s (%(reactions)i reaction)',
+                '%(title)s (%(reactions)i reactions)', reaction_count) % \
                 {'title': title,
-                 'comments': entry.comment_count}
+                 'reactions': reaction_count}
         return title
     get_title.short_description = _('title')
 
@@ -125,38 +129,16 @@ class EntryAdmin(admin.ModelAdmin):
     get_sites.allow_tags = True
     get_sites.short_description = _('site(s)')
 
-    def get_comments_are_open(self, entry):
-        """Admin wrapper for entry.comments_are_open"""
-        return entry.comments_are_open
-    get_comments_are_open.boolean = True
-    get_comments_are_open.short_description = _('comment enabled')
-
-    def get_is_actual(self, entry):
-        """Admin wrapper for entry.is_actual"""
-        return entry.is_actual
-    get_is_actual.boolean = True
-    get_is_actual.short_description = _('is actual')
-
     def get_is_visible(self, entry):
         """Admin wrapper for entry.is_visible"""
         return entry.is_visible
     get_is_visible.boolean = True
     get_is_visible.short_description = _('is visible')
 
-    def get_link(self, entry):
-        """Return a formated link to the entry"""
-        return u'<a href="%s" target="blank">%s</a>' % (
-            entry.get_absolute_url(), _('View'))
-    get_link.allow_tags = True
-    get_link.short_description = _('View on site')
-
     def get_short_url(self, entry):
         """Return the short url in HTML"""
-        short_url = entry.short_url
-        if not short_url:
-            return _('Unavailable')
         return '<a href="%(url)s" target="blank">%(url)s</a>' % \
-               {'url': short_url}
+               {'url': entry.short_url}
     get_short_url.allow_tags = True
     get_short_url.short_description = _('short url')
 
@@ -272,9 +254,17 @@ class EntryAdmin(admin.ModelAdmin):
         """Close the pingbacks for selected entries"""
         queryset.update(pingback_enabled=False)
         self.message_user(
-            request, _('Linkbacks are now closed for selected entries.'))
+            request, _('Pingbacks are now closed for selected entries.'))
     close_pingbacks.short_description = _(
-        'Close the linkbacks for selected entries')
+        'Close the pingbacks for selected entries')
+
+    def close_trackbacks(self, request, queryset):
+        """Close the trackbacks for selected entries"""
+        queryset.update(trackback_enabled=False)
+        self.message_user(
+            request, _('Trackbacks are now closed for selected entries.'))
+    close_trackbacks.short_description = _(
+        'Close the trackbacks for selected entries')
 
     def put_on_top(self, request, queryset):
         """Put the selected entries on top at the current date"""
