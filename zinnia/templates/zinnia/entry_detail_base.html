@@ -101,7 +101,7 @@
 	<a href="{{ comment.url }}" rel="external nofollow"
            class="fn url">{{ comment.name }}</a>
 	{% else %}
-	{{ comment.name }}
+	<span class="fn"{{ comment.name }}</span>
 	{% endif %}
 	{% trans "on" %}
         <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">

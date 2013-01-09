@@ -15,7 +15,7 @@
   <li class="vcard">
     <a href="{{ object.get_absolute_url }}"
        title="{% blocktrans with author=object %}Show all {{ author }}'s entries{% endblocktrans %}"
-       class="fn nickname url">{{ object }}</a>
+       class="fn url{% if not author.get_full_name %} nickname{% endif %}">{{ object }}</a>
     {% blocktrans count entry_count=object.count_entries_published %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
   </li>
   {% empty %}
