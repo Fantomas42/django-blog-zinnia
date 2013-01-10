@@ -5,8 +5,10 @@ Develop
 -------
 
 * Microformats improved
+* Improve Blogger importer
 * Finest control on linkbacks
 * Split Entry model into mixins
+* Custom template for content rendering
 
 0.12
 ----

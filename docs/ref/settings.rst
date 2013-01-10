@@ -20,19 +20,6 @@ All settings described here can be found in :file:`zinnia/settings.py`.
 Entry
 =====
 
-.. setting:: ZINNIA_ENTRY_TEMPLATES
-
-ZINNIA_ENTRY_TEMPLATES
-----------------------
-**Default value:** ``()`` (Empty tuple)
-
-List of tuple for extending the list of templates availables for
-rendering the entry. By using this setting, you can change the look and
-feel of an entry directly in the admin interface. Example: ::
-
-  ZINNIA_ENTRY_TEMPLATES = (('entry_detail_alternate.html',
-                             gettext('Alternative template')),)
-
 .. setting:: ZINNIA_ENTRY_BASE_MODEL
 
 ZINNIA_ENTRY_BASE_MODEL
@@ -41,6 +28,34 @@ ZINNIA_ENTRY_BASE_MODEL
 
 String defining the base model path for the Entry model. See
 :doc:`/how-to/extending_entry_model` for more informations.
+
+.. setting:: ZINNIA_ENTRY_DETAIL_TEMPLATES
+
+ZINNIA_ENTRY_DETAIL_TEMPLATES
+-----------------------------
+**Default value:** ``()`` (Empty tuple)
+
+List of tuple for extending the list of templates availables for
+rendering the entry detail view. By using this setting, you can
+change the look and feel of an entry page directly in the admin
+interface. Example: ::
+
+  ZINNIA_ENTRY_DETAIL_TEMPLATES = (('entry_detail_alternate.html',
+                                    gettext('Alternative template')),)
+
+.. setting:: ZINNIA_ENTRY_CONTENT_TEMPLATES
+
+ZINNIA_ENTRY_CONTENT_TEMPLATES
+------------------------------
+**Default value:** ``()`` (Empty tuple)
+
+List of tuple for extending the list of templates availables for
+rendering the content of an entry. By using this setting, you can
+change the look and feel of an entry directly in the admin
+interface. Example: ::
+
+  ZINNIA_ENTRY_CONTENT_TEMPLATES = (('zinnia/_entry_detail_alternate.html',
+                                     gettext('Alternative template')),)
 
 .. setting:: ZINNIA_UPLOAD_TO
 
