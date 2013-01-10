@@ -113,14 +113,14 @@ class EntryQuerysetArchiveTemplateResponseMixin(TemplateResponseMixin):
 class EntryArchiveTemplateResponseMixin(
         EntryQuerysetArchiveTemplateResponseMixin):
     """Same as EntryQuerysetArchivetemplateResponseMixin
-    but use the template defined in the Entr instance
+    but use the template defined in the Entry instance
     as the base template name."""
 
     def get_default_base_template_names(self):
         """Return the Entry.template value"""
-        return [self.object.template,
+        return [self.object.detail_template,
                 '%s.html' % self.object.slug,
-                '%s_%s' % (self.object.slug, self.object.template)]
+                '%s_%s' % (self.object.slug, self.object.detail_template)]
 
 
 class EntryQuerysetArchiveTodayTemplateResponseMixin(

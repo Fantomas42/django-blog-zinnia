@@ -221,7 +221,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         entry.sites.clear()
         response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertEquals(response.status_code, 404)
-        entry.template = '_entry_detail.html'
+        entry.detail_template = '_entry_detail.html'
         entry.save()
         entry.sites.add(Site.objects.get_current())
         with self.assertNumQueries(1):

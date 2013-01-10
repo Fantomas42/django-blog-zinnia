@@ -144,7 +144,7 @@ class MixinTestCase(TestCase):
 
     def test_entry_archive_template_response_mixin(self):
         class FakeEntry(object):
-            template = 'entry_detail.html'
+            detail_template = 'entry_detail.html'
             slug = 'my-fake-entry'
 
         get_year = lambda: 2012
@@ -189,7 +189,7 @@ class MixinTestCase(TestCase):
              'zinnia/entry_detail.html',
              'entry_detail.html'])
 
-        instance.object.template = 'custom.html'
+        instance.object.detail_template = 'custom.html'
         self.assertEquals(
             instance.get_template_names(),
             ['zinnia/archives/2012/04/21/my-fake-entry_custom.html',

@@ -31,7 +31,9 @@ class EntryAdmin(admin.ModelAdmin):
     date_hierarchy = 'creation_date'
     fieldsets = ((_('Content'), {'fields': ('title', 'content',
                                             'image', 'status')}),
-                 (_('Options'), {'fields': ('featured', 'excerpt', 'template',
+                 (_('Options'), {'fields': ('featured', 'excerpt',
+                                            'content_template',
+                                            'detail_template',
                                             'related', 'authors',
                                             'creation_date',
                                             'start_publication',
@@ -53,7 +55,8 @@ class EntryAdmin(admin.ModelAdmin):
     list_display = ('get_title', 'get_authors', 'get_categories',
                     'get_tags', 'get_sites', 'get_is_visible',
                     'get_short_url', 'creation_date')
-    radio_fields = {'template': admin.VERTICAL}
+    radio_fields = {'content_template': admin.VERTICAL,
+                    'detail_template': admin.VERTICAL}
     filter_horizontal = ('categories', 'authors', 'related')
     prepopulated_fields = {'slug': ('title', )}
     search_fields = ('title', 'excerpt', 'content', 'tags')

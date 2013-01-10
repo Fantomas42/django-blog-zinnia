@@ -25,9 +25,10 @@ from zinnia.models.category import Category
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import UPLOAD_TO
 from zinnia.settings import MARKUP_LANGUAGE
-from zinnia.settings import ENTRY_TEMPLATES
-from zinnia.settings import ENTRY_BASE_MODEL
 from zinnia.settings import MARKDOWN_EXTENSIONS
+from zinnia.settings import ENTRY_BASE_MODEL
+from zinnia.settings import ENTRY_DETAIL_TEMPLATES
+from zinnia.settings import ENTRY_CONTENT_TEMPLATES
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.settings import AUTO_CLOSE_PINGBACKS_AFTER
 from zinnia.settings import AUTO_CLOSE_TRACKBACKS_AFTER
@@ -408,16 +409,32 @@ class PasswordRequiredEntry(models.Model):
         abstract = True
 
 
+class ContentTemplateEntry(models.Model):
+    """
+    Abstract model class to display entry's content
+    with a custom template.
+    """
+    content_template = models.CharField(
+        _('content template'), max_length=250,
+        default='zinnia/_entry_detail.html',
+        choices=[('zinnia/_entry_detail.html', _('Default template'))] +
+        ENTRY_CONTENT_TEMPLATES,
+        help_text=_("Template used to display the entry's content."))
+
+    class Meta:
+        abstract = True
+
+
 class DetailTemplateEntry(models.Model):
     """
     Abstract model class to display entries with a
     custom template if needed on the detail page.
     """
-    template = models.CharField(
-        _('template'), max_length=250,
+    detail_template = models.CharField(
+        _('detail template'), max_length=250,
         default='entry_detail.html',
         choices=[('entry_detail.html', _('Default template'))] +
-        ENTRY_TEMPLATES,
+        ENTRY_DETAIL_TEMPLATES,
         help_text=_("Template used to display the entry's detail page."))
 
     class Meta:
@@ -436,6 +453,7 @@ class EntryAbstractClass(
         TagsEntry,
         LoginRequiredEntry,
         PasswordRequiredEntry,
+        ContentTemplateEntry,
         DetailTemplateEntry):
     """
     Final abstract entry model class assembling

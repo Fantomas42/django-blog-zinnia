@@ -13,8 +13,11 @@ PAGINATION = getattr(settings, 'ZINNIA_PAGINATION', 10)
 ALLOW_EMPTY = getattr(settings, 'ZINNIA_ALLOW_EMPTY', True)
 ALLOW_FUTURE = getattr(settings, 'ZINNIA_ALLOW_FUTURE', True)
 
-ENTRY_TEMPLATES = getattr(settings, 'ZINNIA_ENTRY_TEMPLATES', [])
 ENTRY_BASE_MODEL = getattr(settings, 'ZINNIA_ENTRY_BASE_MODEL', '')
+ENTRY_DETAIL_TEMPLATES = getattr(
+    settings, 'ZINNIA_ENTRY_DETAIL_TEMPLATES', [])
+ENTRY_CONTENT_TEMPLATES = getattr(
+    settings, 'ZINNIA_ENTRY_CONTENT_TEMPLATES', [])
 
 MARKUP_LANGUAGE = getattr(settings, 'ZINNIA_MARKUP_LANGUAGE', 'html')
 
