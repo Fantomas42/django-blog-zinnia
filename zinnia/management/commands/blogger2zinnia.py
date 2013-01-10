@@ -39,6 +39,8 @@ class Command(NoArgsCommand):
                     help='The Zinnia category to import Blogger posts to'),
         make_option('--blogger-blog-id', dest='blogger_blog_id', default='',
                     help='The id of the Blogger blog to import'),
+        make_option('--blogger-limit', dest='blogger_limit', default=25,
+                    help='Specify a limit for posts to be imported'),
         make_option('--author', dest='author', default='',
                     help='All imported entries belong to specified author'))
 
@@ -70,8 +72,9 @@ class Command(NoArgsCommand):
 
         self.verbosity = int(options.get('verbosity', 1))
         self.blogger_username = options.get('blogger_username')
-        self.category_title = options.get('category_title')
         self.blogger_blog_id = options.get('blogger_blog_id')
+        self.blogger_limit = int(options.get('blogger_limit'))
+        self.category_title = options.get('category_title')
 
         self.write_out(self.style.TITLE(
             'Starting migration from Blogger to Zinnia %s\n' % __version__))
@@ -145,7 +148,8 @@ class Command(NoArgsCommand):
     def import_posts(self):
         category = self.get_category()
         self.write_out(self.style.STEP('- Importing entries\n'))
-        for post in self.blogger_manager.get_posts(self.blogger_blog_id):
+        for post in self.blogger_manager.get_posts(self.blogger_blog_id,
+                                                   self.blogger_limit):
             creation_date = convert_blogger_timestamp(post.published.text)
             status = DRAFT if is_draft(post) else PUBLISHED
             title = post.title.text or ''
@@ -254,8 +258,9 @@ class BloggerManager(object):
         for blog in feed.entry:
             yield blog
 
-    def get_posts(self, blog_id):
-        feed = self.service.Get('/feeds/%s/posts/default' % blog_id)
+    def get_posts(self, blog_id, limit):
+        feed = self.service.Get('/feeds/%s/posts/default/?max-results=%d' %
+                                (blog_id, limit))
         for post in feed.entry:
             yield post
 
