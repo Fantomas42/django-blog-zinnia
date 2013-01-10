@@ -29,6 +29,8 @@ from zinnia.settings import ENTRY_TEMPLATES
 from zinnia.settings import ENTRY_BASE_MODEL
 from zinnia.settings import MARKDOWN_EXTENSIONS
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
+from zinnia.settings import AUTO_CLOSE_PINGBACKS_AFTER
+from zinnia.settings import AUTO_CLOSE_TRACKBACKS_AFTER
 from zinnia.managers import entries_published
 from zinnia.managers import EntryPublishedManager
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
@@ -235,17 +237,44 @@ class DiscussionsEntry(models.Model):
         """
         return self.discussions.filter(flags__flag=TRACKBACK)
 
+    def discussion_is_still_open(self, discussion_type, auto_close_after):
+        """
+        Checks if a type of discussion is still open
+        are a certain number of days.
+        """
+        discussion_enabled = getattr(self, discussion_type)
+        if auto_close_after and discussion_enabled:
+            return (timezone.now() - (
+                self.start_publication or self.creation_date)).days < \
+                auto_close_after
+        return discussion_enabled
+
     @property
     def comments_are_open(self):
         """
         Checks if the comments are open with the
         AUTO_CLOSE_COMMENTS_AFTER setting.
         """
-        if AUTO_CLOSE_COMMENTS_AFTER and self.comment_enabled:
-            return (timezone.now() - (
-                self.start_publication or self.creation_date)).days < \
-                AUTO_CLOSE_COMMENTS_AFTER
-        return self.comment_enabled
+        return self.discussion_is_still_open(
+            'comment_enabled', AUTO_CLOSE_COMMENTS_AFTER)
+
+    @property
+    def pingbacks_are_open(self):
+        """
+        Checks if the pingbacks are open with the
+        AUTO_CLOSE_PINGBACKS_AFTER setting.
+        """
+        return self.discussion_is_still_open(
+            'pingback_enabled', AUTO_CLOSE_PINGBACKS_AFTER)
+
+    @property
+    def trackbacks_are_open(self):
+        """
+        Checks if the trackbacks are open with the
+        AUTO_CLOSE_TRACKBACKS_AFTER setting.
+        """
+        return self.discussion_is_still_open(
+            'trackback_enabled', AUTO_CLOSE_TRACKBACKS_AFTER)
 
     class Meta:
         abstract = True
