@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+Develop
+-------
+
+* Microformats improved
+* Finest control on linkbacks
+* Split Entry model into mixins
+
 0.12
 ----
 

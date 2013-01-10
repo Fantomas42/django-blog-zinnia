@@ -190,8 +190,8 @@ set this setting to ``https``.
 
 .. _settings-comments:
 
-Comment moderation
-==================
+Comments
+========
 
 .. setting:: ZINNIA_AUTO_MODERATE_COMMENTS
 
@@ -268,6 +268,31 @@ ZINNIA_COMMENT_FLAG_USER_ID
 
 The ID of the User to be used when flagging the comments as spam, pingback
 or trackback.
+
+.. _settings-linkbacks:
+
+Linkbacks
+=========
+
+.. setting:: ZINNIA_AUTO_CLOSE_PINGBACKS_AFTER
+
+ZINNIA_AUTO_CLOSE_PINGBACKS_AFTER
+---------------------------------
+**Default value:** ``None``
+
+Determine the number of days where pingbacks are open. If you set this
+setting to ``10`` the pingbacks will be closed automaticaly 10 days after
+the publication date of your entries.
+
+.. setting:: ZINNIA_AUTO_CLOSE_TRACKBACKS_AFTER
+
+ZINNIA_AUTO_CLOSE_TRACKBACKS_AFTER
+----------------------------------
+**Default value:** ``None``
+
+Determine the number of days where trackbacks are open. If you set this
+setting to ``10`` the trackbacks will be closed automaticaly 10 days after
+the publication date of your entries.
 
 .. _settings-pinging:
 
