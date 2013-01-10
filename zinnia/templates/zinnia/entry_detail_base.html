@@ -156,7 +156,7 @@
   </ol>
   {% endwith %}
   {% endif %}
-  {% if object.pingback_enabled %}
+  {% if object.pingbacks_are_open %}
   <p>{% trans "Pingbacks are open." %}</p>
   {% else %}
   <p>{% trans "Pingbacks are closed." %}</p>
@@ -165,7 +165,7 @@
 {% endblock %}
 
 {% block entry-trackbacks %}
-{% if object.trackback_count or object.trackback_enabled %}
+{% if object.trackback_count or object.trackbacks_are_open %}
 <div id="trackbacks">
   <h3>{% trans "Trackbacks" %}</h3>
   {% if object.trackback_count %}
@@ -192,7 +192,7 @@
   </ol>
   {% endwith %}
   {% endif %}
-  {% if object.trackback_enabled %}
+  {% if object.trackbacks_are_open %}
   <p>
     <a href="{% url 'zinnia_entry_trackback' object.pk %}" rel="trackback">
       {% trans "Trackback URL" %}</a>

@@ -45,7 +45,7 @@ class EntryTrackback(TemplateMimeTypeView):
         entry = self.get_object()
         site = Site.objects.get_current()
 
-        if not entry.trackback_enabled:
+        if not entry.trackbacks_are_open:
             return self.render_to_response(
                 {'error': u'Trackback is not enabled for %s' % entry.title})
 

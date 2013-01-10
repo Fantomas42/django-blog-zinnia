@@ -90,7 +90,7 @@ def pingback_ping(source, target):
                 creation_date__year=kwargs['year'],
                 creation_date__month=kwargs['month'],
                 creation_date__day=kwargs['day'])
-            if not entry.pingback_enabled:
+            if not entry.pingbacks_are_open:
                 return TARGET_IS_NOT_PINGABLE
         except (KeyError, Entry.DoesNotExist):
             return TARGET_IS_NOT_PINGABLE
