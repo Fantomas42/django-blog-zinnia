@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2012-12-14 04:35-0600\n"
-"PO-Revision-Date: 2012-12-14 10:35+0000\n"
+"POT-Creation-Date: 2013-01-10 08:14-0600\n"
+"PO-Revision-Date: 2013-01-10 14:16+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,106 +18,106 @@ msgstr ""
 "Language: fi_FI\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: feeds.py:121 templates/zinnia/entry_archive.html:5
+#: feeds.py:122 templates/zinnia/entry_archive.html:5
 #: templates/zinnia/entry_archive.html:7 templates/zinnia/entry_list.html:20
 msgid "Latest entries"
 msgstr "Uusimmat kirjoitukset"
 
-#: feeds.py:125
+#: feeds.py:126
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "Uusimmat kirjoitukset sivustolla %s"
 
-#: feeds.py:145
+#: feeds.py:146
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Kirjoitukset kategoriassa %s"
 
-#: feeds.py:149
+#: feeds.py:150
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "Uusimmat kirjoitukset kategoriassa %s"
 
-#: feeds.py:169
+#: feeds.py:170
 #, python-format
 msgid "Entries for author %s"
 msgstr "Kirjoittajan %s kirjoitukset"
 
-#: feeds.py:173
+#: feeds.py:174
 #, python-format
 msgid "The latest entries by %s"
 msgstr "Kirjoittajan %s uusimmat kirjoitukset"
 
-#: feeds.py:194
+#: feeds.py:195
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Kirjoitukset, jotka sisältävät tagin %s"
 
-#: feeds.py:198
+#: feeds.py:199
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "Viimeisiimät kirjoitukset tagilla %s"
 
-#: feeds.py:221
+#: feeds.py:222
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr "Tulokset haulle %s'"
 
-#: feeds.py:225
+#: feeds.py:226
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr "Kirjoitukset, jotka sisältävät tekstin %s'"
 
-#: feeds.py:270
+#: feeds.py:271
 msgid "Latest discussions"
 msgstr "Uusimmat kommentit"
 
-#: feeds.py:274
+#: feeds.py:275
 #, python-format
 msgid "The latest discussions for the site %s"
 msgstr "Uusimmat kommentit sivustolle %s"
 
-#: feeds.py:297
+#: feeds.py:298
 #, python-format
 msgid "Discussions on %s"
 msgstr "Keskustelut %s"
 
-#: feeds.py:301
+#: feeds.py:302
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "Uusimmat keskustelut kirjoitukseen %s"
 
-#: feeds.py:319
+#: feeds.py:321
 #, python-format
 msgid "Comments on %s"
 msgstr "Kommentit kirjoitukseen %s"
 
-#: feeds.py:323
+#: feeds.py:325
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "Uusimmat kommentit kirjoitukseen %s"
 
-#: feeds.py:353
+#: feeds.py:355
 #, python-format
 msgid "Pingbacks on %s"
 msgstr "Päivitysilmoitukset artikkelille %s"
 
-#: feeds.py:357
+#: feeds.py:359
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "Uusimmat päivitysilmoitukset artikkelille %s"
 
-#: feeds.py:375
+#: feeds.py:377
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "Paluuviitteet artikkeliin %s"
 
-#: feeds.py:379
+#: feeds.py:381
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "Paluuviitteet artikkeliin %s"
 
-#: moderator.py:59 moderator.py:81 moderator.py:106
+#: moderator.py:59 moderator.py:80 moderator.py:101
 #, python-format
 msgid "[%(site)s] New comment posted on \"%(title)s\""
 msgstr "[%(site)s] Uusi kommentti lisätty kirjoitukselle \"%(title)s\""
@@ -134,159 +134,148 @@ msgstr "Sisältö"
 msgid "Options"
 msgstr "Lisävalinnat"
 
-#: admin/entry.py:40
+#: admin/entry.py:42
 msgid "Privacy"
 msgstr "Suojausasetukset"
 
-#: admin/entry.py:42
-msgid "Discussion"
-msgstr "Kommentointi"
+#: admin/entry.py:44 templates/admin/zinnia/widgets/_content_stats.html:5
+#: templates/zinnia/_entry_detail_base.html:109
+msgid "Discussions"
+msgstr "Kommentit"
 
-#: admin/entry.py:44
+#: admin/entry.py:49
 msgid "Publication"
 msgstr "Julkaisu"
 
-#: admin/entry.py:72
+#: admin/entry.py:76
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i sanaa)"
 
-#: admin/entry.py:75
+#: admin/entry.py:83
 #, python-format
-msgid "%(title)s (%(comments)i comment)"
-msgid_plural "%(title)s (%(comments)i comments)"
-msgstr[0] "%(title)s (%(comments)i kommentti)"
-msgstr[1] "%(title)s (%(comments)i kommenttia)"
+msgid "%(title)s (%(reactions)i reaction)"
+msgid_plural "%(title)s (%(reactions)i reactions)"
+msgstr[0] ""
+msgstr[1] ""
 
-#: admin/entry.py:81 models/category.py:16 models/entry.py:43
+#: admin/entry.py:88 models/category.py:19 models/entry.py:52
 msgid "title"
 msgstr "otsikko"
 
-#: admin/entry.py:94
+#: admin/entry.py:101
 msgid "author(s)"
 msgstr "kirjoittaja(t)"
 
-#: admin/entry.py:107
+#: admin/entry.py:114
 msgid "category(s)"
 msgstr "kategoria(t)"
 
-#: admin/entry.py:118
+#: admin/entry.py:125
 msgid "tag(s)"
 msgstr "tagi(t)"
 
-#: admin/entry.py:126
+#: admin/entry.py:133
 msgid "site(s)"
 msgstr "sivusto(t)"
 
-#: admin/entry.py:132 models/entry.py:170
-msgid "comment enabled"
-msgstr "kommentointi sallittu"
-
-#: admin/entry.py:138
-msgid "is actual"
-msgstr "varsinainen"
-
-#: admin/entry.py:144
+#: admin/entry.py:139
 msgid "is visible"
 msgstr "näkyvissä"
 
-#: admin/entry.py:149
-msgid "View"
-msgstr "Näytä"
-
-#: admin/entry.py:151
-msgid "View on site"
-msgstr "näytä sivustolla"
-
-#: admin/entry.py:157
-msgid "Unavailable"
-msgstr "Ei käytettävissä"
-
-#: admin/entry.py:161
+#: admin/entry.py:146
 msgid "short url"
 msgstr "lyhyt osoite"
 
-#: admin/entry.py:229
+#: admin/entry.py:214
 msgid "The selected entries now belong to you."
 msgstr "Valitut kirjoitukset kuuluvat nyt sinulle."
 
-#: admin/entry.py:230
+#: admin/entry.py:215
 msgid "Set the entries to the user"
 msgstr "Määritä artikkelit kirjoittajalle"
 
-#: admin/entry.py:237
+#: admin/entry.py:222
 msgid "The selected entries are now marked as published."
 msgstr "Valitut kirjoitukset on nyt julkaistu."
 
-#: admin/entry.py:238
+#: admin/entry.py:223
 msgid "Set entries selected as published"
 msgstr "Julkaise valitut kirjoitukset"
 
-#: admin/entry.py:244
+#: admin/entry.py:229
 msgid "The selected entries are now marked as hidden."
 msgstr "Valitut kirjoitukset on nyt merkitty piilotetuksi."
 
-#: admin/entry.py:245
+#: admin/entry.py:230
 msgid "Set entries selected as hidden"
 msgstr "Määritä valitut kirjoitukset piilotetuksi"
 
-#: admin/entry.py:260
+#: admin/entry.py:245
 msgid "The selected entries have been tweeted."
 msgstr "Valitut kirjoitukset on nyt twiitattu."
 
-#: admin/entry.py:261
+#: admin/entry.py:246
 msgid "Tweet entries selected"
 msgstr "Tweettaa valitut kirjoitukset"
 
-#: admin/entry.py:267
+#: admin/entry.py:252
 msgid "Comments are now closed for selected entries."
 msgstr "Kommentointi on nyt suljettu valituilta kirjoituksilta."
 
-#: admin/entry.py:268
+#: admin/entry.py:253
 msgid "Close the comments for selected entries"
 msgstr "Sulje kommentointi valituilta kirjoituksilta"
 
-#: admin/entry.py:275
-msgid "Linkbacks are now closed for selected entries."
-msgstr "Viittaukset on nyt poistettu käytöstä valituilta kirjoituksilta."
+#: admin/entry.py:260
+msgid "Pingbacks are now closed for selected entries."
+msgstr ""
+
+#: admin/entry.py:262
+msgid "Close the pingbacks for selected entries"
+msgstr ""
+
+#: admin/entry.py:268
+msgid "Trackbacks are now closed for selected entries."
+msgstr ""
+
+#: admin/entry.py:270
+msgid "Close the trackbacks for selected entries"
+msgstr ""
 
 #: admin/entry.py:277
-msgid "Close the linkbacks for selected entries"
-msgstr "Poista viittaukset käytöstä valituilta kirjoituksilta."
-
-#: admin/entry.py:284
 msgid "The selected entries are now set at the current date."
 msgstr "Valittujen kirjoituksien julkaisuajankohdaksi muutettu kuluva päivä."
 
-#: admin/entry.py:286
+#: admin/entry.py:279
 msgid "Put the selected entries on top at the current date"
 msgstr "Aseta valitut kirjoitukset julkaistuksi tällä päivämäärällä"
 
-#: admin/entry.py:305
+#: admin/entry.py:298
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%(directory)s hakemistoa informoitu onnistuneesti %(success)d kirjoituksella."
 
-#: admin/entry.py:309
+#: admin/entry.py:302
 msgid "Ping Directories for selected entries"
 msgstr "Informoi hakemistoja valituilla kirjoituksilla"
 
-#: admin/filters.py:26
+#: admin/filters.py:27
 #, python-format
 msgid "%(item)s (%(count)i entry)"
 msgid_plural "%(item)s (%(count)i entries)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/filters.py:47
+#: admin/filters.py:48
 msgid "published authors"
 msgstr ""
 
-#: admin/filters.py:58
+#: admin/filters.py:59
 msgid "published categories"
 msgstr ""
 
-#: admin/forms.py:19 models/category.py:22
+#: admin/forms.py:19 models/category.py:32
 msgid "parent category"
 msgstr "ylempi kategoria"
 
@@ -304,157 +293,193 @@ msgstr "Kategoria ei voi olla vanhempi itselleen."
 msgid "Categories"
 msgstr "Kategoriat"
 
-#: admin/forms.py:47 models/category.py:54 models/entry.py:118
+#: admin/forms.py:47 models/category.py:73 models/entry.py:363
 msgid "categories"
 msgstr "kategoriat"
 
-#: models/category.py:17
-msgid "used for publication"
-msgstr "käytetään julkaisuun"
+#: models/category.py:22 models/entry.py:57
+msgid "slug"
+msgstr ""
 
-#: models/category.py:19
+#: models/category.py:23
+msgid "Used to build the category's URL."
+msgstr ""
+
+#: models/category.py:26
 msgid "description"
 msgstr "kuvaus"
 
-#: models/category.py:53
+#: models/category.py:72
 msgid "category"
 msgstr "kategoria"
 
-#: models/entry.py:45
-msgid "content"
-msgstr "sisältö"
-
-#: models/entry.py:49 models/entry.py:53
-msgid "used to build the entry's URL"
-msgstr ""
-
-#: models/entry.py:52
-msgid "creation date"
-msgstr "kirjoitusajankohta"
-
-#: models/entry.py:56
-msgid "last update"
-msgstr "päivitetty edellisen kerran"
-
-#: models/entry.py:66
-msgid "excerpt"
-msgstr "tiivistelmä"
-
-#: models/entry.py:67
-msgid "optional element"
-msgstr "valinnainen elementti"
-
-#: models/entry.py:77
-msgid "image"
-msgstr "kuva"
-
-#: models/entry.py:78
-msgid "used for illustration"
-msgstr "käytetään kuvituksessa"
-
-#: models/entry.py:87
-msgid "featured"
-msgstr "nostettu"
-
-#: models/entry.py:97
-msgid "related entries"
-msgstr "liittyvät artikkelit"
-
-#: models/entry.py:108
-msgid "authors"
-msgstr "julkaisijat"
-
-#: models/entry.py:128
-msgid "tags"
-msgstr "tagit"
-
-#: models/entry.py:138
-msgid "sites publication"
-msgstr "julkaise sivustoilla"
-
-#: models/entry.py:147
+#: models/entry.py:47
 msgid "draft"
 msgstr "vedos"
 
-#: models/entry.py:148
+#: models/entry.py:48
 msgid "hidden"
 msgstr "piilotettu"
 
-#: models/entry.py:149
+#: models/entry.py:49
 msgid "published"
 msgstr "julkaistu"
 
-#: models/entry.py:152
+#: models/entry.py:54
+msgid "content"
+msgstr "sisältö"
+
+#: models/entry.py:59 models/entry.py:80
+msgid "Used to build the entry's URL."
+msgstr ""
+
+#: models/entry.py:62
 msgid "status"
 msgstr ""
 
-#: models/entry.py:171
-msgid "linkback enabled"
-msgstr "Paluuviitteet käytössä"
-
-#: models/entry.py:173
+#: models/entry.py:65
 msgid "start publication"
 msgstr "aloita julkaisu"
 
-#: models/entry.py:175
-msgid "date start publish"
-msgstr "ajankohta jolloin artikkeli halutaan julkaistuvan"
+#: models/entry.py:66
+msgid "Start date of publication."
+msgstr ""
 
-#: models/entry.py:176
+#: models/entry.py:69
 msgid "end publication"
 msgstr "päätä julkaisu"
 
-#: models/entry.py:178
-msgid "date end publish"
-msgstr "ajankohta jolloin artikkelin halutaan poistuvan julkaisusta"
+#: models/entry.py:70
+msgid "End date of publication."
+msgstr ""
+
+#: models/entry.py:75
+msgid "sites"
+msgstr ""
+
+#: models/entry.py:76
+msgid "Sites where the entry will be published."
+msgstr ""
+
+#: models/entry.py:79
+msgid "creation date"
+msgstr "kirjoitusajankohta"
+
+#: models/entry.py:83
+msgid "last update"
+msgstr "päivitetty edellisen kerran"
 
 #: models/entry.py:181
-msgid "login required"
-msgstr "vaatii kirjautumisen"
-
-#: models/entry.py:182
-msgid "only authenticated users can view the entry"
-msgstr "vain kirjautuneet käyttäjät voivat tarkastella kirjoitusta"
-
-#: models/entry.py:184
-msgid "password"
-msgstr "salasana"
-
-#: models/entry.py:185
-msgid "protect the entry with a password"
-msgstr "suojaa kirjoitus salasanalla"
-
-#: models/entry.py:188
-msgid "template"
-msgstr "sivupohja"
-
-#: models/entry.py:190
-msgid "Default template"
-msgstr "oletussivupohja"
-
-#: models/entry.py:192
-msgid "template used to display the entry"
-msgstr "Sivupohja, jota halutaan käyttää artikkelin yhteydessä"
-
-#: models/entry.py:194
-msgid "comment count"
-msgstr ""
-
-#: models/entry.py:195
-msgid "pingback count"
-msgstr ""
-
-#: models/entry.py:196
-msgid "trackback count"
-msgstr ""
-
-#: models/entry.py:316
 msgid "entry"
 msgstr "artikkeli"
 
-#: models/entry.py:317
+#: models/entry.py:182
 msgid "entries"
 msgstr "kirjoitukset"
+
+#: models/entry.py:195
+msgid "comments enabled"
+msgstr ""
+
+#: models/entry.py:196
+msgid "Allows comments if checked."
+msgstr ""
+
+#: models/entry.py:198
+msgid "pingbacks enabled"
+msgstr ""
+
+#: models/entry.py:199
+msgid "Allows pingbacks if checked."
+msgstr ""
+
+#: models/entry.py:201
+msgid "trackbacks enabled"
+msgstr ""
+
+#: models/entry.py:202
+msgid "Allows trackbacks if checked."
+msgstr ""
+
+#: models/entry.py:205
+msgid "comment count"
+msgstr ""
+
+#: models/entry.py:207
+msgid "pingback count"
+msgstr ""
+
+#: models/entry.py:209
+msgid "trackback count"
+msgstr ""
+
+#: models/entry.py:292
+msgid "related entries"
+msgstr "liittyvät artikkelit"
+
+#: models/entry.py:310
+msgid "excerpt"
+msgstr "tiivistelmä"
+
+#: models/entry.py:311
+msgid "Optional element."
+msgstr ""
+
+#: models/entry.py:322
+msgid "image"
+msgstr "kuva"
+
+#: models/entry.py:323
+msgid "Used for illustration."
+msgstr ""
+
+#: models/entry.py:334
+msgid "featured"
+msgstr "nostettu"
+
+#: models/entry.py:349
+msgid "authors"
+msgstr "julkaisijat"
+
+#: models/entry.py:373
+msgid "tags"
+msgstr "tagit"
+
+#: models/entry.py:392
+msgid "login required"
+msgstr "vaatii kirjautumisen"
+
+#: models/entry.py:393
+msgid "Only authenticated users can view the entry."
+msgstr ""
+
+#: models/entry.py:405
+msgid "password"
+msgstr "salasana"
+
+#: models/entry.py:406
+msgid "Protects the entry with a password."
+msgstr ""
+
+#: models/entry.py:418
+msgid "content template"
+msgstr ""
+
+#: models/entry.py:420 models/entry.py:436
+msgid "Default template"
+msgstr "oletussivupohja"
+
+#: models/entry.py:422
+msgid "Template used to display the entry's content."
+msgstr ""
+
+#: models/entry.py:434
+msgid "detail template"
+msgstr ""
+
+#: models/entry.py:438
+msgid "Template used to display the entry's detail page."
+msgstr ""
 
 #: templates/403.html:6
 msgid "Error 403"
@@ -498,11 +523,6 @@ msgstr "Sivupyynnössä tapahtui virhe. Virheestä on ilmoitettu sivuston ylläp
 msgid "Contents"
 msgstr "Sisällöt"
 
-#: templates/admin/zinnia/widgets/_content_stats.html:5
-#: templates/zinnia/_entry_detail.html:86
-msgid "Discussions"
-msgstr "Kommentit"
-
 #: templates/admin/zinnia/widgets/_content_stats.html:10
 #: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:17
 #: templates/zinnia/sitemap.html:57 templates/zinnia/tag_list.html:19
@@ -517,7 +537,7 @@ msgstr[0] "%(entry_count)s artikkeli"
 msgstr[1] "%(entry_count)s artikkelia"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:15
-#: templates/zinnia/_entry_detail.html:91
+#: templates/zinnia/_entry_detail_base.html:114
 #: templates/zinnia/tags/popular_entries.html:8
 #: templates/zinnia/tags/statistics.html:16
 #, python-format
@@ -535,7 +555,7 @@ msgstr[0] "%(category_count)s kategoria"
 msgstr[1] "%(category_count)s kategoriaa"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:25
-#: templates/zinnia/_entry_detail.html:108
+#: templates/zinnia/_entry_detail_base.html:131
 #: templates/zinnia/tags/statistics.html:19
 #, python-format
 msgid "%(pingback_count)s pingback"
@@ -552,7 +572,7 @@ msgstr[0] "%(tag_count)s tagi"
 msgstr[1] "%(tag_count)s tagia"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:33
-#: templates/zinnia/_entry_detail.html:115
+#: templates/zinnia/_entry_detail_base.html:138
 #: templates/zinnia/tags/statistics.html:22
 #, python-format
 msgid "%(trackback_count)s trackback"
@@ -622,7 +642,7 @@ msgstr "Muokkaa kirjoitusta"
 #: templates/feeds/discussion_title.html:2
 #: templates/feeds/pingback_title.html:2
 #: templates/feeds/trackback_title.html:2
-#: templates/zinnia/_entry_detail.html:20
+#: templates/zinnia/_entry_detail_base.html:24
 #: templates/zinnia/entry_detail_base.html:106
 #: templates/zinnia/entry_detail_base.html:143
 #: templates/zinnia/entry_detail_base.html:179
@@ -645,7 +665,7 @@ msgid "View all draft entries"
 msgstr "Listaa luonnokset"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:11
-#: templates/zinnia/_entry_detail.html:28
+#: templates/zinnia/_entry_detail_base.html:32
 #: templates/zinnia/tags/recent_comments.html:6
 #: templates/zinnia/tags/recent_linkbacks.html:7
 msgid "in"
@@ -666,7 +686,7 @@ msgid "Edit"
 msgstr "muokkaa"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:31
-#: templates/zinnia/_entry_detail.html:95
+#: templates/zinnia/_entry_detail_base.html:118
 #: templates/zinnia/entry_detail_base.html:124
 #: templates/zinnia/tags/recent_comments.html:15
 msgid "No comments yet."
@@ -710,7 +730,7 @@ msgid "Title"
 msgstr "Otsikko"
 
 #: templates/admin/zinnia/widgets/quickpost.html:26
-#: templates/zinnia/_entry_detail.html:66 templates/zinnia/base.html:40
+#: templates/zinnia/_entry_detail_base.html:87 templates/zinnia/base.html:40
 #: templates/zinnia/tag_list.html:7 templatetags/zbreadcrumbs.py:46
 msgid "Tags"
 msgstr "Tagit"
@@ -828,21 +848,21 @@ msgstr ""
 msgid "Return to entry list"
 msgstr "Palaa artikkelilistaan"
 
-#: templates/zinnia/_entry_detail.html:13
+#: templates/zinnia/_entry_detail_base.html:17
 msgid "Written by"
 msgstr "Kirjoittanut"
 
-#: templates/zinnia/_entry_detail.html:17 templates/zinnia/author_list.html:17
-#: templates/zinnia/tags/authors.html:6
+#: templates/zinnia/_entry_detail_base.html:21
+#: templates/zinnia/author_list.html:17 templates/zinnia/tags/authors.html:6
 #, python-format
 msgid "Show all %(author)s's entries"
 msgstr "Näytä kaikki %(author)sn kirjoitukset"
 
-#: templates/zinnia/_entry_detail.html:22
+#: templates/zinnia/_entry_detail_base.html:26
 msgid "Written on"
 msgstr "Kirjoitettu"
 
-#: templates/zinnia/_entry_detail.html:31
+#: templates/zinnia/_entry_detail_base.html:35
 #: templates/zinnia/category_list.html:16
 #: templates/zinnia/tags/categories.html:6
 #: templates/zinnia/tags/categories_tree.html:5
@@ -850,60 +870,65 @@ msgstr "Kirjoitettu"
 msgid "Show all entries in %(category)s"
 msgstr "Näytä kirjoitukset kategoriassa %(category)s"
 
-#: templates/zinnia/_entry_detail.html:56
+#: templates/zinnia/_entry_detail_base.html:41
+msgid "Last update on"
+msgstr ""
+
+#: templates/zinnia/_entry_detail_base.html:73
 #, python-format
 msgid "Continue reading %(object)s"
 msgstr "Lue lisää artikkelista %(object)s"
 
-#: templates/zinnia/_entry_detail.html:58
+#: templates/zinnia/_entry_detail_base.html:75
 msgid "Continue reading"
 msgstr "Lue lisää"
 
-#: templates/zinnia/_entry_detail.html:69 templates/zinnia/tag_list.html:18
+#: templates/zinnia/_entry_detail_base.html:90
+#: templates/zinnia/tag_list.html:18
 #, python-format
 msgid "Show all entries tagged by %(tag)s"
 msgstr "Näytä kaikki kirjoitukset, joilla tagi %(tag)s"
 
-#: templates/zinnia/_entry_detail.html:72
+#: templates/zinnia/_entry_detail_base.html:93
 msgid "No tags"
 msgstr "Ei tageja"
 
-#: templates/zinnia/_entry_detail.html:77
+#: templates/zinnia/_entry_detail_base.html:99
 msgid "Short url"
 msgstr "Lyhytosoite"
 
-#: templates/zinnia/_entry_detail.html:79
+#: templates/zinnia/_entry_detail_base.html:101
 #, python-format
 msgid "Short URL to %(object)s"
 msgstr "Lyhyt osoite kirjoitukselle %(object)s"
 
-#: templates/zinnia/_entry_detail.html:90
+#: templates/zinnia/_entry_detail_base.html:113
 #: templates/zinnia/tags/popular_entries.html:7
 #, python-format
 msgid "Comments on %(object)s"
 msgstr "Kommentit kirjoitukselle %(object)s"
 
-#: templates/zinnia/_entry_detail.html:97
+#: templates/zinnia/_entry_detail_base.html:120
 #, python-format
 msgid "Leave a comment on %(object)s"
 msgstr "Jätä kommentti kirjoitukselle %(object)s"
 
-#: templates/zinnia/_entry_detail.html:98
+#: templates/zinnia/_entry_detail_base.html:121
 msgid "Be first to comment!"
 msgstr "Kommentoi ensimmäisenä!"
 
-#: templates/zinnia/_entry_detail.html:101
+#: templates/zinnia/_entry_detail_base.html:124
 #: templates/zinnia/entry_detail_base.html:120
 #: templates/zinnia/entry_detail_base.html:126
 msgid "Comments are closed."
 msgstr "Kommentointi on suljettu."
 
-#: templates/zinnia/_entry_detail.html:107
+#: templates/zinnia/_entry_detail_base.html:130
 #, python-format
 msgid "Pingbacks on %(object)s"
 msgstr "Viittaukset kirjoitukselle %(object)s"
 
-#: templates/zinnia/_entry_detail.html:114
+#: templates/zinnia/_entry_detail_base.html:137
 #, python-format
 msgid "Trackbacks on %(object)s"
 msgstr "Paluuviitteet kirjoitukselle %(object)s"
@@ -989,7 +1014,7 @@ msgstr "Kategorialistaus"
 msgid "No categories yet."
 msgstr "Ei kategoriaa vielä."
 
-#: templates/zinnia/entry_archive.html:16
+#: templates/zinnia/entry_archive.html:17
 msgid "Yearly archives"
 msgstr ""
 
@@ -1327,11 +1352,11 @@ msgstr "Sivu %s"
 msgid "Week %s"
 msgstr "Viikko %s"
 
-#: tests/views.py:409 views/search.py:30
+#: tests/views.py:414 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Liian lyhyt hakulauseke"
 
-#: tests/views.py:413 views/search.py:34
+#: tests/views.py:418 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Hakulauseketta ei löytynyt."
 
