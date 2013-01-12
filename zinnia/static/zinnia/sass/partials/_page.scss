@@ -18,9 +18,7 @@
   h4              { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
   h5              { font-size: 1em;   font-weight: bold; margin-bottom: 1.50em; }
   h6              { font-size: 1em;   font-weight: bold;                        }
-  p               { margin: 0 0 1.5em;
-    .left         { @include float-left;  margin: 1.5em 1.5em 1.5em 0; padding: 0; }
-    .right        { @include float-right; margin: 1.5em 0 1.5em 1.5em; padding: 0; } }
+  p               { margin: 0 0 1.5em; }
   a               { text-decoration: none;
     &:hover       { text-decoration: underline }  }
   blockquote      { margin: 1.5em;

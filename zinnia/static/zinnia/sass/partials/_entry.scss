@@ -17,22 +17,26 @@ h2.entry-title {
 }
 
 .entry-body {
-  text-align: justify;
   padding-right: 0.5em;
-  p { font-size: 1.2em; }
   img {
+    padding: 1em;
     &, &.left {
-    margin: 0 1.5em 1.5em 0;
+    margin: 0 1em 1em 0;
     float: left;
     }
     &.right {
-      margin: 0 0 1.5em 1.5em;
+      margin: 0 0 1em 1em;
       float: right;
     }
   }
   li {
     list-style-image: none;
   }
+}
+
+.entry-content {
+  text-align: justify;
+  p { font-size: 1.2em; }
 }
 
 .continue-reading {
