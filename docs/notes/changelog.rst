@@ -1,13 +1,14 @@
 CHANGELOG
 =========
 
-Develop
--------
+0.12.1
+------
 
 * Microformats improved
 * Improve Blogger importer
 * Finest control on linkbacks
 * Split Entry model into mixins
+* Compatibility fix with Django 1.5
 * Custom template for content rendering
 * Fix Python 2.7 issues with ``wp2zinnia``
 
