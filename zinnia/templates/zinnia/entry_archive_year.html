@@ -17,7 +17,7 @@
 <ul>
   {% for date in date_list %}
   <li>
-    <a href="{% url 'zinnia_entry_archive_month' year date|date:"m" %}" rel="archives">{{ date|date:"YEAR_MONTH_FORMAT" }}</a>
+    <a href="{% url 'zinnia_entry_archive_month' date|date:"Y" date|date:"m" %}" rel="archives">{{ date|date:"YEAR_MONTH_FORMAT" }}</a>
   </li>
   {% endfor %}
 </ul>
