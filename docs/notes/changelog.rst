@@ -9,6 +9,7 @@ Develop
 * Finest control on linkbacks
 * Split Entry model into mixins
 * Custom template for content rendering
+* Fix Python 2.7 issues with ``wp2zinnia``
 
 0.12
 ----
