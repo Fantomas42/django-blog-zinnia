@@ -235,7 +235,7 @@ class Command(LabelCommand):
         tags = []
         for category in categories:
             domain = category.attrib.get('domain', 'category')
-            if domain == 'tag' and category.attrib.get('nicename'):
+            if 'tag' in domain and category.attrib.get('nicename'):
                 tags.append(category.attrib.get('nicename'))
         return tags
 
