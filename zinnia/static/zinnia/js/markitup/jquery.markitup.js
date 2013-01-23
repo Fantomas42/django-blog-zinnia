@@ -3,7 +3,7 @@
 // v 1.1.x
 // Dual licensed under the MIT and GPL licenses.
 // ----------------------------------------------------------------------------
-// Copyright (C) 2007-2011 Jay Salvat
+// Copyright (C) 2007-2012 Jay Salvat
 // http://markitup.jaysalvat.com/
 // ----------------------------------------------------------------------------
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -12,10 +12,10 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,13 +26,19 @@
 // ----------------------------------------------------------------------------
 (function($) {
 	$.fn.markItUp = function(settings, extraSettings) {
-		var options, ctrlKey, shiftKey, altKey;
-		ctrlKey = shiftKey = altKey = false;
+		var method, params, options, ctrlKey, shiftKey, altKey; ctrlKey = shiftKey = altKey = false;
+
+		if (typeof settings == 'string') {
+			method = settings;
+			params = extraSettings;
+		} 
 
 		options = {	id:						'',
 					nameSpace:				'',
 					root:					'',
+					previewHandler:			false,
 					previewInWindow:		'', // 'width=800, height=600, resizable=yes, scrollbars=yes'
+					previewInElement:		'',
 					previewAutoRefresh:		true,
 					previewPosition:		'after',
 					previewTemplatePath:	'~/templates/preview.html',
@@ -73,6 +79,20 @@
 			options.previewParserPath = localize(options.previewParserPath);
 			options.previewTemplatePath = localize(options.previewTemplatePath);
 
+			if (method) {
+				switch(method) {
+					case 'remove':
+						remove();
+					break;
+					case 'insert':
+						markup(params);
+					break;
+					default: 
+						$.error('Method ' +  method + ' does not exist on jQuery.markItUp');
+				}
+				return;
+			}
+
 			// apply the computed path to ~/
 			function localize(data, inText) {
 				if (inText) {
@@ -109,26 +129,26 @@
 				if (options.resizeHandle === true && $.browser.safari !== true) {
 					resizeHandle = $('<div class="markItUpResizeHandle"></div>')
 						.insertAfter($$)
-						.bind("mousedown", function(e) {
+						.bind("mousedown.markItUp", function(e) {
 							var h = $$.height(), y = e.clientY, mouseMove, mouseUp;
 							mouseMove = function(e) {
 								$$.css("height", Math.max(20, e.clientY+h-y)+"px");
 								return false;
 							};
 							mouseUp = function(e) {
-								$("html").unbind("mousemove", mouseMove).unbind("mouseup", mouseUp);
+								$("html").unbind("mousemove.markItUp", mouseMove).unbind("mouseup.markItUp", mouseUp);
 								return false;
 							};
-							$("html").bind("mousemove", mouseMove).bind("mouseup", mouseUp);
+							$("html").bind("mousemove.markItUp", mouseMove).bind("mouseup.markItUp", mouseUp);
 					});
 					footer.append(resizeHandle);
 				}
 
 				// listen key events
-				$$.keydown(keyPressed).keyup(keyPressed);
-
+				$$.bind('keydown.markItUp', keyPressed).bind('keyup', keyPressed);
+				
 				// bind an event to catch external calls
-				$$.bind("insertion", function(e, settings) {
+				$$.bind("insertion.markItUp", function(e, settings) {
 					if (settings.target !== false) {
 						get();
 					}
@@ -138,9 +158,13 @@
 				});
 
 				// remember the last focus
-				$$.focus(function() {
+				$$.bind('focus.markItUp', function() {
 					$.markItUp.focused = this;
 				});
+
+				if (options.previewInElement) {
+					refreshPreview();
+				}
 			}
 
 			// recursively build header with dropMenus from markupset
@@ -159,34 +183,33 @@
 							t += levels[j]+"-";
 						}
 						li = $('<li class="markItUpButton markItUpButton'+t+(i)+' '+(button.className||'')+'"><a href="" '+key+' title="'+title+'">'+(button.name||'')+'</a></li>')
-						.bind("contextmenu", function() { // prevent contextmenu on mac and allow ctrl+click
+						.bind("contextmenu.markItUp", function() { // prevent contextmenu on mac and allow ctrl+click
 							return false;
-						}).click(function() {
+						}).bind('click.markItUp', function() {
 							return false;
-						}).bind("focusin", function(){
+						}).bind("focusin.markItUp", function(){
                             $$.focus();
-						}).mouseup(function() {
+						}).bind('mouseup', function() {
 							if (button.call) {
 								eval(button.call)();
 							}
 							setTimeout(function() { markup(button) },1);
 							return false;
-						}).hover(function() {
+						}).bind('mouseenter.markItUp', function() {
 								$('> ul', this).show();
 								$(document).one('click', function() { // close dropmenu if click outside
 										$('ul ul', header).hide();
 									}
 								);
-							}, function() {
+						}).bind('mouseleave.markItUp', function() {
 								$('> ul', this).hide();
-							}
-						).appendTo(ul);
+						}).appendTo(ul);
 						if (button.dropMenu) {
 							levels.push(i);
 							$(li).addClass('markItUpDropMenu').append(dropMenus(button.dropMenu));
 						}
 					}
-				});
+				}); 
 				levels.pop();
 				return ul;
 			}
@@ -241,7 +264,7 @@
 				var openBlockWith 		= prepare(clicked.openBlockWith);
 				var closeBlockWith 		= prepare(clicked.closeBlockWith);
 				var multiline 			= clicked.multiline;
-
+				
 				if (replaceWith !== "") {
 					block = openWith + replaceWith + closeWith;
 				} else if (selection === '' && placeHolder !== '') {
@@ -249,9 +272,13 @@
 				} else {
 					string = string || selection;
 
-					var lines = selection.split(/\r?\n/), blocks = [];
-
-					for (var l=0; l < lines.length; l++) {
+					var lines = [string], blocks = [];
+					
+					if (multiline === true) {
+						lines = string.split(/\r?\n/);
+					}
+					
+					for (var l = 0; l < lines.length; l++) {
 						line = lines[l];
 						var trailingSpaces;
 						if (trailingSpaces = line.match(/ *$/)) {
@@ -260,15 +287,15 @@
 							blocks.push(openWith + line + closeWith);
 						}
 					}
-
+					
 					block = blocks.join("\n");
 				}
 
 				block = openBlockWith + block + closeBlockWith;
 
-				return {	block:block,
-							openWith:openWith,
-							replaceWith:replaceWith,
+				return {	block:block, 
+							openWith:openWith, 
+							replaceWith:replaceWith, 
 							placeHolder:placeHolder,
 							closeWith:closeWith
 					};
@@ -279,13 +306,13 @@
 				var len, j, n, i;
 				hash = clicked = button;
 				get();
-				$.extend(hash, {	line:"",
+				$.extend(hash, {	line:"", 
 						 			root:options.root,
-									textarea:textarea,
-									selection:(selection||''),
+									textarea:textarea, 
+									selection:(selection||''), 
 									caretPosition:caretPosition,
-									ctrlKey:ctrlKey,
-									shiftKey:shiftKey,
+									ctrlKey:ctrlKey, 
+									shiftKey:shiftKey, 
 									altKey:altKey
 								}
 							);
@@ -294,7 +321,7 @@
 				prepare(clicked.beforeInsert);
 				if ((ctrlKey === true && shiftKey === true) || button.multiline === true) {
 					prepare(clicked.beforeMultiInsert);
-				}
+				}			
 				$.extend(hash, { line:1 });
 
 				if ((ctrlKey === true && shiftKey === true)) {
@@ -307,6 +334,7 @@
 							lines[i] = "";
 						}
 					}
+
 					string = { block:lines.join('\n')};
 					start = caretPosition;
 					len = string.block.length + (($.browser.opera) ? n-1 : 0);
@@ -329,7 +357,7 @@
 				}
 				if ((selection === '' && string.replaceWith === '')) {
 					caretOffset += fixOperaBug(string.block);
-
+					
 					start = caretPosition + string.openWith.length;
 					len = string.block.length - string.openWith.length - string.closeWith.length;
 
@@ -357,9 +385,9 @@
 
 				// refresh preview if opened
 				if (previewWindow && options.previewAutoRefresh) {
-					refreshPreview();
+					refreshPreview(); 
 				}
-
+																									
 				// reinit keyevent
 				shiftKey = altKey = ctrlKey = abort = false;
 			}
@@ -378,9 +406,9 @@
 				}
 				return 0;
 			}
-
+				
 			// add markup
-			function insert(block) {
+			function insert(block) {	
 				if (document.selection) {
 					var newSelection = document.selection.createRange();
 					newSelection.text = block;
@@ -398,8 +426,8 @@
 					}
 					range = textarea.createTextRange();
 					range.collapse(true);
-					range.moveStart('character', start);
-					range.moveEnd('character', len);
+					range.moveStart('character', start); 
+					range.moveEnd('character', len); 
 					range.select();
 				} else if (textarea.setSelectionRange ){
 					textarea.setSelectionRange(start, start + len);
@@ -430,13 +458,17 @@
 					caretPosition = textarea.selectionStart;
 
 					selection = textarea.value.substring(caretPosition, textarea.selectionEnd);
-				}
+				} 
 				return selection;
 			}
 
 			// open preview window
 			function preview() {
-				if (!previewWindow || previewWindow.closed) {
+				if (typeof options.previewHandler === 'function') {
+					previewWindow = true;
+				} else if (options.previewInElement) {
+					previewWindow = $(options.previewInElement);
+				} else if (!previewWindow || previewWindow.closed) {
 					if (options.previewInWindow) {
 						previewWindow = window.open('', 'preview', options.previewInWindow);
 						$(window).unload(function() {
@@ -448,7 +480,7 @@
 							iFrame.insertAfter(footer);
 						} else {
 							iFrame.insertBefore(header);
-						}
+						}	
 						previewWindow = iFrame[iFrame.length - 1].contentWindow || frame[iFrame.length - 1];
 					}
 				} else if (altKey === true) {
@@ -460,7 +492,7 @@
 					previewWindow = iFrame = false;
 				}
 				if (!options.previewAutoRefresh) {
-					refreshPreview();
+					refreshPreview(); 
 				}
 				if (options.previewInWindow) {
 					previewWindow.focus();
@@ -474,9 +506,11 @@
 
 			function renderPreview() {
 				var phtml;
-				if (options.previewParser && typeof options.previewParser === 'function') {
+				if (options.previewHandler && typeof options.previewHandler === 'function') {
+					options.previewHandler( $$.val() );
+				} else if (options.previewParser && typeof options.previewParser === 'function') {
 					var data = options.previewParser( $$.val() );
-					writeInPreview( localize(data, 1) );
+					writeInPreview(localize(data, 1) ); 
 				} else if (options.previewParserPath !== '') {
 					$.ajax({
 						type: 'POST',
@@ -485,7 +519,7 @@
 						url: options.previewParserPath,
 						data: options.previewParserVar+'='+encodeURIComponent($$.val()),
 						success: function(data) {
-							writeInPreview( localize(data, 1) );
+							writeInPreview( localize(data, 1) ); 
 						}
 					});
 				} else {
@@ -502,30 +536,32 @@
 				}
 				return false;
 			}
-
+			
 			function writeInPreview(data) {
-				if (previewWindow.document) {
+				if (options.previewInElement) {
+					$(options.previewInElement).html(data);
+				} else if (previewWindow && previewWindow.document) {			
 					try {
 						sp = previewWindow.document.documentElement.scrollTop
 					} catch(e) {
 						sp = 0;
-					}
+					}	
 					previewWindow.document.open();
 					previewWindow.document.write(data);
 					previewWindow.document.close();
 					previewWindow.document.documentElement.scrollTop = sp;
 				}
 			}
-
+			
 			// set keys pressed
-			function keyPressed(e) {
+			function keyPressed(e) { 
 				shiftKey = e.shiftKey;
 				altKey = e.altKey;
 				ctrlKey = (!(e.altKey && e.ctrlKey)) ? (e.ctrlKey || e.metaKey) : false;
 
 				if (e.type === 'keydown') {
 					if (ctrlKey === true) {
-						li = $('a[accesskey="'+String.fromCharCode(e.keyCode)+'"]', header).parent('li');
+						li = $('a[accesskey="'+((e.keyCode == 13) ? '\\n' : String.fromCharCode(e.keyCode))+'"]', header).parent('li');
 						if (li.length !== 0) {
 							ctrlKey = false;
 							setTimeout(function() {
@@ -550,7 +586,7 @@
 					}
 					if (e.keyCode === 9) { // Tab key
 						if (shiftKey == true || ctrlKey == true || altKey == true) {
-							return false;
+							return false; 
 						}
 						if (caretOffset !== -1) {
 							get();
@@ -566,14 +602,19 @@
 				}
 			}
 
+			function remove() {
+				$$.unbind(".markItUp").removeClass('markItUpEditor');
+				$$.parent('div').parent('div.markItUp').parent('div').replaceWith($$);
+				$$.data('markItUp', null);
+			}
+
 			init();
 		});
 	};
 
 	$.fn.markItUpRemove = function() {
 		return this.each(function() {
-				var $$ = $(this).unbind().removeClass('markItUpEditor');
-				$$.parent('div').parent('div.markItUp').parent('div').replaceWith($$);
+				$(this).markItUp('remove');
 			}
 		);
 	};
