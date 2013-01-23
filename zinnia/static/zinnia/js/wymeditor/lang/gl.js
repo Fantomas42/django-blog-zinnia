@@ -1,4 +1,4 @@
-WYMeditor.STRINGS['gl'] = {
+WYMeditor.STRINGS.gl = {
     Strong:           'Moita énfase',
     Emphasis:         'Énfase',
     Superscript:      'Superíndice',
