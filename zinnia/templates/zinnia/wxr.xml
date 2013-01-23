@@ -42,7 +42,7 @@
       {% for category in entry.categories.all %}
       <category domain="category" nicename="{{ category.slug }}"><![CDATA[{{ category.title }}]]></category>
       {% endfor %}{% tags_for_object entry as tag_list %}{% for tag in tag_list %}
-      <category domain="tag" nicename="{{ tag }}"><![CDATA[{{ tag }}]]></category>
+      <category domain="post_tag" nicename="{{ tag }}"><![CDATA[{{ tag }}]]></category>
       {% endfor %}
       <guid isPermaLink="true">{{ site_url }}{{ entry.get_absolute_url }}</guid>
       <description></description>
