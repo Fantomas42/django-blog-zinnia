@@ -81,7 +81,7 @@ Beside the ``zinnia`` class name in the ``<body>`` tag of the
 
 .. code-block:: html+django
 
-  <body class="zinnia default blue sidebar-right {% block body-class %}{% endblock %}">
+  <body class="zinnia default blue right-sidebar {% block body-class %}{% endblock %}">
 
 The ``default`` class name represents the original default theme of
 Zinnia. You can remove this class, or replace with the classes ``light`` or
@@ -92,11 +92,11 @@ The ``blue`` class represents the main color used within the
 theme. Available color are: ``yellow``, ``orange``, ``red``, ``magenta``,
 ``violet``, ``blue``, ``cyan``, ``green``.
 
-The ``sidebar-right`` class sets the sidebar at right and ``sidebar-left``
+The ``right-sidebar`` class sets the sidebar at right and ``left-sidebar``
 at left, by default if none of these classes are present, the sidebar is
-set at right.
+set at right. You can hide the sidebar by using the ``no-sidebar`` class.
 
-With these 3 sets of classes available in the CSS, you now have 4*9*2=72
+With these 3 sets of classes available in the CSS, you now have 4*9*3=108
 variations of the default theme available. Try them and choose your
 favorite!
 
