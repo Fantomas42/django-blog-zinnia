@@ -26,28 +26,31 @@ SITE_ID = 1
 
 LANGUAGE_CODE = 'en'
 
-LANGUAGES = (('en', gettext('English')),
-             ('fr', gettext('French')),
-             ('de', gettext('German')),
-             ('es', gettext('Spanish')),
-             ('it', gettext('Italian')),
-             ('nl', gettext('Dutch')),
-             ('hu', gettext('Hungarian')),
-             ('cs', gettext('Czech')),
-             ('sk', gettext('Slovak')),
-             ('ru', gettext('Russian')),
-             ('pl', gettext('Polish')),
-             ('eu', gettext('Basque')),
-             ('ca', gettext('Catalan')),
-             ('tr', gettext('Turkish')),
-             ('hr_HR', gettext('Croatian')),
-             ('pt_BR', gettext('Brazilian Portuguese')),
-             ('fi_FI', gettext('Finnish (Finland)')),
-             ('zh_CN', gettext('Simplified Chinese')),)
+LANGUAGES = (
+    ('en', gettext('English')),
+    ('fr', gettext('French')),
+    ('de', gettext('German')),
+    ('es', gettext('Spanish')),
+    ('it', gettext('Italian')),
+    ('nl', gettext('Dutch')),
+    ('hu', gettext('Hungarian')),
+    ('cs', gettext('Czech')),
+    ('sk', gettext('Slovak')),
+    ('ru', gettext('Russian')),
+    ('pl', gettext('Polish')),
+    ('eu', gettext('Basque')),
+    ('ca', gettext('Catalan')),
+    ('tr', gettext('Turkish')),
+    ('hr_HR', gettext('Croatian')),
+    ('pt_BR', gettext('Brazilian Portuguese')),
+    ('fi_FI', gettext('Finnish (Finland)')),
+    ('zh_CN', gettext('Simplified Chinese')),
+)
+
 
 PASSWORD_HASHERS = (
-    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
-    )
+    'django.contrib.auth.hashers.SHA1PasswordHasher',
+)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -57,14 +60,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    )
+)
 
 ROOT_URLCONF = 'demo.urls'
-
-TEMPLATE_LOADERS = (
-    'django.template.loaders.app_directories.Loader',
-    'django.template.loaders.eggs.Loader',
-    )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -74,7 +72,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
     'zinnia.context_processors.version',
-    )
+)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -91,7 +89,7 @@ INSTALLED_APPS = (
     'zinnia',
     'tagging',
     'django_xmlrpc',
-    )
+)
 
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
