@@ -1,4 +1,4 @@
-WYMeditor.SKINS['django'] = {
+WYMeditor.SKINS.django = {
 
     init: function(wym) {
 

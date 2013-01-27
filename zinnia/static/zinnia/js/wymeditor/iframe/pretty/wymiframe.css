@@ -1,0 +1,396 @@
+/*
+ * WYMeditor : what you see is What You Mean web-based editor
+ * Copyright (c) 2005 - 2009 Jean-Francois Hovinne, http://www.wymeditor.org/
+ * Dual licensed under the MIT (MIT-license.txt)
+ * and GPL (GPL-license.txt) licenses.
+ *
+ * For further information visit:
+ *        http://www.wymeditor.org/
+ *
+ * File Name:
+ *        wymeditor.css
+ *        Main editor css file.
+ *        See the documentation for more info.
+ *
+ * File Authors:
+ *        Jean-Francois Hovinne (jf.hovinne a-t wymeditor dotorg)
+ *        Daniel Reszka (d.reszka a-t wymeditor dotorg)
+ *        Gyuris Gellért (bubu a-t ujevangelizacio dothu)
+*/
+
+/* VISUAL FEEDBACK */
+@font-face {
+    font-family: "Visitor";
+    src: url("visitor1.woff") format("woff"),
+         url("visitor1.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* basic */
+  body  { background: #e1e8f1;}
+
+/* make HTML blocs visible */
+  div,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ul,
+  ol,
+  table,
+  address,
+  blockquote,
+  pre           { background: #FFFFFF;
+                  padding:8px 5px 5px;
+                  margin:10px; }
+  ul,
+  ol,
+  dl            { background: #B9C4D0;
+                  margin: 10px;
+                  padding: 0 0 0 10px;
+                  list-style-position: outside;
+                  min-height: 1.6em; }
+  ul ul,
+  ul ol,
+  ol ol,
+  ol ul         { margin: 5px 0 0 -5px }
+  ul > li ul,
+  ul > li ol,
+  ol > li ul,
+  ol > li ol    { border-top: 4px solid #B9C4D0 }
+  li > p:first-child,
+  li > div:first-child { margin-top: 0 } 
+  li > p:last-child,
+  li > div:last-child {	margin-bottom: 0 }
+  li, 
+  dd, 
+  dt            { background: white;
+                  margin: 0px 0 4px 20px;
+                  padding: 8px 0 0 5px; }
+  dt            { margin-bottom: 0 }
+  dd + dt       { margin-top: 4px; }
+  dd            { margin: 2px 0 0 4em }
+  td            { background: #F0F4F8; width: 25%; }
+  th            { background: #ffffcc; }
+  caption       { background: #E4E4B0; padding: 5px; font-weight: bold; }
+  table         { font-size: 12px; width: 500px; }
+  blockquote    { margin-left: 30px; }
+  pre           { background-color:transparent; border: 1px solid white; }
+
+/* Gecko min height fix */
+  td            { height: 1.6em; }
+
+/* specific HTML elements */
+  caption   { text-align: left; }
+  img       { margin-right: 5px;
+              border-style: solid;
+              border-color: gray;
+              border-width: 0; }
+  a img     { border-width: 1px; border-color: blue; }
+  acronym   { border: 1px solid gray; }
+  span      { /*background-color: #eef;*/ }
+
+/* visual feedback for non-valid nesting of elements*/
+  h1 h1, h1 h2, h1 h3, h1 h4, h1 h5, h1 h6, h1 p, h1 pre, h1 address,
+  h2 h1, h2 h2, h2 h3, h2 h4, h2 h5, h2 h6, h2 p, h2 pre, h2 address,
+  h3 h1, h3 h2, h3 h3, h3 h4, h3 h5, h3 h6, h3 p, h3 pre, h3 address,
+  h4 h1, h4 h2, h4 h3, h4 h4, h4 h5, h4 h6, h4 p, h4 pre, h4 address,
+  h5 h1, h5 h2, h5 h3, h5 h4, h5 h5, h5 h6, h5 p, h5 pre, h5 address,
+  h6 h1, h6 h2, h6 h3, h6 h4, h6 h4, h6 h6, h6 p, h6 pre, h6 address,
+  p h1, p h2, p h3, p h4, p h5, p h6, p pre, p address,
+  pre h1, pre h2, pre h3, pre h4, pre h5, pre h6, pre p, pre pre, pre address,
+  address h1, address h2, address h3, address h4, address h5, address h6,
+  address p, address pre, address address
+  { background-color: #ff9999 !important;
+    border: 1px solid red !important;
+    font-size: 12px !important;
+    font-weight: normal; }
+
+/* Spacer BRs shouldn't add much whitespace */
+br { height: 5px; line-height: 5px; }
+
+/* labels: block elements; IE9 support ::before: http://stackoverflow.com/questions/7157405/are-css3-after-and-before-pseudo-elements-rendered-by-ie9  */
+div, p, ol, ul, dl, li, dt, dd, h1, h2, h3, h4, h5, h6, blockquote, 
+pre, address {
+	position: relative;
+}
+div::before,
+p::before,
+ol::before,
+ul::before,
+dl::before,
+li::before,
+dt::before,
+dd::before,
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before,
+blockquote::before,
+pre::before,
+address::before {
+	position: absolute;
+	left: -1px;
+	top: -1px;
+	padding: 0px 3px;
+	font: 10px/10px "Visitor", monospace;
+	color: silver;
+	background: rgba(255,255,255,0.5);
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;  
+    user-select: none;
+    cursor: default;
+    white-space: nowrap;
+}
+div:hover::before,
+p:hover::before,
+ol:hover::before,
+ul:hover::before,
+dl:hover::before,
+li:hover::before,
+dt:hover::before,
+dd:hover::before,
+h1:hover::before,
+h2:hover::before,
+h3:hover::before,
+h4:hover::before,
+h5:hover::before,
+h6:hover::before,
+blockquote:hover::before,
+pre:hover::before,
+address:hover::before {
+	color: rgb(65,105,225);
+	background: rgba(255,255,255,0.);
+	outline: 1px solid rgba(65,105,225,0.9);
+}
+div::before                          { content: "document division" } /* official names: https://developer.mozilla.org/en/HTML/Element */
+div[class]::before                   { content: "document division type \"" attr(class) "\"" }
+body.short div::before               { content: "div" }
+body.short div[class]::before        { content: "div." attr(class) }
+p::before                            { content: "paragraph" }
+p[class]::before                     { content: "paragraph type \"" attr(class) "\"" }
+body.short p::before                 { content: "p" }
+body.short p[class]::before          { content: "p." attr(class) }
+ol::before                           { content: "ordered list" }
+ol[class]::before                    { content: "ordered list type \"" attr(class) "\"" }
+body.short ol::before                { content: "ol" }
+body.short ol[class]::before         { content: "ol." attr(class) }
+ul::before                           { content: "unordered list" }
+ul[class]::before                    { content: "unordered list type \"" attr(class) "\"" }
+body.short ul::before                { content: "ul" }
+body.short ul[class]::before         { content: "ul." attr(class) }
+dl::before                           { content: "definition list" }
+dl[class]::before                    { content: "definition list type \"" attr(class) "\"" }
+body.short dl::before                { content: "dl" }
+body.short dl[class]::before         { content: "dl." attr(class) }
+li::before                           { content: "list item" }
+li[class]::before                    { content: "list item type \"" attr(class) "\"" }
+body.short li::before                { content: "li" }
+body.short li[class]::before         { content: "li." attr(class) }
+dt::before                           { content: "definition term" }
+dt[class]::before                    { content: "definition term type \"" attr(class) "\"" }
+body.short dt::before                { content: "dt" }
+body.short dt[class]::before         { content: "dt." attr(class) }
+dd::before                           { content: "definition description" }
+dd[class]::before                    { content: "definition description type \"" attr(class) "\"" }
+body.short dd::before                { content: "dd" }
+body.short dd[class]::before         { content: "dd." attr(class) }
+h1::before                           { content: "heading 1" }
+h1[class]::before                    { content: "heading 1 type \"" attr(class) "\"" }
+body.short h1::before                { content: "h1" }
+body.short h1[class]::before         { content: "h1." attr(class) }
+h2::before                           { content: "heading 2" }
+h2[class]::before                    { content: "heading 2 type \"" attr(class) "\"" }
+body.short h2::before                { content: "h2" }
+body.short h2[class]::before         { content: "h2." attr(class) }
+h3::before                           { content: "heading 3" }
+h3[class]::before                    { content: "heading 3 type \"" attr(class) "\"" }
+body.short h3::before                { content: "h3" }
+body.short h3[class]::before         { content: "h3." attr(class) }
+h4::before                           { content: "heading 4" }
+h4[class]::before                    { content: "heading 4 type \"" attr(class) "\"" }
+body.short h4::before                { content: "h4" }
+body.short h4[class]::before         { content: "h4." attr(class) }
+h5::before                           { content: "heading 5" }
+h5[class]::before                    { content: "heading 5 type \"" attr(class) "\"" }
+body.short h5::before                { content: "h5" }
+body.short h5[class]::before         { content: "h5." attr(class) }
+h6::before                           { content: "heading 6" }
+h6[class]::before                    { content: "heading 6 type \"" attr(class) "\"" }
+body.short h6::before                { content: "h6" }
+body.short h6[class]::before         { content: "h6." attr(class) }
+blockquote::before                   { content: "block quotation" }
+blockquote[class]::before            { content: "block quotation type \"" attr(class) "\"" }
+body.short blockquote::before        { content: "blockquote" }
+body.short blockquote[class]::before { content: "blockquote." attr(class) }
+pre::before                          { content: "preformatted text" }
+pre[class]::before                   { content: "preformatted text type \"" attr(class) "\"" }
+body.short pre::before               { content: "pre" }
+body.short pre[class]::before        { content: "pre." attr(class) }
+address::before                      { content: "address or contact information" }
+address[class]::before               { content: "address or contact information type \"" attr(class) "\"" }
+body.short address::before           { content: "address" }
+body.short ddress[class]::before     { content: "address." attr(class) }
+
+ul[class]:not(:empty)::before, body:not(.short) ul:not(:empty)::before,
+ol[class]:not(:empty)::before, body:not(.short) ol:not(:empty)::before,
+dl[class]:not(:empty)::before, body:not(.short) dl:not(:empty)::before {
+	transform: rotate(90deg);
+	-ms-transform: rotate(90deg); /* IE 9 */
+	-webkit-transform: rotate(90deg); /* Safari and Chrome */
+	-o-transform: rotate(90deg); /* Opera 11+ */
+	-moz-transform: rotate(90deg); /* Firefox */
+	transform-origin: bottom left;
+	-ms-transform-origin:  bottom left;
+	-webkit-transform-origin: bottom left;
+	-o-transform-origin: bottom left;
+	-moz-transform-origin: bottom left;
+	top: -11px;
+}
+
+/* labels: inline elements */
+span, strong, b, em, i, a, abbr, acronym, kbd, q, cite, samp, var, del, 
+ins, dfn, code, sup, sub {
+	position: relative;
+}
+span:hover::before,
+strong:hover::before,
+b:hover::before,
+em:hover::before,
+i:hover::before,
+a:hover::before,
+abbr:hover::before,
+acronym:hover::before,
+kbd:hover::before,
+/*q:hover::before(2), now is not working http://www.w3.org/TR/css3-content/#inserting0 */
+cite:hover::before,
+samp:hover::before,
+var:hover::before,
+del:hover::before,
+ins:hover::before,
+dfn:hover::before,
+code:hover::before,
+sup:hover::before,
+sub:hover::before {
+	position: absolute;
+	top: -8px;
+	left: -2px;
+	padding: 0px 3px;
+	font: 10px/10px "Visitor", monospace;
+	hyphens: none; /* chrome: a-href */
+	color: rgb(65,105,225);
+	background: rgba(255,255,255,0.9);
+	outline: 1px solid rgba(65,105,225,0.9);
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;  
+    user-select: none;
+    cursor: default;
+    white-space: nowrap;
+}
+span:hover::before                      { content: "text span" }
+span[class]:hover::before               { content: "text span type \"" attr(class) "\"" }
+body.short span:hover::before           { content: "span" }
+body.short span[class]:hover::before    { content: "span." attr(class) }
+strong:hover::before,
+b:hover::before                         { content: "strong emphasis" }
+strong[class]:hover::before,
+b[class]:hover::before                  { content: "strong emphasis type \"" attr(class) "\"" }
+body.short strong:hover::before,
+body.short b:hover::before              { content: "strong" }
+body.short strong[class]:hover::before,
+body.short b[class]:hover::before       { content: "strong." attr(class) }
+em:hover::before,
+i:hover::before                         { content: "emphasis" }
+em[class]:hover::before,
+i[class]:hover::before                  { content: "emphasis type \"" attr(class) "\"" }
+body.short em:hover::before,
+body.short i:hover::before              { content: "em" }
+body.short em[class]:hover::before,
+body.short i[class]:hover::before       { content: "em." attr(class) }
+a[href]:hover::before                   { content: "hyperlink" }
+a[href][class]:hover::before            { content: "hyperlink type \"" attr(class) "\"" }
+body.short a[href]:hover::before        { content: "a-href" }
+body.short a[href][class]:hover::before { content: "a-href." attr(class) }
+abbr:hover::before                      { content: "abbreviation" }
+abbr[class]:hover::before               { content: "abbreviation type \"" attr(class) "\"" }
+body.short abbr:hover::before           { content: "abbr" }
+body.short abbr[class]:hover::before    { content: "abbr." attr(class) }
+acronym:hover::before                   { content: "acronym" }
+acronym[class]:hover::before            { content: "acronym type \"" attr(class) "\"" }
+body.short acronym:hover::before        { content: "acronym" }
+body.short acronym[class]:hover::before { content: "acronym." attr(class) }
+kbd:hover::before                       { content: "keyboard input" }
+kbd[class]:hover::before                { content: "keyboard input type \"" attr(class) "\"" }
+body.short kbd:hover::before            { content: "kbd" }
+body.short kbd[class]:hover::before     { content: "kbd." attr(class)}
+/* q:hover::before(2)                     { content: "quotation" }
+q[class]:hover::before(2)               { content: "quotation type \"" attr(class) "\"" }
+body.short q:hover::before(2)           { content: "q" }
+body.short q[class]:hover::before(2)    { content: "q." attr(class) } */
+cite:hover::before                      { content: "work title" }
+cite[class]:hover::before               { content: "work title type \"" attr(class) "\""}
+body.short cite:hover::before           { content: "cite" }
+body.short cite[class]:hover::before    { content: "cite." attr(class) }
+samp:hover::before                      { content: "sample text" }
+samp[class]:hover::before               { content: "sample text type \"" attr(class) "\"" }
+body.short samp:hover::before           { content: "samp" }
+body.short samp[class]:hover::before    { content: "samp." attr(class) }
+var:hover::before                       { content: "variable" }
+var[class]:hover::before                { content: "variable type \"" attr(class) "\"" }
+body.short var:hover::before            { content: "var" }
+body.short var[class]:hover::before     { content: "var." attr(class) }
+del:hover::before                       { content: "deleted text" }
+del[class]:hover::before                { content: "deleted text type \"" attr(class) "\"" }
+body.short del:hover::before            { content: "del" }
+body.short del[class]:hover::before     { content: "del." attr(class) }
+ins:hover::before                       { content: "inserted text" }
+ins[class]:hover::before                { content: "inserted text type \"" attr(class) "\"" }
+body.short ins:hover::before            { content: "ins" }
+body.short ins[class]:hover::before     { content: "ins." attr(class) }
+dfn:hover::before                       { content: "definition" }
+dfn[class]:hover::before                { content: "definition type \"" attr(class) "\"" }
+body.short dfn:hover::before            { content: "dfn" }
+body.short dfn[class]:hover::before     { content: "dfn." attr(class) }
+code:hover::before                      { content: "code fragment" }
+code[class]:hover::before               { content: "code fragment type \"" attr(class) "\"" }
+body.short code:hover::before           { content: "code" }
+body.short code[class]:hover::before    { content: "code." attr(class) }
+sup:hover::before                       { content: "superscript" }
+sup[class]:hover::before                { content: "superscript type \"" attr(class) "\"" }
+body.short sup:hover::before            { content: "sup" }
+body.short sup[class]:hover::before     { content: "sup." attr(class) }
+sub:hover::before                       { content: "subscript" }
+sub[class]:hover::before                { content: "subscript type \"" attr(class) "\""}
+body.short sub:hover::before            { content: "sub" }
+body.short sub[class]:hover::before     { content: "sub." attr(class) }
+
+span:hover,
+strong:hover, b:hover,
+em:hover, i:hover,
+a[href]:hover,
+abbr:hover,
+acronym:hover,
+kbd:hover,
+q:hover,
+cite:hover,
+samp:hover,
+var:hover,
+del:hover,
+ins:hover,
+dfn:hover,
+code:hover,
+sup:hover,
+sub:hover { background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAgSURBVAiZY3DMfPj/////DDDMxIAGMAQYHTMf/kcWAADRgQ4R3lkO7wAAAABJRU5ErkJggg==) bottom left no-repeat,
+                        url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAgSURBVAiZY/z//z8DDDhlPfrPxIAGMAQYHTMf/kcWAABxJAgb2YLYKgAAAABJRU5ErkJggg==) bottom right no-repeat }

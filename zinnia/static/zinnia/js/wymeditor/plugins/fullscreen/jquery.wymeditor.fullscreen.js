@@ -24,47 +24,44 @@ WYMeditor.editor.prototype.fullscreen = function() {
         $iframe = jQuery(this._iframe),
         $overlay = null,
         $window = jQuery(window),
-        
+
         editorMargin = 15;     // Margin from window (without padding)
 
-    
-    //construct the button's html
-    var html = "<li class='wym_tools_fullscreen'>"
-             + "<a name='Fullscreen' href='#'"
-             + " style='background-image:"
-             + " url(" + wym._options.basePath +"plugins/fullscreen/icon_fullscreen.gif)'>"
-             + "Fullscreen"
-             + "</a></li>";
 
+    //construct the button's html
+    var html = '' +
+        "<li class='wym_tools_fullscreen'>" +
+            "<a name='Fullscreen' href='#' " +
+                "style='background-image: url(" +
+                    wym._options.basePath +
+                    "plugins/fullscreen/icon_fullscreen.gif)'>" +
+                "Fullscreen" +
+            "</a>" +
+        "</li>";
     //add the button to the tools box
     $box.find(wym._options.toolsSelector + wym._options.toolsListSelector)
         .append(html);
-        
+
     function resize () {
-                // Calculate margins
-            var uiHeight = $box.outerHeight(true) 
-                                - $iframe.outerHeight(true),
-                editorPadding = $box.outerWidth() - $box.width(),
-                
-                // Calculate heights
-                screenHeight = $window.height(),
-                iframeHeight = (screenHeight 
-                                    - uiHeight 
-                                    - (editorMargin * 2)) + 'px',
-                
-                // Calculate witdths
-                screenWidth = $window.width(),
-                boxWidth = (screenWidth 
-                                - editorPadding
-                                - (editorMargin * 2)) + 'px';
-            
-            $box.css('width', boxWidth);
-            $iframe.css('height', iframeHeight);
-            $overlay.css({
-                'height': screenHeight + 'px',
-                'width': screenWidth + 'px'
-            });
-    };
+        // Calculate margins
+        var uiHeight = $box.outerHeight(true) - $iframe.outerHeight(true);
+        var editorPadding = $box.outerWidth() - $box.width();
+
+        // Calculate heights
+        var screenHeight = $window.height();
+        var iframeHeight = (screenHeight - uiHeight - (editorMargin * 2)) + 'px';
+
+        // Calculate witdths
+        var screenWidth = $window.width();
+        var boxWidth = (screenWidth - editorPadding - (editorMargin * 2)) + 'px';
+
+        $box.css('width', boxWidth);
+        $iframe.css('height', iframeHeight);
+        $overlay.css({
+            'height': screenHeight + 'px',
+            'width': screenWidth + 'px'
+        });
+    }
 
     //handle click event
     $box.find('li.wym_tools_fullscreen a').click(function() {
@@ -72,7 +69,7 @@ WYMeditor.editor.prototype.fullscreen = function() {
             // Store previous inline styles
             $box.data('wym-inline-css', $box.attr('style'));
             $iframe.data('wym-inline-css', $iframe.attr('style'));
-            
+
             // Create overlay
             $overlay = jQuery('<div id="wym-fullscreen-overlay"></div>')
                 .appendTo('body').css({
@@ -83,32 +80,32 @@ WYMeditor.editor.prototype.fullscreen = function() {
                     'top': '0px',
                     'left': '0px'
                 });
-            
+
             // Possition the editor
             $box.css({
-                'position': 'fixed', 
+                'position': 'fixed',
                 'z-index': '99',
                 'top': editorMargin + 'px',
                 'left': editorMargin + 'px'
             });
-            
+
             // Bind event listeners
             $window.bind('resize', resize);
             $box.find('li.wym_tools_html a').bind('click', resize);
-            
+
             // Force resize
             resize();
         } else {
             // Unbind event listeners
             $window.unbind('resize', resize);
             $box.find('li.wym_tools_html a').unbind('click', resize);
-            
+
             // Remove inline styles
             $box.css({
-                'position': 'static', 
-                'z-index': '', 
-                'width': '', 
-                'top': '', 
+                'position': 'static',
+                'z-index': '',
+                'width': '',
+                'top': '',
                 'left': ''
             });
             $iframe.css('height', '');
@@ -116,7 +113,7 @@ WYMeditor.editor.prototype.fullscreen = function() {
             // Remove overlay
             $overlay.remove();
             $overlay = null;
-            
+
             // Retore previous inline styles
             $box.attr('style', $box.data('wym-inline-css'));
             $iframe.attr('style', $iframe.data('wym-inline-css'));

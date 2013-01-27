@@ -50,9 +50,9 @@
     }
     // Slider
     ol.flex-control-nav li a {
-      background: $rebase03;
+      background: $rebase02;
       &:hover {
-        background: $rebase02;
+        background: $rebase00;
       }
       &.active {
         background: $rebase01;
@@ -85,6 +85,9 @@
     a { @include link-colors($accent, lighten($accent, 5%),
                              lighten(adjust-hue($accent, 75deg), 10%),
                              $accent, $accent); }
+    ol.flex-control-nav li a.active {
+      background: $accent;
+    }
 }
 
 &.default {

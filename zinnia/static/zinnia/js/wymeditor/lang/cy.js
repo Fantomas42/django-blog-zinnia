@@ -1,4 +1,4 @@
-WYMeditor.STRINGS['cy'] = {
+WYMeditor.STRINGS.cy = {
     Strong:           'Bras',
     Emphasis:         'Italig',
     Superscript:      'Uwchsgript',

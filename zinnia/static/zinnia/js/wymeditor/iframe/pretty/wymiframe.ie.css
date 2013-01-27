@@ -1,0 +1,21 @@
+/*
+ * WYMeditor : what you see is What You Mean web-based editor
+ * Copyright (c) 2005 - 2009 Jean-Francois Hovinne, http://www.wymeditor.org/
+ * Dual licensed under the MIT (MIT-license.txt)
+ * and GPL (GPL-license.txt) licenses.
+ *
+ * For further information visit:
+ *        http://www.wymeditor.org/
+ *
+ * File Name:
+ *        wymeditor.ie.css
+ *        Main editor css file, IE support.
+ *        See the documentation for more info.
+ *
+ * File Authors:
+ *        Gyuris Gellért (bubu a-t ujevangelizacio dothu)
+*/
+
+/* VISUAL FEEDBACK */
+ul, ol, dl { min-height: auto; line-height: 0px }
+li, dt, dd { line-height: 20px; }

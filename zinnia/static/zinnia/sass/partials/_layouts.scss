@@ -37,7 +37,7 @@
 @include at-breakpoint($screen-layout) {
   $third: floor($total-columns / 3);
 
-  &, &.sidebar-right {
+  &, &.right-sidebar {
     #content {
       @include span-columns(2 * $third);
     }
@@ -47,12 +47,20 @@
     }
   }
 
-  &.sidebar-left {
+  &.left-sidebar {
     #content {
       @include span-columns(2 * $third omega);
     }
     #sidebar {
       @include span-columns($third);
+    }
+  }
+  &.no-sidebar {
+    #content {
+      @include span-columns($total-columns);
+    }
+    #sidebar {
+      display: none;
     }
   }
 }
