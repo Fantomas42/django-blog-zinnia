@@ -51,8 +51,6 @@ class CoreEntry(models.Model):
     title = models.CharField(
         _('title'), max_length=255)
 
-    content = models.TextField(_('content'))
-
     slug = models.SlugField(
         _('slug'), max_length=255,
         unique_for_date='creation_date',
@@ -84,28 +82,6 @@ class CoreEntry(models.Model):
 
     objects = models.Manager()
     published = EntryPublishedManager()
-
-    @property
-    def html_content(self):
-        """
-        Returns the "content" field formatted in HTML.
-        """
-        if MARKUP_LANGUAGE == 'markdown':
-            return markdown(self.content, MARKDOWN_EXTENSIONS)
-        elif MARKUP_LANGUAGE == 'textile':
-            return textile(self.content)
-        elif MARKUP_LANGUAGE == 'restructuredtext':
-            return restructuredtext(self.content)
-        elif not '</p>' in self.content:
-            return linebreaks(self.content)
-        return self.content
-
-    @property
-    def word_count(self):
-        """
-        Counts the number of words used in an entry.
-        """
-        return len(strip_tags(self.html_content).split())
 
     @property
     def is_actual(self):
@@ -183,6 +159,39 @@ class CoreEntry(models.Model):
         permissions = (('can_view_all', 'Can view all entries'),
                        ('can_change_status', 'Can change status'),
                        ('can_change_author', 'Can change author(s)'), )
+
+
+class ContentEntry(models.Model):
+    """
+    Abstract content model class providing field
+    and methods to write content inside an entry.
+    """
+    content = models.TextField(_('content'), blank=True)
+
+    @property
+    def html_content(self):
+        """
+        Returns the "content" field formatted in HTML.
+        """
+        if MARKUP_LANGUAGE == 'markdown':
+            return markdown(self.content, MARKDOWN_EXTENSIONS)
+        elif MARKUP_LANGUAGE == 'textile':
+            return textile(self.content)
+        elif MARKUP_LANGUAGE == 'restructuredtext':
+            return restructuredtext(self.content)
+        elif not '</p>' in self.content:
+            return linebreaks(self.content)
+        return self.content
+
+    @property
+    def word_count(self):
+        """
+        Counts the number of words used in the content.
+        """
+        return len(strip_tags(self.html_content).split())
+
+    class Meta:
+        abstract = True
 
 
 class DiscussionsEntry(models.Model):
@@ -443,6 +452,7 @@ class DetailTemplateEntry(models.Model):
 
 class EntryAbstractClass(
         CoreEntry,
+        ContentEntry,
         DiscussionsEntry,
         RelatedEntry,
         ExcerptEntry,

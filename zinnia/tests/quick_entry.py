@@ -44,12 +44,12 @@ class QuickEntryTestCase(TestCase):
         response = self.client.get('/quick_entry/', follow=True)
         self.assertEquals(response.redirect_chain,
                           [('http://testserver/admin/zinnia/entry/add/', 302)])
-        response = self.client.post('/quick_entry/', {'title': 'test'},
+        response = self.client.post('/quick_entry/', {'content': 'test'},
                                     follow=True)
         self.assertEquals(response.redirect_chain,
                           [('http://testserver/admin/zinnia/entry/add/'
-                            '?tags=&title=test&sites=1&content='
-                            '%3Cp%3E%3C%2Fp%3E&authors=2&slug=test', 302)])
+                            '?tags=&title=&sites=1&content='
+                            '%3Cp%3Etest%3C%2Fp%3E&authors=2&slug=', 302)])
         response = self.client.post('/quick_entry/',
                                     {'title': 'test', 'tags': 'test',
                                      'content': 'Test content',
