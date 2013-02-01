@@ -90,8 +90,8 @@ class EntryCommentModerator(CommentModerator):
             [author.email for author in content_object.authors.all()] + \
             [comment.email]
         recipient_list = set(
-            [comment.email for comment in content_object.comments
-             if comment.email]) - set(exclude_list)
+            [other_comment.email for other_comment in content_object.comments
+             if other_comment.email]) - set(exclude_list)
         if recipient_list:
             site = Site.objects.get_current()
             template = loader.get_template('comments/comment_reply_email.txt')

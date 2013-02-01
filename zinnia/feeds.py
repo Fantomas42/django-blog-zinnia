@@ -119,7 +119,7 @@ class LatestEntries(EntryFeed):
 
     def get_title(self, obj):
         """Title of the feed"""
-        return  _('Latest entries')
+        return _('Latest entries')
 
     def description(self):
         """Description of the feed"""
