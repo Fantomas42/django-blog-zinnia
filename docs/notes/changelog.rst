@@ -1,6 +1,18 @@
 CHANGELOG
 =========
 
+0.12.2
+------
+
+* CSS updates and fixes
+* Fix viewport meta tag
+* I18n support for the URLs
+* Update MarkItUp to v1.1.13
+* Update WYMeditor to v1.0.0b3
+* Entry's content can be blank
+* Compatibility fix for WXR > 1.0
+* Fix potential issue on ``check_is_spam``
+
 0.12.1
 ------
 
