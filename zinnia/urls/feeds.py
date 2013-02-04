@@ -17,10 +17,10 @@ from zinnia.feeds import LatestDiscussions
 
 urlpatterns = patterns(
     '',
-    url(_(r'^latest/$'),
+    url(r'^$',
         LatestEntries(),
         name='zinnia_entry_latest_feed'),
-    url(_(r'^latest/discussions/$'),
+    url(_(r'^discussions/$'),
         LatestDiscussions(),
         name='zinnia_discussion_latest_feed'),
     url(_(r'^search/$'),
