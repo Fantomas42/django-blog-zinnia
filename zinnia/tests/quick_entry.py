@@ -30,27 +30,27 @@ class QuickEntryTestCase(TestCase):
         restore_template_loaders()
 
     def test_quick_entry(self):
-        response = self.client.get('/quick_entry/', follow=True)
+        response = self.client.get('/quick-entry/', follow=True)
         self.assertEquals(
             response.redirect_chain,
-            [('http://testserver/accounts/login/?next=/quick_entry/', 302)])
+            [('http://testserver/accounts/login/?next=/quick-entry/', 302)])
         self.client.login(username='user', password='password')
-        response = self.client.get('/quick_entry/', follow=True)
+        response = self.client.get('/quick-entry/', follow=True)
         self.assertEquals(
             response.redirect_chain,
-            [('http://testserver/accounts/login/?next=/quick_entry/', 302)])
+            [('http://testserver/accounts/login/?next=/quick-entry/', 302)])
         self.client.logout()
         self.client.login(username='admin', password='password')
-        response = self.client.get('/quick_entry/', follow=True)
+        response = self.client.get('/quick-entry/', follow=True)
         self.assertEquals(response.redirect_chain,
                           [('http://testserver/admin/zinnia/entry/add/', 302)])
-        response = self.client.post('/quick_entry/', {'content': 'test'},
+        response = self.client.post('/quick-entry/', {'content': 'test'},
                                     follow=True)
         self.assertEquals(response.redirect_chain,
                           [('http://testserver/admin/zinnia/entry/add/'
                             '?tags=&title=&sites=1&content='
                             '%3Cp%3Etest%3C%2Fp%3E&authors=2&slug=', 302)])
-        response = self.client.post('/quick_entry/',
+        response = self.client.post('/quick-entry/',
                                     {'title': 'test', 'tags': 'test',
                                      'content': 'Test content',
                                      'save_draft': ''}, follow=True)
@@ -62,7 +62,7 @@ class QuickEntryTestCase(TestCase):
         self.assertEquals(entry.title, 'test')
         self.assertEquals(entry.tags, 'test')
         self.assertEquals(entry.content, '<p>Test content</p>')
-        response = self.client.post('/quick_entry/',
+        response = self.client.post('/quick-entry/',
                                     {'title': 'test', 'tags': 'test-2',
                                      'content': 'Test content',
                                      'save_draft': ''}, follow=True)
@@ -74,7 +74,7 @@ class QuickEntryTestCase(TestCase):
 
     def test_quick_entry_non_ascii_title_issue_153(self):
         self.client.login(username='admin', password='password')
-        response = self.client.post('/quick_entry/',
+        response = self.client.post('/quick-entry/',
                                     {'title': u'тест', 'tags': 'test-2',
                                      'content': 'Test content',
                                      'save_draft': ''}, follow=True)
