@@ -29,6 +29,7 @@ class EntryAdmin(admin.ModelAdmin):
     """Admin for Entry model"""
     form = EntryAdminForm
     date_hierarchy = 'creation_date'
+    prepopulated_fields = {'slug': ('title', )}
     fieldsets = ((_('Content'), {'fields': ('title', 'content',
                                             'image', 'status')}),
                  (_('Options'), {'fields': ('featured', 'excerpt',
