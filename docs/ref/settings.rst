@@ -186,6 +186,16 @@ So by default you will have 15 entries displayed on the feeds.
 URLs
 ====
 
+.. setting:: ZINNIA_TRANSLATED_URLS
+
+ZINNIA_TRANSLATED_URLS
+----------------------
+.. versionadded:: 0.12.2
+**Default value:** ``False``
+
+Boolean used to activate the internationalization of the URLs provided by
+Zinnia if the translation is avaialable in your language.
+
 .. setting:: ZINNIA_URL_SHORTENER_BACKEND
 
 ZINNIA_URL_SHORTENER_BACKEND

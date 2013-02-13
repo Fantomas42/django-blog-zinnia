@@ -20,7 +20,8 @@ h2.entry-title {
   padding-right: 0.5em;
   img {
     padding: 1em;
-    max-width: 96%;
+    max-width: 100%;
+    @include box-sizing(border-box);
     &, &.left {
     margin: 0 1em 1em 0;
     float: left;

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2013-01-10 08:14-0600\n"
-"PO-Revision-Date: 2013-01-10 14:16+0000\n"
+"POT-Creation-Date: 2013-02-04 07:17-0600\n"
+"PO-Revision-Date: 2013-02-04 13:19+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -140,7 +140,7 @@ msgid "Privacy"
 msgstr "Pribatutasuna"
 
 #: admin/entry.py:44 templates/admin/zinnia/widgets/_content_stats.html:5
-#: templates/zinnia/_entry_detail_base.html:109
+#: templates/zinnia/_entry_detail_base.html:108
 msgid "Discussions"
 msgstr "Eztabaidak"
 
@@ -294,11 +294,11 @@ msgstr "Kategoriak ezin dira nor bere gurazo izan."
 msgid "Categories"
 msgstr "Kategoriak"
 
-#: admin/forms.py:47 models/category.py:73 models/entry.py:363
+#: admin/forms.py:47 models/category.py:73 models/entry.py:372
 msgid "categories"
 msgstr "kategoriak"
 
-#: models/category.py:22 models/entry.py:57
+#: models/category.py:22 models/entry.py:55
 msgid "slug"
 msgstr ""
 
@@ -326,159 +326,159 @@ msgstr "ezkutatuta"
 msgid "published"
 msgstr "argitaratuta"
 
-#: models/entry.py:54
-msgid "content"
-msgstr "edukia"
-
-#: models/entry.py:59 models/entry.py:80
+#: models/entry.py:57 models/entry.py:78
 msgid "Used to build the entry's URL."
 msgstr ""
 
-#: models/entry.py:62
+#: models/entry.py:60
 msgid "status"
 msgstr ""
 
-#: models/entry.py:65
+#: models/entry.py:63
 msgid "start publication"
 msgstr "argitaratu"
 
-#: models/entry.py:66
+#: models/entry.py:64
 msgid "Start date of publication."
 msgstr ""
 
-#: models/entry.py:69
+#: models/entry.py:67
 msgid "end publication"
 msgstr "ez-argitaratu"
 
-#: models/entry.py:70
+#: models/entry.py:68
 msgid "End date of publication."
 msgstr ""
 
-#: models/entry.py:75
+#: models/entry.py:73
 msgid "sites"
 msgstr ""
 
-#: models/entry.py:76
+#: models/entry.py:74
 msgid "Sites where the entry will be published."
 msgstr ""
 
-#: models/entry.py:79
+#: models/entry.py:77
 msgid "creation date"
 msgstr "sorrera data"
 
-#: models/entry.py:83
+#: models/entry.py:81
 msgid "last update"
 msgstr "azken eguneraketa"
 
-#: models/entry.py:181
+#: models/entry.py:157
 msgid "entry"
 msgstr "sarrera"
 
-#: models/entry.py:182
+#: models/entry.py:158
 msgid "entries"
 msgstr "sarrerak"
 
-#: models/entry.py:195
+#: models/entry.py:169
+msgid "content"
+msgstr "edukia"
+
+#: models/entry.py:204
 msgid "comments enabled"
 msgstr ""
 
-#: models/entry.py:196
+#: models/entry.py:205
 msgid "Allows comments if checked."
 msgstr ""
 
-#: models/entry.py:198
+#: models/entry.py:207
 msgid "pingbacks enabled"
 msgstr ""
 
-#: models/entry.py:199
+#: models/entry.py:208
 msgid "Allows pingbacks if checked."
 msgstr ""
 
-#: models/entry.py:201
+#: models/entry.py:210
 msgid "trackbacks enabled"
 msgstr ""
 
-#: models/entry.py:202
+#: models/entry.py:211
 msgid "Allows trackbacks if checked."
 msgstr ""
 
-#: models/entry.py:205
+#: models/entry.py:214
 msgid "comment count"
 msgstr ""
 
-#: models/entry.py:207
+#: models/entry.py:216
 msgid "pingback count"
 msgstr ""
 
-#: models/entry.py:209
+#: models/entry.py:218
 msgid "trackback count"
 msgstr ""
 
-#: models/entry.py:292
+#: models/entry.py:301
 msgid "related entries"
 msgstr "erlazionatutako sarrerak"
 
-#: models/entry.py:310
+#: models/entry.py:319
 msgid "excerpt"
 msgstr "laburpena"
 
-#: models/entry.py:311
+#: models/entry.py:320
 msgid "Optional element."
 msgstr ""
 
-#: models/entry.py:322
+#: models/entry.py:331
 msgid "image"
 msgstr "irudia"
 
-#: models/entry.py:323
+#: models/entry.py:332
 msgid "Used for illustration."
 msgstr ""
 
-#: models/entry.py:334
+#: models/entry.py:343
 msgid "featured"
 msgstr "nabarmendua"
 
-#: models/entry.py:349
+#: models/entry.py:358
 msgid "authors"
 msgstr "egileak"
 
-#: models/entry.py:373
+#: models/entry.py:382
 msgid "tags"
 msgstr "etiketak"
 
-#: models/entry.py:392
+#: models/entry.py:401
 msgid "login required"
 msgstr "pasahitza beharrezkoa"
 
-#: models/entry.py:393
+#: models/entry.py:402
 msgid "Only authenticated users can view the entry."
 msgstr ""
 
-#: models/entry.py:405
+#: models/entry.py:414
 msgid "password"
 msgstr "pasahitza"
 
-#: models/entry.py:406
+#: models/entry.py:415
 msgid "Protects the entry with a password."
 msgstr ""
 
-#: models/entry.py:418
+#: models/entry.py:427
 msgid "content template"
 msgstr ""
 
-#: models/entry.py:420 models/entry.py:436
+#: models/entry.py:429 models/entry.py:445
 msgid "Default template"
 msgstr "Lehenetsitako txantiloia"
 
-#: models/entry.py:422
+#: models/entry.py:431
 msgid "Template used to display the entry's content."
 msgstr ""
 
-#: models/entry.py:434
+#: models/entry.py:443
 msgid "detail template"
 msgstr ""
 
-#: models/entry.py:438
+#: models/entry.py:447
 msgid "Template used to display the entry's detail page."
 msgstr ""
 
@@ -538,7 +538,7 @@ msgstr[0] "sarrera bat"
 msgstr[1] "%(entry_count)s sarrera"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:15
-#: templates/zinnia/_entry_detail_base.html:114
+#: templates/zinnia/_entry_detail_base.html:113
 #: templates/zinnia/tags/popular_entries.html:8
 #: templates/zinnia/tags/statistics.html:16
 #, python-format
@@ -556,7 +556,7 @@ msgstr[0] "kategoria bat"
 msgstr[1] "%(category_count)s kategoria"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:25
-#: templates/zinnia/_entry_detail_base.html:131
+#: templates/zinnia/_entry_detail_base.html:130
 #: templates/zinnia/tags/statistics.html:19
 #, python-format
 msgid "%(pingback_count)s pingback"
@@ -573,7 +573,7 @@ msgstr[0] "etiketa bat"
 msgstr[1] "%(tag_count)s etiketa"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:33
-#: templates/zinnia/_entry_detail_base.html:138
+#: templates/zinnia/_entry_detail_base.html:137
 #: templates/zinnia/tags/statistics.html:22
 #, python-format
 msgid "%(trackback_count)s trackback"
@@ -643,7 +643,7 @@ msgstr "Sarrera editatu"
 #: templates/feeds/discussion_title.html:2
 #: templates/feeds/pingback_title.html:2
 #: templates/feeds/trackback_title.html:2
-#: templates/zinnia/_entry_detail_base.html:24
+#: templates/zinnia/_entry_detail_base.html:23
 #: templates/zinnia/entry_detail_base.html:106
 #: templates/zinnia/entry_detail_base.html:143
 #: templates/zinnia/entry_detail_base.html:179
@@ -666,7 +666,7 @@ msgid "View all draft entries"
 msgstr "Zirriborro guztiak ikusi"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:11
-#: templates/zinnia/_entry_detail_base.html:32
+#: templates/zinnia/_entry_detail_base.html:31
 #: templates/zinnia/tags/recent_comments.html:6
 #: templates/zinnia/tags/recent_linkbacks.html:7
 msgid "in"
@@ -687,7 +687,7 @@ msgid "Edit"
 msgstr "Editatu"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:31
-#: templates/zinnia/_entry_detail_base.html:118
+#: templates/zinnia/_entry_detail_base.html:117
 #: templates/zinnia/entry_detail_base.html:124
 #: templates/zinnia/tags/recent_comments.html:15
 msgid "No comments yet."
@@ -731,7 +731,7 @@ msgid "Title"
 msgstr "Izenburua"
 
 #: templates/admin/zinnia/widgets/quickpost.html:26
-#: templates/zinnia/_entry_detail_base.html:87 templates/zinnia/base.html:40
+#: templates/zinnia/_entry_detail_base.html:86 templates/zinnia/base.html:40
 #: templates/zinnia/tag_list.html:7 templatetags/zbreadcrumbs.py:46
 msgid "Tags"
 msgstr "Etiketak"
@@ -859,11 +859,11 @@ msgstr "Idazlea(k):"
 msgid "Show all %(author)s's entries"
 msgstr "%(author)s-(r)en sarrera guztiak ikusi"
 
-#: templates/zinnia/_entry_detail_base.html:26
+#: templates/zinnia/_entry_detail_base.html:25
 msgid "Written on"
 msgstr "Data honetan:"
 
-#: templates/zinnia/_entry_detail_base.html:35
+#: templates/zinnia/_entry_detail_base.html:34
 #: templates/zinnia/category_list.html:16
 #: templates/zinnia/tags/categories.html:6
 #: templates/zinnia/tags/categories_tree.html:5
@@ -871,65 +871,65 @@ msgstr "Data honetan:"
 msgid "Show all entries in %(category)s"
 msgstr "%(category)s kategoriako sarrera guztiak ikusi"
 
-#: templates/zinnia/_entry_detail_base.html:41
+#: templates/zinnia/_entry_detail_base.html:40
 msgid "Last update on"
 msgstr ""
 
-#: templates/zinnia/_entry_detail_base.html:73
+#: templates/zinnia/_entry_detail_base.html:72
 #, python-format
 msgid "Continue reading %(object)s"
 msgstr "%(object)s irakurtzen jarraitu"
 
-#: templates/zinnia/_entry_detail_base.html:75
+#: templates/zinnia/_entry_detail_base.html:74
 msgid "Continue reading"
 msgstr "Irakurtzen jarraitu"
 
-#: templates/zinnia/_entry_detail_base.html:90
+#: templates/zinnia/_entry_detail_base.html:89
 #: templates/zinnia/tag_list.html:18
 #, python-format
 msgid "Show all entries tagged by %(tag)s"
 msgstr "%(tag)s etiketadun sarrera guztiak ikusi"
 
-#: templates/zinnia/_entry_detail_base.html:93
+#: templates/zinnia/_entry_detail_base.html:92
 msgid "No tags"
 msgstr "Etiketarik ez"
 
-#: templates/zinnia/_entry_detail_base.html:99
+#: templates/zinnia/_entry_detail_base.html:98
 msgid "Short url"
 msgstr "URL motza"
 
-#: templates/zinnia/_entry_detail_base.html:101
+#: templates/zinnia/_entry_detail_base.html:100
 #, python-format
 msgid "Short URL to %(object)s"
 msgstr "%(object)s sarrerara URL motza"
 
-#: templates/zinnia/_entry_detail_base.html:113
+#: templates/zinnia/_entry_detail_base.html:112
 #: templates/zinnia/tags/popular_entries.html:7
 #, python-format
 msgid "Comments on %(object)s"
 msgstr "%(object)s sarreraren iruzkinak"
 
-#: templates/zinnia/_entry_detail_base.html:120
+#: templates/zinnia/_entry_detail_base.html:119
 #, python-format
 msgid "Leave a comment on %(object)s"
 msgstr "%(object)s sarreran iruzkina gehitu"
 
-#: templates/zinnia/_entry_detail_base.html:121
+#: templates/zinnia/_entry_detail_base.html:120
 msgid "Be first to comment!"
 msgstr "Iruzkina gehitzen lehena izan zaitez!"
 
-#: templates/zinnia/_entry_detail_base.html:124
+#: templates/zinnia/_entry_detail_base.html:123
 #: templates/zinnia/entry_detail_base.html:120
 #: templates/zinnia/entry_detail_base.html:126
 msgid "Comments are closed."
 msgstr "Iruzkinak itxita daude."
 
-#: templates/zinnia/_entry_detail_base.html:130
+#: templates/zinnia/_entry_detail_base.html:129
 #, python-format
 msgid "Pingbacks on %(object)s"
 msgstr "%(object)s sarreraren pingback-ak"
 
-#: templates/zinnia/_entry_detail_base.html:137
+#: templates/zinnia/_entry_detail_base.html:136
 #, python-format
 msgid "Trackbacks on %(object)s"
 msgstr "%(object)s sarreraren trackback-ak"
@@ -1360,6 +1360,130 @@ msgstr "Eredua laburregia da"
 #: tests/views.py:418 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Ez da bilaketarako eredurik topatu"
+
+#: urls/__init__.py:22
+msgid "^feeds/"
+msgstr ""
+
+#: urls/__init__.py:23
+msgid "^tags/"
+msgstr ""
+
+#: urls/__init__.py:24
+msgid "^authors/"
+msgstr ""
+
+#: urls/__init__.py:25
+msgid "^categories/"
+msgstr ""
+
+#: urls/__init__.py:26
+msgid "^search/"
+msgstr ""
+
+#: urls/__init__.py:27
+msgid "^sitemap/"
+msgstr ""
+
+#: urls/__init__.py:28
+msgid "^trackback/"
+msgstr ""
+
+#: urls/__init__.py:29
+msgid "^comments/"
+msgstr ""
+
+#: urls/archives.py:18
+msgid "^page/(?P<page>\\d+)/$"
+msgstr ""
+
+#: urls/archives.py:27
+msgid "^(?P<year>\\d{4})/page/(?P<page>\\d+)/$"
+msgstr ""
+
+#: urls/archives.py:33
+msgid "^(?P<year>\\d{4})/week/(?P<week>\\d{2})/$"
+msgstr ""
+
+#: urls/archives.py:36
+msgid "^(?P<year>\\d{4})/week/(?P<week>\\d{2})/page/(?P<page>\\d+)/$"
+msgstr ""
+
+#: urls/archives.py:45
+msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/page/(?P<page>\\d+)/$"
+msgstr ""
+
+#: urls/archives.py:54
+msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/page/(?P<page>\\d+)/$"
+msgstr ""
+
+#: urls/archives.py:61
+msgid "^today/$"
+msgstr ""
+
+#: urls/archives.py:64
+msgid "^today/page/(?P<page>\\d+)/$"
+msgstr ""
+
+#: urls/authors.py:18
+msgid "^(?P<username>[.+-@\\w]+)/page/(?P<page>\\d+)/$"
+msgstr ""
+
+#: urls/categories.py:15
+msgid "^(?P<path>[-\\/\\w]+)/page/(?P<page>\\d+)/$"
+msgstr ""
+
+#: urls/comments.py:11
+msgid "^success/$"
+msgstr ""
+
+#: urls/feeds.py:23
+msgid "^discussions/$"
+msgstr ""
+
+#: urls/feeds.py:26
+msgid "^search/$"
+msgstr ""
+
+#: urls/feeds.py:29
+msgid "^tags/(?P<tag>[^/]+(?u))/$"
+msgstr ""
+
+#: urls/feeds.py:32
+msgid "^authors/(?P<username>[.+-@\\w]+)/$"
+msgstr ""
+
+#: urls/feeds.py:35
+msgid "^categories/(?P<path>[-\\/\\w]+)/$"
+msgstr ""
+
+#: urls/feeds.py:38
+msgid ""
+"^discussions/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+msgstr ""
+
+#: urls/feeds.py:42
+msgid ""
+"^comments/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+msgstr ""
+
+#: urls/feeds.py:46
+msgid ""
+"^pingbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+msgstr ""
+
+#: urls/feeds.py:50
+msgid ""
+"^trackbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+msgstr ""
+
+#: urls/quick_entry.py:11
+msgid "^quick-entry/$"
+msgstr ""
+
+#: urls/tags.py:18
+msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
+msgstr ""
 
 #: views/tags.py:48
 #, python-format

@@ -47,11 +47,6 @@ LANGUAGES = (
     ('zh_CN', gettext('Simplified Chinese')),
 )
 
-
-PASSWORD_HASHERS = (
-    'django.contrib.auth.hashers.SHA1PasswordHasher',
-)
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

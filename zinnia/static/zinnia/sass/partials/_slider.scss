@@ -35,6 +35,7 @@
   position: relative;
   img {
     width: 100%;
+    height: 300px;
     display: block;
   }
 }
@@ -106,6 +107,9 @@ ol.flex-control-nav {
   .slide-content {
     h2 { font-size: 3em; }
     p { font-size: 1.2em; display: inline-block; }
+  }
+  .slide img {
+    height: 400px;
   }
   .flex-direction-nav {
     .prev { @include hd-nav-direction-button(left); }
