@@ -191,6 +191,7 @@ URLs
 ZINNIA_TRANSLATED_URLS
 ----------------------
 .. versionadded:: 0.12.2
+
 **Default value:** ``False``
 
 Boolean used to activate the internationalization of the URLs provided by

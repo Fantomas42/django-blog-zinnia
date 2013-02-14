@@ -56,6 +56,14 @@ Useful for having a sexier admin interface.
 
 URL: https://github.com/Fantomas42/admin-tools-zinnia
 
+zinnia-threaded-comment
+=======================
+
+Zinnia-threaded-comments customizes the comment application bundled by
+Django to enable replies to comments within your Weblog.
+
+URL: https://github.com/Fantomas42/zinnia-threaded-comments
+
 zinnia-theme-html5
 ==================
 
