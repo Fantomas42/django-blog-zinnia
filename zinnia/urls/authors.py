@@ -12,10 +12,10 @@ urlpatterns = patterns(
     url(r'^$',
         AuthorList.as_view(),
         name='zinnia_author_list'),
-    url(r'^(?P<username>[.+-@\w]+)/$',
-        AuthorDetail.as_view(),
-        name='zinnia_author_detail'),
     url(_(r'^(?P<username>[.+-@\w]+)/page/(?P<page>\d+)/$'),
         AuthorDetail.as_view(),
         name='zinnia_author_detail_paginated'),
+    url(r'^(?P<username>[.+-@\w]+)/$',
+        AuthorDetail.as_view(),
+        name='zinnia_author_detail'),
 )
