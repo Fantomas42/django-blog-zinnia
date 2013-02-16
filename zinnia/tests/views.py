@@ -342,7 +342,6 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             entry = Entry.objects.create(**params)
             entry.sites.add(self.site)
             entry.categories.add(self.category)
-            entry.authors.add(self.author)
         response = self.client.get('/categories/tests/')
         self.assertEquals(len(response.context['object_list']), PAGINATION)
         response = self.client.get('/categories/tests/?page=2')
@@ -374,6 +373,29 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             '/authors/admin/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(
             response, 'zinnia/author/admin/entry_list.html')
+        self.assertEquals(response.context['author'].username, 'admin')
+        restore_template_loaders()
+
+    def test_zinnia_author_detail_paginated(self):
+        """Test case reproducing issue #207 on author
+        detail view paginated"""
+        setup_test_template_loader(
+            {'zinnia/entry_list.html': ''})
+        for i in range(PAGINATION):
+            params = {'title': 'My entry %i' % i,
+                      'content': 'My content %i' % i,
+                      'slug': 'my-entry-%i' % i,
+                      'creation_date': datetime(2010, 1, 1),
+                      'status': PUBLISHED}
+            entry = Entry.objects.create(**params)
+            entry.sites.add(self.site)
+            entry.authors.add(self.author)
+        response = self.client.get('/authors/admin/')
+        self.assertEquals(len(response.context['object_list']), PAGINATION)
+        response = self.client.get('/authors/admin/?page=2')
+        self.assertEquals(len(response.context['object_list']), 2)
+        response = self.client.get('/authors/admin/page/2/')
+        self.assertEquals(len(response.context['object_list']), 2)
         self.assertEquals(response.context['author'].username, 'admin')
         restore_template_loaders()
 
