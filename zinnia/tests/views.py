@@ -425,6 +425,27 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertEquals(response.status_code, 404)
         restore_template_loaders()
 
+    def test_zinnia_tag_detail_paginated(self):
+        setup_test_template_loader(
+            {'zinnia/entry_list.html': ''})
+        for i in range(PAGINATION):
+            params = {'title': 'My entry %i' % i,
+                      'content': 'My content %i' % i,
+                      'slug': 'my-entry-%i' % i,
+                      'tags': 'tests',
+                      'creation_date': datetime(2010, 1, 1),
+                      'status': PUBLISHED}
+            entry = Entry.objects.create(**params)
+            entry.sites.add(self.site)
+        response = self.client.get('/tags/tests/')
+        self.assertEquals(len(response.context['object_list']), PAGINATION)
+        response = self.client.get('/tags/tests/?page=2')
+        self.assertEquals(len(response.context['object_list']), 2)
+        response = self.client.get('/tags/tests/page/2/')
+        self.assertEquals(len(response.context['object_list']), 2)
+        self.assertEquals(response.context['tag'].name, 'tests')
+        restore_template_loaders()
+
     def test_zinnia_entry_search(self):
         setup_test_template_loader(
             {'zinnia/entry_search.html': ''})
