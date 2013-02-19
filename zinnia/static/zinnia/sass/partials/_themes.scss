@@ -88,6 +88,9 @@
     ol.flex-control-nav li a.active {
       background: $accent;
     }
+    .slide-content a {
+      color: lighten($accent, 15%);
+    }
 }
 
 &.default {

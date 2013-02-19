@@ -102,7 +102,7 @@ ol.flex-control-nav {
 // Responsive
 @media (min-width: 900px) {
   .slider-container {
-    @include pad(1, 1);
+    @include pad(1, 1, 12);
   }
   .slide-content {
     h2 { font-size: 3em; }
