@@ -24,7 +24,7 @@
     {% block link %}{% endblock %}
     {% block script %}{% endblock %}
   </head>
-  <body class="zinnia default blue right-sidebar {% block body-class %}{% endblock %}">
+  <body class="zinnia {% block theme-class %}default{% endblock %} {% block color-class %}blue{% endblock %} {% block sidebar-class %}right-sidebar{% endblock %} {% block body-class %}{% endblock %}">
     <div class="container">
       <div id="header">
         <ul class="top-navigation">
