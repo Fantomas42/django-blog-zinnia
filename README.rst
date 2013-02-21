@@ -26,6 +26,7 @@ More than a long speech, here the list of the main features :
 * Tags and categories views
 * `Advanced search engine`_
 * Prepublication and expiration
+* `Custom templates for various contents`_
 * Edition in `MarkDown`_, `Textile`_ or `reStructuredText`_
 * Widgets (Popular entries, Similar entries, ...)
 * Spam protection with `Akismet`_, `TypePad`_ or `Mollom`_
@@ -45,7 +46,6 @@ More than a long speech, here the list of the main features :
 * `WordPress conversion utility`_
 * `WYMeditor`_, `TinyMCE`_ and `MarkItUp`_ support
 * Efficient database queries
-* Custom templates for various contents
 * Ready to use and extendable templates
 * `Compass`_ and `Sass3`_ integration
 * `Windows Live Writer`_ compatibility
@@ -83,8 +83,9 @@ More information and help available at these URLs :
 * For reporting a bug use `Github Issues`_.
 
 
-.. _`Sitemaps`: http://django-blog-zinnia.readthedocs.org/en/latest/getting-started/configuration.html#module-zinnia.sitemaps
-.. _`Advanced search engine`: http://django-blog-zinnia.readthedocs.org/en/latest/topics/search_engines.html
+.. _`Sitemaps`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#module-zinnia.sitemaps
+.. _`Advanced search engine`: http://docs.django-blog-zinnia.com/en/latest/topics/search_engines.html
+.. _`Custom templates for various contents`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#templates-for-entries
 .. _`MarkDown`: http://daringfireball.net/projects/markdown/
 .. _`Textile`: http://redcloth.org/hobix.com/textile/
 .. _`reStructuredText`: http://docutils.sourceforge.net/rst.html
@@ -92,16 +93,16 @@ More information and help available at these URLs :
 .. _`TypePad`: http://antispam.typepad.com/
 .. _`Mollom`: http://mollom.com/
 .. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi
-.. _`Bit.ly`: http://django-blog-zinnia.readthedocs.org/en/latest/getting-started/configuration.html#module-zinnia.url_shortener.backends.bitly
-.. _`Twitter`: http://django-blog-zinnia.readthedocs.org/en/latest/getting-started/configuration.html#twitter
+.. _`Bit.ly`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#module-zinnia.url_shortener.backends.bitly
+.. _`Twitter`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#twitter
 .. _`Gravatar`: http://gravatar.com/
-.. _`Django-CMS`: http://django-blog-zinnia.readthedocs.org/en/latest/getting-started/configuration.html#django-cms
+.. _`Django-CMS`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#django-cms
 .. _`Entry model extendable`: http://django-blog-zinnia.rtfd.org/extending-entry
 .. _`WYMeditor`: http://www.wymeditor.org/
 .. _`TinyMCE`: http://tinymce.moxiecode.com/
 .. _`MarkItUp`: http://markitup.jaysalvat.com/
-.. _`Blogger conversion utility`: http://django-blog-zinnia.readthedocs.org/en/latest/how-to/import_export.html#from-blogger-to-zinnia
-.. _`WordPress conversion utility`: http://django-blog-zinnia.readthedocs.org/en/latest/how-to/import_export.html#from-wordpress-to-zinnia
+.. _`Blogger conversion utility`: http://docs.django-blog-zinnia.com/en/latest/how-to/import_export.html#from-blogger-to-zinnia
+.. _`WordPress conversion utility`: http://docs.django-blog-zinnia.com/en/latest/how-to/import_export.html#from-wordpress-to-zinnia
 .. _`Compass`: http://compass-style.org/
 .. _`Sass3`: http://sass-lang.com/
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
@@ -117,7 +118,7 @@ More information and help available at these URLs :
 .. _`Darwin's Weblog`: http://darwin.willbreak.it/
 .. _`ShiningPanda`: http://www.shiningpanda.com/blog/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
-.. _`Documentation`: http://django-blog-zinnia.readthedocs.org/
+.. _`Documentation`: http://docs.django-blog-zinnia.com/
 .. _`Jenkins CI server`: https://jenkins.shiningpanda.com/django-blog-zinnia/
 .. _`Google Group`: http://groups.google.com/group/django-blog-zinnia/
 .. _`Github Issues`: https://github.com/Fantomas42/django-blog-zinnia/issues/

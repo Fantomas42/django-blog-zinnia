@@ -27,4 +27,4 @@
   My son Darwin, for the motivation that he gives to me.
 
   And of course all the contributors to the project:
-  http://django-blog-zinnia.rtfd.org/thanks
+  http://docs.django-blog-zinnia.com/en/latest/notes/thanks.html

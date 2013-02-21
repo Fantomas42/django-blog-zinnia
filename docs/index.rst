@@ -87,6 +87,6 @@ index or try to find it using the search function:
 * :ref:`genindex`
 * :ref:`search`
 
-.. _`documentation online at readthedocs.org`: http://django-blog-zinnia.readthedocs.org/
+.. _`documentation online at readthedocs.org`: http://docs.django-blog-zinnia.com/
 .. _`Testing and coverage reports`: https://jenkins.shiningpanda.com/django-blog-zinnia/job/Django-Blog-Zinnia/
 
