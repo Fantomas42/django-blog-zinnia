@@ -24,6 +24,7 @@ urlpatterns = patterns(
     url(_(r'^authors/'), include('zinnia.urls.authors')),
     url(_(r'^categories/'), include('zinnia.urls.categories')),
     url(_(r'^search/'), include('zinnia.urls.search')),
+    url(_(r'^random/'), include('zinnia.urls.random')),
     url(_(r'^sitemap/'), include('zinnia.urls.sitemap')),
     url(_(r'^trackback/'), include('zinnia.urls.trackback')),
     url(_(r'^comments/'), include('zinnia.urls.comments')),

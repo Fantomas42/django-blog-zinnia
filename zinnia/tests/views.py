@@ -461,6 +461,15 @@ class ZinniaViewsTestCase(ViewsBaseCase):
                           _('No pattern to search found'))
         restore_template_loaders()
 
+    def test_zinnia_entry_random(self):
+        setup_test_template_loader(
+            {'zinnia/entry_detail.html': ''})
+        response = self.client.get('/random/', follow=True)
+        self.assertTrue(response.redirect_chain[0][0].startswith(
+            'http://testserver/2010/'))
+        self.assertEquals(response.redirect_chain[0][1], 302)
+        restore_template_loaders()
+
     def test_zinnia_sitemap(self):
         setup_test_template_loader(
             {'zinnia/sitemap.html': ''})
