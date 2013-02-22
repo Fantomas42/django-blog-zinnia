@@ -20,6 +20,8 @@ this application greatest each day.
 * Mauro Bianchi (bianchimro)
 * Arion Sprague (asprague)
 * Tom Träskbäck (Noobidoo)
+* Gvidon Malyarov (gvidon)
+* Travis Jensen
 * Franck Bret
 * Jason Davies
 * Brandon Taylor
