@@ -3,14 +3,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Zinnia's Blog - {% block title %}{% endblock %}</title>
+    <title>Zinnia's Weblog - {% block title %}{% endblock %}</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="cache-control" content="public" />
     <meta name="robots" content="follow, all" />
     <meta name="language" content="{{ LANGUAGE_CODE }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="{% block meta-description %}Demonstration of the Zinnia Blog application.{% endblock %}" />
-    <meta name="keywords" content="{% block meta-keywords %}django, blog, zinnia{% endblock %}" />
+    <meta name="description" content="{% block meta-description %}{% trans "Just another Zinnia weblog." %}</p>{% endblock %}" />
+    <meta name="keywords" content="{% block meta-keywords %}django, blog, weblog, zinnia{% endblock %}" />
     <meta name="author" content="Fantomas42" />
     {% block meta %}{% endblock %}
     <link rel="pingback" href="/xmlrpc/" />
@@ -46,12 +46,12 @@
           </p>
         </form>
         <h1>
-          <a href="{% url 'zinnia_entry_archive_index' %}" title="Zinnia's Blog" rel="home">
-            Zinnia's Blog
+          <a href="{% url 'zinnia_entry_archive_index' %}" title="Zinnia's Weblog" rel="home">
+            Zinnia's Weblog
           </a>
         </h1>
         <blockquote>
-          <p>Just another Zinnia Weblog.</p>
+          <p>{% trans "Just another Zinnia weblog." %}</p>
         </blockquote>
         {% block breadcrumbs %}{% endblock %}
       </div>
@@ -62,8 +62,8 @@
           <h3>{% trans "Useful links" %}</h3>
           <ul>
             <li>
-              <a href="{% url 'zinnia_entry_archive_index' %}" title="{% trans "Blog index" %}">
-                {% trans "Blog index" %}
+              <a href="{% url 'zinnia_entry_archive_index' %}" title="{% trans "Weblog index" %}">
+                {% trans "Weblog index" %}
               </a>
             </li>
             <li>
@@ -80,22 +80,11 @@
         {% endblock %}
       </div>
       <div id="sidebar">
-        <div id="widget-welcome" class="widget">
-          <h3>Welcome!</h3>
-          <p>
-            This simple skin is the base template of the Zinnia application,
-            used for displaying the blog quickly.
-          </p>
-          <p>
-            Feel free to override the <strong>zinnia/base.html</strong>
-            template to <a href="http://django-blog-zinnia.rtfd.org/look-and-feel">change the default appearence</a>.
-          </p>
-        </div>
         {% block sidebar %}
         {% endblock %}
       </div>
       <div id="footer">
-        <p>Powered by <a href="http://www.djangoproject.com">Django</a> and <a href="https://github.com/Fantomas42/django-blog-zinnia">Zinnia {{ ZINNIA_VERSION }}</a>.</p>
+        <p>{% blocktrans %}Powered by <a href="http://www.djangoproject.com">Django</a> and <a href="https://github.com/Fantomas42/django-blog-zinnia">Zinnia {{ ZINNIA_VERSION }}</a>.{% endblocktrans %}</p>
       </div>
     </div>
   </body>
