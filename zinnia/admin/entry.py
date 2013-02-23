@@ -53,7 +53,7 @@ class EntryAdmin(admin.ModelAdmin):
                    'trackback_enabled', 'creation_date', 'start_publication',
                    'end_publication', 'sites')
     list_display = ('get_title', 'get_authors', 'get_categories',
-                    'get_tags', 'get_sites', 'get_is_visible',
+                    'get_tags', 'get_sites', 'get_is_visible', 'featured',
                     'get_short_url', 'creation_date')
     radio_fields = {'content_template': admin.VERTICAL,
                     'detail_template': admin.VERTICAL}
