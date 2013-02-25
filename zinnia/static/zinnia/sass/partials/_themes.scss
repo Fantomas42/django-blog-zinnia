@@ -26,8 +26,11 @@
       border-top: 1px solid $rebase01;
     }
     // Linkbacks
-    #comment-list, #pingback-list, #trackback-list {
-      li, img { border: 1px solid $rebase01; }
+    li {
+      &.comment, &.pingback, &.trackback {
+        border: 1px solid $rebase01;
+        img { border: 1px solid $rebase01; }
+      }
     }
     .superuser-comment img { background-color: $rebase01; }
     // Header
