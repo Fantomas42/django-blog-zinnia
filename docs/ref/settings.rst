@@ -232,11 +232,13 @@ immediately or should be marked non-public and await approval.
 
 ZINNIA_AUTO_CLOSE_COMMENTS_AFTER
 --------------------------------
-**Default value:** ``None``
+**Default value:** ``None`` (forever)
 
 Determine the number of days where comments are open. If you set this
 setting to ``10`` the comments will be closed automaticaly 10 days after
 the publication date of your entries.
+
+``0`` means disabling comments completely.
 
 .. setting:: ZINNIA_MAIL_COMMENT_REPLY
 
@@ -304,21 +306,25 @@ Linkbacks
 
 ZINNIA_AUTO_CLOSE_PINGBACKS_AFTER
 ---------------------------------
-**Default value:** ``None``
+**Default value:** ``None`` (forever)
 
 Determine the number of days where pingbacks are open. If you set this
 setting to ``10`` the pingbacks will be closed automaticaly 10 days after
 the publication date of your entries.
 
+``0`` means disabling pingbacks completely.
+
 .. setting:: ZINNIA_AUTO_CLOSE_TRACKBACKS_AFTER
 
 ZINNIA_AUTO_CLOSE_TRACKBACKS_AFTER
 ----------------------------------
-**Default value:** ``None``
+**Default value:** ``None`` (forever)
 
 Determine the number of days where trackbacks are open. If you set this
 setting to ``10`` the trackbacks will be closed automaticaly 10 days after
 the publication date of your entries.
+
+``0`` means disabling trackbacks completely.
 
 .. _settings-pinging:
 
