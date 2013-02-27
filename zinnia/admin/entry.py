@@ -314,7 +314,8 @@ class EntryAdmin(admin.ModelAdmin):
         queryset.update(featured=False)
         self.message_user(
             request, _('Selected entries are no longer marked as featured.'))
-    unmark_featured.short_description = _('Un-Mark selectred entries as featured')
+    unmark_featured.short_description = _(
+        'Unmark selected entries as featured')
 
     def get_urls(self):
         entry_admin_urls = super(EntryAdmin, self).get_urls()
