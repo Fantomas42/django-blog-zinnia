@@ -33,6 +33,60 @@ these steps.
        url(r'^sitemap-(?P<section>.+)\.xml$', 'sitemap',
            {'sitemaps': sitemaps}),)
 
+.. _zinnia-templates:
+
+Templates for entries
+=====================
+
+In your Weblog you will always publish entries, but sometimes you want to
+have a different look and feel for special entries.
+
+You may want to publish an entry with a short content like a quote, in
+which case it would be better not to provide a *continue reading* link when
+rendering this entry.
+
+To solve this problem, Zinnia allows the user to select a template to
+render the entry's content and the entry's detail page.
+
+In order to use a template without the *continue reading* link, we need to
+register it under this setting in the project's configuration: ::
+
+  ZINNIA_ENTRY_CONTENT_TEMPLATES = [
+    ('zinnia/_short_entry_detail.html', 'Short entry template'),
+  ]
+
+Now we will create the ``zinnia/_short_entry_detail.html`` template with
+this sample of code:
+
+.. code-block:: html+django
+
+  {% extends "zinnia/_entry_detail.html" %}
+
+  {% block continue-reading %}{% endblock %}
+
+A new template is now available in the admin interface to display the entry
+without the *continue reading* link when displayed in a list.
+
+Then if you want to have custom rendering of the detail page of the entry,
+by displaying the entry fullwidth without the sidebar for example, the same
+process applies. We will add this setting in the project's configuration:
+::
+
+  ZINNIA_ENTRY_DETAIL_TEMPLATES = [
+      ('detail/fullwidth_entry_detail.html', 'Fullwidth template'),
+  ]
+
+And now we finally create the ``zinnia/fullwidth_entry_detail.html``
+template with this sample of code:
+
+.. code-block:: html+django
+
+  {% extends "zinnia/entry_detail.html" %}
+
+  {% block zinnia-sidebar %}no-sidebar{% endblock %}
+
+  {% block sidebar %}{% endblock %}
+
 .. _zinnia-akismet:
 
 Akismet Anti-Spam
