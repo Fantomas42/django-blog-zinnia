@@ -66,6 +66,7 @@ or you can visit these websites who use Zinnia.
 * `brainbreach`_.
 * `Mauro Bianchi`_.
 * `Sergey Miracle`_.
+* `Infantium`_.
 
 
 If you are a proud user of Zinnia, send me the URL of your website and I
@@ -114,6 +115,7 @@ More information and help available at these URLs :
 .. _`brainbreach`: http://brainbreach.com/
 .. _`Mauro Bianchi`: http://www.maurobianchi.it/
 .. _`Sergey Miracle`: http://sergeymiracle.com/weblog/
+.. _`Infantium`: http://www.infantium.com/blog/
 .. _`AR.Drone Best of User Videos`: http://ardrone.parrot.com/best-of-user-videos/
 .. _`Darwin's Weblog`: http://darwin.willbreak.it/
 .. _`ShiningPanda`: http://www.shiningpanda.com/blog/
