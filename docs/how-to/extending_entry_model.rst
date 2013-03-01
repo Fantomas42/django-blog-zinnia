@@ -180,7 +180,7 @@ Now we can easily
 :doc:`customize the templates</how-to/customize_look_and_feel>`
 provided by Zinnia to display the gallery field into the Weblog's pages.
 
-For information you can see another implementation example in the
+For more information you can see another implementation example in the
 `cmsplugin-zinnia`_ package.
 
 .. _`South`: http://south.aeracode.org/

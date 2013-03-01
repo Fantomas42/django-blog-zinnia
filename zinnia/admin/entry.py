@@ -53,7 +53,7 @@ class EntryAdmin(admin.ModelAdmin):
                    'trackback_enabled', 'creation_date', 'start_publication',
                    'end_publication', 'sites')
     list_display = ('get_title', 'get_authors', 'get_categories',
-                    'get_tags', 'get_sites', 'get_is_visible',
+                    'get_tags', 'get_sites', 'get_is_visible', 'featured',
                     'get_short_url', 'creation_date')
     radio_fields = {'content_template': admin.VERTICAL,
                     'detail_template': admin.VERTICAL}
@@ -62,7 +62,8 @@ class EntryAdmin(admin.ModelAdmin):
     search_fields = ('title', 'excerpt', 'content', 'tags')
     actions = ['make_mine', 'make_published', 'make_hidden',
                'close_comments', 'close_pingbacks', 'close_trackbacks',
-               'ping_directories', 'make_tweet', 'put_on_top']
+               'ping_directories', 'make_tweet', 'put_on_top',
+               'mark_featured', 'unmark_featured']
     actions_on_top = True
     actions_on_bottom = True
 
@@ -148,7 +149,7 @@ class EntryAdmin(admin.ModelAdmin):
     # Custom Methods
     def save_model(self, request, entry, form, change):
         """Save the authors, update time, make an excerpt"""
-        if not form.cleaned_data.get('excerpt') and entry.status == PUBLISHED:
+        if not entry.excerpt and entry.status == PUBLISHED:
             entry.excerpt = Truncator(strip_tags(entry.content)).words(50)
 
         if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
@@ -300,6 +301,21 @@ class EntryAdmin(admin.ModelAdmin):
                         {'directory': directory, 'success': success})
     ping_directories.short_description = _(
         'Ping Directories for selected entries')
+
+    def mark_featured(self, request, queryset):
+        """Mark selected as featured post."""
+        queryset.update(featured=True)
+        self.message_user(
+            request, _('Selected entries are now marked as featured.'))
+    mark_featured.short_description = _('Mark selected entries as featured')
+
+    def unmark_featured(self, request, queryset):
+        """Un-Mark selected featured posts"""
+        queryset.update(featured=False)
+        self.message_user(
+            request, _('Selected entries are no longer marked as featured.'))
+    unmark_featured.short_description = _(
+        'Unmark selected entries as featured')
 
     def get_urls(self):
         entry_admin_urls = super(EntryAdmin, self).get_urls()

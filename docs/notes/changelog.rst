@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+0.12.3
+------
+
+* Better ``skeleton.html``
+* Better rendering for the slider
+* Add view for having a random entry
+* Compatibility fix with Django 1.5 in admin
+* Fix issue with author detail view paginated
+* Better settings for ``ZINNIA_AUTO_CLOSE_*_AFTER``
+
 0.12.2
 ------
 

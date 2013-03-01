@@ -144,7 +144,7 @@ quite fit your needs. You should take a look on the
 
 
 If you want the ability to reply on comments, you can take a look at
-`django-threadcomments`_ for example.
+`zinnia-threaded-comments`_ or at `django-threadcomments`_.
 
 
 .. _`MarkDown`: http://daringfireball.net/projects/markdown/
@@ -154,4 +154,5 @@ If you want the ability to reply on comments, you can take a look at
 .. _`django-modeltranslation`:
 .. _`sorl.thumbnail`: http://thumbnail.sorl.net/
 .. _`customizing the comments framework`: https://docs.djangoproject.com/en/dev/ref/contrib/comments/custom/
+.. _`zinnia-threaded-comments`: https://github.com/Fantomas42/zinnia-threaded-comments
 .. _`django-threadcomments`: https://github.com/HonzaKral/django-threadedcomments

@@ -253,7 +253,8 @@ class DiscussionsEntry(models.Model):
         are a certain number of days.
         """
         discussion_enabled = getattr(self, discussion_type)
-        if auto_close_after and discussion_enabled:
+        if (discussion_enabled and isinstance(auto_close_after, int)
+                and auto_close_after >= 0):
             return (timezone.now() - (
                 self.start_publication or self.creation_date)).days < \
                 auto_close_after
@@ -500,7 +501,4 @@ def get_base_model():
 class Entry(get_base_model()):
     """
     The final Entry model based on inheritence.
-
-    Check this out for customizing the Entry Model class:
-    http://django-blog-zinnia.rtfd.org/extending-entry
     """

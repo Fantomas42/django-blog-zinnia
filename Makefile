@@ -36,7 +36,7 @@ kwalitee:
 
 translations:
 	@echo "$(COLOR)* Generating english translation$(NO_COLOR)"
-	@cd zinnia && ../bin/django makemessages --extension=.html,.txt -l en
+	@cd zinnia && ../bin/demo makemessages --extension=.html,.txt -l en
 	@echo "$(COLOR)* Pushing translation to Transifex$(NO_COLOR)"
 	@rm -rf .tox
 	@tx push -s

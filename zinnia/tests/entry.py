@@ -96,6 +96,10 @@ class EntryTestCase(TestCase):
         original_auto_close = entry.AUTO_CLOSE_COMMENTS_AFTER
         entry.AUTO_CLOSE_COMMENTS_AFTER = None
         self.assertEquals(self.entry.comments_are_open, True)
+        entry.AUTO_CLOSE_COMMENTS_AFTER = -1
+        self.assertEquals(self.entry.comments_are_open, True)
+        entry.AUTO_CLOSE_COMMENTS_AFTER = 0
+        self.assertEquals(self.entry.comments_are_open, False)
         entry.AUTO_CLOSE_COMMENTS_AFTER = 5
         self.assertEquals(self.entry.comments_are_open, True)
         self.entry.start_publication = timezone.now() - timedelta(days=7)
@@ -107,6 +111,10 @@ class EntryTestCase(TestCase):
         original_auto_close = entry.AUTO_CLOSE_PINGBACKS_AFTER
         entry.AUTO_CLOSE_PINGBACKS_AFTER = None
         self.assertEquals(self.entry.pingbacks_are_open, True)
+        entry.AUTO_CLOSE_PINGBACKS_AFTER = -1
+        self.assertEquals(self.entry.pingbacks_are_open, True)
+        entry.AUTO_CLOSE_PINGBACKS_AFTER = 0
+        self.assertEquals(self.entry.pingbacks_are_open, False)
         entry.AUTO_CLOSE_PINGBACKS_AFTER = 5
         self.assertEquals(self.entry.pingbacks_are_open, True)
         self.entry.start_publication = timezone.now() - timedelta(days=7)
@@ -118,6 +126,10 @@ class EntryTestCase(TestCase):
         original_auto_close = entry.AUTO_CLOSE_TRACKBACKS_AFTER
         entry.AUTO_CLOSE_TRACKBACKS_AFTER = None
         self.assertEquals(self.entry.trackbacks_are_open, True)
+        entry.AUTO_CLOSE_TRACKBACKS_AFTER = -1
+        self.assertEquals(self.entry.trackbacks_are_open, True)
+        entry.AUTO_CLOSE_TRACKBACKS_AFTER = 0
+        self.assertEquals(self.entry.trackbacks_are_open, False)
         entry.AUTO_CLOSE_TRACKBACKS_AFTER = 5
         self.assertEquals(self.entry.trackbacks_are_open, True)
         self.entry.start_publication = timezone.now() - timedelta(days=7)
