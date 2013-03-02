@@ -1,6 +1,4 @@
 """Test cases for Zinnia's flags"""
-from __future__ import with_statement
-
 from django.test import TestCase
 
 from zinnia import flags

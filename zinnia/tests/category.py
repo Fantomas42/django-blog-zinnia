@@ -1,6 +1,4 @@
 """Test cases for Zinnia's Category"""
-from __future__ import with_statement
-
 from django.test import TestCase
 from django.contrib.sites.models import Site
 

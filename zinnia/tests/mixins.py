@@ -1,5 +1,4 @@
 """Test cases for Zinnia's mixins"""
-from __future__ import with_statement
 from datetime import date
 
 from django.test import TestCase

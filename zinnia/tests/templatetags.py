@@ -1,6 +1,4 @@
 """Test cases for Zinnia's templatetags"""
-from __future__ import with_statement
-
 from django.test import TestCase
 from django.template import Context
 from django.template import Template
