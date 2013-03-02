@@ -1,6 +1,5 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n %}
-{% load url from future %}
 
 {% block meta-description %}{% blocktrans with year=week|date:"Y" week_number=week|date:"W"%}Archives week {{ week_number }} of {{ year }}{% endblocktrans %}{% endblock %}
 
