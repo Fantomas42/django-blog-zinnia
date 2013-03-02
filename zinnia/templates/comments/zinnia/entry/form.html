@@ -1,7 +1,7 @@
 {% load comments i18n %}
 {% load url from future %}
 <form action="{% comment_form_target %}" method="post" id="comment-form">
-  {% csrf_token %}
+  <div>{% csrf_token %}</div>
   <fieldset>
     <legend>{% trans "Post your comment" %}</legend>
     <input type="hidden" name="next" value="{% url 'zinnia_comment_success' %}"/>
