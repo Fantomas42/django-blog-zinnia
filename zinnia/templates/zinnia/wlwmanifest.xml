@@ -1,4 +1,4 @@
-{% load i18n %}{% load url from future %}<?xml version="1.0" encoding="utf-8" ?>
+{% load i18n %}<?xml version="1.0" encoding="utf-8" ?>
 <manifest xmlns="http://schemas.microsoft.com/wlw/manifest/weblog">
   <options>
     <clientType>Metaweblog</clientType>

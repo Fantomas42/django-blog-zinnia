@@ -1,5 +1,4 @@
 """Test cases for Zinnia's url_shortener"""
-from __future__ import with_statement
 import warnings
 
 from django.test import TestCase

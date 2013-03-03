@@ -1,5 +1,4 @@
 """Test cases for Zinnia's Entry"""
-from __future__ import with_statement
 import warnings
 from datetime import timedelta
 

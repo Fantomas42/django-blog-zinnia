@@ -1,6 +1,5 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n zinnia_tags %}
-{% load url from future %}
 
 {% block title %}{% trans "Search results for" %} {% if pattern %}'{{ pattern }}'{% endif %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} | {% trans "Page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
 

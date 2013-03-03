@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+0.13
+----
+
+* Django 1.4 is no longer supported
+
 0.12.3
 ------
 

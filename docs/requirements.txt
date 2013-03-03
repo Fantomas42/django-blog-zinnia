@@ -1,5 +1,5 @@
 PIL
-django==1.4
+django==1.5
 django-bitly==0.6
 django-mptt==0.5.2
 django-tagging==0.3.1

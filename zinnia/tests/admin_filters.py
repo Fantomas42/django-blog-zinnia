@@ -1,6 +1,4 @@
 """Test cases for Zinnia's admin filters"""
-from __future__ import with_statement
-
 from django.test import TestCase
 from django.test import RequestFactory
 from django.contrib.admin import site

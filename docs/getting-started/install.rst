@@ -11,8 +11,8 @@ Dependencies
 
 Make sure to install these packages prior to installation :
 
-* `Python 2.x`_ >= 2.5
-* `Django`_ >= 1.4
+* `Python 2.x`_ >= 2.6.5
+* `Django`_ >= 1.5
 * `PIL`_ >= 1.1.6
 * `django-mptt`_ >= 0.5.1 < 0.6
 * `django-tagging`_ >= 0.3.1
@@ -118,6 +118,7 @@ want. Here's a custom implementation of the URLs provided by Zinnia: ::
   url(r'^trackback/', include('zinnia.urls.trackback')),
   url(r'^blog/tags/', include('zinnia.urls.tags')),
   url(r'^blog/feeds/', include('zinnia.urls.feeds')),
+  url(r'^blog/random/', include('zinnia.urls.random')),
   url(r'^blog/authors/', include('zinnia.urls.authors')),
   url(r'^blog/categories/', include('zinnia.urls.categories')),
   url(r'^blog/comments/', include('zinnia.urls.comments')),
