@@ -21,7 +21,7 @@ Make sure to install these packages prior to installation :
 The packages below are optionnal but needed for run the full test suite.
 
 * `pytz`_
-* `pyparsing`_ >= 1.5.5
+* `pyparsing`_ >= 1.5.5 < 2.0.0
 * `django-xmlrpc`_ >= 0.1.3
 
 Note that all the dependencies will be resolved if you install
