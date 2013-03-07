@@ -1,14 +1,14 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n %}
 
-{% block meta-description %}{% trans "Archives" %} {{ year }}{% endblock %}
+{% block meta-description %}{% trans "Archives" %} {{ year|date:"Y" }}{% endblock %}
 
-{% block title %}{% trans "Archives" %} {{ year }}{% endblock %}
+{% block title %}{% trans "Archives" %} {{ year|date:"Y" }}{% endblock %}
 
-{% block body-class %}{{ block.super }} archive date year year-{{ year }}{% endblock %}
+{% block body-class %}{{ block.super }} archive date year year-{{ year|date:"Y" }}{% endblock %}
 
 {% block content-title %}
-<h1>{% trans "Archives" %} {{ year }}</h1>
+<h1>{% trans "Archives" %} {{ year|date:"Y" }}</h1>
 {% endblock %}
 
 {% block content-related %}
