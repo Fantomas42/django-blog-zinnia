@@ -136,7 +136,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         setup_test_template_loader(
             {'zinnia/archives/2010/entry_archive_year.html': ''})
         response = self.check_publishing_context(
-            '/2010/', 2, 3, 'entry_list', 2)
+            '/2010/', 2, 3, 'entry_list', 4)
         self.assertTemplateUsed(
             response, 'zinnia/archives/2010/entry_archive_year.html')
         restore_template_loaders()
