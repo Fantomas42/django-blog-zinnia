@@ -24,6 +24,8 @@ USE_L10N = True
 
 SITE_ID = 1
 
+AUTH_USER_MODEL = 'demo.User'
+
 LANGUAGE_CODE = 'en'
 
 LANGUAGES = (
@@ -84,6 +86,7 @@ INSTALLED_APPS = (
     'zinnia',
     'tagging',
     'django_xmlrpc',
+    'demo',
 )
 
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
