@@ -353,10 +353,7 @@ def zinnia_statistics(template='zinnia/tags/statistics.html'):
         last_entry = entries.latest()
         months_count = (last_entry.creation_date -
                         first_entry.creation_date).days / 31.0
-        if months_count:
-            entries_per_month = entries_count / months_count
-        else:
-            entries_per_month = entries_count / 1.0
+        entries_per_month = entries_count / (months_count or 1.0)
 
         comments_per_entry = float(replies_count) / entries_count
         linkbacks_per_entry = float(pingbacks_count + trackbacks_count) / \
@@ -367,13 +364,12 @@ def zinnia_statistics(template='zinnia/tags/statistics.html'):
             total_words_entry += e.word_count
         words_per_entry = float(total_words_entry) / entries_count
 
+        words_per_comment = 0.0
         if replies_count:
             total_words_comment = 0
             for c in replies.all():
                 total_words_comment += len(c.comment.split())
             words_per_comment = float(total_words_comment) / replies_count
-        else:
-            words_per_comment = 0.0
     else:
         words_per_entry = words_per_comment = entries_per_month = \
             comments_per_entry = linkbacks_per_entry = 0.0
