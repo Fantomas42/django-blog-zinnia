@@ -44,6 +44,18 @@ class PreviousNextPublishedMixin(object):
         if dates:
             return dates[0].date()
 
+    def get_next_year(self, date):
+        """Get the next year with published Entries"""
+        return self.get_previous_next_published(
+            datetime(date.year, 1, 1), 'year',
+            previous=False)
+
+    def get_previous_year(self, date):
+        """Get the previous year with published Entries"""
+        return self.get_previous_next_published(
+            datetime(date.year, 1, 1), 'year',
+            previous=True)
+
     def get_next_month(self, date):
         """Get the next month with published Entries"""
         return self.get_previous_next_published(
