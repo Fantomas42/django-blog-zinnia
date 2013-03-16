@@ -86,7 +86,8 @@ def count_discussions_handler(sender, **kwargs):
         entry.comment_count = entry.comments.count()
         entry.pingback_count = entry.pingbacks.count()
         entry.trackback_count = entry.trackbacks.count()
-        entry.save(force_update=True)
+        entry.save(update_fields=[
+            'comment_count', 'pingback_count', 'trackback_count'])
 
 
 def count_comments_handler(sender, **kwargs):
@@ -96,7 +97,7 @@ def count_comments_handler(sender, **kwargs):
     entry = kwargs['comment'].content_object
     if isinstance(entry, Entry):
         entry.comment_count = F('comment_count') + 1
-        entry.save(force_update=True)
+        entry.save(update_fields=['comment_count'])
 
 
 def count_pingbacks_handler(sender, **kwargs):
@@ -105,7 +106,7 @@ def count_pingbacks_handler(sender, **kwargs):
     """
     entry = kwargs['entry']
     entry.pingback_count = F('pingback_count') + 1
-    entry.save(force_update=True)
+    entry.save(update_fields=['pingback_count'])
 
 
 def count_trackbacks_handler(sender, **kwargs):
@@ -114,7 +115,7 @@ def count_trackbacks_handler(sender, **kwargs):
     """
     entry = kwargs['entry']
     entry.trackback_count = F('trackback_count') + 1
-    entry.save(force_update=True)
+    entry.save(update_fields=['trackback_count'])
 
 
 def connect_entry_signals():
