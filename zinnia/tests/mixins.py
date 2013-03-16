@@ -10,7 +10,6 @@ from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime
-from zinnia.views.mixins.mimetypes import MimeTypeMixin
 from zinnia.views.mixins.archives import PreviousNextPublishedMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
 from zinnia.views.mixins.prefetch_related import PrefetchRelatedMixin
@@ -35,15 +34,6 @@ class MixinTestCase(TestCase):
         instance.queryset = qs
         self.assertEquals(instance.get_queryset(),
                           [])
-
-    def test_mimetype_mixin(self):
-        instance = MimeTypeMixin()
-        self.assertRaises(ImproperlyConfigured,
-                          instance.get_mimetype)
-
-        instance.mimetype = 'mimetype'
-        self.assertEquals(instance.get_mimetype(),
-                          'mimetype')
 
     def test_entry_queryset_template_response_mixin(self):
         instance = EntryQuerysetTemplateResponseMixin()

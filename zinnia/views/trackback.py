@@ -2,6 +2,7 @@
 from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.shortcuts import get_object_or_404
+from django.views.generic.base import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.http import HttpResponsePermanentRedirect
@@ -11,12 +12,11 @@ from zinnia.models.entry import Entry
 from zinnia.flags import TRACKBACK
 from zinnia.flags import get_user_flagger
 from zinnia.signals import trackback_was_posted
-from zinnia.views.mixins.mimetypes import TemplateMimeTypeView
 
 
-class EntryTrackback(TemplateMimeTypeView):
+class EntryTrackback(TemplateView):
     """View for handling trackbacks on the entries"""
-    mimetype = 'text/xml'
+    content_type = 'text/xml'
     template_name = 'zinnia/entry_trackback.xml'
 
     @method_decorator(csrf_exempt)
