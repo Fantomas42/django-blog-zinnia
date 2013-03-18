@@ -62,14 +62,14 @@ def get_authors(context, template='zinnia/tags/authors.html'):
             'context_author': context.get('author')}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_recent_entries(number=5, template='zinnia/tags/recent_entries.html'):
     """Return the most recent entries"""
     return {'template': template,
             'entries': Entry.published.all()[:number]}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_featured_entries(number=5,
                          template='zinnia/tags/featured_entries.html'):
     """Return the featured entries"""
@@ -77,7 +77,7 @@ def get_featured_entries(number=5,
             'entries': Entry.published.filter(featured=True)[:number]}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_draft_entries(number=5,
                       template='zinnia/tags/draft_entries.html'):
     """Return the latest draft entries"""
@@ -85,14 +85,14 @@ def get_draft_entries(number=5,
             'entries': Entry.objects.filter(status=DRAFT)[:number]}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
     """Return random entries"""
     return {'template': template,
             'entries': Entry.published.order_by('?')[:number]}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     """Return popular entries"""
     return {'template': template,
@@ -144,7 +144,7 @@ def get_similar_entries(context, number=5,
             'entries': entries}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_archives_entries(template='zinnia/tags/archives_entries.html'):
     """Return archives entries"""
     return {'template': template,
@@ -152,7 +152,7 @@ def get_archives_entries(template='zinnia/tags/archives_entries.html'):
                                               order='DESC')}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_archives_entries_tree(
         template='zinnia/tags/archives_entries_tree.html'):
     """Return archives entries as a Tree"""
@@ -195,7 +195,7 @@ def get_calendar_entries(context, year=None, month=None,
                 next_month=next_month)}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
     """Return the most recent comments"""
     # Using map(smart_unicode... fix bug related to issue #8554
@@ -214,7 +214,7 @@ def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
             'comments': comments}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_recent_linkbacks(number=5,
                          template='zinnia/tags/recent_linkbacks.html'):
     """Return the most recent linkbacks"""
@@ -324,7 +324,7 @@ def get_tag_cloud(context, steps=6, min_count=None,
             'context_tag': context.get('tag')}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def zinnia_statistics(template='zinnia/tags/statistics.html'):
     """Return statistics on the content of Zinnia"""
     content_type = ContentType.objects.get_for_model(Entry)
