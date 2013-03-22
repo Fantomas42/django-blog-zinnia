@@ -23,15 +23,6 @@
 {% endblock %}
 
 {% block sidebar %}
-<div id="widget-welcome" class="widget">
-  <h3>{% trans "Welcome!" %}</h3>
-  <p>
-    {% trans "This simple theme is the default appearance of Zinnia." %}
-  </p>
-  <p>
-    {% trans "Don't hesitate to override the template <strong>zinnia/base.html</strong> to start <a href='http://docs.django-blog-zinnia.com/en/latest/how-to/customize_look_and_feel.html'>customizing your Weblog</a>." %}
-  </p>
-</div>
 <div id="widget-categories" class="widget">
   <h3>{% trans "Categories" %}</h3>
   {% get_categories %}
