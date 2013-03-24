@@ -61,7 +61,8 @@ Applications
 
 .. highlight:: python
 
-Then register :mod:`zinnia`, and these following applications in the
+Assuming that you have an already existing Django project, register
+:mod:`zinnia`, and these following applications in the
 :setting:`INSTALLED_APPS` section of your project's settings. ::
 
   INSTALLED_APPS = (
