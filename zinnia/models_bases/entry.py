@@ -19,8 +19,6 @@ from django.contrib.markup.templatetags.markup import restructuredtext
 from tagging.fields import TagField
 from tagging.utils import parse_tag_input
 
-from zinnia.models_bases.author import Author
-from zinnia.models_bases.category import Category
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import UPLOAD_TO
 from zinnia.settings import MARKUP_LANGUAGE
@@ -352,7 +350,7 @@ class AuthorsEntry(models.Model):
     between the entries and their authors.
     """
     authors = models.ManyToManyField(
-        Author,
+        'zinnia.Author',
         related_name='entries',
         blank=True, null=False,
         verbose_name=_('authors'))
@@ -366,7 +364,7 @@ class CategoriesEntry(models.Model):
     Abstract model class to categorize the entries.
     """
     categories = models.ManyToManyField(
-        Category,
+        'zinnia.Category',
         related_name='entries',
         blank=True, null=True,
         verbose_name=_('categories'))
