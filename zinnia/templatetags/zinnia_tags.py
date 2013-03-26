@@ -37,6 +37,8 @@ CACHE_ENTRIES_RELATED = {}
 
 
 def get_archives(field, date_part, order):
+    """Return archives already TZ evaluated so sorting 
+    in templates work as expected"""
     if settings.USE_TZ:
         # Use django 1.5+ default implementation
         if hasattr(Entry.published, 'datetimes'):
