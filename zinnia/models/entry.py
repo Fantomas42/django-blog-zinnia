@@ -479,10 +479,12 @@ class EntryAbstractClass(
         abstract = True
 
 
-def get_base_model():
+def get_entry_base_model():
     """
-    Determine the base Model to inherit in the
-    Entry Model, this allow to overload it.
+    Determine the base abstract model to inherit from,
+    to build the final Entry model.
+    This mecanizm allows extension and customization of
+    the Entry model class.
     """
     if not ENTRY_BASE_MODEL:
         return EntryAbstractClass
@@ -499,7 +501,7 @@ def get_base_model():
     return EntryAbstractClass
 
 
-class Entry(get_base_model()):
+class Entry(get_entry_base_model()):
     """
     The final Entry model based on inheritence.
     """

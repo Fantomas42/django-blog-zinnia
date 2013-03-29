@@ -16,7 +16,7 @@ from zinnia.models import entry
 from zinnia.models.entry import Entry
 from zinnia.managers import PUBLISHED
 from zinnia.flags import PINGBACK, TRACKBACK
-from zinnia.models.entry import get_base_model
+from zinnia.models.entry import get_entry_base_model
 from zinnia.models.entry import EntryAbstractClass
 from zinnia.tests.utils import datetime
 from zinnia import url_shortener as shortener_settings
@@ -310,18 +310,18 @@ class EntryGetBaseModelTestCase(TestCase):
     def tearDown(self):
         entry.ENTRY_BASE_MODEL = self.original_entry_base_model
 
-    def test_get_base_model(self):
+    def test_get_entry_base_model(self):
         entry.ENTRY_BASE_MODEL = ''
-        self.assertEquals(get_base_model(), EntryAbstractClass)
+        self.assertEquals(get_entry_base_model(), EntryAbstractClass)
 
         entry.ENTRY_BASE_MODEL = 'mymodule.myclass'
         try:
             with warnings.catch_warnings(record=True) as w:
-                self.assertEquals(get_base_model(), EntryAbstractClass)
+                self.assertEquals(get_entry_base_model(), EntryAbstractClass)
                 self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
         except AttributeError:
             # Fail under Python2.5, because of'warnings.catch_warnings'
             pass
 
         entry.ENTRY_BASE_MODEL = 'zinnia.models.entry.EntryAbstractClass'
-        self.assertEquals(get_base_model(), EntryAbstractClass)
+        self.assertEquals(get_entry_base_model(), EntryAbstractClass)
