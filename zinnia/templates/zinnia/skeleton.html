@@ -2,13 +2,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Zinnia's Weblog - {% block title %}{% endblock %}</title>
+    <title>Zinnia's Weblog - {% block title %}{% endblock %}{% block title-page %}{% endblock %}</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="cache-control" content="public" />
     <meta name="robots" content="follow, all" />
     <meta name="language" content="{{ LANGUAGE_CODE }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="{% block meta-description %}{% trans "Just another Zinnia weblog." %}</p>{% endblock %}" />
+    <meta name="description" content="{% block meta-description %}{% trans "Just another Zinnia weblog." %}{% endblock %}{% block meta-description-page %}{% endblock %}" />
     <meta name="keywords" content="{% block meta-keywords %}django, blog, weblog, zinnia{% endblock %}" />
     <meta name="author" content="Fantomas42" />
     {% block meta %}{% endblock %}

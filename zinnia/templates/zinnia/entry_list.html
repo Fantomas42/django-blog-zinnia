@@ -1,7 +1,9 @@
 {% extends "zinnia/base.html" %}
 {% load i18n zinnia_tags %}
 
-{% block meta-description %}{% trans "Latest entries for" %} {% if category %}{% trans "the category" %} {{ category }}{% if category.description %}: {{ category.description|striptags|safe }}{% endif %}{% endif %}{% if tag %}{% trans "the tag" %} {{ tag }}{% endif %}{% if author %}{% trans "the author" %} {{ author }}{% endif %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} {% trans "page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
+{% block meta-description %}{% trans "Latest entries for" %} {% if category %}{% trans "the category" %} {{ category }}{% if category.description %}: {{ category.description|striptags|safe }}{% endif %}{% endif %}{% if tag %}{% trans "the tag" %} {{ tag }}{% endif %}{% if author %}{% trans "the author" %} {{ author }}{% endif %}{% endblock %}
+
+{% block meta-description-page %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} {% trans "page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
 
 {% block link %}
   {{ block.super }}
@@ -16,7 +18,9 @@
   {% endif %}
 {% endblock %}
 
-{% block title %}{% trans "Latest entries" %} {% if category %}| {% trans "Category" %} {{ category }}{% endif %}{% if tag %}| {% trans "Tag" %} {{ tag }}{% endif %}{% if author %}| {% trans "Author" %} {{ author }}{% endif %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} | {% trans "Page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
+{% block title %}{% if category %}{% trans "Category" %} {{ category }}{% endif %}{% if tag %}{% trans "Tag" %} {{ tag }}{% endif %}{% if author %}{% trans "Author" %} {{ author }}{% endif %}{% endblock %}
+
+{% block title-page %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} - {% trans "Page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
 
 {% block body-class %}entry-list{% if page_obj %} paginated page-{{ page_obj.number }}{% endif %}{% if category %} category category-{{ category.slug }}{% endif %}{% if tag %} tag tag-{{ tag|slugify }}{% endif %}{% if author %} author author-{{ author|slugify }}{% endif %}{% endblock %}
 

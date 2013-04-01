@@ -1,9 +1,9 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n zinnia_tags %}
 
-{% block title %}{% trans "Search results for" %} {% if pattern %}'{{ pattern }}'{% endif %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} | {% trans "Page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
+{% block title %}{% trans "Search results for" %} {% if pattern %}'{{ pattern }}'{% endif %}{% endblock %}
 
-{% block meta-description %}{% trans "Search results for" %} {% if pattern %}'{{ pattern }}'{% endif %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} {% trans "page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
+{% block meta-description %}{% trans "Search results for" %} {% if pattern %}'{{ pattern }}'{% endif %}{% endblock %}
 
 {% block link %}
   {{ block.super }}
