@@ -2,6 +2,7 @@
 from django.test import TestCase
 from django.contrib import comments
 from django.contrib.sites.models import Site
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -9,6 +10,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.spam_checker.backends.long_enough import backend
 
 
+@skipIfCustomUser
 class LongEnoughTestCase(TestCase):
     """Test cases for zinnia.spam_checker.long_enough"""
 

@@ -11,6 +11,7 @@ from django.test.utils import setup_test_template_loader
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.signals import user_logged_in
 from django.contrib.auth.models import update_last_login
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -23,6 +24,7 @@ from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_discussion_signals
 
 
+@skipIfCustomUser
 class ViewsBaseCase(TestCase):
     """
     Setup and utility function base case.

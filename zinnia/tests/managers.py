@@ -1,6 +1,7 @@
 """Test cases for Zinnia's managers"""
 from django.test import TestCase
 from django.contrib.sites.models import Site
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from tagging.models import Tag
 
@@ -13,6 +14,7 @@ from zinnia.managers import tags_published
 from zinnia.managers import entries_published
 
 
+@skipIfCustomUser
 class ManagersTestCase(TestCase):
 
     def setUp(self):

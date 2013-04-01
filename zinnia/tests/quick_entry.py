@@ -1,15 +1,17 @@
 # coding=utf-8
 """Test cases for Zinnia's quick entry"""
 from django.test import TestCase
-from django.contrib.auth.models import User
 from django.test.utils import restore_template_loaders
 from django.test.utils import setup_test_template_loader
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import settings
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.managers import DRAFT
 
 
+@skipIfCustomUser
 class QuickEntryTestCase(TestCase):
     """Test cases for quick_entry view"""
     urls = 'zinnia.tests.urls'
@@ -22,8 +24,10 @@ class QuickEntryTestCase(TestCase):
 
         self.original_wysiwyg = settings.WYSIWYG
         settings.WYSIWYG = None
-        User.objects.create_user('user', 'user@example.com', 'password')
-        User.objects.create_superuser('admin', 'admin@example.com', 'password')
+        Author.objects.create_user(
+            'user', 'user@example.com', 'password')
+        Author.objects.create_superuser(
+            'admin', 'admin@example.com', 'password')
 
     def tearDown(self):
         settings.WYSIWYG = self.original_wysiwyg

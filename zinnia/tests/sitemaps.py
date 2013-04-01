@@ -1,6 +1,7 @@
 """Test cases for Zinnia's sitemaps"""
 from django.test import TestCase
 from django.contrib.sites.models import Site
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
@@ -12,6 +13,7 @@ from zinnia.sitemaps import AuthorSitemap
 from zinnia.sitemaps import TagSitemap
 
 
+@skipIfCustomUser
 class ZinniaSitemapsTestCase(TestCase):
     """Test cases for Sitemaps classes provided"""
     urls = 'zinnia.tests.urls'

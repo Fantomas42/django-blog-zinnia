@@ -5,15 +5,16 @@ from datetime import timedelta
 from django.test import TestCase
 from django.utils import timezone
 from django.contrib import comments
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.comments.models import CommentFlag
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.models import entry
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.models.entry import get_entry_base_model
@@ -30,6 +31,7 @@ class EntryTestCase(TestCase):
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
 
+    @skipIfCustomUser
     def test_discussions(self):
         site = Site.objects.get_current()
         self.assertEquals(self.entry.discussions.count(), 0)
@@ -53,8 +55,8 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.pingbacks.count(), 0)
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        author = User.objects.create_user(username='webmaster',
-                                          email='webmaster@example.com')
+        author = Author.objects.create_user(username='webmaster',
+                                            email='webmaster@example.com')
 
         comment = comments.get_model().objects.create(
             comment='My Comment 3',

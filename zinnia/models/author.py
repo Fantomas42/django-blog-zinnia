@@ -1,18 +1,17 @@
 """Author model for Zinnia"""
 from django.db import models
-from django.contrib.auth.models import User
-from django.contrib.auth.models import UserManager
+from django.contrib.auth import get_user_model
 
 from zinnia.managers import entries_published
 from zinnia.managers import EntryRelatedPublishedManager
 
 
-class Author(User):
+class Author(get_user_model()):
     """
-    Proxy model around :class:`django.contrib.auth.models.User`.
+    Proxy model around :class:`django.contrib.auth.models.get_user_model`.
     """
 
-    objects = UserManager()
+    objects = get_user_model()._default_manager
     published = EntryRelatedPublishedManager()
 
     def entries_published(self):
@@ -26,13 +25,13 @@ class Author(User):
         """
         Builds and returns the author's URL based on his username.
         """
-        return ('zinnia_author_detail', (self.username,))
+        return ('zinnia_author_detail', [self.get_username()])
 
     def __unicode__(self):
         """
         If the user has a full name, use it instead of the username.
         """
-        return self.get_full_name() or self.username
+        return self.get_full_name() or self.get_username()
 
     class Meta:
         """

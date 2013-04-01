@@ -6,9 +6,10 @@ from django.template import TemplateSyntaxError
 from django.contrib import comments
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import CommentFlag
+from django.contrib.auth.tests.utils import skipIfCustomUser
+
 from tagging.models import Tag
 
 from zinnia.models.entry import Entry
@@ -94,6 +95,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['template'], 'custom_template.html')
         self.assertEquals(context['context_category'], category)
 
+    @skipIfCustomUser
     def test_get_authors(self):
         source_context = Context({})
         with self.assertNumQueries(1):
@@ -346,6 +348,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['previous_month'], datetime(2010, 1, 1))
         self.assertEquals(context['next_month'], None)
 
+    @skipIfCustomUser
     def test_get_recent_comments(self):
         site = Site.objects.get_current()
         with self.assertNumQueries(1):
@@ -369,8 +372,8 @@ class TemplateTagsTestCase(TestCase):
             self.assertEquals(context['comments'][0].content_object,
                               self.entry)
 
-        author = User.objects.create_user(username='webmaster',
-                                          email='webmaster@example.com')
+        author = Author.objects.create_user(username='webmaster',
+                                            email='webmaster@example.com')
         comment_2 = comments.get_model().objects.create(
             comment='My Comment 2', site=site,
             content_object=self.entry)
@@ -385,9 +388,10 @@ class TemplateTagsTestCase(TestCase):
             self.assertEquals(context['comments'][1].content_object,
                               self.entry)
 
+    @skipIfCustomUser
     def test_get_recent_linkbacks(self):
-        user = User.objects.create_user(username='webmaster',
-                                        email='webmaster@example.com')
+        user = Author.objects.create_user(username='webmaster',
+                                          email='webmaster@example.com')
         site = Site.objects.get_current()
         with self.assertNumQueries(1):
             context = get_recent_linkbacks()
@@ -524,6 +528,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['middle'], [])
         self.assertEquals(context['end'], [5, 6, 7])
 
+    @skipIfCustomUser
     def test_zinnia_breadcrumbs(self):
         class FakeRequest(object):
             def __init__(self, path):
@@ -593,9 +598,8 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(len(context['breadcrumbs']), 3)
         check_only_last_have_no_url(context['breadcrumbs'])
 
-        User.objects.create_user(username='webmaster',
-                                 email='webmaster@example.com')
-        author = Author.objects.get(username='webmaster')
+        author = Author.objects.create_user(username='webmaster',
+                                            email='webmaster@example.com')
         source_context = Context(
             {'request': FakeRequest(author.get_absolute_url()),
              'object': author})
@@ -705,6 +709,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['template'], 'custom_template.html')
         self.assertEquals(context['context_tag'], tag)
 
+    @skipIfCustomUser
     def test_zinnia_statistics(self):
         with self.assertNumQueries(9):
             context = zinnia_statistics()

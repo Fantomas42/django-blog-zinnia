@@ -10,6 +10,7 @@ from django.utils.feedgenerator import Atom1Feed
 from django.utils.feedgenerator import DefaultFeed
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from tagging.models import Tag
 
@@ -34,6 +35,7 @@ from zinnia.feeds import EntryTrackbacks
 from zinnia.feeds import LatestDiscussions
 
 
+@skipIfCustomUser
 class ZinniaFeedsTestCase(TestCase):
     """Test cases for the Feed classes provided"""
     urls = 'zinnia.tests.urls'
