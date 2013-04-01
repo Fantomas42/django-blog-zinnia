@@ -6,6 +6,7 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.moderation import moderator as moderator_stack
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -15,6 +16,7 @@ from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_discussion_signals
 
 
+@skipIfCustomUser
 class EntryCommentModeratorTestCase(TestCase):
     """Test cases for the moderator"""
 

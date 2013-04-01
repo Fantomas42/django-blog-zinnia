@@ -4,6 +4,7 @@ from datetime import date
 from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.core.exceptions import ImproperlyConfigured
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -286,6 +287,7 @@ class MixinTestCase(TestCase):
         self.assertRaises(ImproperlyConfigured,
                           instance.get_queryset)
 
+    @skipIfCustomUser
     def test_prefetch_categories_authors_mixin(self):
         author = Author.objects.create_user(username='author',
                                             email='author@example.com')

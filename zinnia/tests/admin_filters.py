@@ -7,6 +7,7 @@ from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.admin.views.main import ChangeList
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -24,6 +25,7 @@ class MiniEntryCategoryAdmin(ModelAdmin):
     list_filter = [CategoryListFilter]
 
 
+@skipIfCustomUser
 class AuthorListFilterTestCase(TestCase):
     """Test case for AuthorListFilter"""
     urls = 'zinnia.tests.urls'

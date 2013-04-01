@@ -1,5 +1,6 @@
 """Test cases for Zinnia's admin"""
 from django.test import TestCase
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import settings
 from zinnia.models.entry import Entry
@@ -7,6 +8,7 @@ from zinnia.models.author import Author
 from zinnia.models.category import Category
 
 
+@skipIfCustomUser
 class EntryAdminTestCase(TestCase):
     """Test case for Entry Admin"""
     urls = 'zinnia.tests.urls'
@@ -53,6 +55,7 @@ class EntryAdminTestCase(TestCase):
         self.assertEquals(Entry.objects.count(), 1)
 
 
+@skipIfCustomUser
 class CategoryAdminTestCase(TestCase):
     """Test cases for Category Admin"""
     urls = 'zinnia.tests.urls'

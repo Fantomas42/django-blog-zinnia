@@ -3,6 +3,7 @@
 from django.test import TestCase
 from django.test.utils import restore_template_loaders
 from django.test.utils import setup_test_template_loader
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import settings
 from zinnia.models.entry import Entry
@@ -10,6 +11,7 @@ from zinnia.models.author import Author
 from zinnia.managers import DRAFT
 
 
+@skipIfCustomUser
 class QuickEntryTestCase(TestCase):
     """Test cases for quick_entry view"""
     urls = 'zinnia.tests.urls'

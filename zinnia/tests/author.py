@@ -1,12 +1,14 @@
 """Test cases for Zinnia's Author"""
 from django.test import TestCase
 from django.contrib.sites.models import Site
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
 
 
+@skipIfCustomUser
 class AuthorTestCase(TestCase):
 
     def setUp(self):

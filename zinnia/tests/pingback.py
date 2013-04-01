@@ -10,6 +10,7 @@ from django.contrib.sites.models import Site
 from django.test.utils import restore_template_loaders
 from django.test.utils import setup_test_template_loader
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from BeautifulSoup import BeautifulSoup
 
@@ -26,6 +27,7 @@ from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_discussion_signals
 
 
+@skipIfCustomUser
 class PingBackTestCase(TestCase):
     """Test cases for pingbacks"""
     urls = 'zinnia.tests.urls'

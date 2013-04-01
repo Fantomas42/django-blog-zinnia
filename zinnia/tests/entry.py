@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.comments.models import CommentFlag
+from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.models import entry
 from zinnia.models.entry import Entry
@@ -30,6 +31,7 @@ class EntryTestCase(TestCase):
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
 
+    @skipIfCustomUser
     def test_discussions(self):
         site = Site.objects.get_current()
         self.assertEquals(self.entry.discussions.count(), 0)
@@ -54,7 +56,7 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
         author = Author.objects.create_user(username='webmaster',
-                                          email='webmaster@example.com')
+                                            email='webmaster@example.com')
 
         comment = comments.get_model().objects.create(
             comment='My Comment 3',
