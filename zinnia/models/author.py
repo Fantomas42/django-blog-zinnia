@@ -1,8 +1,7 @@
 """Author model for Zinnia"""
 from django.db import models
-from django.contrib.auth.models import User
-from django.contrib.auth.models import UserManager
 
+from zinnia.compat import User
 from zinnia.managers import entries_published
 from zinnia.managers import EntryRelatedPublishedManager
 
@@ -12,7 +11,6 @@ class Author(User):
     Proxy model around :class:`django.contrib.auth.models.User`.
     """
 
-    objects = UserManager()
     published = EntryRelatedPublishedManager()
 
     def entries_published(self):
