@@ -3,7 +3,9 @@
 
 {% block meta-description %}{% trans "Latest entries" %}{% endblock %}
 
-{% block title %}{% trans "Latest entries" %}{% endblock %}
+{% block title %}
+{% trans "Latest entries" %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} | {% trans "Page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}
+{% endblock %}
 
 {% block body-class %}{{ block.super }} archive index {% now "\y\e\a\r-Y \m\o\n\t\h-m \w\e\ek-W \d\a\y-d" %}{% endblock %}
 
