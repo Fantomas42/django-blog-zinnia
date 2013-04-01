@@ -30,10 +30,10 @@ year_patterns = [
 ]
 
 week_patterns = [
-    url(_(r'^(?P<year>\d{4})/week/(?P<week>\d{2})/$'),
+    url(_(r'^(?P<year>\d{4})/week/(?P<week>\d+)/$'),
         EntryWeek.as_view(),
         name='zinnia_entry_archive_week'),
-    url(_(r'^(?P<year>\d{4})/week/(?P<week>\d{2})/page/(?P<page>\d+)/$'),
+    url(_(r'^(?P<year>\d{4})/week/(?P<week>\d+)/page/(?P<page>\d+)/$'),
         EntryWeek.as_view(),
         name='zinnia_entry_archive_week_paginated'),
 ]
