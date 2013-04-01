@@ -6,7 +6,6 @@ from django.template import TemplateSyntaxError
 from django.contrib import comments
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import CommentFlag
 from tagging.models import Tag
@@ -369,8 +368,8 @@ class TemplateTagsTestCase(TestCase):
             self.assertEquals(context['comments'][0].content_object,
                               self.entry)
 
-        author = User.objects.create_user(username='webmaster',
-                                          email='webmaster@example.com')
+        author = Author.objects.create_user(username='webmaster',
+                                            email='webmaster@example.com')
         comment_2 = comments.get_model().objects.create(
             comment='My Comment 2', site=site,
             content_object=self.entry)
@@ -386,8 +385,8 @@ class TemplateTagsTestCase(TestCase):
                               self.entry)
 
     def test_get_recent_linkbacks(self):
-        user = User.objects.create_user(username='webmaster',
-                                        email='webmaster@example.com')
+        user = Author.objects.create_user(username='webmaster',
+                                          email='webmaster@example.com')
         site = Site.objects.get_current()
         with self.assertNumQueries(1):
             context = get_recent_linkbacks()
@@ -593,9 +592,8 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(len(context['breadcrumbs']), 3)
         check_only_last_have_no_url(context['breadcrumbs'])
 
-        User.objects.create_user(username='webmaster',
-                                 email='webmaster@example.com')
-        author = Author.objects.get(username='webmaster')
+        author = Author.objects.create_user(username='webmaster',
+                                            email='webmaster@example.com')
         source_context = Context(
             {'request': FakeRequest(author.get_absolute_url()),
              'object': author})

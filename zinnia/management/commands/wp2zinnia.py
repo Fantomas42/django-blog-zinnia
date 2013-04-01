@@ -138,7 +138,7 @@ class Command(LabelCommand):
 
     def migrate_author(self, author_name):
         """Handle actions for migrating the authors"""
-        action_text = "The author '%s' needs to be migrated to an User:\n"\
+        action_text = "The author '%s' needs to be migrated to an user:\n"\
                       "1. Use an existing user ?\n"\
                       "2. Create a new user ?\n"\
                       "Please select a choice: " % self.style.ITEM(author_name)
