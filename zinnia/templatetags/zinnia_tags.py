@@ -36,6 +36,31 @@ VECTORS_FACTORY = lambda: VectorBuilder(Entry.published.all(),
 CACHE_ENTRIES_RELATED = {}
 
 
+def get_archives(field, date_part, order):
+    """Return archives already TZ evaluated so sorting 
+    in templates work as expected"""
+    if settings.USE_TZ:
+        # Use django 1.5+ default implementation
+        if hasattr(Entry.published, 'datetimes'):
+            archives = Entry.published.datetimes(field, date_part, order=order)
+        else:
+            # Do the extra work to get unique TZ aware dates 
+            # so regroups work in the template like we'd expect
+            archives = []
+            order_by = field
+            if order == 'DESC':
+                order_by = '-%s' % field
+            all_archives = [
+                x.creation_date for x in Entry.published.all().order_by(order_by)
+            ]
+            for aa in all_archives:
+                archives.append(timezone.datetime(aa.year, aa.month, aa.day))
+    else:
+        # Just get the naive dates
+        archives = Entry.published.dates(field, date_part, order=order)
+    return archives
+
+
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_categories(context, template='zinnia/tags/categories.html'):
     """Return the published categories"""
@@ -148,8 +173,7 @@ def get_similar_entries(context, number=5,
 def get_archives_entries(template='zinnia/tags/archives_entries.html'):
     """Return archives entries"""
     return {'template': template,
-            'archives': Entry.published.dates('creation_date', 'month',
-                                              order='DESC')}
+            'archives': get_archives('creation_date', 'month', 'DESC')}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
@@ -157,8 +181,7 @@ def get_archives_entries_tree(
         template='zinnia/tags/archives_entries_tree.html'):
     """Return archives entries as a Tree"""
     return {'template': template,
-            'archives': Entry.published.dates('creation_date', 'day',
-                                              order='ASC')}
+            'archives': get_archives('creation_date', 'day', 'ASC')}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
