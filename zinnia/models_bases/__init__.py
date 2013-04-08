@@ -1,0 +1,1 @@
+"""Base models for Zinnia"""
