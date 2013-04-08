@@ -4,7 +4,7 @@ import warnings
 from django.utils.importlib import import_module
 
 from zinnia.settings import ENTRY_BASE_MODEL
-from zinnia.models_bases.entry import EntryAbstractClass
+from zinnia.models_bases.entry import AbstractEntry
 
 
 def get_entry_base_model():
@@ -15,7 +15,7 @@ def get_entry_base_model():
     the Entry model class.
     """
     if not ENTRY_BASE_MODEL:
-        return EntryAbstractClass
+        return AbstractEntry
 
     dot = ENTRY_BASE_MODEL.rindex('.')
     module_name = ENTRY_BASE_MODEL[:dot]
@@ -26,7 +26,7 @@ def get_entry_base_model():
     except (ImportError, AttributeError):
         warnings.warn('%s cannot be imported' % ENTRY_BASE_MODEL,
                       RuntimeWarning)
-    return EntryAbstractClass
+    return AbstractEntry
 
 
 class Entry(get_entry_base_model()):

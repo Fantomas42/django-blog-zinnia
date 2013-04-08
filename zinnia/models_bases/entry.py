@@ -446,7 +446,7 @@ class DetailTemplateEntry(models.Model):
         abstract = True
 
 
-class EntryAbstractClass(
+class AbstractEntry(
         CoreEntry,
         ContentEntry,
         DiscussionsEntry,
@@ -466,7 +466,7 @@ class EntryAbstractClass(
     all the abstract entry model classes into a single one.
 
     In this manner we can override some fields without
-    reimplemting all the EntryAbstractClass.
+    reimplemting all the AbstractEntry.
     """
 
     class Meta(CoreEntry.Meta):
