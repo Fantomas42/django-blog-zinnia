@@ -19,28 +19,20 @@ class URLShortenerTestCase(TestCase):
 
     def test_get_url_shortener(self):
         us_settings.URL_SHORTENER_BACKEND = 'mymodule.myclass'
-        try:
-            with warnings.catch_warnings(record=True) as w:
-                self.assertEquals(get_url_shortener(), default_backend)
-                self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
-                self.assertEquals(
-                    str(w[-1].message),
-                    'mymodule.myclass backend cannot be imported')
-        except AttributeError:
-            # Fail under Python2.5, because of'warnings.catch_warnings'
-            pass
+        with warnings.catch_warnings(record=True) as w:
+            self.assertEquals(get_url_shortener(), default_backend)
+            self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
+            self.assertEquals(
+                str(w[-1].message),
+                'mymodule.myclass backend cannot be imported')
 
         us_settings.URL_SHORTENER_BACKEND = 'zinnia.tests.custom_url_shortener'
-        try:
-            with warnings.catch_warnings(record=True) as w:
-                self.assertEquals(get_url_shortener(), default_backend)
-                self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
-                self.assertEquals(
-                    str(w[-1].message),
-                    'This backend only exists for testing')
-        except AttributeError:
-            # Fail under Python2.5, because of'warnings.catch_warnings'
-            pass
+        with warnings.catch_warnings(record=True) as w:
+            self.assertEquals(get_url_shortener(), default_backend)
+            self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
+            self.assertEquals(
+                str(w[-1].message),
+                'This backend only exists for testing')
 
         us_settings.URL_SHORTENER_BACKEND = 'zinnia.url_shortener'\
                                             '.backends.default'
