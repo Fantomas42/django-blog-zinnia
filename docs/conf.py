@@ -111,7 +111,7 @@ pygments_style = 'sphinx'
 html_theme = 'default'
 
 # For using default theme on RTFD
-html_style = ''
+html_style = 'default.css'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
