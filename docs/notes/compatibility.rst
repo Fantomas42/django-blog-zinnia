@@ -27,6 +27,7 @@ Here a list establishing the compatibility between Zinnia and Django:
 
 Backward incompatibilities with Django v1.4.x due to :
 
+* Experimental support of Python 3.
 * Remove of the Python 2.5 support.
 * Changes related to the archives views.
 * Usage of the new syntax for the url templatetag.
