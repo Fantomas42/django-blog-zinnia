@@ -42,47 +42,56 @@ The extension process is done in three main steps:
 #. Register your class into Zinnia to be used.
 #. Update the :class:`~zinnia.admin.entry.EntryAdmin` class accordingly.
 
-In the suite of this document we will show how to add an image gallery into
-the :class:`Entry` model to illustrate the concepts involved. We assume that
-the pieces of codes written for this document belong in the
-:mod:`zinnia_gallery` package/application.
-
 .. _writing-model-extension:
 
 Writing model extension
 =======================
 
+In the suite of this document we will show how to add an image gallery into
+the :class:`Entry` model to illustrate the concepts involved when
+extending. We assume that the pieces of codes written for this document
+belong in the :mod:`zinnia_gallery` module/application.
+
+.. versionchanged:: 0.13
+
+The :class:`zinnia.models.entry.EntryAbstractClass` has been moved and
+renamed to :class:`zinnia.models_bases.entry.AbstractEntry`.
+
 The first step to extend the :class:`Entry` model is to define a new class
-inherited from the :class:`EntryAbstractClass` and add your fields or/and
-override the inherited methods if needed. So in :mod:`zinnia_gallery` let's
-write our new class in a file named :file:`entry_gallery.py`. ::
+inherited from the :class:`~zinnia.models_bases.entry.AbstractEntry` and
+add your fields or/and override the inherited methods if needed. So in
+:mod:`zinnia_gallery` let's write our gallery models and the extension in
+the :class:`Entry` model in :file:`models.py`. ::
 
   from django.db import models
-  from zinnia_gallery.models import Gallery
-  from zinnia.models.entry import EntryAbstractClass
+  from zinnia.models_bases.entry import AbstractEntry
 
-  class EntryGallery(EntryAbstractClass):
+  class Picture(models.Model):
+      title = models.CharField(max_length=50)
+      image = models.ImageField(upload_to='gallery')
+
+  class Gallery(models.Model):
+      title = models.CharField(max_length=50)
+      pictures = models.ManyToManyField(Picture)
+
+  class EntryGallery(AbstractEntry):
       gallery = models.ForeignKey(Gallery)
 
       def __unicode__(self):
           return u'EntryGallery %s' % self.title
 
-      class Meta(EntryAbstractClass.Meta):
+      class Meta(AbstractEntry.Meta):
           abstract = True
 
-In this code sample, we add a new :class:`~django.db.models.ForeignKey`
-field named ``gallery`` pointing to a :class:`Gallery` model defined in
-:mod:`zinnia_gallery.models` and we override the
-:meth:`EntryAbstractClass.__unicode__` method.
+In this code sample, we simply add in our :class:`Entry` model a new
+:class:`~django.db.models.ForeignKey` field named ``gallery`` pointing to a
+:class:`Gallery` model and we override the :meth:`Entry.__unicode__` method.
 
-.. note:: You have to respect **3 important rules** to make extending working :
+.. note:: You have to respect **2 important rules** to make extending working :
 
           #. Do not import the :class:`Entry` model in your file defining
              the extended model because it will cause a circular
              importation.
-
-          #. Do not put your abstract model in a file named :file:`models.py`,
-             it will not work for a non obvious reason.
 
           #. Don't forget to tell that your model is ``abstract``. Otherwise a
              table will be created and the extending process will not work
@@ -92,10 +101,66 @@ field named ``gallery`` pointing to a :class:`Gallery` model defined in
    :ref:`model-inheritance` for more information about the concepts
    behind the model inheritence in Django and the limitations.
 
+.. _writing-model-customisation:
+
+Writing model customisation
+===========================
+
+Adding fields is pretty easy, but now that the :class:`Entry` model has
+been extended, we want to change the :attr:`image` field wich is an
+:class:`~django.db.models.ImageField` by default to use our new
+:class:`Picture` instead.
+
+To customise this field, the same process as extending apply, but we can
+take advantage of all the abstracts classes provided to build the
+:class:`~zinnia.models_bases.entry.AbstractEntry` to rebuild our own custom
+:class:`Entry` model like this: ::
+
+  from django.db import models
+  from zinnia.models_bases import entry
+
+  class Picture(models.Model):
+      title = models.CharField(max_length=50)
+      image = models.ImageField(upload_to='gallery')
+
+  class Gallery(models.Model):
+      title = models.CharField(max_length=50)
+      pictures = models.ManyToManyField(Picture)
+
+  class EntryGallery(
+            entry.CoreEntry,
+            entry.ContentEntry,
+            entry.DiscussionsEntry,
+            entry.RelatedEntry,
+            entry.ExcerptEntry,
+            entry.FeaturedEntry,
+            entry.AuthorsEntry,
+            entry.CategoriesEntry,
+            entry.TagsEntry,
+            entry.LoginRequiredEntry,
+            entry.PasswordRequiredEntry,
+            entry.ContentTemplateEntry,
+            entry.DetailTemplateEntry):
+
+      image = models.ForeignKey(Picture)
+      gallery = models.ForeignKey(Gallery)
+
+      def __unicode__(self):
+          return u'EntryGallery %s' % self.title
+
+      class Meta(entry.CoreEntry.Meta):
+          abstract = True
+
+Now we have an :class:`Entry` model extended with a gallery of pictures and
+customised with a :class:`Picture` model relation as the :attr:`image`
+field.
+
+Note that the same process apply if you want to delete some built-in fields.
+
 .. _database-considerations:
 
 Considerations about the database
----------------------------------
+=================================
 
 If you do the extension of the :class:`Entry` model after the ``syncdb``
 command, you have to manually alter the Zinnia's tables for reflecting your
@@ -133,7 +198,7 @@ process.
 
 Following our example we must add this line in the project's settings. ::
 
-  ZINNIA_ENTRY_BASE_MODEL = 'zinnia_gallery.entry_gallery.EntryGallery'
+  ZINNIA_ENTRY_BASE_MODEL = 'zinnia_gallery.models.EntryGallery'
 
 If an error occurs when your new class is imported a warning will be raised
 and the :class:`EntryAbstractClass` will be used.

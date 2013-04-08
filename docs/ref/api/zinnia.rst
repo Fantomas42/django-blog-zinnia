@@ -90,6 +90,7 @@ Subpackages
 
     zinnia.admin
     zinnia.models
+    zinnia.models_bases
     zinnia.spam_checker
     zinnia.templatetags
     zinnia.url_shortener
