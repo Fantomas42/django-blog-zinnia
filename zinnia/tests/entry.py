@@ -12,14 +12,14 @@ from django.utils.translation import deactivate
 from django.contrib.comments.models import CommentFlag
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
-from zinnia.models import entry
+from zinnia.managers import PUBLISHED
+from zinnia.models_bases import entry
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
-from zinnia.managers import PUBLISHED
 from zinnia.flags import PINGBACK, TRACKBACK
-from zinnia.models.entry import get_entry_base_model
-from zinnia.models.entry import EntryAbstractClass
 from zinnia.tests.utils import datetime
+from zinnia.models.entry import get_entry_base_model
+from zinnia.models_bases.entry import EntryAbstractClass
 from zinnia import url_shortener as shortener_settings
 
 

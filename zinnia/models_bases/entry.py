@@ -102,7 +102,7 @@ class CoreEntry(models.Model):
         """
         Returns the previous published entry if exists.
         """
-        entries = Entry.published.filter(
+        entries = self.__class__.published.filter(
             creation_date__lt=self.creation_date)[:1]
         if entries:
             return entries[0]
@@ -112,7 +112,7 @@ class CoreEntry(models.Model):
         """
         Returns the next published entry if exists.
         """
-        entries = Entry.published.filter(
+        entries = self.__class__.published.filter(
             creation_date__gt=self.creation_date).order_by('creation_date')[:1]
         if entries:
             return entries[0]
@@ -471,4 +471,3 @@ class EntryAbstractClass(
 
     class Meta(CoreEntry.Meta):
         abstract = True
-

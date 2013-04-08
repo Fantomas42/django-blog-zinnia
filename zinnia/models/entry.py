@@ -7,7 +7,6 @@ from zinnia.settings import ENTRY_BASE_MODEL
 from zinnia.models_bases.entry import EntryAbstractClass
 
 
-
 def get_entry_base_model():
     """
     Determine the base abstract model to inherit from,
