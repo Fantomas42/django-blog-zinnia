@@ -90,9 +90,10 @@ build the canonical URL of an entry.
 
 To do this override, simply use the method explained in the
 :doc:`/how-to/extending_entry_model` document to create a new class based on
-:class:`EntryAbstractClass` with the new ``get_absolute_url`` method.  ::
+:class:`~zinnia.models_bases.entry.AbstractEntry` with the new
+``get_absolute_url`` method. ::
 
-  class EntryWithNewUrl(EntryAbstractClass):
+  class EntryWithNewUrl(AbstractEntry):
       """Entry with '/blog/<id>/' URL"""
 
       @models.permalink
@@ -100,7 +101,7 @@ To do this override, simply use the method explained in the
           return ('zinnia_entry_detail', (),
                   {'pk': self.id})
 
-      class Meta(EntryAbstractClass.Meta):
+      class Meta(AbstractEntry.Meta):
           abstract = True
 
 Due to the intensive use of this method into the templates, make sure that

@@ -1,0 +1,9 @@
+language: python
+python:
+    - "2.6"
+    - "2.7"
+install:
+    - python bootstrap.py
+    - ./bin/buildout
+script:
+    - ./bin/test
