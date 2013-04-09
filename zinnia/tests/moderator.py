@@ -1,4 +1,6 @@
 """Test cases for Zinnia's moderator"""
+from __future__ import unicode_literals
+
 from django.core import mail
 from django.test import TestCase
 from django.contrib import comments
@@ -67,7 +69,7 @@ class EntryCommentModeratorTestCase(TestCase):
         moderator = EntryCommentModerator(Entry)
         moderator.email_authors = True
         moderator.mail_comment_notification_recipients = [
-            u'admin@example.com', u'webmaster@example.com']
+            'admin@example.com', 'webmaster@example.com']
         moderator.do_email_authors(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 0)
         moderator.mail_comment_notification_recipients = []
@@ -91,13 +93,13 @@ class EntryCommentModeratorTestCase(TestCase):
         moderator.do_email_authors(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)
         self.assertEquals(mail.outbox[0].to,
-                          [u'admin@example.com', u'contrib@example.com'])
+                          ['admin@example.com', 'contrib@example.com'])
         mail.outbox = []
         contributor.email = ''
         contributor.save()
         moderator.do_email_authors(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)
-        self.assertEquals(mail.outbox[0].to, [u'admin@example.com'])
+        self.assertEquals(mail.outbox[0].to, ['admin@example.com'])
 
     def test_do_email_reply(self):
         comment = comments.get_model().objects.create(
@@ -106,7 +108,7 @@ class EntryCommentModeratorTestCase(TestCase):
         moderator = EntryCommentModerator(Entry)
         moderator.email_notification_reply = True
         moderator.mail_comment_notification_recipients = [
-            u'admin@example.com', u'webmaster@example.com']
+            'admin@example.com', 'webmaster@example.com']
         moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 0)
 
@@ -121,15 +123,15 @@ class EntryCommentModeratorTestCase(TestCase):
             content_object=self.entry, is_public=True, site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)
-        self.assertEquals(mail.outbox[0].bcc, [u'user_1@example.com'])
+        self.assertEquals(mail.outbox[0].bcc, ['user_1@example.com'])
 
         comment = comments.get_model().objects.create(
             comment='My Comment 4', user=self.author, is_public=True,
             content_object=self.entry, site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 2)
-        self.assertEquals(mail.outbox[1].bcc, [u'user_1@example.com',
-                                               u'user_2@example.com'])
+        self.assertEquals(mail.outbox[1].bcc, ['user_1@example.com',
+                                               'user_2@example.com'])
 
     def test_moderate(self):
         comment = comments.get_model().objects.create(

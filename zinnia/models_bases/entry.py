@@ -1,4 +1,6 @@
 """Base entry models for Zinnia"""
+from __future__ import unicode_literals
+
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
@@ -138,7 +140,7 @@ class CoreEntry(models.Model):
             'slug': self.slug})
 
     def __unicode__(self):
-        return u'%s: %s' % (self.title, self.get_status_display())
+        return '%s: %s' % (self.title, self.get_status_display())
 
     class Meta:
         """

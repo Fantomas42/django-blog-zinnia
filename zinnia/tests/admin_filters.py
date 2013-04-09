@@ -1,4 +1,6 @@
 """Test cases for Zinnia's admin filters"""
+from __future__ import unicode_literals
+
 from django.test import TestCase
 from django.test import RequestFactory
 from django.contrib.admin import site
@@ -86,10 +88,10 @@ class AuthorListFilterTestCase(TestCase):
         with self.assertNumQueries(1):
             filterspec = changelist.get_filters(request)[0][0]
             self.assertEquals(filterspec.title, 'published authors')
-            self.assertEquals(filterspec.used_parameters, {'author': u'2'})
+            self.assertEquals(filterspec.used_parameters, {'author': '2'})
             self.assertEquals(filterspec.lookup_choices,
-                              [('1', u'webmaster (2 entries)'),
-                               ('2', u'contributor (1 entry)')])
+                              [('1', 'webmaster (2 entries)'),
+                               ('2', 'contributor (1 entry)')])
 
 
 class CategoryListFilterTestCase(TestCase):
@@ -152,7 +154,7 @@ class CategoryListFilterTestCase(TestCase):
         with self.assertNumQueries(1):
             filterspec = changelist.get_filters(request)[0][0]
             self.assertEquals(filterspec.title, 'published categories')
-            self.assertEquals(filterspec.used_parameters, {'category': u'2'})
+            self.assertEquals(filterspec.used_parameters, {'category': '2'})
             self.assertEquals(filterspec.lookup_choices,
-                              [('1', u'Category 1 (2 entries)'),
-                               ('2', u'Category 2 (1 entry)')])
+                              [('1', 'Category 1 (2 entries)'),
+                               ('2', 'Category 2 (1 entry)')])

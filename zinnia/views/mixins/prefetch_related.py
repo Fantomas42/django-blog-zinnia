@@ -1,4 +1,6 @@
 """Mixins for enabling prefetching in views returning list of entries"""
+from __future__ import unicode_literals
+
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -16,11 +18,11 @@ class PrefetchRelatedMixin(object):
         """
         if self.relation_names is None:
             raise ImproperlyConfigured(
-                u"'%s' must define 'relation_names'" %
+                "'%s' must define 'relation_names'" %
                 self.__class__.__name__)
         if not isinstance(self.relation_names, (tuple, list)):
             raise ImproperlyConfigured(
-                u"%s's relation_names property must be a tuple or list." %
+                "%s's relation_names property must be a tuple or list." %
                 self.__class__.__name__)
         return super(PrefetchRelatedMixin, self
                      ).get_queryset().prefetch_related(*self.relation_names)
