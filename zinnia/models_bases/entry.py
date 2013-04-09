@@ -11,6 +11,7 @@ from django.utils.functional import cached_property
 from django.contrib import comments
 from django.contrib.comments.models import CommentFlag
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
 from django.contrib.markup.templatetags.markup import markdown
 from django.contrib.markup.templatetags.markup import textile
@@ -34,6 +35,7 @@ from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.url_shortener import get_url_shortener
 
 
+@python_2_unicode_compatible
 class CoreEntry(models.Model):
     """
     Abstract core entry model class providing
@@ -139,7 +141,7 @@ class CoreEntry(models.Model):
             'day': creation_date.strftime('%d'),
             'slug': self.slug})
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s: %s' % (self.title, self.get_status_display())
 
     class Meta:
