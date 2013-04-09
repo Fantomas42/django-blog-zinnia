@@ -63,42 +63,60 @@ def get_authors(context, template='zinnia/tags/authors.html'):
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
-def get_recent_entries(number=5, template='zinnia/tags/recent_entries.html'):
+def get_recent_entries(number=5, template='zinnia/tags/recent_entries.html',
+                       categories=None):
     """Return the most recent entries"""
+    qs = Entry.published
+    if categories:
+        qs = qs.filter(categories__in=categories)
     return {'template': template,
-            'entries': Entry.published.all()[:number]}
+            'entries': qs.all()[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_featured_entries(number=5,
-                         template='zinnia/tags/featured_entries.html'):
+                         template='zinnia/tags/featured_entries.html',
+                         categories=None):
     """Return the featured entries"""
+    qs = Entry.published
+    if categories:
+        qs = qs.filter(categories__in=categories)
     return {'template': template,
-            'entries': Entry.published.filter(featured=True)[:number]}
+            'entries': qs.filter(featured=True)[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_draft_entries(number=5,
-                      template='zinnia/tags/draft_entries.html'):
+                      template='zinnia/tags/draft_entries.html',
+                      categories=None):
     """Return the latest draft entries"""
+    qs = Entry.objects.filter(status=DRAFT)
+    if categories:
+        qs = qs.filter(categories__in=categories)
     return {'template': template,
-            'entries': Entry.objects.filter(status=DRAFT)[:number]}
+            'entries': qs.all()[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
-def get_random_entries(number=5, template='zinnia/tags/random_entries.html'):
+def get_random_entries(number=5, template='zinnia/tags/random_entries.html',
+                       categories=None):
     """Return random entries"""
+    qs = Entry.published.order_by('?')
+    if categories:
+        qs = qs.filter(categories__in=categories)
     return {'template': template,
-            'entries': Entry.published.order_by('?')[:number]}
+            'entries': qs.all()[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
-def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
+def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html',
+                        categories=None):
     """Return popular entries"""
+    qs = Entry.published.filter(comment_count__gt=0).order_by('-comment_count')
+    if categories:
+        qs = qs.filter(categories__in=categories)
     return {'template': template,
-            'entries': Entry.published.filter(
-                comment_count__gt=0).order_by(
-                    '-comment_count')[:number]}
+            'entries': qs.all()[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -145,25 +163,32 @@ def get_similar_entries(context, number=5,
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
-def get_archives_entries(template='zinnia/tags/archives_entries.html'):
+def get_archives_entries(template='zinnia/tags/archives_entries.html',
+                         categories=None):
     """Return archives entries"""
+    qs = Entry.published
+    if categories:
+        qs = qs.filter(categories__in=categories)
     return {'template': template,
-            'archives': Entry.published.dates('creation_date', 'month',
-                                              order='DESC')}
+            'archives': qs.dates('creation_date', 'month', order='DESC')}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_archives_entries_tree(
-        template='zinnia/tags/archives_entries_tree.html'):
+        template='zinnia/tags/archives_entries_tree.html',
+        categories=None):
     """Return archives entries as a Tree"""
+    qs = Entry.published
+    if categories:
+        qs = qs.filter(categories__in=categories)
     return {'template': template,
-            'archives': Entry.published.dates('creation_date', 'day',
-                                              order='ASC')}
+            'archives': qs.dates('creation_date', 'day', order='ASC')}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_calendar_entries(context, year=None, month=None,
-                         template='zinnia/tags/calendar.html'):
+                         template='zinnia/tags/calendar.html',
+                         categories=None):
     """Return an HTML calendar of entries"""
     if not year or not month:
         date_month = context.get('month') or context.get('day') or \
@@ -177,7 +202,10 @@ def get_calendar_entries(context, year=None, month=None,
         current_month = timezone.make_aware(
             current_month, timezone.utc)
 
-    dates = list(Entry.published.dates('creation_date', 'month'))
+    qs = Entry.published
+    if categories:
+        qs = qs.filter(categories__in=categories)
+    dates = list(qs.dates('creation_date', 'month'))
 
     if not current_month in dates:
         dates.append(current_month)
@@ -196,11 +224,14 @@ def get_calendar_entries(context, year=None, month=None,
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
-def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
+def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html',
+                        categories=None):
     """Return the most recent comments"""
+    qs = Entry.published
+    if categories:
+        qs = qs.filter(categories__in=categories)
     # Using map(smart_unicode... fix bug related to issue #8554
-    entry_published_pks = map(smart_unicode,
-                              Entry.published.values_list('id', flat=True))
+    entry_published_pks = map(smart_unicode, qs.values_list('id', flat=True))
     content_type = ContentType.objects.get_for_model(Entry)
 
     comments = get_comment_model().objects.filter(
@@ -216,10 +247,13 @@ def get_recent_comments(number=5, template='zinnia/tags/recent_comments.html'):
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_recent_linkbacks(number=5,
-                         template='zinnia/tags/recent_linkbacks.html'):
+                         template='zinnia/tags/recent_linkbacks.html',
+                         categories=None):
     """Return the most recent linkbacks"""
-    entry_published_pks = map(smart_unicode,
-                              Entry.published.values_list('id', flat=True))
+    qs = Entry.published
+    if categories:
+        qs = qs.filter(categories__in=categories)
+    entry_published_pks = map(smart_unicode, qs.values_list('id', flat=True))
     content_type = ContentType.objects.get_for_model(Entry)
 
     linkbacks = get_comment_model().objects.filter(

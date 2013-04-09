@@ -52,6 +52,15 @@ class TemplateTagsTestCase(TestCase):
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
 
+        self.category = Category.objects.create(
+            title='Category', slug='category'
+        )
+        params.update(
+            slug='entry-with-category', status=PUBLISHED, featured=True,
+        )
+        self.entry_with_category = Entry.objects.create(**params)
+        self.entry_with_category.categories.add(self.category)
+
     def publish_entry(self):
         self.entry.status = PUBLISHED
         self.entry.featured = True
@@ -81,7 +90,7 @@ class TemplateTagsTestCase(TestCase):
         source_context = Context({})
         with self.assertNumQueries(0):
             context = get_categories_tree(source_context)
-        self.assertEquals(len(context['categories']), 0)
+        self.assertEquals(len(context['categories']), 1)
         self.assertEquals(context['template'],
                           'zinnia/tags/categories_tree.html')
         self.assertEquals(context['context_category'], None)
@@ -92,7 +101,7 @@ class TemplateTagsTestCase(TestCase):
         with self.assertNumQueries(0):
             context = get_categories_tree(
                 source_context, 'custom_template.html')
-        self.assertEquals(len(context['categories']), 1)
+        self.assertEquals(len(context['categories']), 2)
         self.assertEquals(context['template'], 'custom_template.html')
         self.assertEquals(context['context_category'], category)
 
@@ -131,6 +140,19 @@ class TemplateTagsTestCase(TestCase):
             context = get_recent_entries(0)
         self.assertEquals(len(context['entries']), 0)
 
+        # If we don't do this it doesn't count as published.
+        self.entry_with_category.sites.add(Site.objects.get_current())
+
+        context = get_recent_entries(categories=None)
+        self.assertEquals(len(context['entries']), 2)
+
+        context = get_recent_entries(categories=Category.objects.all())
+        self.assertEquals(len(context['entries']), 1)
+
+        categories = Category.objects.filter(pk=self.category.pk)
+        context = get_recent_entries(categories=categories)
+        self.assertEquals(len(context['entries']), 1)
+
     def test_get_featured_entries(self):
         with self.assertNumQueries(1):
             context = get_featured_entries()
@@ -147,17 +169,46 @@ class TemplateTagsTestCase(TestCase):
             context = get_featured_entries(0)
         self.assertEquals(len(context['entries']), 0)
 
+        # If we don't do this it doesn't count as published.
+        self.entry_with_category.sites.add(Site.objects.get_current())
+
+        context = get_featured_entries(categories=Category.objects.all())
+        self.assertEquals(len(context['entries']), 1)
+
+        context = get_featured_entries(categories=None)
+        self.assertEquals(len(context['entries']), 2)
+
+        categories = Category.objects.filter(pk=self.category.pk)
+        context = get_featured_entries(categories=categories)
+        self.assertEquals(len(context['entries']), 1)
+
     def test_draft_entries(self):
+        self.entry_with_category.status = DRAFT
+        self.entry_with_category.save()
+
         with self.assertNumQueries(0):
             context = get_draft_entries()
-        self.assertEquals(len(context['entries']), 1)
+        self.assertEquals(len(context['entries']), 2)
         self.assertEquals(context['template'],
                           'zinnia/tags/draft_entries.html')
+
+        context = get_draft_entries(categories=Category.objects.all())
+        self.assertEquals(len(context['entries']), 1)
+
+        context = get_draft_entries(categories=None)
+        self.assertEquals(len(context['entries']), 2)
+
+        context = get_draft_entries(1, categories=None)
+        self.assertEquals(len(context['entries']), 1)
+
+        categories = Category.objects.filter(pk=self.category.pk)
+        context = get_draft_entries(categories=categories)
+        self.assertEquals(len(context['entries']), 1)
 
         self.publish_entry()
         with self.assertNumQueries(0):
             context = get_draft_entries(3, 'custom_template.html')
-        self.assertEquals(len(context['entries']), 0)
+        self.assertEquals(len(context['entries']), 1)
         self.assertEquals(context['template'], 'custom_template.html')
         with self.assertNumQueries(0):
             context = get_draft_entries(0)
@@ -170,14 +221,27 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['template'],
                           'zinnia/tags/random_entries.html')
 
+        # If we don't do this it doesn't count as published.
+        self.entry_with_category.sites.add(Site.objects.get_current())
+
+        context = get_random_entries(categories=None)
+        self.assertEquals(len(context['entries']), 1)
+
+        categories = Category.objects.filter(pk=self.category.pk)
+        context = get_random_entries(categories=categories)
+        self.assertEquals(len(context['entries']), 1)
+
         self.publish_entry()
         with self.assertNumQueries(0):
             context = get_random_entries(3, 'custom_template.html')
-        self.assertEquals(len(context['entries']), 1)
+        self.assertEquals(len(context['entries']), 2)
         self.assertEquals(context['template'], 'custom_template.html')
         with self.assertNumQueries(0):
             context = get_random_entries(0)
         self.assertEquals(len(context['entries']), 0)
+
+        context = get_random_entries(categories=Category.objects.all())
+        self.assertEquals(len(context['entries']), 1)
 
     def test_get_popular_entries(self):
         with self.assertNumQueries(1):
@@ -201,6 +265,7 @@ class TemplateTagsTestCase(TestCase):
         site = Site.objects.get_current()
         second_entry = Entry.objects.create(**params)
         second_entry.sites.add(site)
+        second_entry.categories.add(self.category)
         self.entry.comment_count = 1
         self.entry.save()
         with self.assertNumQueries(0):
@@ -212,6 +277,16 @@ class TemplateTagsTestCase(TestCase):
         with self.assertNumQueries(0):
             context = get_popular_entries(3)
         self.assertEquals(list(context['entries']), [self.entry, second_entry])
+
+        context = get_popular_entries(categories=None)
+        self.assertEquals(len(context['entries']), 2)
+
+        context = get_popular_entries(categories=Category.objects.all())
+        self.assertEquals(len(context['entries']), 1)
+
+        categories = Category.objects.filter(pk=self.category.pk)
+        context = get_popular_entries(categories=categories)
+        self.assertEquals(len(context['entries']), 1)
 
         self.entry.status = DRAFT
         self.entry.save()
@@ -270,6 +345,19 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['archives'][1], datetime(2009, 1, 1))
         self.assertEquals(context['template'], 'custom_template.html')
 
+        # If we don't do this it doesn't count as published.
+        self.entry_with_category.sites.add(Site.objects.get_current())
+
+        context = get_archives_entries(categories=None)
+        self.assertEquals(len(context['archives']), 2)
+
+        context = get_archives_entries(categories=Category.objects.all())
+        self.assertEquals(len(context['archives']), 1)
+
+        categories = Category.objects.filter(pk=self.category.pk)
+        context = get_archives_entries(categories=categories)
+        self.assertEquals(len(context['archives']), 1)
+
     def test_get_archives_tree(self):
         with self.assertNumQueries(1):
             context = get_archives_entries_tree()
@@ -294,6 +382,19 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['archives'][0], datetime(2009, 1, 10))
         self.assertEquals(context['archives'][1], datetime(2010, 1, 1))
         self.assertEquals(context['template'], 'custom_template.html')
+
+        # If we don't do this it doesn't count as published.
+        self.entry_with_category.sites.add(Site.objects.get_current())
+
+        context = get_archives_entries(categories=None)
+        self.assertEquals(len(context['archives']), 2)
+
+        context = get_archives_entries(categories=Category.objects.all())
+        self.assertEquals(len(context['archives']), 1)
+
+        categories = Category.objects.filter(pk=self.category.pk)
+        context = get_archives_entries(categories=categories)
+        self.assertEquals(len(context['archives']), 1)
 
     def test_get_calendar_entries(self):
         source_context = Context()
@@ -337,6 +438,10 @@ class TemplateTagsTestCase(TestCase):
         site = Site.objects.get_current()
         second_entry = Entry.objects.create(**params)
         second_entry.sites.add(site)
+        second_entry.categories.add(self.category)
+
+        # If we don't do this it doesn't count as published.
+        self.entry_with_category.sites.add(Site.objects.get_current())
 
         source_context = Context()
         with self.assertNumQueries(2):
@@ -345,6 +450,19 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(context['next_month'], datetime(2010, 1, 1))
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
+        self.assertEquals(context['previous_month'], datetime(2010, 1, 1))
+        self.assertEquals(context['next_month'], None)
+
+        with self.assertNumQueries(3):
+            context = get_calendar_entries(
+                source_context, 2009, 1, categories=Category.objects.all(),
+            )
+        self.assertEquals(context['previous_month'], datetime(2008, 1, 1))
+        self.assertEquals(context['next_month'], datetime(2010, 1, 1))
+        with self.assertNumQueries(3):
+            context = get_calendar_entries(
+                source_context, categories=Category.objects.all(),
+            )
         self.assertEquals(context['previous_month'], datetime(2010, 1, 1))
         self.assertEquals(context['next_month'], None)
 
@@ -387,6 +505,16 @@ class TemplateTagsTestCase(TestCase):
             self.assertEquals(context['comments'][1].content_object,
                               self.entry)
 
+        context = get_recent_comments(categories=None)
+        self.assertEquals(len(context['comments']), 2)
+
+        context = get_recent_comments(categories=Category.objects.all())
+        self.assertEquals(len(context['comments']), 0)
+
+        self.entry.categories.add(self.category)
+        context = get_recent_comments(categories=Category.objects.all())
+        self.assertEquals(len(context['comments']), 2)
+
     def test_get_recent_linkbacks(self):
         user = User.objects.create_user(username='webmaster',
                                         email='webmaster@example.com')
@@ -425,6 +553,16 @@ class TemplateTagsTestCase(TestCase):
                               self.entry)
             self.assertEquals(context['linkbacks'][1].content_object,
                               self.entry)
+
+        context = get_recent_linkbacks(categories=None)
+        self.assertEquals(len(context['linkbacks']), 2)
+
+        context = get_recent_linkbacks(categories=Category.objects.all())
+        self.assertEquals(len(context['linkbacks']), 0)
+
+        self.entry.categories.add(self.category)
+        context = get_recent_linkbacks(categories=Category.objects.all())
+        self.assertEquals(len(context['linkbacks']), 2)
 
     def test_zinnia_pagination(self):
         class FakeRequest(object):
@@ -712,7 +850,7 @@ class TemplateTagsTestCase(TestCase):
             context = zinnia_statistics()
         self.assertEquals(context['template'], 'zinnia/tags/statistics.html')
         self.assertEquals(context['entries'], 0)
-        self.assertEquals(context['categories'], 0)
+        self.assertEquals(context['categories'], 1)
         self.assertEquals(context['tags'], 0)
         self.assertEquals(context['authors'], 0)
         self.assertEquals(context['comments'], 0)
@@ -738,7 +876,7 @@ class TemplateTagsTestCase(TestCase):
             context = zinnia_statistics('custom_template.html')
         self.assertEquals(context['template'], 'custom_template.html')
         self.assertEquals(context['entries'], 1)
-        self.assertEquals(context['categories'], 1)
+        self.assertEquals(context['categories'], 2)
         self.assertEquals(context['tags'], 2)
         self.assertEquals(context['authors'], 1)
         self.assertEquals(context['comments'], 1)
