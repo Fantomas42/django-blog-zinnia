@@ -28,4 +28,4 @@ class Command(NoArgsCommand):
                         'site': site,
                         'site_url': '%s://%s' % (PROTOCOL, site.domain)}
         export = render_to_string('zinnia/wxr.xml', blog_context)
-        print smart_str(export)
+        print(smart_str(export))
