@@ -62,7 +62,6 @@ or you can visit these websites who use Zinnia.
 * `Tryolabs`_.
 * `AR.Drone Best of User Videos`_.
 * `Professional Web Studio`_.
-* `mixedCase`_.
 * `brainbreach`_.
 * `Mauro Bianchi`_.
 * `Sergey Miracle`_.
@@ -112,7 +111,6 @@ More information and help available at these URLs :
 .. _`Fantomas' side`: http://fantomas.willbreak.it/blog/
 .. _`Mobile version`: http://m.fantomas.willbreak.it/blog/
 .. _`Professional Web Studio`: http://www.professionalwebstudio.com/en/weblog/
-.. _`mixedCase`: http://www.mixedcase.nl/articles/
 .. _`Tryolabs`: http://www.tryolabs.com/Blog/
 .. _`brainbreach`: http://brainbreach.com/
 .. _`Mauro Bianchi`: http://www.maurobianchi.it/
