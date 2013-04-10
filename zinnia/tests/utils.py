@@ -1,6 +1,10 @@
 """Utils for Zinnia's tests"""
-import StringIO
-from xmlrpclib import Transport
+try:
+    from io import StringIO
+    from xmlrpc.client import Transport
+except ImportError:  # Python 2
+    from StringIO import StringIO
+    from xmlrpclib import Transport
 from datetime import datetime as original_datetime
 
 from django.conf import settings
@@ -21,7 +25,7 @@ class TestTransport(Transport):
         response = self.client.post(handler,
                                     request_body,
                                     content_type="text/xml")
-        res = StringIO.StringIO(response.content)
+        res = StringIO(response.content)
         setattr(res, 'getheader', lambda *args: '')  # For Python >= 2.7
         res.seek(0)
         if not hasattr(res, 'getheader'):

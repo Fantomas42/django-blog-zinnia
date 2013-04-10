@@ -1,8 +1,12 @@
 """XML-RPC methods of Zinnia metaWeblog API"""
 import os
 from datetime import datetime
-from xmlrpclib import Fault
-from xmlrpclib import DateTime
+try:
+    from xmlrpc.client import Fault
+    from xmlrpc.client import DateTime
+except ImportError:  # Python 2
+    from xmlrpclib import Fault
+    from xmlrpclib import DateTime
 
 from django.utils import six
 from django.conf import settings

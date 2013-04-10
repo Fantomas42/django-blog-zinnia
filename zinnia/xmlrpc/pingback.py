@@ -1,8 +1,14 @@
 """XML-RPC methods of Zinnia Pingback"""
-from urllib2 import urlopen
-from urllib2 import URLError
-from urllib2 import HTTPError
-from urlparse import urlsplit
+try:
+    from urllib.error import URLError
+    from urllib.error import HTTPError
+    from urllib.request import urlopen
+    from urllib.parse import urlsplit
+except ImportError:  # Python 2
+    from urllib2 import urlopen
+    from urllib2 import URLError
+    from urllib2 import HTTPError
+    from urlparse import urlsplit
 
 from django.utils import six
 from django.contrib import comments

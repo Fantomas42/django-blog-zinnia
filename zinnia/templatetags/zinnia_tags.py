@@ -1,7 +1,10 @@
 """Template tags and filters for Zinnia"""
 from hashlib import md5
-from urllib import urlencode
 from datetime import datetime
+try:
+    from urllib.parse import urlencode
+except ImportError:  # Python 2
+    from urllib import urlencode
 
 from django.db.models import Q
 from django.db.models import Count

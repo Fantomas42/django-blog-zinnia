@@ -1,7 +1,12 @@
 """Test cases for Zinnia's MetaWeblog API"""
-from xmlrpclib import Binary
-from xmlrpclib import Fault
-from xmlrpclib import ServerProxy
+try:
+    from xmlrpc.client import Binary
+    from xmlrpc.client import Fault
+    from xmlrpc.client import ServerProxy
+except ImportError:  # Python 2
+    from xmlrpclib import Binary
+    from xmlrpclib import Fault
+    from xmlrpclib import ServerProxy
 from tempfile import TemporaryFile
 
 from django.test import TestCase

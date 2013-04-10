@@ -1,10 +1,13 @@
 """WordPress to Zinnia command module"""
 import os
 import sys
-from urllib2 import urlopen
 from datetime import datetime
 from optparse import make_option
 from xml.etree import ElementTree as ET
+try:
+    from urllib.request import urlopen
+except ImportError:  # Python 2
+    from urllib2 import urlopen
 
 from django.conf import settings
 from django.utils import timezone

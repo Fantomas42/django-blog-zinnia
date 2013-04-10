@@ -1,10 +1,17 @@
 """Pings utilities for Zinnia"""
 import socket
-import xmlrpclib
 import threading
-from urllib2 import urlopen
-from urlparse import urlsplit
 from logging import getLogger
+try:
+    from urllib.request import urlopen
+    from urllib.parse import urlsplit
+    from xmlrpc.client import Error
+    from xmlrpc.client import ServerProxy
+except ImportError:  # Python 2
+    from urllib2 import urlopen
+    from urlparse import urlsplit
+    from xmlrpclib import Error
+    from xmlrpclib import ServerProxy
 
 from BeautifulSoup import BeautifulSoup
 
@@ -35,7 +42,7 @@ class DirectoryPinger(threading.Thread):
         self.timeout = timeout
         self.entries = entries
         self.server_name = server_name
-        self.server = xmlrpclib.ServerProxy(self.server_name)
+        self.server = ServerProxy(self.server_name)
         self.ressources = URLRessources()
 
         threading.Thread.__init__(self)
@@ -161,8 +168,8 @@ class ExternalUrlsPinger(threading.Thread):
     def pingback_url(self, server_name, target_url):
         """Do a pingback call for the target url"""
         try:
-            server = xmlrpclib.ServerProxy(server_name)
+            server = ServerProxy(server_name)
             reply = server.pingback.ping(self.entry_url, target_url)
-        except (xmlrpclib.Error, socket.error):
+        except (Error, socket.error):
             reply = '%s cannot be pinged.' % target_url
         return reply

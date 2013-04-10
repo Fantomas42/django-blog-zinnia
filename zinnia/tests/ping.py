@@ -1,7 +1,12 @@
 """Test cases for Zinnia's ping"""
-import cStringIO
-from urllib2 import URLError
 from urllib import addinfourl
+try:
+    from io import StringIO
+    from urllib.error import URLError
+except ImportError:  # Python 2
+    from cStringIO import StringIO
+    from urllib2 import URLError
+
 from django.test import TestCase
 
 from zinnia.models.entry import Entry
@@ -89,15 +94,15 @@ class ExternalUrlsPingerTestCase(TestCase):
     def fake_urlopen(self, url):
         """Fake urlopen using test client"""
         if 'example' in url:
-            response = cStringIO.StringIO('')
+            response = StringIO('')
             return addinfourl(response, {'X-Pingback': '/xmlrpc.php',
                                          'Content-Type': 'text/html'}, url)
         elif 'localhost' in url:
-            response = cStringIO.StringIO(
+            response = StringIO(
                 '<link rel="pingback" href="/xmlrpc/">')
             return addinfourl(response, {'Content-Type': 'text/xhtml'}, url)
         elif 'google' in url:
-            response = cStringIO.StringIO('PNG CONTENT')
+            response = StringIO('PNG CONTENT')
             return addinfourl(response, {'content-type': 'image/png'}, url)
         elif 'error' in url:
             raise URLError('Invalid ressource')

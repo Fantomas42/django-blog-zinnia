@@ -1,5 +1,8 @@
 """Test cases for Zinnia's feeds"""
-from urlparse import urljoin
+try:
+    from urllib.parse import urljoin
+except ImportError:  # Python 2
+    from urlparse import urljoin
 
 from django.test import TestCase
 from django.contrib import comments
