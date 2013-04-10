@@ -1,5 +1,7 @@
 """Comparison tools for Zinnia
 Based on clustered_models app"""
+from django.utils import six
+
 from math import sqrt
 
 from zinnia.settings import F_MIN
@@ -36,7 +38,7 @@ class ClusteredModel(object):
         and specified fields"""
         dataset = {}
         for item in self.queryset.filter():
-            dataset[item] = ' '.join([unicode(getattr(item, field))
+            dataset[item] = ' '.join([six.text_type(getattr(item, field))
                                       for field in self.fields])
         return dataset
 

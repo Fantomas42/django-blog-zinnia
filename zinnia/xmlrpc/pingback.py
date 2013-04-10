@@ -4,6 +4,7 @@ from urllib2 import URLError
 from urllib2 import HTTPError
 from urlparse import urlsplit
 
+from django.utils import six
 from django.contrib import comments
 from django.utils.html import strip_tags
 from django.contrib.sites.models import Site
@@ -33,7 +34,7 @@ def generate_pingback_content(soup, target, max_length, trunc_char='...'):
     """Generate a description text for the pingback"""
     link = soup.find('a', href=target)
 
-    content = strip_tags(unicode(link.findParent()))
+    content = strip_tags(six.text_type(link.findParent()))
     index = content.index(link.string)
 
     if len(content) > max_length:

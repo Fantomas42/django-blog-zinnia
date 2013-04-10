@@ -4,6 +4,7 @@ from datetime import datetime
 from xmlrpclib import Fault
 from xmlrpclib import DateTime
 
+from django.utils import six
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.sites.models import Site
@@ -93,7 +94,7 @@ def post_structure(entry, site):
     """A post structure with extensions"""
     author = entry.authors.all()[0]
     return {'title': entry.title,
-            'description': unicode(entry.html_content),
+            'description': six.text_type(entry.html_content),
             'link': '%s://%s%s' % (PROTOCOL, site.domain,
                                    entry.get_absolute_url()),
             # Basic Extensions
