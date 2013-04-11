@@ -23,7 +23,7 @@ WYMeditor.STRINGS['eu'] = {
     Heading_6:        '6 Goiburua',
     Preformatted:     'Aurreformatua',
     Blockquote:       'Aipamena',
-    Table_Header:     'Taula goiburua,
+    Table_Header:     'Taula goiburua',
     URL:              'URL',
     Title:            'Izenburua',
     Alternative_Text: 'Testu alternatiboa',
