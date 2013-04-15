@@ -1,4 +1,4 @@
-PIL
+Pillow==2.0.0
 django==1.5
 django-bitly==0.6
 django-mptt==0.5.2

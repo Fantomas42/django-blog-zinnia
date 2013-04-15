@@ -13,7 +13,7 @@ Make sure to install these packages prior to installation :
 
 * `Python 2.x`_ >= 2.6.5
 * `Django`_ >= 1.5
-* `PIL`_ >= 1.1.6
+* `PIL`_ >= 1.1.6 or `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.5.1 < 0.6
 * `django-tagging`_ >= 0.3.1
 * `beautifulsoup4`_ >= 4.1.3
@@ -159,6 +159,7 @@ following. ::
 .. _`Python 2.x`: http://www.python.org/
 .. _`Django`: https://www.djangoproject.com/
 .. _`PIL`: http://www.pythonware.com/products/pil/
+.. _`Pillow`: http://python-imaging.github.io/Pillow/
 .. _`django-mptt`: https://github.com/django-mptt/django-mptt/
 .. _`django-tagging`: https://code.google.com/p/django-tagging/
 .. _`beautifulsoup4`: http://www.crummy.com/software/BeautifulSoup/
