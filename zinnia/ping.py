@@ -13,7 +13,7 @@ except ImportError:  # Python 2
     from xmlrpclib import Error
     from xmlrpclib import ServerProxy
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
@@ -123,7 +123,7 @@ class ExternalUrlsPinger(threading.Thread):
     def find_external_urls(self, entry):
         """Find external urls in an entry"""
         soup = BeautifulSoup(entry.html_content)
-        external_urls = [a['href'] for a in soup.findAll('a')
+        external_urls = [a['href'] for a in soup.find_all('a')
                          if self.is_external_url(
                              a['href'], self.ressources.site_url)]
         return external_urls
@@ -131,11 +131,12 @@ class ExternalUrlsPinger(threading.Thread):
     def find_pingback_href(self, content):
         """Try to find Link markup to pingback url"""
         soup = BeautifulSoup(content)
-        for link in soup.findAll('link'):
+        for link in soup.find_all('link'):
             dict_attr = dict(link.attrs)
             if 'rel' in dict_attr and 'href' in dict_attr:
-                if dict_attr['rel'].lower() == PINGBACK:
-                    return dict_attr.get('href')
+                for rel_type in dict_attr['rel']:
+                    if rel_type.lower() == PINGBACK:
+                        return dict_attr.get('href')
 
     def find_pingback_urls(self, urls):
         """Find the pingback urls of each urls"""

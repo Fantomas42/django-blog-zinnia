@@ -19,14 +19,14 @@ from django.core.urlresolvers import Resolver404
 from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 
+from bs4 import BeautifulSoup
+from django_xmlrpc.decorators import xmlrpc_func
+
 from zinnia.models.entry import Entry
 from zinnia.flags import PINGBACK
 from zinnia.flags import get_user_flagger
 from zinnia.signals import pingback_was_posted
 from zinnia.settings import PINGBACK_CONTENT_LENGTH
-
-from BeautifulSoup import BeautifulSoup
-from django_xmlrpc.decorators import xmlrpc_func
 
 UNDEFINED_ERROR = 0
 SOURCE_DOES_NOT_EXIST = 16

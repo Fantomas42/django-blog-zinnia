@@ -18,7 +18,7 @@ from django.test.utils import setup_test_template_loader
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author

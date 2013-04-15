@@ -4,7 +4,7 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 from django.contrib import comments
 from django.contrib.sites.models import Site

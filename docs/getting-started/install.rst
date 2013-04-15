@@ -16,7 +16,7 @@ Make sure to install these packages prior to installation :
 * `PIL`_ >= 1.1.6
 * `django-mptt`_ >= 0.5.1 < 0.6
 * `django-tagging`_ >= 0.3.1
-* `BeautifulSoup`_ >= 3.2.0
+* `beautifulsoup4`_ >= 4.1.3
 
 The packages below are optionnal but needed for run the full test suite.
 
@@ -161,7 +161,7 @@ following. ::
 .. _`PIL`: http://www.pythonware.com/products/pil/
 .. _`django-mptt`: https://github.com/django-mptt/django-mptt/
 .. _`django-tagging`: https://code.google.com/p/django-tagging/
-.. _`BeautifulSoup`: http://www.crummy.com/software/BeautifulSoup/
+.. _`beautifulsoup4`: http://www.crummy.com/software/BeautifulSoup/
 .. _`pytz`: http://pytz.sourceforge.net/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/
 .. _`django-xmlrpc`: https://github.com/Fantomas42/django-xmlrpc
