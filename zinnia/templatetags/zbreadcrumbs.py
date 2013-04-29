@@ -43,6 +43,7 @@ def day_crumb(creation_date):
 
 
 def entry_breadcrumbs(entry):
+    """Breadcrumbs for an Entry"""
     creation_date = entry.creation_date
     if is_aware(creation_date):
         creation_date = localtime(creation_date)
