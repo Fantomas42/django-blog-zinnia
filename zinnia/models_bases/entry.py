@@ -130,9 +130,9 @@ class CoreEntry(models.Model):
         Builds and returns the entry's URL based on
         the slug and the creation date.
         """
-        creation_date = (timezone.is_aware(self.creation_date) and
-                         timezone.localtime(self.creation_date) or
-                         self.creation_date)
+        creation_date = self.creation_date
+        if timezone.is_aware(creation_date):
+            creation_date = timezone.localtime(creation_date)
         return ('zinnia_entry_detail', (), {
             'year': creation_date.strftime('%Y'),
             'month': creation_date.strftime('%m'),
