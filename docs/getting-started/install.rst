@@ -18,9 +18,11 @@ Make sure to install these packages prior to installation :
 * `django-tagging`_ >= 0.3.1
 * `beautifulsoup4`_ >= 4.1.3
 
-The packages below are optionnal but needed for run the full test suite.
+The packages below are optionnal but needed for run the full test suite or
+migrate the database.
 
 * `pytz`_
+* `South`_ >= 0.7.6
 * `pyparsing`_ >= 1.5.5 < 2.0.0
 * `django-xmlrpc`_ >= 0.1.3
 
@@ -151,7 +153,7 @@ project directory to sync the models with the database. ::
 
   $ python manage.py syncdb
 
-If you are using South to manage your database, you will have to do the
+If you are using `South`_ to manage your database, you will have to do the
 following. ::
 
   $ python manage.py syncdb --migrate
@@ -166,3 +168,4 @@ following. ::
 .. _`pytz`: http://pytz.sourceforge.net/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/
 .. _`django-xmlrpc`: https://github.com/Fantomas42/django-xmlrpc
+.. _`South`: http://south.aeracode.org/
