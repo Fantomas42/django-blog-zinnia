@@ -9,6 +9,7 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils.translation import activate
 from django.utils.translation import deactivate
+from django.test.utils import override_settings
 from django.contrib.comments.models import CommentFlag
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
@@ -303,6 +304,29 @@ class EntryHtmlContentTestCase(TestCase):
                               '<li>Item 2</li>\n</ul>\n')
         except AssertionError:
             self.assertEquals(html_content, self.entry.content)
+
+
+class EntryAbsoluteUrlTestCase(TestCase):
+
+    def check_get_absolute_url(self, creation_date, url_expected):
+        params = {'title': 'My entry',
+                  'content': 'My content',
+                  'slug': 'my-entry',
+                  'creation_date': creation_date}
+        entry = Entry.objects.create(**params)
+        self.assertEquals(entry.get_absolute_url(), url_expected)
+
+    @override_settings(USE_TZ=False)
+    def test_get_absolute_url_no_timezone(self):
+        self.check_get_absolute_url(datetime(2013, 1, 1, 12, 0),
+                                    '/2013/01/01/my-entry/')
+
+    @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
+    def test_get_absolute_url_with_timezone(self):
+        self.check_get_absolute_url(datetime(2013, 1, 1, 12, 0),
+                                    '/2013/01/01/my-entry/')
+        self.check_get_absolute_url(datetime(2013, 1, 1, 23, 0),
+                                    '/2013/01/02/my-entry/')
 
 
 class EntryGetBaseModelTestCase(TestCase):

@@ -5,6 +5,7 @@ from django.conf import settings
 
 from zinnia.tests.entry import EntryTestCase
 from zinnia.tests.entry import EntryHtmlContentTestCase
+from zinnia.tests.entry import EntryAbsoluteUrlTestCase
 from zinnia.tests.entry import EntryGetBaseModelTestCase
 from zinnia.tests.signals import SignalsTestCase
 from zinnia.tests.category import CategoryTestCase
@@ -54,7 +55,7 @@ def suite():
                   MixinTestCase, LongEnoughTestCase,
                   AuthorTestCase, FlagsTestCase,
                   AuthorListFilterTestCase, CategoryListFilterTestCase,
-                  TranslatedURLsTestCase)
+                  TranslatedURLsTestCase, EntryAbsoluteUrlTestCase)
 
     if 'django_xmlrpc' in settings.INSTALLED_APPS:
         test_cases += (PingBackTestCase, MetaWeblogTestCase)
