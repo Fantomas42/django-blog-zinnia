@@ -168,9 +168,17 @@ class EntryTestCase(TestCase):
 
     def test_previous_entry(self):
         site = Site.objects.get_current()
+        with self.assertNumQueries(0):
+            # entry.previous_entry does not works until entry
+            # is published, so no query should be performed
+            self.assertFalse(self.entry.previous_entry)
+        self.entry.status = PUBLISHED
+        self.entry.save()
+        self.entry.sites.add(site)
+        del self.entry.previous_next  # Invalidate the cached property
         with self.assertNumQueries(1):
             self.assertFalse(self.entry.previous_entry)
-        with self.assertNumQueries(0):
+            # Reload to check the cache
             self.assertFalse(self.entry.previous_entry)
         params = {'title': 'My second entry',
                   'content': 'My second content',
@@ -179,10 +187,10 @@ class EntryTestCase(TestCase):
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
-        del self.entry.previous_entry  # Invalidate the cached_property
+        del self.entry.previous_next  # Invalidate the cached property
         with self.assertNumQueries(1):
             self.assertEquals(self.entry.previous_entry, self.second_entry)
-        with self.assertNumQueries(0):
+            # Reload to check the cache
             self.assertEquals(self.entry.previous_entry, self.second_entry)
         params = {'title': 'My third entry',
                   'content': 'My third content',
@@ -191,15 +199,24 @@ class EntryTestCase(TestCase):
                   'status': PUBLISHED}
         self.third_entry = Entry.objects.create(**params)
         self.third_entry.sites.add(site)
-        del self.entry.previous_entry
+        del self.entry.previous_next  # Invalidate the cached property
         self.assertEquals(self.entry.previous_entry, self.third_entry)
         self.assertEquals(self.third_entry.previous_entry, self.second_entry)
+        self.assertFalse(self.second_entry.previous_entry)
 
     def test_next_entry(self):
         site = Site.objects.get_current()
+        with self.assertNumQueries(0):
+            # entry.next_entry does not works until entry
+            # is published, so no query should be performed
+            self.assertFalse(self.entry.previous_entry)
+        self.entry.status = PUBLISHED
+        self.entry.save()
+        self.entry.sites.add(site)
+        del self.entry.previous_next  # Invalidate the cached property
         with self.assertNumQueries(1):
             self.assertFalse(self.entry.next_entry)
-        with self.assertNumQueries(0):
+            # Reload to check the cache
             self.assertFalse(self.entry.next_entry)
         params = {'title': 'My second entry',
                   'content': 'My second content',
@@ -208,10 +225,10 @@ class EntryTestCase(TestCase):
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
-        del self.entry.next_entry  # Invalidate the cached_property
+        del self.entry.previous_next  # Invalidate the cached property
         with self.assertNumQueries(1):
             self.assertEquals(self.entry.next_entry, self.second_entry)
-        with self.assertNumQueries(0):
+            # Reload to check the cache
             self.assertEquals(self.entry.next_entry, self.second_entry)
         params = {'title': 'My third entry',
                   'content': 'My third content',
@@ -220,9 +237,43 @@ class EntryTestCase(TestCase):
                   'status': PUBLISHED}
         self.third_entry = Entry.objects.create(**params)
         self.third_entry.sites.add(site)
-        del self.entry.next_entry
+        del self.entry.previous_next  # Invalidate the cached property
         self.assertEquals(self.entry.next_entry, self.third_entry)
         self.assertEquals(self.third_entry.next_entry, self.second_entry)
+        self.assertFalse(self.second_entry.next_entry)
+
+    def test_previous_next_entry_in_one_query(self):
+        site = Site.objects.get_current()
+        self.entry.status = PUBLISHED
+        self.entry.save()
+        self.entry.sites.add(site)
+        with self.assertNumQueries(1):
+            self.assertFalse(self.entry.previous_entry)
+            self.assertFalse(self.entry.next_entry)
+            # Reload to check the cache
+            self.assertFalse(self.entry.previous_entry)
+            self.assertFalse(self.entry.next_entry)
+        params = {'title': 'My second entry',
+                  'content': 'My second content',
+                  'slug': 'my-second-entry',
+                  'creation_date': datetime(2001, 1, 1),
+                  'status': PUBLISHED}
+        self.second_entry = Entry.objects.create(**params)
+        self.second_entry.sites.add(site)
+        params = {'title': 'My third entry',
+                  'content': 'My third content',
+                  'slug': 'my-third-entry',
+                  'creation_date': datetime(2050, 1, 1),
+                  'status': PUBLISHED}
+        self.third_entry = Entry.objects.create(**params)
+        self.third_entry.sites.add(site)
+        del self.entry.previous_next  # Invalidate the cached property
+        with self.assertNumQueries(1):
+            self.assertEquals(self.entry.previous_entry, self.second_entry)
+            self.assertEquals(self.entry.next_entry, self.third_entry)
+            # Reload to check the cache
+            self.assertEquals(self.entry.previous_entry, self.second_entry)
+            self.assertEquals(self.entry.next_entry, self.third_entry)
 
     def test_related_published(self):
         site = Site.objects.get_current()

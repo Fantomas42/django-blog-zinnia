@@ -5,7 +5,6 @@ from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.html import linebreaks
 from django.contrib.sites.models import Site
-from django.utils.functional import cached_property
 from django.contrib import comments
 from django.contrib.comments.models import CommentFlag
 from django.utils.translation import ugettext_lazy as _
@@ -97,25 +96,49 @@ class CoreEntry(models.Model):
         """
         return self.is_actual and self.status == PUBLISHED
 
-    @cached_property
+    @property
     def previous_entry(self):
         """
         Returns the previous published entry if exists.
         """
-        entries = self.__class__.published.filter(
-            creation_date__lt=self.creation_date)[:1]
-        if entries:
-            return entries[0]
+        return self.previous_next_entries[0]
 
-    @cached_property
+    @property
     def next_entry(self):
         """
         Returns the next published entry if exists.
         """
-        entries = self.__class__.published.filter(
-            creation_date__gt=self.creation_date).order_by('creation_date')[:1]
-        if entries:
-            return entries[0]
+        return self.previous_next_entries[1]
+
+    @property
+    def previous_next_entries(self):
+        """
+        Returns and caches a tuple containing the next
+        and previous published entries.
+        Only available if the entry instance is published.
+        """
+        previous_next = getattr(self, 'previous_next', None)
+
+        if previous_next is None:
+            if not self.is_visible:
+                previous_next = (None, None)
+                setattr(self, 'previous_next', previous_next)
+                return previous_next
+
+            entries = list(self.__class__.published.all())
+            index = entries.index(self)
+            try:
+                previous = entries[index + 1]
+            except IndexError:
+                previous = None
+
+            if index:
+                next = entries[index - 1]
+            else:
+                next = None
+            previous_next = (previous, next)
+            setattr(self, 'previous_next', previous_next)
+        return previous_next
 
     @property
     def short_url(self):

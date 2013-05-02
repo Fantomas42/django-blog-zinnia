@@ -12,8 +12,7 @@ from django.utils.encoding import force_unicode
 
 def skip_model_member(app, what, name, obj, skip, options):
     # These fields always fails !
-    if name in ('tags', 'image',
-                'next_entry', 'previous_entry'):
+    if name in ('tags', 'image'):
         return True
     return skip
 
