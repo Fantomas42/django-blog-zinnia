@@ -168,7 +168,10 @@ class EntryTestCase(TestCase):
 
     def test_previous_entry(self):
         site = Site.objects.get_current()
-        self.assertFalse(self.entry.previous_entry)
+        with self.assertNumQueries(1):
+            self.assertFalse(self.entry.previous_entry)
+        with self.assertNumQueries(0):
+            self.assertFalse(self.entry.previous_entry)
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'slug': 'my-second-entry',
@@ -177,7 +180,10 @@ class EntryTestCase(TestCase):
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
         del self.entry.previous_entry  # Invalidate the cached_property
-        self.assertEquals(self.entry.previous_entry, self.second_entry)
+        with self.assertNumQueries(1):
+            self.assertEquals(self.entry.previous_entry, self.second_entry)
+        with self.assertNumQueries(0):
+            self.assertEquals(self.entry.previous_entry, self.second_entry)
         params = {'title': 'My third entry',
                   'content': 'My third content',
                   'slug': 'my-third-entry',
@@ -191,7 +197,10 @@ class EntryTestCase(TestCase):
 
     def test_next_entry(self):
         site = Site.objects.get_current()
-        self.assertFalse(self.entry.next_entry)
+        with self.assertNumQueries(1):
+            self.assertFalse(self.entry.next_entry)
+        with self.assertNumQueries(0):
+            self.assertFalse(self.entry.next_entry)
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'slug': 'my-second-entry',
@@ -200,7 +209,10 @@ class EntryTestCase(TestCase):
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
         del self.entry.next_entry  # Invalidate the cached_property
-        self.assertEquals(self.entry.next_entry, self.second_entry)
+        with self.assertNumQueries(1):
+            self.assertEquals(self.entry.next_entry, self.second_entry)
+        with self.assertNumQueries(0):
+            self.assertEquals(self.entry.next_entry, self.second_entry)
         params = {'title': 'My third entry',
                   'content': 'My third content',
                   'slug': 'my-third-entry',
