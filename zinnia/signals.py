@@ -92,12 +92,14 @@ def count_discussions_handler(sender, **kwargs):
 
 def count_comments_handler(sender, **kwargs):
     """
-    Update Entry.comment_count when a comment was posted.
+    Update Entry.comment_count when a public comment was posted.
     """
-    entry = kwargs['comment'].content_object
-    if isinstance(entry, Entry):
-        entry.comment_count = F('comment_count') + 1
-        entry.save(update_fields=['comment_count'])
+    comment = kwargs['comment']
+    if comment.is_public:
+        entry = comment.content_object
+        if isinstance(entry, Entry):
+            entry.comment_count = F('comment_count') + 1
+            entry.save(update_fields=['comment_count'])
 
 
 def count_pingbacks_handler(sender, **kwargs):

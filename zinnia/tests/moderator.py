@@ -183,4 +183,4 @@ class EntryCommentModeratorTestCase(TestCase):
         disconnect_discussion_signals()
         self.assertEqual(comments.get_model().objects.count(), 1)
         entry = Entry.objects.get(pk=self.entry.pk)
-        self.assertEquals(entry.comment_count, 1)
+        self.assertEquals(entry.comment_count, 0)
