@@ -24,7 +24,7 @@ Entry
 
 ZINNIA_ENTRY_BASE_MODEL
 -----------------------
-**Default value:** ``''`` (Empty string)
+**Default value:** ``'zinnia.models_bases.entry.AbstractEntry'`` (Empty string)
 
 String defining the base model path for the Entry model. See
 :doc:`/how-to/extending_entry_model` for more informations.

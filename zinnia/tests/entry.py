@@ -1,5 +1,4 @@
 """Test cases for Zinnia's Entry"""
-import warnings
 from datetime import timedelta
 
 from django.test import TestCase
@@ -19,9 +18,6 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
-from zinnia.models import entry as entry_models
-from zinnia.models_bases.entry import AbstractEntry
-from zinnia.models.entry import get_entry_base_model
 from zinnia import url_shortener as shortener_settings
 
 
@@ -390,24 +386,3 @@ class EntryAbsoluteUrlTestCase(TestCase):
                                     '/2013/01/01/my-entry/')
         self.check_get_absolute_url(datetime(2013, 1, 1, 23, 0),
                                     '/2013/01/02/my-entry/')
-
-
-class EntryGetBaseModelTestCase(TestCase):
-
-    def setUp(self):
-        self.original_entry_base_model = entry_models.ENTRY_BASE_MODEL
-
-    def tearDown(self):
-        entry_models.ENTRY_BASE_MODEL = self.original_entry_base_model
-
-    def test_get_entry_base_model(self):
-        entry_models.ENTRY_BASE_MODEL = ''
-        self.assertEquals(get_entry_base_model(), AbstractEntry)
-
-        entry_models.ENTRY_BASE_MODEL = 'mymodule.myclass'
-        with warnings.catch_warnings(record=True) as w:
-            self.assertEquals(get_entry_base_model(), AbstractEntry)
-            self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
-
-        entry_models.ENTRY_BASE_MODEL = 'zinnia.models.entry.AbstractEntry'
-        self.assertEquals(get_entry_base_model(), AbstractEntry)
