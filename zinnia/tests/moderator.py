@@ -1,6 +1,7 @@
 """Test cases for Zinnia's moderator"""
 from django.core import mail
 from django.test import TestCase
+from django.utils import timezone
 from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
@@ -35,7 +36,8 @@ class EntryCommentModeratorTestCase(TestCase):
     def test_email(self):
         comment = comments.get_model().objects.create(
             comment='My Comment', user=self.author, is_public=True,
-            content_object=self.entry, site=self.site)
+            content_object=self.entry, submit_date=timezone.now(),
+            site=self.site)
         self.assertEquals(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
         moderator.email_reply = False
@@ -52,7 +54,8 @@ class EntryCommentModeratorTestCase(TestCase):
     def test_do_email_notification(self):
         comment = comments.get_model().objects.create(
             comment='My Comment', user=self.author, is_public=True,
-            content_object=self.entry, site=self.site)
+            content_object=self.entry, submit_date=timezone.now(),
+            site=self.site)
         self.assertEquals(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
         moderator.mail_comment_notification_recipients = ['admin@example.com']
@@ -62,7 +65,8 @@ class EntryCommentModeratorTestCase(TestCase):
     def test_do_email_authors(self):
         comment = comments.get_model().objects.create(
             comment='My Comment', user=self.author, is_public=True,
-            content_object=self.entry, site=self.site)
+            content_object=self.entry, submit_date=timezone.now(),
+            site=self.site)
         self.assertEquals(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
         moderator.email_authors = True
@@ -80,7 +84,8 @@ class EntryCommentModeratorTestCase(TestCase):
         """
         comment = comments.get_model().objects.create(
             comment='My Comment', user=self.author, is_public=True,
-            content_object=self.entry, site=self.site)
+            content_object=self.entry, submit_date=timezone.now(),
+            site=self.site)
         self.assertEquals(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
         moderator.email_authors = True
@@ -102,7 +107,8 @@ class EntryCommentModeratorTestCase(TestCase):
     def test_do_email_reply(self):
         comment = comments.get_model().objects.create(
             comment='My Comment 1', user=self.author, is_public=True,
-            content_object=self.entry, site=self.site)
+            content_object=self.entry, submit_date=timezone.now(),
+            site=self.site)
         moderator = EntryCommentModerator(Entry)
         moderator.email_notification_reply = True
         moderator.mail_comment_notification_recipients = [
@@ -112,20 +118,23 @@ class EntryCommentModeratorTestCase(TestCase):
 
         comment = comments.get_model().objects.create(
             comment='My Comment 2', user_email='user_1@example.com',
-            content_object=self.entry, is_public=True, site=self.site)
+            content_object=self.entry, is_public=True,
+            submit_date=timezone.now(), site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 0)
 
         comment = comments.get_model().objects.create(
             comment='My Comment 3', user_email='user_2@example.com',
-            content_object=self.entry, is_public=True, site=self.site)
+            content_object=self.entry, is_public=True,
+            submit_date=timezone.now(), site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)
         self.assertEquals(mail.outbox[0].bcc, [u'user_1@example.com'])
 
         comment = comments.get_model().objects.create(
             comment='My Comment 4', user=self.author, is_public=True,
-            content_object=self.entry, site=self.site)
+            content_object=self.entry, submit_date=timezone.now(),
+            site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 2)
         self.assertEquals(mail.outbox[1].bcc, [u'user_1@example.com',
@@ -134,7 +143,8 @@ class EntryCommentModeratorTestCase(TestCase):
     def test_moderate(self):
         comment = comments.get_model().objects.create(
             comment='My Comment', user=self.author, is_public=True,
-            content_object=self.entry, site=self.site)
+            content_object=self.entry, submit_date=timezone.now(),
+            site=self.site)
         moderator = EntryCommentModerator(Entry)
         moderator.auto_moderate_comments = True
         moderator.spam_checker_backends = ()
@@ -152,7 +162,8 @@ class EntryCommentModeratorTestCase(TestCase):
         self.entry.authors.clear()
         comment = comments.get_model().objects.create(
             comment='My Comment', user=self.author, is_public=True,
-            content_object=self.entry, site=self.site)
+            content_object=self.entry, submit_date=timezone.now(),
+            site=self.site)
         moderator = EntryCommentModerator(Entry)
         moderator.auto_moderate_comments = False
         moderator.spam_checker_backends = (

@@ -4,6 +4,7 @@ from urllib2 import URLError
 from urllib2 import HTTPError
 from urlparse import urlsplit
 
+from django.utils import timezone
 from django.contrib import comments
 from django.utils.html import strip_tags
 from django.contrib.sites.models import Site
@@ -104,7 +105,8 @@ def pingback_ping(source, target):
         pingback, created = comments.get_model().objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Entry),
             object_pk=entry.pk, user_url=source, site=site,
-            defaults={'comment': description, 'user_name': title})
+            defaults={'comment': description, 'user_name': title,
+                      'submit_date': timezone.now()})
         if created:
             pingback.flags.create(user=get_user_flagger(), flag=PINGBACK)
             pingback_was_posted.send(pingback.__class__,

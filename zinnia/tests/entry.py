@@ -37,17 +37,21 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.pingbacks.count(), 0)
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        comments.get_model().objects.create(comment='My Comment 1',
-                                            content_object=self.entry,
-                                            site=site)
+        comments.get_model().objects.create(
+            comment='My Comment 1',
+            content_object=self.entry,
+            submit_date=timezone.now(),
+            site=site)
         self.assertEquals(self.entry.discussions.count(), 1)
         self.assertEquals(self.entry.comments.count(), 1)
         self.assertEquals(self.entry.pingbacks.count(), 0)
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
-        comments.get_model().objects.create(comment='My Comment 2',
-                                            content_object=self.entry,
-                                            site=site, is_public=False)
+        comments.get_model().objects.create(
+            comment='My Comment 2',
+            content_object=self.entry,
+            submit_date=timezone.now(),
+            site=site, is_public=False)
         self.assertEquals(self.entry.discussions.count(), 1)
         self.assertEquals(self.entry.comments.count(), 1)
         self.assertEquals(self.entry.pingbacks.count(), 0)
@@ -59,6 +63,7 @@ class EntryTestCase(TestCase):
         comment = comments.get_model().objects.create(
             comment='My Comment 3',
             content_object=self.entry,
+            submit_date=timezone.now(),
             site=Site.objects.create(domain='http://toto.com',
                                      name='Toto.com'))
         comment.flags.create(user=author, flag=CommentFlag.MODERATOR_APPROVAL)
@@ -68,7 +73,10 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
         comment = comments.get_model().objects.create(
-            comment='My Pingback 1', content_object=self.entry, site=site)
+            comment='My Pingback 1',
+            content_object=self.entry,
+            submit_date=timezone.now(),
+            site=site)
         comment.flags.create(user=author, flag=PINGBACK)
         self.assertEquals(self.entry.discussions.count(), 3)
         self.assertEquals(self.entry.comments.count(), 2)
@@ -76,7 +84,10 @@ class EntryTestCase(TestCase):
         self.assertEquals(self.entry.trackbacks.count(), 0)
 
         comment = comments.get_model().objects.create(
-            comment='My Trackback 1', content_object=self.entry, site=site)
+            comment='My Trackback 1',
+            content_object=self.entry,
+            submit_date=timezone.now(),
+            site=site)
         comment.flags.create(user=author, flag=TRACKBACK)
         self.assertEquals(self.entry.discussions.count(), 4)
         self.assertEquals(self.entry.comments.count(), 2)

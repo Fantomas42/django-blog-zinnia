@@ -1,5 +1,6 @@
 """Test cases for Zinnia's templatetags"""
 from django.test import TestCase
+from django.utils import timezone
 from django.template import Context
 from django.template import Template
 from django.template import TemplateSyntaxError
@@ -359,7 +360,7 @@ class TemplateTagsTestCase(TestCase):
 
         comment_1 = comments.get_model().objects.create(
             comment='My Comment 1', site=site,
-            content_object=self.entry)
+            content_object=self.entry, submit_date=timezone.now())
         with self.assertNumQueries(1):
             context = get_recent_comments(3, 'custom_template.html')
         self.assertEquals(len(context['comments']), 0)
@@ -376,7 +377,7 @@ class TemplateTagsTestCase(TestCase):
                                             email='webmaster@example.com')
         comment_2 = comments.get_model().objects.create(
             comment='My Comment 2', site=site,
-            content_object=self.entry)
+            content_object=self.entry, submit_date=timezone.now())
         comment_2.flags.create(user=author,
                                flag=CommentFlag.MODERATOR_APPROVAL)
         with self.assertNumQueries(3):
@@ -401,7 +402,7 @@ class TemplateTagsTestCase(TestCase):
 
         linkback_1 = comments.get_model().objects.create(
             comment='My Linkback 1', site=site,
-            content_object=self.entry)
+            content_object=self.entry, submit_date=timezone.now())
         linkback_1.flags.create(user=user, flag=PINGBACK)
         with self.assertNumQueries(1):
             context = get_recent_linkbacks(3, 'custom_template.html')
@@ -417,7 +418,7 @@ class TemplateTagsTestCase(TestCase):
 
         linkback_2 = comments.get_model().objects.create(
             comment='My Linkback 2', site=site,
-            content_object=self.entry)
+            content_object=self.entry, submit_date=timezone.now())
         linkback_2.flags.create(user=user, flag=TRACKBACK)
         with self.assertNumQueries(3):
             context = get_recent_linkbacks()
@@ -732,8 +733,10 @@ class TemplateTagsTestCase(TestCase):
         Category.objects.create(title='Category 1', slug='category-1')
         author = Author.objects.create_user(username='webmaster',
                                             email='webmaster@example.com')
-        comments.get_model().objects.create(comment='My Comment 1', site=site,
-                                            content_object=self.entry)
+        comments.get_model().objects.create(
+            comment='My Comment 1', site=site,
+            content_object=self.entry,
+            submit_date=timezone.now())
         self.entry.authors.add(author)
         self.publish_entry()
 

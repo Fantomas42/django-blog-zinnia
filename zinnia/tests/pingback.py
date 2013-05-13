@@ -5,6 +5,7 @@ from urllib2 import HTTPError
 from xmlrpclib import ServerProxy
 
 from django.test import TestCase
+from django.utils import timezone
 from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.test.utils import restore_template_loaders
@@ -231,7 +232,8 @@ class PingBackTestCase(TestCase):
         comment = comments.get_model().objects.create(
             content_type=ContentType.objects.get_for_model(Entry),
             object_pk=self.first_entry.pk,
-            site=self.site, comment='Test pingback',
+            site=self.site, submit_date=timezone.now(),
+            comment='Test pingback',
             user_url='http://example.com/blog/1/',
             user_name='Test pingback')
         comment.flags.create(user=self.author, flag=PINGBACK)

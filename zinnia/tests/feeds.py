@@ -2,6 +2,7 @@
 from urlparse import urljoin
 
 from django.test import TestCase
+from django.utils import timezone
 from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
@@ -68,20 +69,26 @@ class ZinniaFeedsTestCase(TestCase):
         return entry
 
     def create_discussions(self, entry):
-        comment = comments.get_model().objects.create(comment='My Comment',
-                                                      user=self.author,
-                                                      user_name='admin',
-                                                      content_object=entry,
-                                                      site=self.site)
-        pingback = comments.get_model().objects.create(comment='My Pingback',
-                                                       user=self.author,
-                                                       content_object=entry,
-                                                       site=self.site)
+        comment = comments.get_model().objects.create(
+            comment='My Comment',
+            user=self.author,
+            user_name='admin',
+            content_object=entry,
+            site=self.site,
+            submit_date=timezone.now())
+        pingback = comments.get_model().objects.create(
+            comment='My Pingback',
+            user=self.author,
+            content_object=entry,
+            site=self.site,
+            submit_date=timezone.now())
         pingback.flags.create(user=self.author, flag=PINGBACK)
-        trackback = comments.get_model().objects.create(comment='My Trackback',
-                                                        user=self.author,
-                                                        content_object=entry,
-                                                        site=self.site)
+        trackback = comments.get_model().objects.create(
+            comment='My Trackback',
+            user=self.author,
+            content_object=entry,
+            site=self.site,
+            submit_date=timezone.now())
         trackback.flags.create(user=self.author, flag=TRACKBACK)
         return [comment, pingback, trackback]
 

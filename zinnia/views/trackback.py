@@ -1,4 +1,5 @@
 """Views for Zinnia trackback"""
+from django.utils import timezone
 from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.shortcuts import get_object_or_404
@@ -54,6 +55,7 @@ class EntryTrackback(TemplateView):
         blog_name = request.POST.get('blog_name') or title
 
         trackback, created = comments.get_model().objects.get_or_create(
+            submit_date=timezone.now(),
             content_type=ContentType.objects.get_for_model(Entry),
             object_pk=entry.pk, site=site, user_url=url,
             user_name=blog_name, defaults={'comment': excerpt})

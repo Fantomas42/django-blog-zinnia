@@ -584,6 +584,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.assertEquals(response.context['comment'], None)
 
         comment = comments.get_model().objects.create(
+            submit_date=timezone.now(),
             comment='My Comment 1', content_object=self.category,
             site=self.site, is_public=False)
         with self.assertNumQueries(1):

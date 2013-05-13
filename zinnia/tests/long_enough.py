@@ -1,5 +1,6 @@
 """Test cases for Zinnia's long_enought spam checker"""
 from django.test import TestCase
+from django.utils import timezone
 from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.contrib.auth.tests.utils import skipIfCustomUser
@@ -30,7 +31,8 @@ class LongEnoughTestCase(TestCase):
     def test_long_enough(self):
         comment = comments.get_model().objects.create(
             comment='My Comment', user=self.author, is_public=True,
-            content_object=self.entry, site=self.site)
+            content_object=self.entry, site=self.site,
+            submit_date=timezone.now())
         self.assertEquals(backend(comment, self.entry, {}), True)
 
         comment.comment = 'Hello I just wanted to thank for great article'
