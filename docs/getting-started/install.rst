@@ -11,7 +11,7 @@ Dependencies
 
 Make sure to install these packages prior to installation :
 
-* `Python 2.x`_ >= 2.6.5
+* `Python`_ >= 2.6.5
 * `Django`_ >= 1.5
 * `PIL`_ >= 1.1.6 or `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.5.1 < 0.6
@@ -24,7 +24,7 @@ migrate the database.
 * `pytz`_
 * `South`_ >= 0.7.6
 * `pyparsing`_ >= 1.5.5 < 2.0.0
-* `django-xmlrpc`_ >= 0.1.3
+* `django-xmlrpc`_ >= 0.1.5
 
 Note that all the dependencies will be resolved if you install
 Zinnia with :program:`pip` or :program:`easy_install`, excepting Django.
@@ -158,7 +158,7 @@ following. ::
 
   $ python manage.py syncdb --migrate
 
-.. _`Python 2.x`: http://www.python.org/
+.. _`Python`: http://www.python.org/
 .. _`Django`: https://www.djangoproject.com/
 .. _`PIL`: http://www.pythonware.com/products/pil/
 .. _`Pillow`: http://python-imaging.github.io/Pillow/
