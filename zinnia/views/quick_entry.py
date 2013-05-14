@@ -1,5 +1,8 @@
 """Views for Zinnia quick entry"""
-from urllib import urlencode
+try:
+    from urllib.parse import urlencode
+except:  # Python 2
+    from urllib import urlencode
 
 from django import forms
 from django.shortcuts import redirect

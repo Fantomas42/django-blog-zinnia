@@ -1,4 +1,6 @@
 """Views for Zinnia trackback"""
+from __future__ import unicode_literals
+
 from django.utils import timezone
 from django.contrib import comments
 from django.contrib.sites.models import Site
@@ -48,7 +50,7 @@ class EntryTrackback(TemplateView):
 
         if not entry.trackbacks_are_open:
             return self.render_to_response(
-                {'error': u'Trackback is not enabled for %s' % entry.title})
+                {'error': 'Trackback is not enabled for %s' % entry.title})
 
         title = request.POST.get('title') or url
         excerpt = request.POST.get('excerpt') or title
@@ -66,5 +68,5 @@ class EntryTrackback(TemplateView):
                                       entry=entry)
         else:
             return self.render_to_response(
-                {'error': u'Trackback is already registered'})
+                {'error': 'Trackback is already registered'})
         return self.render_to_response({})

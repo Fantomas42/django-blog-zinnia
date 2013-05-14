@@ -1,4 +1,6 @@
 """Widgets for Zinnia admin"""
+from __future__ import unicode_literals
+
 from itertools import chain
 
 from django import forms
@@ -13,7 +15,7 @@ from django.utils.encoding import force_unicode
 class TreeNodeChoiceField(forms.ModelChoiceField):
     """Duplicating the TreeNodeChoiceField bundled in django-mptt
     to avoid conflict with the TreeNodeChoiceField bundled in django-cms..."""
-    def __init__(self, level_indicator=u'|--', *args, **kwargs):
+    def __init__(self, level_indicator='|--', *args, **kwargs):
         self.level_indicator = level_indicator
         if kwargs.get('required', True) and not 'empty_label' in kwargs:
             kwargs['empty_label'] = None
@@ -22,7 +24,7 @@ class TreeNodeChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         """Creates labels which represent the tree level of each node
         when generating option labels."""
-        return u'%s %s' % (self.level_indicator * getattr(
+        return '%s %s' % (self.level_indicator * getattr(
             obj, obj._mptt_meta.level_attr), smart_unicode(obj))
 
 
@@ -38,14 +40,14 @@ class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
 
 class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
     """MPTT version of ModelMultipleChoiceField"""
-    def __init__(self, level_indicator=u'|--', *args, **kwargs):
+    def __init__(self, level_indicator='|--', *args, **kwargs):
         self.level_indicator = level_indicator
         super(MPTTModelMultipleChoiceField, self).__init__(*args, **kwargs)
 
     def label_from_instance(self, obj):
         """Creates labels which represent the tree level of each node
         when generating option labels."""
-        return u'%s %s' % (self.level_indicator * getattr(
+        return '%s %s' % (self.level_indicator * getattr(
             obj, obj._mptt_meta.level_attr), smart_unicode(obj))
 
     def _get_choices(self):
@@ -75,8 +77,8 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
             """Inner scope render_option"""
             option_value = force_unicode(option_value)
             selected_html = (option_value in selected_choices) and \
-                u' selected="selected"' or ''
-            return u'<option value="%s" data-tree-id="%s" ' \
+                ' selected="selected"' or ''
+            return '<option value="%s" data-tree-id="%s" ' \
                    'data-left-value="%s"%s>%s</option>' % (
                        escape(option_value),
                        sort_fields[0], sort_fields[1], selected_html,
@@ -87,15 +89,15 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         for option_value, option_label, sort_fields in chain(
                 self.choices, choices):
             if isinstance(option_label, (list, tuple)):
-                output.append(u'<optgroup label="%s">' % escape(
+                output.append('<optgroup label="%s">' % escape(
                     force_unicode(option_value)))
                 for option in option_label:
                     output.append(render_option(*option))
-                output.append(u'</optgroup>')
+                output.append('</optgroup>')
             else:
                 output.append(render_option(option_value, option_label,
                                             sort_fields))
-        return u'\n'.join(output)
+        return '\n'.join(output)
 
     class Media:
         """MPTTFilteredSelectMultiple's Media"""

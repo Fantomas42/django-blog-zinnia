@@ -1,4 +1,6 @@
 """Search module with complex query parsing for Zinnia"""
+from django.utils import six
+
 from pyparsing import Word
 from pyparsing import alphas
 from pyparsing import WordEnd
@@ -26,7 +28,7 @@ def createQ(token):
     query = getattr(token, 'query', '')
     wildcards = None
 
-    if isinstance(query, basestring):  # Unicode -> Quoted string
+    if isinstance(query, six.string_types):  # Unicode -> Quoted string
         search = query
     else:  # List -> No quoted string (possible wildcards)
         if len(query) == 1:

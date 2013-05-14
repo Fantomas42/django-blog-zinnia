@@ -1,4 +1,6 @@
 """Callable Queryset mixins for Zinnia views"""
+from __future__ import unicode_literals
+
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -12,5 +14,5 @@ class CallableQuerysetMixin(object):
         """Check that the queryset is defined and call it"""
         if self.queryset is None:
             raise ImproperlyConfigured(
-                u"'%s' must define 'queryset'" % self.__class__.__name__)
+                "'%s' must define 'queryset'" % self.__class__.__name__)
         return self.queryset()

@@ -1,16 +1,20 @@
 """WordPress to Zinnia command module"""
 import os
 import sys
-from urllib2 import urlopen
 from datetime import datetime
 from optparse import make_option
 from xml.etree import ElementTree as ET
+try:
+    from urllib.request import urlopen
+except ImportError:  # Python 2
+    from urllib2 import urlopen
 
 from django.conf import settings
 from django.utils import timezone
 from django.core.files import File
 from django.utils.text import Truncator
 from django.utils.html import strip_tags
+from django.utils.six.moves import input
 from django.db.utils import IntegrityError
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
@@ -143,7 +147,7 @@ class Command(LabelCommand):
                       "2. Create a new user ?\n"\
                       "Please select a choice: " % self.style.ITEM(author_name)
         while 42:
-            selection = raw_input(smart_str(action_text))
+            selection = input(smart_str(action_text))
             if selection and selection in '12':
                 break
         if selection == '1':
@@ -171,7 +175,7 @@ class Command(LabelCommand):
                             "%s or 'back'\n"\
                             "Please select a choice: " % \
                             ', '.join(usernames_display)
-                user_selected = raw_input(user_text)
+                user_selected = input(user_text)
                 if user_selected in usernames:
                     break
                 if user_selected == '' and preselected_user:
@@ -183,7 +187,7 @@ class Command(LabelCommand):
         else:
             create_text = "2. Please type the email of " \
                           "the '%s' user or 'back': " % author_name
-            author_mail = raw_input(create_text)
+            author_mail = input(create_text)
             if author_mail.strip() == 'back':
                 return self.migrate_author(author_name)
             try:

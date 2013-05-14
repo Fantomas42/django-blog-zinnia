@@ -1,5 +1,7 @@
 # coding=utf-8
 """Test cases for Zinnia's quick entry"""
+from __future__ import unicode_literals
+
 from django.test import TestCase
 from django.test.utils import restore_template_loaders
 from django.test.utils import setup_test_template_loader
@@ -79,7 +81,7 @@ class QuickEntryTestCase(TestCase):
     def test_quick_entry_non_ascii_title_issue_153(self):
         self.client.login(username='admin', password='password')
         response = self.client.post('/quick-entry/',
-                                    {'title': u'тест', 'tags': 'test-2',
+                                    {'title': 'тест', 'tags': 'test-2',
                                      'content': 'Test content',
                                      'save_draft': ''}, follow=True)
         self.assertEquals(response.redirect_chain,

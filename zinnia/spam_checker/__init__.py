@@ -16,7 +16,7 @@ def get_spam_checker(backend_path):
         warnings.warn('%s backend cannot be imported' % backend_path,
                       RuntimeWarning)
         backend = None
-    except ImproperlyConfigured, e:
+    except ImproperlyConfigured as e:
         warnings.warn(str(e), RuntimeWarning)
         backend = None
 

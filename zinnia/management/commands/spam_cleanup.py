@@ -24,4 +24,4 @@ class Command(NoArgsCommand):
         spams.delete()
 
         if verbosity:
-            print '%i spam comments deleted.' % spams_count
+            print('%i spam comments deleted.' % spams_count)

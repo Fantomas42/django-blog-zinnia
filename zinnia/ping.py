@@ -1,12 +1,19 @@
 """Pings utilities for Zinnia"""
 import socket
-import xmlrpclib
 import threading
-from urllib2 import urlopen
-from urlparse import urlsplit
 from logging import getLogger
+try:
+    from urllib.request import urlopen
+    from urllib.parse import urlsplit
+    from xmlrpc.client import Error
+    from xmlrpc.client import ServerProxy
+except ImportError:  # Python 2
+    from urllib2 import urlopen
+    from urlparse import urlsplit
+    from xmlrpclib import Error
+    from xmlrpclib import ServerProxy
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
@@ -35,7 +42,7 @@ class DirectoryPinger(threading.Thread):
         self.timeout = timeout
         self.entries = entries
         self.server_name = server_name
-        self.server = xmlrpclib.ServerProxy(self.server_name)
+        self.server = ServerProxy(self.server_name)
         self.ressources = URLRessources()
 
         threading.Thread.__init__(self)
@@ -116,7 +123,7 @@ class ExternalUrlsPinger(threading.Thread):
     def find_external_urls(self, entry):
         """Find external urls in an entry"""
         soup = BeautifulSoup(entry.html_content)
-        external_urls = [a['href'] for a in soup.findAll('a')
+        external_urls = [a['href'] for a in soup.find_all('a')
                          if self.is_external_url(
                              a['href'], self.ressources.site_url)]
         return external_urls
@@ -124,11 +131,12 @@ class ExternalUrlsPinger(threading.Thread):
     def find_pingback_href(self, content):
         """Try to find Link markup to pingback url"""
         soup = BeautifulSoup(content)
-        for link in soup.findAll('link'):
+        for link in soup.find_all('link'):
             dict_attr = dict(link.attrs)
             if 'rel' in dict_attr and 'href' in dict_attr:
-                if dict_attr['rel'].lower() == PINGBACK:
-                    return dict_attr.get('href')
+                for rel_type in dict_attr['rel']:
+                    if rel_type.lower() == PINGBACK:
+                        return dict_attr.get('href')
 
     def find_pingback_urls(self, urls):
         """Find the pingback urls of each urls"""
@@ -161,8 +169,8 @@ class ExternalUrlsPinger(threading.Thread):
     def pingback_url(self, server_name, target_url):
         """Do a pingback call for the target url"""
         try:
-            server = xmlrpclib.ServerProxy(server_name)
+            server = ServerProxy(server_name)
             reply = server.pingback.ping(self.entry_url, target_url)
-        except (xmlrpclib.Error, socket.error):
+        except (Error, socket.error):
             reply = '%s cannot be pinged.' % target_url
         return reply

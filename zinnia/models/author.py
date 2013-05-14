@@ -1,11 +1,13 @@
 """Author model for Zinnia"""
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils.encoding import python_2_unicode_compatible
 
 from zinnia.managers import entries_published
 from zinnia.managers import EntryRelatedPublishedManager
 
 
+@python_2_unicode_compatible
 class Author(get_user_model()):
     """
     Proxy model around :class:`django.contrib.auth.models.get_user_model`.
@@ -27,7 +29,7 @@ class Author(get_user_model()):
         """
         return ('zinnia_author_detail', [self.get_username()])
 
-    def __unicode__(self):
+    def __str__(self):
         """
         If the user has a full name, use it instead of the username.
         """

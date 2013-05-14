@@ -28,11 +28,11 @@ def process_model_docstring(app, what, name, obj, options, lines):
             verbose_name = force_unicode(field.verbose_name).capitalize()
 
             if help_text:
-                lines.append(u':param %s: %s' % (field.attname, help_text))
+                lines.append(':param %s: %s' % (field.attname, help_text))
             else:
-                lines.append(u':param %s: %s' % (field.attname, verbose_name))
+                lines.append(':param %s: %s' % (field.attname, verbose_name))
             # Add the field's type to the docstring
-            lines.append(u':type %s: %s' % (field.attname,
+            lines.append(':type %s: %s' % (field.attname,
                                             type(field).__name__))
     # Return the extended docstring
     return lines

@@ -1,7 +1,10 @@
 """Template tags and filters for Zinnia"""
 from hashlib import md5
-from urllib import urlencode
 from datetime import datetime
+try:
+    from urllib.parse import urlencode
+except ImportError:  # Python 2
+    from urllib import urlencode
 
 from django.db.models import Q
 from django.db.models import Count
@@ -130,7 +133,8 @@ def get_similar_entries(context, number=5,
                 if score:
                     entry_related[entry] = score
 
-        related = sorted(entry_related.items(), key=lambda(k, v): (v, k))
+        related = sorted(entry_related.items(),
+                         key=lambda k_v: (k_v[1], k_v[0]))
         return [rel[0] for rel in related]
 
     object_id = context['object'].pk

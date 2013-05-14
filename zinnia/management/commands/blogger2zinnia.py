@@ -7,6 +7,7 @@ from optparse import make_option
 
 from django.conf import settings
 from django.utils import timezone
+from django.utils.six.moves import input
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
@@ -80,7 +81,7 @@ class Command(NoArgsCommand):
             'Starting migration from Blogger to Zinnia %s\n' % __version__))
 
         if not self.blogger_username:
-            self.blogger_username = raw_input('Blogger username: ')
+            self.blogger_username = input('Blogger username: ')
             if not self.blogger_username:
                 raise CommandError('Invalid Blogger username')
 
@@ -107,7 +108,7 @@ class Command(NoArgsCommand):
             self.select_blog_id()
 
         if not self.category_title:
-            self.category_title = raw_input(
+            self.category_title = input(
                 'Category title for imported entries: ')
             if not self.category_title:
                 raise CommandError('Invalid category title')
@@ -126,7 +127,7 @@ class Command(NoArgsCommand):
                 self.write_out('%s. %s (%s)' % (i, blog.title.text,
                                                 get_blog_id(blog)))
             try:
-                blog_index = int(raw_input('\nSelect a blog to import: '))
+                blog_index = int(input('\nSelect a blog to import: '))
                 blog = blogs[blog_index]
                 break
             except (ValueError, KeyError):

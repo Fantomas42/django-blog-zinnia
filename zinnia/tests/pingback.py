@@ -1,8 +1,14 @@
 """Test cases for Zinnia's PingBack API"""
-import cStringIO
-from urlparse import urlsplit
-from urllib2 import HTTPError
-from xmlrpclib import ServerProxy
+try:
+    from io import StringIO
+    from urllib.error import HTTPError
+    from urllib.parse import urlsplit
+    from xmlrpc.client import ServerProxy
+except ImportError:  # Python 2
+    from cStringIO import StringIO
+    from urllib2 import HTTPError
+    from urlparse import urlsplit
+    from xmlrpclib import ServerProxy
 
 from django.test import TestCase
 from django.utils import timezone
@@ -13,7 +19,7 @@ from django.test.utils import setup_test_template_loader
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -40,7 +46,7 @@ class PingBackTestCase(TestCase):
         if not netloc:
             raise
         if self.site.domain == netloc:
-            response = cStringIO.StringIO(self.client.get(url).content)
+            response = StringIO(self.client.get(url).content)
             return response
         raise HTTPError(url, 404, 'unavailable url', {}, None)
 

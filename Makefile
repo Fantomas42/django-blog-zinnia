@@ -43,6 +43,10 @@ translations:
 	@echo "$(COLOR)* Remove english translation$(NO_COLOR)"
 	@rm -rf zinnia/locale/en/
 
+2to3:
+	@echo "$(COLOR)* Checking Py3 code$(NO_COLOR)"
+	@2to3 -x future -x dict -x map -x xrange -x imports -x import -x urllib -x print -x input zinnia/
+
 clean:
 	@echo "$(COLOR)* Removing useless files$(NO_COLOR)"
 	@find demo zinnia docs -type f \( -name "*.pyc" -o -name "\#*" -o -name "*~" \) -exec rm -f {} \;

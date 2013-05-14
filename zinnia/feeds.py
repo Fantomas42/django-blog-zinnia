@@ -1,6 +1,10 @@
 """Feeds for Zinnia"""
-from urlparse import urljoin
-from BeautifulSoup import BeautifulSoup
+try:
+    from urllib.parse import urljoin
+except ImportError:  # Python 2
+    from urlparse import urljoin
+
+from bs4 import BeautifulSoup
 
 from django.contrib import comments
 from django.contrib.sites.models import Site
