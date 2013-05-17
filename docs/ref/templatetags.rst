@@ -340,3 +340,15 @@ Usage examples: ::
   {% get_gravatar user.email 50 "PG" "identicon" "https" %}
   {% get_gravatar user.email rating="PG" protocol="https" %}
 
+.. templatefilter:: widont
+
+widont
+======
+
+Insert a non-breaking space between the last two words of your sentence.
+
+.. autofunction:: widont
+
+Usage example: ::
+
+  {{ variable|widont }}
