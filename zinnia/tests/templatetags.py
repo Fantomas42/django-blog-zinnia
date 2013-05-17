@@ -20,6 +20,7 @@ from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
+from zinnia.templatetags.zinnia_tags import widont
 from zinnia.templatetags.zinnia_tags import get_authors
 from zinnia.templatetags.zinnia_tags import get_gravatar
 from zinnia.templatetags.zinnia_tags import get_tag_cloud
@@ -709,6 +710,28 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(len(context['tags']), 2)
         self.assertEquals(context['template'], 'custom_template.html')
         self.assertEquals(context['context_tag'], tag)
+
+    def test_widont(self):
+        self.assertEquals(
+            widont('Word'), 'Word')
+        self.assertEquals(
+            widont('A complete string'),
+            'A complete&nbsp;string')
+        self.assertEquals(
+            widont('A complete\tstring'),
+            'A complete&nbsp;string')
+        self.assertEquals(
+            widont('A  complete  string'),
+            'A  complete&nbsp;string')
+        self.assertEquals(
+            widont('A complete string with trailing spaces  '),
+            'A complete string with trailing&nbsp;spaces  ')
+        self.assertEquals(
+            widont('A complete string with <markup>', autoescape=False),
+            'A complete string with&nbsp;<markup>')
+        self.assertEquals(
+            widont('A complete string with <markup>', autoescape=True),
+            'A complete string with&nbsp;&lt;markup&gt;')
 
     @skipIfCustomUser
     def test_zinnia_statistics(self):

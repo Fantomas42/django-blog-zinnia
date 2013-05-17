@@ -1,11 +1,11 @@
-{% load comments i18n %}
+{% load comments i18n zinnia_tags %}
 <div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}">
   {% block entry-header %}
   <div class="entry-header">
     {% block entry-title %}
     <h2 class="entry-title">
       <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
-        {{ object.title }}
+        {{ object.title|widont }}
       </a>
     </h2>
     {% endblock %}
