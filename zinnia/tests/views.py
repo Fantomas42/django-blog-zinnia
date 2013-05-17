@@ -537,7 +537,16 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         entry.save()
         connect_discussion_signals()
         get_user_flagger()  # Memoize user flagger for stable query number
-        with self.assertNumQueries(6):
+        if comments.get_comment_app_name() == comments.DEFAULT_COMMENTS_APP:
+            # If we are not using the default comment app,
+            # we can count the database queries executed.
+            with self.assertNumQueries(6):
+                self.assertEquals(
+                    self.client.post('/trackback/1/',
+                                     {'url': 'http://example.com'}).content,
+                    '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
+                    '<error>0</error>\n  \n</response>\n')
+        else:
             self.assertEquals(
                 self.client.post('/trackback/1/',
                                  {'url': 'http://example.com'}).content,
