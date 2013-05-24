@@ -219,8 +219,8 @@ about the install instructions and possibilities.
 TinyMCE
 =======
 
-If you want to replace WYMEditor by TinyMCE install `django-tinymce`_ and
-follow the `installation instructions`_.
+If you want to replace WYMEditor by TinyMCE just install `django-tinymce`_
+as described in the the `installation instructions`_.
 
 TinyMCE can be customized by overriding the
 :file:`admin/zinnia/entry/tinymce_textareas.js` template.
@@ -288,7 +288,7 @@ Insert something like this in your project's urls.py: ::
 .. _`tweepy`: https://github.com/tweepy/tweepy
 .. _`cmsplugin_zinnia`: https://github.com/Fantomas42/cmsplugin-zinnia
 .. _`django-CMS`: http://www.django-cms.org/
-.. _`django-tinymce`: https://code.google.com/p/django-tinymce/
-.. _`installation instructions`: http://django-tinymce.googlecode.com/svn/trunk/docs/.build/html/index.html
+.. _`django-tinymce`: https://github.com/aljosa/django-tinymce
+.. _`installation instructions`: http://django-tinymce.readthedocs.org/en/latest/installation.html
 .. _`django-xmlrpc`: http://pypi.python.org/pypi/django-xmlrpc/
 .. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi
