@@ -1,6 +1,6 @@
-==================================
-Django Blog Zinnia |travis-master|
-==================================
+====================================================
+Django Blog Zinnia |travis-master| |coverage-master|
+====================================================
 
 |latest-version| |downloads|
 
@@ -87,6 +87,9 @@ More information and help available at these URLs :
 .. |travis-master| image:: https://travis-ci.org/Fantomas42/django-blog-zinnia.png?branch=master
    :alt: Build Status - master branch
    :target: http://travis-ci.org/Fantomas42/django-blog-zinnia
+.. |coverage-master| image:: https://coveralls.io/repos/Fantomas42/django-blog-zinnia/badge.png?branch=master
+   :alt: Coverage of the code
+   :target: https://coveralls.io/Fantomas42/django-blog-zinnia
 .. |latest-version| image:: https://pypip.in/v/django-blog-zinnia/badge.png
    :alt: Latest version on Pypi
    :target: https://crate.io/packages/django-blog-zinnia/
