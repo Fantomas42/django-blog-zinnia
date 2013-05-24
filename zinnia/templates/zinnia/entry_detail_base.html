@@ -3,7 +3,7 @@
 
 {% block title %}{{ object.title }}{% endblock %}
 
-{% block meta-description %}{% if object.excerpt %}{{ object.excerpt|striptags }}{% else %}{{ object.content|striptags|truncatewords:100 }}{% endif %}{% endblock %}
+{% block meta-description %}{{ object.excerpt|safe }}{% endblock %}
 
 {% block meta-keywords %}{% if object.tags %}{{ object.tags }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 

@@ -13,7 +13,7 @@
             <a href="{{ entry.get_absolute_url }}" rel="bookmark"
                title="{{ entry.title }}">{{ entry.title }}</a>
           </h2>
-          {{ entry.excerpt|linebreaks|truncatewords_html:30 }}
+          {{ entry.excerpt|safe|linebreaks|truncatewords_html:30 }}
         </div>
       </li>
       {% endfor %}
