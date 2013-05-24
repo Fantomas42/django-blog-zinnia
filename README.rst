@@ -81,6 +81,8 @@ More information and help available at these URLs :
 * `Code repository`_.
 * `Documentation`_.
 * `Jenkins CI server`_.
+* `Travis CI server`_.
+* `Coverage report`_.
 * Discussions and help at `Google Group`_.
 * For reporting a bug use `Github Issues`_.
 
@@ -133,5 +135,7 @@ More information and help available at these URLs :
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://docs.django-blog-zinnia.com/
 .. _`Jenkins CI server`: https://jenkins.shiningpanda.com/django-blog-zinnia/
+.. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia
+.. _`Coverage report`: https://coveralls.io/r/Fantomas42/django-blog-zinnia
 .. _`Google Group`: http://groups.google.com/group/django-blog-zinnia/
 .. _`Github Issues`: https://github.com/Fantomas42/django-blog-zinnia/issues/
