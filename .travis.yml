@@ -8,7 +8,7 @@ install:
 script:
     - ./bin/test
 after_success:
-    - coveralls
+    - ./bin/coveralls
 notifications:
     irc:
         - "irc.freenode.org#django-blog-zinnia"
