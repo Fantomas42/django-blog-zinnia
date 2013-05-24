@@ -2,6 +2,8 @@
 Django Blog Zinnia |travis-master|
 ==================================
 
+|latest-version| |downloads|
+
 Simple yet powerful and really extendable application for managing a blog
 within your Django Web site.
 
@@ -85,6 +87,12 @@ More information and help available at these URLs :
 .. |travis-master| image:: https://travis-ci.org/Fantomas42/django-blog-zinnia.png?branch=master
    :alt: Build Status - master branch
    :target: http://travis-ci.org/Fantomas42/django-blog-zinnia
+.. |latest-version| image:: https://pypip.in/v/django-blog-zinnia/badge.png
+   :alt: Latest version on Pypi
+   :target: https://crate.io/packages/django-blog-zinnia/
+.. |downloads| image:: https://pypip.in/d/django-blog-zinnia/badge.png
+   :alt: Downloads from Pypi
+   :target: https://crate.io/packages/django-blog-zinnia/
 .. _`Sitemaps`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#module-zinnia.sitemaps
 .. _`Advanced search engine`: http://docs.django-blog-zinnia.com/en/latest/topics/search_engines.html
 .. _`Custom templates for various contents`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#templates-for-entries
