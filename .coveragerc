@@ -1,0 +1,5 @@
+[report]
+source		= zinnia
+exclude_lines	=
+    pragma: no cover
+
