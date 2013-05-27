@@ -1,5 +1,6 @@
 [report]
 source		= zinnia
+omit		= */eggs/*,*/lib/*,*/demo/*,*/tests/*
 exclude_lines	=
     pragma: no cover
 
