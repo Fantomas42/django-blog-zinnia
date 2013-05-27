@@ -12,13 +12,12 @@ from django.contrib.comments.models import CommentFlag
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
-from django.contrib.markup.templatetags.markup import markdown
-from django.contrib.markup.templatetags.markup import textile
-from django.contrib.markup.templatetags.markup import restructuredtext
-
 from tagging.fields import TagField
 from tagging.utils import parse_tag_input
 
+from zinnia.markups import textile
+from zinnia.markups import markdown
+from zinnia.markups import restructuredtext
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import UPLOAD_TO
 from zinnia.settings import MARKUP_LANGUAGE
