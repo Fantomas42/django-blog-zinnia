@@ -235,14 +235,18 @@ an über coder knowing more than 42 programming languages, you have the
 possibility to use a custom markup language for editing the entries.
 
 Currently **MarkDown**, **Textile** and **reStructuredText** are supported,
-so if you want to use one of these languages, simply set this
-variable as appropriate in your project's settings. ::
+so if you want to use one of these languages, first set this
+setting as appropriate in your project's settings. ::
 
   ZINNIA_MARKUP_LANGUAGE = 'restructuredtext'
 
 Note that the name of the language must be in lowercase.
 
-More informations about the dependencies in :mod:`django.contrib.markup`.
+Then install the corresponding library to your needs:
+
+* ``textile`` -- requires `Textile`_
+* ``markdown`` -- requires `Markdown`_
+* ``restructuredtext`` -- requires `Docutils`_
 
 .. _zinnia-xmlrpc:
 
@@ -290,5 +294,8 @@ Insert something like this in your project's urls.py: ::
 .. _`django-CMS`: http://www.django-cms.org/
 .. _`django-tinymce`: https://github.com/aljosa/django-tinymce
 .. _`installation instructions`: http://django-tinymce.readthedocs.org/en/latest/installation.html
+.. _`Textile`: https://pypi.python.org/pypi/textile
+.. _`Markdown`: http://pypi.python.org/pypi/Markdown
+.. _`Docutils`: http://docutils.sf.net/
 .. _`django-xmlrpc`: http://pypi.python.org/pypi/django-xmlrpc/
 .. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi

@@ -13,7 +13,7 @@ from zinnia.settings import RESTRUCTUREDTEXT_SETTINGS
 
 def textile(value):
     """
-    Textile processing
+    Textile processing.
     """
     try:
         import textile
@@ -43,7 +43,7 @@ def markdown(value, extensions=MARKDOWN_EXTENSIONS):
 
 def restructuredtext(value, settings=RESTRUCTUREDTEXT_SETTINGS):
     """
-    RestructuredText processing
+    RestructuredText processing with optionnally custom settings.
     """
     try:
         from docutils.core import publish_parts
