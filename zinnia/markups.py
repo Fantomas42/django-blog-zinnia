@@ -18,7 +18,8 @@ def textile(value):
     try:
         import textile
     except ImportError:
-        warnings.warn("The Python textile library isn't installed.")
+        warnings.warn("The Python textile library isn't installed.",
+                      RuntimeWarning)
         return value
 
     return textile.textile(force_bytes(value),
@@ -33,7 +34,8 @@ def markdown(value, extensions=MARKDOWN_EXTENSIONS):
     try:
         import markdown
     except ImportError:
-        warnings.warn("The Python markdown library isn't installed.")
+        warnings.warn("The Python markdown library isn't installed.",
+                      RuntimeWarning)
         return value
 
     extensions = [e for e in extensions.split(',') if e]
@@ -48,7 +50,8 @@ def restructuredtext(value, settings=RESTRUCTUREDTEXT_SETTINGS):
     try:
         from docutils.core import publish_parts
     except ImportError:
-        warnings.warn("The Python docutils library isn't installed.")
+        warnings.warn("The Python docutils library isn't installed.",
+                      RuntimeWarning)
         return value
 
     parts = publish_parts(source=force_bytes(value),
