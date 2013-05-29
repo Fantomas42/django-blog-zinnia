@@ -21,7 +21,6 @@ from zinnia.markups import restructuredtext
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import UPLOAD_TO
 from zinnia.settings import MARKUP_LANGUAGE
-from zinnia.settings import MARKDOWN_EXTENSIONS
 from zinnia.settings import ENTRY_DETAIL_TEMPLATES
 from zinnia.settings import ENTRY_CONTENT_TEMPLATES
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
@@ -197,7 +196,7 @@ class ContentEntry(models.Model):
         Returns the "content" field formatted in HTML.
         """
         if MARKUP_LANGUAGE == 'markdown':
-            return markdown(self.content, MARKDOWN_EXTENSIONS)
+            return markdown(self.content)
         elif MARKUP_LANGUAGE == 'textile':
             return textile(self.content)
         elif MARKUP_LANGUAGE == 'restructuredtext':
