@@ -384,7 +384,7 @@ class EntryAbsoluteUrlTestCase(TestCase):
                   'slug': 'my-entry',
                   'creation_date': creation_date}
         entry = Entry.objects.create(**params)
-        self.assertEquals(entry.get_absolute_url(), url_expected)
+        self.assertTrue(url_expected in entry.get_absolute_url())
 
     @override_settings(USE_TZ=False)
     def test_get_absolute_url_no_timezone(self):
