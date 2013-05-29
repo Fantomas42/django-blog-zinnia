@@ -544,8 +544,8 @@ class ZinniaViewsTestCase(ViewsBaseCase):
                 self.assertEquals(
                     self.client.post('/trackback/1/',
                                      {'url': 'http://example.com'}).content,
-                    '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
-                    '<error>0</error>\n  \n</response>\n')
+                    '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n'
+                    '  <error>0</error>\n  \n</response>\n')
         else:
             self.assertEquals(
                 self.client.post('/trackback/1/',
