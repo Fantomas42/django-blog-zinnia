@@ -154,6 +154,26 @@ register the Mollom spam checking protection with this setting: ::
   MOLLOM_PUBLIC_KEY = 'your public key'
   MOLLOM_PRIVATE_KEY = 'your private key'
 
+.. _zinnia-pinging:
+
+Pinging
+=======
+
+By default Zinnia is configured to ping the directories and the external
+urls embedded in your entries when a new entry is published.
+
+If you want to completly remove these features, simply set these settings
+in your project's configuration: ::
+
+  ZINNIA_PING_EXTERNAL_URLS = False
+  ZINNIA_SAVE_PING_DIRECTORIES = False
+
+You can also edit the list of the directories to be pinged by using this
+setting: ::
+
+  ZINNIA_PING_DIRECTORIES = ('http://ping.directory.com/',
+                             'http://pong.directory.com/')
+
 .. _zinnia-bitly:
 
 Bit.ly
@@ -201,7 +221,6 @@ the shortened URL of your entry.
 
 Django-CMS
 ==========
-
 
 If you use `django-CMS`_, Zinnia can be integrated into your pages,
 thanks to the plugin system.

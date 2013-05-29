@@ -26,7 +26,7 @@ migrate the database.
 * `pyparsing`_ >= 1.5.5 < 2.0.0
 * `django-xmlrpc`_ >= 0.1.5
 
-Note that all the dependencies will be resolved if you install
+Note that all the needed dependencies will be resolved if you install
 Zinnia with :program:`pip` or :program:`easy_install`, excepting Django.
 
 .. _getting-the-code:
