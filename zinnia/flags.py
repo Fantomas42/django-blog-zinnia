@@ -15,7 +15,10 @@ def _get_user_flagger():
     try:
         user = User.objects.get(pk=COMMENT_FLAG_USER_ID)
     except User.DoesNotExist:
-        user = User.objects.create_user('Zinnia-Flagger')
+          try:
+              user = User.objects.get(username='Zinnia-Flagger')
+          except User.DoesNotExist:
+              user = User.objects.create_user('Zinnia-Flagger')
     return user
 
 get_user_flagger = memoize(_get_user_flagger, user_flagger_, 0)
