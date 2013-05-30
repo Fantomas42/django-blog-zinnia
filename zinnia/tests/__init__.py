@@ -33,6 +33,7 @@ from zinnia.tests.admin_filters import AuthorListFilterTestCase
 from zinnia.tests.admin_filters import CategoryListFilterTestCase
 from zinnia.tests.flags import FlagsTestCase
 from zinnia.tests.translated_urls import TranslatedURLsTestCase
+from zinnia.tests.markups import MarkupsTestCase
 from zinnia.tests.markups import FailImportMarkupTestCase
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
@@ -57,7 +58,7 @@ def suite():
                   AuthorTestCase, FlagsTestCase,
                   AuthorListFilterTestCase, CategoryListFilterTestCase,
                   TranslatedURLsTestCase, EntryAbsoluteUrlTestCase,
-                  FailImportMarkupTestCase)
+                  MarkupsTestCase, FailImportMarkupTestCase)
 
     if 'django_xmlrpc' in settings.INSTALLED_APPS:
         test_cases += (PingBackTestCase, MetaWeblogTestCase)
