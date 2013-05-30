@@ -244,9 +244,9 @@ Note that the name of the language must be in lowercase.
 
 Then install the corresponding library to your needs:
 
-* ``textile`` -- requires `Textile`_
-* ``markdown`` -- requires `Markdown`_
-* ``restructuredtext`` -- requires `Docutils`_
+* ``textile`` -- requires `Textile`_ >= 2.1.5
+* ``markdown`` -- requires `Markdown`_ >= 2.3.1
+* ``restructuredtext`` -- requires `Docutils`_ >= 0.10
 
 .. _zinnia-xmlrpc:
 
