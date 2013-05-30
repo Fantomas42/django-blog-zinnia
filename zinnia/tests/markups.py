@@ -17,43 +17,43 @@ class MarkupsTestCase(TestCase):
     @skipUnless(is_lib_available('textile'), 'Textile is not available')
     def test_textile(self):
         self.assertEquals(textile(self.text).strip(),
-                          u'<p>Hello <strong>World</strong> !</p>')
+                          '<p>Hello <strong>World</strong> !</p>')
 
     @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
     def test_markdown(self):
         self.assertEquals(markdown(self.text).strip(),
-                          u'<p>Hello <em>World</em> !</p>')
+                          '<p>Hello <em>World</em> !</p>')
 
     @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
     def test_markdown_extensions(self):
         text = '[TOC]\n\n# Header 1\n\n## Header 2'
         self.assertEquals(markdown(text).strip(),
-                          u'<p>[TOC]</p>\n<h1>Header 1</h1>'
+                          '<p>[TOC]</p>\n<h1>Header 1</h1>'
                           '\n<h2>Header 2</h2>')
         self.assertEquals(markdown(text, extensions='toc').strip(),
-                          u'<div class="toc">\n<ul>\n<li><a href="#header-1">'
-                          u'Header 1</a><ul>\n<li><a href="#header-2">'
-                          u'Header 2</a></li>\n</ul>\n</li>\n</ul>\n</div>'
-                          u'\n<h1 id="header-1">Header 1</h1>\n'
-                          u'<h2 id="header-2">Header 2</h2>')
+                          '<div class="toc">\n<ul>\n<li><a href="#header-1">'
+                          'Header 1</a><ul>\n<li><a href="#header-2">'
+                          'Header 2</a></li>\n</ul>\n</li>\n</ul>\n</div>'
+                          '\n<h1 id="header-1">Header 1</h1>\n'
+                          '<h2 id="header-2">Header 2</h2>')
 
     @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
     def test_restructuredtext(self):
         self.assertEquals(restructuredtext(self.text).strip(),
-                          u'<p>Hello <em>World</em> !</p>')
+                          '<p>Hello <em>World</em> !</p>')
 
     @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
     def test_restructuredtext_settings_override(self):
         text = 'My email is toto@example.com'
         self.assertEquals(restructuredtext(text).strip(),
-                          u'<p>My email is <a class="reference external" '
-                          u'href="mailto:toto&#64;example.com">'
-                          u'toto&#64;example.com</a></p>')
+                          '<p>My email is <a class="reference external" '
+                          'href="mailto:toto&#64;example.com">'
+                          'toto&#64;example.com</a></p>')
         self.assertEquals(
             restructuredtext(text, {'cloak_email_addresses': True}).strip(),
-            u'<p>My email is <a class="reference external" '
-            u'href="mailto:toto&#37;&#52;&#48;example&#46;com">'
-            u'toto<span>&#64;</span>example<span>&#46;</span>com</a></p>')
+            '<p>My email is <a class="reference external" '
+            'href="mailto:toto&#37;&#52;&#48;example&#46;com">'
+            'toto<span>&#64;</span>example<span>&#46;</span>com</a></p>')
 
 
 class FailImportMarkupTestCase(TestCase):
