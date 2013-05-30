@@ -1,7 +1,6 @@
 """Unit tests for Zinnia"""
 from unittest import TestSuite
 from unittest import TestLoader
-from django.conf import settings
 
 from zinnia.tests.entry import EntryTestCase
 from zinnia.tests.entry import EntryHtmlContentTestCase
@@ -58,10 +57,8 @@ def suite():
                   AuthorTestCase, FlagsTestCase,
                   AuthorListFilterTestCase, CategoryListFilterTestCase,
                   TranslatedURLsTestCase, EntryAbsoluteUrlTestCase,
-                  MarkupsTestCase, FailImportMarkupTestCase)
-
-    if 'django_xmlrpc' in settings.INSTALLED_APPS:
-        test_cases += (PingBackTestCase, MetaWeblogTestCase)
+                  MarkupsTestCase, FailImportMarkupTestCase,
+                  PingBackTestCase, MetaWeblogTestCase)
 
     for test_class in test_cases:
         tests = loader.loadTestsFromTestCase(test_class)
