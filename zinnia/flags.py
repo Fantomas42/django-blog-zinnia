@@ -6,6 +6,7 @@ from zinnia.settings import COMMENT_FLAG_USER_ID
 
 PINGBACK = 'pingback'
 TRACKBACK = 'trackback'
+FLAGGER_USERNAME = 'Zinnia-Flagger'
 
 user_flagger_ = {}
 
@@ -15,10 +16,10 @@ def _get_user_flagger():
     try:
         user = User.objects.get(pk=COMMENT_FLAG_USER_ID)
     except User.DoesNotExist:
-          try:
-              user = User.objects.get(username='Zinnia-Flagger')
-          except User.DoesNotExist:
-              user = User.objects.create_user('Zinnia-Flagger')
+        try:
+            user = User.objects.get(username=FLAGGER_USERNAME)
+        except User.DoesNotExist:
+            user = User.objects.create_user(FLAGGER_USERNAME)
     return user
 
 get_user_flagger = memoize(_get_user_flagger, user_flagger_, 0)

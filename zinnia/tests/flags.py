@@ -3,8 +3,8 @@ from django.test import TestCase
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import flags
+from zinnia.flags import user_flagger_
 from zinnia.flags import get_user_flagger
-from zinnia.flags import _get_user_flagger
 
 
 @skipIfCustomUser
@@ -19,6 +19,16 @@ class FlagsTestCase(TestCase):
     def test_get_user_flagger_does_not_exist(self):
         original_user_id = flags.COMMENT_FLAG_USER_ID
         flags.COMMENT_FLAG_USER_ID = 4242
-        flagger = _get_user_flagger()
+        flagger = get_user_flagger()
+        self.assertEquals(flagger.username, 'Zinnia-Flagger')
+        flags.COMMENT_FLAG_USER_ID = original_user_id
+
+    def test_get_user_flagged_does_not_exist_twice_issue_245(self):
+        original_user_id = flags.COMMENT_FLAG_USER_ID
+        flags.COMMENT_FLAG_USER_ID = None
+        flagger = get_user_flagger()
+        self.assertEquals(flagger.username, 'Zinnia-Flagger')
+        del user_flagger_[()]  # Clear the cache
+        flagger = get_user_flagger()
         self.assertEquals(flagger.username, 'Zinnia-Flagger')
         flags.COMMENT_FLAG_USER_ID = original_user_id
