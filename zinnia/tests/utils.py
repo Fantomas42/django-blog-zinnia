@@ -13,8 +13,9 @@ from django.test.client import Client
 
 
 class TestTransport(Transport):
-    """Handles connections to XML-RPC server
-    through Django test client."""
+    """
+    Handles connections to XML-RPC server through Django test client.
+    """
 
     def __init__(self, *args, **kwargs):
         Transport.__init__(self, *args, **kwargs)
@@ -34,11 +35,23 @@ class TestTransport(Transport):
 
 
 def test_datetime(*args):
-    """Generating a datetime aware or naive
-    depending of USE_TZ"""
+    """
+    Generating a datetime aware or naive depending of USE_TZ.
+    """
     d = original_datetime(*args)
     if settings.USE_TZ:
         d = timezone.make_aware(d, timezone.utc)
     return d
 
 datetime = test_datetime
+
+
+def is_lib_available(library):
+    """
+    Check if a Python library is available.
+    """
+    try:
+        __import__(library)
+        return True
+    except ImportError:
+        return False

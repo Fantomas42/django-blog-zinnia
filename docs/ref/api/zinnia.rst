@@ -43,6 +43,14 @@ Zinnia API
     :undoc-members:
     :show-inheritance:
 
+:mod:`markups` Module
+----------------------
+
+.. automodule:: zinnia.markups
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`moderator` Module
 -----------------------
 

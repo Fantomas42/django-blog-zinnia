@@ -94,10 +94,21 @@ ZINNIA_MARKDOWN_EXTENSIONS
 --------------------------
 **Default value:** ``''`` (Empty string)
 
-Extensions names to be used for rendering the entries in MarkDown. Example:
-::
+Extensions names coma separated to be used for rendering the entries in
+MarkDown. Example: ::
 
   ZINNIA_MARKDOWN_EXTENSIONS = 'extension1_name,extension2_name...'
+
+.. setting:: ZINNIA_RESTRUCTUREDTEXT_SETTINGS
+
+ZINNIA_RESTRUCTUREDTEXT_SETTINGS
+--------------------------------
+**Default value:** ``{}`` (Empty dict)
+
+A dictionary containing settings for the RestructuredText markup
+processing. See the Docutils restructuredtext `writer settings docs
+<http://docutils.sourceforge.net/docs/user/config.html#html4css1-writer>`_
+for details.
 
 .. setting:: ZINNIA_WYSIWYG
 
