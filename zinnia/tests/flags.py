@@ -11,6 +11,15 @@ from zinnia.flags import get_user_flagger
 class FlagsTestCase(TestCase):
     """Test cases for zinnia.flags"""
 
+    def setUp(self):
+        self.clear_user_flagger_cache()
+
+    def clear_user_flagger_cache(self):
+        try:
+            del user_flagger_[()]
+        except KeyError:
+            pass
+
     def test_get_user_flagger_cache(self):
         get_user_flagger()
         with self.assertNumQueries(0):
@@ -28,7 +37,7 @@ class FlagsTestCase(TestCase):
         flags.COMMENT_FLAG_USER_ID = None
         flagger = get_user_flagger()
         self.assertEquals(flagger.username, 'Zinnia-Flagger')
-        del user_flagger_[()]  # Clear the cache
+        self.clear_user_flagger_cache()
         flagger = get_user_flagger()
         self.assertEquals(flagger.username, 'Zinnia-Flagger')
         flags.COMMENT_FLAG_USER_ID = original_user_id
