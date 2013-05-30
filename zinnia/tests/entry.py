@@ -4,6 +4,7 @@ from datetime import timedelta
 from django.test import TestCase
 from django.utils import timezone
 from django.contrib import comments
+from django.utils.unittest import skipUnless
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils.translation import activate
@@ -18,6 +19,7 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
+from zinnia.tests.utils import is_lib_available
 from zinnia import url_shortener as shortener_settings
 
 
@@ -330,50 +332,44 @@ class EntryHtmlContentTestCase(TestCase):
         self.assertEquals(self.entry.html_content,
                           '<p>Hello world !<br /> this is my content</p>')
 
+    @skipUnless(is_lib_available('textile'), 'Textile is not available')
     def test_html_content_textitle(self):
         entry.MARKUP_LANGUAGE = 'textile'
         self.entry.content = 'Hello world !\n\n' \
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
         html_content = self.entry.html_content
-        try:
-            self.assertEquals(html_content,
-                              '\t<p>Hello world !</p>\n\n\t'
-                              '<p>this is my content :</p>\n\n\t'
-                              '<ul>\n\t\t<li>Item 1</li>\n\t\t'
-                              '<li>Item 2</li>\n\t</ul>')
-        except AssertionError:
-            self.assertEquals(html_content, self.entry.content)
+        self.assertEquals(html_content,
+                          '\t<p>Hello world !</p>\n\n\t'
+                          '<p>this is my content :</p>\n\n\t'
+                          '<ul>\n\t\t<li>Item 1</li>\n\t\t'
+                          '<li>Item 2</li>\n\t</ul>')
 
+    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
     def test_html_content_markdown(self):
         entry.MARKUP_LANGUAGE = 'markdown'
         self.entry.content = 'Hello world !\n\n' \
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
         html_content = self.entry.html_content
-        try:
-            self.assertEquals(html_content,
-                              '<p>Hello world !</p>\n'
-                              '<p>this is my content :</p>'
-                              '\n<ul>\n<li>Item 1</li>\n'
-                              '<li>Item 2</li>\n</ul>')
-        except AssertionError:
-            self.assertEquals(html_content, self.entry.content)
+        self.assertEquals(html_content,
+                          '<p>Hello world !</p>\n'
+                          '<p>this is my content :</p>'
+                          '\n<ul>\n<li>Item 1</li>\n'
+                          '<li>Item 2</li>\n</ul>')
 
+    @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
     def test_html_content_restructuredtext(self):
         entry.MARKUP_LANGUAGE = 'restructuredtext'
         self.entry.content = 'Hello world !\n\n' \
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
         html_content = self.entry.html_content
-        try:
-            self.assertEquals(html_content,
-                              '<p>Hello world !</p>\n'
-                              '<p>this is my content :</p>'
-                              '\n<ul class="simple">\n<li>Item 1</li>\n'
-                              '<li>Item 2</li>\n</ul>\n')
-        except AssertionError:
-            self.assertEquals(html_content, self.entry.content)
+        self.assertEquals(html_content,
+                          '<p>Hello world !</p>\n'
+                          '<p>this is my content :</p>'
+                          '\n<ul class="simple">\n<li>Item 1</li>\n'
+                          '<li>Item 2</li>\n</ul>\n')
 
 
 class EntryAbsoluteUrlTestCase(TestCase):
