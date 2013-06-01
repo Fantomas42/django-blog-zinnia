@@ -195,5 +195,44 @@ class EntryCommentModeratorTestCase(TestCase):
         self.client.post(url, datas)
         disconnect_discussion_signals()
         self.assertEqual(comments.get_model().objects.count(), 1)
-        entry = Entry.objects.get(pk=self.entry.pk)
-        self.assertEquals(entry.comment_count, 0)
+        entry_reloaded = Entry.objects.get(pk=self.entry.pk)
+        self.assertEquals(entry_reloaded.comment_count, 0)
+
+    def test_comment_count_denormalization(self):
+        class AllIsSpamModerator(EntryCommentModerator):
+            spam_checker_backends = [
+                'zinnia.spam_checker.backends.all_is_spam']
+
+        class NoMailNoSpamModerator(EntryCommentModerator):
+            def email(self, *ka, **kw):
+                pass
+
+            def moderate(self, *ka, **kw):
+                return False
+
+        datas = {'name': 'Jim Bob',
+                 'email': 'jim.bob@example.com',
+                 'url': '',
+                 'comment': 'This is my comment'}
+
+        f = CommentForm(self.entry)
+        datas.update(f.initial)
+        url = reverse('comments-post-comment')
+
+        moderator_stack.unregister(Entry)
+        moderator_stack.register(Entry, AllIsSpamModerator)
+
+        self.assertEquals(self.entry.comment_count, 0)
+        connect_discussion_signals()
+        self.client.post(url, datas)
+        entry_reloaded = Entry.objects.get(pk=self.entry.pk)
+        self.assertEquals(entry_reloaded.comment_count, 0)
+
+        moderator_stack.unregister(Entry)
+        moderator_stack.register(Entry, NoMailNoSpamModerator)
+
+        datas['comment'] = 'This a published comment'
+        self.client.post(url, datas)
+        disconnect_discussion_signals()
+        entry_reloaded = Entry.objects.get(pk=self.entry.pk)
+        self.assertEquals(entry_reloaded.comment_count, 1)
