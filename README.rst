@@ -91,7 +91,7 @@ More information and help available at these URLs :
    :target: http://travis-ci.org/Fantomas42/django-blog-zinnia
 .. |coverage-master| image:: https://coveralls.io/repos/Fantomas42/django-blog-zinnia/badge.png?branch=master
    :alt: Coverage of the code
-   :target: https://coveralls.io/Fantomas42/django-blog-zinnia
+   :target: https://coveralls.io/r/Fantomas42/django-blog-zinnia
 .. |latest-version| image:: https://pypip.in/v/django-blog-zinnia/badge.png
    :alt: Latest version on Pypi
    :target: https://crate.io/packages/django-blog-zinnia/
