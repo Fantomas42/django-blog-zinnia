@@ -263,7 +263,8 @@ class Command(LabelCommand):
         if settings.USE_TZ:
             creation_date = timezone.make_aware(creation_date, timezone.utc)
 
-        excerpt = item_node.find('{%sexcerpt/}encoded' % WP_NS).text
+        excerpt = strip_tags(item_node.find(
+            '{%sexcerpt/}encoded' % WP_NS).text)
         if not excerpt:
             if self.auto_excerpt:
                 excerpt = Truncator(strip_tags(content)).words(50)

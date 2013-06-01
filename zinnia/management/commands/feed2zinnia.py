@@ -115,7 +115,7 @@ class Command(LabelCommand):
             categories = self.import_categories(feed_entry)
             entry_dict = {'title': feed_entry.title[:255],
                           'content': feed_entry.description,
-                          'excerpt': feed_entry.get('summary'),
+                          'excerpt': strip_tags(feed_entry.get('summary')),
                           'status': PUBLISHED,
                           'creation_date': creation_date,
                           'start_publication': creation_date,
