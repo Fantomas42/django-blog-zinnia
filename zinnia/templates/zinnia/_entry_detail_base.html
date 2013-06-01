@@ -61,7 +61,7 @@
     {% endblock %}
     {% block entry-content %}
     <div class="entry-content">
-      {{ object_content }}
+      {{ object_content|safe }}
     </div>
     {% endblock %}
     {% block continue-reading %}

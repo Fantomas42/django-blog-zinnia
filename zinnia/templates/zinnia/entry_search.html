@@ -29,7 +29,7 @@
 {% block content-loop %}
 {% if not error %}
 {% for object in object_list %}
-  {% include object.content_template with object_content=object.html_content|truncatewords_html:100|safe continue_reading=1 %}
+  {% include object.content_template with object_content=object.html_content|truncatewords_html:100 continue_reading=1 %}
 {% empty %}
 <p class="info">{% trans "Nothing found." %}</p>
 {% endfor %}

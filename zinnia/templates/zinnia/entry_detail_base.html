@@ -34,7 +34,7 @@
 {% block content %}
 
 {% block entry-content %}
-  {% include object.content_template with object_content=object.html_content|safe %}
+  {% include object.content_template with object_content=object.html_content %}
 {% endblock %}
 
 {% block entry-widgets %}
