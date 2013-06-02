@@ -82,7 +82,7 @@ class DrupalToZinnia(object):
     Class for import Drupal blog content into Zinnia.
     """
 
-    def __init__(self, engine, node_type = "blog", users = dict()):
+    def __init__(self, engine, node_type = "blog", users = dict(), threaded_comments = False):
         """
         Initialised the importer class.
 
@@ -101,6 +101,7 @@ class DrupalToZinnia(object):
 
         self.initialise_alchemy(engine)
         self.node_type = node_type
+        self.threaded_comments = threaded_comments
 
         # Extract general information from Zinnia.
         self.site = Site.objects.get_current()
@@ -269,9 +270,9 @@ class DrupalToZinnia(object):
             modified = datetime.fromtimestamp(last.timestamp, pytz.UTC)
             created = datetime.fromtimestamp(node.created, pytz.UTC)
             user = self.author_mapping[node.uid]
-        
+
             # Create the entry if it doesn't exist already.
-            if not Entry.objects.filter(title=title).exists():
+            if not Entry.objects.filter(title=title, creation_date=created, last_update=modified).exists():
                 zinnia_entry = Entry(content=body, creation_date=created,
                                      last_update=modified, title=title,
                                      status=PUBLISHED, slug=slugify(title))
@@ -338,35 +339,49 @@ class DrupalToZinnia(object):
 
     def import_categories(self):
         """
-        Runs the import of categories.
+        Imports the categories from Drupal into Zinnia. This includes full
+        information about the category hierarchy.
+
+        The method will set-up a number of required properties that are used
+        later on for assigning blog entries to correct categories.
         """
 
-        # Mapping of term IDs (tid) from Drupal to Zinnia Category IDs. Provides
-        # safer way to identify correct category in case of identically named
-        # categories in different category trees.
-        zinnia_category_mapping = {}
+        # Holds mapping between term IDs in Drupal and Zinnia Category IDs. This
+        # allows for proper processing of identically-named categories across
+        # multiple category hierarchy trees. Pairs are stored as (tid,
+        # Category.id).
+        self.zinnia_category_mapping = {}
 
-        # Category hierarchy information, stored as tid, tid key/value pairs.
+        # Holds information about parent/child relatinships of Drupal categories
+        # as (tid, tid) key/value pair.
         category_parents = {}
 
-        # Iterate over non-tag Drupal vocabularies.
+        # Iterate over non-tag Drupal vocabularies. This will map into Zinnia
+        # categories.
         for vocabulary in self.session.query(self.Vocabulary).filter(self.Vocabulary.tags!=1).all():
             # Look-up the terms that belong to the vocabulary.
             for term in self.session.query(self.TermData).filter(self.TermData.vid==vocabulary.vid).all():
-                if not Category.objects.filter(title=term.name).exists():
-                    parent_id = self.session.query(self.TermHierarchy).filter(self.TermHierarchy.tid==term.tid).first().parent
+                drupal_parent_id = self.session.query(self.TermHierarchy).filter(self.TermHierarchy.tid==term.tid).first().parent 
 
-                    category = Category(title=term.name, description=term.description, slug = slugify(term.name))
-                    category.save()
+                # Construct a unique slug.
+                slug_base = slugify(term.name)
+                slug_number = 0
+                slug = slug_base
+                while Category.objects.filter(slug=slug).exists():
+                    number += 1
+                    slug = "%s%d" % (slug_base, number)
 
-                    zinnia_category_mapping[term.tid] = category.pk
-                    category_parents[term.tid] = parent_id
+                category = Category(title=term.name, description=term.description, slug = slug)
+                category.save()
 
-        # Set-up category hierarchy.
-        for tid, parent_id in category_parents.iteritems():
-            if parent_id != 0:
-                category = Category.objects.get(pk=zinnia_category_mapping[tid])
-                category.parent = Category.objects.get(pk=zinnia_category_mapping[parent_id])
+                self.zinnia_category_mapping[term.tid] = category.pk
+                category_parents[term.tid] = drupal_parent_id
+
+        # Set-up Zinnia's category hierarchy.
+        for tid, tid_parent in category_parents.iteritems():
+            if tid_parent != 0:
+                category = Category.objects.get(pk=self.zinnia_category_mapping[tid])
+                category.parent = Category.objects.get(pk=self.zinnia_category_mapping[tid_parent])
                 category.save()
 
     def import_comments(self, drupal_node, zinnia_entry):
@@ -381,7 +396,16 @@ class DrupalToZinnia(object):
             attached.
         """
 
+        # Holds mapping between comment IDs in Drupal and Zinnia Comment
+        # IDs. This is used later on if setting-up threaded comment parents.
+        zinnia_comment_mapping = {}
+
+        # Holds information about parent/child relatinships of Drupal comments
+        # as (cid, cid) key/value pair.
+        comment_parents = {}
+
         drupal_comments = self.session.query(self.Comments).filter(self.Comments.nid==drupal_node.nid).order_by(self.Comments.timestamp)
+
         for drupal_comment in drupal_comments:
             comment = Comment(#title=drupal_comment.subject,
                               comment=drupal_comment.comment,
@@ -394,14 +418,52 @@ class DrupalToZinnia(object):
                               content_object = zinnia_entry,
                               site_id = self.site.pk)
             comment.save()
-            #print drupal_comment.nid
-            #print unicode(comment.comment).encode("utf-8")
+
+            # Store parent/child information for threaded comments.
+            zinnia_comment_mapping[drupal_comment.cid] = comment.pk
+            comment_parents[drupal_comment.cid] = drupal_comment.pid
+
+        # Update comment parent/child relationships if threaded comments were
+        # enabled.
+        if self.threaded_comments:
+            for cid, cid_parent in comment_parents.iteritems():
+                if cid_parent != 0:
+                    comment = Comment.objects.get(pk=zinnia_comment_mapping[cid])
+                    comment.parent = Comment.objects.get(pk=zinnia_comment_mapping[cid_parent])
+                    comment.save()
+            
+        # Update the entry so that comment count and visibility will be fixed.
+        zinnia_entry.comment_count = zinnia_entry.comments.count()
+        zinnia_entry.pingback_count = zinnia_entry.pingbacks.count()
+        zinnia_entry.trackback_count = zinnia_entry.trackbacks.count()
+        zinnia_entry.save(force_update=True)
 
 
 ###########
 # Command #
 ###########
 class Command(LabelCommand):
+    """
+    Implements a custom Django management command used for importing Drupal blog
+    into Zinnia.
+    """
+
+    help = """
+Import a Drupal blog into Zinnia.
+
+The command will import the following:
+
+    - User information (username and mail only).
+
+Currenlty the script has the following limitations:
+
+    - No conversion of additional user information is performed.
+    - No conversion of formatting is performed. Content is copied as-is.
+    - Supports only MySQL-compatible database.
+    - Revision history is not preserved (Django Blog Zinnia does not support
+      revision history).
+"""
+
     option_list = LabelCommand.option_list + (
         make_option("-H", "--database-hostname", type="string", default="localhost",
                     help="Hostname of database server providing the Drupal database."),
@@ -416,8 +478,10 @@ class Command(LabelCommand):
                     help="Drupal Node type that should be processed."),
         make_option("-U", "--users", type="string", action="callback",
                     callback=create_mappingaction("users"), default=dict(),
-                    help="List of Drupal users that should be imported, including their mapping to Zinnia users. Default is to import all user blogs with preserved usernames.")
-        
+                    help="List of Drupal users that should be imported, including their mapping to Zinnia users. Default is to import all user blogs with preserved usernames."),
+        make_option("-t", "--threaded-comments", action="store_true",
+                    default=False, dest="threaded_comments",
+                    help="Import comments while preserving threading information. Requires zinnia-threaded-comments application."),
         )
     
     def handle_label(self, database_name, **options):
@@ -434,7 +498,8 @@ class Command(LabelCommand):
                                                            urllib.quote(database_name))
         engine = create_engine(database_connection_url)
 
-        importer = DrupalToZinnia(engine, options['node_type'], options['users'])
+        importer = DrupalToZinnia(engine, options['node_type'], options['users'], options['threaded_comments'])
+        importer.import_users()
         importer.import_categories()
         importer.import_content()
 
