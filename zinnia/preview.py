@@ -44,7 +44,7 @@ class HTMLPreview(object):
         """
         Boolean telling if the preview has hidden content.
         """
-        return len(self.preview) < len(self.content)
+        return self.preview != self.content
 
     def __str__(self):
         """
