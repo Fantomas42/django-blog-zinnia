@@ -45,7 +45,7 @@
 
 {% block content-loop %}
 {% for object in object_list %}
-  {% include object.content_template with object_content=object.html_content|truncatewords_html:100 continue_reading=1 %}
+  {% include object.content_template with object_content=object.html_preview continue_reading=1 %}
 {% empty %}
   <p class="info">
     <a href="{% url 'admin:zinnia_entry_add' %}">{% trans "No entries yet." %}</a>
