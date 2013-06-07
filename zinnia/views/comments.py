@@ -23,7 +23,7 @@ class CommentSuccess(TemplateResponseMixin, View):
             try:
                 self.comment = comments.get_model().objects.get(
                     pk=request.GET['c'])
-            except ObjectDoesNotExist:
+            except (ObjectDoesNotExist, ValueError):
                 pass
         if self.comment and self.comment.is_public:
             return HttpResponsePermanentRedirect(
