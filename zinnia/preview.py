@@ -1,16 +1,12 @@
 """Preview for Zinnia"""
-import re
-
 from django.utils.text import Truncator
 from django.utils.encoding import python_2_unicode_compatible
+
+from bs4 import BeautifulSoup
 
 from zinnia.settings import PREVIEW_SPLITTERS
 from zinnia.settings import PREVIEW_MAX_WORDS
 from zinnia.settings import PREVIEW_MORE_STRING
-
-MARKUP_CONTENT = re.compile(r'>[^<>]+<')
-MARKUP_ONLY = re.compile(r'^[^<>]+')
-NON_ORPHAN_MARKUPS = re.compile(r'<([^<>]+)></\1>')
 
 
 @python_2_unicode_compatible
@@ -76,15 +72,8 @@ class HTMLPreview(object):
         Split the HTML content with a marker
         without breaking closing markups.
         """
-        head, tail = self.content.split(splitter, 2)
-
-        tail = MARKUP_CONTENT.sub('><', tail)
-        tail = MARKUP_ONLY.sub('', tail)
-
-        final_tail = None
-        while final_tail != tail:
-            if final_tail is not None:
-                tail = final_tail
-            final_tail = NON_ORPHAN_MARKUPS.sub('', tail)
-
-        return head + self.more_string + final_tail
+        soup = BeautifulSoup(self.content.split(splitter)[0],
+                             'html.parser')
+        last_string = soup.find_all(text=True)[-1]
+        last_string.replace_with(last_string.string + self.more_string)
+        return soup
