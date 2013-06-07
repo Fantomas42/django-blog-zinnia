@@ -33,7 +33,7 @@ RESTRUCTUREDTEXT_SETTINGS = getattr(
 PREVIEW_SPLITTERS = getattr(settings, 'ZINNIA_PREVIEW_SPLITTERS',
                             ['<!-- more -->', '<!--more-->'])
 
-PREVIEW_MAX_WORDS = getattr(settings, 'ZINNIA_PREVIEW_MAX_WORDS', 100)
+PREVIEW_MAX_WORDS = getattr(settings, 'ZINNIA_PREVIEW_MAX_WORDS', 55)
 
 PREVIEW_MORE_STRING = getattr(settings, 'ZINNIA_PREVIEW_MORE_STRING', ' ...')
 
