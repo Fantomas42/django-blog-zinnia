@@ -18,6 +18,7 @@ from tagging.utils import parse_tag_input
 from zinnia.markups import textile
 from zinnia.markups import markdown
 from zinnia.markups import restructuredtext
+from zinnia.preview import HTMLPreview
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import UPLOAD_TO
 from zinnia.settings import MARKUP_LANGUAGE
@@ -204,6 +205,13 @@ class ContentEntry(models.Model):
         elif not '</p>' in self.content:
             return linebreaks(self.content)
         return self.content
+
+    @property
+    def html_preview(self):
+        """
+        Returns a preview of the "content" field formmated in HTML.
+        """
+        return HTMLPreview(self.html_content)
 
     @property
     def word_count(self):

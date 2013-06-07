@@ -371,6 +371,12 @@ class EntryHtmlContentTestCase(TestCase):
                           '\n<ul class="simple">\n<li>Item 1</li>\n'
                           '<li>Item 2</li>\n</ul>\n')
 
+    def test_html_preview(self):
+        entry.MARKUP_LANGUAGE = None
+        preview = self.entry.html_preview
+        self.assertEquals(str(preview), '<p>My content</p>')
+        self.assertEquals(preview.has_more, False)
+
 
 class EntryAbsoluteUrlTestCase(TestCase):
 

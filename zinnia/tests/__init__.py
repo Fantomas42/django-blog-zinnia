@@ -34,6 +34,7 @@ from zinnia.tests.flags import FlagsTestCase
 from zinnia.tests.translated_urls import TranslatedURLsTestCase
 from zinnia.tests.markups import MarkupsTestCase
 from zinnia.tests.markups import FailImportMarkupTestCase
+from zinnia.tests.preview import HTMLPreviewTestCase
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 
@@ -58,7 +59,8 @@ def suite():
                   AuthorListFilterTestCase, CategoryListFilterTestCase,
                   TranslatedURLsTestCase, EntryAbsoluteUrlTestCase,
                   MarkupsTestCase, FailImportMarkupTestCase,
-                  PingBackTestCase, MetaWeblogTestCase)
+                  PingBackTestCase, MetaWeblogTestCase,
+                  HTMLPreviewTestCase)
 
     for test_class in test_cases:
         tests = loader.loadTestsFromTestCase(test_class)
