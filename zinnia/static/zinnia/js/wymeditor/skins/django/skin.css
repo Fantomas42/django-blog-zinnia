@@ -19,7 +19,7 @@
 
 /*TRYING TO RESET STYLES THAT MAY INTERFERE WITH WYMEDITOR*/
         .wym_skin_django p, .wym_skin_django h2, .wym_skin_django h3,
-        .wym_skin_django ul, .wym_skin_django li { background: transparent url(); margin: 0; padding: 0; border-width:0; list-style: none; }
+        .wym_skin_django ul, .wym_skin_django li { background: transparent; margin: 0; padding: 0; border-width:0; list-style: none; }
 
 
 /*HIDDEN BY DEFAULT*/
@@ -27,7 +27,7 @@
         .wym_skin_django .wym_area_right         { display: block; }
 
 
-/*TYPO*/    
+/*TYPO*/
         .wym_skin_django                { font-size: 62,5%; font-family: "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif }
         .wym_skin_django h2             { font-size: 110%; /* = 11px */}
         .wym_skin_django h3             { font-size: 100%; /* = 10px */}
@@ -71,7 +71,7 @@
       /*hide section titles by default*/
         .wym_skin_django .wym_section h2         { display: none; }
       /*disable any margin-collapse*/
-        .wym_skin_django .wym_section            { padding-top: 1px; padding-bottom: 1px; }    
+        .wym_skin_django .wym_section            { padding-top: 1px; padding-bottom: 1px; }
       /*auto-clear sections*/
         .wym_skin_django .wym_section ul:after   { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
  * html .wym_skin_django .wym_section ul         { height: 1%;}
@@ -87,12 +87,12 @@
         .wym_skin_django .wym_dropdown.hover ul  { display: block; }
 
         .wym_skin_django .wym_tools ul  { padding-left: 0px !important; margin-left: 0px; }
-        
+
     /*option: add this class to a section to make its elements render buttons (icons are only available for the wym_tools section for now)*/
         .wym_skin_django .wym_buttons li         { float:left;}
         .wym_skin_django .wym_buttons a          { width: 20px; height: 20px; overflow: hidden; padding: 2px }
       /*image replacements*/
-        .wym_skin_django .wym_buttons li a                         { background: url(icons.png) no-repeat; text-indent: -9999px;} 
+        .wym_skin_django .wym_buttons li a                         { background: url(icons.png) no-repeat; text-indent: -9999px;}
         .wym_skin_django .wym_buttons li.wym_tools_strong a        { background-position: 0 -382px;}
         .wym_skin_django .wym_buttons li.wym_tools_emphasis a      { background-position: 0 -22px;}
         .wym_skin_django .wym_buttons li.wym_tools_superscript a   { background-position: 0 -430px;}
@@ -114,23 +114,23 @@
 /*DECORATION*/
         .wym_skin_django .wym_section h2             { background: #fff;}
         .wym_skin_django .wym_section h2 span        { color: gray;}
-        .wym_skin_django .wym_panel                  { padding: 0; background: white;}    
-        .wym_skin_django .wym_panel ul               { margin: 2px 0 5px; }        
+        .wym_skin_django .wym_panel                  { padding: 0; background: white;}
+        .wym_skin_django .wym_panel ul               { margin: 2px 0 5px; }
         .wym_skin_django .wym_dropdown               { padding: 0; border: solid gray; border-width: 1px 1px 0 1px; }
         .wym_skin_django .wym_dropdown ul            { border: solid gray; border-width: 0 1px 1px 1px; margin-left: -1px; padding: 5px 10px 5px 3px;}
-        
+
 /*DIALOGS*/
         .wym_dialog div.row         { margin-bottom: 5px;}
         .wym_dialog div.row input   { margin-right: 5px;}
         .wym_dialog div.row label   { float: left; width: 150px; display: block; text-align: right; margin-right: 10px; }
         .wym_dialog div.row-indent  { padding-left: 160px; }
-        /*autoclearing*/        
+        /*autoclearing*/
         .wym_dialog div.row:after            { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
         .wym_dialog div.row                  { display: inline-block; }
             /* Hides from IE-mac \*/
             * html .wym_dialog div.row       { height: 1%; }
             .wym_dialog div.row              { display: block; }
-            /* End hide from IE-mac */                
-            
+            /* End hide from IE-mac */
+
 /*WYMEDITOR_LINK*/
         a.wym_wymeditor_link        { text-indent: -9999px; float: right; display: block; width: 50px; height: 15px; background: url(../wymeditor_icon.png);  overflow: hidden; text-decoration: none;  }
