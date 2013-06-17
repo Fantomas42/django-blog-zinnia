@@ -134,7 +134,7 @@ More information and help available at these URLs :
 .. _`ShiningPanda`: http://www.shiningpanda.com/blog/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://docs.django-blog-zinnia.com/
-.. _`Jenkins CI server`: https://jenkins.shiningpanda.com/django-blog-zinnia/
+.. _`Jenkins CI server`: https://jenkins.shiningpanda-ci.com/django-blog-zinnia/
 .. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia
 .. _`Coverage report`: https://coveralls.io/r/Fantomas42/django-blog-zinnia
 .. _`Google Group`: http://groups.google.com/group/django-blog-zinnia/
