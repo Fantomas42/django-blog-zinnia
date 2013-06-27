@@ -68,6 +68,7 @@ or you can visit these websites who use Zinnia.
 * `Mauro Bianchi`_.
 * `Sergey Miracle`_.
 * `Infantium`_.
+* `Pana`_.
 
 
 If you are a proud user of Zinnia, send me the URL of your website and I
@@ -132,9 +133,10 @@ More information and help available at these URLs :
 .. _`AR.Drone Best of User Videos`: http://ardrone.parrot.com/best-of-user-videos/
 .. _`Darwin's Weblog`: http://darwin.willbreak.it/
 .. _`ShiningPanda`: http://www.shiningpanda.com/blog/
+.. _`Pana`: http://chusen87.com/news/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://docs.django-blog-zinnia.com/
-.. _`Jenkins CI server`: https://jenkins.shiningpanda.com/django-blog-zinnia/
+.. _`Jenkins CI server`: https://jenkins.shiningpanda-ci.com/django-blog-zinnia/
 .. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia
 .. _`Coverage report`: https://coveralls.io/r/Fantomas42/django-blog-zinnia
 .. _`Google Group`: http://groups.google.com/group/django-blog-zinnia/
