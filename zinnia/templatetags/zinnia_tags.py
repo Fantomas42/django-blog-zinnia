@@ -107,7 +107,7 @@ def get_popular_entries(number=5, template='zinnia/tags/popular_entries.html'):
     return {'template': template,
             'entries': Entry.published.filter(
                 comment_count__gt=0).order_by(
-                    '-comment_count')[:number]}
+                '-comment_count')[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)

@@ -77,10 +77,10 @@ class EntryRelatedPublishedManager(models.Manager):
         now = timezone.now()
         return super(
             EntryRelatedPublishedManager, self).get_query_set().filter(
-                models.Q(entries__start_publication__lte=now) |
-                models.Q(entries__start_publication=None),
-                models.Q(entries__end_publication__gt=now) |
-                models.Q(entries__end_publication=None),
-                entries__status=PUBLISHED,
-                entries__sites=Site.objects.get_current()
+            models.Q(entries__start_publication__lte=now) |
+            models.Q(entries__start_publication=None),
+            models.Q(entries__end_publication__gt=now) |
+            models.Q(entries__end_publication=None),
+            entries__status=PUBLISHED,
+            entries__sites=Site.objects.get_current()
             ).distinct()
