@@ -8,12 +8,12 @@ from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
-from django.conf import settings as project_settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import get_language
 from django.template.response import TemplateResponse
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 from zinnia import settings
 from zinnia.managers import HIDDEN
@@ -365,19 +365,23 @@ class EntryAdmin(admin.ModelAdmin):
             {'preview': entry.html_content})
 
     def _media(self):
-        STATIC_URL = '%szinnia/' % project_settings.STATIC_URL
+        """The medias needed to enhance the admin page"""
+        def static_url(url):
+            return staticfiles_storage.url('zinnia/%s' % url)
+
         media = super(EntryAdmin, self).media + Media(
-            css={'all': ('%scss/jquery.autocomplete.css' % STATIC_URL,)},
-            js=('%sjs/jquery.js' % STATIC_URL,
-                '%sjs/jquery.bgiframe.js' % STATIC_URL,
-                '%sjs/jquery.autocomplete.js' % STATIC_URL,
-                reverse('admin:zinnia_entry_autocomplete_tags'),))
+            css={'all': (
+                static_url('css/jquery.autocomplete.css'),)},
+            js=(static_url('js/jquery.js'),
+                static_url('js/jquery.bgiframe.js'),
+                static_url('js/jquery.autocomplete.js'),
+                reverse('admin:zinnia_entry_autocomplete_tags')))
 
         if settings.WYSIWYG == 'wymeditor':
             media += Media(
-                js=('%sjs/wymeditor/jquery.wymeditor.pack.js' % STATIC_URL,
-                    '%sjs/wymeditor/plugins/hovertools/'
-                    'jquery.wymeditor.hovertools.js' % STATIC_URL,
+                js=(static_url('js/wymeditor/jquery.wymeditor.pack.js'),
+                    static_url('js/wymeditor/plugins/hovertools/'
+                               'jquery.wymeditor.hovertools.js'),
                     reverse('admin:zinnia_entry_wymeditor')))
         elif settings.WYSIWYG == 'tinymce':
             from tinymce.widgets import TinyMCE
@@ -385,13 +389,13 @@ class EntryAdmin(admin.ModelAdmin):
                 js=(reverse('tinymce-js', args=('admin/zinnia/entry',)),))
         elif settings.WYSIWYG == 'markitup':
             media += Media(
-                js=('%sjs/markitup/jquery.markitup.js' % STATIC_URL,
-                    '%sjs/markitup/sets/%s/set.js' % (
-                        STATIC_URL, settings.MARKUP_LANGUAGE),
+                js=(static_url('js/markitup/jquery.markitup.js'),
+                    static_url('js/markitup/sets/%s/set.js' % (
+                        settings.MARKUP_LANGUAGE)),
                     reverse('admin:zinnia_entry_markitup')),
                 css={'all': (
-                    '%sjs/markitup/skins/django/style.css' % STATIC_URL,
-                    '%sjs/markitup/sets/%s/style.css' % (
-                        STATIC_URL, settings.MARKUP_LANGUAGE))})
+                    static_url('js/markitup/skins/django/style.css'),
+                    static_url('js/markitup/sets/%s/style.css' % (
+                        settings.MARKUP_LANGUAGE)))})
         return media
     media = property(_media)
