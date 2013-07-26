@@ -1,4 +1,4 @@
-{% load i18n static %}
+{% load i18n staticfiles %}
 {% if entries %}
 <div class="slider-container">
   <div class="slider">
@@ -20,9 +20,8 @@
     </ul>
   </div>
 </div>
-{% get_static_prefix as STATIC_URL %}
-<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.flexslider.js"></script>
+<script type="text/javascript" src="{% static "zinnia/js/jquery.js" %}"></script>
+<script type="text/javascript" src="{% static "zinnia/js/jquery.flexslider.js" %}"></script>
 <script type="text/javascript">
   jQuery(window).load(function() {
     jQuery(".slider").flexslider({
