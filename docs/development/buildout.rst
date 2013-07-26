@@ -66,6 +66,7 @@ Follow these few command to start the development: ::
   $ virtualenv --no-site-packages django-blog-zinnia
   $ cd django-blog-zinnia
   $ source ./bin/activate
+  $ pip install -U setuptools
   $ python bootstrap.py
   $ ./bin/buildout
 
