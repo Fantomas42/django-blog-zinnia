@@ -4,12 +4,12 @@ from __future__ import unicode_literals
 from itertools import chain
 
 from django import forms
-from django.conf import settings
 from django.contrib.admin import widgets
 from django.utils.html import escape
 from django.utils.html import conditional_escape
 from django.utils.encoding import smart_unicode
 from django.utils.encoding import force_unicode
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 class TreeNodeChoiceField(forms.ModelChoiceField):
@@ -101,6 +101,6 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
 
     class Media:
         """MPTTFilteredSelectMultiple's Media"""
-        js = (settings.STATIC_URL + 'admin/js/core.js',
-              settings.STATIC_URL + 'zinnia/js/mptt_m2m_selectbox.js',
-              settings.STATIC_URL + 'admin/js/SelectFilter2.js',)
+        js = (staticfiles_storage.url('admin/js/core.js'),
+              staticfiles_storage.url('zinnia/js/mptt_m2m_selectbox.js'),
+              staticfiles_storage.url('admin/js/SelectFilter2.js'))

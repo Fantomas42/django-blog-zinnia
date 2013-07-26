@@ -74,6 +74,7 @@ Assuming that you have an already existing Django project, register
     'django.contrib.comments',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
     'django.contrib.contenttypes',
     'tagging',
     'mptt',
@@ -94,7 +95,6 @@ already present. ::
     'django.core.context_processors.i18n',
     'django.core.context_processors.request',
     'django.core.context_processors.media',
-    'django.core.context_processors.static',
     'zinnia.context_processors.version',) # Optional
 
 .. _urls:

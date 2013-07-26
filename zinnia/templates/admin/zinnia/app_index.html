@@ -1,18 +1,18 @@
 {% extends "admin/app_index.html" %}
-{% load i18n %}
+{% load i18n staticfiles %}
 
 {% block extrastyle %}
 {{ block.super }}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}zinnia/css/jquery.autocomplete.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}zinnia/css/dashboard_zinnia.css" />
+<link rel="stylesheet" type="text/css" href="{% static "zinnia/css/jquery.autocomplete.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "zinnia/css/dashboard_zinnia.css" %}" />
 {% endblock %}
 
 {% block extrahead %}
 {{ block.super }}
-<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.masonry.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.bgiframe.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}zinnia/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="{% static "zinnia/js/jquery.js" %}"></script>
+<script type="text/javascript" src="{% static "zinnia/js/jquery.masonry.js" %}"></script>
+<script type="text/javascript" src="{% static "zinnia/js/jquery.bgiframe.js" %}"></script>
+<script type="text/javascript" src="{% static "zinnia/js/jquery.autocomplete.js" %}"></script>
 <script type="text/javascript" src="{% url 'admin:zinnia_entry_autocomplete_tags' %}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
