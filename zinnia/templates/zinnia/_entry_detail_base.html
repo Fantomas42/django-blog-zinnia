@@ -11,6 +11,7 @@
     {% endblock %}
     {% block entry-info %}
     <p class="entry-info">
+      {% block entry-authors %}
       {% with authors=object.authors.all %}
       {% if authors|length %}
       {% trans "Written by" %}
@@ -24,14 +25,20 @@
       {% trans "Written on" %}
       {% endif %}
       {% endwith %}
+      {% endblock %}
+      {% block entry-published %}
       <abbr class="published" title="{{ object.creation_date|date:"c" }}">{{ object.creation_date|date:"DATE_FORMAT" }}</abbr>
+      {% endblock %}
+      {% block entry-categories %}
       {% with categories=object.categories.all %}
       {% if categories|length %}
       {% trans "in" %}
       {% for category in categories %}
       <a href="{{ category.get_absolute_url }}"
          title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
-         rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.{% endwith %}
+         rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.
+      {% endwith %}
+      {% endblock %}
     </p>
     {% endblock %}
     {% block entry-last-update %}
@@ -102,9 +109,10 @@
       </a>
     </p>
     {% endblock %}
-    {% block entry-comments %}
+    {% block entry-discussions %}
     <p class="entry-comments">
       <strong>{% trans "Discussions" %}</strong> :
+      {% block entry-comments %}
       {% with comment_count=object.comment_count %}
       {% if comment_count %}
       <a href="{{ object.get_absolute_url }}#comments"
@@ -123,6 +131,8 @@
       {% endif %}
       {% endif %}
       {% endwith %}
+      {% endblock %}
+      {% block entry-pingbacks %}
       {% with pingback_count=object.pingback_count %}
       {% if pingback_count %}
       , <a href="{{ object.get_absolute_url }}#pingbacks" title="{% blocktrans with object=object.title %}Pingbacks on {{ object }}{% endblocktrans %}">
@@ -130,6 +140,8 @@
       </a>
       {% endif %}
       {% endwith %}
+      {% endblock %}
+      {% block entry-trackbacks %}
       {% with trackback_count=object.trackback_count %}
       {% if trackback_count %}
       , <a href="{{ object.get_absolute_url }}#trackbacks" title="{% blocktrans with object=object.title %}Trackbacks on {{ object }}{% endblocktrans %}">
@@ -137,6 +149,7 @@
       </a>
       {% endif %}
       {% endwith %}
+      {% endblock %}
     </p>
     {% endblock %}
   </div>
