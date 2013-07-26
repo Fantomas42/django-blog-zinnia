@@ -39,7 +39,7 @@
 
 {% block entry-widgets %}
 <div class="entry-widgets">
-  {% block entry-widgets-next-entry %}
+  {% block entry-next-entry %}
   {% with next_entry=object.next_entry %}
   {% if next_entry %}
   <div class="entry-next">
@@ -53,7 +53,7 @@
   {% endif %}
   {% endwith %}
   {% endblock %}
-  {% block entry-widgets-previous-entry %}
+  {% block entry-previous-entry %}
   {% with previous_entry=object.previous_entry %}
   {% if previous_entry %}
   <div class="entry-previous">
@@ -67,7 +67,7 @@
   {% endif %}
   {% endwith %}
   {% endblock %}
-  {% block entry-widgets-related-entries %}
+  {% block entry-related-entries %}
   {% with entry_related=object.related_published %}
   {% if entry_related %}
   <div class="entry-related">
@@ -83,7 +83,7 @@
   {% endif %}
   {% endwith %}
   {% endblock %}
-  {% block entry-widgets-similar-entries %}
+  {% block entry-similar-entries %}
   <div class="entry-similar">
     <h3>{% trans "Similar entries" %}</h3>
     {% get_similar_entries %}
