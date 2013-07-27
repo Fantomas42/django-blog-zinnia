@@ -1,12 +1,12 @@
 {% extends "admin/zinnia/widgets/base.html" %}
 {% load i18n zinnia_tags %}
 
-{% block module_id %}comments{% endblock %}
+{% block module_id %}comments{% endblock module_id %}
 
-{% block summary %}{% trans "Recent comments" %}{% endblock %}
+{% block summary %}{% trans "Recent comments" %}{% endblock summary %}
 
-{% block title %}{% trans "Recent comments" %}{% endblock %}
+{% block title %}{% trans "Recent comments" %}{% endblock title %}
 
 {% block content %}
   {% get_recent_comments template="admin/zinnia/widgets/_recent_comments.html" %}
-{% endblock %}
+{% endblock content %}

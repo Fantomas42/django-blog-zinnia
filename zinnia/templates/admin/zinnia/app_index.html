@@ -5,7 +5,7 @@
 {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static "zinnia/css/jquery.autocomplete.css" %}" />
 <link rel="stylesheet" type="text/css" href="{% static "zinnia/css/dashboard_zinnia.css" %}" />
-{% endblock %}
+{% endblock extrastyle %}
 
 {% block extrahead %}
 {{ block.super }}
@@ -21,7 +21,7 @@ $(document).ready(function() {
   });
 });
 </script>
-{% endblock %}
+{% endblock extrahead %}
 
 {% block content %}
 <div id="content-main">
@@ -31,4 +31,4 @@ $(document).ready(function() {
   {% include "admin/zinnia/widgets/draft_entries.html" %}
   {% include "admin/zinnia/widgets/recent_linkbacks.html" %}
 </div>
-{% endblock %}
+{% endblock content %}
