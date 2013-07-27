@@ -1,11 +1,11 @@
 {% extends "zinnia/base.html" %}
 {% load i18n comments zinnia_tags %}
 
-{% block title %}{{ object.title }}{% endblock %}
+{% block title %}{{ object.title }}{% endblock title %}
 
-{% block meta-description %}{{ object.excerpt|safe }}{% endblock %}
+{% block meta-description %}{{ object.excerpt|safe }}{% endblock meta-description %}
 
-{% block meta-keywords %}{% if object.tags %}{{ object.tags }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block meta-keywords %}{% if object.tags %}{{ object.tags }}{% else %}{{ block.super }}{% endif %}{% endblock meta-keywords %}
 
 {% block link %}
   {{ block.super }}
@@ -27,15 +27,15 @@
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of trackbacks on" %} '{{ object.title }}'"
         href="{% url 'zinnia_entry_trackback_feed' year month day object.slug %}" />
   {% endwith %}
-{% endblock %}
+{% endblock link %}
 
-{% block body-class %}entry entry-{{ object.pk }}{% if object.featured %} featured{% endif %} year-{{ object.creation_date|date:"Y" }} month-{{ object.creation_date|date:"m" }} week-{{ object.creation_date|date:"W" }} day-{{ object.creation_date|date:"d" }}{% endblock %}
+{% block body-class %}entry entry-{{ object.pk }}{% if object.featured %} featured{% endif %} year-{{ object.creation_date|date:"Y" }} month-{{ object.creation_date|date:"m" }} week-{{ object.creation_date|date:"W" }} day-{{ object.creation_date|date:"d" }}{% endblock body-class %}
 
 {% block content %}
 
 {% block entry-content %}
   {% include object.content_template with object_content=object.html_content %}
-{% endblock %}
+{% endblock entry-content %}
 
 {% block entry-widgets %}
 <div class="entry-widgets">
@@ -52,7 +52,7 @@
   </div>
   {% endif %}
   {% endwith %}
-  {% endblock %}
+  {% endblock entry-next-entry %}
   {% block entry-previous-entry %}
   {% with previous_entry=object.previous_entry %}
   {% if previous_entry %}
@@ -66,7 +66,7 @@
   </div>
   {% endif %}
   {% endwith %}
-  {% endblock %}
+  {% endblock entry-previous-entry %}
   {% block entry-related-entries %}
   {% with entry_related=object.related_published %}
   {% if entry_related %}
@@ -82,15 +82,15 @@
   </div>
   {% endif %}
   {% endwith %}
-  {% endblock %}
+  {% endblock entry-related-entries %}
   {% block entry-similar-entries %}
   <div class="entry-similar">
     <h3>{% trans "Similar entries" %}</h3>
     {% get_similar_entries %}
   </div>
-  {% endblock %}
+  {% endblock entry-similar-entries %}
 </div>
-{% endblock %}
+{% endblock entry-widgets %}
 
 {% block entry-comments %}
 <div id="comments">
@@ -134,7 +134,7 @@
     {% endif %}
   {% endif %}
 </div>
-{% endblock %}
+{% endblock entry-comments %}
 
 {% block entry-pingbacks %}
 <div id="pingbacks">
@@ -169,7 +169,7 @@
   <p>{% trans "Pingbacks are closed." %}</p>
   {% endif %}
 </div>
-{% endblock %}
+{% endblock entry-pingbacks %}
 
 {% block entry-trackbacks %}
 {% if object.trackback_count or object.trackbacks_are_open %}
@@ -207,15 +207,15 @@
   {% endif %}
 </div>
 {% endif %}
-{% endblock %}
+{% endblock entry-trackbacks %}
 
 {% block entry-comments-form %}
 {% if object.comments_are_open %}
   {% render_comment_form for object %}
 {% endif %}
-{% endblock %}
+{% endblock entry-comments-form %}
 
-{% endblock %}
+{% endblock content %}
 
 {% block admin_tools %}
 {% if perms.zinnia.change_entry %}
@@ -225,4 +225,4 @@
   </a>
 </li>
 {% endif %}
-{% endblock %}
+{% endblock admin_tools %}

@@ -1,11 +1,11 @@
 {% extends "zinnia/base.html" %}
 {% load i18n %}
 
-{% block meta-description %}{% trans "Tag list" %}{% endblock %}
+{% block meta-description %}{% trans "Tag list" %}{% endblock meta-description %}
 
-{% block title %}{% trans "Tags" %}{% endblock %}
+{% block title %}{% trans "Tags" %}{% endblock title %}
 
-{% block body-class %}tag-list{% endblock %}
+{% block body-class %}tag-list{% endblock body-class %}
 
 {% block content %}
 <h2>{% trans "Tag list" %}</h2>
@@ -23,4 +23,4 @@
   </li>
   {% endfor %}
 </ul>
-{% endblock %}
+{% endblock content %}

@@ -1,9 +1,9 @@
 {% extends "zinnia/base.html" %}
 {% load i18n zinnia_tags mptt_tags %}
 
-{% block title %}{% trans "Sitemap" %}{% endblock %}
+{% block title %}{% trans "Sitemap" %}{% endblock title %}
 
-{% block body-class %}sitemap{% endblock %}
+{% block body-class %}sitemap{% endblock body-class %}
 
 {% block content %}
 <h2>{% trans "Sitemap" %}</h2>
@@ -69,4 +69,4 @@
   <h3>{% trans "Monthly archives" %}</h3>
   {% get_archives_entries %}
 </div>
-{% endblock %}
+{% endblock content %}

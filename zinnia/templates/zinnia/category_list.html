@@ -1,11 +1,11 @@
 {% extends "zinnia/base.html" %}
 {% load i18n mptt_tags %}
 
-{% block meta-description %}{% trans "Category list" %}{% endblock %}
+{% block meta-description %}{% trans "Category list" %}{% endblock meta-description %}
 
-{% block title %}{% trans "Categories" %}{% endblock %}
+{% block title %}{% trans "Categories" %}{% endblock title %}
 
-{% block body-class %}category-list{% endblock %}
+{% block body-class %}category-list{% endblock body-class %}
 
 {% block content %}
 <h2>{% trans "Category list" %}</h2>
@@ -29,4 +29,4 @@
   </li>
   {% endif %}
 </ul>
-{% endblock %}
+{% endblock content %}

@@ -8,7 +8,7 @@
         {{ object.title|widont }}
       </a>
     </h2>
-    {% endblock %}
+    {% endblock entry-title %}
     {% block entry-info %}
     <p class="entry-info">
       {% block entry-authors %}
@@ -25,10 +25,10 @@
       {% trans "Written on" %}
       {% endif %}
       {% endwith %}
-      {% endblock %}
+      {% endblock entry-authors %}
       {% block entry-published %}
       <abbr class="published" title="{{ object.creation_date|date:"c" }}">{{ object.creation_date|date:"DATE_FORMAT" }}</abbr>
-      {% endblock %}
+      {% endblock entry-published %}
       {% block entry-categories %}
       {% with categories=object.categories.all %}
       {% if categories|length %}
@@ -38,16 +38,16 @@
          title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
          rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.
       {% endwith %}
-      {% endblock %}
+      {% endblock entry-categories %}
     </p>
-    {% endblock %}
+    {% endblock entry-info %}
     {% block entry-last-update %}
     <p class="entry-last-update">
       {% trans "Last update on" %} <abbr class="updated" title="{{ object.last_update|date:"c" }}">{{ object.last_update|date:"DATE_FORMAT" }}</abbr>.
     </p>
-    {% endblock %}
+    {% endblock entry-last-update %}
   </div>
-  {% endblock %}
+  {% endblock entry-header %}
 
   {% block entry-body %}
   <div class="entry-body">
@@ -65,12 +65,12 @@
       </p>
     </div>
     {% endif %}
-    {% endblock %}
+    {% endblock entry-image %}
     {% block entry-content %}
     <div class="entry-content">
       {{ object_content|safe }}
     </div>
-    {% endblock %}
+    {% endblock entry-content %}
     {% block continue-reading %}
     {% if continue_reading and object_content.has_more %}
     <p class="continue-reading">
@@ -81,9 +81,9 @@
       </a>
     </p>
     {% endif %}
-    {% endblock %}
+    {% endblock continue-reading %}
   </div>
-  {% endblock %}
+  {% endblock entry-body %}
 
   {% block entry-footer %}
   <div class="entry-footer">
@@ -98,7 +98,7 @@
       <span>{% trans "No tags" %}</span>
       {% endfor %}
     </p>
-    {% endblock %}
+    {% endblock entry-tags %}
     {% block entry-shorturl %}
     <p class="entry-shorturl">
       <strong>{% trans "Short url" %}</strong> :
@@ -108,7 +108,7 @@
         {{ object.short_url }}
       </a>
     </p>
-    {% endblock %}
+    {% endblock entry-shorturl %}
     {% block entry-discussions %}
     <p class="entry-discussions">
       <strong>{% trans "Discussions" %}</strong> :
@@ -131,7 +131,7 @@
       {% endif %}
       {% endif %}
       {% endwith %}
-      {% endblock %}
+      {% endblock entry-comments %}
       {% block entry-pingbacks %}
       {% with pingback_count=object.pingback_count %}
       {% if pingback_count %}
@@ -140,7 +140,7 @@
       </a>
       {% endif %}
       {% endwith %}
-      {% endblock %}
+      {% endblock entry-pingbacks %}
       {% block entry-trackbacks %}
       {% with trackback_count=object.trackback_count %}
       {% if trackback_count %}
@@ -149,9 +149,9 @@
       </a>
       {% endif %}
       {% endwith %}
-      {% endblock %}
+      {% endblock entry-trackbacks %}
     </p>
-    {% endblock %}
+    {% endblock entry-discussions %}
   </div>
-  {% endblock %}
+  {% endblock entry-footer %}
 </div>

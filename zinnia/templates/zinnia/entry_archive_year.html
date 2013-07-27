@@ -1,15 +1,15 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n %}
 
-{% block meta-description %}{% trans "Archives" %} {{ year|date:"Y" }}{% endblock %}
+{% block meta-description %}{% trans "Archives" %} {{ year|date:"Y" }}{% endblock meta-description %}
 
-{% block title %}{% trans "Archives" %} {{ year|date:"Y" }}{% endblock %}
+{% block title %}{% trans "Archives" %} {{ year|date:"Y" }}{% endblock title %}
 
-{% block body-class %}{{ block.super }} archive date year year-{{ year|date:"Y" }}{% endblock %}
+{% block body-class %}{{ block.super }} archive date year year-{{ year|date:"Y" }}{% endblock body-class %}
 
 {% block content-title %}
 <h1>{% trans "Archives" %} {{ year|date:"Y" }}</h1>
-{% endblock %}
+{% endblock content-title %}
 
 {% block content-related %}
 <h2>{% trans "Monthly archives" %}</h2>
@@ -33,4 +33,4 @@
   <a href="{% url 'zinnia_entry_archive_year' next_year|date:"Y" %}" rel="archives">{{ next_year|date:"Y" }}</a>
 </p>
 {% endif %}
-{% endblock %}
+{% endblock content-related %}

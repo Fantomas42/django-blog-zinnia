@@ -2,16 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Zinnia's Weblog - {% block title %}{% endblock %}{% block title-page %}{% endblock %}</title>
+    <title>Zinnia's Weblog - {% block title %}{% endblock title %}{% block title-page %}{% endblock title-page %}</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="cache-control" content="public" />
     <meta name="robots" content="follow, all" />
     <meta name="language" content="{{ LANGUAGE_CODE }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="{% block meta-description %}{% trans "Just another Zinnia weblog." %}{% endblock %}{% block meta-description-page %}{% endblock %}" />
-    <meta name="keywords" content="{% block meta-keywords %}django, blog, weblog, zinnia{% endblock %}" />
+    <meta name="description" content="{% block meta-description %}{% trans "Just another Zinnia weblog." %}{% endblock meta-description %}{% block meta-description-page %}{% endblock meta-description-page %}" />
+    <meta name="keywords" content="{% block meta-keywords %}django, blog, weblog, zinnia{% endblock meta-keywords %}" />
     <meta name="author" content="Fantomas42" />
-    {% block meta %}{% endblock %}
+    {% block meta %}{% endblock meta %}
     <link rel="pingback" href="/xmlrpc/" />
     <link rel="shortcut icon" href="{% static "zinnia/img/favicon.ico" %}" />
     <link rel="home" href="{% url 'zinnia_entry_archive_index' %}" />
@@ -20,10 +20,10 @@
     <!--[if lt IE 8]>
         <link rel="stylesheet" type="text/css" media="screen, projection" href="{% static "zinnia/css/ie.css" %}" />
     <![endif]-->
-    {% block link %}{% endblock %}
-    {% block script %}{% endblock %}
+    {% block link %}{% endblock link %}
+    {% block script %}{% endblock script %}
   </head>
-  <body class="zinnia {% block theme-class %}default{% endblock %} {% block color-class %}blue{% endblock %} {% block sidebar-class %}right-sidebar{% endblock %} {% block body-class %}{% endblock %}">
+  <body class="zinnia {% block theme-class %}default{% endblock theme-class %} {% block color-class %}blue{% endblock color-class %} {% block sidebar-class %}right-sidebar{% endblock sidebar-class %} {% block body-class %}{% endblock body-class %}">
     <div class="container">
       <div id="header">
         <ul class="top-navigation">
@@ -52,9 +52,9 @@
         <blockquote>
           <p>{% trans "Just another Zinnia weblog." %}</p>
         </blockquote>
-        {% block breadcrumbs %}{% endblock %}
+        {% block breadcrumbs %}{% endblock breadcrumbs  %}
       </div>
-      {% block slider %}{% endblock %}
+      {% block slider %}{% endblock slider %}
       <div id="content" class="hfeed">
         {% block content %}
         <div class="links">
@@ -76,11 +76,11 @@
           <h3>{% trans "Search" %}</h3>
           {% include "zinnia/tags/search_form.html" %}
         </div>
-        {% endblock %}
+        {% endblock content %}
       </div>
       <div id="sidebar">
         {% block sidebar %}
-        {% endblock %}
+        {% endblock sidebar %}
       </div>
       <div id="footer">
         <p>{% blocktrans %}Powered by <a href="http://www.djangoproject.com">Django</a> and <a href="https://github.com/Fantomas42/django-blog-zinnia">Zinnia {{ ZINNIA_VERSION }}</a>.{% endblocktrans %}</p>

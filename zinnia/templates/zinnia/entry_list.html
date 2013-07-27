@@ -1,9 +1,9 @@
 {% extends "zinnia/base.html" %}
 {% load i18n zinnia_tags %}
 
-{% block meta-description %}{% trans "Latest entries for" %} {% if category %}{% trans "the category" %} {{ category }}{% if category.description %}: {{ category.description|striptags|safe }}{% endif %}{% endif %}{% if tag %}{% trans "the tag" %} {{ tag }}{% endif %}{% if author %}{% trans "the author" %} {{ author }}{% endif %}{% endblock %}
+{% block meta-description %}{% trans "Latest entries for" %} {% if category %}{% trans "the category" %} {{ category }}{% if category.description %}: {{ category.description|striptags|safe }}{% endif %}{% endif %}{% if tag %}{% trans "the tag" %} {{ tag }}{% endif %}{% if author %}{% trans "the author" %} {{ author }}{% endif %}{% endblock meta-description %}
 
-{% block meta-description-page %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} {% trans "page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
+{% block meta-description-page %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} {% trans "page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock meta-description-page %}
 
 {% block link %}
   {{ block.super }}
@@ -16,13 +16,13 @@
   {% if author %}
     <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ author }}" href="{% url 'zinnia_author_feed' author.username %}" />
   {% endif %}
-{% endblock %}
+{% endblock link %}
 
-{% block title %}{% if category %}{% trans "Category" %} {{ category }}{% endif %}{% if tag %}{% trans "Tag" %} {{ tag }}{% endif %}{% if author %}{% trans "Author" %} {{ author }}{% endif %}{% endblock %}
+{% block title %}{% if category %}{% trans "Category" %} {{ category }}{% endif %}{% if tag %}{% trans "Tag" %} {{ tag }}{% endif %}{% if author %}{% trans "Author" %} {{ author }}{% endif %}{% endblock title %}
 
-{% block title-page %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} - {% trans "Page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock %}
+{% block title-page %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} - {% trans "Page" %} {{ page_obj.number }}{% endifnotequal %}{% endif %}{% endblock title-page %}
 
-{% block body-class %}entry-list{% if page_obj %} paginated page-{{ page_obj.number }}{% endif %}{% if category %} category category-{{ category.slug }}{% endif %}{% if tag %} tag tag-{{ tag|slugify }}{% endif %}{% if author %} author author-{{ author|slugify }}{% endif %}{% endblock %}
+{% block body-class %}entry-list{% if page_obj %} paginated page-{{ page_obj.number }}{% endif %}{% if category %} category category-{{ category.slug }}{% endif %}{% if tag %} tag tag-{{ tag|slugify }}{% endif %}{% if author %} author author-{{ author|slugify }}{% endif %}{% endblock body-class %}
 
 {% block content %}
 
@@ -41,7 +41,7 @@
 {% if author %}
 <h1>{% blocktrans %}Author archives: {{ author }}{% endblocktrans %}</h1>
 {% endif %}
-{% endblock %}
+{% endblock content-title %}
 
 {% block content-loop %}
 {% for object in object_list %}
@@ -51,18 +51,18 @@
     <a href="{% url 'admin:zinnia_entry_add' %}">{% trans "No entries yet." %}</a>
   </p>
 {% endfor %}
-{% endblock %}
+{% endblock content-loop %}
 
 {% block content-pagination %}
 {% if is_paginated %}
   {% zinnia_pagination page_obj %}
 {% endif %}
-{% endblock %}
+{% endblock content-pagination %}
 
 {% block content-related %}
-{% endblock %}
+{% endblock content-related %}
 
-{% endblock %}
+{% endblock content %}
 
 {% block admin_tools %}
   {% if category and perms.zinnia.change_category %}
@@ -86,4 +86,4 @@
     </a>
   </li>
   {% endif %}
-{% endblock %}
+{% endblock admin_tools %}

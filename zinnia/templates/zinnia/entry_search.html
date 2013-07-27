@@ -1,16 +1,16 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n zinnia_tags %}
 
-{% block title %}{% trans "Search results for" %} '{{ pattern }}'{% endblock %}
+{% block title %}{% trans "Search results for" %} '{{ pattern }}'{% endblock title %}
 
-{% block meta-description %}{% trans "Search results for" %} '{{ pattern }}'{% endblock %}
+{% block meta-description %}{% trans "Search results for" %} '{{ pattern }}'{% endblock meta-description %}
 
 {% block link %}
   {{ block.super }}
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of search result of" %} '{{ pattern }}'" href="{% url 'zinnia_entry_search_feed' %}?pattern={{ pattern }}" />
-{% endblock %}
+{% endblock link %}
 
-{% block body-class %}{{ block.super }} search {% if object_list %}search-results{% else %}search-no-results{% endif %}{% endblock %}
+{% block body-class %}{{ block.super }} search {% if object_list %}search-results{% else %}search-no-results{% endif %}{% endblock body-class %}
 
 {% block content-title %}
 <h1>{% trans "Search results for" %} '{{ pattern }}'</h1>
@@ -24,7 +24,7 @@
   {% blocktrans count entry_count=paginator.count %}{{ entry_count }} entry found{% plural %}{{ entry_count }} entries found{% endblocktrans %}
 </p>
 {% endif %}
-{% endblock %}
+{% endblock content-title %}
 
 {% block content-loop %}
 {% if not error %}
@@ -34,10 +34,10 @@
 <p class="info">{% trans "Nothing found." %}</p>
 {% endfor %}
 {% endif %}
-{% endblock %}
+{% endblock content-loop %}
 
 {% block content-related %}
 <div class="search">
   {% include "zinnia/tags/search_form.html" %}
 </div>
-{% endblock %}
+{% endblock content-related %}

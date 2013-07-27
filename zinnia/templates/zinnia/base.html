@@ -1,11 +1,11 @@
 {% extends "zinnia/skeleton.html" %}
 {% load zinnia_tags i18n %}
 
-{% block meta-keywords %}{% get_tags as entry_tags %}{{ entry_tags|join:", "}}{% endblock %}
+{% block meta-keywords %}{% get_tags as entry_tags %}{{ entry_tags|join:", "}}{% endblock meta-keywords %}
 
 {% block meta %}
     <meta name="generator" content="Zinnia {{ ZINNIA_VERSION }}" />
-{% endblock %}
+{% endblock meta %}
 
 {% block link %}
     <link rel="index" href="{% url 'zinnia_entry_archive_index' %}" />
@@ -16,11 +16,11 @@
     <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url 'zinnia_entry_latest_feed' %}" />
     <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest discussions" %}" href="{% url 'zinnia_discussion_latest_feed' %}" />
     {% get_archives_entries "zinnia/tags/archives_entries_link.html" %}
-{% endblock %}
+{% endblock link %}
 
 {% block breadcrumbs %}
   {% zinnia_breadcrumbs %}
-{% endblock %}
+{% endblock breadcrumbs %}
 
 {% block sidebar %}
 <div id="widget-welcome" class="widget">
@@ -91,7 +91,7 @@
     </li>
     {% endif %}
     {% block admin_tools %}
-    {% endblock %}
+    {% endblock admin_tools %}
     <li>
       <a href="{% url 'admin:logout' %}" title="{% trans "Log out" %}">
         {% trans "Log out" %}
@@ -100,4 +100,4 @@
   </ul>
 </div>
 {% endif %}
-{% endblock %}
+{% endblock sidebar %}
