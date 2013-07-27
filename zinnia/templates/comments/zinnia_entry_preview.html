@@ -1,9 +1,9 @@
 {% extends "zinnia/base.html" %}
 {% load i18n zinnia_tags comments %}
 
-{% block title %}{% trans "Comment preview" %}{% endblock %}
+{% block title %}{% trans "Comment preview" %}{% endblock title %}
 
-{% block body-class %}comment-preview{% endblock %}
+{% block body-class %}comment-preview{% endblock body-class %}
 
 {% block content %}
   {% if form.errors %}
@@ -33,4 +33,4 @@
   </ol>
   {% endif %}
   {% include "comments/zinnia/entry/form.html" %}
-{% endblock %}
+{% endblock content %}

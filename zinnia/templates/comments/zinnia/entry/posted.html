@@ -1,9 +1,9 @@
 {% extends "zinnia/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Thanks for your comment" %}{% endblock %}
+{% block title %}{% trans "Thanks for your comment" %}{% endblock title %}
 
-{% block body-class %}comment-posted{% endblock %}
+{% block body-class %}comment-posted{% endblock body-class %}
 
 {% block content %}
 <h2>{% trans "Thanks for your comment" %}</h2>
@@ -28,4 +28,4 @@
     </a>
   </li>
 </ul>
-{% endblock %}
+{% endblock content %}
