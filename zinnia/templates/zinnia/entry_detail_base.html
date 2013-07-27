@@ -217,7 +217,7 @@
 
 {% endblock content %}
 
-{% block admin_tools %}
+{% block admin-tools %}
 {% if perms.zinnia.change_entry %}
 <li>
   <a href="{% url 'admin:zinnia_entry_change' object.pk %}" title="{% trans "Edit the entry" %}">
@@ -225,4 +225,4 @@
   </a>
 </li>
 {% endif %}
-{% endblock admin_tools %}
+{% endblock admin-tools %}

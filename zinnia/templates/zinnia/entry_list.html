@@ -64,7 +64,7 @@
 
 {% endblock content %}
 
-{% block admin_tools %}
+{% block admin-tools %}
   {% if category and perms.zinnia.change_category %}
   <li>
     <a href="{% url 'admin:zinnia_category_change' category.pk %}" title="{% trans "Edit the category" %}">
@@ -86,4 +86,4 @@
     </a>
   </li>
   {% endif %}
-{% endblock admin_tools %}
+{% endblock admin-tools %}
