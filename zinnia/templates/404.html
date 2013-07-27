@@ -5,11 +5,11 @@
 <ul class="breadcrumbs">
   <li>{% trans "Error 404" %}</li>
 </ul>
-{% endblock %}
+{% endblock breadcrumbs %}
 
-{% block title %}{% trans "Page not found" %}{% endblock %}
+{% block title %}{% trans "Page not found" %}{% endblock title %}
 
-{% block body-class %}error-404{% endblock %}
+{% block body-class %}error-404{% endblock body-class %}
 
 {% block content %}
 <h2>{% trans "Page not found" %}</h2>
@@ -17,4 +17,4 @@
 <p>{% trans "Sorry, but the requested page could not be found." %}</p>
 
 {{ block.super }}
-{% endblock %}
+{% endblock content %}
