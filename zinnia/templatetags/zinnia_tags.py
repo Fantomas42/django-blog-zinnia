@@ -304,7 +304,7 @@ def get_gravatar(email, size=80, rating='g', default=None,
     """Return url for a Gravatar"""
     GRAVATAR_PROTOCOLS = {'http': 'http://www',
                           'https': 'https://secure'}
-    url = '%s.gravatar.com/avatar/%s.jpg' % (
+    url = '%s.gravatar.com/avatar/%s' % (
         GRAVATAR_PROTOCOLS[protocol],
         md5(email.strip().lower()).hexdigest())
     options = {'s': size, 'r': rating}
