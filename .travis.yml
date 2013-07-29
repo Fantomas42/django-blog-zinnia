@@ -6,6 +6,8 @@ install:
     - pip install -U setuptools
     - python bootstrap.py
     - ./bin/buildout -c ci/travis.cfg
+before_script:
+    - make kwalitee
 script:
     - ./bin/test
 after_success:
