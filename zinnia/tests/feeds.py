@@ -122,16 +122,28 @@ class ZinniaFeedsTestCase(TestCase):
         feed = EntryFeed()
         self.assertEquals(
             feed.item_enclosure_url(entry), 'http://example.com/image.jpg')
+        self.assertEquals(feed.item_enclosure_length(entry), '100000')
+        self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
         entry.content = 'My test content with image <img src="image.jpg" />'
         entry.save()
         self.assertEquals(
             feed.item_enclosure_url(entry), 'http://example.com/image.jpg')
+        self.assertEquals(feed.item_enclosure_length(entry), '100000')
+        self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
         entry.content = 'My test content with image ' \
                         '<img src="http://test.com/image.jpg" />'
         entry.save()
         self.assertEquals(
             feed.item_enclosure_url(entry), 'http://test.com/image.jpg')
-        entry.image = 'image_field.jpg'
+        self.assertEquals(feed.item_enclosure_length(entry), '100000')
+        self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
+        entry.image = 'image_field.png'
+        entry.save()
+        self.assertEquals(feed.item_enclosure_url(entry),
+                          urljoin('http://example.com', entry.image.url))
+        self.assertEquals(feed.item_enclosure_length(entry), '100000')
+        self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/png')
+        entry.image = 'image_without_extension'
         entry.save()
         self.assertEquals(feed.item_enclosure_url(entry),
                           urljoin('http://example.com', entry.image.url))

@@ -1,10 +1,10 @@
 """Feeds for Zinnia"""
+import os
+from mimetypes import guess_type
 try:
     from urllib.parse import urljoin
 except ImportError:  # Python 2
     from urlparse import urljoin
-
-from bs4 import BeautifulSoup
 
 from django.contrib import comments
 from django.contrib.sites.models import Site
@@ -17,6 +17,8 @@ from django.template.defaultfilters import slugify
 from django.core.urlresolvers import NoReverseMatch
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
+
+from bs4 import BeautifulSoup
 
 from tagging.models import Tag
 from tagging.models import TaggedItem
@@ -99,14 +101,24 @@ class EntryFeed(ZinniaFeed):
         else:
             img = BeautifulSoup(item.html_content).find('img')
             url = img.get('src') if img else None
+        self.cached_enclosure_url = url
         return urljoin(self.site_url, url) if url else None
 
     def item_enclosure_length(self, item):
-        """Hardcoded enclosure length"""
+        """Try to obtains the size of the enclosure if the image
+        is present on the FS, otherwise returns an hardcoded value"""
+        if item.image:
+            try:
+                return str(os.path.getsize(item.image.path))
+            except os.error:
+                pass
         return '100000'
 
     def item_enclosure_mime_type(self, item):
-        """Hardcoded enclosure mimetype"""
+        """Guesses the enclosure's mimetype"""
+        mimetype, encoding = guess_type(self.cached_enclosure_url)
+        if mimetype:
+            return mimetype
         return 'image/jpeg'
 
 
