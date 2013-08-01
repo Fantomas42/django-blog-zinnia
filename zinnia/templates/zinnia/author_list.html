@@ -1,11 +1,11 @@
 {% extends "zinnia/base.html" %}
 {% load i18n %}
 
-{% block meta-description %}{% trans "Author list" %}{% endblock %}
+{% block meta-description %}{% trans "Author list" %}{% endblock meta-description %}
 
-{% block title %}{% trans "Authors" %}{% endblock %}
+{% block title %}{% trans "Authors" %}{% endblock title %}
 
-{% block body-class %}author-list{% endblock %}
+{% block body-class %}author-list{% endblock body-class %}
 
 {% block content %}
 <h2>{% trans "Author list" %}</h2>
@@ -24,4 +24,4 @@
   </li>
   {% endfor %}
 </ul>
-{% endblock %}
+{% endblock content %}

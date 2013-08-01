@@ -20,13 +20,17 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.template.defaultfilters import slugify
 
+from tagging.models import Tag
+
+from django_xmlrpc.decorators import xmlrpc_func
+
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.settings import PROTOCOL
 from zinnia.settings import UPLOAD_TO
 from zinnia.managers import DRAFT, PUBLISHED
-from django_xmlrpc.decorators import xmlrpc_func
+
 
 # http://docs.nucleuscms.org/blog/12#errorcodes
 LOGIN_ERROR = 801
@@ -92,6 +96,21 @@ def category_structure(category, site):
             'parentId': category.parent and category.parent.pk or 0,
             'categoryDescription': category.description,
             'categoryName': category.title}
+
+
+def tag_structure(tag, site):
+    """A Tag structure"""
+    return {'tag_id': tag.pk,
+            'name': tag.name,
+            'count': tag.count,
+            'slug': tag.name,
+            'html_url': '%s://%s%s' % (
+                PROTOCOL, site.domain,
+                reverse('zinnia_tag_detail', args=[tag.name])),
+            'rss_url': '%s://%s%s' % (
+                PROTOCOL, site.domain,
+                reverse('zinnia_tag_feed', args=[tag.name]))
+            }
 
 
 def post_structure(entry, site):
@@ -179,6 +198,17 @@ def get_recent_posts(blog_id, username, password, number):
     site = Site.objects.get_current()
     return [post_structure(entry, site)
             for entry in Entry.objects.filter(authors=user)[:number]]
+
+
+@xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])
+def get_tags(blog_id, username, password):
+    """wp.getTags(blog_id, username, password)
+    => tag structure[]"""
+    authenticate(username, password)
+    site = Site.objects.get_current()
+    return [tag_structure(tag, site)
+            for tag in Tag.objects.usage_for_queryset(
+                Entry.published.all(), counts=True)]
 
 
 @xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])

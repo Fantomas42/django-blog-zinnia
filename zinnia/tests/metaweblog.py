@@ -118,6 +118,24 @@ class MetaWeblogTestCase(TestCase):
               'user_email': 'webmaster@example.com',
               'display_name': 'webmaster'}])
 
+    def test_get_tags(self):
+        self.assertRaises(Fault, self.server.wp.getTags,
+                          1, 'contributor', 'password')
+        self.assertEquals(
+            self.server.wp.getTags('apikey', 'webmaster', 'password'),
+            [{'count': 1,
+              'html_url': 'http://example.com/tags/test/',
+              'name': 'test',
+              'rss_url': 'http://example.com/feeds/tags/test/',
+              'slug': 'test',
+              'tag_id': 1},
+             {'count': 1,
+              'html_url': 'http://example.com/tags/zinnia/',
+              'name': 'zinnia',
+              'rss_url': 'http://example.com/feeds/tags/zinnia/',
+              'slug': 'zinnia',
+              'tag_id': 2}])
+
     def test_get_categories(self):
         self.assertRaises(Fault, self.server.metaWeblog.getCategories,
                           1, 'contributor', 'password')

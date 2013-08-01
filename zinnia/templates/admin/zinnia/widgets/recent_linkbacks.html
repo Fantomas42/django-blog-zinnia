@@ -1,12 +1,12 @@
 {% extends "admin/zinnia/widgets/base.html" %}
 {% load i18n zinnia_tags %}
 
-{% block module_id %}linkbacks{% endblock %}
+{% block module_id %}linkbacks{% endblock module_id %}
 
-{% block summary %}{% trans "Recent linkbacks" %}{% endblock %}
+{% block summary %}{% trans "Recent linkbacks" %}{% endblock summary %}
 
-{% block title %}{% trans "Recent linkbacks" %}{% endblock %}
+{% block title %}{% trans "Recent linkbacks" %}{% endblock title %}
 
 {% block content %}
   {% get_recent_linkbacks template="admin/zinnia/widgets/_recent_linkbacks.html" %}
-{% endblock %}
+{% endblock content %}

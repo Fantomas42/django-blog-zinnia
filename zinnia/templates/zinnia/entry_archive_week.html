@@ -1,16 +1,16 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n %}
 
-{% block meta-description %}{% blocktrans with year=week|date:"Y" week_number=week|date:"W"%}Archives week {{ week_number }} of {{ year }}{% endblocktrans %}{% endblock %}
+{% block meta-description %}{% blocktrans with year=week|date:"Y" week_number=week|date:"W"%}Archives week {{ week_number }} of {{ year }}{% endblocktrans %}{% endblock meta-description %}
 
-{% block title %}{% blocktrans with year=week|date:"Y" week_number=week|date:"W"%}Archives week {{ week_number }} of {{ year }}{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans with year=week|date:"Y" week_number=week|date:"W"%}Archives week {{ week_number }} of {{ year }}{% endblocktrans %}{% endblock title %}
 
-{% block body-class %}{{ block.super }} archive date week year-{{ week|date:"Y" }} month-{{ week|date:"m" }} week-{{ week|date:"W" }}{% endblock %}
+{% block body-class %}{{ block.super }} archive date week year-{{ week|date:"Y" }} month-{{ week|date:"m" }} week-{{ week|date:"W" }}{% endblock body-class %}
 
 {% block content-title %}
 <h1>{% blocktrans with year=week|date:"Y" week_number=week|date:"W" %}Archives week {{ week_number }} of {{ year }}{% endblocktrans %}</h1>
 <h2>{{ week|date:"DATE_FORMAT" }} - {{ week_end_day|date:"DATE_FORMAT" }}</h2>
-{% endblock %}
+{% endblock content-title %}
 
 {% block content-related %}
 {% if previous_week %}
@@ -38,4 +38,4 @@
     <a href="{% url 'zinnia_entry_archive_month' week|date:"Y" week|date:"m" %}" rel="archives">{{ week|date:"YEAR_MONTH_FORMAT" }}</a>
   </li>
 <ul>
-{% endblock %}
+{% endblock content-related %}

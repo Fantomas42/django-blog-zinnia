@@ -5,11 +5,11 @@
 <ul class="breadcrumbs">
   <li>{% trans "Error 403" %}</li>
 </ul>
-{% endblock %}
+{% endblock breadcrumbs %}
 
-{% block title %}{% trans "Permission denied" %}{% endblock %}
+{% block title %}{% trans "Permission denied" %}{% endblock title %}
 
-{% block body-class %}error-403{% endblock %}
+{% block body-class %}error-403{% endblock body-class %}
 
 {% block content %}
 <h2>{% trans "Permission denied" %}</h2>
@@ -17,4 +17,4 @@
 <p>{% trans "Sorry but you don't have the permission to do this action." %}</p>
 
 {{ block.super }}
-{% endblock %}
+{% endblock content %}

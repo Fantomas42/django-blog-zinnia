@@ -5,9 +5,10 @@ python:
 install:
     - pip install -U setuptools
     - python bootstrap.py
-    - ./bin/buildout -c ci/travis.cfg
+    - ./bin/buildout -c travis.cfg
 before_script:
-    - make kwalitee
+    - ./bin/pyflakes zinnia
+    - ./bin/pep8 --count --show-source --statistics --exclude=migrations zinnia
 script:
     - ./bin/test
 after_success:

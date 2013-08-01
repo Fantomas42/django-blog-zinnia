@@ -660,15 +660,15 @@ class TemplateTagsTestCase(TestCase):
         self.assertEquals(
             get_gravatar('webmaster@example.com'),
             'http://www.gravatar.com/avatar/86d4fd4a22de452'
-            'a9228298731a0b592.jpg?s=80&amp;r=g')
+            'a9228298731a0b592?s=80&amp;r=g')
         self.assertEquals(
             get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404'),
             'http://www.gravatar.com/avatar/86d4fd4a22de452'
-            'a9228298731a0b592.jpg?s=15&amp;r=x&amp;d=404')
+            'a9228298731a0b592?s=15&amp;r=x&amp;d=404')
         self.assertEquals(
             get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404', 'https'),
             'https://secure.gravatar.com/avatar/86d4fd4a22de452'
-            'a9228298731a0b592.jpg?s=15&amp;r=x&amp;d=404')
+            'a9228298731a0b592?s=15&amp;r=x&amp;d=404')
 
     def test_get_tags(self):
         Tag.objects.create(name='tag')

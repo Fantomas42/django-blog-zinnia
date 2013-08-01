@@ -277,7 +277,7 @@ class ZinniaFeedsTestCase(TestCase):
         self.assertEquals(
             feed.item_enclosure_url(comments[0]),
             'http://www.gravatar.com/avatar/e64c7d89f26b'
-            'd1972efa854d13d7dd61.jpg?s=80&amp;r=g')
+            'd1972efa854d13d7dd61?s=80&amp;r=g')
         self.assertEquals(feed.item_enclosure_length(entry), '100000')
         self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
 

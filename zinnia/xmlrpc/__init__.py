@@ -16,6 +16,8 @@ ZINNIA_XMLRPC_METAWEBLOG = [
      'blogger.deletePost'),
     ('zinnia.xmlrpc.metaweblog.get_authors',
      'wp.getAuthors'),
+    ('zinnia.xmlrpc.metaweblog.get_tags',
+     'wp.getTags'),
     ('zinnia.xmlrpc.metaweblog.get_categories',
      'metaWeblog.getCategories'),
     ('zinnia.xmlrpc.metaweblog.new_category',

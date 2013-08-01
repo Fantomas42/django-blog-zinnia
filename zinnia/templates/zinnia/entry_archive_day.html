@@ -1,15 +1,15 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n %}
 
-{% block meta-description %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
+{% block meta-description %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock meta-description %}
 
-{% block title %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
+{% block title %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock title %}
 
-{% block body-class %}{{ block.super }} archive date day year-{{ day|date:"Y" }} month-{{ day|date:"m" }} week-{{ day|date:"W" }} day-{{ day|date:"d" }}{% endblock %}
+{% block body-class %}{{ block.super }} archive date day year-{{ day|date:"Y" }} month-{{ day|date:"m" }} week-{{ day|date:"W" }} day-{{ day|date:"d" }}{% endblock body-class %}
 
 {% block content-title %}
 <h1>{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}</h1>
-{% endblock %}
+{% endblock content-title %}
 
 {% block content-related %}
 {% if previous_day %}
@@ -44,4 +44,4 @@
   </li>
   {% endif %}
 </ul>
-{% endblock %}
+{% endblock content-related %}
