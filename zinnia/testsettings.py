@@ -32,9 +32,6 @@ TEMPLATE_LOADERS = [
      ]
 ]
 
-TEMPLATE_DIRS = [os.path.join(os.path.dirname(__file__),
-                              'tests', 'templates')]
-
 INSTALLED_APPS = ['django.contrib.contenttypes',
                   'django.contrib.staticfiles',
                   'django.contrib.comments',
