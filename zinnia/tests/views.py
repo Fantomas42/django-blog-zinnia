@@ -515,61 +515,55 @@ class ZinniaViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_trackback(self):
         setup_test_template_loader(
-            {'404.html': ''})
+            {'404.html': '',
+             'zinnia/entry_trackback.xml': ''})
         response = self.client.post('/trackback/404/')
         self.assertEquals(response.status_code, 404)
-        restore_template_loaders()
         self.assertEquals(
             self.client.post('/trackback/1/').status_code, 301)
-        self.assertEquals(
-            self.client.get('/trackback/1/').status_code, 301)
         entry = Entry.objects.get(slug='test-1')
-        self.assertEquals(entry.trackback_count, 0)
         entry.trackback_enabled = False
         entry.save()
-        self.assertEquals(
-            self.client.post('/trackback/1/',
-                             {'url': 'http://example.com'}).content,
-            '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
-            '<error>1</error>\n  <message>Trackback is not enabled for '
-            'Test 1</message>\n  \n</response>\n')
+        self.assertEquals(entry.trackback_count, 0)
+        response = self.client.post('/trackback/1/',
+                                    {'url': 'http://example.com'})
+        self.assertEquals(response['Content-Type'], 'text/xml')
+        self.assertEquals(response.context['error'],
+                          'Trackback is not enabled for Test 1')
         entry.trackback_enabled = True
         entry.save()
         connect_discussion_signals()
         get_user_flagger()  # Memoize user flagger for stable query number
         if comments.get_comment_app_name() == comments.DEFAULT_COMMENTS_APP:
-            # If we are not using the default comment app,
+            # If we are using the default comment app,
             # we can count the database queries executed.
             with self.assertNumQueries(6):
-                self.assertEquals(
-                    self.client.post('/trackback/1/',
-                                     {'url': 'http://example.com'}).content,
-                    '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n'
-                    '  <error>0</error>\n  \n</response>\n')
+                response = self.client.post('/trackback/1/',
+                                            {'url': 'http://example.com'})
         else:
-            self.assertEquals(
-                self.client.post('/trackback/1/',
-                                 {'url': 'http://example.com'}).content,
-                '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
-                '<error>0</error>\n  \n</response>\n')
+            response = self.client.post('/trackback/1/',
+                                        {'url': 'http://example.com'})
+        self.assertEquals(response['Content-Type'], 'text/xml')
+        self.assertEquals('error' in response.context, False)
         disconnect_discussion_signals()
         entry = Entry.objects.get(pk=entry.pk)
         self.assertEquals(entry.trackback_count, 1)
-        self.assertEquals(
-            self.client.post('/trackback/1/',
-                             {'url': 'http://example.com'}).content,
-            '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
-            '<error>1</error>\n  <message>Trackback is already registered'
-            '</message>\n  \n</response>\n')
+        response = self.client.post('/trackback/1/',
+                                    {'url': 'http://example.com'})
+        self.assertEquals(response.context['error'],
+                          'Trackback is already registered')
+        restore_template_loaders()
 
     def test_zinnia_trackback_on_entry_without_author(self):
+        setup_test_template_loader(
+            {'zinnia/entry_trackback.xml': ''})
         entry = Entry.objects.get(slug='test-1')
         entry.authors.clear()
-        self.assertEquals(
-            self.client.post('/trackback/1/',
-                             {'url': 'http://example.com'}).content,
-            '<?xml version="1.0" encoding="utf-8"?>\n<response>\n  \n  '
-            '<error>0</error>\n  \n</response>\n')
+        response = self.client.post('/trackback/1/',
+                                    {'url': 'http://example.com'})
+        self.assertEquals(response['Content-Type'], 'text/xml')
+        self.assertEquals('error' in response.context, False)
+        restore_template_loaders()
 
     def test_capabilities(self):
         setup_test_template_loader(
