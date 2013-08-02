@@ -37,7 +37,7 @@ def disable_for_loaddata(signal_handler):
     def wrapper(*args, **kwargs):
         for fr in inspect.stack():
             if inspect.getmodulename(fr[1]) == 'loaddata':
-                return
+                return  # pragma: no cover
         signal_handler(*args, **kwargs)
 
     return wrapper
