@@ -410,12 +410,14 @@ class ZinniaViewsTestCase(ViewsBaseCase):
         self.check_publishing_context('/tags/', 2)
 
     def test_zinnia_tag_detail(self):
-        self.inhibit_templates('zinnia/tag/tests/entry_list.html')
+        self.inhibit_templates('zinnia/tag/tests/entry_list.html', '404.html')
         response = self.check_publishing_context(
             '/tags/tests/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(
             response, 'zinnia/tag/tests/entry_list.html')
         self.assertEquals(response.context['tag'].name, 'tests')
+        response = self.client.get('/tags/404/')
+        self.assertEquals(response.status_code, 404)
 
     def test_zinnia_tag_detail_paginated(self):
         self.inhibit_templates('zinnia/entry_list.html')
