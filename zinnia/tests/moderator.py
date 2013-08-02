@@ -8,6 +8,8 @@ from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.contrib.comments.forms import CommentForm
+from django.test.utils import restore_template_loaders
+from django.test.utils import setup_test_template_loader
 from django.contrib.comments.moderation import moderator as moderator_stack
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
@@ -24,6 +26,11 @@ class EntryCommentModeratorTestCase(TestCase):
     """Test cases for the moderator"""
 
     def setUp(self):
+        setup_test_template_loader(
+            {'comments/comment_authors_email.txt': '',
+             'comments/comment_notification_email.txt': '',
+             'comments/comment_reply_email.txt': ''})
+
         self.site = Site.objects.get_current()
         self.author = Author.objects.create(username='admin',
                                             email='admin@example.com')
@@ -34,6 +41,9 @@ class EntryCommentModeratorTestCase(TestCase):
         self.entry = Entry.objects.create(**params)
         self.entry.sites.add(self.site)
         self.entry.authors.add(self.author)
+
+    def tearDown(self):
+        restore_template_loaders()
 
     def test_email(self):
         comment = comments.get_model().objects.create(
