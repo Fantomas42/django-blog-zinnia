@@ -569,22 +569,22 @@ class ZinniaCustomDetailViews(ViewsBaseCase):
         """We don't need to generate the full template
         to make the tests working"""
         super(ZinniaCustomDetailViews, self).setUp()
-        self.inhibit_templates('zinnia/entry_search.html')
+        self.inhibit_templates('zinnia/entry_custom_list.html')
 
     def test_custom_category_detail(self):
         response = self.check_publishing_context('/categories/tests/', 2, 3)
-        self.assertTemplateUsed(response, 'zinnia/entry_search.html')
+        self.assertTemplateUsed(response, 'zinnia/entry_custom_list.html')
         self.assertEquals(response.context['category'].slug, 'tests')
         self.assertEquals(response.context['extra'], 'context')
 
     def test_custom_author_detail(self):
         response = self.check_publishing_context('/authors/admin/', 2, 3)
-        self.assertTemplateUsed(response, 'zinnia/entry_search.html')
+        self.assertTemplateUsed(response, 'zinnia/entry_custom_list.html')
         self.assertEquals(response.context['author'].username, 'admin')
         self.assertEquals(response.context['extra'], 'context')
 
     def test_custom_tag_detail(self):
         response = self.check_publishing_context('/tags/tests/', 2, 3)
-        self.assertTemplateUsed(response, 'zinnia/entry_search.html')
+        self.assertTemplateUsed(response, 'zinnia/entry_custom_list.html')
         self.assertEquals(response.context['tag'].name, 'tests')
         self.assertEquals(response.context['extra'], 'context')

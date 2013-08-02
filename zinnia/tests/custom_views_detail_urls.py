@@ -11,7 +11,7 @@ from zinnia.tests.urls import urlpatterns as test_urlpatterns
 class CustomModelDetailMixin(object):
     """Mixin for changing the template_name
     and overriding the context"""
-    template_name = 'zinnia/entry_search.html'
+    template_name = 'zinnia/entry_custom_list.html'
 
     def get_context_data(self, **kwargs):
         context = super(CustomModelDetailMixin,
@@ -46,10 +46,10 @@ urlpatterns = patterns(
     url(r'^categories/(?P<path>[-\/\w]+)/$',
         CustomCategoryDetail.as_view(),
         name='zinnia_category_detail'),
-    url(r'^tags/(?P<tag>[- \w]+)/$',
+    url(r'^tags/(?P<tag>[^/]+(?u))/$',
         CustomTagDetail.as_view(),
         name='zinnia_tag_detail'),
-    url(r'^tags/(?P<tag>[- \w]+)/page/(?P<page>\d+)/$',
+    url(r'^tags/(?P<tag>[^/]+(?u))/page/(?P<page>\d+)/$',
         CustomTagDetail.as_view(),
         name='zinnia_tag_detail_paginated'),
 ) + test_urlpatterns
