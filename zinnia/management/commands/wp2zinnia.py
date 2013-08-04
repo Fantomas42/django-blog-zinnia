@@ -162,7 +162,7 @@ class Command(LabelCommand):
                 usernames_display = []
                 preselected_user = None
                 for user in users:
-                    username = user.username
+                    username = getattr(user, user.USERNAME_FIELD)
                     if username == author_name:
                         usernames_display.append('[%s]' % username)
                         preselected_user = username
@@ -183,7 +183,7 @@ class Command(LabelCommand):
                     break
                 if user_selected.strip() == 'back':
                     return self.migrate_author(author_name)
-            return users.get(username=user_selected)
+            return users.get(**{users[0].USERNAME_FIELD: user_selected})
         else:
             create_text = "2. Please type the email of " \
                           "the '%s' user or 'back': " % author_name
