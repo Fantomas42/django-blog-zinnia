@@ -20,12 +20,12 @@ from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from tagging.models import Tag
 
+from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
-from zinnia.models.category import Category
-from zinnia.managers import PUBLISHED
-from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
+from zinnia.models.category import Category
+from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia import feeds
 from zinnia.feeds import EntryFeed
 from zinnia.feeds import ZinniaFeed
@@ -98,8 +98,6 @@ class ZinniaFeedsTestCase(TestCase):
         return [comment, pingback, trackback]
 
     def test_entry_feed(self):
-        original_feeds_format = feeds.FEEDS_FORMAT
-        feeds.FEEDS_FORMAT = ''
         entry = self.create_published_entry()
         feed = EntryFeed()
         self.assertEquals(feed.item_pubdate(entry), entry.creation_date)
@@ -115,11 +113,8 @@ class ZinniaFeedsTestCase(TestCase):
         self.author.save()
         feed.item_author_name(entry)
         self.assertEquals(feed.item_author_link(entry), 'http://example.com')
-        feeds.FEEDS_FORMAT = original_feeds_format
 
     def test_entry_feed_enclosure(self):
-        original_feeds_format = feeds.FEEDS_FORMAT
-        feeds.FEEDS_FORMAT = ''
         entry = self.create_published_entry()
         feed = EntryFeed()
         self.assertEquals(
@@ -153,18 +148,14 @@ class ZinniaFeedsTestCase(TestCase):
                           urljoin('http://example.com', entry.image.url))
         self.assertEquals(feed.item_enclosure_length(entry), '100000')
         self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
-        feeds.FEEDS_FORMAT = original_feeds_format
 
     def test_entry_feed_enclosure_issue_134(self):
-        original_feeds_format = feeds.FEEDS_FORMAT
-        feeds.FEEDS_FORMAT = ''
         entry = self.create_published_entry()
         feed = EntryFeed()
         entry.content = 'My test content with image <img xsrc="image.jpg" />'
         entry.save()
         self.assertEquals(
             feed.item_enclosure_url(entry), None)
-        feeds.FEEDS_FORMAT = original_feeds_format
 
     def test_latest_entries(self):
         self.create_published_entry()
@@ -312,13 +303,10 @@ class ZinniaFeedsTestCase(TestCase):
             'The latest trackbacks for the entry %s' % entry.title)
 
     def test_entry_feed_no_authors(self):
-        original_feeds_format = feeds.FEEDS_FORMAT
-        feeds.FEEDS_FORMAT = ''
         entry = self.create_published_entry()
         entry.authors.clear()
         feed = EntryFeed()
         self.assertEquals(feed.item_author_name(entry), None)
-        feeds.FEEDS_FORMAT = original_feeds_format
 
     def test_entry_feed_rss_or_atom(self):
         original_feeds_format = feeds.FEEDS_FORMAT

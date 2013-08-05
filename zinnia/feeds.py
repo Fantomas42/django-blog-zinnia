@@ -43,7 +43,7 @@ class ZinniaFeed(Feed):
     def __init__(self):
         if FEEDS_FORMAT == 'atom':
             self.feed_type = Atom1Feed
-            self.subtitle = self.description
+            self.subtitle = getattr(self, 'description', None)
 
     def title(self, obj=None):
         """Title of the feed prefixed with the site name """
