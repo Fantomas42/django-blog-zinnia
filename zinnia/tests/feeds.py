@@ -10,9 +10,11 @@ from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
+from django.core.files.base import ContentFile
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.feedgenerator import DefaultFeed
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.storage import default_storage
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
@@ -137,13 +139,15 @@ class ZinniaFeedsTestCase(TestCase):
             feed.item_enclosure_url(entry), 'http://test.com/image.jpg')
         self.assertEquals(feed.item_enclosure_length(entry), '100000')
         self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/jpeg')
-        entry.image = 'image_field.png'
+        path = default_storage.save('enclosure.png', ContentFile('Content'))
+        entry.image = path
         entry.save()
         self.assertEquals(feed.item_enclosure_url(entry),
                           urljoin('http://example.com', entry.image.url))
-        self.assertEquals(feed.item_enclosure_length(entry), '100000')
+        self.assertEquals(feed.item_enclosure_length(entry), '7')
         self.assertEquals(feed.item_enclosure_mime_type(entry), 'image/png')
-        entry.image = 'image_without_extension'
+        default_storage.delete(path)
+        entry.image = 'invalid_image_without_extension'
         entry.save()
         self.assertEquals(feed.item_enclosure_url(entry),
                           urljoin('http://example.com', entry.image.url))

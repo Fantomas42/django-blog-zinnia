@@ -15,6 +15,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import NoReverseMatch
+from django.core.files.storage import default_storage
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
 
@@ -109,8 +110,8 @@ class EntryFeed(ZinniaFeed):
         is present on the FS, otherwise returns an hardcoded value"""
         if item.image:
             try:
-                return str(os.path.getsize(item.image.path))
-            except os.error:
+                return str(default_storage.size(item.image.path))
+            except (os.error, NotImplementedError):
                 pass
         return '100000'
 
