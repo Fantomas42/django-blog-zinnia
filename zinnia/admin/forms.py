@@ -1,4 +1,6 @@
 """Forms for Zinnia admin"""
+from __future__ import unicode_literals
+
 from django import forms
 from django.db.models import ManyToOneRel
 from django.db.models import ManyToManyRel
@@ -6,9 +8,10 @@ from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 
+from mptt.forms import TreeNodeChoiceField
+
 from zinnia.models.entry import Entry
 from zinnia.models.category import Category
-from zinnia.admin.widgets import TreeNodeChoiceField
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.widgets import MPTTModelMultipleChoiceField
 
@@ -17,7 +20,8 @@ class CategoryAdminForm(forms.ModelForm):
     """Form for Category's Admin"""
     parent = TreeNodeChoiceField(
         label=_('parent category').capitalize(),
-        required=False, empty_label=_('No parent category'),
+        level_indicator='|--', required=False,
+        empty_label=_('No parent category'),
         queryset=Category.objects.all())
 
     def __init__(self, *args, **kwargs):

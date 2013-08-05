@@ -12,22 +12,6 @@ from django.utils.encoding import force_unicode
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 
-class TreeNodeChoiceField(forms.ModelChoiceField):
-    """Duplicating the TreeNodeChoiceField bundled in django-mptt
-    to avoid conflict with the TreeNodeChoiceField bundled in django-cms..."""
-    def __init__(self, level_indicator='|--', *args, **kwargs):
-        self.level_indicator = level_indicator
-        if kwargs.get('required', True) and not 'empty_label' in kwargs:
-            kwargs['empty_label'] = None
-        super(TreeNodeChoiceField, self).__init__(*args, **kwargs)
-
-    def label_from_instance(self, obj):
-        """Creates labels which represent the tree level of each node
-        when generating option labels."""
-        return '%s %s' % (self.level_indicator * getattr(
-            obj, obj._mptt_meta.level_attr), smart_unicode(obj))
-
-
 class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
     """MPTT version of ModelChoiceIterator"""
     def choice(self, obj):
