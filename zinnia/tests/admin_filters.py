@@ -27,30 +27,20 @@ class MiniEntryCategoryAdmin(ModelAdmin):
     list_filter = [CategoryListFilter]
 
 
-@skipIfCustomUser
-class AuthorListFilterTestCase(TestCase):
-    """Test case for AuthorListFilter"""
+class BaseListFilterTestCase(TestCase):
+    """Base TestCase for testing Filters"""
     urls = 'zinnia.tests.urls'
 
     def setUp(self):
         activate('en')
         self.request_factory = RequestFactory()
-
         self.site = Site.objects.get_current()
-        self.authors = [
-            Author.objects.create_user(username='webmaster',
-                                       email='webmaster@example.com'),
-            Author.objects.create_user(username='contributor',
-                                       email='contributor@example.com'),
-            Author.objects.create_user(username='reader',
-                                       email='reader@example.com')]
 
         params = {'title': 'My entry 1',
                   'content': 'My content 1',
                   'status': PUBLISHED,
                   'slug': 'my-entry-1'}
         self.entry_1 = Entry.objects.create(**params)
-        self.entry_1.authors.add(self.authors[0])
         self.entry_1.sites.add(self.site)
 
         params = {'title': 'My entry 2',
@@ -58,7 +48,6 @@ class AuthorListFilterTestCase(TestCase):
                   'status': PUBLISHED,
                   'slug': 'my-entry-2'}
         self.entry_2 = Entry.objects.create(**params)
-        self.entry_2.authors.add(*self.authors[:-1])
         self.entry_2.sites.add(self.site)
 
     def tearDown(self):
@@ -71,6 +60,23 @@ class AuthorListFilterTestCase(TestCase):
             modeladmin.date_hierarchy, modeladmin.search_fields,
             modeladmin.list_select_related, modeladmin.list_per_page,
             modeladmin.list_max_show_all, modeladmin.list_editable, modeladmin)
+
+
+@skipIfCustomUser
+class AuthorListFilterTestCase(BaseListFilterTestCase):
+    """Test case for AuthorListFilter"""
+
+    def setUp(self):
+        super(AuthorListFilterTestCase, self).setUp()
+        self.authors = [
+            Author.objects.create_user(username='webmaster',
+                                       email='webmaster@example.com'),
+            Author.objects.create_user(username='contributor',
+                                       email='contributor@example.com'),
+            Author.objects.create_user(username='reader',
+                                       email='reader@example.com')]
+        self.entry_1.authors.add(self.authors[0])
+        self.entry_2.authors.add(*self.authors[:-1])
 
     def test_filter(self):
         modeladmin = MiniEntryAuthorAdmin(Entry, site)
@@ -94,15 +100,11 @@ class AuthorListFilterTestCase(TestCase):
                                ('2', 'contributor (1 entry)')])
 
 
-class CategoryListFilterTestCase(TestCase):
+class CategoryListFilterTestCase(BaseListFilterTestCase):
     """Test case for CategoryListFilter"""
-    urls = 'zinnia.tests.urls'
 
     def setUp(self):
-        activate('en')
-        self.request_factory = RequestFactory()
-
-        self.site = Site.objects.get_current()
+        super(CategoryListFilterTestCase, self).setUp()
         self.categories = [
             Category.objects.create(title='Category 1',
                                     slug='cat-1'),
@@ -111,32 +113,8 @@ class CategoryListFilterTestCase(TestCase):
             Category.objects.create(title='Category 3',
                                     slug='cat-3')]
 
-        params = {'title': 'My entry 1',
-                  'content': 'My content 1',
-                  'status': PUBLISHED,
-                  'slug': 'my-entry-1'}
-        self.entry_1 = Entry.objects.create(**params)
         self.entry_1.categories.add(self.categories[0])
-        self.entry_1.sites.add(self.site)
-
-        params = {'title': 'My entry 2',
-                  'content': 'My content 2',
-                  'status': PUBLISHED,
-                  'slug': 'my-entry-2'}
-        self.entry_2 = Entry.objects.create(**params)
         self.entry_2.categories.add(*self.categories[:-1])
-        self.entry_2.sites.add(self.site)
-
-    def tearDown(self):
-        deactivate()
-
-    def get_changelist(self, request, model, modeladmin):
-        return ChangeList(
-            request, model, modeladmin.list_display,
-            modeladmin.list_display_links, modeladmin.list_filter,
-            modeladmin.date_hierarchy, modeladmin.search_fields,
-            modeladmin.list_select_related, modeladmin.list_per_page,
-            modeladmin.list_max_show_all, modeladmin.list_editable, modeladmin)
 
     def test_filter(self):
         modeladmin = MiniEntryCategoryAdmin(Entry, site)
