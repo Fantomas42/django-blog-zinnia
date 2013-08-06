@@ -35,8 +35,11 @@ class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
         Creates labels which represent the tree level of each node
         when generating option labels.
         """
-        return '%s %s' % (self.level_indicator * getattr(
-            obj, obj._mptt_meta.level_attr), smart_unicode(obj))
+        label = smart_unicode(obj)
+        prefix = self.level_indicator * getattr(obj, obj._mptt_meta.level_attr)
+        if prefix:
+            return '%s %s' % (prefix, label)
+        return label
 
     def _get_choices(self):
         """

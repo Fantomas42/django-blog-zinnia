@@ -48,9 +48,8 @@ class MPTTModelMultipleChoiceFieldTestCase(TestCase):
     def test_label_from_instance(self):
         field = MPTTModelMultipleChoiceField(
             queryset=Category.objects.all())
-
         self.assertEquals(field.label_from_instance(self.category_1),
-                          ' Category 1')
+                          'Category 1')
         self.assertEquals(field.label_from_instance(self.category_2),
                           '|-- Category 2')
 
@@ -58,5 +57,5 @@ class MPTTModelMultipleChoiceFieldTestCase(TestCase):
         field = MPTTModelMultipleChoiceField(
             queryset=Category.objects.all())
         self.assertEquals(list(field.choices),
-                          [(1, u' Category 1', (1, 1)),
+                          [(1, u'Category 1', (1, 1)),
                            (2, u'|-- Category 2', (1, 2))])
