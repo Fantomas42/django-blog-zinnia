@@ -46,16 +46,30 @@ class MPTTModelMultipleChoiceFieldTestCase(TestCase):
             parent=self.category_1)
 
     def test_label_from_instance(self):
+        queryset = Category.objects.all()
+
         field = MPTTModelMultipleChoiceField(
-            queryset=Category.objects.all())
+            queryset=queryset)
         self.assertEquals(field.label_from_instance(self.category_1),
                           'Category 1')
         self.assertEquals(field.label_from_instance(self.category_2),
                           '|-- Category 2')
+        field = MPTTModelMultipleChoiceField(
+            level_indicator='-->', queryset=queryset)
+        self.assertEquals(field.label_from_instance(self.category_2),
+                          '--> Category 2')
 
     def test_get_choices(self):
+        queryset = Category.objects.all()
+
         field = MPTTModelMultipleChoiceField(
-            queryset=Category.objects.all())
+            queryset=queryset)
         self.assertEquals(list(field.choices),
                           [(1, u'Category 1', (1, 1)),
                            (2, u'|-- Category 2', (1, 2))])
+
+        field = MPTTModelMultipleChoiceField(
+            level_indicator='-->', queryset=queryset)
+        self.assertEquals(list(field.choices),
+                          [(1, u'Category 1', (1, 1)),
+                           (2, u'--> Category 2', (1, 2))])
