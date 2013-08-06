@@ -37,6 +37,7 @@ LANGUAGES = (
     ('hu', gettext('Hungarian')),
     ('cs', gettext('Czech')),
     ('sk', gettext('Slovak')),
+    ('lt', gettext('Lithuanian')),
     ('ru', gettext('Russian')),
     ('pl', gettext('Polish')),
     ('eu', gettext('Basque')),
