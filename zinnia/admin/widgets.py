@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 from itertools import chain
 
 from django.contrib.admin import widgets
-from django.utils.html import escape
-from django.utils.html import conditional_escape
-from django.utils.encoding import force_unicode
+from django.utils.html import format_html
+from django.utils.safestring import mark_safe
+from django.utils.encoding import force_text
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 
@@ -14,6 +14,24 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
     """
     MPTT version of FilteredSelectMultiple
     """
+
+    def render_option(self, selected_choices, option_value,
+                      option_label, sort_fields):
+        """
+        Overrides the render_option method to handle
+        the sort_fields argument.
+        """
+        option_value = force_text(option_value)
+        if option_value in selected_choices:
+            selected_html = mark_safe(' selected="selected"')
+        else:
+            selected_html = ''
+        return format_html(
+            '<option value="{0}"{1} data-tree-id="{2}"'
+            ' data-left-value="{3}">{4}</option>',
+            option_value, selected_html,
+            sort_fields[0], sort_fields[1],
+            force_text(option_label))
 
     def render_options(self, choices, selected_choices):
         """
@@ -23,30 +41,13 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         some default choices for this field, make sure they have the
         extra tuple too!)
         """
-        def render_option(option_value, option_label, sort_fields):
-            """Inner scope render_option"""
-            option_value = force_unicode(option_value)
-            selected_html = (option_value in selected_choices) and \
-                ' selected="selected"' or ''
-            return '<option value="%s" data-tree-id="%s" ' \
-                   'data-left-value="%s"%s>%s</option>' % (
-                       escape(option_value),
-                       sort_fields[0], sort_fields[1], selected_html,
-                       conditional_escape(force_unicode(option_label)))
-        # Normalize to strings.
-        selected_choices = set([force_unicode(v) for v in selected_choices])
+        selected_choices = set(force_text(v) for v in selected_choices)
         output = []
         for option_value, option_label, sort_fields in chain(
                 self.choices, choices):
-            if isinstance(option_label, (list, tuple)):
-                output.append('<optgroup label="%s">' % escape(
-                    force_unicode(option_value)))
-                for option in option_label:
-                    output.append(render_option(*option))
-                output.append('</optgroup>')
-            else:
-                output.append(render_option(option_value, option_label,
-                                            sort_fields))
+            output.append(self.render_option(
+                selected_choices, option_value,
+                option_label, sort_fields))
         return '\n'.join(output)
 
     class Media:
