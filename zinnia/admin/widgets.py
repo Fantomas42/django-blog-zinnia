@@ -11,10 +11,9 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
-    """MPTT version of FilteredSelectMultiple"""
-    def __init__(self, verbose_name, is_stacked, attrs=None, choices=()):
-        super(MPTTFilteredSelectMultiple, self).__init__(
-            verbose_name, is_stacked, attrs, choices)
+    """
+    MPTT version of FilteredSelectMultiple
+    """
 
     def render_options(self, choices, selected_choices):
         """

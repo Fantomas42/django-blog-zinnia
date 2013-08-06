@@ -32,6 +32,7 @@ from zinnia.tests.admin_filters import AuthorListFilterTestCase
 from zinnia.tests.admin_filters import CategoryListFilterTestCase
 from zinnia.tests.admin_fields import MPTTModelChoiceIteratorTestCase
 from zinnia.tests.admin_fields import MPTTModelMultipleChoiceFieldTestCase
+from zinnia.tests.admin_widgets import MPTTFilteredSelectMultipleTestCase
 from zinnia.tests.flags import FlagsTestCase
 from zinnia.tests.translated_urls import TranslatedURLsTestCase
 from zinnia.tests.markups import MarkupsTestCase
@@ -65,6 +66,7 @@ def suite():
                   HTMLPreviewTestCase,
                   MPTTModelChoiceIteratorTestCase,
                   MPTTModelMultipleChoiceFieldTestCase,
+                  MPTTFilteredSelectMultipleTestCase
                   )
 
     for test_class in test_cases:
