@@ -30,6 +30,8 @@ from zinnia.tests.mixins import MixinTestCase
 from zinnia.tests.author import AuthorTestCase
 from zinnia.tests.admin_filters import AuthorListFilterTestCase
 from zinnia.tests.admin_filters import CategoryListFilterTestCase
+from zinnia.tests.admin_fields import MPTTModelChoiceIteratorTestCase
+from zinnia.tests.admin_fields import MPTTModelMultipleChoiceFieldTestCase
 from zinnia.tests.flags import FlagsTestCase
 from zinnia.tests.translated_urls import TranslatedURLsTestCase
 from zinnia.tests.markups import MarkupsTestCase
@@ -60,7 +62,10 @@ def suite():
                   TranslatedURLsTestCase, EntryAbsoluteUrlTestCase,
                   MarkupsTestCase, FailImportMarkupTestCase,
                   PingBackTestCase, MetaWeblogTestCase,
-                  HTMLPreviewTestCase)
+                  HTMLPreviewTestCase,
+                  MPTTModelChoiceIteratorTestCase,
+                  MPTTModelMultipleChoiceFieldTestCase,
+                  )
 
     for test_class in test_cases:
         tests = loader.loadTestsFromTestCase(test_class)
