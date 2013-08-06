@@ -13,7 +13,7 @@ from mptt.forms import TreeNodeChoiceField
 from zinnia.models.entry import Entry
 from zinnia.models.category import Category
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
-from zinnia.admin.widgets import MPTTModelMultipleChoiceField
+from zinnia.admin.fields import MPTTModelMultipleChoiceField
 
 
 class CategoryAdminForm(forms.ModelForm):

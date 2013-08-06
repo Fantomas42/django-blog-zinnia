@@ -25,6 +25,14 @@ admin Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`fields` Module
+---------------------
+
+.. automodule:: zinnia.admin.fields
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`filters` Module
 ---------------------
 
