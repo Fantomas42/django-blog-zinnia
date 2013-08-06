@@ -19,7 +19,7 @@ from zinnia.admin.fields import MPTTModelMultipleChoiceField
 class CategoryAdminForm(forms.ModelForm):
     """Form for Category's Admin"""
     parent = TreeNodeChoiceField(
-        label=_('parent category').capitalize(),
+        label=_('Parent category'),
         level_indicator='|--', required=False,
         empty_label=_('No parent category'),
         queryset=Category.objects.all())
