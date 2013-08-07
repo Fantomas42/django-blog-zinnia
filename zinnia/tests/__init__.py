@@ -28,6 +28,8 @@ from zinnia.tests.url_shortener import URLShortenerTestCase
 from zinnia.tests.long_enough import LongEnoughTestCase
 from zinnia.tests.mixins import MixinTestCase
 from zinnia.tests.author import AuthorTestCase
+from zinnia.tests.admin_forms import EntryAdminFormTestCase
+from zinnia.tests.admin_forms import CategoryAdminFormTestCase
 from zinnia.tests.admin_filters import AuthorListFilterTestCase
 from zinnia.tests.admin_filters import CategoryListFilterTestCase
 from zinnia.tests.admin_fields import MPTTModelChoiceIteratorTestCase
@@ -64,6 +66,7 @@ def suite():
                   MarkupsTestCase, FailImportMarkupTestCase,
                   PingBackTestCase, MetaWeblogTestCase,
                   HTMLPreviewTestCase,
+                  EntryAdminFormTestCase, CategoryAdminFormTestCase,
                   MPTTModelChoiceIteratorTestCase,
                   MPTTModelMultipleChoiceFieldTestCase,
                   MPTTFilteredSelectMultipleTestCase
