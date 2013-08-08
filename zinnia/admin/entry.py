@@ -92,9 +92,8 @@ class EntryAdmin(admin.ModelAdmin):
         """Return the authors in HTML"""
         try:
             authors = ['<a href="%s" target="blank">%s</a>' %
-                       (reverse('zinnia_author_detail',
-                                args=[author.username]),
-                        author.username) for author in entry.authors.all()]
+                       (author.get_absolute_url(), author.username)
+                       for author in entry.authors.all()]
         except NoReverseMatch:
             authors = [author.username for author in entry.authors.all()]
         return ', '.join(authors)

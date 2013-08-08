@@ -2,70 +2,40 @@
 from __future__ import unicode_literals
 
 from django.test import TestCase
+from django.contrib.sites.models import Site
+from django.utils.translation import activate
+from django.utils.translation import deactivate
 from django.contrib.admin.sites import AdminSite
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
-from zinnia import settings
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
+from zinnia.admin.entry import EntryAdmin
 from zinnia.admin.category import CategoryAdmin
-
-
-@skipIfCustomUser
-class EntryAdminTestCase(TestCase):
-    """Test case for Entry Admin"""
-    urls = 'zinnia.tests.urls'
-
-    def setUp(self):
-        self.original_wysiwyg = settings.WYSIWYG
-        settings.WYSIWYG = None
-        Author.objects.create_superuser(
-            'admin', 'admin@example.com', 'password')
-        category_1 = Category.objects.create(title='Category 1', slug='cat-1')
-        Category.objects.create(title='Category 2', slug='cat-2',
-                                parent=category_1)
-
-        self.client.login(username='admin', password='password')
-
-    def tearDown(self):
-        settings.WYSIWYG = self.original_wysiwyg
-
-    def test_entry_add_and_change(self):
-        """Test the insertion of an Entry"""
-        self.assertEquals(Entry.objects.count(), 0)
-        post_data = {'title': 'New entry',
-                     'detail_template': 'entry_detail.html',
-                     'content_template': 'zinnia/_entry_detail.html',
-                     'creation_date_0': '2011-01-01',
-                     'creation_date_1': '12:00:00',
-                     'start_publication_0': '2011-01-01',
-                     'start_publication_1': '12:00:00',
-                     'end_publication_0': '2042-03-15',
-                     'end_publication_1': '00:00:00',
-                     'status': '2',
-                     'sites': '1',
-                     'content': 'My content'}
-
-        response = self.client.post('/admin/zinnia/entry/add/', post_data)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(Entry.objects.count(), 0)
-
-        post_data.update({'slug': 'new-entry'})
-        response = self.client.post('/admin/zinnia/entry/add/',
-                                    post_data, follow=True)
-        self.assertEquals(response.redirect_chain,
-                          [('http://testserver/admin/zinnia/entry/', 302)])
-        self.assertEquals(Entry.objects.count(), 1)
 
 
 class BaseAdminTestCase(TestCase):
     rich_urls = 'zinnia.tests.urls'
     poor_urls = 'zinnia.tests.poor_urls'
     urls = rich_urls
+    model_class = None
+    admin_class = None
 
     def setUp(self):
+        activate('en')
         self.site = AdminSite()
+        self.admin = self.admin_class(
+            self.model_class, self.site)
+
+    def tearDown(self):
+        """
+        Be sure to restore the good urls to use
+        if a test fail before restoring the urls.
+        """
+        self.urls = self.rich_urls
+        self._urlconf_setup()
+        deactivate()
 
     def check_with_rich_and_poor_urls(self, func, args,
                                       result_rich, result_poor):
@@ -74,16 +44,111 @@ class BaseAdminTestCase(TestCase):
         self._urlconf_setup()
         self.assertEquals(func(*args), result_poor)
         self.urls = self.rich_urls
+        self._urlconf_setup()
+
+
+class EntryAdminTestCase(BaseAdminTestCase):
+    """Test case for Entry Admin"""
+    model_class = Entry
+    admin_class = EntryAdmin
+
+    def setUp(self):
+        super(EntryAdminTestCase, self).setUp()
+        params = {'title': 'My title',
+                  'content': 'My content',
+                  'slug': 'my-titile'}
+        self.entry = Entry.objects.create(**params)
+
+    def test_get_title(self):
+        self.assertEquals(self.admin.get_title(self.entry),
+                          'My title (2 words)')
+        self.entry.comment_count = 1
+        self.entry.save()
+        self.assertEquals(self.admin.get_title(self.entry),
+                          'My title (2 words) (1 reaction)')
+        self.entry.pingback_count = 1
+        self.entry.save()
+        self.assertEquals(self.admin.get_title(self.entry),
+                          'My title (2 words) (2 reactions)')
+
+    @skipIfCustomUser
+    def test_get_authors(self):
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_authors, (self.entry,),
+            '', '')
+        author_1 = Author.objects.create_user(
+            'author-1', 'author1@example.com')
+        author_2 = Author.objects.create_user(
+            'author-2', 'author2@example.com')
+        self.entry.authors.add(author_1)
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_authors, (self.entry,),
+            '<a href="/authors/author-1/" target="blank">author-1</a>',
+            'author-1')
+        self.entry.authors.add(author_2)
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_authors, (self.entry,),
+            '<a href="/authors/author-1/" target="blank">author-1</a>, '
+            '<a href="/authors/author-2/" target="blank">author-2</a>',
+            'author-1, author-2',)
+
+    def test_get_catgories(self):
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_categories, (self.entry,),
+            '', '')
+        category_1 = Category.objects.create(title='Category 1',
+                                             slug='category-1')
+        category_2 = Category.objects.create(title='Category 2',
+                                             slug='category-2')
+        self.entry.categories.add(category_1)
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_categories, (self.entry,),
+            '<a href="/categories/category-1/" target="blank">Category 1</a>',
+            'Category 1')
+        self.entry.categories.add(category_2)
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_categories, (self.entry,),
+            '<a href="/categories/category-1/" target="blank">Category 1</a>, '
+            '<a href="/categories/category-2/" target="blank">Category 2</a>',
+            'Category 1, Category 2')
+
+    def test_get_tags(self):
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_tags, (self.entry,),
+            '', '')
+        self.entry.tags = 'zinnia'
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_tags, (self.entry,),
+            '<a href="/tags/zinnia/" target="blank">zinnia</a>',
+            'zinnia')
+        self.entry.tags = 'zinnia, test'
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_tags, (self.entry,),
+            '<a href="/tags/test/" target="blank">test</a>, '
+            '<a href="/tags/zinnia/" target="blank">zinnia</a>',
+            'zinnia, test')  # Yes, this is not the same order...
+
+    def test_get_sites(self):
+        self.assertEquals(self.admin.get_sites(self.entry), '')
+        self.entry.sites.add(Site.objects.get_current())
+        self.assertEquals(
+            self.admin.get_sites(self.entry),
+            '<a href="http://example.com" target="blank">example.com</a>')
+
+    def test_get_is_visible(self):
+        self.assertEquals(self.admin.get_is_visible(self.entry),
+                          self.entry.is_visible)
 
 
 class CategoryAdminTestCase(BaseAdminTestCase):
     """Test cases for Category Admin"""
+    model_class = Category
+    admin_class = CategoryAdmin
 
     def test_get_tree_path(self):
-        admin = CategoryAdmin(Category, self.site)
         category = Category.objects.create(title='Category', slug='cat')
 
         self.check_with_rich_and_poor_urls(
-            admin.get_tree_path, (category,),
+            self.admin.get_tree_path, (category,),
             '<a href="/categories/cat/" target="blank">/cat/</a>',
             '/cat/')
