@@ -2,12 +2,14 @@
 from __future__ import unicode_literals
 
 from django.test import TestCase
+from django.contrib.admin.sites import AdminSite
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import settings
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
+from zinnia.admin.category import CategoryAdmin
 
 
 @skipIfCustomUser
@@ -57,38 +59,31 @@ class EntryAdminTestCase(TestCase):
         self.assertEquals(Entry.objects.count(), 1)
 
 
-@skipIfCustomUser
-class CategoryAdminTestCase(TestCase):
-    """Test cases for Category Admin"""
-    urls = 'zinnia.tests.urls'
+class BaseAdminTestCase(TestCase):
+    rich_urls = 'zinnia.tests.urls'
+    poor_urls = 'zinnia.tests.poor_urls'
+    urls = rich_urls
 
     def setUp(self):
-        Author.objects.create_superuser(
-            'admin', 'admin@example.com', 'password')
-        self.client.login(username='admin', password='password')
+        self.site = AdminSite()
 
-    def test_category_add_and_change(self):
-        """Test the insertion of a Category, change error, and new insert"""
-        self.assertEquals(Category.objects.count(), 0)
-        post_data = {'title': 'New category',
-                     'slug': 'new-category'}
-        response = self.client.post('/admin/zinnia/category/add/',
-                                    post_data, follow=True)
-        self.assertEquals(response.redirect_chain,
-                          [('http://testserver/admin/zinnia/category/', 302)])
-        self.assertEquals(Category.objects.count(), 1)
+    def check_with_rich_and_poor_urls(self, func, args,
+                                      result_rich, result_poor):
+        self.assertEquals(func(*args), result_rich)
+        self.urls = self.poor_urls
+        self._urlconf_setup()
+        self.assertEquals(func(*args), result_poor)
+        self.urls = self.rich_urls
 
-        post_data.update({'parent': '1'})
-        response = self.client.post('/admin/zinnia/category/1/', post_data)
-        self.assertEquals(response.status_code, 200)
 
-        response = self.client.post('/admin/zinnia/category/add/', post_data)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(Category.objects.count(), 1)
+class CategoryAdminTestCase(BaseAdminTestCase):
+    """Test cases for Category Admin"""
 
-        post_data.update({'slug': 'new-category-2'})
-        response = self.client.post('/admin/zinnia/category/add/',
-                                    post_data, follow=True)
-        self.assertEquals(response.redirect_chain,
-                          [('http://testserver/admin/zinnia/category/', 302)])
-        self.assertEquals(Category.objects.count(), 2)
+    def test_get_tree_path(self):
+        admin = CategoryAdmin(Category, self.site)
+        category = Category.objects.create(title='Category', slug='cat')
+
+        self.check_with_rich_and_poor_urls(
+            admin.get_tree_path, (category,),
+            '<a href="/categories/cat/" target="blank">/cat/</a>',
+            '/cat/')
