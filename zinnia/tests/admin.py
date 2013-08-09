@@ -9,6 +9,7 @@ from django.utils.translation import deactivate
 from django.contrib.admin.sites import AdminSite
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
+from zinnia import settings
 from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -179,6 +180,82 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.assertEquals(len(self.admin.queryset(self.request)), 1)
         self.request.user = root
         self.assertEquals(len(self.admin.queryset(self.request)), 2)
+
+    def test_formfield_for_manytomany(self):
+        user = Author.objects.create_user(
+            'user', 'user@exemple.com')
+        user.is_staff = True
+        user.save()
+        root = Author.objects.create_superuser(
+            'root', 'root@exemple.com', 'toor')
+        self.request.user = user
+        field = self.admin.formfield_for_manytomany(
+            Entry.authors.field, self.request)
+        self.assertEquals(field.queryset.count(), 1)
+        self.request.user = root
+        field = self.admin.formfield_for_manytomany(
+            Entry.authors.field, self.request)
+        self.assertEquals(field.queryset.count(), 2)
+
+    def test_get_readonly_fields(self):
+        user = Author.objects.create_user(
+            'user', 'user@exemple.com')
+        root = Author.objects.create_superuser(
+            'root', 'root@exemple.com', 'toor')
+        self.request.user = user
+        self.assertEquals(self.admin.get_readonly_fields(self.request),
+                          ['status'])
+        self.request.user = root
+        self.assertEquals(self.admin.get_readonly_fields(self.request),
+                          ())
+
+    def test_get_actions(self):
+        original_user_twitter = settings.USE_TWITTER
+        original_ping_directories = settings.PING_DIRECTORIES
+        user = Author.objects.create_user(
+            'user', 'user@exemple.com')
+        root = Author.objects.create_superuser(
+            'root', 'root@exemple.com', 'toor')
+        self.request.user = user
+        settings.USE_TWITTER = True
+        settings.PING_DIRECTORIES = True
+        self.assertEquals(
+            self.admin.get_actions(self.request).keys(),
+            ['delete_selected',
+             'close_comments',
+             'close_pingbacks',
+             'close_trackbacks',
+             'ping_directories',
+             'make_tweet',
+             'put_on_top',
+             'mark_featured',
+             'unmark_featured'])
+        settings.USE_TWITTER = False
+        settings.PING_DIRECTORIES = False
+        self.assertEquals(
+            self.admin.get_actions(self.request).keys(),
+            ['delete_selected',
+             'close_comments',
+             'close_pingbacks',
+             'close_trackbacks',
+             'put_on_top',
+             'mark_featured',
+             'unmark_featured'])
+        self.request.user = root
+        self.assertEquals(
+            self.admin.get_actions(self.request).keys(),
+            ['delete_selected',
+             'make_mine',
+             'make_published',
+             'make_hidden',
+             'close_comments',
+             'close_pingbacks',
+             'close_trackbacks',
+             'put_on_top',
+             'mark_featured',
+             'unmark_featured'])
+        settings.USE_TWITTER = original_user_twitter
+        settings.PING_DIRECTORIES = original_ping_directories
 
 
 class CategoryAdminTestCase(BaseAdminTestCase):
