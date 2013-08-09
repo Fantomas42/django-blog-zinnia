@@ -131,8 +131,9 @@ class EntryAdminTestCase(BaseAdminTestCase):
     def test_get_sites(self):
         self.assertEquals(self.admin.get_sites(self.entry), '')
         self.entry.sites.add(Site.objects.get_current())
-        self.assertEquals(
-            self.admin.get_sites(self.entry),
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_sites, (self.entry,),
+            '<a href="http://example.com/" target="blank">example.com</a>',
             '<a href="http://example.com" target="blank">example.com</a>')
 
     def test_get_is_visible(self):

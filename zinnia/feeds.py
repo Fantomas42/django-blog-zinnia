@@ -26,8 +26,8 @@ from tagging.models import TaggedItem
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
-from zinnia.settings import COPYRIGHT
 from zinnia.settings import PROTOCOL
+from zinnia.settings import COPYRIGHT
 from zinnia.settings import FEEDS_FORMAT
 from zinnia.settings import FEEDS_MAX_ITEMS
 from zinnia.views.categories import get_category_or_404

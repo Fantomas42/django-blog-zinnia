@@ -18,6 +18,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from zinnia import settings
 from zinnia.managers import HIDDEN
 from zinnia.managers import PUBLISHED
+from zinnia.settings import PROTOCOL
 from zinnia.models.author import Author
 from zinnia.ping import DirectoryPinger
 from zinnia.admin.forms import EntryAdminForm
@@ -126,9 +127,14 @@ class EntryAdmin(admin.ModelAdmin):
 
     def get_sites(self, entry):
         """Return the sites linked in HTML"""
+        try:
+            index_url = reverse('zinnia_entry_archive_index')
+        except NoReverseMatch:
+            index_url = ''
         return ', '.join(
-            ['<a href="http://%(domain)s" target="blank">%(name)s</a>' %
-             site.__dict__ for site in entry.sites.all()])
+            ['<a href="%s://%s%s" target="blank">%s</a>' %
+             (PROTOCOL, site.domain, index_url, site.name)
+             for site in entry.sites.all()])
     get_sites.allow_tags = True
     get_sites.short_description = _('site(s)')
 
