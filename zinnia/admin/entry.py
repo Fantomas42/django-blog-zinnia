@@ -138,18 +138,22 @@ class EntryAdmin(admin.ModelAdmin):
     get_sites.allow_tags = True
     get_sites.short_description = _('site(s)')
 
+    def get_short_url(self, entry):
+        """Return the short url in HTML"""
+        try:
+            short_url = entry.short_url
+        except NoReverseMatch:
+            short_url = entry.get_absolute_url()
+        return '<a href="%(url)s" target="blank">%(url)s</a>' % \
+               {'url': short_url}
+    get_short_url.allow_tags = True
+    get_short_url.short_description = _('short url')
+
     def get_is_visible(self, entry):
         """Admin wrapper for entry.is_visible"""
         return entry.is_visible
     get_is_visible.boolean = True
     get_is_visible.short_description = _('is visible')
-
-    def get_short_url(self, entry):
-        """Return the short url in HTML"""
-        return '<a href="%(url)s" target="blank">%(url)s</a>' % \
-               {'url': entry.short_url}
-    get_short_url.allow_tags = True
-    get_short_url.short_description = _('short url')
 
     # Custom Methods
     def save_model(self, request, entry, form, change):
