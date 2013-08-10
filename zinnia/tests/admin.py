@@ -50,6 +50,7 @@ class BaseAdminTestCase(TestCase):
         self._urlconf_setup()
 
 
+@skipIfCustomUser
 class EntryAdminTestCase(BaseAdminTestCase):
     """Test case for Entry Admin"""
     model_class = Entry
@@ -59,7 +60,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
         super(EntryAdminTestCase, self).setUp()
         params = {'title': 'My title',
                   'content': 'My content',
-                  'slug': 'my-titile'}
+                  'slug': 'my-title'}
         self.entry = Entry.objects.create(**params)
         self.request_factory = RequestFactory()
         self.request = self.request_factory.get('/')
@@ -76,7 +77,6 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.assertEquals(self.admin.get_title(self.entry),
                           'My title (2 words) (2 reactions)')
 
-    @skipIfCustomUser
     def test_get_authors(self):
         self.check_with_rich_and_poor_urls(
             self.admin.get_authors, (self.entry,),
@@ -146,8 +146,8 @@ class EntryAdminTestCase(BaseAdminTestCase):
             self.admin.get_short_url, (self.entry,),
             '<a href="http://example.com/1/" target="blank">'
             'http://example.com/1/</a>',
-            '<a href="/2013/08/09/my-titile/" target="blank">'
-            '/2013/08/09/my-titile/</a>')
+            '<a href="%(url)s" target="blank">'
+            '%(url)s</a>' % {'url': self.entry.get_absolute_url()})
 
     def test_get_is_visible(self):
         self.assertEquals(self.admin.get_is_visible(self.entry),
