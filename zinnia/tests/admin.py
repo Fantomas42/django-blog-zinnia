@@ -50,6 +50,15 @@ class BaseAdminTestCase(TestCase):
         self._urlconf_setup()
 
 
+class TestMessageBackend(object):
+    """Message backend for testing"""
+    def __init__(self, *ka, **kw):
+        self.messages = []
+
+    def add(self, *ka, **kw):
+        self.messages.append((ka, kw))
+
+
 @skipIfCustomUser
 class EntryAdminTestCase(BaseAdminTestCase):
     """Test case for Entry Admin"""
@@ -256,6 +265,16 @@ class EntryAdminTestCase(BaseAdminTestCase):
              'unmark_featured'])
         settings.USE_TWITTER = original_user_twitter
         settings.PING_DIRECTORIES = original_ping_directories
+
+    def test_make_mine(self):
+        user = Author.objects.create_user(
+            'user', 'user@exemple.com')
+        self.request.user = user
+        self.request._messages = TestMessageBackend()
+        self.assertEquals(user.entries.count(), 0)
+        self.admin.make_mine(self.request, Entry.objects.all())
+        self.assertEquals(user.entries.count(), 1)
+        self.assertEquals(len(self.request._messages.messages), 1)
 
 
 class CategoryAdminTestCase(BaseAdminTestCase):
