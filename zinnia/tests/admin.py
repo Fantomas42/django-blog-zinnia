@@ -8,6 +8,8 @@ from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.admin.sites import AdminSite
+from django.test.utils import restore_template_loaders
+from django.test.utils import setup_test_template_loader
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import settings
@@ -41,6 +43,10 @@ class BaseAdminTestCase(TestCase):
         self.urls = self.rich_urls
         self._urlconf_setup()
         deactivate()
+        try:
+            restore_template_loaders()
+        except AttributeError:
+            pass
 
     def check_with_rich_and_poor_urls(self, func, args,
                                       result_rich, result_poor):
@@ -348,6 +354,36 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.admin.unmark_featured(self.request, Entry.objects.all())
         self.assertEquals(Entry.objects.filter(featured=True).count(), 0)
         self.assertEquals(len(self.request._messages.messages), 2)
+
+    def test_autocomplete_tags(self):
+        template_to_use = 'admin/zinnia/entry/autocomplete_tags.js'
+        setup_test_template_loader({template_to_use: ''})
+        response = self.admin.autocomplete_tags(self.request)
+        self.assertTemplateUsed(response, template_to_use)
+        self.assertEquals(response['Content-Type'], 'application/javascript')
+
+    def test_wymeditor(self):
+        template_to_use = 'admin/zinnia/entry/wymeditor.js'
+        setup_test_template_loader({template_to_use: ''})
+        response = self.admin.wymeditor(self.request)
+        self.assertTemplateUsed(response, template_to_use)
+        self.assertEquals(len(response.context_data['lang']), 2)
+        self.assertEquals(response['Content-Type'], 'application/javascript')
+
+    def test_markitup(self):
+        template_to_use = 'admin/zinnia/entry/markitup.js'
+        setup_test_template_loader({template_to_use: ''})
+        response = self.admin.markitup(self.request)
+        self.assertTemplateUsed(response, template_to_use)
+        self.assertEquals(response['Content-Type'], 'application/javascript')
+
+    def test_content_preview(self):
+        template_to_use = 'admin/zinnia/entry/preview.html'
+        setup_test_template_loader({template_to_use: ''})
+        response = self.admin.content_preview(self.request)
+        self.assertTemplateUsed(response, template_to_use)
+        self.assertEquals(response.context_data['preview'], '<p></p>')
+        self.assertEquals(response['Content-Type'], 'text/html; charset=utf-8')
 
 
 class CategoryAdminTestCase(BaseAdminTestCase):
