@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 from django.test import RequestFactory
+from django.utils import timezone
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
@@ -14,6 +15,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
+from zinnia.tests.utils import datetime
 from zinnia.admin.entry import EntryAdmin
 from zinnia.admin.category import CategoryAdmin
 
@@ -275,6 +277,77 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.admin.make_mine(self.request, Entry.objects.all())
         self.assertEquals(user.entries.count(), 1)
         self.assertEquals(len(self.request._messages.messages), 1)
+
+    def test_make_published(self):
+        original_ping_directories = settings.PING_DIRECTORIES
+        settings.PING_DIRECTORIES = []
+        self.request._messages = TestMessageBackend()
+        self.entry.sites.add(Site.objects.get_current())
+        self.assertEquals(Entry.published.count(), 0)
+        self.admin.make_published(self.request, Entry.objects.all())
+        self.assertEquals(Entry.published.count(), 1)
+        self.assertEquals(len(self.request._messages.messages), 1)
+        settings.PING_DIRECTORIES = original_ping_directories
+
+    def test_make_hidden(self):
+        self.request._messages = TestMessageBackend()
+        self.entry.status = PUBLISHED
+        self.entry.save()
+        self.entry.sites.add(Site.objects.get_current())
+        self.assertEquals(Entry.published.count(), 1)
+        self.admin.make_hidden(self.request, Entry.objects.all())
+        self.assertEquals(Entry.published.count(), 0)
+        self.assertEquals(len(self.request._messages.messages), 1)
+
+    def test_close_comments(self):
+        self.request._messages = TestMessageBackend()
+        self.assertEquals(Entry.objects.filter(
+            comment_enabled=True).count(), 1)
+        self.admin.close_comments(self.request, Entry.objects.all())
+        self.assertEquals(Entry.objects.filter(
+            comment_enabled=True).count(), 0)
+        self.assertEquals(len(self.request._messages.messages), 1)
+
+    def test_close_pingbacks(self):
+        self.request._messages = TestMessageBackend()
+        self.assertEquals(Entry.objects.filter(
+            pingback_enabled=True).count(), 1)
+        self.admin.close_pingbacks(self.request, Entry.objects.all())
+        self.assertEquals(Entry.objects.filter(
+            pingback_enabled=True).count(), 0)
+        self.assertEquals(len(self.request._messages.messages), 1)
+
+    def test_close_trackbacks(self):
+        self.request._messages = TestMessageBackend()
+        self.assertEquals(Entry.objects.filter(
+            trackback_enabled=True).count(), 1)
+        self.admin.close_trackbacks(self.request, Entry.objects.all())
+        self.assertEquals(Entry.objects.filter(
+            trackback_enabled=True).count(), 0)
+        self.assertEquals(len(self.request._messages.messages), 1)
+
+    def test_put_on_top(self):
+        original_ping_directories = settings.PING_DIRECTORIES
+        settings.PING_DIRECTORIES = []
+        self.request._messages = TestMessageBackend()
+        self.entry.creation_date = datetime(2011, 1, 1, 12, 0)
+        self.admin.put_on_top(self.request, Entry.objects.all())
+        self.assertEquals(
+            Entry.objects.get(pk=self.entry.pk).creation_date.date(),
+            timezone.now().date())
+        self.assertEquals(len(self.request._messages.messages), 1)
+        settings.PING_DIRECTORIES = original_ping_directories
+
+    def test_mark_unmark_featured(self):
+        self.request._messages = TestMessageBackend()
+        self.assertEquals(Entry.objects.filter(
+            featured=True).count(), 0)
+        self.admin.mark_featured(self.request, Entry.objects.all())
+        self.assertEquals(Entry.objects.filter(featured=True).count(), 1)
+        self.assertEquals(len(self.request._messages.messages), 1)
+        self.admin.unmark_featured(self.request, Entry.objects.all())
+        self.assertEquals(Entry.objects.filter(featured=True).count(), 0)
+        self.assertEquals(len(self.request._messages.messages), 2)
 
 
 class CategoryAdminTestCase(BaseAdminTestCase):

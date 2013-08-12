@@ -239,22 +239,6 @@ class EntryAdmin(admin.ModelAdmin):
             request, _('The selected entries are now marked as hidden.'))
     make_hidden.short_description = _('Set entries selected as hidden')
 
-    def make_tweet(self, request, queryset):
-        """Post an update on Twitter"""
-        import tweepy
-        auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY,
-                                   settings.TWITTER_CONSUMER_SECRET)
-        auth.set_access_token(settings.TWITTER_ACCESS_KEY,
-                              settings.TWITTER_ACCESS_SECRET)
-        api = tweepy.API(auth)
-        for entry in queryset:
-            short_url = entry.short_url
-            message = '%s %s' % (entry.title[:139 - len(short_url)], short_url)
-            api.update_status(message)
-        self.message_user(
-            request, _('The selected entries have been tweeted.'))
-    make_tweet.short_description = _('Tweet entries selected')
-
     def close_comments(self, request, queryset):
         """Close the comments for selected entries"""
         queryset.update(comment_enabled=False)
@@ -288,6 +272,37 @@ class EntryAdmin(admin.ModelAdmin):
     put_on_top.short_description = _(
         'Put the selected entries on top at the current date')
 
+    def mark_featured(self, request, queryset):
+        """Mark selected as featured post."""
+        queryset.update(featured=True)
+        self.message_user(
+            request, _('Selected entries are now marked as featured.'))
+    mark_featured.short_description = _('Mark selected entries as featured')
+
+    def unmark_featured(self, request, queryset):
+        """Un-Mark selected featured posts"""
+        queryset.update(featured=False)
+        self.message_user(
+            request, _('Selected entries are no longer marked as featured.'))
+    unmark_featured.short_description = _(
+        'Unmark selected entries as featured')
+
+    def make_tweet(self, request, queryset):
+        """Post an update on Twitter"""
+        import tweepy
+        auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY,
+                                   settings.TWITTER_CONSUMER_SECRET)
+        auth.set_access_token(settings.TWITTER_ACCESS_KEY,
+                              settings.TWITTER_ACCESS_SECRET)
+        api = tweepy.API(auth)
+        for entry in queryset:
+            short_url = entry.short_url
+            message = '%s %s' % (entry.title[:139 - len(short_url)], short_url)
+            api.update_status(message)
+        self.message_user(
+            request, _('The selected entries have been tweeted.'))
+    make_tweet.short_description = _('Tweet entries selected')
+
     def ping_directories(self, request, queryset, messages=True):
         """Ping Directories for selected entries"""
         for directory in settings.PING_DIRECTORIES:
@@ -310,21 +325,6 @@ class EntryAdmin(admin.ModelAdmin):
                         {'directory': directory, 'success': success})
     ping_directories.short_description = _(
         'Ping Directories for selected entries')
-
-    def mark_featured(self, request, queryset):
-        """Mark selected as featured post."""
-        queryset.update(featured=True)
-        self.message_user(
-            request, _('Selected entries are now marked as featured.'))
-    mark_featured.short_description = _('Mark selected entries as featured')
-
-    def unmark_featured(self, request, queryset):
-        """Un-Mark selected featured posts"""
-        queryset.update(featured=False)
-        self.message_user(
-            request, _('Selected entries are no longer marked as featured.'))
-    unmark_featured.short_description = _(
-        'Unmark selected entries as featured')
 
     def get_urls(self):
         entry_admin_urls = super(EntryAdmin, self).get_urls()
