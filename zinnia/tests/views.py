@@ -122,7 +122,7 @@ class ViewsBaseCase(TestCase):
         self.assertTrue('protocol' in response.context)
 
 
-class ZinniaViewsTestCase(ViewsBaseCase):
+class ViewsTestCase(ViewsBaseCase):
     """
     Test cases for generic views used in the application,
     for reproducing and correcting issue :
@@ -559,7 +559,7 @@ class ZinniaViewsTestCase(ViewsBaseCase):
             ('http://example.com/categories/tests/', 302))
 
 
-class ZinniaCustomDetailViews(ViewsBaseCase):
+class CustomDetailViewsTestCase(ViewsBaseCase):
     """
     Tests with an alternate urls.py that modifies how author_detail,
     tags_detail and categories_detail views to be called with a custom
@@ -570,7 +570,7 @@ class ZinniaCustomDetailViews(ViewsBaseCase):
     def setUp(self):
         """We don't need to generate the full template
         to make the tests working"""
-        super(ZinniaCustomDetailViews, self).setUp()
+        super(CustomDetailViewsTestCase, self).setUp()
         self.inhibit_templates('zinnia/entry_custom_list.html')
 
     def test_custom_category_detail(self):

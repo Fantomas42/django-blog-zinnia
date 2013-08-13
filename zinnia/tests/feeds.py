@@ -42,7 +42,7 @@ from zinnia.feeds import LatestDiscussions
 
 
 @skipIfCustomUser
-class ZinniaFeedsTestCase(TestCase):
+class FeedsTestCase(TestCase):
     """Test cases for the Feed classes provided"""
     urls = 'zinnia.tests.urls'
 

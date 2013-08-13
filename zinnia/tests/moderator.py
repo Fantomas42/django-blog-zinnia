@@ -22,7 +22,7 @@ from zinnia.signals import disconnect_discussion_signals
 
 
 @skipIfCustomUser
-class EntryCommentModeratorTestCase(TestCase):
+class CommentModeratorTestCase(TestCase):
     """Test cases for the moderator"""
 
     def setUp(self):

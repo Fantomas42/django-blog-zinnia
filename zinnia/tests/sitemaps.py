@@ -14,7 +14,7 @@ from zinnia.sitemaps import TagSitemap
 
 
 @skipIfCustomUser
-class ZinniaSitemapsTestCase(TestCase):
+class SitemapsTestCase(TestCase):
     """Test cases for Sitemaps classes provided"""
     urls = 'zinnia.tests.urls'
 

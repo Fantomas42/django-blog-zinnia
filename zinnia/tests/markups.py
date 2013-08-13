@@ -59,7 +59,7 @@ class MarkupsTestCase(TestCase):
 
 @skipUnless(sys.version_info >= (2, 7, 0),
             'Cannot run these tests under Python 2.7')
-class FailImportMarkupTestCase(TestCase):
+class MarkupFailImportTestCase(TestCase):
     exclude_list = ['textile', 'markdown', 'docutils']
 
     def setUp(self):
