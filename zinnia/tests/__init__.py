@@ -18,7 +18,6 @@ from zinnia.tests.signals import SignalsTestCase
 from zinnia.tests.pingback import PingBackTestCase
 from zinnia.tests.metaweblog import MetaWeblogTestCase
 from zinnia.tests.comparison import ComparisonTestCase
-from zinnia.tests.quick_entry import QuickEntryTestCase
 from zinnia.tests.preview import HTMLPreviewTestCase
 from zinnia.tests.markups import MarkupsTestCase
 from zinnia.tests.markups import MarkupFailImportTestCase
@@ -69,7 +68,6 @@ def suite():
         MPTTFilteredSelectMultipleTestCase,
         # Front
         MixinTestCase,
-        QuickEntryTestCase,
         ViewsTestCase,
         CustomDetailViewsTestCase,
         FeedsTestCase,
