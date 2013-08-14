@@ -35,7 +35,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=['beautifulsoup4>=4.1',
-                      'django-mptt>=0.5.1,<0.6',
+                      'django-mptt>=0.5.1',
                       'django-tagging>=0.3.1',
                       'django-xmlrpc>=0.1.5',
                       'pyparsing>=1.5.5,<2.0',
