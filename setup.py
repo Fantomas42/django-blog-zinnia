@@ -39,5 +39,5 @@ setup(
                       'django-tagging>=0.3.1',
                       'django-xmlrpc>=0.1.5',
                       'pyparsing>=2.0.1',
-                      'pytz']
+                      'pytz>=2013b']
 )
