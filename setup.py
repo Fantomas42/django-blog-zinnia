@@ -38,6 +38,6 @@ setup(
                       'django-mptt>=0.5.1',
                       'django-tagging>=0.3.1',
                       'django-xmlrpc>=0.1.5',
-                      'pyparsing>=1.5.5,<2.0',
+                      'pyparsing>=2.0.1',
                       'pytz']
 )
