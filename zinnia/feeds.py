@@ -159,7 +159,7 @@ class AuthorEntries(EntryFeed):
 
     def get_object(self, request, username):
         """Retrieve the author by his username"""
-        return get_object_or_404(Author, username=username)
+        return get_object_or_404(Author, **{Author.USERNAME_FIELD: username})
 
     def items(self, obj):
         """Items are the published entries of the author"""
@@ -167,7 +167,7 @@ class AuthorEntries(EntryFeed):
 
     def link(self, obj):
         """URL of the author"""
-        return reverse('zinnia_author_detail', args=[obj.username])
+        return reverse('zinnia_author_detail', args=[getattr(obj, obj.USERNAME_FIELD)])
 
     def get_title(self, obj):
         """Title of the feed"""
