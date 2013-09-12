@@ -67,4 +67,4 @@ is_using_sqlite = settings.DATABASES["default"]["ENGINE"].endswith("sqlite3")
 #This is a rough rule
 #I don't know if it's necessarily true across all inputs
 #Will ask on the mailing list eventually
-supports_savepoints = not (is_before_1_6() and is_using_sqlite())
+supports_savepoints = not (is_before_1_6 and is_using_sqlite)
