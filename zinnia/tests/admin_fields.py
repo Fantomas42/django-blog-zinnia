@@ -30,9 +30,9 @@ class MPTTModelChoiceIteratorTestCase(TestCase):
         field = FakeField()
         iterator = MPTTModelChoiceIterator(field)
 
-        self.assertEquals(iterator.choice(category_1),
+        self.assertEqual(iterator.choice(category_1),
                           (1, 'Category 1', (1, 1)))
-        self.assertEquals(iterator.choice(category_2),
+        self.assertEqual(iterator.choice(category_2),
                           (2, 'Category 2', (1, 2)))
 
 
@@ -50,13 +50,13 @@ class MPTTModelMultipleChoiceFieldTestCase(TestCase):
 
         field = MPTTModelMultipleChoiceField(
             queryset=queryset)
-        self.assertEquals(field.label_from_instance(self.category_1),
+        self.assertEqual(field.label_from_instance(self.category_1),
                           'Category 1')
-        self.assertEquals(field.label_from_instance(self.category_2),
+        self.assertEqual(field.label_from_instance(self.category_2),
                           '|-- Category 2')
         field = MPTTModelMultipleChoiceField(
             level_indicator='-->', queryset=queryset)
-        self.assertEquals(field.label_from_instance(self.category_2),
+        self.assertEqual(field.label_from_instance(self.category_2),
                           '--> Category 2')
 
     def test_get_choices(self):
@@ -64,12 +64,12 @@ class MPTTModelMultipleChoiceFieldTestCase(TestCase):
 
         field = MPTTModelMultipleChoiceField(
             queryset=queryset)
-        self.assertEquals(list(field.choices),
+        self.assertEqual(list(field.choices),
                           [(1, 'Category 1', (1, 1)),
                            (2, '|-- Category 2', (1, 2))])
 
         field = MPTTModelMultipleChoiceField(
             level_indicator='-->', queryset=queryset)
-        self.assertEquals(list(field.choices),
+        self.assertEqual(list(field.choices),
                           [(1, 'Category 1', (1, 1)),
                            (2, '--> Category 2', (1, 2))])

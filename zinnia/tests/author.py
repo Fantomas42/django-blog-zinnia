@@ -37,5 +37,5 @@ class AuthorTestCase(TestCase):
         self.author.first_name = 'John'
         self.author.last_name = 'Doe'
         self.author.save()
-        self.assertEquals(six.text_type(self.author),
+        self.assertEqual(six.text_type(self.author),
                          'John Doe')

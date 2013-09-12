@@ -33,7 +33,7 @@ class MixinTestCase(TestCase):
             return []
 
         instance.queryset = qs
-        self.assertEquals(instance.get_queryset(),
+        self.assertEqual(instance.get_queryset(),
                           [])
 
     def test_entry_queryset_template_response_mixin(self):
@@ -44,17 +44,17 @@ class MixinTestCase(TestCase):
                           instance.get_model_name)
         instance.model_type = 'model'
         instance.model_name = 'name'
-        self.assertEquals(instance.get_model_type(),
+        self.assertEqual(instance.get_model_type(),
                           'model')
-        self.assertEquals(instance.get_model_name(),
+        self.assertEqual(instance.get_model_name(),
                           'name')
-        self.assertEquals(instance.get_template_names(),
+        self.assertEqual(instance.get_template_names(),
                           ['zinnia/model/name/entry_list.html',
                            'zinnia/model/name_entry_list.html',
                            'zinnia/model/entry_list.html',
                            'zinnia/entry_list.html'])
         instance.template_name = 'zinnia/entry_search.html'
-        self.assertEquals(instance.get_template_names(),
+        self.assertEqual(instance.get_template_names(),
                           ['zinnia/entry_search.html',
                            'zinnia/model/name/entry_list.html',
                            'zinnia/model/name_entry_list.html',
@@ -67,20 +67,20 @@ class MixinTestCase(TestCase):
         get_month = lambda: '04'
         get_day = lambda: 21
         instance = EntryQuerysetArchiveTemplateResponseMixin()
-        self.assertEquals(
+        self.assertEqual(
             instance.get_template_names(),
             ['zinnia/archives/entry_archive.html',
              'zinnia/entry_archive.html',
              'entry_archive.html'])
         instance.get_year = get_year
-        self.assertEquals(
+        self.assertEqual(
             instance.get_template_names(),
             ['zinnia/archives/2012/entry_archive.html',
              'zinnia/archives/entry_archive.html',
              'zinnia/entry_archive.html',
              'entry_archive.html'])
         instance.get_week = get_week
-        self.assertEquals(
+        self.assertEqual(
             instance.get_template_names(),
             ['zinnia/archives/2012/week/16/entry_archive.html',
              'zinnia/archives/week/16/entry_archive.html',
@@ -89,7 +89,7 @@ class MixinTestCase(TestCase):
              'zinnia/entry_archive.html',
              'entry_archive.html'])
         instance.get_month = get_month
-        self.assertEquals(
+        self.assertEqual(
             instance.get_template_names(),
             ['zinnia/archives/2012/month/04/entry_archive.html',
              'zinnia/archives/month/04/entry_archive.html',
@@ -100,7 +100,7 @@ class MixinTestCase(TestCase):
              'zinnia/entry_archive.html',
              'entry_archive.html'])
         instance.get_day = get_day
-        self.assertEquals(
+        self.assertEqual(
             instance.get_template_names(),
             ['zinnia/archives/2012/04/21/entry_archive.html',
              'zinnia/archives/month/04/day/21/entry_archive.html',
@@ -116,7 +116,7 @@ class MixinTestCase(TestCase):
              'entry_archive.html'])
 
         instance.template_name = 'zinnia/entry_search.html'
-        self.assertEquals(
+        self.assertEqual(
             instance.get_template_names(),
             ['zinnia/entry_search.html',
              'zinnia/archives/2012/04/21/entry_archive.html',
@@ -146,7 +146,7 @@ class MixinTestCase(TestCase):
         instance.get_month = get_month
         instance.get_day = get_day
         instance.object = FakeEntry()
-        self.assertEquals(
+        self.assertEqual(
             instance.get_template_names(),
             ['zinnia/archives/2012/04/21/my-fake-entry_entry_detail.html',
              'zinnia/archives/month/04/day/21/my-fake-entry_entry_detail.html',
@@ -180,7 +180,7 @@ class MixinTestCase(TestCase):
              'entry_detail.html'])
 
         instance.object.detail_template = 'custom.html'
-        self.assertEquals(
+        self.assertEqual(
             instance.get_template_names(),
             ['zinnia/archives/2012/04/21/my-fake-entry_custom.html',
              'zinnia/archives/month/04/day/21/my-fake-entry_custom.html',
@@ -240,44 +240,44 @@ class MixinTestCase(TestCase):
         epnp = EntryPreviousNextPublished()
 
         test_date = datetime(2009, 12, 1)
-        self.assertEquals(epnp.get_previous_year(test_date), None)
-        self.assertEquals(epnp.get_previous_month(test_date), None)
-        self.assertEquals(epnp.get_previous_day(test_date), None)
-        self.assertEquals(epnp.get_next_year(test_date), date(2012, 1, 1))
-        self.assertEquals(epnp.get_next_month(test_date), date(2012, 1, 1))
-        self.assertEquals(epnp.get_next_day(test_date), date(2012, 1, 1))
+        self.assertEqual(epnp.get_previous_year(test_date), None)
+        self.assertEqual(epnp.get_previous_month(test_date), None)
+        self.assertEqual(epnp.get_previous_day(test_date), None)
+        self.assertEqual(epnp.get_next_year(test_date), date(2012, 1, 1))
+        self.assertEqual(epnp.get_next_month(test_date), date(2012, 1, 1))
+        self.assertEqual(epnp.get_next_day(test_date), date(2012, 1, 1))
 
         test_date = datetime(2012, 1, 1)
-        self.assertEquals(epnp.get_previous_year(test_date), None)
-        self.assertEquals(epnp.get_previous_month(test_date), None)
-        self.assertEquals(epnp.get_previous_day(test_date), None)
-        self.assertEquals(epnp.get_next_year(test_date), date(2013, 1, 1))
-        self.assertEquals(epnp.get_next_month(test_date), date(2012, 3, 1))
-        self.assertEquals(epnp.get_next_day(test_date), date(2012, 3, 15))
+        self.assertEqual(epnp.get_previous_year(test_date), None)
+        self.assertEqual(epnp.get_previous_month(test_date), None)
+        self.assertEqual(epnp.get_previous_day(test_date), None)
+        self.assertEqual(epnp.get_next_year(test_date), date(2013, 1, 1))
+        self.assertEqual(epnp.get_next_month(test_date), date(2012, 3, 1))
+        self.assertEqual(epnp.get_next_day(test_date), date(2012, 3, 15))
 
         test_date = datetime(2012, 3, 15)
-        self.assertEquals(epnp.get_previous_year(test_date), None)
-        self.assertEquals(epnp.get_previous_month(test_date), date(2012, 1, 1))
-        self.assertEquals(epnp.get_previous_day(test_date), date(2012, 1, 1))
-        self.assertEquals(epnp.get_next_year(test_date), date(2013, 1, 1))
-        self.assertEquals(epnp.get_next_month(test_date), date(2013, 6, 1))
-        self.assertEquals(epnp.get_next_day(test_date), date(2013, 6, 2))
+        self.assertEqual(epnp.get_previous_year(test_date), None)
+        self.assertEqual(epnp.get_previous_month(test_date), date(2012, 1, 1))
+        self.assertEqual(epnp.get_previous_day(test_date), date(2012, 1, 1))
+        self.assertEqual(epnp.get_next_year(test_date), date(2013, 1, 1))
+        self.assertEqual(epnp.get_next_month(test_date), date(2013, 6, 1))
+        self.assertEqual(epnp.get_next_day(test_date), date(2013, 6, 2))
 
         test_date = datetime(2013, 6, 2)
-        self.assertEquals(epnp.get_previous_year(test_date), date(2012, 1, 1))
-        self.assertEquals(epnp.get_previous_month(test_date), date(2012, 3, 1))
-        self.assertEquals(epnp.get_previous_day(test_date), date(2012, 3, 15))
-        self.assertEquals(epnp.get_next_year(test_date), None)
-        self.assertEquals(epnp.get_next_month(test_date), None)
-        self.assertEquals(epnp.get_next_day(test_date), None)
+        self.assertEqual(epnp.get_previous_year(test_date), date(2012, 1, 1))
+        self.assertEqual(epnp.get_previous_month(test_date), date(2012, 3, 1))
+        self.assertEqual(epnp.get_previous_day(test_date), date(2012, 3, 15))
+        self.assertEqual(epnp.get_next_year(test_date), None)
+        self.assertEqual(epnp.get_next_month(test_date), None)
+        self.assertEqual(epnp.get_next_day(test_date), None)
 
         test_date = datetime(2014, 5, 1)
-        self.assertEquals(epnp.get_previous_year(test_date), date(2013, 1, 1))
-        self.assertEquals(epnp.get_previous_month(test_date), date(2013, 6, 1))
-        self.assertEquals(epnp.get_previous_day(test_date), date(2013, 6, 2))
-        self.assertEquals(epnp.get_next_year(test_date), None)
-        self.assertEquals(epnp.get_next_month(test_date), None)
-        self.assertEquals(epnp.get_next_day(test_date), None)
+        self.assertEqual(epnp.get_previous_year(test_date), date(2013, 1, 1))
+        self.assertEqual(epnp.get_previous_month(test_date), date(2013, 6, 1))
+        self.assertEqual(epnp.get_previous_day(test_date), date(2013, 6, 2))
+        self.assertEqual(epnp.get_next_year(test_date), None)
+        self.assertEqual(epnp.get_next_month(test_date), None)
+        self.assertEqual(epnp.get_next_day(test_date), None)
 
     def test_prefetch_related_mixin(self):
         instance = PrefetchRelatedMixin()

@@ -44,44 +44,44 @@ class SitemapsTestCase(TestCase):
 
     def test_entry_sitemap(self):
         sitemap = EntrySitemap()
-        self.assertEquals(len(sitemap.items()), 2)
-        self.assertEquals(sitemap.lastmod(self.entry_1),
+        self.assertEqual(len(sitemap.items()), 2)
+        self.assertEqual(sitemap.lastmod(self.entry_1),
                           self.entry_1.last_update)
 
     def test_category_sitemap(self):
         sitemap = CategorySitemap()
         items = sitemap.items()
-        self.assertEquals(len(items), 2)
-        self.assertEquals(sitemap.lastmod(items[0]),
+        self.assertEqual(len(items), 2)
+        self.assertEqual(sitemap.lastmod(items[0]),
                           self.entry_2.last_update)
-        self.assertEquals(sitemap.lastmod(items[1]),
+        self.assertEqual(sitemap.lastmod(items[1]),
                           self.entry_1.last_update)
-        self.assertEquals(sitemap.priority(items[0]), '1.0')
-        self.assertEquals(sitemap.priority(items[1]), '0.5')
+        self.assertEqual(sitemap.priority(items[0]), '1.0')
+        self.assertEqual(sitemap.priority(items[1]), '0.5')
 
     def test_author_sitemap(self):
         sitemap = AuthorSitemap()
         items = sitemap.items()
-        self.assertEquals(len(items), 2)
-        self.assertEquals(sitemap.lastmod(items[0]),
+        self.assertEqual(len(items), 2)
+        self.assertEqual(sitemap.lastmod(items[0]),
                           self.entry_2.last_update)
-        self.assertEquals(sitemap.lastmod(items[1]),
+        self.assertEqual(sitemap.lastmod(items[1]),
                           self.entry_1.last_update)
-        self.assertEquals(sitemap.priority(items[0]), '1.0')
-        self.assertEquals(sitemap.priority(items[1]), '0.5')
+        self.assertEqual(sitemap.priority(items[0]), '1.0')
+        self.assertEqual(sitemap.priority(items[1]), '0.5')
 
     def test_tag_sitemap(self):
         sitemap = TagSitemap()
         items = sitemap.items()
-        self.assertEquals(len(items), 2)
-        self.assertEquals(sitemap.lastmod(items[1]),
+        self.assertEqual(len(items), 2)
+        self.assertEqual(sitemap.lastmod(items[1]),
                           self.entry_2.last_update)
-        self.assertEquals(sitemap.lastmod(items[0]),
+        self.assertEqual(sitemap.lastmod(items[0]),
                           self.entry_1.last_update)
-        self.assertEquals(sitemap.priority(items[1]), '1.0')
-        self.assertEquals(sitemap.priority(items[0]), '0.5')
-        self.assertEquals(sitemap.location(items[1]), '/tags/zinnia/')
-        self.assertEquals(sitemap.location(items[0]), '/tags/test/')
+        self.assertEqual(sitemap.priority(items[1]), '1.0')
+        self.assertEqual(sitemap.priority(items[0]), '0.5')
+        self.assertEqual(sitemap.location(items[1]), '/tags/zinnia/')
+        self.assertEqual(sitemap.location(items[0]), '/tags/test/')
 
     def test_empty_sitemap_issue_188(self):
         Entry.objects.all().delete()
@@ -89,7 +89,7 @@ class SitemapsTestCase(TestCase):
         category_sitemap = CategorySitemap()
         author_sitemap = AuthorSitemap()
         tag_sitemap = TagSitemap()
-        self.assertEquals(len(entry_sitemap.items()), 0)
-        self.assertEquals(len(category_sitemap.items()), 0)
-        self.assertEquals(len(author_sitemap.items()), 0)
-        self.assertEquals(len(tag_sitemap.items()), 0)
+        self.assertEqual(len(entry_sitemap.items()), 0)
+        self.assertEqual(len(category_sitemap.items()), 0)
+        self.assertEqual(len(author_sitemap.items()), 0)
+        self.assertEqual(len(tag_sitemap.items()), 0)

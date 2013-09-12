@@ -121,22 +121,22 @@ class PingBackTestCase(TestCase):
         target = 'http://%s%s' % (self.site.domain,
                                   self.first_entry.get_absolute_url())
 
-        self.assertEquals(
+        self.assertEqual(
             generate_pingback_content(soup, target, 1000),
             'My second content with link to first entry and other links : '
             'http://localhost:8000/error-404/ http://example.com/.')
-        self.assertEquals(
+        self.assertEqual(
             generate_pingback_content(soup, target, 50),
             '...ond content with link to first entry and other lin...')
 
         soup = BeautifulSoup('<a href="%s">test link</a>' % target)
-        self.assertEquals(
+        self.assertEqual(
             generate_pingback_content(soup, target, 6), 'test l...')
 
         soup = BeautifulSoup('test <a href="%s">link</a>' % target)
-        self.assertEquals(
+        self.assertEqual(
             generate_pingback_content(soup, target, 8), '...est link')
-        self.assertEquals(
+        self.assertEqual(
             generate_pingback_content(soup, target, 9), 'test link')
 
     def test_pingback_ping(self):
@@ -147,53 +147,53 @@ class PingBackTestCase(TestCase):
 
         # Error code 0 : A generic fault code
         response = self.server.pingback.ping('toto', 'titi')
-        self.assertEquals(response, 0)
+        self.assertEqual(response, 0)
         response = self.server.pingback.ping('http://%s/' % self.site.domain,
                                              'http://%s/' % self.site.domain)
-        self.assertEquals(response, 0)
+        self.assertEqual(response, 0)
 
         # Error code 16 : The source URI does not exist.
         response = self.server.pingback.ping('http://example.com/', target)
-        self.assertEquals(response, 16)
+        self.assertEqual(response, 16)
 
         # Error code 17 : The source URI does not contain a link to
         # the target URI and so cannot be used as a source.
         response = self.server.pingback.ping(source, 'toto')
-        self.assertEquals(response, 17)
+        self.assertEqual(response, 17)
 
         # Error code 32 : The target URI does not exist.
         response = self.server.pingback.ping(
             source, 'http://localhost:8000/error-404/')
-        self.assertEquals(response, 32)
+        self.assertEqual(response, 32)
         response = self.server.pingback.ping(source, 'http://example.com/')
-        self.assertEquals(response, 32)
+        self.assertEqual(response, 32)
 
         # Error code 33 : The target URI cannot be used as a target.
         response = self.server.pingback.ping(source, 'http://localhost:8000/')
-        self.assertEquals(response, 33)
+        self.assertEqual(response, 33)
         self.first_entry.pingback_enabled = False
         self.first_entry.save()
         response = self.server.pingback.ping(source, target)
-        self.assertEquals(response, 33)
+        self.assertEqual(response, 33)
 
         # Validate pingback
-        self.assertEquals(self.first_entry.pingback_count, 0)
+        self.assertEqual(self.first_entry.pingback_count, 0)
         self.first_entry.pingback_enabled = True
         self.first_entry.save()
         connect_discussion_signals()
         response = self.server.pingback.ping(source, target)
         disconnect_discussion_signals()
-        self.assertEquals(
+        self.assertEqual(
             response,
             'Pingback from %s to %s registered.' % (source, target))
         first_entry_reloaded = Entry.objects.get(pk=self.first_entry.pk)
-        self.assertEquals(first_entry_reloaded.pingback_count, 1)
+        self.assertEqual(first_entry_reloaded.pingback_count, 1)
         self.assertTrue(self.second_entry.title in
                         self.first_entry.pingbacks[0].user_name)
 
         # Error code 48 : The pingback has already been registered.
         response = self.server.pingback.ping(source, target)
-        self.assertEquals(response, 48)
+        self.assertEqual(response, 48)
 
     def test_pingback_ping_on_entry_without_author(self):
         target = 'http://%s%s' % (
@@ -206,11 +206,11 @@ class PingBackTestCase(TestCase):
         connect_discussion_signals()
         response = self.server.pingback.ping(source, target)
         disconnect_discussion_signals()
-        self.assertEquals(
+        self.assertEqual(
             response,
             'Pingback from %s to %s registered.' % (source, target))
         first_entry_reloaded = Entry.objects.get(pk=self.first_entry.pk)
-        self.assertEquals(first_entry_reloaded.pingback_count, 1)
+        self.assertEqual(first_entry_reloaded.pingback_count, 1)
         self.assertTrue(self.second_entry.title in
                         self.first_entry.pingbacks[0].user_name)
 
@@ -221,26 +221,26 @@ class PingBackTestCase(TestCase):
             self.site.domain, self.second_entry.get_absolute_url())
 
         response = self.server.pingback.ping(source, target)
-        self.assertEquals(
+        self.assertEqual(
             response, 'Pingback from %s to %s registered.' % (source, target))
 
         response = self.server.pingback.extensions.getPingbacks(
             'http://example.com/')
-        self.assertEquals(response, 32)
+        self.assertEqual(response, 32)
 
         response = self.server.pingback.extensions.getPingbacks(
             'http://localhost:8000/error-404/')
-        self.assertEquals(response, 32)
+        self.assertEqual(response, 32)
 
         response = self.server.pingback.extensions.getPingbacks(
             'http://localhost:8000/2010/')
-        self.assertEquals(response, 33)
+        self.assertEqual(response, 33)
 
         response = self.server.pingback.extensions.getPingbacks(source)
-        self.assertEquals(response, [])
+        self.assertEqual(response, [])
 
         response = self.server.pingback.extensions.getPingbacks(target)
-        self.assertEquals(response, [
+        self.assertEqual(response, [
             'http://localhost:8000/2010/01/01/my-second-entry/'])
 
         comment = comments.get_model().objects.create(
@@ -253,6 +253,6 @@ class PingBackTestCase(TestCase):
         comment.flags.create(user=self.author, flag=PINGBACK)
 
         response = self.server.pingback.extensions.getPingbacks(target)
-        self.assertEquals(response, [
+        self.assertEqual(response, [
             'http://localhost:8000/2010/01/01/my-second-entry/',
             'http://example.com/blog/1/'])
