@@ -35,9 +35,16 @@ class PreviousNextPublishedMixin(object):
             filters = {'creation_date__gt': date}
             ordering = 'ASC'
 
-        dates = list(self.get_queryset().filter(
-            **filters).dates('creation_date', period, order=ordering))
-
+        items = self.get_queryset().filter(
+            **filters)
+        #In 1.6, datetimes is added, which is the only way to get
+        #datetimes (Which creation_date is) instead of date objects
+        if hasattr(items, 'datetimes'):
+            dates = items.datetimes('creation_date', period, order=ordering)
+        else:
+            dates = items.dates('creation_date', period, order=ordering)
+        dates = list(dates)
+        
         if date in dates:
             dates.remove(date)
 

@@ -2,7 +2,10 @@
 from __future__ import unicode_literals
 
 from django import forms
-from django.utils.encoding import smart_unicode
+try:
+    from django.utils.encoding import smart_unicode
+except ImportError:
+    from django.utils.encoding import smart_text as smart_unicode
 
 
 class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):

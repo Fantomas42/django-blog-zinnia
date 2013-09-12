@@ -45,7 +45,9 @@ def generate_pingback_content(soup, target, max_length, trunc_char='...'):
     index = content.index(link.string)
 
     if len(content) > max_length:
-        middle = max_length / 2
+        #Assuming integer division was desired (Otherwise
+        #this doesn't make sense)
+        middle = max_length // 2
         start = index - middle
         end = index + middle
 

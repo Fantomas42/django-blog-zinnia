@@ -1,0 +1,26 @@
+.....s.F..
+======================================================================
+FAIL: test_next_entry (zinnia.tests.entry.EntryTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mark/Proyectos/django-blog-zinnia/zinnia/tests/entry.py", line 236, in test_next_entry
+    print(query, "\n\n")
+  File "/usr/local/lib/python3.3/dist-packages/django/test/testcases.py", line 108, in __exit__
+    executed, self.num
+AssertionError: 2 != 1 : 2 queries executed, 1 expected
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.315s
+
+FAILED (failures=1, skipped=1)
+Creating test database for alias 'default'...
+Invalidating cache in test_next_entry
+False True TEST
+[] queries
+{'time': '0.000', 'sql': 'QUERY = \'SELECT "zinnia_entry"."id", "zinnia_entry"."title", "zinnia_entry"."slug", "zinnia_entry"."status", "zinnia_entry"."start_publication", "zinnia_entry"."end_publication", "zinnia_entry"."creation_date", "zinnia_entry"."last_update", "zinnia_entry"."content", "zinnia_entry"."comment_enabled", "zinnia_entry"."pingback_enabled", "zinnia_entry"."trackback_enabled", "zinnia_entry"."comment_count", "zinnia_entry"."pingback_count", "zinnia_entry"."trackback_count", "zinnia_entry"."excerpt", "zinnia_entry"."image", "zinnia_entry"."featured", "zinnia_entry"."tags", "zinnia_entry"."login_required", "zinnia_entry"."password", "zinnia_entry"."content_template", "zinnia_entry"."detail_template" FROM "zinnia_entry" ORDER BY "zinnia_entry"."creation_date" DESC\' - PARAMS = ()'} 
+
+
+{'time': '0.000', 'sql': 'QUERY = \'SELECT "tagging_tag"."id", "tagging_tag"."name" FROM "tagging_tag" INNER JOIN "tagging_taggeditem" ON ( "tagging_tag"."id" = "tagging_taggeditem"."tag_id" ) WHERE ("tagging_taggeditem"."content_type_id" = %s  AND "tagging_taggeditem"."object_id" = %s ) ORDER BY "tagging_tag"."name" ASC\' - PARAMS = (12, 1)'} 
+
+
+Destroying test database for alias 'default'...

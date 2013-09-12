@@ -1,6 +1,9 @@
 """Test cases for Zinnia's markups"""
 import sys
-import __builtin__
+try:
+    import __builtin__
+except ImportError:
+    import builtins as __builtin__
 import warnings
 
 from django.test import TestCase
@@ -77,30 +80,33 @@ class MarkupFailImportTestCase(TestCase):
 
     def test_textile(self):
         with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
             result = textile('My *text*')
-        self.tearDown()
-        self.assertEquals(result, 'My *text*')
-        self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
-        self.assertEquals(
-            str(w[-1].message),
-            "The Python textile library isn't installed.")
+            self.tearDown()
+            self.assertEquals(result, 'My *text*')
+            self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
+            self.assertEquals(
+                str(w[-1].message),
+                "The Python textile library isn't installed.")
 
     def test_markdown(self):
         with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
             result = markdown('My *text*')
-        self.tearDown()
-        self.assertEquals(result, 'My *text*')
-        self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
-        self.assertEquals(
-            str(w[-1].message),
-            "The Python markdown library isn't installed.")
+            self.tearDown()
+            self.assertEquals(result, 'My *text*')
+            self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
+            self.assertEquals(
+                str(w[-1].message),
+                "The Python markdown library isn't installed.")
 
     def test_restructuredtext(self):
         with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
             result = restructuredtext('My *text*')
-        self.tearDown()
-        self.assertEquals(result, 'My *text*')
-        self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
-        self.assertEquals(
-            str(w[-1].message),
-            "The Python docutils library isn't installed.")
+            self.tearDown()
+            self.assertEquals(result, 'My *text*')
+            self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
+            self.assertEquals(
+                str(w[-1].message),
+                "The Python docutils library isn't installed.")

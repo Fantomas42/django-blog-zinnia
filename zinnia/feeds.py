@@ -5,6 +5,8 @@ try:
     from urllib.parse import urljoin
 except ImportError:  # Python 2
     from urlparse import urljoin
+from bs4 import BeautifulSoup
+import six
 
 from django.contrib import comments
 from django.contrib.sites.models import Site
@@ -12,14 +14,13 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.translation import ugettext as _
+from django.utils import timezone
 from django.contrib.syndication.views import Feed
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import NoReverseMatch
 from django.core.files.storage import default_storage
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
-
-from bs4 import BeautifulSoup
 
 from tagging.models import Tag
 from tagging.models import TaggedItem
@@ -80,7 +81,7 @@ class EntryFeed(ZinniaFeed):
         """Returns the first author of an entry"""
         if item.authors.count():
             self.item_author = item.authors.all()[0]
-            return self.item_author.__unicode__()
+            return six.text_type(self.item_author)
 
     def item_author_email(self, item):
         """Returns the first author's email"""
@@ -184,11 +185,11 @@ class AuthorEntries(EntryFeed):
 
     def get_title(self, obj):
         """Title of the feed"""
-        return _('Entries for author %s') % obj.__unicode__()
+        return _('Entries for author %s') % six.text_type(obj)
 
     def description(self, obj):
         """Description of the feed"""
-        return _('The latest entries by %s') % obj.__unicode__()
+        return _('The latest entries by %s') % six.text_type(obj)
 
 
 class TagEntries(EntryFeed):

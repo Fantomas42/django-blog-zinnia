@@ -107,8 +107,13 @@ class CommentModeratorTestCase(TestCase):
         self.entry.authors.add(contributor)
         moderator.do_email_authors(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 1)
-        self.assertEquals(mail.outbox[0].to,
-                          ['admin@example.com', 'contrib@example.com'])
+        #This test, as written, is flawed. It assumes that the database
+        #returns the message's authors in the order they were added,
+        #which is an invalid assumption.
+        #For now, I'm changing the test. An alternative fix would be to add an
+        #order(ing?) attribute in Author.Meta . 
+        self.assertEquals(set(mail.outbox[0].to),
+                          set(['admin@example.com', 'contrib@example.com']))
         mail.outbox = []
         contributor.email = ''
         contributor.save()
@@ -149,8 +154,9 @@ class CommentModeratorTestCase(TestCase):
             site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEquals(len(mail.outbox), 2)
-        self.assertEquals(mail.outbox[1].bcc, ['user_1@example.com',
-                                               'user_2@example.com'])
+        #This suffers from the same ordering assumption issue
+        self.assertEquals(set(mail.outbox[1].bcc), set(['user_1@example.com',
+                                               'user_2@example.com']))
 
     def test_moderate(self):
         comment = comments.get_model().objects.create(
@@ -204,7 +210,7 @@ class CommentModeratorTestCase(TestCase):
         self.client.post(url, datas)
         self.client.post(url, datas)
         disconnect_discussion_signals()
-        self.assertEqual(comments.get_model().objects.count(), 1)
+        self.assertEquals(comments.get_model().objects.count(), 1)
         entry_reloaded = Entry.objects.get(pk=self.entry.pk)
         self.assertEquals(entry_reloaded.comment_count, 0)
 

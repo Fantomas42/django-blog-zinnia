@@ -14,6 +14,7 @@ from zinnia.models.entry import Entry
 from zinnia.models.category import Category
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.fields import MPTTModelMultipleChoiceField
+from zinnia.tests.utils import is_before_1_6
 
 
 class CategoryAdminForm(forms.ModelForm):
@@ -26,7 +27,13 @@ class CategoryAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CategoryAdminForm, self).__init__(*args, **kwargs)
-        rel = ManyToOneRel(Category, 'id')
+        if is_before_1_6:
+            rel = ManyToOneRel(Category, 'id')
+        else:
+            #This may or may not be the correct fix.
+            #This really ought to be thrown out and replaced with something
+            #actually a part of the API.
+            rel = ManyToOneRel(Category._meta.get_field('tree_id'), Category, 'id')
         self.fields['parent'].widget = RelatedFieldWidgetWrapper(
             self.fields['parent'].widget, rel, self.admin_site)
 

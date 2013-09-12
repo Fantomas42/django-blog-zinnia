@@ -67,6 +67,8 @@ class PingBackTestCase(TestCase):
              '404.html': '404'})
         # Preparing site
         self.site = Site.objects.get_current()
+        #Hack until I figure out why django's not reloading the site properly.
+        self.old_domain = self.site.domain
         self.site.domain = 'localhost:8000'
         self.site.save()
         # Creating tests entries
@@ -107,6 +109,12 @@ class PingBackTestCase(TestCase):
         zinnia.xmlrpc.pingback.urlopen = self.original_urlopen
         shortener_settings.URL_SHORTENER_BACKEND = self.original_shortener
         restore_template_loaders()
+        
+        #Remove this as soon as I figure out why django's not reloading the site
+        #properly.
+        self.site = Site.objects.get_current()
+        self.site.domain = self.old_domain
+        self.site.save()
 
     def test_generate_pingback_content(self):
         soup = BeautifulSoup(self.second_entry.content)

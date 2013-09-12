@@ -12,6 +12,9 @@ class SpamCheckerTestCase(TestCase):
 
     def test_get_spam_checker(self):
         with warnings.catch_warnings(record=True) as w:
+            #Without this, in python 3, depending on the flags passed in
+            #on the command line, you might not get the warnings
+            warnings.simplefilter("always")
             self.assertEquals(get_spam_checker('mymodule.myclass'), None)
             self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
             self.assertEquals(
@@ -19,6 +22,7 @@ class SpamCheckerTestCase(TestCase):
                 'mymodule.myclass backend cannot be imported')
 
         with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
             self.assertEquals(
                 get_spam_checker('zinnia.tests.custom_spam_checker'), None)
             self.assertTrue(issubclass(w[-1].category, RuntimeWarning))

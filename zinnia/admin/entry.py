@@ -24,6 +24,7 @@ from zinnia.ping import DirectoryPinger
 from zinnia.admin.forms import EntryAdminForm
 from zinnia.admin.filters import AuthorListFilter
 from zinnia.admin.filters import CategoryListFilter
+from zinnia.tests.utils import is_before_1_6
 
 
 class EntryAdmin(admin.ModelAdmin):
@@ -346,22 +347,34 @@ class EntryAdmin(admin.ModelAdmin):
 
     def autocomplete_tags(self, request):
         """View for tag autocompletion"""
-        return TemplateResponse(
-            request, 'admin/zinnia/entry/autocomplete_tags.js',
-            mimetype='application/javascript')
+        if is_before_1_6:
+            kwargs = {"content_type": 'application/javascript'}
+        else:
+            kwargs = {"mimetype": 'application/javascript'}
+        
+        return TemplateResponse(request, 'admin/zinnia/entry/wymeditor.js',
+                                **kwargs)
 
     def wymeditor(self, request):
         """View for serving the config of WYMEditor"""
+        if is_before_1_6:
+            kwargs = {"content_type": 'application/javascript'}
+        else:
+            kwargs = {"mimetype": 'application/javascript'}
         return TemplateResponse(
             request, 'admin/zinnia/entry/wymeditor.js',
             {'lang': get_language().split('-')[0]},
-            'application/javascript')
+            **kwargs)
 
     def markitup(self, request):
         """View for serving the config of MarkItUp"""
+        if is_before_1_6:
+            kwargs = {"content_type": 'application/javascript'}
+        else:
+            kwargs = {"mimetype": 'application/javascript'}
         return TemplateResponse(
             request, 'admin/zinnia/entry/markitup.js',
-            mimetype='application/javascript')
+            **kwargs)
 
     @csrf_exempt
     def content_preview(self, request):

@@ -237,7 +237,8 @@ class EntryAdminTestCase(BaseAdminTestCase):
         settings.USE_TWITTER = True
         settings.PING_DIRECTORIES = True
         self.assertEquals(
-            self.admin.get_actions(self.request).keys(),
+            #keys otherwise returns a generator in python3/ django 1.6
+            list(self.admin.get_actions(self.request).keys()),
             ['delete_selected',
              'close_comments',
              'close_pingbacks',
@@ -250,7 +251,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
         settings.USE_TWITTER = False
         settings.PING_DIRECTORIES = False
         self.assertEquals(
-            self.admin.get_actions(self.request).keys(),
+            list(self.admin.get_actions(self.request).keys()),
             ['delete_selected',
              'close_comments',
              'close_pingbacks',
@@ -260,7 +261,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
              'unmark_featured'])
         self.request.user = root
         self.assertEquals(
-            self.admin.get_actions(self.request).keys(),
+            list(self.admin.get_actions(self.request).keys()),
             ['delete_selected',
              'make_mine',
              'make_published',

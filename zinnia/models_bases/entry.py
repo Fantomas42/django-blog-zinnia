@@ -140,6 +140,7 @@ class CoreEntry(models.Model):
             else:
                 next = None
             previous_next = (previous, next)
+            #Why use setattr here???
             setattr(self, 'previous_next', previous_next)
         return previous_next
 

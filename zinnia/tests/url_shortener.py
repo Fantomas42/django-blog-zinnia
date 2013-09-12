@@ -20,6 +20,7 @@ class URLShortenerTestCase(TestCase):
     def test_get_url_shortener(self):
         us_settings.URL_SHORTENER_BACKEND = 'mymodule.myclass'
         with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
             self.assertEquals(get_url_shortener(), default_backend)
             self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
             self.assertEquals(
@@ -28,6 +29,7 @@ class URLShortenerTestCase(TestCase):
 
         us_settings.URL_SHORTENER_BACKEND = 'zinnia.tests.custom_url_shortener'
         with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
             self.assertEquals(get_url_shortener(), default_backend)
             self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
             self.assertEquals(

@@ -157,18 +157,31 @@ def get_similar_entries(context, number=5,
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_archives_entries(template='zinnia/tags/archives_entries.html'):
     """Return archives entries"""
+    #In 1.6, datetimes returns the query's datetimes, while in 1.5
+    #and back query.datetimes doesn't exist and query.dates returns the
+    #same thing
+    if hasattr(Entry.published, "datetimes"):
+        archives = Entry.published.datetimes('creation_date', 'month',
+                                              order='DESC')
+    else:
+        archives = Entry.published.dates('creation_date', 'month',
+                                              order='DESC')
     return {'template': template,
-            'archives': Entry.published.dates('creation_date', 'month',
-                                              order='DESC')}
+            'archives': archives}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_archives_entries_tree(
         template='zinnia/tags/archives_entries_tree.html'):
     """Return archives entries as a Tree"""
+    if hasattr(Entry.published, "datetimes"):
+        archives = Entry.published.datetimes('creation_date', 'day',
+                                              order='ASC')
+    else:
+        archives = Entry.published.dates('creation_date', 'day',
+                                              order='ASC')
     return {'template': template,
-            'archives': Entry.published.dates('creation_date', 'day',
-                                              order='ASC')}
+            'archives': archives}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -187,7 +200,10 @@ def get_calendar_entries(context, year=None, month=None,
         current_month = timezone.make_aware(
             current_month, timezone.utc)
 
-    dates = list(Entry.published.dates('creation_date', 'month'))
+    if hasattr(Entry.published, "datetimes"):
+        dates = list(Entry.published.datetimes('creation_date', 'month'))
+    else:
+        dates = list(Entry.published.dates('creation_date', 'month'))
 
     if not current_month in dates:
         dates.append(current_month)
@@ -261,22 +277,22 @@ def zinnia_pagination(context, page, begin_pages=3, end_pages=3,
                                        page.number + after_pages]
 
     if set(begin) & set(end):  # [1, 2, 3], [...], [2, 3, 4]
-        begin = sorted(set(begin + end))  # [1, 2, 3, 4]
+        begin = sorted(set(list(begin) + list(end)))  # [1, 2, 3, 4]
         middle, end = [], []
     elif begin[-1] + 1 == end[0]:  # [1, 2, 3], [...], [4, 5, 6]
-        begin += end  # [1, 2, 3, 4, 5, 6]
+        begin = list(begin) + list(end)  # [1, 2, 3, 4, 5, 6]
         middle, end = [], []
     elif set(begin) & set(middle):  # [1, 2, 3], [2, 3, 4], [...]
-        begin = sorted(set(begin + middle))  # [1, 2, 3, 4]
+        begin = sorted(set(list(begin) + list(middle)))  # [1, 2, 3, 4]
         middle = []
     elif begin[-1] + 1 == middle[0]:  # [1, 2, 3], [4, 5, 6], [...]
-        begin += middle  # [1, 2, 3, 4, 5, 6]
+        begin = list(begin) + list(middle)  # [1, 2, 3, 4, 5, 6]
         middle = []
     elif middle[-1] + 1 == end[0]:  # [...], [15, 16, 17], [18, 19, 20]
-        end = middle + end  # [15, 16, 17, 18, 19, 20]
+        end = list(middle) + list(end)  # [15, 16, 17, 18, 19, 20]
         middle = []
     elif set(middle) & set(end):  # [...], [17, 18, 19], [18, 19, 20]
-        end = sorted(set(middle + end))  # [17, 18, 19, 20]
+        end = sorted(set(list(middle) + list(end)))  # [17, 18, 19, 20]
         middle = []
 
     return {'template': template, 'page': page, 'GET_string': GET_string,
@@ -306,7 +322,8 @@ def get_gravatar(email, size=80, rating='g', default=None,
                           'https': 'https://secure'}
     url = '%s.gravatar.com/avatar/%s' % (
         GRAVATAR_PROTOCOLS[protocol],
-        md5(email.strip().lower()).hexdigest())
+        #TODO: Figure out if assuming utf-8 is acceptable
+        md5(email.strip().lower().encode("utf-8")).hexdigest())
     options = {'s': size, 'r': rating}
     if default:
         options['d'] = default
