@@ -6,7 +6,6 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 from bs4 import BeautifulSoup
-import six
 
 from django.contrib import comments
 from django.contrib.sites.models import Site
@@ -14,7 +13,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.translation import ugettext as _
-from django.utils import timezone
+from django.utils import timezone, six
 from django.contrib.syndication.views import Feed
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import NoReverseMatch

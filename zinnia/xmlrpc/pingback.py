@@ -78,7 +78,7 @@ def pingback_ping(source, target):
 
         site = Site.objects.get_current()
         try:
-            document = ''.join(urlopen(source).readlines())
+            document = ''.join(map(lambda byte_line: byte_line.decode("utf-8"), urlopen(source).readlines()))
         except (HTTPError, URLError):
             return SOURCE_DOES_NOT_EXIST
 
@@ -106,7 +106,7 @@ def pingback_ping(source, target):
             return TARGET_IS_NOT_PINGABLE
 
         soup = BeautifulSoup(document)
-        title = soup.find('title')
+        title = six.text_type(soup.find('title'))
         title = title and strip_tags(title) or _('No title')
         description = generate_pingback_content(soup, target,
                                                 PINGBACK_CONTENT_LENGTH)

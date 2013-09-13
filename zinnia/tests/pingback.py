@@ -11,7 +11,7 @@ except ImportError:  # Python 2
     from xmlrpclib import ServerProxy
 
 from django.test import TestCase
-from django.utils import timezone
+from django.utils import timezone, six
 from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.test.utils import restore_template_loaders
@@ -46,7 +46,7 @@ class PingBackTestCase(TestCase):
         if not netloc:
             raise
         if self.site.domain == netloc:
-            response = StringIO(self.client.get(url).content)
+            response = six.BytesIO(self.client.get(url).content)
             return response
         raise HTTPError(url, 404, 'unavailable url', {}, None)
 

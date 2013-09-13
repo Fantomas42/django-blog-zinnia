@@ -2,8 +2,8 @@
 from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.contrib.auth.tests.utils import skipIfCustomUser
+from django.utils import six
 
-import six
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author

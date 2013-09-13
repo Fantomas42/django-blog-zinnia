@@ -2,8 +2,8 @@
 import re
 from functools import wraps
 from datetime import datetime
-import six
 
+from django.utils import six
 from django.utils.dateformat import format
 from django.utils.timezone import is_aware
 from django.utils.timezone import localtime

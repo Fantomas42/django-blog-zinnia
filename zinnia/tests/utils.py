@@ -1,12 +1,11 @@
 """Utils for Zinnia's tests"""
 try:
-    from io import StringIO
     from xmlrpc.client import Transport
 except ImportError:  # Python 2
-    from StringIO import StringIO
     from xmlrpclib import Transport
 from datetime import datetime as original_datetime
 
+from django.utils import six
 from django.conf import settings
 from django.utils import timezone
 from django.test.client import Client
@@ -27,11 +26,11 @@ class TestTransport(Transport):
         response = self.client.post(handler,
                                     request_body,
                                     content_type="text/xml")
-        #I'm not sure if it's allowed to assume utf-8 is the proper
-        #encoding. Feedback would be appreciated.
-        res = StringIO(response.content.decode("utf-8"))
+        #I think(?) this is supposed to be bytes
+        res = six.BytesIO(response.content)
         setattr(res, 'getheader', lambda *args: '')  # For Python >= 2.7
         res.seek(0)
+        #What's with the redundancy?
         if not hasattr(res, 'getheader'):
             setattr(res, 'getheader', lambda *args: "")
         return self.parse_response(res)

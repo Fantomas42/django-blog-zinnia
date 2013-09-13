@@ -17,9 +17,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.storage import default_storage
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.tests.utils import skipIfCustomUser
+from django.utils import six
 
 from tagging.models import Tag
-import six
 
 from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
