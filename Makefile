@@ -28,10 +28,8 @@ sphinx:
 docs: coverage sphinx
 
 kwalitee:
-	@echo "$(COLOR)* Running pyflakes$(NO_COLOR)"
-	@./bin/pyflakes zinnia
-	@echo "$(COLOR)* Running pep8$(NO_COLOR)"
-	@./bin/pep8 --count --show-source --show-pep8 --statistics --exclude=migrations zinnia
+	@echo "$(COLOR)* Running flake8$(NO_COLOR)"
+	@./bin/flake8 --count --show-source --show-pep8 --statistics --exclude=migrations zinnia
 	@echo "$(SUCCESS_COLOR)* No kwalitee errors, Congratulations ! :)$(NO_COLOR)"
 
 translations:
