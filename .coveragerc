@@ -3,6 +3,11 @@ source		= zinnia
 omit		= zinnia/tests/*
                   zinnia/migrations/*
                   zinnia/management/*
+                  zinnia/spam_checker/backends/*
+                  zinnia/url_shortener/backends/*
+                  demo/*
+                  eggs/*
+                  */lib/*
 
 [report]
 show_missing    = True
