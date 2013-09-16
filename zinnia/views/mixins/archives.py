@@ -1,5 +1,5 @@
 """Mixins for Zinnia archive views"""
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.conf import settings
 from django.utils import timezone
 
@@ -28,11 +28,30 @@ class PreviousNextPublishedMixin(object):
         if settings.USE_TZ:
             date = timezone.make_aware(date, timezone.utc)
 
+        #Convert the dang datetime to a true date object
+        date = date.date()
+        if period == "year":
+            #No thinking required here...
+            next_date = date.replace(year=date.year + 1)
+        elif period == "month":
+            #We've got to do the date math ourselves because we don't
+            #know how many days to add and timedelta doesn't have a months
+            #parameter
+            if date.month < 12:
+                new_month = date.month + 1
+                new_year = date.year
+            else:
+                new_month = 1
+                new_year = date.year + 1
+            next_date = date.replace(month=new_month, year=new_year)
+        elif period == "day":
+            #datetime is smart enough to do the math for us here
+            next_date = date + timedelta(days=1)
         if previous:
-            filters = {'creation_date__lt': date}
+            filters = {'creation_date__lte': next_date}
             ordering = 'DESC'
         else:
-            filters = {'creation_date__gt': date}
+            filters = {'creation_date__gte': next_date}
             ordering = 'ASC'
 
         items = self.get_queryset().filter(
@@ -43,13 +62,13 @@ class PreviousNextPublishedMixin(object):
             dates = items.datetimes('creation_date', period, order=ordering)
         else:
             dates = items.dates('creation_date', period, order=ordering)
-        dates = list(dates)
+        dates = [date_time.date() for date_time in dates]
         
         if date in dates:
             dates.remove(date)
 
         if dates:
-            return dates[0].date()
+            return dates[0]
 
     def get_next_year(self, date):
         """Get the next year with published Entries"""

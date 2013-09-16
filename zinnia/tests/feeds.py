@@ -24,7 +24,7 @@ from tagging.models import Tag
 from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
-from zinnia.tests.utils import datetime
+from zinnia.tests.utils import datetime, urlEqual
 from zinnia.models.category import Category
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia import feeds
@@ -270,10 +270,10 @@ class FeedsTestCase(TestCase):
         self.assertEqual(
             feed.description(entry),
             'The latest comments for the entry %s' % entry.title)
-        self.assertEqual(
+        self.assertTrue(urlEqual(
             feed.item_enclosure_url(comments[0]),
             'http://www.gravatar.com/avatar/e64c7d89f26b'
-            'd1972efa854d13d7dd61?s=80&amp;r=g')
+            'd1972efa854d13d7dd61?s=80&amp;r=g'))
         self.assertEqual(feed.item_enclosure_length(entry), '100000')
         self.assertEqual(feed.item_enclosure_mime_type(entry), 'image/jpeg')
 

@@ -58,6 +58,38 @@ def is_lib_available(library):
     except ImportError:
         return False
 
+def urlEqual(url_1, url_2):
+    uri_1, uri_2 = url_1.split("?")[0], url_2.split("?")[0]
+    if uri_1 == uri_2:
+        try:
+            querystring_1 = url_1.split("?")[1]
+        except IndexError:
+            querystring_1 = ""
+        try:
+            querystring_2 = url_2.split("?")[1]
+        except IndexError:
+            querystring_2 = ""
+        query_1 = {}
+        #This is ugly, I know. Will fix when less braindead
+        for item in map(lambda item: item.strip(";").split("="), querystring_1.split("&")):
+            if len(item) == 2:
+                key, value = item
+            else:
+                key = item[0]
+                value = None
+            query_1[key] = value
+        query_2 = {}
+        for item in map(lambda item: item.strip(";").split("="), querystring_2.split("&")):
+            if len(item) == 2:
+                key, value = item
+            else:
+                key = item[0]
+                value = None
+            query_2[key] = value
+            
+        return query_1 == query_2
+    return False
+
 is_before_1_6 = (django.VERSION[0] < 1) or (django.VERSION[0]
                                             == 1 and django.VERSION[1] < 6)
 

@@ -348,9 +348,9 @@ class EntryAdmin(admin.ModelAdmin):
     def autocomplete_tags(self, request):
         """View for tag autocompletion"""
         if is_before_1_6:
-            kwargs = {"content_type": 'application/javascript'}
-        else:
             kwargs = {"mimetype": 'application/javascript'}
+        else:
+            kwargs = {"content_type": 'application/javascript'}
         
         return TemplateResponse(request, 'admin/zinnia/entry/wymeditor.js',
                                 **kwargs)
@@ -358,9 +358,9 @@ class EntryAdmin(admin.ModelAdmin):
     def wymeditor(self, request):
         """View for serving the config of WYMEditor"""
         if is_before_1_6:
-            kwargs = {"content_type": 'application/javascript'}
-        else:
             kwargs = {"mimetype": 'application/javascript'}
+        else:
+            kwargs = {"content_type": 'application/javascript'}
         return TemplateResponse(
             request, 'admin/zinnia/entry/wymeditor.js',
             {'lang': get_language().split('-')[0]},
@@ -369,9 +369,9 @@ class EntryAdmin(admin.ModelAdmin):
     def markitup(self, request):
         """View for serving the config of MarkItUp"""
         if is_before_1_6:
-            kwargs = {"content_type": 'application/javascript'}
-        else:
             kwargs = {"mimetype": 'application/javascript'}
+        else:
+            kwargs = {"content_type": 'application/javascript'}
         return TemplateResponse(
             request, 'admin/zinnia/entry/markitup.js',
             **kwargs)
