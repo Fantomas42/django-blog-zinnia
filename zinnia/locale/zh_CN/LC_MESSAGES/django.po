@@ -658,6 +658,7 @@ msgstr "编辑日志"
 #: templates/zinnia/entry_detail_base.html:113
 #: templates/zinnia/entry_detail_base.html:150
 #: templates/zinnia/entry_detail_base.html:186
+msgctxt "on date"
 msgid "on"
 msgstr "在"
 
