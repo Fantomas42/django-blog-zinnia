@@ -110,7 +110,7 @@
 	{% else %}
 	<span class="fn">{{ comment.name }}</span>
 	{% endif %}
-	{% trans "on" %}
+	{% trans "on" context "on date" %}
         <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
           {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
@@ -147,7 +147,7 @@
       <p class="pingback-info">
 	<a href="{{ pingback.url }}" rel="external nofollow"
            class="fn url org">{{ pingback.name }}</a>
-	{% trans "on" %}
+	{% trans "on" context "on date" %}
         <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}">
           {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
@@ -183,7 +183,7 @@
       <p class="trackback-info">
 	<a href="{{ trackback.url }}" rel="external nofollow"
            class="fn url org">{{ trackback.name }}</a>
-	{% trans "on" %}
+	{% trans "on" context "on date" %}
         <abbr class="trackback-published" title="{{ trackback.submit_date|date:"c" }}">
           {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>
