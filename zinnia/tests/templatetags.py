@@ -19,7 +19,7 @@ from zinnia.models.category import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 from zinnia.flags import PINGBACK, TRACKBACK
-from zinnia.tests.utils import datetime
+from zinnia.tests.utils import datetime, urlEqual
 from zinnia.templatetags.zinnia_tags import widont
 from zinnia.templatetags.zinnia_tags import get_authors
 from zinnia.templatetags.zinnia_tags import get_gravatar
@@ -657,18 +657,18 @@ class TemplateTagsTestCase(TestCase):
         # More tests can be done here, for testing path and objects in context
 
     def test_get_gravatar(self):
-        self.assertEqual(
+        self.assertTrue(urlEqual(
             get_gravatar('webmaster@example.com'),
             'http://www.gravatar.com/avatar/86d4fd4a22de452'
-            'a9228298731a0b592?s=80&amp;r=g')
-        self.assertEqual(
+            'a9228298731a0b592?s=80&amp;r=g'))
+        self.assertTrue(urlEqual(
             get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404'),
             'http://www.gravatar.com/avatar/86d4fd4a22de452'
-            'a9228298731a0b592?s=15&amp;r=x&amp;d=404')
-        self.assertEqual(
+            'a9228298731a0b592?s=15&amp;r=x&amp;d=404'))
+        self.assertTrue(urlEqual(
             get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404', 'https'),
             'https://secure.gravatar.com/avatar/86d4fd4a22de452'
-            'a9228298731a0b592?s=15&amp;r=x&amp;d=404')
+            'a9228298731a0b592?s=15&amp;r=x&amp;d=404'))
 
     def test_get_tags(self):
         Tag.objects.create(name='tag')
@@ -779,3 +779,4 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['entries_per_month'], 1)
         self.assertEqual(context['comments_per_entry'], 1)
         self.assertEqual(context['linkbacks_per_entry'], 0)
+

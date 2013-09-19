@@ -9,7 +9,8 @@ from django.utils import six
 from django.conf import settings
 from django.utils import timezone
 from django.test.client import Client
-import django
+
+from zinnia import is_before_1_6
 
 
 class TestTransport(Transport):
@@ -71,7 +72,7 @@ def urlEqual(url_1, url_2):
             querystring_2 = ""
         query_1 = {}
         #This is ugly, I know. Will fix when less braindead
-        for item in map(lambda item: item.strip(";").split("="), querystring_1.split("&")):
+        for item in map(lambda item: item.split("="), querystring_1.replace(";", "&").split("&")):
             if len(item) == 2:
                 key, value = item
             else:
@@ -79,7 +80,7 @@ def urlEqual(url_1, url_2):
                 value = None
             query_1[key] = value
         query_2 = {}
-        for item in map(lambda item: item.strip(";").split("="), querystring_2.split("&")):
+        for item in map(lambda item: item.split("="), querystring_2.replace(";", "&").split("&")):
             if len(item) == 2:
                 key, value = item
             else:
@@ -89,9 +90,6 @@ def urlEqual(url_1, url_2):
             
         return query_1 == query_2
     return False
-
-is_before_1_6 = (django.VERSION[0] < 1) or (django.VERSION[0]
-                                            == 1 and django.VERSION[1] < 6)
 
 is_using_sqlite = settings.DATABASES["default"]["ENGINE"].endswith("sqlite3")
 

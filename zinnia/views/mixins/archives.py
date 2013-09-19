@@ -58,10 +58,13 @@ class PreviousNextPublishedMixin(object):
             **filters)
         #In 1.6, datetimes is added, which is the only way to get
         #datetimes (Which creation_date is) instead of date objects
+        #We ought to handle datetimes in utc instead of the local timezone
         if hasattr(items, 'datetimes'):
-            dates = items.datetimes('creation_date', period, order=ordering)
+            dates = items.datetimes('creation_date', period, order=ordering,
+                                    tzinfo=timezone.utc)
         else:
-            dates = items.dates('creation_date', period, order=ordering)
+            dates = items.dates('creation_date', period, order=ordering,
+                                tzinfo=timezone.utc)
         dates = [date_time.date() for date_time in dates]
         
         if date in dates:

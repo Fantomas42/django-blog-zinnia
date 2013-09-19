@@ -14,7 +14,7 @@ from zinnia.models.entry import Entry
 from zinnia.models.category import Category
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.fields import MPTTModelMultipleChoiceField
-from zinnia.tests.utils import is_before_1_6
+from zinnia import is_before_1_6
 
 
 class CategoryAdminForm(forms.ModelForm):
