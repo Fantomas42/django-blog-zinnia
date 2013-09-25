@@ -9,9 +9,9 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
 
+
 @skipIfCustomUser
 class AuthorTestCase(TestCase):
-
     def setUp(self):
         self.site = Site.objects.get_current()
         self.author = Author.objects.create_user(

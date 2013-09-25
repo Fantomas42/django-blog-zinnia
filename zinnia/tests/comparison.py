@@ -15,7 +15,8 @@ class ComparisonTestCase(TestCase):
         self.assertEqual(pearson_score([0, 1, 2], [0, 1, 2]), 0.0)
         #The pearson algorithm was incorrect. My results have been verified
         #with a wolfram calculator here:
-        #http://www.wolframalpha.com/widgets/view.jsp?id=3038cb5ccf72f21a13801d9c78f70937
+        #http://www.wolframalpha.com/widgets/view.jsp?
+        #id=3038cb5ccf72f21a13801d9c78f70937
 
         #One thing that I don't understand is why the pearson
         #calculator is returning 1-r . I've left it as is.
@@ -36,8 +37,9 @@ class ComparisonTestCase(TestCase):
         self.assertEqual(list(cm.dataset().values()), ['1', '2'])
         cm = ClusteredModel(Entry.objects.all(),
                             ['title', 'excerpt', 'content'])
-        self.assertEqual(list(cm.dataset().values()), ['My entry 1  My content 1',
-                                                  'My entry 2  My content 2'])
+        self.assertEqual(list(cm.dataset().values()),
+                         ['My entry 1  My content 1',
+                          'My entry 2  My content 2'])
 
     def test_vector_builder(self):
         vectors = VectorBuilder(Entry.objects.all(),
@@ -55,12 +57,14 @@ class ComparisonTestCase(TestCase):
         #keys were iterated through (words_total.items, to be specific)
         #, which is undefined. Therefore, we cannot rely on its order being
         #fixed. So, I just sort the list to get it in a consistant order
-        self.assertEqual(sorted(columns), sorted(['content', 'This', 'my', 'is', '1',
-                                    'second', '2', 'first']))
+        self.assertEqual(sorted(columns), sorted(
+            ['content', 'This', 'my', 'is', '1',
+             'second', '2', 'first']))
         #Again, we can't rely on the ordering of dict contents
-        #being constant. I *think* I've addressed all of the sorting issues, but
-        #I might have missed something.
-        #If the vectorbuilder needs ordering to matter, the algorithm used needs
-        #to be changed significantly.
-        self.assertEqual(sorted([sorted(row) for row in dataset.values()]), sorted([sorted([1, 1, 1, 1, 1, 0, 0, 1]),
-                                             sorted([0, 0, 0, 0, 0, 1, 1, 0])]))
+        #being constant. I *think* I've addressed all of
+        #the sorting issues, but I might have missed something.
+        #If the vectorbuilder needs ordering to matter,
+        #the algorithm used needs to be changed significantly.
+        self.assertEqual(sorted([sorted(row) for row in dataset.values()]),
+                         sorted([sorted([1, 1, 1, 1, 1, 0, 0, 1]),
+                                 sorted([0, 0, 0, 0, 0, 1, 1, 0])]))

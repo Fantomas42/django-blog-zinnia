@@ -479,7 +479,8 @@ class TemplateTagsTestCase(TestCase):
             context = zinnia_pagination(source_context, paginator.page(15))
         self.assertEqual(list(context['begin']), [1, 2, 3])
         self.assertEqual(list(context['middle']), [])
-        self.assertEqual(list(context['end']), [13, 14, 15, 16, 17, 18, 19, 20])
+        self.assertEqual(list(context['end']),
+                         [13, 14, 15, 16, 17, 18, 19, 20])
 
         with self.assertNumQueries(0):
             context = zinnia_pagination(source_context, paginator.page(18))
@@ -779,4 +780,3 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['entries_per_month'], 1)
         self.assertEqual(context['comments_per_entry'], 1)
         self.assertEqual(context['linkbacks_per_entry'], 0)
-

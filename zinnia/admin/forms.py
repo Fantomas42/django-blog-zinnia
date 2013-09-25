@@ -33,7 +33,8 @@ class CategoryAdminForm(forms.ModelForm):
             #This may or may not be the correct fix.
             #This really ought to be thrown out and replaced with something
             #actually a part of the API.
-            rel = ManyToOneRel(Category._meta.get_field('tree_id'), Category, 'id')
+            rel = ManyToOneRel(Category._meta.get_field('tree_id'),
+                               Category, 'id')
         self.fields['parent'].widget = RelatedFieldWidgetWrapper(
             self.fields['parent'].widget, rel, self.admin_site)
 

@@ -351,7 +351,6 @@ class EntryAdmin(admin.ModelAdmin):
             kwargs = {"mimetype": 'application/javascript'}
         else:
             kwargs = {"content_type": 'application/javascript'}
-        
         return TemplateResponse(request, 'admin/zinnia/entry/wymeditor.js',
                                 **kwargs)
 

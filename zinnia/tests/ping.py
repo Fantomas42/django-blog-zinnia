@@ -3,7 +3,7 @@ try:
     from urllib import addinfourl
 except ImportError:
     from urllib.response import addinfourl
-    
+
 try:
     from io import StringIO
     from urllib.error import URLError

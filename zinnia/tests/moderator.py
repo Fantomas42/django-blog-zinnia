@@ -111,7 +111,7 @@ class CommentModeratorTestCase(TestCase):
         #returns the message's authors in the order they were added,
         #which is an invalid assumption.
         #For now, I'm changing the test. An alternative fix would be to add an
-        #order(ing?) attribute in Author.Meta . 
+        #order(ing?) attribute in Author.Meta .
         self.assertEqual(set(mail.outbox[0].to),
                           set(['admin@example.com', 'contrib@example.com']))
         mail.outbox = []

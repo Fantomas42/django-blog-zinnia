@@ -250,7 +250,7 @@ class EntryTestCase(TestCase):
         self.assertEqual(self.entry.next_entry, self.third_entry)
         self.assertEqual(self.third_entry.next_entry, self.second_entry)
         self.assertFalse(self.second_entry.next_entry)
-                                                    
+
     def test_previous_next_entry_in_one_query(self):
         site = Site.objects.get_current()
         self.entry.status = PUBLISHED

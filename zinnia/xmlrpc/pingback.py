@@ -78,7 +78,9 @@ def pingback_ping(source, target):
 
         site = Site.objects.get_current()
         try:
-            document = ''.join(map(lambda byte_line: byte_line.decode("utf-8"), urlopen(source).readlines()))
+            document = ''.join(map(
+                lambda byte_line: byte_line.decode("utf-8"),
+                urlopen(source).readlines()))
         except (HTTPError, URLError):
             return SOURCE_DOES_NOT_EXIST
 

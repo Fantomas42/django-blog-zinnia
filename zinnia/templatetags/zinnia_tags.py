@@ -162,10 +162,12 @@ def get_archives_entries(template='zinnia/tags/archives_entries.html'):
     #same thing
     if hasattr(Entry.published, "datetimes"):
         archives = Entry.published.datetimes('creation_date', 'month',
-                                              order='DESC', tzinfo=timezone.utc)
+                                              order='DESC',
+                                             tzinfo=timezone.utc)
     else:
         archives = Entry.published.dates('creation_date', 'month',
-                                              order='DESC', tzinfo=timezone.utc)
+                                              order='DESC',
+                                         tzinfo=timezone.utc)
     return {'template': template,
             'archives': archives}
 
@@ -203,18 +205,18 @@ def get_calendar_entries(context, year=None, month=None,
     #Note: I need to make the results of the datetimes access
     #distinct. ".dates" does this, but datetimes does not. (All it does
     #is "truncate" them to the kind without guaranteeing uniqueness.)
-    #The proper fix for this is probably to convert creation_date to a true
-    #date instead of a datetime, but that's a big decision to make.
     if hasattr(Entry.published, "datetimes"):
-        dates = list(Entry.published.datetimes('creation_date', 'month', tzinfo=timezone.utc))
+        dates = list(Entry.published.datetimes('creation_date', 'month',
+                                               tzinfo=timezone.utc))
     else:
-        dates = list(Entry.published.dates('creation_date', 'month', tzinfo=timezone.utc))
+        dates = list(Entry.published.dates('creation_date', 'month',
+                                           tzinfo=timezone.utc))
 
     if current_month not in dates:
         dates.append(current_month)
         dates.sort()
     index = dates.index(current_month)
-    
+
     previous_month = index > 0 and dates[index - 1] or None
     next_month = index != len(dates) - 1 and dates[index + 1] or None
 
