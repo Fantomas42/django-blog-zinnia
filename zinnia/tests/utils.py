@@ -10,7 +10,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.test.client import Client
 
-from zinnia import is_before_1_6
+from zinnia.utils import is_before_1_6
 
 
 class TestTransport(Transport):

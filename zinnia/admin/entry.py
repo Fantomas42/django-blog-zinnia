@@ -24,7 +24,7 @@ from zinnia.ping import DirectoryPinger
 from zinnia.admin.forms import EntryAdminForm
 from zinnia.admin.filters import AuthorListFilter
 from zinnia.admin.filters import CategoryListFilter
-from zinnia import is_before_1_6
+from zinnia.utils import is_before_1_6
 
 
 class EntryAdmin(admin.ModelAdmin):
