@@ -1,11 +1,9 @@
 """Test cases for Zinnia's PingBack API"""
 try:
-    from io import StringIO
     from urllib.error import HTTPError
     from urllib.parse import urlsplit
     from xmlrpc.client import ServerProxy
 except ImportError:  # Python 2
-    from cStringIO import StringIO
     from urllib2 import HTTPError
     from urlparse import urlsplit
     from xmlrpclib import ServerProxy

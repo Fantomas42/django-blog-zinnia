@@ -223,7 +223,7 @@ class EntryTestCase(TestCase):
         self.entry.save()
         self.entry.sites.add(site)
         del self.entry.previous_next  # Invalidate the cached property
-        with self.assertNumQueries(1) as q:
+        with self.assertNumQueries(1):
             self.assertFalse(self.entry.next_entry)
             # Reload to check the cache
             self.assertFalse(self.entry.next_entry)
@@ -260,7 +260,7 @@ class EntryTestCase(TestCase):
             expected_query_count = 1
         else:
             expected_query_count = 1
-        with self.assertNumQueries(expected_query_count) as q:
+        with self.assertNumQueries(expected_query_count):
             self.assertFalse(self.entry.next_entry)
             # Reload to check the cache
             self.assertFalse(self.entry.previous_entry)
@@ -284,7 +284,7 @@ class EntryTestCase(TestCase):
             expected_query_count = 1
         else:
             expected_query_count = 1
-        with self.assertNumQueries(expected_query_count) as q:
+        with self.assertNumQueries(expected_query_count):
             self.assertEqual(self.entry.previous_entry, self.second_entry)
             self.assertEqual(self.entry.next_entry, self.third_entry)
             # Reload to check the cache
