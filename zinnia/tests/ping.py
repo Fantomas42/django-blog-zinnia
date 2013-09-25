@@ -136,9 +136,10 @@ class ExternalUrlsPingerTestCase(TestCase):
 
     def test_pingback_url(self):
         pinger = ExternalUrlsPinger(self.entry, start_now=False)
-        self.assertEqual(pinger.pingback_url('http://localhost',
-                                              'http://error.com'),
-                          'http://error.com cannot be pinged.')
+        self.assertEqual(
+            pinger.pingback_url('http://localhost',
+                                'http://error.com'),
+            'http://error.com cannot be pinged.')
 
     def test_find_pingback_urls(self):
         # Set up a stub around urlopen

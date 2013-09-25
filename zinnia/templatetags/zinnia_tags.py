@@ -162,12 +162,11 @@ def get_archives_entries(template='zinnia/tags/archives_entries.html'):
     #same thing
     if hasattr(Entry.published, "datetimes"):
         archives = Entry.published.datetimes('creation_date', 'month',
-                                              order='DESC',
+                                             order='DESC',
                                              tzinfo=timezone.utc)
     else:
         archives = Entry.published.dates('creation_date', 'month',
-                                              order='DESC',
-                                         tzinfo=timezone.utc)
+                                         order='DESC')
     return {'template': template,
             'archives': archives}
 
@@ -181,7 +180,7 @@ def get_archives_entries_tree(
                                               order='ASC', tzinfo=timezone.utc)
     else:
         archives = Entry.published.dates('creation_date', 'day',
-                                              order='ASC', tzinfo=timezone.utc)
+                                         order='ASC')
     return {'template': template,
             'archives': archives}
 
@@ -209,8 +208,7 @@ def get_calendar_entries(context, year=None, month=None,
         dates = list(Entry.published.datetimes('creation_date', 'month',
                                                tzinfo=timezone.utc))
     else:
-        dates = list(Entry.published.dates('creation_date', 'month',
-                                           tzinfo=timezone.utc))
+        dates = list(Entry.published.dates('creation_date', 'month')
 
     if current_month not in dates:
         dates.append(current_month)

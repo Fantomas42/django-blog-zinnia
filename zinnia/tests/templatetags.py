@@ -84,7 +84,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_categories_tree(source_context)
         self.assertEqual(len(context['categories']), 0)
         self.assertEqual(context['template'],
-                          'zinnia/tags/categories_tree.html')
+                         'zinnia/tags/categories_tree.html')
         self.assertEqual(context['context_category'], None)
 
         category = Category.objects.create(title='Category 1',
@@ -122,7 +122,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_recent_entries()
         self.assertEqual(len(context['entries']), 0)
         self.assertEqual(context['template'],
-                          'zinnia/tags/recent_entries.html')
+                         'zinnia/tags/recent_entries.html')
 
         self.publish_entry()
         with self.assertNumQueries(0):
@@ -138,7 +138,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_featured_entries()
         self.assertEqual(len(context['entries']), 0)
         self.assertEqual(context['template'],
-                          'zinnia/tags/featured_entries.html')
+                         'zinnia/tags/featured_entries.html')
 
         self.publish_entry()
         with self.assertNumQueries(0):
@@ -154,7 +154,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_draft_entries()
         self.assertEqual(len(context['entries']), 1)
         self.assertEqual(context['template'],
-                          'zinnia/tags/draft_entries.html')
+                         'zinnia/tags/draft_entries.html')
 
         self.publish_entry()
         with self.assertNumQueries(0):
@@ -170,7 +170,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_random_entries()
         self.assertEqual(len(context['entries']), 0)
         self.assertEqual(context['template'],
-                          'zinnia/tags/random_entries.html')
+                         'zinnia/tags/random_entries.html')
 
         self.publish_entry()
         with self.assertNumQueries(0):
@@ -186,7 +186,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_popular_entries()
         self.assertEqual(len(context['entries']), 0)
         self.assertEqual(context['template'],
-                          'zinnia/tags/popular_entries.html')
+                         'zinnia/tags/popular_entries.html')
 
         self.publish_entry()
         with self.assertNumQueries(0):
@@ -228,7 +228,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_similar_entries(source_context)
         self.assertEqual(len(context['entries']), 0)
         self.assertEqual(context['template'],
-                          'zinnia/tags/similar_entries.html')
+                         'zinnia/tags/similar_entries.html')
 
         params = {'title': 'My second entry',
                   'content': 'This is the second entry of my tests.',
@@ -252,7 +252,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_archives_entries()
         self.assertEqual(len(context['archives']), 0)
         self.assertEqual(context['template'],
-                          'zinnia/tags/archives_entries.html')
+                         'zinnia/tags/archives_entries.html')
 
         self.publish_entry()
         params = {'title': 'My second entry',
@@ -277,7 +277,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_archives_entries_tree()
         self.assertEqual(len(context['archives']), 0)
         self.assertEqual(context['template'],
-                          'zinnia/tags/archives_entries_tree.html')
+                         'zinnia/tags/archives_entries_tree.html')
 
         self.publish_entry()
         params = {'title': 'My second entry',
@@ -357,7 +357,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_recent_comments()
         self.assertEqual(len(context['comments']), 0)
         self.assertEqual(context['template'],
-                          'zinnia/tags/recent_comments.html')
+                         'zinnia/tags/recent_comments.html')
 
         comment_1 = comments.get_model().objects.create(
             comment='My Comment 1', site=site,
@@ -372,7 +372,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_recent_comments()
             self.assertEqual(len(context['comments']), 1)
             self.assertEqual(context['comments'][0].content_object,
-                              self.entry)
+                             self.entry)
 
         author = Author.objects.create_user(username='webmaster',
                                             email='webmaster@example.com')
@@ -384,11 +384,11 @@ class TemplateTagsTestCase(TestCase):
         with self.assertNumQueries(3):
             context = get_recent_comments()
             self.assertEqual(list(context['comments']),
-                              [comment_2, comment_1])
+                             [comment_2, comment_1])
             self.assertEqual(context['comments'][0].content_object,
-                              self.entry)
+                             self.entry)
             self.assertEqual(context['comments'][1].content_object,
-                              self.entry)
+                             self.entry)
 
     @skipIfCustomUser
     def test_get_recent_linkbacks(self):
@@ -399,7 +399,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_recent_linkbacks()
         self.assertEqual(len(context['linkbacks']), 0)
         self.assertEqual(context['template'],
-                          'zinnia/tags/recent_linkbacks.html')
+                         'zinnia/tags/recent_linkbacks.html')
 
         linkback_1 = comments.get_model().objects.create(
             comment='My Linkback 1', site=site,
@@ -415,7 +415,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_recent_linkbacks()
             self.assertEqual(len(context['linkbacks']), 1)
             self.assertEqual(context['linkbacks'][0].content_object,
-                              self.entry)
+                             self.entry)
 
         linkback_2 = comments.get_model().objects.create(
             comment='My Linkback 2', site=site,
@@ -424,11 +424,11 @@ class TemplateTagsTestCase(TestCase):
         with self.assertNumQueries(3):
             context = get_recent_linkbacks()
             self.assertEqual(list(context['linkbacks']),
-                              [linkback_2, linkback_1])
+                             [linkback_2, linkback_1])
             self.assertEqual(context['linkbacks'][0].content_object,
-                              self.entry)
+                             self.entry)
             self.assertEqual(context['linkbacks'][1].content_object,
-                              self.entry)
+                             self.entry)
 
     def test_zinnia_pagination(self):
         class FakeRequest(object):
@@ -555,7 +555,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(len(context['breadcrumbs']), 1)
         self.assertEqual(context['breadcrumbs'][0].name, 'Blog')
         self.assertEqual(context['breadcrumbs'][0].url,
-                          reverse('zinnia_entry_archive_index'))
+                         reverse('zinnia_entry_archive_index'))
         self.assertEqual(context['template'], 'zinnia/tags/breadcrumbs.html')
 
         with self.assertNumQueries(0):

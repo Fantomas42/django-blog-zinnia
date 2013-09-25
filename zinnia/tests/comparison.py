@@ -21,9 +21,9 @@ class ComparisonTestCase(TestCase):
         #One thing that I don't understand is why the pearson
         #calculator is returning 1-r . I've left it as is.
         self.assertEqual(pearson_score([0, 1, 3], [0, 1, 2]),
-                          0.01801949393803437)
+                         0.01801949393803437)
         self.assertEqual(pearson_score([0, 1, 2], [0, 1, 3]),
-                          0.01801949393803437)
+                         0.01801949393803437)
 
     def test_clustered_model(self):
         params = {'title': 'My entry 1', 'content': 'My content 1',

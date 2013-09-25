@@ -5,8 +5,8 @@ from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 #Turn datetime warnings into exceptions when testing.
 import warnings
 warnings.filterwarnings(
-        'error', r"DateTimeField received a naive datetime",
-        RuntimeWarning, r'django\.db\.models\.fields')
+    'error', r"DateTimeField received a naive datetime",
+    RuntimeWarning, r'django\.db\.models\.fields')
 
 DATABASES = {'default': {'NAME': 'zinnia_tests.db',
                          'ENGINE': 'django.db.backends.sqlite3'}}

@@ -84,15 +84,15 @@ class EntryAdminTestCase(BaseAdminTestCase):
 
     def test_get_title(self):
         self.assertEqual(self.admin.get_title(self.entry),
-                          'My title (2 words)')
+                         'My title (2 words)')
         self.entry.comment_count = 1
         self.entry.save()
         self.assertEqual(self.admin.get_title(self.entry),
-                          'My title (2 words) (1 reaction)')
+                         'My title (2 words) (1 reaction)')
         self.entry.pingback_count = 1
         self.entry.save()
         self.assertEqual(self.admin.get_title(self.entry),
-                          'My title (2 words) (2 reactions)')
+                         'My title (2 words) (2 reactions)')
 
     def test_get_authors(self):
         self.check_with_rich_and_poor_urls(
@@ -168,7 +168,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
 
     def test_get_is_visible(self):
         self.assertEqual(self.admin.get_is_visible(self.entry),
-                          self.entry.is_visible)
+                         self.entry.is_visible)
 
     def test_save_model(self):
         user = Author.objects.create_user(
@@ -221,10 +221,10 @@ class EntryAdminTestCase(BaseAdminTestCase):
             'root', 'root@exemple.com', 'toor')
         self.request.user = user
         self.assertEqual(self.admin.get_readonly_fields(self.request),
-                          ['status'])
+                         ['status'])
         self.request.user = root
         self.assertEqual(self.admin.get_readonly_fields(self.request),
-                          ())
+                         ())
 
     def test_get_actions(self):
         original_user_twitter = settings.USE_TWITTER

@@ -22,8 +22,8 @@ def pearson_score(list1, list2):
     #I'm going off the definition given here:
     #http://www.stat.wmich.edu/s216/book/node122.html
     num = prod_sum - (sum1 * sum2 / len(list1))
-    den = sqrt((sum_sq1 - pow(sum1, 2) / len(list1)) *
-               (sum_sq2 - pow(sum2, 2) / len(list2)))
+    den = sqrt((sum_sq1 - (1.0 * pow(sum1, 2)) / len(list1)) *
+               (sum_sq2 - (1.0 * pow(sum2, 2)) / len(list2)))
     if den == 0:
         return 0.0
     #Why are we returning 1 - r instead of just r?

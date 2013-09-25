@@ -96,8 +96,8 @@ class AuthorListFilterTestCase(BaseListFilterTestCase):
             self.assertEqual(filterspec.title, 'published authors')
             self.assertEqual(filterspec.used_parameters, {'author': '2'})
             self.assertEqual(filterspec.lookup_choices,
-                              [('1', 'webmaster (2 entries)'),
-                               ('2', 'contributor (1 entry)')])
+                             [('1', 'webmaster (2 entries)'),
+                              ('2', 'contributor (1 entry)')])
 
 
 class CategoryListFilterTestCase(BaseListFilterTestCase):
@@ -134,5 +134,5 @@ class CategoryListFilterTestCase(BaseListFilterTestCase):
             self.assertEqual(filterspec.title, 'published categories')
             self.assertEqual(filterspec.used_parameters, {'category': '2'})
             self.assertEqual(filterspec.lookup_choices,
-                              [('1', 'Category 1 (2 entries)'),
-                               ('2', 'Category 2 (1 entry)')])
+                             [('1', 'Category 1 (2 entries)'),
+                              ('2', 'Category 2 (1 entry)')])

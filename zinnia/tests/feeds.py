@@ -104,7 +104,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.item_pubdate(entry), entry.creation_date)
         self.assertEqual(feed.item_categories(entry), [self.category.title])
         self.assertEqual(feed.item_author_name(entry),
-                          six.text_type(self.author))
+                         six.text_type(self.author))
         self.assertEqual(feed.item_author_email(entry), self.author.email)
         self.assertEqual(
             feed.item_author_link(entry),
@@ -139,14 +139,14 @@ class FeedsTestCase(TestCase):
         entry.image = path
         entry.save()
         self.assertEqual(feed.item_enclosure_url(entry),
-                          urljoin('http://example.com', entry.image.url))
+                         urljoin('http://example.com', entry.image.url))
         self.assertEqual(feed.item_enclosure_length(entry), '7')
         self.assertEqual(feed.item_enclosure_mime_type(entry), 'image/png')
         default_storage.delete(path)
         entry.image = 'invalid_image_without_extension'
         entry.save()
         self.assertEqual(feed.item_enclosure_url(entry),
-                          urljoin('http://example.com', entry.image.url))
+                         urljoin('http://example.com', entry.image.url))
         self.assertEqual(feed.item_enclosure_length(entry), '100000')
         self.assertEqual(feed.item_enclosure_mime_type(entry), 'image/jpeg')
 
@@ -188,11 +188,11 @@ class FeedsTestCase(TestCase):
         self.assertEqual(len(feed.items(self.author)), 1)
         self.assertEqual(feed.link(self.author), '/authors/admin/')
         self.assertEqual(feed.get_title(self.author),
-                          'Entries for author %s' %
-                          six.text_type(self.author))
+                         'Entries for author %s' %
+                         six.text_type(self.author))
         self.assertEqual(feed.description(self.author),
-                          'The latest entries by %s' %
-                          six.text_type(self.author))
+                         'The latest entries by %s' %
+                         six.text_type(self.author))
 
     def test_tag_entries(self):
         self.create_published_entry()
@@ -202,9 +202,9 @@ class FeedsTestCase(TestCase):
         self.assertEqual(len(feed.items('tests')), 1)
         self.assertEqual(feed.link(tag), '/tags/tests/')
         self.assertEqual(feed.get_title(tag),
-                          'Entries for the tag %s' % tag.name)
+                         'Entries for the tag %s' % tag.name)
         self.assertEqual(feed.description(tag),
-                          'The latest entries for the tag %s' % tag.name)
+                         'The latest entries for the tag %s' % tag.name)
 
     def test_search_entries(self):
         class FakeRequest:
@@ -218,7 +218,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(len(feed.items('test')), 1)
         self.assertEqual(feed.link('test'), '/search/?pattern=test')
         self.assertEqual(feed.get_title('test'),
-                          "Results of the search for '%s'" % 'test')
+                         "Results of the search for '%s'" % 'test')
         self.assertEqual(
             feed.description('test'),
             "The entries containing the pattern '%s'" % 'test')
@@ -243,16 +243,16 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.link(entry), '/2010/01/01/my-test-entry/')
         self.assertEqual(len(feed.items(entry)), 3)
         self.assertEqual(feed.item_pubdate(comments[0]),
-                          comments[0].submit_date)
+                         comments[0].submit_date)
         self.assertEqual(feed.item_link(comments[0]),
-                          '/comments/cr/%i/1/#c1' % self.entry_ct_id)
+                         '/comments/cr/%i/1/#c1' % self.entry_ct_id)
         self.assertEqual(feed.item_author_name(comments[0]),
-                          six.text_type(self.author))
+                         six.text_type(self.author))
         self.assertEqual(feed.item_author_email(comments[0]),
-                          'admin@example.com')
+                         'admin@example.com')
         self.assertEqual(feed.item_author_link(comments[0]), '')
         self.assertEqual(feed.get_title(entry),
-                          'Discussions on %s' % entry.title)
+                         'Discussions on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
             'The latest discussions for the entry %s' % entry.title)
@@ -263,10 +263,10 @@ class FeedsTestCase(TestCase):
         feed = EntryComments()
         self.assertEqual(list(feed.items(entry)), [comments[0]])
         self.assertEqual(feed.item_link(comments[0]),
-                          '/comments/cr/%i/1/#comment-1-by-admin' %
-                          self.entry_ct_id)
+                         '/comments/cr/%i/1/#comment-1-by-admin' %
+                         self.entry_ct_id)
         self.assertEqual(feed.get_title(entry),
-                          'Comments on %s' % entry.title)
+                         'Comments on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
             'The latest comments for the entry %s' % entry.title)
@@ -283,9 +283,9 @@ class FeedsTestCase(TestCase):
         feed = EntryPingbacks()
         self.assertEqual(list(feed.items(entry)), [comments[1]])
         self.assertEqual(feed.item_link(comments[1]),
-                          '/comments/cr/%i/1/#pingback-2' % self.entry_ct_id)
+                         '/comments/cr/%i/1/#pingback-2' % self.entry_ct_id)
         self.assertEqual(feed.get_title(entry),
-                          'Pingbacks on %s' % entry.title)
+                         'Pingbacks on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
             'The latest pingbacks for the entry %s' % entry.title)
@@ -296,9 +296,9 @@ class FeedsTestCase(TestCase):
         feed = EntryTrackbacks()
         self.assertEqual(list(feed.items(entry)), [comments[2]])
         self.assertEqual(feed.item_link(comments[2]),
-                          '/comments/cr/%i/1/#trackback-3' % self.entry_ct_id)
+                         '/comments/cr/%i/1/#trackback-3' % self.entry_ct_id)
         self.assertEqual(feed.get_title(entry),
-                          'Trackbacks on %s' % entry.title)
+                         'Trackbacks on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
             'The latest trackbacks for the entry %s' % entry.title)

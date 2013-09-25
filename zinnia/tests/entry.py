@@ -170,9 +170,9 @@ class EntryTestCase(TestCase):
         shortener_settings.URL_SHORTENER_BACKEND = 'zinnia.url_shortener.'\
                                                    'backends.default'
         self.assertEqual(self.entry.short_url,
-                          'http://example.com' +
-                          reverse('zinnia_entry_shortlink',
-                                  args=[self.entry.pk]))
+                         'http://example.com' +
+                         reverse('zinnia_entry_shortlink',
+                                 args=[self.entry.pk]))
         shortener_settings.URL_SHORTENER_BACKEND = original_shortener
 
     def test_previous_entry(self):
@@ -337,7 +337,7 @@ class EntryHtmlContentTestCase(TestCase):
         self.entry.content = 'Hello world !\n' \
                              ' this is my content'
         self.assertEqual(self.entry.html_content,
-                          '<p>Hello world !<br /> this is my content</p>')
+                         '<p>Hello world !<br /> this is my content</p>')
 
     @skipUnless(is_lib_available('textile'), 'Textile is not available')
     def test_html_content_textitle(self):
@@ -347,10 +347,10 @@ class EntryHtmlContentTestCase(TestCase):
                              '* Item 1\n* Item 2'
         html_content = self.entry.html_content
         self.assertEqual(html_content,
-                          '\t<p>Hello world !</p>\n\n\t'
-                          '<p>this is my content :</p>\n\n\t'
-                          '<ul>\n\t\t<li>Item 1</li>\n\t\t'
-                          '<li>Item 2</li>\n\t</ul>')
+                         '\t<p>Hello world !</p>\n\n\t'
+                         '<p>this is my content :</p>\n\n\t'
+                         '<ul>\n\t\t<li>Item 1</li>\n\t\t'
+                         '<li>Item 2</li>\n\t</ul>')
 
     @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
     def test_html_content_markdown(self):
@@ -360,10 +360,10 @@ class EntryHtmlContentTestCase(TestCase):
                              '* Item 1\n* Item 2'
         html_content = self.entry.html_content
         self.assertEqual(html_content,
-                          '<p>Hello world !</p>\n'
-                          '<p>this is my content :</p>'
-                          '\n<ul>\n<li>Item 1</li>\n'
-                          '<li>Item 2</li>\n</ul>')
+                         '<p>Hello world !</p>\n'
+                         '<p>this is my content :</p>'
+                         '\n<ul>\n<li>Item 1</li>\n'
+                         '<li>Item 2</li>\n</ul>')
 
     @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
     def test_html_content_restructuredtext(self):
@@ -373,10 +373,10 @@ class EntryHtmlContentTestCase(TestCase):
                              '* Item 1\n* Item 2'
         html_content = self.entry.html_content
         self.assertEqual(html_content,
-                          '<p>Hello world !</p>\n'
-                          '<p>this is my content :</p>'
-                          '\n<ul class="simple">\n<li>Item 1</li>\n'
-                          '<li>Item 2</li>\n</ul>\n')
+                         '<p>Hello world !</p>\n'
+                         '<p>this is my content :</p>'
+                         '\n<ul class="simple">\n<li>Item 1</li>\n'
+                         '<li>Item 2</li>\n</ul>\n')
 
     def test_html_preview(self):
         entry.MARKUP_LANGUAGE = None

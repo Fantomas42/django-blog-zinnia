@@ -61,8 +61,7 @@ class PreviousNextPublishedMixin(object):
             dates = items.datetimes('creation_date', period, order=ordering,
                                     tzinfo=timezone.utc)
         else:
-            dates = items.dates('creation_date', period, order=ordering,
-                                tzinfo=timezone.utc)
+            dates = items.dates('creation_date', period, order=ordering)
         dates = list(dates)
         if date in dates:
             dates.remove(date)

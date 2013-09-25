@@ -74,14 +74,14 @@ class MetaWeblogTestCase(TestCase):
         self.contributor.is_staff = True
         self.contributor.save()
         self.assertEqual(authenticate('contributor', 'password'),
-                          self.contributor)
+                         self.contributor)
         self.assertRaises(Fault, authenticate, 'contributor',
                           'password', 'zinnia.change_entry')
         self.assertEqual(authenticate('webmaster', 'password'),
-                          self.webmaster)
+                         self.webmaster)
         self.assertEqual(authenticate('webmaster', 'password',
-                                       'zinnia.change_entry'),
-                          self.webmaster)
+                                      'zinnia.change_entry'),
+                         self.webmaster)
 
     def test_get_users_blogs(self):
         self.assertRaises(Fault, self.server.blogger.getUsersBlogs,
@@ -216,9 +216,9 @@ class MetaWeblogTestCase(TestCase):
         self.assertEqual(post['categories'], ['Category 1', 'Category 2'])
         self.assertTrue('2010-01-01T12:00:00' in post['dateCreated'].value)
         self.assertEqual(post['link'],
-                          'http://example.com/2010/01/01/my-entry-1/')
+                         'http://example.com/2010/01/01/my-entry-1/')
         self.assertEqual(post['permaLink'],
-                          'http://example.com/2010/01/01/my-entry-1/')
+                         'http://example.com/2010/01/01/my-entry-1/')
         self.assertEqual(post['postid'], self.entry_1.pk)
         self.assertEqual(post['userid'], 'webmaster')
         self.assertEqual(post['mt_excerpt'], '')

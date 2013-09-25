@@ -34,7 +34,7 @@ class MixinTestCase(TestCase):
 
         instance.queryset = qs
         self.assertEqual(instance.get_queryset(),
-                          [])
+                         [])
 
     def test_entry_queryset_template_response_mixin(self):
         instance = EntryQuerysetTemplateResponseMixin()
@@ -45,21 +45,21 @@ class MixinTestCase(TestCase):
         instance.model_type = 'model'
         instance.model_name = 'name'
         self.assertEqual(instance.get_model_type(),
-                          'model')
+                         'model')
         self.assertEqual(instance.get_model_name(),
-                          'name')
+                         'name')
         self.assertEqual(instance.get_template_names(),
-                          ['zinnia/model/name/entry_list.html',
-                           'zinnia/model/name_entry_list.html',
-                           'zinnia/model/entry_list.html',
-                           'zinnia/entry_list.html'])
+                         ['zinnia/model/name/entry_list.html',
+                          'zinnia/model/name_entry_list.html',
+                          'zinnia/model/entry_list.html',
+                          'zinnia/entry_list.html'])
         instance.template_name = 'zinnia/entry_search.html'
         self.assertEqual(instance.get_template_names(),
-                          ['zinnia/entry_search.html',
-                           'zinnia/model/name/entry_list.html',
-                           'zinnia/model/name_entry_list.html',
-                           'zinnia/model/entry_list.html',
-                           'zinnia/entry_list.html'])
+                         ['zinnia/entry_search.html',
+                          'zinnia/model/name/entry_list.html',
+                          'zinnia/model/name_entry_list.html',
+                          'zinnia/model/entry_list.html',
+                          'zinnia/entry_list.html'])
 
     def test_entry_queryset_archive_template_response_mixin(self):
         get_year = lambda: 2012

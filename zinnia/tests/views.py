@@ -104,12 +104,12 @@ class ViewsBaseCase(TestCase):
         else:
             response = self.client.get(url)
         self.assertEqual(len(response.context['object_list']),
-                          first_expected)
+                         first_expected)
         if second_expected:
             self.create_published_entry()
             response = self.client.get(url)
             self.assertEqual(len(response.context['object_list']),
-                              second_expected)
+                             second_expected)
         if friendly_context:
             self.assertEqual(
                 response.context['object_list'],
@@ -235,7 +235,7 @@ class ViewsTestCase(ViewsBaseCase):
             response = self.client.get('/1/')
         self.assertEqual(response.status_code, 301)
         self.assertEqual(response['Location'],
-                          'http://testserver/2010/01/01/test-1/')
+                         'http://testserver/2010/01/01/test-1/')
 
     def test_zinnia_entry_detail(self):
         self.inhibit_templates('zinnia/_entry_detail.html', '404.html')
@@ -447,11 +447,11 @@ class ViewsTestCase(ViewsBaseCase):
         response = self.client.get('/search/?pattern=ab')
         self.assertEqual(len(response.context['object_list']), 0)
         self.assertEqual(response.context['error'],
-                          _('The pattern is too short'))
+                         _('The pattern is too short'))
         response = self.client.get('/search/')
         self.assertEqual(len(response.context['object_list']), 0)
         self.assertEqual(response.context['error'],
-                          _('No pattern to search found'))
+                         _('No pattern to search found'))
 
     def test_zinnia_entry_random(self):
         self.inhibit_templates('zinnia/entry_detail.html')
@@ -487,7 +487,7 @@ class ViewsTestCase(ViewsBaseCase):
                                     {'url': 'http://example.com'})
         self.assertEqual(response['Content-Type'], 'text/xml')
         self.assertEqual(response.context['error'],
-                          'Trackback is not enabled for Test 1')
+                         'Trackback is not enabled for Test 1')
         entry.trackback_enabled = True
         entry.save()
         connect_discussion_signals()
@@ -509,7 +509,7 @@ class ViewsTestCase(ViewsBaseCase):
         response = self.client.post('/trackback/1/',
                                     {'url': 'http://example.com'})
         self.assertEqual(response.context['error'],
-                          'Trackback is already registered')
+                         'Trackback is already registered')
 
     def test_zinnia_trackback_on_entry_without_author(self):
         self.inhibit_templates('zinnia/entry_trackback.xml')
@@ -611,11 +611,12 @@ class ViewsTestCase(ViewsBaseCase):
                                      'content': 'Test content',
                                      'save_draft': ''})
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(urlEqual(response['Location'],
-                          'http://testserver/admin/zinnia/entry/add/'
-                          '?tags=test-2&title=%D1%82%D0%B5%D1%81%D1%82'
-                          '&sites=1&content=%3Cp%3ETest+content%3C%2Fp%3E'
-                          '&authors=2&slug='))
+        self.assertTrue(urlEqual(
+            response['Location'],
+            'http://testserver/admin/zinnia/entry/add/'
+            '?tags=test-2&title=%D1%82%D0%B5%D1%81%D1%82'
+            '&sites=1&content=%3Cp%3ETest+content%3C%2Fp%3E'
+            '&authors=2&slug='))
 
 
 class CustomDetailViewsTestCase(ViewsBaseCase):
