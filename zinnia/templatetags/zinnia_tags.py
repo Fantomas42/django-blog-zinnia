@@ -177,7 +177,7 @@ def get_archives_entries_tree(
     """Return archives entries as a Tree"""
     if hasattr(Entry.published, "datetimes"):
         archives = Entry.published.datetimes('creation_date', 'day',
-                                              order='ASC', tzinfo=timezone.utc)
+                                             order='ASC', tzinfo=timezone.utc)
     else:
         archives = Entry.published.dates('creation_date', 'day',
                                          order='ASC')
@@ -208,7 +208,7 @@ def get_calendar_entries(context, year=None, month=None,
         dates = list(Entry.published.datetimes('creation_date', 'month',
                                                tzinfo=timezone.utc))
     else:
-        dates = list(Entry.published.dates('creation_date', 'month')
+        dates = list(Entry.published.dates('creation_date', 'month'))
 
     if current_month not in dates:
         dates.append(current_month)

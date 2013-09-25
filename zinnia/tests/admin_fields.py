@@ -66,7 +66,7 @@ class MPTTModelMultipleChoiceFieldTestCase(TestCase):
             queryset=queryset)
         self.assertEqual(list(field.choices),
                          [(1, 'Category 1', (1, 1)),
-                           (2, '|-- Category 2', (1, 2))])
+                          (2, '|-- Category 2', (1, 2))])
 
         field = MPTTModelMultipleChoiceField(
             level_indicator='-->', queryset=queryset)
