@@ -28,8 +28,6 @@ class PreviousNextPublishedMixin(object):
         if settings.USE_TZ:
             date = timezone.make_aware(date, timezone.utc)
 
-        #Convert the dang datetime to a true date object
-        date = date.date()
         if period == "year":
             #No thinking required here...
             next_date = date.replace(year=date.year + 1)
@@ -65,13 +63,12 @@ class PreviousNextPublishedMixin(object):
         else:
             dates = items.dates('creation_date', period, order=ordering,
                                 tzinfo=timezone.utc)
-        dates = [date_time.date() for date_time in dates]
-        
+        dates = list(dates)
         if date in dates:
             dates.remove(date)
 
         if dates:
-            return dates[0]
+            return dates[0].date()
 
     def get_next_year(self, date):
         """Get the next year with published Entries"""

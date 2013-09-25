@@ -223,15 +223,9 @@ class EntryTestCase(TestCase):
         self.entry.save()
         self.entry.sites.add(site)
         del self.entry.previous_next  # Invalidate the cached property
-        if supports_savepoints:
-            expected_query_count = 1
-        else:
-            expected_query_count = 1
-        with self.assertNumQueries(expected_query_count) as q:
+        with self.assertNumQueries(1) as q:
+            self.assertFalse(self.entry.next_entry)
             # Reload to check the cache
-            all_entries = list(Entry.objects.all())
-            for query in  q.captured_queries:
-                print(query, "\n\n")
             self.assertFalse(self.entry.next_entry)
         params = {'title': 'My second entry',
                   'content': 'My second content',
@@ -241,11 +235,7 @@ class EntryTestCase(TestCase):
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
         del self.entry.previous_next  # Invalidate the cached property
-        if supports_savepoints:
-            expected_query_count = 1
-        else:
-            expected_query_count = 1
-        with self.assertNumQueries(expected_query_count):
+        with self.assertNumQueries(1):
             self.assertEqual(self.entry.next_entry, self.second_entry)
             # Reload to check the cache
             self.assertEqual(self.entry.next_entry, self.second_entry)

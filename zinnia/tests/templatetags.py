@@ -544,7 +544,7 @@ class TemplateTagsTestCase(TestCase):
             size = len(crumb_list) - 1
             for i, crumb in enumerate(crumb_list):
                 if i != size:
-                    self.assertNotEquals(crumb.url, None)
+                    self.assertNotEqual(crumb.url, None)
                 else:
                     self.assertEqual(crumb.url, None)
 

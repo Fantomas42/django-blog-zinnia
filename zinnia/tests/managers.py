@@ -51,7 +51,7 @@ class ManagersTestCase(TestCase):
     def test_tags_published(self):
         self.assertEqual(tags_published().count(), Tag.objects.count())
         Tag.objects.create(name='out')
-        self.assertNotEquals(tags_published().count(), Tag.objects.count())
+        self.assertNotEqual(tags_published().count(), Tag.objects.count())
 
     def test_author_published_manager_get_query_set(self):
         self.assertEqual(Author.published.count(), 1)
@@ -250,7 +250,7 @@ class ManagersTestCase(TestCase):
         self.entry_2.save()
         # Be sure that basic_search does not return
         # the same results of advanced_search
-        self.assertNotEquals(
+        self.assertNotEqual(
             Entry.published.basic_search('content 1').count(),
             Entry.published.advanced_search('content 1').count())
         # Now check the fallback with the '*' pattern
