@@ -14,6 +14,8 @@ from django.utils.translation import get_language
 from django.template.response import TemplateResponse
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import Q
+from django.contrib.auth.models import User
 
 from zinnia import settings
 from zinnia.managers import HIDDEN
@@ -174,7 +176,14 @@ class EntryAdmin(admin.ModelAdmin):
         """Filters the disposable authors"""
         if db_field.name == 'authors':
             if request.user.has_perm('zinnia.can_change_author'):
-                kwargs['queryset'] = Author.objects.filter(is_staff=True)
+                kwargs['queryset'] = Author.objects.filter(#Anyone who is staff
+                                                           Q(is_staff=True) |
+                                                           #Anyone who would be allowed to post now.  Unfortunately, this is too slow without an explicit join condition
+                                                           #Q(user_permissions__codename='add_entry') |
+                                                           #Q(groups__permissions__codename='add_entry') |
+                                                           #Anyone who wrote an entry in the past
+                                                           Q(entries__isnull=False)
+                                                           ).distinct().order_by('username')
             else:
                 kwargs['queryset'] = Author.objects.filter(pk=request.user.pk)
 
