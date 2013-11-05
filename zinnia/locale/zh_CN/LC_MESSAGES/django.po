@@ -5,13 +5,14 @@
 # Translators:
 # linuxqueen <x86@263.net>, 2013
 # Julien Fache <fantomas42@gmail.com>, 2011
+# linuxqueen <x86@263.net>, 2013
 # yetist <yetist@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
-"Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2013-08-06 20:39+0200\n"
-"PO-Revision-Date: 2013-08-06 18:40+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-05 23:09+0100\n"
+"PO-Revision-Date: 2013-11-05 22:08+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/django-blog-zinnia/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -128,39 +129,39 @@ msgstr "\"%(title)s\"新评论发布于[%(site)s]"
 msgid "tree path"
 msgstr "目录树"
 
-#: admin/entry.py:32 templates/admin/zinnia/widgets/quickpost.html:17
+#: admin/entry.py:33 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "内容"
 
-#: admin/entry.py:34
+#: admin/entry.py:35
 msgid "Options"
 msgstr "选项"
 
-#: admin/entry.py:42
+#: admin/entry.py:43
 msgid "Privacy"
 msgstr "隐私"
 
-#: admin/entry.py:44 templates/admin/zinnia/widgets/_content_stats.html:4
+#: admin/entry.py:45 templates/admin/zinnia/widgets/_content_stats.html:4
 #: templates/zinnia/_entry_detail_base.html:114
 msgid "Discussions"
 msgstr "讨论"
 
-#: admin/entry.py:49
+#: admin/entry.py:50
 msgid "Publication"
 msgstr "出版"
 
-#: admin/entry.py:77
+#: admin/entry.py:78
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i 个字符)"
 
-#: admin/entry.py:84
+#: admin/entry.py:85
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
 msgstr[0] ""
 
-#: admin/entry.py:89 models/category.py:21 models_bases/entry.py:48
+#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:48
 msgid "title"
 msgstr "标题"
 
@@ -176,106 +177,106 @@ msgstr "类别"
 msgid "tag(s)"
 msgstr "标签"
 
-#: admin/entry.py:134
+#: admin/entry.py:139
 msgid "site(s)"
 msgstr "网站"
 
-#: admin/entry.py:140
-msgid "is visible"
-msgstr "是否可见"
-
-#: admin/entry.py:147
+#: admin/entry.py:150
 msgid "short url"
 msgstr "缩略URL"
 
-#: admin/entry.py:215
+#: admin/entry.py:156
+msgid "is visible"
+msgstr "是否可见"
+
+#: admin/entry.py:224
 msgid "The selected entries now belong to you."
 msgstr "选定的日志现在属于你。"
 
-#: admin/entry.py:216
+#: admin/entry.py:225
 msgid "Set the entries to the user"
 msgstr "设置自己为所选日志的作者"
 
-#: admin/entry.py:223
+#: admin/entry.py:232
 msgid "The selected entries are now marked as published."
 msgstr "标记选定的日志现为发布状态。"
 
-#: admin/entry.py:224
+#: admin/entry.py:233
 msgid "Set entries selected as published"
 msgstr "发布所选日志"
 
-#: admin/entry.py:230
+#: admin/entry.py:239
 msgid "The selected entries are now marked as hidden."
 msgstr "隐藏选定的日志。"
 
-#: admin/entry.py:231
+#: admin/entry.py:240
 msgid "Set entries selected as hidden"
 msgstr "设置所选日志为隐藏状态"
 
 #: admin/entry.py:246
-msgid "The selected entries have been tweeted."
-msgstr "选定的日志已经被tweeted。"
-
-#: admin/entry.py:247
-msgid "Tweet entries selected"
-msgstr "推特所选日志"
-
-#: admin/entry.py:253
 msgid "Comments are now closed for selected entries."
 msgstr "选定日志的评论已关闭。"
 
-#: admin/entry.py:254
+#: admin/entry.py:247
 msgid "Close the comments for selected entries"
 msgstr "关闭所选日志的评论功能"
 
-#: admin/entry.py:261
+#: admin/entry.py:254
 msgid "Pingbacks are now closed for selected entries."
 msgstr "所选的日志已关闭pingback功能"
 
-#: admin/entry.py:263
+#: admin/entry.py:256
 msgid "Close the pingbacks for selected entries"
 msgstr "关闭所选日志的pingback功能"
 
-#: admin/entry.py:269
+#: admin/entry.py:262
 msgid "Trackbacks are now closed for selected entries."
 msgstr "所选日志的trackback功能已关闭"
 
-#: admin/entry.py:271
+#: admin/entry.py:264
 msgid "Close the trackbacks for selected entries"
 msgstr "关闭所选日志的trackback功能"
 
-#: admin/entry.py:278
+#: admin/entry.py:271
 msgid "The selected entries are now set at the current date."
 msgstr "选定的日志现在被设置成当前日期。"
 
-#: admin/entry.py:280
+#: admin/entry.py:273
 msgid "Put the selected entries on top at the current date"
 msgstr "把所选的日志放在当前日期的顶部"
 
-#: admin/entry.py:299
+#: admin/entry.py:279
+msgid "Selected entries are now marked as featured."
+msgstr ""
+
+#: admin/entry.py:280
+msgid "Mark selected entries as featured"
+msgstr ""
+
+#: admin/entry.py:286
+msgid "Selected entries are no longer marked as featured."
+msgstr ""
+
+#: admin/entry.py:288
+msgid "Unmark selected entries as featured"
+msgstr ""
+
+#: admin/entry.py:303
+msgid "The selected entries have been tweeted."
+msgstr "选定的日志已经被tweeted。"
+
+#: admin/entry.py:304
+msgid "Tweet entries selected"
+msgstr "推特所选日志"
+
+#: admin/entry.py:323
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%(directory)s 路径成功ping到 %(success)d  项"
 
-#: admin/entry.py:303
+#: admin/entry.py:327
 msgid "Ping Directories for selected entries"
 msgstr "提交所选日志到搜索引擎"
-
-#: admin/entry.py:309
-msgid "Selected entries are now marked as featured."
-msgstr ""
-
-#: admin/entry.py:310
-msgid "Mark selected entries as featured"
-msgstr ""
-
-#: admin/entry.py:316
-msgid "Selected entries are no longer marked as featured."
-msgstr ""
-
-#: admin/entry.py:318
-msgid "Unmark selected entries as featured"
-msgstr ""
 
 #: admin/filters.py:27
 #, python-format
@@ -660,7 +661,7 @@ msgstr "编辑日志"
 #: templates/zinnia/entry_detail_base.html:186
 msgctxt "on date"
 msgid "on"
-msgstr "在"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:15
 #: templates/comments/zinnia/entry/form.html:25
@@ -1411,11 +1412,11 @@ msgstr "第%s页"
 msgid "Week %s"
 msgstr "第%s周"
 
-#: tests/views.py:448 views/search.py:30
+#: tests/views.py:450 views/search.py:30
 msgid "The pattern is too short"
 msgstr "模式长度不够"
 
-#: tests/views.py:452 views/search.py:34
+#: tests/views.py:454 views/search.py:34
 msgid "No pattern to search found"
 msgstr "没有搜索到相关模式"
 

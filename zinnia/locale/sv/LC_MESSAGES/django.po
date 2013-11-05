@@ -7,11 +7,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
-"Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2013-09-18 17:00+0000\n"
-"PO-Revision-Date: 2013-09-18 17:00+0000\n"
-"Last-Translator: Edwin Nimell <edwin@nimell.com>\n"
-"Language-Team: Swedish\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-05 23:09+0100\n"
+"PO-Revision-Date: 2013-11-05 22:08+0000\n"
+"Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
+"Language-Team: Swedish (http://www.transifex.com/projects/p/django-blog-zinnia/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -126,40 +126,40 @@ msgstr "[%(site)s] Nya kommentar för \"%(title)s\""
 msgid "tree path"
 msgstr "sökväg"
 
-#: admin/entry.py:32 templates/admin/zinnia/widgets/quickpost.html:17
+#: admin/entry.py:33 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "Innehåll"
 
-#: admin/entry.py:34
+#: admin/entry.py:35
 msgid "Options"
 msgstr "Alternativ"
 
-#: admin/entry.py:42
+#: admin/entry.py:43
 msgid "Privacy"
 msgstr "Sekretess"
 
-#: admin/entry.py:44 templates/admin/zinnia/widgets/_content_stats.html:4
+#: admin/entry.py:45 templates/admin/zinnia/widgets/_content_stats.html:4
 #: templates/zinnia/_entry_detail_base.html:114
 msgid "Discussions"
 msgstr "Diskussioner"
 
-#: admin/entry.py:49
+#: admin/entry.py:50
 msgid "Publication"
 msgstr "Publiceringar"
 
-#: admin/entry.py:77
+#: admin/entry.py:78
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i ord)"
 
-#: admin/entry.py:84
+#: admin/entry.py:85
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
 msgstr[0] "%(title)s (%(reactions)i reaktion)"
 msgstr[1] "%(title)s (%(reactions)i reaktioner)"
 
-#: admin/entry.py:89 models/category.py:21 models_bases/entry.py:48
+#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:48
 msgid "title"
 msgstr "titel"
 
@@ -175,106 +175,106 @@ msgstr "kategori(er)"
 msgid "tag(s)"
 msgstr "tagg(ar)"
 
-#: admin/entry.py:134
+#: admin/entry.py:139
 msgid "site(s)"
 msgstr "sida/or"
 
-#: admin/entry.py:140
-msgid "is visible"
-msgstr "är synlig"
-
-#: admin/entry.py:147
+#: admin/entry.py:150
 msgid "short url"
 msgstr "kort url"
 
-#: admin/entry.py:215
+#: admin/entry.py:156
+msgid "is visible"
+msgstr "är synlig"
+
+#: admin/entry.py:224
 msgid "The selected entries now belong to you."
 msgstr "De markerade inläggen hör nu till dig."
 
-#: admin/entry.py:216
+#: admin/entry.py:225
 msgid "Set the entries to the user"
 msgstr "Tilldela inläggen till användaren"
 
-#: admin/entry.py:223
+#: admin/entry.py:232
 msgid "The selected entries are now marked as published."
 msgstr "De valda inläggen är nu markerade som publicerade."
 
-#: admin/entry.py:224
+#: admin/entry.py:233
 msgid "Set entries selected as published"
 msgstr "Markera valda inlägg som publicerade"
 
-#: admin/entry.py:230
+#: admin/entry.py:239
 msgid "The selected entries are now marked as hidden."
 msgstr "De valda inläggen är nu markerade som dolda."
 
-#: admin/entry.py:231
+#: admin/entry.py:240
 msgid "Set entries selected as hidden"
 msgstr "Markera valda inlägg som dolda"
 
 #: admin/entry.py:246
-msgid "The selected entries have been tweeted."
-msgstr "De valda inläggen har blivit twittrade."
-
-#: admin/entry.py:247
-msgid "Tweet entries selected"
-msgstr "Twittra valda inlägg"
-
-#: admin/entry.py:253
 msgid "Comments are now closed for selected entries."
 msgstr "Kommentarer är nu avstängt för valda inlägg."
 
-#: admin/entry.py:254
+#: admin/entry.py:247
 msgid "Close the comments for selected entries"
 msgstr "Stäng av kommentarer för valda inlägg"
 
-#: admin/entry.py:261
+#: admin/entry.py:254
 msgid "Pingbacks are now closed for selected entries."
 msgstr "Pingbacks är nu avstängt för valda inlägg."
 
-#: admin/entry.py:263
+#: admin/entry.py:256
 msgid "Close the pingbacks for selected entries"
 msgstr "Stäng av pingbacks för valda inlägg"
 
-#: admin/entry.py:269
+#: admin/entry.py:262
 msgid "Trackbacks are now closed for selected entries."
 msgstr "Trackbacks är nu avstängt för valda inlägg."
 
-#: admin/entry.py:271
+#: admin/entry.py:264
 msgid "Close the trackbacks for selected entries"
 msgstr "Stäng av trackbacks för valda inlägg"
 
-#: admin/entry.py:278
+#: admin/entry.py:271
 msgid "The selected entries are now set at the current date."
 msgstr "De valda inläggen har nu satts till aktuellt datum."
 
-#: admin/entry.py:280
+#: admin/entry.py:273
 msgid "Put the selected entries on top at the current date"
 msgstr "Sätt datum för valda inlägg till aktuell tid"
 
-#: admin/entry.py:299
+#: admin/entry.py:279
+msgid "Selected entries are now marked as featured."
+msgstr "Valda inlägg är nu markerade som huvudnummer."
+
+#: admin/entry.py:280
+msgid "Mark selected entries as featured"
+msgstr "Markera valda inlägg som huvudnummer"
+
+#: admin/entry.py:286
+msgid "Selected entries are no longer marked as featured."
+msgstr "Valda inlägg är inte längre markerade som huvudnummer."
+
+#: admin/entry.py:288
+msgid "Unmark selected entries as featured"
+msgstr "Avmarekera valda inlägg som huvudnummer"
+
+#: admin/entry.py:303
+msgid "The selected entries have been tweeted."
+msgstr "De valda inläggen har blivit twittrade."
+
+#: admin/entry.py:304
+msgid "Tweet entries selected"
+msgstr "Twittra valda inlägg"
+
+#: admin/entry.py:323
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "Katalogen %(directory)s har pingat %(success)d inlägg."
 
-#: admin/entry.py:303
+#: admin/entry.py:327
 msgid "Ping Directories for selected entries"
 msgstr "Pinga kataloger för valda inlägg"
-
-#: admin/entry.py:309
-msgid "Selected entries are now marked as featured."
-msgstr "Valda inlägg är nu markerade som huvudnummer."
-
-#: admin/entry.py:310
-msgid "Mark selected entries as featured"
-msgstr "Markera valda inlägg som huvudnummer"
-
-#: admin/entry.py:316
-msgid "Selected entries are no longer marked as featured."
-msgstr "Valda inlägg är inte längre markerade som huvudnummer."
-
-#: admin/entry.py:318
-msgid "Unmark selected entries as featured"
-msgstr "Avmarekera valda inlägg som huvudnummer"
 
 #: admin/filters.py:27
 #, python-format
@@ -537,9 +537,7 @@ msgstr "Server error"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
-"Ett fel har uppstått. Det har blivit rapporterat till sidans administratörer via "
-"e-mail och kommer bli åtgärdat inom kort. Tack för ditt tålamod."
+msgstr "Ett fel har uppstått. Det har blivit rapporterat till sidans administratörer via e-mail och kommer bli åtgärdat inom kort. Tack för ditt tålamod."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
@@ -670,7 +668,7 @@ msgstr "Ändra inlägg"
 #: templates/zinnia/entry_detail_base.html:186
 msgctxt "on date"
 msgid "on"
-msgstr "den"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:15
 #: templates/comments/zinnia/entry/form.html:25
@@ -990,10 +988,7 @@ msgid ""
 "Don't hesitate to override the template <strong>zinnia/base.html</strong> to"
 " start <a href='http://docs.django-blog-zinnia.com/en/latest/how-"
 "to/customize_look_and_feel.html'>customizing your Weblog</a>."
-msgstr ""
-"Tveka inte att överskugga denna mall <strong>zinnia/base.html<strong> för "
-"att börja <a href='http://docs.django-blog-zinnia.com/en/latest/how-"
-"to/customize_look_and_feel.html'>skräddarsy din webblogg</a>."
+msgstr "Tveka inte att överskugga denna mall <strong>zinnia/base.html<strong> för att börja <a href='http://docs.django-blog-zinnia.com/en/latest/how-to/customize_look_and_feel.html'>skräddarsy din webblogg</a>."
 
 #: templates/zinnia/base.html:44
 msgid "Calendar"
@@ -1404,10 +1399,7 @@ msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex queries."
-msgstr ""
-"Du kan använda - för att exkludera ord och fraser, &quot;citationstecken&quot; för "
-"exakta fraser och OCH/ELLER boolska operatorer kombinerat med parenteser för"
-" komplexa frågor."
+msgstr "Du kan använda - för att exkludera ord och fraser, &quot;citationstecken&quot; för exakta fraser och OCH/ELLER boolska operatorer kombinerat med parenteser för komplexa frågor."
 
 #: templates/zinnia/tags/similar_entries.html:9
 msgid "No similar entries."
@@ -1430,11 +1422,11 @@ msgstr "Sida %s"
 msgid "Week %s"
 msgstr "Vecka %s"
 
-#: tests/views.py:448 views/search.py:30
+#: tests/views.py:450 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Sökmönstret är för kort"
 
-#: tests/views.py:452 views/search.py:34
+#: tests/views.py:454 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Inget sökmönster funnet"
 

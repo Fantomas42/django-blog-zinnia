@@ -4,16 +4,19 @@
 # 
 # Translators:
 # danSamara <dan.samara@gmail.com>, 2012
+# danSamara <dan.samara@gmail.com>, 2012
 # Julien Fache <fantomas42@gmail.com>, 2011
+# m05quit0 <sjkomarov@gmail.com>, 2013
+# Max <makc.kekc@gmail.com>, 2011
 # Max <makc.kekc@gmail.com>, 2011
 # Oleg Prans <yozapr@gmail.com>, 2012-2013
 # m05quit0 <sjkomarov@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
-"Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2013-08-06 20:39+0200\n"
-"PO-Revision-Date: 2013-08-06 18:40+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-05 23:09+0100\n"
+"PO-Revision-Date: 2013-11-05 22:08+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/django-blog-zinnia/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -130,33 +133,33 @@ msgstr "[%(site)s] Новый комментарий к \"%(title)s\""
 msgid "tree path"
 msgstr "путь"
 
-#: admin/entry.py:32 templates/admin/zinnia/widgets/quickpost.html:17
+#: admin/entry.py:33 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "Содержимое"
 
-#: admin/entry.py:34
+#: admin/entry.py:35
 msgid "Options"
 msgstr "Опции"
 
-#: admin/entry.py:42
+#: admin/entry.py:43
 msgid "Privacy"
 msgstr "Приватность"
 
-#: admin/entry.py:44 templates/admin/zinnia/widgets/_content_stats.html:4
+#: admin/entry.py:45 templates/admin/zinnia/widgets/_content_stats.html:4
 #: templates/zinnia/_entry_detail_base.html:114
 msgid "Discussions"
 msgstr "Обсуждения"
 
-#: admin/entry.py:49
+#: admin/entry.py:50
 msgid "Publication"
 msgstr "Публикация"
 
-#: admin/entry.py:77
+#: admin/entry.py:78
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i слов)"
 
-#: admin/entry.py:84
+#: admin/entry.py:85
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
@@ -164,7 +167,7 @@ msgstr[0] "%(title)s (%(reactions)i отклик)"
 msgstr[1] " %(title)s (%(reactions)i отклика)"
 msgstr[2] " %(title)s (%(reactions)i откликов)"
 
-#: admin/entry.py:89 models/category.py:21 models_bases/entry.py:48
+#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:48
 msgid "title"
 msgstr "заголовок"
 
@@ -180,106 +183,106 @@ msgstr "категория(категории)"
 msgid "tag(s)"
 msgstr "тег(и)"
 
-#: admin/entry.py:134
+#: admin/entry.py:139
 msgid "site(s)"
 msgstr "сайт(ы)"
 
-#: admin/entry.py:140
-msgid "is visible"
-msgstr "видима"
-
-#: admin/entry.py:147
+#: admin/entry.py:150
 msgid "short url"
 msgstr "краткая ссылка"
 
-#: admin/entry.py:215
+#: admin/entry.py:156
+msgid "is visible"
+msgstr "видима"
+
+#: admin/entry.py:224
 msgid "The selected entries now belong to you."
 msgstr "Выбранные записи теперь закреплены за вами."
 
-#: admin/entry.py:216
+#: admin/entry.py:225
 msgid "Set the entries to the user"
 msgstr "Установить записи пользователю"
 
-#: admin/entry.py:223
+#: admin/entry.py:232
 msgid "The selected entries are now marked as published."
 msgstr "Выбранные записи отмечены как опубликованные."
 
-#: admin/entry.py:224
+#: admin/entry.py:233
 msgid "Set entries selected as published"
 msgstr "Пометить выделенные записи как опубликованные"
 
-#: admin/entry.py:230
+#: admin/entry.py:239
 msgid "The selected entries are now marked as hidden."
 msgstr "Выбранные записи отмечены как скрытые."
 
-#: admin/entry.py:231
+#: admin/entry.py:240
 msgid "Set entries selected as hidden"
 msgstr "Пометить выделенные записи как скрытые"
 
 #: admin/entry.py:246
-msgid "The selected entries have been tweeted."
-msgstr "Выбранные записи отправлены через twitter."
-
-#: admin/entry.py:247
-msgid "Tweet entries selected"
-msgstr "Отправить выбранные записи в твиттер"
-
-#: admin/entry.py:253
 msgid "Comments are now closed for selected entries."
 msgstr "Для выбранных записей комментарии закрыты."
 
-#: admin/entry.py:254
+#: admin/entry.py:247
 msgid "Close the comments for selected entries"
 msgstr "Закрыть комментирование для выбранных записей"
 
-#: admin/entry.py:261
+#: admin/entry.py:254
 msgid "Pingbacks are now closed for selected entries."
 msgstr "Для выбранных записей сейчас пингбеки отключены."
 
-#: admin/entry.py:263
+#: admin/entry.py:256
 msgid "Close the pingbacks for selected entries"
 msgstr "Отключить пингбэки для выбранных записей"
 
-#: admin/entry.py:269
+#: admin/entry.py:262
 msgid "Trackbacks are now closed for selected entries."
 msgstr "Для выбранных записей сейчас трэкбеки отключены."
 
-#: admin/entry.py:271
+#: admin/entry.py:264
 msgid "Close the trackbacks for selected entries"
 msgstr "Отключить трэкбэки для выбранных записей"
 
-#: admin/entry.py:278
+#: admin/entry.py:271
 msgid "The selected entries are now set at the current date."
 msgstr "Для выбранных записей установлена текущая дата."
 
-#: admin/entry.py:280
+#: admin/entry.py:273
 msgid "Put the selected entries on top at the current date"
 msgstr "Поднять выбранные записи на текущую дату"
 
-#: admin/entry.py:299
+#: admin/entry.py:279
+msgid "Selected entries are now marked as featured."
+msgstr "Выбранные записи теперь отмечены как важные."
+
+#: admin/entry.py:280
+msgid "Mark selected entries as featured"
+msgstr "Отметить выбранные записи как важные"
+
+#: admin/entry.py:286
+msgid "Selected entries are no longer marked as featured."
+msgstr "Выбранные записи теперь не отмечены как важные."
+
+#: admin/entry.py:288
+msgid "Unmark selected entries as featured"
+msgstr "Снять отметку важности с выбранных записей"
+
+#: admin/entry.py:303
+msgid "The selected entries have been tweeted."
+msgstr "Выбранные записи отправлены через twitter."
+
+#: admin/entry.py:304
+msgid "Tweet entries selected"
+msgstr "Отправить выбранные записи в твиттер"
+
+#: admin/entry.py:323
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%(directory)s успешно оповещены о %(success)d записей"
 
-#: admin/entry.py:303
+#: admin/entry.py:327
 msgid "Ping Directories for selected entries"
 msgstr "Оповестить каталоги о выбранных записях"
-
-#: admin/entry.py:309
-msgid "Selected entries are now marked as featured."
-msgstr "Выбранные записи теперь отмечены как важные."
-
-#: admin/entry.py:310
-msgid "Mark selected entries as featured"
-msgstr "Отметить выбранные записи как важные"
-
-#: admin/entry.py:316
-msgid "Selected entries are no longer marked as featured."
-msgstr "Выбранные записи теперь не отмечены как важные."
-
-#: admin/entry.py:318
-msgid "Unmark selected entries as featured"
-msgstr "Снять отметку важности с выбранных записей"
 
 #: admin/filters.py:27
 #, python-format
@@ -299,7 +302,7 @@ msgstr "категории публикаций"
 
 #: admin/forms.py:22
 msgid "Parent category"
-msgstr ""
+msgstr "Родительская категория"
 
 #: admin/forms.py:24
 msgid "No parent category"
@@ -682,7 +685,7 @@ msgstr "Изменить запись"
 #: templates/zinnia/entry_detail_base.html:186
 msgctxt "on date"
 msgid "on"
-msgstr "на"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:15
 #: templates/comments/zinnia/entry/form.html:25
@@ -1105,17 +1108,17 @@ msgstr "Недельные архивы %(week_number)s из %(year)s"
 
 #: templates/zinnia/entry_archive_week.html:17
 msgid "Previous week"
-msgstr ""
+msgstr "Предыдущая неделя"
 
 #: templates/zinnia/entry_archive_week.html:20
 #: templates/zinnia/entry_archive_week.html:28
 #, python-format
 msgid "Week %(week_number)s of %(year)s"
-msgstr ""
+msgstr "Неделя %(week_number)s из %(year)s"
 
 #: templates/zinnia/entry_archive_week.html:25
 msgid "Next week"
-msgstr ""
+msgstr "Следующая неделя"
 
 #: templates/zinnia/entry_archive_year.html:15
 #: templates/zinnia/sitemap.html:69
@@ -1124,11 +1127,11 @@ msgstr "Архив за месяц"
 
 #: templates/zinnia/entry_archive_year.html:25
 msgid "Previous year"
-msgstr ""
+msgstr "Предыдущая неделя"
 
 #: templates/zinnia/entry_archive_year.html:31
 msgid "Next year"
-msgstr ""
+msgstr "Следующий год"
 
 #: templates/zinnia/entry_detail_base.html:21
 msgid "RSS Feed of discussions on"
@@ -1439,11 +1442,11 @@ msgstr "Страница %s"
 msgid "Week %s"
 msgstr "Неделя %s"
 
-#: tests/views.py:448 views/search.py:30
+#: tests/views.py:450 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Запрос слишком короткий"
 
-#: tests/views.py:452 views/search.py:34
+#: tests/views.py:454 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Нечего искать"
 
@@ -1493,11 +1496,11 @@ msgstr "^(?P<year>\\d{4})/page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:33
 msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/week/(?P<week>\\d+)/$"
 
 #: urls/archives.py:36
 msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/week/(?P<week>\\d+)/page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:45
 msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/page/(?P<page>\\d+)/$"

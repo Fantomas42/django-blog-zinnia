@@ -6,12 +6,14 @@
 # Ahmet Emre Aladağ <emre@woramo.com>, 2012
 # TurkishMAN <acikdunyam@gmail.com>, 2013
 # melihsozdinler <melihsozdinler@gmail.com>, 2012
+# melihsozdinler <melihsozdinler@gmail.com>, 2012
+# TurkishMAN <acikdunyam@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
-"Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2013-08-06 20:39+0200\n"
-"PO-Revision-Date: 2013-08-06 18:40+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-05 23:09+0100\n"
+"PO-Revision-Date: 2013-11-05 22:08+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/django-blog-zinnia/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -128,40 +130,40 @@ msgstr "[%(site)s] \"%(title)s\" için yapılan yeni yorum"
 msgid "tree path"
 msgstr "ağaç yolu"
 
-#: admin/entry.py:32 templates/admin/zinnia/widgets/quickpost.html:17
+#: admin/entry.py:33 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "İçerik"
 
-#: admin/entry.py:34
+#: admin/entry.py:35
 msgid "Options"
 msgstr "Seçenekler"
 
-#: admin/entry.py:42
+#: admin/entry.py:43
 msgid "Privacy"
 msgstr "Gizlilik"
 
-#: admin/entry.py:44 templates/admin/zinnia/widgets/_content_stats.html:4
+#: admin/entry.py:45 templates/admin/zinnia/widgets/_content_stats.html:4
 #: templates/zinnia/_entry_detail_base.html:114
 msgid "Discussions"
 msgstr "Tartışmalar"
 
-#: admin/entry.py:49
+#: admin/entry.py:50
 msgid "Publication"
 msgstr "Yayın"
 
-#: admin/entry.py:77
+#: admin/entry.py:78
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i kelime)"
 
-#: admin/entry.py:84
+#: admin/entry.py:85
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/entry.py:89 models/category.py:21 models_bases/entry.py:48
+#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:48
 msgid "title"
 msgstr "başlık"
 
@@ -177,106 +179,106 @@ msgstr "kategori(ler)"
 msgid "tag(s)"
 msgstr "etiket(ler)"
 
-#: admin/entry.py:134
+#: admin/entry.py:139
 msgid "site(s)"
 msgstr "site(ler)"
 
-#: admin/entry.py:140
-msgid "is visible"
-msgstr "görünür"
-
-#: admin/entry.py:147
+#: admin/entry.py:150
 msgid "short url"
 msgstr "Kısa bağlantı"
 
-#: admin/entry.py:215
+#: admin/entry.py:156
+msgid "is visible"
+msgstr "görünür"
+
+#: admin/entry.py:224
 msgid "The selected entries now belong to you."
 msgstr "Seçilen yazılar artık size ait."
 
-#: admin/entry.py:216
+#: admin/entry.py:225
 msgid "Set the entries to the user"
 msgstr "Yazıları kullanıcıya ata"
 
-#: admin/entry.py:223
+#: admin/entry.py:232
 msgid "The selected entries are now marked as published."
 msgstr "Seçilen yazılar artık yayında olarak işaretlendi."
 
-#: admin/entry.py:224
+#: admin/entry.py:233
 msgid "Set entries selected as published"
 msgstr "Seçilen yazıları yayınla"
 
-#: admin/entry.py:230
+#: admin/entry.py:239
 msgid "The selected entries are now marked as hidden."
 msgstr "Seçilen yazılar artık gizli olarak işaretlendi."
 
-#: admin/entry.py:231
+#: admin/entry.py:240
 msgid "Set entries selected as hidden"
 msgstr "Seçilen yazıları gizle"
 
 #: admin/entry.py:246
-msgid "The selected entries have been tweeted."
-msgstr "Seçilen yazılar twitlendi."
-
-#: admin/entry.py:247
-msgid "Tweet entries selected"
-msgstr "Tweet girdileri seçildi"
-
-#: admin/entry.py:253
 msgid "Comments are now closed for selected entries."
 msgstr "Seçilen yazılar için yorumlar kapatıldı."
 
-#: admin/entry.py:254
+#: admin/entry.py:247
 msgid "Close the comments for selected entries"
 msgstr "Seçilen yazıları yoruma kapat"
 
-#: admin/entry.py:261
+#: admin/entry.py:254
 msgid "Pingbacks are now closed for selected entries."
 msgstr ""
 
-#: admin/entry.py:263
+#: admin/entry.py:256
 msgid "Close the pingbacks for selected entries"
 msgstr ""
 
-#: admin/entry.py:269
+#: admin/entry.py:262
 msgid "Trackbacks are now closed for selected entries."
 msgstr ""
 
-#: admin/entry.py:271
+#: admin/entry.py:264
 msgid "Close the trackbacks for selected entries"
 msgstr ""
 
-#: admin/entry.py:278
+#: admin/entry.py:271
 msgid "The selected entries are now set at the current date."
 msgstr "Seçilen yazıların tarihi bugün olarak ayarlandı."
 
-#: admin/entry.py:280
+#: admin/entry.py:273
 msgid "Put the selected entries on top at the current date"
 msgstr "Seçili yazıları şu anki tarihin üstüne koy."
 
-#: admin/entry.py:299
+#: admin/entry.py:279
+msgid "Selected entries are now marked as featured."
+msgstr ""
+
+#: admin/entry.py:280
+msgid "Mark selected entries as featured"
+msgstr ""
+
+#: admin/entry.py:286
+msgid "Selected entries are no longer marked as featured."
+msgstr ""
+
+#: admin/entry.py:288
+msgid "Unmark selected entries as featured"
+msgstr ""
+
+#: admin/entry.py:303
+msgid "The selected entries have been tweeted."
+msgstr "Seçilen yazılar twitlendi."
+
+#: admin/entry.py:304
+msgid "Tweet entries selected"
+msgstr "Tweet girdileri seçildi"
+
+#: admin/entry.py:323
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%(directory)s klasörü %(success)d yazıyı başarıyla pingledi."
 
-#: admin/entry.py:303
+#: admin/entry.py:327
 msgid "Ping Directories for selected entries"
 msgstr "Seçilen yazılar için Ping Klasörleri"
-
-#: admin/entry.py:309
-msgid "Selected entries are now marked as featured."
-msgstr ""
-
-#: admin/entry.py:310
-msgid "Mark selected entries as featured"
-msgstr ""
-
-#: admin/entry.py:316
-msgid "Selected entries are no longer marked as featured."
-msgstr ""
-
-#: admin/entry.py:318
-msgid "Unmark selected entries as featured"
-msgstr ""
 
 #: admin/filters.py:27
 #, python-format
@@ -1424,11 +1426,11 @@ msgstr "%s. Sayfa"
 msgid "Week %s"
 msgstr "%s. Hafta"
 
-#: tests/views.py:448 views/search.py:30
+#: tests/views.py:450 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Örüntü çok kısa"
 
-#: tests/views.py:452 views/search.py:34
+#: tests/views.py:454 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Aranacak örüntü bulunamadı"
 
