@@ -6,7 +6,7 @@
        title="{% trans "Edit the entry" %}">
       {{ entry.title }}
     </a>
-    {% trans "on" %}
+    {% trans "on" context "on date" %}
     <abbr>{{ entry.creation_date|date:"DATE_FORMAT" }}</abbr>
     {{ entry.html_content|truncatewords_html:20|safe }}
   </th>
