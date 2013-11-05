@@ -107,9 +107,9 @@ class EntryCommentModerator(CommentModerator):
             mail.send(fail_silently=not settings.DEBUG)
 
     def moderate(self, comment, content_object, request):
-        """Determine whether a given comment on a given object should be
-        allowed to show up immediately, or should be marked non-public
-        and await approval."""
+        """Determine if a new comment should be marked non-public and await
+        approval. Return ``True`` to put the comment into the moderator queue,
+        or ``False`` to allow it to show up immediately."""
         if self.auto_moderate_comments:
             return True
 

@@ -69,6 +69,7 @@ or you can visit these websites who use Zinnia.
 * `Sergey Miracle`_.
 * `Infantium`_.
 * `Pana`_.
+* `MAGIC Center at RIT`_.
 
 
 If you are a proud user of Zinnia, send me the URL of your website and I
@@ -133,6 +134,7 @@ More information and help available at these URLs :
 .. _`Darwin's Weblog`: http://darwin.willbreak.it/
 .. _`ShiningPanda`: http://www.shiningpanda.com/blog/
 .. _`Pana`: http://chusen87.com/news/
+.. _`MAGIC Center at RIT`: http://magic.rit.edu/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://docs.django-blog-zinnia.com/
 .. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia
