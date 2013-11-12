@@ -1,6 +1,7 @@
 """Views for Zinnia archives"""
 import datetime
 
+from django.conf import settings as django_settings
 from django.utils import timezone
 from django.views.generic.dates import BaseArchiveIndexView
 from django.views.generic.dates import BaseYearArchiveView
@@ -36,7 +37,47 @@ class EntryArchiveMixin(ArchiveMixin,
       custom templates for archives.
     """
     queryset = Entry.published.all
+    
+    def _get_date_list(self, queryset, field, date_part, ordering='ASC'):
+        if django_settings.USE_TZ:
+            # Use django 1.5+ default implementation
+            if hasattr(queryset, 'datetimes'):
+                date_list = queryset.datetimes(field, date_part, order=ordering)
+            else:
+                # do the extra work to get unique TZ aware dates
+                # so regroups work in the template like we'd expect
+                date_list = []
+                order_by = field
+                if ordering == 'DESC':
+                    order_by = '-' + order_by
+                all_dates = [
+                    x.creation_date for x in queryset.order_by(order_by)
+                ]
+                for date in all_dates:
+                    date_list.append(timezone.datetime(date.year, date.month, date.day))
+        else:
+            # just get the naive dates
+            date_list = queryset.dates(field, date_part, order=ordering)
+        return date_list
 
+
+    def get_date_list(self, queryset, date_type=None, ordering='ASC'):
+        """
+        Get a date list by calling `queryset.dates()`, checking along the way
+        for empty lists that aren't allowed.
+        """
+        date_field = self.get_date_field()
+        allow_empty = self.get_allow_empty()
+        if date_type is None:
+            date_type = self.get_date_list_period()
+
+        date_list = self._get_date_list(queryset, date_field, date_type, ordering=ordering)
+        if date_list is not None and not date_list and not allow_empty:
+            name = force_text(queryset.model._meta.verbose_name_plural)
+            raise Http404(_("No %(verbose_name_plural)s available") %
+                          {'verbose_name_plural': name})
+
+        return date_list
 
 class EntryIndex(EntryArchiveMixin,
                  EntryQuerysetArchiveTodayTemplateResponseMixin,
