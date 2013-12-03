@@ -1,5 +1,5 @@
 """Mixins for Zinnia archive views"""
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.conf import settings
 from django.utils import timezone
 
@@ -28,16 +28,41 @@ class PreviousNextPublishedMixin(object):
         if settings.USE_TZ:
             date = timezone.make_aware(date, timezone.utc)
 
+        if period == "year":
+            #No thinking required here...
+            next_date = date.replace(year=date.year + 1)
+        elif period == "month":
+            #We've got to do the date math ourselves because we don't
+            #know how many days to add and timedelta doesn't have a months
+            #parameter
+            if date.month < 12:
+                new_month = date.month + 1
+                new_year = date.year
+            else:
+                new_month = 1
+                new_year = date.year + 1
+            next_date = date.replace(month=new_month, year=new_year)
+        elif period == "day":
+            #datetime is smart enough to do the math for us here
+            next_date = date + timedelta(days=1)
         if previous:
-            filters = {'creation_date__lt': date}
+            filters = {'creation_date__lte': next_date}
             ordering = 'DESC'
         else:
-            filters = {'creation_date__gt': date}
+            filters = {'creation_date__gte': next_date}
             ordering = 'ASC'
 
-        dates = list(self.get_queryset().filter(
-            **filters).dates('creation_date', period, order=ordering))
-
+        items = self.get_queryset().filter(
+            **filters)
+        #In 1.6, datetimes is added, which is the only way to get
+        #datetimes (Which creation_date is) instead of date objects
+        #We ought to handle datetimes in utc instead of the local timezone
+        if hasattr(items, 'datetimes'):
+            dates = items.datetimes('creation_date', period, order=ordering,
+                                    tzinfo=timezone.utc)
+        else:
+            dates = items.dates('creation_date', period, order=ordering)
+        dates = list(dates)
         if date in dates:
             dates.remove(date)
 

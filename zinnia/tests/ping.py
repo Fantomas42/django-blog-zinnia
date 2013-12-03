@@ -1,5 +1,9 @@
 """Test cases for Zinnia's ping"""
-from urllib import addinfourl
+try:
+    from urllib import addinfourl
+except ImportError:
+    from urllib.response import addinfourl
+
 try:
     from io import StringIO
     from urllib.error import URLError
@@ -40,15 +44,15 @@ class DirectoryPingerTestCase(TestCase):
     def test_ping_entry(self):
         pinger = NoThreadDirectoryPinger('http://localhost', [self.entry],
                                          start_now=False)
-        self.assertEquals(
+        self.assertEqual(
             pinger.ping_entry(self.entry),
             {'message': 'http://localhost is an invalid directory.',
              'flerror': True})
-        self.assertEquals(pinger.results, [])
+        self.assertEqual(pinger.results, [])
 
     def test_run(self):
         pinger = NoThreadDirectoryPinger('http://localhost', [self.entry])
-        self.assertEquals(
+        self.assertEqual(
             pinger.results,
             [{'flerror': True,
               'message': 'http://localhost is an invalid directory.'}])
@@ -67,24 +71,24 @@ class ExternalUrlsPingerTestCase(TestCase):
     def test_is_external_url(self):
         r = URLRessources()
         pinger = ExternalUrlsPinger(self.entry, start_now=False)
-        self.assertEquals(pinger.is_external_url(
+        self.assertEqual(pinger.is_external_url(
             'http://example.com/', 'http://google.com/'), True)
-        self.assertEquals(pinger.is_external_url(
+        self.assertEqual(pinger.is_external_url(
             'http://example.com/toto/', 'http://google.com/titi/'), True)
-        self.assertEquals(pinger.is_external_url(
+        self.assertEqual(pinger.is_external_url(
             'http://example.com/blog/', 'http://example.com/page/'), False)
-        self.assertEquals(pinger.is_external_url(
+        self.assertEqual(pinger.is_external_url(
             '%s/blog/' % r.site_url, r.site_url), False)
-        self.assertEquals(pinger.is_external_url(
+        self.assertEqual(pinger.is_external_url(
             'http://google.com/', r.site_url), True)
-        self.assertEquals(pinger.is_external_url(
+        self.assertEqual(pinger.is_external_url(
             '/blog/', r.site_url), False)
 
     def test_find_external_urls(self):
         r = URLRessources()
         pinger = ExternalUrlsPinger(self.entry, start_now=False)
         external_urls = pinger.find_external_urls(self.entry)
-        self.assertEquals(external_urls, [])
+        self.assertEqual(external_urls, [])
         self.entry.content = """
         <p>This is a <a href="http://fantomas.willbreak.it/">link</a>
         to a site.</p>
@@ -93,26 +97,26 @@ class ExternalUrlsPingerTestCase(TestCase):
         """ % r.site_url
         self.entry.save()
         external_urls = pinger.find_external_urls(self.entry)
-        self.assertEquals(external_urls, ['http://fantomas.willbreak.it/'])
+        self.assertEqual(external_urls, ['http://fantomas.willbreak.it/'])
 
     def test_find_pingback_href(self):
         pinger = ExternalUrlsPinger(self.entry, start_now=False)
         result = pinger.find_pingback_href('')
-        self.assertEquals(result, None)
+        self.assertEqual(result, None)
         result = pinger.find_pingback_href("""
         <html><head><link rel="pingback" href="/xmlrpc/" /></head>
         <body></body></html>
         """)
-        self.assertEquals(result, '/xmlrpc/')
+        self.assertEqual(result, '/xmlrpc/')
         result = pinger.find_pingback_href("""
         <html><head><LINK hrEF="/xmlrpc/" REL="PingBack" /></head>
         <body></body></html>
         """)
-        self.assertEquals(result, '/xmlrpc/')
+        self.assertEqual(result, '/xmlrpc/')
         result = pinger.find_pingback_href("""
         <html><head><LINK REL="PingBack" /></head><body></body></html>
         """)
-        self.assertEquals(result, None)
+        self.assertEqual(result, None)
 
     def fake_urlopen(self, url):
         """Fake urlopen using test client"""
@@ -132,9 +136,10 @@ class ExternalUrlsPingerTestCase(TestCase):
 
     def test_pingback_url(self):
         pinger = ExternalUrlsPinger(self.entry, start_now=False)
-        self.assertEquals(pinger.pingback_url('http://localhost',
-                                              'http://error.com'),
-                          'http://error.com cannot be pinged.')
+        self.assertEqual(
+            pinger.pingback_url('http://localhost',
+                                'http://error.com'),
+            'http://error.com cannot be pinged.')
 
     def test_find_pingback_urls(self):
         # Set up a stub around urlopen
@@ -145,7 +150,7 @@ class ExternalUrlsPingerTestCase(TestCase):
 
         urls = ['http://localhost/', 'http://example.com/', 'http://error',
                 'http://www.google.co.uk/images/nav_logo72.png']
-        self.assertEquals(
+        self.assertEqual(
             pinger.find_pingback_urls(urls),
             {'http://localhost/': 'http://localhost/xmlrpc/',
              'http://example.com/': 'http://example.com/xmlrpc.php'})
@@ -163,6 +168,6 @@ class ExternalUrlsPingerTestCase(TestCase):
         <a href="http://www.google.co.uk/images/nav_logo72.png">Img</a>
         """
         pinger = NoThreadExternalUrlsPinger(self.entry)
-        self.assertEquals(pinger.results, [
+        self.assertEqual(pinger.results, [
             'http://localhost/ cannot be pinged.'])
         zinnia.ping.urlopen = self.original_urlopen

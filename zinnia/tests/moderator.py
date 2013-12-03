@@ -50,45 +50,45 @@ class CommentModeratorTestCase(TestCase):
             comment='My Comment', user=self.author, is_public=True,
             content_object=self.entry, submit_date=timezone.now(),
             site=self.site)
-        self.assertEquals(len(mail.outbox), 0)
+        self.assertEqual(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
         moderator.email_reply = False
         moderator.email_authors = False
         moderator.mail_comment_notification_recipients = []
         moderator.email(comment, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 0)
+        self.assertEqual(len(mail.outbox), 0)
         moderator.email_reply = True
         moderator.email_authors = True
         moderator.mail_comment_notification_recipients = ['admin@example.com']
         moderator.email(comment, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 1)
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_do_email_notification(self):
         comment = comments.get_model().objects.create(
             comment='My Comment', user=self.author, is_public=True,
             content_object=self.entry, submit_date=timezone.now(),
             site=self.site)
-        self.assertEquals(len(mail.outbox), 0)
+        self.assertEqual(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
         moderator.mail_comment_notification_recipients = ['admin@example.com']
         moderator.do_email_notification(comment, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 1)
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_do_email_authors(self):
         comment = comments.get_model().objects.create(
             comment='My Comment', user=self.author, is_public=True,
             content_object=self.entry, submit_date=timezone.now(),
             site=self.site)
-        self.assertEquals(len(mail.outbox), 0)
+        self.assertEqual(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
         moderator.email_authors = True
         moderator.mail_comment_notification_recipients = [
             'admin@example.com', 'webmaster@example.com']
         moderator.do_email_authors(comment, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 0)
+        self.assertEqual(len(mail.outbox), 0)
         moderator.mail_comment_notification_recipients = []
         moderator.do_email_authors(comment, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 1)
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_do_email_authors_without_email(self):
         """
@@ -98,7 +98,7 @@ class CommentModeratorTestCase(TestCase):
             comment='My Comment', user=self.author, is_public=True,
             content_object=self.entry, submit_date=timezone.now(),
             site=self.site)
-        self.assertEquals(len(mail.outbox), 0)
+        self.assertEqual(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
         moderator.email_authors = True
         moderator.mail_comment_notification_recipients = []
@@ -106,15 +106,21 @@ class CommentModeratorTestCase(TestCase):
                                             email='contrib@example.com')
         self.entry.authors.add(contributor)
         moderator.do_email_authors(comment, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 1)
-        self.assertEquals(mail.outbox[0].to,
-                          ['admin@example.com', 'contrib@example.com'])
+        self.assertEqual(len(mail.outbox), 1)
+        #This test, as written, is flawed. It assumes that the database
+        #returns the message's authors in the order they were added,
+        #which is an invalid assumption.
+        #For now, I'm changing the test. An alternative fix would be to add an
+        #order(ing?) attribute in Author.Meta .
+        self.assertEqual(
+            set(mail.outbox[0].to),
+            set(['admin@example.com', 'contrib@example.com']))
         mail.outbox = []
         contributor.email = ''
         contributor.save()
         moderator.do_email_authors(comment, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 1)
-        self.assertEquals(mail.outbox[0].to, ['admin@example.com'])
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, ['admin@example.com'])
 
     def test_do_email_reply(self):
         comment = comments.get_model().objects.create(
@@ -126,31 +132,33 @@ class CommentModeratorTestCase(TestCase):
         moderator.mail_comment_notification_recipients = [
             'admin@example.com', 'webmaster@example.com']
         moderator.do_email_reply(comment, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 0)
+        self.assertEqual(len(mail.outbox), 0)
 
         comment = comments.get_model().objects.create(
             comment='My Comment 2', user_email='user_1@example.com',
             content_object=self.entry, is_public=True,
             submit_date=timezone.now(), site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 0)
+        self.assertEqual(len(mail.outbox), 0)
 
         comment = comments.get_model().objects.create(
             comment='My Comment 3', user_email='user_2@example.com',
             content_object=self.entry, is_public=True,
             submit_date=timezone.now(), site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 1)
-        self.assertEquals(mail.outbox[0].bcc, ['user_1@example.com'])
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].bcc, ['user_1@example.com'])
 
         comment = comments.get_model().objects.create(
             comment='My Comment 4', user=self.author, is_public=True,
             content_object=self.entry, submit_date=timezone.now(),
             site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
-        self.assertEquals(len(mail.outbox), 2)
-        self.assertEquals(mail.outbox[1].bcc, ['user_1@example.com',
-                                               'user_2@example.com'])
+        self.assertEqual(len(mail.outbox), 2)
+        #This suffers from the same ordering assumption issue
+        self.assertEqual(
+            set(mail.outbox[1].bcc),
+            set(['user_1@example.com', 'user_2@example.com']))
 
     def test_moderate(self):
         comment = comments.get_model().objects.create(
@@ -160,15 +168,18 @@ class CommentModeratorTestCase(TestCase):
         moderator = EntryCommentModerator(Entry)
         moderator.auto_moderate_comments = True
         moderator.spam_checker_backends = ()
-        self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
-                          True)
+        self.assertEqual(
+            moderator.moderate(comment, self.entry, 'request'),
+            True)
         moderator.auto_moderate_comments = False
-        self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
-                          False)
+        self.assertEqual(
+            moderator.moderate(comment, self.entry, 'request'),
+            False)
         moderator.spam_checker_backends = (
             'zinnia.spam_checker.backends.all_is_spam',)
-        self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
-                          True)
+        self.assertEqual(
+            moderator.moderate(comment, self.entry, 'request'),
+            True)
 
     def test_moderate_comment_on_entry_without_author(self):
         self.entry.authors.clear()
@@ -180,8 +191,9 @@ class CommentModeratorTestCase(TestCase):
         moderator.auto_moderate_comments = False
         moderator.spam_checker_backends = (
             'zinnia.spam_checker.backends.all_is_spam',)
-        self.assertEquals(moderator.moderate(comment, self.entry, 'request'),
-                          True)
+        self.assertEqual(
+            moderator.moderate(comment, self.entry, 'request'),
+            True)
 
     def test_integrity_error_on_duplicate_spam_comments(self):
         class AllIsSpamModerator(EntryCommentModerator):
@@ -199,14 +211,14 @@ class CommentModeratorTestCase(TestCase):
         f = CommentForm(self.entry)
         datas.update(f.initial)
         url = reverse('comments-post-comment')
-        self.assertEquals(self.entry.comment_count, 0)
+        self.assertEqual(self.entry.comment_count, 0)
         connect_discussion_signals()
         self.client.post(url, datas)
         self.client.post(url, datas)
         disconnect_discussion_signals()
         self.assertEqual(comments.get_model().objects.count(), 1)
         entry_reloaded = Entry.objects.get(pk=self.entry.pk)
-        self.assertEquals(entry_reloaded.comment_count, 0)
+        self.assertEqual(entry_reloaded.comment_count, 0)
 
     def test_comment_count_denormalization(self):
         class AllIsSpamModerator(EntryCommentModerator):
@@ -232,11 +244,11 @@ class CommentModeratorTestCase(TestCase):
         moderator_stack.unregister(Entry)
         moderator_stack.register(Entry, AllIsSpamModerator)
 
-        self.assertEquals(self.entry.comment_count, 0)
+        self.assertEqual(self.entry.comment_count, 0)
         connect_discussion_signals()
         self.client.post(url, datas)
         entry_reloaded = Entry.objects.get(pk=self.entry.pk)
-        self.assertEquals(entry_reloaded.comment_count, 0)
+        self.assertEqual(entry_reloaded.comment_count, 0)
 
         moderator_stack.unregister(Entry)
         moderator_stack.register(Entry, NoMailNoSpamModerator)
@@ -245,4 +257,4 @@ class CommentModeratorTestCase(TestCase):
         self.client.post(url, datas)
         disconnect_discussion_signals()
         entry_reloaded = Entry.objects.get(pk=self.entry.pk)
-        self.assertEquals(entry_reloaded.comment_count, 1)
+        self.assertEqual(entry_reloaded.comment_count, 1)
