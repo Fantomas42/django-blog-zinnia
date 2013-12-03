@@ -60,7 +60,7 @@ Of course adding or removing classes can easily be done in your own
 templates by overriding the block named ``body-class``.
 
 You also have to note that a real effort has be done for providing clean
-and valid HTML documents, without redondant and useless classes or IDs
+and valid HTML documents, without redundant and useless classes or IDs
 overweighting the document respecting the **presentation-free markup**
 rule.
 
