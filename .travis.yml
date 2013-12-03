@@ -7,8 +7,7 @@ install:
     - python bootstrap.py
     - ./bin/buildout -c travis.cfg
 before_script:
-    - ./bin/pyflakes zinnia
-    - ./bin/pep8 --count --show-source --statistics --exclude=migrations zinnia
+    - ./bin/flake8 --count --show-source --statistics --exclude=migrations zinnia
 script:
     - ./bin/test
 after_success:

@@ -4,12 +4,13 @@
 # 
 # Translators:
 # tero <tero@alen.mobi>, 2012
+# tero <tero@alen.mobi>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
-"Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2013-08-06 20:39+0200\n"
-"PO-Revision-Date: 2013-08-06 18:40+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-05 23:09+0100\n"
+"PO-Revision-Date: 2013-11-05 22:08+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Finnish (Finland) (http://www.transifex.com/projects/p/django-blog-zinnia/language/fi_FI/)\n"
 "MIME-Version: 1.0\n"
@@ -126,40 +127,40 @@ msgstr "[%(site)s] Uusi kommentti lisätty kirjoitukselle \"%(title)s\""
 msgid "tree path"
 msgstr "polku"
 
-#: admin/entry.py:32 templates/admin/zinnia/widgets/quickpost.html:17
+#: admin/entry.py:33 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "Sisältö"
 
-#: admin/entry.py:34
+#: admin/entry.py:35
 msgid "Options"
 msgstr "Lisävalinnat"
 
-#: admin/entry.py:42
+#: admin/entry.py:43
 msgid "Privacy"
 msgstr "Suojausasetukset"
 
-#: admin/entry.py:44 templates/admin/zinnia/widgets/_content_stats.html:4
+#: admin/entry.py:45 templates/admin/zinnia/widgets/_content_stats.html:4
 #: templates/zinnia/_entry_detail_base.html:114
 msgid "Discussions"
 msgstr "Kommentit"
 
-#: admin/entry.py:49
+#: admin/entry.py:50
 msgid "Publication"
 msgstr "Julkaisu"
 
-#: admin/entry.py:77
+#: admin/entry.py:78
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i sanaa)"
 
-#: admin/entry.py:84
+#: admin/entry.py:85
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/entry.py:89 models/category.py:21 models_bases/entry.py:48
+#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:48
 msgid "title"
 msgstr "otsikko"
 
@@ -175,106 +176,106 @@ msgstr "kategoria(t)"
 msgid "tag(s)"
 msgstr "tagi(t)"
 
-#: admin/entry.py:134
+#: admin/entry.py:139
 msgid "site(s)"
 msgstr "sivusto(t)"
 
-#: admin/entry.py:140
-msgid "is visible"
-msgstr "näkyvissä"
-
-#: admin/entry.py:147
+#: admin/entry.py:150
 msgid "short url"
 msgstr "lyhyt osoite"
 
-#: admin/entry.py:215
+#: admin/entry.py:156
+msgid "is visible"
+msgstr "näkyvissä"
+
+#: admin/entry.py:224
 msgid "The selected entries now belong to you."
 msgstr "Valitut kirjoitukset kuuluvat nyt sinulle."
 
-#: admin/entry.py:216
+#: admin/entry.py:225
 msgid "Set the entries to the user"
 msgstr "Määritä artikkelit kirjoittajalle"
 
-#: admin/entry.py:223
+#: admin/entry.py:232
 msgid "The selected entries are now marked as published."
 msgstr "Valitut kirjoitukset on nyt julkaistu."
 
-#: admin/entry.py:224
+#: admin/entry.py:233
 msgid "Set entries selected as published"
 msgstr "Julkaise valitut kirjoitukset"
 
-#: admin/entry.py:230
+#: admin/entry.py:239
 msgid "The selected entries are now marked as hidden."
 msgstr "Valitut kirjoitukset on nyt merkitty piilotetuksi."
 
-#: admin/entry.py:231
+#: admin/entry.py:240
 msgid "Set entries selected as hidden"
 msgstr "Määritä valitut kirjoitukset piilotetuksi"
 
 #: admin/entry.py:246
-msgid "The selected entries have been tweeted."
-msgstr "Valitut kirjoitukset on nyt twiitattu."
-
-#: admin/entry.py:247
-msgid "Tweet entries selected"
-msgstr "Tweettaa valitut kirjoitukset"
-
-#: admin/entry.py:253
 msgid "Comments are now closed for selected entries."
 msgstr "Kommentointi on nyt suljettu valituilta kirjoituksilta."
 
-#: admin/entry.py:254
+#: admin/entry.py:247
 msgid "Close the comments for selected entries"
 msgstr "Sulje kommentointi valituilta kirjoituksilta"
 
-#: admin/entry.py:261
+#: admin/entry.py:254
 msgid "Pingbacks are now closed for selected entries."
 msgstr ""
 
-#: admin/entry.py:263
+#: admin/entry.py:256
 msgid "Close the pingbacks for selected entries"
 msgstr ""
 
-#: admin/entry.py:269
+#: admin/entry.py:262
 msgid "Trackbacks are now closed for selected entries."
 msgstr ""
 
-#: admin/entry.py:271
+#: admin/entry.py:264
 msgid "Close the trackbacks for selected entries"
 msgstr ""
 
-#: admin/entry.py:278
+#: admin/entry.py:271
 msgid "The selected entries are now set at the current date."
 msgstr "Valittujen kirjoituksien julkaisuajankohdaksi muutettu kuluva päivä."
 
-#: admin/entry.py:280
+#: admin/entry.py:273
 msgid "Put the selected entries on top at the current date"
 msgstr "Aseta valitut kirjoitukset julkaistuksi tällä päivämäärällä"
 
-#: admin/entry.py:299
+#: admin/entry.py:279
+msgid "Selected entries are now marked as featured."
+msgstr ""
+
+#: admin/entry.py:280
+msgid "Mark selected entries as featured"
+msgstr ""
+
+#: admin/entry.py:286
+msgid "Selected entries are no longer marked as featured."
+msgstr ""
+
+#: admin/entry.py:288
+msgid "Unmark selected entries as featured"
+msgstr ""
+
+#: admin/entry.py:303
+msgid "The selected entries have been tweeted."
+msgstr "Valitut kirjoitukset on nyt twiitattu."
+
+#: admin/entry.py:304
+msgid "Tweet entries selected"
+msgstr "Tweettaa valitut kirjoitukset"
+
+#: admin/entry.py:323
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%(directory)s hakemistoa informoitu onnistuneesti %(success)d kirjoituksella."
 
-#: admin/entry.py:303
+#: admin/entry.py:327
 msgid "Ping Directories for selected entries"
 msgstr "Informoi hakemistoja valituilla kirjoituksilla"
-
-#: admin/entry.py:309
-msgid "Selected entries are now marked as featured."
-msgstr ""
-
-#: admin/entry.py:310
-msgid "Mark selected entries as featured"
-msgstr ""
-
-#: admin/entry.py:316
-msgid "Selected entries are no longer marked as featured."
-msgstr ""
-
-#: admin/entry.py:318
-msgid "Unmark selected entries as featured"
-msgstr ""
 
 #: admin/filters.py:27
 #, python-format
@@ -666,8 +667,9 @@ msgstr "Muokkaa kirjoitusta"
 #: templates/zinnia/entry_detail_base.html:113
 #: templates/zinnia/entry_detail_base.html:150
 #: templates/zinnia/entry_detail_base.html:186
+msgctxt "on date"
 msgid "on"
-msgstr ","
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:15
 #: templates/comments/zinnia/entry/form.html:25
@@ -1421,11 +1423,11 @@ msgstr "Sivu %s"
 msgid "Week %s"
 msgstr "Viikko %s"
 
-#: tests/views.py:448 views/search.py:30
+#: tests/views.py:450 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Liian lyhyt hakulauseke"
 
-#: tests/views.py:452 views/search.py:34
+#: tests/views.py:454 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Hakulauseketta ei löytynyt."
 

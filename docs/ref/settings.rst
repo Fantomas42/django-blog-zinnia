@@ -270,8 +270,8 @@ ZINNIA_AUTO_MODERATE_COMMENTS
 -----------------------------
 **Default value:** ``False``
 
-Determine if a new comment should be allowed to show up
-immediately or should be marked non-public and await approval.
+Determine if a new comment should be marked non-public and await approval.
+Leave as ``False`` to allow comments to show up immediately.
 
 .. setting:: ZINNIA_AUTO_CLOSE_COMMENTS_AFTER
 

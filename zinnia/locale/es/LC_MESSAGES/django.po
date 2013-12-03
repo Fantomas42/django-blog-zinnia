@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# 2lopez <roberto.lopez.lopez@gmail.com>, 2012
+# carpediem <alberto@paparelli.com.ar>, 2013
+# brian.sanchez <seven.xp@gmail.com>, 2013
 # carpediem <alberto@paparelli.com.ar>, 2013
 # igalarzab <igalarzab@gmail.com>, 2011
 # Julien Fache <fantomas42@gmail.com>, 2011
@@ -11,9 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
-"Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2013-08-06 20:39+0200\n"
-"PO-Revision-Date: 2013-08-06 18:40+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-05 23:09+0100\n"
+"PO-Revision-Date: 2013-11-05 22:08+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/django-blog-zinnia/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -130,40 +133,40 @@ msgstr "[%(site)s] Nuevo comentario en \"%(title)s\""
 msgid "tree path"
 msgstr "árbol de categorías"
 
-#: admin/entry.py:32 templates/admin/zinnia/widgets/quickpost.html:17
+#: admin/entry.py:33 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "Contenido"
 
-#: admin/entry.py:34
+#: admin/entry.py:35
 msgid "Options"
 msgstr "Opciones"
 
-#: admin/entry.py:42
+#: admin/entry.py:43
 msgid "Privacy"
 msgstr "Privacidad"
 
-#: admin/entry.py:44 templates/admin/zinnia/widgets/_content_stats.html:4
+#: admin/entry.py:45 templates/admin/zinnia/widgets/_content_stats.html:4
 #: templates/zinnia/_entry_detail_base.html:114
 msgid "Discussions"
 msgstr "Debates"
 
-#: admin/entry.py:49
+#: admin/entry.py:50
 msgid "Publication"
 msgstr "Publicación"
 
-#: admin/entry.py:77
+#: admin/entry.py:78
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i palabras)"
 
-#: admin/entry.py:84
+#: admin/entry.py:85
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
 msgstr[0] "%(title)s (%(reactions)i reacción)"
 msgstr[1] "%(title)s (%(reactions)i reacciones)"
 
-#: admin/entry.py:89 models/category.py:21 models_bases/entry.py:48
+#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:48
 msgid "title"
 msgstr "título"
 
@@ -179,106 +182,106 @@ msgstr "categoría(s)"
 msgid "tag(s)"
 msgstr "tag(s)"
 
-#: admin/entry.py:134
+#: admin/entry.py:139
 msgid "site(s)"
 msgstr "sitio(s)"
 
-#: admin/entry.py:140
-msgid "is visible"
-msgstr "es visible?"
-
-#: admin/entry.py:147
+#: admin/entry.py:150
 msgid "short url"
 msgstr "url corta"
 
-#: admin/entry.py:215
+#: admin/entry.py:156
+msgid "is visible"
+msgstr "es visible?"
+
+#: admin/entry.py:224
 msgid "The selected entries now belong to you."
 msgstr "Las entradas seleccionadas ahora son tuyas."
 
-#: admin/entry.py:216
+#: admin/entry.py:225
 msgid "Set the entries to the user"
 msgstr "Asignar las entradas al usuario"
 
-#: admin/entry.py:223
+#: admin/entry.py:232
 msgid "The selected entries are now marked as published."
 msgstr "Las entradas seleccionadas han sido marcadas como publicadas."
 
-#: admin/entry.py:224
+#: admin/entry.py:233
 msgid "Set entries selected as published"
 msgstr "Publicar las entradas seleccionadas"
 
-#: admin/entry.py:230
+#: admin/entry.py:239
 msgid "The selected entries are now marked as hidden."
 msgstr "Las entradas seleccionadas han sido marcadas como ocultas."
 
-#: admin/entry.py:231
+#: admin/entry.py:240
 msgid "Set entries selected as hidden"
 msgstr "Ocultar las entradas seleccionadas"
 
 #: admin/entry.py:246
-msgid "The selected entries have been tweeted."
-msgstr "Las entradas marcadas han sido twitteadas."
-
-#: admin/entry.py:247
-msgid "Tweet entries selected"
-msgstr "Twittear las entradas seleccionadas"
-
-#: admin/entry.py:253
 msgid "Comments are now closed for selected entries."
 msgstr "Los comentarios en las entradas marcadas han sido cerrados."
 
-#: admin/entry.py:254
+#: admin/entry.py:247
 msgid "Close the comments for selected entries"
 msgstr "Cerrar los comentarios de las entradas seleccionadas"
 
-#: admin/entry.py:261
+#: admin/entry.py:254
 msgid "Pingbacks are now closed for selected entries."
 msgstr "Pingbacks cerrados ahora para las entradas seleccionadas."
 
-#: admin/entry.py:263
+#: admin/entry.py:256
 msgid "Close the pingbacks for selected entries"
 msgstr "Cerrar pingbacks para las entradas seleccionadas"
 
-#: admin/entry.py:269
+#: admin/entry.py:262
 msgid "Trackbacks are now closed for selected entries."
 msgstr "Trackbacks cerrados ahora para las entradas seleccionadas."
 
-#: admin/entry.py:271
+#: admin/entry.py:264
 msgid "Close the trackbacks for selected entries"
 msgstr "Cerrar trackbacks para las entradas seleccionadas"
 
-#: admin/entry.py:278
+#: admin/entry.py:271
 msgid "The selected entries are now set at the current date."
 msgstr "Las fechas de las entradas seleccionadas han sido puestas al momento actual."
 
-#: admin/entry.py:280
+#: admin/entry.py:273
 msgid "Put the selected entries on top at the current date"
 msgstr "Poner las fechas de las entradas seleccionadas al momento actual"
 
-#: admin/entry.py:299
+#: admin/entry.py:279
+msgid "Selected entries are now marked as featured."
+msgstr ""
+
+#: admin/entry.py:280
+msgid "Mark selected entries as featured"
+msgstr ""
+
+#: admin/entry.py:286
+msgid "Selected entries are no longer marked as featured."
+msgstr ""
+
+#: admin/entry.py:288
+msgid "Unmark selected entries as featured"
+msgstr ""
+
+#: admin/entry.py:303
+msgid "The selected entries have been tweeted."
+msgstr "Las entradas marcadas han sido twitteadas."
+
+#: admin/entry.py:304
+msgid "Tweet entries selected"
+msgstr "Twittear las entradas seleccionadas"
+
+#: admin/entry.py:323
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "El directorio %(directory)s ha realizado un ping correctamente a %(success)d entradas."
 
-#: admin/entry.py:303
+#: admin/entry.py:327
 msgid "Ping Directories for selected entries"
 msgstr "Ping directorios para las entradas seleccionadas"
-
-#: admin/entry.py:309
-msgid "Selected entries are now marked as featured."
-msgstr ""
-
-#: admin/entry.py:310
-msgid "Mark selected entries as featured"
-msgstr ""
-
-#: admin/entry.py:316
-msgid "Selected entries are no longer marked as featured."
-msgstr ""
-
-#: admin/entry.py:318
-msgid "Unmark selected entries as featured"
-msgstr ""
 
 #: admin/filters.py:27
 #, python-format
@@ -670,8 +673,9 @@ msgstr "Editar la entrada"
 #: templates/zinnia/entry_detail_base.html:113
 #: templates/zinnia/entry_detail_base.html:150
 #: templates/zinnia/entry_detail_base.html:186
+msgctxt "on date"
 msgid "on"
-msgstr "en"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:15
 #: templates/comments/zinnia/entry/form.html:25
@@ -1425,11 +1429,11 @@ msgstr "Página %s"
 msgid "Week %s"
 msgstr "Semana %s"
 
-#: tests/views.py:448 views/search.py:30
+#: tests/views.py:450 views/search.py:30
 msgid "The pattern is too short"
 msgstr "La cadena es muy corta"
 
-#: tests/views.py:452 views/search.py:34
+#: tests/views.py:454 views/search.py:34
 msgid "No pattern to search found"
 msgstr "No se encuentra cadena"
 

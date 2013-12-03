@@ -4,10 +4,12 @@ CHANGELOG
 0.13
 ----
 
-* Python 3.0 support
+* Start Python 3.0 support
 * Display page number in list
 * Basic support of custom User
 * Django 1.4 is no longer supported
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.12.3...v0.13
 
 0.12.3
 ------

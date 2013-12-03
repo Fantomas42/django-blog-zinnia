@@ -43,6 +43,7 @@ LANGUAGES = (
     ('eu', gettext('Basque')),
     ('ca', gettext('Catalan')),
     ('tr', gettext('Turkish')),
+    ('sv', gettext('Swedish')),
     ('hr_HR', gettext('Croatian')),
     ('pt_BR', gettext('Brazilian Portuguese')),
     ('fi_FI', gettext('Finnish (Finland)')),

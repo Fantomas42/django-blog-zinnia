@@ -22,7 +22,7 @@
 	{% else %}
 	{{ comment.name }}
 	{% endif %}
-	{% trans "on" %}
+	{% trans "on" context "on date" %}
         <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
           {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
         </abbr>

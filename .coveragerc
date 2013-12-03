@@ -1,6 +1,16 @@
-[report]
+[run]
 source		= zinnia
-omit		= */eggs/*,*/lib/*,*/demo/*,*/tests/*
+omit		= zinnia/tests/*
+                  zinnia/migrations/*
+                  zinnia/management/*
+                  zinnia/spam_checker/backends/*
+                  zinnia/url_shortener/backends/*
+                  demo/*
+                  eggs/*
+                  */lib/*
+
+[report]
+show_missing    = True
 exclude_lines	=
     pragma: no cover
     from xmlrpc.client import Fault

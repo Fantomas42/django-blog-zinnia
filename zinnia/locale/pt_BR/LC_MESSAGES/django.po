@@ -5,17 +5,21 @@
 # Translators:
 # Daniel Izelli <izelli@gmail.com>, 2011
 # Fábio <bnafta@gmail.com>, 2013
+# Fábio <bnafta@gmail.com>, 2013
 # fferreira <fernandogferreira@gmail.com>, 2012
+# fferreira <fernandogferreira@gmail.com>, 2012
+# Rodrigo Prior <rprior@infranology.com.br>, 2013
 # Rodrigo Prior <rprior@infranology.com.br>, 2013
 # rogerio rgrlinux <rgrlinux@gmail.com>, 2011
 # Seta00 <reuben@seta00.com>, 2011
 # tiagosamaha <tiagosamaha@gmail.com>, 2013
+# tiagosamaha <tiagosamaha@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
-"Report-Msgid-Bugs-To: https://github.com/Fantomas42/django-blog-zinnia/issues\n"
-"POT-Creation-Date: 2013-08-06 20:39+0200\n"
-"PO-Revision-Date: 2013-08-06 18:40+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-05 23:09+0100\n"
+"PO-Revision-Date: 2013-11-05 22:08+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/django-blog-zinnia/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -132,40 +136,40 @@ msgstr "[%(site)s] Novo comentário postado em \"%(title)s\""
 msgid "tree path"
 msgstr "caminho de árvore"
 
-#: admin/entry.py:32 templates/admin/zinnia/widgets/quickpost.html:17
+#: admin/entry.py:33 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "Conteúdo"
 
-#: admin/entry.py:34
+#: admin/entry.py:35
 msgid "Options"
 msgstr "Opções"
 
-#: admin/entry.py:42
+#: admin/entry.py:43
 msgid "Privacy"
 msgstr "Privacidade"
 
-#: admin/entry.py:44 templates/admin/zinnia/widgets/_content_stats.html:4
+#: admin/entry.py:45 templates/admin/zinnia/widgets/_content_stats.html:4
 #: templates/zinnia/_entry_detail_base.html:114
 msgid "Discussions"
 msgstr "Discussões"
 
-#: admin/entry.py:49
+#: admin/entry.py:50
 msgid "Publication"
 msgstr "Publicação"
 
-#: admin/entry.py:77
+#: admin/entry.py:78
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i palavras)"
 
-#: admin/entry.py:84
+#: admin/entry.py:85
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
 msgstr[0] "%(title)s (%(reactions)i reação)"
 msgstr[1] "%(title)s (%(reactions)i reações)"
 
-#: admin/entry.py:89 models/category.py:21 models_bases/entry.py:48
+#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:48
 msgid "title"
 msgstr "título"
 
@@ -181,106 +185,106 @@ msgstr "categoria (s)"
 msgid "tag(s)"
 msgstr "tag (s)"
 
-#: admin/entry.py:134
+#: admin/entry.py:139
 msgid "site(s)"
 msgstr "site (s)"
 
-#: admin/entry.py:140
-msgid "is visible"
-msgstr "é visível"
-
-#: admin/entry.py:147
+#: admin/entry.py:150
 msgid "short url"
 msgstr "url curta"
 
-#: admin/entry.py:215
+#: admin/entry.py:156
+msgid "is visible"
+msgstr "é visível"
+
+#: admin/entry.py:224
 msgid "The selected entries now belong to you."
 msgstr "Os artigos selecionados agora pertencem a você."
 
-#: admin/entry.py:216
+#: admin/entry.py:225
 msgid "Set the entries to the user"
 msgstr "Definir os artigos para o usuário"
 
-#: admin/entry.py:223
+#: admin/entry.py:232
 msgid "The selected entries are now marked as published."
 msgstr "Os artigos selecionados foram publicados."
 
-#: admin/entry.py:224
+#: admin/entry.py:233
 msgid "Set entries selected as published"
 msgstr "Definir artigos selecionados como publicado"
 
-#: admin/entry.py:230
+#: admin/entry.py:239
 msgid "The selected entries are now marked as hidden."
 msgstr "Os artigos selecionados foram escondidos."
 
-#: admin/entry.py:231
+#: admin/entry.py:240
 msgid "Set entries selected as hidden"
 msgstr "Definir artigos selecionados como oculto"
 
 #: admin/entry.py:246
-msgid "The selected entries have been tweeted."
-msgstr "Os artigos selecionados foram twitados."
-
-#: admin/entry.py:247
-msgid "Tweet entries selected"
-msgstr "Tweet artigos selecionados"
-
-#: admin/entry.py:253
 msgid "Comments are now closed for selected entries."
 msgstr "Comentários foram desativados nos artigos selecionados."
 
-#: admin/entry.py:254
+#: admin/entry.py:247
 msgid "Close the comments for selected entries"
 msgstr "Feche os comentários para os artigos selecionados"
 
-#: admin/entry.py:261
+#: admin/entry.py:254
 msgid "Pingbacks are now closed for selected entries."
 msgstr "Linkbacks foram desativados nos artigos selecionados."
 
-#: admin/entry.py:263
+#: admin/entry.py:256
 msgid "Close the pingbacks for selected entries"
 msgstr "Feche os linkbacks para os artigos selecionados"
 
-#: admin/entry.py:269
+#: admin/entry.py:262
 msgid "Trackbacks are now closed for selected entries."
 msgstr "Linkbacks foram desativados nos artigos selecionados."
 
-#: admin/entry.py:271
+#: admin/entry.py:264
 msgid "Close the trackbacks for selected entries"
 msgstr "Feche os linkbacks para os artigos selecionados"
 
-#: admin/entry.py:278
+#: admin/entry.py:271
 msgid "The selected entries are now set at the current date."
 msgstr "Os artigos selecionados agora pertencem à data atual."
 
-#: admin/entry.py:280
+#: admin/entry.py:273
 msgid "Put the selected entries on top at the current date"
 msgstr "Colocar os artigos selecionados no topo por hoje"
 
-#: admin/entry.py:299
+#: admin/entry.py:279
+msgid "Selected entries are now marked as featured."
+msgstr "Os artigos selecionados foram marcados como destaque."
+
+#: admin/entry.py:280
+msgid "Mark selected entries as featured"
+msgstr "Marcar artigos selecionados como destaque."
+
+#: admin/entry.py:286
+msgid "Selected entries are no longer marked as featured."
+msgstr "Os artigos selecionados não estão mais marcados como destaque."
+
+#: admin/entry.py:288
+msgid "Unmark selected entries as featured"
+msgstr "Desmarcar os arquigos selecionadas como destaque"
+
+#: admin/entry.py:303
+msgid "The selected entries have been tweeted."
+msgstr "Os artigos selecionados foram twitados."
+
+#: admin/entry.py:304
+msgid "Tweet entries selected"
+msgstr "Tweet artigos selecionados"
+
+#: admin/entry.py:323
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%(directory)s diretório pingado com sucesso %(success)d artigos."
 
-#: admin/entry.py:303
+#: admin/entry.py:327
 msgid "Ping Directories for selected entries"
 msgstr "Pingar diretórios para os artigos selecionados"
-
-#: admin/entry.py:309
-msgid "Selected entries are now marked as featured."
-msgstr "Os artigos selecionados foram marcados como destaque."
-
-#: admin/entry.py:310
-msgid "Mark selected entries as featured"
-msgstr "Marcar artigos selecionados como destaque."
-
-#: admin/entry.py:316
-msgid "Selected entries are no longer marked as featured."
-msgstr "Os artigos selecionados não estão mais marcados como destaque."
-
-#: admin/entry.py:318
-msgid "Unmark selected entries as featured"
-msgstr "Desmarcar os arquigos selecionadas como destaque"
 
 #: admin/filters.py:27
 #, python-format
@@ -299,7 +303,7 @@ msgstr "categorias publicadas"
 
 #: admin/forms.py:22
 msgid "Parent category"
-msgstr ""
+msgstr "Categoria primária"
 
 #: admin/forms.py:24
 msgid "No parent category"
@@ -672,8 +676,9 @@ msgstr "Editar o artigo"
 #: templates/zinnia/entry_detail_base.html:113
 #: templates/zinnia/entry_detail_base.html:150
 #: templates/zinnia/entry_detail_base.html:186
+msgctxt "on date"
 msgid "on"
-msgstr "em"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:15
 #: templates/comments/zinnia/entry/form.html:25
@@ -1095,17 +1100,17 @@ msgstr "Semana %(week_number)s de %(year)s"
 
 #: templates/zinnia/entry_archive_week.html:17
 msgid "Previous week"
-msgstr ""
+msgstr "Semana anterior"
 
 #: templates/zinnia/entry_archive_week.html:20
 #: templates/zinnia/entry_archive_week.html:28
 #, python-format
 msgid "Week %(week_number)s of %(year)s"
-msgstr ""
+msgstr "Semana %(week_number)s de %(year)s"
 
 #: templates/zinnia/entry_archive_week.html:25
 msgid "Next week"
-msgstr ""
+msgstr "Próxima semana"
 
 #: templates/zinnia/entry_archive_year.html:15
 #: templates/zinnia/sitemap.html:69
@@ -1114,11 +1119,11 @@ msgstr "Arquivos mensais"
 
 #: templates/zinnia/entry_archive_year.html:25
 msgid "Previous year"
-msgstr ""
+msgstr "Ano anterior"
 
 #: templates/zinnia/entry_archive_year.html:31
 msgid "Next year"
-msgstr ""
+msgstr "Próximo ano"
 
 #: templates/zinnia/entry_detail_base.html:21
 msgid "RSS Feed of discussions on"
@@ -1427,11 +1432,11 @@ msgstr "Página %s"
 msgid "Week %s"
 msgstr "Semana %s"
 
-#: tests/views.py:448 views/search.py:30
+#: tests/views.py:450 views/search.py:30
 msgid "The pattern is too short"
 msgstr "O padrão é muito curto"
 
-#: tests/views.py:452 views/search.py:34
+#: tests/views.py:454 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Nenhum padrão encontrado"
 
@@ -1481,11 +1486,11 @@ msgstr "^(?P<year>\\d{4})/pagina/(?P<page>\\d+)/$"
 
 #: urls/archives.py:33
 msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/week/(?P<week>\\d+)/$"
 
 #: urls/archives.py:36
 msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/week/(?P<week>\\d+)/page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:45
 msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/page/(?P<page>\\d+)/$"
