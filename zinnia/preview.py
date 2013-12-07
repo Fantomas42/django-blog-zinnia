@@ -46,7 +46,9 @@ class HTMLPreview(object):
         """
         Method used to render the preview in templates.
         """
-        return self.preview
+        #Python really doesn't like __str__ returning non-strings
+        #In python 3.3 (perhaps earlier), it raises a TypeError
+        return str(self.preview)
 
     def build_preview(self):
         """

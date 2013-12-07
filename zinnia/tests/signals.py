@@ -23,7 +23,7 @@ class SignalsTestCase(TestCase):
             return make_top()
 
         call()
-        self.assertEquals(self.top, 1)
+        self.assertEqual(self.top, 1)
         # Okay the command is executed
 
     def test_ping_directories_handler(self):
@@ -43,17 +43,17 @@ class SignalsTestCase(TestCase):
                   'status': PUBLISHED,
                   'slug': 'my-entry'}
         entry = Entry.objects.create(**params)
-        self.assertEquals(entry.is_visible, True)
+        self.assertEqual(entry.is_visible, True)
         settings.PING_DIRECTORIES = ()
         ping_directories_handler('sender', **{'instance': entry})
-        self.assertEquals(self.top, 0)
+        self.assertEqual(self.top, 0)
         settings.PING_DIRECTORIES = ('toto',)
         settings.SAVE_PING_DIRECTORIES = True
         ping_directories_handler('sender', **{'instance': entry})
-        self.assertEquals(self.top, 1)
+        self.assertEqual(self.top, 1)
         entry.status = DRAFT
         ping_directories_handler('sender', **{'instance': entry})
-        self.assertEquals(self.top, 1)
+        self.assertEqual(self.top, 1)
 
         # Remove stub
         zinnia.ping.DirectoryPinger = self.original_pinger
@@ -75,16 +75,16 @@ class SignalsTestCase(TestCase):
                   'status': PUBLISHED,
                   'slug': 'my-entry'}
         entry = Entry.objects.create(**params)
-        self.assertEquals(entry.is_visible, True)
+        self.assertEqual(entry.is_visible, True)
         settings.SAVE_PING_EXTERNAL_URLS = False
         ping_external_urls_handler('sender', **{'instance': entry})
-        self.assertEquals(self.top, 0)
+        self.assertEqual(self.top, 0)
         settings.SAVE_PING_EXTERNAL_URLS = True
         ping_external_urls_handler('sender', **{'instance': entry})
-        self.assertEquals(self.top, 1)
+        self.assertEqual(self.top, 1)
         entry.status = 0
         ping_external_urls_handler('sender', **{'instance': entry})
-        self.assertEquals(self.top, 1)
+        self.assertEqual(self.top, 1)
 
         # Remove stub
         zinnia.ping.ExternalUrlsPinger = self.original_pinger

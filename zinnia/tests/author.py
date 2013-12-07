@@ -2,6 +2,8 @@
 from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.contrib.auth.tests.utils import skipIfCustomUser
+from django.utils import six
+
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -10,7 +12,6 @@ from zinnia.managers import PUBLISHED
 
 @skipIfCustomUser
 class AuthorTestCase(TestCase):
-
     def setUp(self):
         self.site = Site.objects.get_current()
         self.author = Author.objects.create_user(
@@ -31,10 +32,10 @@ class AuthorTestCase(TestCase):
         self.assertEqual(self.author.entries_published().count(), 1)
 
     def test_unicode(self):
-        self.assertEqual(self.author.__unicode__(),
+        self.assertEqual(six.text_type(self.author),
                          'webmaster')
         self.author.first_name = 'John'
         self.author.last_name = 'Doe'
         self.author.save()
-        self.assertEqual(self.author.__unicode__(),
+        self.assertEqual(six.text_type(self.author),
                          'John Doe')

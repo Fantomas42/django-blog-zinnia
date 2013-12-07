@@ -93,11 +93,11 @@ class AuthorListFilterTestCase(BaseListFilterTestCase):
 
         with self.assertNumQueries(1):
             filterspec = changelist.get_filters(request)[0][0]
-            self.assertEquals(filterspec.title, 'published authors')
-            self.assertEquals(filterspec.used_parameters, {'author': '2'})
-            self.assertEquals(filterspec.lookup_choices,
-                              [('1', 'webmaster (2 entries)'),
-                               ('2', 'contributor (1 entry)')])
+            self.assertEqual(filterspec.title, 'published authors')
+            self.assertEqual(filterspec.used_parameters, {'author': '2'})
+            self.assertEqual(filterspec.lookup_choices,
+                             [('1', 'webmaster (2 entries)'),
+                              ('2', 'contributor (1 entry)')])
 
 
 class CategoryListFilterTestCase(BaseListFilterTestCase):
@@ -131,8 +131,8 @@ class CategoryListFilterTestCase(BaseListFilterTestCase):
 
         with self.assertNumQueries(1):
             filterspec = changelist.get_filters(request)[0][0]
-            self.assertEquals(filterspec.title, 'published categories')
-            self.assertEquals(filterspec.used_parameters, {'category': '2'})
-            self.assertEquals(filterspec.lookup_choices,
-                              [('1', 'Category 1 (2 entries)'),
-                               ('2', 'Category 2 (1 entry)')])
+            self.assertEqual(filterspec.title, 'published categories')
+            self.assertEqual(filterspec.used_parameters, {'category': '2'})
+            self.assertEqual(filterspec.lookup_choices,
+                             [('1', 'Category 1 (2 entries)'),
+                              ('2', 'Category 2 (1 entry)')])
