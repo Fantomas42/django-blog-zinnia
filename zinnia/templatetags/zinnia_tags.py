@@ -364,7 +364,7 @@ def widont(value, autoescape=None):
     esc = autoescape and conditional_escape or (lambda x: x)
 
     def replace(matchobj):
-        return u'&nbsp;%s' % matchobj.group(1)
+        return '&nbsp;%s' % matchobj.group(1)
 
     value = WIDONT_REGEXP.sub(replace, esc(smart_text(value)))
     return mark_safe(value)
