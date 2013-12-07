@@ -52,11 +52,12 @@ class TemplateTagsTestCase(TestCase):
                   'creation_date': datetime(2010, 1, 1),
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
+        self.site = Site.objects.get_current()
 
     def publish_entry(self):
         self.entry.status = PUBLISHED
         self.entry.featured = True
-        self.entry.sites.add(Site.objects.get_current())
+        self.entry.sites.add(self.site)
         self.entry.save()
 
     def test_get_categories(self):
@@ -200,9 +201,8 @@ class TemplateTagsTestCase(TestCase):
                   'status': PUBLISHED,
                   'comment_count': 2,
                   'slug': 'my-second-entry'}
-        site = Site.objects.get_current()
         second_entry = Entry.objects.create(**params)
-        second_entry.sites.add(site)
+        second_entry.sites.add(self.site)
         self.entry.comment_count = 1
         self.entry.save()
         with self.assertNumQueries(0):
@@ -235,9 +235,8 @@ class TemplateTagsTestCase(TestCase):
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
                   'slug': 'my-second-entry'}
-        site = Site.objects.get_current()
         second_entry = Entry.objects.create(**params)
-        second_entry.sites.add(site)
+        second_entry.sites.add(self.site)
 
         source_context = Context({'object': second_entry})
         with self.assertNumQueries(3):
@@ -261,9 +260,8 @@ class TemplateTagsTestCase(TestCase):
                   'status': PUBLISHED,
                   'creation_date': datetime(2009, 1, 1),
                   'slug': 'my-second-entry'}
-        site = Site.objects.get_current()
         second_entry = Entry.objects.create(**params)
-        second_entry.sites.add(site)
+        second_entry.sites.add(self.site)
 
         with self.assertNumQueries(0):
             context = get_archives_entries('custom_template.html')
@@ -286,9 +284,8 @@ class TemplateTagsTestCase(TestCase):
                   'status': PUBLISHED,
                   'creation_date': datetime(2009, 1, 10),
                   'slug': 'my-second-entry'}
-        site = Site.objects.get_current()
         second_entry = Entry.objects.create(**params)
-        second_entry.sites.add(site)
+        second_entry.sites.add(self.site)
 
         with self.assertNumQueries(0):
             context = get_archives_entries_tree('custom_template.html')
@@ -336,9 +333,8 @@ class TemplateTagsTestCase(TestCase):
                   'status': PUBLISHED,
                   'creation_date': datetime(2008, 1, 1),
                   'slug': 'my-second-entry'}
-        site = Site.objects.get_current()
         second_entry = Entry.objects.create(**params)
-        second_entry.sites.add(site)
+        second_entry.sites.add(self.site)
 
         source_context = Context()
         with self.assertNumQueries(2):
@@ -352,7 +348,6 @@ class TemplateTagsTestCase(TestCase):
 
     @skipIfCustomUser
     def test_get_recent_comments(self):
-        site = Site.objects.get_current()
         with self.assertNumQueries(1):
             context = get_recent_comments()
         self.assertEqual(len(context['comments']), 0)
@@ -360,7 +355,7 @@ class TemplateTagsTestCase(TestCase):
                          'zinnia/tags/recent_comments.html')
 
         comment_1 = comments.get_model().objects.create(
-            comment='My Comment 1', site=site,
+            comment='My Comment 1', site=self.site,
             content_object=self.entry, submit_date=timezone.now())
         with self.assertNumQueries(1):
             context = get_recent_comments(3, 'custom_template.html')
@@ -377,7 +372,7 @@ class TemplateTagsTestCase(TestCase):
         author = Author.objects.create_user(username='webmaster',
                                             email='webmaster@example.com')
         comment_2 = comments.get_model().objects.create(
-            comment='My Comment 2', site=site,
+            comment='My Comment 2', site=self.site,
             content_object=self.entry, submit_date=timezone.now())
         comment_2.flags.create(user=author,
                                flag=CommentFlag.MODERATOR_APPROVAL)
@@ -394,7 +389,6 @@ class TemplateTagsTestCase(TestCase):
     def test_get_recent_linkbacks(self):
         user = Author.objects.create_user(username='webmaster',
                                           email='webmaster@example.com')
-        site = Site.objects.get_current()
         with self.assertNumQueries(1):
             context = get_recent_linkbacks()
         self.assertEqual(len(context['linkbacks']), 0)
@@ -402,7 +396,7 @@ class TemplateTagsTestCase(TestCase):
                          'zinnia/tags/recent_linkbacks.html')
 
         linkback_1 = comments.get_model().objects.create(
-            comment='My Linkback 1', site=site,
+            comment='My Linkback 1', site=self.site,
             content_object=self.entry, submit_date=timezone.now())
         linkback_1.flags.create(user=user, flag=PINGBACK)
         with self.assertNumQueries(1):
@@ -418,7 +412,7 @@ class TemplateTagsTestCase(TestCase):
                              self.entry)
 
         linkback_2 = comments.get_model().objects.create(
-            comment='My Linkback 2', site=site,
+            comment='My Linkback 2', site=self.site,
             content_object=self.entry, submit_date=timezone.now())
         linkback_2.flags.create(user=user, flag=TRACKBACK)
         with self.assertNumQueries(3):
@@ -753,12 +747,11 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['comments_per_entry'], 0)
         self.assertEqual(context['linkbacks_per_entry'], 0)
 
-        site = Site.objects.get_current()
         Category.objects.create(title='Category 1', slug='category-1')
         author = Author.objects.create_user(username='webmaster',
                                             email='webmaster@example.com')
         comments.get_model().objects.create(
-            comment='My Comment 1', site=site,
+            comment='My Comment 1', site=self.site,
             content_object=self.entry,
             submit_date=timezone.now())
         self.entry.authors.add(author)
