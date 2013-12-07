@@ -495,7 +495,7 @@ class ViewsTestCase(ViewsBaseCase):
         if comments.get_comment_app_name() == comments.DEFAULT_COMMENTS_APP:
             # If we are using the default comment app,
             # we can count the database queries executed.
-            with self.assertNumQueries(6):
+            with self.assertNumQueries(8):
                 response = self.client.post('/trackback/1/',
                                             {'url': 'http://example.com'})
         else:
