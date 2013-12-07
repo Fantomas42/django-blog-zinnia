@@ -1,5 +1,5 @@
 pillow==2.2.1
-django==1.5.5
+django==1.6
 django-bitly==0.7
 django-mptt==0.6.0
 django-tagging==0.3.1
