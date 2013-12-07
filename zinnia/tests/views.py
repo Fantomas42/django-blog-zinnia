@@ -257,7 +257,7 @@ class ViewsTestCase(ViewsBaseCase):
         entry = self.create_published_entry()
         entry.login_required = True
         entry.save()
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(1):
             response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertTemplateUsed(response, 'zinnia/login.html')
         response = self.client.post('/2010/01/01/my-test-entry/',
@@ -276,12 +276,12 @@ class ViewsTestCase(ViewsBaseCase):
             response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEqual(response.context['error'], False)
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(1):
             response = self.client.post('/2010/01/01/my-test-entry/',
                                         {'entry_password': 'bad_password'})
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEqual(response.context['error'], True)
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(7):
             response = self.client.post('/2010/01/01/my-test-entry/',
                                         {'entry_password': 'password'})
         self.assertEqual(response.status_code, 200)
@@ -296,17 +296,17 @@ class ViewsTestCase(ViewsBaseCase):
         entry.password = 'password'
         entry.login_required = True
         entry.save()
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(1):
             response = self.client.get('/2010/01/01/my-test-entry/')
         self.assertTemplateUsed(response, 'zinnia/login.html')
-        with self.assertNumQueries(9):
+        with self.assertNumQueries(12):
             response = self.client.post('/2010/01/01/my-test-entry/',
                                         {'username': 'admin',
                                          'password': 'password'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEqual(response.context['error'], False)
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(7):
             response = self.client.post('/2010/01/01/my-test-entry/',
                                         {'entry_password': 'password'})
         self.assertEqual(response.status_code, 200)
