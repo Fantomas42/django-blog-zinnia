@@ -62,7 +62,7 @@ class TemplateTagsTestCase(TestCase):
 
     def test_get_categories(self):
         source_context = Context({})
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_categories(source_context)
         self.assertEqual(len(context['categories']), 0)
         self.assertEqual(context['template'], 'zinnia/tags/categories.html')
@@ -101,7 +101,7 @@ class TemplateTagsTestCase(TestCase):
     @skipIfCustomUser
     def test_get_authors(self):
         source_context = Context({})
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_authors(source_context)
         self.assertEqual(len(context['authors']), 0)
         self.assertEqual(context['template'], 'zinnia/tags/authors.html')
@@ -119,7 +119,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['context_author'], author)
 
     def test_get_recent_entries(self):
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_recent_entries()
         self.assertEqual(len(context['entries']), 0)
         self.assertEqual(context['template'],
@@ -135,7 +135,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(len(context['entries']), 0)
 
     def test_get_featured_entries(self):
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_featured_entries()
         self.assertEqual(len(context['entries']), 0)
         self.assertEqual(context['template'],
@@ -167,7 +167,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(len(context['entries']), 0)
 
     def test_get_random_entries(self):
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_random_entries()
         self.assertEqual(len(context['entries']), 0)
         self.assertEqual(context['template'],
@@ -183,7 +183,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(len(context['entries']), 0)
 
     def test_get_popular_entries(self):
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_popular_entries()
         self.assertEqual(len(context['entries']), 0)
         self.assertEqual(context['template'],
@@ -247,7 +247,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['template'], 'custom_template.html')
 
     def test_get_archives_entries(self):
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_archives_entries()
         self.assertEqual(len(context['archives']), 0)
         self.assertEqual(context['template'],
@@ -271,7 +271,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['template'], 'custom_template.html')
 
     def test_get_archives_tree(self):
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_archives_entries_tree()
         self.assertEqual(len(context['archives']), 0)
         self.assertEqual(context['template'],
@@ -296,7 +296,7 @@ class TemplateTagsTestCase(TestCase):
 
     def test_get_calendar_entries(self):
         source_context = Context()
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(context['next_month'], None)
@@ -672,7 +672,7 @@ class TemplateTagsTestCase(TestCase):
         {% get_tags as entry_tags %}
         {{ entry_tags|join:", " }}
         """)
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(1):
             html = t.render(Context())
         self.assertEqual(html.strip(), '')
         self.publish_entry()
@@ -691,7 +691,7 @@ class TemplateTagsTestCase(TestCase):
 
     def test_get_tag_cloud(self):
         source_context = Context({})
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(1):
             context = get_tag_cloud(source_context)
         self.assertEqual(len(context['tags']), 0)
         self.assertEqual(context['template'], 'zinnia/tags/tag_cloud.html')
@@ -730,7 +730,7 @@ class TemplateTagsTestCase(TestCase):
 
     @skipIfCustomUser
     def test_zinnia_statistics(self):
-        with self.assertNumQueries(9):
+        with self.assertNumQueries(8):
             context = zinnia_statistics()
         self.assertEqual(context['template'], 'zinnia/tags/statistics.html')
         self.assertEqual(context['entries'], 0)
