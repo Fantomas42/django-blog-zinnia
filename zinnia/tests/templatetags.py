@@ -61,7 +61,7 @@ class TemplateTagsTestCase(TestCase):
         self.entry.save()
 
     def test_get_categories(self):
-        source_context = Context({})
+        source_context = Context()
         with self.assertNumQueries(0):
             context = get_categories(source_context)
         self.assertEqual(len(context['categories']), 0)
@@ -80,7 +80,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['context_category'], category)
 
     def test_get_categories_tree(self):
-        source_context = Context({})
+        source_context = Context()
         with self.assertNumQueries(0):
             context = get_categories_tree(source_context)
         self.assertEqual(len(context['categories']), 0)
@@ -100,7 +100,7 @@ class TemplateTagsTestCase(TestCase):
 
     @skipIfCustomUser
     def test_get_authors(self):
-        source_context = Context({})
+        source_context = Context()
         with self.assertNumQueries(0):
             context = get_authors(source_context)
         self.assertEqual(len(context['authors']), 0)
@@ -690,7 +690,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertRaises(TemplateSyntaxError, Template, template_error_args)
 
     def test_get_tag_cloud(self):
-        source_context = Context({})
+        source_context = Context()
         with self.assertNumQueries(1):
             context = get_tag_cloud(source_context)
         self.assertEqual(len(context['tags']), 0)
