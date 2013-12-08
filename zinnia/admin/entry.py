@@ -56,6 +56,7 @@ class EntryAdmin(admin.ModelAdmin):
     list_display = ('get_title', 'get_authors', 'get_categories',
                     'get_tags', 'get_sites', 'get_is_visible', 'featured',
                     'get_short_url', 'creation_date')
+    list_editable = ['get_is_visible', 'featured']
     radio_fields = {'content_template': admin.VERTICAL,
                     'detail_template': admin.VERTICAL}
     filter_horizontal = ('categories', 'authors', 'related')
