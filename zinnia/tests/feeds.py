@@ -4,6 +4,7 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 
+from django.utils import six
 from django.test import TestCase
 from django.utils import timezone
 from django.contrib import comments
@@ -17,14 +18,14 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.storage import default_storage
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.tests.utils import skipIfCustomUser
-from django.utils import six
 
 from tagging.models import Tag
 
 from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
-from zinnia.tests.utils import datetime, urlEqual
+from zinnia.tests.utils import datetime
+from zinnia.tests.utils import urlEqual
 from zinnia.models.category import Category
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia import feeds
@@ -351,5 +352,6 @@ class FeedsTestCase(TestCase):
         entry_same_slug = Entry.objects.create(**params)
         entry_same_slug.sites.add(self.site)
         entry_same_slug.authors.add(self.author)
+
         self.assertEqual(feed.get_object(
             'request', 2010, 2, 1, entry_same_slug.slug), entry_same_slug)

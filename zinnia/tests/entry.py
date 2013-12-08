@@ -18,7 +18,7 @@ from zinnia.models_bases import entry
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.flags import PINGBACK, TRACKBACK
-from zinnia.tests.utils import datetime, supports_savepoints
+from zinnia.tests.utils import datetime
 from zinnia.tests.utils import is_lib_available
 from zinnia import url_shortener as shortener_settings
 
@@ -216,7 +216,7 @@ class EntryTestCase(TestCase):
     def test_next_entry(self):
         site = Site.objects.get_current()
         with self.assertNumQueries(0):
-             #entry.next_entry does not works until entry
+            # entry.next_entry does not works until entry
             # is published, so no query should be performed
             self.assertFalse(self.entry.previous_entry)
         self.entry.status = PUBLISHED
@@ -256,11 +256,8 @@ class EntryTestCase(TestCase):
         self.entry.status = PUBLISHED
         self.entry.save()
         self.entry.sites.add(site)
-        if supports_savepoints:
-            expected_query_count = 1
-        else:
-            expected_query_count = 1
-        with self.assertNumQueries(expected_query_count):
+        with self.assertNumQueries(1):
+            self.assertFalse(self.entry.previous_entry)
             self.assertFalse(self.entry.next_entry)
             # Reload to check the cache
             self.assertFalse(self.entry.previous_entry)
@@ -280,11 +277,7 @@ class EntryTestCase(TestCase):
         self.third_entry = Entry.objects.create(**params)
         self.third_entry.sites.add(site)
         del self.entry.previous_next  # Invalidate the cached property
-        if supports_savepoints:
-            expected_query_count = 1
-        else:
-            expected_query_count = 1
-        with self.assertNumQueries(expected_query_count):
+        with self.assertNumQueries(1):
             self.assertEqual(self.entry.previous_entry, self.second_entry)
             self.assertEqual(self.entry.next_entry, self.third_entry)
             # Reload to check the cache
@@ -386,6 +379,7 @@ class EntryHtmlContentTestCase(TestCase):
 
 
 class EntryAbsoluteUrlTestCase(TestCase):
+
     def check_get_absolute_url(self, creation_date, url_expected):
         params = {'title': 'My entry',
                   'content': 'My content',

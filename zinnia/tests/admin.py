@@ -237,7 +237,6 @@ class EntryAdminTestCase(BaseAdminTestCase):
         settings.USE_TWITTER = True
         settings.PING_DIRECTORIES = True
         self.assertEqual(
-            #keys otherwise returns a generator in python3/ django 1.6
             list(self.admin.get_actions(self.request).keys()),
             ['delete_selected',
              'close_comments',
