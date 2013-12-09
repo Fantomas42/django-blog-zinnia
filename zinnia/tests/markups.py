@@ -1,9 +1,9 @@
 """Test cases for Zinnia's markups"""
 import sys
 try:
-    import __builtin__
-except ImportError:
-    import builtins as __builtin__
+    import builtins
+except ImportError:  # Python 2
+    import __builtin__ as builtins
 import warnings
 
 from django.test import TestCase
@@ -66,11 +66,11 @@ class MarkupFailImportTestCase(TestCase):
     exclude_list = ['textile', 'markdown', 'docutils']
 
     def setUp(self):
-        self.original_import = __builtin__.__import__
-        __builtin__.__import__ = self.import_hook
+        self.original_import = builtins.__import__
+        builtins.__import__ = self.import_hook
 
     def tearDown(self):
-        __builtin__.__import__ = self.original_import
+        builtins.__import__ = self.original_import
 
     def import_hook(self, name, *args, **kwargs):
         if name in self.exclude_list:
@@ -80,33 +80,30 @@ class MarkupFailImportTestCase(TestCase):
 
     def test_textile(self):
         with warnings.catch_warnings(record=True) as w:
-            warnings.simplefilter("always")
             result = textile('My *text*')
-            self.tearDown()
-            self.assertEqual(result, 'My *text*')
-            self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
-            self.assertEqual(
-                str(w[-1].message),
-                "The Python textile library isn't installed.")
+        self.tearDown()
+        self.assertEqual(result, 'My *text*')
+        self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
+        self.assertEqual(
+            str(w[-1].message),
+            "The Python textile library isn't installed.")
 
     def test_markdown(self):
         with warnings.catch_warnings(record=True) as w:
-            warnings.simplefilter("always")
             result = markdown('My *text*')
-            self.tearDown()
-            self.assertEqual(result, 'My *text*')
-            self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
-            self.assertEqual(
-                str(w[-1].message),
-                "The Python markdown library isn't installed.")
+        self.tearDown()
+        self.assertEqual(result, 'My *text*')
+        self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
+        self.assertEqual(
+            str(w[-1].message),
+            "The Python markdown library isn't installed.")
 
     def test_restructuredtext(self):
         with warnings.catch_warnings(record=True) as w:
-            warnings.simplefilter("always")
             result = restructuredtext('My *text*')
-            self.tearDown()
-            self.assertEqual(result, 'My *text*')
-            self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
-            self.assertEqual(
-                str(w[-1].message),
-                "The Python docutils library isn't installed.")
+        self.tearDown()
+        self.assertEqual(result, 'My *text*')
+        self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
+        self.assertEqual(
+            str(w[-1].message),
+            "The Python docutils library isn't installed.")
