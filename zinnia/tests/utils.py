@@ -10,8 +10,6 @@ from django.conf import settings
 from django.utils import timezone
 from django.test.client import Client
 
-from zinnia.utils import is_before_1_6
-
 
 class TestTransport(Transport):
     """
@@ -27,13 +25,9 @@ class TestTransport(Transport):
         response = self.client.post(handler,
                                     request_body,
                                     content_type="text/xml")
-        #I think(?) this is supposed to be bytes
         res = six.BytesIO(response.content)
         setattr(res, 'getheader', lambda *args: '')  # For Python >= 2.7
         res.seek(0)
-        #What's with the redundancy?
-        if not hasattr(res, 'getheader'):
-            setattr(res, 'getheader', lambda *args: "")
         return self.parse_response(res)
 
 
@@ -93,10 +87,3 @@ def urlEqual(url_1, url_2):
 
         return query_1 == query_2
     return False
-
-is_using_sqlite = settings.DATABASES["default"]["ENGINE"].endswith("sqlite3")
-
-#This is a rough rule
-#I don't know if it's necessarily true across all inputs
-#Will ask on the mailing list eventually
-supports_savepoints = not (is_before_1_6 and is_using_sqlite)

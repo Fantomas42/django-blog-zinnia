@@ -307,8 +307,7 @@ class MetaWeblogTestCase(TestCase):
 
     def test_new_media_object(self):
         file_ = TemporaryFile()
-        #Not sure if assuming the encoding is the right thing to do.
-        file_.write('My test content'.encode("utf-8"))
+        file_.write('My test content'.encode('utf-8'))
         file_.seek(0)
         media = {'name': 'zinnia_test_file.txt',
                  'type': 'text/plain',

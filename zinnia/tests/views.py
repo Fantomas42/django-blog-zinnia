@@ -20,7 +20,8 @@ from zinnia.models.category import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
-from zinnia.tests.utils import datetime, urlEqual
+from zinnia.tests.utils import datetime
+from zinnia.tests.utils import urlEqual
 from zinnia.flags import get_user_flagger
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_discussion_signals

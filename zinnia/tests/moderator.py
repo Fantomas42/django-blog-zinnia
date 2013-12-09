@@ -107,11 +107,6 @@ class CommentModeratorTestCase(TestCase):
         self.entry.authors.add(contributor)
         moderator.do_email_authors(comment, self.entry, 'request')
         self.assertEqual(len(mail.outbox), 1)
-        #This test, as written, is flawed. It assumes that the database
-        #returns the message's authors in the order they were added,
-        #which is an invalid assumption.
-        #For now, I'm changing the test. An alternative fix would be to add an
-        #order(ing?) attribute in Author.Meta .
         self.assertEqual(
             set(mail.outbox[0].to),
             set(['admin@example.com', 'contrib@example.com']))
@@ -155,7 +150,6 @@ class CommentModeratorTestCase(TestCase):
             site=self.site)
         moderator.do_email_reply(comment, self.entry, 'request')
         self.assertEqual(len(mail.outbox), 2)
-        #This suffers from the same ordering assumption issue
         self.assertEqual(
             set(mail.outbox[1].bcc),
             set(['user_1@example.com', 'user_2@example.com']))
@@ -168,18 +162,12 @@ class CommentModeratorTestCase(TestCase):
         moderator = EntryCommentModerator(Entry)
         moderator.auto_moderate_comments = True
         moderator.spam_checker_backends = ()
-        self.assertEqual(
-            moderator.moderate(comment, self.entry, 'request'),
-            True)
+        self.assertTrue(moderator.moderate(comment, self.entry, 'request'))
         moderator.auto_moderate_comments = False
-        self.assertEqual(
-            moderator.moderate(comment, self.entry, 'request'),
-            False)
+        self.assertFalse(moderator.moderate(comment, self.entry, 'request'))
         moderator.spam_checker_backends = (
             'zinnia.spam_checker.backends.all_is_spam',)
-        self.assertEqual(
-            moderator.moderate(comment, self.entry, 'request'),
-            True)
+        self.assertTrue(moderator.moderate(comment, self.entry, 'request'))
 
     def test_moderate_comment_on_entry_without_author(self):
         self.entry.authors.clear()
@@ -191,9 +179,7 @@ class CommentModeratorTestCase(TestCase):
         moderator.auto_moderate_comments = False
         moderator.spam_checker_backends = (
             'zinnia.spam_checker.backends.all_is_spam',)
-        self.assertEqual(
-            moderator.moderate(comment, self.entry, 'request'),
-            True)
+        self.assertTrue(moderator.moderate(comment, self.entry, 'request'))
 
     def test_integrity_error_on_duplicate_spam_comments(self):
         class AllIsSpamModerator(EntryCommentModerator):
