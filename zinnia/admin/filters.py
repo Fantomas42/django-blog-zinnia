@@ -1,10 +1,9 @@
 """Filters for Zinnia admin"""
-
+from django.db.models import Count
+from django.utils.encoding import smart_text
 from django.contrib.admin import SimpleListFilter
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.db.models import Count
-from django.utils import six
 
 from zinnia.models.author import Author
 from zinnia.models.category import Category
@@ -29,7 +28,7 @@ class RelatedPublishedFilter(SimpleListFilter):
                     '%(item)s (%(count)i entry)',
                     '%(item)s (%(count)i entries)',
                     active_object.number_of_entries) % {
-                    'item': six.text_type(active_object),
+                    'item': smart_text(active_object),
                     'count': active_object.number_of_entries})
 
     def queryset(self, request, queryset):
