@@ -3,7 +3,6 @@ import re
 from functools import wraps
 from datetime import datetime
 
-from django.utils import six
 from django.utils.dateformat import format
 from django.utils.timezone import is_aware
 from django.utils.timezone import localtime
@@ -61,10 +60,10 @@ MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
                                        Crumb(x.name)],
                      'Author': lambda x: [Crumb(_('Authors'),
                                                 reverse('zinnia_author_list')),
-                                          Crumb(six.text_type(x))],
+                                          Crumb(x.__str__())],
                      'Category': lambda x: [Crumb(
                          _('Categories'), reverse('zinnia_category_list'))] +
-                     [Crumb(six.text_type(anc), anc.get_absolute_url())
+                     [Crumb(anc.__str__(), anc.get_absolute_url())
                       for anc in x.get_ancestors()] + [Crumb(x.title)],
                      'Entry': entry_breadcrumbs}
 
