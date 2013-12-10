@@ -1,6 +1,4 @@
 """Template mixins for Zinnia views"""
-from __future__ import unicode_literals
-
 from django.utils import timezone
 from django.core.exceptions import ImproperlyConfigured
 from django.views.generic.base import TemplateResponseMixin

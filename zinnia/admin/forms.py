@@ -1,6 +1,4 @@
 """Forms for Zinnia admin"""
-from __future__ import unicode_literals
-
 from django import forms
 from django.db.models import ManyToOneRel
 from django.db.models import ManyToManyRel

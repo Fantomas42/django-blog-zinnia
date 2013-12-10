@@ -1,6 +1,4 @@
 """Fields for Zinnia admin"""
-from __future__ import unicode_literals
-
 from django import forms
 try:
     from django.utils.encoding import smart_unicode

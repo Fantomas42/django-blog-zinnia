@@ -1,6 +1,4 @@
 """Test cases for Zinnia's admin widgets"""
-from __future__ import unicode_literals
-
 from django.test import TestCase
 
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple

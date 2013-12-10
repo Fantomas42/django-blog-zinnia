@@ -1,6 +1,4 @@
 """Test cases for Zinnia's admin forms"""
-from __future__ import unicode_literals
-
 from django.test import TestCase
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 

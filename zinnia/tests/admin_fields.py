@@ -1,6 +1,4 @@
 """Test cases for Zinnia's admin fields"""
-from __future__ import unicode_literals
-
 from django.test import TestCase
 from django.utils.encoding import smart_text
 
