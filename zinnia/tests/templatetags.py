@@ -232,7 +232,7 @@ class TemplateTagsTestCase(TestCase):
                          'zinnia/tags/similar_entries.html')
 
         params = {'title': 'My second entry',
-                  'content': 'This is the second entry of my tests.',
+                  'content': 'This is the second content of my tests.',
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
                   'slug': 'my-second-entry'}
