@@ -2,6 +2,7 @@
 from datetime import date
 from calendar import HTMLCalendar
 
+from django.utils import timezone
 from django.utils.dates import MONTHS
 from django.utils.dates import WEEKDAYS_ABBR
 from django.utils.formats import get_format
@@ -86,10 +87,12 @@ class ZinniaCalendar(HTMLCalendar):
         new attributes computed for formatting a day, and thead/tfooter"""
         self.current_year = theyear
         self.current_month = themonth
-        self.day_entries = [entries.creation_date.day for entries in
-                            Entry.published.filter(
+        self.day_entries = [
+            timezone.localtime(entries.creation_date, timezone.get_current_timezone()).day
+            for entries in Entry.published.filter(
                                 creation_date__year=theyear,
                                 creation_date__month=themonth)]
+
 
         v = []
         a = v.append
