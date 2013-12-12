@@ -45,8 +45,6 @@ def generate_pingback_content(soup, target, max_length, trunc_char='...'):
     index = content.index(link.string)
 
     if len(content) > max_length:
-        #Assuming integer division was desired (Otherwise
-        #this doesn't make sense)
         middle = max_length // 2
         start = index - middle
         end = index + middle
@@ -79,7 +77,7 @@ def pingback_ping(source, target):
         site = Site.objects.get_current()
         try:
             document = ''.join(map(
-                lambda byte_line: byte_line.decode("utf-8"),
+                lambda byte_line: byte_line.decode('utf-8'),
                 urlopen(source).readlines()))
         except (HTTPError, URLError):
             return SOURCE_DOES_NOT_EXIST

@@ -8,8 +8,9 @@ except ImportError:  # Python 2
     from urlparse import urlsplit
     from xmlrpclib import ServerProxy
 
+from django.utils import six
+from django.utils import timezone
 from django.test import TestCase
-from django.utils import timezone, six
 from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.test.utils import restore_template_loaders
@@ -65,10 +66,6 @@ class PingBackTestCase(TestCase):
              '404.html': '404'})
         # Preparing site
         self.site = Site.objects.get_current()
-        #Hack until I figure out why django's not reloading the site properly.
-        self.old_domain = self.site.domain
-        self.site.domain = 'localhost:8000'
-        self.site.save()
         # Creating tests entries
         self.author = Author.objects.create_user(username='webmaster',
                                                  email='webmaster@example.com')
@@ -89,8 +86,8 @@ class PingBackTestCase(TestCase):
                   ' and other links : %s %s.' % (
                       self.site.domain,
                       self.first_entry.get_absolute_url(),
-                      'http://localhost:8000/error-404/',
-                      'http://example.com/'),
+                      'http://example.com/error-404/',
+                      'http://external/'),
                   'slug': 'my-second-entry',
                   'creation_date': datetime(2010, 1, 1, 12),
                   'status': PUBLISHED}
@@ -99,7 +96,7 @@ class PingBackTestCase(TestCase):
         self.second_entry.categories.add(self.category)
         self.second_entry.authors.add(self.author)
         # Instanciating the server proxy
-        self.server = ServerProxy('http://localhost:8000/xmlrpc/',
+        self.server = ServerProxy('http://example.com/xmlrpc/',
                                   transport=TestTransport())
 
     def tearDown(self):
@@ -107,12 +104,6 @@ class PingBackTestCase(TestCase):
         zinnia.xmlrpc.pingback.urlopen = self.original_urlopen
         shortener_settings.URL_SHORTENER_BACKEND = self.original_shortener
         restore_template_loaders()
-
-        #Remove this as soon as I figure out why django's not reloading
-        #the site properly.
-        self.site = Site.objects.get_current()
-        self.site.domain = self.old_domain
-        self.site.save()
 
     def test_generate_pingback_content(self):
         soup = BeautifulSoup(self.second_entry.content)
@@ -122,7 +113,7 @@ class PingBackTestCase(TestCase):
         self.assertEqual(
             generate_pingback_content(soup, target, 1000),
             'My second content with link to first entry and other links : '
-            'http://localhost:8000/error-404/ http://example.com/.')
+            'http://example.com/error-404/ http://external/.')
         self.assertEqual(
             generate_pingback_content(soup, target, 50),
             '...ond content with link to first entry and other lin...')
@@ -151,7 +142,7 @@ class PingBackTestCase(TestCase):
         self.assertEqual(response, 0)
 
         # Error code 16 : The source URI does not exist.
-        response = self.server.pingback.ping('http://example.com/', target)
+        response = self.server.pingback.ping('http://external/', target)
         self.assertEqual(response, 16)
 
         # Error code 17 : The source URI does not contain a link to
@@ -161,13 +152,13 @@ class PingBackTestCase(TestCase):
 
         # Error code 32 : The target URI does not exist.
         response = self.server.pingback.ping(
-            source, 'http://localhost:8000/error-404/')
+            source, 'http://example.com/error-404/')
         self.assertEqual(response, 32)
-        response = self.server.pingback.ping(source, 'http://example.com/')
+        response = self.server.pingback.ping(source, 'http://external/')
         self.assertEqual(response, 32)
 
         # Error code 33 : The target URI cannot be used as a target.
-        response = self.server.pingback.ping(source, 'http://localhost:8000/')
+        response = self.server.pingback.ping(source, 'http://example.com/')
         self.assertEqual(response, 33)
         self.first_entry.pingback_enabled = False
         self.first_entry.save()
@@ -223,15 +214,15 @@ class PingBackTestCase(TestCase):
             response, 'Pingback from %s to %s registered.' % (source, target))
 
         response = self.server.pingback.extensions.getPingbacks(
-            'http://example.com/')
+            'http://external/')
         self.assertEqual(response, 32)
 
         response = self.server.pingback.extensions.getPingbacks(
-            'http://localhost:8000/error-404/')
+            'http://example.com/error-404/')
         self.assertEqual(response, 32)
 
         response = self.server.pingback.extensions.getPingbacks(
-            'http://localhost:8000/2010/')
+            'http://example.com/2010/')
         self.assertEqual(response, 33)
 
         response = self.server.pingback.extensions.getPingbacks(source)
@@ -239,18 +230,18 @@ class PingBackTestCase(TestCase):
 
         response = self.server.pingback.extensions.getPingbacks(target)
         self.assertEqual(response, [
-            'http://localhost:8000/2010/01/01/my-second-entry/'])
+            'http://example.com/2010/01/01/my-second-entry/'])
 
         comment = comments.get_model().objects.create(
             content_type=ContentType.objects.get_for_model(Entry),
             object_pk=self.first_entry.pk,
             site=self.site, submit_date=timezone.now(),
             comment='Test pingback',
-            user_url='http://example.com/blog/1/',
+            user_url='http://external/blog/1/',
             user_name='Test pingback')
         comment.flags.create(user=self.author, flag=PINGBACK)
 
         response = self.server.pingback.extensions.getPingbacks(target)
         self.assertEqual(response, [
-            'http://localhost:8000/2010/01/01/my-second-entry/',
-            'http://example.com/blog/1/'])
+            'http://example.com/2010/01/01/my-second-entry/',
+            'http://external/blog/1/'])
