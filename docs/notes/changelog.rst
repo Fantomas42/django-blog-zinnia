@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+* Full Python 3.0 support
+* Django 1.5 is no longer supported
+
 0.13
 ----
 
