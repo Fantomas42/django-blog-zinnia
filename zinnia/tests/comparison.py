@@ -11,12 +11,12 @@ class ComparisonTestCase(TestCase):
     """Test cases for comparison tools"""
 
     def test_pearson_score(self):
-        self.assertEquals(pearson_score([42], [42]), 0.0)
-        self.assertEquals(pearson_score([0, 1, 2], [0, 1, 2]), 0.0)
-        self.assertEquals(pearson_score([0, 1, 3], [0, 1, 2]),
-                          0.051316701949486232)
-        self.assertEquals(pearson_score([0, 1, 2], [0, 1, 3]),
-                          0.051316701949486232)
+        self.assertEqual(pearson_score([42], [42]), 1.0)
+        self.assertEqual(pearson_score([0, 1, 2], [0, 1, 2]), 1.0)
+        self.assertEqual(pearson_score([0, 1, 3], [0, 1, 2]),
+                         0.9819805060619656)
+        self.assertEqual(pearson_score([0, 1, 2], [0, 1, 3]),
+                         0.9819805060619656)
 
     def test_clustered_model(self):
         params = {'title': 'My entry 1', 'content': 'My content 1',
@@ -26,11 +26,12 @@ class ComparisonTestCase(TestCase):
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         Entry.objects.create(**params)
         cm = ClusteredModel(Entry.objects.all())
-        self.assertEquals(cm.dataset().values(), ['1', '2'])
+        self.assertEqual(list(cm.dataset().values()), ['1', '2'])
         cm = ClusteredModel(Entry.objects.all(),
                             ['title', 'excerpt', 'content'])
-        self.assertEquals(cm.dataset().values(), ['My entry 1  My content 1',
-                                                  'My entry 2  My content 2'])
+        self.assertEqual(list(cm.dataset().values()),
+                         ['My entry 1  My content 1',
+                          'My entry 2  My content 2'])
 
     def test_vector_builder(self):
         vectors = VectorBuilder(Entry.objects.all(),
@@ -44,7 +45,9 @@ class ComparisonTestCase(TestCase):
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         Entry.objects.create(**params)
         columns, dataset = vectors()
-        self.assertEquals(columns, ['content', 'This', 'my', 'is', '1',
-                                    'second', '2', 'first'])
-        self.assertEquals(dataset.values(), [[1, 1, 1, 1, 1, 0, 0, 1],
-                                             [0, 0, 0, 0, 0, 1, 1, 0]])
+        self.assertEqual(sorted(columns), sorted(
+            ['content', 'This', 'my', 'is', '1',
+             'second', '2', 'first']))
+        self.assertEqual(sorted([sorted(row) for row in dataset.values()]),
+                         sorted([sorted([1, 1, 1, 1, 1, 0, 0, 1]),
+                                 sorted([0, 0, 0, 0, 0, 1, 1, 0])]))

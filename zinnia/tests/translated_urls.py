@@ -11,10 +11,10 @@ class TranslatedURLsTestCase(TestCase):
 
     def test_translated_urls(self):
         deactivate()
-        self.assertEquals(
+        self.assertEqual(
             i18n_url(r'^authors/'), r'^authors/')
         activate('fr')
-        self.assertEquals(
+        self.assertEqual(
             i18n_url(r'^authors/', True), r'^auteurs/')
-        self.assertEquals(
+        self.assertEqual(
             i18n_url(r'^authors/', False), r'^authors/')

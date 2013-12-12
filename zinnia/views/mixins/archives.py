@@ -35,9 +35,10 @@ class PreviousNextPublishedMixin(object):
             filters = {'creation_date__gt': date}
             ordering = 'ASC'
 
-        dates = list(self.get_queryset().filter(
-            **filters).dates('creation_date', period, order=ordering))
+        dates = self.get_queryset().filter(**filters).datetimes(
+            'creation_date', period, order=ordering, tzinfo=timezone.utc)
 
+        dates = list(dates)
         if date in dates:
             dates.remove(date)
 

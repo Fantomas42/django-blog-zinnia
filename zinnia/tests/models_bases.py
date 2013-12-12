@@ -9,7 +9,7 @@ from zinnia.models_bases.entry import AbstractEntry
 class LoadModelClassTestCase(TestCase):
 
     def test_load_model_class(self):
-        self.assertEquals(
+        self.assertEqual(
             load_model_class('zinnia.models_bases.entry.AbstractEntry'),
             AbstractEntry)
         self.assertRaises(ImproperlyConfigured,

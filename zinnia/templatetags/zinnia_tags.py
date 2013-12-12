@@ -158,8 +158,9 @@ def get_similar_entries(context, number=5,
 def get_archives_entries(template='zinnia/tags/archives_entries.html'):
     """Return archives entries"""
     return {'template': template,
-            'archives': Entry.published.dates('creation_date', 'month',
-                                              order='DESC')}
+            'archives': Entry.published.datetimes(
+                'creation_date', 'month',
+                order='DESC', tzinfo=timezone.utc)}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
@@ -167,8 +168,9 @@ def get_archives_entries_tree(
         template='zinnia/tags/archives_entries_tree.html'):
     """Return archives entries as a Tree"""
     return {'template': template,
-            'archives': Entry.published.dates('creation_date', 'day',
-                                              order='ASC')}
+            'archives': Entry.published.datetimes(
+                'creation_date', 'day',
+                order='ASC', tzinfo=timezone.utc)}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -187,9 +189,10 @@ def get_calendar_entries(context, year=None, month=None,
         current_month = timezone.make_aware(
             current_month, timezone.utc)
 
-    dates = list(Entry.published.dates('creation_date', 'month'))
+    dates = list(Entry.published.datetimes('creation_date', 'month',
+                                           tzinfo=timezone.utc))
 
-    if not current_month in dates:
+    if current_month not in dates:
         dates.append(current_month)
         dates.sort()
     index = dates.index(current_month)
@@ -255,10 +258,10 @@ def zinnia_pagination(context, page, begin_pages=3, end_pages=3,
         if key != 'page':
             GET_string += '&%s=%s' % (key, value)
 
-    begin = page.paginator.page_range[:begin_pages]
-    end = page.paginator.page_range[-end_pages:]
-    middle = page.paginator.page_range[max(page.number - before_pages - 1, 0):
-                                       page.number + after_pages]
+    begin = list(page.paginator.page_range[:begin_pages])
+    end = list(page.paginator.page_range[-end_pages:])
+    middle = list(page.paginator.page_range[
+        max(page.number - before_pages - 1, 0):page.number + after_pages])
 
     if set(begin) & set(end):  # [1, 2, 3], [...], [2, 3, 4]
         begin = sorted(set(begin + end))  # [1, 2, 3, 4]
@@ -279,8 +282,12 @@ def zinnia_pagination(context, page, begin_pages=3, end_pages=3,
         end = sorted(set(middle + end))  # [17, 18, 19, 20]
         middle = []
 
-    return {'template': template, 'page': page, 'GET_string': GET_string,
-            'begin': begin, 'middle': middle, 'end': end}
+    return {'template': template,
+            'page': page,
+            'begin': begin,
+            'middle': middle,
+            'end': end,
+            'GET_string': GET_string}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -306,7 +313,7 @@ def get_gravatar(email, size=80, rating='g', default=None,
                           'https': 'https://secure'}
     url = '%s.gravatar.com/avatar/%s' % (
         GRAVATAR_PROTOCOLS[protocol],
-        md5(email.strip().lower()).hexdigest())
+        md5(email.strip().lower().encode('utf-8')).hexdigest())
     options = {'s': size, 'r': rating}
     if default:
         options['d'] = default
@@ -342,7 +349,7 @@ def widont(value, autoescape=None):
     esc = autoescape and conditional_escape or (lambda x: x)
 
     def replace(matchobj):
-        return u'&nbsp;%s' % matchobj.group(1)
+        return '&nbsp;%s' % matchobj.group(1)
 
     value = WIDONT_REGEXP.sub(replace, esc(smart_text(value)))
     return mark_safe(value)

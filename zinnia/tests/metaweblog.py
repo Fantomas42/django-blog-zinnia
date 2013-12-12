@@ -73,20 +73,20 @@ class MetaWeblogTestCase(TestCase):
         self.assertRaises(Fault, authenticate, 'contributor', 'password')
         self.contributor.is_staff = True
         self.contributor.save()
-        self.assertEquals(authenticate('contributor', 'password'),
-                          self.contributor)
+        self.assertEqual(authenticate('contributor', 'password'),
+                         self.contributor)
         self.assertRaises(Fault, authenticate, 'contributor',
                           'password', 'zinnia.change_entry')
-        self.assertEquals(authenticate('webmaster', 'password'),
-                          self.webmaster)
-        self.assertEquals(authenticate('webmaster', 'password',
-                                       'zinnia.change_entry'),
-                          self.webmaster)
+        self.assertEqual(authenticate('webmaster', 'password'),
+                         self.webmaster)
+        self.assertEqual(authenticate('webmaster', 'password',
+                                      'zinnia.change_entry'),
+                         self.webmaster)
 
     def test_get_users_blogs(self):
         self.assertRaises(Fault, self.server.blogger.getUsersBlogs,
                           'apikey', 'contributor', 'password')
-        self.assertEquals(
+        self.assertEqual(
             self.server.blogger.getUsersBlogs(
                 'apikey', 'webmaster', 'password'),
             [{'url': 'http://example.com/',
@@ -99,7 +99,7 @@ class MetaWeblogTestCase(TestCase):
         self.webmaster.first_name = 'John'
         self.webmaster.last_name = 'Doe'
         self.webmaster.save()
-        self.assertEquals(self.server.blogger.getUserInfo(
+        self.assertEqual(self.server.blogger.getUserInfo(
             'apikey', 'webmaster', 'password'),
             {'firstname': 'John', 'lastname': 'Doe',
              'url': 'http://example.com/authors/webmaster/',
@@ -110,7 +110,7 @@ class MetaWeblogTestCase(TestCase):
     def test_get_authors(self):
         self.assertRaises(Fault, self.server.wp.getAuthors,
                           'apikey', 'contributor', 'password')
-        self.assertEquals(
+        self.assertEqual(
             self.server.wp.getAuthors(
                 'apikey', 'webmaster', 'password'),
             [{'user_login': 'webmaster',
@@ -121,7 +121,7 @@ class MetaWeblogTestCase(TestCase):
     def test_get_tags(self):
         self.assertRaises(Fault, self.server.wp.getTags,
                           1, 'contributor', 'password')
-        self.assertEquals(
+        self.assertEqual(
             self.server.wp.getTags('apikey', 'webmaster', 'password'),
             [{'count': 1,
               'html_url': 'http://example.com/tags/test/',
@@ -139,7 +139,7 @@ class MetaWeblogTestCase(TestCase):
     def test_get_categories(self):
         self.assertRaises(Fault, self.server.metaWeblog.getCategories,
                           1, 'contributor', 'password')
-        self.assertEquals(
+        self.assertEqual(
             self.server.metaWeblog.getCategories('apikey',
                                                  'webmaster', 'password'),
             [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
@@ -157,7 +157,7 @@ class MetaWeblogTestCase(TestCase):
         self.categories[1].parent = self.categories[0]
         self.categories[1].description = 'category 2 description'
         self.categories[1].save()
-        self.assertEquals(
+        self.assertEqual(
             self.server.metaWeblog.getCategories('apikey',
                                                  'webmaster', 'password'),
             [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
@@ -181,72 +181,72 @@ class MetaWeblogTestCase(TestCase):
                            'parent_id': self.categories[0].pk}
         self.assertRaises(Fault, self.server.wp.newCategory,
                           1, 'contributor', 'password', category_struct)
-        self.assertEquals(Category.objects.count(), 2)
+        self.assertEqual(Category.objects.count(), 2)
         new_category_id = self.server.wp.newCategory(
             1, 'webmaster', 'password', category_struct)
-        self.assertEquals(Category.objects.count(), 3)
+        self.assertEqual(Category.objects.count(), 3)
         category = Category.objects.get(pk=new_category_id)
-        self.assertEquals(category.title, 'Category 3')
-        self.assertEquals(category.description, 'Category 3 description')
-        self.assertEquals(category.slug, 'category-3')
-        self.assertEquals(category.parent.pk, 1)
+        self.assertEqual(category.title, 'Category 3')
+        self.assertEqual(category.description, 'Category 3 description')
+        self.assertEqual(category.slug, 'category-3')
+        self.assertEqual(category.parent.pk, 1)
 
     def test_get_recent_posts(self):
         self.assertRaises(Fault, self.server.metaWeblog.getRecentPosts,
                           1, 'contributor', 'password', 10)
-        self.assertEquals(len(self.server.metaWeblog.getRecentPosts(
+        self.assertEqual(len(self.server.metaWeblog.getRecentPosts(
             1, 'webmaster', 'password', 10)), 2)
 
     def test_delete_post(self):
         self.assertRaises(Fault, self.server.blogger.deletePost,
                           'apikey', 1, 'contributor', 'password', 'publish')
-        self.assertEquals(Entry.objects.count(), 2)
+        self.assertEqual(Entry.objects.count(), 2)
         self.assertTrue(
             self.server.blogger.deletePost(
                 'apikey', self.entry_1.pk, 'webmaster', 'password', 'publish'))
-        self.assertEquals(Entry.objects.count(), 1)
+        self.assertEqual(Entry.objects.count(), 1)
 
     def test_get_post(self):
         self.assertRaises(Fault, self.server.metaWeblog.getPost,
                           1, 'contributor', 'password')
         post = self.server.metaWeblog.getPost(
             self.entry_1.pk, 'webmaster', 'password')
-        self.assertEquals(post['title'], self.entry_1.title)
-        self.assertEquals(post['description'], '<p>My content 1</p>')
-        self.assertEquals(post['categories'], ['Category 1', 'Category 2'])
+        self.assertEqual(post['title'], self.entry_1.title)
+        self.assertEqual(post['description'], '<p>My content 1</p>')
+        self.assertEqual(post['categories'], ['Category 1', 'Category 2'])
         self.assertTrue('2010-01-01T12:00:00' in post['dateCreated'].value)
-        self.assertEquals(post['link'],
-                          'http://example.com/2010/01/01/my-entry-1/')
-        self.assertEquals(post['permaLink'],
-                          'http://example.com/2010/01/01/my-entry-1/')
-        self.assertEquals(post['postid'], self.entry_1.pk)
-        self.assertEquals(post['userid'], 'webmaster')
-        self.assertEquals(post['mt_excerpt'], '')
-        self.assertEquals(post['mt_allow_comments'], 1)
-        self.assertEquals(post['mt_allow_pings'], 1)
-        self.assertEquals(post['mt_keywords'], self.entry_1.tags)
-        self.assertEquals(post['wp_author'], 'webmaster')
-        self.assertEquals(post['wp_author_id'], self.webmaster.pk)
-        self.assertEquals(post['wp_author_display_name'], 'webmaster')
-        self.assertEquals(post['wp_password'], '')
-        self.assertEquals(post['wp_slug'], self.entry_1.slug)
+        self.assertEqual(post['link'],
+                         'http://example.com/2010/01/01/my-entry-1/')
+        self.assertEqual(post['permaLink'],
+                         'http://example.com/2010/01/01/my-entry-1/')
+        self.assertEqual(post['postid'], self.entry_1.pk)
+        self.assertEqual(post['userid'], 'webmaster')
+        self.assertEqual(post['mt_excerpt'], '')
+        self.assertEqual(post['mt_allow_comments'], 1)
+        self.assertEqual(post['mt_allow_pings'], 1)
+        self.assertEqual(post['mt_keywords'], self.entry_1.tags)
+        self.assertEqual(post['wp_author'], 'webmaster')
+        self.assertEqual(post['wp_author_id'], self.webmaster.pk)
+        self.assertEqual(post['wp_author_display_name'], 'webmaster')
+        self.assertEqual(post['wp_password'], '')
+        self.assertEqual(post['wp_slug'], self.entry_1.slug)
 
     def test_new_post(self):
         post = post_structure(self.entry_2, self.site)
         self.assertRaises(Fault, self.server.metaWeblog.newPost,
                           1, 'contributor', 'password', post, 1)
-        self.assertEquals(Entry.objects.count(), 2)
-        self.assertEquals(Entry.published.count(), 1)
+        self.assertEqual(Entry.objects.count(), 2)
+        self.assertEqual(Entry.published.count(), 1)
         self.server.metaWeblog.newPost(
             1, 'webmaster', 'password', post, 1)
-        self.assertEquals(Entry.objects.count(), 3)
-        self.assertEquals(Entry.published.count(), 2)
+        self.assertEqual(Entry.objects.count(), 3)
+        self.assertEqual(Entry.published.count(), 2)
         del post['dateCreated']
         post['wp_author_id'] = self.contributor.pk
         self.server.metaWeblog.newPost(
             1, 'webmaster', 'password', post, 0)
-        self.assertEquals(Entry.objects.count(), 4)
-        self.assertEquals(Entry.published.count(), 2)
+        self.assertEqual(Entry.objects.count(), 4)
+        self.assertEqual(Entry.published.count(), 2)
 
     def test_edit_post(self):
         post = post_structure(self.entry_2, self.site)
@@ -256,18 +256,18 @@ class MetaWeblogTestCase(TestCase):
             1, 'webmaster', 'password', post, 0)
 
         entry = Entry.objects.get(pk=new_post_id)
-        self.assertEquals(entry.title, self.entry_2.title)
-        self.assertEquals(entry.content, self.entry_2.html_content)
-        self.assertEquals(entry.excerpt, self.entry_2.excerpt)
-        self.assertEquals(entry.slug, self.entry_2.slug)
-        self.assertEquals(entry.status, DRAFT)
-        self.assertEquals(entry.password, self.entry_2.password)
-        self.assertEquals(entry.comment_enabled, True)
-        self.assertEquals(entry.pingback_enabled, True)
-        self.assertEquals(entry.categories.count(), 1)
-        self.assertEquals(entry.authors.count(), 1)
-        self.assertEquals(entry.authors.all()[0], self.webmaster)
-        self.assertEquals(entry.creation_date, self.entry_2.creation_date)
+        self.assertEqual(entry.title, self.entry_2.title)
+        self.assertEqual(entry.content, self.entry_2.html_content)
+        self.assertEqual(entry.excerpt, self.entry_2.excerpt)
+        self.assertEqual(entry.slug, self.entry_2.slug)
+        self.assertEqual(entry.status, DRAFT)
+        self.assertEqual(entry.password, self.entry_2.password)
+        self.assertEqual(entry.comment_enabled, True)
+        self.assertEqual(entry.pingback_enabled, True)
+        self.assertEqual(entry.categories.count(), 1)
+        self.assertEqual(entry.authors.count(), 1)
+        self.assertEqual(entry.authors.all()[0], self.webmaster)
+        self.assertEqual(entry.creation_date, self.entry_2.creation_date)
 
         entry.title = 'Title edited'
         entry.creation_date = datetime(2000, 1, 1)
@@ -282,18 +282,18 @@ class MetaWeblogTestCase(TestCase):
 
         response = self.server.metaWeblog.editPost(
             new_post_id, 'webmaster', 'password', post, 1)
-        self.assertEquals(response, True)
+        self.assertEqual(response, True)
         entry = Entry.objects.get(pk=new_post_id)
-        self.assertEquals(entry.title, post['title'])
-        self.assertEquals(entry.content, post['description'])
-        self.assertEquals(entry.excerpt, post['mt_excerpt'])
-        self.assertEquals(entry.slug, 'slug-edited')
-        self.assertEquals(entry.status, PUBLISHED)
-        self.assertEquals(entry.password, 'password')
-        self.assertEquals(entry.comment_enabled, False)
-        self.assertEquals(entry.pingback_enabled, False)
-        self.assertEquals(entry.categories.count(), 0)
-        self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
+        self.assertEqual(entry.title, post['title'])
+        self.assertEqual(entry.content, post['description'])
+        self.assertEqual(entry.excerpt, post['mt_excerpt'])
+        self.assertEqual(entry.slug, 'slug-edited')
+        self.assertEqual(entry.status, PUBLISHED)
+        self.assertEqual(entry.password, 'password')
+        self.assertEqual(entry.comment_enabled, False)
+        self.assertEqual(entry.pingback_enabled, False)
+        self.assertEqual(entry.categories.count(), 0)
+        self.assertEqual(entry.creation_date, datetime(2000, 1, 1))
 
         del post['dateCreated']
         post['wp_author_id'] = self.contributor.pk
@@ -301,13 +301,13 @@ class MetaWeblogTestCase(TestCase):
         response = self.server.metaWeblog.editPost(
             new_post_id, 'webmaster', 'password', post, 1)
         entry = Entry.objects.get(pk=new_post_id)
-        self.assertEquals(entry.authors.count(), 1)
-        self.assertEquals(entry.authors.all()[0], self.contributor)
-        self.assertEquals(entry.creation_date, datetime(2000, 1, 1))
+        self.assertEqual(entry.authors.count(), 1)
+        self.assertEqual(entry.authors.all()[0], self.contributor)
+        self.assertEqual(entry.creation_date, datetime(2000, 1, 1))
 
     def test_new_media_object(self):
         file_ = TemporaryFile()
-        file_.write('My test content')
+        file_.write('My test content'.encode('utf-8'))
         file_.seek(0)
         media = {'name': 'zinnia_test_file.txt',
                  'type': 'text/plain',

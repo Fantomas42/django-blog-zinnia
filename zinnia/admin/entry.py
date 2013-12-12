@@ -347,21 +347,21 @@ class EntryAdmin(admin.ModelAdmin):
     def autocomplete_tags(self, request):
         """View for tag autocompletion"""
         return TemplateResponse(
-            request, 'admin/zinnia/entry/autocomplete_tags.js',
-            mimetype='application/javascript')
+            request, 'admin/zinnia/entry/wymeditor.js',
+            content_type='application/javascript')
 
     def wymeditor(self, request):
         """View for serving the config of WYMEditor"""
         return TemplateResponse(
             request, 'admin/zinnia/entry/wymeditor.js',
             {'lang': get_language().split('-')[0]},
-            'application/javascript')
+            content_type='application/javascript')
 
     def markitup(self, request):
         """View for serving the config of MarkItUp"""
         return TemplateResponse(
             request, 'admin/zinnia/entry/markitup.js',
-            mimetype='application/javascript')
+            content_type='application/javascript')
 
     @csrf_exempt
     def content_preview(self, request):

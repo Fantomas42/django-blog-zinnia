@@ -18,11 +18,13 @@ def pearson_score(list1, list2):
     prod_sum = sum([list1[i] * list2[i] for i in range(len(list1))])
 
     num = prod_sum - (sum1 * sum2 / len(list1))
-    den = sqrt((sum_sq1 - pow(sum1, 2) / len(list1)) *
-               (sum_sq2 - pow(sum2, 2) / len(list2)))
-    if den == 0:
-        return 0.0
-    return 1.0 - num / den
+    den = sqrt((sum_sq1 - pow(sum1, 2.0) / len(list1)) *
+               (sum_sq2 - pow(sum2, 2.0) / len(list2)))
+
+    if den == 0.0:
+        return 1.0
+
+    return num / den
 
 
 class ClusteredModel(object):

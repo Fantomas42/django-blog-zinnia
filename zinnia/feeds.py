@@ -80,7 +80,7 @@ class EntryFeed(ZinniaFeed):
         """Returns the first author of an entry"""
         if item.authors.count():
             self.item_author = item.authors.all()[0]
-            return self.item_author.__unicode__()
+            return self.item_author.__str__()
 
     def item_author_email(self, item):
         """Returns the first author's email"""
@@ -184,11 +184,11 @@ class AuthorEntries(EntryFeed):
 
     def get_title(self, obj):
         """Title of the feed"""
-        return _('Entries for author %s') % obj.__unicode__()
+        return _('Entries for author %s') % obj.__str__()
 
     def description(self, obj):
         """Description of the feed"""
-        return _('The latest entries by %s') % obj.__unicode__()
+        return _('The latest entries by %s') % obj.__str__()
 
 
 class TagEntries(EntryFeed):

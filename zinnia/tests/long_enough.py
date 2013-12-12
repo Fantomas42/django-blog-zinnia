@@ -33,8 +33,8 @@ class LongEnoughTestCase(TestCase):
             comment='My Comment', user=self.author, is_public=True,
             content_object=self.entry, site=self.site,
             submit_date=timezone.now())
-        self.assertEquals(backend(comment, self.entry, {}), True)
+        self.assertEqual(backend(comment, self.entry, {}), True)
 
         comment.comment = 'Hello I just wanted to thank for great article'
         comment.save()
-        self.assertEquals(backend(comment, self.entry, {}), False)
+        self.assertEqual(backend(comment, self.entry, {}), False)

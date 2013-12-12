@@ -1,6 +1,4 @@
 """Test cases for Zinnia's admin"""
-from __future__ import unicode_literals
-
 from django.test import TestCase
 from django.test import RequestFactory
 from django.utils import timezone
@@ -50,10 +48,10 @@ class BaseAdminTestCase(TestCase):
 
     def check_with_rich_and_poor_urls(self, func, args,
                                       result_rich, result_poor):
-        self.assertEquals(func(*args), result_rich)
+        self.assertEqual(func(*args), result_rich)
         self.urls = self.poor_urls
         self._urlconf_setup()
-        self.assertEquals(func(*args), result_poor)
+        self.assertEqual(func(*args), result_poor)
         self.urls = self.rich_urls
         self._urlconf_setup()
 
@@ -83,16 +81,16 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.request = self.request_factory.get('/')
 
     def test_get_title(self):
-        self.assertEquals(self.admin.get_title(self.entry),
-                          'My title (2 words)')
+        self.assertEqual(self.admin.get_title(self.entry),
+                         'My title (2 words)')
         self.entry.comment_count = 1
         self.entry.save()
-        self.assertEquals(self.admin.get_title(self.entry),
-                          'My title (2 words) (1 reaction)')
+        self.assertEqual(self.admin.get_title(self.entry),
+                         'My title (2 words) (1 reaction)')
         self.entry.pingback_count = 1
         self.entry.save()
-        self.assertEquals(self.admin.get_title(self.entry),
-                          'My title (2 words) (2 reactions)')
+        self.assertEqual(self.admin.get_title(self.entry),
+                         'My title (2 words) (2 reactions)')
 
     def test_get_authors(self):
         self.check_with_rich_and_poor_urls(
@@ -151,7 +149,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
             'zinnia, test')  # Yes, this is not the same order...
 
     def test_get_sites(self):
-        self.assertEquals(self.admin.get_sites(self.entry), '')
+        self.assertEqual(self.admin.get_sites(self.entry), '')
         self.entry.sites.add(Site.objects.get_current())
         self.check_with_rich_and_poor_urls(
             self.admin.get_sites, (self.entry,),
@@ -167,8 +165,8 @@ class EntryAdminTestCase(BaseAdminTestCase):
             '%(url)s</a>' % {'url': self.entry.get_absolute_url()})
 
     def test_get_is_visible(self):
-        self.assertEquals(self.admin.get_is_visible(self.entry),
-                          self.entry.is_visible)
+        self.assertEqual(self.admin.get_is_visible(self.entry),
+                         self.entry.is_visible)
 
     def test_save_model(self):
         user = Author.objects.create_user(
@@ -179,8 +177,8 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.entry.status = PUBLISHED
         self.admin.save_model(self.request, self.entry,
                               form, False)
-        self.assertEquals(len(form.cleaned_data['authors']), 1)
-        self.assertEquals(self.entry.excerpt, self.entry.content)
+        self.assertEqual(len(form.cleaned_data['authors']), 1)
+        self.assertEqual(self.entry.excerpt, self.entry.content)
 
     def test_queryset(self):
         user = Author.objects.create_user(
@@ -194,9 +192,9 @@ class EntryAdminTestCase(BaseAdminTestCase):
         root_entry = Entry.objects.create(**params)
         root_entry.authors.add(root)
         self.request.user = user
-        self.assertEquals(len(self.admin.queryset(self.request)), 1)
+        self.assertEqual(len(self.admin.queryset(self.request)), 1)
         self.request.user = root
-        self.assertEquals(len(self.admin.queryset(self.request)), 2)
+        self.assertEqual(len(self.admin.queryset(self.request)), 2)
 
     def test_formfield_for_manytomany(self):
         user = Author.objects.create_user(
@@ -208,11 +206,11 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.request.user = user
         field = self.admin.formfield_for_manytomany(
             Entry.authors.field, self.request)
-        self.assertEquals(field.queryset.count(), 1)
+        self.assertEqual(field.queryset.count(), 1)
         self.request.user = root
         field = self.admin.formfield_for_manytomany(
             Entry.authors.field, self.request)
-        self.assertEquals(field.queryset.count(), 2)
+        self.assertEqual(field.queryset.count(), 2)
 
     def test_get_readonly_fields(self):
         user = Author.objects.create_user(
@@ -220,11 +218,11 @@ class EntryAdminTestCase(BaseAdminTestCase):
         root = Author.objects.create_superuser(
             'root', 'root@exemple.com', 'toor')
         self.request.user = user
-        self.assertEquals(self.admin.get_readonly_fields(self.request),
-                          ['status'])
+        self.assertEqual(self.admin.get_readonly_fields(self.request),
+                         ['status'])
         self.request.user = root
-        self.assertEquals(self.admin.get_readonly_fields(self.request),
-                          ())
+        self.assertEqual(self.admin.get_readonly_fields(self.request),
+                         ())
 
     def test_get_actions(self):
         original_user_twitter = settings.USE_TWITTER
@@ -236,8 +234,8 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.request.user = user
         settings.USE_TWITTER = True
         settings.PING_DIRECTORIES = True
-        self.assertEquals(
-            self.admin.get_actions(self.request).keys(),
+        self.assertEqual(
+            list(self.admin.get_actions(self.request).keys()),
             ['delete_selected',
              'close_comments',
              'close_pingbacks',
@@ -249,8 +247,8 @@ class EntryAdminTestCase(BaseAdminTestCase):
              'unmark_featured'])
         settings.USE_TWITTER = False
         settings.PING_DIRECTORIES = False
-        self.assertEquals(
-            self.admin.get_actions(self.request).keys(),
+        self.assertEqual(
+            list(self.admin.get_actions(self.request).keys()),
             ['delete_selected',
              'close_comments',
              'close_pingbacks',
@@ -259,8 +257,8 @@ class EntryAdminTestCase(BaseAdminTestCase):
              'mark_featured',
              'unmark_featured'])
         self.request.user = root
-        self.assertEquals(
-            self.admin.get_actions(self.request).keys(),
+        self.assertEqual(
+            list(self.admin.get_actions(self.request).keys()),
             ['delete_selected',
              'make_mine',
              'make_published',
@@ -279,20 +277,20 @@ class EntryAdminTestCase(BaseAdminTestCase):
             'user', 'user@exemple.com')
         self.request.user = user
         self.request._messages = TestMessageBackend()
-        self.assertEquals(user.entries.count(), 0)
+        self.assertEqual(user.entries.count(), 0)
         self.admin.make_mine(self.request, Entry.objects.all())
-        self.assertEquals(user.entries.count(), 1)
-        self.assertEquals(len(self.request._messages.messages), 1)
+        self.assertEqual(user.entries.count(), 1)
+        self.assertEqual(len(self.request._messages.messages), 1)
 
     def test_make_published(self):
         original_ping_directories = settings.PING_DIRECTORIES
         settings.PING_DIRECTORIES = []
         self.request._messages = TestMessageBackend()
         self.entry.sites.add(Site.objects.get_current())
-        self.assertEquals(Entry.published.count(), 0)
+        self.assertEqual(Entry.published.count(), 0)
         self.admin.make_published(self.request, Entry.objects.all())
-        self.assertEquals(Entry.published.count(), 1)
-        self.assertEquals(len(self.request._messages.messages), 1)
+        self.assertEqual(Entry.published.count(), 1)
+        self.assertEqual(len(self.request._messages.messages), 1)
         settings.PING_DIRECTORIES = original_ping_directories
 
     def test_make_hidden(self):
@@ -300,37 +298,37 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.entry.status = PUBLISHED
         self.entry.save()
         self.entry.sites.add(Site.objects.get_current())
-        self.assertEquals(Entry.published.count(), 1)
+        self.assertEqual(Entry.published.count(), 1)
         self.admin.make_hidden(self.request, Entry.objects.all())
-        self.assertEquals(Entry.published.count(), 0)
-        self.assertEquals(len(self.request._messages.messages), 1)
+        self.assertEqual(Entry.published.count(), 0)
+        self.assertEqual(len(self.request._messages.messages), 1)
 
     def test_close_comments(self):
         self.request._messages = TestMessageBackend()
-        self.assertEquals(Entry.objects.filter(
+        self.assertEqual(Entry.objects.filter(
             comment_enabled=True).count(), 1)
         self.admin.close_comments(self.request, Entry.objects.all())
-        self.assertEquals(Entry.objects.filter(
+        self.assertEqual(Entry.objects.filter(
             comment_enabled=True).count(), 0)
-        self.assertEquals(len(self.request._messages.messages), 1)
+        self.assertEqual(len(self.request._messages.messages), 1)
 
     def test_close_pingbacks(self):
         self.request._messages = TestMessageBackend()
-        self.assertEquals(Entry.objects.filter(
+        self.assertEqual(Entry.objects.filter(
             pingback_enabled=True).count(), 1)
         self.admin.close_pingbacks(self.request, Entry.objects.all())
-        self.assertEquals(Entry.objects.filter(
+        self.assertEqual(Entry.objects.filter(
             pingback_enabled=True).count(), 0)
-        self.assertEquals(len(self.request._messages.messages), 1)
+        self.assertEqual(len(self.request._messages.messages), 1)
 
     def test_close_trackbacks(self):
         self.request._messages = TestMessageBackend()
-        self.assertEquals(Entry.objects.filter(
+        self.assertEqual(Entry.objects.filter(
             trackback_enabled=True).count(), 1)
         self.admin.close_trackbacks(self.request, Entry.objects.all())
-        self.assertEquals(Entry.objects.filter(
+        self.assertEqual(Entry.objects.filter(
             trackback_enabled=True).count(), 0)
-        self.assertEquals(len(self.request._messages.messages), 1)
+        self.assertEqual(len(self.request._messages.messages), 1)
 
     def test_put_on_top(self):
         original_ping_directories = settings.PING_DIRECTORIES
@@ -338,52 +336,52 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.request._messages = TestMessageBackend()
         self.entry.creation_date = datetime(2011, 1, 1, 12, 0)
         self.admin.put_on_top(self.request, Entry.objects.all())
-        self.assertEquals(
+        self.assertEqual(
             Entry.objects.get(pk=self.entry.pk).creation_date.date(),
             timezone.now().date())
-        self.assertEquals(len(self.request._messages.messages), 1)
+        self.assertEqual(len(self.request._messages.messages), 1)
         settings.PING_DIRECTORIES = original_ping_directories
 
     def test_mark_unmark_featured(self):
         self.request._messages = TestMessageBackend()
-        self.assertEquals(Entry.objects.filter(
+        self.assertEqual(Entry.objects.filter(
             featured=True).count(), 0)
         self.admin.mark_featured(self.request, Entry.objects.all())
-        self.assertEquals(Entry.objects.filter(featured=True).count(), 1)
-        self.assertEquals(len(self.request._messages.messages), 1)
+        self.assertEqual(Entry.objects.filter(featured=True).count(), 1)
+        self.assertEqual(len(self.request._messages.messages), 1)
         self.admin.unmark_featured(self.request, Entry.objects.all())
-        self.assertEquals(Entry.objects.filter(featured=True).count(), 0)
-        self.assertEquals(len(self.request._messages.messages), 2)
+        self.assertEqual(Entry.objects.filter(featured=True).count(), 0)
+        self.assertEqual(len(self.request._messages.messages), 2)
 
     def test_autocomplete_tags(self):
         template_to_use = 'admin/zinnia/entry/autocomplete_tags.js'
         setup_test_template_loader({template_to_use: ''})
         response = self.admin.autocomplete_tags(self.request)
         self.assertTemplateUsed(response, template_to_use)
-        self.assertEquals(response['Content-Type'], 'application/javascript')
+        self.assertEqual(response['Content-Type'], 'application/javascript')
 
     def test_wymeditor(self):
         template_to_use = 'admin/zinnia/entry/wymeditor.js'
         setup_test_template_loader({template_to_use: ''})
         response = self.admin.wymeditor(self.request)
         self.assertTemplateUsed(response, template_to_use)
-        self.assertEquals(len(response.context_data['lang']), 2)
-        self.assertEquals(response['Content-Type'], 'application/javascript')
+        self.assertEqual(len(response.context_data['lang']), 2)
+        self.assertEqual(response['Content-Type'], 'application/javascript')
 
     def test_markitup(self):
         template_to_use = 'admin/zinnia/entry/markitup.js'
         setup_test_template_loader({template_to_use: ''})
         response = self.admin.markitup(self.request)
         self.assertTemplateUsed(response, template_to_use)
-        self.assertEquals(response['Content-Type'], 'application/javascript')
+        self.assertEqual(response['Content-Type'], 'application/javascript')
 
     def test_content_preview(self):
         template_to_use = 'admin/zinnia/entry/preview.html'
         setup_test_template_loader({template_to_use: ''})
         response = self.admin.content_preview(self.request)
         self.assertTemplateUsed(response, template_to_use)
-        self.assertEquals(response.context_data['preview'], '<p></p>')
-        self.assertEquals(response['Content-Type'], 'text/html; charset=utf-8')
+        self.assertEqual(response.context_data['preview'], '<p></p>')
+        self.assertEqual(response['Content-Type'], 'text/html; charset=utf-8')
 
 
 class CategoryAdminTestCase(BaseAdminTestCase):

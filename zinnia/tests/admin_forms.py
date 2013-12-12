@@ -1,6 +1,4 @@
 """Test cases for Zinnia's admin forms"""
-from __future__ import unicode_literals
-
 from django.test import TestCase
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 
@@ -19,7 +17,7 @@ class EntryAdminFormTestCase(TestCase):
 
     def test_initial_sites(self):
         form = EntryAdminForm()
-        self.assertEquals(
+        self.assertEqual(
             len(form.fields['sites'].initial), 1)
 
 
@@ -39,11 +37,11 @@ class CategoryAdminFormTestCase(TestCase):
                  'slug': category.slug}
         form = CategoryAdminForm(datas, instance=category)
         self.assertFalse(form.is_valid())
-        self.assertEquals(len(form.errors['parent']), 1)
+        self.assertEqual(len(form.errors['parent']), 1)
 
         subcategory = Category.objects.create(
             title='Category 2', slug='cat-2')
-        self.assertEquals(subcategory.parent, None)
+        self.assertEqual(subcategory.parent, None)
 
         datas = {'parent': category.pk,
                  'title': subcategory.title,

@@ -1,6 +1,4 @@
 """Mixins for enabling prefetching in views returning list of entries"""
-from __future__ import unicode_literals
-
 from django.core.exceptions import ImproperlyConfigured
 
 

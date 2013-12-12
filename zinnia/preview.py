@@ -46,7 +46,7 @@ class HTMLPreview(object):
         """
         Method used to render the preview in templates.
         """
-        return self.preview
+        return str(self.preview)
 
     def build_preview(self):
         """

@@ -1,6 +1,4 @@
 """Forms for Zinnia admin"""
-from __future__ import unicode_literals
-
 from django import forms
 from django.db.models import ManyToOneRel
 from django.db.models import ManyToManyRel
@@ -26,7 +24,8 @@ class CategoryAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CategoryAdminForm, self).__init__(*args, **kwargs)
-        rel = ManyToOneRel(Category, 'id')
+        rel = ManyToOneRel(Category._meta.get_field('tree_id'),
+                           Category, 'id')
         self.fields['parent'].widget = RelatedFieldWidgetWrapper(
             self.fields['parent'].widget, rel, self.admin_site)
 
