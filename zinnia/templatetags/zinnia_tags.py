@@ -157,32 +157,20 @@ def get_similar_entries(context, number=5,
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_archives_entries(template='zinnia/tags/archives_entries.html'):
     """Return archives entries"""
-    #In 1.6, datetimes returns the query's datetimes, while in 1.5
-    #and back query.datetimes doesn't exist and query.dates returns the
-    #same thing
-    if hasattr(Entry.published, "datetimes"):
-        archives = Entry.published.datetimes('creation_date', 'month',
-                                             order='DESC',
-                                             tzinfo=timezone.utc)
-    else:
-        archives = Entry.published.dates('creation_date', 'month',
-                                         order='DESC')
     return {'template': template,
-            'archives': archives}
+            'archives': Entry.published.datetimes(
+                'creation_date', 'month',
+                order='DESC', tzinfo=timezone.utc)}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def get_archives_entries_tree(
         template='zinnia/tags/archives_entries_tree.html'):
     """Return archives entries as a Tree"""
-    if hasattr(Entry.published, "datetimes"):
-        archives = Entry.published.datetimes('creation_date', 'day',
-                                             order='ASC', tzinfo=timezone.utc)
-    else:
-        archives = Entry.published.dates('creation_date', 'day',
-                                         order='ASC')
     return {'template': template,
-            'archives': archives}
+            'archives': Entry.published.datetimes(
+                'creation_date', 'day',
+                order='ASC', tzinfo=timezone.utc)}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -201,14 +189,8 @@ def get_calendar_entries(context, year=None, month=None,
         current_month = timezone.make_aware(
             current_month, timezone.utc)
 
-    #Note: I need to make the results of the datetimes access
-    #distinct. ".dates" does this, but datetimes does not. (All it does
-    #is "truncate" them to the kind without guaranteeing uniqueness.)
-    if hasattr(Entry.published, "datetimes"):
-        dates = list(Entry.published.datetimes('creation_date', 'month',
-                                               tzinfo=timezone.utc))
-    else:
-        dates = list(Entry.published.dates('creation_date', 'month'))
+    dates = list(Entry.published.datetimes('creation_date', 'month',
+                                           tzinfo=timezone.utc))
 
     if current_month not in dates:
         dates.append(current_month)
@@ -327,8 +309,7 @@ def get_gravatar(email, size=80, rating='g', default=None,
                           'https': 'https://secure'}
     url = '%s.gravatar.com/avatar/%s' % (
         GRAVATAR_PROTOCOLS[protocol],
-        #TODO: Figure out if assuming utf-8 is acceptable
-        md5(email.strip().lower().encode("utf-8")).hexdigest())
+        md5(email.strip().lower().encode('utf-8')).hexdigest())
     options = {'s': size, 'r': rating}
     if default:
         options['d'] = default
