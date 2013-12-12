@@ -258,32 +258,36 @@ def zinnia_pagination(context, page, begin_pages=3, end_pages=3,
         if key != 'page':
             GET_string += '&%s=%s' % (key, value)
 
-    begin = page.paginator.page_range[:begin_pages]
-    end = page.paginator.page_range[-end_pages:]
-    middle = page.paginator.page_range[max(page.number - before_pages - 1, 0):
-                                       page.number + after_pages]
+    begin = list(page.paginator.page_range[:begin_pages])
+    end = list(page.paginator.page_range[-end_pages:])
+    middle = list(page.paginator.page_range[
+        max(page.number - before_pages - 1, 0):page.number + after_pages])
 
     if set(begin) & set(end):  # [1, 2, 3], [...], [2, 3, 4]
-        begin = sorted(set(list(begin) + list(end)))  # [1, 2, 3, 4]
+        begin = sorted(set(begin + end))  # [1, 2, 3, 4]
         middle, end = [], []
     elif begin[-1] + 1 == end[0]:  # [1, 2, 3], [...], [4, 5, 6]
-        begin = list(begin) + list(end)  # [1, 2, 3, 4, 5, 6]
+        begin += end  # [1, 2, 3, 4, 5, 6]
         middle, end = [], []
     elif set(begin) & set(middle):  # [1, 2, 3], [2, 3, 4], [...]
-        begin = sorted(set(list(begin) + list(middle)))  # [1, 2, 3, 4]
+        begin = sorted(set(begin + middle))  # [1, 2, 3, 4]
         middle = []
     elif begin[-1] + 1 == middle[0]:  # [1, 2, 3], [4, 5, 6], [...]
-        begin = list(begin) + list(middle)  # [1, 2, 3, 4, 5, 6]
+        begin += middle  # [1, 2, 3, 4, 5, 6]
         middle = []
     elif middle[-1] + 1 == end[0]:  # [...], [15, 16, 17], [18, 19, 20]
-        end = list(middle) + list(end)  # [15, 16, 17, 18, 19, 20]
+        end = middle + end  # [15, 16, 17, 18, 19, 20]
         middle = []
     elif set(middle) & set(end):  # [...], [17, 18, 19], [18, 19, 20]
-        end = sorted(set(list(middle) + list(end)))  # [17, 18, 19, 20]
+        end = sorted(set(middle + end))  # [17, 18, 19, 20]
         middle = []
 
-    return {'template': template, 'page': page, 'GET_string': GET_string,
-            'begin': begin, 'middle': middle, 'end': end}
+    return {'template': template,
+            'page': page,
+            'begin': begin,
+            'middle': middle,
+            'end': end,
+            'GET_string': GET_string}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
