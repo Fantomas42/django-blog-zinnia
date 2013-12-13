@@ -90,10 +90,10 @@ class ZinniaCalendar(HTMLCalendar):
                             Entry.published.filter(
                                 creation_date__year=theyear,
                                 creation_date__month=themonth)]
-
         v = []
         a = v.append
-        a('<table class="calendar">')
+        a('<table class="%s">' % (
+            self.day_entries and 'entries-calendar' or 'no-entries-calendar'))
         a('\n')
         a(self.formatmonthname(theyear, themonth, withyear=withyear))
         a('\n')

@@ -1,5 +1,5 @@
 {% load i18n mptt_tags %}
-<ul class="category-root">
+<ul class="{% if not categories %}no-{% endif %}categories-tree category-root">
   {% recursetree categories %}
   <li{% if node.slug == context_category.slug %} class="current">{% else %}>{% endif %}
     <a href="{{ node.get_absolute_url }}" title="{% blocktrans with category=node %}Show all entries in {{ category }}{% endblocktrans %}">{{ node }}</a>

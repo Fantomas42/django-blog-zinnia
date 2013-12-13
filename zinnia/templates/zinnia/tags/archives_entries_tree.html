@@ -1,6 +1,6 @@
 {% load i18n %}
 {% regroup archives by year as year_list %}
-<ul>
+<ul class="{% if not archives %}no-{% endif %}archives-entries-tree">
   {% for year in year_list %}
   <li>
     <a title="{% trans "Archives" %} {{ year.grouper }}" rel="archives"

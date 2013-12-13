@@ -1,5 +1,5 @@
 {% load i18n %}
-<ul class="{% if tags %}tags{% else %}no-tags{% endif %}">
+<ul class="{% if not tags %}no-{% endif %}tag-cloud">
   {% for tag in tags %}
   <li>
     <a href="{% url 'zinnia_tag_detail' tag.name %}"

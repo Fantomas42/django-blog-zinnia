@@ -63,7 +63,7 @@
     }
     // Sidebar
     #sidebar h3 { background-color: $rebase02; }
-    table.calendar {
+    [class*='entries-calendar'] {
       th, tfoot td {
         color: $rebase1;
         background: none repeat scroll 0 0 $rebase02;

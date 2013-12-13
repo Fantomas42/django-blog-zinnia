@@ -1,5 +1,5 @@
 {% load i18n %}
-<ul>
+<ul  class="{% if not linkbacks %}no-{% endif %}linkbacks-recent">
   {% for linkback in linkbacks %}
   <li>
     {% with entry=linkback.content_object %}
