@@ -1,5 +1,5 @@
 {% load i18n %}
-<ul>
+<ul class="{% if not comments %}no-{% endif %}comments-recent">
   {% for comment in comments %}
   <li>
     {% with entry=comment.content_object %}

@@ -1,5 +1,5 @@
 {% load i18n %}
-<ul>
+<ul class="{% if not archives %}no-{% endif %}archives-entries">
   {% for date in archives %}
   <li>
     <a title="{% trans "Archives" %} {{ date|date:"YEAR_MONTH_FORMAT" }}" rel="archives"
