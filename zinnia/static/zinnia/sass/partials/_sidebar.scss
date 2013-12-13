@@ -13,15 +13,11 @@
   }
 }
 
-#widget-tags {
-  ul.tags { @include tag-cloud(1.4em); }
-}
+.tag-cloud { @include tag-cloud(1.4em); }
 
-#widget-populars {
-  a { display: block; }
-}
+.entries-popular a { display: block; }
 
-table.calendar {
+[class*='entries-calendar'] {
   table-layout: fixed;
   caption, td, th {
     padding: 4px 0;
