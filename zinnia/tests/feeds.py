@@ -4,7 +4,6 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 
-from django.utils import six
 from django.test import TestCase
 from django.utils import timezone
 from django.contrib import comments
@@ -105,7 +104,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.item_pubdate(entry), entry.creation_date)
         self.assertEqual(feed.item_categories(entry), [self.category.title])
         self.assertEqual(feed.item_author_name(entry),
-                         six.text_type(self.author))
+                         self.author.__str__())
         self.assertEqual(feed.item_author_email(entry), self.author.email)
         self.assertEqual(
             feed.item_author_link(entry),
@@ -190,10 +189,10 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.link(self.author), '/authors/admin/')
         self.assertEqual(feed.get_title(self.author),
                          'Entries for author %s' %
-                         six.text_type(self.author))
+                         self.author.__str__())
         self.assertEqual(feed.description(self.author),
                          'The latest entries by %s' %
-                         six.text_type(self.author))
+                         self.author.__str__())
 
     def test_tag_entries(self):
         self.create_published_entry()
@@ -248,7 +247,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.item_link(comments[0]),
                          '/comments/cr/%i/1/#c1' % self.entry_ct_id)
         self.assertEqual(feed.item_author_name(comments[0]),
-                         six.text_type(self.author))
+                         self.author.__str__())
         self.assertEqual(feed.item_author_email(comments[0]),
                          'admin@example.com')
         self.assertEqual(feed.item_author_link(comments[0]), '')
