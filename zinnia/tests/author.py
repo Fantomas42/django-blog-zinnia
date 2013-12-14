@@ -1,5 +1,4 @@
 """Test cases for Zinnia's Author"""
-from django.utils import six
 from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.contrib.auth.tests.utils import skipIfCustomUser
@@ -32,11 +31,12 @@ class AuthorTestCase(TestCase):
         self.entry.save()
         self.assertEqual(self.author.entries_published().count(), 1)
 
-    def test_unicode(self):
-        self.assertEqual(six.text_type(self.author),
+    def test_str(self):
+        self.assertEqual(self.author.__str__(),
                          'webmaster')
         self.author.first_name = 'John'
+        self.assertEqual(self.author.__str__(),
+                         'John')
         self.author.last_name = 'Doe'
-        self.author.save()
-        self.assertEqual(six.text_type(self.author),
+        self.assertEqual(self.author.__str__(),
                          'John Doe')
