@@ -566,15 +566,15 @@ class ViewsTestCase(ViewsBaseCase):
             'root', 'root@example.com', 'password')
         response = self.client.get('/quick-entry/')
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(urlEqual(
+        self.assertEqual(
             response['Location'],
-            'http://testserver/accounts/login/?next=/quick-entry/'))
+            'http://testserver/accounts/login/?next=/quick-entry/')
         self.client.login(username='admin', password='password')
         response = self.client.get('/quick-entry/')
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(urlEqual(
+        self.assertEqual(
             response['Location'],
-            'http://testserver/accounts/login/?next=/quick-entry/'))
+            'http://testserver/accounts/login/?next=/quick-entry/')
         self.client.logout()
         self.client.login(username='root', password='password')
         response = self.client.get('/quick-entry/')
@@ -595,9 +595,9 @@ class ViewsTestCase(ViewsBaseCase):
                                      'save_draft': ''})
         entry = Entry.objects.get(title='test')
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(urlEqual(
+        self.assertEqual(
             response['Location'],
-            'http://testserver%s' % entry.get_absolute_url()))
+            'http://testserver%s' % entry.get_absolute_url())
         self.assertEqual(entry.status, DRAFT)
         self.assertEqual(entry.title, 'test')
         self.assertEqual(entry.tags, 'test')

@@ -1,7 +1,11 @@
 """Utils for Zinnia's tests"""
 try:
+    from urllib.parse import parse_qs
+    from urllib.parse import urlparse
     from xmlrpc.client import Transport
 except ImportError:  # Python 2
+    from urlparse import parse_qs
+    from urlparse import urlparse
     from xmlrpclib import Transport
 from datetime import datetime as original_datetime
 
@@ -55,35 +59,12 @@ def is_lib_available(library):
 
 
 def urlEqual(url_1, url_2):
-    uri_1, uri_2 = url_1.split("?")[0], url_2.split("?")[0]
-    if uri_1 == uri_2:
-        try:
-            querystring_1 = url_1.split("?")[1]
-        except IndexError:
-            querystring_1 = ""
-        try:
-            querystring_2 = url_2.split("?")[1]
-        except IndexError:
-            querystring_2 = ""
-        query_1 = {}
-        #This is ugly, I know. Will fix when less braindead
-        for item in map(lambda item: item.split("="),
-                        querystring_1.replace(";", "&").split("&")):
-            if len(item) == 2:
-                key, value = item
-            else:
-                key = item[0]
-                value = None
-            query_1[key] = value
-        query_2 = {}
-        for item in map(lambda item: item.split("="),
-                        querystring_2.replace(";", "&").split("&")):
-            if len(item) == 2:
-                key, value = item
-            else:
-                key = item[0]
-                value = None
-            query_2[key] = value
+    """
+    Compare two URLs with query string where
+    ordering does not matter.
+    """
+    parse_result_1 = urlparse(url_1)
+    parse_result_2 = urlparse(url_2)
 
-        return query_1 == query_2
-    return False
+    return (parse_result_1[:4] == parse_result_2[:4] and
+            parse_qs(parse_result_1[5]) == parse_qs(parse_result_2[5]))
