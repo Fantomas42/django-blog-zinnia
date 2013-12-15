@@ -4,7 +4,8 @@ Contributing to Zinnia
 
 .. highlightlang:: console
 
-Zinnia is an open-source project, so yours contributions are welcomed and needed.
+Zinnia is an open-source project, so yours contributions are welcomed and
+needed.
 
 .. _writing-code:
 
@@ -19,14 +20,16 @@ code ? You are welcome.
 Process
 -------
 
-#. `Fork`_ the code on Github.
-#. Clone a local copy of your fork.
+#. `Fork`_ and clone the repository on Github.
+#. Create a branch based on ``develop``.
 #. Write tests.
 #. Develop your code.
-#. Test your new code.
 #. Update the documentation if needed.
-#. Commit and push your changes.
-#. Open a pull request.
+#. Push your branch and open a pull-request.
+
+Once the pull-request is open, the continuous integration server will build
+your pull-request. If the build is passing, your contribution has great
+chances to be integrated quickly.
 
 .. _code-conventions:
 

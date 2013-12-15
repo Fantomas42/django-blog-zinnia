@@ -57,14 +57,14 @@ Running the buildout
 
 Before running the buildout script we will clone the main development
 repository of django-blog-zinnia, create a virtual Python environment to
-cloisonate the installation of the required librairies,
-then bootstrap the buildout script to finally execute it.
+isolate the installation of the required librairies, then bootstrap the
+buildout script to finally execute it.
 
 Follow these few command to start the development: ::
 
   $ git clone git://github.com/Fantomas42/django-blog-zinnia.git
-  $ virtualenv --no-site-packages django-blog-zinnia
   $ cd django-blog-zinnia
+  $ virtualenv .
   $ source ./bin/activate
   $ pip install -U setuptools
   $ python bootstrap.py
@@ -73,7 +73,7 @@ Follow these few command to start the development: ::
 The buildout script will resolve all the dependencies needed to develop the
 application and install some usefull scripts.
 
-Once the buildout has rune, you are ready to hack the Zinnia project.
+Once the buildout has run, you are ready to hack the Zinnia project.
 
 .. _development-scripts:
 
@@ -90,8 +90,7 @@ To view the code coverage run this command: ::
 
 Execute these commands to check the code conventions: ::
 
-  $ ./bin/pyflakes zinnia
-  $ ./bin/pep8 --count -r --exclude=tests.py,migrations zinnia
+  $ ./bin/flake8 --count -r --exclude=tests.py,migrations zinnia
 
 For building the HTML documentation run this simple command: ::
 
