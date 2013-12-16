@@ -94,8 +94,8 @@ already present. ::
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.i18n',
     'django.core.context_processors.request',
-    'django.core.context_processors.media',
-    'zinnia.context_processors.version',) # Optional
+    'zinnia.context_processors.version',  # Optional
+  )
 
 .. _urls:
 
