@@ -81,12 +81,12 @@ class AuthorListFilterTestCase(BaseListFilterTestCase):
 
         request = self.request_factory.get('/')
         changelist = self.get_changelist(request, Entry, modeladmin)
-        queryset = changelist.get_query_set(request)
+        queryset = changelist.get_queryset(request)
         self.assertEqual(queryset.count(), 2)
 
         request = self.request_factory.get('/', {'author': '2'})
         changelist = self.get_changelist(request, Entry, modeladmin)
-        queryset = changelist.get_query_set(request)
+        queryset = changelist.get_queryset(request)
         self.assertEqual(queryset.count(), 1)
 
         with self.assertNumQueries(1):
@@ -119,12 +119,12 @@ class CategoryListFilterTestCase(BaseListFilterTestCase):
 
         request = self.request_factory.get('/')
         changelist = self.get_changelist(request, Entry, modeladmin)
-        queryset = changelist.get_query_set(request)
+        queryset = changelist.get_queryset(request)
         self.assertEqual(queryset.count(), 2)
 
         request = self.request_factory.get('/', {'category': '2'})
         changelist = self.get_changelist(request, Entry, modeladmin)
-        queryset = changelist.get_query_set(request)
+        queryset = changelist.get_queryset(request)
         self.assertEqual(queryset.count(), 1)
 
         with self.assertNumQueries(1):

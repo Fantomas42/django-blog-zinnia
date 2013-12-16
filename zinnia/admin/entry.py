@@ -171,12 +171,12 @@ class EntryAdmin(admin.ModelAdmin):
         entry.last_update = timezone.now()
         entry.save()
 
-    def queryset(self, request):
+    def get_queryset(self, request):
         """Make special filtering by user permissions"""
         if not request.user.has_perm('zinnia.can_view_all'):
             queryset = request.user.entries.all()
         else:
-            queryset = super(EntryAdmin, self).queryset(request)
+            queryset = super(EntryAdmin, self).get_queryset(request)
         return queryset.prefetch_related('categories', 'authors', 'sites')
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
