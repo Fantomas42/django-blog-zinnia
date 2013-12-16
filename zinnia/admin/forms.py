@@ -8,7 +8,6 @@ from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 
 from mptt.forms import TreeNodeChoiceField
 
-from zinnia.models.entry import Entry
 from zinnia.models.category import Category
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.fields import MPTTModelMultipleChoiceField
@@ -37,10 +36,6 @@ class CategoryAdminForm(forms.ModelForm):
                 _('A category cannot be parent of itself.'))
         return data
 
-    class Meta:
-        """CategoryAdminForm's Meta"""
-        model = Category
-
 
 class EntryAdminForm(forms.ModelForm):
     """Form for Entry's Admin"""
@@ -56,7 +51,3 @@ class EntryAdminForm(forms.ModelForm):
         self.fields['categories'].widget = RelatedFieldWidgetWrapper(
             self.fields['categories'].widget, rel, self.admin_site)
         self.fields['sites'].initial = [Site.objects.get_current()]
-
-    class Meta:
-        """EntryAdminForm's Meta"""
-        model = Entry
