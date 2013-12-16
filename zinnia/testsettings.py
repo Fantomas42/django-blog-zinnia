@@ -15,15 +15,21 @@ SECRET_KEY = 'secret-key'
 
 ROOT_URLCONF = 'zinnia.tests.urls'
 
-LOCALE_PATHS = [os.path.join(os.path.dirname(__file__),
-                             'locale')]
+LOCALE_PATHS = [os.path.join(os.path.dirname(__file__), 'locale')]
 
 PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.SHA1PasswordHasher']
+    'django.contrib.auth.hashers.SHA1PasswordHasher'
+]
+
+MIDDLEWARE_CLASSES = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+]
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.request',
-    'zinnia.context_processors.version']
+    'zinnia.context_processors.version'
+]
 
 TEMPLATE_LOADERS = [
     ['django.template.loaders.cached.Loader', [
@@ -32,15 +38,19 @@ TEMPLATE_LOADERS = [
      ]
 ]
 
-INSTALLED_APPS = ['django.contrib.contenttypes',
-                  'django.contrib.staticfiles',
-                  'django.contrib.comments',
-                  'django.contrib.sessions',
-                  'django.contrib.sites',
-                  'django.contrib.admin',
-                  'django.contrib.auth',
-                  'django_xmlrpc',
-                  'mptt', 'tagging', 'zinnia']
+INSTALLED_APPS = [
+    'django.contrib.contenttypes',
+    'django.contrib.staticfiles',
+    'django.contrib.comments',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django_xmlrpc',
+    'mptt',
+    'tagging',
+    'zinnia'
+]
 
 ZINNIA_PAGINATION = 3
 
