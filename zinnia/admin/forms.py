@@ -40,6 +40,7 @@ class CategoryAdminForm(forms.ModelForm):
     class Meta:
         """CategoryAdminForm's Meta"""
         model = Category
+        fields = forms.ALL_FIELDS
 
 
 class EntryAdminForm(forms.ModelForm):
@@ -60,3 +61,4 @@ class EntryAdminForm(forms.ModelForm):
     class Meta:
         """EntryAdminForm's Meta"""
         model = Entry
+        fields = forms.ALL_FIELDS

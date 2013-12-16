@@ -192,9 +192,9 @@ class EntryAdminTestCase(BaseAdminTestCase):
         root_entry = Entry.objects.create(**params)
         root_entry.authors.add(root)
         self.request.user = user
-        self.assertEqual(len(self.admin.queryset(self.request)), 1)
+        self.assertEqual(len(self.admin.get_queryset(self.request)), 1)
         self.request.user = root
-        self.assertEqual(len(self.admin.queryset(self.request)), 2)
+        self.assertEqual(len(self.admin.get_queryset(self.request)), 2)
 
     def test_formfield_for_manytomany(self):
         user = Author.objects.create_user(

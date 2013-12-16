@@ -32,14 +32,14 @@ def entries_published(queryset):
 class EntryPublishedManager(models.Manager):
     """Manager to retrieve published entries"""
 
-    def get_query_set(self):
+    def get_queryset(self):
         """Return published entries"""
         return entries_published(
-            super(EntryPublishedManager, self).get_query_set())
+            super(EntryPublishedManager, self).get_queryset())
 
     def on_site(self):
         """Return entries published on current site"""
-        return super(EntryPublishedManager, self).get_query_set().filter(
+        return super(EntryPublishedManager, self).get_queryset().filter(
             sites=Site.objects.get_current())
 
     def search(self, pattern):
@@ -66,17 +66,17 @@ class EntryPublishedManager(models.Manager):
             else:
                 lookup |= query_part
 
-        return self.get_query_set().filter(lookup)
+        return self.get_queryset().filter(lookup)
 
 
 class EntryRelatedPublishedManager(models.Manager):
     """Manager to retrieve objects associated with published entries"""
 
-    def get_query_set(self):
+    def get_queryset(self):
         """Return a queryset containing published entries"""
         now = timezone.now()
         return super(
-            EntryRelatedPublishedManager, self).get_query_set().filter(
+            EntryRelatedPublishedManager, self).get_queryset().filter(
             models.Q(entries__start_publication__lte=now) |
             models.Q(entries__start_publication=None),
             models.Q(entries__end_publication__gt=now) |
