@@ -50,7 +50,7 @@ class TemplateTagsTestCase(TestCase):
         params = {'title': 'My entry',
                   'content': 'My content',
                   'tags': 'zinnia, test',
-                  'creation_date': datetime(2010, 1, 1),
+                  'creation_date': datetime(2010, 1, 1, 12),
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
         self.site = Site.objects.get_current()
