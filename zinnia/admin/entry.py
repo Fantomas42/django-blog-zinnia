@@ -347,7 +347,7 @@ class EntryAdmin(admin.ModelAdmin):
     def autocomplete_tags(self, request):
         """View for tag autocompletion"""
         return TemplateResponse(
-            request, 'admin/zinnia/entry/wymeditor.js',
+            request, 'admin/zinnia/entry/autocomplete_tags.js',
             content_type='application/javascript')
 
     def wymeditor(self, request):
