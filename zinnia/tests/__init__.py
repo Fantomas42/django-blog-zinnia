@@ -24,6 +24,7 @@ from zinnia.tests.markups import MarkupFailImportTestCase
 from zinnia.tests.ping import DirectoryPingerTestCase
 from zinnia.tests.ping import ExternalUrlsPingerTestCase
 from zinnia.tests.templatetags import TemplateTagsTestCase
+from zinnia.tests.templatetags import TemplateTagsTimezoneTestCase
 from zinnia.tests.long_enough import LongEnoughTestCase
 from zinnia.tests.spam_checker import SpamCheckerTestCase
 from zinnia.tests.moderator import CommentModeratorTestCase
@@ -74,6 +75,7 @@ def suite():
         SitemapsTestCase,
         ComparisonTestCase,
         TemplateTagsTestCase,
+        TemplateTagsTimezoneTestCase,
         # HTML
         HTMLPreviewTestCase,
         EntryHtmlContentTestCase,
