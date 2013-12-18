@@ -805,51 +805,57 @@ class TemplateTagsTimezoneTestCase(TestCase):
         template = Template('{% load zinnia_tags %}'
                             '{% get_calendar_entries 2014 1 %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
-        self.assertTrue('/2014/01/01/' in template.render(Context()))
         self.create_published_entry_at(datetime(2014, 1, 1, 23, 0))
-        self.assertTrue('/2014/01/02/' not in template.render(Context()))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/01/' in output)
+        self.assertTrue('/2014/01/02/' not in output)
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_calendar_entries_with_timezone(self):
         template = Template('{% load zinnia_tags %}'
                             '{% get_calendar_entries 2014 1 %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
-        self.assertTrue('/2014/01/01/' in template.render(Context()))
         self.create_published_entry_at(datetime(2014, 1, 1, 23, 0))
-        self.assertTrue('/2014/01/02/' in template.render(Context()))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/01/' in output)
+        self.assertTrue('/2014/01/02/' in output)
 
     @override_settings(USE_TZ=False)
     def test_archives_entries_no_timezone(self):
         template = Template('{% load zinnia_tags %}'
                             '{% get_archives_entries %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
-        self.assertTrue('/2014/01/' in template.render(Context()))
         self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
-        self.assertTrue('/2014/02/' not in template.render(Context()))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/' in output)
+        self.assertTrue('/2014/02/' not in output)
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_archives_entries_with_timezone(self):
         template = Template('{% load zinnia_tags %}'
                             '{% get_archives_entries %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
-        self.assertTrue('/2014/01/' in template.render(Context()))
         self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
-        self.assertTrue('/2014/02/' in template.render(Context()))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/' in output)
+        self.assertTrue('/2014/02/' in output)
 
     @override_settings(USE_TZ=False)
     def test_archives_entries_tree_no_timezone(self):
         template = Template('{% load zinnia_tags %}'
                             '{% get_archives_entries_tree %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
-        self.assertTrue('/2014/01/01/' in template.render(Context()))
         self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
-        self.assertTrue('/2014/02/01/' not in template.render(Context()))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/01/' in output)
+        self.assertTrue('/2014/02/01/' not in output)
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_archives_entries_tree_with_timezone(self):
         template = Template('{% load zinnia_tags %}'
                             '{% get_archives_entries_tree %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
-        self.assertTrue('/2014/01/01/' in template.render(Context()))
         self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
-        self.assertTrue('/2014/02/01/' in template.render(Context()))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/01/' in output)
+        self.assertTrue('/2014/02/01/' in output)
