@@ -86,10 +86,11 @@ class ZinniaCalendar(HTMLCalendar):
         new attributes computed for formatting a day, and thead/tfooter"""
         self.current_year = theyear
         self.current_month = themonth
-        self.day_entries = [entries.creation_date.day for entries in
-                            Entry.published.filter(
+        self.day_entries = [date.day
+                            for date in Entry.published.filter(
                                 creation_date__year=theyear,
-                                creation_date__month=themonth)]
+                                creation_date__month=themonth
+                                ).datetimes('creation_date', 'day')]
         v = []
         a = v.append
         a('<table class="%s">' % (

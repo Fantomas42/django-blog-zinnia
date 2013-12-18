@@ -8,6 +8,7 @@ from django.contrib import comments
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
+from django.test.utils import override_settings
 from django.contrib.comments.models import CommentFlag
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
@@ -37,9 +38,9 @@ from zinnia.templatetags.zinnia_tags import get_popular_entries
 from zinnia.templatetags.zinnia_tags import get_similar_entries
 from zinnia.templatetags.zinnia_tags import get_recent_comments
 from zinnia.templatetags.zinnia_tags import get_recent_linkbacks
+from zinnia.templatetags.zinnia_tags import get_featured_entries
 from zinnia.templatetags.zinnia_tags import get_calendar_entries
 from zinnia.templatetags.zinnia_tags import get_archives_entries
-from zinnia.templatetags.zinnia_tags import get_featured_entries
 from zinnia.templatetags.zinnia_tags import get_archives_entries_tree
 
 
@@ -267,8 +268,15 @@ class TemplateTagsTestCase(TestCase):
         with self.assertNumQueries(0):
             context = get_archives_entries('custom_template.html')
         self.assertEqual(len(context['archives']), 2)
-        self.assertEqual(context['archives'][0], datetime(2010, 1, 1))
-        self.assertEqual(context['archives'][1], datetime(2009, 1, 1))
+
+        self.assertEqual(
+            context['archives'][0],
+            timezone.localtime(
+                self.entry.creation_date).replace(day=1, hour=0))
+        self.assertEqual(
+            context['archives'][1],
+            timezone.localtime(
+                second_entry.creation_date).replace(day=1, hour=0))
         self.assertEqual(context['template'], 'custom_template.html')
 
     def test_get_archives_tree(self):
@@ -291,8 +299,14 @@ class TemplateTagsTestCase(TestCase):
         with self.assertNumQueries(0):
             context = get_archives_entries_tree('custom_template.html')
         self.assertEqual(len(context['archives']), 2)
-        self.assertEqual(context['archives'][0], datetime(2009, 1, 10))
-        self.assertEqual(context['archives'][1], datetime(2010, 1, 1))
+        self.assertEqual(
+            context['archives'][0],
+            timezone.localtime(
+                second_entry.creation_date).replace(hour=0))
+        self.assertEqual(
+            context['archives'][1],
+            timezone.localtime(
+                self.entry.creation_date).replace(hour=0))
         self.assertEqual(context['template'], 'custom_template.html')
 
     def test_get_calendar_entries(self):
@@ -307,20 +321,29 @@ class TemplateTagsTestCase(TestCase):
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context,
                                            template='custom_template.html')
-        self.assertEqual(context['previous_month'], datetime(2010, 1, 1))
+        self.assertEqual(
+            context['previous_month'],
+            timezone.localtime(
+                self.entry.creation_date).replace(day=1, hour=0))
         self.assertEqual(context['next_month'], None)
         self.assertEqual(context['template'], 'custom_template.html')
 
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context, 2009, 1)
         self.assertEqual(context['previous_month'], None)
-        self.assertEqual(context['next_month'], datetime(2010, 1, 1))
+        self.assertEqual(
+            context['next_month'],
+            timezone.localtime(
+                self.entry.creation_date).replace(day=1, hour=0))
 
         source_context = Context({'month': datetime(2009, 1, 1)})
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
         self.assertEqual(context['previous_month'], None)
-        self.assertEqual(context['next_month'], datetime(2010, 1, 1))
+        self.assertEqual(
+            context['next_month'],
+            timezone.localtime(
+                self.entry.creation_date).replace(day=1, hour=0))
 
         source_context = Context({'month': datetime(2010, 1, 1)})
         with self.assertNumQueries(2):
@@ -334,17 +357,26 @@ class TemplateTagsTestCase(TestCase):
                   'status': PUBLISHED,
                   'creation_date': datetime(2008, 1, 1),
                   'slug': 'my-second-entry'}
-        second_entry = Entry.objects.create(**params)
-        second_entry.sites.add(self.site)
+        prev_entry = Entry.objects.create(**params)
+        prev_entry.sites.add(self.site)
 
         source_context = Context()
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context, 2009, 1)
-        self.assertEqual(context['previous_month'], datetime(2008, 1, 1))
-        self.assertEqual(context['next_month'], datetime(2010, 1, 1))
+        self.assertEqual(
+            context['previous_month'],
+            timezone.localtime(
+                prev_entry.creation_date).replace(day=1, hour=0))
+        self.assertEqual(
+            context['next_month'],
+            timezone.localtime(
+                self.entry.creation_date).replace(day=1, hour=0))
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
-        self.assertEqual(context['previous_month'], datetime(2010, 1, 1))
+        self.assertEqual(
+            context['previous_month'],
+            timezone.localtime(
+                self.entry.creation_date).replace(day=1, hour=0))
         self.assertEqual(context['next_month'], None)
 
     @skipIfCustomUser
@@ -774,3 +806,84 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['entries_per_month'], 1)
         self.assertEqual(context['comments_per_entry'], 1)
         self.assertEqual(context['linkbacks_per_entry'], 0)
+
+
+class TemplateTagsTimezoneTestCase(TestCase):
+
+    def create_published_entry_at(self, creation_date):
+        params = {'title': 'My entry',
+                  'content': 'My content',
+                  'slug': 'my-entry',
+                  'status': PUBLISHED,
+                  'creation_date': creation_date}
+        entry = Entry.objects.create(**params)
+        entry.sites.add(Site.objects.get_current())
+        return entry
+
+    @override_settings(USE_TZ=False)
+    def test_calendar_entries_no_timezone(self):
+        template = Template('{% load zinnia_tags %}'
+                            '{% get_calendar_entries 2014 1 %}')
+        self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
+        self.create_published_entry_at(datetime(2014, 1, 1, 23, 0))
+        self.create_published_entry_at(datetime(2012, 12, 31, 23, 0))
+        self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/01/' in output)
+        self.assertTrue('/2014/01/02/' not in output)
+        self.assertTrue('/2012/12/' in output)
+        self.assertTrue('/2014/02/' not in output)
+
+    @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
+    def test_calendar_entries_with_timezone(self):
+        template = Template('{% load zinnia_tags %}'
+                            '{% get_calendar_entries 2014 1 %}')
+        self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
+        self.create_published_entry_at(datetime(2014, 1, 1, 23, 0))
+        self.create_published_entry_at(datetime(2012, 12, 31, 23, 0))
+        self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/01/' in output)
+        self.assertTrue('/2014/01/02/' in output)
+        self.assertTrue('/2013/01/' in output)
+        self.assertTrue('/2014/02/' in output)
+
+    @override_settings(USE_TZ=False)
+    def test_archives_entries_no_timezone(self):
+        template = Template('{% load zinnia_tags %}'
+                            '{% get_archives_entries %}')
+        self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
+        self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/' in output)
+        self.assertTrue('/2014/02/' not in output)
+
+    @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
+    def test_archives_entries_with_timezone(self):
+        template = Template('{% load zinnia_tags %}'
+                            '{% get_archives_entries %}')
+        self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
+        self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/' in output)
+        self.assertTrue('/2014/02/' in output)
+
+    @override_settings(USE_TZ=False)
+    def test_archives_entries_tree_no_timezone(self):
+        template = Template('{% load zinnia_tags %}'
+                            '{% get_archives_entries_tree %}')
+        self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
+        self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/01/' in output)
+        self.assertTrue('/2014/02/01/' not in output)
+
+    @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
+    def test_archives_entries_tree_with_timezone(self):
+        template = Template('{% load zinnia_tags %}'
+                            '{% get_archives_entries_tree %}')
+        self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
+        self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
+        output = template.render(Context())
+        self.assertTrue('/2014/01/01/' in output)
+        self.assertTrue('/2014/02/01/' in output)

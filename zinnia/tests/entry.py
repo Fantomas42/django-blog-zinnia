@@ -392,6 +392,8 @@ class EntryAbsoluteUrlTestCase(TestCase):
     def test_get_absolute_url_no_timezone(self):
         self.check_get_absolute_url(datetime(2013, 1, 1, 12, 0),
                                     '/2013/01/01/my-entry/')
+        self.check_get_absolute_url(datetime(2013, 1, 1, 23, 0),
+                                    '/2013/01/01/my-entry/')
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_get_absolute_url_with_timezone(self):

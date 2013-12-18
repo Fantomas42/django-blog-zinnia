@@ -159,8 +159,7 @@ def get_archives_entries(template='zinnia/tags/archives_entries.html'):
     """Return archives entries"""
     return {'template': template,
             'archives': Entry.published.datetimes(
-                'creation_date', 'month',
-                order='DESC', tzinfo=timezone.utc)}
+                'creation_date', 'month', order='DESC')}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
@@ -169,8 +168,7 @@ def get_archives_entries_tree(
     """Return archives entries as a Tree"""
     return {'template': template,
             'archives': Entry.published.datetimes(
-                'creation_date', 'day',
-                order='ASC', tzinfo=timezone.utc)}
+                'creation_date', 'day', order='ASC')}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -187,10 +185,10 @@ def get_calendar_entries(context, year=None, month=None,
     current_month = datetime(year, month, 1)
     if settings.USE_TZ:
         current_month = timezone.make_aware(
-            current_month, timezone.utc)
+            current_month, timezone.get_current_timezone()
+            ).replace(day=1, hour=0)
 
-    dates = list(Entry.published.datetimes('creation_date', 'month',
-                                           tzinfo=timezone.utc))
+    dates = list(Entry.published.datetimes('creation_date', 'month'))
 
     if current_month not in dates:
         dates.append(current_month)
