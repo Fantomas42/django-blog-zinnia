@@ -185,10 +185,10 @@ def get_calendar_entries(context, year=None, month=None,
     current_month = datetime(year, month, 1)
     if settings.USE_TZ:
         current_month = timezone.make_aware(
-            current_month, timezone.utc)
+            current_month, timezone.get_current_timezone()
+            ).replace(day=1, hour=0)
 
-    dates = list(Entry.published.datetimes('creation_date', 'month',
-                                           tzinfo=timezone.utc))
+    dates = list(Entry.published.datetimes('creation_date', 'month'))
 
     if current_month not in dates:
         dates.append(current_month)
