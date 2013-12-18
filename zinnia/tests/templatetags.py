@@ -248,7 +248,6 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(len(context['entries']), 1)
         self.assertEqual(context['template'], 'custom_template.html')
 
-    @override_settings(USE_TZ=True, TIME_ZONE='UTC')
     def test_get_archives_entries(self):
         with self.assertNumQueries(0):
             context = get_archives_entries()
@@ -270,11 +269,16 @@ class TemplateTagsTestCase(TestCase):
             context = get_archives_entries('custom_template.html')
         self.assertEqual(len(context['archives']), 2)
 
-        self.assertEqual(context['archives'][0], datetime(2010, 1, 1))
-        self.assertEqual(context['archives'][1], datetime(2009, 1, 1))
+        self.assertEqual(
+            context['archives'][0],
+            timezone.localtime(
+                self.entry.creation_date).replace(day=1, hour=0))
+        self.assertEqual(
+            context['archives'][1],
+            timezone.localtime(
+                second_entry.creation_date).replace(day=1, hour=0))
         self.assertEqual(context['template'], 'custom_template.html')
 
-    @override_settings(USE_TZ=True, TIME_ZONE='UTC')
     def test_get_archives_tree(self):
         with self.assertNumQueries(0):
             context = get_archives_entries_tree()
@@ -295,8 +299,12 @@ class TemplateTagsTestCase(TestCase):
         with self.assertNumQueries(0):
             context = get_archives_entries_tree('custom_template.html')
         self.assertEqual(len(context['archives']), 2)
-        self.assertEqual(context['archives'][0], datetime(2009, 1, 10))
-        self.assertEqual(context['archives'][1], datetime(2010, 1, 1))
+        self.assertEqual(context['archives'][0],
+                         timezone.localtime(
+                             second_entry.creation_date).replace(hour=0))
+        self.assertEqual(context['archives'][1],
+                         timezone.localtime(
+                             self.entry.creation_date).replace(hour=0))
         self.assertEqual(context['template'], 'custom_template.html')
 
     def test_get_calendar_entries(self):
