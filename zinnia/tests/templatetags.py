@@ -806,9 +806,13 @@ class TemplateTagsTimezoneTestCase(TestCase):
                             '{% get_calendar_entries 2014 1 %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
         self.create_published_entry_at(datetime(2014, 1, 1, 23, 0))
+        self.create_published_entry_at(datetime(2012, 12, 31, 23, 0))
+        self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
         output = template.render(Context())
         self.assertTrue('/2014/01/01/' in output)
         self.assertTrue('/2014/01/02/' not in output)
+        self.assertTrue('/2012/12/' in output)
+        self.assertTrue('/2014/02/' not in output)
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_calendar_entries_with_timezone(self):
@@ -816,9 +820,13 @@ class TemplateTagsTimezoneTestCase(TestCase):
                             '{% get_calendar_entries 2014 1 %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
         self.create_published_entry_at(datetime(2014, 1, 1, 23, 0))
+        self.create_published_entry_at(datetime(2012, 12, 31, 23, 0))
+        self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
         output = template.render(Context())
         self.assertTrue('/2014/01/01/' in output)
         self.assertTrue('/2014/01/02/' in output)
+        self.assertTrue('/2013/01/' in output)
+        self.assertTrue('/2014/02/' in output)
 
     @override_settings(USE_TZ=False)
     def test_archives_entries_no_timezone(self):
