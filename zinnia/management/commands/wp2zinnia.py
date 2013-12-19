@@ -404,7 +404,7 @@ class Command(LabelCommand):
                 'comment': content,
                 'submit_date': submit_date,
                 'ip_address': comment_node.find(
-                    '{%s}comment_author_IP' % WP_NS).text or '',
+                    '{%s}comment_author_IP' % WP_NS).text or None,
                 'is_public': is_public,
                 'is_removed': is_removed, }
             comment = comments.get_model()(**comment_dict)
