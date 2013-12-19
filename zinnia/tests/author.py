@@ -42,7 +42,7 @@ class AuthorTestCase(TestCase):
                          'John Doe')
 
     def test_for_pollution(self):
-        self.assertEqual(get_user_model(), 
+        self.assertEqual(get_user_model(),
                          get_user_model().objects.model)
         self.assertNotEqual(get_user_model().objects.model,
                             Author)

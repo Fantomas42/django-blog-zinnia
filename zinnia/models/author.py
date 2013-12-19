@@ -6,11 +6,13 @@ from django.utils.encoding import python_2_unicode_compatible
 from zinnia.managers import entries_published
 from zinnia.managers import EntryRelatedPublishedManager
 
+
 class AuthorManagers(models.Model):
     published = EntryRelatedPublishedManager()
 
     class Meta:
         abstract = True
+
 
 @python_2_unicode_compatible
 class Author(get_user_model(), AuthorManagers):
