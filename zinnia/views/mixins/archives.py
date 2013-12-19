@@ -26,7 +26,7 @@ class PreviousNextPublishedMixin(object):
     def get_previous_next_published(self, date, period, previous=True):
         """Return the next or previous published date period with Entries"""
         if settings.USE_TZ:
-            date = timezone.make_aware(date, timezone.utc)
+            date = timezone.make_aware(date, timezone.get_current_timezone())
 
         if previous:
             filters = {'creation_date__lt': date}
@@ -36,7 +36,7 @@ class PreviousNextPublishedMixin(object):
             ordering = 'ASC'
 
         dates = self.get_queryset().filter(**filters).datetimes(
-            'creation_date', period, order=ordering, tzinfo=timezone.utc)
+            'creation_date', period, order=ordering)
 
         dates = list(dates)
         if date in dates:
