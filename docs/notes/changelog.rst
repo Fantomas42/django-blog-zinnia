@@ -3,6 +3,8 @@ CHANGELOG
 
 * Full Python 3.0 support
 * Django 1.5 is no longer supported
+* Fix timezone issues in templatetags and archives
+* Database query optimizations in the archives views
 
 0.13
 ----
