@@ -1,4 +1,4 @@
-"""Breadcrumb module for Zinnia templatetags"""
+"""Breadcrumb module for Zinnia"""
 import re
 from functools import wraps
 from datetime import datetime
