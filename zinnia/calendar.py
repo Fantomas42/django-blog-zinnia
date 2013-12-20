@@ -1,4 +1,4 @@
-"""Calendar module for Zinnia templatetags"""
+"""Calendar module for Zinnia"""
 from datetime import date
 from calendar import HTMLCalendar
 
