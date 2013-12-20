@@ -1,4 +1,6 @@
 """Calendar module for Zinnia"""
+from __future__ import absolute_import
+
 from datetime import date
 from calendar import HTMLCalendar
 
@@ -13,7 +15,7 @@ from zinnia.models.entry import Entry
 AMERICAN_TO_EUROPEAN_WEEK_DAYS = [6, 0, 1, 2, 3, 4, 5]
 
 
-class ZinniaCalendar(HTMLCalendar):
+class Calendar(HTMLCalendar):
     """Override of HTMLCalendar"""
 
     def __init__(self):
@@ -35,7 +37,7 @@ class ZinniaCalendar(HTMLCalendar):
                    'class="archives">%d</a></td>' % (
                        self.cssclasses[weekday], archive_day_url, day)
 
-        return super(ZinniaCalendar, self).formatday(day, weekday)
+        return super(Calendar, self).formatday(day, weekday)
 
     def formatweekday(self, day):
         """Return a weekday name translated
@@ -45,8 +47,7 @@ class ZinniaCalendar(HTMLCalendar):
 
     def formatweekheader(self):
         """Return a header for a week as a table row."""
-        return '<thead>%s</thead>' % super(
-            ZinniaCalendar, self).formatweekheader()
+        return '<thead>%s</thead>' % super(Calendar, self).formatweekheader()
 
     def formatfooter(self, previous_month, next_month):
         """Return a footer for a previous and next month."""

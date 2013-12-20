@@ -32,8 +32,8 @@ from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import PROTOCOL
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import pearson_score
-from zinnia.templatetags.zcalendar import ZinniaCalendar
-from zinnia.templatetags.zbreadcrumbs import retrieve_breadcrumbs
+from zinnia.calendar import Calendar
+from zinnia.breadcrumbs import retrieve_breadcrumbs
 
 register = Library()
 
@@ -181,7 +181,7 @@ def get_calendar_entries(context, year=None, month=None,
             timezone.now().date()
         year, month = date_month.timetuple()[:2]
 
-    calendar = ZinniaCalendar()
+    calendar = Calendar()
     current_month = datetime(year, month, 1)
     if settings.USE_TZ:
         current_month = timezone.make_aware(
