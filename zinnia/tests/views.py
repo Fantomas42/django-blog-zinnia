@@ -98,7 +98,7 @@ class ViewsBaseCase(TestCase):
                                  second_expected=None,
                                  friendly_context=None,
                                  queries=None):
-        """Test the numbers of entries in context of an url,"""
+        """Test the numbers of entries in context of an url."""
         if queries is not None:
             with self.assertNumQueries(queries):
                 response = self.client.get(url)
@@ -153,15 +153,23 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertTemplateUsed(response, template_name_today)
 
     def test_zinnia_entry_archive_year(self):
-        self.inhibit_templates('zinnia/archives/2010/entry_archive_year.html')
+        self.inhibit_templates(
+            'zinnia/archives/2010/entry_archive_year.html',
+            'zinnia/entry_archive_year.html')
         response = self.check_publishing_context(
             '/2010/', 2, 3, 'entry_list', 4)
         self.assertTemplateUsed(
             response, 'zinnia/archives/2010/entry_archive_year.html')
+        self.assertEqual(response.context['previous_year'], None)
+        self.assertEqual(response.context['next_year'], None)
+        response = self.client.get('/2011/')
+        self.assertEqual(response.context['previous_year'], date(2010, 1, 1))
+        self.assertEqual(response.context['next_year'], None)
 
     def test_zinnia_entry_archive_week(self):
         self.inhibit_templates(
-            'zinnia/archives/2010/week/00/entry_archive_week.html')
+            'zinnia/archives/2010/week/00/entry_archive_week.html',
+            'zinnia/entry_archive_week.html')
         response = self.check_publishing_context(
             '/2010/week/00/', 1, 2, 'entry_list', 1)
         self.assertTemplateUsed(
@@ -170,6 +178,13 @@ class ViewsTestCase(ViewsBaseCase):
         # are considered to be in week 0.
         self.assertEqual(response.context['week'], date(2009, 12, 28))
         self.assertEqual(response.context['week_end_day'], date(2010, 1, 3))
+        self.assertEqual(response.context['previous_week'], date(2009, 12, 21))
+        self.assertEqual(response.context['next_week'], date(2010, 1, 4))
+        response = self.client.get('/2011/week/01/')
+        self.assertEqual(response.context['week'], date(2011, 1, 3))
+        self.assertEqual(response.context['week_end_day'], date(2011, 1, 9))
+        self.assertEqual(response.context['previous_week'], date(2010, 12, 27))
+        self.assertEqual(response.context['next_week'], date(2011, 1, 10))
 
     def test_zinnia_entry_archive_month(self):
         self.inhibit_templates(
