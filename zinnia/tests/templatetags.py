@@ -62,6 +62,14 @@ class TemplateTagsTestCase(TestCase):
         self.entry.sites.add(self.site)
         self.entry.save()
 
+    def make_local(self, date_time):
+        """
+        Convert aware datetime to local datetime.
+        """
+        if timezone.is_aware(date_time):
+            return timezone.localtime(date_time)
+        return date_time
+
     def test_get_categories(self):
         source_context = Context()
         with self.assertNumQueries(0):
@@ -271,12 +279,10 @@ class TemplateTagsTestCase(TestCase):
 
         self.assertEqual(
             context['archives'][0],
-            timezone.localtime(
-                self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
         self.assertEqual(
             context['archives'][1],
-            timezone.localtime(
-                second_entry.creation_date).replace(day=1, hour=0))
+            self.make_local(second_entry.creation_date).replace(day=1, hour=0))
         self.assertEqual(context['template'], 'custom_template.html')
 
     def test_get_archives_tree(self):
@@ -301,11 +307,11 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(len(context['archives']), 2)
         self.assertEqual(
             context['archives'][0],
-            timezone.localtime(
+            self.make_local(
                 second_entry.creation_date).replace(hour=0))
         self.assertEqual(
             context['archives'][1],
-            timezone.localtime(
+            self.make_local(
                 self.entry.creation_date).replace(hour=0))
         self.assertEqual(context['template'], 'custom_template.html')
 
@@ -323,8 +329,7 @@ class TemplateTagsTestCase(TestCase):
                                            template='custom_template.html')
         self.assertEqual(
             context['previous_month'],
-            timezone.localtime(
-                self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
         self.assertEqual(context['next_month'], None)
         self.assertEqual(context['template'], 'custom_template.html')
 
@@ -333,8 +338,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(
             context['next_month'],
-            timezone.localtime(
-                self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
 
         source_context = Context({'month': datetime(2009, 1, 1)})
         with self.assertNumQueries(2):
@@ -342,8 +346,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(
             context['next_month'],
-            timezone.localtime(
-                self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
 
         source_context = Context({'month': datetime(2010, 1, 1)})
         with self.assertNumQueries(2):
@@ -365,18 +368,15 @@ class TemplateTagsTestCase(TestCase):
             context = get_calendar_entries(source_context, 2009, 1)
         self.assertEqual(
             context['previous_month'],
-            timezone.localtime(
-                prev_entry.creation_date).replace(day=1, hour=0))
+            self.make_local(prev_entry.creation_date).replace(day=1, hour=0))
         self.assertEqual(
             context['next_month'],
-            timezone.localtime(
-                self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
         self.assertEqual(
             context['previous_month'],
-            timezone.localtime(
-                self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
         self.assertEqual(context['next_month'], None)
 
     @skipIfCustomUser
