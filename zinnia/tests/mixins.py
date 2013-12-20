@@ -237,9 +237,9 @@ class MixinTestCase(TestCase):
         class EntryPreviousNextPublished(PreviousNextPublishedMixin):
             def get_queryset(self):
                 return Entry.published.all()
-        epnp = EntryPreviousNextPublished()
 
         test_date = datetime(2009, 12, 1)
+        epnp = EntryPreviousNextPublished()
         self.assertEqual(epnp.get_previous_year(test_date), None)
         self.assertEqual(epnp.get_previous_month(test_date), None)
         self.assertEqual(epnp.get_previous_day(test_date), None)
@@ -248,6 +248,7 @@ class MixinTestCase(TestCase):
         self.assertEqual(epnp.get_next_day(test_date), date(2012, 1, 1))
 
         test_date = datetime(2012, 1, 1)
+        epnp = EntryPreviousNextPublished()
         self.assertEqual(epnp.get_previous_year(test_date), None)
         self.assertEqual(epnp.get_previous_month(test_date), None)
         self.assertEqual(epnp.get_previous_day(test_date), None)
@@ -256,6 +257,7 @@ class MixinTestCase(TestCase):
         self.assertEqual(epnp.get_next_day(test_date), date(2012, 3, 15))
 
         test_date = datetime(2012, 3, 15)
+        epnp = EntryPreviousNextPublished()
         self.assertEqual(epnp.get_previous_year(test_date), None)
         self.assertEqual(epnp.get_previous_month(test_date), date(2012, 1, 1))
         self.assertEqual(epnp.get_previous_day(test_date), date(2012, 1, 1))
@@ -264,6 +266,7 @@ class MixinTestCase(TestCase):
         self.assertEqual(epnp.get_next_day(test_date), date(2013, 6, 2))
 
         test_date = datetime(2013, 6, 2)
+        epnp = EntryPreviousNextPublished()
         self.assertEqual(epnp.get_previous_year(test_date), date(2012, 1, 1))
         self.assertEqual(epnp.get_previous_month(test_date), date(2012, 3, 1))
         self.assertEqual(epnp.get_previous_day(test_date), date(2012, 3, 15))
@@ -272,6 +275,7 @@ class MixinTestCase(TestCase):
         self.assertEqual(epnp.get_next_day(test_date), None)
 
         test_date = datetime(2014, 5, 1)
+        epnp = EntryPreviousNextPublished()
         self.assertEqual(epnp.get_previous_year(test_date), date(2013, 1, 1))
         self.assertEqual(epnp.get_previous_month(test_date), date(2013, 6, 1))
         self.assertEqual(epnp.get_previous_day(test_date), date(2013, 6, 2))

@@ -23,60 +23,62 @@ class PreviousNextPublishedMixin(object):
     """Mixin for correcting the previous/next
     context variable to return dates with published datas"""
 
-    def get_previous_next_published(self, date, period, previous=True):
-        """Return the next or previous published date period with Entries"""
-        if settings.USE_TZ:
-            date = timezone.make_aware(date, timezone.get_current_timezone())
+    def get_previous_next_published(self, date):
+        """
+        Returns a dict of the next and previous date periods
+        with published entries.
+        """
+        previous_next = getattr(self, 'previous_next', None)
 
-        if previous:
-            filters = {'creation_date__lt': date}
-            ordering = 'DESC'
-        else:
-            filters = {'creation_date__gt': date}
-            ordering = 'ASC'
+        if previous_next is None:
+            date_year = datetime(date.year, 1, 1)
+            date_month = datetime(date.year, date.month, 1)
+            date_day = datetime(date.year, date.month, date.day)
+            previous_next = {'year': [None, None],
+                             'month': [None, None],
+                             'day':  [None, None]}
+            dates = self.get_queryset().datetimes(
+                'creation_date', 'day', order='ASC')
+            for d in dates:
+                d_year = datetime(d.year, 1, 1)
+                d_month = datetime(d.year, d.month, 1)
+                d_day = datetime(d.year, d.month, d.day)
+                if d_year < date_year:
+                    previous_next['year'][0] = d_year.date()
+                elif d_year > date_year and not previous_next['year'][1]:
+                    previous_next['year'][1] = d_year.date()
+                if d_month < date_month:
+                    previous_next['month'][0] = d_month.date()
+                elif d_month > date_month and not previous_next['month'][1]:
+                    previous_next['month'][1] = d_month.date()
+                if d_day < date_day:
+                    previous_next['day'][0] = d_day.date()
+                elif d_day > date_day and not previous_next['day'][1]:
+                    previous_next['day'][1] = d_day.date()
 
-        dates = self.get_queryset().filter(**filters).datetimes(
-            'creation_date', period, order=ordering)
-
-        dates = list(dates)
-        if date in dates:
-            dates.remove(date)
-
-        if dates:
-            return dates[0].date()
+            setattr(self, 'previous_next', previous_next)
+        return previous_next
 
     def get_next_year(self, date):
         """Get the next year with published Entries"""
-        return self.get_previous_next_published(
-            datetime(date.year, 1, 1), 'year',
-            previous=False)
+        return self.get_previous_next_published(date)['year'][1]
 
     def get_previous_year(self, date):
         """Get the previous year with published Entries"""
-        return self.get_previous_next_published(
-            datetime(date.year, 1, 1), 'year',
-            previous=True)
+        return self.get_previous_next_published(date)['year'][0]
 
     def get_next_month(self, date):
         """Get the next month with published Entries"""
-        return self.get_previous_next_published(
-            datetime(date.year, date.month, 1), 'month',
-            previous=False)
+        return self.get_previous_next_published(date)['month'][1]
 
     def get_previous_month(self, date):
         """Get the previous month with published Entries"""
-        return self.get_previous_next_published(
-            datetime(date.year, date.month, 1), 'month',
-            previous=True)
+        return self.get_previous_next_published(date)['month'][0]
 
     def get_next_day(self, date):
         """Get the next day with published Entries"""
-        return self.get_previous_next_published(
-            datetime(date.year, date.month, date.day),
-            'day', previous=False)
+        return self.get_previous_next_published(date)['day'][1]
 
     def get_previous_day(self, date):
         """Get the previous day with published Entries"""
-        return self.get_previous_next_published(
-            datetime(date.year, date.month, date.day),
-            'day', previous=True)
+        return self.get_previous_next_published(date)['day'][0]
