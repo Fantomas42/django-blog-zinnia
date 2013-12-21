@@ -352,3 +352,16 @@ Insert a non-breaking space between the last two words of your sentence.
 Usage example: ::
 
   {{ variable|widont }}
+
+.. templatefilter:: week_number
+
+week_number
+===========
+
+Return the Python week number of a date.
+
+.. autofunction:: week_number
+
+Usage example: ::
+
+  {{ date_variable|week_number }}
