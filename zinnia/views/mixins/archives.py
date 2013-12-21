@@ -54,11 +54,13 @@ class PreviousNextPublishedMixin(object):
                     previous_next['month'][1] = d_month.date()
                 if d_day < date_day:
                     previous_next['day'][0] = d_day.date()
-                    previous_next['week'][0] = d_day.date()
+                    previous_next['week'][0] = d_day.date() - timedelta(
+                        days=d_day.weekday())
                 elif d_day > date_day and not previous_next['day'][1]:
                     previous_next['day'][1] = d_day.date()
                 if d_day > date_next_week and not previous_next['week'][1]:
-                    previous_next['week'][1] = d_day.date()
+                    previous_next['week'][1] = d_day.date() - timedelta(
+                        days=d_day.weekday())
 
             setattr(self, 'previous_next', previous_next)
         return previous_next
