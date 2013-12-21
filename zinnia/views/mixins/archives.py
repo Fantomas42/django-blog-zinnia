@@ -2,9 +2,6 @@
 from datetime import datetime
 from datetime import timedelta
 
-from django.conf import settings
-from django.utils import timezone
-
 from zinnia.settings import PAGINATION
 from zinnia.settings import ALLOW_EMPTY
 from zinnia.settings import ALLOW_FUTURE
