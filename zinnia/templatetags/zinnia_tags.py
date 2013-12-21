@@ -353,6 +353,19 @@ def widont(value, autoescape=None):
     return mark_safe(value)
 
 
+@register.filter
+def week_number(date):
+    """
+    Return the Python week number of a date.
+    The django |date:"W" returns incompatible value
+    with the view implementation.
+    """
+    week_number = date.strftime('%W')
+    if int(week_number) < 10:
+        week_number = week_number[-1]
+    return week_number
+
+
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def zinnia_statistics(template='zinnia/tags/statistics.html'):
     """Return statistics on the content of Zinnia"""
