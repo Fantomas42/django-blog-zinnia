@@ -33,7 +33,7 @@ class PreviousNextPublishedMixin(object):
             date_year = datetime(date.year, 1, 1)
             date_month = datetime(date.year, date.month, 1)
             date_day = datetime(date.year, date.month, date.day)
-            date_next_week = date_day + timedelta(days=7)
+            date_next_week = date_day + timedelta(weeks=1)
             previous_next = {'year': [None, None],
                              'week': [None, None],
                              'month': [None, None],
