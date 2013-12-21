@@ -217,11 +217,11 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.context['week'], date(2009, 12, 28))
         self.assertEqual(response.context['week_end_day'], date(2010, 1, 3))
         self.assertEqual(response.context['previous_week'], None)
-        self.assertEqual(response.context['next_week'], date(2010, 6, 1))
+        self.assertEqual(response.context['next_week'], date(2010, 5, 31))
         response = self.client.get('/2011/week/01/')
         self.assertEqual(response.context['week'], date(2011, 1, 3))
         self.assertEqual(response.context['week_end_day'], date(2011, 1, 9))
-        self.assertEqual(response.context['previous_week'], date(2010, 6, 1))
+        self.assertEqual(response.context['previous_week'], date(2010, 5, 31))
         self.assertEqual(response.context['next_week'], None)
 
     @override_settings(USE_TZ=False)
