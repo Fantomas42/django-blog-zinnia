@@ -23,6 +23,7 @@ from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
 from zinnia.templatetags.zinnia_tags import widont
+from zinnia.templatetags.zinnia_tags import week_number
 from zinnia.templatetags.zinnia_tags import get_authors
 from zinnia.templatetags.zinnia_tags import get_gravatar
 from zinnia.templatetags.zinnia_tags import get_tag_cloud
@@ -761,6 +762,10 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(
             widont('A complete string with <markup>', autoescape=True),
             'A complete string with&nbsp;&lt;markup&gt;')
+
+    def test_week_number(self):
+        self.assertEqual(week_number(datetime(2013, 1, 1)), '0')
+        self.assertEqual(week_number(datetime(2013, 12, 21)), '50')
 
     @skipIfCustomUser
     def test_zinnia_statistics(self):
