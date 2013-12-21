@@ -1,7 +1,6 @@
 """Mixins for Zinnia archive views"""
 from datetime import datetime
-from django.conf import settings
-from django.utils import timezone
+from datetime import timedelta
 
 from zinnia.settings import PAGINATION
 from zinnia.settings import ALLOW_EMPTY
@@ -34,7 +33,9 @@ class PreviousNextPublishedMixin(object):
             date_year = datetime(date.year, 1, 1)
             date_month = datetime(date.year, date.month, 1)
             date_day = datetime(date.year, date.month, date.day)
+            date_next_week = date_day + timedelta(days=7)
             previous_next = {'year': [None, None],
+                             'week': [None, None],
                              'month': [None, None],
                              'day':  [None, None]}
             dates = self.get_queryset().datetimes(
@@ -53,8 +54,11 @@ class PreviousNextPublishedMixin(object):
                     previous_next['month'][1] = d_month.date()
                 if d_day < date_day:
                     previous_next['day'][0] = d_day.date()
+                    previous_next['week'][0] = d_day.date()
                 elif d_day > date_day and not previous_next['day'][1]:
                     previous_next['day'][1] = d_day.date()
+                if d_day > date_next_week and not previous_next['week'][1]:
+                    previous_next['week'][1] = d_day.date()
 
             setattr(self, 'previous_next', previous_next)
         return previous_next
@@ -66,6 +70,14 @@ class PreviousNextPublishedMixin(object):
     def get_previous_year(self, date):
         """Get the previous year with published Entries"""
         return self.get_previous_next_published(date)['year'][0]
+
+    def get_next_week(self, date):
+        """Get the next week with published Entries"""
+        return self.get_previous_next_published(date)['week'][1]
+
+    def get_previous_week(self, date):
+        """Get the previous wek with published Entries"""
+        return self.get_previous_next_published(date)['week'][0]
 
     def get_next_month(self, date):
         """Get the next month with published Entries"""

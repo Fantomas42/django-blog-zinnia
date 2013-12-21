@@ -71,7 +71,7 @@ ARCHIVE_REGEXP = re.compile(
     r'.*(?P<year>\d{4})/(?P<month>\d{2})?/(?P<day>\d{2})?.*')
 
 ARCHIVE_WEEK_REGEXP = re.compile(
-    r'.*(?P<year>\d{4})/week/(?P<week>\d{2})?.*')
+    r'.*(?P<year>\d{4})/week/(?P<week>\d+)?.*')
 
 PAGE_REGEXP = re.compile(r'page/(?P<page>\d+).*$')
 
