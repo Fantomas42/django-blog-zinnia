@@ -11,6 +11,22 @@ Zinnia API
     :undoc-members:
     :show-inheritance:
 
+:mod:`breadcrumbs` Module
+-------------------------
+
+.. automodule:: zinnia.breadcrumbs
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`calendar` Module
+----------------------
+
+.. automodule:: zinnia.calendar
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`comparison` Module
 ------------------------
 
@@ -100,7 +116,6 @@ Subpackages
     zinnia.models
     zinnia.models_bases
     zinnia.spam_checker
-    zinnia.templatetags
     zinnia.url_shortener
     zinnia.urls
     zinnia.views
