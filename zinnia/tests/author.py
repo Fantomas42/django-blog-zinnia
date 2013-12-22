@@ -41,8 +41,9 @@ class AuthorTestCase(TestCase):
         self.assertEqual(self.author.__str__(),
                          'John Doe')
 
-    def test_for_pollution(self):
-        self.assertEqual(get_user_model(),
-                         get_user_model().objects.model)
+    def test_manager_pollution(self):
+        """
+        https://github.com/Fantomas42/django-blog-zinnia/pull/307
+        """
         self.assertNotEqual(get_user_model().objects.model,
                             Author)
