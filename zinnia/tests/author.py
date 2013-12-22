@@ -2,7 +2,7 @@
 from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.contrib.auth.tests.utils import skipIfCustomUser
-
+from django.contrib.auth import get_user_model
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -40,3 +40,10 @@ class AuthorTestCase(TestCase):
         self.author.last_name = 'Doe'
         self.assertEqual(self.author.__str__(),
                          'John Doe')
+
+    def test_manager_pollution(self):
+        """
+        https://github.com/Fantomas42/django-blog-zinnia/pull/307
+        """
+        self.assertNotEqual(get_user_model().objects.model,
+                            Author)
