@@ -7,7 +7,11 @@ from zinnia.managers import entries_published
 from zinnia.managers import EntryRelatedPublishedManager
 
 
-class AuthorManagers(models.Model):
+class AuthorPublishedManager(models.Model):
+    """
+    Proxy model manager to avoid overriding of
+    the default User's manager and issue #307.
+    """
     published = EntryRelatedPublishedManager()
 
     class Meta:
@@ -15,7 +19,8 @@ class AuthorManagers(models.Model):
 
 
 @python_2_unicode_compatible
-class Author(get_user_model(), AuthorManagers):
+class Author(get_user_model(),
+             AuthorPublishedManager):
     """
     Proxy model around :class:`django.contrib.auth.models.get_user_model`.
     """
