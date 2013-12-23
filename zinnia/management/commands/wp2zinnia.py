@@ -2,6 +2,7 @@
 import os
 import sys
 import pytz
+
 from datetime import datetime
 from optparse import make_option
 from xml.etree import ElementTree as ET
@@ -260,9 +261,11 @@ class Command(LabelCommand):
         start_publication and creation_date will use the same value,
         wich is always in Wordpress $post->post_date"""
         creation_date = datetime.strptime(
-            item_node.find('{%s}post_date_gmt' % WP_NS).text, '%Y-%m-%d %H:%M:%S')
+            item_node.find('{%s}post_date_gmt' % WP_NS).text,
+            '%Y-%m-%d %H:%M:%S')
         if settings.USE_TZ:
-            creation_date = timezone.make_aware(creation_date, pytz.timezone('GMT'))
+            creation_date = timezone.make_aware(
+                creation_date, pytz.timezone('GMT'))
 
         excerpt = strip_tags(item_node.find(
             '{%sexcerpt/}encoded' % WP_NS).text)
@@ -382,7 +385,8 @@ class Command(LabelCommand):
                 comment_node.find('{%s}comment_date_gmt' % WP_NS).text,
                 '%Y-%m-%d %H:%M:%S')
             if settings.USE_TZ:
-                submit_date = timezone.make_aware(submit_date, pytz.timezone('GMT'))
+                submit_date = timezone.make_aware(submit_date,
+                                                  pytz.timezone('GMT'))
 
             approvation = comment_node.find(
                 '{%s}comment_approved' % WP_NS).text
