@@ -647,6 +647,10 @@ class ViewsTestCase(ViewsBaseCase):
             response.redirect_chain[1],
             ('http://example.com/categories/tests/', 302))
 
+    def test_comment_success_invalid_pk_issue_292(self):
+        self.client.get('/comments/success/?c=blabla.php')
+
+
     def test_quick_entry(self):
         Author.objects.create_superuser(
             'root', 'root@example.com', 'password')
