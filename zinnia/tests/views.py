@@ -648,8 +648,11 @@ class ViewsTestCase(ViewsBaseCase):
             ('http://example.com/categories/tests/', 302))
 
     def test_comment_success_invalid_pk_issue_292(self):
-        self.client.get('/comments/success/?c=blabla.php')
-
+        self.inhibit_templates('comments/zinnia/entry/posted.html')
+        with self.assertNumQueries(0):
+            response = self.client.get('/comments/success/?c=file.php')
+        self.assertTemplateUsed(response, 'comments/zinnia/entry/posted.html')
+        self.assertEqual(response.context['comment'], None)
 
     def test_quick_entry(self):
         Author.objects.create_superuser(
