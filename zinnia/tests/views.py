@@ -188,7 +188,7 @@ class ViewsTestCase(ViewsBaseCase):
             'zinnia/archives/2010/week/00/entry_archive_week.html',
             'zinnia/entry_archive_week.html')
         response = self.check_publishing_context(
-            '/2010/week/00/', 1, 2, 'entry_list', 2)
+            '/2010/week/00/', 1, 2, 'entry_list', 3)
         self.assertTemplateUsed(
             response, 'zinnia/archives/2010/week/00/entry_archive_week.html')
         # All days in a new year preceding the first Monday
@@ -197,11 +197,13 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.context['week_end_day'], date(2010, 1, 3))
         self.assertEqual(response.context['previous_week'], None)
         self.assertEqual(response.context['next_week'], date(2010, 5, 31))
+        self.assertEqual(list(response.context['date_list']), [datetime(2010, 1, 1)])
         response = self.client.get('/2011/week/01/')
         self.assertEqual(response.context['week'], date(2011, 1, 3))
         self.assertEqual(response.context['week_end_day'], date(2011, 1, 9))
         self.assertEqual(response.context['previous_week'], date(2010, 5, 31))
         self.assertEqual(response.context['next_week'], None)
+        self.assertEqual(list(response.context['date_list']), [])
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_zinnia_entry_archive_week_with_timezone(self):
@@ -209,7 +211,7 @@ class ViewsTestCase(ViewsBaseCase):
             'zinnia/archives/2010/week/00/entry_archive_week.html',
             'zinnia/entry_archive_week.html')
         response = self.check_publishing_context(
-            '/2010/week/00/', 1, 2, 'entry_list', 2)
+            '/2010/week/00/', 1, 2, 'entry_list', 3)
         self.assertTemplateUsed(
             response, 'zinnia/archives/2010/week/00/entry_archive_week.html')
         # All days in a new year preceding the first Monday
@@ -218,11 +220,13 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.context['week_end_day'], date(2010, 1, 3))
         self.assertEqual(response.context['previous_week'], None)
         self.assertEqual(response.context['next_week'], date(2010, 5, 31))
+        self.assertEqual(response.context['date_list'][0].date(), datetime(2010, 1, 2).date())
         response = self.client.get('/2011/week/01/')
         self.assertEqual(response.context['week'], date(2011, 1, 3))
         self.assertEqual(response.context['week_end_day'], date(2011, 1, 9))
         self.assertEqual(response.context['previous_week'], date(2010, 5, 31))
         self.assertEqual(response.context['next_week'], None)
+        self.assertEqual(list(response.context['date_list']), [])
 
     @override_settings(USE_TZ=False)
     def test_zinnia_entry_archive_month_no_timezone(self):
@@ -235,9 +239,11 @@ class ViewsTestCase(ViewsBaseCase):
             response, 'zinnia/archives/2010/month/01/entry_archive_month.html')
         self.assertEqual(response.context['previous_month'], None)
         self.assertEqual(response.context['next_month'], date(2010, 5, 1))
+        self.assertEqual(list(response.context['date_list']), [datetime(2010, 1, 1)])
         response = self.client.get('/2010/05/')
         self.assertEqual(response.context['previous_month'], date(2010, 1, 1))
         self.assertEqual(response.context['next_month'], None)
+        self.assertEqual(list(response.context['date_list']), [datetime(2010, 5, 31)])
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_zinnia_entry_archive_month_with_timezone(self):
@@ -250,9 +256,11 @@ class ViewsTestCase(ViewsBaseCase):
             response, 'zinnia/archives/2010/month/01/entry_archive_month.html')
         self.assertEqual(response.context['previous_month'], None)
         self.assertEqual(response.context['next_month'], date(2010, 6, 1))
+        self.assertEqual(response.context['date_list'][0].date(), datetime(2010, 1, 2).date())
         response = self.client.get('/2010/06/')
         self.assertEqual(response.context['previous_month'], date(2010, 1, 1))
         self.assertEqual(response.context['next_month'], None)
+        self.assertEqual(response.context['date_list'][0].date(), datetime(2010, 6, 1).date())
 
     @override_settings(USE_TZ=False)
     def test_zinnia_entry_archive_day_no_timezone(self):

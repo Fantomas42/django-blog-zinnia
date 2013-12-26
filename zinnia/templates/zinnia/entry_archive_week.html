@@ -13,6 +13,16 @@
 {% endblock content-title %}
 
 {% block content-related %}
+{% if date_list %}
+<h2>{% trans "Daily archives" %}</h2>
+<ul>
+  {% for date in date_list %}
+  <li>
+    <a href="{% url 'zinnia_entry_archive_day' date|date:"Y" date|date:"m" date|date:"d" %}" rel="archives">{{ date|date:"DATE_FORMAT" }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
 {% if previous_week %}
 <h3>{% trans "Previous week" %}</h3>
 <p>
