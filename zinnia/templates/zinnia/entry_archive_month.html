@@ -12,6 +12,7 @@
 {% endblock content-title %}
 
 {% block content-related %}
+{% if date_list %}
 <h2>{% trans "Daily archives" %}</h2>
 <ul>
   {% for date in date_list %}
@@ -20,7 +21,7 @@
   </li>
   {% endfor %}
 </ul>
-
+{% endif %}
 {% if previous_month %}
 <h3>{% trans "Previous month" %}</h3>
 <p>
