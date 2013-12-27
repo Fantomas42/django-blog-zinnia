@@ -28,7 +28,7 @@ def month_crumb(creation_date):
     """Crumb for a month"""
     year = creation_date.strftime('%Y')
     month = creation_date.strftime('%m')
-    month_text = format(creation_date, 'b').capitalize()
+    month_text = format(creation_date, 'F').capitalize()
     return Crumb(month_text, reverse('zinnia_entry_archive_month',
                                      args=[year, month]))
 
