@@ -201,6 +201,8 @@ class EntryAdmin(admin.ModelAdmin):
     def get_actions(self, request):
         """Define user actions by permissions"""
         actions = super(EntryAdmin, self).get_actions(request)
+        if not actions:
+            return actions
         if (not request.user.has_perm('zinnia.can_change_author') or
                 not request.user.has_perm('zinnia.can_view_all')):
             del actions['make_mine']
