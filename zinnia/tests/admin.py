@@ -272,6 +272,15 @@ class EntryAdminTestCase(BaseAdminTestCase):
         settings.USE_TWITTER = original_user_twitter
         settings.PING_DIRECTORIES = original_ping_directories
 
+    def test_get_actions_in_popup_mode_issue_291(self):
+        user = Author.objects.create_user(
+            'user', 'user@exemple.com')
+        request = self.request_factory.get('/?_popup=1')
+        request.user = user
+        self.assertEqual(
+            list(self.admin.get_actions(request).keys()),
+            [])
+
     def test_make_mine(self):
         user = Author.objects.create_user(
             'user', 'user@exemple.com')
