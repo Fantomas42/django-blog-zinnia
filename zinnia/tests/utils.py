@@ -35,7 +35,7 @@ class TestTransport(Transport):
         return self.parse_response(res)
 
 
-def test_datetime(*args):
+def omniscient_datetime(*args):
     """
     Generating a datetime aware or naive depending of USE_TZ.
     """
@@ -44,7 +44,7 @@ def test_datetime(*args):
         d = timezone.make_aware(d, timezone.utc)
     return d
 
-datetime = test_datetime
+datetime = omniscient_datetime
 
 
 def is_lib_available(library):
