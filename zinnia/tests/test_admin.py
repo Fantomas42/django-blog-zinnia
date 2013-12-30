@@ -18,6 +18,7 @@ from zinnia.models.category import Category
 from zinnia.tests.utils import datetime
 from zinnia.admin.entry import EntryAdmin
 from zinnia.admin.category import CategoryAdmin
+from zinnia.signals import disconnect_entry_signals
 
 
 class BaseAdminTestCase(TestCase):
@@ -28,6 +29,7 @@ class BaseAdminTestCase(TestCase):
     admin_class = None
 
     def setUp(self):
+        disconnect_entry_signals()
         activate('en')
         self.site = AdminSite()
         self.admin = self.admin_class(

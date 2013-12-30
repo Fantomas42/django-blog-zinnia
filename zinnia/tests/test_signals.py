@@ -7,10 +7,16 @@ from zinnia.managers import PUBLISHED
 from zinnia.signals import disable_for_loaddata
 from zinnia.signals import ping_directories_handler
 from zinnia.signals import ping_external_urls_handler
+from zinnia.signals import disconnect_entry_signals
+from zinnia.signals import disconnect_discussion_signals
 
 
 class SignalsTestCase(TestCase):
     """Test cases for signals"""
+
+    def setUp(self):
+        disconnect_entry_signals()
+        disconnect_discussion_signals()
 
     def test_disable_for_loaddata(self):
         self.top = 0
