@@ -24,6 +24,7 @@ from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
 from zinnia.flags import get_user_flagger
 from zinnia.signals import connect_discussion_signals
+from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 
 
@@ -38,6 +39,8 @@ class ViewsBaseCase(TestCase):
     """
 
     def setUp(self):
+        disconnect_entry_signals()
+        disconnect_discussion_signals()
         self.site = Site.objects.get_current()
         self.author = Author.objects.create_user(username='admin',
                                                  email='admin@example.com',
