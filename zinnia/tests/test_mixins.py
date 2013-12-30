@@ -11,6 +11,7 @@ from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime
+from zinnia.signals import disconnect_entry_signals
 from zinnia.views.mixins.archives import PreviousNextPublishedMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
 from zinnia.views.mixins.prefetch_related import PrefetchRelatedMixin
@@ -23,6 +24,9 @@ from zinnia.views.mixins.templates import \
 
 class MixinTestCase(TestCase):
     """Test cases for zinnia.views.mixins"""
+
+    def setUp(self):
+        disconnect_entry_signals()
 
     def test_callable_queryset_mixin(self):
         instance = CallableQuerysetMixin()

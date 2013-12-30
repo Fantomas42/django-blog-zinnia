@@ -30,6 +30,7 @@ from zinnia.tests.utils import TestTransport
 from zinnia.xmlrpc.pingback import generate_pingback_content
 from zinnia import url_shortener as shortener_settings
 from zinnia.signals import connect_discussion_signals
+from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 
 
@@ -50,6 +51,8 @@ class PingBackTestCase(TestCase):
         raise HTTPError(url, 404, 'unavailable url', {}, None)
 
     def setUp(self):
+        disconnect_entry_signals()
+        disconnect_discussion_signals()
         # Use default URL shortener backend, to avoid networks errors
         self.original_shortener = shortener_settings.URL_SHORTENER_BACKEND
         shortener_settings.URL_SHORTENER_BACKEND = 'zinnia.url_shortener.'\

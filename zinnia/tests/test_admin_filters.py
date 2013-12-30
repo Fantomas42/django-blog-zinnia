@@ -15,6 +15,7 @@ from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.admin.filters import AuthorListFilter
 from zinnia.admin.filters import CategoryListFilter
+from zinnia.signals import disconnect_entry_signals
 
 
 class MiniEntryAuthorAdmin(ModelAdmin):
@@ -30,6 +31,7 @@ class BaseListFilterTestCase(TestCase):
     urls = 'zinnia.tests.urls'
 
     def setUp(self):
+        disconnect_entry_signals()
         activate('en')
         self.request_factory = RequestFactory()
         self.site = Site.objects.get_current()

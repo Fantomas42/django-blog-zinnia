@@ -11,6 +11,7 @@ from zinnia.sitemaps import EntrySitemap
 from zinnia.sitemaps import CategorySitemap
 from zinnia.sitemaps import AuthorSitemap
 from zinnia.sitemaps import TagSitemap
+from zinnia.signals import disconnect_entry_signals
 
 
 @skipIfCustomUser
@@ -19,6 +20,7 @@ class SitemapsTestCase(TestCase):
     urls = 'zinnia.tests.urls'
 
     def setUp(self):
+        disconnect_entry_signals()
         self.site = Site.objects.get_current()
         self.authors = [
             Author.objects.create(username='admin', email='admin@example.com'),

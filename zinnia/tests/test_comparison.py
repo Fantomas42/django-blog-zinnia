@@ -5,10 +5,14 @@ from zinnia.models.entry import Entry
 from zinnia.comparison import pearson_score
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import ClusteredModel
+from zinnia.signals import disconnect_entry_signals
 
 
 class ComparisonTestCase(TestCase):
     """Test cases for comparison tools"""
+
+    def setUp(self):
+        disconnect_entry_signals()
 
     def test_pearson_score(self):
         self.assertEqual(pearson_score([42], [42]), 1.0)
