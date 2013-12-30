@@ -5,11 +5,13 @@ from django.contrib.sites.models import Site
 from zinnia.models.entry import Entry
 from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
+from zinnia.signals import disconnect_entry_signals
 
 
 class CategoryTestCase(TestCase):
 
     def setUp(self):
+        disconnect_entry_signals()
         self.site = Site.objects.get_current()
         self.categories = [Category.objects.create(title='Category 1',
                                                    slug='category-1'),

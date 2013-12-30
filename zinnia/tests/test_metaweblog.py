@@ -24,6 +24,7 @@ from zinnia.tests.utils import datetime
 from zinnia.xmlrpc.metaweblog import authenticate
 from zinnia.xmlrpc.metaweblog import post_structure
 from zinnia.tests.utils import TestTransport
+from zinnia.signals import disconnect_entry_signals
 
 
 @skipIfCustomUser
@@ -32,6 +33,7 @@ class MetaWeblogTestCase(TestCase):
     urls = 'zinnia.tests.urls'
 
     def setUp(self):
+        disconnect_entry_signals()
         # Create data
         self.webmaster = Author.objects.create_superuser(
             username='webmaster',

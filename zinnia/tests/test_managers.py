@@ -12,12 +12,14 @@ from zinnia.tests.utils import datetime
 from zinnia.managers import PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
+from zinnia.signals import disconnect_entry_signals
 
 
 @skipIfCustomUser
 class ManagersTestCase(TestCase):
 
     def setUp(self):
+        disconnect_entry_signals()
         self.sites = [
             Site.objects.get_current(),
             Site.objects.create(domain='http://domain.com',

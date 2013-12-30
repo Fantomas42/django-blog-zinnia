@@ -24,6 +24,7 @@ from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
 from zinnia.flags import get_user_flagger
 from zinnia.signals import connect_discussion_signals
+from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 
 
@@ -38,6 +39,8 @@ class ViewsBaseCase(TestCase):
     """
 
     def setUp(self):
+        disconnect_entry_signals()
+        disconnect_discussion_signals()
         self.site = Site.objects.get_current()
         self.author = Author.objects.create_user(username='admin',
                                                  email='admin@example.com',
@@ -53,6 +56,7 @@ class ViewsBaseCase(TestCase):
         entry.sites.add(self.site)
         entry.categories.add(self.category)
         entry.authors.add(self.author)
+        self.first_entry = entry
 
         params = {'title': 'Test 2',
                   'content': 'Second test entry published',
@@ -64,6 +68,7 @@ class ViewsBaseCase(TestCase):
         entry.sites.add(self.site)
         entry.categories.add(self.category)
         entry.authors.add(self.author)
+        self.second_entry = entry
 
     def tearDown(self):
         """Always try to restore the initial template loaders
@@ -336,19 +341,19 @@ class ViewsTestCase(ViewsBaseCase):
             response = self.client.get('/1/')
         self.assertEqual(response.status_code, 301)
         self.assertEqual(response['Location'],
-                         'http://testserver/2010/01/01/test-1/')
+                         'http://testserver%s' % self.first_entry.get_absolute_url())
 
     def test_zinnia_entry_detail(self):
         self.inhibit_templates('zinnia/_entry_detail.html', '404.html')
         entry = self.create_published_entry()
         entry.sites.clear()
-        response = self.client.get('/2010/01/01/my-test-entry/')
+        response = self.client.get(entry.get_absolute_url())
         self.assertEqual(response.status_code, 404)
         entry.detail_template = '_entry_detail.html'
         entry.save()
         entry.sites.add(Site.objects.get_current())
         with self.assertNumQueries(1):
-            response = self.client.get('/2010/01/01/my-test-entry/')
+            response = self.client.get(entry.get_absolute_url())
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/_entry_detail.html')
 
@@ -359,9 +364,9 @@ class ViewsTestCase(ViewsBaseCase):
         entry.login_required = True
         entry.save()
         with self.assertNumQueries(1):
-            response = self.client.get('/2010/01/01/my-test-entry/')
+            response = self.client.get(entry.get_absolute_url())
         self.assertTemplateUsed(response, 'zinnia/login.html')
-        response = self.client.post('/2010/01/01/my-test-entry/',
+        response = self.client.post(entry.get_absolute_url(),
                                     {'username': 'admin',
                                      'password': 'password'})
         self.assertEqual(response.status_code, 200)
@@ -374,16 +379,16 @@ class ViewsTestCase(ViewsBaseCase):
         entry.password = 'password'
         entry.save()
         with self.assertNumQueries(1):
-            response = self.client.get('/2010/01/01/my-test-entry/')
+            response = self.client.get(entry.get_absolute_url())
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEqual(response.context['error'], False)
         with self.assertNumQueries(1):
-            response = self.client.post('/2010/01/01/my-test-entry/',
+            response = self.client.post(entry.get_absolute_url(),
                                         {'entry_password': 'bad_password'})
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEqual(response.context['error'], True)
         with self.assertNumQueries(7):
-            response = self.client.post('/2010/01/01/my-test-entry/',
+            response = self.client.post(entry.get_absolute_url(),
                                         {'entry_password': 'password'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/entry_detail.html')
@@ -398,17 +403,17 @@ class ViewsTestCase(ViewsBaseCase):
         entry.login_required = True
         entry.save()
         with self.assertNumQueries(1):
-            response = self.client.get('/2010/01/01/my-test-entry/')
+            response = self.client.get(entry.get_absolute_url())
         self.assertTemplateUsed(response, 'zinnia/login.html')
         with self.assertNumQueries(12):
-            response = self.client.post('/2010/01/01/my-test-entry/',
+            response = self.client.post(entry.get_absolute_url(),
                                         {'username': 'admin',
                                          'password': 'password'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEqual(response.context['error'], False)
         with self.assertNumQueries(7):
-            response = self.client.post('/2010/01/01/my-test-entry/',
+            response = self.client.post(entry.get_absolute_url(),
                                         {'entry_password': 'password'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/entry_detail.html')
@@ -425,8 +430,7 @@ class ViewsTestCase(ViewsBaseCase):
             '/categories/', 1,
             friendly_context='category_list',
             queries=0)
-        entry = Entry.objects.all()[0]
-        entry.categories.add(Category.objects.create(
+        self.first_entry.categories.add(Category.objects.create(
             title='New category', slug='new-category'))
         self.check_publishing_context('/categories/', 2)
 
@@ -468,8 +472,7 @@ class ViewsTestCase(ViewsBaseCase):
         user = Author.objects.create(username='new-user',
                                      email='new_user@example.com')
         self.check_publishing_context('/authors/', 1)
-        entry = Entry.objects.all()[0]
-        entry.authors.add(user)
+        self.first_entry.authors.add(user)
         self.check_publishing_context('/authors/', 2)
 
     def test_zinnia_author_detail(self):
@@ -507,9 +510,8 @@ class ViewsTestCase(ViewsBaseCase):
             '/tags/', 1,
             friendly_context='tag_list',
             queries=1)
-        entry = Entry.objects.all()[0]
-        entry.tags = 'tests, tag'
-        entry.save()
+        self.first_entry.tags = 'tests, tag'
+        self.first_entry.save()
         self.check_publishing_context('/tags/', 2)
 
     def test_zinnia_tag_detail(self):
@@ -580,17 +582,16 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.status_code, 404)
         self.assertEqual(
             self.client.post('/trackback/1/').status_code, 301)
-        entry = Entry.objects.get(slug='test-1')
-        entry.trackback_enabled = False
-        entry.save()
-        self.assertEqual(entry.trackback_count, 0)
+        self.first_entry.trackback_enabled = False
+        self.first_entry.save()
+        self.assertEqual(self.first_entry.trackback_count, 0)
         response = self.client.post('/trackback/1/',
                                     {'url': 'http://example.com'})
         self.assertEqual(response['Content-Type'], 'text/xml')
         self.assertEqual(response.context['error'],
                          'Trackback is not enabled for Test 1')
-        entry.trackback_enabled = True
-        entry.save()
+        self.first_entry.trackback_enabled = True
+        self.first_entry.save()
         connect_discussion_signals()
         get_user_flagger()  # Memoize user flagger for stable query number
         if comments.get_comment_app_name() == comments.DEFAULT_COMMENTS_APP:
@@ -605,7 +606,7 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response['Content-Type'], 'text/xml')
         self.assertEqual('error' in response.context, False)
         disconnect_discussion_signals()
-        entry = Entry.objects.get(pk=entry.pk)
+        entry = Entry.objects.get(pk=self.first_entry.pk)
         self.assertEqual(entry.trackback_count, 1)
         response = self.client.post('/trackback/1/',
                                     {'url': 'http://example.com'})
@@ -614,8 +615,7 @@ class ViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_trackback_on_entry_without_author(self):
         self.inhibit_templates('zinnia/entry_trackback.xml')
-        entry = Entry.objects.get(slug='test-1')
-        entry.authors.clear()
+        self.first_entry.authors.clear()
         response = self.client.post('/trackback/1/',
                                     {'url': 'http://example.com'})
         self.assertEqual(response['Content-Type'], 'text/xml')

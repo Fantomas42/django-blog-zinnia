@@ -7,12 +7,14 @@ from django.contrib.auth import get_user_model
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
+from zinnia.signals import disconnect_entry_signals
 
 
 @skipIfCustomUser
 class AuthorTestCase(TestCase):
 
     def setUp(self):
+        disconnect_entry_signals()
         self.site = Site.objects.get_current()
         self.author = Author.objects.create_user(
             'webmaster', 'webmaster@example.com')

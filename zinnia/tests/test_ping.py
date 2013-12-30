@@ -14,6 +14,7 @@ from zinnia.models.entry import Entry
 from zinnia.ping import URLRessources
 from zinnia.ping import DirectoryPinger
 from zinnia.ping import ExternalUrlsPinger
+from zinnia.signals import disconnect_entry_signals
 
 
 class NoThreadMixin(object):
@@ -31,7 +32,9 @@ class NoThreadExternalUrlsPinger(NoThreadMixin, ExternalUrlsPinger):
 
 class DirectoryPingerTestCase(TestCase):
     """Test cases for DirectoryPinger"""
+
     def setUp(self):
+        disconnect_entry_signals()
         params = {'title': 'My entry',
                   'content': 'My content',
                   'tags': 'zinnia, test',
@@ -59,6 +62,7 @@ class ExternalUrlsPingerTestCase(TestCase):
     """Test cases for ExternalUrlsPinger"""
 
     def setUp(self):
+        disconnect_entry_signals()
         params = {'title': 'My entry',
                   'content': 'My content',
                   'tags': 'zinnia, test',

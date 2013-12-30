@@ -9,6 +9,8 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
 from zinnia.spam_checker.backends.long_enough import backend
+from zinnia.signals import disconnect_entry_signals
+from zinnia.signals import disconnect_discussion_signals
 
 
 @skipIfCustomUser
@@ -16,6 +18,8 @@ class LongEnoughTestCase(TestCase):
     """Test cases for zinnia.spam_checker.long_enough"""
 
     def setUp(self):
+        disconnect_entry_signals()
+        disconnect_discussion_signals()
         self.site = Site.objects.get_current()
         self.author = Author.objects.create(username='admin',
                                             email='admin@example.com')

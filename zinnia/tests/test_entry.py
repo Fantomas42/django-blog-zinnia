@@ -21,11 +21,15 @@ from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import is_lib_available
 from zinnia import url_shortener as shortener_settings
+from zinnia.signals import disconnect_entry_signals
+from zinnia.signals import disconnect_discussion_signals
 
 
 class EntryTestCase(TestCase):
 
     def setUp(self):
+        disconnect_entry_signals()
+        disconnect_discussion_signals()
         params = {'title': 'My entry',
                   'content': 'My content',
                   'slug': 'my-entry'}

@@ -40,6 +40,8 @@ from zinnia.feeds import EntryComments
 from zinnia.feeds import EntryPingbacks
 from zinnia.feeds import EntryTrackbacks
 from zinnia.feeds import LatestDiscussions
+from zinnia.signals import disconnect_entry_signals
+from zinnia.signals import disconnect_discussion_signals
 
 
 @skipIfCustomUser
@@ -48,6 +50,8 @@ class FeedsTestCase(TestCase):
     urls = 'zinnia.tests.urls'
 
     def setUp(self):
+        disconnect_entry_signals()
+        disconnect_discussion_signals()
         activate('en')
         self.site = Site.objects.get_current()
         self.author = Author.objects.create(username='admin',

@@ -17,6 +17,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.moderator import EntryCommentModerator
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.signals import disconnect_entry_signals
 
 
 @skipIfCustomUser
@@ -24,6 +25,8 @@ class CommentModeratorTestCase(TestCase):
     """Test cases for the moderator"""
 
     def setUp(self):
+        disconnect_entry_signals()
+        disconnect_discussion_signals()
         setup_test_template_loader(
             {'comments/comment_authors_email.txt': '',
              'comments/comment_notification_email.txt': '',

@@ -22,6 +22,8 @@ from zinnia.managers import PUBLISHED
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
+from zinnia.signals import disconnect_entry_signals
+from zinnia.signals import disconnect_discussion_signals
 from zinnia.templatetags.zinnia_tags import widont
 from zinnia.templatetags.zinnia_tags import week_number
 from zinnia.templatetags.zinnia_tags import get_authors
@@ -49,6 +51,8 @@ class TemplateTagsTestCase(TestCase):
     """Test cases for Template tags"""
 
     def setUp(self):
+        disconnect_entry_signals()
+        disconnect_discussion_signals()
         params = {'title': 'My entry',
                   'content': 'My content',
                   'tags': 'zinnia, test',
