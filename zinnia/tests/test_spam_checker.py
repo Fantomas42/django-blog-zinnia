@@ -20,7 +20,8 @@ class SpamCheckerTestCase(TestCase):
 
         with warnings.catch_warnings(record=True) as w:
             self.assertEqual(
-                get_spam_checker('zinnia.tests.custom_spam_checker'), None)
+                get_spam_checker(
+                    'zinnia.tests.implementations.custom_spam_checker'), None)
             self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
             self.assertEqual(
                 str(w[-1].message),

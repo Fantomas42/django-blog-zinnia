@@ -17,7 +17,7 @@ from zinnia.signals import disconnect_entry_signals
 @skipIfCustomUser
 class SitemapsTestCase(TestCase):
     """Test cases for Sitemaps classes provided"""
-    urls = 'zinnia.tests.urls'
+    urls = 'zinnia.tests.implementations.urls.default'
 
     def setUp(self):
         disconnect_entry_signals()

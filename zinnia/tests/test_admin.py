@@ -22,8 +22,8 @@ from zinnia.signals import disconnect_entry_signals
 
 
 class BaseAdminTestCase(TestCase):
-    rich_urls = 'zinnia.tests.urls'
-    poor_urls = 'zinnia.tests.poor_urls'
+    rich_urls = 'zinnia.tests.implementations.urls.default'
+    poor_urls = 'zinnia.tests.implementations.urls.poor'
     urls = rich_urls
     model_class = None
     admin_class = None
