@@ -136,7 +136,7 @@ class ViewsTestCase(ViewsBaseCase):
     for reproducing and correcting issue :
     http://github.com/Fantomas42/django-blog-zinnia/issues#issue/3
     """
-    urls = 'zinnia.tests.urls'
+    urls = 'zinnia.tests.implementations.urls.default'
 
     @override_settings(USE_TZ=False)
     def test_zinnia_entry_archive_index_no_timezone(self):
@@ -340,8 +340,9 @@ class ViewsTestCase(ViewsBaseCase):
         with self.assertNumQueries(1):
             response = self.client.get('/1/')
         self.assertEqual(response.status_code, 301)
-        self.assertEqual(response['Location'],
-                         'http://testserver%s' % self.first_entry.get_absolute_url())
+        self.assertEqual(
+            response['Location'],
+            'http://testserver%s' % self.first_entry.get_absolute_url())
 
     def test_zinnia_entry_detail(self):
         self.inhibit_templates('zinnia/_entry_detail.html', '404.html')
@@ -733,7 +734,7 @@ class CustomDetailViewsTestCase(ViewsBaseCase):
     tags_detail and categories_detail views to be called with a custom
     template_name keyword argument and an extra_context.
     """
-    urls = 'zinnia.tests.custom_views_detail_urls'
+    urls = 'zinnia.tests.implementations.urls.custom_detail_views'
 
     def setUp(self):
         """We don't need to generate the full template

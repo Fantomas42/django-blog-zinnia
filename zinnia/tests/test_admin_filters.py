@@ -28,7 +28,7 @@ class MiniEntryCategoryAdmin(ModelAdmin):
 
 class BaseListFilterTestCase(TestCase):
     """Base TestCase for testing Filters"""
-    urls = 'zinnia.tests.urls'
+    urls = 'zinnia.tests.implementations.urls.default'
 
     def setUp(self):
         disconnect_entry_signals()

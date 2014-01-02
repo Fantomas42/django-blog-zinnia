@@ -30,7 +30,7 @@ from zinnia.signals import disconnect_entry_signals
 @skipIfCustomUser
 class MetaWeblogTestCase(TestCase):
     """Test cases for MetaWeblog"""
-    urls = 'zinnia.tests.urls'
+    urls = 'zinnia.tests.implementations.urls.default'
 
     def setUp(self):
         disconnect_entry_signals()

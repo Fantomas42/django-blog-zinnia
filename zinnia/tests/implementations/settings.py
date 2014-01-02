@@ -13,7 +13,7 @@ STATIC_URL = '/static/'
 
 SECRET_KEY = 'secret-key'
 
-ROOT_URLCONF = 'zinnia.tests.urls'
+ROOT_URLCONF = 'zinnia.tests.implementions.urls.default'
 
 LOCALE_PATHS = [os.path.join(os.path.dirname(__file__), 'locale')]
 

@@ -26,7 +26,8 @@ class URLShortenerTestCase(TestCase):
                 str(w[-1].message),
                 'mymodule.myclass backend cannot be imported')
 
-        us_settings.URL_SHORTENER_BACKEND = 'zinnia.tests.custom_url_shortener'
+        us_settings.URL_SHORTENER_BACKEND = ('zinnia.tests.implementations.'
+                                             'custom_url_shortener')
         with warnings.catch_warnings(record=True) as w:
             self.assertEqual(get_url_shortener(), default_backend)
             self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
