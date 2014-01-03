@@ -19,6 +19,7 @@ from django.utils import timezone
 from zinnia.models.entry import Entry
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
+from zinnia.settings import MARKUP_LANGUAGE
 
 
 class QuickEntryForm(forms.ModelForm):
@@ -44,9 +45,11 @@ class QuickEntry(View):
         return redirect('admin:zinnia_entry_add')
 
     def post(self, request, *args, **kwargs):
-        """Handle the datas for posting a quick entry,
+        """
+        Handle the datas for posting a quick entry,
         and redirect to the admin in case of error or
-        to the entry's page in case of success"""
+        to the entry's page in case of success.
+        """
         data = {
             'title': request.POST.get('title'),
             'slug': slugify(request.POST.get('title')),
@@ -61,16 +64,26 @@ class QuickEntry(View):
             'tags': request.POST.get('tags')}
         form = QuickEntryForm(data)
         if form.is_valid():
-            form.instance.content = linebreaks(form.cleaned_data['content'])
+            form.instance.content = self.htmlize(form.cleaned_data['content'])
             entry = form.save()
             return redirect(entry)
 
         data = {'title': smart_str(request.POST.get('title', '')),
-                'content': smart_str(linebreaks(request.POST.get(
-                    'content', ''))),
+                'content': smart_str(self.htmlize(
+                    request.POST.get('content', ''))),
                 'tags': smart_str(request.POST.get('tags', '')),
                 'slug': slugify(request.POST.get('title', '')),
                 'authors': request.user.pk,
                 'sites': Site.objects.get_current().pk}
         return redirect('%s?%s' % (reverse('admin:zinnia_entry_add'),
                                    urlencode(data)))
+
+    def htmlize(self, content):
+        """
+        Convert to HTML the content if the MARKUP_LANGUAGE
+        is set to HTML to optimize the rendering and avoid
+        ugly effect in WYMEditor.
+        """
+        if MARKUP_LANGUAGE == 'html':
+            return linebreaks(content)
+        return content
