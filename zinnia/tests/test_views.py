@@ -17,7 +17,7 @@ from django.contrib.auth.tests.utils import skipIfCustomUser
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
-from zinnia.models_bases import entry as entry_conf
+from zinnia.views import quick_entry
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
@@ -729,8 +729,8 @@ class ViewsTestCase(ViewsBaseCase):
             '&authors=2&slug='))
 
     def test_quick_entry_markup_language_issue_270(self):
-        original_markup_language = entry_conf.MARKUP_LANGUAGE
-        entry_conf.MARKUP_LANGUAGE = 'restructuredtext'
+        original_markup_language = quick_entry.MARKUP_LANGUAGE
+        quick_entry.MARKUP_LANGUAGE = 'restructuredtext'
         Author.objects.create_superuser(
             'root', 'root@example.com', 'password')
         self.client.login(username='root', password='password')
@@ -747,10 +747,7 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEquals(
             entry.content,
             'Hello *World* !')
-        self.assertEquals(
-            entry.html_content,
-            '<p>Hello <em>World</em> !</p>')
-        entry_conf.MARKUP_LANGUAGE = original_markup_language
+        quick_entry.MARKUP_LANGUAGE = original_markup_language
 
 
 class CustomDetailViewsTestCase(ViewsBaseCase):
