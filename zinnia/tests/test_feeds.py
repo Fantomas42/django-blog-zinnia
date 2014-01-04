@@ -20,6 +20,7 @@ from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from tagging.models import Tag
 
+from zinnia.managers import HIDDEN
 from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -260,6 +261,14 @@ class FeedsTestCase(TestCase):
         self.assertEqual(
             feed.description(entry),
             'The latest discussions for the entry %s' % entry.title)
+
+    def test_feed_for_hidden_entry_issue_277(self):
+        entry = self.create_published_entry()
+        entry.status = HIDDEN
+        entry.save()
+        feed = EntryDiscussions()
+        self.assertEqual(feed.get_object(
+            'request', 2010, 1, 1, entry.slug), entry)
 
     def test_entry_comments(self):
         entry = self.create_published_entry()
