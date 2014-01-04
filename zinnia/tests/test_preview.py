@@ -1,3 +1,4 @@
+# coding=utf-8
 """Test cases for Zinnia's preview"""
 from django.test import TestCase
 
@@ -37,3 +38,9 @@ class HTMLPreviewTestCase(TestCase):
                               max_words=2, more_string=' .........')
         self.assertEqual(str(preview), '<p>Hello the .........</p>')
         self.assertEqual(preview.has_more, True)
+
+    def test_str_non_ascii_issue_314(self):
+        text = '<p>тест non ascii</p>'
+        preview = HTMLPreview(text, splitters=[],
+                              max_words=2, more_string=' ...')
+        self.assertEqual(str(preview), '<p>тест non ...</p>')
