@@ -1,4 +1,5 @@
 """Preview for Zinnia"""
+from django.utils import six
 from django.utils.text import Truncator
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -46,7 +47,7 @@ class HTMLPreview(object):
         """
         Method used to render the preview in templates.
         """
-        return str(self.preview)
+        return six.text_type(self.preview)
 
     def build_preview(self):
         """
