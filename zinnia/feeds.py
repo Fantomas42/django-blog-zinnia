@@ -297,7 +297,7 @@ class EntryDiscussions(DiscussionFeed):
 
     def get_object(self, request, year, month, day, slug):
         """Retrieve the discussions by entry's slug"""
-        return get_object_or_404(Entry.published, slug=slug,
+        return get_object_or_404(Entry, slug=slug,
                                  creation_date__year=year,
                                  creation_date__month=month,
                                  creation_date__day=day)
