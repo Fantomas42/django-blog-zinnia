@@ -10,6 +10,7 @@ from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
+from django.test.utils import override_settings
 from django.core.files.base import ContentFile
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.feedgenerator import DefaultFeed
@@ -269,6 +270,24 @@ class FeedsTestCase(TestCase):
         feed = EntryDiscussions()
         self.assertEqual(feed.get_object(
             'request', 2010, 1, 1, entry.slug), entry)
+
+    @override_settings(USE_TZ=False)
+    def test_feed_discussions_no_timezone_issue_277(self):
+        entry = self.create_published_entry()
+        entry.creation_date = datetime(2014, 1, 1, 23)
+        entry.save()
+        feed = EntryDiscussions()
+        self.assertEqual(feed.get_object(
+            'request', 2014, 1, 1, entry.slug), entry)
+
+    @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
+    def test_feed_discussions_with_timezone_issue_277(self):
+        entry = self.create_published_entry()
+        entry.creation_date = datetime(2014, 1, 1, 23)
+        entry.save()
+        feed = EntryDiscussions()
+        self.assertEqual(feed.get_object(
+            'request', 2014, 1, 2, entry.slug), entry)
 
     def test_entry_comments(self):
         entry = self.create_published_entry()
