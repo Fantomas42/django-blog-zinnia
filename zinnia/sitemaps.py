@@ -15,30 +15,34 @@ from zinnia.settings import PROTOCOL
 
 class ZinniaSitemap(Sitemap):
     """
-    Base Sitemap class for Zinnia
+    Base Sitemap class for Zinnia.
     """
     protocol = PROTOCOL
 
 
 class EntrySitemap(ZinniaSitemap):
     """
-    Sitemap for entries
+    Sitemap for entries.
     """
     priority = 0.5
     changefreq = 'weekly'
 
     def items(self):
-        """Return published entries"""
+        """
+        Return published entries.
+        """
         return Entry.published.all()
 
     def lastmod(self, obj):
-        """Return last modification of an entry"""
+        """
+        Return last modification of an entry.
+        """
         return obj.last_update
 
 
 class EntryRelatedSitemap(ZinniaSitemap):
     """
-    Sitemap for models related to Entries
+    Sitemap for models related to Entries.
     """
     model = None
     changefreq = 'monthly'
@@ -97,21 +101,21 @@ class EntryRelatedSitemap(ZinniaSitemap):
 
 class CategorySitemap(EntryRelatedSitemap):
     """
-    Sitemap for categories
+    Sitemap for categories.
     """
     model = Category
 
 
 class AuthorSitemap(EntryRelatedSitemap):
     """
-    Sitemap for authors
+    Sitemap for authors.
     """
     model = Author
 
 
 class TagSitemap(EntryRelatedSitemap):
     """
-    Sitemap for tags
+    Sitemap for tags.
     """
 
     def get_queryset(self):
@@ -138,6 +142,6 @@ class TagSitemap(EntryRelatedSitemap):
 
     def location(self, item):
         """
-        Return URL of the Tag
+        Return URL of the tag.
         """
         return reverse('zinnia_tag_detail', args=[item.name])
