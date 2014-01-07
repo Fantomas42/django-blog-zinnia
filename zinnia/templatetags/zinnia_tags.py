@@ -175,18 +175,24 @@ def get_archives_entries_tree(
 def get_calendar_entries(context, year=None, month=None,
                          template='zinnia/tags/entries_calendar.html'):
     """Return an HTML calendar of entries"""
-    if not year or not month:
-        date_month = context.get('month') or context.get('day') or \
-            getattr(context.get('object'), 'creation_date', None) or \
-            timezone.now().date()
-        year, month = date_month.timetuple()[:2]
-
-    calendar = Calendar()
-    current_month = datetime(year, month, 1)
-    if settings.USE_TZ:
-        current_month = timezone.make_aware(
-            current_month, timezone.get_current_timezone()
-            ).replace(day=1, hour=0)
+    if not (year and month):
+        month_day = context.get('month') or context.get('day')
+        creation_date = getattr(context.get('object'), 'creation_date', None)
+        if month_day:
+            if settings.USE_TZ:
+                month_day = timezone.make_aware(
+                    month_day, timezone.get_current_timezone())
+            current_month = month_day.replace(day=1, hour=0)
+        elif creation_date:
+            current_month = creation_date.date().replace(day=1)
+        else:
+            current_month = timezone.now().date().replace(day=1)
+    else:
+        if settings.USE_TZ:
+            current_month = datetime(year, month, 1,
+                                     tzinfo=timezone.get_current_timezone())
+        else:
+            current_month = datetime(year, month, 1)
 
     dates = list(Entry.published.datetimes('creation_date', 'month'))
 
@@ -197,6 +203,7 @@ def get_calendar_entries(context, year=None, month=None,
 
     previous_month = index > 0 and dates[index - 1] or None
     next_month = index != len(dates) - 1 and dates[index + 1] or None
+    calendar = Calendar()
 
     return {'template': template,
             'next_month': next_month,
