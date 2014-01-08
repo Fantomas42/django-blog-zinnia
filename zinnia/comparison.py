@@ -1,5 +1,4 @@
-"""Comparison tools for Zinnia
-Based on clustered_models app"""
+"""Comparison tools for Zinnia"""
 from django.utils import six
 
 from math import sqrt
@@ -9,7 +8,9 @@ from zinnia.settings import F_MAX
 
 
 def pearson_score(list1, list2):
-    """Compute the pearson score between 2 lists of vectors"""
+    """
+    Compute the Pearson' score between 2 lists of vectors.
+    """
     sum1 = sum(list1)
     sum2 = sum(list2)
     sum_sq1 = sum([pow(l, 2) for l in list1])
@@ -28,16 +29,20 @@ def pearson_score(list1, list2):
 
 
 class ClusteredModel(object):
-    """Wrapper around Model class
-    building a dataset of instances"""
+    """
+    Wrapper around Model class
+    building a dataset of instances.
+    """
 
     def __init__(self, queryset, fields=['id']):
         self.fields = fields
         self.queryset = queryset
 
     def dataset(self):
-        """Generate a dataset with the queryset
-        and specified fields"""
+        """
+        Generate a dataset based on the queryset
+        and the specified fields.
+        """
         dataset = {}
         for item in self.queryset.filter():
             dataset[item] = ' '.join([six.text_type(getattr(item, field))
@@ -46,7 +51,9 @@ class ClusteredModel(object):
 
 
 class VectorBuilder(object):
-    """Build a list of vectors based on datasets"""
+    """
+    Build a list of vectors based on datasets.
+    """
 
     def __init__(self, queryset, fields):
         self.key = ''
@@ -56,7 +63,9 @@ class VectorBuilder(object):
         self.build_dataset()
 
     def build_dataset(self):
-        """Generate whole dataset"""
+        """
+        Generate the whole dataset.
+        """
         data = {}
         words_total = {}
 
@@ -84,11 +93,15 @@ class VectorBuilder(object):
         self.key = self.generate_key()
 
     def generate_key(self):
-        """Generate key for this list of vectors"""
+        """
+        Generate key for this list of vectors.
+        """
         return self.clustered_model.queryset.count()
 
     def flush(self):
-        """Flush the dataset"""
+        """
+        Flush the dataset.
+        """
         if self.key != self.generate_key():
             self.build_dataset()
 
