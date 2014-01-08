@@ -11,21 +11,27 @@ from django.utils.translation import ugettext as _
 
 
 class Crumb(object):
-    """Part of the Breadcrumbs"""
+    """
+    Part of the breadcrumbs.
+    """
     def __init__(self, name, url=None):
         self.name = name
         self.url = url
 
 
 def year_crumb(creation_date):
-    """Crumb for a year"""
+    """
+    Crumb for a year.
+    """
     year = creation_date.strftime('%Y')
     return Crumb(year, reverse('zinnia_entry_archive_year',
                                args=[year]))
 
 
 def month_crumb(creation_date):
-    """Crumb for a month"""
+    """
+    Crumb for a month.
+    """
     year = creation_date.strftime('%Y')
     month = creation_date.strftime('%m')
     month_text = format(creation_date, 'F').capitalize()
@@ -34,7 +40,9 @@ def month_crumb(creation_date):
 
 
 def day_crumb(creation_date):
-    """Crumb for a day"""
+    """
+    Crumb for a day.
+    """
     year = creation_date.strftime('%Y')
     month = creation_date.strftime('%m')
     day = creation_date.strftime('%d')
@@ -43,7 +51,9 @@ def day_crumb(creation_date):
 
 
 def entry_breadcrumbs(entry):
-    """Breadcrumbs for an Entry"""
+    """
+    Breadcrumbs for an Entry.
+    """
     creation_date = entry.creation_date
     if is_aware(creation_date):
         creation_date = localtime(creation_date)
@@ -77,9 +87,9 @@ PAGE_REGEXP = re.compile(r'page/(?P<page>\d+).*$')
 
 
 def handle_page_crumb(func):
-    """Decorator for handling the
-    current page in the breadcrumbs"""
-
+    """
+    Decorator for handling the current page in the breadcrumbs.
+    """
     @wraps(func)
     def wrapper(path, model, page, root_name):
         path = PAGE_REGEXP.sub('', path)
@@ -95,8 +105,10 @@ def handle_page_crumb(func):
 
 @handle_page_crumb
 def retrieve_breadcrumbs(path, model_instance, root_name=''):
-    """Build a semi-hardcoded breadcrumbs
-    based of the model's url handled by Zinnia"""
+    """
+    Build a semi-hardcoded breadcrumbs
+    based of the model's url handled by Zinnia.
+    """
     breadcrumbs = []
 
     if root_name:
