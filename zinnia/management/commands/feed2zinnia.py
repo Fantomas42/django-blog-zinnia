@@ -31,8 +31,10 @@ from zinnia.signals import disconnect_discussion_signals
 
 
 class Command(LabelCommand):
-    """Command object for importing a RSS or Atom
-    feed into Zinnia."""
+    """
+    Command object for importing a RSS or Atom
+    feed into Zinnia.
+    """
     help = 'Import a RSS or Atom feed into Zinnia.'
     label = 'feed url'
     args = 'url'
@@ -52,7 +54,9 @@ class Command(LabelCommand):
     SITE = Site.objects.get_current()
 
     def __init__(self):
-        """Init the Command and add custom styles"""
+        """
+        Init the Command and add custom styles.
+        """
         super(Command, self).__init__()
         self.style.TITLE = self.style.SQL_FIELD
         self.style.STEP = self.style.SQL_COLTYPE
@@ -61,7 +65,9 @@ class Command(LabelCommand):
         disconnect_discussion_signals()
 
     def write_out(self, message, verbosity_level=1):
-        """Convenient method for outputing"""
+        """
+        Convenient method for outputing.
+        """
         if self.verbosity and self.verbosity >= verbosity_level:
             sys.stdout.write(smart_str(message))
             sys.stdout.flush()
@@ -92,7 +98,9 @@ class Command(LabelCommand):
         self.import_entries(feed.entries)
 
     def import_entries(self, feed_entries):
-        """Import entries"""
+        """
+        Import entries.
+        """
         for feed_entry in feed_entries:
             self.write_out('> %s... ' % feed_entry.title)
             if feed_entry.get('published_parsed'):

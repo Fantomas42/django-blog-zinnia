@@ -8,7 +8,9 @@ from zinnia.settings import SPAM_CHECKER_BACKENDS
 
 
 def get_spam_checker(backend_path):
-    """Return the selected spam checker backend"""
+    """
+    Return the selected spam checker backend.
+    """
     try:
         backend_module = import_module(backend_path)
         backend = getattr(backend_module, 'backend')
@@ -25,7 +27,9 @@ def get_spam_checker(backend_path):
 
 def check_is_spam(content, content_object, request,
                   backends=SPAM_CHECKER_BACKENDS):
-    """Return True if the content is a spam, else False"""
+    """
+    Return True if the content is a spam, else False.
+    """
     for backend_path in backends:
         spam_checker = get_spam_checker(backend_path)
         if spam_checker is not None:

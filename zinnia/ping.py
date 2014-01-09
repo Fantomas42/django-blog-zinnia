@@ -23,7 +23,9 @@ from zinnia.settings import PROTOCOL
 
 
 class URLRessources(object):
-    """Object defining the ressources of the website"""
+    """
+    Object defining the ressources of the Website.
+    """
 
     def __init__(self):
         self.current_site = Site.objects.get_current()
@@ -35,7 +37,9 @@ class URLRessources(object):
 
 
 class DirectoryPinger(threading.Thread):
-    """Threaded Directory Pinger"""
+    """
+    Threaded web directory pinger.
+    """
 
     def __init__(self, server_name, entries, timeout=10, start_now=True):
         self.results = []
@@ -50,7 +54,9 @@ class DirectoryPinger(threading.Thread):
             self.start()
 
     def run(self):
-        """Ping entries to a Directory in a Thread"""
+        """
+        Ping entries to a directory in a thread.
+        """
         logger = getLogger('zinnia.ping.directory')
         socket.setdefaulttimeout(self.timeout)
         for entry in self.entries:
@@ -60,7 +66,9 @@ class DirectoryPinger(threading.Thread):
         socket.setdefaulttimeout(None)
 
     def ping_entry(self, entry):
-        """Ping an entry to a Directory"""
+        """
+        Ping an entry to a directory.
+        """
         entry_url = '%s%s' % (self.ressources.site_url,
                               entry.get_absolute_url())
         categories = '|'.join([c.title for c in entry.categories.all()])
@@ -84,7 +92,9 @@ class DirectoryPinger(threading.Thread):
 
 
 class ExternalUrlsPinger(threading.Thread):
-    """Threaded ExternalUrls Pinger"""
+    """
+    Threaded external URLs pinger.
+    """
 
     def __init__(self, entry, timeout=10, start_now=True):
         self.results = []
@@ -99,7 +109,9 @@ class ExternalUrlsPinger(threading.Thread):
             self.start()
 
     def run(self):
-        """Ping external URLS in a Thread"""
+        """
+        Ping external URLs in a Thread.
+        """
         logger = getLogger('zinnia.ping.external_urls')
         socket.setdefaulttimeout(self.timeout)
 
@@ -114,14 +126,18 @@ class ExternalUrlsPinger(threading.Thread):
         socket.setdefaulttimeout(None)
 
     def is_external_url(self, url, site_url):
-        """Check of the url in an external url"""
+        """
+        Check if the URL is an external URL.
+        """
         url_splitted = urlsplit(url)
         if not url_splitted.netloc:
             return False
         return url_splitted.netloc != urlsplit(site_url).netloc
 
     def find_external_urls(self, entry):
-        """Find external urls in an entry"""
+        """
+        Find external URLs in an entry.
+        """
         soup = BeautifulSoup(entry.html_content)
         external_urls = [a['href'] for a in soup.find_all('a')
                          if self.is_external_url(
@@ -129,7 +145,9 @@ class ExternalUrlsPinger(threading.Thread):
         return external_urls
 
     def find_pingback_href(self, content):
-        """Try to find Link markup to pingback url"""
+        """
+        Try to find LINK markups to pingback URL.
+        """
         soup = BeautifulSoup(content)
         for link in soup.find_all('link'):
             dict_attr = dict(link.attrs)
@@ -139,7 +157,9 @@ class ExternalUrlsPinger(threading.Thread):
                         return dict_attr.get('href')
 
     def find_pingback_urls(self, urls):
-        """Find the pingback urls of each urls"""
+        """
+        Find the pingback URL for each URLs.
+        """
         pingback_urls = {}
 
         for url in urls:
@@ -167,7 +187,9 @@ class ExternalUrlsPinger(threading.Thread):
         return pingback_urls
 
     def pingback_url(self, server_name, target_url):
-        """Do a pingback call for the target url"""
+        """
+        Do a pingback call for the target URL.
+        """
         try:
             server = ServerProxy(server_name)
             reply = server.pingback.ping(self.entry_url, target_url)

@@ -42,8 +42,10 @@ WP_NS = 'http://wordpress.org/export/%s/'
 
 
 class Command(LabelCommand):
-    """Command object for importing a WordPress blog
-    into Zinnia via a WordPress eXtended RSS (WXR) file."""
+    """
+    Command object for importing a WordPress blog
+    into Zinnia via a WordPress eXtended RSS (WXR) file.
+    """
     help = 'Import a Wordpress blog into Zinnia.'
     label = 'WXR file'
     args = 'wordpress.xml'
@@ -66,7 +68,9 @@ class Command(LabelCommand):
                       'private': PUBLISHED}
 
     def __init__(self):
-        """Init the Command and add custom styles"""
+        """
+        Init the Command and add custom styles.
+        """
         super(Command, self).__init__()
         self.style.TITLE = self.style.SQL_FIELD
         self.style.STEP = self.style.SQL_COLTYPE
@@ -75,7 +79,9 @@ class Command(LabelCommand):
         disconnect_discussion_signals()
 
     def write_out(self, message, verbosity_level=1):
-        """Convenient method for outputing"""
+        """
+        Convenient method for outputing.
+        """
         if self.verbosity and self.verbosity >= verbosity_level:
             sys.stdout.write(smart_str(message))
             sys.stdout.flush()
@@ -108,8 +114,10 @@ class Command(LabelCommand):
         self.import_entries(tree.findall('channel/item'))
 
     def guess_wxr_version(self, tree):
-        """We will try to guess the wxr version used
-        to complete the wordpress xml namespace name"""
+        """
+        We will try to guess the wxr version used
+        to complete the wordpress xml namespace name.
+        """
         for v in ('1.2', '1.1', '1.0'):
             try:
                 tree.find('channel/{%s}wxr_version' % (WP_NS % v)).text
@@ -119,9 +127,11 @@ class Command(LabelCommand):
         raise CommandError('Cannot resolve the wordpress namespace')
 
     def import_authors(self, tree):
-        """Retrieve all the authors used in posts
+        """
+        Retrieve all the authors used in posts
         and convert it to new or existing author and
-        return the conversion"""
+        return the conversion.
+        """
         self.write_out(self.style.STEP('- Importing authors\n'))
 
         post_authors = set()
@@ -143,7 +153,9 @@ class Command(LabelCommand):
         return authors
 
     def migrate_author(self, author_name):
-        """Handle actions for migrating the authors"""
+        """
+        Handle actions for migrating the authors.
+        """
         action_text = "The author '%s' needs to be migrated to an user:\n"\
                       "1. Use an existing user ?\n"\
                       "2. Create a new user ?\n"\
@@ -198,10 +210,12 @@ class Command(LabelCommand):
                 return Author.objects.get(username=author_name)
 
     def import_categories(self, category_nodes):
-        """Import all the categories from 'wp:category' nodes,
+        """
+        Import all the categories from 'wp:category' nodes,
         because categories in 'item' nodes are not necessarily
         all the categories and returning it in a dict for
-        database optimizations."""
+        database optimizations.
+        """
         self.write_out(self.style.STEP('- Importing categories\n'))
 
         categories = {}
@@ -223,10 +237,12 @@ class Command(LabelCommand):
         return categories
 
     def import_tags(self, tag_nodes):
-        """Import all the tags form 'wp:tag' nodes,
+        """
+        Import all the tags form 'wp:tag' nodes,
         because tags in 'item' nodes are not necessarily
         all the tags, then use only the nicename, because it's like
-        a slug and the true tag name may be not valid for url usage."""
+        a slug and the true tag name may be not valid for url usage.
+        """
         self.write_out(self.style.STEP('- Importing tags\n'))
         for tag_node in tag_nodes:
             tag_name = tag_node.find(
@@ -236,8 +252,10 @@ class Command(LabelCommand):
             self.write_out(self.style.ITEM('OK\n'))
 
     def get_entry_tags(self, categories):
-        """Return a list of entry's tags,
-        by using the nicename for url compatibility"""
+        """
+        Return a list of entry's tags,
+        by using the nicename for url compatibility.
+        """
         tags = []
         for category in categories:
             domain = category.attrib.get('domain', 'category')
@@ -246,8 +264,10 @@ class Command(LabelCommand):
         return tags
 
     def get_entry_categories(self, category_nodes):
-        """Return a list of entry's categories
-        based of imported categories"""
+        """
+        Return a list of entry's categories
+        based on imported categories.
+        """
         categories = []
         for category_node in category_nodes:
             domain = category_node.attrib.get('domain')
@@ -256,10 +276,12 @@ class Command(LabelCommand):
         return categories
 
     def import_entry(self, title, content, item_node):
-        """Importing an entry but some data are missing like
+        """
+        Importing an entry but some data are missing like
         related entries, start_publication and end_publication.
         start_publication and creation_date will use the same value,
-        wich is always in Wordpress $post->post_date"""
+        wich is always in Wordpress $post->post_date.
+        """
         creation_date = datetime.strptime(
             item_node.find('{%s}post_date_gmt' % WP_NS).text,
             '%Y-%m-%d %H:%M:%S')
@@ -318,9 +340,11 @@ class Command(LabelCommand):
                 return meta.find('{%s}meta_value' % WP_NS).text
 
     def import_entries(self, items):
-        """Loops over items and find entry to import,
+        """
+        Loops over items and find entry to import,
         an entry need to have 'post_type' set to 'post' and
-        have content."""
+        have content.
+        """
         self.write_out(self.style.STEP('- Importing entries\n'))
 
         for item_node in items:
@@ -363,8 +387,10 @@ class Command(LabelCommand):
                 self.write_out(self.style.ITEM('OK\n'))
 
     def import_comments(self, entry, comment_nodes):
-        """Loops over comments nodes and import then
-        in django.contrib.comments"""
+        """
+        Loops over comments nodes and import then
+        in django.contrib.comments.
+        """
         for comment_node in comment_nodes:
             is_pingback = comment_node.find(
                 '{%s}comment_type' % WP_NS).text == PINGBACK

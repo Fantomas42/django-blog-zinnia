@@ -8,8 +8,9 @@ from zinnia.settings import ALLOW_FUTURE
 
 
 class ArchiveMixin(object):
-    """Mixin centralizing the configuration
-    of the archives views"""
+    """
+    Mixin centralizing the configuration of the archives views.
+    """
     paginate_by = PAGINATION
     allow_empty = ALLOW_EMPTY
     allow_future = ALLOW_FUTURE
@@ -19,8 +20,10 @@ class ArchiveMixin(object):
 
 
 class PreviousNextPublishedMixin(object):
-    """Mixin for correcting the previous/next
-    context variable to return dates with published datas"""
+    """
+    Mixin for correcting the previous/next
+    context variable to return dates with published datas.
+    """
 
     def get_previous_next_published(self, date):
         """
@@ -66,33 +69,49 @@ class PreviousNextPublishedMixin(object):
         return previous_next
 
     def get_next_year(self, date):
-        """Get the next year with published Entries"""
+        """
+        Get the next year with published entries.
+        """
         return self.get_previous_next_published(date)['year'][1]
 
     def get_previous_year(self, date):
-        """Get the previous year with published Entries"""
+        """
+        Get the previous year with published entries.
+        """
         return self.get_previous_next_published(date)['year'][0]
 
     def get_next_week(self, date):
-        """Get the next week with published Entries"""
+        """
+        Get the next week with published entries.
+        """
         return self.get_previous_next_published(date)['week'][1]
 
     def get_previous_week(self, date):
-        """Get the previous wek with published Entries"""
+        """
+        Get the previous wek with published entries.
+        """
         return self.get_previous_next_published(date)['week'][0]
 
     def get_next_month(self, date):
-        """Get the next month with published Entries"""
+        """
+        Get the next month with published entries.
+        """
         return self.get_previous_next_published(date)['month'][1]
 
     def get_previous_month(self, date):
-        """Get the previous month with published Entries"""
+        """
+        Get the previous month with published entries.
+        """
         return self.get_previous_next_published(date)['month'][0]
 
     def get_next_day(self, date):
-        """Get the next day with published Entries"""
+        """
+        Get the next day with published entries.
+        """
         return self.get_previous_next_published(date)['day'][1]
 
     def get_previous_day(self, date):
-        """Get the previous day with published Entries"""
+        """
+        Get the previous day with published entries.
+        """
         return self.get_previous_next_published(date)['day'][0]

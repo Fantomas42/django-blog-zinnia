@@ -16,17 +16,23 @@ AMERICAN_TO_EUROPEAN_WEEK_DAYS = [6, 0, 1, 2, 3, 4, 5]
 
 
 class Calendar(HTMLCalendar):
-    """Override of HTMLCalendar"""
+    """
+    Extension of the HTMLCalendar.
+    """
 
     def __init__(self):
-        """Retrieve and convert the localized first week day
-        at initialization"""
+        """
+        Retrieve and convert the localized first week day
+        at initialization.
+        """
         HTMLCalendar.__init__(self, AMERICAN_TO_EUROPEAN_WEEK_DAYS[
             get_format('FIRST_DAY_OF_WEEK')])
 
     def formatday(self, day, weekday):
-        """Return a day as a table cell with a link
-        if entries are published this day"""
+        """
+        Return a day as a table cell with a link
+        if entries are published this day.
+        """
         if day and day in self.day_entries:
             day_date = date(self.current_year, self.current_month, day)
             archive_day_url = reverse('zinnia_entry_archive_day',
@@ -40,17 +46,22 @@ class Calendar(HTMLCalendar):
         return super(Calendar, self).formatday(day, weekday)
 
     def formatweekday(self, day):
-        """Return a weekday name translated
-        as a table header."""
+        """
+        Return a weekday name translated as a table header.
+        """
         return '<th class="%s">%s</th>' % (self.cssclasses[day],
                                            WEEKDAYS_ABBR[day].title())
 
     def formatweekheader(self):
-        """Return a header for a week as a table row."""
+        """
+        Return a header for a week as a table row.
+        """
         return '<thead>%s</thead>' % super(Calendar, self).formatweekheader()
 
     def formatfooter(self, previous_month, next_month):
-        """Return a footer for a previous and next month."""
+        """
+        Return a footer for a previous and next month.
+        """
         footer = '<tfoot><tr>' \
                  '<td colspan="3" class="prev">%s</td>' \
                  '<td class="pad">&nbsp;</td>' \
@@ -83,8 +94,11 @@ class Calendar(HTMLCalendar):
 
     def formatmonth(self, theyear, themonth, withyear=True,
                     previous_month=None, next_month=None):
-        """Return a formatted month as a table with
-        new attributes computed for formatting a day, and thead/tfooter"""
+        """
+        Return a formatted month as a table
+        with new attributes computed for formatting a day,
+        and thead/tfooter.
+        """
         self.current_year = theyear
         self.current_month = themonth
         self.day_entries = [date.day
