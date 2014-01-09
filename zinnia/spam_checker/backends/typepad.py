@@ -19,12 +19,16 @@ TYPEPAD_API_KEY = settings.TYPEPAD_SECRET_API_KEY
 
 
 class TypePad(Akismet):
-    """TypePad version of the Akismet module"""
+    """
+    TypePad version of the Akismet module.
+    """
     baseurl = 'api.antispam.typepad.com/1.1/'
 
 
 def backend(comment, content_object, request):
-    """TypePad spam checker backend for Zinnia"""
+    """
+    TypePad spam checker backend for Zinnia.
+    """
     blog_url = '%s://%s/' % (PROTOCOL, Site.objects.get_current().domain)
 
     typepad = TypePad(key=TYPEPAD_API_KEY, blog_url=blog_url)
