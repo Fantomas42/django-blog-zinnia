@@ -15,7 +15,9 @@ class Command(NoArgsCommand):
     help = 'Refresh all the discussion counts on entries'
 
     def write_out(self, message, verbosity_level=1):
-        """Convenient method for outputing"""
+        """
+        Convenient method for outputing.
+        """
         if self.verbosity and self.verbosity >= verbosity_level:
             sys.stdout.write(smart_str(message))
             sys.stdout.flush()
