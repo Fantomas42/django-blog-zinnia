@@ -10,7 +10,9 @@ from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
 
 
 def get_category_or_404(path):
-    """Retrieve a Category instance by a path"""
+    """
+    Retrieve a Category instance by a path.
+    """
     path_bits = [p for p in path.split('/') if p]
     return get_object_or_404(Category, slug=path_bits[-1])
 

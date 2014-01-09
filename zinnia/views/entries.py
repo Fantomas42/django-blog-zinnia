@@ -26,5 +26,7 @@ class EntryDateDetail(ArchiveMixin,
 
 
 class EntryDetail(EntryProtectionMixin, EntryDateDetail):
-    """Detailled view archive view for an Entry
-    with password and login protections"""
+    """
+    Detailled view archive view for an Entry
+    with password and login protections.
+    """

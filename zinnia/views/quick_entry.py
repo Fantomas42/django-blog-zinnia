@@ -23,7 +23,9 @@ from zinnia.settings import MARKUP_LANGUAGE
 
 
 class QuickEntryForm(forms.ModelForm):
-    """Form for posting an entry quickly"""
+    """
+    Form for posting an entry quickly.
+    """
 
     class Meta:
         model = Entry
@@ -33,15 +35,21 @@ class QuickEntryForm(forms.ModelForm):
 
 
 class QuickEntry(View):
-    """View handling the quick post of a short Entry"""
+    """
+    View handling the quick post of a short Entry.
+    """
 
     @method_decorator(permission_required('zinnia.add_entry'))
     def dispatch(self, *args, **kwargs):
-        """Decorate the view dispatcher with permission_required"""
+        """
+        Decorate the view dispatcher with permission_required.
+        """
         return super(QuickEntry, self).dispatch(*args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        """GET only do a redirection to the admin for adding and entry"""
+        """
+        GET only do a redirection to the admin for adding and entry.
+        """
         return redirect('admin:zinnia_entry_add')
 
     def post(self, request, *args, **kwargs):

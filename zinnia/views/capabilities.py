@@ -8,11 +8,15 @@ from zinnia.settings import FEEDS_FORMAT
 
 
 class CapabilityView(TemplateView):
-    """Base view for the weblog capabilities"""
+    """
+    Base view for the weblog capabilities.
+    """
 
     def get_context_data(self, **kwargs):
-        """Populate the context of the template
-        with technical informations for building urls"""
+        """
+        Populate the context of the template
+        with technical informations for building urls.
+        """
         context = super(CapabilityView, self).get_context_data(**kwargs)
         context.update({'protocol': PROTOCOL,
                         'copyright': COPYRIGHT,
