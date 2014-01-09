@@ -1,1 +1,1 @@
-"""Shortlink backends for Zinnia"""
+"""URL shortener backends for Zinnia"""
