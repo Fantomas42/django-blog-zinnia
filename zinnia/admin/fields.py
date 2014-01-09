@@ -5,7 +5,7 @@ from django.utils.encoding import smart_text
 
 class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
     """
-    MPTT version of ModelChoiceIterator
+    MPTT version of ModelChoiceIterator.
     """
 
     def choice(self, obj):
@@ -21,7 +21,7 @@ class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
 
 class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
     """
-    MPTT version of ModelMultipleChoiceField
+    MPTT version of ModelMultipleChoiceField.
     """
 
     def __init__(self, level_indicator='|--', *args, **kwargs):
@@ -30,7 +30,7 @@ class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
 
     def label_from_instance(self, obj):
         """
-        Creates labels which represent the tree level of each node
+        Create labels which represent the tree level of each node
         when generating option labels.
         """
         label = smart_text(obj)
@@ -41,7 +41,7 @@ class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
 
     def _get_choices(self):
         """
-        Overrides the _get_choices method to use MPTTModelChoiceIterator.
+        Override the _get_choices method to use MPTTModelChoiceIterator.
         """
         return MPTTModelChoiceIterator(self)
 

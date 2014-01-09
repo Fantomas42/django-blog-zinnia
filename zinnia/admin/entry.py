@@ -27,7 +27,9 @@ from zinnia.admin.filters import CategoryListFilter
 
 
 class EntryAdmin(admin.ModelAdmin):
-    """Admin for Entry model"""
+    """
+    Admin for Entry model.
+    """
     form = EntryAdminForm
     date_hierarchy = 'creation_date'
     fieldsets = ((_('Content'), {'fields': ('title', 'content',
@@ -74,7 +76,9 @@ class EntryAdmin(admin.ModelAdmin):
 
     # Custom Display
     def get_title(self, entry):
-        """Return the title with word count and number of comments"""
+        """
+        Return the title with word count and number of comments.
+        """
         title = _('%(title)s (%(word_count)i words)') % \
             {'title': entry.title, 'word_count': entry.word_count}
         reaction_count = (entry.comment_count +
@@ -90,7 +94,9 @@ class EntryAdmin(admin.ModelAdmin):
     get_title.short_description = _('title')
 
     def get_authors(self, entry):
-        """Return the authors in HTML"""
+        """
+        Return the authors in HTML.
+        """
         try:
             authors = ['<a href="%s" target="blank">%s</a>' %
                        (author.get_absolute_url(), author.username)
@@ -102,7 +108,9 @@ class EntryAdmin(admin.ModelAdmin):
     get_authors.short_description = _('author(s)')
 
     def get_categories(self, entry):
-        """Return the categories linked in HTML"""
+        """
+        Return the categories linked in HTML.
+        """
         try:
             categories = ['<a href="%s" target="blank">%s</a>' %
                           (category.get_absolute_url(), category.title)
@@ -115,7 +123,9 @@ class EntryAdmin(admin.ModelAdmin):
     get_categories.short_description = _('category(s)')
 
     def get_tags(self, entry):
-        """Return the tags linked in HTML"""
+        """
+        Return the tags linked in HTML.
+        """
         try:
             return ', '.join(['<a href="%s" target="blank">%s</a>' %
                               (reverse('zinnia_tag_detail', args=[tag]), tag)
@@ -126,7 +136,9 @@ class EntryAdmin(admin.ModelAdmin):
     get_tags.short_description = _('tag(s)')
 
     def get_sites(self, entry):
-        """Return the sites linked in HTML"""
+        """
+        Return the sites linked in HTML.
+        """
         try:
             index_url = reverse('zinnia_entry_archive_index')
         except NoReverseMatch:
@@ -139,7 +151,9 @@ class EntryAdmin(admin.ModelAdmin):
     get_sites.short_description = _('site(s)')
 
     def get_short_url(self, entry):
-        """Return the short url in HTML"""
+        """
+        Return the short url in HTML.
+        """
         try:
             short_url = entry.short_url
         except NoReverseMatch:
@@ -150,14 +164,18 @@ class EntryAdmin(admin.ModelAdmin):
     get_short_url.short_description = _('short url')
 
     def get_is_visible(self, entry):
-        """Admin wrapper for entry.is_visible"""
+        """
+        Admin wrapper for entry.is_visible.
+        """
         return entry.is_visible
     get_is_visible.boolean = True
     get_is_visible.short_description = _('is visible')
 
     # Custom Methods
     def save_model(self, request, entry, form, change):
-        """Save the authors, update time, make an excerpt"""
+        """
+        Save the authors, update time, make an excerpt.
+        """
         if not entry.excerpt and entry.status == PUBLISHED:
             entry.excerpt = Truncator(strip_tags(entry.content)).words(50)
 
@@ -172,7 +190,9 @@ class EntryAdmin(admin.ModelAdmin):
         entry.save()
 
     def get_queryset(self, request):
-        """Make special filtering by user permissions"""
+        """
+        Make special filtering by user's permissions.
+        """
         if not request.user.has_perm('zinnia.can_view_all'):
             queryset = request.user.entries.all()
         else:
@@ -180,7 +200,9 @@ class EntryAdmin(admin.ModelAdmin):
         return queryset.prefetch_related('categories', 'authors', 'sites')
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
-        """Filters the disposable authors"""
+        """
+        Filter the disposable authors.
+        """
         if db_field.name == 'authors':
             if request.user.has_perm('zinnia.can_change_author'):
                 kwargs['queryset'] = Author.objects.filter(is_staff=True)
@@ -191,6 +213,9 @@ class EntryAdmin(admin.ModelAdmin):
             db_field, request, **kwargs)
 
     def get_readonly_fields(self, request, obj=None):
+        """
+        Return readonly fields by user's permissions.
+        """
         readonly_fields = super(EntryAdmin, self).get_readonly_fields(
             request, obj)
         if not request.user.has_perm('zinnia.can_change_status'):
@@ -199,7 +224,9 @@ class EntryAdmin(admin.ModelAdmin):
         return readonly_fields
 
     def get_actions(self, request):
-        """Define user actions by permissions"""
+        """
+        Define actions by user's permissions.
+        """
         actions = super(EntryAdmin, self).get_actions(request)
         if not actions:
             return actions
@@ -218,7 +245,9 @@ class EntryAdmin(admin.ModelAdmin):
 
     # Custom Actions
     def make_mine(self, request, queryset):
-        """Set the entries to the user"""
+        """
+        Set the entries to the current user.
+        """
         for entry in queryset:
             if request.user not in entry.authors.all():
                 entry.authors.add(request.user)
@@ -227,7 +256,9 @@ class EntryAdmin(admin.ModelAdmin):
     make_mine.short_description = _('Set the entries to the user')
 
     def make_published(self, request, queryset):
-        """Set entries selected as published"""
+        """
+        Set entries selected as published.
+        """
         queryset.update(status=PUBLISHED)
         self.ping_directories(request, queryset, messages=False)
         self.message_user(
@@ -235,14 +266,18 @@ class EntryAdmin(admin.ModelAdmin):
     make_published.short_description = _('Set entries selected as published')
 
     def make_hidden(self, request, queryset):
-        """Set entries selected as hidden"""
+        """
+        Set entries selected as hidden.
+        """
         queryset.update(status=HIDDEN)
         self.message_user(
             request, _('The selected entries are now marked as hidden.'))
     make_hidden.short_description = _('Set entries selected as hidden')
 
     def close_comments(self, request, queryset):
-        """Close the comments for selected entries"""
+        """
+        Close the comments for selected entries.
+        """
         queryset.update(comment_enabled=False)
         self.message_user(
             request, _('Comments are now closed for selected entries.'))
@@ -250,7 +285,9 @@ class EntryAdmin(admin.ModelAdmin):
                                          'selected entries')
 
     def close_pingbacks(self, request, queryset):
-        """Close the pingbacks for selected entries"""
+        """
+        Close the pingbacks for selected entries.
+        """
         queryset.update(pingback_enabled=False)
         self.message_user(
             request, _('Pingbacks are now closed for selected entries.'))
@@ -258,7 +295,9 @@ class EntryAdmin(admin.ModelAdmin):
         'Close the pingbacks for selected entries')
 
     def close_trackbacks(self, request, queryset):
-        """Close the trackbacks for selected entries"""
+        """
+        Close the trackbacks for selected entries.
+        """
         queryset.update(trackback_enabled=False)
         self.message_user(
             request, _('Trackbacks are now closed for selected entries.'))
@@ -266,7 +305,9 @@ class EntryAdmin(admin.ModelAdmin):
         'Close the trackbacks for selected entries')
 
     def put_on_top(self, request, queryset):
-        """Put the selected entries on top at the current date"""
+        """
+        Put the selected entries on top at the current date.
+        """
         queryset.update(creation_date=timezone.now())
         self.ping_directories(request, queryset, messages=False)
         self.message_user(request, _(
@@ -275,14 +316,18 @@ class EntryAdmin(admin.ModelAdmin):
         'Put the selected entries on top at the current date')
 
     def mark_featured(self, request, queryset):
-        """Mark selected as featured post."""
+        """
+        Mark selected as featured post.
+        """
         queryset.update(featured=True)
         self.message_user(
             request, _('Selected entries are now marked as featured.'))
     mark_featured.short_description = _('Mark selected entries as featured')
 
     def unmark_featured(self, request, queryset):
-        """Un-Mark selected featured posts"""
+        """
+        Un-Mark selected featured posts.
+        """
         queryset.update(featured=False)
         self.message_user(
             request, _('Selected entries are no longer marked as featured.'))
@@ -290,7 +335,9 @@ class EntryAdmin(admin.ModelAdmin):
         'Unmark selected entries as featured')
 
     def make_tweet(self, request, queryset):
-        """Post an update on Twitter"""
+        """
+        Post an update on Twitter.
+        """
         import tweepy
         auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY,
                                    settings.TWITTER_CONSUMER_SECRET)
@@ -306,7 +353,9 @@ class EntryAdmin(admin.ModelAdmin):
     make_tweet.short_description = _('Tweet entries selected')
 
     def ping_directories(self, request, queryset, messages=True):
-        """Ping Directories for selected entries"""
+        """
+        Ping web directories for selected entries.
+        """
         for directory in settings.PING_DIRECTORIES:
             pinger = DirectoryPinger(directory, queryset)
             pinger.join()
@@ -329,6 +378,9 @@ class EntryAdmin(admin.ModelAdmin):
         'Ping Directories for selected entries')
 
     def get_urls(self):
+        """
+        Overload the admin's urls for WYSIWYG and tag auto-completion.
+        """
         entry_admin_urls = super(EntryAdmin, self).get_urls()
         urls = patterns(
             '',
@@ -347,28 +399,36 @@ class EntryAdmin(admin.ModelAdmin):
         return urls + entry_admin_urls
 
     def autocomplete_tags(self, request):
-        """View for tag autocompletion"""
+        """
+        View for tag auto-completion.
+        """
         return TemplateResponse(
             request, 'admin/zinnia/entry/autocomplete_tags.js',
             content_type='application/javascript')
 
     def wymeditor(self, request):
-        """View for serving the config of WYMEditor"""
+        """
+        View for serving the config of WYMEditor.
+        """
         return TemplateResponse(
             request, 'admin/zinnia/entry/wymeditor.js',
             {'lang': get_language().split('-')[0]},
             content_type='application/javascript')
 
     def markitup(self, request):
-        """View for serving the config of MarkItUp"""
+        """
+        View for serving the config of MarkItUp.
+        """
         return TemplateResponse(
             request, 'admin/zinnia/entry/markitup.js',
             content_type='application/javascript')
 
     @csrf_exempt
     def content_preview(self, request):
-        """Admin view to preview Entry.content in HTML,
-        useful when using markups to write entries"""
+        """
+        Admin view to preview Entry.content in HTML,
+        useful when using markups to write entries.
+        """
         data = request.POST.get('data', '')
         entry = self.model(content=data)
         return TemplateResponse(
@@ -376,7 +436,9 @@ class EntryAdmin(admin.ModelAdmin):
             {'preview': entry.html_content})
 
     def _media(self):
-        """The medias needed to enhance the admin page"""
+        """
+        The medias needed to enhance the admin page.
+        """
         def static_url(url):
             return staticfiles_storage.url('zinnia/%s' % url)
 
