@@ -376,7 +376,7 @@ class TemplateTagsTestCase(TestCase):
 
     def test_get_calendar_entries_month_context(self):
         self.publish_entry()
-        source_context = Context({'month': datetime(2009, 1, 1)})
+        source_context = Context({'month': datetime(2009, 1, 1).date()})
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
         self.assertEqual(context['previous_month'], None)
@@ -386,7 +386,7 @@ class TemplateTagsTestCase(TestCase):
 
     def test_get_calendar_entries_day_context(self):
         self.publish_entry()
-        source_context = Context({'month': datetime(2009, 1, 15)})
+        source_context = Context({'month': datetime(2009, 1, 15).date()})
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
         self.assertEqual(context['previous_month'], None)
