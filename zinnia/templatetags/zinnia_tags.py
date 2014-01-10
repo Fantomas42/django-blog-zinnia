@@ -209,7 +209,9 @@ def get_calendar_entries(context, year=None, month=None,
             'next_month': next_month,
             'previous_month': previous_month,
             'calendar': calendar.formatmonth(
-                year, month, previous_month=previous_month,
+                current_month.year,
+                current_month.month,
+                previous_month=previous_month,
                 next_month=next_month)}
 
 
