@@ -1,4 +1,6 @@
 """Test cases for Zinnia's templatetags"""
+from datetime import date
+
 from django.test import TestCase
 from django.utils import timezone
 from django.template import Context
@@ -334,7 +336,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_calendar_entries(source_context)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
     def test_get_calendar_entries_incomplete_year_month(self):
@@ -344,14 +346,14 @@ class TemplateTagsTestCase(TestCase):
             context = get_calendar_entries(source_context, year=2009)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context, month=1)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
     def test_get_calendar_entries_full_params(self):
@@ -363,7 +365,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(
             context['next_month'],
-            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).date().replace(day=1))
         self.assertEqual(context['template'], 'custom_template.html')
 
     def test_get_calendar_entries_no_prev_next(self):
@@ -376,23 +378,23 @@ class TemplateTagsTestCase(TestCase):
 
     def test_get_calendar_entries_month_context(self):
         self.publish_entry()
-        source_context = Context({'month': datetime(2009, 1, 1).date()})
+        source_context = Context({'month': date(2009, 1, 1)})
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(
             context['next_month'],
-            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).date().replace(day=1))
 
     def test_get_calendar_entries_day_context(self):
         self.publish_entry()
-        source_context = Context({'month': datetime(2009, 1, 15).date()})
+        source_context = Context({'month': date(2009, 1, 15)})
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(
             context['next_month'],
-            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).date().replace(day=1))
 
     def test_get_calendar_entries_object_context(self):
         self.publish_entry()
@@ -401,14 +403,14 @@ class TemplateTagsTestCase(TestCase):
             context = get_calendar_entries(source_context)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
-                  'creation_date': datetime(2008, 1, 1),
+                  'creation_date': datetime(2008, 1, 15),
                   'slug': 'my-second-entry'}
         second_entry = Entry.objects.create(**params)
         second_entry.sites.add(self.site)
@@ -418,7 +420,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_calendar_entries(source_context)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(second_entry.creation_date).replace(day=1, hour=0))
+            self.make_local(second_entry.creation_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
         source_context = Context({'object': second_entry})
@@ -427,7 +429,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(
             context['next_month'],
-            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.creation_date).date().replace(day=1))
 
     @skipIfCustomUser
     def test_get_recent_comments(self):
