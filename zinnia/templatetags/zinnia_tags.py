@@ -190,9 +190,9 @@ def get_calendar_entries(context, year=None, month=None,
     else:
         current_month = date(year, month, 1)
 
-    dates = map(
+    dates = list(map(
         lambda x: settings.USE_TZ and timezone.localtime(x).date() or x.date(),
-        Entry.published.datetimes('creation_date', 'month'))
+        Entry.published.datetimes('creation_date', 'month')))
 
     if current_month not in dates:
         dates.append(current_month)
