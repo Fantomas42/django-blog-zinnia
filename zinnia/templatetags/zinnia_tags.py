@@ -1,7 +1,7 @@
 """Template tags and filters for Zinnia"""
 import re
 from hashlib import md5
-from datetime import datetime
+from datetime import date
 try:
     from urllib.parse import urlencode
 except ImportError:  # Python 2
@@ -201,20 +201,26 @@ def get_calendar_entries(context, year=None, month=None,
     """
     Return an HTML calendar of entries.
     """
-    if not year or not month:
-        date_month = context.get('month') or context.get('day') or \
-            getattr(context.get('object'), 'creation_date', None) or \
-            timezone.now().date()
-        year, month = date_month.timetuple()[:2]
+    if not (year and month):
+        month_day = context.get('month') or context.get('day')
+        creation_date = getattr(context.get('object'), 'creation_date', None)
+        if month_day:
+            current_month = month_day
+        elif creation_date:
+            if settings.USE_TZ:
+                creation_date = timezone.localtime(creation_date)
+            current_month = creation_date.date().replace(day=1)
+        else:
+            today = timezone.now()
+            if settings.USE_TZ:
+                today = timezone.localtime(today)
+            current_month = today.date().replace(day=1)
+    else:
+        current_month = date(year, month, 1)
 
-    calendar = Calendar()
-    current_month = datetime(year, month, 1)
-    if settings.USE_TZ:
-        current_month = timezone.make_aware(
-            current_month, timezone.get_current_timezone()
-            ).replace(day=1, hour=0)
-
-    dates = list(Entry.published.datetimes('creation_date', 'month'))
+    dates = list(map(
+        lambda x: settings.USE_TZ and timezone.localtime(x).date() or x.date(),
+        Entry.published.datetimes('creation_date', 'month')))
 
     if current_month not in dates:
         dates.append(current_month)
@@ -223,12 +229,15 @@ def get_calendar_entries(context, year=None, month=None,
 
     previous_month = index > 0 and dates[index - 1] or None
     next_month = index != len(dates) - 1 and dates[index + 1] or None
+    calendar = Calendar()
 
     return {'template': template,
             'next_month': next_month,
             'previous_month': previous_month,
             'calendar': calendar.formatmonth(
-                year, month, previous_month=previous_month,
+                current_month.year,
+                current_month.month,
+                previous_month=previous_month,
                 next_month=next_month)}
 
 
