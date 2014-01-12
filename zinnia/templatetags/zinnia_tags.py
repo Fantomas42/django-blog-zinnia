@@ -1,7 +1,7 @@
 """Template tags and filters for Zinnia"""
 import re
 from hashlib import md5
-from datetime import datetime
+from datetime import date
 try:
     from urllib.parse import urlencode
 except ImportError:  # Python 2
@@ -179,22 +179,20 @@ def get_calendar_entries(context, year=None, month=None,
         month_day = context.get('month') or context.get('day')
         creation_date = getattr(context.get('object'), 'creation_date', None)
         if month_day:
-            if settings.USE_TZ:
-                month_day = timezone.make_aware(
-                    month_day, timezone.get_current_timezone())
-            current_month = month_day.replace(day=1, hour=0)
+            current_month = month_day
         elif creation_date:
+            if settings.USE_TZ:
+                creation_date = timezone.localtime(creation_date)
             current_month = creation_date.date().replace(day=1)
         else:
-            current_month = timezone.now().date().replace(day=1)
+            current_month = timezone.localtime(
+                timezone.now()).date().replace(day=1)
     else:
-        if settings.USE_TZ:
-            current_month = datetime(year, month, 1,
-                                     tzinfo=timezone.get_current_timezone())
-        else:
-            current_month = datetime(year, month, 1)
+        current_month = date(year, month, 1)
 
-    dates = list(Entry.published.datetimes('creation_date', 'month'))
+    dates = map(
+        lambda x: settings.USE_TZ and timezone.localtime(x).date() or x.date(),
+        Entry.published.datetimes('creation_date', 'month'))
 
     if current_month not in dates:
         dates.append(current_month)
