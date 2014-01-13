@@ -63,12 +63,14 @@ class EntryTrackback(TemplateView):
         title = request.POST.get('title') or url
         excerpt = request.POST.get('excerpt') or title
         blog_name = request.POST.get('blog_name') or title
+        ip_address = request.META.get('REMOTE_ADDR', None)
 
         trackback, created = comments.get_model().objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Entry),
             object_pk=entry.pk, site=site, user_url=url,
-            user_name=blog_name, defaults={'comment': excerpt,
-                                           'submit_date': timezone.now()})
+            user_name=blog_name, ip_address=ip_address,
+            defaults={'comment': excerpt,
+                      'submit_date': timezone.now()})
         if created:
             trackback.flags.create(user=get_user_flagger(), flag=TRACKBACK)
             trackback_was_posted.send(trackback.__class__,
