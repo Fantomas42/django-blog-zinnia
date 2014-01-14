@@ -1,6 +1,7 @@
 """EntryAdmin for Zinnia"""
 from django.forms import Media
 from django.contrib import admin
+from django.db.models import Q
 from django.conf.urls import url
 from django.conf.urls import patterns
 from django.utils import timezone
@@ -205,7 +206,9 @@ class EntryAdmin(admin.ModelAdmin):
         """
         if db_field.name == 'authors':
             if request.user.has_perm('zinnia.can_change_author'):
-                kwargs['queryset'] = Author.objects.filter(is_staff=True)
+                kwargs['queryset'] = Author.objects.filter(
+                    Q(is_staff=True) | Q(entries__isnull=False)
+                    ).distinct()
             else:
                 kwargs['queryset'] = Author.objects.filter(pk=request.user.pk)
 
