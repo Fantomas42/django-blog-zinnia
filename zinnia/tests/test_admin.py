@@ -199,20 +199,29 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.assertEqual(len(self.admin.get_queryset(self.request)), 2)
 
     def test_formfield_for_manytomany(self):
-        user = Author.objects.create_user(
-            'user', 'user@exemple.com')
-        user.is_staff = True
-        user.save()
+        staff = Author.objects.create_user(
+            'staff', 'staff@exemple.com')
+        author = Author.objects.create_user(
+            'author', 'author@exemple.com')
         root = Author.objects.create_superuser(
             'root', 'root@exemple.com', 'toor')
-        self.request.user = user
+        self.request.user = staff
         field = self.admin.formfield_for_manytomany(
             Entry.authors.field, self.request)
         self.assertEqual(field.queryset.count(), 1)
         self.request.user = root
         field = self.admin.formfield_for_manytomany(
             Entry.authors.field, self.request)
+        self.assertEqual(field.queryset.count(), 1)
+        staff.is_staff = True
+        staff.save()
+        field = self.admin.formfield_for_manytomany(
+            Entry.authors.field, self.request)
         self.assertEqual(field.queryset.count(), 2)
+        self.entry.authors.add(author)
+        field = self.admin.formfield_for_manytomany(
+            Entry.authors.field, self.request)
+        self.assertEqual(field.queryset.count(), 3)
 
     def test_get_readonly_fields(self):
         user = Author.objects.create_user(
