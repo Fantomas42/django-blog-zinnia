@@ -100,10 +100,12 @@ class EntryAdmin(admin.ModelAdmin):
         """
         try:
             authors = ['<a href="%s" target="blank">%s</a>' %
-                       (author.get_absolute_url(), author.username)
+                       (author.get_absolute_url(),
+                        getattr(author, author.USERNAME_FIELD))
                        for author in entry.authors.all()]
         except NoReverseMatch:
-            authors = [author.username for author in entry.authors.all()]
+            authors = [getattr(author, author.USERNAME_FIELD)
+                       for author in entry.authors.all()]
         return ', '.join(authors)
     get_authors.allow_tags = True
     get_authors.short_description = _('author(s)')

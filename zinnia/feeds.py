@@ -112,7 +112,7 @@ class EntryFeed(ZinniaFeed):
         """
         try:
             author_url = reverse('zinnia_author_detail',
-                                 args=[self.item_author.username])
+                                 args=[getattr(self.item_author, self.item_author.USERNAME_FIELD)])
             return self.site_url + author_url
         except NoReverseMatch:
             return self.site_url
@@ -227,7 +227,7 @@ class AuthorEntries(EntryFeed):
         """
         Retrieve the author by his username.
         """
-        return get_object_or_404(Author, username=username)
+        return get_object_or_404(Author, **{Author.USERNAME_FIELD: username})
 
     def items(self, obj):
         """
@@ -239,7 +239,8 @@ class AuthorEntries(EntryFeed):
         """
         URL of the author.
         """
-        return reverse('zinnia_author_detail', args=[obj.username])
+        return reverse('zinnia_author_detail',
+                       args=[getattr(obj, obj.USERNAME_FIELD)])
 
     def get_title(self, obj):
         """
