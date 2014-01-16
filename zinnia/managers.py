@@ -39,7 +39,8 @@ class EntryPublishedManager(models.Manager):
 
     def on_site(self):
         """Return entries published on current site"""
-        return self.get_query_set().filter(sites=Site.objects.get_current())
+        return super(EntryPublishedManager, self).get_query_set().filter(
+            sites=Site.objects.get_current())
 
     def search(self, pattern):
         """Top level search method on entries"""
