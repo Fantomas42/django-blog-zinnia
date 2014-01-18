@@ -8,6 +8,8 @@ CHANGELOG
 * Fix timezone issues in templatetags and archives
 * Database query optimizations in the archives views
 
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.13...v0.14
+
 0.13
 ----
 
