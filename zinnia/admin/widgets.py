@@ -1,6 +1,4 @@
 """Widgets for Zinnia admin"""
-from __future__ import unicode_literals
-
 from itertools import chain
 
 from django.contrib.admin import widgets
@@ -12,7 +10,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 
 class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
     """
-    MPTT version of FilteredSelectMultiple
+    MPTT version of FilteredSelectMultiple.
     """
 
     def render_option(self, selected_choices, option_value,
@@ -39,7 +37,7 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         change to the for loop and render_option so they will unpack
         and use our extra tuple of mptt sort fields (if you pass in
         some default choices for this field, make sure they have the
-        extra tuple too!)
+        extra tuple too!).
         """
         selected_choices = set(force_text(v) for v in selected_choices)
         output = []
@@ -51,7 +49,9 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         return '\n'.join(output)
 
     class Media:
-        """MPTTFilteredSelectMultiple's Media"""
+        """
+        MPTTFilteredSelectMultiple's Media.
+        """
         js = (staticfiles_storage.url('admin/js/core.js'),
               staticfiles_storage.url('zinnia/js/mptt_m2m_selectbox.js'),
               staticfiles_storage.url('admin/js/SelectFilter2.js'))

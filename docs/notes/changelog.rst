@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+* Full Python 3.0 support
+* Django 1.5 is no longer supported
+* Better support of custom User model
+* Improvements on the archives by week
+* Fix timezone issues in templatetags and archives
+* Database query optimizations in the archives views
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.13...v0.14
+
 0.13
 ----
 

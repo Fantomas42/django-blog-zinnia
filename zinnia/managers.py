@@ -9,7 +9,9 @@ PUBLISHED = 2
 
 
 def tags_published():
-    """Return the published tags"""
+    """
+    Return the published tags.
+    """
     from tagging.models import Tag
     from zinnia.models.entry import Entry
     tags_entry_published = Tag.objects.usage_for_queryset(
@@ -19,7 +21,9 @@ def tags_published():
 
 
 def entries_published(queryset):
-    """Return only the entries published"""
+    """
+    Return only the entries published.
+    """
     now = timezone.now()
     return queryset.filter(
         models.Q(start_publication__lte=now) |
@@ -30,32 +34,44 @@ def entries_published(queryset):
 
 
 class EntryPublishedManager(models.Manager):
-    """Manager to retrieve published entries"""
+    """
+    Manager to retrieve published entries.
+    """
 
-    def get_query_set(self):
-        """Return published entries"""
+    def get_queryset(self):
+        """
+        Return published entries.
+        """
         return entries_published(
-            super(EntryPublishedManager, self).get_query_set())
+            super(EntryPublishedManager, self).get_queryset())
 
     def on_site(self):
-        """Return entries published on current site"""
-        return super(EntryPublishedManager, self).get_query_set().filter(
+        """
+        Return entries published on current site.
+        """
+        return super(EntryPublishedManager, self).get_queryset().filter(
             sites=Site.objects.get_current())
 
     def search(self, pattern):
-        """Top level search method on entries"""
+        """
+        Top level search method on entries.
+        """
         try:
             return self.advanced_search(pattern)
         except:
             return self.basic_search(pattern)
 
     def advanced_search(self, pattern):
-        """Advanced search on entries"""
+        """
+        Advanced search on entries.
+        """
         from zinnia.search import advanced_search
         return advanced_search(pattern)
 
     def basic_search(self, pattern):
-        """Basic search on entries"""
+        """
+        Basic search on entries.
+        """
         lookup = None
         for pattern in pattern.split():
             query_part = models.Q(content__icontains=pattern) | \
@@ -66,17 +82,21 @@ class EntryPublishedManager(models.Manager):
             else:
                 lookup |= query_part
 
-        return self.get_query_set().filter(lookup)
+        return self.get_queryset().filter(lookup)
 
 
 class EntryRelatedPublishedManager(models.Manager):
-    """Manager to retrieve objects associated with published entries"""
+    """
+    Manager to retrieve objects associated with published entries.
+    """
 
-    def get_query_set(self):
-        """Return a queryset containing published entries"""
+    def get_queryset(self):
+        """
+        Return a queryset containing published entries.
+        """
         now = timezone.now()
         return super(
-            EntryRelatedPublishedManager, self).get_query_set().filter(
+            EntryRelatedPublishedManager, self).get_queryset().filter(
             models.Q(entries__start_publication__lte=now) |
             models.Q(entries__start_publication=None),
             models.Q(entries__end_publication__gt=now) |

@@ -2,12 +2,14 @@ language: python
 python:
     - "2.6"
     - "2.7"
+    - "3.2"
+    - "3.3"
 install:
     - pip install -U setuptools
     - python bootstrap.py
     - ./bin/buildout -c travis.cfg
 before_script:
-    - ./bin/flake8 --count --show-source --statistics --exclude=migrations zinnia
+    - ./bin/flake8 --exclude=migrations zinnia
 script:
     - ./bin/test
 after_success:

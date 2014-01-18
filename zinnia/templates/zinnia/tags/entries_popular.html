@@ -1,0 +1,15 @@
+{% load i18n %}
+<ul class="{% if not entries %}no-{% endif %}entries-popular">
+  {% for entry in entries %}
+  <li>
+    <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
+    <a href="{{ entry.get_absolute_url }}#comments"
+       title="{% blocktrans with object=entry.title %}Comments on {{ object }}{% endblocktrans %}">
+      {% blocktrans count comment_count=entry.comment_count %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}</a>
+  </li>
+  {% empty %}
+  <li>
+    {% trans "No entries yet." %}
+  </li>
+  {% endfor %}
+</ul>

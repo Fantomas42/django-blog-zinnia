@@ -23,7 +23,9 @@ from zinnia.settings import STOP_WORDS
 
 
 def createQ(token):
-    """Creates the Q() object"""
+    """
+    Creates the Q() object.
+    """
     meta = getattr(token, 'meta', None)
     query = getattr(token, 'query', '')
     wildcards = None
@@ -80,7 +82,9 @@ def createQ(token):
 
 
 def unionQ(token):
-    """Appends all the Q() objects"""
+    """
+    Appends all the Q() objects.
+    """
     query = Q()
     operation = 'and'
     negation = False
@@ -128,7 +132,8 @@ QUERY.setParseAction(unionQ)
 
 
 def advanced_search(pattern):
-    """Parse the grammar of a pattern
-    and build a queryset with it"""
+    """
+    Parse the grammar of a pattern and build a queryset with it.
+    """
     query_parsed = QUERY.parseString(pattern)
     return Entry.published.filter(query_parsed[0]).distinct()

@@ -19,7 +19,9 @@ AKISMET_API_KEY = settings.AKISMET_SECRET_API_KEY
 
 
 def backend(comment, content_object, request):
-    """Akismet spam checker backend for Zinnia"""
+    """
+    Akismet spam checker backend for Zinnia.
+    """
     blog_url = '%s://%s/' % (PROTOCOL, Site.objects.get_current().domain)
 
     akismet = Akismet(key=AKISMET_API_KEY, blog_url=blog_url)

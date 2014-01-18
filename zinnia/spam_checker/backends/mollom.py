@@ -20,7 +20,9 @@ MOLLOM_PRIVATE_KEY = settings.MOLLOM_PRIVATE_KEY
 
 
 def backend(comment, content_object, request):
-    """Mollom spam checker backend for Zinnia"""
+    """
+    Mollom spam checker backend for Zinnia.
+    """
     mollom_api = MollomAPI(
         publicKey=MOLLOM_PUBLIC_KEY,
         privateKey=MOLLOM_PRIVATE_KEY)

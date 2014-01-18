@@ -143,11 +143,11 @@ the gems (*Ruby powered !*) used to build the CSS documents:
 
   $ gem list
   *** LOCAL GEMS ***
-  chunky_png (1.2.6)
+  chunky_png (1.2.9)
   compass (0.12.2)
-  fssm (0.2.9)
-  sass (3.2.1)
-  susy (1.0.1)
+  fssm (0.2.10)
+  sass (3.2.12)
+  susy (1.0.9)
 
 .. _special-templates:
 

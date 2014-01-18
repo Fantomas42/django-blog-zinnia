@@ -1,6 +1,4 @@
 """Forms for Zinnia admin"""
-from __future__ import unicode_literals
-
 from django import forms
 from django.db.models import ManyToOneRel
 from django.db.models import ManyToManyRel
@@ -17,7 +15,9 @@ from zinnia.admin.fields import MPTTModelMultipleChoiceField
 
 
 class CategoryAdminForm(forms.ModelForm):
-    """Form for Category's Admin"""
+    """
+    Form for Category's Admin.
+    """
     parent = TreeNodeChoiceField(
         label=_('Parent category'),
         level_indicator='|--', required=False,
@@ -26,12 +26,15 @@ class CategoryAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CategoryAdminForm, self).__init__(*args, **kwargs)
-        rel = ManyToOneRel(Category, 'id')
+        rel = ManyToOneRel(Category._meta.get_field('tree_id'),
+                           Category, 'id')
         self.fields['parent'].widget = RelatedFieldWidgetWrapper(
             self.fields['parent'].widget, rel, self.admin_site)
 
     def clean_parent(self):
-        """Check if category parent is not selfish"""
+        """
+        Check if category parent is not selfish.
+        """
         data = self.cleaned_data['parent']
         if data == self.instance:
             raise forms.ValidationError(
@@ -39,12 +42,17 @@ class CategoryAdminForm(forms.ModelForm):
         return data
 
     class Meta:
-        """CategoryAdminForm's Meta"""
+        """
+        CategoryAdminForm's Meta.
+        """
         model = Category
+        fields = forms.ALL_FIELDS
 
 
 class EntryAdminForm(forms.ModelForm):
-    """Form for Entry's Admin"""
+    """
+    Form for Entry's Admin.
+    """
     categories = MPTTModelMultipleChoiceField(
         label=_('Categories'), required=False,
         queryset=Category.objects.all(),
@@ -59,5 +67,8 @@ class EntryAdminForm(forms.ModelForm):
         self.fields['sites'].initial = [Site.objects.get_current()]
 
     class Meta:
-        """EntryAdminForm's Meta"""
+        """
+        EntryAdminForm's Meta.
+        """
         model = Entry
+        fields = forms.ALL_FIELDS

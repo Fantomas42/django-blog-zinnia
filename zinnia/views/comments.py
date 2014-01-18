@@ -8,9 +8,11 @@ from django.views.generic.base import TemplateResponseMixin
 
 
 class CommentSuccess(TemplateResponseMixin, View):
-    """View for handing the publication of a Comment
-    on an Entry. Do a redirection if the comment is visible,
-    else render a confirmation template."""
+    """
+    View for handing the publication of a Comment on an Entry.
+    Do a redirection if the comment is visible,
+    else render a confirmation template.
+    """
     template_name = 'comments/zinnia/entry/posted.html'
 
     def get_context_data(self, **kwargs):

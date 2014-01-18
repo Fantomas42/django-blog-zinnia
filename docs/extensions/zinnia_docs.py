@@ -10,6 +10,7 @@ from django.db import models
 from django.utils.html import strip_tags
 from django.utils.encoding import force_unicode
 
+
 def skip_model_member(app, what, name, obj, skip, options):
     # These fields always fails !
     if name in ('tags', 'image'):
@@ -19,8 +20,7 @@ def skip_model_member(app, what, name, obj, skip, options):
 
 def process_model_docstring(app, what, name, obj, options, lines):
     if inspect.isclass(obj) and issubclass(obj, models.Model):
-        fields = obj._meta._fields()
-        for field in fields:
+        for field in obj._meta.fields:
             # Decode and strip any html out of the field's help text
             help_text = strip_tags(force_unicode(field.help_text))
             # Decode and capitalize the verbose name, for use if there isn't
@@ -33,7 +33,7 @@ def process_model_docstring(app, what, name, obj, options, lines):
                 lines.append(':param %s: %s' % (field.attname, verbose_name))
             # Add the field's type to the docstring
             lines.append(':type %s: %s' % (field.attname,
-                                            type(field).__name__))
+                                           type(field).__name__))
     # Return the extended docstring
     return lines
 

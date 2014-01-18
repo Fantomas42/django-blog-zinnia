@@ -1,19 +1,21 @@
 """Template mixins for Zinnia views"""
-from __future__ import unicode_literals
-
 from django.utils import timezone
 from django.core.exceptions import ImproperlyConfigured
 from django.views.generic.base import TemplateResponseMixin
 
 
 class EntryQuerysetTemplateResponseMixin(TemplateResponseMixin):
-    """Return a custom template name for views returning
-    a queryset of Entry filtered by another model."""
+    """
+    Return a custom template name for views returning
+    a queryset of Entry filtered by another model.
+    """
     model_type = None
     model_name = None
 
     def get_model_type(self):
-        """Return the model type for templates"""
+        """
+        Return the model type for templates.
+        """
         if self.model_type is None:
             raise ImproperlyConfigured(
                 "%s requires either a definition of "
@@ -22,7 +24,9 @@ class EntryQuerysetTemplateResponseMixin(TemplateResponseMixin):
         return self.model_type
 
     def get_model_name(self):
-        """Return the model name for templates"""
+        """
+        Return the model name for templates.
+        """
         if self.model_name is None:
             raise ImproperlyConfigured(
                 "%s requires either a definition of "
@@ -31,7 +35,9 @@ class EntryQuerysetTemplateResponseMixin(TemplateResponseMixin):
         return self.model_name
 
     def get_template_names(self):
-        """Return a list of template names to be used for the view"""
+        """
+        Return a list of template names to be used for the view.
+        """
         model_type = self.get_model_type()
         model_name = self.get_model_name()
 
@@ -48,12 +54,15 @@ class EntryQuerysetTemplateResponseMixin(TemplateResponseMixin):
 
 
 class EntryQuerysetArchiveTemplateResponseMixin(TemplateResponseMixin):
-    """Return a custom template name for the archive views based
-    on the type of the archives and the value of the date."""
+    """
+    Return a custom template name for the archive views based
+    on the type of the archives and the value of the date.
+    """
     template_name_suffix = '_archive'
 
     def get_archive_part_value(self, part):
-        """Method for accessing to the value of
+        """
+        Method for accessing to the value of
         self.get_year(), self.get_month(), etc methods
         if they exists.
         """
@@ -63,12 +72,16 @@ class EntryQuerysetArchiveTemplateResponseMixin(TemplateResponseMixin):
             return None
 
     def get_default_base_template_names(self):
-        """Return a list of default base templates used
-        to build the full list of templates."""
+        """
+        Return a list of default base templates used
+        to build the full list of templates.
+        """
         return ['entry%s.html' % self.template_name_suffix]
 
     def get_template_names(self):
-        """Return a list of template names to be used for the view"""
+        """
+        Return a list of template names to be used for the view.
+        """
         year = self.get_archive_part_value('year')
         week = self.get_archive_part_value('week')
         month = self.get_archive_part_value('month')
@@ -114,12 +127,16 @@ class EntryQuerysetArchiveTemplateResponseMixin(TemplateResponseMixin):
 
 class EntryArchiveTemplateResponseMixin(
         EntryQuerysetArchiveTemplateResponseMixin):
-    """Same as EntryQuerysetArchivetemplateResponseMixin
+    """
+    Same as EntryQuerysetArchivetemplateResponseMixin
     but use the template defined in the Entry instance
-    as the base template name."""
+    as the base template name.
+    """
 
     def get_default_base_template_names(self):
-        """Return the Entry.template value"""
+        """
+        Return the Entry.template value.
+        """
         return [self.object.detail_template,
                 '%s.html' % self.object.slug,
                 '%s_%s' % (self.object.slug, self.object.detail_template)]
@@ -127,9 +144,11 @@ class EntryArchiveTemplateResponseMixin(
 
 class EntryQuerysetArchiveTodayTemplateResponseMixin(
         EntryQuerysetArchiveTemplateResponseMixin):
-    """Same as EntryQuerysetArchivetemplateResponseMixin
+    """
+    Same as EntryQuerysetArchivetemplateResponseMixin
     but use the current date of the day when getting
-    archive part values"""
+    archive part values.
+    """
     today = None
 
     def get_archive_part_value(self, part):

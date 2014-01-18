@@ -1,0 +1,19 @@
+{% load i18n %}
+<ul  class="{% if not linkbacks %}no-{% endif %}linkbacks-recent">
+  {% for linkback in linkbacks %}
+  <li>
+    {% with entry=linkback.content_object %}
+    <a href="{{ linkback.url }}">{{ linkback.name }}</a>
+    {% trans "in" %}
+    <a href="{{ entry.get_absolute_url }}#c{{ linkback.pk }}"
+       title="{% trans "Linkback on" %} {{ entry.title }}">
+      {{ entry.title }}
+    </a>
+    {% endwith %}
+  </li>
+  {% empty %}
+  <li>
+    {% trans "No linkbacks yet." %}
+  </li>
+  {% endfor %}
+</ul>

@@ -37,7 +37,7 @@ class BaseAuthorDetail(object):
         build a queryset of his published entries.
         """
         self.author = get_object_or_404(
-            Author, username=self.kwargs['username'])
+            Author, **{Author.USERNAME_FIELD: self.kwargs['username']})
         return self.author.entries_published()
 
     def get_context_data(self, **kwargs):
@@ -70,4 +70,4 @@ class AuthorDetail(EntryQuerysetTemplateResponseMixin,
         """
         The model name is the author's username.
         """
-        return self.author.username
+        return self.author.get_username()

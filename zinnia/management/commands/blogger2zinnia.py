@@ -31,8 +31,10 @@ Comment = get_comment_model()
 
 
 class Command(NoArgsCommand):
-    """Command object for importing a Blogger blog
-    into Zinnia via Google's gdata API."""
+    """
+    Command object for importing a Blogger blog
+    into Zinnia via Google's gdata API.
+    """
     help = 'Import a Blogger blog into Zinnia.'
 
     option_list = NoArgsCommand.option_list + (
@@ -53,7 +55,9 @@ class Command(NoArgsCommand):
     SITE = Site.objects.get_current()
 
     def __init__(self):
-        """Init the Command and add custom styles"""
+        """
+        Init the Command and add custom styles.
+        """
         super(Command, self).__init__()
         self.style.TITLE = self.style.SQL_FIELD
         self.style.STEP = self.style.SQL_COLTYPE
@@ -62,7 +66,9 @@ class Command(NoArgsCommand):
         disconnect_discussion_signals()
 
     def write_out(self, message, verbosity_level=1):
-        """Convenient method for outputing"""
+        """
+        Convenient method for outputing.
+        """
         if self.verbosity and self.verbosity >= verbosity_level:
             sys.stdout.write(smart_str(message))
             sys.stdout.flush()

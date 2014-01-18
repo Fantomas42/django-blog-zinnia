@@ -75,6 +75,7 @@ class EntryWeek(EntryArchiveMixin, BaseWeekArchiveView):
         """
         self.date_list, self.object_list, extra_context = super(
             EntryWeek, self).get_dated_items()
+        self.date_list = self.get_date_list(self.object_list, 'day')
         extra_context['week_end_day'] = extra_context[
             'week'] + datetime.timedelta(days=6)
         return self.date_list, self.object_list, extra_context

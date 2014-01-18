@@ -1,12 +1,15 @@
 """Utils for Zinnia's tests"""
 try:
-    from io import StringIO
+    from urllib.parse import parse_qs
+    from urllib.parse import urlparse
     from xmlrpc.client import Transport
 except ImportError:  # Python 2
-    from StringIO import StringIO
+    from urlparse import parse_qs
+    from urlparse import urlparse
     from xmlrpclib import Transport
 from datetime import datetime as original_datetime
 
+from django.utils import six
 from django.conf import settings
 from django.utils import timezone
 from django.test.client import Client
@@ -26,15 +29,13 @@ class TestTransport(Transport):
         response = self.client.post(handler,
                                     request_body,
                                     content_type="text/xml")
-        res = StringIO(response.content)
+        res = six.BytesIO(response.content)
         setattr(res, 'getheader', lambda *args: '')  # For Python >= 2.7
         res.seek(0)
-        if not hasattr(res, 'getheader'):
-            setattr(res, 'getheader', lambda *args: "")
         return self.parse_response(res)
 
 
-def test_datetime(*args):
+def omniscient_datetime(*args):
     """
     Generating a datetime aware or naive depending of USE_TZ.
     """
@@ -43,7 +44,7 @@ def test_datetime(*args):
         d = timezone.make_aware(d, timezone.utc)
     return d
 
-datetime = test_datetime
+datetime = omniscient_datetime
 
 
 def is_lib_available(library):
@@ -55,3 +56,15 @@ def is_lib_available(library):
         return True
     except ImportError:
         return False
+
+
+def urlEqual(url_1, url_2):
+    """
+    Compare two URLs with query string where
+    ordering does not matter.
+    """
+    parse_result_1 = urlparse(url_1)
+    parse_result_2 = urlparse(url_2)
+
+    return (parse_result_1[:4] == parse_result_2[:4] and
+            parse_qs(parse_result_1[5]) == parse_qs(parse_result_2[5]))

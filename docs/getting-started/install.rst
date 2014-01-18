@@ -12,7 +12,7 @@ Dependencies
 Make sure to install these packages prior to installation :
 
 * `Python`_ >= 2.6.5
-* `Django`_ == 1.5
+* `Django`_ >= 1.6
 * `PIL`_ >= 1.1.6 or `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.5.1 < 0.6
 * `django-tagging`_ >= 0.3.1
@@ -94,8 +94,8 @@ already present. ::
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.i18n',
     'django.core.context_processors.request',
-    'django.core.context_processors.media',
-    'zinnia.context_processors.version',) # Optional
+    'zinnia.context_processors.version',  # Optional
+  )
 
 .. _urls:
 

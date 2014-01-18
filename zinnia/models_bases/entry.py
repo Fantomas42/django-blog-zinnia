@@ -1,6 +1,4 @@
 """Base entry models for Zinnia"""
-from __future__ import unicode_literals
-
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
@@ -196,15 +194,15 @@ class ContentEntry(models.Model):
         """
         Returns the "content" field formatted in HTML.
         """
-        if MARKUP_LANGUAGE == 'markdown':
+        if '</p>' in self.content:
+            return self.content
+        elif MARKUP_LANGUAGE == 'markdown':
             return markdown(self.content)
         elif MARKUP_LANGUAGE == 'textile':
             return textile(self.content)
         elif MARKUP_LANGUAGE == 'restructuredtext':
             return restructuredtext(self.content)
-        elif not '</p>' in self.content:
-            return linebreaks(self.content)
-        return self.content
+        return linebreaks(self.content)
 
     @property
     def html_preview(self):

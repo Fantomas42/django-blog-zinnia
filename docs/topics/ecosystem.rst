@@ -88,6 +88,14 @@ Richard Espelin.
 
 URL: https://bitbucket.org/resplin/byteflow2zinnia
 
+zinnia-drupal
+=============
+
+Helper Django application for importing content from Drupal into Django
+Blog Zinnia by Branko Majic.
+
+URL: https://github.com/azaghal/zinnia-drupal
+
 .. _`message`: https://github.com/Fantomas42
 .. _`Django-CMS`: http://www.django-cms.org/
 .. _`django-admin-tools`: http://django-admin-tools.readthedocs.org/en/latest/index.html

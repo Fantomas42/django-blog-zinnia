@@ -1,6 +1,4 @@
 """Views for Zinnia trackback"""
-from __future__ import unicode_literals
-
 from django.utils import timezone
 from django.contrib import comments
 from django.contrib.sites.models import Site
@@ -18,28 +16,38 @@ from zinnia.signals import trackback_was_posted
 
 
 class EntryTrackback(TemplateView):
-    """View for handling trackbacks on the entries"""
+    """
+    View for handling trackbacks on the entries.
+    """
     content_type = 'text/xml'
     template_name = 'zinnia/entry_trackback.xml'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
-        """Decorate the view dispatcher with csrf_exempt"""
+        """
+        Decorate the view dispatcher with csrf_exempt.
+        """
         return super(EntryTrackback, self).dispatch(*args, **kwargs)
 
     def get_object(self):
-        """Retrieve the Entry trackbacked"""
+        """
+        Retrieve the Entry trackbacked.
+        """
         return get_object_or_404(Entry.published, pk=self.kwargs['pk'])
 
     def get(self, request, *args, **kwargs):
-        """GET only do a permanent redirection to the Entry"""
+        """
+        GET only do a permanent redirection to the Entry.
+        """
         entry = self.get_object()
         return HttpResponsePermanentRedirect(entry.get_absolute_url())
 
     def post(self, request, *args, **kwargs):
-        """Check if an URL is provided and if trackbacks
-        are enabled on the Entry. If so the URL is registered
-        one time as a trackback"""
+        """
+        Check if an URL is provided and if trackbacks
+        are enabled on the Entry.
+        If so the URL is registered one time as a trackback.
+        """
         url = request.POST.get('url')
 
         if not url:
@@ -55,12 +63,14 @@ class EntryTrackback(TemplateView):
         title = request.POST.get('title') or url
         excerpt = request.POST.get('excerpt') or title
         blog_name = request.POST.get('blog_name') or title
+        ip_address = request.META.get('REMOTE_ADDR', None)
 
         trackback, created = comments.get_model().objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Entry),
             object_pk=entry.pk, site=site, user_url=url,
-            user_name=blog_name, defaults={'comment': excerpt,
-                                           'submit_date': timezone.now()})
+            user_name=blog_name, ip_address=ip_address,
+            defaults={'comment': excerpt,
+                      'submit_date': timezone.now()})
         if created:
             trackback.flags.create(user=get_user_flagger(), flag=TRACKBACK)
             trackback_was_posted.send(trackback.__class__,
