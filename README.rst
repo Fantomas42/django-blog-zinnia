@@ -1,8 +1,8 @@
-======================================================
-Django Blog Zinnia |travis-develop| |coverage-develop|
-======================================================
+===============================================
+Django Blog Zinnia |latest-version| |downloads|
+===============================================
 
-|latest-version| |downloads|
+|travis-develop| |coverage-develop|
 
 Simple yet powerful and really extendable application for managing a blog
 within your Django Web site.
