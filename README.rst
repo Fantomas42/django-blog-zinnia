@@ -14,6 +14,8 @@ left out.
 Why should we re-implement something that is already done and reviewed by
 others and tested ?
 
+|paypal|
+
 Features
 ========
 
@@ -99,6 +101,9 @@ More information and help available at these URLs :
 .. |downloads| image:: https://pypip.in/d/django-blog-zinnia/badge.png
    :alt: Downloads from Pypi
    :target: https://crate.io/packages/django-blog-zinnia/
+.. |paypal| image:: https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif
+   :alt:  Make a free donation with Paypal to encourage the development
+   :target: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=68T48HR8KK9KG
 .. _`Sitemaps`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#module-zinnia.sitemaps
 .. _`Advanced search engine`: http://docs.django-blog-zinnia.com/en/latest/topics/search_engines.html
 .. _`Custom templates for various contents`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#templates-for-entries
