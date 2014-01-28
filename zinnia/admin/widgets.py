@@ -20,7 +20,7 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         the sort_fields argument.
         """
         option_value = force_text(option_value)
-        option_label = force_text(option_label)
+        option_label = mark_safe(option_label)
         if option_value in selected_choices:
             selected_html = mark_safe(' selected="selected"')
         else:
