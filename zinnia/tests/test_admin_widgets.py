@@ -32,7 +32,7 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
         self.assertEqual(
             option,
             '<option value="1" data-tree-id="1"'
-            ' data-left-value="1">тест</option>')
+            ' data-left-value="1">тест</option>'.decode('utf-8'))
 
     def test_render_options(self):
         widget = MPTTFilteredSelectMultiple('test', False)
