@@ -27,12 +27,12 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
     def test_render_option_non_ascii_issue_317(self):
         widget = MPTTFilteredSelectMultiple('test', False)
 
-        option = widget.render_option([], 1, 'тест'.decode('utf-8'), (1, 1))
+        option = widget.render_option([], 1, u'тест', (1, 1))
 
         self.assertEqual(
             option,
-            '<option value="1" data-tree-id="1"'
-            ' data-left-value="1">тест</option>'.decode('utf-8'))
+            u'<option value="1" data-tree-id="1"'
+            u' data-left-value="1">тест</option>')
 
     def test_render_options(self):
         widget = MPTTFilteredSelectMultiple('test', False)
