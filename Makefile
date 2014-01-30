@@ -32,14 +32,19 @@ kwalitee:
 	@./bin/flake8 --count --show-source --show-pep8 --statistics --exclude=migrations zinnia
 	@echo "$(SUCCESS_COLOR)* No kwalitee errors, Congratulations ! :)$(NO_COLOR)"
 
-translations:
+push-translations:
 	@echo "$(COLOR)* Generating english translation$(NO_COLOR)"
 	@cd zinnia && ../bin/demo makemessages --extension=.html,.txt -l en
-	@echo "$(COLOR)* Pushing translation to Transifex$(NO_COLOR)"
-	@rm -rf .tox
+	@echo "$(COLOR)* Pushing source translation to Transifex$(NO_COLOR)"
 	@tx push -s
-	@echo "$(COLOR)* Remove english translation$(NO_COLOR)"
+	@echo "$(COLOR)* Removing source translation$(NO_COLOR)"
 	@rm -rf zinnia/locale/en/
+
+pull-translations:
+	@echo "$(COLOR)* Pulling translations from Transifex$(NO_COLOR)"
+	@tx pull -a -f --minimum-perc=50
+	@echo "$(COLOR)* Compiling translations$(NO_COLOR)"
+	@cd zinnia && ../bin/demo compilemessages
 
 2to3:
 	@echo "$(COLOR)* Checking Py3 code$(NO_COLOR)"
@@ -50,7 +55,6 @@ clean:
 	@find demo zinnia docs -type f \( -name "*.pyc" -o -name "\#*" -o -name "*~" \) -exec rm -f {} \;
 	@rm -f \#* *~
 	@rm -rf uploads
-	@rm -rf .tox
 
 mrproper: clean
 	@rm -rf docs/build/doctrees

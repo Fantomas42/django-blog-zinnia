@@ -1,5 +1,5 @@
 [main]
-host = http://www.transifex.net
+host = https://www.transifex.com
 
 [django-blog-zinnia.djangopo]
 file_filter = zinnia/locale/<lang>/LC_MESSAGES/django.po

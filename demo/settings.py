@@ -34,6 +34,7 @@ LANGUAGES = (
     ('es', gettext('Spanish')),
     ('it', gettext('Italian')),
     ('nl', gettext('Dutch')),
+    ('bg', gettext('Bulgarian')),
     ('hu', gettext('Hungarian')),
     ('cs', gettext('Czech')),
     ('sk', gettext('Slovak')),

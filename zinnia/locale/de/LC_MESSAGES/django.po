@@ -6,7 +6,7 @@
 # DerMensch <b1077887@rmqkr.net>, 2013
 # Daniel Seither <post@tiwoc.de>, 2012
 # DerMensch <b1077887@rmqkr.net>, 2013
-# Jannis Leidel <jannis@leidel.info>, 2011
+# Jannis Leidel <jannis@leidel.info>, 2011,2013
 # Julien Fache <fantomas42@gmail.com>, 2011
 # madcad <mail@mad-cad.net>, 2011
 msgid ""
@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 23:09+0100\n"
-"PO-Revision-Date: 2013-11-05 22:08+0000\n"
-"Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
+"PO-Revision-Date: 2013-12-21 19:24+0000\n"
+"Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/django-blog-zinnia/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -90,7 +90,7 @@ msgstr "Kommentare auf %s"
 #: feeds.py:319
 #, python-format
 msgid "The latest discussions for the entry %s"
-msgstr "Die neusten Kommentare für die Einträge %s"
+msgstr "Die neusten Kommentare für den Eintrag %s"
 
 #: feeds.py:338
 #, python-format
@@ -100,7 +100,7 @@ msgstr "Kommentar für %s"
 #: feeds.py:342
 #, python-format
 msgid "The latest comments for the entry %s"
-msgstr "Die neusten Kommentare für die Einträge %s"
+msgstr "Die neusten Kommentare für den Eintrag %s"
 
 #: feeds.py:372
 #, python-format
@@ -198,7 +198,7 @@ msgstr "Die ausgewählten Einträge gehören nun Ihnen."
 
 #: admin/entry.py:225
 msgid "Set the entries to the user"
-msgstr "Ausgewählte Einträge dem aktuellem Benutzer zuordnen"
+msgstr "Ausgewählte Einträge dem aktuellen Benutzer zuordnen"
 
 #: admin/entry.py:232
 msgid "The selected entries are now marked as published."
@@ -250,19 +250,19 @@ msgstr "Setzen Sie die ausgewählten Einträge auf das aktuelle Datum"
 
 #: admin/entry.py:279
 msgid "Selected entries are now marked as featured."
-msgstr ""
+msgstr "Ausgewählte Einträge sind nun als Feature markiert."
 
 #: admin/entry.py:280
 msgid "Mark selected entries as featured"
-msgstr ""
+msgstr "Ausgewählte Einträge als Feature markieren"
 
 #: admin/entry.py:286
 msgid "Selected entries are no longer marked as featured."
-msgstr ""
+msgstr "Ausgewählte Einträge sind nicht länger als Feature markiert"
 
 #: admin/entry.py:288
 msgid "Unmark selected entries as featured"
-msgstr ""
+msgstr "Ausgewählte Einträge nicht länger als Feature markieren"
 
 #: admin/entry.py:303
 msgid "The selected entries have been tweeted."
@@ -275,7 +275,7 @@ msgstr "Ausgewählte Einträge twittern"
 #: admin/entry.py:323
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr "%(directory)s  Verzeichnis erfolgreich angepingt %(success)d Einträge."
+msgstr "%(directory)s Verzeichnis hat erfolgreich %(success)d Einträge gepingt."
 
 #: admin/entry.py:327
 msgid "Ping Directories for selected entries"
@@ -290,7 +290,7 @@ msgstr[1] "%(item)s (%(count)i Einträge)"
 
 #: admin/filters.py:48
 msgid "published authors"
-msgstr "Autoren, die etwas veröffentlicht haben"
+msgstr "Veröffentlichte Autoren"
 
 #: admin/filters.py:59
 msgid "published categories"
@@ -298,7 +298,7 @@ msgstr "veröffentlichte Kategorien"
 
 #: admin/forms.py:22
 msgid "Parent category"
-msgstr ""
+msgstr "Übergeordnete Kategorie"
 
 #: admin/forms.py:24
 msgid "No parent category"
@@ -306,7 +306,7 @@ msgstr "Keine Hauptkategorie"
 
 #: admin/forms.py:38
 msgid "A category cannot be parent of itself."
-msgstr "Eine Kategorie kann auf selbst sein referenzieren."
+msgstr "Eine Kategorie kann sich nicht selbst referenzieren."
 
 #: admin/forms.py:49 templates/zinnia/base.html:36
 #: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
@@ -364,7 +364,7 @@ msgstr "Veröffentlichungsbeginn"
 
 #: models_bases/entry.py:60
 msgid "Start date of publication."
-msgstr "Veröffentlichungsdatum."
+msgstr "Startdatum der Veröffentlichung."
 
 #: models_bases/entry.py:63
 msgid "end publication"
@@ -380,7 +380,7 @@ msgstr "Websites"
 
 #: models_bases/entry.py:70
 msgid "Sites where the entry will be published."
-msgstr "Websites auf denen der Eintrag veröffentlicht wird."
+msgstr "Websites, auf denen der Eintrag veröffentlicht wird."
 
 #: models_bases/entry.py:73
 msgid "creation date"
@@ -416,7 +416,7 @@ msgstr "Pingbacks aktiviert."
 
 #: models_bases/entry.py:238
 msgid "Allows pingbacks if checked."
-msgstr "Erlaubt  Pingbacks."
+msgstr "Erlaubt Pingbacks."
 
 #: models_bases/entry.py:240
 msgid "trackbacks enabled"
@@ -428,7 +428,7 @@ msgstr "Erlaubt Trackbacks."
 
 #: models_bases/entry.py:244
 msgid "comment count"
-msgstr "Anzahl Kommentare"
+msgstr "Kommentaranzahl"
 
 #: models_bases/entry.py:246
 msgid "pingback count"
@@ -460,7 +460,7 @@ msgstr "Wird zu Veranschaulichung verwendet."
 
 #: models_bases/entry.py:374
 msgid "featured"
-msgstr "empfohlenen"
+msgstr "Features"
 
 #: models_bases/entry.py:389
 msgid "authors"
@@ -484,11 +484,11 @@ msgstr "Passwort"
 
 #: models_bases/entry.py:446
 msgid "Protects the entry with a password."
-msgstr "Eintrag mit einem Passwort schützen"
+msgstr "Schützt den Eintrag mit einem Passwort."
 
 #: models_bases/entry.py:458
 msgid "content template"
-msgstr "Content Template"
+msgstr "Inhalt-Template"
 
 #: models_bases/entry.py:460 models_bases/entry.py:476
 msgid "Default template"
@@ -500,7 +500,7 @@ msgstr "Template, das zur Darstellung des Eintrags verwendet wird."
 
 #: models_bases/entry.py:474
 msgid "detail template"
-msgstr "Detail Template"
+msgstr "Detail-Template"
 
 #: models_bases/entry.py:478
 msgid "Template used to display the entry's detail page."
@@ -542,11 +542,11 @@ msgstr "Server-Fehler"
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr "Es ist ein Fehler aufgetreten. Der Server-Admin wurde umgehend benachrichtig und wird sich in Kürze um den Fehler kümmern. Wir danken für Ihr Verständnis."
+msgstr "Es ist ein Fehler aufgetreten. Der Server-Admin wurde umgehend benachrichtigt und wird sich in Kürze um den Fehler kümmern. Wir danken für Ihr Verständnis."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
-msgstr "Inhalt"
+msgstr "Inhalte"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:9
 #: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:17
@@ -558,8 +558,8 @@ msgstr "Inhalt"
 #, python-format
 msgid "%(entry_count)s entry"
 msgid_plural "%(entry_count)s entries"
-msgstr[0] " %(entry_count)s  Eintrag"
-msgstr[1] " %(entry_count)s  Einträge"
+msgstr[0] " %(entry_count)s Eintrag"
+msgstr[1] " %(entry_count)s Einträge"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:14
 #: templates/zinnia/_entry_detail_base.html:120
@@ -602,8 +602,8 @@ msgstr[1] "%(tag_count)s Tags"
 #, python-format
 msgid "%(trackback_count)s trackback"
 msgid_plural "%(trackback_count)s trackbacks"
-msgstr[0] " %(trackback_count)s  Trackback"
-msgstr[1] " %(trackback_count)s  Trackbacks"
+msgstr[0] " %(trackback_count)s Trackback"
+msgstr[1] " %(trackback_count)s Trackbacks"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:37
 #: templates/zinnia/tags/statistics.html:4
@@ -673,7 +673,7 @@ msgstr "Eintrag bearbeiten"
 #: templates/zinnia/entry_detail_base.html:186
 msgctxt "on date"
 msgid "on"
-msgstr ""
+msgstr "am"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:15
 #: templates/comments/zinnia/entry/form.html:25
@@ -683,12 +683,12 @@ msgstr "Vorschau"
 #: templates/admin/zinnia/widgets/_draft_entries.html:22
 #: templates/zinnia/tags/draft_entries.html:9
 msgid "No draft entries."
-msgstr "Kein Entwurfs Einträge."
+msgstr "Keine Eintragsentwürfe."
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:31
 #: templates/admin/zinnia/widgets/_draft_entries.html:32
 msgid "View all draft entries"
-msgstr "Alle Eintragsentwürfe anziegen"
+msgstr "Alle Eintragsentwürfe anzeigen"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:10
 #: templates/zinnia/_entry_detail_base.html:35
@@ -700,7 +700,7 @@ msgstr "in"
 #: templates/admin/zinnia/widgets/_recent_comments.html:13
 #: templates/zinnia/tags/recent_comments.html:8
 msgid "Comment on"
-msgstr "Ihre Meinung zu"
+msgstr "Ihr Kommentar"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:22
 msgid "Edit the comment"
@@ -725,7 +725,7 @@ msgstr "Verwalten Sie die Kommentare"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:7
 msgid "made a linkback on"
-msgstr "mache eine LinkBack auf"
+msgstr "LinkBack erstellt auf"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:17
 msgid "Edit the linkback"
@@ -982,18 +982,18 @@ msgstr "RSS-Feed der neuesten Diskussionen"
 
 #: templates/zinnia/base.html:27
 msgid "Welcome!"
-msgstr ""
+msgstr "Willkommen!"
 
 #: templates/zinnia/base.html:29
 msgid "This simple theme is the default appearance of Zinnia."
-msgstr ""
+msgstr "Dieses einfache Thema ist das standardmäßige Erscheinungsbild von Zinnia."
 
 #: templates/zinnia/base.html:32
 msgid ""
 "Don't hesitate to override the template <strong>zinnia/base.html</strong> to"
 " start <a href='http://docs.django-blog-zinnia.com/en/latest/how-"
 "to/customize_look_and_feel.html'>customizing your Weblog</a>."
-msgstr ""
+msgstr "Um das Erscheinungsbild Ihres <a href='http://docs.django-blog-zinnia.com/en/latest/how-to/customize_look_and_feel.html'>Weblogs anzupassen</a>, können Sie als erstes das Template <strong>zinnia/base.html</strong> überschreiben."
 
 #: templates/zinnia/base.html:44
 msgid "Calendar"
@@ -1078,7 +1078,7 @@ msgstr "Voriger Monat"
 
 #: templates/zinnia/entry_archive_month.html:31
 msgid "Next month"
-msgstr "Nächste Monat"
+msgstr "Nächster Monat"
 
 #: templates/zinnia/entry_archive_today.html:4
 #: templates/zinnia/entry_archive_today.html:6
@@ -1091,21 +1091,21 @@ msgstr "Archiv von heute"
 #: templates/zinnia/entry_archive_week.html:11
 #, python-format
 msgid "Archives week %(week_number)s of %(year)s"
-msgstr "Archiv zur KW %(week_number)s/%(year)s"
+msgstr "Archiv der Kalenderwoche %(week_number)s von %(year)s"
 
 #: templates/zinnia/entry_archive_week.html:17
 msgid "Previous week"
-msgstr ""
+msgstr "Vorige Woche"
 
 #: templates/zinnia/entry_archive_week.html:20
 #: templates/zinnia/entry_archive_week.html:28
 #, python-format
 msgid "Week %(week_number)s of %(year)s"
-msgstr ""
+msgstr "Woche %(week_number)s von %(year)s"
 
 #: templates/zinnia/entry_archive_week.html:25
 msgid "Next week"
-msgstr ""
+msgstr "Nächste Woche"
 
 #: templates/zinnia/entry_archive_year.html:15
 #: templates/zinnia/sitemap.html:69
@@ -1114,11 +1114,11 @@ msgstr "Monatliche Archive"
 
 #: templates/zinnia/entry_archive_year.html:25
 msgid "Previous year"
-msgstr ""
+msgstr "Voriges Jahr"
 
 #: templates/zinnia/entry_archive_year.html:31
 msgid "Next year"
-msgstr ""
+msgstr "Nächstes Jahr"
 
 #: templates/zinnia/entry_detail_base.html:21
 msgid "RSS Feed of discussions on"
@@ -1130,11 +1130,11 @@ msgstr "RSS-Feed mit Kommentaren zu"
 
 #: templates/zinnia/entry_detail_base.html:25
 msgid "RSS Feed of pingbacks on"
-msgstr "RSS-Feed auf den Pingbacks"
+msgstr "RSS-Feed von Pingbacks zu"
 
 #: templates/zinnia/entry_detail_base.html:27
 msgid "RSS Feed of trackbacks on"
-msgstr "RSS-Feed auf Trackbacks ist an."
+msgstr "RSS-Feed von Trackbacks zu"
 
 #: templates/zinnia/entry_detail_base.html:46
 msgid "Next entry"
@@ -1142,7 +1142,7 @@ msgstr "Nächster Eintrag"
 
 #: templates/zinnia/entry_detail_base.html:60
 msgid "Previous entry"
-msgstr "Vorheriger Eintrag"
+msgstr "Voriger Eintrag"
 
 #: templates/zinnia/entry_detail_base.html:74
 msgid "Related entries"
@@ -1291,7 +1291,7 @@ msgstr "Ihr Benutzername und Passwort stimmen nicht überein. Bitte versuchen Si
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
-msgstr "Sie müssen eingeloggt sein um diesen Eintrag zu sehen."
+msgstr "Sie müssen eingeloggt sein, um diesen Eintrag zu sehen."
 
 #: templates/zinnia/login.html:34
 msgid "Login"
@@ -1307,7 +1307,7 @@ msgstr "Das Kennwort ist ungültig. Bitte versuchen Sie es erneut."
 
 #: templates/zinnia/password.html:17
 msgid "You need to provide a password to view this entry."
-msgstr "Sie benötigen ein Passwort um diesen Eintrag lesen zu können."
+msgstr "Sie benötigen ein Passwort, um diesen Eintrag lesen zu können."
 
 #: templates/zinnia/password.html:24
 msgid "Password"
@@ -1337,7 +1337,7 @@ msgstr "Alle Einträge"
 
 #: templates/zinnia/skeleton.html:11 templates/zinnia/skeleton.html.py:53
 msgid "Just another Zinnia weblog."
-msgstr ""
+msgstr "Nur noch ein weiteres Zinnia-Weblog."
 
 #: templates/zinnia/skeleton.html:43 templates/zinnia/tags/search_form.html:4
 msgid "Keywords..."
@@ -1349,7 +1349,7 @@ msgstr "Nützliche Links"
 
 #: templates/zinnia/skeleton.html:64 templates/zinnia/skeleton.html.py:65
 msgid "Weblog index"
-msgstr ""
+msgstr "Weblog-Startseite"
 
 #: templates/zinnia/skeleton.html:76
 msgid "Search"
@@ -1361,7 +1361,7 @@ msgid ""
 "Powered by <a href=\"http://www.djangoproject.com\">Django</a> and <a "
 "href=\"https://github.com/Fantomas42/django-blog-zinnia\">Zinnia "
 "%(ZINNIA_VERSION)s</a>."
-msgstr ""
+msgstr "Basiert auf <a href=\"http://www.djangoproject.com\">Django</a> und <a href=\"https://github.com/Fantomas42/django-blog-zinnia\">Zinnia %(ZINNIA_VERSION)s</a>."
 
 #: templates/zinnia/tag_list.html:4 templates/zinnia/tag_list.html.py:11
 msgid "Tag list"
@@ -1389,7 +1389,7 @@ msgstr "Mehr neuste Einträge"
 #: templates/zinnia/tags/pagination.html:33
 #: templates/zinnia/tags/pagination.html:47
 msgid "Entries page"
-msgstr "Einträge der Seite"
+msgstr "Eintragseite"
 
 #: templates/zinnia/tags/pagination.html:56
 msgid "More old entries"
@@ -1425,7 +1425,7 @@ msgstr "Seite %s"
 #: templatetags/zbreadcrumbs.py:116
 #, python-format
 msgid "Week %s"
-msgstr "KW %s"
+msgstr "Kalenderwoche %s"
 
 #: tests/views.py:450 views/search.py:30
 msgid "The pattern is too short"
@@ -1437,131 +1437,131 @@ msgstr "Es wurde kein Suchbegriff angegeben."
 
 #: urls/__init__.py:23
 msgid "^feeds/"
-msgstr ""
+msgstr "^feeds/"
 
 #: urls/__init__.py:24
 msgid "^tags/"
-msgstr ""
+msgstr "^tags/"
 
 #: urls/__init__.py:25
 msgid "^authors/"
-msgstr ""
+msgstr "^autoren/"
 
 #: urls/__init__.py:26
 msgid "^categories/"
-msgstr ""
+msgstr "^kategorien/"
 
 #: urls/__init__.py:27
 msgid "^search/"
-msgstr ""
+msgstr "^suche/"
 
 #: urls/__init__.py:28
 msgid "^random/"
-msgstr ""
+msgstr "^zufällig/"
 
 #: urls/__init__.py:29
 msgid "^sitemap/"
-msgstr ""
+msgstr "^sitemap/"
 
 #: urls/__init__.py:30
 msgid "^trackback/"
-msgstr ""
+msgstr "^trackback/"
 
 #: urls/__init__.py:31
 msgid "^comments/"
-msgstr ""
+msgstr "^kommentare/"
 
 #: urls/archives.py:18
 msgid "^page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^seite/(?P<page>\\d+)/$"
 
 #: urls/archives.py:27
 msgid "^(?P<year>\\d{4})/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/seite/(?P<page>\\d+)/$"
 
 #: urls/archives.py:33
 msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/woche/(?P<week>\\d+)/$"
 
 #: urls/archives.py:36
 msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/woche/(?P<week>\\d+)/seite/(?P<page>\\d+)/$"
 
 #: urls/archives.py:45
 msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/(?P<month>\\d{2})/seite/(?P<page>\\d+)/$"
 
 #: urls/archives.py:54
 msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/seite/(?P<page>\\d+)/$"
 
 #: urls/archives.py:61
 msgid "^today/$"
-msgstr ""
+msgstr "^heute/$"
 
 #: urls/archives.py:64
 msgid "^today/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^heute/seite/(?P<page>\\d+)/$"
 
 #: urls/authors.py:15
 msgid "^(?P<username>[.+-@\\w]+)/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<username>[.+-@\\w]+)/seite/(?P<page>\\d+)/$"
 
 #: urls/categories.py:15
 msgid "^(?P<path>[-\\/\\w]+)/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<path>[-\\/\\w]+)/seite/(?P<page>\\d+)/$"
 
 #: urls/comments.py:11
 msgid "^success/$"
-msgstr ""
+msgstr "^erfolgreich/$"
 
 #: urls/feeds.py:23
 msgid "^discussions/$"
-msgstr ""
+msgstr "^diskussionen/$"
 
 #: urls/feeds.py:26
 msgid "^search/$"
-msgstr ""
+msgstr "^suche/$"
 
 #: urls/feeds.py:29
 msgid "^tags/(?P<tag>[^/]+(?u))/$"
-msgstr ""
+msgstr "^tags/(?P<tag>[^/]+(?u))/$"
 
 #: urls/feeds.py:32
 msgid "^authors/(?P<username>[.+-@\\w]+)/$"
-msgstr ""
+msgstr "^autoren/(?P<username>[.+-@\\w]+)/$"
 
 #: urls/feeds.py:35
 msgid "^categories/(?P<path>[-\\/\\w]+)/$"
-msgstr ""
+msgstr "^kategorien/(?P<path>[-\\/\\w]+)/$"
 
 #: urls/feeds.py:38
 msgid ""
 "^discussions/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^diskussionen/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/feeds.py:42
 msgid ""
 "^comments/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^kommentare/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/feeds.py:46
 msgid ""
 "^pingbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^pingbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/feeds.py:50
 msgid ""
 "^trackbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^trackbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/quick_entry.py:11
 msgid "^quick-entry/$"
-msgstr ""
+msgstr "^schnell-eintrag/$"
 
 #: urls/tags.py:18
 msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<tag>[^/]+(?u))/seite/(?P<page>\\d+)/$"
 
 #: views/tags.py:48
 #, python-format
@@ -1574,7 +1574,7 @@ msgstr "Benutzername ist falsch."
 
 #: xmlrpc/metaweblog.py:47
 msgid "Password is invalid."
-msgstr "Kennwort ist ungültig."
+msgstr "Passwort ist ungültig."
 
 #: xmlrpc/metaweblog.py:49
 msgid "User account unavailable."
