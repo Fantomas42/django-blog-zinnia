@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 23:09+0100\n"
-"PO-Revision-Date: 2013-11-05 22:16+0000\n"
+"PO-Revision-Date: 2014-01-29 14:37+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/django-blog-zinnia/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -680,7 +680,7 @@ msgstr "Prévisualiser"
 #: templates/admin/zinnia/widgets/_draft_entries.html:22
 #: templates/zinnia/tags/draft_entries.html:9
 msgid "No draft entries."
-msgstr "Aucun brouillon actuellement"
+msgstr "Aucun brouillon actuellement."
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:31
 #: templates/admin/zinnia/widgets/_draft_entries.html:32
@@ -713,7 +713,7 @@ msgstr "Editer"
 #: templates/zinnia/entry_detail_base.html:131
 #: templates/zinnia/tags/recent_comments.html:15
 msgid "No comments yet."
-msgstr "Pas de commentaires."
+msgstr "Aucun commentaire."
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:39
 #: templates/admin/zinnia/widgets/_recent_comments.html:40
@@ -731,7 +731,7 @@ msgstr "Editer le lien entrant"
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:25
 #: templates/zinnia/tags/recent_linkbacks.html:16
 msgid "No linkbacks yet."
-msgstr "Aucun lien entrant actuellement"
+msgstr "Aucun lien entrant."
 
 #: templates/admin/zinnia/widgets/content_stats.html:6
 #: templates/admin/zinnia/widgets/content_stats.html:8
@@ -967,7 +967,7 @@ msgstr "Auteurs"
 
 #: templates/zinnia/author_list.html:23 templates/zinnia/tags/authors.html:12
 msgid "No authors yet."
-msgstr "Pas encore d'auteurs."
+msgstr "Pas encore d'auteur."
 
 #: templates/zinnia/base.html:16 templates/zinnia/skeleton.html:36
 msgid "RSS Feed of latest entries"
@@ -1050,7 +1050,7 @@ msgstr "Liste des catégories"
 #: templates/zinnia/tags/categories.html:11
 #: templates/zinnia/tags/categories_tree.html:16
 msgid "No categories yet."
-msgstr "Pas encore de catégories."
+msgstr "Pas encore de catégorie."
 
 #: templates/zinnia/entry_archive.html:16
 msgid "Yearly archives"
@@ -1244,7 +1244,7 @@ msgstr "Archives de l'auteur %(author)s"
 #: templates/zinnia/tags/random_entries.html:9
 #: templates/zinnia/tags/recent_entries.html:9
 msgid "No entries yet."
-msgstr "Pas encore d'articles."
+msgstr "Pas encore d'article."
 
 #: templates/zinnia/entry_list.html:70 templates/zinnia/entry_list.html:71
 msgid "Edit the category"
@@ -1366,12 +1366,12 @@ msgstr "Liste des tags"
 
 #: templates/zinnia/tag_list.html:22 templates/zinnia/tags/tag_cloud.html:11
 msgid "No tags yet."
-msgstr "Pas encore de tags."
+msgstr "Pas encore de tag."
 
 #: templates/zinnia/tags/archives_entries.html:12
 #: templates/zinnia/tags/archives_entries_tree.html:37
 msgid "No archives yet."
-msgstr "Pas encore d'archives."
+msgstr "Pas encore d'archive."
 
 #: templates/zinnia/tags/pagination.html:4
 #, python-format
