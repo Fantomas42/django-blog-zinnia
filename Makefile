@@ -36,7 +36,6 @@ translations:
 	@echo "$(COLOR)* Generating english translation$(NO_COLOR)"
 	@cd zinnia && ../bin/demo makemessages --extension=.html,.txt -l en
 	@echo "$(COLOR)* Pushing translation to Transifex$(NO_COLOR)"
-	@rm -rf .tox
 	@tx push -s
 	@echo "$(COLOR)* Remove english translation$(NO_COLOR)"
 	@rm -rf zinnia/locale/en/
@@ -50,7 +49,6 @@ clean:
 	@find demo zinnia docs -type f \( -name "*.pyc" -o -name "\#*" -o -name "*~" \) -exec rm -f {} \;
 	@rm -f \#* *~
 	@rm -rf uploads
-	@rm -rf .tox
 
 mrproper: clean
 	@rm -rf docs/build/doctrees
