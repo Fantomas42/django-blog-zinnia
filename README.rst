@@ -57,7 +57,7 @@ More than a long speech, here the list of the main features :
 Examples
 ========
 
-Take a look at the online demo at : http://django-blog-zinnia.com/
+Take a look at the online demo at : http://demo.django-blog-zinnia.com/
 or you can visit these websites who use Zinnia.
 
 * `Fantomas' side`_  / `Mobile version`_.
