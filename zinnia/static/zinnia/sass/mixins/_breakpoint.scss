@@ -3,9 +3,9 @@
     @media (min-width: 1024px) { @content; }
   }
   @if $breakpoint == "medium" {
-    @media (max-width: 768px) { @content; }
+    @media (min-width: 768px) { @content; }
   }
   @if $breakpoint == "small" {
-    @media (max-width: 480px) { @content; }
+    @media (min-width: 480px) { @content; }
   }
 }
