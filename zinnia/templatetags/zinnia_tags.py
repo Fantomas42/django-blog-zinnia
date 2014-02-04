@@ -14,6 +14,7 @@ from django.utils import timezone
 from django.template import Library
 from django.utils.encoding import smart_text
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
 from django.utils.html import conditional_escape
 from django.template.defaultfilters import stringfilter
 from django.contrib.comments.models import CommentFlag
@@ -330,7 +331,7 @@ def zinnia_pagination(context, page, begin_pages=3, end_pages=3,
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
-def zinnia_breadcrumbs(context, root_name='Blog',
+def zinnia_breadcrumbs(context, root_name=_('Blog'),
                        template='zinnia/tags/breadcrumbs.html',):
     """
     Return a breadcrumb for the application.
