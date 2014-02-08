@@ -418,6 +418,17 @@ def week_number(date):
     return week_number
 
 
+@register.filter
+def comment_admin_urlname(action):
+    """
+    Return the admin URLs for the comment app used.
+    """
+    comment = get_comment_model()
+    return 'admin:%s_%s_%s' % (
+        comment._meta.app_label, comment._meta.model_name,
+        action)
+
+
 @register.inclusion_tag('zinnia/tags/dummy.html')
 def zinnia_statistics(template='zinnia/tags/statistics.html'):
     """
