@@ -47,6 +47,7 @@ from zinnia.templatetags.zinnia_tags import get_featured_entries
 from zinnia.templatetags.zinnia_tags import get_calendar_entries
 from zinnia.templatetags.zinnia_tags import get_archives_entries
 from zinnia.templatetags.zinnia_tags import get_archives_entries_tree
+from zinnia.templatetags.zinnia_tags import user_admin_urlname
 from zinnia.templatetags.zinnia_tags import comment_admin_urlname
 
 
@@ -822,6 +823,11 @@ class TemplateTagsTestCase(TestCase):
         comment_admin_url = comment_admin_urlname('action')
         self.assertTrue(comment_admin_url.startswith('admin:'))
         self.assertTrue(comment_admin_url.endswith('_action'))
+
+    @skipIfCustomUser
+    def test_user_admin_urlname(self):
+        user_admin_url = user_admin_urlname('action')
+        self.assertEqual(user_admin_url, 'admin:auth_user_action')
 
     @skipIfCustomUser
     def test_zinnia_statistics(self):
