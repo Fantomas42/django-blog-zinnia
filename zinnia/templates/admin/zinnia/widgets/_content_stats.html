@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n zinnia_tags %}
 <tr>
   <th>{% trans "Contents" %}</th>
   <th>{% trans "Discussions" %}</th>
@@ -10,7 +10,7 @@
     </a>
   </td>
   <td>
-    <a href="{% url 'admin:comments_comment_changelist' %}?is_public__exact=1">
+    <a href="{% url 'changelist'|comment_admin_urlname %}?is_public__exact=1">
       {% blocktrans count comment_count=comments %}{{ comment_count }} comment{% plural %}{{ comment_count }} comments{% endblocktrans %}
     </a>
   </td>
@@ -38,7 +38,7 @@
     </a>
   </td>
   <td>
-    <a href="{% url 'admin:comments_comment_changelist' %}?is_public__exact=0">
+    <a href="{% url 'changelist'|comment_admin_urlname %}?is_public__exact=0">
       {% blocktrans count reject_count=rejects %}{{ reject_count }} rejected item{% plural %}{{ reject_count }} rejected items{% endblocktrans %}
     </a>
   </td>
