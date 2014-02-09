@@ -81,7 +81,7 @@
   {% endif %}
   {% if author and perms.auth.change_user %}
   <li>
-    <a href="{% url 'admin:auth_user_change' author.pk %}" title="{% trans "Edit the author" %}">
+    <a href="{% url 'change'|user_admin_urlname author.pk %}" title="{% trans "Edit the author" %}">
       {% trans "Edit the author" %}
     </a>
   </li>

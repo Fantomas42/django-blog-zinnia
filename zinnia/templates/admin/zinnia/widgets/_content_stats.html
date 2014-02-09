@@ -33,7 +33,7 @@
 </tr>
 <tr>
   <td>
-    <a href="{% url 'admin:auth_user_changelist' %}">
+    <a href="{% url 'changelist'|user_admin_urlname %}">
       {% blocktrans count author_count=authors %}{{ author_count }} author{% plural %}{{ author_count }} authors{% endblocktrans %}
     </a>
   </td>
