@@ -1,0 +1,20 @@
+{% extends "zinnia/skeleton.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumbs">
+  <li>{% trans "Error 400" %}</li>
+</ul>
+{% endblock breadcrumbs %}
+
+{% block title %}{% trans "Bad request" %}{% endblock title %}
+
+{% block body-class %}error-400{% endblock body-class %}
+
+{% block content %}
+<h2>{% trans "Bad request" %}</h2>
+
+<p>{% trans "Sorry, but the request was malformed." %}</p>
+
+{{ block.super }}
+{% endblock content %}
