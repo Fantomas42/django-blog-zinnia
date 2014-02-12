@@ -1,4 +1,4 @@
-{% load i18n staticfiles %}<?xml version="1.0" encoding="utf-8" ?>
+{% load i18n staticfiles zinnia_tags %}<?xml version="1.0" encoding="utf-8" ?>
 <manifest xmlns="http://schemas.microsoft.com/wlw/manifest/weblog">
   <options>
     <clientType>Metaweblog</clientType>
@@ -52,7 +52,7 @@
       <text>{% trans "Manage comments" %}</text>
       <imageUrl>{% static "zinnia/img/wlw/comments.png" %}</imageUrl>
       <clickUrl><![CDATA[
-        {blog-homepage-url}{% url 'admin:comments_comment_changelist' %}
+        {blog-homepage-url}{% url 'changelist'|comment_admin_urlname %}
       ]]></clickUrl>
     </button>
   </buttons>-->

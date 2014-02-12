@@ -14,8 +14,10 @@ from django.utils import timezone
 from django.template import Library
 from django.utils.encoding import smart_text
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
 from django.utils.html import conditional_escape
 from django.template.defaultfilters import stringfilter
+from django.contrib.auth import get_user_model
 from django.contrib.comments.models import CommentFlag
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments import get_model as get_comment_model
@@ -330,7 +332,7 @@ def zinnia_pagination(context, page, begin_pages=3, end_pages=3,
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
-def zinnia_breadcrumbs(context, root_name='Blog',
+def zinnia_breadcrumbs(context, root_name=_('Blog'),
                        template='zinnia/tags/breadcrumbs.html',):
     """
     Return a breadcrumb for the application.
@@ -415,6 +417,28 @@ def week_number(date):
     if int(week_number) < 10:
         week_number = week_number[-1]
     return week_number
+
+
+@register.filter
+def comment_admin_urlname(action):
+    """
+    Return the admin URLs for the comment app used.
+    """
+    comment = get_comment_model()
+    return 'admin:%s_%s_%s' % (
+        comment._meta.app_label, comment._meta.model_name,
+        action)
+
+
+@register.filter
+def user_admin_urlname(action):
+    """
+    Return the admin URLs for the user app used.
+    """
+    user = get_user_model()
+    return 'admin:%s_%s_%s' % (
+        user._meta.app_label, user._meta.model_name,
+        action)
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')

@@ -29,6 +29,12 @@ migrate the database.
 Note that all the needed dependencies will be resolved if you install
 Zinnia with :program:`pip` or :program:`easy_install`, excepting Django.
 
+Note about `django-tagging`_ that the released version on Pypi is not
+compatible with Python 3. In this case you should use this fork which is
+compatible with Python 2 and 3.
+
+https://github.com/Fantomas42/django-tagging
+
 .. _getting-the-code:
 
 Getting the code

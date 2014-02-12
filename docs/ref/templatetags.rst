@@ -365,3 +365,31 @@ Return the Python week number of a date.
 Usage example: ::
 
   {{ date_variable|week_number }}
+
+.. templatefilter:: comment_admin_urlname
+
+comment_admin_urlname
+=====================
+
+Return an admin URL for managing the comments, whatever the the application
+used.
+
+.. autofunction:: comment_admin_urlname
+
+Usage example: ::
+
+  {% url 'changelist'|comment_admin_urlname %}
+
+.. templatefilter:: user_admin_urlname
+
+user_admin_urlname
+=====================
+
+Return an admin URL for managing the users, whatever the the application
+used.
+
+.. autofunction:: user_admin_urlname
+
+Usage example: ::
+
+  {% url 'changelist'|user_admin_urlname %}
