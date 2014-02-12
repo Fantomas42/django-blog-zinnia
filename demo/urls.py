@@ -12,9 +12,6 @@ from zinnia.sitemaps import CategorySitemap
 from zinnia.sitemaps import AuthorSitemap
 
 admin.autodiscover()
-handler500 = 'django.views.defaults.server_error'
-handler404 = 'django.views.defaults.page_not_found'
-handler403 = 'django.views.defaults.permission_denied'
 
 urlpatterns = patterns(
     '',
