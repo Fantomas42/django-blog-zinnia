@@ -15,7 +15,7 @@ Make sure to install these packages prior to installation :
 * `Django`_ >= 1.6
 * `PIL`_ >= 1.1.6 or `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.5.1 < 0.6
-* `django-tagging`_ >= 0.3.1
+* `django-tagging`_ >= 0.3.2
 * `beautifulsoup4`_ >= 4.1.3
 
 The packages below are optionnal but needed for run the full test suite or
@@ -28,12 +28,6 @@ migrate the database.
 
 Note that all the needed dependencies will be resolved if you install
 Zinnia with :program:`pip` or :program:`easy_install`, excepting Django.
-
-Note about `django-tagging`_ that the released version on Pypi is not
-compatible with Python 3. In this case you should use this fork which is
-compatible with Python 2 and 3.
-
-https://github.com/Fantomas42/django-tagging
 
 .. _getting-the-code:
 
