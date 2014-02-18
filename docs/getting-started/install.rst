@@ -14,7 +14,7 @@ Make sure to install these packages prior to installation :
 * `Python`_ >= 2.6.5
 * `Django`_ >= 1.6
 * `PIL`_ >= 1.1.6 or `Pillow`_ >= 2.0.0
-* `django-mptt`_ >= 0.5.1 < 0.6
+* `django-mptt`_ >= 0.5.1
 * `django-tagging`_ >= 0.3.2
 * `beautifulsoup4`_ >= 4.1.3
 
@@ -23,7 +23,7 @@ migrate the database.
 
 * `pytz`_
 * `South`_ >= 0.7.6
-* `pyparsing`_ >= 1.5.5 < 2.0.0
+* `pyparsing`_ >= 2.0.1
 * `django-xmlrpc`_ >= 0.1.5
 
 Note that all the needed dependencies will be resolved if you install
