@@ -50,7 +50,7 @@
       <excerpt:encoded><![CDATA[{{ entry.excerpt|safe }}]]></excerpt:encoded>
       <wp:post_id>{{ entry.pk }}</wp:post_id>
       <wp:post_date>{{ entry.creation_date|date:"Y-m-d H:i:s" }}</wp:post_date>
-      <wp:post_date_gmt>0000-00-00 00:00:00</wp:post_date_gmt>
+      <wp:post_date_gmt>{{ entry.creation_date|date:"Y-m-d H:i:s" }}</wp:post_date_gmt>
       <wp:comment_status>{% if entry.comment_enabled %}open{% else %}closed{% endif %}</wp:comment_status>
       <wp:ping_status>{% if entry.pingback_enabled %}open{% else %}closed{% endif %}</wp:ping_status>
       <wp:track_status>{% if entry.trackback_enabled %}open{% else %}closed{% endif %}</wp:track_status>
