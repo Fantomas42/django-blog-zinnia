@@ -11,6 +11,7 @@ from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.utils.six.moves import input
 from django.utils.encoding import smart_str
+from django.utils.encoding import smart_unicode
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
 from django.core.management.base import CommandError
@@ -168,7 +169,7 @@ class Command(NoArgsCommand):
             title = post.title.text or ''
             content = post.content.text or ''
             excerpt = self.auto_excerpt and Truncator(
-                strip_tags(content)).words(50) or ''
+                strip_tags(smart_unicode(content))).words(50) or ''
             slug = slugify(post.title.text or get_post_id(post))[:255]
             try:
                 entry = Entry.objects.get(creation_date=creation_date,
