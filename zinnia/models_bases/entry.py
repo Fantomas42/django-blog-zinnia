@@ -51,14 +51,17 @@ class CoreEntry(models.Model):
         help_text=_("Used to build the entry's URL."))
 
     status = models.IntegerField(
-        _('status'), choices=STATUS_CHOICES, default=DRAFT)
+        _('status'), db_index=True,
+        choices=STATUS_CHOICES, default=DRAFT)
 
     start_publication = models.DateTimeField(
-        _('start publication'), blank=True, null=True,
+        _('start publication'),
+        db_index=True, blank=True, null=True,
         help_text=_('Start date of publication.'))
 
     end_publication = models.DateTimeField(
-        _('end publication'), blank=True, null=True,
+        _('end publication'),
+        db_index=True, blank=True, null=True,
         help_text=_('End date of publication.'))
 
     sites = models.ManyToManyField(
@@ -68,7 +71,8 @@ class CoreEntry(models.Model):
         help_text=_('Sites where the entry will be published.'))
 
     creation_date = models.DateTimeField(
-        _('creation date'), default=timezone.now,
+        _('creation date'),
+        db_index=True, default=timezone.now,
         help_text=_("Used to build the entry's URL."))
 
     last_update = models.DateTimeField(
