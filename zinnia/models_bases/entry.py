@@ -176,7 +176,8 @@ class CoreEntry(models.Model):
         get_latest_by = 'creation_date'
         verbose_name = _('entry')
         verbose_name_plural = _('entries')
-        index_together = [['slug', 'creation_date']]
+        index_together = [['slug', 'creation_date'],
+                          ['status', 'start_publication', 'end_publication']]
         permissions = (('can_view_all', 'Can view all entries'),
                        ('can_change_status', 'Can change status'),
                        ('can_change_author', 'Can change author(s)'), )
