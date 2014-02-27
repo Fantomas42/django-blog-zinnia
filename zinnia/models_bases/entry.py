@@ -51,14 +51,17 @@ class CoreEntry(models.Model):
         help_text=_("Used to build the entry's URL."))
 
     status = models.IntegerField(
-        _('status'), choices=STATUS_CHOICES, default=DRAFT)
+        _('status'), db_index=True,
+        choices=STATUS_CHOICES, default=DRAFT)
 
     start_publication = models.DateTimeField(
-        _('start publication'), blank=True, null=True,
+        _('start publication'),
+        db_index=True, blank=True, null=True,
         help_text=_('Start date of publication.'))
 
     end_publication = models.DateTimeField(
-        _('end publication'), blank=True, null=True,
+        _('end publication'),
+        db_index=True, blank=True, null=True,
         help_text=_('End date of publication.'))
 
     sites = models.ManyToManyField(
@@ -68,7 +71,8 @@ class CoreEntry(models.Model):
         help_text=_('Sites where the entry will be published.'))
 
     creation_date = models.DateTimeField(
-        _('creation date'), default=timezone.now,
+        _('creation date'),
+        db_index=True, default=timezone.now,
         help_text=_("Used to build the entry's URL."))
 
     last_update = models.DateTimeField(
@@ -176,7 +180,9 @@ class CoreEntry(models.Model):
         get_latest_by = 'creation_date'
         verbose_name = _('entry')
         verbose_name_plural = _('entries')
-        index_together = [['slug', 'creation_date']]
+        index_together = [['slug', 'creation_date'],
+                          ['status', 'creation_date',
+                           'start_publication', 'end_publication']]
         permissions = (('can_view_all', 'Can view all entries'),
                        ('can_change_status', 'Can change status'),
                        ('can_change_author', 'Can change author(s)'), )
