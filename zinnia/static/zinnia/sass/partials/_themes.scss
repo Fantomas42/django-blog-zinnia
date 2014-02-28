@@ -42,7 +42,7 @@
     // Forms
     fieldset { border: 1px solid $rebase01; }
     legend, caption { color: $rebase1; }
-    input[type=email], input[type=text], input[type=password],
+    input[type=url], input[type=email], input[type=text], input[type=password],
     textarea {
       color: $rebase1;
       background-color: $rebase02;
