@@ -74,7 +74,6 @@
     // Pagination
     .paginator {
       border-top: 1px solid $rebase01;
-      border-bottom: 1px solid $rebase01;
       li {
         border: solid 1px $rebase01;
         &.page:hover {
@@ -82,6 +81,10 @@
           a { color: $rebase2; }
         }
       }
+    }
+    // Content related
+    .hfeed > h2 {
+      border-top: 1px solid $rebase01;
     }
 }
 
