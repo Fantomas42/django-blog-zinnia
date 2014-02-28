@@ -36,7 +36,8 @@
     // Header
     #header {
       border-bottom: 1px solid $rebase01;
-      h1 { text-shadow: 2px 2px 2px $rebase01; }
+      h1 { text-shadow: 2px 2px 2px $rebase00; }
+      blockquote { color: $rebase1; }
     }
     // Forms
     fieldset { border: 1px solid $rebase01; }
@@ -74,7 +75,6 @@
     // Pagination
     .paginator {
       border-top: 1px solid $rebase01;
-      border-bottom: 1px solid $rebase01;
       li {
         border: solid 1px $rebase01;
         &.page:hover {
@@ -82,6 +82,10 @@
           a { color: $rebase2; }
         }
       }
+    }
+    // Content related
+    .hfeed > h2 {
+      border-top: 1px solid $rebase01;
     }
 }
 
