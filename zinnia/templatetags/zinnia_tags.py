@@ -287,7 +287,7 @@ def get_recent_linkbacks(number=5,
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
-def zinnia_pagination(context, page, begin_pages=3, end_pages=3,
+def zinnia_pagination(context, page, begin_pages=1, end_pages=1,
                       before_pages=2, after_pages=2,
                       template='zinnia/tags/pagination.html'):
     """
