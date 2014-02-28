@@ -6,5 +6,8 @@ ul.paginator {
     display: inline-block;
     padding: 0 0.5em;
     margin-right: 0.3em;
+    &.current {
+      font-weight: bold;
+    }
   }
 }

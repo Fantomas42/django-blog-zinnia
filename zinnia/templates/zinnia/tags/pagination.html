@@ -14,7 +14,7 @@
   {% for page_number in begin %}
   <li class="page {% ifequal page.number page_number %}current{% endifequal %}">
     {% ifequal page.number page_number %}
-    <strong>{{ page_number }}</strong>
+    {{ page_number }}
     {% else %}
     <a href="?page={{ page_number }}{{ GET_string }}"
        title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
@@ -27,7 +27,7 @@
   {% for page_number in middle %}
   <li class="page {% ifequal page.number page_number %}current{% endifequal %}">
     {% ifequal page.number page_number %}
-    <strong>{{ page_number }}</strong>
+    {{ page_number }}
     {% else %}
     <a href="?page={{ page_number }}{{ GET_string }}"
        title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
@@ -41,7 +41,7 @@
   {% for page_number in end %}
   <li class="page {% ifequal page.number page_number %}current{% endifequal %}">
     {% ifequal page.number page_number %}
-    <strong>{{ page_number }}</strong>
+    {{ page_number }}
     {% else %}
     <a href="?page={{ page_number }}{{ GET_string }}"
        title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
