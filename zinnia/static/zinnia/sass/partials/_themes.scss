@@ -36,7 +36,8 @@
     // Header
     #header {
       border-bottom: 1px solid $rebase01;
-      h1 { text-shadow: 2px 2px 2px $rebase01; }
+      h1 { text-shadow: 2px 2px 2px $rebase00; }
+      blockquote { color: $rebase1; }
     }
     // Forms
     fieldset { border: 1px solid $rebase01; }
