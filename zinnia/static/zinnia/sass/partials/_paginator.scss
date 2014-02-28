@@ -11,5 +11,18 @@ ul.paginator {
     &.current, &.index, &.ellipsis, * {
       padding: 0 0.5em;
     }
+    &.index, &.previous, &.next, &.ellipsis {
+      display: none;
+    }
+    @include breakpoint("small") {
+      &.previous, &.next, &.ellipsis {
+        display: inline-block;
+      }
+    }
+    @include breakpoint("large") {
+      &.index {
+        display: inline-block;
+      }
+    }
   }
 }
