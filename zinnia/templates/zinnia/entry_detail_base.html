@@ -119,7 +119,9 @@
            id="c{{ comment.pk }}" class="anchor-link"
            title="{% trans "Direct link to this comment" %}">#</a>
       </p>
+      {% block comment-content %}
       {{ comment.comment|linebreaks }}
+      {% endblock comment-content %}
     </li>
     {% endfor %}
   </ol>
