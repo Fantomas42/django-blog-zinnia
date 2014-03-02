@@ -102,8 +102,11 @@
     {% for comment in comment_list %}
     <li id="comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
         class="comment vcard {% cycle box1,box2 %}{% if comment.user %} authenticated-comment{% if comment.user.is_staff %} staff-comment{% endif %}{% if comment.user.is_superuser %} superuser-comment{% endif %}{% endif %}">
+      {% block comment-image %}
       <img src="{% get_gravatar comment.email 60 "G" %}"
            class="gravatar photo" alt="{{ comment.name }}" />
+      {% endblock comment-image %}
+      {% block comment-info %}
       <p class="comment-info">
 	{% if comment.url %}
 	<a href="{{ comment.url }}" rel="external nofollow"
@@ -119,6 +122,7 @@
            id="c{{ comment.pk }}" class="anchor-link"
            title="{% trans "Direct link to this comment" %}">#</a>
       </p>
+      {% endblock comment-info %}
       {% block comment-content %}
       {{ comment.comment|linebreaks }}
       {% endblock comment-content %}
