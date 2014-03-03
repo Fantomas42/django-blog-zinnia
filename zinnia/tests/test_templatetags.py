@@ -521,7 +521,10 @@ class TemplateTagsTestCase(TestCase):
         paginator = Paginator(range(200), 10)
 
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(1))
+            context = zinnia_pagination(
+                source_context, paginator.page(1),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(context['page'].number, 1)
         self.assertEqual(list(context['begin']), [1, 2, 3])
         self.assertEqual(list(context['middle']), [])
@@ -531,7 +534,10 @@ class TemplateTagsTestCase(TestCase):
 
         source_context = Context({'request': FakeRequest({})})
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(2))
+            context = zinnia_pagination(
+                source_context, paginator.page(2),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(context['page'].number, 2)
         self.assertEqual(list(context['begin']), [1, 2, 3, 4])
         self.assertEqual(list(context['middle']), [])
@@ -539,53 +545,75 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['GET_string'], '')
 
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(3))
+            context = zinnia_pagination(
+                source_context, paginator.page(3),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(list(context['begin']), [1, 2, 3, 4, 5])
         self.assertEqual(list(context['middle']), [])
         self.assertEqual(list(context['end']), [18, 19, 20])
 
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(6))
+            context = zinnia_pagination(
+                source_context, paginator.page(6),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(list(context['begin']), [1, 2, 3, 4, 5, 6, 7, 8])
         self.assertEqual(list(context['middle']), [])
         self.assertEqual(list(context['end']), [18, 19, 20])
 
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(11))
+            context = zinnia_pagination(
+                source_context, paginator.page(11),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(list(context['begin']), [1, 2, 3])
         self.assertEqual(list(context['middle']), [9, 10, 11, 12, 13])
         self.assertEqual(list(context['end']), [18, 19, 20])
 
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(15))
+            context = zinnia_pagination(
+                source_context, paginator.page(15),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(list(context['begin']), [1, 2, 3])
         self.assertEqual(list(context['middle']), [])
         self.assertEqual(list(context['end']),
                          [13, 14, 15, 16, 17, 18, 19, 20])
 
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(18))
+            context = zinnia_pagination(
+                source_context, paginator.page(18),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(list(context['begin']), [1, 2, 3])
         self.assertEqual(list(context['middle']), [])
         self.assertEqual(list(context['end']), [16, 17, 18, 19, 20])
 
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(19))
+            context = zinnia_pagination(
+                source_context, paginator.page(19),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(list(context['begin']), [1, 2, 3])
         self.assertEqual(list(context['middle']), [])
         self.assertEqual(list(context['end']), [17, 18, 19, 20])
 
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(20))
+            context = zinnia_pagination(
+                source_context, paginator.page(20),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(list(context['begin']), [1, 2, 3])
         self.assertEqual(list(context['middle']), [])
         self.assertEqual(list(context['end']), [18, 19, 20])
 
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(10),
-                                        begin_pages=1, end_pages=3,
-                                        before_pages=4, after_pages=3,
-                                        template='custom_template.html')
+            context = zinnia_pagination(
+                source_context, paginator.page(10),
+                begin_pages=1, end_pages=3,
+                before_pages=4, after_pages=3,
+                template='custom_template.html')
         self.assertEqual(list(context['begin']), [1])
         self.assertEqual(list(context['middle']), [6, 7, 8, 9, 10, 11, 12, 13])
         self.assertEqual(list(context['end']), [18, 19, 20])
@@ -593,21 +621,30 @@ class TemplateTagsTestCase(TestCase):
 
         paginator = Paginator(range(50), 10)
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(1))
+            context = zinnia_pagination(
+                source_context, paginator.page(1),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(list(context['begin']), [1, 2, 3, 4, 5])
         self.assertEqual(list(context['middle']), [])
         self.assertEqual(list(context['end']), [])
 
         paginator = Paginator(range(60), 10)
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(1))
+            context = zinnia_pagination(
+                source_context, paginator.page(1),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(list(context['begin']), [1, 2, 3, 4, 5, 6])
         self.assertEqual(list(context['middle']), [])
         self.assertEqual(list(context['end']), [])
 
         paginator = Paginator(range(70), 10)
         with self.assertNumQueries(0):
-            context = zinnia_pagination(source_context, paginator.page(1))
+            context = zinnia_pagination(
+                source_context, paginator.page(1),
+                begin_pages=3, end_pages=3,
+                before_pages=2, after_pages=2)
         self.assertEqual(list(context['begin']), [1, 2, 3])
         self.assertEqual(list(context['middle']), [])
         self.assertEqual(list(context['end']), [5, 6, 7])
