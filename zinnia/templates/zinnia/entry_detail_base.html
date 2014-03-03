@@ -93,58 +93,6 @@
 </div>
 {% endblock entry-widgets %}
 
-{% block entry-comments %}
-<div id="comments">
-  <h3>{% trans "Comments" %}</h3>
-  {% if object.comment_count %}
-  {% with comment_list=object.comments %}
-  {% block comments-loop %}
-  <ol id="comment-list">
-    {% for comment in comment_list %}
-    <li id="comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
-        class="comment vcard {% cycle box1,box2 %}{% if comment.user %} authenticated-comment{% if comment.user.is_staff %} staff-comment{% endif %}{% if comment.user.is_superuser %} superuser-comment{% endif %}{% endif %}">
-      {% block comment-image %}
-      <img src="{% get_gravatar comment.email 60 "G" %}"
-           class="gravatar photo" alt="{{ comment.name }}" />
-      {% endblock comment-image %}
-      {% block comment-info %}
-      <p class="comment-info">
-	{% if comment.url %}
-	<a href="{{ comment.url }}" rel="external nofollow"
-           class="fn url">{{ comment.name }}</a>
-	{% else %}
-	<span class="fn">{{ comment.name }}</span>
-	{% endif %}
-	{% trans "on" context "on date" %}
-        <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
-          {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
-        <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
-           id="c{{ comment.pk }}" class="anchor-link"
-           title="{% trans "Direct link to this comment" %}">#</a>
-      </p>
-      {% endblock comment-info %}
-      {% block comment-content %}
-      {{ comment.comment|linebreaks }}
-      {% endblock comment-content %}
-    </li>
-    {% endfor %}
-  </ol>
-  {% endblock comments-loop %}
-  {% endwith %}
-    {% if not object.comments_are_open %}
-  <p>{% trans "Comments are closed." %}</p>
-    {% endif %}
-  {% else %}
-    {% if object.comments_are_open %}
-  <p>{% trans "No comments yet." %}</p>
-    {% else %}
-  <p>{% trans "Comments are closed." %}</p>
-    {% endif %}
-  {% endif %}
-</div>
-{% endblock entry-comments %}
-
 {% block entry-pingbacks %}
 <div id="pingbacks">
   <h3>{% trans "Pingbacks" %}</h3>
@@ -233,6 +181,58 @@
 </div>
 {% endif %}
 {% endblock entry-trackbacks %}
+
+{% block entry-comments %}
+<div id="comments">
+  <h3>{% trans "Comments" %}</h3>
+  {% if object.comment_count %}
+  {% with comment_list=object.comments %}
+  {% block comments-loop %}
+  <ol id="comment-list">
+    {% for comment in comment_list %}
+    <li id="comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
+        class="comment vcard {% cycle box1,box2 %}{% if comment.user %} authenticated-comment{% if comment.user.is_staff %} staff-comment{% endif %}{% if comment.user.is_superuser %} superuser-comment{% endif %}{% endif %}">
+      {% block comment-image %}
+      <img src="{% get_gravatar comment.email 60 "G" %}"
+           class="gravatar photo" alt="{{ comment.name }}" />
+      {% endblock comment-image %}
+      {% block comment-info %}
+      <p class="comment-info">
+	{% if comment.url %}
+	<a href="{{ comment.url }}" rel="external nofollow"
+           class="fn url">{{ comment.name }}</a>
+	{% else %}
+	<span class="fn">{{ comment.name }}</span>
+	{% endif %}
+	{% trans "on" context "on date" %}
+        <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
+          {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+        </abbr>
+        <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
+           id="c{{ comment.pk }}" class="anchor-link"
+           title="{% trans "Direct link to this comment" %}">#</a>
+      </p>
+      {% endblock comment-info %}
+      {% block comment-content %}
+      {{ comment.comment|linebreaks }}
+      {% endblock comment-content %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% endblock comments-loop %}
+  {% endwith %}
+    {% if not object.comments_are_open %}
+  <p>{% trans "Comments are closed." %}</p>
+    {% endif %}
+  {% else %}
+    {% if object.comments_are_open %}
+  <p>{% trans "No comments yet." %}</p>
+    {% else %}
+  <p>{% trans "Comments are closed." %}</p>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock entry-comments %}
 
 {% block entry-comments-form %}
 {% if object.comments_are_open %}
