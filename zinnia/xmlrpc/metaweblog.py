@@ -42,7 +42,8 @@ def authenticate(username, password, permission=None):
     Authenticate staff_user with permission.
     """
     try:
-        author = Author.objects.get(username__exact=username)
+        author = Author.objects.get(
+            **{'%s__exact' % Author.USERNAME_FIELD: username})
     except Author.DoesNotExist:
         raise Fault(LOGIN_ERROR, _('Username is incorrect.'))
     if not author.check_password(password):
@@ -70,14 +71,20 @@ def user_structure(user, site):
     """
     An user structure.
     """
+    full_name = user.get_full_name().split(' ')
+    first_name = full_name[0]
+    try:
+        last_name = full_name[1]
+    except IndexError:
+        last_name = ''
     return {'userid': user.pk,
             'email': user.email,
-            'nickname': user.username,
-            'lastname': user.last_name,
-            'firstname': user.first_name,
+            'nickname': user.get_username(),
+            'lastname': last_name,
+            'firstname': first_name,
             'url': '%s://%s%s' % (
                 PROTOCOL, site.domain,
-                reverse('zinnia_author_detail', args=[user.username]))}
+                user.get_absolute_url())}
 
 
 def author_structure(user):
@@ -85,8 +92,8 @@ def author_structure(user):
     An author structure.
     """
     return {'user_id': user.pk,
-            'user_login': user.username,
-            'display_name': user.username,
+            'user_login': user.get_username(),
+            'display_name': user.__str__(),
             'user_email': user.email}
 
 
@@ -140,7 +147,7 @@ def post_structure(entry, site):
             'categories': [cat.title for cat in entry.categories.all()],
             'dateCreated': DateTime(entry.creation_date.isoformat()),
             'postid': entry.pk,
-            'userid': author.username,
+            'userid': author.get_username(),
             # Useful Movable Type Extensions
             'mt_excerpt': entry.excerpt,
             'mt_allow_comments': int(entry.comment_enabled),
@@ -148,9 +155,9 @@ def post_structure(entry, site):
                                int(entry.trackback_enabled)),
             'mt_keywords': entry.tags,
             # Useful Wordpress Extensions
-            'wp_author': author.username,
+            'wp_author': author.get_username(),
             'wp_author_id': author.pk,
-            'wp_author_display_name': author.username,
+            'wp_author_display_name': author.__str__(),
             'wp_password': entry.password,
             'wp_slug': entry.slug,
             'sticky': entry.featured}

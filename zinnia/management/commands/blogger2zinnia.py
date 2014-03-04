@@ -109,7 +109,7 @@ class Command(NoArgsCommand):
         if default_author:
             try:
                 self.default_author = Author.objects.get(
-                    username=default_author)
+                    **{Author.USERNAME_FIELD: self.default_author})
             except Author.DoesNotExist:
                 raise CommandError(
                     'Invalid Zinnia username for default author "%s"' %
@@ -180,8 +180,6 @@ class Command(NoArgsCommand):
                 entry = Entry(status=status, title=title, content=content,
                               creation_date=creation_date, slug=slug,
                               excerpt=excerpt)
-                if self.default_author:
-                    entry.author = self.default_author
                 entry.tags = ','.join([slugify(cat.term) for
                                        cat in post.category])
                 entry.last_update = convert_blogger_timestamp(
