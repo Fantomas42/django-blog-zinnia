@@ -94,7 +94,7 @@ class Command(LabelCommand):
         if self.default_author:
             try:
                 self.default_author = Author.objects.get(
-                    username=self.default_author)
+                    **{Author.USERNAME_FIELD: self.default_author})
             except Author.DoesNotExist:
                 raise CommandError('Invalid username for default author')
 
@@ -167,7 +167,7 @@ class Command(LabelCommand):
         if selection == '1':
             users = Author.objects.all()
             if users.count() == 1:
-                username = users[0].username
+                username = users[0].get_username()
                 preselected_user = username
                 usernames = [username]
                 usernames_display = ['[%s]' % username]
@@ -176,7 +176,7 @@ class Command(LabelCommand):
                 usernames_display = []
                 preselected_user = None
                 for user in users:
-                    username = getattr(user, user.USERNAME_FIELD)
+                    username = user.get_username()
                     if username == author_name:
                         usernames_display.append('[%s]' % username)
                         preselected_user = username
@@ -207,7 +207,8 @@ class Command(LabelCommand):
             try:
                 return Author.objects.create_user(author_name, author_mail)
             except IntegrityError:
-                return Author.objects.get(username=author_name)
+                return Author.objects.get(
+                    **{Author.USERNAME_FIELD: author_name})
 
     def import_categories(self, category_nodes):
         """
