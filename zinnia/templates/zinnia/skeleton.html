@@ -40,7 +40,7 @@
         </ul>
         <form method="get" action="{% url 'zinnia_entry_search' %}">
           <p>
-            <input type="text" value="{% trans "Keywords..." %}" name="pattern" onfocus="this.value=''" />
+            <input type="text" name="pattern" placeholder="{% trans "Keywords..." %}" {% if pattern %}value="{{ pattern }}"{% endif %} />
             <input type="submit" class="submitbutton" value="OK" />
           </p>
         </form>
