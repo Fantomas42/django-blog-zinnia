@@ -99,6 +99,15 @@ class MetaWeblogTestCase(TestCase):
         self.assertRaises(Fault, self.server.blogger.getUserInfo,
                           'apikey', 'contributor', 'password')
         self.webmaster.first_name = 'John'
+        self.webmaster.save()
+        self.assertEqual(self.server.blogger.getUserInfo(
+            'apikey', 'webmaster', 'password'),
+            {'firstname': 'John', 'lastname': '',
+             'url': 'http://example.com/authors/webmaster/',
+             'userid': self.webmaster.pk,
+             'nickname': 'webmaster',
+             'email': 'webmaster@example.com'})
+
         self.webmaster.last_name = 'Doe'
         self.webmaster.save()
         self.assertEqual(self.server.blogger.getUserInfo(
