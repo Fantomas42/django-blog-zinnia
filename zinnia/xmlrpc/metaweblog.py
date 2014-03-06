@@ -71,7 +71,7 @@ def user_structure(user, site):
     """
     An user structure.
     """
-    full_name = user.get_full_name().split(' ')
+    full_name = user.get_full_name().split()
     first_name = full_name[0]
     try:
         last_name = full_name[1]
