@@ -73,7 +73,7 @@ process applies. We will add this setting in the project's configuration:
 ::
 
   ZINNIA_ENTRY_DETAIL_TEMPLATES = [
-      ('detail/fullwidth_entry_detail.html', 'Fullwidth template'),
+      ('zinnia/fullwidth_entry_detail.html', 'Fullwidth template'),
   ]
 
 And now we finally create the ``zinnia/fullwidth_entry_detail.html``
@@ -83,7 +83,7 @@ template with this sample of code:
 
   {% extends "zinnia/entry_detail.html" %}
 
-  {% block zinnia-sidebar %}no-sidebar{% endblock %}
+  {% block sidebar-class %}no-sidebar{% endblock %}
 
   {% block sidebar %}{% endblock %}
 
