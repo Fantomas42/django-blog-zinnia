@@ -44,3 +44,13 @@ class HTMLPreviewTestCase(TestCase):
         preview = HTMLPreview(text, splitters=[],
                               max_words=2, more_string=' ...')
         self.assertEqual(str(preview), '<p>тест non ...</p>')
+
+    def test_metrics(self):
+        text = '<p>Hello World</p> <p>Hello dude</p>'
+        preview = HTMLPreview(text, splitters=[],
+                              max_words=2, more_string=' ...')
+        self.assertEqual(preview.total_words, 4)
+        self.assertEqual(preview.displayed_words, 2)
+        self.assertEqual(preview.remaining_words, 2)
+        self.assertEqual(preview.displayed_percent, 50.0)
+        self.assertEqual(preview.remaining_percent, 50.0)
