@@ -21,6 +21,7 @@ class EntryPreviewMixin(object):
         if obj.status == PUBLISHED:
             return obj
         if (self.request.user.has_perm('zinnia.can_view_all') or
-                self.request.user in obj.authors.all()):
+                self.request.user.pk in [
+                author.pk for author in obj.authors.all()]):
             return obj
         raise Http404(_('No entry found matching the query'))
