@@ -142,10 +142,10 @@ More information and help available at these URLs:
 .. _`Pana`: http://chusen87.com/news/
 .. _`MAGIC Center at RIT`: http://magic.rit.edu/
 .. _`Rudolf Steiner School of Kreuzlingen`: http://www.steinerschulekreuzlingen.ch/
+.. _`Vidzor Studio LLC`: http://vidzor.com/blog/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://docs.django-blog-zinnia.com/
 .. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia
 .. _`Coverage report`: https://coveralls.io/r/Fantomas42/django-blog-zinnia
 .. _`Google Group`: http://groups.google.com/group/django-blog-zinnia/
 .. _`GitHub Issues`: https://github.com/Fantomas42/django-blog-zinnia/issues/
-.. _`Vidzor Studio LLC`: http://vidzor.com/blog/
