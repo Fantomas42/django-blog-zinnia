@@ -247,19 +247,19 @@ msgstr "把所选的日志放在当前日期的顶部"
 
 #: admin/entry.py:279
 msgid "Selected entries are now marked as featured."
-msgstr ""
+msgstr "已将所选日志标记为特色"
 
 #: admin/entry.py:280
 msgid "Mark selected entries as featured"
-msgstr ""
+msgstr "把所选的日志标记为特色"
 
 #: admin/entry.py:286
 msgid "Selected entries are no longer marked as featured."
-msgstr ""
+msgstr "所选日志现已移除特色标记"
 
 #: admin/entry.py:288
 msgid "Unmark selected entries as featured"
-msgstr ""
+msgstr "把所选日志移除特色标记"
 
 #: admin/entry.py:303
 msgid "The selected entries have been tweeted."
@@ -294,7 +294,7 @@ msgstr "已发布类别"
 
 #: admin/forms.py:22
 msgid "Parent category"
-msgstr ""
+msgstr "父类别"
 
 #: admin/forms.py:24
 msgid "No parent category"
@@ -452,7 +452,7 @@ msgstr "图片"
 
 #: models_bases/entry.py:363
 msgid "Used for illustration."
-msgstr ""
+msgstr "日志插图"
 
 #: models_bases/entry.py:374
 msgid "featured"
@@ -661,7 +661,7 @@ msgstr "编辑日志"
 #: templates/zinnia/entry_detail_base.html:186
 msgctxt "on date"
 msgid "on"
-msgstr ""
+msgstr "发布于"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:15
 #: templates/comments/zinnia/entry/form.html:25
@@ -885,7 +885,7 @@ msgstr "显示所有%(category)s日志"
 
 #: templates/zinnia/_entry_detail_base.html:46
 msgid "Last update on"
-msgstr ""
+msgstr "最后更新于"
 
 #: templates/zinnia/_entry_detail_base.html:78
 #, python-format
@@ -1082,7 +1082,7 @@ msgstr "档案日期%(year)s的%(week_number)s"
 
 #: templates/zinnia/entry_archive_week.html:17
 msgid "Previous week"
-msgstr ""
+msgstr "上周"
 
 #: templates/zinnia/entry_archive_week.html:20
 #: templates/zinnia/entry_archive_week.html:28
@@ -1092,7 +1092,7 @@ msgstr ""
 
 #: templates/zinnia/entry_archive_week.html:25
 msgid "Next week"
-msgstr ""
+msgstr "下周"
 
 #: templates/zinnia/entry_archive_year.html:15
 #: templates/zinnia/sitemap.html:69
@@ -1101,11 +1101,11 @@ msgstr "每月存档"
 
 #: templates/zinnia/entry_archive_year.html:25
 msgid "Previous year"
-msgstr ""
+msgstr "去年"
 
 #: templates/zinnia/entry_archive_year.html:31
 msgid "Next year"
-msgstr ""
+msgstr "明年"
 
 #: templates/zinnia/entry_detail_base.html:21
 msgid "RSS Feed of discussions on"
