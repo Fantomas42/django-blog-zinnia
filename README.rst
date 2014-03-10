@@ -73,7 +73,7 @@ or you can visit these websites who use Zinnia.
 * `Pana`_
 * `MAGIC Center at RIT`_
 * `Rudolf Steiner School of Kreuzlingen`_
-
+* `Vidzor Studio LLC`_
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
@@ -148,3 +148,4 @@ More information and help available at these URLs:
 .. _`Coverage report`: https://coveralls.io/r/Fantomas42/django-blog-zinnia
 .. _`Google Group`: http://groups.google.com/group/django-blog-zinnia/
 .. _`GitHub Issues`: https://github.com/Fantomas42/django-blog-zinnia/issues/
+.. _`Vidzor Studio LLC`: http://vidzor.com/blog/
