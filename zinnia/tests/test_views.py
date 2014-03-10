@@ -421,6 +421,25 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertTemplateUsed(response, 'zinnia/entry_detail.html')
         user_logged_in.connect(update_last_login)
 
+    def test_zinnia_entry_detail_preview(self):
+        self.inhibit_templates('zinnia/entry_detail.html', '404.html')
+        self.first_entry.status = DRAFT
+        self.first_entry.save()
+        url = self.first_entry.get_absolute_url()
+        with self.assertNumQueries(2):
+            response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+        Author.objects.create_superuser(
+            'root', 'root@example.com', 'password')
+        self.client.login(username='root', password='password')
+        with self.assertNumQueries(3):
+            response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.client.login(username='admin', password='password')
+        with self.assertNumQueries(6):
+            response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
     def test_zinnia_entry_channel(self):
         self.inhibit_templates('zinnia/entry_list.html')
         self.check_publishing_context(

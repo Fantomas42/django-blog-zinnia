@@ -25,6 +25,14 @@ mixins Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`entry_preview` Module
+------------------------------
+
+.. automodule:: zinnia.views.mixins.entry_preview
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`entry_protection` Module
 ------------------------------
 
