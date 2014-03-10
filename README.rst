@@ -74,6 +74,7 @@ or you can visit these websites who use Zinnia.
 * `MAGIC Center at RIT`_
 * `Rudolf Steiner School of Kreuzlingen`_
 * `Vidzor Studio LLC`_
+* `Bookshadow`_
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
@@ -143,6 +144,7 @@ More information and help available at these URLs:
 .. _`MAGIC Center at RIT`: http://magic.rit.edu/
 .. _`Rudolf Steiner School of Kreuzlingen`: http://www.steinerschulekreuzlingen.ch/
 .. _`Vidzor Studio LLC`: http://vidzor.com/blog/
+.. _`Bookshadow`: http://bookshadow.com/weblog/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://docs.django-blog-zinnia.com/
 .. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia
