@@ -74,6 +74,7 @@ or you can visit these websites who use Zinnia.
 * `MAGIC Center at RIT`_
 * `Rudolf Steiner School of Kreuzlingen`_
 * `Vidzor Studio LLC`_
+* `Bookshadow`_
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
