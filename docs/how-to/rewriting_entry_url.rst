@@ -123,9 +123,12 @@ for handling our new URL. ::
   from django.views.generic.detail import DetailView
 
   from zinnia.models.entry import Entry
+  from zinnia.views.mixins.entry_preview import EntryPreviewMixin
   from zinnia.views.mixins.entry_protection import EntryProtectionMixin
 
-  class EntryDetail(EntryProtectionMixin, DetailView):
+  class EntryDetail(EntryPreviewMixin,
+                    EntryProtectionMixin,
+                    DetailView):
       queryset = Entry.published.on_site()
       template_name_field = 'template'
 
