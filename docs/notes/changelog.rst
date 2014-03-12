@@ -1,6 +1,27 @@
 CHANGELOG
 =========
 
+0.14.1
+------
+
+* Fix dates on WXR export
+* Fix blogger2zinnia unicode issue
+* Fix unicode issue on Category admin
+* Fix URL errors with custom comment app
+* Full support of custom User model
+* Metrics for the content previews
+* More useable pagination
+* More blocks for customizing reactions
+* Minor documentation updates
+* Minor fixes for default skin
+* Review admin form for editing the entries
+* Restricted preview for unpublished entries
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.14...v0.14.1
+
+0.14
+----
+
 * Full Python 3.0 support
 * Django 1.5 is no longer supported
 * Better support of custom User model
