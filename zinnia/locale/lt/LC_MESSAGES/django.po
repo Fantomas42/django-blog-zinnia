@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-05 23:09+0100\n"
-"PO-Revision-Date: 2013-11-05 22:08+0000\n"
+"POT-Creation-Date: 2014-03-07 19:30+0100\n"
+"PO-Revision-Date: 2014-03-07 18:30+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/django-blog-zinnia/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -19,141 +19,171 @@ msgstr ""
 "Language: lt\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: feeds.py:139 templates/zinnia/entry_archive.html:4
+#: breadcrumbs.py:68 templates/admin/zinnia/widgets/quickpost.html:25
+#: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:48
+#: templates/zinnia/tag_list.html:6
+msgid "Tags"
+msgstr "Žymės"
+
+#: breadcrumbs.py:71 templates/zinnia/author_list.html:6
+#: templates/zinnia/base.html:40
+msgid "Authors"
+msgstr "Autoriai"
+
+#: breadcrumbs.py:75 admin/forms.py:57 templates/zinnia/base.html:36
+#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
+msgid "Categories"
+msgstr "Kategorijos"
+
+#: breadcrumbs.py:100
+#, python-format
+msgid "Page %s"
+msgstr "Puslapis %s"
+
+#: breadcrumbs.py:128
+#, python-format
+msgid "Week %s"
+msgstr "Savaitė %s"
+
+#: feeds.py:178 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:6
 msgid "Latest entries"
 msgstr "Naujausi įrašai"
 
-#: feeds.py:143
+#: feeds.py:184
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "Naujausi šios svetainės įrašai %s"
 
-#: feeds.py:163
+#: feeds.py:214
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Kategorijos %s įrašai"
 
-#: feeds.py:167
+#: feeds.py:220
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "Naujausi kategorijos %s įrašai"
 
-#: feeds.py:187
+#: feeds.py:251
 #, python-format
 msgid "Entries for author %s"
 msgstr "Autoriaus %s parašyti įrašai"
 
-#: feeds.py:191
+#: feeds.py:257
 #, python-format
 msgid "The latest entries by %s"
 msgstr "Naujausi %s parašyti įrašai"
 
-#: feeds.py:212
+#: feeds.py:288
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Įrašai pagal žymę %s"
 
-#: feeds.py:216
+#: feeds.py:294
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "Naujausi įrašai pagal žymę %s"
 
-#: feeds.py:239
+#: feeds.py:327
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr "Paieškos rezultatai pagal užklausą '%s'"
 
-#: feeds.py:243
+#: feeds.py:333
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr "Įrašai pagal struktūrą '%s'"
 
-#: feeds.py:288
+#: feeds.py:398
 msgid "Latest discussions"
 msgstr "Naujausios diskusijos"
 
-#: feeds.py:292
+#: feeds.py:404
 #, python-format
 msgid "The latest discussions for the site %s"
 msgstr "Naujausios svetainės %s diskusijos"
 
-#: feeds.py:315
+#: feeds.py:437
 #, python-format
 msgid "Discussions on %s"
 msgstr "%s diskusijos"
 
-#: feeds.py:319
+#: feeds.py:443
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "Naujausios įrašo %s diskusijos"
 
-#: feeds.py:338
+#: feeds.py:470
 #, python-format
 msgid "Comments on %s"
 msgstr "Komentarai parašyti į %s"
 
-#: feeds.py:342
+#: feeds.py:476
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "Naujausi komentarai parašyti įrašui %s"
 
-#: feeds.py:372
+#: feeds.py:520
 #, python-format
 msgid "Pingbacks on %s"
 msgstr "Pingbacks į %s"
 
-#: feeds.py:376
+#: feeds.py:526
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "Naujausi pingbacks įrašui %s"
 
-#: feeds.py:394
+#: feeds.py:552
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "Trackbacks į %s"
 
-#: feeds.py:398
+#: feeds.py:558
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "Naujausi trackbacks įrašui %s"
 
-#: moderator.py:59 moderator.py:80 moderator.py:101
+#: moderator.py:65 moderator.py:87 moderator.py:110
 #, python-format
 msgid "[%(site)s] New comment posted on \"%(title)s\""
 msgstr "[%(site)s] Parašytas naujas komentaras į \"%(title)s\""
 
-#: admin/category.py:30
+#: admin/category.py:34
 msgid "tree path"
 msgstr "direktorijų medis"
 
-#: admin/entry.py:33 templates/admin/zinnia/widgets/quickpost.html:17
+#: admin/entry.py:37 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "Turinys"
 
-#: admin/entry.py:35
-msgid "Options"
-msgstr "Nustatymai"
+#: admin/entry.py:39
+msgid "Publication"
+msgstr "Publikavimas"
 
-#: admin/entry.py:43
-msgid "Privacy"
-msgstr "Privatumas"
-
-#: admin/entry.py:45 templates/admin/zinnia/widgets/_content_stats.html:4
+#: admin/entry.py:43 templates/admin/zinnia/widgets/_content_stats.html:4
 #: templates/zinnia/_entry_detail_base.html:114
 msgid "Discussions"
 msgstr "Diskusijos"
 
-#: admin/entry.py:50
-msgid "Publication"
-msgstr "Publikavimas"
+#: admin/entry.py:47
+msgid "Privacy"
+msgstr "Privatumas"
 
-#: admin/entry.py:78
+#: admin/entry.py:50
+msgid "Templates"
+msgstr ""
+
+#: admin/entry.py:53
+msgid "Metadatas"
+msgstr ""
+
+#: admin/entry.py:85
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i žodžiai)"
 
-#: admin/entry.py:85
+#: admin/entry.py:92
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
@@ -161,124 +191,124 @@ msgstr[0] ""
 msgstr[1] "%(title)s (%(reactions)i reakcija)"
 msgstr[2] "%(title)s (%(reactions)i reakcijos)"
 
-#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:48
+#: admin/entry.py:97 models/category.py:21 models_bases/entry.py:46
 msgid "title"
 msgstr "pavadinimas"
 
-#: admin/entry.py:102
+#: admin/entry.py:113
 msgid "author(s)"
 msgstr "autorius(iai)"
 
-#: admin/entry.py:115
+#: admin/entry.py:128
 msgid "category(s)"
 msgstr "kategorija(os)"
 
-#: admin/entry.py:126
+#: admin/entry.py:141
 msgid "tag(s)"
 msgstr "žymė(ės)"
 
-#: admin/entry.py:139
+#: admin/entry.py:156
 msgid "site(s)"
 msgstr "svetainė(s)"
 
-#: admin/entry.py:150
+#: admin/entry.py:169
 msgid "short url"
 msgstr "trumpa nuoroda"
 
-#: admin/entry.py:156
+#: admin/entry.py:177
 msgid "is visible"
 msgstr "yra matomas"
 
-#: admin/entry.py:224
+#: admin/entry.py:262
 msgid "The selected entries now belong to you."
 msgstr "Pasirinkti įrašai dabar priklauso jums."
 
-#: admin/entry.py:225
+#: admin/entry.py:263
 msgid "Set the entries to the user"
 msgstr "Priskirkite įrašus vartotojui"
 
-#: admin/entry.py:232
+#: admin/entry.py:272
 msgid "The selected entries are now marked as published."
 msgstr "Pasirinkti įrašai dabar pažymėti, kaip paskelbti."
 
-#: admin/entry.py:233
+#: admin/entry.py:273
 msgid "Set entries selected as published"
 msgstr "Pasirinktus įrašus nustatyti, kaip paskelbtus"
 
-#: admin/entry.py:239
+#: admin/entry.py:281
 msgid "The selected entries are now marked as hidden."
 msgstr "Pasirinkti įrašai dabar pažymėti, kaip nematomi."
 
-#: admin/entry.py:240
+#: admin/entry.py:282
 msgid "Set entries selected as hidden"
 msgstr "Pasirinktus įrašus nustatyti, kaip nematomus."
 
-#: admin/entry.py:246
+#: admin/entry.py:290
 msgid "Comments are now closed for selected entries."
 msgstr "Komentarai pasirinktiems įrašams buvo uždaryti."
 
-#: admin/entry.py:247
+#: admin/entry.py:291
 msgid "Close the comments for selected entries"
 msgstr "Uždaryti komentarus pasirinktiems įrašams"
 
-#: admin/entry.py:254
+#: admin/entry.py:300
 msgid "Pingbacks are now closed for selected entries."
 msgstr "Pingbacks pasirinktiems įrašams buvo uždaryti."
 
-#: admin/entry.py:256
+#: admin/entry.py:302
 msgid "Close the pingbacks for selected entries"
 msgstr "Uždaryti pingbacks pasirinktiems įrašams."
 
-#: admin/entry.py:262
+#: admin/entry.py:310
 msgid "Trackbacks are now closed for selected entries."
 msgstr "Trackbacks buvo uždaryti pasirinktiems įrašams."
 
-#: admin/entry.py:264
+#: admin/entry.py:312
 msgid "Close the trackbacks for selected entries"
 msgstr "Uždaryti trackbacks pasirinktiems  įrašams."
 
-#: admin/entry.py:271
+#: admin/entry.py:321
 msgid "The selected entries are now set at the current date."
 msgstr "Pasirinktiems įrašams nustatyta dabartinė data."
 
-#: admin/entry.py:273
+#: admin/entry.py:323
 msgid "Put the selected entries on top at the current date"
 msgstr "Pasirinktus įrašus patalpinti dabartinės datos viršuje."
 
-#: admin/entry.py:279
+#: admin/entry.py:331
 msgid "Selected entries are now marked as featured."
 msgstr "Pasirinkti įrašai buvo pažymėti, kaip išskirti."
 
-#: admin/entry.py:280
+#: admin/entry.py:332
 msgid "Mark selected entries as featured"
 msgstr "Pasirinktus įrašus pažymėti, kaip išskirtus"
 
-#: admin/entry.py:286
+#: admin/entry.py:340
 msgid "Selected entries are no longer marked as featured."
 msgstr "Pasirinkti įrašai nebėra pažymėti, kaip išskirti."
 
-#: admin/entry.py:288
+#: admin/entry.py:342
 msgid "Unmark selected entries as featured"
 msgstr "Atžymėti pasirinktus įrašus, kaip išskirtus"
 
-#: admin/entry.py:303
+#: admin/entry.py:359
 msgid "The selected entries have been tweeted."
 msgstr "Pasirinkti įrašai buvo paskelbti."
 
-#: admin/entry.py:304
+#: admin/entry.py:360
 msgid "Tweet entries selected"
 msgstr "Tweet įrašai pasirinkti"
 
-#: admin/entry.py:323
+#: admin/entry.py:381
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "%(directory)s direktorija sėkmingai supingino %(success)d įrašus."
 
-#: admin/entry.py:327
+#: admin/entry.py:385
 msgid "Ping Directories for selected entries"
 msgstr "Pinginti Direktorijas pasirinktiems įrašams"
 
-#: admin/filters.py:27
+#: admin/filters.py:28
 #, python-format
 msgid "%(item)s (%(count)i entry)"
 msgid_plural "%(item)s (%(count)i entries)"
@@ -286,11 +316,11 @@ msgstr[0] ""
 msgstr[1] "%(item)s (%(count)i įrašas)"
 msgstr[2] "%(item)s (%(count)i įrašai)"
 
-#: admin/filters.py:48
+#: admin/filters.py:49
 msgid "published authors"
 msgstr "publikuojami autoriai"
 
-#: admin/filters.py:59
+#: admin/filters.py:60
 msgid "published categories"
 msgstr "publikuojamos kategorijos"
 
@@ -302,21 +332,15 @@ msgstr ""
 msgid "No parent category"
 msgstr "Ne tėvinė kategorija"
 
-#: admin/forms.py:38
+#: admin/forms.py:41
 msgid "A category cannot be parent of itself."
 msgstr "Kategorija negali būti savo paties tėvine kategorija."
 
-#: admin/forms.py:49 templates/zinnia/base.html:36
-#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
-#: templatetags/zbreadcrumbs.py:65
-msgid "Categories"
-msgstr "Kategorijos"
-
-#: admin/forms.py:51 models/category.py:75 models_bases/entry.py:403
+#: admin/forms.py:59 models/category.py:75 models_bases/entry.py:407
 msgid "categories"
 msgstr "kategorijos"
 
-#: models/category.py:24 models_bases/entry.py:51
+#: models/category.py:24 models_bases/entry.py:49
 msgid "slug"
 msgstr "slug"
 
@@ -336,27 +360,27 @@ msgstr "tėvinė kategorija"
 msgid "category"
 msgstr "kategorija"
 
-#: models_bases/entry.py:43
+#: models_bases/entry.py:41
 msgid "draft"
 msgstr "juodraštis"
 
-#: models_bases/entry.py:44
+#: models_bases/entry.py:42
 msgid "hidden"
 msgstr "paslėptas"
 
-#: models_bases/entry.py:45
+#: models_bases/entry.py:43
 msgid "published"
 msgstr "publikuojamas"
 
-#: models_bases/entry.py:53 models_bases/entry.py:74
+#: models_bases/entry.py:51 models_bases/entry.py:76
 msgid "Used to build the entry's URL."
 msgstr "Naudojamas sudaryti įrašo URL."
 
-#: models_bases/entry.py:56
+#: models_bases/entry.py:54
 msgid "status"
 msgstr "statusas"
 
-#: models_bases/entry.py:59
+#: models_bases/entry.py:58
 msgid "start publication"
 msgstr "pradėti publikavimą"
 
@@ -368,141 +392,153 @@ msgstr "Publikacijos pradžios data."
 msgid "end publication"
 msgstr "nutraukti publikavimą"
 
-#: models_bases/entry.py:64
+#: models_bases/entry.py:65
 msgid "End date of publication."
 msgstr "Publikavimo pabaigos data."
 
-#: models_bases/entry.py:69
+#: models_bases/entry.py:70
 msgid "sites"
 msgstr "svetainės"
 
-#: models_bases/entry.py:70
+#: models_bases/entry.py:71
 msgid "Sites where the entry will be published."
 msgstr "Svetainės, kuriose įrašas bus publikuojamas."
 
-#: models_bases/entry.py:73
+#: models_bases/entry.py:74
 msgid "creation date"
 msgstr "sukūrimo data"
 
-#: models_bases/entry.py:77
+#: models_bases/entry.py:79
 msgid "last update"
 msgstr "paskutinis atnaujinimas"
 
-#: models_bases/entry.py:179
+#: models_bases/entry.py:181
 msgid "entry"
 msgstr "įrašas"
 
-#: models_bases/entry.py:180
+#: models_bases/entry.py:182
 msgid "entries"
 msgstr "įrašai"
 
-#: models_bases/entry.py:192
+#: models_bases/entry.py:196
 msgid "content"
 msgstr "turinys"
 
-#: models_bases/entry.py:234
+#: models_bases/entry.py:238
 msgid "comments enabled"
 msgstr "komentarai įjungti"
 
-#: models_bases/entry.py:235
+#: models_bases/entry.py:239
 msgid "Allows comments if checked."
 msgstr "Jei pažymėta, komentarai yra leidžiami."
 
-#: models_bases/entry.py:237
+#: models_bases/entry.py:241
 msgid "pingbacks enabled"
 msgstr "pingbacks įjungti"
 
-#: models_bases/entry.py:238
+#: models_bases/entry.py:242
 msgid "Allows pingbacks if checked."
 msgstr "Jei pažymėta, pingbacks yra leidžiami."
 
-#: models_bases/entry.py:240
+#: models_bases/entry.py:244
 msgid "trackbacks enabled"
 msgstr "trackbacks įjungti"
 
-#: models_bases/entry.py:241
+#: models_bases/entry.py:245
 msgid "Allows trackbacks if checked."
 msgstr "Jei pažymėta, trackbacks yra leidžiami."
 
-#: models_bases/entry.py:244
+#: models_bases/entry.py:248
 msgid "comment count"
 msgstr "komentarų skaičius"
 
-#: models_bases/entry.py:246
+#: models_bases/entry.py:250
 msgid "pingback count"
 msgstr "pingback skaičius"
 
-#: models_bases/entry.py:248
+#: models_bases/entry.py:252
 msgid "trackback count"
 msgstr "trackback skaičius"
 
-#: models_bases/entry.py:332
+#: models_bases/entry.py:336
 msgid "related entries"
 msgstr "panašūs įrašai"
 
-#: models_bases/entry.py:350
+#: models_bases/entry.py:354
 msgid "excerpt"
 msgstr "ištrauka"
 
-#: models_bases/entry.py:351
-msgid "Optional element."
-msgstr "Neprivalomas elementas."
+#: models_bases/entry.py:355
+msgid "Used for search and SEO."
+msgstr ""
 
-#: models_bases/entry.py:362
+#: models_bases/entry.py:366
 msgid "image"
 msgstr "paveikslėlis"
 
-#: models_bases/entry.py:363
+#: models_bases/entry.py:367
 msgid "Used for illustration."
 msgstr "Naudojama iliustracijai."
 
-#: models_bases/entry.py:374
+#: models_bases/entry.py:378
 msgid "featured"
 msgstr "išskirtas"
 
-#: models_bases/entry.py:389
+#: models_bases/entry.py:393
 msgid "authors"
 msgstr "autoriai"
 
-#: models_bases/entry.py:413
+#: models_bases/entry.py:417
 msgid "tags"
 msgstr "žymės"
 
-#: models_bases/entry.py:432
+#: models_bases/entry.py:436
 msgid "login required"
 msgstr "būtinas prisijungimas"
 
-#: models_bases/entry.py:433
+#: models_bases/entry.py:437
 msgid "Only authenticated users can view the entry."
 msgstr "Tik tie vartotojai, kurie turi priėjimą gali peržiūrėti šį įrašą."
 
-#: models_bases/entry.py:445
+#: models_bases/entry.py:449
 msgid "password"
 msgstr "slaptažodis"
 
-#: models_bases/entry.py:446
+#: models_bases/entry.py:450
 msgid "Protects the entry with a password."
 msgstr "Apsaugo įrašą slaptažodžiu."
 
-#: models_bases/entry.py:458
+#: models_bases/entry.py:462
 msgid "content template"
 msgstr "turinio šablonas"
 
-#: models_bases/entry.py:460 models_bases/entry.py:476
+#: models_bases/entry.py:464 models_bases/entry.py:480
 msgid "Default template"
 msgstr "Numatytasis šablonas"
 
-#: models_bases/entry.py:462
+#: models_bases/entry.py:466
 msgid "Template used to display the entry's content."
 msgstr "Šablonas naudojamas atvaizduoti įrašo turinį."
 
-#: models_bases/entry.py:474
+#: models_bases/entry.py:478
 msgid "detail template"
 msgstr "detail šablonas"
 
-#: models_bases/entry.py:478
+#: models_bases/entry.py:482
 msgid "Template used to display the entry's detail page."
 msgstr "Šablonas naudojamas atvaizduoti įrašo detalujį puslapį."
+
+#: templates/400.html:6
+msgid "Error 400"
+msgstr ""
+
+#: templates/400.html:10 templates/400.html.py:15
+msgid "Bad request"
+msgstr ""
+
+#: templates/400.html:17
+msgid "Sorry, but the request was malformed."
+msgstr ""
 
 #: templates/403.html:6
 msgid "Error 403"
@@ -513,8 +549,8 @@ msgid "Permission denied"
 msgstr "Priėjimas neleidžiamas"
 
 #: templates/403.html:17
-msgid "Sorry but you don't have the permission to do this action."
-msgstr "Atsiprašome, tačiau jums nesuteiktas leidimas atlikti šį veiksmą."
+msgid "Sorry, but you don't have the permission to do this action."
+msgstr ""
 
 #: templates/404.html:6
 msgid "Error 404"
@@ -562,7 +598,7 @@ msgstr[2] "%(entry_count)s įrašai"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:14
 #: templates/zinnia/_entry_detail_base.html:120
-#: templates/zinnia/tags/popular_entries.html:8
+#: templates/zinnia/tags/entries_popular.html:8
 #: templates/zinnia/tags/statistics.html:16
 #, python-format
 msgid "%(comment_count)s comment"
@@ -662,8 +698,8 @@ msgid "%(linkbacks_per_entry)s linkbacks per entry"
 msgstr "%(linkbacks_per_entry)s atgalinių nuorodų per įrašą"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:6
-#: templates/zinnia/entry_detail_base.html:223
-#: templates/zinnia/entry_detail_base.html:224
+#: templates/zinnia/entry_detail_base.html:248
+#: templates/zinnia/entry_detail_base.html:249
 msgid "Edit the entry"
 msgstr "Redaguoti įrašą"
 
@@ -674,20 +710,20 @@ msgstr "Redaguoti įrašą"
 #: templates/feeds/pingback_title.html:2
 #: templates/feeds/trackback_title.html:2
 #: templates/zinnia/_entry_detail_base.html:23
-#: templates/zinnia/entry_detail_base.html:113
-#: templates/zinnia/entry_detail_base.html:150
-#: templates/zinnia/entry_detail_base.html:186
+#: templates/zinnia/entry_detail_base.html:109
+#: templates/zinnia/entry_detail_base.html:153
+#: templates/zinnia/entry_detail_base.html:207
 msgctxt "on date"
 msgid "on"
 msgstr ""
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:15
-#: templates/comments/zinnia/entry/form.html:25
+#: templates/comments/zinnia/entry/form.html:31
 msgid "Preview"
 msgstr "Peržiūra"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:22
-#: templates/zinnia/tags/draft_entries.html:9
+#: templates/zinnia/tags/entries_draft.html:9
 msgid "No draft entries."
 msgstr "Nėra juodraštinių įrašų."
 
@@ -698,13 +734,13 @@ msgstr "Peržiūrėti visus juodraščius"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:10
 #: templates/zinnia/_entry_detail_base.html:35
-#: templates/zinnia/tags/recent_comments.html:6
-#: templates/zinnia/tags/recent_linkbacks.html:7
+#: templates/zinnia/tags/comments_recent.html:6
+#: templates/zinnia/tags/linkbacks_recent.html:7
 msgid "in"
 msgstr "į"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:13
-#: templates/zinnia/tags/recent_comments.html:8
+#: templates/zinnia/tags/comments_recent.html:8
 msgid "Comment on"
 msgstr "Komentuoti"
 
@@ -719,8 +755,8 @@ msgstr "Redaguoti"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:30
 #: templates/zinnia/_entry_detail_base.html:124
-#: templates/zinnia/entry_detail_base.html:131
-#: templates/zinnia/tags/recent_comments.html:15
+#: templates/zinnia/entry_detail_base.html:229
+#: templates/zinnia/tags/comments_recent.html:15
 msgid "No comments yet."
 msgstr "Komentarų kol kas nėra."
 
@@ -738,7 +774,7 @@ msgid "Edit the linkback"
 msgstr "Keisti atgalinę nuorodą"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:25
-#: templates/zinnia/tags/recent_linkbacks.html:16
+#: templates/zinnia/tags/linkbacks_recent.html:16
 msgid "No linkbacks yet."
 msgstr "Nėra atgalinių nuorodų."
 
@@ -760,12 +796,6 @@ msgstr "Greitas publikavimas"
 #: templates/admin/zinnia/widgets/quickpost.html:9
 msgid "Title"
 msgstr "Pavadinimas"
-
-#: templates/admin/zinnia/widgets/quickpost.html:25
-#: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:48
-#: templates/zinnia/tag_list.html:6 templatetags/zbreadcrumbs.py:58
-msgid "Tags"
-msgstr "Žymės"
 
 #: templates/admin/zinnia/widgets/quickpost.html:33
 msgid "Save as draft"
@@ -845,20 +875,20 @@ msgstr[2] "Prašome ištaisyti šias klaidas."
 msgid "Preview of the comment"
 msgstr "Peržiūrėti komentarą"
 
-#: templates/comments/zinnia/entry/form.html:5
+#: templates/comments/zinnia/entry/form.html:11
 msgid "Post your comment"
 msgstr "Rašyti komentarą"
 
-#: templates/comments/zinnia/entry/form.html:20
+#: templates/comments/zinnia/entry/form.html:26
 msgid "Comment as"
 msgstr "Komentuoti kaip"
 
-#: templates/comments/zinnia/entry/form.html:20 templates/zinnia/base.html:96
+#: templates/comments/zinnia/entry/form.html:26 templates/zinnia/base.html:96
 #: templates/zinnia/base.html.py:97
 msgid "Log out"
 msgstr "Atsijungti"
 
-#: templates/comments/zinnia/entry/form.html:24
+#: templates/comments/zinnia/entry/form.html:30
 msgid "Post"
 msgstr "Rašyti"
 
@@ -909,8 +939,8 @@ msgstr "Paskutinis atnaujinimas"
 
 #: templates/zinnia/_entry_detail_base.html:78
 #, python-format
-msgid "Continue reading %(object)s"
-msgstr "Skaityti toliau %(object)s"
+msgid "%(percent)s%% of %(object)s still remains to read."
+msgstr ""
 
 #: templates/zinnia/_entry_detail_base.html:80
 msgid "Continue reading"
@@ -936,7 +966,7 @@ msgid "Short URL to %(object)s"
 msgstr "Trumpas URL į %(object)s"
 
 #: templates/zinnia/_entry_detail_base.html:119
-#: templates/zinnia/tags/popular_entries.html:7
+#: templates/zinnia/tags/entries_popular.html:7
 #, python-format
 msgid "Comments on %(object)s"
 msgstr "%(object)s komentarai"
@@ -951,8 +981,8 @@ msgid "Be first to comment!"
 msgstr "Būkite pirmas, kuris pakomentuosite!"
 
 #: templates/zinnia/_entry_detail_base.html:130
-#: templates/zinnia/entry_detail_base.html:127
-#: templates/zinnia/entry_detail_base.html:133
+#: templates/zinnia/entry_detail_base.html:225
+#: templates/zinnia/entry_detail_base.html:231
 msgid "Comments are closed."
 msgstr "Komentarai yra uždaryti."
 
@@ -969,11 +999,6 @@ msgstr "Trackbacks į %(object)s"
 #: templates/zinnia/author_list.html:4 templates/zinnia/author_list.html:11
 msgid "Author list"
 msgstr "Autoriaus sąrašas"
-
-#: templates/zinnia/author_list.html:6 templates/zinnia/base.html:40
-#: templatetags/zbreadcrumbs.py:61
-msgid "Authors"
-msgstr "Autoriai"
 
 #: templates/zinnia/author_list.html:23 templates/zinnia/tags/authors.html:12
 msgid "No authors yet."
@@ -1025,17 +1050,17 @@ msgstr "Populiarūs įrašai"
 #: templates/zinnia/entry_archive_month.html:4
 #: templates/zinnia/entry_archive_month.html:6
 #: templates/zinnia/entry_archive_month.html:11
-#: templates/zinnia/entry_archive_month.html:36
+#: templates/zinnia/entry_archive_month.html:37
 #: templates/zinnia/entry_archive_today.html:22
-#: templates/zinnia/entry_archive_week.html:32
+#: templates/zinnia/entry_archive_week.html:42
 #: templates/zinnia/entry_archive_year.html:4
 #: templates/zinnia/entry_archive_year.html:6
 #: templates/zinnia/entry_archive_year.html:11
-#: templates/zinnia/tags/archives_entries.html:5
-#: templates/zinnia/tags/archives_entries_link.html:2
-#: templates/zinnia/tags/archives_entries_tree.html:6
-#: templates/zinnia/tags/archives_entries_tree.html:13
-#: templates/zinnia/tags/archives_entries_tree.html:23
+#: templates/zinnia/tags/entries_archives.html:5
+#: templates/zinnia/tags/entries_archives_link.html:2
+#: templates/zinnia/tags/entries_archives_tree.html:6
+#: templates/zinnia/tags/entries_archives_tree.html:13
+#: templates/zinnia/tags/entries_archives_tree.html:23
 msgid "Archives"
 msgstr "Archyvas"
 
@@ -1075,15 +1100,23 @@ msgstr "Praeita diena"
 msgid "Next day"
 msgstr "Kita diena"
 
-#: templates/zinnia/entry_archive_month.html:15
+#: templates/zinnia/entry_archive_day.html:35
+#: templates/zinnia/entry_archive_week.html:30
+#: templates/zinnia/entry_archive_week.html:38
+#, python-format
+msgid "Week %(week_number)s of %(year)s"
+msgstr ""
+
+#: templates/zinnia/entry_archive_month.html:16
+#: templates/zinnia/entry_archive_week.html:17
 msgid "Daily archives"
 msgstr "Dienos archyvas"
 
-#: templates/zinnia/entry_archive_month.html:25
+#: templates/zinnia/entry_archive_month.html:26
 msgid "Previous month"
 msgstr "Praeitas mėnuo"
 
-#: templates/zinnia/entry_archive_month.html:31
+#: templates/zinnia/entry_archive_month.html:32
 msgid "Next month"
 msgstr "Kitas mėnuo"
 
@@ -1100,17 +1133,11 @@ msgstr "Šiandienos archyvas"
 msgid "Archives week %(week_number)s of %(year)s"
 msgstr "Archyvo savaite %(week_number)s metų %(year)s"
 
-#: templates/zinnia/entry_archive_week.html:17
+#: templates/zinnia/entry_archive_week.html:27
 msgid "Previous week"
 msgstr ""
 
-#: templates/zinnia/entry_archive_week.html:20
-#: templates/zinnia/entry_archive_week.html:28
-#, python-format
-msgid "Week %(week_number)s of %(year)s"
-msgstr ""
-
-#: templates/zinnia/entry_archive_week.html:25
+#: templates/zinnia/entry_archive_week.html:35
 msgid "Next week"
 msgstr ""
 
@@ -1127,73 +1154,73 @@ msgstr ""
 msgid "Next year"
 msgstr ""
 
-#: templates/zinnia/entry_detail_base.html:21
+#: templates/zinnia/entry_detail_base.html:22
 msgid "RSS Feed of discussions on"
 msgstr "RSS Srautas diskusijų"
 
-#: templates/zinnia/entry_detail_base.html:23
+#: templates/zinnia/entry_detail_base.html:24
 msgid "RSS Feed of comments on"
 msgstr "RSS Srautas komentarų"
 
-#: templates/zinnia/entry_detail_base.html:25
+#: templates/zinnia/entry_detail_base.html:26
 msgid "RSS Feed of pingbacks on"
 msgstr "RSS Srautas pingbacks"
 
-#: templates/zinnia/entry_detail_base.html:27
+#: templates/zinnia/entry_detail_base.html:28
 msgid "RSS Feed of trackbacks on"
 msgstr "RSS Srautas trackbacks"
 
-#: templates/zinnia/entry_detail_base.html:46
+#: templates/zinnia/entry_detail_base.html:47
 msgid "Next entry"
 msgstr "Kitas įrašas"
 
-#: templates/zinnia/entry_detail_base.html:60
+#: templates/zinnia/entry_detail_base.html:61
 msgid "Previous entry"
 msgstr "Praeitas įrašas"
 
-#: templates/zinnia/entry_detail_base.html:74
+#: templates/zinnia/entry_detail_base.html:75
 msgid "Related entries"
 msgstr "Susiję įrašai"
 
-#: templates/zinnia/entry_detail_base.html:88
+#: templates/zinnia/entry_detail_base.html:89
 msgid "Similar entries"
 msgstr "Panašūs įrašai"
 
-#: templates/zinnia/entry_detail_base.html:97
-msgid "Comments"
-msgstr "Komentarai"
-
-#: templates/zinnia/entry_detail_base.html:119
-msgid "Direct link to this comment"
-msgstr "Tiesioginė nuoroda į komentarą"
-
-#: templates/zinnia/entry_detail_base.html:141
+#: templates/zinnia/entry_detail_base.html:98
 msgid "Pingbacks"
 msgstr "Pingbacks"
 
-#: templates/zinnia/entry_detail_base.html:156
+#: templates/zinnia/entry_detail_base.html:115
 msgid "Direct link to this pingback"
 msgstr "Tiesioginė nuoroda į pingback"
 
-#: templates/zinnia/entry_detail_base.html:167
+#: templates/zinnia/entry_detail_base.html:131
 msgid "Pingbacks are open."
 msgstr "Pingbacks yra atidaryti"
 
-#: templates/zinnia/entry_detail_base.html:169
+#: templates/zinnia/entry_detail_base.html:133
 msgid "Pingbacks are closed."
 msgstr "Pingbacks yra uždaryti"
 
-#: templates/zinnia/entry_detail_base.html:177
+#: templates/zinnia/entry_detail_base.html:142
 msgid "Trackbacks"
 msgstr "Trackbacks"
 
-#: templates/zinnia/entry_detail_base.html:192
+#: templates/zinnia/entry_detail_base.html:159
 msgid "Direct link to this trackback"
 msgstr "Tiesioginė nuoroda į trackback"
 
-#: templates/zinnia/entry_detail_base.html:205
+#: templates/zinnia/entry_detail_base.html:177
 msgid "Trackback URL"
 msgstr "trackback URL"
+
+#: templates/zinnia/entry_detail_base.html:187
+msgid "Comments"
+msgstr "Komentarai"
+
+#: templates/zinnia/entry_detail_base.html:213
+msgid "Direct link to this comment"
+msgstr "Tiesioginė nuoroda į komentarą"
 
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries for"
@@ -1249,10 +1276,10 @@ msgstr "Autoriaus archyvai: %(author)s"
 
 #: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:25
 #: templates/zinnia/sitemap.html.py:45
-#: templates/zinnia/tags/featured_entries.html:9
-#: templates/zinnia/tags/popular_entries.html:12
-#: templates/zinnia/tags/random_entries.html:9
-#: templates/zinnia/tags/recent_entries.html:9
+#: templates/zinnia/tags/entries_featured.html:9
+#: templates/zinnia/tags/entries_popular.html:12
+#: templates/zinnia/tags/entries_random.html:9
+#: templates/zinnia/tags/entries_recent.html:9
 msgid "No entries yet."
 msgstr "Įrašų kol kas nėra."
 
@@ -1379,10 +1406,18 @@ msgstr "Žymų sąrašas"
 msgid "No tags yet."
 msgstr "Žymų nėra."
 
-#: templates/zinnia/tags/archives_entries.html:12
-#: templates/zinnia/tags/archives_entries_tree.html:37
+#: templates/zinnia/tags/entries_archives.html:12
+#: templates/zinnia/tags/entries_archives_tree.html:37
 msgid "No archives yet."
 msgstr "Archyvų nėra."
+
+#: templates/zinnia/tags/entries_similar.html:9
+msgid "No similar entries."
+msgstr "Nėra panašių įrašų."
+
+#: templates/zinnia/tags/linkbacks_recent.html:9
+msgid "Linkback on"
+msgstr "Atgalinė nuoroda į"
 
 #: templates/zinnia/tags/pagination.html:4
 #, python-format
@@ -1403,20 +1438,12 @@ msgstr "Įrašų puslapis"
 msgid "More old entries"
 msgstr "Daugiau senesnių įrašų"
 
-#: templates/zinnia/tags/recent_linkbacks.html:9
-msgid "Linkback on"
-msgstr "Atgalinė nuoroda į"
-
 #: templates/zinnia/tags/search_form.html:6
 msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex queries."
 msgstr "Galite naudoti - kad išskirti žodžius ar frazes, &quot;double quotes&quot; tikslioms frazėms ir AND/OR boolean operatorius."
-
-#: templates/zinnia/tags/similar_entries.html:9
-msgid "No similar entries."
-msgstr "Nėra panašių įrašų."
 
 #: templates/zinnia/tags/tag_cloud.html:6
 #, python-format
@@ -1426,21 +1453,15 @@ msgstr[0] ""
 msgstr[1] "%(entry_count)s įrašas pagal žymas %(tag)s"
 msgstr[2] "%(entry_count)s įrašai pagal žymas %(tag)s"
 
-#: templatetags/zbreadcrumbs.py:90
-#, python-format
-msgid "Page %s"
-msgstr "Puslapis %s"
+#: templatetags/zinnia_tags.py:335
+msgid "Blog"
+msgstr ""
 
-#: templatetags/zbreadcrumbs.py:116
-#, python-format
-msgid "Week %s"
-msgstr "Savaitė %s"
-
-#: tests/views.py:450 views/search.py:30
+#: tests/test_views.py:555 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Struktūra per trumpa"
 
-#: tests/views.py:454 views/search.py:34
+#: tests/test_views.py:559 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Struktūra paieškai nerasta"
 
@@ -1577,23 +1598,23 @@ msgstr "^(?P<tag>[^/]+(?u))/puslapis/(?P<page>\\d+)/$"
 msgid "No Tag found matching \"%s\"."
 msgstr "Žymė pagal \"%s\" nerasta."
 
-#: xmlrpc/metaweblog.py:45
+#: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."
 msgstr "Vartotojo vardas yra neteisingas."
 
-#: xmlrpc/metaweblog.py:47
+#: xmlrpc/metaweblog.py:50
 msgid "Password is invalid."
 msgstr "Slaptažodis yra neteisingas."
 
-#: xmlrpc/metaweblog.py:49
+#: xmlrpc/metaweblog.py:52
 msgid "User account unavailable."
 msgstr "Vartotojo sąskaita nepasiekiama."
 
-#: xmlrpc/metaweblog.py:52
+#: xmlrpc/metaweblog.py:55
 #, python-format
 msgid "User cannot %s."
 msgstr "Vartotojas negali %s."
 
-#: xmlrpc/pingback.py:108
+#: xmlrpc/pingback.py:114
 msgid "No title"
 msgstr "Nėra pavadinimo"

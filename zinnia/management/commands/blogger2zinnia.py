@@ -11,6 +11,7 @@ from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.utils.six.moves import input
 from django.utils.encoding import smart_str
+from django.utils.encoding import smart_unicode
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
 from django.core.management.base import CommandError
@@ -108,7 +109,7 @@ class Command(NoArgsCommand):
         if default_author:
             try:
                 self.default_author = Author.objects.get(
-                    username=default_author)
+                    **{Author.USERNAME_FIELD: self.default_author})
             except Author.DoesNotExist:
                 raise CommandError(
                     'Invalid Zinnia username for default author "%s"' %
@@ -168,7 +169,7 @@ class Command(NoArgsCommand):
             title = post.title.text or ''
             content = post.content.text or ''
             excerpt = self.auto_excerpt and Truncator(
-                strip_tags(content)).words(50) or ''
+                strip_tags(smart_unicode(content))).words(50) or ''
             slug = slugify(post.title.text or get_post_id(post))[:255]
             try:
                 entry = Entry.objects.get(creation_date=creation_date,
@@ -179,8 +180,6 @@ class Command(NoArgsCommand):
                 entry = Entry(status=status, title=title, content=content,
                               creation_date=creation_date, slug=slug,
                               excerpt=excerpt)
-                if self.default_author:
-                    entry.author = self.default_author
                 entry.tags = ','.join([slugify(cat.term) for
                                        cat in post.category])
                 entry.last_update = convert_blogger_timestamp(

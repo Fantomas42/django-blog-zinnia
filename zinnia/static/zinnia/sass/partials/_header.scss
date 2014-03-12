@@ -13,7 +13,7 @@
   blockquote {
     border: none;
     background: none;
-    margin: 0 0 1.5em 0;;
+    margin:  0 0 1.5em 0;
     padding: 0 1.5em 0 0;
   }
 
@@ -47,17 +47,17 @@
     }
   }
 
-  @media (min-width: 480px) {
+  @include breakpoint("small") {
     form, .top-navigation {
       display: block;
     }
   }
-  @media (min-width: 768px) {
+  @include breakpoint("medium") {
     h1 {
       font-size: 4em;
     }
   }
-  @media (min-width: 1024px) {
+  @include breakpoint("large") {
     h1 {
       background: transparent image-url("logo.png") no-repeat scroll left center;
       padding-left: 1.5em;

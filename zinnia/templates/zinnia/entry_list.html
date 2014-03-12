@@ -14,7 +14,7 @@
     <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ tag }}" href="{% url 'zinnia_tag_feed' tag.name %}" />
   {% endif %}
   {% if author %}
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ author }}" href="{% url 'zinnia_author_feed' author.username %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ author }}" href="{% url 'zinnia_author_feed' author.get_username %}" />
   {% endif %}
 {% endblock link %}
 
@@ -81,7 +81,7 @@
   {% endif %}
   {% if author and perms.auth.change_user %}
   <li>
-    <a href="{% url 'admin:auth_user_change' author.pk %}" title="{% trans "Edit the author" %}">
+    <a href="{% url 'change'|user_admin_urlname author.pk %}" title="{% trans "Edit the author" %}">
       {% trans "Edit the author" %}
     </a>
   </li>

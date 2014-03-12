@@ -1,6 +1,10 @@
 """Preview for Zinnia"""
+from __future__ import division
+
 from django.utils import six
 from django.utils.text import Truncator
+from django.utils.html import strip_tags
+from django.utils.functional import cached_property
 from django.utils.encoding import python_2_unicode_compatible
 
 from bs4 import BeautifulSoup
@@ -78,3 +82,39 @@ class HTMLPreview(object):
         last_string = soup.find_all(text=True)[-1]
         last_string.replace_with(last_string.string + self.more_string)
         return soup
+
+    @cached_property
+    def total_words(self):
+        """
+        Return the total of words contained in the content.
+        """
+        return len(strip_tags(self.content).split())
+
+    @cached_property
+    def displayed_words(self):
+        """
+        Return the number of words displayed in the preview.
+        """
+        return (len(strip_tags(self.preview).split()) -
+                len(self.more_string.split()))
+
+    @cached_property
+    def remaining_words(self):
+        """
+        Return the number of words remaining after the preview.
+        """
+        return self.total_words - self.displayed_words
+
+    @cached_property
+    def displayed_percent(self):
+        """
+        Return the percentage of the content displayed in the preview.
+        """
+        return (self.displayed_words / self.total_words) * 100
+
+    @cached_property
+    def remaining_percent(self):
+        """
+        Return the percentage of the content remaining after the preview.
+        """
+        return (self.remaining_words / self.total_words) * 100

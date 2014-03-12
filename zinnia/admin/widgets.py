@@ -1,10 +1,12 @@
 """Widgets for Zinnia admin"""
 from itertools import chain
 
-from django.contrib.admin import widgets
+from django.utils import six
+from django.utils.html import escape
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.encoding import force_text
+from django.contrib.admin import widgets
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 
@@ -20,16 +22,17 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         the sort_fields argument.
         """
         option_value = force_text(option_value)
+        option_label = escape(force_text(option_label))
+
         if option_value in selected_choices:
             selected_html = mark_safe(' selected="selected"')
         else:
             selected_html = ''
         return format_html(
-            '<option value="{0}"{1} data-tree-id="{2}"'
-            ' data-left-value="{3}">{4}</option>',
-            option_value, selected_html,
-            sort_fields[0], sort_fields[1],
-            force_text(option_label))
+            six.text_type('<option value="{1}"{2} data-tree-id="{3}"'
+                          ' data-left-value="{4}">{0}</option>'),
+            option_label, option_value, selected_html,
+            sort_fields[0], sort_fields[1])
 
     def render_options(self, choices, selected_choices):
         """

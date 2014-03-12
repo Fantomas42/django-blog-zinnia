@@ -10,6 +10,7 @@ form {
     font-size: 1.2em; }
   input {
     &[type=email],
+    &[type=url],
     &[type=text],
     &[type=password] {
       margin: 0.5em 0;

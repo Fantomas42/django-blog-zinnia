@@ -93,17 +93,110 @@
 </div>
 {% endblock entry-widgets %}
 
+{% block entry-pingbacks %}
+<div id="pingbacks">
+  <h3>{% trans "Pingbacks" %}</h3>
+  {% if object.pingback_count %}
+  {% with pingback_list=object.pingbacks %}
+  {% block pingbacks-loop %}
+  <ol id="pingback-list">
+    {% for pingback in pingback_list %}
+    <li id="pingback-{{ pingback.pk }}" class="pingback vcard {% cycle box1,box2 %}">
+      {% block pingback-info %}
+      <p class="pingback-info">
+	<a href="{{ pingback.url }}" rel="external nofollow"
+           class="fn url org">{{ pingback.name }}</a>
+	{% trans "on" context "on date" %}
+        <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}">
+          {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+        </abbr>
+        <a href="#pingback-{{ pingback.pk }}"
+           id="c{{ pingback.pk }}" class="anchor-link"
+           title="{% trans "Direct link to this pingback" %}">#</a>
+      </p>
+      {% endblock pingback-info %}
+      {% block pingback-content %}
+      <p class="pingback-content">
+	{{ pingback.comment }}
+      </p>
+      {% endblock pingback-content %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% endblock pingbacks-loop %}
+  {% endwith %}
+  {% endif %}
+  {% block pingbacks-status %}
+  {% if object.pingbacks_are_open %}
+  <p>{% trans "Pingbacks are open." %}</p>
+  {% else %}
+  <p>{% trans "Pingbacks are closed." %}</p>
+  {% endif %}
+  {% endblock pingbacks-status %}
+</div>
+{% endblock entry-pingbacks %}
+
+{% block entry-trackbacks %}
+{% if object.trackback_count or object.trackbacks_are_open %}
+<div id="trackbacks">
+  <h3>{% trans "Trackbacks" %}</h3>
+  {% if object.trackback_count %}
+  {% with trackback_list=object.trackbacks %}
+  {% block trackbacks-loop %}
+  <ol id="trackback-list">
+    {% for trackback in trackback_list %}
+    <li id="trackback-{{ trackback.pk }}" class="trackback vcard {% cycle box1,box2 %}">
+      {% block trackback-info %}
+      <p class="trackback-info">
+	<a href="{{ trackback.url }}" rel="external nofollow"
+           class="fn url org">{{ trackback.name }}</a>
+	{% trans "on" context "on date" %}
+        <abbr class="trackback-published" title="{{ trackback.submit_date|date:"c" }}">
+          {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+        </abbr>
+        <a href="#trackback-{{ trackback.pk }}"
+           id="c{{ trackback.pk }}" class="anchor-link"
+           title="{% trans "Direct link to this trackback" %}">#</a>
+      </p>
+      {% endblock trackback-info %}
+      {% block trackback-content %}
+      <p class="trackback-content">
+	{{ trackback.comment }}
+      </p>
+      {% endblock trackback-content %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% endblock trackbacks-loop %}
+  {% endwith %}
+  {% endif %}
+  {% block trackbacks-status %}
+  {% if object.trackbacks_are_open %}
+  <p>
+    <a href="{% url 'zinnia_entry_trackback' object.pk %}" rel="trackback">
+      {% trans "Trackback URL" %}</a>
+  </p>
+  {% endif %}
+  {% endblock trackbacks-status %}
+</div>
+{% endif %}
+{% endblock entry-trackbacks %}
+
 {% block entry-comments %}
 <div id="comments">
   <h3>{% trans "Comments" %}</h3>
   {% if object.comment_count %}
   {% with comment_list=object.comments %}
+  {% block comments-loop %}
   <ol id="comment-list">
     {% for comment in comment_list %}
     <li id="comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
         class="comment vcard {% cycle box1,box2 %}{% if comment.user %} authenticated-comment{% if comment.user.is_staff %} staff-comment{% endif %}{% if comment.user.is_superuser %} superuser-comment{% endif %}{% endif %}">
+      {% block comment-image %}
       <img src="{% get_gravatar comment.email 60 "G" %}"
            class="gravatar photo" alt="{{ comment.name }}" />
+      {% endblock comment-image %}
+      {% block comment-info %}
       <p class="comment-info">
 	{% if comment.url %}
 	<a href="{{ comment.url }}" rel="external nofollow"
@@ -119,10 +212,14 @@
            id="c{{ comment.pk }}" class="anchor-link"
            title="{% trans "Direct link to this comment" %}">#</a>
       </p>
+      {% endblock comment-info %}
+      {% block comment-content %}
       {{ comment.comment|linebreaks }}
+      {% endblock comment-content %}
     </li>
     {% endfor %}
   </ol>
+  {% endblock comments-loop %}
   {% endwith %}
     {% if not object.comments_are_open %}
   <p>{% trans "Comments are closed." %}</p>
@@ -136,79 +233,6 @@
   {% endif %}
 </div>
 {% endblock entry-comments %}
-
-{% block entry-pingbacks %}
-<div id="pingbacks">
-  <h3>{% trans "Pingbacks" %}</h3>
-  {% if object.pingback_count %}
-  {% with pingback_list=object.pingbacks %}
-  <ol id="pingback-list">
-    {% for pingback in pingback_list %}
-    <li id="pingback-{{ pingback.pk }}" class="pingback vcard {% cycle box1,box2 %}">
-      <p class="pingback-info">
-	<a href="{{ pingback.url }}" rel="external nofollow"
-           class="fn url org">{{ pingback.name }}</a>
-	{% trans "on" context "on date" %}
-        <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}">
-          {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
-        <a href="#pingback-{{ pingback.pk }}"
-           id="c{{ pingback.pk }}" class="anchor-link"
-           title="{% trans "Direct link to this pingback" %}">#</a>
-      </p>
-      <p class="pingback-content">
-	{{ pingback.comment }}
-      </p>
-    </li>
-    {% endfor %}
-  </ol>
-  {% endwith %}
-  {% endif %}
-  {% if object.pingbacks_are_open %}
-  <p>{% trans "Pingbacks are open." %}</p>
-  {% else %}
-  <p>{% trans "Pingbacks are closed." %}</p>
-  {% endif %}
-</div>
-{% endblock entry-pingbacks %}
-
-{% block entry-trackbacks %}
-{% if object.trackback_count or object.trackbacks_are_open %}
-<div id="trackbacks">
-  <h3>{% trans "Trackbacks" %}</h3>
-  {% if object.trackback_count %}
-  {% with trackback_list=object.trackbacks %}
-  <ol id="trackback-list">
-    {% for trackback in trackback_list %}
-    <li id="trackback-{{ trackback.pk }}" class="trackback vcard {% cycle box1,box2 %}">
-      <p class="trackback-info">
-	<a href="{{ trackback.url }}" rel="external nofollow"
-           class="fn url org">{{ trackback.name }}</a>
-	{% trans "on" context "on date" %}
-        <abbr class="trackback-published" title="{{ trackback.submit_date|date:"c" }}">
-          {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
-        <a href="#trackback-{{ trackback.pk }}"
-           id="c{{ trackback.pk }}" class="anchor-link"
-           title="{% trans "Direct link to this trackback" %}">#</a>
-      </p>
-      <p class="trackback-content">
-	{{ trackback.comment }}
-      </p>
-    </li>
-    {% endfor %}
-  </ol>
-  {% endwith %}
-  {% endif %}
-  {% if object.trackbacks_are_open %}
-  <p>
-    <a href="{% url 'zinnia_entry_trackback' object.pk %}" rel="trackback">
-      {% trans "Trackback URL" %}</a>
-  </p>
-  {% endif %}
-</div>
-{% endif %}
-{% endblock entry-trackbacks %}
 
 {% block entry-comments-form %}
 {% if object.comments_are_open %}

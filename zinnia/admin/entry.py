@@ -33,25 +33,27 @@ class EntryAdmin(admin.ModelAdmin):
     """
     form = EntryAdminForm
     date_hierarchy = 'creation_date'
-    fieldsets = ((_('Content'), {'fields': ('title', 'content',
-                                            'image', 'status')}),
-                 (_('Options'), {'fields': ('featured', 'excerpt',
-                                            'content_template',
-                                            'detail_template',
-                                            'related', 'authors',
-                                            'creation_date',
-                                            'start_publication',
-                                            'end_publication'),
-                                 'classes': ('collapse', 'collapse-closed')}),
-                 (_('Privacy'), {'fields': ('password', 'login_required',),
-                                 'classes': ('collapse', 'collapse-closed')}),
-                 (_('Discussions'), {'fields': ('comment_enabled',
-                                                'pingback_enabled',
-                                                'trackback_enabled'),
-                                     'classes': ('collapse',
-                                                 'collapse-closed')}),
-                 (_('Publication'), {'fields': ('categories', 'tags',
-                                                'sites', 'slug')}))
+    fieldsets = (
+        (_('Content'), {
+            'fields': (('title', 'status'), 'content', 'image')}),
+        (_('Publication'), {
+            'fields': (('start_publication', 'end_publication'),
+                       'creation_date', 'sites'),
+            'classes': ('collapse', 'collapse-closed')}),
+        (_('Discussions'), {
+            'fields': ('comment_enabled', 'pingback_enabled',
+                       'trackback_enabled'),
+            'classes': ('collapse', 'collapse-closed')}),
+        (_('Privacy'), {
+            'fields': ('login_required', 'password'),
+            'classes': ('collapse', 'collapse-closed')}),
+        (_('Templates'), {
+            'fields': ('content_template', 'detail_template'),
+            'classes': ('collapse', 'collapse-closed')}),
+        (_('Metadatas'), {
+            'fields': ('featured', 'excerpt', 'authors', 'related'),
+            'classes': ('collapse', 'collapse-closed')}),
+        (None, {'fields': ('categories', 'tags', 'slug')}))
     list_filter = (CategoryListFilter, AuthorListFilter, 'status', 'featured',
                    'login_required', 'comment_enabled', 'pingback_enabled',
                    'trackback_enabled', 'creation_date', 'start_publication',

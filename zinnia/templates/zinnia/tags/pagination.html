@@ -12,9 +12,9 @@
   {% endif %}
 
   {% for page_number in begin %}
-  <li class="page {% ifequal page.number page_number %}current{% endifequal %}">
+  <li class="page{% ifequal page.number page_number %} current{% endifequal %}">
     {% ifequal page.number page_number %}
-    <strong>{{ page_number }}</strong>
+    {{ page_number }}
     {% else %}
     <a href="?page={{ page_number }}{{ GET_string }}"
        title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
@@ -25,9 +25,9 @@
   {% if middle %}
   <li class="ellipsis">&hellip;</li>
   {% for page_number in middle %}
-  <li class="page {% ifequal page.number page_number %}current{% endifequal %}">
+  <li class="page{% ifequal page.number page_number %} current{% endifequal %}">
     {% ifequal page.number page_number %}
-    <strong>{{ page_number }}</strong>
+    {{ page_number }}
     {% else %}
     <a href="?page={{ page_number }}{{ GET_string }}"
        title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
@@ -39,9 +39,9 @@
   {% if end %}
   <li class="ellipsis">&hellip;</li>
   {% for page_number in end %}
-  <li class="page {% ifequal page.number page_number %}current{% endifequal %}">
+  <li class="page{% ifequal page.number page_number %} current{% endifequal %}">
     {% ifequal page.number page_number %}
-    <strong>{{ page_number }}</strong>
+    {{ page_number }}
     {% else %}
     <a href="?page={{ page_number }}{{ GET_string }}"
        title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>

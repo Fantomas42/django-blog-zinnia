@@ -3,6 +3,7 @@ from django.views.generic.dates import BaseDateDetailView
 
 from zinnia.models.entry import Entry
 from zinnia.views.mixins.archives import ArchiveMixin
+from zinnia.views.mixins.entry_preview import EntryPreviewMixin
 from zinnia.views.mixins.entry_protection import EntryProtectionMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
 from zinnia.views.mixins.templates import EntryArchiveTemplateResponseMixin
@@ -25,8 +26,10 @@ class EntryDateDetail(ArchiveMixin,
     queryset = Entry.published.on_site
 
 
-class EntryDetail(EntryProtectionMixin, EntryDateDetail):
+class EntryDetail(EntryPreviewMixin,
+                  EntryProtectionMixin,
+                  EntryDateDetail):
     """
-    Detailled view archive view for an Entry
-    with password and login protections.
+    Detailled archive view for an Entry with password
+    and login protections and restricted preview.
     """

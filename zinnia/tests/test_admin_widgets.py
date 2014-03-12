@@ -1,5 +1,7 @@
+# coding=utf-8
 """Test cases for Zinnia's admin widgets"""
 from django.test import TestCase
+from django.utils.encoding import smart_text
 
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 
@@ -22,6 +24,16 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
             option,
             '<option value="1" selected="selected" data-tree-id="4"'
             ' data-left-value="5">Test</option>')
+
+    def test_render_option_non_ascii_issue_317(self):
+        widget = MPTTFilteredSelectMultiple('test', False)
+
+        option = widget.render_option([], 1, 'тест', (1, 1))
+
+        self.assertEqual(
+            option,
+            smart_text('<option value="1" data-tree-id="1"'
+                       ' data-left-value="1">тест</option>'))
 
     def test_render_options(self):
         widget = MPTTFilteredSelectMultiple('test', False)
