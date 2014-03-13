@@ -60,4 +60,3 @@ mrproper: clean
 	@rm -rf docs/build/doctrees
 	@rm -rf docs/build/html
 	@rm -rf docs/coverage
-
