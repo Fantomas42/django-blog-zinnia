@@ -87,10 +87,12 @@ class EntryAdminTestCase(BaseAdminTestCase):
                          'My title (2 words)')
         self.entry.comment_count = 1
         self.entry.save()
+        self.entry = Entry.objects.get(pk=self.entry.pk)
         self.assertEqual(self.admin.get_title(self.entry),
                          'My title (2 words) (1 reaction)')
         self.entry.pingback_count = 1
         self.entry.save()
+        self.entry = Entry.objects.get(pk=self.entry.pk)
         self.assertEqual(self.admin.get_title(self.entry),
                          'My title (2 words) (2 reactions)')
 
