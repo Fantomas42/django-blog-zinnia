@@ -85,8 +85,8 @@ class EntryAdmin(admin.ModelAdmin):
         title = _('%(title)s (%(word_count)i words)') % \
             {'title': entry.title, 'word_count': entry.word_count}
         reaction_count = int(entry.comment_count +
-                          entry.pingback_count +
-                          entry.trackback_count)
+                             entry.pingback_count +
+                             entry.trackback_count)
         if reaction_count:
             return ungettext_lazy(
                 '%(title)s (%(reactions)i reaction)',
