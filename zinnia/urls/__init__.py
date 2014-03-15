@@ -1,7 +1,7 @@
 """Defaults urls for the Zinnia project"""
 from django.conf.urls import url
-from django.conf.urls import include
 from django.conf.urls import patterns
+from django.conf.urls import include as default_include
 
 from django.utils.translation import ugettext_lazy
 
@@ -17,6 +17,16 @@ def i18n_url(url, translate=TRANSLATED_URLS):
     return url
 
 _ = i18n_url
+
+
+def namespace_include(patterns, namespace='zinnia', app_name='zinnia'):
+    """
+    Include urlpatterns under the default 'zinnia'
+    instance and application namespaces.
+    """
+    return default_include(patterns, namespace=namespace, app_name=app_name)
+
+include = namespace_include
 
 urlpatterns = patterns(
     '',
