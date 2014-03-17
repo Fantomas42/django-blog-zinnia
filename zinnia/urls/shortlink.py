@@ -9,5 +9,5 @@ urlpatterns = patterns(
     '',
     url(r'^(?P<pk>\d+)/$',
         EntryShortLink.as_view(),
-        name='zinnia_entry_shortlink'),
+        name='entry_shortlink'),
 )

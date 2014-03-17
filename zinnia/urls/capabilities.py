@@ -11,11 +11,11 @@ from zinnia.views.capabilities import WLWManifestXml
 urlpatterns = patterns(
     '',
     url(r'^rsd.xml$', RsdXml.as_view(),
-        name='zinnia_rsd'),
+        name='rsd'),
     url(r'^humans.txt$', HumansTxt.as_view(),
-        name='zinnia_humans'),
+        name='humans'),
     url(r'^opensearch.xml$', OpenSearchXml.as_view(),
-        name='zinnia_opensearch'),
+        name='opensearch'),
     url(r'^wlwmanifest.xml$', WLWManifestXml.as_view(),
-        name='zinnia_wlwmanifest')
+        name='wlwmanifest')
 )

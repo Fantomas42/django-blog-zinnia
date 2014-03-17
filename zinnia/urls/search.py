@@ -8,5 +8,5 @@ from zinnia.views.search import EntrySearch
 urlpatterns = patterns(
     '',
     url(r'^$', EntrySearch.as_view(),
-        name='zinnia_entry_search'),
+        name='entry_search'),
 )
