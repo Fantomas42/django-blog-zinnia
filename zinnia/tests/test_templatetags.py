@@ -673,7 +673,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(len(context['breadcrumbs']), 1)
         self.assertEqual(context['breadcrumbs'][0].name, 'Blog')
         self.assertEqual(context['breadcrumbs'][0].url,
-                         reverse('zinnia_entry_archive_index'))
+                         reverse('zinnia:entry_archive_index'))
         self.assertEqual(context['template'], 'zinnia/tags/breadcrumbs.html')
 
         with self.assertNumQueries(0):
@@ -711,7 +711,7 @@ class TemplateTagsTestCase(TestCase):
 
         tag = Tag.objects.get(name='test')
         source_context = Context(
-            {'request': FakeRequest(reverse('zinnia_tag_detail',
+            {'request': FakeRequest(reverse('zinnia:tag_detail',
                                             args=['test'])),
              'object': tag})
         with self.assertNumQueries(0):

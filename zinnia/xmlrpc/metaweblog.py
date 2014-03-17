@@ -64,7 +64,7 @@ def blog_structure(site):
             'blogName': site.name,
             'url': '%s://%s%s' % (
                 PROTOCOL, site.domain,
-                reverse('zinnia_entry_archive_index'))}
+                reverse('zinnia:entry_archive_index'))}
 
 
 def user_structure(user, site):
@@ -107,7 +107,7 @@ def category_structure(category, site):
                 category.get_absolute_url()),
             'rssUrl': '%s://%s%s' % (
                 PROTOCOL, site.domain,
-                reverse('zinnia_category_feed', args=[category.tree_path])),
+                reverse('zinnia:category_feed', args=[category.tree_path])),
             # Useful Wordpress Extensions
             'categoryId': category.pk,
             'parentId': category.parent and category.parent.pk or 0,
@@ -125,10 +125,10 @@ def tag_structure(tag, site):
             'slug': tag.name,
             'html_url': '%s://%s%s' % (
                 PROTOCOL, site.domain,
-                reverse('zinnia_tag_detail', args=[tag.name])),
+                reverse('zinnia:tag_detail', args=[tag.name])),
             'rss_url': '%s://%s%s' % (
                 PROTOCOL, site.domain,
-                reverse('zinnia_tag_feed', args=[tag.name]))
+                reverse('zinnia:tag_feed', args=[tag.name]))
             }
 
 

@@ -35,7 +35,7 @@ class Calendar(HTMLCalendar):
         """
         if day and day in self.day_entries:
             day_date = date(self.current_year, self.current_month, day)
-            archive_day_url = reverse('zinnia_entry_archive_day',
+            archive_day_url = reverse('zinnia:entry_archive_day',
                                       args=[day_date.strftime('%Y'),
                                             day_date.strftime('%m'),
                                             day_date.strftime('%d')])
@@ -69,7 +69,7 @@ class Calendar(HTMLCalendar):
                  '</tr></tfoot>'
         if previous_month:
             previous_content = '<a href="%s" class="previous-month">%s</a>' % (
-                reverse('zinnia_entry_archive_month', args=[
+                reverse('zinnia:entry_archive_month', args=[
                     previous_month.strftime('%Y'),
                     previous_month.strftime('%m')]),
                 date_format(previous_month, 'YEAR_MONTH_FORMAT'))
@@ -78,7 +78,7 @@ class Calendar(HTMLCalendar):
 
         if next_month:
             next_content = '<a href="%s" class="next-month">%s</a>' % (
-                reverse('zinnia_entry_archive_month', args=[
+                reverse('zinnia:entry_archive_month', args=[
                     next_month.strftime('%Y'),
                     next_month.strftime('%m')]),
                 date_format(next_month, 'YEAR_MONTH_FORMAT'))
