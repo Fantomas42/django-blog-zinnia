@@ -15,22 +15,22 @@
 {% if previous_day %}
 <h3>{% trans "Previous day" %}</h3>
 <p>
-  <a href="{% url 'zinnia_entry_archive_day' previous_day|date:"Y" previous_day|date:"m" previous_day|date:"d" %}" rel="archives">{{ previous_day|date:"DATE_FORMAT" }}</a>
+  <a href="{% url 'zinnia:entry_archive_day' previous_day|date:"Y" previous_day|date:"m" previous_day|date:"d" %}" rel="archives">{{ previous_day|date:"DATE_FORMAT" }}</a>
 </p>
 {% endif %}
 
 <h3>{% trans "Archives" %}</h3>
 <ul>
   <li>
-    <a href="{% url 'zinnia_entry_archive_year' day|date:"Y" %}" rel="archives">{{ day|date:"Y" }}</a>
+    <a href="{% url 'zinnia:entry_archive_year' day|date:"Y" %}" rel="archives">{{ day|date:"Y" }}</a>
   </li>
   {% if previous_month %}
   <li>
-    <a href="{% url 'zinnia_entry_archive_month' previous_month|date:"Y" previous_month|date:"m" %}" rel="archives">{{ previous_month|date:"YEAR_MONTH_FORMAT" }}</a>
+    <a href="{% url 'zinnia:entry_archive_month' previous_month|date:"Y" previous_month|date:"m" %}" rel="archives">{{ previous_month|date:"YEAR_MONTH_FORMAT" }}</a>
   </li>
   {% endif %}
   <li>
-    <a href="{% url 'zinnia_entry_archive_month' day|date:"Y" day|date:"m" %}" rel="archives">{{ day|date:"YEAR_MONTH_FORMAT" }}</a>
+    <a href="{% url 'zinnia:entry_archive_month' day|date:"Y" day|date:"m" %}" rel="archives">{{ day|date:"YEAR_MONTH_FORMAT" }}</a>
   </li>
 <ul>
 {% endblock content-related %}

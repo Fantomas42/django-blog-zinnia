@@ -20,13 +20,13 @@
   <link rel="canonical" href="{{ object.get_absolute_url }}" />
   {% with year=object.creation_date|date:"Y" month=object.creation_date|date:"m" day=object.creation_date|date:"d" %}
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of discussions on" %} '{{ object.title }}'"
-        href="{% url 'zinnia_entry_discussion_feed' year month day object.slug %}" />
+        href="{% url 'zinnia:entry_discussion_feed' year month day object.slug %}" />
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'"
-        href="{% url 'zinnia_entry_comment_feed' year month day object.slug %}" />
+        href="{% url 'zinnia:entry_comment_feed' year month day object.slug %}" />
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of pingbacks on" %} '{{ object.title }}'"
-        href="{% url 'zinnia_entry_pingback_feed' year month day object.slug %}" />
+        href="{% url 'zinnia:entry_pingback_feed' year month day object.slug %}" />
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of trackbacks on" %} '{{ object.title }}'"
-        href="{% url 'zinnia_entry_trackback_feed' year month day object.slug %}" />
+        href="{% url 'zinnia:entry_trackback_feed' year month day object.slug %}" />
   {% endwith %}
 {% endblock link %}
 
@@ -173,7 +173,7 @@
   {% block trackbacks-status %}
   {% if object.trackbacks_are_open %}
   <p>
-    <a href="{% url 'zinnia_entry_trackback' object.pk %}" rel="trackback">
+    <a href="{% url 'zinnia:entry_trackback' object.pk %}" rel="trackback">
       {% trans "Trackback URL" %}</a>
   </p>
   {% endif %}
