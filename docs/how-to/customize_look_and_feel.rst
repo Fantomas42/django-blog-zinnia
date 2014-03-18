@@ -339,7 +339,7 @@ or directly in the urls: ::
       '',
       url(r'^$', EntrySearch.as_view(
           template_name='custom/template.html'),
-          name='zinnia_entry_search'),
+          name='entry_search'),
       )
 
 .. _packaging-theme:
