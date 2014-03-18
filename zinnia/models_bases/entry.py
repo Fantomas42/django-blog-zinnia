@@ -161,7 +161,7 @@ class CoreEntry(models.Model):
         creation_date = self.creation_date
         if timezone.is_aware(creation_date):
             creation_date = timezone.localtime(creation_date)
-        return ('zinnia_entry_detail', (), {
+        return ('zinnia:entry_detail', (), {
             'year': creation_date.strftime('%Y'),
             'month': creation_date.strftime('%m'),
             'day': creation_date.strftime('%d'),

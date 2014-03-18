@@ -36,7 +36,7 @@ class Author(get_user_model(),
         """
         Builds and returns the author's URL based on his username.
         """
-        return ('zinnia_author_detail', [self.get_username()])
+        return ('zinnia:author_detail', [self.get_username()])
 
     def __str__(self):
         """

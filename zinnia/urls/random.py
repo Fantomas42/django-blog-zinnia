@@ -9,5 +9,5 @@ urlpatterns = patterns(
     '',
     url(r'^$',
         EntryRandom.as_view(),
-        name='zinnia_entry_random'),
+        name='entry_random'),
 )

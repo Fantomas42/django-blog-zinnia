@@ -18,7 +18,7 @@
 <ul>
   {% for date in date_list %}
   <li>
-    <a href="{% url 'zinnia_entry_archive_day' date|date:"Y" date|date:"m" date|date:"d" %}" rel="archives">{{ date|date:"DATE_FORMAT" }}</a>
+    <a href="{% url 'zinnia:entry_archive_day' date|date:"Y" date|date:"m" date|date:"d" %}" rel="archives">{{ date|date:"DATE_FORMAT" }}</a>
   </li>
   {% endfor %}
 </ul>
@@ -26,7 +26,7 @@
 {% if previous_week %}
 <h3>{% trans "Previous week" %}</h3>
 <p>
-  <a href="{% url 'zinnia_entry_archive_week' previous_week|date:"Y" previous_week|week_number %}" rel="archives">
+  <a href="{% url 'zinnia:entry_archive_week' previous_week|date:"Y" previous_week|week_number %}" rel="archives">
     {% blocktrans with year=previous_week|date:"Y" week_number=previous_week|week_number %}Week {{ week_number }} of {{ year }}{% endblocktrans %}
   </a>
 </p>
@@ -34,7 +34,7 @@
 {% if next_week %}
 <h3>{% trans "Next week" %}</h3>
 <p>
-  <a href="{% url 'zinnia_entry_archive_week' next_week|date:"Y" next_week|week_number %}" rel="archives">
+  <a href="{% url 'zinnia:entry_archive_week' next_week|date:"Y" next_week|week_number %}" rel="archives">
     {% blocktrans with year=next_week|date:"Y" week_number=next_week|week_number %}Week {{ week_number }} of {{ year }}{% endblocktrans %}
   </a>
 </p>
@@ -42,10 +42,10 @@
 <h3>{% trans "Archives" %}</h3>
 <ul>
   <li>
-    <a href="{% url 'zinnia_entry_archive_year' week|date:"Y" %}" rel="archives">{{ week|date:"Y" }}</a>
+    <a href="{% url 'zinnia:entry_archive_year' week|date:"Y" %}" rel="archives">{{ week|date:"Y" }}</a>
   </li>
   <li>
-    <a href="{% url 'zinnia_entry_archive_month' week|date:"Y" week|date:"m" %}" rel="archives">{{ week|date:"YEAR_MONTH_FORMAT" }}</a>
+    <a href="{% url 'zinnia:entry_archive_month' week|date:"Y" week|date:"m" %}" rel="archives">{{ week|date:"YEAR_MONTH_FORMAT" }}</a>
   </li>
 <ul>
 {% endblock content-related %}

@@ -16,7 +16,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^$', RedirectView.as_view(url='/blog/')),
-    url(r'^blog/', include('zinnia.urls')),
+    url(r'^blog/', include('zinnia.urls', namespace='zinnia')),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
     url(r'^i18n/', include('django.conf.urls.i18n')),

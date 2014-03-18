@@ -14,7 +14,7 @@
     {% block meta %}{% endblock meta %}
     <link rel="pingback" href="/xmlrpc/" />
     <link rel="shortcut icon" href="{% static "zinnia/img/favicon.ico" %}" />
-    <link rel="home" href="{% url 'zinnia_entry_archive_index' %}" />
+    <link rel="home" href="{% url 'zinnia:entry_archive_index' %}" />
     <link rel="stylesheet" type="text/css" media="screen, projection" href="{% static "zinnia/css/screen.css" %}" />
     <link rel="stylesheet" type="text/css" media="print" href="{% static "zinnia/css/print.css" %}" />
     <!--[if lt IE 8]>
@@ -28,24 +28,24 @@
       <div id="header">
         <ul class="top-navigation">
           <li>
-            <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}" class="sitemap">
+            <a href="{% url 'zinnia:sitemap' %}" title="{% trans "Sitemap" %}" class="sitemap">
               {% trans "Sitemap" %}
             </a>
           </li>
           <li>
-            <a href="{% url 'zinnia_entry_latest_feed' %}" title="{% trans "RSS Feed of latest entries" %}" class="feeds">
+            <a href="{% url 'zinnia:entry_latest_feed' %}" title="{% trans "RSS Feed of latest entries" %}" class="feeds">
               {% trans "RSS Feed" %}
             </a>
           </li>
         </ul>
-        <form method="get" action="{% url 'zinnia_entry_search' %}">
+        <form method="get" action="{% url 'zinnia:entry_search' %}">
           <p>
             <input type="text" name="pattern" placeholder="{% trans "Keywords..." %}" {% if pattern %}value="{{ pattern }}"{% endif %} />
             <input type="submit" class="submitbutton" value="OK" />
           </p>
         </form>
         <h1>
-          <a href="{% url 'zinnia_entry_archive_index' %}" title="Zinnia's Weblog" rel="home">
+          <a href="{% url 'zinnia:entry_archive_index' %}" title="Zinnia's Weblog" rel="home">
             Zinnia's Weblog
           </a>
         </h1>
@@ -61,12 +61,12 @@
           <h3>{% trans "Useful links" %}</h3>
           <ul>
             <li>
-              <a href="{% url 'zinnia_entry_archive_index' %}" title="{% trans "Weblog index" %}">
+              <a href="{% url 'zinnia:entry_archive_index' %}" title="{% trans "Weblog index" %}">
                 {% trans "Weblog index" %}
               </a>
             </li>
             <li>
-              <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}">
+              <a href="{% url 'zinnia:sitemap' %}" title="{% trans "Sitemap" %}">
                 {% trans "Sitemap" %}
               </a>
             </li>

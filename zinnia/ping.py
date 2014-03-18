@@ -31,9 +31,9 @@ class URLRessources(object):
         self.current_site = Site.objects.get_current()
         self.site_url = '%s://%s' % (PROTOCOL, self.current_site.domain)
         self.blog_url = '%s%s' % (self.site_url,
-                                  reverse('zinnia_entry_archive_index'))
+                                  reverse('zinnia:entry_archive_index'))
         self.blog_feed = '%s%s' % (self.site_url,
-                                   reverse('zinnia_entry_latest_feed'))
+                                   reverse('zinnia:entry_latest_feed'))
 
 
 class DirectoryPinger(threading.Thread):

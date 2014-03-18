@@ -24,7 +24,7 @@ def year_crumb(creation_date):
     Crumb for a year.
     """
     year = creation_date.strftime('%Y')
-    return Crumb(year, reverse('zinnia_entry_archive_year',
+    return Crumb(year, reverse('zinnia:entry_archive_year',
                                args=[year]))
 
 
@@ -35,7 +35,7 @@ def month_crumb(creation_date):
     year = creation_date.strftime('%Y')
     month = creation_date.strftime('%m')
     month_text = format(creation_date, 'F').capitalize()
-    return Crumb(month_text, reverse('zinnia_entry_archive_month',
+    return Crumb(month_text, reverse('zinnia:entry_archive_month',
                                      args=[year, month]))
 
 
@@ -46,7 +46,7 @@ def day_crumb(creation_date):
     year = creation_date.strftime('%Y')
     month = creation_date.strftime('%m')
     day = creation_date.strftime('%d')
-    return Crumb(day, reverse('zinnia_entry_archive_day',
+    return Crumb(day, reverse('zinnia:entry_archive_day',
                               args=[year, month, day]))
 
 
@@ -63,16 +63,16 @@ def entry_breadcrumbs(entry):
             Crumb(entry.title)]
 
 
-ZINNIA_ROOT_URL = lambda: reverse('zinnia_entry_archive_index')
+ZINNIA_ROOT_URL = lambda: reverse('zinnia:entry_archive_index')
 
 MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
-                                             reverse('zinnia_tag_list')),
+                                             reverse('zinnia:tag_list')),
                                        Crumb(x.name)],
                      'Author': lambda x: [Crumb(_('Authors'),
-                                                reverse('zinnia_author_list')),
+                                                reverse('zinnia:author_list')),
                                           Crumb(x.__str__())],
                      'Category': lambda x: [Crumb(
-                         _('Categories'), reverse('zinnia_category_list'))] +
+                         _('Categories'), reverse('zinnia:category_list'))] +
                      [Crumb(anc.__str__(), anc.get_absolute_url())
                       for anc in x.get_ancestors()] + [Crumb(x.title)],
                      'Entry': entry_breadcrumbs}

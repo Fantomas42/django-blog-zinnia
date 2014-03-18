@@ -9,5 +9,5 @@ urlpatterns = patterns(
     '',
     url(r'^(?P<pk>\d+)/$',
         EntryTrackback.as_view(),
-        name='zinnia_entry_trackback'),
+        name='entry_trackback'),
 )

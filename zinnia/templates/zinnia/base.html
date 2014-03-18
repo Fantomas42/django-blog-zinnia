@@ -8,13 +8,13 @@
 {% endblock meta %}
 
 {% block link %}
-    <link rel="index" href="{% url 'zinnia_entry_archive_index' %}" />
-    <link rel="author" type="text/plain" href="{% url 'zinnia_humans' %}" />
-    <link rel="EditURI" type="application/rsd+xml" href="{% url 'zinnia_rsd' %}" />
-    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url 'zinnia_wlwmanifest' %}" />
-    <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Blog" href="{% url 'zinnia_opensearch' %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url 'zinnia_entry_latest_feed' %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest discussions" %}" href="{% url 'zinnia_discussion_latest_feed' %}" />
+    <link rel="index" href="{% url 'zinnia:entry_archive_index' %}" />
+    <link rel="author" type="text/plain" href="{% url 'zinnia:humans' %}" />
+    <link rel="EditURI" type="application/rsd+xml" href="{% url 'zinnia:rsd' %}" />
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url 'zinnia:wlwmanifest' %}" />
+    <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Blog" href="{% url 'zinnia:opensearch' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url 'zinnia:entry_latest_feed' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest discussions" %}" href="{% url 'zinnia:discussion_latest_feed' %}" />
     {% get_archives_entries "zinnia/tags/entries_archives_link.html" %}
 {% endblock link %}
 

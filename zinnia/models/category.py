@@ -60,7 +60,7 @@ class Category(MPTTModel):
         Builds and returns the category's URL
         based on his tree path.
         """
-        return ('zinnia_category_detail', (self.tree_path,))
+        return ('zinnia:category_detail', (self.tree_path,))
 
     def __str__(self):
         return self.title

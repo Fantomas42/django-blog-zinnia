@@ -98,7 +98,7 @@ To do this override, simply use the method explained in the
 
       @models.permalink
       def get_absolute_url(self):
-          return ('zinnia_entry_detail', (),
+          return ('zinnia:entry_detail', (),
                   {'pk': self.id})
 
       class Meta(AbstractEntry.Meta):
@@ -155,7 +155,7 @@ entries. Doing a copy of the original module in your own project can save
 you a lot time. ::
 
   ...
-  url(r'^weblog/', include('zinnia_customized.urls')),
+  url(r'^weblog/', include('zinnia_customized.urls', namespace='zinnia')),
   ...
 
 Now in :mod:`zinnia_customized.urls` rewrite the :func:`~django.conf.urls.url`
@@ -168,7 +168,7 @@ the text parameters. ::
 
   url(r'^(?P<pk>\d+)/$',
       EntryDetail.as_view(),
-      name='zinnia_entry_detail')
+      name='entry_detail')
 
 .. warning::
    If you use the pingback XML-RPC service, you will also need change

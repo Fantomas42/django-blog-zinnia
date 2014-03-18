@@ -133,7 +133,7 @@ class EntryAdmin(admin.ModelAdmin):
         """
         try:
             return ', '.join(['<a href="%s" target="blank">%s</a>' %
-                              (reverse('zinnia_tag_detail', args=[tag]), tag)
+                              (reverse('zinnia:tag_detail', args=[tag]), tag)
                               for tag in entry.tags_list])
         except NoReverseMatch:
             return entry.tags
@@ -145,7 +145,7 @@ class EntryAdmin(admin.ModelAdmin):
         Return the sites linked in HTML.
         """
         try:
-            index_url = reverse('zinnia_entry_archive_index')
+            index_url = reverse('zinnia:entry_archive_index')
         except NoReverseMatch:
             index_url = ''
         return ', '.join(

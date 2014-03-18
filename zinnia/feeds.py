@@ -112,7 +112,7 @@ class EntryFeed(ZinniaFeed):
         """
         try:
             author_url = reverse(
-                'zinnia_author_detail',
+                'zinnia:author_detail',
                 args=[getattr(self.item_author,
                               self.item_author.USERNAME_FIELD)])
             return self.site_url + author_url
@@ -163,7 +163,7 @@ class LatestEntries(EntryFeed):
         """
         URL of latest entries.
         """
-        return reverse('zinnia_entry_archive_index')
+        return reverse('zinnia:entry_archive_index')
 
     def items(self):
         """
@@ -241,7 +241,7 @@ class AuthorEntries(EntryFeed):
         """
         URL of the author.
         """
-        return reverse('zinnia_author_detail',
+        return reverse('zinnia:author_detail',
                        args=[getattr(obj, obj.USERNAME_FIELD)])
 
     def get_title(self, obj):
@@ -279,7 +279,7 @@ class TagEntries(EntryFeed):
         """
         URL of the tag.
         """
-        return reverse('zinnia_tag_detail', args=[obj.name])
+        return reverse('zinnia:tag_detail', args=[obj.name])
 
     def get_title(self, obj):
         """
@@ -318,7 +318,7 @@ class SearchEntries(EntryFeed):
         """
         URL of the search request.
         """
-        return '%s?pattern=%s' % (reverse('zinnia_entry_search'), obj)
+        return '%s?pattern=%s' % (reverse('zinnia:entry_search'), obj)
 
     def get_title(self, obj):
         """
@@ -389,7 +389,7 @@ class LatestDiscussions(DiscussionFeed):
         """
         URL of latest discussions.
         """
-        return reverse('zinnia_entry_archive_index')
+        return reverse('zinnia:entry_archive_index')
 
     def get_title(self, obj):
         """

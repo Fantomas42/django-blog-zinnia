@@ -144,4 +144,4 @@ class TagSitemap(EntryRelatedSitemap):
         """
         Return URL of the tag.
         """
-        return reverse('zinnia_tag_detail', args=[item.name])
+        return reverse('zinnia:tag_detail', args=[item.name])

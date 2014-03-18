@@ -175,7 +175,7 @@ class EntryTestCase(TestCase):
                                                    'backends.default'
         self.assertEqual(self.entry.short_url,
                          'http://example.com' +
-                         reverse('zinnia_entry_shortlink',
+                         reverse('zinnia:entry_shortlink',
                                  args=[self.entry.pk]))
         shortener_settings.URL_SHORTENER_BACKEND = original_shortener
 
