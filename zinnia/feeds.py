@@ -112,7 +112,7 @@ class EntryFeed(ZinniaFeed):
         """
         try:
             author_url = reverse(
-                'zinnia_author_detail',
+                'zinnia:author_detail',
                 args=[getattr(self.item_author,
                               self.item_author.USERNAME_FIELD)])
             return self.site_url + author_url
