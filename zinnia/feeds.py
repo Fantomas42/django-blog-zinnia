@@ -111,10 +111,7 @@ class EntryFeed(ZinniaFeed):
         Return the author's URL.
         """
         try:
-            author_url = reverse(
-                'zinnia:author_detail',
-                args=[getattr(self.item_author,
-                              self.item_author.USERNAME_FIELD)])
+            author_url = self.item_author.get_absolute_url()
             return self.site_url + author_url
         except NoReverseMatch:
             return self.site_url
