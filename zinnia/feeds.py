@@ -103,12 +103,14 @@ class EntryFeed(ZinniaFeed):
     def item_author_email(self, item):
         """
         Return the first author's email.
+        Should not be called if self.item_author_name has returned None.
         """
         return self.item_author.email
 
     def item_author_link(self, item):
         """
         Return the author's URL.
+        Should not be called if self.item_author_name has returned None.
         """
         try:
             author_url = self.item_author.get_absolute_url()
