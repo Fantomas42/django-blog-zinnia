@@ -241,8 +241,7 @@ class AuthorEntries(EntryFeed):
         """
         URL of the author.
         """
-        return reverse('zinnia:author_detail',
-                       args=[getattr(obj, obj.USERNAME_FIELD)])
+        return obj.get_absolute_url()
 
     def get_title(self, obj):
         """
