@@ -103,18 +103,17 @@ class EntryFeed(ZinniaFeed):
     def item_author_email(self, item):
         """
         Return the first author's email.
+        Should not be called if self.item_author_name has returned None.
         """
         return self.item_author.email
 
     def item_author_link(self, item):
         """
         Return the author's URL.
+        Should not be called if self.item_author_name has returned None.
         """
         try:
-            author_url = reverse(
-                'zinnia:author_detail',
-                args=[getattr(self.item_author,
-                              self.item_author.USERNAME_FIELD)])
+            author_url = self.item_author.get_absolute_url()
             return self.site_url + author_url
         except NoReverseMatch:
             return self.site_url
@@ -241,8 +240,7 @@ class AuthorEntries(EntryFeed):
         """
         URL of the author.
         """
-        return reverse('zinnia:author_detail',
-                       args=[getattr(obj, obj.USERNAME_FIELD)])
+        return obj.get_absolute_url()
 
     def get_title(self, obj):
         """
