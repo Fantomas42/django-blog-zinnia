@@ -187,7 +187,7 @@ class EntryAdmin(admin.ModelAdmin):
         if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
             form.cleaned_data['authors'] = entry.authors.all()
 
-        if not form.cleaned_data.get('authors'):
+        if not entry.pk and not form.cleaned_data.get('authors'):
             form.cleaned_data['authors'] = Author.objects.filter(
                 pk=request.user.pk)
 
