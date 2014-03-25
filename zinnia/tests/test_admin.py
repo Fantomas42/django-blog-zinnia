@@ -181,8 +181,11 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.entry.status = PUBLISHED
         self.admin.save_model(self.request, self.entry,
                               form, False)
-        self.assertEqual(len(form.cleaned_data['authors']), 1)
+        self.assertEqual(len(form.cleaned_data['authors']), 0)
         self.assertEqual(self.entry.excerpt, self.entry.content)
+        self.admin.save_model(self.request, Entry(),
+                              form, False)
+        self.assertEqual(len(form.cleaned_data['authors']), 1)
 
     def test_queryset(self):
         user = Author.objects.create_user(
