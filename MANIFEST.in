@@ -1,5 +1,5 @@
+include LICENSE
 include README.rst
-include LICENSE.txt
 include versions.cfg
 include buildout.cfg
 include bootstrap.py
