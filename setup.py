@@ -11,8 +11,7 @@ setup(
 
     description='A clear and powerfull weblog application powered with Django',
     long_description='\n'.join([open('README.rst').read(),
-                                open(os.path.join('docs', 'notes',
-                                                  'changelog.rst')).read()]),
+                                open('CHANGELOG').read()]),
     keywords='django, blog, weblog, zinnia, post, news',
 
     author=zinnia.__author__,
