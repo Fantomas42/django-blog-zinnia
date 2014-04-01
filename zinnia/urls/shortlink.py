@@ -7,7 +7,7 @@ from zinnia.views.shortlink import EntryShortLink
 
 urlpatterns = patterns(
     '',
-    url(r'^(?P<pk>\d+)/$',
+    url(r'^(?P<token>[\da-z]+)/$',
         EntryShortLink.as_view(),
         name='entry_shortlink'),
 )
