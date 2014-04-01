@@ -339,7 +339,7 @@ class ViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_entry_shortlink(self):
         with self.assertNumQueries(1):
-            response = self.client.get('/1/')
+            response = self.client.get('/e1/')
         self.assertEqual(response.status_code, 301)
         self.assertEqual(
             response['Location'],
