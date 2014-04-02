@@ -9,7 +9,7 @@ from zinnia.settings import PROTOCOL
 
 base36 = lambda x: ''.join(
     [(string.digits + string.lowercase)[(x / 36 ** i) % 36]
-     for i in xrange(int(math.log(x, 36)), -1, -1)]
+     for i in range(int(math.log(x, 36)), -1, -1)]
     )
 
 
