@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from zinnia.settings import PROTOCOL
 
 base36 = lambda x: ''.join(
-    [(string.digits + string.ascii_lowercase)[(x // 36 ** i) % 36]
+    [(string.digits + string.ascii_uppercase)[(x // 36 ** i) % 36]
      for i in range(int(math.log(x, 36)), -1, -1)]
     )
 
