@@ -163,8 +163,8 @@ class EntryAdminTestCase(BaseAdminTestCase):
     def test_get_short_url(self):
         self.check_with_rich_and_poor_urls(
             self.admin.get_short_url, (self.entry,),
-            '<a href="http://example.com/e1/" target="blank">'
-            'http://example.com/e1/</a>',
+            '<a href="http://example.com/1/" target="blank">'
+            'http://example.com/1/</a>',
             '<a href="%(url)s" target="blank">'
             '%(url)s</a>' % {'url': self.entry.get_absolute_url()})
 
