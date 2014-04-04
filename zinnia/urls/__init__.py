@@ -21,7 +21,7 @@ _ = i18n_url
 urlpatterns = patterns(
     '',
     url(_(r'^feeds/'), include('zinnia.urls.feeds')),
-    url(_(r'^tags/'), include('zinnia.urls.tags',)),
+    url(_(r'^tags/'), include('zinnia.urls.tags')),
     url(_(r'^authors/'), include('zinnia.urls.authors')),
     url(_(r'^categories/'), include('zinnia.urls.categories')),
     url(_(r'^search/'), include('zinnia.urls.search')),
