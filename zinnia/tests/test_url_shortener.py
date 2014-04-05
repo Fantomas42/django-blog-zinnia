@@ -38,3 +38,19 @@ class URLShortenerTestCase(TestCase):
         us_settings.URL_SHORTENER_BACKEND = 'zinnia.url_shortener'\
                                             '.backends.default'
         self.assertEqual(get_url_shortener(), default_backend)
+
+
+class FakeEntry(object):
+    """Fake entry with only 'pk' as attribute"""
+    def __init__(self, pk):
+        self.pk = pk
+
+
+class UrlShortenerDefaultBackendTestCase(TestCase):
+    """Tests cases for the default url shortener backend"""
+
+    def test_backend(self):
+        pass
+
+    def test_base36(self):
+        pass
