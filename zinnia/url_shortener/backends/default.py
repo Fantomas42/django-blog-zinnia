@@ -1,5 +1,4 @@
 """Default URL shortener backend for Zinnia"""
-import math
 import string
 
 from django.contrib.sites.models import Site
@@ -7,10 +6,18 @@ from django.core.urlresolvers import reverse
 
 from zinnia.settings import PROTOCOL
 
-base36 = lambda x: ''.join(
-    [(string.digits + string.ascii_uppercase)[(x // 36 ** i) % 36]
-     for i in range(int(math.log(x, 36)), -1, -1)]
-    )
+BASE36_ALPHABET = string.digits + string.ascii_uppercase
+
+
+def base36(value):
+    """
+    Encode int to base 36.
+    """
+    result = ''
+    while value:
+        value, i = divmod(value, 36)
+        result = BASE36_ALPHABET[i] + result
+    return result
 
 
 def backend(entry):
