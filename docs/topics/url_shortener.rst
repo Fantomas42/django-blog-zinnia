@@ -16,18 +16,29 @@ entries, and you needed to install :ref:`django-bitly<zinnia-bitly>`.
 
 One way it's not bad, but it's not enough.
 
-First of all Zinnia now provides his own short URLs for the entries,
-example:
+Now Zinnia provides his own backend by default for making the URLs of the
+entries shorter, example:
 
-  http://mydomain.com/blog/1/
+  http://mydomain.com/blog/2S/
+
+This backend use the primary key of the entries, encoded in base 36 for
+more privacy.
 
 Of course the URL is short (and can be shorter) but if you have a long
 domain, the URL can be not so short, example:
 
-  http://mysuperverylongdomain.com/blog/1/ (40 characters !)
+  http://mysuperverylongdomain.com/blog/15R/ (42 characters !)
 
 But now you can easily change this behavior and use your favorite URL
 shortener service by writing a backend shortening your URLs.
+
+.. note:: The default backend is limited. When reaching the primary key
+          **46656**, the short URLs generated enter in conflict with the
+          archives by year.
+
+          If you have reached this number of entries, it's effectively a
+          good idea to change the default backend for a more scalable
+          solution.
 
 .. _writing-url-shortener:
 
