@@ -4,7 +4,7 @@ omit		= zinnia/tests/*
                   zinnia/migrations/*
                   zinnia/management/*
                   zinnia/spam_checker/backends/*
-                  zinnia/url_shortener/backends/*
+                  zinnia/url_shortener/backends/bitly
                   demo/*
                   eggs/*
                   */lib/*
