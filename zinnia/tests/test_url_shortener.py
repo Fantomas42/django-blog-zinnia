@@ -5,7 +5,7 @@ from django.test import TestCase
 
 from zinnia.url_shortener import get_url_shortener
 from zinnia import url_shortener as us_settings
-from zinnia.url_shortener.backends.default import backend as default_backend
+from zinnia.url_shortener.backends import default
 
 
 class URLShortenerTestCase(TestCase):
@@ -20,7 +20,7 @@ class URLShortenerTestCase(TestCase):
     def test_get_url_shortener(self):
         us_settings.URL_SHORTENER_BACKEND = 'mymodule.myclass'
         with warnings.catch_warnings(record=True) as w:
-            self.assertEqual(get_url_shortener(), default_backend)
+            self.assertEqual(get_url_shortener(), default.backend)
             self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
             self.assertEqual(
                 str(w[-1].message),
@@ -29,7 +29,7 @@ class URLShortenerTestCase(TestCase):
         us_settings.URL_SHORTENER_BACKEND = ('zinnia.tests.implementations.'
                                              'custom_url_shortener')
         with warnings.catch_warnings(record=True) as w:
-            self.assertEqual(get_url_shortener(), default_backend)
+            self.assertEqual(get_url_shortener(), default.backend)
             self.assertTrue(issubclass(w[-1].category, RuntimeWarning))
             self.assertEqual(
                 str(w[-1].message),
@@ -37,7 +37,7 @@ class URLShortenerTestCase(TestCase):
 
         us_settings.URL_SHORTENER_BACKEND = 'zinnia.url_shortener'\
                                             '.backends.default'
-        self.assertEqual(get_url_shortener(), default_backend)
+        self.assertEqual(get_url_shortener(), default.backend)
 
 
 class FakeEntry(object):
@@ -48,9 +48,21 @@ class FakeEntry(object):
 
 class UrlShortenerDefaultBackendTestCase(TestCase):
     """Tests cases for the default url shortener backend"""
+    urls = 'zinnia.tests.implementations.urls.default'
 
     def test_backend(self):
-        pass
+        original_protocol = default.PROTOCOL
+        default.PROTOCOL = 'http'
+        entry = FakeEntry(1)
+        self.assertEquals(default.backend(entry),
+                          'http://example.com/1/')
+        default.PROTOCOL = 'https'
+        entry = FakeEntry(100)
+        self.assertEquals(default.backend(entry),
+                          'https://example.com/2S/')
+        default.PROTOCOL = original_protocol
 
     def test_base36(self):
-        pass
+        self.assertEquals(default.base36(1), '1')
+        self.assertEquals(default.base36(100), '2S')
+        self.assertEquals(default.base36(46656), '1000')
