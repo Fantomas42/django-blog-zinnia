@@ -88,6 +88,7 @@ INSTALLED_APPS = (
     'zinnia',
     'tagging',
     'django_xmlrpc',
+    'south',
 )
 
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
