@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'django_xmlrpc',
     'mptt',
     'tagging',
-    'zinnia'
+    'zinnia',
+    'south'
 ]
 
 ZINNIA_PAGINATION = 3
