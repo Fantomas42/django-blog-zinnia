@@ -1,3 +1,6 @@
+from django.db import connection
+from django.db.transaction import set_autocommit
+
 from south.v2 import DataMigration
 
 from zinnia.migrations import user_name
@@ -10,6 +13,8 @@ class Migration(DataMigration):
 
     def forwards(self, orm):
         """Create the new permission for changing status"""
+        if connection.vendor == 'sqlite':
+            set_autocommit(True)
         ct, created = orm['contenttypes.ContentType'].objects.get_or_create(
             model='entry', app_label='zinnia')
         perm, created = orm['auth.permission'].objects.get_or_create(
