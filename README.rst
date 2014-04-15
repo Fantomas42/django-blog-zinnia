@@ -116,7 +116,7 @@ More information and help available at these URLs:
 .. _`TypePad`: http://antispam.typepad.com/
 .. _`Mollom`: http://mollom.com/
 .. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi
-.. _`Bit.ly`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#module-zinnia.url_shortener.backends.bitly
+.. _`Bit.ly`: https://github.com/Fantomas42/zinnia-url-shortener-bitly
 .. _`Twitter`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#twitter
 .. _`Gravatar`: http://gravatar.com/
 .. _`Django-CMS`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#django-cms
