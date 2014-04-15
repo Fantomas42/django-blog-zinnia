@@ -174,24 +174,6 @@ setting: ::
   ZINNIA_PING_DIRECTORIES = ('http://ping.directory.com/',
                              'http://pong.directory.com/')
 
-.. _zinnia-bitly:
-
-Bit.ly
-======
-
-.. module:: zinnia.url_shortener.backends.bitly
-
-You find http://bit.ly useful and want to use it for your blog entries ?
-
-It's simple, install `django-bitly`_ in your project's settings and add
-these settings: ::
-
-  BITLY_LOGIN = 'your bit.ly login'
-  BITLY_API_KEY = 'your bit.ly api key'
-  ZINNIA_URL_SHORTENER_BACKEND = 'zinnia.url_shortener.backends.bitly'
-
-Zinnia will do the rest.
-
 .. _zinnia-twitter:
 
 Twitter
