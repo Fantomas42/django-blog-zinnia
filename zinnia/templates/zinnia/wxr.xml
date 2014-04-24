@@ -14,7 +14,7 @@
   <channel>
     <title>{{ site.name }}</title>
     <link>{{ site_url }}</link>
-    <description>Blog exported from django-blog-zinnia</description>
+    <description>Weblog exported from django-blog-zinnia</description>
     <pubDate>{% now "r" %}</pubDate>
     <generator>Zinnia {{ version }}</generator>
     <language>{{ language }}</language>
