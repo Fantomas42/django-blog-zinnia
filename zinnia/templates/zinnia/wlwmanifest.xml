@@ -33,7 +33,7 @@
   </options>
 
   <weblog>
-    <serviceName>{{ site.name }} Blog</serviceName>
+    <serviceName>{{ site.name }} Weblog</serviceName>
     <imageUrl>{% static "zinnia/img/wlw/zinnia.png" %}</imageUrl>
     <watermarkImageUrl>{% static "zinnia/img/wlw/watermark.png" %}</watermarkImageUrl>
     <homepageLinkText>{% trans "View site" %}</homepageLinkText>
