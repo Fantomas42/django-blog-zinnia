@@ -3,7 +3,6 @@ source		= zinnia
 omit		= zinnia/tests/*
                   zinnia/migrations/*
                   zinnia/management/*
-                  zinnia/spam_checker/backends/*
                   demo/*
                   eggs/*
                   */lib/*
