@@ -112,9 +112,9 @@ More information and help available at these URLs:
 .. _`Markdown`: http://daringfireball.net/projects/markdown/
 .. _`Textile`: http://redcloth.org/hobix.com/textile/
 .. _`reStructuredText`: http://docutils.sourceforge.net/rst.html
-.. _`Akismet`: http://akismet.com
-.. _`TypePad`: http://antispam.typepad.com/
-.. _`Mollom`: http://mollom.com/
+.. _`Akismet`: https://github.com/Fantomas42/zinnia-spam-checker-akismet
+.. _`TypePad`: https://github.com/Fantomas42/zinnia-spam-checker-akismet#using-typepad-antispam
+.. _`Mollom`: https://github.com/Fantomas42/zinnia-spam-checker-mollom
 .. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi
 .. _`Bit.ly`: https://github.com/Fantomas42/zinnia-url-shortener-bitly
 .. _`Twitter`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#twitter
