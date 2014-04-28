@@ -88,6 +88,22 @@ entries via `Bit.ly`_.
 
 URL: https://github.com/Fantomas42/zinnia-url-shortener-bitly
 
+zinnia-spam-checker-akismet
+===========================
+
+Zinnia-spam-checker-akismet is an extension adding anti-spam protection via
+`Akismet`_ or Typepad.
+
+URL: https://github.com/Fantomas42/zinnia-spam-checker-akismet
+
+zinnia-spam-checker-mollom
+==========================
+
+Zinnia-spam-checker-mollom is an extension adding anti-spam protection via
+`Mollom`_.
+
+URL: https://github.com/Fantomas42/zinnia-spam-checker-mollom
+
 byteflow2zinnia
 ===============
 
@@ -109,3 +125,5 @@ URL: https://github.com/azaghal/zinnia-drupal
 .. _`django-admin-tools`: http://django-admin-tools.readthedocs.org/en/latest/index.html
 .. _`Bootstrap`: http://twitter.github.com/bootstrap/
 .. _`Bit.ly`: https://bitly.com/
+.. _`Akismet`: http://akismet.com/
+.. _`Mollom`: https://mollom.com/
