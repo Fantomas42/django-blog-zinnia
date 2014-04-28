@@ -17,14 +17,6 @@ backends Package
     :undoc-members:
     :show-inheritance:
 
-:mod:`automattic` Module
-------------------------
-
-.. automodule:: zinnia.spam_checker.backends.automattic
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 :mod:`long_enough` Module
 -------------------------
 
@@ -32,20 +24,3 @@ backends Package
     :members:
     :undoc-members:
     :show-inheritance:
-
-:mod:`mollom` Module
---------------------
-
-.. automodule:: zinnia.spam_checker.backends.mollom
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`typepad` Module
----------------------
-
-.. automodule:: zinnia.spam_checker.backends.typepad
-    :members:
-    :undoc-members:
-    :show-inheritance:
-

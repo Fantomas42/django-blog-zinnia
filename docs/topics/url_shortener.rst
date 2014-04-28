@@ -12,7 +12,7 @@ transfering long URLs.
 And so many URL shortening services exist, each with his own features.
 
 Originally Zinnia provided a only way to generate short URLs for your
-entries, and you needed to install :ref:`django-bitly<zinnia-bitly>`.
+entries, and you needed to install mod:`django-bitly`.
 
 One way it's not bad, but it's not enough.
 
