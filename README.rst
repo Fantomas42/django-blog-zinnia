@@ -60,7 +60,7 @@ Examples
 Take a look at the online demo at: http://demo.django-blog-zinnia.com/
 or you can visit these websites who use Zinnia.
 
-* `Fantomas' side`_  / `Mobile version`_
+* `Fantomas' side`_
 * `Darwin's Weblog`_
 * `ShiningPanda`_
 * `Tryolabs`_
@@ -130,7 +130,6 @@ More information and help available at these URLs:
 .. _`Sass3`: http://sass-lang.com/
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
 .. _`Fantomas' side`: http://fantomas.willbreak.it/blog/
-.. _`Mobile version`: http://m.fantomas.willbreak.it/blog/
 .. _`Professional Web Studio`: http://www.professionalwebstudio.com/en/weblog/
 .. _`Tryolabs`: http://www.tryolabs.com/Blog/
 .. _`brainbreach`: http://brainbreach.com/
