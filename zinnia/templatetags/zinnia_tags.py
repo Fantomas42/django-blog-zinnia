@@ -304,13 +304,7 @@ def zinnia_pagination(context, page, begin_pages=1, end_pages=1,
     middle = list(page.paginator.page_range[
         max(page.number - before_pages - 1, 0):page.number + after_pages])
 
-    if set(begin) & set(end):  # [1, 2, 3], [...], [2, 3, 4]
-        begin = sorted(set(begin + end))  # [1, 2, 3, 4]
-        middle, end = [], []
-    elif begin[-1] + 1 == end[0]:  # [1, 2, 3], [...], [4, 5, 6]
-        begin += end  # [1, 2, 3, 4, 5, 6]
-        middle, end = [], []
-    elif set(begin) & set(middle):  # [1, 2, 3], [2, 3, 4], [...]
+    if set(begin) & set(middle):  # [1, 2, 3], [2, 3, 4], [...]
         begin = sorted(set(begin + middle))  # [1, 2, 3, 4]
         middle = []
     elif begin[-1] + 1 == middle[0]:  # [1, 2, 3], [4, 5, 6], [...]
@@ -322,6 +316,13 @@ def zinnia_pagination(context, page, begin_pages=1, end_pages=1,
     elif set(middle) & set(end):  # [...], [17, 18, 19], [18, 19, 20]
         end = sorted(set(middle + end))  # [17, 18, 19, 20]
         middle = []
+
+    if set(begin) & set(end):  # [1, 2, 3], [...], [2, 3, 4]
+        begin = sorted(set(begin + end))  # [1, 2, 3, 4]
+        middle, end = [], []
+    elif begin[-1] + 1 == end[0]:  # [1, 2, 3], [...], [4, 5, 6]
+        begin += end  # [1, 2, 3, 4, 5, 6]
+        middle, end = [], []
 
     return {'template': template,
             'page': page,
