@@ -649,6 +649,29 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(list(context['middle']), [])
         self.assertEqual(list(context['end']), [5, 6, 7])
 
+    def test_zinnia_pagination_on_my_website(self):
+        """
+        Reproduce the issue encountred on my website,
+        versus the expected result.
+        """
+        class FakeRequest(object):
+            def __init__(self, get_dict={}):
+                self.GET = get_dict
+
+        source_context = Context({'request': FakeRequest()})
+        paginator = Paginator(range(40), 10)
+
+        with self.assertNumQueries(0):
+            for i in range(1, 5):
+                context = zinnia_pagination(
+                    source_context, paginator.page(i),
+                    begin_pages=1, end_pages=1,
+                    before_pages=2, after_pages=2)
+                self.assertEqual(context['page'].number, i)
+                self.assertEqual(list(context['begin']), [1, 2, 3, 4])
+                self.assertEqual(list(context['middle']), [])
+                self.assertEqual(list(context['end']), [])
+
     @skipIfCustomUser
     def test_zinnia_breadcrumbs(self):
         class FakeRequest(object):
