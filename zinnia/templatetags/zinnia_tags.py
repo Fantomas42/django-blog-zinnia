@@ -45,6 +45,7 @@ VECTORS_FACTORY = lambda: VectorBuilder(Entry.published.all(),
 CACHE_ENTRIES_RELATED = {}
 
 WIDONT_REGEXP = re.compile(r'\s+(\S+\s*)$')
+DOUBLE_SPACE_PUNCTUATION_WIDONT_REGEXP = re.compile(r'\s+([-+*/%;:!?]\S+\s*)$')
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -404,6 +405,8 @@ def widont(value, autoescape=None):
         return '&nbsp;%s' % matchobj.group(1)
 
     value = WIDONT_REGEXP.sub(replace, esc(smart_text(value)))
+    value = DOUBLE_SPACE_PUNCTUATION_WIDONT_REGEXP.sub(replace, value)
+
     return mark_safe(value)
 
 
