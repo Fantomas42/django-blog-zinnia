@@ -875,6 +875,46 @@ class TemplateTagsTestCase(TestCase):
             widont('A complete string with <markup>', autoescape=True),
             'A complete string with&nbsp;&lt;markup&gt;')
 
+    def test_widont_punctuation(self):
+        """
+        In some languages like French, applying the widont filter
+        before a punctuation sign preceded by a space, leads to
+        ugly visual results, instead of before visual results.
+        """
+        self.assertEqual(
+            widont('Releases : django-blog-zinnia'),
+            'Releases&nbsp;:&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases ; django-blog-zinnia'),
+            'Releases&nbsp;;&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases ! django-blog-zinnia'),
+            'Releases&nbsp;!&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases ? django-blog-zinnia'),
+            'Releases&nbsp;?&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases - django-blog-zinnia'),
+            'Releases&nbsp;-&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases + django-blog-zinnia'),
+            'Releases&nbsp;+&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases * django-blog-zinnia'),
+            'Releases&nbsp;*&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases / django-blog-zinnia'),
+            'Releases&nbsp;/&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases % django-blog-zinnia'),
+            'Releases&nbsp;%&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases   :   django-blog-zinnia  '),
+            'Releases&nbsp;:&nbsp;django-blog-zinnia  ')
+        self.assertEqual(
+            widont('Releases :: django-blog-zinnia'),
+            'Releases&nbsp;::&nbsp;django-blog-zinnia')
+
     def test_week_number(self):
         self.assertEqual(week_number(datetime(2013, 1, 1)), '0')
         self.assertEqual(week_number(datetime(2013, 12, 21)), '50')
