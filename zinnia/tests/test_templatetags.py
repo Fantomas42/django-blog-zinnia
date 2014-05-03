@@ -882,11 +882,38 @@ class TemplateTagsTestCase(TestCase):
         ugly visual results, instead of before visual results.
         """
         self.assertEqual(
-            widont('Le temps des releases : django-blog-zinnia'),
-            'Le temps des releases&nbsp;:&nbsp;django-blog-zinnia')
+            widont('Releases : django-blog-zinnia'),
+            'Releases&nbsp;:&nbsp;django-blog-zinnia')
         self.assertEqual(
-            widont('Le temps des releases   :   django-blog-zinnia  '),
-            'Le temps des releases&nbsp;:&nbsp;django-blog-zinnia  ')
+            widont('Releases ; django-blog-zinnia'),
+            'Releases&nbsp;;&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases ! django-blog-zinnia'),
+            'Releases&nbsp;!&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases ? django-blog-zinnia'),
+            'Releases&nbsp;?&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases - django-blog-zinnia'),
+            'Releases&nbsp;-&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases + django-blog-zinnia'),
+            'Releases&nbsp;+&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases * django-blog-zinnia'),
+            'Releases&nbsp;*&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases / django-blog-zinnia'),
+            'Releases&nbsp;/&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases % django-blog-zinnia'),
+            'Releases&nbsp;%&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases   :   django-blog-zinnia  '),
+            'Releases&nbsp;:&nbsp;django-blog-zinnia  ')
+        self.assertEqual(
+            widont('Releases :: django-blog-zinnia'),
+            'Releases&nbsp;::&nbsp;django-blog-zinnia')
 
     def test_week_number(self):
         self.assertEqual(week_number(datetime(2013, 1, 1)), '0')
