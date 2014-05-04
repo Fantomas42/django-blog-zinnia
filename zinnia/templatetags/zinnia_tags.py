@@ -44,8 +44,10 @@ VECTORS_FACTORY = lambda: VectorBuilder(Entry.published.all(),
                                         ['title', 'excerpt', 'content'])
 CACHE_ENTRIES_RELATED = {}
 
-WIDONT_REGEXP = re.compile(r'\s+(\S+\s*)$')
-DOUBLE_SPACE_PUNCTUATION_WIDONT_REGEXP = re.compile(r'\s+([-+*/%;:!?]\S+\s*)$')
+WIDONT_REGEXP = re.compile(
+    r'\s+(\S+\s*)$')
+DOUBLE_SPACE_PUNCTUATION_WIDONT_REGEXP = re.compile(
+    r'\s+([-+*/%=;:!?]+&nbsp;\S+\s*)$')
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
