@@ -921,6 +921,27 @@ class TemplateTagsTestCase(TestCase):
             widont('Releases :z django-blog-zinnia'),
             'Releases :z&nbsp;django-blog-zinnia')
 
+    def test_widont_post_punctuation(self):
+        """
+        Sometimes applying the widont filter on just a punctuation sign,
+        leads to ugly visual results, instead of better visual results.
+        """
+        self.assertEqual(
+            widont('Move !'),
+            'Move&nbsp;!')
+        self.assertEqual(
+            widont('Move it   !  '),
+            'Move&nbsp;it&nbsp;!  ')
+        self.assertEqual(
+            widont('Move it ?'),
+            'Move&nbsp;it&nbsp;?')
+        self.assertEqual(
+            widont('I like to move : it !'),
+            'I like to move&nbsp;:&nbsp;it&nbsp;!')
+        self.assertEqual(
+            widont('I like to : move it !'),
+            'I like to : move&nbsp;it&nbsp;!')
+
     def test_week_number(self):
         self.assertEqual(week_number(datetime(2013, 1, 1)), '0')
         self.assertEqual(week_number(datetime(2013, 12, 21)), '50')
