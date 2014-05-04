@@ -875,11 +875,11 @@ class TemplateTagsTestCase(TestCase):
             widont('A complete string with <markup>', autoescape=True),
             'A complete string with&nbsp;&lt;markup&gt;')
 
-    def test_widont_punctuation(self):
+    def test_widont_pre_punctuation(self):
         """
         In some languages like French, applying the widont filter
         before a punctuation sign preceded by a space, leads to
-        ugly visual results, instead of before visual results.
+        ugly visual results, instead of a better visual results.
         """
         self.assertEqual(
             widont('Releases : django-blog-zinnia'),
@@ -909,11 +909,38 @@ class TemplateTagsTestCase(TestCase):
             widont('Releases % django-blog-zinnia'),
             'Releases&nbsp;%&nbsp;django-blog-zinnia')
         self.assertEqual(
+            widont('Releases = django-blog-zinnia'),
+            'Releases&nbsp;=&nbsp;django-blog-zinnia')
+        self.assertEqual(
             widont('Releases   :   django-blog-zinnia  '),
             'Releases&nbsp;:&nbsp;django-blog-zinnia  ')
         self.assertEqual(
             widont('Releases :: django-blog-zinnia'),
             'Releases&nbsp;::&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases :z django-blog-zinnia'),
+            'Releases :z&nbsp;django-blog-zinnia')
+
+    def test_widont_post_punctuation(self):
+        """
+        Sometimes applying the widont filter on just a punctuation sign,
+        leads to ugly visual results, instead of better visual results.
+        """
+        self.assertEqual(
+            widont('Move !'),
+            'Move&nbsp;!')
+        self.assertEqual(
+            widont('Move it   !  '),
+            'Move&nbsp;it&nbsp;!  ')
+        self.assertEqual(
+            widont('Move it ?'),
+            'Move&nbsp;it&nbsp;?')
+        self.assertEqual(
+            widont('I like to move : it !'),
+            'I like to move&nbsp;:&nbsp;it&nbsp;!')
+        self.assertEqual(
+            widont('I like to : move it !'),
+            'I like to : move&nbsp;it&nbsp;!')
 
     def test_week_number(self):
         self.assertEqual(week_number(datetime(2013, 1, 1)), '0')
