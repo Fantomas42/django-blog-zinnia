@@ -48,6 +48,8 @@ WIDONT_REGEXP = re.compile(
     r'\s+(\S+\s*)$')
 DOUBLE_SPACE_PUNCTUATION_WIDONT_REGEXP = re.compile(
     r'\s+([-+*/%=;:!?]+&nbsp;\S+\s*)$')
+END_PUNCTUATION_WIDONT_REGEXP = re.compile(
+    r'\s+([?!]+\s*)$')
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -406,7 +408,8 @@ def widont(value, autoescape=None):
     def replace(matchobj):
         return '&nbsp;%s' % matchobj.group(1)
 
-    value = WIDONT_REGEXP.sub(replace, esc(smart_text(value)))
+    value = END_PUNCTUATION_WIDONT_REGEXP.sub(replace, esc(smart_text(value)))
+    value = WIDONT_REGEXP.sub(replace, value)
     value = DOUBLE_SPACE_PUNCTUATION_WIDONT_REGEXP.sub(replace, value)
 
     return mark_safe(value)
