@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-07 19:30+0100\n"
-"PO-Revision-Date: 2014-03-07 18:35+0000\n"
+"POT-Creation-Date: 2014-05-06 20:16+0200\n"
+"PO-Revision-Date: 2014-05-06 18:22+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/django-blog-zinnia/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgid "Authors"
 msgstr "Auteurs"
 
 #: breadcrumbs.py:75 admin/forms.py:57 templates/zinnia/base.html:36
-#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
+#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:58
 msgid "Categories"
 msgstr "Catégories"
 
@@ -46,101 +46,101 @@ msgstr "Page %s"
 msgid "Week %s"
 msgstr "Semaine %s"
 
-#: feeds.py:178 templates/zinnia/entry_archive.html:4
+#: feeds.py:177 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:6
 msgid "Latest entries"
 msgstr "Derniers articles"
 
-#: feeds.py:184
+#: feeds.py:183
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "Les dernières actualités du site %s"
 
-#: feeds.py:214
+#: feeds.py:213
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Actualités pour la catégorie : %s"
 
-#: feeds.py:220
+#: feeds.py:219
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "Les dernières actualités pour la catégorie : %s"
 
-#: feeds.py:251
+#: feeds.py:249
 #, python-format
 msgid "Entries for author %s"
 msgstr "L'actualité par %s"
 
-#: feeds.py:257
+#: feeds.py:255
 #, python-format
 msgid "The latest entries by %s"
 msgstr "Les dernières actualités par %s"
 
-#: feeds.py:288
+#: feeds.py:286
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Actualités pour le tag : %s"
 
-#: feeds.py:294
+#: feeds.py:292
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "Les dernières actualités pour le tag : %s"
 
-#: feeds.py:327
+#: feeds.py:325
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr "Résultats de recherche pour '%s'"
 
-#: feeds.py:333
+#: feeds.py:331
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr "Les dernières actualités contenant le motif '%s'"
 
-#: feeds.py:398
+#: feeds.py:396
 msgid "Latest discussions"
 msgstr "Dernières discussions"
 
-#: feeds.py:404
+#: feeds.py:402
 #, python-format
 msgid "The latest discussions for the site %s"
 msgstr "Les dernières discussions pour le site %s"
 
-#: feeds.py:437
+#: feeds.py:435
 #, python-format
 msgid "Discussions on %s"
 msgstr "Discussions sur %s"
 
-#: feeds.py:443
+#: feeds.py:441
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "Les dernières discussions sur l'actualité : %s"
 
-#: feeds.py:470
+#: feeds.py:468
 #, python-format
 msgid "Comments on %s"
 msgstr "Commentaires sur %s"
 
-#: feeds.py:476
+#: feeds.py:474
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "Les derniers commentaires sur l'actualité : %s"
 
-#: feeds.py:520
+#: feeds.py:518
 #, python-format
 msgid "Pingbacks on %s"
 msgstr "Pingbacks sur %s"
 
-#: feeds.py:526
+#: feeds.py:524
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "Les derniers pingbacks sur l'actualité : %s"
 
-#: feeds.py:552
+#: feeds.py:550
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "Trackbacks sur %s"
 
-#: feeds.py:558
+#: feeds.py:556
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "Les derniers trackbacks sur l'actualité : %s"
@@ -583,8 +583,7 @@ msgstr "Contenus"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:9
 #: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:17
-#: templates/zinnia/sitemap.html:57 templates/zinnia/tag_list.html:18
-#: templates/zinnia/tags/authors.html:8
+#: templates/zinnia/tag_list.html:18 templates/zinnia/tags/authors.html:8
 #: templates/zinnia/tags/categories.html:7
 #: templates/zinnia/tags/categories_tree.html:6
 #: templates/zinnia/tags/statistics.html:7
@@ -1071,7 +1070,7 @@ msgstr "Poster un article"
 msgid "Category list"
 msgstr "Liste des catégories"
 
-#: templates/zinnia/category_list.html:28 templates/zinnia/sitemap.html:62
+#: templates/zinnia/category_list.html:28
 #: templates/zinnia/tags/categories.html:11
 #: templates/zinnia/tags/categories_tree.html:16
 msgid "No categories yet."
@@ -1084,7 +1083,7 @@ msgstr "Archives annuelles"
 #: templates/zinnia/entry_archive_day.html:16
 #: templates/zinnia/entry_archive_today.html:16
 msgid "Previous day"
-msgstr "Jour précèdent"
+msgstr "Jour précédent"
 
 #: templates/zinnia/entry_archive_day.html:22
 msgid "Next day"
@@ -1104,7 +1103,7 @@ msgstr "Archives journalières"
 
 #: templates/zinnia/entry_archive_month.html:26
 msgid "Previous month"
-msgstr "Mois précèdent"
+msgstr "Mois précédent"
 
 #: templates/zinnia/entry_archive_month.html:32
 msgid "Next month"
@@ -1125,20 +1124,20 @@ msgstr "Archives de la semaine %(week_number)s de %(year)s"
 
 #: templates/zinnia/entry_archive_week.html:27
 msgid "Previous week"
-msgstr "Semaine précèdente"
+msgstr "Semaine précédente"
 
 #: templates/zinnia/entry_archive_week.html:35
 msgid "Next week"
 msgstr "Semaine suivante"
 
 #: templates/zinnia/entry_archive_year.html:15
-#: templates/zinnia/sitemap.html:69
+#: templates/zinnia/sitemap.html:63
 msgid "Monthly archives"
 msgstr "Archives mensuelles"
 
 #: templates/zinnia/entry_archive_year.html:25
 msgid "Previous year"
-msgstr "Année précèdente"
+msgstr "Année précédente"
 
 #: templates/zinnia/entry_archive_year.html:31
 msgid "Next year"
@@ -1264,8 +1263,8 @@ msgstr "Archives pour le tag %(tag)s"
 msgid "Author archives: %(author)s"
 msgstr "Archives de l'auteur %(author)s"
 
-#: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:25
-#: templates/zinnia/sitemap.html.py:45
+#: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:29
+#: templates/zinnia/sitemap.html.py:51
 #: templates/zinnia/tags/entries_featured.html:9
 #: templates/zinnia/tags/entries_popular.html:12
 #: templates/zinnia/tags/entries_random.html:9
@@ -1341,21 +1340,25 @@ msgstr "Mot de passe"
 msgid "Valid"
 msgstr "Valider"
 
-#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:9
+#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:11
 #: templates/zinnia/skeleton.html:31 templates/zinnia/skeleton.html.py:32
 #: templates/zinnia/skeleton.html:69 templates/zinnia/skeleton.html.py:70
 msgid "Sitemap"
 msgstr "Carte du site"
 
-#: templates/zinnia/sitemap.html:12
+#: templates/zinnia/sitemap.html:6
+msgid "Sitemap of the weblog"
+msgstr "Sitemap du blog"
+
+#: templates/zinnia/sitemap.html:14
 msgid "Entries per categories"
 msgstr "Articles par catégories"
 
-#: templates/zinnia/sitemap.html:20 templates/zinnia/sitemap.html.py:40
+#: templates/zinnia/sitemap.html:23 templates/zinnia/sitemap.html.py:45
 msgid "comment"
 msgstr "commentaire"
 
-#: templates/zinnia/sitemap.html:33
+#: templates/zinnia/sitemap.html:37
 msgid "All the entries"
 msgstr "Tous les articles"
 
@@ -1441,15 +1444,15 @@ msgid_plural "%(entry_count)s entries tagged by %(tag)s"
 msgstr[0] "%(entry_count)s article taggé par %(tag)s"
 msgstr[1] "%(entry_count)s articles taggés par %(tag)s"
 
-#: templatetags/zinnia_tags.py:335
+#: templatetags/zinnia_tags.py:341
 msgid "Blog"
 msgstr "Blog"
 
-#: tests/test_views.py:555 views/search.py:30
+#: tests/test_views.py:574 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Le motif de recherche est trop court !"
 
-#: tests/test_views.py:559 views/search.py:34
+#: tests/test_views.py:578 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Aucun motif de recherche !"
 
@@ -1585,6 +1588,10 @@ msgstr "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 #, python-format
 msgid "No Tag found matching \"%s\"."
 msgstr "Aucun Tag trouvé correspondant à \"%s\"."
+
+#: views/mixins/entry_preview.py:27
+msgid "No entry found matching the query"
+msgstr "Aucun article trouvé en réponse à la requête"
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."
