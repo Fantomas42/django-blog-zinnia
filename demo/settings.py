@@ -49,7 +49,8 @@ LANGUAGES = (
     ('sv', gettext('Swedish')),
     ('hr_HR', gettext('Croatian')),
     ('pt_BR', gettext('Brazilian Portuguese')),
-    ('fi_FI', gettext('Finnish (Finland)')),
+    ('fa_IR', gettext('Persian')),
+    ('fi_FI', gettext('Finnish')),
     ('zh_CN', gettext('Simplified Chinese')),
 )
 
