@@ -19,7 +19,9 @@
     <li>
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
       {% with comment_count=entry.comment_count %}
+      {% if comment_count %}
       - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
+      {% endif %}
       {% endwith %}
     </li>
     {% empty %}
@@ -39,7 +41,9 @@
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
       - {{ entry.creation_date|date:"SHORT_DATE_FORMAT" }}
       {% with comment_count=entry.comment_count %}
+      {% if comment_count %}
       - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
+      {% endif %}
       {% endwith %}
     </li>
     {% empty %}
