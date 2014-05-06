@@ -3,8 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# tero <tero@alen.mobi>, 2012
-# tero <tero@alen.mobi>, 2012
+# MahdiZareie <Mahdi@zareie.net>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
@@ -12,243 +11,242 @@ msgstr ""
 "POT-Creation-Date: 2014-05-06 20:16+0200\n"
 "PO-Revision-Date: 2014-05-06 18:16+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
-"Language-Team: Finnish (Finland) (http://www.transifex.com/projects/p/django-blog-zinnia/language/fi_FI/)\n"
+"Language-Team: Persian (Iran) (http://www.transifex.com/projects/p/django-blog-zinnia/language/fa_IR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi_FI\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fa_IR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: breadcrumbs.py:68 templates/admin/zinnia/widgets/quickpost.html:25
 #: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:48
 #: templates/zinnia/tag_list.html:6
 msgid "Tags"
-msgstr "Tagit"
+msgstr "برچسب ها"
 
 #: breadcrumbs.py:71 templates/zinnia/author_list.html:6
 #: templates/zinnia/base.html:40
 msgid "Authors"
-msgstr "Kirjoittajat"
+msgstr "نویسندگان"
 
 #: breadcrumbs.py:75 admin/forms.py:57 templates/zinnia/base.html:36
 #: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:58
 msgid "Categories"
-msgstr "Kategoriat"
+msgstr "موضوعات"
 
 #: breadcrumbs.py:100
 #, python-format
 msgid "Page %s"
-msgstr "Sivu %s"
+msgstr ""
 
 #: breadcrumbs.py:128
 #, python-format
 msgid "Week %s"
-msgstr "Viikko %s"
+msgstr ""
 
 #: feeds.py:177 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:6
 msgid "Latest entries"
-msgstr "Uusimmat kirjoitukset"
+msgstr "آخرین نوشته ها"
 
 #: feeds.py:183
 #, python-format
 msgid "The latest entries for the site %s"
-msgstr "Uusimmat kirjoitukset sivustolla %s"
+msgstr "آخرین نوشته ها برای سایت  %s"
 
 #: feeds.py:213
 #, python-format
 msgid "Entries for the category %s"
-msgstr "Kirjoitukset kategoriassa %s"
+msgstr "نوشته های مربوط به موضوع  %s"
 
 #: feeds.py:219
 #, python-format
 msgid "The latest entries for the category %s"
-msgstr "Uusimmat kirjoitukset kategoriassa %s"
+msgstr "آخرین نوشته های برای موضوع  %s"
 
 #: feeds.py:249
 #, python-format
 msgid "Entries for author %s"
-msgstr "Kirjoittajan %s kirjoitukset"
+msgstr "نوشته های متعلق به  %s"
 
 #: feeds.py:255
 #, python-format
 msgid "The latest entries by %s"
-msgstr "Kirjoittajan %s uusimmat kirjoitukset"
+msgstr "آخرین نوشته های  %s"
 
 #: feeds.py:286
 #, python-format
 msgid "Entries for the tag %s"
-msgstr "Kirjoitukset, jotka sisältävät tagin %s"
+msgstr "نوشته های مرتبط با برچسب  %s"
 
 #: feeds.py:292
 #, python-format
 msgid "The latest entries for the tag %s"
-msgstr "Viimeisiimät kirjoitukset tagilla %s"
+msgstr "آخرین نوشته های مرتبط با برچسب  %s"
 
 #: feeds.py:325
 #, python-format
 msgid "Results of the search for '%s'"
-msgstr "Tulokset haulle %s'"
+msgstr ""
 
 #: feeds.py:331
 #, python-format
 msgid "The entries containing the pattern '%s'"
-msgstr "Kirjoitukset, jotka sisältävät tekstin %s'"
+msgstr ""
 
 #: feeds.py:396
 msgid "Latest discussions"
-msgstr "Uusimmat kommentit"
+msgstr "آخرین گفتوگو ها"
 
 #: feeds.py:402
 #, python-format
 msgid "The latest discussions for the site %s"
-msgstr "Uusimmat kommentit sivustolle %s"
+msgstr "آخرین گفتوگو ها برای سایت  %s"
 
 #: feeds.py:435
 #, python-format
 msgid "Discussions on %s"
-msgstr "Keskustelut %s"
+msgstr "گفتوگوهای مربوط به  %s"
 
 #: feeds.py:441
 #, python-format
 msgid "The latest discussions for the entry %s"
-msgstr "Uusimmat keskustelut kirjoitukseen %s"
+msgstr "آخرین گفتوگو های مربوط به نوشته ی  %s"
 
 #: feeds.py:468
 #, python-format
 msgid "Comments on %s"
-msgstr "Kommentit kirjoitukseen %s"
+msgstr "نظرات ارسالی برای  %s"
 
 #: feeds.py:474
 #, python-format
 msgid "The latest comments for the entry %s"
-msgstr "Uusimmat kommentit kirjoitukseen %s"
+msgstr "آخرین نظرات ارسالی برای  نوشته ی %s"
 
 #: feeds.py:518
 #, python-format
 msgid "Pingbacks on %s"
-msgstr "Päivitysilmoitukset artikkelille %s"
+msgstr ""
 
 #: feeds.py:524
 #, python-format
 msgid "The latest pingbacks for the entry %s"
-msgstr "Uusimmat päivitysilmoitukset artikkelille %s"
+msgstr ""
 
 #: feeds.py:550
 #, python-format
 msgid "Trackbacks on %s"
-msgstr "Paluuviitteet artikkeliin %s"
+msgstr ""
 
 #: feeds.py:556
 #, python-format
 msgid "The latest trackbacks for the entry %s"
-msgstr "Paluuviitteet artikkeliin %s"
+msgstr ""
 
 #: moderator.py:65 moderator.py:87 moderator.py:110
 #, python-format
 msgid "[%(site)s] New comment posted on \"%(title)s\""
-msgstr "[%(site)s] Uusi kommentti lisätty kirjoitukselle \"%(title)s\""
+msgstr "[%(site)s] نظر جدید برای \"%(title)s\" ارسال شده است"
 
 #: admin/category.py:34
 msgid "tree path"
-msgstr "polku"
+msgstr "مسیر درختی"
 
 #: admin/entry.py:37 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
-msgstr "Sisältö"
+msgstr "محتوا"
 
 #: admin/entry.py:39
 msgid "Publication"
-msgstr "Julkaisu"
+msgstr "انتشار"
 
 #: admin/entry.py:43 templates/admin/zinnia/widgets/_content_stats.html:4
 #: templates/zinnia/_entry_detail_base.html:114
 msgid "Discussions"
-msgstr "Kommentit"
+msgstr "گفتوگوها"
 
 #: admin/entry.py:47
 msgid "Privacy"
-msgstr "Suojausasetukset"
+msgstr "حریم خصوصی"
 
 #: admin/entry.py:50
 msgid "Templates"
-msgstr ""
+msgstr "قالب ها"
 
 #: admin/entry.py:53
 msgid "Metadatas"
-msgstr ""
+msgstr "فراداده ها"
 
 #: admin/entry.py:85
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
-msgstr "%(title)s (%(word_count)i sanaa)"
+msgstr "%(title)s (%(word_count)i کلمه)"
 
 #: admin/entry.py:92
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: admin/entry.py:97 models/category.py:21 models_bases/entry.py:46
 msgid "title"
-msgstr "otsikko"
+msgstr "عنوان"
 
 #: admin/entry.py:113
 msgid "author(s)"
-msgstr "kirjoittaja(t)"
+msgstr "نویسنده(گان)"
 
 #: admin/entry.py:128
 msgid "category(s)"
-msgstr "kategoria(t)"
+msgstr "موضوع(ها)"
 
 #: admin/entry.py:141
 msgid "tag(s)"
-msgstr "tagi(t)"
+msgstr "برچسب(ها)"
 
 #: admin/entry.py:156
 msgid "site(s)"
-msgstr "sivusto(t)"
+msgstr "سایت(ها)"
 
 #: admin/entry.py:169
 msgid "short url"
-msgstr "lyhyt osoite"
+msgstr "آدرس کوتاه"
 
 #: admin/entry.py:177
 msgid "is visible"
-msgstr "näkyvissä"
+msgstr "نمایش داده شود"
 
 #: admin/entry.py:262
 msgid "The selected entries now belong to you."
-msgstr "Valitut kirjoitukset kuuluvat nyt sinulle."
+msgstr "نوشته های انتخاب شده حالا متعلق به شماست"
 
 #: admin/entry.py:263
 msgid "Set the entries to the user"
-msgstr "Määritä artikkelit kirjoittajalle"
+msgstr "تنظیم نوشته ها به کاربر"
 
 #: admin/entry.py:272
 msgid "The selected entries are now marked as published."
-msgstr "Valitut kirjoitukset on nyt julkaistu."
+msgstr "نوشته های انتخاب شده منتشر گردید"
 
 #: admin/entry.py:273
 msgid "Set entries selected as published"
-msgstr "Julkaise valitut kirjoitukset"
+msgstr "منتشر کردن نوشته های انتخاب شده"
 
 #: admin/entry.py:281
 msgid "The selected entries are now marked as hidden."
-msgstr "Valitut kirjoitukset on nyt merkitty piilotetuksi."
+msgstr "نوشته های انتخاب شده مقفی شد"
 
 #: admin/entry.py:282
 msgid "Set entries selected as hidden"
-msgstr "Määritä valitut kirjoitukset piilotetuksi"
+msgstr "مخفی کردن نوشته های انتخاب شده"
 
 #: admin/entry.py:290
 msgid "Comments are now closed for selected entries."
-msgstr "Kommentointi on nyt suljettu valituilta kirjoituksilta."
+msgstr "بخش نظرات برای نوشته های انتخاب شده بسته گردید."
 
 #: admin/entry.py:291
 msgid "Close the comments for selected entries"
-msgstr "Sulje kommentointi valituilta kirjoituksilta"
+msgstr "بستن نظرات برای نوشته های انتخاب شده"
 
 #: admin/entry.py:300
 msgid "Pingbacks are now closed for selected entries."
@@ -268,11 +266,11 @@ msgstr ""
 
 #: admin/entry.py:321
 msgid "The selected entries are now set at the current date."
-msgstr "Valittujen kirjoituksien julkaisuajankohdaksi muutettu kuluva päivä."
+msgstr "تاریخ نوشته های انتخاب شده روی تاریخ جاری تنظیم گردید."
 
 #: admin/entry.py:323
 msgid "Put the selected entries on top at the current date"
-msgstr "Aseta valitut kirjoitukset julkaistuksi tällä päivämäärällä"
+msgstr ""
 
 #: admin/entry.py:331
 msgid "Selected entries are now marked as featured."
@@ -292,27 +290,26 @@ msgstr ""
 
 #: admin/entry.py:359
 msgid "The selected entries have been tweeted."
-msgstr "Valitut kirjoitukset on nyt twiitattu."
+msgstr "نوشته های انتخاب شده Tweet شدند."
 
 #: admin/entry.py:360
 msgid "Tweet entries selected"
-msgstr "Tweettaa valitut kirjoitukset"
+msgstr "Tweet کردن نوشته های انتخاب شده"
 
 #: admin/entry.py:381
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr "%(directory)s hakemistoa informoitu onnistuneesti %(success)d kirjoituksella."
+msgstr ""
 
 #: admin/entry.py:385
 msgid "Ping Directories for selected entries"
-msgstr "Informoi hakemistoja valituilla kirjoituksilla"
+msgstr ""
 
 #: admin/filters.py:28
 #, python-format
 msgid "%(item)s (%(count)i entry)"
 msgid_plural "%(item)s (%(count)i entries)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: admin/filters.py:49
 msgid "published authors"
@@ -320,23 +317,23 @@ msgstr ""
 
 #: admin/filters.py:60
 msgid "published categories"
-msgstr ""
+msgstr "موضوعات منتشر شده"
 
 #: admin/forms.py:22
 msgid "Parent category"
-msgstr ""
+msgstr "موضوع بالادست"
 
 #: admin/forms.py:24
 msgid "No parent category"
-msgstr "Ei ylempää kategoriaa"
+msgstr "موضوع بالادست وجود ندارد"
 
 #: admin/forms.py:41
 msgid "A category cannot be parent of itself."
-msgstr "Kategoria ei voi olla vanhempi itselleen."
+msgstr "یه موضوع نمیتواند بالادست خود باشد"
 
 #: admin/forms.py:59 models/category.py:75 models_bases/entry.py:407
 msgid "categories"
-msgstr "kategoriat"
+msgstr "موضوعات"
 
 #: models/category.py:24 models_bases/entry.py:49
 msgid "slug"
@@ -348,27 +345,27 @@ msgstr ""
 
 #: models/category.py:28
 msgid "description"
-msgstr "kuvaus"
+msgstr "توضیحات"
 
 #: models/category.py:34
 msgid "parent category"
-msgstr "ylempi kategoria"
+msgstr "موضوع بالادست"
 
 #: models/category.py:74
 msgid "category"
-msgstr "kategoria"
+msgstr "موضوع"
 
 #: models_bases/entry.py:41
 msgid "draft"
-msgstr "vedos"
+msgstr "چرکنویس"
 
 #: models_bases/entry.py:42
 msgid "hidden"
-msgstr "piilotettu"
+msgstr "مخفی"
 
 #: models_bases/entry.py:43
 msgid "published"
-msgstr "julkaistu"
+msgstr "منتشر شده"
 
 #: models_bases/entry.py:51 models_bases/entry.py:76
 msgid "Used to build the entry's URL."
@@ -376,55 +373,55 @@ msgstr ""
 
 #: models_bases/entry.py:54
 msgid "status"
-msgstr ""
+msgstr "وضعیت"
 
 #: models_bases/entry.py:58
 msgid "start publication"
-msgstr "aloita julkaisu"
+msgstr "شروع انتشار"
 
 #: models_bases/entry.py:60
 msgid "Start date of publication."
-msgstr ""
+msgstr "تاریخ شروع انتشار."
 
 #: models_bases/entry.py:63
 msgid "end publication"
-msgstr "päätä julkaisu"
+msgstr "پایان انتشار"
 
 #: models_bases/entry.py:65
 msgid "End date of publication."
-msgstr ""
+msgstr "تاریخ پایان انتشار."
 
 #: models_bases/entry.py:70
 msgid "sites"
-msgstr ""
+msgstr "سایت ها"
 
 #: models_bases/entry.py:71
 msgid "Sites where the entry will be published."
-msgstr ""
+msgstr "سایت هایی که نوشته در آنها منتشر خواهد شد."
 
 #: models_bases/entry.py:74
 msgid "creation date"
-msgstr "kirjoitusajankohta"
+msgstr "تاریخ ایجاد"
 
 #: models_bases/entry.py:79
 msgid "last update"
-msgstr "päivitetty edellisen kerran"
+msgstr "آخرین به روز رسانی"
 
 #: models_bases/entry.py:181
 msgid "entry"
-msgstr "artikkeli"
+msgstr "نوشته"
 
 #: models_bases/entry.py:182
 msgid "entries"
-msgstr "kirjoitukset"
+msgstr "نوشته ها"
 
 #: models_bases/entry.py:196
 msgid "content"
-msgstr "sisältö"
+msgstr "محتوا"
 
 #: models_bases/entry.py:238
 msgid "comments enabled"
-msgstr ""
+msgstr "بخش نظرات فعال است"
 
 #: models_bases/entry.py:239
 msgid "Allows comments if checked."
@@ -448,7 +445,7 @@ msgstr ""
 
 #: models_bases/entry.py:248
 msgid "comment count"
-msgstr ""
+msgstr "تعداد نظرات"
 
 #: models_bases/entry.py:250
 msgid "pingback count"
@@ -460,11 +457,11 @@ msgstr ""
 
 #: models_bases/entry.py:336
 msgid "related entries"
-msgstr "liittyvät artikkelit"
+msgstr "نوشته های مرتبط"
 
 #: models_bases/entry.py:354
 msgid "excerpt"
-msgstr "tiivistelmä"
+msgstr "گلچین"
 
 #: models_bases/entry.py:355
 msgid "Used for search and SEO."
@@ -472,7 +469,7 @@ msgstr ""
 
 #: models_bases/entry.py:366
 msgid "image"
-msgstr "kuva"
+msgstr "تصویر"
 
 #: models_bases/entry.py:367
 msgid "Used for illustration."
@@ -480,31 +477,31 @@ msgstr ""
 
 #: models_bases/entry.py:378
 msgid "featured"
-msgstr "nostettu"
+msgstr ""
 
 #: models_bases/entry.py:393
 msgid "authors"
-msgstr "julkaisijat"
+msgstr "نویسندگان"
 
 #: models_bases/entry.py:417
 msgid "tags"
-msgstr "tagit"
+msgstr "برچسب ها"
 
 #: models_bases/entry.py:436
 msgid "login required"
-msgstr "vaatii kirjautumisen"
+msgstr "نیاز به احراز هویت"
 
 #: models_bases/entry.py:437
 msgid "Only authenticated users can view the entry."
-msgstr ""
+msgstr "فقط کاربران احراز هویت شده میتوانند این نوشته را مشاهده کنند ."
 
 #: models_bases/entry.py:449
 msgid "password"
-msgstr "salasana"
+msgstr "گذرواژه"
 
 #: models_bases/entry.py:450
 msgid "Protects the entry with a password."
-msgstr ""
+msgstr "از نوشته با رمز محافظت کن."
 
 #: models_bases/entry.py:462
 msgid "content template"
@@ -512,7 +509,7 @@ msgstr ""
 
 #: models_bases/entry.py:464 models_bases/entry.py:480
 msgid "Default template"
-msgstr "oletussivupohja"
+msgstr "قالب پیشفرض"
 
 #: models_bases/entry.py:466
 msgid "Template used to display the entry's content."
@@ -520,7 +517,7 @@ msgstr ""
 
 #: models_bases/entry.py:478
 msgid "detail template"
-msgstr ""
+msgstr "جزئیات قالب"
 
 #: models_bases/entry.py:482
 msgid "Template used to display the entry's detail page."
@@ -528,57 +525,57 @@ msgstr ""
 
 #: templates/400.html:6
 msgid "Error 400"
-msgstr ""
+msgstr "خطای 400"
 
 #: templates/400.html:10 templates/400.html.py:15
 msgid "Bad request"
-msgstr ""
+msgstr "درخواست نادرست"
 
 #: templates/400.html:17
 msgid "Sorry, but the request was malformed."
-msgstr ""
+msgstr "با عرض پوزش ، درخواست ساختار صحیح ندارد."
 
 #: templates/403.html:6
 msgid "Error 403"
-msgstr "Virhe 403"
+msgstr "خطای 403"
 
 #: templates/403.html:10 templates/403.html.py:15
 msgid "Permission denied"
-msgstr "Pääsy estetty"
+msgstr "امکان دسترسی وجود ندارد"
 
 #: templates/403.html:17
 msgid "Sorry, but you don't have the permission to do this action."
-msgstr ""
+msgstr "با عرض پوزش ، شما برای این کار دسترسی ندارید."
 
 #: templates/404.html:6
 msgid "Error 404"
-msgstr "Virhe 404"
+msgstr "خطای 404"
 
 #: templates/404.html:10 templates/404.html.py:15
 msgid "Page not found"
-msgstr "Sivua ei löydy"
+msgstr "صفحه یافت نشد"
 
 #: templates/404.html:17
 msgid "Sorry, but the requested page could not be found."
-msgstr "Valitettavasti pyydettyä sivua ei löytynyt."
+msgstr "متاسفیم ، اما صفحه درخواستی یافت نشد"
 
 #: templates/500.html:6
 msgid "Error 500"
-msgstr "Virhe 500"
+msgstr "خطای 500"
 
 #: templates/500.html:10 templates/500.html.py:15
 msgid "Server error"
-msgstr "Palvelinvirhe"
+msgstr "خطای سرویس دهنده"
 
 #: templates/500.html:17
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr "Sivupyynnössä tapahtui virhe. Virheestä on ilmoitettu sivuston ylläpitoa mahdollisia korjaustoimenpiteitä varten. Kiitos kärsivällisyydestä."
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
-msgstr "Sisällöt"
+msgstr "محتوا"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:9
 #: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:17
@@ -589,8 +586,7 @@ msgstr "Sisällöt"
 #, python-format
 msgid "%(entry_count)s entry"
 msgid_plural "%(entry_count)s entries"
-msgstr[0] "%(entry_count)s artikkeli"
-msgstr[1] "%(entry_count)s artikkelia"
+msgstr[0] ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:14
 #: templates/zinnia/_entry_detail_base.html:120
@@ -599,16 +595,14 @@ msgstr[1] "%(entry_count)s artikkelia"
 #, python-format
 msgid "%(comment_count)s comment"
 msgid_plural "%(comment_count)s comments"
-msgstr[0] "%(comment_count)s kommentti"
-msgstr[1] "%(comment_count)s kommenttia"
+msgstr[0] ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:21
 #: templates/zinnia/tags/statistics.html:13
 #, python-format
 msgid "%(category_count)s category"
 msgid_plural "%(category_count)s categories"
-msgstr[0] "%(category_count)s kategoria"
-msgstr[1] "%(category_count)s kategoriaa"
+msgstr[0] ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:24
 #: templates/zinnia/_entry_detail_base.html:139
@@ -616,16 +610,14 @@ msgstr[1] "%(category_count)s kategoriaa"
 #, python-format
 msgid "%(pingback_count)s pingback"
 msgid_plural "%(pingback_count)s pingbacks"
-msgstr[0] "%(pingback_count)s linkitys"
-msgstr[1] "%(pingback_count)s linkitystä"
+msgstr[0] ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:29
 #: templates/zinnia/tags/statistics.html:10
 #, python-format
 msgid "%(tag_count)s tag"
 msgid_plural "%(tag_count)s tags"
-msgstr[0] "%(tag_count)s tagi"
-msgstr[1] "%(tag_count)s tagia"
+msgstr[0] ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:32
 #: templates/zinnia/_entry_detail_base.html:148
@@ -633,64 +625,61 @@ msgstr[1] "%(tag_count)s tagia"
 #, python-format
 msgid "%(trackback_count)s trackback"
 msgid_plural "%(trackback_count)s trackbacks"
-msgstr[0] "%(trackback_count)s viittaus"
-msgstr[1] "%(trackback_count)s viittausta"
+msgstr[0] ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:37
 #: templates/zinnia/tags/statistics.html:4
 #, python-format
 msgid "%(author_count)s author"
 msgid_plural "%(author_count)s authors"
-msgstr[0] "%(author_count)s kirjoittaja"
-msgstr[1] "%(author_count)s kirjoittajaa"
+msgstr[0] ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:42
 #: templates/zinnia/tags/statistics.html:25
 #, python-format
 msgid "%(reject_count)s rejected item"
 msgid_plural "%(reject_count)s rejected items"
-msgstr[0] "%(reject_count)s hylätty kommentti"
-msgstr[1] "%(reject_count)s hylättyä kommenttia"
+msgstr[0] ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:47
 msgid "Statistics"
-msgstr "Tilastot"
+msgstr "آمار"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:49
 #: templates/zinnia/tags/statistics.html:28
 #, python-format
 msgid "%(entries_per_month)s entries per month"
-msgstr "%(entries_per_month)s kirjoitusta kuukaudessa"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:54
 #: templates/zinnia/tags/statistics.html:31
 #, python-format
 msgid "%(words_per_entry)s words per entry"
-msgstr "%(words_per_entry)s sanaa kirjoituksessa"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:57
 #: templates/zinnia/tags/statistics.html:34
 #, python-format
 msgid "%(words_per_comment)s words per comment"
-msgstr "%(words_per_comment)s sanaa kommenttia kohden"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:62
 #: templates/zinnia/tags/statistics.html:37
 #, python-format
 msgid "%(comments_per_entry)s comments per entry"
-msgstr "%(comments_per_entry)s kommenttia kirjoitusta kohden"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_content_stats.html:65
 #: templates/zinnia/tags/statistics.html:40
 #, python-format
 msgid "%(linkbacks_per_entry)s linkbacks per entry"
-msgstr "%(linkbacks_per_entry)s viittausta kirjoitusta kohden"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:6
 #: templates/zinnia/entry_detail_base.html:248
 #: templates/zinnia/entry_detail_base.html:249
 msgid "Edit the entry"
-msgstr "Muokkaa kirjoitusta"
+msgstr "ویرایش نوشته"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:9
 #: templates/comments/zinnia_entry_preview.html:25
@@ -709,181 +698,180 @@ msgstr ""
 #: templates/admin/zinnia/widgets/_draft_entries.html:15
 #: templates/comments/zinnia/entry/form.html:31
 msgid "Preview"
-msgstr "Esikatsele"
+msgstr "پیش نمایش"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:22
 #: templates/zinnia/tags/entries_draft.html:9
 msgid "No draft entries."
-msgstr "Ei luonnoksia."
+msgstr "هیچ نوشته چرک نویسی وجود ندارد"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:31
 #: templates/admin/zinnia/widgets/_draft_entries.html:32
 msgid "View all draft entries"
-msgstr "Listaa luonnokset"
+msgstr "نمایش همه ی چرک نویس ها"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:10
 #: templates/zinnia/_entry_detail_base.html:35
 #: templates/zinnia/tags/comments_recent.html:6
 #: templates/zinnia/tags/linkbacks_recent.html:7
 msgid "in"
-msgstr "kategoriassa"
+msgstr "در"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:13
 #: templates/zinnia/tags/comments_recent.html:8
 msgid "Comment on"
-msgstr "Kommentoi"
+msgstr "نظر گذاشتن در"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:22
 msgid "Edit the comment"
-msgstr "muokkaa komenttia"
+msgstr "ویرایش نظر"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:23
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:18
 msgid "Edit"
-msgstr "muokkaa"
+msgstr "ویرایش"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:30
 #: templates/zinnia/_entry_detail_base.html:124
 #: templates/zinnia/entry_detail_base.html:229
 #: templates/zinnia/tags/comments_recent.html:15
 msgid "No comments yet."
-msgstr "Ei vielä komentteja."
+msgstr "هنوز نظری ارسال نشده"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:39
 #: templates/admin/zinnia/widgets/_recent_comments.html:40
 msgid "Manage the comments"
-msgstr "Hallitse kommentteja"
+msgstr "مدیریت نظرات"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:7
 msgid "made a linkback on"
-msgstr "luo viittaus"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:17
 msgid "Edit the linkback"
-msgstr "muokkaa viittausta"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:25
 #: templates/zinnia/tags/linkbacks_recent.html:16
 msgid "No linkbacks yet."
-msgstr "Ei viittauksia vielä."
+msgstr ""
 
 #: templates/admin/zinnia/widgets/content_stats.html:6
 #: templates/admin/zinnia/widgets/content_stats.html:8
 msgid "Today"
-msgstr "Tänään"
+msgstr "امروز"
 
 #: templates/admin/zinnia/widgets/draft_entries.html:6
 #: templates/admin/zinnia/widgets/draft_entries.html:8
 msgid "Draft entries"
-msgstr "Vedokset"
+msgstr "نوشته های چرک نویس"
 
 #: templates/admin/zinnia/widgets/quickpost.html:5
 #: templates/admin/zinnia/widgets/quickpost.html:6
 msgid "Quick publishing"
-msgstr "Pikajulkaisu"
+msgstr "انتشار فوری"
 
 #: templates/admin/zinnia/widgets/quickpost.html:9
 msgid "Title"
-msgstr "Otsikko"
+msgstr "عنوان"
 
 #: templates/admin/zinnia/widgets/quickpost.html:33
 msgid "Save as draft"
-msgstr "Tallenna vedoksena"
+msgstr "ذخیره به عنوان چرک نویس"
 
 #: templates/admin/zinnia/widgets/quickpost.html:34
 msgid "Reset"
-msgstr "Palauta"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/quickpost.html:35
 msgid "Publish"
-msgstr "Julkaise"
+msgstr "انتشار"
 
 #: templates/admin/zinnia/widgets/recent_comments.html:6
 #: templates/admin/zinnia/widgets/recent_comments.html:8
 #: templates/zinnia/base.html:56
 msgid "Recent comments"
-msgstr "Uusimmat kommentit"
+msgstr "نظرات اخیر"
 
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:6
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:8
 #: templates/zinnia/base.html:60
 msgid "Recent linkbacks"
-msgstr "Uusimmat viittaukset"
+msgstr ""
 
 #: templates/comments/comment_authors_email.txt:1
 #: templates/comments/comment_notification_email.txt:1
 #: templates/comments/comment_reply_email.txt:1
 #: templates/zinnia/entry_list.html:21
 msgid "Author"
-msgstr "Kirjoittaja"
+msgstr "نویسنده"
 
 #: templates/comments/comment_authors_email.txt:3
 #: templates/comments/comment_notification_email.txt:5
 #: templates/comments/comment_reply_email.txt:3
 msgid "Comment"
-msgstr "Kommentti"
+msgstr "نظر"
 
 #: templates/comments/comment_authors_email.txt:6
 #: templates/comments/comment_notification_email.txt:8
 #: templates/comments/comment_reply_email.txt:6
 msgid "View this comment"
-msgstr "Näytä kommentti"
+msgstr "مشاهده ی این نظر"
 
 #: templates/comments/comment_notification_email.txt:2
 msgid "Email"
-msgstr "Sähköpostiosoite"
+msgstr "آدرس ایمیل"
 
 #: templates/comments/comment_notification_email.txt:3
 msgid "IP"
-msgstr "IP"
+msgstr "شناسه ی IP "
 
 #: templates/comments/comment_notification_email.txt:10
 msgid "Flag this comment"
-msgstr "Liputa tämä kommentti"
+msgstr "علامت زدن این نظر"
 
 #: templates/comments/comment_notification_email.txt:12
 msgid "Delete this comment"
-msgstr "Poista tämä kommentti"
+msgstr "حذف این نظر"
 
 #: templates/comments/comment_notification_email.txt:14
 msgid "Approve this comment"
-msgstr "Hyväksy tämä kommentti"
+msgstr "تائید این نظر"
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
-msgstr "Esikatsele kommenttia"
+msgstr "پیش نمایش نظر"
 
 #: templates/comments/zinnia_entry_preview.html:10
 msgid "Please correct following error."
 msgid_plural "Please correct following errors."
-msgstr[0] "Ole hyvä ja korjaa seuraava virhe."
-msgstr[1] "Ole hyvä ja korjaa seuraavat virheet"
+msgstr[0] "لطفا خطا های زیر را اصلاح کنید."
 
 #: templates/comments/zinnia_entry_preview.html:12
 msgid "Preview of the comment"
-msgstr "Kommentin esikatselu"
+msgstr "پیش نمایش نظر"
 
 #: templates/comments/zinnia/entry/form.html:11
 msgid "Post your comment"
-msgstr "Lähetä kommenttisi"
+msgstr "ارسال نظر شما"
 
 #: templates/comments/zinnia/entry/form.html:26
 msgid "Comment as"
-msgstr ""
+msgstr "نگارش نظر به عنوان "
 
 #: templates/comments/zinnia/entry/form.html:26 templates/zinnia/base.html:96
 #: templates/zinnia/base.html.py:97
 msgid "Log out"
-msgstr "Kirjaudu ulos"
+msgstr "خروج"
 
 #: templates/comments/zinnia/entry/form.html:30
 msgid "Post"
-msgstr "Lähetä"
+msgstr "ارسال"
 
 #: templates/comments/zinnia/entry/posted.html:4
 #: templates/comments/zinnia/entry/posted.html:9
 msgid "Thanks for your comment"
-msgstr "Kiitos kommentistasi"
+msgstr "بابت ارسال نظر سپاسگذاریم"
 
 #: templates/comments/zinnia/entry/posted.html:11
 msgid "Your comment needs to be approved before getting displayed."
@@ -897,21 +885,21 @@ msgstr ""
 #: templates/comments/zinnia/entry/posted.html:26
 #: templates/comments/zinnia/entry/posted.html:27
 msgid "Return to entry list"
-msgstr "Palaa artikkelilistaan"
+msgstr "بازگشت به لیست نوشته ها"
 
 #: templates/zinnia/_entry_detail_base.html:17
 msgid "Written by"
-msgstr "Kirjoittanut"
+msgstr "نوشته شده توسط"
 
 #: templates/zinnia/_entry_detail_base.html:21
 #: templates/zinnia/author_list.html:17 templates/zinnia/tags/authors.html:6
 #, python-format
 msgid "Show all %(author)s's entries"
-msgstr "Näytä kaikki %(author)sn kirjoitukset"
+msgstr ""
 
 #: templates/zinnia/_entry_detail_base.html:25
 msgid "Written on"
-msgstr "Kirjoitettu"
+msgstr "نوشته شده در"
 
 #: templates/zinnia/_entry_detail_base.html:38
 #: templates/zinnia/category_list.html:16
@@ -919,11 +907,11 @@ msgstr "Kirjoitettu"
 #: templates/zinnia/tags/categories_tree.html:5
 #, python-format
 msgid "Show all entries in %(category)s"
-msgstr "Näytä kirjoitukset kategoriassa %(category)s"
+msgstr ""
 
 #: templates/zinnia/_entry_detail_base.html:46
 msgid "Last update on"
-msgstr ""
+msgstr "آخرین به روز رسانی در"
 
 #: templates/zinnia/_entry_detail_base.html:78
 #, python-format
@@ -932,81 +920,81 @@ msgstr ""
 
 #: templates/zinnia/_entry_detail_base.html:80
 msgid "Continue reading"
-msgstr "Lue lisää"
+msgstr "ادامه مطلب"
 
 #: templates/zinnia/_entry_detail_base.html:95
 #: templates/zinnia/tag_list.html:17
 #, python-format
 msgid "Show all entries tagged by %(tag)s"
-msgstr "Näytä kaikki kirjoitukset, joilla tagi %(tag)s"
+msgstr ""
 
 #: templates/zinnia/_entry_detail_base.html:98
 msgid "No tags"
-msgstr "Ei tageja"
+msgstr "بدون برچسب"
 
 #: templates/zinnia/_entry_detail_base.html:104
 msgid "Short url"
-msgstr "Lyhytosoite"
+msgstr "لینک کوتاه"
 
 #: templates/zinnia/_entry_detail_base.html:106
 #, python-format
 msgid "Short URL to %(object)s"
-msgstr "Lyhyt osoite kirjoitukselle %(object)s"
+msgstr ""
 
 #: templates/zinnia/_entry_detail_base.html:119
 #: templates/zinnia/tags/entries_popular.html:7
 #, python-format
 msgid "Comments on %(object)s"
-msgstr "Kommentit kirjoitukselle %(object)s"
+msgstr ""
 
 #: templates/zinnia/_entry_detail_base.html:126
 #, python-format
 msgid "Leave a comment on %(object)s"
-msgstr "Jätä kommentti kirjoitukselle %(object)s"
+msgstr ""
 
 #: templates/zinnia/_entry_detail_base.html:127
 msgid "Be first to comment!"
-msgstr "Kommentoi ensimmäisenä!"
+msgstr "نفر اولی باشید که نظر میگذارید"
 
 #: templates/zinnia/_entry_detail_base.html:130
 #: templates/zinnia/entry_detail_base.html:225
 #: templates/zinnia/entry_detail_base.html:231
 msgid "Comments are closed."
-msgstr "Kommentointi on suljettu."
+msgstr "بخش نظرات بسته است"
 
 #: templates/zinnia/_entry_detail_base.html:138
 #, python-format
 msgid "Pingbacks on %(object)s"
-msgstr "Viittaukset kirjoitukselle %(object)s"
+msgstr ""
 
 #: templates/zinnia/_entry_detail_base.html:147
 #, python-format
 msgid "Trackbacks on %(object)s"
-msgstr "Paluuviitteet kirjoitukselle %(object)s"
+msgstr ""
 
 #: templates/zinnia/author_list.html:4 templates/zinnia/author_list.html:11
 msgid "Author list"
-msgstr "Julkaisijat"
+msgstr "لیست نویسندگان"
 
 #: templates/zinnia/author_list.html:23 templates/zinnia/tags/authors.html:12
 msgid "No authors yet."
-msgstr "Ei kirjoittajia vielä."
+msgstr "هنوز هیچ نویسنده ای وجود ندارد"
 
 #: templates/zinnia/base.html:16 templates/zinnia/skeleton.html:36
 msgid "RSS Feed of latest entries"
-msgstr "RSS syöte viimeisimmistä kirjoituksista"
+msgstr ""
 
 #: templates/zinnia/base.html:17
 msgid "RSS Feed of latest discussions"
-msgstr "RSS syöte viimeisimmistä kommenteista"
+msgstr ""
 
 #: templates/zinnia/base.html:27
 msgid "Welcome!"
-msgstr ""
+msgstr "خوش آمدید!"
 
 #: templates/zinnia/base.html:29
 msgid "This simple theme is the default appearance of Zinnia."
-msgstr ""
+msgstr "این قالب ساده ظاهر اولیه ی زیننیا است ."
 
 #: templates/zinnia/base.html:32
 msgid ""
@@ -1017,19 +1005,19 @@ msgstr ""
 
 #: templates/zinnia/base.html:44
 msgid "Calendar"
-msgstr "Kalenteri"
+msgstr "تقویم"
 
 #: templates/zinnia/base.html:52
 msgid "Recent entries"
-msgstr "Viimeisimmät kirjoitukset"
+msgstr "نوشته های اخیر"
 
 #: templates/zinnia/base.html:64
 msgid "Random entries"
-msgstr "Satunnaiset kirjoitukset"
+msgstr "ارسال های رندم"
 
 #: templates/zinnia/base.html:68
 msgid "Popular entries"
-msgstr "Suositut artikkelit"
+msgstr "نوشته های محبوب"
 
 #: templates/zinnia/base.html:72 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_day.html:6
@@ -1050,43 +1038,43 @@ msgstr "Suositut artikkelit"
 #: templates/zinnia/tags/entries_archives_tree.html:13
 #: templates/zinnia/tags/entries_archives_tree.html:23
 msgid "Archives"
-msgstr "Arkisto"
+msgstr "آرشیو"
 
 #: templates/zinnia/base.html:77
 msgid "Tools"
-msgstr "Työkalut"
+msgstr "ابزار ها"
 
 #: templates/zinnia/base.html:81 templates/zinnia/base.html.py:82
 msgid "Dashboard"
-msgstr "Ohjausnäkymä"
+msgstr "پیشخوان"
 
 #: templates/zinnia/base.html:88 templates/zinnia/base.html.py:89
 msgid "Post an entry"
-msgstr "Kirjoita artikkeli"
+msgstr "ارسال یک نوشته"
 
 #: templates/zinnia/category_list.html:4
 #: templates/zinnia/category_list.html:11
 msgid "Category list"
-msgstr "Kategorialistaus"
+msgstr "لیست موضوعات"
 
 #: templates/zinnia/category_list.html:28
 #: templates/zinnia/tags/categories.html:11
 #: templates/zinnia/tags/categories_tree.html:16
 msgid "No categories yet."
-msgstr "Ei kategoriaa vielä."
+msgstr "هیچ موضوعی هنوز وجود ندارد"
 
 #: templates/zinnia/entry_archive.html:16
 msgid "Yearly archives"
-msgstr ""
+msgstr "آرشیو سالیانه"
 
 #: templates/zinnia/entry_archive_day.html:16
 #: templates/zinnia/entry_archive_today.html:16
 msgid "Previous day"
-msgstr "Edellinen päivä"
+msgstr "روز پیشین"
 
 #: templates/zinnia/entry_archive_day.html:22
 msgid "Next day"
-msgstr "Seuraava päivä"
+msgstr "روز بعدی"
 
 #: templates/zinnia/entry_archive_day.html:35
 #: templates/zinnia/entry_archive_week.html:30
@@ -1098,169 +1086,169 @@ msgstr ""
 #: templates/zinnia/entry_archive_month.html:16
 #: templates/zinnia/entry_archive_week.html:17
 msgid "Daily archives"
-msgstr "Päivittäinen arkisto"
+msgstr "آرشیو روزانه"
 
 #: templates/zinnia/entry_archive_month.html:26
 msgid "Previous month"
-msgstr "Edellinen kuukausi"
+msgstr "ماه پیشین"
 
 #: templates/zinnia/entry_archive_month.html:32
 msgid "Next month"
-msgstr "Seuraava kuukausi"
+msgstr "ماه بعدی"
 
 #: templates/zinnia/entry_archive_today.html:4
 #: templates/zinnia/entry_archive_today.html:6
 #: templates/zinnia/entry_archive_today.html:11
 msgid "Today archives"
-msgstr "Tämän päivän arkisto"
+msgstr "آرشیو امروز"
 
 #: templates/zinnia/entry_archive_week.html:4
 #: templates/zinnia/entry_archive_week.html:6
 #: templates/zinnia/entry_archive_week.html:11
 #, python-format
 msgid "Archives week %(week_number)s of %(year)s"
-msgstr "Arkisto vko %(week_number)s %(year)s"
+msgstr ""
 
 #: templates/zinnia/entry_archive_week.html:27
 msgid "Previous week"
-msgstr ""
+msgstr "هفته پیشین"
 
 #: templates/zinnia/entry_archive_week.html:35
 msgid "Next week"
-msgstr ""
+msgstr "هفته بعدی"
 
 #: templates/zinnia/entry_archive_year.html:15
 #: templates/zinnia/sitemap.html:63
 msgid "Monthly archives"
-msgstr "Kuukausiarkisto"
+msgstr "آرشیو ماهیانه"
 
 #: templates/zinnia/entry_archive_year.html:25
 msgid "Previous year"
-msgstr ""
+msgstr "سال پیشین"
 
 #: templates/zinnia/entry_archive_year.html:31
 msgid "Next year"
-msgstr ""
+msgstr "سال بعدی"
 
 #: templates/zinnia/entry_detail_base.html:22
 msgid "RSS Feed of discussions on"
-msgstr "RSS syöte keskusluista "
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:24
 msgid "RSS Feed of comments on"
-msgstr "RSS syöte kommenteista"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:26
 msgid "RSS Feed of pingbacks on"
-msgstr "RSS syöte päivitysilmoituksista"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:28
 msgid "RSS Feed of trackbacks on"
-msgstr "RSS syöte paluuviitteistä"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:47
 msgid "Next entry"
-msgstr "Seuraava kirjoitus"
+msgstr "نوشته بعدی"
 
 #: templates/zinnia/entry_detail_base.html:61
 msgid "Previous entry"
-msgstr "Edellinen kirjoitus"
+msgstr "نوشته قبلی"
 
 #: templates/zinnia/entry_detail_base.html:75
 msgid "Related entries"
-msgstr "Liittyviä kirjoituksia"
+msgstr "نوشته های مرتبط"
 
 #: templates/zinnia/entry_detail_base.html:89
 msgid "Similar entries"
-msgstr "Samankaltaisia kirjoituksia"
+msgstr "نوشته های مشابه"
 
 #: templates/zinnia/entry_detail_base.html:98
 msgid "Pingbacks"
-msgstr "Viittaukset"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:115
 msgid "Direct link to this pingback"
-msgstr "Suora linkki tähän viittaukseen"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:131
 msgid "Pingbacks are open."
-msgstr "Viittaukset ovat käytössä."
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:133
 msgid "Pingbacks are closed."
-msgstr "Viittaukset ovat poissä käytöstä."
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:142
 msgid "Trackbacks"
-msgstr "Paluuviitteet"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:159
 msgid "Direct link to this trackback"
-msgstr "Suora linkki tähän paluuviitteeseen"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:177
 msgid "Trackback URL"
-msgstr "Paluuviitteen osoite"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:187
 msgid "Comments"
-msgstr "Kommentit"
+msgstr "نظرات"
 
 #: templates/zinnia/entry_detail_base.html:213
 msgid "Direct link to this comment"
-msgstr "Suora linkki kommenttiin"
+msgstr "لینک مستقیم به این نظر"
 
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries for"
-msgstr "Uusimmat kirjoitukset "
+msgstr "آخرین نوشته ها برای"
 
 #: templates/zinnia/entry_list.html:4
 msgid "the category"
-msgstr "kategoria"
+msgstr "موضوع"
 
 #: templates/zinnia/entry_list.html:4
 msgid "the tag"
-msgstr "tagi"
+msgstr "برچسب"
 
 #: templates/zinnia/entry_list.html:4
 msgid "the author"
-msgstr "kirjoittaja"
+msgstr "نویسنده"
 
 #: templates/zinnia/entry_list.html:6
 msgid "page"
-msgstr "sivu"
+msgstr "صفحه"
 
 #: templates/zinnia/entry_list.html:11 templates/zinnia/entry_list.html:14
 #: templates/zinnia/entry_list.html:17 templates/zinnia/skeleton.html:37
 msgid "RSS Feed"
-msgstr "RSS syöte"
+msgstr ""
 
 #: templates/zinnia/entry_list.html:21
 msgid "Category"
-msgstr "Kategoria"
+msgstr "موضوع"
 
 #: templates/zinnia/entry_list.html:21
 msgid "Tag"
-msgstr "Tagi"
+msgstr "برچسب"
 
 #: templates/zinnia/entry_list.html:23
 msgid "Page"
-msgstr "Sivu"
+msgstr "صفحه"
 
 #: templates/zinnia/entry_list.html:31
 #, python-format
 msgid "Category archives: %(category)s"
-msgstr "Arkisto kategorialle %(category)s"
+msgstr ""
 
 #: templates/zinnia/entry_list.html:38
 #, python-format
 msgid "Tag archives: %(tag)s"
-msgstr "Arkisto tagille %(tag)s"
+msgstr ""
 
 #: templates/zinnia/entry_list.html:42
 #, python-format
 msgid "Author archives: %(author)s"
-msgstr "Kirjoittajan %(author)s arkisto"
+msgstr ""
 
 #: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:29
 #: templates/zinnia/sitemap.html.py:51
@@ -1269,81 +1257,80 @@ msgstr "Kirjoittajan %(author)s arkisto"
 #: templates/zinnia/tags/entries_random.html:9
 #: templates/zinnia/tags/entries_recent.html:9
 msgid "No entries yet."
-msgstr "Ei vielä kirjoituksia."
+msgstr "هنوز نوشته ای وجود ندارد"
 
 #: templates/zinnia/entry_list.html:70 templates/zinnia/entry_list.html:71
 msgid "Edit the category"
-msgstr "Muokkaa kategoriaa"
+msgstr "ویرایش موضوع"
 
 #: templates/zinnia/entry_list.html:77 templates/zinnia/entry_list.html:78
 msgid "Edit the tag"
-msgstr "Muokkaa tagia"
+msgstr "ویرایش برچسب"
 
 #: templates/zinnia/entry_list.html:84 templates/zinnia/entry_list.html:85
 msgid "Edit the author"
-msgstr "Muokkaa kirjoittajaa"
+msgstr "ویرایش نوسنده"
 
 #: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:6
 #: templates/zinnia/entry_search.html:16
 msgid "Search results for"
-msgstr "Tulokset haulle"
+msgstr "نتایج جستوجو برای"
 
 #: templates/zinnia/entry_search.html:10
 msgid "RSS Feed of search result of"
-msgstr "RSS syöte haulle"
+msgstr ""
 
 #: templates/zinnia/entry_search.html:24
 #, python-format
 msgid "%(entry_count)s entry found"
 msgid_plural "%(entry_count)s entries found"
-msgstr[0] "Löytyi %(entry_count)s kirjoitus"
-msgstr[1] "Löytyi %(entry_count)s kirjoitusta"
+msgstr[0] ""
 
 #: templates/zinnia/entry_search.html:34
 msgid "Nothing found."
-msgstr "Ei tuloksia."
+msgstr "چیزی یافت نشد"
 
 #: templates/zinnia/login.html:4 templates/zinnia/login.html.py:9
 msgid "Login required"
-msgstr "Vaatii kirjautumisen"
+msgstr "نیاز به احراز هویت"
 
 #: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr "Virheellinen käyttäjätunnus ja/tai salasana. Ole hyvä ja yritä uudestaan."
+msgstr "نام کاربری و گذرواژه ی وارد شده مطابق نیست ، مجددا تلاش کنید"
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
-msgstr "Sinun tulee olla yhteydessä tarkastellaksesi kirjoitusta."
+msgstr "شما باید متصل باشید تا این نوشته را مشاهده کنید"
 
 #: templates/zinnia/login.html:34
 msgid "Login"
-msgstr "Kirjaudu"
+msgstr "ورود"
 
 #: templates/zinnia/password.html:4 templates/zinnia/password.html.py:9
 msgid "Password required"
-msgstr "Salasana vaaditaan"
+msgstr "گذرواژه مورد نیاز است"
 
 #: templates/zinnia/password.html:13
 msgid "The password provided is not valid. Please try again."
-msgstr "Antamasi salasana oli virheellinen. Ole hyvä ja yritä uudestaan."
+msgstr "گذرواژه وارد شده معتبر نیست ، مجددا تلاش کنید ."
 
 #: templates/zinnia/password.html:17
 msgid "You need to provide a password to view this entry."
-msgstr "Sinun tulee antaa salasana lukeaksesi tämän kirjoituksen."
+msgstr "براش مشاهده ی این نوشته باید یک رمز ارائه دهید"
 
 #: templates/zinnia/password.html:24
 msgid "Password"
-msgstr "Salasana"
+msgstr "گذرواژه"
 
 #: templates/zinnia/password.html:29
 msgid "Valid"
-msgstr "Kelpo"
+msgstr "معتبر"
 
 #: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:11
 #: templates/zinnia/skeleton.html:31 templates/zinnia/skeleton.html.py:32
 #: templates/zinnia/skeleton.html:69 templates/zinnia/skeleton.html.py:70
 msgid "Sitemap"
-msgstr "Sivukartta"
+msgstr "نقشه سایت"
 
 #: templates/zinnia/sitemap.html:6
 msgid "Sitemap of the weblog"
@@ -1351,27 +1338,27 @@ msgstr ""
 
 #: templates/zinnia/sitemap.html:14
 msgid "Entries per categories"
-msgstr "Kirjoitusta kategoriassa"
+msgstr "تعداد نوشته ها بر حسب موضوعات"
 
 #: templates/zinnia/sitemap.html:23 templates/zinnia/sitemap.html.py:45
 msgid "comment"
-msgstr "kommentti"
+msgstr "نظر"
 
 #: templates/zinnia/sitemap.html:37
 msgid "All the entries"
-msgstr "Kaikki kirjoitukset"
+msgstr "تمام نوشته ها"
 
 #: templates/zinnia/skeleton.html:11 templates/zinnia/skeleton.html.py:53
 msgid "Just another Zinnia weblog."
-msgstr ""
+msgstr "یک وبلاگ دیگر با زیننیا ."
 
 #: templates/zinnia/skeleton.html:43 templates/zinnia/tags/search_form.html:4
 msgid "Keywords..."
-msgstr "Avainsanat…"
+msgstr "کلمات کلیدی..."
 
 #: templates/zinnia/skeleton.html:61
 msgid "Useful links"
-msgstr "Hyödyllisiä linkkejä"
+msgstr "لینک های مفید"
 
 #: templates/zinnia/skeleton.html:64 templates/zinnia/skeleton.html.py:65
 msgid "Weblog index"
@@ -1379,7 +1366,7 @@ msgstr ""
 
 #: templates/zinnia/skeleton.html:76
 msgid "Search"
-msgstr "Etsi"
+msgstr "جستوجو"
 
 #: templates/zinnia/skeleton.html:86
 #, python-format
@@ -1391,69 +1378,68 @@ msgstr ""
 
 #: templates/zinnia/tag_list.html:4 templates/zinnia/tag_list.html.py:11
 msgid "Tag list"
-msgstr "Tagilistaus"
+msgstr "لیست برچسب ها"
 
 #: templates/zinnia/tag_list.html:22 templates/zinnia/tags/tag_cloud.html:11
 msgid "No tags yet."
-msgstr "Ei vielä yhtään tagia."
+msgstr "بدون برچسب"
 
 #: templates/zinnia/tags/entries_archives.html:12
 #: templates/zinnia/tags/entries_archives_tree.html:37
 msgid "No archives yet."
-msgstr "Ei vielä yhtään arkistoa."
+msgstr "هنوز هیچ آرشیوی وجود ندارد"
 
 #: templates/zinnia/tags/entries_similar.html:9
 msgid "No similar entries."
-msgstr "Ei vastaavia kirjoituksia."
+msgstr "نوشته مشابه وجود ندارد"
 
 #: templates/zinnia/tags/linkbacks_recent.html:9
 msgid "Linkback on"
-msgstr "Paluuviite"
+msgstr ""
 
 #: templates/zinnia/tags/pagination.html:4
 #, python-format
 msgid "Page %(current_page)s of %(total_page)s"
-msgstr "Sivu %(current_page)s / %(total_page)s"
+msgstr ""
 
 #: templates/zinnia/tags/pagination.html:10
 msgid "More recent entries"
-msgstr "Lisää uusimpia kirjoituksia"
+msgstr "نوشته های قدیمی تر"
 
 #: templates/zinnia/tags/pagination.html:20
 #: templates/zinnia/tags/pagination.html:33
 #: templates/zinnia/tags/pagination.html:47
 msgid "Entries page"
-msgstr "Kirjoitukset sivu"
+msgstr "صفحه نوشته ها"
 
 #: templates/zinnia/tags/pagination.html:56
 msgid "More old entries"
-msgstr "Lisää vanhempia kirjoituksia"
+msgstr "نوشته های خیلی قدیمی تر"
 
 #: templates/zinnia/tags/search_form.html:6
 msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex queries."
-msgstr "Voit rajata sanan pois hausta --merkillä, hakea tarkkoja sanamuotoja &quot;lainausmerkeillä&quot; ja käyttää AND/OR operaatioita laiausmerkkien kanssa monipuolisempien kyselyjen tekemiseksi."
+msgstr ""
 
 #: templates/zinnia/tags/tag_cloud.html:6
 #, python-format
 msgid "%(entry_count)s entry tagged by %(tag)s"
 msgid_plural "%(entry_count)s entries tagged by %(tag)s"
-msgstr[0] "%(entry_count)s kirjoitukseen liitetty tagi %(tag)s"
-msgstr[1] "%(entry_count)s kirjoitukseen liitetty tagi %(tag)s"
+msgstr[0] ""
 
 #: templatetags/zinnia_tags.py:341
 msgid "Blog"
-msgstr ""
+msgstr "بلاگ"
 
 #: tests/test_views.py:574 views/search.py:30
 msgid "The pattern is too short"
-msgstr "Liian lyhyt hakulauseke"
+msgstr "الگوی وارد شده بسیار کوتاه است"
 
 #: tests/test_views.py:578 views/search.py:34
 msgid "No pattern to search found"
-msgstr "Hakulauseketta ei löytynyt."
+msgstr "الگویی برای جستوجو یافت نشد"
 
 #: urls/__init__.py:23
 msgid "^feeds/"
@@ -1586,7 +1572,7 @@ msgstr ""
 #: views/tags.py:48
 #, python-format
 msgid "No Tag found matching \"%s\"."
-msgstr "\"%s\" vastaava tagia ei löytynyt."
+msgstr ""
 
 #: views/mixins/entry_preview.py:27
 msgid "No entry found matching the query"
@@ -1594,21 +1580,21 @@ msgstr ""
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."
-msgstr "Virheellinen käyttäjätunnus."
+msgstr "نام کاربری صحیح نیست"
 
 #: xmlrpc/metaweblog.py:50
 msgid "Password is invalid."
-msgstr "Virheellinen salasana."
+msgstr "گذرواژه معتبر نیست"
 
 #: xmlrpc/metaweblog.py:52
 msgid "User account unavailable."
-msgstr "Käyttäjätili ei käytössä."
+msgstr "حساب کاربری در دسترس نیست"
 
 #: xmlrpc/metaweblog.py:55
 #, python-format
 msgid "User cannot %s."
-msgstr "Käyttäjä ei voi %s"
+msgstr ""
 
 #: xmlrpc/pingback.py:114
 msgid "No title"
-msgstr "Ei otsikkoa"
+msgstr "بدون عنوان"
