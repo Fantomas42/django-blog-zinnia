@@ -1,7 +1,9 @@
 {% extends "zinnia/base.html" %}
-{% load i18n zinnia_tags mptt_tags %}
+{% load i18n zinnia_tags %}
 
 {% block title %}{% trans "Sitemap" %}{% endblock title %}
+
+{% block meta-description %}{% trans "Sitemap of the weblog" %}{% endblock meta-description %}
 
 {% block body-class %}sitemap{% endblock body-class %}
 
@@ -16,8 +18,10 @@
     {% for entry in category.entries_published.all %}
     <li>
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
-      {% with comment_count=entry.comments.count %}
+      {% with comment_count=entry.comment_count %}
+      {% if comment_count %}
       - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
+      {% endif %}
       {% endwith %}
     </li>
     {% empty %}
@@ -36,8 +40,10 @@
     <li>
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
       - {{ entry.creation_date|date:"SHORT_DATE_FORMAT" }}
-      {% with comment_count=entry.comments.count %}
+      {% with comment_count=entry.comment_count %}
+      {% if comment_count %}
       - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
+      {% endif %}
       {% endwith %}
     </li>
     {% empty %}
@@ -50,19 +56,7 @@
 
 <div class="categories">
   <h3>{% trans "Categories" %}</h3>
-  {% for category, structure in categories|tree_info %}
-    {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
-      <a href="{{ category.get_absolute_url }}" title="{{ category.title }}">{{ category.title }}</a>
-      -
-      {% blocktrans count entry_count=category.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
-    {% for level in structure.closed_levels %}</li></ul>{% endfor %}
-    {% empty %}
-  <ul>
-    <li>
-      {% trans "No categories yet." %}
-    </li>
-  </ul>
-  {% endfor %}
+  {% get_categories_tree %}
 </div>
 
 <div class="montharchives">
