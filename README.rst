@@ -117,7 +117,7 @@ More information and help available at these URLs:
 .. _`Mollom`: https://github.com/Fantomas42/zinnia-spam-checker-mollom
 .. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi
 .. _`Bit.ly`: https://github.com/Fantomas42/zinnia-url-shortener-bitly
-.. _`Twitter`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#twitter
+.. _`Twitter`:  https://github.com/Fantomas42/zinnia-twitter
 .. _`Gravatar`: http://gravatar.com/
 .. _`Django-CMS`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#django-cms
 .. _`Entry model extendable`: http://django-blog-zinnia.rtfd.org/extending-entry
