@@ -17,7 +17,11 @@ from django.template.defaultfilters import slugify
 from django.core.management.base import CommandError
 from django.core.management.base import NoArgsCommand
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.comments import get_model as get_comment_model
+
+try:
+    from django_comments import get_model as get_comment_model
+except ImportError:
+    from django.contrib.comments import get_model as get_comment_model
 
 from zinnia import __version__
 from zinnia.models.entry import Entry

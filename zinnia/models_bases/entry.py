@@ -5,8 +5,17 @@ from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.html import linebreaks
 from django.contrib.sites.models import Site
-from django.contrib import comments
-from django.contrib.comments.models import CommentFlag
+
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comments
+
+try:
+    from django_comments.models import CommentFlag
+except ImportError:
+    from django.contrib.comments.models import CommentFlag
+
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 

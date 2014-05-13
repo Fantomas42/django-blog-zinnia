@@ -4,7 +4,12 @@ from datetime import date
 
 from django.test import TestCase
 from django.utils import timezone
-from django.contrib import comments
+
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comments
+
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
 from django.test.utils import restore_template_loaders

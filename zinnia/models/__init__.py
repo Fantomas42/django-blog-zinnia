@@ -6,7 +6,11 @@ from zinnia.models.category import Category
 from zinnia.signals import connect_entry_signals
 from zinnia.signals import connect_discussion_signals
 from zinnia.moderator import EntryCommentModerator
-from django.contrib.comments.moderation import moderator
+
+try:
+    from django_comments.moderation import moderator
+except ImportError:
+    from django.contrib.comments.moderation import moderator
 
 # Here we import the Zinnia's Model classes
 # to register the Models at the loading, not

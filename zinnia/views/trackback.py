@@ -1,6 +1,11 @@
 """Views for Zinnia trackback"""
 from django.utils import timezone
-from django.contrib import comments
+
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comments
+
 from django.contrib.sites.models import Site
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView

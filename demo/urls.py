@@ -13,11 +13,18 @@ from zinnia.sitemaps import AuthorSitemap
 
 admin.autodiscover()
 
+comments_url_pattern = 'django.contrib.comments.urls'
+try:
+    import django_comments
+    comments_url_pattern = 'django_comments.urls'
+except ImportError:
+    pass
+
 urlpatterns = patterns(
     '',
     url(r'^$', RedirectView.as_view(url='/blog/')),
     url(r'^blog/', include('zinnia.urls')),
-    url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^comments/', include(comments_url_pattern)),
     url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -1,5 +1,10 @@
 """Views for Zinnia comments"""
-from django.contrib import comments
+
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comments
+
 from django.template.defaultfilters import slugify
 from django.http import HttpResponsePermanentRedirect
 from django.core.exceptions import ObjectDoesNotExist

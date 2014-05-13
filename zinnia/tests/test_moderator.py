@@ -2,13 +2,28 @@
 from django.core import mail
 from django.test import TestCase
 from django.utils import timezone
-from django.contrib import comments
+
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comments
+
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
-from django.contrib.comments.forms import CommentForm
+
+try:
+    from django_comments.forms import CommentForm
+except ImportError:
+    from django.contrib.comments.forms import CommentForm
+
 from django.test.utils import restore_template_loaders
 from django.test.utils import setup_test_template_loader
-from django.contrib.comments.moderation import moderator as moderator_stack
+
+try:
+    from django_comments.moderation import moderator as moderator_stack
+except ImportError:
+    from django.contrib.comments.moderation import moderator as moderator_stack
+
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.models.entry import Entry

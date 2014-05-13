@@ -21,7 +21,12 @@ from django.db.utils import IntegrityError
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
-from django.contrib import comments
+
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comment
+
 from django.core.management.base import CommandError
 from django.core.management.base import LabelCommand
 from django.core.files.temp import NamedTemporaryFile

@@ -12,7 +12,12 @@ except ImportError:  # Python 2
 
 from django.utils import six
 from django.utils import timezone
-from django.contrib import comments
+
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comments
+
 from django.utils.html import strip_tags
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import resolve

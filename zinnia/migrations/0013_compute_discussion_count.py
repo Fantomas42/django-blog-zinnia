@@ -1,5 +1,9 @@
 from django.db.models import Q
-from django.contrib.comments.models import CommentFlag
+
+try:
+    from django_comments.models import CommentFlag
+except ImportError:
+    from django.contrib.comments.models import CommentFlag
 
 from zinnia.flags import PINGBACK
 from zinnia.flags import TRACKBACK

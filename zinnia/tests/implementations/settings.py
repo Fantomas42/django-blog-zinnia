@@ -38,10 +38,17 @@ TEMPLATE_LOADERS = [
      ]
 ]
 
+comments_app = 'django.contrib.comments'
+try:
+    import django_comments
+    comments_app = 'django_comments'
+except ImportError:
+    pass
+
 INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
-    'django.contrib.comments',
+    comments_app,
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',

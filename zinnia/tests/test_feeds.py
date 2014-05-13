@@ -6,7 +6,12 @@ except ImportError:  # Python 2
 
 from django.test import TestCase
 from django.utils import timezone
-from django.contrib import comments
+
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comments
+
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate

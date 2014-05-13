@@ -12,10 +12,17 @@ admin.autodiscover()
 handler500 = 'django.views.defaults.server_error'
 handler404 = 'django.views.defaults.page_not_found'
 
+comments_url_pattern = 'django.contrib.comments.urls'
+try:
+    import django_comments
+    comments_url_pattern = 'django_comments.urls'
+except ImportError:
+    pass
+
 urlpatterns += patterns(
     '',
     url(r'^channel-test/$', EntryChannel.as_view(query='test')),
-    url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^comments/', include(comments_url_pattern)),
     url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
     url(r'^admin/', include(admin.site.urls)),
 )

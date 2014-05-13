@@ -73,10 +73,17 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'zinnia.context_processors.version',
 )
 
+comments_app = 'django.contrib.comments'
+try:
+    import django_comments
+    comments_app = 'django_comments'
+except ImportError:
+    pass
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.sitemaps',
-    'django.contrib.comments',
+    comments_app,
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',

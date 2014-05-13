@@ -18,10 +18,18 @@ from django.utils.translation import ugettext as _
 from django.utils.html import conditional_escape
 from django.template.defaultfilters import stringfilter
 from django.contrib.auth import get_user_model
-from django.contrib.comments.models import CommentFlag
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.comments import get_model as get_comment_model
 
+try:
+    from django_comments.models import CommentFlag
+except ImportError:
+    from django.contrib.comments.models import CommentFlag
+
+try:
+    from django_comments import get_model as get_comment_model
+except ImportError:
+    from django.contrib.comments import get_model as get_comment_model
+
+from django.contrib.contenttypes.models import ContentType
 from tagging.models import Tag
 from tagging.utils import calculate_cloud
 

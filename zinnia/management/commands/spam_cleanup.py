@@ -1,5 +1,10 @@
 """Spam cleanup command module for Zinnia"""
-from django.contrib import comments
+
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comments
+
 from django.contrib.contenttypes.models import ContentType
 from django.core.management.base import NoArgsCommand
 

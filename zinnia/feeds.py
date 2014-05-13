@@ -6,7 +6,11 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 
-from django.contrib import comments
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comments
+
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404

@@ -4,11 +4,19 @@ from functools import wraps
 
 from django.db.models import F
 from django.dispatch import Signal
-from django.contrib import comments
+
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comments
+
 from django.db.models.signals import post_save
 from django.db.models.signals import pre_delete
-from django.contrib.comments.signals import comment_was_posted
-from django.contrib.comments.signals import comment_was_flagged
+
+try:
+    from django_comments.signals import comment_was_posted, comment_was_flagged
+except ImportError:
+    from django.contrib.comments.signals import comment_was_posted, comment_was_flagged
 
 from zinnia import settings
 from zinnia.models.entry import Entry

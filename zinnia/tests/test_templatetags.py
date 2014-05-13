@@ -6,12 +6,22 @@ from django.utils import timezone
 from django.template import Context
 from django.template import Template
 from django.template import TemplateSyntaxError
-from django.contrib import comments
+
+try:
+    import django_comments as comments
+except ImportError:
+    from django.contrib import comments
+
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
-from django.contrib.comments.models import CommentFlag
+
+try:
+    from django_comments.models import CommentFlag
+except ImportError:
+    from django.contrib.comments.models import CommentFlag
+
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from tagging.models import Tag
