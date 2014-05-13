@@ -241,14 +241,12 @@ class EntryAdminTestCase(BaseAdminTestCase):
                          ())
 
     def test_get_actions(self):
-        original_user_twitter = settings.USE_TWITTER
         original_ping_directories = settings.PING_DIRECTORIES
         user = Author.objects.create_user(
             'user', 'user@exemple.com')
         root = Author.objects.create_superuser(
             'root', 'root@exemple.com', 'toor')
         self.request.user = user
-        settings.USE_TWITTER = True
         settings.PING_DIRECTORIES = True
         self.assertEqual(
             list(self.admin.get_actions(self.request).keys()),
@@ -257,11 +255,9 @@ class EntryAdminTestCase(BaseAdminTestCase):
              'close_pingbacks',
              'close_trackbacks',
              'ping_directories',
-             'make_tweet',
              'put_on_top',
              'mark_featured',
              'unmark_featured'])
-        settings.USE_TWITTER = False
         settings.PING_DIRECTORIES = False
         self.assertEqual(
             list(self.admin.get_actions(self.request).keys()),
@@ -285,7 +281,6 @@ class EntryAdminTestCase(BaseAdminTestCase):
              'put_on_top',
              'mark_featured',
              'unmark_featured'])
-        settings.USE_TWITTER = original_user_twitter
         settings.PING_DIRECTORIES = original_ping_directories
 
     def test_get_actions_in_popup_mode_issue_291(self):
