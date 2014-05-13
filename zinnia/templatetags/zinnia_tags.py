@@ -419,7 +419,7 @@ def widont(value, autoescape=None):
 def week_number(date):
     """
     Return the Python week number of a date.
-    The django |date:"W" returns incompatible value
+    The django \|date:"W" returns incompatible value
     with the view implementation.
     """
     week_number = date.strftime('%W')
