@@ -104,6 +104,14 @@ Zinnia-spam-checker-mollom is an extension adding anti-spam protection via
 
 URL: https://github.com/Fantomas42/zinnia-spam-checker-mollom
 
+zinnia-twitter
+==============
+
+Zinnia-twitter is an admin extension allowing you to post your entries on
+`Twitter`_.
+
+URL: https://github.com/Fantomas42/zinnia-twitter
+
 byteflow2zinnia
 ===============
 
@@ -127,3 +135,4 @@ URL: https://github.com/azaghal/zinnia-drupal
 .. _`Bit.ly`: https://bitly.com/
 .. _`Akismet`: http://akismet.com/
 .. _`Mollom`: https://mollom.com/
+.. _`Twitter`: https://twitter.com/
