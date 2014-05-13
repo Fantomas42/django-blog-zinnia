@@ -68,7 +68,7 @@ class EntryAdmin(admin.ModelAdmin):
     search_fields = ('title', 'excerpt', 'content', 'tags')
     actions = ['make_mine', 'make_published', 'make_hidden',
                'close_comments', 'close_pingbacks', 'close_trackbacks',
-               'ping_directories', 'make_tweet', 'put_on_top',
+               'ping_directories', 'put_on_top',
                'mark_featured', 'unmark_featured']
     actions_on_top = True
     actions_on_bottom = True
@@ -245,8 +245,6 @@ class EntryAdmin(admin.ModelAdmin):
             del actions['make_published']
         if not settings.PING_DIRECTORIES:
             del actions['ping_directories']
-        if not settings.USE_TWITTER:
-            del actions['make_tweet']
 
         return actions
 
@@ -340,24 +338,6 @@ class EntryAdmin(admin.ModelAdmin):
             request, _('Selected entries are no longer marked as featured.'))
     unmark_featured.short_description = _(
         'Unmark selected entries as featured')
-
-    def make_tweet(self, request, queryset):
-        """
-        Post an update on Twitter.
-        """
-        import tweepy
-        auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY,
-                                   settings.TWITTER_CONSUMER_SECRET)
-        auth.set_access_token(settings.TWITTER_ACCESS_KEY,
-                              settings.TWITTER_ACCESS_SECRET)
-        api = tweepy.API(auth)
-        for entry in queryset:
-            short_url = entry.short_url
-            message = '%s %s' % (entry.title[:139 - len(short_url)], short_url)
-            api.update_status(message)
-        self.message_user(
-            request, _('The selected entries have been tweeted.'))
-    make_tweet.short_description = _('Tweet entries selected')
 
     def ping_directories(self, request, queryset, messages=True):
         """
