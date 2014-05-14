@@ -173,7 +173,7 @@ def get_similar_entries(context, number=5,
     object_id = context['object'].pk
     columns, dataset = VECTORS()
     key = '%s-%s' % (object_id, VECTORS.key)
-    if not key in CACHE_ENTRIES_RELATED.keys():
+    if key not in CACHE_ENTRIES_RELATED.keys():
         CACHE_ENTRIES_RELATED[key] = compute_related(object_id, dataset)
 
     entries = CACHE_ENTRIES_RELATED[key][:number]

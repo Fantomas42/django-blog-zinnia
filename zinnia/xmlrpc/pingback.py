@@ -86,7 +86,7 @@ def pingback_ping(source, target):
         except (HTTPError, URLError):
             return SOURCE_DOES_NOT_EXIST
 
-        if not target in document:
+        if target not in document:
             return SOURCE_DOES_NOT_LINK
 
         scheme, netloc, path, query, fragment = urlsplit(target)
