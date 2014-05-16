@@ -600,13 +600,13 @@ class ViewsTestCase(ViewsBaseCase):
     def test_zinnia_trackback(self):
         self.inhibit_templates('zinnia/entry_trackback.xml', '404.html')
         response = self.client.post('/trackback/404/')
+        trackback_url = '/trackback/%s/' % self.first_entry.pk
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(
-            self.client.post('/trackback/1/').status_code, 301)
+        self.assertEqual(self.client.post(trackback_url).status_code, 301)
         self.first_entry.trackback_enabled = False
         self.first_entry.save()
         self.assertEqual(self.first_entry.trackback_count, 0)
-        response = self.client.post('/trackback/1/',
+        response = self.client.post(trackback_url,
                                     {'url': 'http://example.com'})
         self.assertEqual(response['Content-Type'], 'text/xml')
         self.assertEqual(response.context['error'],
@@ -619,17 +619,17 @@ class ViewsTestCase(ViewsBaseCase):
             # If we are using the default comment app,
             # we can count the database queries executed.
             with self.assertNumQueries(8):
-                response = self.client.post('/trackback/1/',
+                response = self.client.post(trackback_url,
                                             {'url': 'http://example.com'})
         else:
-            response = self.client.post('/trackback/1/',
+            response = self.client.post(trackback_url,
                                         {'url': 'http://example.com'})
         self.assertEqual(response['Content-Type'], 'text/xml')
         self.assertEqual('error' in response.context, False)
         disconnect_discussion_signals()
         entry = Entry.objects.get(pk=self.first_entry.pk)
         self.assertEqual(entry.trackback_count, 1)
-        response = self.client.post('/trackback/1/',
+        response = self.client.post(trackback_url,
                                     {'url': 'http://example.com'})
         self.assertEqual(response.context['error'],
                          'Trackback is already registered')
