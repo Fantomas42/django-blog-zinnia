@@ -158,13 +158,13 @@ class MetaWeblogTestCase(TestCase):
             [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
               'description': 'Category 1',
               'htmlUrl': 'http://example.com/categories/category-1/',
-              'categoryId': 1, 'parentId': 0,
+              'categoryId': self.categories[0].pk, 'parentId': 0,
               'categoryName': 'Category 1',
               'categoryDescription': ''},
              {'rssUrl': 'http://example.com/feeds/categories/category-2/',
               'description': 'Category 2',
               'htmlUrl': 'http://example.com/categories/category-2/',
-              'categoryId': 2, 'parentId': 0,
+              'categoryId': self.categories[1].pk, 'parentId': 0,
               'categoryName': 'Category 2',
               'categoryDescription': ''}])
         self.categories[1].parent = self.categories[0]
@@ -176,7 +176,7 @@ class MetaWeblogTestCase(TestCase):
             [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
               'description': 'Category 1',
               'htmlUrl': 'http://example.com/categories/category-1/',
-              'categoryId': 1, 'parentId': 0,
+              'categoryId': self.categories[0].pk, 'parentId': 0,
               'categoryName': 'Category 1',
               'categoryDescription': ''},
              {'rssUrl':
@@ -184,7 +184,8 @@ class MetaWeblogTestCase(TestCase):
               'description': 'Category 2',
               'htmlUrl':
               'http://example.com/categories/category-1/category-2/',
-              'categoryId': 2, 'parentId': 1,
+              'categoryId': self.categories[1].pk,
+              'parentId': self.categories[0].pk,
               'categoryName': 'Category 2',
               'categoryDescription': 'category 2 description'}])
 
