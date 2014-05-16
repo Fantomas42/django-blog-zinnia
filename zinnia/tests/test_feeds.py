@@ -251,7 +251,8 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.item_pubdate(comments[0]),
                          comments[0].submit_date)
         self.assertEqual(feed.item_link(comments[0]),
-                         '/comments/cr/%i/1/#c1' % self.entry_ct_id)
+                         '/comments/cr/%i/%i/#c%i' %
+                         (self.entry_ct_id, entry.pk, comments[0].pk))
         self.assertEqual(feed.item_author_name(comments[0]),
                          self.author.__str__())
         self.assertEqual(feed.item_author_email(comments[0]),
@@ -295,8 +296,8 @@ class FeedsTestCase(TestCase):
         feed = EntryComments()
         self.assertEqual(list(feed.items(entry)), [comments[0]])
         self.assertEqual(feed.item_link(comments[0]),
-                         '/comments/cr/%i/1/#comment-1-by-admin' %
-                         self.entry_ct_id)
+                         '/comments/cr/%i/%i/#comment-%i-by-admin' %
+                         (self.entry_ct_id, entry.pk, comments[0].pk))
         self.assertEqual(feed.get_title(entry),
                          'Comments on %s' % entry.title)
         self.assertEqual(
@@ -315,7 +316,8 @@ class FeedsTestCase(TestCase):
         feed = EntryPingbacks()
         self.assertEqual(list(feed.items(entry)), [comments[1]])
         self.assertEqual(feed.item_link(comments[1]),
-                         '/comments/cr/%i/1/#pingback-2' % self.entry_ct_id)
+                         '/comments/cr/%i/%i/#pingback-%i' %
+                         (self.entry_ct_id, entry.pk, comments[1].pk))
         self.assertEqual(feed.get_title(entry),
                          'Pingbacks on %s' % entry.title)
         self.assertEqual(
@@ -328,7 +330,8 @@ class FeedsTestCase(TestCase):
         feed = EntryTrackbacks()
         self.assertEqual(list(feed.items(entry)), [comments[2]])
         self.assertEqual(feed.item_link(comments[2]),
-                         '/comments/cr/%i/1/#trackback-3' % self.entry_ct_id)
+                         '/comments/cr/%i/%i/#trackback-%i' %
+                         (self.entry_ct_id, entry.pk, comments[2].pk))
         self.assertEqual(feed.get_title(entry),
                          'Trackbacks on %s' % entry.title)
         self.assertEqual(
