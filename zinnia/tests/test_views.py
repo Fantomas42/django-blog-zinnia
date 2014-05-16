@@ -637,7 +637,7 @@ class ViewsTestCase(ViewsBaseCase):
     def test_zinnia_trackback_on_entry_without_author(self):
         self.inhibit_templates('zinnia/entry_trackback.xml')
         self.first_entry.authors.clear()
-        response = self.client.post('/trackback/1/',
+        response = self.client.post('/trackback/%s/' % self.first_entry.pk,
                                     {'url': 'http://example.com'})
         self.assertEqual(response['Content-Type'], 'text/xml')
         self.assertEqual('error' in response.context, False)
