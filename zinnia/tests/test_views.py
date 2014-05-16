@@ -27,6 +27,7 @@ from zinnia.flags import get_user_flagger
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.url_shortener.backends.default import base36
 
 
 @skipIfCustomUser
@@ -339,7 +340,7 @@ class ViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_entry_shortlink(self):
         with self.assertNumQueries(1):
-            response = self.client.get('/1/')
+            response = self.client.get('/%s/' % base36(self.first_entry.pk))
         self.assertEqual(response.status_code, 301)
         self.assertEqual(
             response['Location'],
