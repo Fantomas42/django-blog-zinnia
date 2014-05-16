@@ -2,7 +2,7 @@
 import os
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 
-DATABASES = {'default': {'NAME': 'zinnia_tests.db',
+DATABASES = {'default': {'NAME': 'zinnia.db',
                          'ENGINE': 'django.db.backends.sqlite3'}}
 
 SITE_ID = 1
