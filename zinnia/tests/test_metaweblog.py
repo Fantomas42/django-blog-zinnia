@@ -14,6 +14,8 @@ from django.contrib.sites.models import Site
 from django.core.files.storage import default_storage
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
+from tagging.models import Tag
+
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
@@ -139,13 +141,13 @@ class MetaWeblogTestCase(TestCase):
               'name': 'test',
               'rss_url': 'http://example.com/feeds/tags/test/',
               'slug': 'test',
-              'tag_id': 1},
+              'tag_id': Tag.objects.get(name='test').pk},
              {'count': 1,
               'html_url': 'http://example.com/tags/zinnia/',
               'name': 'zinnia',
               'rss_url': 'http://example.com/feeds/tags/zinnia/',
               'slug': 'zinnia',
-              'tag_id': 2}])
+              'tag_id': Tag.objects.get(name='zinnia').pk}])
 
     def test_get_categories(self):
         self.assertRaises(Fault, self.server.metaWeblog.getCategories,
