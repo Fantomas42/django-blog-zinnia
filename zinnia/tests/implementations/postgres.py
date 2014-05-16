@@ -1,5 +1,5 @@
 """Settings for testing zinnia on Postgres"""
-from zinnia.tests.implementations.settings import *
+from zinnia.tests.implementations.settings import *  # noqa
 
 DATABASES = {
     'default': {
