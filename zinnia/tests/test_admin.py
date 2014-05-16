@@ -19,6 +19,7 @@ from zinnia.tests.utils import datetime
 from zinnia.admin.entry import EntryAdmin
 from zinnia.admin.category import CategoryAdmin
 from zinnia.signals import disconnect_entry_signals
+from zinnia.url_shortener.backends.default import base36
 
 
 class BaseAdminTestCase(TestCase):
@@ -163,10 +164,11 @@ class EntryAdminTestCase(BaseAdminTestCase):
     def test_get_short_url(self):
         self.check_with_rich_and_poor_urls(
             self.admin.get_short_url, (self.entry,),
-            '<a href="http://example.com/1/" target="blank">'
-            'http://example.com/1/</a>',
-            '<a href="%(url)s" target="blank">'
-            '%(url)s</a>' % {'url': self.entry.get_absolute_url()})
+            '<a href="http://example.com/%(hash)s/" target="blank">'
+            'http://example.com/%(hash)s/</a>' % {
+                'hash': base36(self.entry.pk)},
+            '<a href="%(url)s" target="blank">%(url)s</a>' % {
+                'url': self.entry.get_absolute_url()})
 
     def test_get_is_visible(self):
         self.assertEqual(self.admin.get_is_visible(self.entry),

@@ -25,6 +25,7 @@ from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 from zinnia.url_shortener.backends.default import base36
 
+
 class EntryTestCase(TestCase):
 
     def setUp(self):
