@@ -86,7 +86,7 @@ class AuthorListFilterTestCase(BaseListFilterTestCase):
         queryset = changelist.get_queryset(request)
         self.assertEqual(queryset.count(), 2)
 
-        request = self.request_factory.get('/', {'author': '2'})
+        request = self.request_factory.get('/', {'author': self.authors[1].pk})
         changelist = self.get_changelist(request, Entry, modeladmin)
         queryset = changelist.get_queryset(request)
         self.assertEqual(queryset.count(), 1)
@@ -94,10 +94,13 @@ class AuthorListFilterTestCase(BaseListFilterTestCase):
         with self.assertNumQueries(1):
             filterspec = changelist.get_filters(request)[0][0]
             self.assertEqual(filterspec.title, 'published authors')
-            self.assertEqual(filterspec.used_parameters, {'author': '2'})
+            self.assertEqual(filterspec.used_parameters,
+                             {'author': str(self.authors[1].pk)})
             self.assertEqual(filterspec.lookup_choices,
-                             [('1', 'webmaster (2 entries)'),
-                              ('2', 'contributor (1 entry)')])
+                             [(str(self.authors[0].pk),
+                               'webmaster (2 entries)'),
+                              (str(self.authors[1].pk),
+                               'contributor (1 entry)')])
 
 
 class CategoryListFilterTestCase(BaseListFilterTestCase):
