@@ -200,7 +200,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEqual(category.title, 'Category 3')
         self.assertEqual(category.description, 'Category 3 description')
         self.assertEqual(category.slug, 'category-3')
-        self.assertEqual(category.parent.pk, 1)
+        self.assertEqual(category.parent, self.categories[0])
 
     def test_get_recent_posts(self):
         self.assertRaises(Fault, self.server.metaWeblog.getRecentPosts,
