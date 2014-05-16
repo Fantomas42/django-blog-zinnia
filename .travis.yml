@@ -4,12 +4,16 @@ python:
     - "2.7"
     - "3.2"
     - "3.3"
+env:
+    - DATABASE_ENGINE=sqlite
+    - DATABASE_ENGINE=postgres
 install:
     - pip install -U setuptools
     - python bootstrap.py
     - ./bin/buildout -c travis.cfg
 before_script:
     - ./bin/flake8 --exclude=migrations zinnia
+    - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ]; then psql -c 'create database zinnia;' -U postgres; fi"
 script:
     - ./bin/test
 after_success:

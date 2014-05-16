@@ -232,6 +232,12 @@ class TemplateTagsTestCase(TestCase):
         self.entry.save()
         with self.assertNumQueries(0):
             context = get_popular_entries(3)
+        self.assertEqual(list(context['entries']), [second_entry, self.entry])
+
+        self.entry.comment_count = 3
+        self.entry.save()
+        with self.assertNumQueries(0):
+            context = get_popular_entries(3)
         self.assertEqual(list(context['entries']), [self.entry, second_entry])
 
         self.entry.status = DRAFT

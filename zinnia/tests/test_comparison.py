@@ -25,12 +25,13 @@ class ComparisonTestCase(TestCase):
     def test_clustered_model(self):
         params = {'title': 'My entry 1', 'content': 'My content 1',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1'}
-        Entry.objects.create(**params)
+        entry_1 = Entry.objects.create(**params)
         params = {'title': 'My entry 2', 'content': 'My content 2',
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
-        Entry.objects.create(**params)
+        entry_2 = Entry.objects.create(**params)
         cm = ClusteredModel(Entry.objects.all())
-        self.assertEqual(list(cm.dataset().values()), ['1', '2'])
+        self.assertEqual(list(cm.dataset().values()),
+                         [str(entry_1.pk), str(entry_2.pk)])
         cm = ClusteredModel(Entry.objects.all(),
                             ['title', 'excerpt', 'content'])
         self.assertEqual(list(cm.dataset().values()),

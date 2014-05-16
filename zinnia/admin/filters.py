@@ -21,7 +21,8 @@ class RelatedPublishedFilter(SimpleListFilter):
         Return published objects with the number of entries.
         """
         active_objects = self.model.published.all().annotate(
-            number_of_entries=Count('entries'))
+            number_of_entries=Count('entries')).order_by(
+            '-number_of_entries', 'pk')
         for active_object in active_objects:
             yield (
                 str(active_object.pk), ungettext_lazy(

@@ -23,6 +23,7 @@ from zinnia.tests.utils import is_lib_available
 from zinnia import url_shortener as shortener_settings
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.url_shortener.backends.default import base36
 
 
 class EntryTestCase(TestCase):
@@ -176,7 +177,7 @@ class EntryTestCase(TestCase):
         self.assertEqual(self.entry.short_url,
                          'http://example.com' +
                          reverse('zinnia:entry_shortlink',
-                                 args=[self.entry.pk]))
+                                 args=[base36(self.entry.pk)]))
         shortener_settings.URL_SHORTENER_BACKEND = original_shortener
 
     def test_previous_entry(self):

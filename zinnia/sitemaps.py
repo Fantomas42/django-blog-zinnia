@@ -64,8 +64,9 @@ class EntryRelatedSitemap(ZinniaSitemap):
         with the number of entries and the latest modification date.
         """
         return self.model.published.annotate(
-            count_entries=Count('entries')).annotate(
-            last_update=Max('entries__last_update'))
+            number_of_entries=Count('entries')).annotate(
+            last_update=Max('entries__last_update')).order_by(
+            '-number_of_entries', 'pk')
 
     def cache_infos(self, queryset):
         """
@@ -74,7 +75,7 @@ class EntryRelatedSitemap(ZinniaSitemap):
         """
         self.cache = {}
         for item in queryset:
-            self.cache[item.pk] = (item.count_entries, item.last_update)
+            self.cache[item.pk] = (item.number_of_entries, item.last_update)
 
     def set_max_entries(self):
         """

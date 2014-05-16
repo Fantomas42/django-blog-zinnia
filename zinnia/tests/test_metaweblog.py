@@ -14,6 +14,8 @@ from django.contrib.sites.models import Site
 from django.core.files.storage import default_storage
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
+from tagging.models import Tag
+
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
@@ -139,13 +141,13 @@ class MetaWeblogTestCase(TestCase):
               'name': 'test',
               'rss_url': 'http://example.com/feeds/tags/test/',
               'slug': 'test',
-              'tag_id': 1},
+              'tag_id': Tag.objects.get(name='test').pk},
              {'count': 1,
               'html_url': 'http://example.com/tags/zinnia/',
               'name': 'zinnia',
               'rss_url': 'http://example.com/feeds/tags/zinnia/',
               'slug': 'zinnia',
-              'tag_id': 2}])
+              'tag_id': Tag.objects.get(name='zinnia').pk}])
 
     def test_get_categories(self):
         self.assertRaises(Fault, self.server.metaWeblog.getCategories,
@@ -156,13 +158,13 @@ class MetaWeblogTestCase(TestCase):
             [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
               'description': 'Category 1',
               'htmlUrl': 'http://example.com/categories/category-1/',
-              'categoryId': 1, 'parentId': 0,
+              'categoryId': self.categories[0].pk, 'parentId': 0,
               'categoryName': 'Category 1',
               'categoryDescription': ''},
              {'rssUrl': 'http://example.com/feeds/categories/category-2/',
               'description': 'Category 2',
               'htmlUrl': 'http://example.com/categories/category-2/',
-              'categoryId': 2, 'parentId': 0,
+              'categoryId': self.categories[1].pk, 'parentId': 0,
               'categoryName': 'Category 2',
               'categoryDescription': ''}])
         self.categories[1].parent = self.categories[0]
@@ -174,7 +176,7 @@ class MetaWeblogTestCase(TestCase):
             [{'rssUrl': 'http://example.com/feeds/categories/category-1/',
               'description': 'Category 1',
               'htmlUrl': 'http://example.com/categories/category-1/',
-              'categoryId': 1, 'parentId': 0,
+              'categoryId': self.categories[0].pk, 'parentId': 0,
               'categoryName': 'Category 1',
               'categoryDescription': ''},
              {'rssUrl':
@@ -182,7 +184,8 @@ class MetaWeblogTestCase(TestCase):
               'description': 'Category 2',
               'htmlUrl':
               'http://example.com/categories/category-1/category-2/',
-              'categoryId': 2, 'parentId': 1,
+              'categoryId': self.categories[1].pk,
+              'parentId': self.categories[0].pk,
               'categoryName': 'Category 2',
               'categoryDescription': 'category 2 description'}])
 
@@ -200,7 +203,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEqual(category.title, 'Category 3')
         self.assertEqual(category.description, 'Category 3 description')
         self.assertEqual(category.slug, 'category-3')
-        self.assertEqual(category.parent.pk, 1)
+        self.assertEqual(category.parent, self.categories[0])
 
     def test_get_recent_posts(self):
         self.assertRaises(Fault, self.server.metaWeblog.getRecentPosts,
