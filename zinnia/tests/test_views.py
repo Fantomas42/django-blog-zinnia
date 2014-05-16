@@ -665,20 +665,21 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.context['comment'], None)
 
         with self.assertNumQueries(1):
-            response = self.client.get('/comments/success/?c=42')
+            response = self.client.get('/comments/success/?c=404')
         self.assertEqual(response.context['comment'], None)
 
         comment = comments.get_model().objects.create(
             submit_date=timezone.now(),
             comment='My Comment 1', content_object=self.category,
             site=self.site, is_public=False)
+        success_url = '/comments/success/?c=%s' % comment.pk
         with self.assertNumQueries(1):
-            response = self.client.get('/comments/success/?c=1')
+            response = self.client.get(success_url)
         self.assertEqual(response.context['comment'], comment)
         comment.is_public = True
         comment.save()
         with self.assertNumQueries(5):
-            response = self.client.get('/comments/success/?c=1', follow=True)
+            response = self.client.get(success_url, follow=True)
         self.assertEqual(
             response.redirect_chain[1],
             ('http://example.com/categories/tests/', 302))
