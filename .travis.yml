@@ -27,7 +27,7 @@ before_script:
     - sh -c "if [ '$DATABASE_ENGINE' = 'mysql' ];
       then
         mysql -e 'create database zinnia CHARACTER SET utf8 COLLATE utf8_general_ci;
-        mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql';
+        mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql;';
       fi"
 script:
     - ./bin/test
