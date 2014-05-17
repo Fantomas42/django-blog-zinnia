@@ -8,6 +8,12 @@ env:
     - DATABASE_ENGINE=sqlite
     - DATABASE_ENGINE=postgres
     - DATABASE_ENGINE=mysql
+matrix:
+    exclude:
+        - python: 3.2
+          env: DATABASE_ENGINE=mysql
+        - python: 3.3
+          env: DATABASE_ENGINE=mysql
 install:
     - pip install -U setuptools
     - python bootstrap.py
