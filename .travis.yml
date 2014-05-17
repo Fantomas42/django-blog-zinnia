@@ -7,6 +7,7 @@ python:
 env:
     - DATABASE_ENGINE=sqlite
     - DATABASE_ENGINE=postgres
+    - DATABASE_ENGINE=mysql
 install:
     - pip install -U setuptools
     - python bootstrap.py
@@ -14,6 +15,7 @@ install:
 before_script:
     - ./bin/flake8 --exclude=migrations zinnia
     - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ]; then psql -c 'create database zinnia;' -U postgres; fi"
+    - sh -c "if [ '$DATABASE_ENGINE' = 'mysql' ]; then mysql -e 'create database zinnia CHARACTER SET utf8 COLLATE utf8_general_ci;'; fi"
 script:
     - ./bin/test
 after_success:
