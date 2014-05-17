@@ -24,6 +24,7 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.flags import PINGBACK
+from zinnia.flags import user_flagger_
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import TestTransport
@@ -53,6 +54,11 @@ class PingBackTestCase(TestCase):
     def setUp(self):
         disconnect_entry_signals()
         disconnect_discussion_signals()
+        # Clean the memoization of user flagger to avoid error on MySQL
+        try:
+            del user_flagger_[()]
+        except KeyError:
+            pass
         # Use default URL shortener backend, to avoid networks errors
         self.original_shortener = shortener_settings.URL_SHORTENER_BACKEND
         shortener_settings.URL_SHORTENER_BACKEND = 'zinnia.url_shortener.'\
