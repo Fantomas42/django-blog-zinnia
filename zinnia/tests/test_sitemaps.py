@@ -55,9 +55,9 @@ class SitemapsTestCase(TestCase):
         items = sitemap.items()
         self.assertEqual(len(items), 2)
         self.assertEqual(sitemap.lastmod(items[0]),
-                         self.entry_2.last_update)
+                         self.entry_2.last_update.replace(microsecond=0))
         self.assertEqual(sitemap.lastmod(items[1]),
-                         self.entry_1.last_update)
+                         self.entry_1.last_update.replace(microsecond=0))
         self.assertEqual(sitemap.priority(items[0]), '1.0')
         self.assertEqual(sitemap.priority(items[1]), '0.5')
 
@@ -66,9 +66,9 @@ class SitemapsTestCase(TestCase):
         items = sitemap.items()
         self.assertEqual(len(items), 2)
         self.assertEqual(sitemap.lastmod(items[0]),
-                         self.entry_2.last_update)
+                         self.entry_2.last_update.replace(microsecond=0))
         self.assertEqual(sitemap.lastmod(items[1]),
-                         self.entry_1.last_update)
+                         self.entry_1.last_update.replace(microsecond=0))
         self.assertEqual(sitemap.priority(items[0]), '1.0')
         self.assertEqual(sitemap.priority(items[1]), '0.5')
 
@@ -77,9 +77,9 @@ class SitemapsTestCase(TestCase):
         items = sitemap.items()
         self.assertEqual(len(items), 2)
         self.assertEqual(sitemap.lastmod(items[1]),
-                         self.entry_2.last_update)
+                         self.entry_2.last_update.replace(microsecond=0))
         self.assertEqual(sitemap.lastmod(items[0]),
-                         self.entry_1.last_update)
+                         self.entry_1.last_update.replace(microsecond=0))
         self.assertEqual(sitemap.priority(items[1]), '1.0')
         self.assertEqual(sitemap.priority(items[0]), '0.5')
         self.assertEqual(sitemap.location(items[1]), '/tags/zinnia/')
