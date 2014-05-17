@@ -261,7 +261,7 @@ def get_recent_comments(number=5, template='zinnia/tags/comments_recent.html'):
     comments = get_comment_model().objects.filter(
         Q(flags=None) | Q(flags__flag=CommentFlag.MODERATOR_APPROVAL),
         content_type=content_type, object_pk__in=entry_published_pks,
-        is_public=True).order_by('-submit_date')[:number]
+        is_public=True).order_by('-pk')[:number]
 
     comments = comments.prefetch_related('content_object')
 
@@ -283,7 +283,7 @@ def get_recent_linkbacks(number=5,
         content_type=content_type,
         object_pk__in=entry_published_pks,
         flags__flag__in=[PINGBACK, TRACKBACK],
-        is_public=True).order_by('-submit_date')[:number]
+        is_public=True).order_by('-pk')[:number]
 
     linkbacks = linkbacks.prefetch_related('content_object')
 
