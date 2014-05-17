@@ -14,6 +14,7 @@ matrix:
           env: DATABASE_ENGINE=mysql
         - python: 3.3
           env: DATABASE_ENGINE=mysql
+    fast_finish: true
 install:
     - pip install -U setuptools
     - python bootstrap.py
