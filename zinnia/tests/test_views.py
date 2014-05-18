@@ -23,6 +23,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
+from zinnia.flags import user_flagger_
 from zinnia.flags import get_user_flagger
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_entry_signals
@@ -599,6 +600,11 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(len(response.context['categories']), 2)
 
     def test_zinnia_trackback(self):
+        # Clean the memoization of user flagger to avoid error on MySQL
+        try:
+            del user_flagger_[()]
+        except KeyError:
+            pass
         self.inhibit_templates('zinnia/entry_trackback.xml', '404.html')
         response = self.client.post('/trackback/404/')
         trackback_url = '/trackback/%s/' % self.first_entry.pk
@@ -636,6 +642,11 @@ class ViewsTestCase(ViewsBaseCase):
                          'Trackback is already registered')
 
     def test_zinnia_trackback_on_entry_without_author(self):
+        # Clean the memoization of user flagger to avoid error on MySQL
+        try:
+            del user_flagger_[()]
+        except KeyError:
+            pass
         self.inhibit_templates('zinnia/entry_trackback.xml')
         self.first_entry.authors.clear()
         response = self.client.post('/trackback/%s/' % self.first_entry.pk,
