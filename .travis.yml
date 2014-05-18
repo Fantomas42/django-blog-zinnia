@@ -18,7 +18,15 @@ matrix:
 install:
     - pip install -U setuptools
     - python bootstrap.py
-    - ./bin/buildout -c travis.cfg
+    - ./bin/buildout -c travis.cfg testenv:DJANGO_SETTINGS_MODULE=zinnia.tests.implementations.$DATABASE_ENGINE
+    - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ];
+      then
+        pip install psycopg2;
+      fi"
+    - sh -c "if [ '$DATABASE_ENGINE' = 'mysql' ];
+      then
+        pip install mysql-python;
+      fi"
 before_script:
     - ./bin/flake8 --exclude=migrations zinnia
     - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ];
