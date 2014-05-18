@@ -22,22 +22,16 @@ install:
     - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ];
       then
         pip install psycopg2;
-      fi"
-    - sh -c "if [ '$DATABASE_ENGINE' = 'mysql' ];
-      then
-        pip install mysql-python;
-      fi"
-before_script:
-    - ./bin/flake8 --exclude=migrations zinnia
-    - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ];
-      then
         psql -c 'create database zinnia;' -U postgres;
       fi"
     - sh -c "if [ '$DATABASE_ENGINE' = 'mysql' ];
       then
+        pip install mysql-python;
         mysql -e 'create database zinnia CHARACTER SET utf8 COLLATE utf8_general_ci;';
         mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql;
       fi"
+before_script:
+    - ./bin/flake8 --exclude=migrations zinnia
 script:
     - ./bin/test
 after_success:
