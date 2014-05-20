@@ -66,7 +66,7 @@ class EntryRelatedSitemap(ZinniaSitemap):
         return self.model.published.annotate(
             count_entries_published=Count('entries')).annotate(
             last_update=Max('entries__last_update')).order_by(
-            '-count_entries_published', '-pk')
+            '-count_entries_published', '-last_update', '-pk')
 
     def cache_infos(self, queryset):
         """
