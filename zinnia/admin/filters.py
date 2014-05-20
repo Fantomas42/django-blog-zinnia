@@ -22,7 +22,7 @@ class RelatedPublishedFilter(SimpleListFilter):
         """
         active_objects = self.model.published.all().annotate(
             count_entries_published=Count('entries')).order_by(
-            '-count_entries_published', 'pk')
+            '-count_entries_published', '-pk')
         for active_object in active_objects:
             yield (
                 str(active_object.pk), ungettext_lazy(
