@@ -53,14 +53,18 @@ class SitemapsTestCase(TestCase):
 
     def test_entry_sitemap(self):
         sitemap = EntrySitemap()
-        self.assertEqual(len(sitemap.items()), 2)
-        self.assertEqual(sitemap.lastmod(self.entry_1),
-                         self.entry_1.last_update)
+        with self.assertNumQueries(1):
+            items = sitemap.items()
+            self.assertEqual(len(items), 2)
+        self.assertEqual(
+            sitemap.lastmod(items[0]).replace(microsecond=0),
+            self.entry_2.last_update.replace(microsecond=0))
 
     def test_category_sitemap(self):
         sitemap = CategorySitemap()
-        items = sitemap.items()
-        self.assertEqual(len(items), 2)
+        with self.assertNumQueries(1):
+            items = sitemap.items()
+            self.assertEqual(len(items), 2)
         self.assertEqual(
             sitemap.lastmod(items[0]).replace(microsecond=0),
             self.entry_2.last_update.replace(microsecond=0))
@@ -72,8 +76,9 @@ class SitemapsTestCase(TestCase):
 
     def test_author_sitemap(self):
         sitemap = AuthorSitemap()
-        items = sitemap.items()
-        self.assertEqual(len(items), 2)
+        with self.assertNumQueries(1):
+            items = sitemap.items()
+            self.assertEqual(len(items), 2)
         self.assertEqual(
             sitemap.lastmod(items[0]).replace(microsecond=0),
             self.entry_2.last_update.replace(microsecond=0))
@@ -85,8 +90,9 @@ class SitemapsTestCase(TestCase):
 
     def test_tag_sitemap(self):
         sitemap = TagSitemap()
-        items = sitemap.items()
-        self.assertEqual(len(items), 2)
+        with self.assertNumQueries(3):
+            items = sitemap.items()
+            self.assertEqual(len(items), 2)
         self.assertEqual(
             sitemap.lastmod(items[1]).replace(microsecond=0),
             self.entry_2.last_update.replace(microsecond=0))
