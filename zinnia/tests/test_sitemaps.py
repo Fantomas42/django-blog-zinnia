@@ -44,6 +44,13 @@ class SitemapsTestCase(TestCase):
         self.entry_2.categories.add(self.categories[0])
         self.entry_2.sites.add(self.site)
 
+        params = {'title': 'My entry draft', 'content': 'My content draft',
+                  'tags': 'zinnia, tag', 'slug': 'my-entry-draft'}
+        self.entry_draft = Entry.objects.create(**params)
+        self.entry_draft.authors.add(self.authors[0])
+        self.entry_draft.categories.add(self.categories[0])
+        self.entry_draft.sites.add(self.site)
+
     def test_entry_sitemap(self):
         sitemap = EntrySitemap()
         self.assertEqual(len(sitemap.items()), 2)
