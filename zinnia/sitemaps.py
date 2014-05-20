@@ -135,9 +135,8 @@ class TagSitemap(EntryRelatedSitemap):
         """
         self.cache = {}
         for item in queryset:
-            # If the sitemap is going to be too slow,
-            # don't hesitate to do this :
-            # self.cache[item.pk] = (item.count, None)
+            # If the sitemap is too slow, don't hesitate to do this :
+            #   self.cache[item.pk] = (item.count, None)
             self.cache[item.pk] = (
                 item.count, TaggedItem.objects.get_by_model(
                     self.entries_qs, item)[0].last_update)
