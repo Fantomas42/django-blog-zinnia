@@ -44,16 +44,27 @@ class SitemapsTestCase(TestCase):
         self.entry_2.categories.add(self.categories[0])
         self.entry_2.sites.add(self.site)
 
+        params = {'title': 'My entry draft', 'content': 'My content draft',
+                  'tags': 'zinnia, tag', 'slug': 'my-entry-draft'}
+        self.entry_draft = Entry.objects.create(**params)
+        self.entry_draft.authors.add(self.authors[0])
+        self.entry_draft.categories.add(self.categories[0])
+        self.entry_draft.sites.add(self.site)
+
     def test_entry_sitemap(self):
         sitemap = EntrySitemap()
-        self.assertEqual(len(sitemap.items()), 2)
-        self.assertEqual(sitemap.lastmod(self.entry_1),
-                         self.entry_1.last_update)
+        with self.assertNumQueries(1):
+            items = sitemap.items()
+            self.assertEqual(len(items), 2)
+        self.assertEqual(
+            sitemap.lastmod(items[0]).replace(microsecond=0),
+            self.entry_2.last_update.replace(microsecond=0))
 
     def test_category_sitemap(self):
         sitemap = CategorySitemap()
-        items = sitemap.items()
-        self.assertEqual(len(items), 2)
+        with self.assertNumQueries(1):
+            items = sitemap.items()
+            self.assertEqual(len(items), 2)
         self.assertEqual(
             sitemap.lastmod(items[0]).replace(microsecond=0),
             self.entry_2.last_update.replace(microsecond=0))
@@ -65,8 +76,9 @@ class SitemapsTestCase(TestCase):
 
     def test_author_sitemap(self):
         sitemap = AuthorSitemap()
-        items = sitemap.items()
-        self.assertEqual(len(items), 2)
+        with self.assertNumQueries(1):
+            items = sitemap.items()
+            self.assertEqual(len(items), 2)
         self.assertEqual(
             sitemap.lastmod(items[0]).replace(microsecond=0),
             self.entry_2.last_update.replace(microsecond=0))
@@ -78,8 +90,9 @@ class SitemapsTestCase(TestCase):
 
     def test_tag_sitemap(self):
         sitemap = TagSitemap()
-        items = sitemap.items()
-        self.assertEqual(len(items), 2)
+        with self.assertNumQueries(3):
+            items = sitemap.items()
+            self.assertEqual(len(items), 2)
         self.assertEqual(
             sitemap.lastmod(items[1]).replace(microsecond=0),
             self.entry_2.last_update.replace(microsecond=0))
