@@ -290,14 +290,15 @@ class Command(LabelCommand):
             creation_date = timezone.make_aware(
                 creation_date, pytz.timezone('GMT'))
 
-        excerpt = strip_tags(item_node.find(
-            '{%sexcerpt/}encoded' % WP_NS).text)
+        excerpt = item_node.find('{%sexcerpt/}encoded' % WP_NS).text
         if not excerpt:
             if self.auto_excerpt:
                 excerpt = Truncator(strip_tags(content)).words(50)
             else:
                 excerpt = ''
-
+        else:
+            excerpt = strip_tags(excerpt)
+    
         # Prefer use this function than
         # item_node.find('{%s}post_name' % WP_NS).text
         # Because slug can be not well formated
