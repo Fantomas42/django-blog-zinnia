@@ -3,15 +3,16 @@ from datetime import timedelta
 
 from django.test import TestCase
 from django.utils import timezone
-from django.contrib import comments
 from django.utils.unittest import skipUnless
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.test.utils import override_settings
-from django.contrib.comments.models import CommentFlag
 from django.contrib.auth.tests.utils import skipIfCustomUser
+
+import django_comments as comments
+from django_comments.models import CommentFlag
 
 from zinnia.managers import PUBLISHED
 from zinnia.models_bases import entry
