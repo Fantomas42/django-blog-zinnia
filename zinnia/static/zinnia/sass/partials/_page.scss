@@ -45,4 +45,8 @@
   th, td, caption { padding: 4px 10px 4px 5px; }
   tfoot           { font-style: italic; }
   img.help        { cursor: help; }
+
+  .categories, .category-root {
+    p { margin: 0; }
+  }
 }
