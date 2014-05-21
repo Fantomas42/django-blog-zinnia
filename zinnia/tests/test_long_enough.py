@@ -1,9 +1,10 @@
 """Test cases for Zinnia's long_enought spam checker"""
 from django.test import TestCase
 from django.utils import timezone
-from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.contrib.auth.tests.utils import skipIfCustomUser
+
+import django_comments as comments
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author

@@ -4,7 +4,6 @@ from datetime import date
 
 from django.test import TestCase
 from django.utils import timezone
-from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
 from django.test.utils import restore_template_loaders
@@ -13,6 +12,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.signals import user_logged_in
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth.tests.utils import skipIfCustomUser
+
+import django_comments as comments
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author

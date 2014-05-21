@@ -11,12 +11,13 @@ except ImportError:  # Python 2
 from django.utils import six
 from django.utils import timezone
 from django.test import TestCase
-from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.test.utils import restore_template_loaders
 from django.test.utils import setup_test_template_loader
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.tests.utils import skipIfCustomUser
+
+import django_comments as comments
 
 from bs4 import BeautifulSoup
 
