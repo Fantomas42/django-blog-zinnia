@@ -38,16 +38,16 @@ TEMPLATE_LOADERS = [
 INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
-    'django.contrib.comments',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django_comments',
     'django_xmlrpc',
     'mptt',
     'tagging',
-    'zinnia',
-    'south'
+    'south',
+    'zinnia'
 ]
 
 ZINNIA_PAGINATION = 3
