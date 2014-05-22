@@ -298,7 +298,7 @@ class Command(LabelCommand):
                 excerpt = ''
         else:
             excerpt = strip_tags(excerpt)
- 
+
         # Prefer use this function than
         # item_node.find('{%s}post_name' % WP_NS).text
         # Because slug can be not well formated
