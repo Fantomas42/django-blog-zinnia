@@ -291,7 +291,7 @@ class Command(LabelCommand):
                 creation_date, pytz.timezone('GMT'))
 
         excerpt = strip_tags(item_node.find(
-            '{%sexcerpt/}encoded' % WP_NS).text)
+            '{%sexcerpt/}encoded' % WP_NS).text or '')
         if not excerpt:
             if self.auto_excerpt:
                 excerpt = Truncator(strip_tags(content)).words(50)
