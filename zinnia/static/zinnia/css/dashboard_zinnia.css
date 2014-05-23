@@ -9,11 +9,11 @@ body.dashboard #content {
       font-size: 12px; }
 
 .managelink {
-  background: url('../img/manage.png?1378057982') no-repeat scroll 0 0.2em transparent;
+  background: url("../img/manage.png") no-repeat scroll 0 0.2em transparent;
   padding-left: 12px; }
 
 .previewlink {
-  background: url('../img/preview.png?1378057982') no-repeat scroll 0 0.2em transparent;
+  background: url("../img/preview.png") no-repeat scroll 0 0.2em transparent;
   padding-left: 12px; }
 
 input, textarea, select {
