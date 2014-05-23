@@ -16,6 +16,7 @@ Make sure to install these packages prior to installation :
 * `PIL`_ >= 1.1.6 or `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.5.1
 * `django-tagging`_ >= 0.3.2
+* `django-contrib-comments`_ >= 1.5
 * `beautifulsoup4`_ >= 4.1.3
 
 The packages below are optionnal but needed for run the full test suite or
@@ -71,13 +72,13 @@ Assuming that you have an already existing Django project, register
     'django.contrib.auth',
     'django.contrib.admin',
     'django.contrib.sites',
-    'django.contrib.comments',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.contenttypes',
-    'tagging',
+    'django_comments',
     'mptt',
+    'tagging',
     'zinnia',
   )
 
@@ -106,7 +107,7 @@ Add at least these following lines to your project's urls.py in order to
 display the Weblog. ::
 
   url(r'^weblog/', include('zinnia.urls', namespace='zinnia')),
-  url(r'^comments/', include('django.contrib.comments.urls')),
+  url(r'^comments/', include('django_comments.urls')),
 
 Remember to enable the :mod:`~django.contrib.admin` site in the urls.py of
 your project if you haven't done it yet for having the edition capabilities.
@@ -168,6 +169,7 @@ following. ::
 .. _`Pillow`: http://python-imaging.github.io/Pillow/
 .. _`django-mptt`: https://github.com/django-mptt/django-mptt/
 .. _`django-tagging`: https://code.google.com/p/django-tagging/
+.. _`django-contrib-comments`: https://github.com/django/django-contrib-comments
 .. _`beautifulsoup4`: http://www.crummy.com/software/BeautifulSoup/
 .. _`pytz`: http://pytz.sourceforge.net/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/

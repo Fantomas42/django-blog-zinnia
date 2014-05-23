@@ -77,7 +77,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.sitemaps',
-    'django.contrib.comments',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -85,11 +84,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.staticfiles',
-    'mptt',
-    'zinnia',
-    'tagging',
+    'django_comments',
     'django_xmlrpc',
+    'mptt',
     'south',
+    'tagging',
+    'zinnia'
 )
 
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS

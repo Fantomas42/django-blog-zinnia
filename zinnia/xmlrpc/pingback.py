@@ -12,7 +12,6 @@ except ImportError:  # Python 2
 
 from django.utils import six
 from django.utils import timezone
-from django.contrib import comments
 from django.utils.html import strip_tags
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import resolve
@@ -20,8 +19,11 @@ from django.core.urlresolvers import Resolver404
 from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 
-from bs4 import BeautifulSoup
+import django_comments as comments
+
 from django_xmlrpc.decorators import xmlrpc_func
+
+from bs4 import BeautifulSoup
 
 from zinnia.models.entry import Entry
 from zinnia.flags import PINGBACK

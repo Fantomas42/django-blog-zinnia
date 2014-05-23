@@ -21,10 +21,11 @@ from django.db.utils import IntegrityError
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
-from django.contrib import comments
 from django.core.management.base import CommandError
 from django.core.management.base import LabelCommand
 from django.core.files.temp import NamedTemporaryFile
+
+import django_comments as comments
 
 from tagging.models import Tag
 
@@ -390,7 +391,7 @@ class Command(LabelCommand):
     def import_comments(self, entry, comment_nodes):
         """
         Loops over comments nodes and import then
-        in django.contrib.comments.
+        in django_comments.
         """
         for comment_node in comment_nodes:
             is_pingback = comment_node.find(

@@ -6,7 +6,6 @@ except ImportError:  # Python 2
 
 from django.test import TestCase
 from django.utils import timezone
-from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
@@ -18,6 +17,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.storage import default_storage
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.tests.utils import skipIfCustomUser
+
+import django_comments as comments
 
 from tagging.models import Tag
 

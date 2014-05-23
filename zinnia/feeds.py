@@ -6,7 +6,6 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 
-from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
@@ -20,6 +19,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
 
 from bs4 import BeautifulSoup
+
+import django_comments as comments
 
 from tagging.models import Tag
 from tagging.models import TaggedItem

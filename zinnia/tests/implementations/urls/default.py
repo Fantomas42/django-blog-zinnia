@@ -15,7 +15,7 @@ urlpatterns = patterns(
     '',
     url(r'^', include('zinnia.urls', namespace='zinnia')),
     url(r'^channel-test/$', EntryChannel.as_view(query='test')),
-    url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^comments/', include('django_comments.urls')),
     url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
     url(r'^admin/', include(admin.site.urls)),
 )
