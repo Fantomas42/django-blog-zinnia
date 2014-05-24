@@ -382,29 +382,6 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.assertTemplateUsed(response, template_to_use)
         self.assertEqual(response['Content-Type'], 'application/javascript')
 
-    def test_wymeditor(self):
-        template_to_use = 'admin/zinnia/entry/wymeditor.js'
-        setup_test_template_loader({template_to_use: ''})
-        response = self.admin.wymeditor(self.request)
-        self.assertTemplateUsed(response, template_to_use)
-        self.assertEqual(len(response.context_data['lang']), 2)
-        self.assertEqual(response['Content-Type'], 'application/javascript')
-
-    def test_markitup(self):
-        template_to_use = 'admin/zinnia/entry/markitup.js'
-        setup_test_template_loader({template_to_use: ''})
-        response = self.admin.markitup(self.request)
-        self.assertTemplateUsed(response, template_to_use)
-        self.assertEqual(response['Content-Type'], 'application/javascript')
-
-    def test_content_preview(self):
-        template_to_use = 'admin/zinnia/entry/preview.html'
-        setup_test_template_loader({template_to_use: ''})
-        response = self.admin.content_preview(self.request)
-        self.assertTemplateUsed(response, template_to_use)
-        self.assertEqual(response.context_data['preview'], '<p></p>')
-        self.assertEqual(response['Content-Type'], 'text/html; charset=utf-8')
-
 
 class CategoryAdminTestCase(BaseAdminTestCase):
     """Test cases for Category Admin"""
