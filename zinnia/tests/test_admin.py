@@ -382,6 +382,25 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.assertTemplateUsed(response, template_to_use)
         self.assertEqual(response['Content-Type'], 'application/javascript')
 
+    def test_medias(self):
+        medias = self.admin.media
+        self.assertEqual(
+            medias._css,
+            {'all': ['/static/zinnia/css/jquery.autocomplete.css']})
+        self.assertEqual(
+            medias._js,
+            ['/static/admin/js/core.js',
+             '/static/admin/js/admin/RelatedObjectLookups.js',
+             '/static/admin/js/jquery.min.js',
+             '/static/admin/js/jquery.init.js',
+             '/static/admin/js/actions.min.js',
+             '/static/admin/js/urlify.js',
+             '/static/admin/js/prepopulate.min.js',
+             '/static/zinnia/js/jquery.js',
+             '/static/zinnia/js/jquery.bgiframe.js',
+             '/static/zinnia/js/jquery.autocomplete.js',
+             '/admin/zinnia/entry/autocomplete_tags/'])
+
 
 class CategoryAdminTestCase(BaseAdminTestCase):
     """Test cases for Category Admin"""
