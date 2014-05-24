@@ -9,8 +9,6 @@ from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.translation import get_language
 from django.template.response import TemplateResponse
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
