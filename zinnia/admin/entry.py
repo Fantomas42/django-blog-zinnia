@@ -437,25 +437,5 @@ class EntryAdmin(admin.ModelAdmin):
                 static_url('js/jquery.autocomplete.js'),
                 reverse('admin:zinnia_entry_autocomplete_tags')))
 
-        if settings.WYSIWYG == 'wymeditor':
-            media += Media(
-                js=(static_url('js/wymeditor/jquery.wymeditor.pack.js'),
-                    static_url('js/wymeditor/plugins/hovertools/'
-                               'jquery.wymeditor.hovertools.js'),
-                    reverse('admin:zinnia_entry_wymeditor')))
-        elif settings.WYSIWYG == 'tinymce':
-            from tinymce.widgets import TinyMCE
-            media += TinyMCE().media + Media(
-                js=(reverse('tinymce-js', args=('admin/zinnia/entry',)),))
-        elif settings.WYSIWYG == 'markitup':
-            media += Media(
-                js=(static_url('js/markitup/jquery.markitup.js'),
-                    static_url('js/markitup/sets/%s/set.js' % (
-                        settings.MARKUP_LANGUAGE)),
-                    reverse('admin:zinnia_entry_markitup')),
-                css={'all': (
-                    static_url('js/markitup/skins/django/style.css'),
-                    static_url('js/markitup/sets/%s/style.css' % (
-                        settings.MARKUP_LANGUAGE)))})
         return media
     media = property(_media)
