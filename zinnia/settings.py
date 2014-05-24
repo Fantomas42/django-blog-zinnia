@@ -37,15 +37,6 @@ PREVIEW_MAX_WORDS = getattr(settings, 'ZINNIA_PREVIEW_MAX_WORDS', 55)
 
 PREVIEW_MORE_STRING = getattr(settings, 'ZINNIA_PREVIEW_MORE_STRING', ' ...')
 
-WYSIWYG_MARKUP_MAPPING = {
-    'textile': 'markitup',
-    'markdown': 'markitup',
-    'restructuredtext': 'markitup',
-    'html': 'tinymce' in settings.INSTALLED_APPS and 'tinymce' or 'wymeditor'}
-
-WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
-                  WYSIWYG_MARKUP_MAPPING.get(MARKUP_LANGUAGE))
-
 AUTO_CLOSE_PINGBACKS_AFTER = getattr(
     settings, 'ZINNIA_AUTO_CLOSE_PINGBACKS_AFTER', None)
 
