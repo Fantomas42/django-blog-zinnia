@@ -364,7 +364,7 @@ class EntryAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         """
-        Overload the admin's urls for WYSIWYG and tag auto-completion.
+        Overload the admin's urls for tag auto-completion.
         """
         entry_admin_urls = super(EntryAdmin, self).get_urls()
         urls = patterns(
