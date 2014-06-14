@@ -107,22 +107,6 @@ setting: ::
   ZINNIA_PING_DIRECTORIES = ('http://ping.directory.com/',
                              'http://pong.directory.com/')
 
-.. _zinnia-django-cms:
-
-Django-CMS
-==========
-
-If you use `django-CMS`_, Zinnia can be integrated into your pages,
-thanks to the plugin system.
-
-.. warning::
-   .. versionchanged:: 0.10.1
-
-   ``zinnia.plugins`` has been removed in favor of `cmsplugin_zinnia`_.
-
-Simply refer to `cmsplugin_zinnia`_'s documentation for more information
-about the install instructions and possibilities.
-
 .. _zinnia-markup-languages:
 
 Markup languages
@@ -188,8 +172,6 @@ Insert something like this in your project's urls.py: ::
 .. _`PyMollom`: https://github.com/itkovian/PyMollom
 .. _`django-bitly`: http://bitbucket.org/discovery/django-bitly/
 .. _`tweepy`: https://github.com/tweepy/tweepy
-.. _`cmsplugin_zinnia`: https://github.com/Fantomas42/cmsplugin-zinnia
-.. _`django-CMS`: http://www.django-cms.org/
 .. _`installation instructions`: http://django-tinymce.readthedocs.org/en/latest/installation.html
 .. _`Textile`: https://pypi.python.org/pypi/textile
 .. _`Markdown`: http://pypi.python.org/pypi/Markdown
