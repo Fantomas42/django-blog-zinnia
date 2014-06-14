@@ -123,17 +123,6 @@ thanks to the plugin system.
 Simply refer to `cmsplugin_zinnia`_'s documentation for more information
 about the install instructions and possibilities.
 
-.. _zinnia-tinymce:
-
-TinyMCE
-=======
-
-If you want to replace WYMEditor by TinyMCE just install `django-tinymce`_
-as described in the the `installation instructions`_.
-
-TinyMCE can be customized by overriding the
-:file:`admin/zinnia/entry/tinymce_textareas.js` template.
-
 .. _zinnia-markup-languages:
 
 Markup languages
@@ -201,7 +190,6 @@ Insert something like this in your project's urls.py: ::
 .. _`tweepy`: https://github.com/tweepy/tweepy
 .. _`cmsplugin_zinnia`: https://github.com/Fantomas42/cmsplugin-zinnia
 .. _`django-CMS`: http://www.django-cms.org/
-.. _`django-tinymce`: https://github.com/aljosa/django-tinymce
 .. _`installation instructions`: http://django-tinymce.readthedocs.org/en/latest/installation.html
 .. _`Textile`: https://pypi.python.org/pypi/textile
 .. _`Markdown`: http://pypi.python.org/pypi/Markdown
