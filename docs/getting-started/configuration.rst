@@ -166,13 +166,6 @@ Insert something like this in your project's urls.py: ::
           pingback detection.
           More information at http://hixie.ch/specs/pingback/pingback-1.0#TOC2
 
-.. _`akismet`: http://www.voidspace.org.uk/python/modules.shtml#akismet
-.. _`TypePad AntiSpam`: http://antispam.typepad.com/
-.. _`Mollom`: http://mollom.com/
-.. _`PyMollom`: https://github.com/itkovian/PyMollom
-.. _`django-bitly`: http://bitbucket.org/discovery/django-bitly/
-.. _`tweepy`: https://github.com/tweepy/tweepy
-.. _`installation instructions`: http://django-tinymce.readthedocs.org/en/latest/installation.html
 .. _`Textile`: https://pypi.python.org/pypi/textile
 .. _`Markdown`: http://pypi.python.org/pypi/Markdown
 .. _`Docutils`: http://docutils.sf.net/
