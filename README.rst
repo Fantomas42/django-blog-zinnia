@@ -121,9 +121,9 @@ More information and help available at these URLs:
 .. _`Gravatar`: http://gravatar.com/
 .. _`Django-CMS`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#django-cms
 .. _`Entry model extendable`: http://django-blog-zinnia.rtfd.org/extending-entry
-.. _`WYMeditor`: http://www.wymeditor.org/
-.. _`TinyMCE`: http://tinymce.moxiecode.com/
-.. _`MarkItUp`: http://markitup.jaysalvat.com/
+.. _`WYMeditor`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-wymeditor
+.. _`TinyMCE`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-tinymce
+.. _`MarkItUp`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-markitup
 .. _`Blogger conversion utility`: http://docs.django-blog-zinnia.com/en/latest/how-to/import_export.html#from-blogger-to-zinnia
 .. _`WordPress conversion utility`: http://docs.django-blog-zinnia.com/en/latest/how-to/import_export.html#from-wordpress-to-zinnia
 .. _`Compass`: http://compass-style.org/

@@ -80,6 +80,30 @@ Zinnia-theme-bootstrap is an extension theme for your Weblog based on
 
 URL: https://github.com/Fantomas42/zinnia-theme-bootstrap
 
+zinnia-wysiwyg-wymeditor
+========================
+
+Zinnia-wysiwyg-wymeditor is an extension for editing your entries in the
+admin with `WYMEditor`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-wysiwyg-wymeditor
+
+zinnia-wysiwyg-tinymce
+======================
+
+Zinnia-wysiwyg-tinymce is an extension for editing your entries in the
+admin with `TinyMCE`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-wysiwyg-tinymce
+
+zinnia-wysiwyg-markitup
+=======================
+
+Zinnia-wysiwyg-markitup is an extension for editing your entries in the
+admin with `MarkItUp`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-wysiwyg-markitup
+
 zinnia-url-shortener-bitly
 ==========================
 
@@ -132,6 +156,9 @@ URL: https://github.com/azaghal/zinnia-drupal
 .. _`Django-CMS`: http://www.django-cms.org/
 .. _`django-admin-tools`: http://django-admin-tools.readthedocs.org/en/latest/index.html
 .. _`Bootstrap`: http://twitter.github.com/bootstrap/
+.. _`WYMEditor`: http://www.wymeditor.org/
+.. _`TinyMCE`: http://www.tinymce.com/
+.. _`MarkItUp`: http://markitup.jaysalvat.com/
 .. _`Bit.ly`: https://bitly.com/
 .. _`Akismet`: http://akismet.com/
 .. _`Mollom`: https://mollom.com/

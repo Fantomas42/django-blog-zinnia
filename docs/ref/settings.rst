@@ -110,33 +110,6 @@ processing. See the Docutils restructuredtext `writer settings docs
 <http://docutils.sourceforge.net/docs/user/config.html#html4css1-writer>`_
 for details.
 
-.. setting:: ZINNIA_WYSIWYG
-
-ZINNIA_WYSIWYG
---------------
-**Default value:** ::
-
-    WYSIWYG_MARKUP_MAPPING = {
-        'textile': 'markitup',
-        'markdown': 'markitup',
-        'restructuredtext': 'markitup',
-        'html': 'tinymce' in settings.INSTALLED_APPS and \
-                    'tinymce' or 'wymeditor'}
-
-    WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
-                      WYSIWYG_MARKUP_MAPPING.get(ZINNIA_MARKUP_LANGUAGE))
-
-Determining the WYSIWYG editor used for editing an entry.
-So if MarkDown, Textile or reStructuredText are used, the value will be
-``'markitup'``, but if you use HTML, TinyMCE will be used if
-:ref:`django-tinymce is installed<zinnia-tinymce>`, else WYMEditor will be
-used.
-
-This setting can also be used for disabling the WYSIWYG
-functionnality. Example: ::
-
-  ZINNIA_WYSIWYG = None
-
 .. _settings-preview:
 
 Preview

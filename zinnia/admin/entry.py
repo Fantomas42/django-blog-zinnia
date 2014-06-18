@@ -9,8 +9,6 @@ from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.translation import get_language
 from django.template.response import TemplateResponse
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -366,7 +364,7 @@ class EntryAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         """
-        Overload the admin's urls for WYSIWYG and tag auto-completion.
+        Overload the admin's urls for tag auto-completion.
         """
         entry_admin_urls = super(EntryAdmin, self).get_urls()
         urls = patterns(
@@ -374,15 +372,7 @@ class EntryAdmin(admin.ModelAdmin):
             url(r'^autocomplete_tags/$',
                 self.admin_site.admin_view(self.autocomplete_tags),
                 name='zinnia_entry_autocomplete_tags'),
-            url(r'^wymeditor/$',
-                self.admin_site.admin_view(self.wymeditor),
-                name='zinnia_entry_wymeditor'),
-            url(r'^markitup/$',
-                self.admin_site.admin_view(self.markitup),
-                name='zinnia_entry_markitup'),
-            url(r'^markitup/preview/$',
-                self.admin_site.admin_view(self.content_preview),
-                name='zinnia_entry_markitup_preview'),)
+        )
         return urls + entry_admin_urls
 
     def autocomplete_tags(self, request):
@@ -392,35 +382,6 @@ class EntryAdmin(admin.ModelAdmin):
         return TemplateResponse(
             request, 'admin/zinnia/entry/autocomplete_tags.js',
             content_type='application/javascript')
-
-    def wymeditor(self, request):
-        """
-        View for serving the config of WYMEditor.
-        """
-        return TemplateResponse(
-            request, 'admin/zinnia/entry/wymeditor.js',
-            {'lang': get_language().split('-')[0]},
-            content_type='application/javascript')
-
-    def markitup(self, request):
-        """
-        View for serving the config of MarkItUp.
-        """
-        return TemplateResponse(
-            request, 'admin/zinnia/entry/markitup.js',
-            content_type='application/javascript')
-
-    @csrf_exempt
-    def content_preview(self, request):
-        """
-        Admin view to preview Entry.content in HTML,
-        useful when using markups to write entries.
-        """
-        data = request.POST.get('data', '')
-        entry = self.model(content=data)
-        return TemplateResponse(
-            request, 'admin/zinnia/entry/preview.html',
-            {'preview': entry.html_content})
 
     def _media(self):
         """
@@ -437,25 +398,5 @@ class EntryAdmin(admin.ModelAdmin):
                 static_url('js/jquery.autocomplete.js'),
                 reverse('admin:zinnia_entry_autocomplete_tags')))
 
-        if settings.WYSIWYG == 'wymeditor':
-            media += Media(
-                js=(static_url('js/wymeditor/jquery.wymeditor.pack.js'),
-                    static_url('js/wymeditor/plugins/hovertools/'
-                               'jquery.wymeditor.hovertools.js'),
-                    reverse('admin:zinnia_entry_wymeditor')))
-        elif settings.WYSIWYG == 'tinymce':
-            from tinymce.widgets import TinyMCE
-            media += TinyMCE().media + Media(
-                js=(reverse('tinymce-js', args=('admin/zinnia/entry',)),))
-        elif settings.WYSIWYG == 'markitup':
-            media += Media(
-                js=(static_url('js/markitup/jquery.markitup.js'),
-                    static_url('js/markitup/sets/%s/set.js' % (
-                        settings.MARKUP_LANGUAGE)),
-                    reverse('admin:zinnia_entry_markitup')),
-                css={'all': (
-                    static_url('js/markitup/skins/django/style.css'),
-                    static_url('js/markitup/sets/%s/style.css' % (
-                        settings.MARKUP_LANGUAGE)))})
         return media
     media = property(_media)
