@@ -450,12 +450,13 @@ class ViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_category_list(self):
         self.inhibit_templates('zinnia/category_list.html')
+        category = Category.objects.create(
+            title='New category', slug='new-category')
         self.check_publishing_context(
             '/categories/', 1,
             friendly_context='category_list',
             queries=0)
-        self.first_entry.categories.add(Category.objects.create(
-            title='New category', slug='new-category'))
+        self.first_entry.categories.add(category)
         self.check_publishing_context('/categories/', 2)
 
     def test_zinnia_category_detail(self):
