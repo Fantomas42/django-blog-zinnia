@@ -27,7 +27,7 @@
       background-repeat: no-repeat;
       background-position: 5px center;
       padding-left: 25px;
-      @include border-radius(5px);
+      border-radius: 5px;
     }
     input[type=submit] {
       display: none;
