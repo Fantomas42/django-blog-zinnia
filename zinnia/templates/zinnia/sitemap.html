@@ -33,32 +33,6 @@
   {% endfor %}
 </div>
 
-<div class="allentries">
-  <h2>{% trans "All the entries" %}</h2>
-  <ul>
-    {% for entry in entries %}
-    <li>
-      <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
-      - {{ entry.creation_date|date:"SHORT_DATE_FORMAT" }}
-      {% with comment_count=entry.comment_count %}
-      {% if comment_count %}
-      - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
-      {% endif %}
-      {% endwith %}
-    </li>
-    {% empty %}
-    <li>
-      {% trans "No entries yet." %}
-    </li>
-    {% endfor %}
-  </ul>
-</div>
-
-<div class="categories">
-  <h2>{% trans "Categories" %}</h2>
-  {% get_categories_tree %}
-</div>
-
 <div class="montharchives">
   <h2>{% trans "Monthly archives" %}</h2>
   {% get_archives_entries %}
