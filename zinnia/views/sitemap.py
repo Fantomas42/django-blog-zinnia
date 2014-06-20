@@ -18,5 +18,5 @@ class Sitemap(TemplateView):
         """
         context = super(Sitemap, self).get_context_data(**kwargs)
         context.update({'entries': Entry.published.all(),
-                        'categories': Category.objects.all()})
+                        'categories': Category.published.all()})
         return context
