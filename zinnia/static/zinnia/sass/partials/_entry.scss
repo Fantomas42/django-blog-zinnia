@@ -21,7 +21,7 @@ h2.entry-title {
   img {
     padding: 1em;
     max-width: 100%;
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     &, &.left {
     margin: 0 1em 1em 0;
     float: left;
