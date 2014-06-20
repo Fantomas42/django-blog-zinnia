@@ -21,11 +21,21 @@
 //    |        #footer         |
 //    +------------------------+
 
-
 & {
   .container {
-    @include container($total-columns, $screen-layout);
-    @include susy-grid-background;
+    *zoom: 1;
+    max-width: $single-column-width;
+    padding-left: $gutter-width;
+    padding-right: $gutter-width;
+    margin-left: auto;
+    margin-right: auto;
+    background-origin: content-box;
+    background-clip: content-box;
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
   }
 
   #header, #footer {
@@ -34,33 +44,43 @@
 }
 
 
-@include at-breakpoint($screen-layout) {
-  $third: floor($total-columns / 3);
+@include breakpoint("large") {
+  $total-columns     : $multi-columns-width + $gutter-width;
+  $one-em-percent    : (100.0 / $total-columns) * 1%;
+  $one-third-percent : ($multi-columns-width / 3) * $one-em-percent;
+  $two-third-percent : $one-third-percent * 2;
+  $gutter-percent    : $gutter-width * $one-em-percent;
 
-  &, &.right-sidebar {
-    #content {
-      @include span-columns(2 * $third);
-    }
-
-    #sidebar {
-      @include span-columns($third omega);
-    }
+  & .container {
+    max-width: $multi-columns-width;
   }
 
-  &.left-sidebar {
-    #content {
-      @include span-columns(2 * $third omega);
-    }
-    #sidebar {
-      @include span-columns($third);
-    }
+  & #content, &.right-sidebar #content {
+    width: $two-third-percent;
+    float: left;
+    margin-right: $gutter-percent;
   }
-  &.no-sidebar {
-    #content {
-      @include span-columns($total-columns);
-    }
-    #sidebar {
-      display: none;
-    }
+  & #sidebar, &.right-sidebar #sidebar {
+    width: $one-third-percent;
+    float: right;
+    margin-right: 0;
+  }
+  &.left-sidebar #content {
+    width: $two-third-percent;
+    float: right;
+    margin-right: 0;
+  }
+  &.left-sidebar #sidebar {
+    width: $one-third-percent;
+    float: left;
+    margin-right: $gutter-percent;
+  }
+  &.no-sidebar #content {
+    width: 100%;
+    float: left;
+    margin-right: $gutter-percent;
+  }
+  &.no-sidebar #sidebar {
+    display: none;
   }
 }
