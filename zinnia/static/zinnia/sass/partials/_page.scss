@@ -11,7 +11,8 @@
   color-profile: sRGB;
   rendering-intent: auto;
 
-  #{headers(all)} { @include header-text; }
+  h1, h2, h3,
+  h4, h5, h6      { @include header-text; }
   h1              { font-size: 3em;   line-height: 1;    margin-bottom: 0.50em; }
   h2              { font-size: 2em;                      margin-bottom: 0.75em; }
   h3              { font-size: 1.5em; line-height: 1;    margin-bottom: 1.00em; }
@@ -36,7 +37,7 @@
   ul, ol          { margin: 0 1.5em 1.5em 0; padding-left: 1.5em; }
   ul              { list-style-type: disc; }
   ol              { list-style-type: decimal; }
-  li              { list-style-image: image-url("bullet.png"); }
+  li              { list-style-image: url("../img/bullet.png"); }
   dl              { margin: 0 0 1.5em 0;
     dt            { font-weight: bold; } }
   dd              { margin-left: 1.5em; }

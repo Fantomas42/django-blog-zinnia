@@ -12,6 +12,7 @@ eggs
 parts
 include
 uploads
+node_modules
 develop-eggs
 django-apps-src
 gems

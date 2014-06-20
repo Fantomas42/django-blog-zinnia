@@ -1,12 +1,7 @@
-// Grid constants used by Susy
-$total-columns          : 6;
-$column-width           : 6em;
+// Grid constants
+$multi-columns-width    : 85em;
+$single-column-width    : 60em;
 $gutter-width           : 1em;
-$grid-padding           : $gutter-width;
-$show-grid-backgrounds  : false;
-
-// At 50em available, we pass at 12 columns
-$screen-layout          : 50em 12;
 
 // Fonts constants
 $font-size              : 12px;
@@ -14,6 +9,6 @@ $font-family            : unquote("Arial, Helvetica, sans-serif");
 $font-family-fixed      : unquote("andale mono, lucida console, monospace");
 
 // UI Colors
-$info-color             : #2BA6CB;
-$error-color            : #DA0000;
-$success-color          : #7FAE00;
+$info-color             : #2ba6cb;
+$error-color            : #da0000;
+$success-color          : #7fae00;

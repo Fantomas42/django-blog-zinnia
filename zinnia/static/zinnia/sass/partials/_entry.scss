@@ -9,7 +9,7 @@ h2.entry-title {
 
 .entry-info {
   padding-left: 2em;
-  background: transparent image-url("category.png") no-repeat scroll 0.5em;
+  background: transparent url("../img/category.png") no-repeat scroll 0.5em;
 }
 
 .entry-last-update {
@@ -21,7 +21,7 @@ h2.entry-title {
   img {
     padding: 1em;
     max-width: 100%;
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     &, &.left {
     margin: 0 1em 1em 0;
     float: left;
