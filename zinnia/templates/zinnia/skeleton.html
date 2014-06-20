@@ -58,7 +58,7 @@
       <div id="content" class="hfeed">
         {% block content %}
         <div class="links">
-          <h3>{% trans "Useful links" %}</h3>
+          <h2>{% trans "Useful links" %}</h2>
           <ul>
             <li>
               <a href="{% url 'zinnia:entry_archive_index' %}" title="{% trans "Weblog index" %}">
@@ -73,7 +73,7 @@
           </ul>
         </div>
         <div class="search">
-          <h3>{% trans "Search" %}</h3>
+          <h2>{% trans "Search" %}</h2>
           {% include "zinnia/tags/search_form.html" %}
         </div>
         {% endblock content %}
