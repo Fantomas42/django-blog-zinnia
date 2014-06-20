@@ -1,12 +1,7 @@
-// Grid constants used by Susy
-$total-columns          : 6;
-$column-width           : 6em;
+// Grid constants
+$multi-columns-width    : 85em;
+$single-column-width    : 60em;
 $gutter-width           : 1em;
-$grid-padding           : $gutter-width;
-$show-grid-backgrounds  : false;
-
-// At 50em available, we pass at 12 columns
-$screen-layout          : 50em 12;
 
 // Fonts constants
 $font-size              : 12px;
