@@ -6,7 +6,7 @@
   border: 2px solid rgba(0,0,0,0.1);
   border-color: lighten($color, 10%);
   text-shadow: 0 -1px rgba(0,0,0,0.3);
-  @include border-radius(3px);
+  border-radius: 3px;
   padding: 0.5em;
   margin-bottom: 1em;
   a {
