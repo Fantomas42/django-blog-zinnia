@@ -105,7 +105,7 @@
 &.default {
   @include rebase(#fff, #eee, #ddd, #ccc,
                   #333, #666, #333, #000);
-  background: transparent image-url("background.gif") repeat-x scroll left top;
+  background: transparent url("../img/background.gif") repeat-x scroll left top;
 }
 
 &.light {
