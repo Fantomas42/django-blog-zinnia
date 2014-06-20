@@ -2,6 +2,7 @@
 from django.views.generic import TemplateView
 
 from zinnia.models.entry import Entry
+from zinnia.models.author import Author
 from zinnia.models.category import Category
 
 
@@ -17,6 +18,9 @@ class Sitemap(TemplateView):
         with all published entries and all the categories.
         """
         context = super(Sitemap, self).get_context_data(**kwargs)
-        context.update({'entries': Entry.published.all(),
-                        'categories': Category.published.all()})
+        context.update(
+            {'entries': Entry.published.all(),
+             'categories': Category.published.all(),
+             'authors': Author.published.all()}
+        )
         return context
