@@ -102,8 +102,8 @@ favorite!
 
 .. _sass-customization:
 
-Compass and Sass
-----------------
+Css and Sass
+------------
 
 If you take a look at :file:`zinnia/static/zinnia/css/screen.css` you will
 probably notice that the CSS is not edited manually. It has been generated
@@ -130,7 +130,17 @@ This organization allow you to easily customize the default Zinnia's CSS by
 doing a copy of these files or reuse some parts of the Zinnia's CSS into
 third-party templates.
 
-To start customizing these files, ...
+Actually the Sass files are compiled with the `libsass`_ implementation
+using a `Gulp`_ script.
+
+If you want to edit the stylesheet directly, (even if it's not
+recommended), you need to have a recent version of `Node.js`_ and install
+the dependencies like: ::
+
+  $ npm install .
+
+Then you just have to run the ``gulp`` command and to edit the Sass files
+to customize the stylesheets provided by Zinnia.
 
 .. _special-templates:
 
@@ -345,3 +355,6 @@ good starting point of a packaged theme.
 .. _`Django Blog Quintet`: https://github.com/franckbret/django-blog-quintet
 .. _`Solarized`: http://ethanschoonover.com/solarized
 .. _`Sass`: http://sass-lang.com/
+.. _`libsass`: http://libsass.org/
+.. _`Gulp`: http://gulpjs.com/
+.. _`Node.js`: http://nodejs.org/
