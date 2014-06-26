@@ -94,6 +94,48 @@ changes to the documentation, commit them, and submit a pull request.
 
 See :ref:`code process<code-process>` for more details.
 
+.. _writing-css:
+
+Writing CSS
+===========
+
+You want to contribute to the default stylesheets provided by Zinnia ?
+
+If you take a look at :file:`zinnia/static/zinnia/css/screen.css` you will
+probably notice that the CSS is not edited manually. It has been generated
+from `Sass`_ files and so it is good pratice not to edit this file
+directly.
+
+Aside of ``zinnia/static/zinnia/css`` directory, you can see another
+directory named ``sass`` which is organized like this: ::
+
+  sass/
+  |-- config/
+  |-- mixins/
+  |-- partials/
+  `-- screen.scss
+
+The ``partials`` folder contains all the **partials** used to build the
+CSS, the ``mixins`` folder contains **reusable mixins** like the tag-cloud
+and finally the ``config`` folder contains all the **configurable
+variables**. For example the :file:`screen.scss` file will include at the
+end all the files who belong in these directories into a single compiled
+CSS document, named :file:`screen.css`.
+
+Actually the Sass files are compiled with the `libsass`_ implementation
+using a `Gulp`_ script.
+
+To install and use Gulp, you need to have a recent version of `Node.js`_
+and install the dependencies like this in the root directory of Zinnia: ::
+
+  $ npm install .
+
+Then you just have to run the ``gulp`` command and start to edit the Sass
+files to customize the stylesheets provided by Zinnia.
+
+Once you are done, open a new pull-request on Github with your commited
+changes.
+
 .. _writing-translations:
 
 Translations
@@ -111,4 +153,8 @@ The translations hosted on Transifex.net will be pulled periodically in the
 repository, but if you are in a hurry, `send me a message`_.
 
 .. _`Fork`: https://github.com/Fantomas42/django-blog-zinnia/fork
+.. _`Sass`: http://sass-lang.com/
+.. _`libsass`: http://libsass.org/
+.. _`Gulp`: http://gulpjs.com/
+.. _`Node.js`: http://nodejs.org/
 .. _`send me a message`: https://github.com/Fantomas42

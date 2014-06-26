@@ -100,48 +100,6 @@ With these 3 sets of classes available in the CSS, you now have 4*9*3=108
 variations of the default theme available. Try them and choose your
 favorite!
 
-.. _sass-customization:
-
-Css and Sass
-------------
-
-If you take a look at :file:`zinnia/static/zinnia/css/screen.css` you will
-probably notice that the CSS is not edited manually. It has been generated
-from `Sass`_ files and so it is good pratice not to edit this file
-directly.
-
-Aside of ``zinnia/static/zinnia/css`` directory, you can see another
-directory named ``sass`` which is organized like this: ::
-
-  sass/
-  |-- config/
-  |-- mixins/
-  |-- partials/
-  `-- screen.scss
-
-The ``partials`` folder contains all the **partials** used to build the
-CSS, the ``mixins`` folder contains **reusable mixins** like the tag-cloud
-and finally the ``config`` folder contains all the **configurable
-variables**. For example the :file:`screen.scss` file will include at the
-end all the files who belong in these directories into a single compiled
-CSS document, named :file:`screen.css`.
-
-This organization allow you to easily customize the default Zinnia's CSS by
-doing a copy of these files or reuse some parts of the Zinnia's CSS into
-third-party templates.
-
-Actually the Sass files are compiled with the `libsass`_ implementation
-using a `Gulp`_ script.
-
-If you want to edit the stylesheet directly, (even if it's not
-recommended), you need to have a recent version of `Node.js`_ and install
-the dependencies like: ::
-
-  $ npm install .
-
-Then you just have to run the ``gulp`` command and to edit the Sass files
-to customize the stylesheets provided by Zinnia.
-
 .. _special-templates:
 
 Special templates
@@ -354,7 +312,4 @@ good starting point of a packaged theme.
 .. _`Zinnia-theme-bootstrap`: https://github.com/Fantomas42/zinnia-theme-bootstrap
 .. _`Django Blog Quintet`: https://github.com/franckbret/django-blog-quintet
 .. _`Solarized`: http://ethanschoonover.com/solarized
-.. _`Sass`: http://sass-lang.com/
-.. _`libsass`: http://libsass.org/
-.. _`Gulp`: http://gulpjs.com/
-.. _`Node.js`: http://nodejs.org/
+
