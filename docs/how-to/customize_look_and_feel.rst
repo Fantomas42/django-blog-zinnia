@@ -312,4 +312,3 @@ good starting point of a packaged theme.
 .. _`Zinnia-theme-bootstrap`: https://github.com/Fantomas42/zinnia-theme-bootstrap
 .. _`Django Blog Quintet`: https://github.com/franckbret/django-blog-quintet
 .. _`Solarized`: http://ethanschoonover.com/solarized
-
