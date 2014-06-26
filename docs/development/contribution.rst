@@ -73,9 +73,10 @@ to understand you. We don’t care about style or correctness.
 
 The documentation should :
 
-* Use **Sphinx** and **restructuredText**.
-* Use **.rst** as file extension.
 * Be written in English.
+* Follow the 80 column rule.
+* Use **.rst** as file extension.
+* Use **Sphinx** and **restructuredText**.
 * Be accessible. You should assume the reader to be moderately familiar
   with Python and Django, but not anything else.
 
