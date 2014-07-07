@@ -48,7 +48,7 @@ More than a long speech, here the list of the main features:
 * Pingback/Trackback support
 * `Blogger conversion utility`_
 * `WordPress conversion utility`_
-* `WYMeditor`_, `TinyMCE`_ and `MarkItUp`_ support
+* `WYMeditor`_, `TinyMCE`_ , `CKEditor`_ and `MarkItUp`_ support
 * Efficient database queries
 * Ready to use and extendable templates
 * `Compass`_ and `Sass3`_ integration
@@ -123,6 +123,7 @@ More information and help available at these URLs:
 .. _`Entry model extendable`: http://django-blog-zinnia.rtfd.org/extending-entry
 .. _`WYMeditor`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-wymeditor
 .. _`TinyMCE`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-tinymce
+.. _`CKEditor`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-ckeditor
 .. _`MarkItUp`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-markitup
 .. _`Blogger conversion utility`: http://docs.django-blog-zinnia.com/en/latest/how-to/import_export.html#from-blogger-to-zinnia
 .. _`WordPress conversion utility`: http://docs.django-blog-zinnia.com/en/latest/how-to/import_export.html#from-wordpress-to-zinnia

@@ -96,6 +96,14 @@ admin with `TinyMCE`_.
 
 URL: https://github.com/django-blog-zinnia/zinnia-wysiwyg-tinymce
 
+zinnia-wysiwyg-ckeditor
+=======================
+
+Zinnia-wysiwyg-ckeditor is an extension for editing your entries in the
+admin with `CKeditor`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-wysiwyg-ckeditor
+
 zinnia-wysiwyg-markitup
 =======================
 
@@ -158,6 +166,7 @@ URL: https://github.com/azaghal/zinnia-drupal
 .. _`Bootstrap`: http://twitter.github.com/bootstrap/
 .. _`WYMEditor`: http://www.wymeditor.org/
 .. _`TinyMCE`: http://www.tinymce.com/
+.. _`CKEditor`: http://ckeditor.com/
 .. _`MarkItUp`: http://markitup.jaysalvat.com/
 .. _`Bit.ly`: https://bitly.com/
 .. _`Akismet`: http://akismet.com/
