@@ -197,7 +197,7 @@ class EntryAdmin(admin.ModelAdmin):
         Make special filtering by user's permissions.
         """
         if not request.user.has_perm('zinnia.can_view_all'):
-            queryset = request.user.entries.all()
+            queryset = self.model.objects.filter(authors__pk=request.user.pk)
         else:
             queryset = super(EntryAdmin, self).get_queryset(request)
         return queryset.prefetch_related('categories', 'authors', 'sites')
@@ -251,9 +251,10 @@ class EntryAdmin(admin.ModelAdmin):
         """
         Set the entries to the current user.
         """
+        author = Author.objects.get(pk=request.user.pk)
         for entry in queryset:
-            if request.user not in entry.authors.all():
-                entry.authors.add(request.user)
+            if author not in entry.authors.all():
+                entry.authors.add(author)
         self.message_user(
             request, _('The selected entries now belong to you.'))
     make_mine.short_description = _('Set the entries to the user')
