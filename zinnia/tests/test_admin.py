@@ -176,7 +176,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
                          self.entry.is_visible)
 
     def test_save_model(self):
-        user = Author.objects.create_user(
+        user = User.objects.create_user(
             'user', 'user@exemple.com')
         self.request.user = user
         form = EntryAdmin.form({'title': 'title'})
@@ -207,11 +207,11 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.assertEqual(len(self.admin.get_queryset(self.request)), 2)
 
     def test_formfield_for_manytomany(self):
-        staff = Author.objects.create_user(
+        staff = User.objects.create_user(
             'staff', 'staff@exemple.com')
-        author = Author.objects.create_user(
+        author = User.objects.create_user(
             'author', 'author@exemple.com')
-        root = Author.objects.create_superuser(
+        root = User.objects.create_superuser(
             'root', 'root@exemple.com', 'toor')
         self.request.user = staff
         field = self.admin.formfield_for_manytomany(
@@ -226,15 +226,15 @@ class EntryAdminTestCase(BaseAdminTestCase):
         field = self.admin.formfield_for_manytomany(
             Entry.authors.field, self.request)
         self.assertEqual(field.queryset.count(), 2)
-        self.entry.authors.add(author)
+        self.entry.authors.add(Author.objects.get(pk=author.pk))
         field = self.admin.formfield_for_manytomany(
             Entry.authors.field, self.request)
         self.assertEqual(field.queryset.count(), 3)
 
     def test_get_readonly_fields(self):
-        user = Author.objects.create_user(
+        user = User.objects.create_user(
             'user', 'user@exemple.com')
-        root = Author.objects.create_superuser(
+        root = User.objects.create_superuser(
             'root', 'root@exemple.com', 'toor')
         self.request.user = user
         self.assertEqual(self.admin.get_readonly_fields(self.request),
@@ -245,9 +245,9 @@ class EntryAdminTestCase(BaseAdminTestCase):
 
     def test_get_actions(self):
         original_ping_directories = settings.PING_DIRECTORIES
-        user = Author.objects.create_user(
+        user = User.objects.create_user(
             'user', 'user@exemple.com')
-        root = Author.objects.create_superuser(
+        root = User.objects.create_superuser(
             'root', 'root@exemple.com', 'toor')
         self.request.user = user
         settings.PING_DIRECTORIES = True
@@ -287,7 +287,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
         settings.PING_DIRECTORIES = original_ping_directories
 
     def test_get_actions_in_popup_mode_issue_291(self):
-        user = Author.objects.create_user(
+        user = User.objects.create_user(
             'user', 'user@exemple.com')
         request = self.request_factory.get('/?_popup=1')
         request.user = user
@@ -298,7 +298,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
     def test_make_mine(self):
         user = Author.objects.create_user(
             'user', 'user@exemple.com')
-        self.request.user = user
+        self.request.user = User.objects.get(pk=user.pk)
         self.request._messages = TestMessageBackend()
         self.assertEqual(user.entries.count(), 0)
         self.admin.make_mine(self.request, Entry.objects.all())
