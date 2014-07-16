@@ -2,6 +2,7 @@
 from django.test import TestCase
 from django.test import RequestFactory
 from django.utils import timezone
+from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
@@ -200,9 +201,9 @@ class EntryAdminTestCase(BaseAdminTestCase):
                   'slug': 'my-root-titile'}
         root_entry = Entry.objects.create(**params)
         root_entry.authors.add(root)
-        self.request.user = user
+        self.request.user = User.objects.get(pk=user.pk)
         self.assertEqual(len(self.admin.get_queryset(self.request)), 1)
-        self.request.user = root
+        self.request.user = User.objects.get(pk=root.pk)
         self.assertEqual(len(self.admin.get_queryset(self.request)), 2)
 
     def test_formfield_for_manytomany(self):
