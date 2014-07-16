@@ -197,7 +197,7 @@ class EntryAdmin(admin.ModelAdmin):
         Make special filtering by user's permissions.
         """
         if not request.user.has_perm('zinnia.can_view_all'):
-            queryset = request.user.entries.all()
+            queryset = self.model.objects.filter(authors__pk=request.user.pk)
         else:
             queryset = super(EntryAdmin, self).get_queryset(request)
         return queryset.prefetch_related('categories', 'authors', 'sites')
