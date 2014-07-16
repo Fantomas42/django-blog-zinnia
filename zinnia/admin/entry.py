@@ -251,9 +251,10 @@ class EntryAdmin(admin.ModelAdmin):
         """
         Set the entries to the current user.
         """
+        author = Author.objects.get(pk=request.user.pk)
         for entry in queryset:
-            if request.user not in entry.authors.all():
-                entry.authors.add(request.user)
+            if author not in entry.authors.all():
+                entry.authors.add(author)
         self.message_user(
             request, _('The selected entries now belong to you.'))
     make_mine.short_description = _('Set the entries to the user')
