@@ -46,7 +46,7 @@ class CategoryAdminForm(forms.ModelForm):
         CategoryAdminForm's Meta.
         """
         model = Category
-        fields = forms.ALL_FIELDS
+        # fields = forms.ALL_FIELDS  # Does not work in django 1.5
 
 
 class EntryAdminForm(forms.ModelForm):
@@ -71,4 +71,4 @@ class EntryAdminForm(forms.ModelForm):
         EntryAdminForm's Meta.
         """
         model = Entry
-        fields = forms.ALL_FIELDS
+        # fields = forms.ALL_FIELDS  # Does not work in django 1.5
