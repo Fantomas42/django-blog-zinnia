@@ -1,4 +1,5 @@
 """Managers of Zinnia"""
+import django
 from django.db import models
 from django.utils import timezone
 from django.contrib.sites.models import Site
@@ -38,18 +39,46 @@ class EntryPublishedManager(models.Manager):
     Manager to retrieve published entries.
     """
 
-    def get_queryset(self):
+    def _get_queryset_compat(self, *args, **kwargs):
+        """
+        rant: why oh why would you rename something so widely used?
+        benjaoming:
+        In Django 1.6, a DeprecationWarning appears whenever get_query_set
+        is called. This is an unfortunate decision by django core devs
+        because a lot of custom manager inheritance relies on the naming
+        of get_query_set/get_queryset. In this case, the DeprecationWarnings
+        firstly broke django-mptt, and then the django-mptt fix broke all the
+        Django<1.6 custom managers with custom querysets defined using `get_query_set`.
+
+        See issue: #316
+        """
+        if django.VERSION >= (1, 6):
+            # in 1.6+, get_queryset gets defined by the base manager and complains if it's called.
+            # otherwise, we have to define it ourselves.
+            get_queryset = super(EntryPublishedManager, self).get_queryset
+        else:
+            get_queryset = super(EntryPublishedManager, self).get_query_set
+        return get_queryset(*args, **kwargs)
+
+    if django.VERSION < (1, 6):
+        # Backwards compatibility hack.
+        # Before fixing #316, we always provided a get_queryset() method even on django < 1.6.
+        # So if anyone's relying on it, need to preserve this until django 1.6 is the minimum supported version.
+        # Then we can get rid of this since it will be provided by models.Model anyway.
+        def get_queryset(self, *args, **kwargs):
+            return self.get_query_set(*args, **kwargs)
+
+    def get_query_set(self):
         """
         Return published entries.
         """
-        return entries_published(
-            super(EntryPublishedManager, self).get_queryset())
+        return entries_published(self._get_queryset_compat())
 
     def on_site(self):
         """
         Return entries published on current site.
         """
-        return super(EntryPublishedManager, self).get_queryset().filter(
+        return self._get_queryset_compat().filter(
             sites=Site.objects.get_current())
 
     def search(self, pattern):
@@ -82,7 +111,7 @@ class EntryPublishedManager(models.Manager):
             else:
                 lookup |= query_part
 
-        return self.get_queryset().filter(lookup)
+        return self._get_queryset_compat().filter(lookup)
 
 
 class EntryRelatedPublishedManager(models.Manager):
@@ -90,13 +119,41 @@ class EntryRelatedPublishedManager(models.Manager):
     Manager to retrieve objects associated with published entries.
     """
 
-    def get_queryset(self):
+    def _get_queryset_compat(self, *args, **kwargs):
+        """
+        rant: why oh why would you rename something so widely used?
+        benjaoming:
+        In Django 1.6, a DeprecationWarning appears whenever get_query_set
+        is called. This is an unfortunate decision by django core devs
+        because a lot of custom manager inheritance relies on the naming
+        of get_query_set/get_queryset. In this case, the DeprecationWarnings
+        firstly broke django-mptt, and then the django-mptt fix broke all the
+        Django<1.6 custom managers with custom querysets defined using `get_query_set`.
+
+        See issue: django-mptt/django-mptt#316
+        """
+        if django.VERSION >= (1, 6):
+            # in 1.6+, get_queryset gets defined by the base manager and complains if it's called.
+            # otherwise, we have to define it ourselves.
+            get_queryset = super(EntryPublishedManager, self).get_queryset
+        else:
+            get_queryset = super(EntryPublishedManager, self).get_query_set
+        return get_queryset(*args, **kwargs)
+
+    if django.VERSION < (1, 6):
+        # Backwards compatibility hack.
+        # Before fixing #316, we always provided a get_queryset() method even on django < 1.6.
+        # So if anyone's relying on it, need to preserve this until django 1.6 is the minimum supported version.
+        # Then we can get rid of this since it will be provided by models.Model anyway.
+        def get_queryset(self, *args, **kwargs):
+            return self.get_query_set(*args, **kwargs)
+            
+    def get_query_set(self):
         """
         Return a queryset containing published entries.
         """
         now = timezone.now()
-        return super(
-            EntryRelatedPublishedManager, self).get_queryset().filter(
+        return self._get_queryset_compat().filter(
             models.Q(entries__start_publication__lte=now) |
             models.Q(entries__start_publication=None),
             models.Q(entries__end_publication__gt=now) |
