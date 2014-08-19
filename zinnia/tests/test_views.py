@@ -348,6 +348,15 @@ class ViewsTestCase(ViewsBaseCase):
             response['Location'],
             'http://testserver%s' % self.first_entry.get_absolute_url())
 
+    def test_zinnia_entry_shortlink_unpublished(self):
+        """
+        https://github.com/Fantomas42/django-blog-zinnia/pull/367
+        """
+        self.first_entry.sites.clear()
+        with self.assertNumQueries(1):
+            response = self.client.get('/%s/' % base36(self.first_entry.pk))
+        self.assertEqual(response.status_code, 404)
+
     def test_zinnia_entry_detail(self):
         self.inhibit_templates('zinnia/_entry_detail.html', '404.html')
         entry = self.create_published_entry()
