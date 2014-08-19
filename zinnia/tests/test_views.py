@@ -342,11 +342,27 @@ class ViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_entry_shortlink(self):
         with self.assertNumQueries(1):
+            # Test non-existing
+            response = self.client.get('/%s/' % base36(999999))
+        self.assertEqual(response.status_code, 404)
+
+        with self.assertNumQueries(1):
             response = self.client.get('/%s/' % base36(self.first_entry.pk))
         self.assertEqual(response.status_code, 301)
         self.assertEqual(
             response['Location'],
             'http://testserver%s' % self.first_entry.get_absolute_url())
+
+    def test_zinnia_entry_shortlink_draft(self):
+        self.first_entry.status = DRAFT
+        self.first_entry.save()
+        with self.assertNumQueries(2):
+            response = self.client.get('/%s/' % base36(self.first_entry.pk))
+        self.assertEqual(response.status_code, 404)
+        self.client.login(username='root', password='password')
+        with self.assertNumQueries(2):
+            response = self.client.get('/%s/' % base36(self.first_entry.pk))
+        self.assertEqual(response.status_code, 404)
 
     def test_zinnia_entry_detail(self):
         self.inhibit_templates('zinnia/_entry_detail.html', '404.html')
