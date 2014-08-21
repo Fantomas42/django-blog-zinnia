@@ -86,7 +86,7 @@ zinnia-theme-foundation
 Zinnia-theme-foundation is an extension theme for your Weblog based on
 `Zurb Foundation 5`_.
 
-URL: https://github.com/gustavi/zinnia-theme-foundation
+URL: https://github.com/django-blog-zinnia/zinnia-theme-foundation
 
 zinnia-wysiwyg-wymeditor
 ========================
