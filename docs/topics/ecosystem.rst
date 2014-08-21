@@ -80,6 +80,14 @@ Zinnia-theme-bootstrap is an extension theme for your Weblog based on
 
 URL: https://github.com/Fantomas42/zinnia-theme-bootstrap
 
+zinnia-theme-foundation
+=======================
+
+Zinnia-theme-foundation is an extension theme for your Weblog based on
+`Zurb Foundation 5`_.
+
+URL: https://github.com/gustavi/zinnia-theme-foundation
+
 zinnia-wysiwyg-wymeditor
 ========================
 
@@ -164,6 +172,7 @@ URL: https://github.com/azaghal/zinnia-drupal
 .. _`Django-CMS`: http://www.django-cms.org/
 .. _`django-admin-tools`: http://django-admin-tools.readthedocs.org/en/latest/index.html
 .. _`Bootstrap`: http://twitter.github.com/bootstrap/
+.. _`Zurb Foundation 5`: http://foundation.zurb.com/
 .. _`WYMEditor`: http://www.wymeditor.org/
 .. _`TinyMCE`: http://www.tinymce.com/
 .. _`CKEditor`: http://ckeditor.com/
