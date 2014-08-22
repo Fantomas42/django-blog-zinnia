@@ -44,7 +44,7 @@ The code bundled in this application is a copy of the original
 ``zinnia.plugins`` module, made for forward compatibility with
 django-blog-zinnia > 0.11.
 
-URL: https://github.com/Fantomas42/cmsplugin-zinnia
+URL: https://github.com/django-blog-zinnia/cmsplugin-zinnia
 
 admin-tools-zinnia
 ==================
@@ -54,7 +54,7 @@ new dashboard modules for your admin interface, related to your Weblog.
 
 Useful for having a sexier admin interface.
 
-URL: https://github.com/Fantomas42/admin-tools-zinnia
+URL: https://github.com/django-blog-zinnia/admin-tools-zinnia
 
 zinnia-threaded-comment
 =======================
@@ -62,7 +62,7 @@ zinnia-threaded-comment
 Zinnia-threaded-comments customizes the comment application bundled by
 Django to enable replies to comments within your Weblog.
 
-URL: https://github.com/Fantomas42/zinnia-threaded-comments
+URL: https://github.com/django-blog-zinnia/zinnia-threaded-comments
 
 zinnia-theme-html5
 ==================
@@ -150,7 +150,7 @@ zinnia-twitter
 Zinnia-twitter is an admin extension allowing you to post your entries on
 `Twitter`_.
 
-URL: https://github.com/Fantomas42/zinnia-twitter
+URL: https://github.com/django-blog-zinnia/zinnia-twitter
 
 byteflow2zinnia
 ===============
