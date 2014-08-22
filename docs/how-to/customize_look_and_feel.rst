@@ -308,7 +308,7 @@ good starting point of a packaged theme.
 
 .. _`specifying a template directory`: https://docs.djangoproject.com/en/dev/ref/templates/api/#loading-templates
 .. _`customize the look and feel`: https://docs.djangoproject.com/en/dev/intro/tutorial02/#customize-the-admin-look-and-feel
-.. _`Zinnia-theme-html5`: https://github.com/Fantomas42/zinnia-theme-html5
-.. _`Zinnia-theme-bootstrap`: https://github.com/Fantomas42/zinnia-theme-bootstrap
+.. _`Zinnia-theme-html5`: https://github.com/django-blog-zinnia/zinnia-theme-html5
+.. _`Zinnia-theme-bootstrap`: https://github.com/django-blog-zinnia/zinnia-theme-bootstrap
 .. _`Django Blog Quintet`: https://github.com/franckbret/django-blog-quintet
 .. _`Solarized`: http://ethanschoonover.com/solarized
