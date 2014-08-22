@@ -70,7 +70,7 @@ zinnia-theme-html5
 Zinnia-theme-html5 is an extension theme for making your Zinnia's Weblog
 HTML5 ready.
 
-URL: https://github.com/Fantomas42/zinnia-theme-html5
+URL: https://github.com/django-blog-zinnia/zinnia-theme-html5
 
 zinnia-theme-bootstrap
 ======================
@@ -78,7 +78,7 @@ zinnia-theme-bootstrap
 Zinnia-theme-bootstrap is an extension theme for your Weblog based on
 `Bootstrap`_.
 
-URL: https://github.com/Fantomas42/zinnia-theme-bootstrap
+URL: https://github.com/django-blog-zinnia/zinnia-theme-bootstrap
 
 zinnia-theme-foundation
 =======================
