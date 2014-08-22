@@ -126,7 +126,7 @@ zinnia-url-shortener-bitly
 Zinnia-url-shortener-bitly is an extension providing URL shortening for the
 entries via `Bit.ly`_.
 
-URL: https://github.com/Fantomas42/zinnia-url-shortener-bitly
+URL: https://github.com/django-blog-zinnia/zinnia-url-shortener-bitly
 
 zinnia-spam-checker-akismet
 ===========================
@@ -134,7 +134,7 @@ zinnia-spam-checker-akismet
 Zinnia-spam-checker-akismet is an extension adding anti-spam protection via
 `Akismet`_ or Typepad.
 
-URL: https://github.com/Fantomas42/zinnia-spam-checker-akismet
+URL: https://github.com/django-blog-zinnia/zinnia-spam-checker-akismet
 
 zinnia-spam-checker-mollom
 ==========================
@@ -142,7 +142,7 @@ zinnia-spam-checker-mollom
 Zinnia-spam-checker-mollom is an extension adding anti-spam protection via
 `Mollom`_.
 
-URL: https://github.com/Fantomas42/zinnia-spam-checker-mollom
+URL: https://github.com/django-blog-zinnia/zinnia-spam-checker-mollom
 
 zinnia-twitter
 ==============
