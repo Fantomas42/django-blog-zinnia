@@ -154,5 +154,5 @@ If you want the ability to reply on comments, you can take a look at
 .. _`django-modeltranslation`:
 .. _`sorl.thumbnail`: http://thumbnail.sorl.net/
 .. _`customizing the comments framework`: http://django-contrib-comments.readthedocs.org/en/latest/custom.html
-.. _`zinnia-threaded-comments`: https://github.com/Fantomas42/zinnia-threaded-comments
+.. _`zinnia-threaded-comments`: https://github.com/django-blog-zinnia/zinnia-threaded-comments
 .. _`django-threadcomments`: https://github.com/HonzaKral/django-threadedcomments
