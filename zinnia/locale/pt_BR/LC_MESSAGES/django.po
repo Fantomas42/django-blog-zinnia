@@ -4,23 +4,23 @@
 # 
 # Translators:
 # Daniel Izelli <izelli@gmail.com>, 2011
-# Fábio <bnafta@gmail.com>, 2013
-# Fábio <bnafta@gmail.com>, 2013-2014
+# Fábio C. Barrionuevo da Luz <bnafta@gmail.com>, 2013
+# Fábio C. Barrionuevo da Luz <bnafta@gmail.com>, 2013-2014
 # fferreira <fernandogferreira@gmail.com>, 2012
 # fferreira <fernandogferreira@gmail.com>, 2012
-# Rodrigo Prior <rprior@infranology.com.br>, 2013
-# Rodrigo Prior <rprior@infranology.com.br>, 2013
+# Rodrigo <rprior@infranology.com.br>, 2013
+# Rodrigo <rprior@infranology.com.br>, 2013-2014
 # rogerio rgrlinux <rgrlinux@gmail.com>, 2011
 # Seta00 <reuben@seta00.com>, 2011
-# tiagosamaha <tiagosamaha@gmail.com>, 2013
-# tiagosamaha <tiagosamaha@gmail.com>, 2013
+# Tiago Samaha Cordeiro <tiagosamaha@gmail.com>, 2013
+# Tiago Samaha Cordeiro <tiagosamaha@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-06 20:16+0200\n"
-"PO-Revision-Date: 2014-05-06 18:16+0000\n"
-"Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
+"PO-Revision-Date: 2014-09-15 12:43+0000\n"
+"Last-Translator: Rodrigo <rprior@infranology.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/django-blog-zinnia/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1356,7 +1356,7 @@ msgstr "Mapa do Site"
 
 #: templates/zinnia/sitemap.html:6
 msgid "Sitemap of the weblog"
-msgstr ""
+msgstr "Mapa do site do weblog"
 
 #: templates/zinnia/sitemap.html:14
 msgid "Entries per categories"
@@ -1599,7 +1599,7 @@ msgstr "Nenhuma Tag encontrada com \"%s\""
 
 #: views/mixins/entry_preview.py:27
 msgid "No entry found matching the query"
-msgstr ""
+msgstr "Nenhuma entrada encontrada que correspondam à consulta"
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."

@@ -3,18 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# linuxqueen <x86@263.net>, 2013
+# Alex Xiang <x86@263.net>, 2013
+# hanfeng <appweb.cn@gmail.com>, 2014
 # mrgaolei <gaolei@liheran.com>, 2014
+# jason lee <979708642@qq.com>, 2014
 # Julien Fache <fantomas42@gmail.com>, 2011
-# linuxqueen <x86@263.net>, 2013
+# Alex Xiang <x86@263.net>, 2013
 # yetist <yetist@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-06 20:16+0200\n"
-"PO-Revision-Date: 2014-05-06 18:16+0000\n"
-"Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
+"PO-Revision-Date: 2014-09-04 06:23+0000\n"
+"Last-Translator: jason lee <979708642@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/django-blog-zinnia/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -175,7 +177,7 @@ msgstr "隐私"
 
 #: admin/entry.py:50
 msgid "Templates"
-msgstr ""
+msgstr "模板"
 
 #: admin/entry.py:53
 msgid "Metadatas"
@@ -469,7 +471,7 @@ msgstr "摘要"
 
 #: models_bases/entry.py:355
 msgid "Used for search and SEO."
-msgstr ""
+msgstr "用来搜索和搜索推广"
 
 #: models_bases/entry.py:366
 msgid "image"
@@ -521,23 +523,23 @@ msgstr "用于显示日志内容的模板"
 
 #: models_bases/entry.py:478
 msgid "detail template"
-msgstr ""
+msgstr "默认模版"
 
 #: models_bases/entry.py:482
 msgid "Template used to display the entry's detail page."
-msgstr ""
+msgstr "用于显示日志内容的模板"
 
 #: templates/400.html:6
 msgid "Error 400"
-msgstr ""
+msgstr "错误400"
 
 #: templates/400.html:10 templates/400.html.py:15
 msgid "Bad request"
-msgstr ""
+msgstr "错误的请求"
 
 #: templates/400.html:17
 msgid "Sorry, but the request was malformed."
-msgstr ""
+msgstr "很抱歉，请求格式错误"
 
 #: templates/403.html:6
 msgid "Error 403"
@@ -549,7 +551,7 @@ msgstr "权限拒绝"
 
 #: templates/403.html:17
 msgid "Sorry, but you don't have the permission to do this action."
-msgstr ""
+msgstr "很抱歉你没有做这个操作的权限。"
 
 #: templates/404.html:6
 msgid "Error 404"
@@ -861,7 +863,7 @@ msgstr "发表评论"
 
 #: templates/comments/zinnia/entry/form.html:26
 msgid "Comment as"
-msgstr ""
+msgstr "评论由"
 
 #: templates/comments/zinnia/entry/form.html:26 templates/zinnia/base.html:96
 #: templates/zinnia/base.html.py:97
@@ -1085,7 +1087,7 @@ msgstr "明天"
 #: templates/zinnia/entry_archive_week.html:38
 #, python-format
 msgid "Week %(week_number)s of %(year)s"
-msgstr ""
+msgstr "%(year)s年度第 %(week_number)s 周"
 
 #: templates/zinnia/entry_archive_month.html:16
 #: templates/zinnia/entry_archive_week.html:17
@@ -1338,7 +1340,7 @@ msgstr "网站地图"
 
 #: templates/zinnia/sitemap.html:6
 msgid "Sitemap of the weblog"
-msgstr ""
+msgstr "博客地图"
 
 #: templates/zinnia/sitemap.html:14
 msgid "Entries per categories"
@@ -1378,7 +1380,7 @@ msgid ""
 "Powered by <a href=\"http://www.djangoproject.com\">Django</a> and <a "
 "href=\"https://github.com/Fantomas42/django-blog-zinnia\">Zinnia "
 "%(ZINNIA_VERSION)s</a>."
-msgstr ""
+msgstr "由 <a href=\"http://www.djangoproject.com\">Django</a> 及 <a href=\"https://github.com/Fantomas42/django-blog-zinnia\">Zinnia %(ZINNIA_VERSION)s</a>.强力驱动"
 
 #: templates/zinnia/tag_list.html:4 templates/zinnia/tag_list.html.py:11
 msgid "Tag list"
@@ -1435,7 +1437,7 @@ msgstr[0] "%(entry_count)s 日志的标签是%(tag)s"
 
 #: templatetags/zinnia_tags.py:341
 msgid "Blog"
-msgstr ""
+msgstr "博客"
 
 #: tests/test_views.py:574 views/search.py:30
 msgid "The pattern is too short"
@@ -1447,131 +1449,131 @@ msgstr "没有搜索到相关模式"
 
 #: urls/__init__.py:23
 msgid "^feeds/"
-msgstr ""
+msgstr "^feeds/"
 
 #: urls/__init__.py:24
 msgid "^tags/"
-msgstr ""
+msgstr "^tags/"
 
 #: urls/__init__.py:25
 msgid "^authors/"
-msgstr ""
+msgstr "^authors/"
 
 #: urls/__init__.py:26
 msgid "^categories/"
-msgstr ""
+msgstr "^categories/"
 
 #: urls/__init__.py:27
 msgid "^search/"
-msgstr ""
+msgstr "^search/"
 
 #: urls/__init__.py:28
 msgid "^random/"
-msgstr ""
+msgstr "^random/"
 
 #: urls/__init__.py:29
 msgid "^sitemap/"
-msgstr ""
+msgstr "^sitemap/"
 
 #: urls/__init__.py:30
 msgid "^trackback/"
-msgstr ""
+msgstr "^trackback/"
 
 #: urls/__init__.py:31
 msgid "^comments/"
-msgstr ""
+msgstr "^comments/"
 
 #: urls/archives.py:18
 msgid "^page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:27
 msgid "^(?P<year>\\d{4})/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:33
 msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/week/(?P<week>\\d+)/$"
 
 #: urls/archives.py:36
 msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/week/(?P<week>\\d+)/page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:45
 msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/(?P<month>\\d{2})/page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:54
 msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:61
 msgid "^today/$"
-msgstr ""
+msgstr "^today/$"
 
 #: urls/archives.py:64
 msgid "^today/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^today/page/(?P<page>\\d+)/$"
 
 #: urls/authors.py:15
 msgid "^(?P<username>[.+-@\\w]+)/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<username>[.+-@\\w]+)/page/(?P<page>\\d+)/$"
 
 #: urls/categories.py:15
 msgid "^(?P<path>[-\\/\\w]+)/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<path>[-\\/\\w]+)/page/(?P<page>\\d+)/$"
 
 #: urls/comments.py:11
 msgid "^success/$"
-msgstr ""
+msgstr "^success/$"
 
 #: urls/feeds.py:23
 msgid "^discussions/$"
-msgstr ""
+msgstr "^discussions/$"
 
 #: urls/feeds.py:26
 msgid "^search/$"
-msgstr ""
+msgstr "^search/$"
 
 #: urls/feeds.py:29
 msgid "^tags/(?P<tag>[^/]+(?u))/$"
-msgstr ""
+msgstr "^tags/(?P<tag>[^/]+(?u))/$"
 
 #: urls/feeds.py:32
 msgid "^authors/(?P<username>[.+-@\\w]+)/$"
-msgstr ""
+msgstr "^authors/(?P<username>[.+-@\\w]+)/$"
 
 #: urls/feeds.py:35
 msgid "^categories/(?P<path>[-\\/\\w]+)/$"
-msgstr ""
+msgstr "^categories/(?P<path>[-\\/\\w]+)/$"
 
 #: urls/feeds.py:38
 msgid ""
 "^discussions/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^discussions/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/feeds.py:42
 msgid ""
 "^comments/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^comments/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/feeds.py:46
 msgid ""
 "^pingbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^pingbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/feeds.py:50
 msgid ""
 "^trackbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^trackbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/quick_entry.py:11
 msgid "^quick-entry/$"
-msgstr ""
+msgstr "^quick-entry/$"
 
 #: urls/tags.py:18
 msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 
 #: views/tags.py:48
 #, python-format
@@ -1580,7 +1582,7 @@ msgstr "没有标签匹配“%s”"
 
 #: views/mixins/entry_preview.py:27
 msgid "No entry found matching the query"
-msgstr ""
+msgstr "没有日志符合你的搜索"
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."

@@ -4,9 +4,9 @@
 # 
 # Translators:
 # Marco Badan <marco.badan@gmail.com>, 2011
-# kowalskj <egorlaw@gmail.com>, 2013
-# fvezzoli <fvezzoli@iz2vtw.net>, 2013
-# fvezzoli <fvezzoli@iz2vtw.net>, 2013
+# Egor <egorlaw@gmail.com>, 2013
+# Francesco Vezzoli <fvezzoli@iz2vtw.net>, 2013
+# Francesco Vezzoli <fvezzoli@iz2vtw.net>, 2013
 # yakky <i.spalletti@nephila.it>, 2012
 # Julien Fache <fantomas42@gmail.com>, 2011
 # yakky <i.spalletti@nephila.it>, 2012

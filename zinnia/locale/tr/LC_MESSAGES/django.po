@@ -4,10 +4,10 @@
 # 
 # Translators:
 # Ahmet Emre Aladağ <emre@woramo.com>, 2012
-# TurkishMAN <acikdunyam@gmail.com>, 2013
+# İbrahim <acikdunyam@gmail.com>, 2013
 # melihsozdinler <melihsozdinler@gmail.com>, 2012
 # melihsozdinler <melihsozdinler@gmail.com>, 2012
-# TurkishMAN <acikdunyam@gmail.com>, 2013
+# İbrahim <acikdunyam@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
