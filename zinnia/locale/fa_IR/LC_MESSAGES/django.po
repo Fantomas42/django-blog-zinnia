@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# hadiazaddel <hadiazaddel@chmail.ir>, 2014
 # MahdiZareie <Mahdi@zareie.net>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-06 20:16+0200\n"
-"PO-Revision-Date: 2014-05-06 18:16+0000\n"
-"Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
+"PO-Revision-Date: 2014-09-03 13:10+0000\n"
+"Last-Translator: hadiazaddel <hadiazaddel@chmail.ir>\n"
 "Language-Team: Persian (Iran) (http://www.transifex.com/projects/p/django-blog-zinnia/language/fa_IR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,12 +38,12 @@ msgstr "موضوعات"
 #: breadcrumbs.py:100
 #, python-format
 msgid "Page %s"
-msgstr ""
+msgstr "صفحه %s"
 
 #: breadcrumbs.py:128
 #, python-format
 msgid "Week %s"
-msgstr ""
+msgstr "هفته %s"
 
 #: feeds.py:177 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:6
@@ -87,12 +88,12 @@ msgstr "آخرین نوشته های مرتبط با برچسب  %s"
 #: feeds.py:325
 #, python-format
 msgid "Results of the search for '%s'"
-msgstr ""
+msgstr "نتایج جستجو برای %s"
 
 #: feeds.py:331
 #, python-format
 msgid "The entries containing the pattern '%s'"
-msgstr ""
+msgstr "نوشته های شامل الگو '%s'"
 
 #: feeds.py:396
 msgid "Latest discussions"
@@ -126,22 +127,22 @@ msgstr "آخرین نظرات ارسالی برای  نوشته ی %s"
 #: feeds.py:518
 #, python-format
 msgid "Pingbacks on %s"
-msgstr ""
+msgstr "بازخوان های %s"
 
 #: feeds.py:524
 #, python-format
 msgid "The latest pingbacks for the entry %s"
-msgstr ""
+msgstr "آخرین بازخوان ها برای نوشته %s"
 
 #: feeds.py:550
 #, python-format
 msgid "Trackbacks on %s"
-msgstr ""
+msgstr "بازخورد های %s"
 
 #: feeds.py:556
 #, python-format
 msgid "The latest trackbacks for the entry %s"
-msgstr ""
+msgstr "آخرین بازخورد های برای نوشته %s"
 
 #: moderator.py:65 moderator.py:87 moderator.py:110
 #, python-format
@@ -250,19 +251,19 @@ msgstr "بستن نظرات برای نوشته های انتخاب شده"
 
 #: admin/entry.py:300
 msgid "Pingbacks are now closed for selected entries."
-msgstr ""
+msgstr "در حال حاضر بازخوان ها برای نوشته های انتخاب شده بسته است."
 
 #: admin/entry.py:302
 msgid "Close the pingbacks for selected entries"
-msgstr ""
+msgstr "بازخوان ها را برای نوشته های انتخاب شده مسدود کن."
 
 #: admin/entry.py:310
 msgid "Trackbacks are now closed for selected entries."
-msgstr ""
+msgstr "در حال حاضر بازخورد ها برای نوشته های انتخاب شده بسته است."
 
 #: admin/entry.py:312
 msgid "Close the trackbacks for selected entries"
-msgstr ""
+msgstr "بازخورد ها را برای نوشته های انتخاب شده مسدود کن."
 
 #: admin/entry.py:321
 msgid "The selected entries are now set at the current date."

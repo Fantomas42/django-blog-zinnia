@@ -4,23 +4,24 @@
 # 
 # Translators:
 # 2lopez <roberto.lopez.lopez@gmail.com>, 2012
-# carpediem <alberto@paparelli.com.ar>, 2013
-# brian.sanchez <seven.xp@gmail.com>, 2013
-# carpediem <alberto@paparelli.com.ar>, 2013
-# whippiii <whippiii@gmail.com>, 2013
-# whippiii <whippiii@gmail.com>, 2014
+# Alberto Paparelli <alberto@paparelli.com.ar>, 2013
+# Brian Sanchez <seven.xp@gmail.com>, 2013
+# Alberto Paparelli <alberto@paparelli.com.ar>, 2013
+# Ernesto Avilés Vzqz <whippiii@gmail.com>, 2013
+# Ernesto Avilés Vzqz <whippiii@gmail.com>, 2014
 # igalarzab <igalarzab@gmail.com>, 2011
 # Julien Fache <fantomas42@gmail.com>, 2011
-# oscarmlage <info@oscarmlage.com>, 2013
+# marctc <marctc@gmail.com>, 2014
+# Óscar M. Lage <info@oscarmlage.com>, 2013
 # 2lopez <roberto.lopez.lopez@gmail.com>, 2012
-# brian.sanchez <seven.xp@gmail.com>, 2013
+# Brian Sanchez <seven.xp@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-06 20:16+0200\n"
-"PO-Revision-Date: 2014-05-06 18:16+0000\n"
-"Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
+"PO-Revision-Date: 2014-07-17 14:42+0000\n"
+"Last-Translator: marctc <marctc@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/django-blog-zinnia/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -609,7 +610,7 @@ msgstr[1] "%(entry_count)s entradas"
 msgid "%(comment_count)s comment"
 msgid_plural "%(comment_count)s comments"
 msgstr[0] "%(comment_count)s comentario"
-msgstr[1] "%(comment_count)s commentarios"
+msgstr[1] "%(comment_count)s comentarios"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:21
 #: templates/zinnia/tags/statistics.html:13
@@ -1356,7 +1357,7 @@ msgstr "Sitemap"
 
 #: templates/zinnia/sitemap.html:6
 msgid "Sitemap of the weblog"
-msgstr ""
+msgstr "Mapa del blog"
 
 #: templates/zinnia/sitemap.html:14
 msgid "Entries per categories"
@@ -1599,7 +1600,7 @@ msgstr "No hay Etiquetas que se ajusten a \"%s\". "
 
 #: views/mixins/entry_preview.py:27
 msgid "No entry found matching the query"
-msgstr ""
+msgstr "No se encontraron entradas a tono con la consulta"
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."

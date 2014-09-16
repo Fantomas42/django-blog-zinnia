@@ -5,7 +5,7 @@
 # Translators:
 # anarion <anarion@go2.pl>, 2012
 # anarion <anarion@go2.pl>, 2012
-# mmarzantowicz <mmarzantowicz@osdf.com.pl>, 2013
+# Mateusz Marzantowicz <mmarzantowicz@osdf.com.pl>, 2013
 # vvarp <vvarpp@gmail.com>, 2011
 # xberus <xberus@gmail.com>, 2012
 # xberus <xberus@gmail.com>, 2012

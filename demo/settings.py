@@ -47,10 +47,12 @@ LANGUAGES = (
     ('ca', gettext('Catalan')),
     ('tr', gettext('Turkish')),
     ('sv', gettext('Swedish')),
+    ('is', gettext('Icelandic')),
     ('hr_HR', gettext('Croatian')),
     ('pt_BR', gettext('Brazilian Portuguese')),
     ('fa_IR', gettext('Persian')),
     ('fi_FI', gettext('Finnish')),
+    ('uk_UA', gettext('Ukrainian')),
     ('zh_CN', gettext('Simplified Chinese')),
 )
 

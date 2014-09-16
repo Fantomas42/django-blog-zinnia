@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-06 20:16+0200\n"
-"PO-Revision-Date: 2014-05-06 18:16+0000\n"
-"Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
+"PO-Revision-Date: 2014-05-07 10:16+0000\n"
+"Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/django-blog-zinnia/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1365,7 +1365,7 @@ msgstr "Карта сайта"
 
 #: templates/zinnia/sitemap.html:6
 msgid "Sitemap of the weblog"
-msgstr ""
+msgstr "Карта сайта блога"
 
 #: templates/zinnia/sitemap.html:14
 msgid "Entries per categories"
@@ -1609,7 +1609,7 @@ msgstr "Не найдено тегов содержащих \"%s\"."
 
 #: views/mixins/entry_preview.py:27
 msgid "No entry found matching the query"
-msgstr ""
+msgstr "Записей по запросу не найдено"
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."

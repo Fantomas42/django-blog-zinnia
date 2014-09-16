@@ -6,7 +6,7 @@
 # Dries Desmet <dries@urga.be>, 2011-2013
 # go2people <admin@go2people.nl>, 2011
 # Julien Fache <fantomas42@gmail.com>, 2011
-# snirp <prinsroy@gmail.com>, 2013
+# Roy Prins <prinsroy@gmail.com>, 2013
 # Steven Vande Ryse <vande.ryse.steven@gmail.com>, 2012
 # Steven Vande Ryse <vande.ryse.steven@gmail.com>, 2012
 msgid ""

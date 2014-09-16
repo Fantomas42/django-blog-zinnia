@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# jery_slo <jernej.jerin@gmail.com>, 2014
+# Jernej Jerin <jernej.jerin@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"

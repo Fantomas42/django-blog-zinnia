@@ -3,313 +3,310 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Jiří Vírava <appukonrad@gmail.com>, 2012
-# Edita Menclová <edi.menclova@centrum.cz>, 2012
-# Edita Menclová <edi.menclova@centrum.cz>, 2012
-# Jiří Vírava <appukonrad@gmail.com>, 2012
-# Martin Jahn <don@mums.cz>, 2012
+# Dmytro Kyrychuk <dmytro.kyrychuck@gmail.com>, 2014
+# Vadym S. Khondar <v.khondar@invisilabs.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-06 20:16+0200\n"
-"PO-Revision-Date: 2014-05-06 18:16+0000\n"
-"Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
-"Language-Team: Czech (http://www.transifex.com/projects/p/django-blog-zinnia/language/cs/)\n"
+"PO-Revision-Date: 2014-08-16 12:17+0000\n"
+"Last-Translator: Dmytro Kyrychuk <dmytro.kyrychuck@gmail.com>\n"
+"Language-Team: Ukrainian (Ukraine) (http://www.transifex.com/projects/p/django-blog-zinnia/language/uk_UA/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Language: uk_UA\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: breadcrumbs.py:68 templates/admin/zinnia/widgets/quickpost.html:25
 #: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:48
 #: templates/zinnia/tag_list.html:6
 msgid "Tags"
-msgstr "Tagy"
+msgstr "Теги"
 
 #: breadcrumbs.py:71 templates/zinnia/author_list.html:6
 #: templates/zinnia/base.html:40
 msgid "Authors"
-msgstr "Autoři"
+msgstr "Автори"
 
 #: breadcrumbs.py:75 admin/forms.py:57 templates/zinnia/base.html:36
 #: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:58
 msgid "Categories"
-msgstr "Kategorie"
+msgstr "Категорії"
 
 #: breadcrumbs.py:100
 #, python-format
 msgid "Page %s"
-msgstr "Starna %s"
+msgstr "Сторінка №%s"
 
 #: breadcrumbs.py:128
 #, python-format
 msgid "Week %s"
-msgstr "Týden %s"
+msgstr "Тиждень №%s"
 
 #: feeds.py:177 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:6
 msgid "Latest entries"
-msgstr "Aktuální články"
+msgstr "Останні дописи"
 
 #: feeds.py:183
 #, python-format
 msgid "The latest entries for the site %s"
-msgstr "Poslední články pro stránky %s"
+msgstr "Останні дописи сайту %s"
 
 #: feeds.py:213
 #, python-format
 msgid "Entries for the category %s"
-msgstr "Články z kategorie %s"
+msgstr "Дописи у категорії %s"
 
 #: feeds.py:219
 #, python-format
 msgid "The latest entries for the category %s"
-msgstr "Poslední články z kategorie %s"
+msgstr "Останні дописи у категорії %s"
 
 #: feeds.py:249
 #, python-format
 msgid "Entries for author %s"
-msgstr "Články od autora %s"
+msgstr "Дописи від %s"
 
 #: feeds.py:255
 #, python-format
 msgid "The latest entries by %s"
-msgstr "Poslední články od %s"
+msgstr "Останні дописи від %s"
 
 #: feeds.py:286
 #, python-format
 msgid "Entries for the tag %s"
-msgstr "Články s tagem %s"
+msgstr "Дописи з тегом %s"
 
 #: feeds.py:292
 #, python-format
 msgid "The latest entries for the tag %s"
-msgstr "Poslední články s tagem %s"
+msgstr "Останні дописи з тегом %s"
 
 #: feeds.py:325
 #, python-format
 msgid "Results of the search for '%s'"
-msgstr "Výsledky vyhledávání pro '%s'"
+msgstr "Результати пошуку за наступним запитом: '%s'"
 
 #: feeds.py:331
 #, python-format
 msgid "The entries containing the pattern '%s'"
-msgstr "Články obsahující vzor '%s'"
+msgstr "Дописи містять такий шаблон: '%s'"
 
 #: feeds.py:396
 msgid "Latest discussions"
-msgstr "Poslední diskuse"
+msgstr "Останні обговорення"
 
 #: feeds.py:402
 #, python-format
 msgid "The latest discussions for the site %s"
-msgstr "Poslední diskuse pro stránku %s"
+msgstr "Останні обговорення сайту %s"
 
 #: feeds.py:435
 #, python-format
 msgid "Discussions on %s"
-msgstr "Diskuze k %s"
+msgstr "Обговорення %s"
 
 #: feeds.py:441
 #, python-format
 msgid "The latest discussions for the entry %s"
-msgstr "Poslední diskuze k článku %s"
+msgstr "Останні обговорення %s"
 
 #: feeds.py:468
 #, python-format
 msgid "Comments on %s"
-msgstr "Komentáře k %s"
+msgstr "Коментарі до %s"
 
 #: feeds.py:474
 #, python-format
 msgid "The latest comments for the entry %s"
-msgstr "Poslední komentáře k článku %s"
+msgstr "Останні коментарі до %s"
 
 #: feeds.py:518
 #, python-format
 msgid "Pingbacks on %s"
-msgstr "Pingbacky na %s"
+msgstr "Пінгбеки до %s"
 
 #: feeds.py:524
 #, python-format
 msgid "The latest pingbacks for the entry %s"
-msgstr "Poslední pingbacky na článek %s"
+msgstr "Останні пінгбеки до %s"
 
 #: feeds.py:550
 #, python-format
 msgid "Trackbacks on %s"
-msgstr "Zpětné odkazy na  %s"
+msgstr "Трекбеки до %s"
 
 #: feeds.py:556
 #, python-format
 msgid "The latest trackbacks for the entry %s"
-msgstr "Poslední zpětné odkazy na článek  %s"
+msgstr "Останні трекбеки до %s"
 
 #: moderator.py:65 moderator.py:87 moderator.py:110
 #, python-format
 msgid "[%(site)s] New comment posted on \"%(title)s\""
-msgstr "[%(site)s] Nové komentáře k \"%(title)s\""
+msgstr "[%(site)s] Новий коментар опублікований до \"%(title)s\""
 
 #: admin/category.py:34
 msgid "tree path"
-msgstr "tree path"
+msgstr "шлях"
 
 #: admin/entry.py:37 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
-msgstr "Obsah"
+msgstr "Вміст"
 
 #: admin/entry.py:39
 msgid "Publication"
-msgstr "Vydání"
+msgstr "Публікація"
 
 #: admin/entry.py:43 templates/admin/zinnia/widgets/_content_stats.html:4
 #: templates/zinnia/_entry_detail_base.html:114
 msgid "Discussions"
-msgstr "Diskuze"
+msgstr "Обговорення"
 
 #: admin/entry.py:47
 msgid "Privacy"
-msgstr "Soukromí"
+msgstr "Приватність"
 
 #: admin/entry.py:50
 msgid "Templates"
-msgstr ""
+msgstr "Шаблони"
 
 #: admin/entry.py:53
 msgid "Metadatas"
-msgstr ""
+msgstr "Метадані"
 
 #: admin/entry.py:85
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
-msgstr "%(title)s (%(word_count)i words)"
+msgstr "%(title)s (%(word_count)i слів)"
 
 #: admin/entry.py:92
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(title)s (%(reactions)i реакція)"
+msgstr[1] "%(title)s (%(reactions)i реакцій)"
+msgstr[2] "%(title)s (%(reactions)i реакцій)"
 
 #: admin/entry.py:97 models/category.py:21 models_bases/entry.py:46
 msgid "title"
-msgstr "nadpis"
+msgstr "Заголовок"
 
 #: admin/entry.py:113
 msgid "author(s)"
-msgstr "autor(ři)"
+msgstr "автор(и)"
 
 #: admin/entry.py:128
 msgid "category(s)"
-msgstr "kategorie(i)"
+msgstr "категорія(-ї)"
 
 #: admin/entry.py:141
 msgid "tag(s)"
-msgstr "tag(y)"
+msgstr "тег(и)"
 
 #: admin/entry.py:156
 msgid "site(s)"
-msgstr "stránka(y)"
+msgstr "сайт(и)"
 
 #: admin/entry.py:169
 msgid "short url"
-msgstr "krátká url"
+msgstr "коротке посилання"
 
 #: admin/entry.py:177
 msgid "is visible"
-msgstr "je viditelný"
+msgstr "видимий"
 
 #: admin/entry.py:262
 msgid "The selected entries now belong to you."
-msgstr "Vybrané příspěvky nyní patří vám."
+msgstr "Обрані дописи тепер належать вам."
 
 #: admin/entry.py:263
 msgid "Set the entries to the user"
-msgstr "Nastavte položky k uživateli"
+msgstr "Встановити дописи користувачу"
 
 #: admin/entry.py:272
 msgid "The selected entries are now marked as published."
-msgstr "Označené položky budou odteď veřejné."
+msgstr "Обрані дописи тепер відмічені як опубліковані"
 
 #: admin/entry.py:273
 msgid "Set entries selected as published"
-msgstr "Nastav označené záznamy jako uveřejněné"
+msgstr "Відмітити обрані дописи як опубліковані"
 
 #: admin/entry.py:281
 msgid "The selected entries are now marked as hidden."
-msgstr "Označené články jsou od této chvíle skryté."
+msgstr "Обрані дописи тепер відмічені як приховані."
 
 #: admin/entry.py:282
 msgid "Set entries selected as hidden"
-msgstr "Nastav označené záznamy jako skryté"
+msgstr "Відмітити обрані дописи як приховані"
 
 #: admin/entry.py:290
 msgid "Comments are now closed for selected entries."
-msgstr "Komentáře pro vybrané položky jsou již uzavřeny"
+msgstr "Коментарі тепер закриті для обраних дописів."
 
 #: admin/entry.py:291
 msgid "Close the comments for selected entries"
-msgstr "Zakaž komentáře pro vybrané články"
+msgstr "Закрити коментарі для обраних дописів"
 
 #: admin/entry.py:300
 msgid "Pingbacks are now closed for selected entries."
-msgstr ""
+msgstr "Пінгбеки обраних дописів тепер закриті."
 
 #: admin/entry.py:302
 msgid "Close the pingbacks for selected entries"
-msgstr ""
+msgstr "Закрити пінгбеки обраних дописів"
 
 #: admin/entry.py:310
 msgid "Trackbacks are now closed for selected entries."
-msgstr ""
+msgstr "Трекбеки обраних дописів тепер закриті."
 
 #: admin/entry.py:312
 msgid "Close the trackbacks for selected entries"
-msgstr ""
+msgstr "Закрити трекбеки обраних дописів"
 
 #: admin/entry.py:321
 msgid "The selected entries are now set at the current date."
-msgstr "Označené položky se teď nastaví pro aktuální datum"
+msgstr "Обрані дописи тепер відмічені сьогоднішньою датою."
 
 #: admin/entry.py:323
 msgid "Put the selected entries on top at the current date"
-msgstr "Dej vybrané příspěvky na začátek aktuálního dne"
+msgstr "Пересунути обрані дописи на початок сьогоднішнього дня."
 
 #: admin/entry.py:331
 msgid "Selected entries are now marked as featured."
-msgstr ""
+msgstr "Обрані дописи тепер відмічені як важливі"
 
 #: admin/entry.py:332
 msgid "Mark selected entries as featured"
-msgstr ""
+msgstr "Відмітити обрані дописи як важливі"
 
 #: admin/entry.py:340
 msgid "Selected entries are no longer marked as featured."
-msgstr ""
+msgstr "Обрані дописи більше не відмічені як важливі"
 
 #: admin/entry.py:342
 msgid "Unmark selected entries as featured"
-msgstr ""
+msgstr "Зняти з вибраних дописів помітку \"важливі\""
 
 #: admin/entry.py:359
 msgid "The selected entries have been tweeted."
-msgstr "Označené články byly tweetnuty."
+msgstr "Обрані дописи були опубліковані в Twitter."
 
 #: admin/entry.py:360
 msgid "Tweet entries selected"
-msgstr "Tweetuj vybrané články"
+msgstr "Твіти обрані"
 
 #: admin/entry.py:381
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr "%(directory)s komentář úspěšně pinged %(success)d položky"
+msgstr ""
 
 #: admin/entry.py:385
 msgid "Ping Directories for selected entries"
-msgstr "Ping Adresáře pro vybrané články"
+msgstr ""
 
 #: admin/filters.py:28
 #, python-format
@@ -321,27 +318,27 @@ msgstr[2] ""
 
 #: admin/filters.py:49
 msgid "published authors"
-msgstr ""
+msgstr "публіковані автори"
 
 #: admin/filters.py:60
 msgid "published categories"
-msgstr ""
+msgstr "публіковані категорії"
 
 #: admin/forms.py:22
 msgid "Parent category"
-msgstr ""
+msgstr "Батьківська категорія"
 
 #: admin/forms.py:24
 msgid "No parent category"
-msgstr "Žádná nadřízená kategorie"
+msgstr "Батьківської категорії немає"
 
 #: admin/forms.py:41
 msgid "A category cannot be parent of itself."
-msgstr "Kategorie nemůže být nadřízena sama sobě"
+msgstr "Категорія не може бути своєю батьківською категоріїю"
 
 #: admin/forms.py:59 models/category.py:75 models_bases/entry.py:407
 msgid "categories"
-msgstr "kategorie"
+msgstr "категорії"
 
 #: models/category.py:24 models_bases/entry.py:49
 msgid "slug"
@@ -349,241 +346,241 @@ msgstr ""
 
 #: models/category.py:25
 msgid "Used to build the category's URL."
-msgstr ""
+msgstr "Використовується для створення URL-адреси категорії."
 
 #: models/category.py:28
 msgid "description"
-msgstr "popis"
+msgstr "опис"
 
 #: models/category.py:34
 msgid "parent category"
-msgstr "nadřízená kategorie"
+msgstr "Батьківська категорія"
 
 #: models/category.py:74
 msgid "category"
-msgstr "kategorie"
+msgstr "категорія"
 
 #: models_bases/entry.py:41
 msgid "draft"
-msgstr "koncept"
+msgstr "чернетка"
 
 #: models_bases/entry.py:42
 msgid "hidden"
-msgstr "skrytý"
+msgstr "прихований"
 
 #: models_bases/entry.py:43
 msgid "published"
-msgstr "publikovaný"
+msgstr "опублікований"
 
 #: models_bases/entry.py:51 models_bases/entry.py:76
 msgid "Used to build the entry's URL."
-msgstr ""
+msgstr "Використовується для створення URL-адреси допису."
 
 #: models_bases/entry.py:54
 msgid "status"
-msgstr ""
+msgstr "статус"
 
 #: models_bases/entry.py:58
 msgid "start publication"
-msgstr "zveřejněno"
+msgstr "опублікувати з"
 
 #: models_bases/entry.py:60
 msgid "Start date of publication."
-msgstr ""
+msgstr "Дата початку публікації."
 
 #: models_bases/entry.py:63
 msgid "end publication"
-msgstr "konec zveřejnění"
+msgstr "опублікувати до"
 
 #: models_bases/entry.py:65
 msgid "End date of publication."
-msgstr ""
+msgstr "Дата закінчення публікації."
 
 #: models_bases/entry.py:70
 msgid "sites"
-msgstr ""
+msgstr "сайти"
 
 #: models_bases/entry.py:71
 msgid "Sites where the entry will be published."
-msgstr ""
+msgstr "Сайти, на котрих буде опубліковано цей допис."
 
 #: models_bases/entry.py:74
 msgid "creation date"
-msgstr "datum vytvoření"
+msgstr "дата створення"
 
 #: models_bases/entry.py:79
 msgid "last update"
-msgstr "poslední úprava"
+msgstr "останнє оновлення"
 
 #: models_bases/entry.py:181
 msgid "entry"
-msgstr "vstup"
+msgstr "допис"
 
 #: models_bases/entry.py:182
 msgid "entries"
-msgstr "články"
+msgstr "дописи"
 
 #: models_bases/entry.py:196
 msgid "content"
-msgstr "obsah"
+msgstr "вміст"
 
 #: models_bases/entry.py:238
 msgid "comments enabled"
-msgstr ""
+msgstr "залишати коментарі дозволено"
 
 #: models_bases/entry.py:239
 msgid "Allows comments if checked."
-msgstr ""
+msgstr "Дозволяє залишати коментарі, якщо відмічено."
 
 #: models_bases/entry.py:241
 msgid "pingbacks enabled"
-msgstr ""
+msgstr "пінгбеки увімкнено"
 
 #: models_bases/entry.py:242
 msgid "Allows pingbacks if checked."
-msgstr ""
+msgstr "Дозволяє пінгбеки, якщо відмічено."
 
 #: models_bases/entry.py:244
 msgid "trackbacks enabled"
-msgstr ""
+msgstr "трекбеки увімкнено"
 
 #: models_bases/entry.py:245
 msgid "Allows trackbacks if checked."
-msgstr ""
+msgstr "Дозволяє трекбеки, якщо відмічено."
 
 #: models_bases/entry.py:248
 msgid "comment count"
-msgstr ""
+msgstr "кількість коментарів"
 
 #: models_bases/entry.py:250
 msgid "pingback count"
-msgstr ""
+msgstr "кількість пінгбеків"
 
 #: models_bases/entry.py:252
 msgid "trackback count"
-msgstr ""
+msgstr "кількість трекбеків"
 
 #: models_bases/entry.py:336
 msgid "related entries"
-msgstr "související položky"
+msgstr "пов'язані дописи"
 
 #: models_bases/entry.py:354
 msgid "excerpt"
-msgstr "výpisek"
+msgstr "витяг"
 
 #: models_bases/entry.py:355
 msgid "Used for search and SEO."
-msgstr ""
+msgstr "Використовується для пошуку та СЕО."
 
 #: models_bases/entry.py:366
 msgid "image"
-msgstr "obrázek"
+msgstr "зображення"
 
 #: models_bases/entry.py:367
 msgid "Used for illustration."
-msgstr ""
+msgstr "Використовується для ілюстрації."
 
 #: models_bases/entry.py:378
 msgid "featured"
-msgstr "uváděný"
+msgstr "популярний"
 
 #: models_bases/entry.py:393
 msgid "authors"
-msgstr "autoři"
+msgstr "автори"
 
 #: models_bases/entry.py:417
 msgid "tags"
-msgstr "tagy"
+msgstr "теги"
 
 #: models_bases/entry.py:436
 msgid "login required"
-msgstr "vyžadováno přihlášení"
+msgstr "необхідний вхід"
 
 #: models_bases/entry.py:437
 msgid "Only authenticated users can view the entry."
-msgstr ""
+msgstr "Лише користувачі, шо пройшли автентифікацію, можуть бачити цей допис."
 
 #: models_bases/entry.py:449
 msgid "password"
-msgstr "heslo"
+msgstr "пароль"
 
 #: models_bases/entry.py:450
 msgid "Protects the entry with a password."
-msgstr ""
+msgstr "Захист допису паролем."
 
 #: models_bases/entry.py:462
 msgid "content template"
-msgstr ""
+msgstr "шаблон вмісту"
 
 #: models_bases/entry.py:464 models_bases/entry.py:480
 msgid "Default template"
-msgstr "výchozí šablona"
+msgstr "Шаблон за замовчуванням"
 
 #: models_bases/entry.py:466
 msgid "Template used to display the entry's content."
-msgstr ""
+msgstr "Шаблон використовується для показу вмісту допису."
 
 #: models_bases/entry.py:478
 msgid "detail template"
-msgstr ""
+msgstr "шаблон подробиць"
 
 #: models_bases/entry.py:482
 msgid "Template used to display the entry's detail page."
-msgstr ""
+msgstr "Шаблон, що використовується для сторінки подробиць допису."
 
 #: templates/400.html:6
 msgid "Error 400"
-msgstr ""
+msgstr "Error 400"
 
 #: templates/400.html:10 templates/400.html.py:15
 msgid "Bad request"
-msgstr ""
+msgstr "Неправильний запит."
 
 #: templates/400.html:17
 msgid "Sorry, but the request was malformed."
-msgstr ""
+msgstr "Вибачте, та запит був свормований неправильно."
 
 #: templates/403.html:6
 msgid "Error 403"
-msgstr "Chyba 403"
+msgstr "Error 403"
 
 #: templates/403.html:10 templates/403.html.py:15
 msgid "Permission denied"
-msgstr "Přístup odepřen"
+msgstr "Доступ заборонено"
 
 #: templates/403.html:17
 msgid "Sorry, but you don't have the permission to do this action."
-msgstr ""
+msgstr "Вибачте, та ви не маєте права виконувати цю дію."
 
 #: templates/404.html:6
 msgid "Error 404"
-msgstr "Chyba 404"
+msgstr "Error 404"
 
 #: templates/404.html:10 templates/404.html.py:15
 msgid "Page not found"
-msgstr "Stránka nebyla nalezena"
+msgstr "Сторінку не знайдено"
 
 #: templates/404.html:17
 msgid "Sorry, but the requested page could not be found."
-msgstr "Je nám líto ale požadovaná stránka nebyla nalezena "
+msgstr "Вибачте, та запитувану сторінку не знайдено."
 
 #: templates/500.html:6
 msgid "Error 500"
-msgstr "Chyba 500"
+msgstr "Error 500"
 
 #: templates/500.html:10 templates/500.html.py:15
 msgid "Server error"
-msgstr "Chyba servru"
+msgstr "Помилка серверу"
 
 #: templates/500.html:17
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "e-mail and should be fixed shortly. Thanks for your patience."
-msgstr "Došlo k chybě. Ta byla nahlášena administrátorovi serveru pomocí e-mailu a měla by být brzy odstraněna. Děkujeme za trpělivost"
+msgstr "Сталася помилка. Адміністраторі були поінформовані про цей інцидент електронною поштою. Проблему буде вирішено найближчим часом. Дякуємо за терпіння."
 
 #: templates/admin/zinnia/widgets/_content_stats.html:3
 msgid "Contents"
-msgstr "Obsah"
+msgstr "Вміст"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:9
 #: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:17
@@ -594,9 +591,9 @@ msgstr "Obsah"
 #, python-format
 msgid "%(entry_count)s entry"
 msgid_plural "%(entry_count)s entries"
-msgstr[0] "%(entry_count)s článek"
-msgstr[1] "%(entry_count)s článků"
-msgstr[2] "%(entry_count)s články"
+msgstr[0] "%(entry_count)s допис"
+msgstr[1] "%(entry_count)s дописи"
+msgstr[2] "%(entry_count)s дописів"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:14
 #: templates/zinnia/_entry_detail_base.html:120
@@ -605,18 +602,18 @@ msgstr[2] "%(entry_count)s články"
 #, python-format
 msgid "%(comment_count)s comment"
 msgid_plural "%(comment_count)s comments"
-msgstr[0] "%(comment_count)s komentář"
-msgstr[1] "%(comment_count)s komentáře"
-msgstr[2] "%(comment_count)s komentáře"
+msgstr[0] "%(comment_count)s коментар"
+msgstr[1] "%(comment_count)s коментаря"
+msgstr[2] "%(comment_count)s коментарів"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:21
 #: templates/zinnia/tags/statistics.html:13
 #, python-format
 msgid "%(category_count)s category"
 msgid_plural "%(category_count)s categories"
-msgstr[0] "%(category_count)s kategorie"
-msgstr[1] "%(category_count)s kategorií"
-msgstr[2] "%(category_count)s kategorie"
+msgstr[0] "%(category_count)s категорія"
+msgstr[1] "%(category_count)s категорій"
+msgstr[2] "%(category_count)s категорій"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:24
 #: templates/zinnia/_entry_detail_base.html:139
@@ -624,18 +621,18 @@ msgstr[2] "%(category_count)s kategorie"
 #, python-format
 msgid "%(pingback_count)s pingback"
 msgid_plural "%(pingback_count)s pingbacks"
-msgstr[0] "%(pingback_count)s pingback"
-msgstr[1] "%(pingback_count)s pingbaků"
-msgstr[2] "%(pingback_count)s pingbacky"
+msgstr[0] "%(pingback_count)s пінгбек"
+msgstr[1] "%(pingback_count)s пінгбеки"
+msgstr[2] "%(pingback_count)s пінгбеків"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:29
 #: templates/zinnia/tags/statistics.html:10
 #, python-format
 msgid "%(tag_count)s tag"
 msgid_plural "%(tag_count)s tags"
-msgstr[0] "%(tag_count)s tag"
-msgstr[1] "%(tag_count)s tagů"
-msgstr[2] "%(tag_count)s tagy"
+msgstr[0] "%(tag_count)s тег"
+msgstr[1] "%(tag_count)s тегів"
+msgstr[2] "%(tag_count)s тегів"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:32
 #: templates/zinnia/_entry_detail_base.html:148
@@ -643,67 +640,67 @@ msgstr[2] "%(tag_count)s tagy"
 #, python-format
 msgid "%(trackback_count)s trackback"
 msgid_plural "%(trackback_count)s trackbacks"
-msgstr[0] "%(trackback_count)s zpětný odkaz"
-msgstr[1] "%(trackback_count)s zpětné odkazy"
-msgstr[2] "%(trackback_count)s zpětné odkazy"
+msgstr[0] "%(trackback_count)s трекбек"
+msgstr[1] "%(trackback_count)s трекбеки"
+msgstr[2] "%(trackback_count)s трекбеків"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:37
 #: templates/zinnia/tags/statistics.html:4
 #, python-format
 msgid "%(author_count)s author"
 msgid_plural "%(author_count)s authors"
-msgstr[0] "%(author_count)s autor"
-msgstr[1] "%(author_count)s autorů"
-msgstr[2] "%(author_count)s autoři"
+msgstr[0] "%(author_count)s автор"
+msgstr[1] "%(author_count)s авторів"
+msgstr[2] "%(author_count)s авторів"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:42
 #: templates/zinnia/tags/statistics.html:25
 #, python-format
 msgid "%(reject_count)s rejected item"
 msgid_plural "%(reject_count)s rejected items"
-msgstr[0] "%(reject_count)s odmítnutý komentář"
-msgstr[1] "%(reject_count)s odmítnutých komentářů"
-msgstr[2] "%(reject_count)s odmítnuté komentáře"
+msgstr[0] "%(reject_count)s відхилений пункт"
+msgstr[1] "%(reject_count)s відхилених пунктів"
+msgstr[2] "%(reject_count)s відхилених пунктів"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:47
 msgid "Statistics"
-msgstr "Statistiky"
+msgstr "Статистика"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:49
 #: templates/zinnia/tags/statistics.html:28
 #, python-format
 msgid "%(entries_per_month)s entries per month"
-msgstr "%(entries_per_month)s článků za měsíc"
+msgstr "%(entries_per_month)s дописів на місяць"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:54
 #: templates/zinnia/tags/statistics.html:31
 #, python-format
 msgid "%(words_per_entry)s words per entry"
-msgstr "%(words_per_entry)s slov v článku"
+msgstr "%(words_per_entry)s слів на допис"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:57
 #: templates/zinnia/tags/statistics.html:34
 #, python-format
 msgid "%(words_per_comment)s words per comment"
-msgstr "%(words_per_comment)s slov v komentáři"
+msgstr "%(words_per_comment)s слів на коментар"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:62
 #: templates/zinnia/tags/statistics.html:37
 #, python-format
 msgid "%(comments_per_entry)s comments per entry"
-msgstr "%(comments_per_entry)s kometářů v článku"
+msgstr "%(comments_per_entry)s коментарів на допис"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:65
 #: templates/zinnia/tags/statistics.html:40
 #, python-format
 msgid "%(linkbacks_per_entry)s linkbacks per entry"
-msgstr "%(linkbacks_per_entry)s příspěvků k článku"
+msgstr "%(linkbacks_per_entry)s лінкбеків на допис"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:6
 #: templates/zinnia/entry_detail_base.html:248
 #: templates/zinnia/entry_detail_base.html:249
 msgid "Edit the entry"
-msgstr "Upravit článek"
+msgstr "Редагувати допис"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:9
 #: templates/comments/zinnia_entry_preview.html:25
@@ -717,130 +714,130 @@ msgstr "Upravit článek"
 #: templates/zinnia/entry_detail_base.html:207
 msgctxt "on date"
 msgid "on"
-msgstr ""
+msgstr "на"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:15
 #: templates/comments/zinnia/entry/form.html:31
 msgid "Preview"
-msgstr "Náhled"
+msgstr "Попередній перегляд"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:22
 #: templates/zinnia/tags/entries_draft.html:9
 msgid "No draft entries."
-msgstr "Žádné nedokončené články"
+msgstr "Немає чорнових  дописів"
 
 #: templates/admin/zinnia/widgets/_draft_entries.html:31
 #: templates/admin/zinnia/widgets/_draft_entries.html:32
 msgid "View all draft entries"
-msgstr "Zobraz všechny nedokončené články"
+msgstr "Переглянути усі чорнові дописи"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:10
 #: templates/zinnia/_entry_detail_base.html:35
 #: templates/zinnia/tags/comments_recent.html:6
 #: templates/zinnia/tags/linkbacks_recent.html:7
 msgid "in"
-msgstr "v"
+msgstr "у"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:13
 #: templates/zinnia/tags/comments_recent.html:8
 msgid "Comment on"
-msgstr "Komentovat "
+msgstr "Кометар до"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:22
 msgid "Edit the comment"
-msgstr "Uprav komentář"
+msgstr "Редагувати коментар"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:23
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:18
 msgid "Edit"
-msgstr "Upravit"
+msgstr "Редагувати"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:30
 #: templates/zinnia/_entry_detail_base.html:124
 #: templates/zinnia/entry_detail_base.html:229
 #: templates/zinnia/tags/comments_recent.html:15
 msgid "No comments yet."
-msgstr "Zatím bez komentáře"
+msgstr "Досі ніхто не додав жодного коментара."
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:39
 #: templates/admin/zinnia/widgets/_recent_comments.html:40
 msgid "Manage the comments"
-msgstr "Spravovat komentáře"
+msgstr "Керування коментарями"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:7
 msgid "made a linkback on"
-msgstr "příspěvky provedeny na "
+msgstr "створено лінкбек до"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:17
 msgid "Edit the linkback"
-msgstr "Upravit příspěvky"
+msgstr "Редагувати лінкбек"
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:25
 #: templates/zinnia/tags/linkbacks_recent.html:16
 msgid "No linkbacks yet."
-msgstr "Zatím žádné příspěvky"
+msgstr "Досі немає жодного лінкбека."
 
 #: templates/admin/zinnia/widgets/content_stats.html:6
 #: templates/admin/zinnia/widgets/content_stats.html:8
 msgid "Today"
-msgstr "Dnes"
+msgstr "Сьогодні"
 
 #: templates/admin/zinnia/widgets/draft_entries.html:6
 #: templates/admin/zinnia/widgets/draft_entries.html:8
 msgid "Draft entries"
-msgstr "Koncepty"
+msgstr "Чорнові дописи"
 
 #: templates/admin/zinnia/widgets/quickpost.html:5
 #: templates/admin/zinnia/widgets/quickpost.html:6
 msgid "Quick publishing"
-msgstr "Rychlé publikování"
+msgstr "Швидка публікація"
 
 #: templates/admin/zinnia/widgets/quickpost.html:9
 msgid "Title"
-msgstr "Titulek"
+msgstr "Заголовок"
 
 #: templates/admin/zinnia/widgets/quickpost.html:33
 msgid "Save as draft"
-msgstr "Ulož jako návrh"
+msgstr "Зберегти як чорновик"
 
 #: templates/admin/zinnia/widgets/quickpost.html:34
 msgid "Reset"
-msgstr "Obnovení"
+msgstr "Скинути"
 
 #: templates/admin/zinnia/widgets/quickpost.html:35
 msgid "Publish"
-msgstr "Publikovat"
+msgstr "Опублікувати"
 
 #: templates/admin/zinnia/widgets/recent_comments.html:6
 #: templates/admin/zinnia/widgets/recent_comments.html:8
 #: templates/zinnia/base.html:56
 msgid "Recent comments"
-msgstr "Poslední komentáře"
+msgstr "Нещодавні коментарі"
 
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:6
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:8
 #: templates/zinnia/base.html:60
 msgid "Recent linkbacks"
-msgstr "Nedávno hledané"
+msgstr "Нещодавні лінкбеки"
 
 #: templates/comments/comment_authors_email.txt:1
 #: templates/comments/comment_notification_email.txt:1
 #: templates/comments/comment_reply_email.txt:1
 #: templates/zinnia/entry_list.html:21
 msgid "Author"
-msgstr "Autor"
+msgstr "Автор"
 
 #: templates/comments/comment_authors_email.txt:3
 #: templates/comments/comment_notification_email.txt:5
 #: templates/comments/comment_reply_email.txt:3
 msgid "Comment"
-msgstr "Komentář"
+msgstr "Коментар"
 
 #: templates/comments/comment_authors_email.txt:6
 #: templates/comments/comment_notification_email.txt:8
 #: templates/comments/comment_reply_email.txt:6
 msgid "View this comment"
-msgstr "Zobrazit komentář"
+msgstr "Переглянути цей коментар"
 
 #: templates/comments/comment_notification_email.txt:2
 msgid "Email"
@@ -852,80 +849,80 @@ msgstr "IP"
 
 #: templates/comments/comment_notification_email.txt:10
 msgid "Flag this comment"
-msgstr "Nahlásit komentář"
+msgstr "Виділити цей коментар"
 
 #: templates/comments/comment_notification_email.txt:12
 msgid "Delete this comment"
-msgstr "Smazat komentář"
+msgstr "Видалити цей коментар"
 
 #: templates/comments/comment_notification_email.txt:14
 msgid "Approve this comment"
-msgstr "Schválit komentář"
+msgstr "Підтвердити цей коментар"
 
 #: templates/comments/zinnia_entry_preview.html:4
 msgid "Comment preview"
-msgstr "Komentovat náhled"
+msgstr "Попередній перегляд коментаря"
 
 #: templates/comments/zinnia_entry_preview.html:10
 msgid "Please correct following error."
 msgid_plural "Please correct following errors."
-msgstr[0] "Prosím opravte následující chybu"
-msgstr[1] "Prosím opravte následující chyby"
-msgstr[2] "Prosím opravte následující chyby"
+msgstr[0] "Виправте, будь ласка, наступну помилку."
+msgstr[1] "Виправте, будь ласка, наступні помилки."
+msgstr[2] "Виправте, будь ласка, наступні помилки."
 
 #: templates/comments/zinnia_entry_preview.html:12
 msgid "Preview of the comment"
-msgstr "Náhled komentáře"
+msgstr "Попередній перегляд коментаря"
 
 #: templates/comments/zinnia/entry/form.html:11
 msgid "Post your comment"
-msgstr "Pošli komentář"
+msgstr "Відправити коментар"
 
 #: templates/comments/zinnia/entry/form.html:26
 msgid "Comment as"
-msgstr ""
+msgstr "Коментувати як"
 
 #: templates/comments/zinnia/entry/form.html:26 templates/zinnia/base.html:96
 #: templates/zinnia/base.html.py:97
 msgid "Log out"
-msgstr "Odhlásit"
+msgstr "Вийти"
 
 #: templates/comments/zinnia/entry/form.html:30
 msgid "Post"
-msgstr "Zveřejnit"
+msgstr "Підправити"
 
 #: templates/comments/zinnia/entry/posted.html:4
 #: templates/comments/zinnia/entry/posted.html:9
 msgid "Thanks for your comment"
-msgstr "Děkujeme za Váš komentář"
+msgstr "Дякуємо за Ваш коментар"
 
 #: templates/comments/zinnia/entry/posted.html:11
 msgid "Your comment needs to be approved before getting displayed."
-msgstr ""
+msgstr "Ваш коментар повинен бути спочатку підтверджений адміністрацією, а вже потім його зможуть переглядати решта користувачів сайту."
 
 #: templates/comments/zinnia/entry/posted.html:19
 #, python-format
 msgid "Back to %(title)s"
-msgstr ""
+msgstr "Повернутися до %(title)s"
 
 #: templates/comments/zinnia/entry/posted.html:26
 #: templates/comments/zinnia/entry/posted.html:27
 msgid "Return to entry list"
-msgstr "Zpět na seznam článků"
+msgstr "Повернутися до списку дописів"
 
 #: templates/zinnia/_entry_detail_base.html:17
 msgid "Written by"
-msgstr "Napsal"
+msgstr "Написав"
 
 #: templates/zinnia/_entry_detail_base.html:21
 #: templates/zinnia/author_list.html:17 templates/zinnia/tags/authors.html:6
 #, python-format
 msgid "Show all %(author)s's entries"
-msgstr "Zobraz všechny články od %(author)s"
+msgstr "Показати всі дописи від %(author)s"
 
 #: templates/zinnia/_entry_detail_base.html:25
 msgid "Written on"
-msgstr "Napsal"
+msgstr "Дата написання"
 
 #: templates/zinnia/_entry_detail_base.html:38
 #: templates/zinnia/category_list.html:16
@@ -933,117 +930,117 @@ msgstr "Napsal"
 #: templates/zinnia/tags/categories_tree.html:5
 #, python-format
 msgid "Show all entries in %(category)s"
-msgstr "Zobraz všechny články z %(category)s"
+msgstr "Показати усі дописи у категорії %(category)s"
 
 #: templates/zinnia/_entry_detail_base.html:46
 msgid "Last update on"
-msgstr ""
+msgstr "Востаннє оновлено"
 
 #: templates/zinnia/_entry_detail_base.html:78
 #, python-format
 msgid "%(percent)s%% of %(object)s still remains to read."
-msgstr ""
+msgstr "Лишилося прочитати ще %(percent)s%% %(object)s."
 
 #: templates/zinnia/_entry_detail_base.html:80
 msgid "Continue reading"
-msgstr "Čtěte dál"
+msgstr "Продовжити читання"
 
 #: templates/zinnia/_entry_detail_base.html:95
 #: templates/zinnia/tag_list.html:17
 #, python-format
 msgid "Show all entries tagged by %(tag)s"
-msgstr "Zobraz všechny články otagované %(tag)s"
+msgstr "Показати усі дописи з тегом %(tag)s"
 
 #: templates/zinnia/_entry_detail_base.html:98
 msgid "No tags"
-msgstr "Žádné tagy"
+msgstr "Немає тегів"
 
 #: templates/zinnia/_entry_detail_base.html:104
 msgid "Short url"
-msgstr "Krátké url"
+msgstr "Коротка адреса"
 
 #: templates/zinnia/_entry_detail_base.html:106
 #, python-format
 msgid "Short URL to %(object)s"
-msgstr "Zkrácená URL k %(object)s"
+msgstr "Коротка адреса до %(object)s"
 
 #: templates/zinnia/_entry_detail_base.html:119
 #: templates/zinnia/tags/entries_popular.html:7
 #, python-format
 msgid "Comments on %(object)s"
-msgstr "Komentáře k %(object)s"
+msgstr "Коментарі до %(object)s"
 
 #: templates/zinnia/_entry_detail_base.html:126
 #, python-format
 msgid "Leave a comment on %(object)s"
-msgstr "Zanechat komentáře k %(object)s"
+msgstr "Лишити коментар до %(object)s"
 
 #: templates/zinnia/_entry_detail_base.html:127
 msgid "Be first to comment!"
-msgstr "Tvůj komentář může být první!"
+msgstr "Станьте першим з тих, хто лишить тут коментар!"
 
 #: templates/zinnia/_entry_detail_base.html:130
 #: templates/zinnia/entry_detail_base.html:225
 #: templates/zinnia/entry_detail_base.html:231
 msgid "Comments are closed."
-msgstr "Komentáře jsou uzavřené"
+msgstr "Коментарі закрито."
 
 #: templates/zinnia/_entry_detail_base.html:138
 #, python-format
 msgid "Pingbacks on %(object)s"
-msgstr "Pingbacks k %(object)s"
+msgstr "Пінгбеки до %(object)s"
 
 #: templates/zinnia/_entry_detail_base.html:147
 #, python-format
 msgid "Trackbacks on %(object)s"
-msgstr "Zpětné odkazy k %(object)s"
+msgstr "Трекбеки до %(object)s"
 
 #: templates/zinnia/author_list.html:4 templates/zinnia/author_list.html:11
 msgid "Author list"
-msgstr "Seznam autorů"
+msgstr "Список авторів"
 
 #: templates/zinnia/author_list.html:23 templates/zinnia/tags/authors.html:12
 msgid "No authors yet."
-msgstr "Zatím žádní autoři"
+msgstr "Досі нема жодного автора."
 
 #: templates/zinnia/base.html:16 templates/zinnia/skeleton.html:36
 msgid "RSS Feed of latest entries"
-msgstr "RSS Kanál posledních článků"
+msgstr "RSS-стрічка останніх дописів"
 
 #: templates/zinnia/base.html:17
 msgid "RSS Feed of latest discussions"
-msgstr "RSS Kanál posledních diskuzí"
+msgstr "RSS-стрічка останніх обговорень"
 
 #: templates/zinnia/base.html:27
 msgid "Welcome!"
-msgstr ""
+msgstr "Вітаємо!"
 
 #: templates/zinnia/base.html:29
 msgid "This simple theme is the default appearance of Zinnia."
-msgstr ""
+msgstr "Ця простенька тема ілюструє звичайний вигляд ZInnia."
 
 #: templates/zinnia/base.html:32
 msgid ""
 "Don't hesitate to override the template <strong>zinnia/base.html</strong> to"
 " start <a href='http://docs.django-blog-zinnia.com/en/latest/how-"
 "to/customize_look_and_feel.html'>customizing your Weblog</a>."
-msgstr ""
+msgstr "Не соромтеся змынювати шаблон <strong>zinnia/base.html</strong>, аби почати <a href='http://docs.django-blog-zinnia.com/en/latest/how-to/customize_look_and_feel.html'>налаштовувати свій блог</a>."
 
 #: templates/zinnia/base.html:44
 msgid "Calendar"
-msgstr "Kalendář"
+msgstr "Календар"
 
 #: templates/zinnia/base.html:52
 msgid "Recent entries"
-msgstr "Poslední záznamy"
+msgstr "Нещодавні дописи"
 
 #: templates/zinnia/base.html:64
 msgid "Random entries"
-msgstr "Náhodně vybrané"
+msgstr "Випадкові дописи"
 
 #: templates/zinnia/base.html:68
 msgid "Popular entries"
-msgstr "Populární články"
+msgstr "Популярні дописи"
 
 #: templates/zinnia/base.html:72 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_day.html:6
@@ -1064,217 +1061,217 @@ msgstr "Populární články"
 #: templates/zinnia/tags/entries_archives_tree.html:13
 #: templates/zinnia/tags/entries_archives_tree.html:23
 msgid "Archives"
-msgstr "Archiv"
+msgstr "Архіви"
 
 #: templates/zinnia/base.html:77
 msgid "Tools"
-msgstr "Nástroje"
+msgstr "Інструменти"
 
 #: templates/zinnia/base.html:81 templates/zinnia/base.html.py:82
 msgid "Dashboard"
-msgstr "Nástrojová deska"
+msgstr ""
 
 #: templates/zinnia/base.html:88 templates/zinnia/base.html.py:89
 msgid "Post an entry"
-msgstr "Přidat příspěvek"
+msgstr "Відправити допис"
 
 #: templates/zinnia/category_list.html:4
 #: templates/zinnia/category_list.html:11
 msgid "Category list"
-msgstr "Seznam kategorií"
+msgstr "Список категорій"
 
 #: templates/zinnia/category_list.html:28
 #: templates/zinnia/tags/categories.html:11
 #: templates/zinnia/tags/categories_tree.html:16
 msgid "No categories yet."
-msgstr "Zatím žádné kategorie"
+msgstr "Досі нема жодної категорії."
 
 #: templates/zinnia/entry_archive.html:16
 msgid "Yearly archives"
-msgstr ""
+msgstr "Щорічні архіви"
 
 #: templates/zinnia/entry_archive_day.html:16
 #: templates/zinnia/entry_archive_today.html:16
 msgid "Previous day"
-msgstr "Předchozí den"
+msgstr "Попередній день"
 
 #: templates/zinnia/entry_archive_day.html:22
 msgid "Next day"
-msgstr "Následující den"
+msgstr "Наступний день"
 
 #: templates/zinnia/entry_archive_day.html:35
 #: templates/zinnia/entry_archive_week.html:30
 #: templates/zinnia/entry_archive_week.html:38
 #, python-format
 msgid "Week %(week_number)s of %(year)s"
-msgstr ""
+msgstr "Тиждень №%(week_number)s %(year)s року"
 
 #: templates/zinnia/entry_archive_month.html:16
 #: templates/zinnia/entry_archive_week.html:17
 msgid "Daily archives"
-msgstr "Denní archiv"
+msgstr "Щоденні архіви"
 
 #: templates/zinnia/entry_archive_month.html:26
 msgid "Previous month"
-msgstr "Předchozí měsíc"
+msgstr "Попередній місяць"
 
 #: templates/zinnia/entry_archive_month.html:32
 msgid "Next month"
-msgstr "Následující měsíc"
+msgstr "Наступний місяць"
 
 #: templates/zinnia/entry_archive_today.html:4
 #: templates/zinnia/entry_archive_today.html:6
 #: templates/zinnia/entry_archive_today.html:11
 msgid "Today archives"
-msgstr "Dnešní archivy"
+msgstr "Сьогоднішній архів"
 
 #: templates/zinnia/entry_archive_week.html:4
 #: templates/zinnia/entry_archive_week.html:6
 #: templates/zinnia/entry_archive_week.html:11
 #, python-format
 msgid "Archives week %(week_number)s of %(year)s"
-msgstr "Archiv týdene %(week_number)s z %(year)s"
+msgstr "Архів тижня №%(week_number)s %(year)s року"
 
 #: templates/zinnia/entry_archive_week.html:27
 msgid "Previous week"
-msgstr ""
+msgstr "Попередній тиждень"
 
 #: templates/zinnia/entry_archive_week.html:35
 msgid "Next week"
-msgstr ""
+msgstr "Наступний тиждень"
 
 #: templates/zinnia/entry_archive_year.html:15
 #: templates/zinnia/sitemap.html:63
 msgid "Monthly archives"
-msgstr "Měsíční archivy"
+msgstr "Щомісячні архіви"
 
 #: templates/zinnia/entry_archive_year.html:25
 msgid "Previous year"
-msgstr ""
+msgstr "Попередній рік"
 
 #: templates/zinnia/entry_archive_year.html:31
 msgid "Next year"
-msgstr ""
+msgstr "Наступний рік"
 
 #: templates/zinnia/entry_detail_base.html:22
 msgid "RSS Feed of discussions on"
-msgstr "RSS Kanál diskuzí k"
+msgstr "RSS-стрічка обговорень "
 
 #: templates/zinnia/entry_detail_base.html:24
 msgid "RSS Feed of comments on"
-msgstr "RSS Kanál komentářů k"
+msgstr "RSS-стрічка коментарів"
 
 #: templates/zinnia/entry_detail_base.html:26
 msgid "RSS Feed of pingbacks on"
-msgstr "RSS Kanál pigbacků k"
+msgstr "RSS-стрічка пінгбеків до"
 
 #: templates/zinnia/entry_detail_base.html:28
 msgid "RSS Feed of trackbacks on"
-msgstr "RSS Kanál zpětných odkazů k"
+msgstr "RSS-стрічка трекбеків до"
 
 #: templates/zinnia/entry_detail_base.html:47
 msgid "Next entry"
-msgstr "Další článek"
+msgstr "Наступний допис"
 
 #: templates/zinnia/entry_detail_base.html:61
 msgid "Previous entry"
-msgstr "Předchozí článek"
+msgstr "Попередній допис"
 
 #: templates/zinnia/entry_detail_base.html:75
 msgid "Related entries"
-msgstr "Související články"
+msgstr "Дописи, що певним чином цього стосуються"
 
 #: templates/zinnia/entry_detail_base.html:89
 msgid "Similar entries"
-msgstr "Podobné články "
+msgstr "Схожі дописи"
 
 #: templates/zinnia/entry_detail_base.html:98
 msgid "Pingbacks"
-msgstr "Pingbacks"
+msgstr "Пінгбеки"
 
 #: templates/zinnia/entry_detail_base.html:115
 msgid "Direct link to this pingback"
-msgstr "Přímý odkaz na tento pingback"
+msgstr "Пряме посилання до пінгбеку"
 
 #: templates/zinnia/entry_detail_base.html:131
 msgid "Pingbacks are open."
-msgstr "Pingbacks jsou otevřené"
+msgstr "Пінгбеки відкриті."
 
 #: templates/zinnia/entry_detail_base.html:133
 msgid "Pingbacks are closed."
-msgstr "Pingbacks jsou uzavřené"
+msgstr "Пінгбеки закриті."
 
 #: templates/zinnia/entry_detail_base.html:142
 msgid "Trackbacks"
-msgstr "Zpětné odkazy"
+msgstr "Трекбеки"
 
 #: templates/zinnia/entry_detail_base.html:159
 msgid "Direct link to this trackback"
-msgstr "Přímý odkaz na tento trackback"
+msgstr "Пряме посилання до трекбеку"
 
 #: templates/zinnia/entry_detail_base.html:177
 msgid "Trackback URL"
-msgstr "URL Zpětného odkazu"
+msgstr "Посилання до трекбеку"
 
 #: templates/zinnia/entry_detail_base.html:187
 msgid "Comments"
-msgstr "Komentáře"
+msgstr "Коментарі"
 
 #: templates/zinnia/entry_detail_base.html:213
 msgid "Direct link to this comment"
-msgstr "Přímý odkaz na tento komentář"
+msgstr "Пряме посилання на коментарі"
 
 #: templates/zinnia/entry_list.html:4
 msgid "Latest entries for"
-msgstr "Nejnovější údaje pro"
+msgstr "Останні дописи у"
 
 #: templates/zinnia/entry_list.html:4
 msgid "the category"
-msgstr "kategorie"
+msgstr "категорія"
 
 #: templates/zinnia/entry_list.html:4
 msgid "the tag"
-msgstr "tag"
+msgstr "тег"
 
 #: templates/zinnia/entry_list.html:4
 msgid "the author"
-msgstr "autor"
+msgstr "автор"
 
 #: templates/zinnia/entry_list.html:6
 msgid "page"
-msgstr "stránka"
+msgstr "сторінка"
 
 #: templates/zinnia/entry_list.html:11 templates/zinnia/entry_list.html:14
 #: templates/zinnia/entry_list.html:17 templates/zinnia/skeleton.html:37
 msgid "RSS Feed"
-msgstr "RSS Kanál"
+msgstr "RSS-стрічка"
 
 #: templates/zinnia/entry_list.html:21
 msgid "Category"
-msgstr "Kategorie"
+msgstr "Категорія"
 
 #: templates/zinnia/entry_list.html:21
 msgid "Tag"
-msgstr "Tag"
+msgstr "Тег"
 
 #: templates/zinnia/entry_list.html:23
 msgid "Page"
-msgstr "Stránka"
+msgstr "Сторінка"
 
 #: templates/zinnia/entry_list.html:31
 #, python-format
 msgid "Category archives: %(category)s"
-msgstr "Archiv kategorie: %(category)s"
+msgstr "Архіви категорії: %(category)s"
 
 #: templates/zinnia/entry_list.html:38
 #, python-format
 msgid "Tag archives: %(tag)s"
-msgstr "Archiv tagu: %(tag)s"
+msgstr "Архіви тегу: %(tag)s"
 
 #: templates/zinnia/entry_list.html:42
 #, python-format
 msgid "Author archives: %(author)s"
-msgstr "Archiv autora: %(author)s"
+msgstr "Архіви автора: %(author)s"
 
 #: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:29
 #: templates/zinnia/sitemap.html.py:51
@@ -1283,110 +1280,110 @@ msgstr "Archiv autora: %(author)s"
 #: templates/zinnia/tags/entries_random.html:9
 #: templates/zinnia/tags/entries_recent.html:9
 msgid "No entries yet."
-msgstr "Zatím žádné položky"
+msgstr "Досі нема жодного допису."
 
 #: templates/zinnia/entry_list.html:70 templates/zinnia/entry_list.html:71
 msgid "Edit the category"
-msgstr "Uprav kategorii"
+msgstr "Редагувати категорію"
 
 #: templates/zinnia/entry_list.html:77 templates/zinnia/entry_list.html:78
 msgid "Edit the tag"
-msgstr "Uprav tag"
+msgstr "Редагувати тег"
 
 #: templates/zinnia/entry_list.html:84 templates/zinnia/entry_list.html:85
 msgid "Edit the author"
-msgstr "Uprav autora"
+msgstr "Редагувати автора"
 
 #: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:6
 #: templates/zinnia/entry_search.html:16
 msgid "Search results for"
-msgstr "Výsledky vyhledávání pro"
+msgstr "Результати пошуку для"
 
 #: templates/zinnia/entry_search.html:10
 msgid "RSS Feed of search result of"
-msgstr "RSS Kanál vyhledávání výsledku"
+msgstr "RSS-стрічка результатів пошуку для"
 
 #: templates/zinnia/entry_search.html:24
 #, python-format
 msgid "%(entry_count)s entry found"
 msgid_plural "%(entry_count)s entries found"
-msgstr[0] "%(entry_count)s nalezený článek"
-msgstr[1] "%(entry_count)s nalezených článků"
-msgstr[2] "%(entry_count)s nalezené články"
+msgstr[0] "%(entry_count)s допис знайдено"
+msgstr[1] "%(entry_count)s дописи знайдено"
+msgstr[2] "%(entry_count)s дописів знайдено"
 
 #: templates/zinnia/entry_search.html:34
 msgid "Nothing found."
-msgstr "Nic nebylo nalezeno"
+msgstr "Нічого не знайдено."
 
 #: templates/zinnia/login.html:4 templates/zinnia/login.html.py:9
 msgid "Login required"
-msgstr "Vyžadováno přihlášení"
+msgstr "Необхідно увійти"
 
 #: templates/zinnia/login.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr "Vaše uživatelské jméno a heslo nesouhlasí. Zkuste to prosím znovu."
+msgstr "Ім’я користувача та пароль не співпали. Спробуйте ще раз."
 
 #: templates/zinnia/login.html:17
 msgid "You need to be connected to view this entry."
-msgstr "Pro zobrazení tohoto článku musíte být přihlášen"
+msgstr "Вам необхідно під’єднатися, аби переглянути цей допис."
 
 #: templates/zinnia/login.html:34
 msgid "Login"
-msgstr "Přihlášení"
+msgstr "Увійти"
 
 #: templates/zinnia/password.html:4 templates/zinnia/password.html.py:9
 msgid "Password required"
-msgstr "Vyžadováno heslo"
+msgstr "Необхідно ввести пароль"
 
 #: templates/zinnia/password.html:13
 msgid "The password provided is not valid. Please try again."
-msgstr "Heslo které jste zadali není správné. Prosím zkuste to znovu"
+msgstr "Уведений пароль є хибним. Спробуйте ще раз."
 
 #: templates/zinnia/password.html:17
 msgid "You need to provide a password to view this entry."
-msgstr "Pro zobrazení musíte zadat heslo"
+msgstr "Необхідно увести пароль, аби переглянути цей допис."
 
 #: templates/zinnia/password.html:24
 msgid "Password"
-msgstr "Heslo"
+msgstr "Пароль"
 
 #: templates/zinnia/password.html:29
 msgid "Valid"
-msgstr "Platnost"
+msgstr "Правильний"
 
 #: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:11
 #: templates/zinnia/skeleton.html:31 templates/zinnia/skeleton.html.py:32
 #: templates/zinnia/skeleton.html:69 templates/zinnia/skeleton.html.py:70
 msgid "Sitemap"
-msgstr "Mapa stránek"
+msgstr "Sitemap"
 
 #: templates/zinnia/sitemap.html:6
 msgid "Sitemap of the weblog"
-msgstr ""
+msgstr "Sitemap блогу"
 
 #: templates/zinnia/sitemap.html:14
 msgid "Entries per categories"
-msgstr "Články z kategorie"
+msgstr "Дописи за категоріями"
 
 #: templates/zinnia/sitemap.html:23 templates/zinnia/sitemap.html.py:45
 msgid "comment"
-msgstr "komentáře"
+msgstr "коментар"
 
 #: templates/zinnia/sitemap.html:37
 msgid "All the entries"
-msgstr "Všechny příspěvky"
+msgstr "Усі дописи"
 
 #: templates/zinnia/skeleton.html:11 templates/zinnia/skeleton.html.py:53
 msgid "Just another Zinnia weblog."
-msgstr ""
+msgstr "Просто ще один блог на Zinnia."
 
 #: templates/zinnia/skeleton.html:43 templates/zinnia/tags/search_form.html:4
 msgid "Keywords..."
-msgstr "Co hledáte..."
+msgstr "Ключові слова..."
 
 #: templates/zinnia/skeleton.html:61
 msgid "Useful links"
-msgstr "Užitečné odkazy"
+msgstr "Корисні посилання"
 
 #: templates/zinnia/skeleton.html:64 templates/zinnia/skeleton.html.py:65
 msgid "Weblog index"
@@ -1394,7 +1391,7 @@ msgstr ""
 
 #: templates/zinnia/skeleton.html:76
 msgid "Search"
-msgstr "Vyhledávání"
+msgstr "Пошук"
 
 #: templates/zinnia/skeleton.html:86
 #, python-format
@@ -1406,225 +1403,225 @@ msgstr ""
 
 #: templates/zinnia/tag_list.html:4 templates/zinnia/tag_list.html.py:11
 msgid "Tag list"
-msgstr "Seznam tagů"
+msgstr "Список тегів"
 
 #: templates/zinnia/tag_list.html:22 templates/zinnia/tags/tag_cloud.html:11
 msgid "No tags yet."
-msgstr "Zatím žádné tagy."
+msgstr "Досі немає жодного тегу."
 
 #: templates/zinnia/tags/entries_archives.html:12
 #: templates/zinnia/tags/entries_archives_tree.html:37
 msgid "No archives yet."
-msgstr "Zatím žádné archivy"
+msgstr "Досі немає жодного архіву."
 
 #: templates/zinnia/tags/entries_similar.html:9
 msgid "No similar entries."
-msgstr "Žádné podobné články"
+msgstr "Немає схожих дописів."
 
 #: templates/zinnia/tags/linkbacks_recent.html:9
 msgid "Linkback on"
-msgstr "Příspěvek na"
+msgstr "Лінкбек до"
 
 #: templates/zinnia/tags/pagination.html:4
 #, python-format
 msgid "Page %(current_page)s of %(total_page)s"
-msgstr "Stránka %(current_page)s z %(total_page)s"
+msgstr "Сторінка №%(current_page)s з %(total_page)s"
 
 #: templates/zinnia/tags/pagination.html:10
 msgid "More recent entries"
-msgstr "Novější záznamy"
+msgstr "Більше нещодавніх дописів"
 
 #: templates/zinnia/tags/pagination.html:20
 #: templates/zinnia/tags/pagination.html:33
 #: templates/zinnia/tags/pagination.html:47
 msgid "Entries page"
-msgstr "Záznamy stránky"
+msgstr "Сторінка дописів"
 
 #: templates/zinnia/tags/pagination.html:56
 msgid "More old entries"
-msgstr "Starší články"
+msgstr "Більше старих дописів"
 
 #: templates/zinnia/tags/search_form.html:6
 msgid ""
 "You can use - to exclude words or phrases, &quot;double quotes&quot; for "
 "exact phrases and the AND/OR boolean operators combined with parenthesis for"
 " complex queries."
-msgstr ""
+msgstr "Можна використовувати - для виключення слів чи фраз, &quot;подвійні лапки&quot; для пошуку конкретних фраз, та комбінувати логічні оператори AND/OR з дужками для побудови складних запитів."
 
 #: templates/zinnia/tags/tag_cloud.html:6
 #, python-format
 msgid "%(entry_count)s entry tagged by %(tag)s"
 msgid_plural "%(entry_count)s entries tagged by %(tag)s"
-msgstr[0] "%(entry_count)s označený článek od %(tag)s"
-msgstr[1] "%(entry_count)s označených článků od %(tag)s"
-msgstr[2] "%(entry_count)s označené články od %(tag)s "
+msgstr[0] "%(entry_count)s допис помічений тегом %(tag)s"
+msgstr[1] "%(entry_count)s дописів помічено тегом %(tag)s"
+msgstr[2] "%(entry_count)s дописів помічено тегом %(tag)s"
 
 #: templatetags/zinnia_tags.py:341
 msgid "Blog"
-msgstr ""
+msgstr "Блог"
 
 #: tests/test_views.py:574 views/search.py:30
 msgid "The pattern is too short"
-msgstr "Vzor je příliš krátký"
+msgstr "Шаблон надто короткий"
 
 #: tests/test_views.py:578 views/search.py:34
 msgid "No pattern to search found"
-msgstr "Žádný vzor pro hledání nebyl nalezen"
+msgstr "Не знайдено шаблону для пошуку"
 
 #: urls/__init__.py:23
 msgid "^feeds/"
-msgstr ""
+msgstr "^feeds/"
 
 #: urls/__init__.py:24
 msgid "^tags/"
-msgstr ""
+msgstr "^tags/"
 
 #: urls/__init__.py:25
 msgid "^authors/"
-msgstr ""
+msgstr "^authors/"
 
 #: urls/__init__.py:26
 msgid "^categories/"
-msgstr ""
+msgstr "^categories/"
 
 #: urls/__init__.py:27
 msgid "^search/"
-msgstr ""
+msgstr "^search/"
 
 #: urls/__init__.py:28
 msgid "^random/"
-msgstr ""
+msgstr "^random/"
 
 #: urls/__init__.py:29
 msgid "^sitemap/"
-msgstr ""
+msgstr "^sitemap/"
 
 #: urls/__init__.py:30
 msgid "^trackback/"
-msgstr ""
+msgstr "^trackback/"
 
 #: urls/__init__.py:31
 msgid "^comments/"
-msgstr ""
+msgstr "^comments/"
 
 #: urls/archives.py:18
 msgid "^page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:27
 msgid "^(?P<year>\\d{4})/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:33
 msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/week/(?P<week>\\d+)/$"
 
 #: urls/archives.py:36
 msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/week/(?P<week>\\d+)/page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:45
 msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/(?P<month>\\d{2})/page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:54
 msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/page/(?P<page>\\d+)/$"
 
 #: urls/archives.py:61
 msgid "^today/$"
-msgstr ""
+msgstr "^today/$"
 
 #: urls/archives.py:64
 msgid "^today/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^today/page/(?P<page>\\d+)/$"
 
 #: urls/authors.py:15
 msgid "^(?P<username>[.+-@\\w]+)/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<username>[.+-@\\w]+)/page/(?P<page>\\d+)/$"
 
 #: urls/categories.py:15
 msgid "^(?P<path>[-\\/\\w]+)/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<path>[-\\/\\w]+)/page/(?P<page>\\d+)/$"
 
 #: urls/comments.py:11
 msgid "^success/$"
-msgstr ""
+msgstr "^success/$"
 
 #: urls/feeds.py:23
 msgid "^discussions/$"
-msgstr ""
+msgstr "^discussions/$"
 
 #: urls/feeds.py:26
 msgid "^search/$"
-msgstr ""
+msgstr "^search/$"
 
 #: urls/feeds.py:29
 msgid "^tags/(?P<tag>[^/]+(?u))/$"
-msgstr ""
+msgstr "^tags/(?P<tag>[^/]+(?u))/$"
 
 #: urls/feeds.py:32
 msgid "^authors/(?P<username>[.+-@\\w]+)/$"
-msgstr ""
+msgstr "^authors/(?P<username>[.+-@\\w]+)/$"
 
 #: urls/feeds.py:35
 msgid "^categories/(?P<path>[-\\/\\w]+)/$"
-msgstr ""
+msgstr "^categories/(?P<path>[-\\/\\w]+)/$"
 
 #: urls/feeds.py:38
 msgid ""
 "^discussions/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^discussions/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/feeds.py:42
 msgid ""
 "^comments/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^comments/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/feeds.py:46
 msgid ""
 "^pingbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^pingbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/feeds.py:50
 msgid ""
 "^trackbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
-msgstr ""
+msgstr "^trackbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
 
 #: urls/quick_entry.py:11
 msgid "^quick-entry/$"
-msgstr ""
+msgstr "^quick-entry/$"
 
 #: urls/tags.py:18
 msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
-msgstr ""
+msgstr "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 
 #: views/tags.py:48
 #, python-format
 msgid "No Tag found matching \"%s\"."
-msgstr "Žádné tagy odpovídající \"%s\"."
+msgstr "Не знайдено тегів, що відповідають \"%s\"."
 
 #: views/mixins/entry_preview.py:27
 msgid "No entry found matching the query"
-msgstr ""
+msgstr "Не знайдено дописів, що відповідають запитові"
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."
-msgstr "Uživatelské jméno je nesprávné"
+msgstr "Хибне ім’я користувача."
 
 #: xmlrpc/metaweblog.py:50
 msgid "Password is invalid."
-msgstr "Heslo je nesprávné"
+msgstr "Хибний пароль."
 
 #: xmlrpc/metaweblog.py:52
 msgid "User account unavailable."
-msgstr "Uživatelský účet není přístupný"
+msgstr "Обліковий запис користувача недоступний."
 
 #: xmlrpc/metaweblog.py:55
 #, python-format
 msgid "User cannot %s."
-msgstr "Uživatel nemůže %s."
+msgstr "Користувач не може %s."
 
 #: xmlrpc/pingback.py:114
 msgid "No title"
-msgstr "Žádný titulek"
+msgstr "Немає заголовку"
