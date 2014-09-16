@@ -2,9 +2,6 @@
 import os
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 
-DATABASES = {'default': {'NAME': 'zinnia_tests.db',
-                         'ENGINE': 'django.db.backends.sqlite3'}}
-
 SITE_ID = 1
 
 USE_TZ = True
@@ -41,14 +38,15 @@ TEMPLATE_LOADERS = [
 INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
-    'django.contrib.comments',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django_comments',
     'django_xmlrpc',
     'mptt',
     'tagging',
+    'south',
     'zinnia'
 ]
 

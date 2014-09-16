@@ -47,9 +47,12 @@ LANGUAGES = (
     ('ca', gettext('Catalan')),
     ('tr', gettext('Turkish')),
     ('sv', gettext('Swedish')),
+    ('is', gettext('Icelandic')),
     ('hr_HR', gettext('Croatian')),
     ('pt_BR', gettext('Brazilian Portuguese')),
-    ('fi_FI', gettext('Finnish (Finland)')),
+    ('fa_IR', gettext('Persian')),
+    ('fi_FI', gettext('Finnish')),
+    ('uk_UA', gettext('Ukrainian')),
     ('zh_CN', gettext('Simplified Chinese')),
 )
 
@@ -76,7 +79,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.sitemaps',
-    'django.contrib.comments',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -84,10 +86,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.staticfiles',
-    'mptt',
-    'zinnia',
-    'tagging',
+    'django_comments',
     'django_xmlrpc',
+    'mptt',
+    'south',
+    'tagging',
+    'zinnia'
 )
 
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS

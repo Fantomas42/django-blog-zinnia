@@ -6,7 +6,6 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 
-from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
@@ -20,6 +19,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
 
 from bs4 import BeautifulSoup
+
+import django_comments as comments
 
 from tagging.models import Tag
 from tagging.models import TaggedItem
@@ -103,18 +104,17 @@ class EntryFeed(ZinniaFeed):
     def item_author_email(self, item):
         """
         Return the first author's email.
+        Should not be called if self.item_author_name has returned None.
         """
         return self.item_author.email
 
     def item_author_link(self, item):
         """
         Return the author's URL.
+        Should not be called if self.item_author_name has returned None.
         """
         try:
-            author_url = reverse(
-                'zinnia_author_detail',
-                args=[getattr(self.item_author,
-                              self.item_author.USERNAME_FIELD)])
+            author_url = self.item_author.get_absolute_url()
             return self.site_url + author_url
         except NoReverseMatch:
             return self.site_url
@@ -163,7 +163,7 @@ class LatestEntries(EntryFeed):
         """
         URL of latest entries.
         """
-        return reverse('zinnia_entry_archive_index')
+        return reverse('zinnia:entry_archive_index')
 
     def items(self):
         """
@@ -241,8 +241,7 @@ class AuthorEntries(EntryFeed):
         """
         URL of the author.
         """
-        return reverse('zinnia_author_detail',
-                       args=[getattr(obj, obj.USERNAME_FIELD)])
+        return obj.get_absolute_url()
 
     def get_title(self, obj):
         """
@@ -279,7 +278,7 @@ class TagEntries(EntryFeed):
         """
         URL of the tag.
         """
-        return reverse('zinnia_tag_detail', args=[obj.name])
+        return reverse('zinnia:tag_detail', args=[obj.name])
 
     def get_title(self, obj):
         """
@@ -318,7 +317,7 @@ class SearchEntries(EntryFeed):
         """
         URL of the search request.
         """
-        return '%s?pattern=%s' % (reverse('zinnia_entry_search'), obj)
+        return '%s?pattern=%s' % (reverse('zinnia:entry_search'), obj)
 
     def get_title(self, obj):
         """
@@ -389,7 +388,7 @@ class LatestDiscussions(DiscussionFeed):
         """
         URL of latest discussions.
         """
-        return reverse('zinnia_entry_archive_index')
+        return reverse('zinnia:entry_archive_index')
 
     def get_title(self, obj):
         """

@@ -50,6 +50,12 @@ class BaseListFilterTestCase(TestCase):
         self.entry_2 = Entry.objects.create(**params)
         self.entry_2.sites.add(self.site)
 
+        params = {'title': 'My entry draft',
+                  'content': 'My content draft',
+                  'slug': 'my-entry-draft'}
+        self.entry_draft = Entry.objects.create(**params)
+        self.entry_draft.sites.add(self.site)
+
     def tearDown(self):
         deactivate()
 
@@ -77,6 +83,7 @@ class AuthorListFilterTestCase(BaseListFilterTestCase):
                                        email='reader@example.com')]
         self.entry_1.authors.add(self.authors[0])
         self.entry_2.authors.add(*self.authors[:-1])
+        self.entry_draft.authors.add(*self.authors)
 
     def test_filter(self):
         modeladmin = MiniEntryAuthorAdmin(Entry, site)
@@ -84,20 +91,23 @@ class AuthorListFilterTestCase(BaseListFilterTestCase):
         request = self.request_factory.get('/')
         changelist = self.get_changelist(request, Entry, modeladmin)
         queryset = changelist.get_queryset(request)
-        self.assertEqual(queryset.count(), 2)
+        self.assertEqual(queryset.count(), 3)
 
-        request = self.request_factory.get('/', {'author': '2'})
+        request = self.request_factory.get('/', {'author': self.authors[1].pk})
         changelist = self.get_changelist(request, Entry, modeladmin)
         queryset = changelist.get_queryset(request)
-        self.assertEqual(queryset.count(), 1)
+        self.assertEqual(queryset.count(), 2)
 
         with self.assertNumQueries(1):
             filterspec = changelist.get_filters(request)[0][0]
             self.assertEqual(filterspec.title, 'published authors')
-            self.assertEqual(filterspec.used_parameters, {'author': '2'})
+            self.assertEqual(filterspec.used_parameters,
+                             {'author': str(self.authors[1].pk)})
             self.assertEqual(filterspec.lookup_choices,
-                             [('1', 'webmaster (2 entries)'),
-                              ('2', 'contributor (1 entry)')])
+                             [(str(self.authors[0].pk),
+                               'webmaster (2 entries)'),
+                              (str(self.authors[1].pk),
+                               'contributor (1 entry)')])
 
 
 class CategoryListFilterTestCase(BaseListFilterTestCase):
@@ -115,6 +125,7 @@ class CategoryListFilterTestCase(BaseListFilterTestCase):
 
         self.entry_1.categories.add(self.categories[0])
         self.entry_2.categories.add(*self.categories[:-1])
+        self.entry_draft.categories.add(*self.categories)
 
     def test_filter(self):
         modeladmin = MiniEntryCategoryAdmin(Entry, site)
@@ -122,17 +133,21 @@ class CategoryListFilterTestCase(BaseListFilterTestCase):
         request = self.request_factory.get('/')
         changelist = self.get_changelist(request, Entry, modeladmin)
         queryset = changelist.get_queryset(request)
-        self.assertEqual(queryset.count(), 2)
+        self.assertEqual(queryset.count(), 3)
 
-        request = self.request_factory.get('/', {'category': '2'})
+        request = self.request_factory.get('/', {'category':
+                                                 str(self.categories[1].pk)})
         changelist = self.get_changelist(request, Entry, modeladmin)
         queryset = changelist.get_queryset(request)
-        self.assertEqual(queryset.count(), 1)
+        self.assertEqual(queryset.count(), 2)
 
         with self.assertNumQueries(1):
             filterspec = changelist.get_filters(request)[0][0]
             self.assertEqual(filterspec.title, 'published categories')
-            self.assertEqual(filterspec.used_parameters, {'category': '2'})
+            self.assertEqual(filterspec.used_parameters,
+                             {'category': str(self.categories[1].pk)})
             self.assertEqual(filterspec.lookup_choices,
-                             [('1', 'Category 1 (2 entries)'),
-                              ('2', 'Category 2 (1 entry)')])
+                             [(str(self.categories[0].pk),
+                               'Category 1 (2 entries)'),
+                              (str(self.categories[1].pk),
+                               'Category 2 (1 entry)')])

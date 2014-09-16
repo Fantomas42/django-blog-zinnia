@@ -17,7 +17,7 @@ def _get_user_flagger():
         user = User.objects.get(pk=COMMENT_FLAG_USER_ID)
     except User.DoesNotExist:
         try:
-            user = User.objects.get(username=FLAGGER_USERNAME)
+            user = User.objects.get(**{User.USERNAME_FIELD: FLAGGER_USERNAME})
         except User.DoesNotExist:
             user = User.objects.create_user(FLAGGER_USERNAME)
     return user

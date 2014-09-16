@@ -11,12 +11,13 @@ except ImportError:  # Python 2
 from django.utils import six
 from django.utils import timezone
 from django.test import TestCase
-from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.test.utils import restore_template_loaders
 from django.test.utils import setup_test_template_loader
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.tests.utils import skipIfCustomUser
+
+import django_comments as comments
 
 from bs4 import BeautifulSoup
 
@@ -24,6 +25,7 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.flags import PINGBACK
+from zinnia.flags import user_flagger_
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import TestTransport
@@ -53,6 +55,11 @@ class PingBackTestCase(TestCase):
     def setUp(self):
         disconnect_entry_signals()
         disconnect_discussion_signals()
+        # Clean the memoization of user flagger to avoid error on MySQL
+        try:
+            del user_flagger_[()]
+        except KeyError:
+            pass
         # Use default URL shortener backend, to avoid networks errors
         self.original_shortener = shortener_settings.URL_SHORTENER_BACKEND
         shortener_settings.URL_SHORTENER_BACKEND = 'zinnia.url_shortener.'\

@@ -64,8 +64,9 @@ class EntryRelatedSitemap(ZinniaSitemap):
         with the number of entries and the latest modification date.
         """
         return self.model.published.annotate(
-            count_entries=Count('entries')).annotate(
-            last_update=Max('entries__last_update'))
+            count_entries_published=Count('entries')).annotate(
+            last_update=Max('entries__last_update')).order_by(
+            '-count_entries_published', '-last_update', '-pk')
 
     def cache_infos(self, queryset):
         """
@@ -74,7 +75,8 @@ class EntryRelatedSitemap(ZinniaSitemap):
         """
         self.cache = {}
         for item in queryset:
-            self.cache[item.pk] = (item.count_entries, item.last_update)
+            self.cache[item.pk] = (item.count_entries_published,
+                                   item.last_update)
 
     def set_max_entries(self):
         """
@@ -133,9 +135,8 @@ class TagSitemap(EntryRelatedSitemap):
         """
         self.cache = {}
         for item in queryset:
-            # If the sitemap is going to be too slow,
-            # don't hesitate to do this :
-            # self.cache[item.pk] = (item.count, None)
+            # If the sitemap is too slow, don't hesitate to do this :
+            #   self.cache[item.pk] = (item.count, None)
             self.cache[item.pk] = (
                 item.count, TaggedItem.objects.get_by_model(
                     self.entries_qs, item)[0].last_update)
@@ -144,4 +145,4 @@ class TagSitemap(EntryRelatedSitemap):
         """
         Return URL of the tag.
         """
-        return reverse('zinnia_tag_detail', args=[item.name])
+        return reverse('zinnia:tag_detail', args=[item.name])

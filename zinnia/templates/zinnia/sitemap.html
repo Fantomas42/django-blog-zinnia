@@ -1,23 +1,27 @@
 {% extends "zinnia/base.html" %}
-{% load i18n zinnia_tags mptt_tags %}
+{% load i18n zinnia_tags %}
 
 {% block title %}{% trans "Sitemap" %}{% endblock title %}
+
+{% block meta-description %}{% trans "Sitemap of the weblog" %}{% endblock meta-description %}
 
 {% block body-class %}sitemap{% endblock body-class %}
 
 {% block content %}
-<h2>{% trans "Sitemap" %}</h2>
+<h1>{% trans "Sitemap" %}</h1>
 
 <div class="entriesbycategories">
-  <h3>{% trans "Entries per categories" %}</h3>
+  <h2>{% trans "Entries per categories" %}</h2>
   {% for category in categories %}
-  <h4>{{ category }}</h4>
+  <h3>{{ category }}</h3>
   <ul>
     {% for entry in category.entries_published.all %}
     <li>
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
-      {% with comment_count=entry.comments.count %}
+      {% with comment_count=entry.comment_count %}
+      {% if comment_count %}
       - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
+      {% endif %}
       {% endwith %}
     </li>
     {% empty %}
@@ -25,48 +29,12 @@
       {% trans "No entries yet." %}
     </li>
     {% endfor %}
-  </ul>
-  {% endfor %}
-</div>
-
-<div class="allentries">
-  <h3>{% trans "All the entries" %}</h3>
-  <ul>
-    {% for entry in entries %}
-    <li>
-      <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
-      - {{ entry.creation_date|date:"SHORT_DATE_FORMAT" }}
-      {% with comment_count=entry.comments.count %}
-      - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
-      {% endwith %}
-    </li>
-    {% empty %}
-    <li>
-      {% trans "No entries yet." %}
-    </li>
-    {% endfor %}
-  </ul>
-</div>
-
-<div class="categories">
-  <h3>{% trans "Categories" %}</h3>
-  {% for category, structure in categories|tree_info %}
-    {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
-      <a href="{{ category.get_absolute_url }}" title="{{ category.title }}">{{ category.title }}</a>
-      -
-      {% blocktrans count entry_count=category.entries_published.count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
-    {% for level in structure.closed_levels %}</li></ul>{% endfor %}
-    {% empty %}
-  <ul>
-    <li>
-      {% trans "No categories yet." %}
-    </li>
   </ul>
   {% endfor %}
 </div>
 
 <div class="montharchives">
-  <h3>{% trans "Monthly archives" %}</h3>
+  <h2>{% trans "Monthly archives" %}</h2>
   {% get_archives_entries %}
 </div>
 {% endblock content %}

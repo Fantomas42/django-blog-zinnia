@@ -23,11 +23,11 @@
     display: none;
     input[type=text] {
       width: 85%;
-      background-image: image-url("search.png");
+      background-image: url("../img/search.png");
       background-repeat: no-repeat;
       background-position: 5px center;
       padding-left: 25px;
-      @include border-radius(5px);
+      border-radius: 5px;
     }
     input[type=submit] {
       display: none;
@@ -59,7 +59,7 @@
   }
   @include breakpoint("large") {
     h1 {
-      background: transparent image-url("logo.png") no-repeat scroll left center;
+      background: transparent url("../img/logo.png") no-repeat scroll left center;
       padding-left: 1.5em;
     }
     blockquote {

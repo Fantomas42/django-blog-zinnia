@@ -44,7 +44,7 @@ The code bundled in this application is a copy of the original
 ``zinnia.plugins`` module, made for forward compatibility with
 django-blog-zinnia > 0.11.
 
-URL: https://github.com/Fantomas42/cmsplugin-zinnia
+URL: https://github.com/django-blog-zinnia/cmsplugin-zinnia
 
 admin-tools-zinnia
 ==================
@@ -54,7 +54,7 @@ new dashboard modules for your admin interface, related to your Weblog.
 
 Useful for having a sexier admin interface.
 
-URL: https://github.com/Fantomas42/admin-tools-zinnia
+URL: https://github.com/django-blog-zinnia/admin-tools-zinnia
 
 zinnia-threaded-comment
 =======================
@@ -62,7 +62,7 @@ zinnia-threaded-comment
 Zinnia-threaded-comments customizes the comment application bundled by
 Django to enable replies to comments within your Weblog.
 
-URL: https://github.com/Fantomas42/zinnia-threaded-comments
+URL: https://github.com/django-blog-zinnia/zinnia-threaded-comments
 
 zinnia-theme-html5
 ==================
@@ -70,7 +70,7 @@ zinnia-theme-html5
 Zinnia-theme-html5 is an extension theme for making your Zinnia's Weblog
 HTML5 ready.
 
-URL: https://github.com/Fantomas42/zinnia-theme-html5
+URL: https://github.com/django-blog-zinnia/zinnia-theme-html5
 
 zinnia-theme-bootstrap
 ======================
@@ -78,7 +78,79 @@ zinnia-theme-bootstrap
 Zinnia-theme-bootstrap is an extension theme for your Weblog based on
 `Bootstrap`_.
 
-URL: https://github.com/Fantomas42/zinnia-theme-bootstrap
+URL: https://github.com/django-blog-zinnia/zinnia-theme-bootstrap
+
+zinnia-theme-foundation
+=======================
+
+Zinnia-theme-foundation is an extension theme for your Weblog based on
+`Zurb Foundation 5`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-theme-foundation
+
+zinnia-wysiwyg-wymeditor
+========================
+
+Zinnia-wysiwyg-wymeditor is an extension for editing your entries in the
+admin with `WYMEditor`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-wysiwyg-wymeditor
+
+zinnia-wysiwyg-tinymce
+======================
+
+Zinnia-wysiwyg-tinymce is an extension for editing your entries in the
+admin with `TinyMCE`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-wysiwyg-tinymce
+
+zinnia-wysiwyg-ckeditor
+=======================
+
+Zinnia-wysiwyg-ckeditor is an extension for editing your entries in the
+admin with `CKeditor`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-wysiwyg-ckeditor
+
+zinnia-wysiwyg-markitup
+=======================
+
+Zinnia-wysiwyg-markitup is an extension for editing your entries in the
+admin with `MarkItUp`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-wysiwyg-markitup
+
+zinnia-url-shortener-bitly
+==========================
+
+Zinnia-url-shortener-bitly is an extension providing URL shortening for the
+entries via `Bit.ly`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-url-shortener-bitly
+
+zinnia-spam-checker-akismet
+===========================
+
+Zinnia-spam-checker-akismet is an extension adding anti-spam protection via
+`Akismet`_ or Typepad.
+
+URL: https://github.com/django-blog-zinnia/zinnia-spam-checker-akismet
+
+zinnia-spam-checker-mollom
+==========================
+
+Zinnia-spam-checker-mollom is an extension adding anti-spam protection via
+`Mollom`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-spam-checker-mollom
+
+zinnia-twitter
+==============
+
+Zinnia-twitter is an admin extension allowing you to post your entries on
+`Twitter`_.
+
+URL: https://github.com/django-blog-zinnia/zinnia-twitter
 
 byteflow2zinnia
 ===============
@@ -100,3 +172,12 @@ URL: https://github.com/azaghal/zinnia-drupal
 .. _`Django-CMS`: http://www.django-cms.org/
 .. _`django-admin-tools`: http://django-admin-tools.readthedocs.org/en/latest/index.html
 .. _`Bootstrap`: http://twitter.github.com/bootstrap/
+.. _`Zurb Foundation 5`: http://foundation.zurb.com/
+.. _`WYMEditor`: http://www.wymeditor.org/
+.. _`TinyMCE`: http://www.tinymce.com/
+.. _`CKEditor`: http://ckeditor.com/
+.. _`MarkItUp`: http://markitup.jaysalvat.com/
+.. _`Bit.ly`: https://bitly.com/
+.. _`Akismet`: http://akismet.com/
+.. _`Mollom`: https://mollom.com/
+.. _`Twitter`: https://twitter.com/

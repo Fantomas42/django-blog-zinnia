@@ -4,7 +4,6 @@ from datetime import date
 
 from django.test import TestCase
 from django.utils import timezone
-from django.contrib import comments
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
 from django.test.utils import restore_template_loaders
@@ -13,6 +12,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.signals import user_logged_in
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth.tests.utils import skipIfCustomUser
+
+import django_comments as comments
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -23,10 +24,12 @@ from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
+from zinnia.flags import user_flagger_
 from zinnia.flags import get_user_flagger
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.url_shortener.backends.default import base36
 
 
 @skipIfCustomUser
@@ -339,11 +342,20 @@ class ViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_entry_shortlink(self):
         with self.assertNumQueries(1):
-            response = self.client.get('/1/')
+            response = self.client.get('/%s/' % base36(self.first_entry.pk))
         self.assertEqual(response.status_code, 301)
         self.assertEqual(
             response['Location'],
             'http://testserver%s' % self.first_entry.get_absolute_url())
+
+    def test_zinnia_entry_shortlink_unpublished(self):
+        """
+        https://github.com/Fantomas42/django-blog-zinnia/pull/367
+        """
+        self.first_entry.sites.clear()
+        with self.assertNumQueries(1):
+            response = self.client.get('/%s/' % base36(self.first_entry.pk))
+        self.assertEqual(response.status_code, 404)
 
     def test_zinnia_entry_detail(self):
         self.inhibit_templates('zinnia/_entry_detail.html', '404.html')
@@ -447,12 +459,13 @@ class ViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_category_list(self):
         self.inhibit_templates('zinnia/category_list.html')
+        category = Category.objects.create(
+            title='New category', slug='new-category')
         self.check_publishing_context(
             '/categories/', 1,
             friendly_context='category_list',
             queries=0)
-        self.first_entry.categories.add(Category.objects.create(
-            title='New category', slug='new-category'))
+        self.first_entry.categories.add(category)
         self.check_publishing_context('/categories/', 2)
 
     def test_zinnia_category_detail(self):
@@ -486,13 +499,12 @@ class ViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_author_list(self):
         self.inhibit_templates('zinnia/author_list.html')
+        user = Author.objects.create(username='new-user',
+                                     email='new_user@example.com')
         self.check_publishing_context(
             '/authors/', 1,
             friendly_context='author_list',
             queries=0)
-        user = Author.objects.create(username='new-user',
-                                     email='new_user@example.com')
-        self.check_publishing_context('/authors/', 1)
         self.first_entry.authors.add(user)
         self.check_publishing_context('/authors/', 2)
 
@@ -598,15 +610,20 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(len(response.context['categories']), 2)
 
     def test_zinnia_trackback(self):
+        # Clean the memoization of user flagger to avoid error on MySQL
+        try:
+            del user_flagger_[()]
+        except KeyError:
+            pass
         self.inhibit_templates('zinnia/entry_trackback.xml', '404.html')
         response = self.client.post('/trackback/404/')
+        trackback_url = '/trackback/%s/' % self.first_entry.pk
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(
-            self.client.post('/trackback/1/').status_code, 301)
+        self.assertEqual(self.client.post(trackback_url).status_code, 301)
         self.first_entry.trackback_enabled = False
         self.first_entry.save()
         self.assertEqual(self.first_entry.trackback_count, 0)
-        response = self.client.post('/trackback/1/',
+        response = self.client.post(trackback_url,
                                     {'url': 'http://example.com'})
         self.assertEqual(response['Content-Type'], 'text/xml')
         self.assertEqual(response.context['error'],
@@ -619,25 +636,30 @@ class ViewsTestCase(ViewsBaseCase):
             # If we are using the default comment app,
             # we can count the database queries executed.
             with self.assertNumQueries(8):
-                response = self.client.post('/trackback/1/',
+                response = self.client.post(trackback_url,
                                             {'url': 'http://example.com'})
         else:
-            response = self.client.post('/trackback/1/',
+            response = self.client.post(trackback_url,
                                         {'url': 'http://example.com'})
         self.assertEqual(response['Content-Type'], 'text/xml')
         self.assertEqual('error' in response.context, False)
         disconnect_discussion_signals()
         entry = Entry.objects.get(pk=self.first_entry.pk)
         self.assertEqual(entry.trackback_count, 1)
-        response = self.client.post('/trackback/1/',
+        response = self.client.post(trackback_url,
                                     {'url': 'http://example.com'})
         self.assertEqual(response.context['error'],
                          'Trackback is already registered')
 
     def test_zinnia_trackback_on_entry_without_author(self):
+        # Clean the memoization of user flagger to avoid error on MySQL
+        try:
+            del user_flagger_[()]
+        except KeyError:
+            pass
         self.inhibit_templates('zinnia/entry_trackback.xml')
         self.first_entry.authors.clear()
-        response = self.client.post('/trackback/1/',
+        response = self.client.post('/trackback/%s/' % self.first_entry.pk,
                                     {'url': 'http://example.com'})
         self.assertEqual(response['Content-Type'], 'text/xml')
         self.assertEqual('error' in response.context, False)
@@ -664,20 +686,21 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.context['comment'], None)
 
         with self.assertNumQueries(1):
-            response = self.client.get('/comments/success/?c=42')
+            response = self.client.get('/comments/success/?c=404')
         self.assertEqual(response.context['comment'], None)
 
         comment = comments.get_model().objects.create(
             submit_date=timezone.now(),
             comment='My Comment 1', content_object=self.category,
             site=self.site, is_public=False)
+        success_url = '/comments/success/?c=%s' % comment.pk
         with self.assertNumQueries(1):
-            response = self.client.get('/comments/success/?c=1')
+            response = self.client.get(success_url)
         self.assertEqual(response.context['comment'], comment)
         comment.is_public = True
         comment.save()
         with self.assertNumQueries(5):
-            response = self.client.get('/comments/success/?c=1', follow=True)
+            response = self.client.get(success_url, follow=True)
         self.assertEqual(
             response.redirect_chain[1],
             ('http://example.com/categories/tests/', 302))

@@ -1,10 +1,11 @@
 """Views for Zinnia comments"""
-from django.contrib import comments
 from django.template.defaultfilters import slugify
 from django.http import HttpResponsePermanentRedirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic.base import View
 from django.views.generic.base import TemplateResponseMixin
+
+import django_comments as comments
 
 
 class CommentSuccess(TemplateResponseMixin, View):

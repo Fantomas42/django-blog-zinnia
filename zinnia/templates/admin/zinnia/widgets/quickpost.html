@@ -1,6 +1,6 @@
 {% load i18n %}
 <div id="quickpost" class="module">
-  <form method="post" action="{% url 'zinnia_entry_quick_post' %}">
+  <form method="post" action="{% url 'zinnia:entry_quick_post' %}">
     {% csrf_token %}
     <table summary="{% trans "Quick publishing" %}">
       <caption>{% trans "Quick publishing" %}</caption>

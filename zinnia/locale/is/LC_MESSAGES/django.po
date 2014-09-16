@@ -1,0 +1,1613 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# levito <levito@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: django-blog-zinnia\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-06 20:16+0200\n"
+"PO-Revision-Date: 2014-07-09 13:37+0000\n"
+"Last-Translator: levito <levito@gmail.com>\n"
+"Language-Team: Icelandic (http://www.transifex.com/projects/p/django-blog-zinnia/language/is/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: is\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: breadcrumbs.py:68 templates/admin/zinnia/widgets/quickpost.html:25
+#: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:48
+#: templates/zinnia/tag_list.html:6
+msgid "Tags"
+msgstr "Tögg"
+
+#: breadcrumbs.py:71 templates/zinnia/author_list.html:6
+#: templates/zinnia/base.html:40
+msgid "Authors"
+msgstr "Höfundar"
+
+#: breadcrumbs.py:75 admin/forms.py:57 templates/zinnia/base.html:36
+#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:58
+msgid "Categories"
+msgstr "Flokkar"
+
+#: breadcrumbs.py:100
+#, python-format
+msgid "Page %s"
+msgstr "Síða %s"
+
+#: breadcrumbs.py:128
+#, python-format
+msgid "Week %s"
+msgstr "Vika %s"
+
+#: feeds.py:177 templates/zinnia/entry_archive.html:4
+#: templates/zinnia/entry_archive.html:6
+msgid "Latest entries"
+msgstr "Nýjust færslur"
+
+#: feeds.py:183
+#, python-format
+msgid "The latest entries for the site %s"
+msgstr "Nýjustu færslur fyrir vefinn %s"
+
+#: feeds.py:213
+#, python-format
+msgid "Entries for the category %s"
+msgstr "Færslur úr flokknum %s"
+
+#: feeds.py:219
+#, python-format
+msgid "The latest entries for the category %s"
+msgstr "Nýjustu færslur úr flokknum %s"
+
+#: feeds.py:249
+#, python-format
+msgid "Entries for author %s"
+msgstr "Færslur frá höfundinum %s"
+
+#: feeds.py:255
+#, python-format
+msgid "The latest entries by %s"
+msgstr "Nýjustu færslur frá %s"
+
+#: feeds.py:286
+#, python-format
+msgid "Entries for the tag %s"
+msgstr "Færslur með tagginu %s"
+
+#: feeds.py:292
+#, python-format
+msgid "The latest entries for the tag %s"
+msgstr "Nýjustu færslur með tagginu %s"
+
+#: feeds.py:325
+#, python-format
+msgid "Results of the search for '%s'"
+msgstr "Leitarniðurstöður fyrir '%s'"
+
+#: feeds.py:331
+#, python-format
+msgid "The entries containing the pattern '%s'"
+msgstr "Færslur með mynstrinu '%s'"
+
+#: feeds.py:396
+msgid "Latest discussions"
+msgstr "Nýjustu umræður"
+
+#: feeds.py:402
+#, python-format
+msgid "The latest discussions for the site %s"
+msgstr "Nýjustu umræður á vefnum %s"
+
+#: feeds.py:435
+#, python-format
+msgid "Discussions on %s"
+msgstr "Umræður í %s"
+
+#: feeds.py:441
+#, python-format
+msgid "The latest discussions for the entry %s"
+msgstr "Nýjustu umræður á færslunni %s"
+
+#: feeds.py:468
+#, python-format
+msgid "Comments on %s"
+msgstr "Umræður á %s"
+
+#: feeds.py:474
+#, python-format
+msgid "The latest comments for the entry %s"
+msgstr "Nýjustu umræður á færslunni %s"
+
+#: feeds.py:518
+#, python-format
+msgid "Pingbacks on %s"
+msgstr "Tilvísanir á %s"
+
+#: feeds.py:524
+#, python-format
+msgid "The latest pingbacks for the entry %s"
+msgstr "Nýjustu tilvísanir á færsluna %s"
+
+#: feeds.py:550
+#, python-format
+msgid "Trackbacks on %s"
+msgstr "Tilvísun á %s"
+
+#: feeds.py:556
+#, python-format
+msgid "The latest trackbacks for the entry %s"
+msgstr "Nýjustu tilvísanir á færsluna %s"
+
+#: moderator.py:65 moderator.py:87 moderator.py:110
+#, python-format
+msgid "[%(site)s] New comment posted on \"%(title)s\""
+msgstr "[%(site)s] Ný athugasemd á \"%(title)s\""
+
+#: admin/category.py:34
+msgid "tree path"
+msgstr "tréslóð"
+
+#: admin/entry.py:37 templates/admin/zinnia/widgets/quickpost.html:17
+msgid "Content"
+msgstr "Efni"
+
+#: admin/entry.py:39
+msgid "Publication"
+msgstr "Birting"
+
+#: admin/entry.py:43 templates/admin/zinnia/widgets/_content_stats.html:4
+#: templates/zinnia/_entry_detail_base.html:114
+msgid "Discussions"
+msgstr "Umræður"
+
+#: admin/entry.py:47
+msgid "Privacy"
+msgstr "Næði"
+
+#: admin/entry.py:50
+msgid "Templates"
+msgstr "Snið"
+
+#: admin/entry.py:53
+msgid "Metadatas"
+msgstr "Aukagögn"
+
+#: admin/entry.py:85
+#, python-format
+msgid "%(title)s (%(word_count)i words)"
+msgstr "%(title)s (%(word_count)i orð)"
+
+#: admin/entry.py:92
+#, python-format
+msgid "%(title)s (%(reactions)i reaction)"
+msgid_plural "%(title)s (%(reactions)i reactions)"
+msgstr[0] "%(title)s (%(reactions)i viðbragð)"
+msgstr[1] "%(title)s (%(reactions)i viðbrögð)"
+
+#: admin/entry.py:97 models/category.py:21 models_bases/entry.py:46
+msgid "title"
+msgstr "titill"
+
+#: admin/entry.py:113
+msgid "author(s)"
+msgstr "höfundur/ar"
+
+#: admin/entry.py:128
+msgid "category(s)"
+msgstr "flokkur/ar"
+
+#: admin/entry.py:141
+msgid "tag(s)"
+msgstr "tagg/tögg"
+
+#: admin/entry.py:156
+msgid "site(s)"
+msgstr "síða/ur"
+
+#: admin/entry.py:169
+msgid "short url"
+msgstr "stutt-slóð"
+
+#: admin/entry.py:177
+msgid "is visible"
+msgstr "er sýnilegt"
+
+#: admin/entry.py:262
+msgid "The selected entries now belong to you."
+msgstr "Valdar færslur tilheyra þér núna."
+
+#: admin/entry.py:263
+msgid "Set the entries to the user"
+msgstr "Setja færslur á notanda"
+
+#: admin/entry.py:272
+msgid "The selected entries are now marked as published."
+msgstr "Valdar færslur eru nú merktar sem birtar."
+
+#: admin/entry.py:273
+msgid "Set entries selected as published"
+msgstr "Uppfæra valdar færslur sem birtar"
+
+#: admin/entry.py:281
+msgid "The selected entries are now marked as hidden."
+msgstr "Valdar færslur eru nú merktar sem faldar."
+
+#: admin/entry.py:282
+msgid "Set entries selected as hidden"
+msgstr "Uppfæra valdar færslur sem faldar"
+
+#: admin/entry.py:290
+msgid "Comments are now closed for selected entries."
+msgstr "Ummæli eru nú lokuð á völdum færslum."
+
+#: admin/entry.py:291
+msgid "Close the comments for selected entries"
+msgstr "Loka umræðum á völdum færslum"
+
+#: admin/entry.py:300
+msgid "Pingbacks are now closed for selected entries."
+msgstr "Tilvísunum hefur nú verið lokað á valdar færslur."
+
+#: admin/entry.py:302
+msgid "Close the pingbacks for selected entries"
+msgstr "Loka fyrir bakvísanir á valdar færslur"
+
+#: admin/entry.py:310
+msgid "Trackbacks are now closed for selected entries."
+msgstr "Lokað hefur verið fyrir tilvísanir á valdar færslur."
+
+#: admin/entry.py:312
+msgid "Close the trackbacks for selected entries"
+msgstr "Loka fyrir tilvísanir á valdar færslur"
+
+#: admin/entry.py:321
+msgid "The selected entries are now set at the current date."
+msgstr "Valdar færslur hafa nú fengið dagsetninguna í dag."
+
+#: admin/entry.py:323
+msgid "Put the selected entries on top at the current date"
+msgstr "Setja valdar færslur efst á núverandi dagsetningu."
+
+#: admin/entry.py:331
+msgid "Selected entries are now marked as featured."
+msgstr "Valdar færslur eru nú forsíðu-færslur."
+
+#: admin/entry.py:332
+msgid "Mark selected entries as featured"
+msgstr "Velja valdar færslur sem forsíðu-færslur"
+
+#: admin/entry.py:340
+msgid "Selected entries are no longer marked as featured."
+msgstr "Valdar færslur eru ekki lengur merktar sem forsíðu-færslur."
+
+#: admin/entry.py:342
+msgid "Unmark selected entries as featured"
+msgstr "Fjarlægja eftirfarandi færslur sem forsíðu-færslur."
+
+#: admin/entry.py:359
+msgid "The selected entries have been tweeted."
+msgstr "Valdar færslur hafa verið tístar."
+
+#: admin/entry.py:360
+msgid "Tweet entries selected"
+msgstr "Tísta völdum færslum"
+
+#: admin/entry.py:381
+#, python-format
+msgid "%(directory)s directory succesfully pinged %(success)d entries."
+msgstr "%(directory)s mappa tókst að pinga %(success)d færslur."
+
+#: admin/entry.py:385
+msgid "Ping Directories for selected entries"
+msgstr "Pinga Directory fyrir valdar færslur"
+
+#: admin/filters.py:28
+#, python-format
+msgid "%(item)s (%(count)i entry)"
+msgid_plural "%(item)s (%(count)i entries)"
+msgstr[0] "%(item)s (%(count)i færsla)"
+msgstr[1] "%(item)s (%(count)i færslur)"
+
+#: admin/filters.py:49
+msgid "published authors"
+msgstr "virkir höfundar"
+
+#: admin/filters.py:60
+msgid "published categories"
+msgstr "birtir flokkar"
+
+#: admin/forms.py:22
+msgid "Parent category"
+msgstr "Yfirflokkur"
+
+#: admin/forms.py:24
+msgid "No parent category"
+msgstr "Engin yfirflokkur"
+
+#: admin/forms.py:41
+msgid "A category cannot be parent of itself."
+msgstr "Yfirflokkur getur ekki verið yfir sjálfum sér"
+
+#: admin/forms.py:59 models/category.py:75 models_bases/entry.py:407
+msgid "categories"
+msgstr "flokkar"
+
+#: models/category.py:24 models_bases/entry.py:49
+msgid "slug"
+msgstr "vefheiti"
+
+#: models/category.py:25
+msgid "Used to build the category's URL."
+msgstr "Notað til að setja saman slóðina fyrir flokkinn."
+
+#: models/category.py:28
+msgid "description"
+msgstr "lýsing"
+
+#: models/category.py:34
+msgid "parent category"
+msgstr "yfirflokkur"
+
+#: models/category.py:74
+msgid "category"
+msgstr "flokkur"
+
+#: models_bases/entry.py:41
+msgid "draft"
+msgstr "uppkast"
+
+#: models_bases/entry.py:42
+msgid "hidden"
+msgstr "falið"
+
+#: models_bases/entry.py:43
+msgid "published"
+msgstr "í birtingu"
+
+#: models_bases/entry.py:51 models_bases/entry.py:76
+msgid "Used to build the entry's URL."
+msgstr "Notað til að setja saman slóðina fyrir færsluna."
+
+#: models_bases/entry.py:54
+msgid "status"
+msgstr "staða"
+
+#: models_bases/entry.py:58
+msgid "start publication"
+msgstr "hefja birtingu"
+
+#: models_bases/entry.py:60
+msgid "Start date of publication."
+msgstr "Dagsetning á birtingu."
+
+#: models_bases/entry.py:63
+msgid "end publication"
+msgstr "ljúka birtingu"
+
+#: models_bases/entry.py:65
+msgid "End date of publication."
+msgstr "Dagsetning þegar birtingu á að ljúka."
+
+#: models_bases/entry.py:70
+msgid "sites"
+msgstr "vefir"
+
+#: models_bases/entry.py:71
+msgid "Sites where the entry will be published."
+msgstr "Vefir þar sem færslurnar munu birtast."
+
+#: models_bases/entry.py:74
+msgid "creation date"
+msgstr "færsla skrifuð"
+
+#: models_bases/entry.py:79
+msgid "last update"
+msgstr "síðast uppfært"
+
+#: models_bases/entry.py:181
+msgid "entry"
+msgstr "færsla"
+
+#: models_bases/entry.py:182
+msgid "entries"
+msgstr "færslur"
+
+#: models_bases/entry.py:196
+msgid "content"
+msgstr "efni"
+
+#: models_bases/entry.py:238
+msgid "comments enabled"
+msgstr "ummæli leyfð"
+
+#: models_bases/entry.py:239
+msgid "Allows comments if checked."
+msgstr "Ummæli leyfð ef hakað er við."
+
+#: models_bases/entry.py:241
+msgid "pingbacks enabled"
+msgstr "bakvísanir leyfðar"
+
+#: models_bases/entry.py:242
+msgid "Allows pingbacks if checked."
+msgstr "Leyfir bakvísanir ef hakað er við."
+
+#: models_bases/entry.py:244
+msgid "trackbacks enabled"
+msgstr "tilvísanir leyfðar"
+
+#: models_bases/entry.py:245
+msgid "Allows trackbacks if checked."
+msgstr "Leyfir tilvísanir ef hakað er við."
+
+#: models_bases/entry.py:248
+msgid "comment count"
+msgstr "fjöldi ummæla"
+
+#: models_bases/entry.py:250
+msgid "pingback count"
+msgstr "fjöldi tilvísana"
+
+#: models_bases/entry.py:252
+msgid "trackback count"
+msgstr "fjöldi tilvísana"
+
+#: models_bases/entry.py:336
+msgid "related entries"
+msgstr "tengdar færslur"
+
+#: models_bases/entry.py:354
+msgid "excerpt"
+msgstr "útdráttur"
+
+#: models_bases/entry.py:355
+msgid "Used for search and SEO."
+msgstr "Notað fyrir leit og leitarvélabestun."
+
+#: models_bases/entry.py:366
+msgid "image"
+msgstr "mynd"
+
+#: models_bases/entry.py:367
+msgid "Used for illustration."
+msgstr "Notað til útskýringar."
+
+#: models_bases/entry.py:378
+msgid "featured"
+msgstr "forsíðufrétt"
+
+#: models_bases/entry.py:393
+msgid "authors"
+msgstr "höfundar"
+
+#: models_bases/entry.py:417
+msgid "tags"
+msgstr "tögg"
+
+#: models_bases/entry.py:436
+msgid "login required"
+msgstr "innskráning er nauðsynleg"
+
+#: models_bases/entry.py:437
+msgid "Only authenticated users can view the entry."
+msgstr "Aðeins samþykktir notendur geta lesið þessa færslu."
+
+#: models_bases/entry.py:449
+msgid "password"
+msgstr "lykilorð"
+
+#: models_bases/entry.py:450
+msgid "Protects the entry with a password."
+msgstr "Læsir færslunni með lykilorði."
+
+#: models_bases/entry.py:462
+msgid "content template"
+msgstr "efnissnið"
+
+#: models_bases/entry.py:464 models_bases/entry.py:480
+msgid "Default template"
+msgstr "Sjálfgefið útlit"
+
+#: models_bases/entry.py:466
+msgid "Template used to display the entry's content."
+msgstr "Snið sem notað er til að birta færsluna."
+
+#: models_bases/entry.py:478
+msgid "detail template"
+msgstr "snið fyrir staka færslu"
+
+#: models_bases/entry.py:482
+msgid "Template used to display the entry's detail page."
+msgstr "Snið notað til að birta staka færslu."
+
+#: templates/400.html:6
+msgid "Error 400"
+msgstr "Villa 400"
+
+#: templates/400.html:10 templates/400.html.py:15
+msgid "Bad request"
+msgstr "Röng fyrirspurn"
+
+#: templates/400.html:17
+msgid "Sorry, but the request was malformed."
+msgstr "Úps, þessi fyrirspurn er eitthvað beygluð."
+
+#: templates/403.html:6
+msgid "Error 403"
+msgstr "Villa 403"
+
+#: templates/403.html:10 templates/403.html.py:15
+msgid "Permission denied"
+msgstr "Aðgangi hafnað"
+
+#: templates/403.html:17
+msgid "Sorry, but you don't have the permission to do this action."
+msgstr "Úps, þú hefur ekki leyfi til að framkvæma þessa aðgerð."
+
+#: templates/404.html:6
+msgid "Error 404"
+msgstr "Villa 404"
+
+#: templates/404.html:10 templates/404.html.py:15
+msgid "Page not found"
+msgstr "Síða fannst ekki"
+
+#: templates/404.html:17
+msgid "Sorry, but the requested page could not be found."
+msgstr "Afsakið, en síðan sem þú baðst um fannst ekki."
+
+#: templates/500.html:6
+msgid "Error 500"
+msgstr "Villa 500"
+
+#: templates/500.html:10 templates/500.html.py:15
+msgid "Server error"
+msgstr "Villa á vefþjón"
+
+#: templates/500.html:17
+msgid ""
+"There's been an error. It's been reported to the site administrators via "
+"e-mail and should be fixed shortly. Thanks for your patience."
+msgstr "Það kom upp villa og hún hefur verið send á vefstjóra með tölvupósti. Við munum kíkja á þetta þegar við höfum tíma. Heyrumst!"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:3
+msgid "Contents"
+msgstr "Efni"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:9
+#: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:17
+#: templates/zinnia/tag_list.html:18 templates/zinnia/tags/authors.html:8
+#: templates/zinnia/tags/categories.html:7
+#: templates/zinnia/tags/categories_tree.html:6
+#: templates/zinnia/tags/statistics.html:7
+#, python-format
+msgid "%(entry_count)s entry"
+msgid_plural "%(entry_count)s entries"
+msgstr[0] "%(entry_count)s færsla"
+msgstr[1] "%(entry_count)s færslur"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:14
+#: templates/zinnia/_entry_detail_base.html:120
+#: templates/zinnia/tags/entries_popular.html:8
+#: templates/zinnia/tags/statistics.html:16
+#, python-format
+msgid "%(comment_count)s comment"
+msgid_plural "%(comment_count)s comments"
+msgstr[0] "%(comment_count)s ummæli"
+msgstr[1] "%(comment_count)s ummæli"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:21
+#: templates/zinnia/tags/statistics.html:13
+#, python-format
+msgid "%(category_count)s category"
+msgid_plural "%(category_count)s categories"
+msgstr[0] "%(category_count)s flokkur"
+msgstr[1] "%(category_count)s flokkar"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:24
+#: templates/zinnia/_entry_detail_base.html:139
+#: templates/zinnia/tags/statistics.html:19
+#, python-format
+msgid "%(pingback_count)s pingback"
+msgid_plural "%(pingback_count)s pingbacks"
+msgstr[0] "%(pingback_count)s bakvísun"
+msgstr[1] "%(pingback_count)s bakvísanir"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:29
+#: templates/zinnia/tags/statistics.html:10
+#, python-format
+msgid "%(tag_count)s tag"
+msgid_plural "%(tag_count)s tags"
+msgstr[0] "%(tag_count)s tagg"
+msgstr[1] "%(tag_count)s tögg"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:32
+#: templates/zinnia/_entry_detail_base.html:148
+#: templates/zinnia/tags/statistics.html:22
+#, python-format
+msgid "%(trackback_count)s trackback"
+msgid_plural "%(trackback_count)s trackbacks"
+msgstr[0] "%(trackback_count)s tilvísun"
+msgstr[1] "%(trackback_count)s tilvísanir"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:37
+#: templates/zinnia/tags/statistics.html:4
+#, python-format
+msgid "%(author_count)s author"
+msgid_plural "%(author_count)s authors"
+msgstr[0] "%(author_count)s höfundur"
+msgstr[1] "%(author_count)s höfundar"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:42
+#: templates/zinnia/tags/statistics.html:25
+#, python-format
+msgid "%(reject_count)s rejected item"
+msgid_plural "%(reject_count)s rejected items"
+msgstr[0] "%(reject_count)s höfnun"
+msgstr[1] "%(reject_count)s hafnanir"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:47
+msgid "Statistics"
+msgstr "Tölfræði"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:49
+#: templates/zinnia/tags/statistics.html:28
+#, python-format
+msgid "%(entries_per_month)s entries per month"
+msgstr "%(entries_per_month)s færslur á mánuði"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:54
+#: templates/zinnia/tags/statistics.html:31
+#, python-format
+msgid "%(words_per_entry)s words per entry"
+msgstr "%(words_per_entry)s orð í færslu"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:57
+#: templates/zinnia/tags/statistics.html:34
+#, python-format
+msgid "%(words_per_comment)s words per comment"
+msgstr "%(words_per_comment)s orð í ummælum"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:62
+#: templates/zinnia/tags/statistics.html:37
+#, python-format
+msgid "%(comments_per_entry)s comments per entry"
+msgstr "%(comments_per_entry)s ummæli í færslum"
+
+#: templates/admin/zinnia/widgets/_content_stats.html:65
+#: templates/zinnia/tags/statistics.html:40
+#, python-format
+msgid "%(linkbacks_per_entry)s linkbacks per entry"
+msgstr "%(linkbacks_per_entry)s tilvísanir á færslu"
+
+#: templates/admin/zinnia/widgets/_draft_entries.html:6
+#: templates/zinnia/entry_detail_base.html:248
+#: templates/zinnia/entry_detail_base.html:249
+msgid "Edit the entry"
+msgstr "Breyta færslu"
+
+#: templates/admin/zinnia/widgets/_draft_entries.html:9
+#: templates/comments/zinnia_entry_preview.html:25
+#: templates/feeds/comment_title.html:2
+#: templates/feeds/discussion_title.html:2
+#: templates/feeds/pingback_title.html:2
+#: templates/feeds/trackback_title.html:2
+#: templates/zinnia/_entry_detail_base.html:23
+#: templates/zinnia/entry_detail_base.html:109
+#: templates/zinnia/entry_detail_base.html:153
+#: templates/zinnia/entry_detail_base.html:207
+msgctxt "on date"
+msgid "on"
+msgstr "á"
+
+#: templates/admin/zinnia/widgets/_draft_entries.html:15
+#: templates/comments/zinnia/entry/form.html:31
+msgid "Preview"
+msgstr "Sýnishorn"
+
+#: templates/admin/zinnia/widgets/_draft_entries.html:22
+#: templates/zinnia/tags/entries_draft.html:9
+msgid "No draft entries."
+msgstr "Ekkert uppkast fannst."
+
+#: templates/admin/zinnia/widgets/_draft_entries.html:31
+#: templates/admin/zinnia/widgets/_draft_entries.html:32
+msgid "View all draft entries"
+msgstr "Skoða öll uppköst"
+
+#: templates/admin/zinnia/widgets/_recent_comments.html:10
+#: templates/zinnia/_entry_detail_base.html:35
+#: templates/zinnia/tags/comments_recent.html:6
+#: templates/zinnia/tags/linkbacks_recent.html:7
+msgid "in"
+msgstr "í"
+
+#: templates/admin/zinnia/widgets/_recent_comments.html:13
+#: templates/zinnia/tags/comments_recent.html:8
+msgid "Comment on"
+msgstr "Skrifa ummæli við"
+
+#: templates/admin/zinnia/widgets/_recent_comments.html:22
+msgid "Edit the comment"
+msgstr "Breyta ummæli"
+
+#: templates/admin/zinnia/widgets/_recent_comments.html:23
+#: templates/admin/zinnia/widgets/_recent_linkbacks.html:18
+msgid "Edit"
+msgstr "Breyta"
+
+#: templates/admin/zinnia/widgets/_recent_comments.html:30
+#: templates/zinnia/_entry_detail_base.html:124
+#: templates/zinnia/entry_detail_base.html:229
+#: templates/zinnia/tags/comments_recent.html:15
+msgid "No comments yet."
+msgstr "Engin ummæli til."
+
+#: templates/admin/zinnia/widgets/_recent_comments.html:39
+#: templates/admin/zinnia/widgets/_recent_comments.html:40
+msgid "Manage the comments"
+msgstr "Yfirfara ummæli"
+
+#: templates/admin/zinnia/widgets/_recent_linkbacks.html:7
+msgid "made a linkback on"
+msgstr "setti linkback á"
+
+#: templates/admin/zinnia/widgets/_recent_linkbacks.html:17
+msgid "Edit the linkback"
+msgstr "Breyta linkback´i"
+
+#: templates/admin/zinnia/widgets/_recent_linkbacks.html:25
+#: templates/zinnia/tags/linkbacks_recent.html:16
+msgid "No linkbacks yet."
+msgstr "Engin linkbacks til."
+
+#: templates/admin/zinnia/widgets/content_stats.html:6
+#: templates/admin/zinnia/widgets/content_stats.html:8
+msgid "Today"
+msgstr "Í dag"
+
+#: templates/admin/zinnia/widgets/draft_entries.html:6
+#: templates/admin/zinnia/widgets/draft_entries.html:8
+msgid "Draft entries"
+msgstr "Uppköst að færslum"
+
+#: templates/admin/zinnia/widgets/quickpost.html:5
+#: templates/admin/zinnia/widgets/quickpost.html:6
+msgid "Quick publishing"
+msgstr "Snögg-skrifa"
+
+#: templates/admin/zinnia/widgets/quickpost.html:9
+msgid "Title"
+msgstr "Titill"
+
+#: templates/admin/zinnia/widgets/quickpost.html:33
+msgid "Save as draft"
+msgstr "Vista sem uppkast"
+
+#: templates/admin/zinnia/widgets/quickpost.html:34
+msgid "Reset"
+msgstr "Endurræsa"
+
+#: templates/admin/zinnia/widgets/quickpost.html:35
+msgid "Publish"
+msgstr "Birta"
+
+#: templates/admin/zinnia/widgets/recent_comments.html:6
+#: templates/admin/zinnia/widgets/recent_comments.html:8
+#: templates/zinnia/base.html:56
+msgid "Recent comments"
+msgstr "Nýleg ummæli"
+
+#: templates/admin/zinnia/widgets/recent_linkbacks.html:6
+#: templates/admin/zinnia/widgets/recent_linkbacks.html:8
+#: templates/zinnia/base.html:60
+msgid "Recent linkbacks"
+msgstr "Nýleg linkbacks"
+
+#: templates/comments/comment_authors_email.txt:1
+#: templates/comments/comment_notification_email.txt:1
+#: templates/comments/comment_reply_email.txt:1
+#: templates/zinnia/entry_list.html:21
+msgid "Author"
+msgstr "Höfundur"
+
+#: templates/comments/comment_authors_email.txt:3
+#: templates/comments/comment_notification_email.txt:5
+#: templates/comments/comment_reply_email.txt:3
+msgid "Comment"
+msgstr "Ummæli"
+
+#: templates/comments/comment_authors_email.txt:6
+#: templates/comments/comment_notification_email.txt:8
+#: templates/comments/comment_reply_email.txt:6
+msgid "View this comment"
+msgstr "Skoða þessi ummæli"
+
+#: templates/comments/comment_notification_email.txt:2
+msgid "Email"
+msgstr "Netfang"
+
+#: templates/comments/comment_notification_email.txt:3
+msgid "IP"
+msgstr "IP"
+
+#: templates/comments/comment_notification_email.txt:10
+msgid "Flag this comment"
+msgstr "Merkja þessi ummæli"
+
+#: templates/comments/comment_notification_email.txt:12
+msgid "Delete this comment"
+msgstr "Eyða þessum ummælum"
+
+#: templates/comments/comment_notification_email.txt:14
+msgid "Approve this comment"
+msgstr "Samþykkja þessi ummæli"
+
+#: templates/comments/zinnia_entry_preview.html:4
+msgid "Comment preview"
+msgstr "Sýnishorn af ummæli"
+
+#: templates/comments/zinnia_entry_preview.html:10
+msgid "Please correct following error."
+msgid_plural "Please correct following errors."
+msgstr[0] "Vinsamlegast lagfærðu eftirfarandi villu."
+msgstr[1] "Vinsamlegast lagfærðu eftirfarandi villur."
+
+#: templates/comments/zinnia_entry_preview.html:12
+msgid "Preview of the comment"
+msgstr "Sýnishorn af ummæli"
+
+#: templates/comments/zinnia/entry/form.html:11
+msgid "Post your comment"
+msgstr "Setja inn ummæli"
+
+#: templates/comments/zinnia/entry/form.html:26
+msgid "Comment as"
+msgstr "Skrifa ummæli sem"
+
+#: templates/comments/zinnia/entry/form.html:26 templates/zinnia/base.html:96
+#: templates/zinnia/base.html.py:97
+msgid "Log out"
+msgstr "Útskrá"
+
+#: templates/comments/zinnia/entry/form.html:30
+msgid "Post"
+msgstr "Skrifa"
+
+#: templates/comments/zinnia/entry/posted.html:4
+#: templates/comments/zinnia/entry/posted.html:9
+msgid "Thanks for your comment"
+msgstr "Takk fyrir ummælin"
+
+#: templates/comments/zinnia/entry/posted.html:11
+msgid "Your comment needs to be approved before getting displayed."
+msgstr "Ummælin þín þurfa að vera samþykkt áður en þau eru birt."
+
+#: templates/comments/zinnia/entry/posted.html:19
+#, python-format
+msgid "Back to %(title)s"
+msgstr "Aftur á %(title)s"
+
+#: templates/comments/zinnia/entry/posted.html:26
+#: templates/comments/zinnia/entry/posted.html:27
+msgid "Return to entry list"
+msgstr "Til baka í færslulista"
+
+#: templates/zinnia/_entry_detail_base.html:17
+msgid "Written by"
+msgstr "Skrifað af"
+
+#: templates/zinnia/_entry_detail_base.html:21
+#: templates/zinnia/author_list.html:17 templates/zinnia/tags/authors.html:6
+#, python-format
+msgid "Show all %(author)s's entries"
+msgstr "Sýna allar færslur eftir höfundinn %(author)s"
+
+#: templates/zinnia/_entry_detail_base.html:25
+msgid "Written on"
+msgstr "Skrifað þann"
+
+#: templates/zinnia/_entry_detail_base.html:38
+#: templates/zinnia/category_list.html:16
+#: templates/zinnia/tags/categories.html:6
+#: templates/zinnia/tags/categories_tree.html:5
+#, python-format
+msgid "Show all entries in %(category)s"
+msgstr "Sýna allar færslur í flokknum %(category)s"
+
+#: templates/zinnia/_entry_detail_base.html:46
+msgid "Last update on"
+msgstr "Síðast uppfært þann"
+
+#: templates/zinnia/_entry_detail_base.html:78
+#, python-format
+msgid "%(percent)s%% of %(object)s still remains to read."
+msgstr "%(percent)s%% af %(object)s hefur ekki fengið lesningu."
+
+#: templates/zinnia/_entry_detail_base.html:80
+msgid "Continue reading"
+msgstr "Lesa meira"
+
+#: templates/zinnia/_entry_detail_base.html:95
+#: templates/zinnia/tag_list.html:17
+#, python-format
+msgid "Show all entries tagged by %(tag)s"
+msgstr "Sýna allar færslur taggaðar með %(tag)s"
+
+#: templates/zinnia/_entry_detail_base.html:98
+msgid "No tags"
+msgstr "Engin tögg"
+
+#: templates/zinnia/_entry_detail_base.html:104
+msgid "Short url"
+msgstr "Stutt-slóð"
+
+#: templates/zinnia/_entry_detail_base.html:106
+#, python-format
+msgid "Short URL to %(object)s"
+msgstr "Stutt-slóð á %(object)s"
+
+#: templates/zinnia/_entry_detail_base.html:119
+#: templates/zinnia/tags/entries_popular.html:7
+#, python-format
+msgid "Comments on %(object)s"
+msgstr "Ummæli á %(object)s"
+
+#: templates/zinnia/_entry_detail_base.html:126
+#, python-format
+msgid "Leave a comment on %(object)s"
+msgstr "Skrifa ummæli á %(object)s"
+
+#: templates/zinnia/_entry_detail_base.html:127
+msgid "Be first to comment!"
+msgstr "Vertu fyrst/ur til að setja inn ummæli!"
+
+#: templates/zinnia/_entry_detail_base.html:130
+#: templates/zinnia/entry_detail_base.html:225
+#: templates/zinnia/entry_detail_base.html:231
+msgid "Comments are closed."
+msgstr "Lokað hefur verið fyrir ummæli."
+
+#: templates/zinnia/_entry_detail_base.html:138
+#, python-format
+msgid "Pingbacks on %(object)s"
+msgstr "Bakvísanir á %(object)s"
+
+#: templates/zinnia/_entry_detail_base.html:147
+#, python-format
+msgid "Trackbacks on %(object)s"
+msgstr "Tilvísanir á %(object)s"
+
+#: templates/zinnia/author_list.html:4 templates/zinnia/author_list.html:11
+msgid "Author list"
+msgstr "Listi yfir höfunda"
+
+#: templates/zinnia/author_list.html:23 templates/zinnia/tags/authors.html:12
+msgid "No authors yet."
+msgstr "Engir höfundar til."
+
+#: templates/zinnia/base.html:16 templates/zinnia/skeleton.html:36
+msgid "RSS Feed of latest entries"
+msgstr "RSS Veita af nýjustu færslum"
+
+#: templates/zinnia/base.html:17
+msgid "RSS Feed of latest discussions"
+msgstr "RSS Veita af nýjustu umræðum"
+
+#: templates/zinnia/base.html:27
+msgid "Welcome!"
+msgstr "Velkomin/n!"
+
+#: templates/zinnia/base.html:29
+msgid "This simple theme is the default appearance of Zinnia."
+msgstr "Þessi einfalda þema er sjálfgefið útlit í bloggkerfinu Zinnia."
+
+#: templates/zinnia/base.html:32
+msgid ""
+"Don't hesitate to override the template <strong>zinnia/base.html</strong> to"
+" start <a href='http://docs.django-blog-zinnia.com/en/latest/how-"
+"to/customize_look_and_feel.html'>customizing your Weblog</a>."
+msgstr "Ekki hika við að breyta <strong>zinnia/base.html</strong> til að <a href='http://docs.django-blog-zinnia.com/en/latest/how-to/customize_look_and_feel.html'>hafa útlitið eins og þú vilt</a>."
+
+#: templates/zinnia/base.html:44
+msgid "Calendar"
+msgstr "Dagatal"
+
+#: templates/zinnia/base.html:52
+msgid "Recent entries"
+msgstr "Nýlegar færslur"
+
+#: templates/zinnia/base.html:64
+msgid "Random entries"
+msgstr "Færslur af handahófi"
+
+#: templates/zinnia/base.html:68
+msgid "Popular entries"
+msgstr "Vinsælar færslur"
+
+#: templates/zinnia/base.html:72 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/entry_archive_day.html:6
+#: templates/zinnia/entry_archive_day.html:11
+#: templates/zinnia/entry_archive_day.html:28
+#: templates/zinnia/entry_archive_month.html:4
+#: templates/zinnia/entry_archive_month.html:6
+#: templates/zinnia/entry_archive_month.html:11
+#: templates/zinnia/entry_archive_month.html:37
+#: templates/zinnia/entry_archive_today.html:22
+#: templates/zinnia/entry_archive_week.html:42
+#: templates/zinnia/entry_archive_year.html:4
+#: templates/zinnia/entry_archive_year.html:6
+#: templates/zinnia/entry_archive_year.html:11
+#: templates/zinnia/tags/entries_archives.html:5
+#: templates/zinnia/tags/entries_archives_link.html:2
+#: templates/zinnia/tags/entries_archives_tree.html:6
+#: templates/zinnia/tags/entries_archives_tree.html:13
+#: templates/zinnia/tags/entries_archives_tree.html:23
+msgid "Archives"
+msgstr "Safn"
+
+#: templates/zinnia/base.html:77
+msgid "Tools"
+msgstr "Verkfæri"
+
+#: templates/zinnia/base.html:81 templates/zinnia/base.html.py:82
+msgid "Dashboard"
+msgstr "Stjórnborð"
+
+#: templates/zinnia/base.html:88 templates/zinnia/base.html.py:89
+msgid "Post an entry"
+msgstr "Skrifa færslu"
+
+#: templates/zinnia/category_list.html:4
+#: templates/zinnia/category_list.html:11
+msgid "Category list"
+msgstr "Listi yfir flokka"
+
+#: templates/zinnia/category_list.html:28
+#: templates/zinnia/tags/categories.html:11
+#: templates/zinnia/tags/categories_tree.html:16
+msgid "No categories yet."
+msgstr "Engir flokkar til."
+
+#: templates/zinnia/entry_archive.html:16
+msgid "Yearly archives"
+msgstr "Safn eftir ári"
+
+#: templates/zinnia/entry_archive_day.html:16
+#: templates/zinnia/entry_archive_today.html:16
+msgid "Previous day"
+msgstr "Fyrri dagur"
+
+#: templates/zinnia/entry_archive_day.html:22
+msgid "Next day"
+msgstr "Næsti dagur"
+
+#: templates/zinnia/entry_archive_day.html:35
+#: templates/zinnia/entry_archive_week.html:30
+#: templates/zinnia/entry_archive_week.html:38
+#, python-format
+msgid "Week %(week_number)s of %(year)s"
+msgstr "Vika %(week_number)s af %(year)s"
+
+#: templates/zinnia/entry_archive_month.html:16
+#: templates/zinnia/entry_archive_week.html:17
+msgid "Daily archives"
+msgstr "Safn eftir dögum"
+
+#: templates/zinnia/entry_archive_month.html:26
+msgid "Previous month"
+msgstr "Fyrri mánuður"
+
+#: templates/zinnia/entry_archive_month.html:32
+msgid "Next month"
+msgstr "Næsti mánuður"
+
+#: templates/zinnia/entry_archive_today.html:4
+#: templates/zinnia/entry_archive_today.html:6
+#: templates/zinnia/entry_archive_today.html:11
+msgid "Today archives"
+msgstr "Safn fyrir daginn í dag"
+
+#: templates/zinnia/entry_archive_week.html:4
+#: templates/zinnia/entry_archive_week.html:6
+#: templates/zinnia/entry_archive_week.html:11
+#, python-format
+msgid "Archives week %(week_number)s of %(year)s"
+msgstr "Safn fyrir %(week_number)s vikuna árið %(year)s "
+
+#: templates/zinnia/entry_archive_week.html:27
+msgid "Previous week"
+msgstr "Fyrr vika"
+
+#: templates/zinnia/entry_archive_week.html:35
+msgid "Next week"
+msgstr "Næsta vika"
+
+#: templates/zinnia/entry_archive_year.html:15
+#: templates/zinnia/sitemap.html:63
+msgid "Monthly archives"
+msgstr "Safn eftir mánuði"
+
+#: templates/zinnia/entry_archive_year.html:25
+msgid "Previous year"
+msgstr "Fyrra ár"
+
+#: templates/zinnia/entry_archive_year.html:31
+msgid "Next year"
+msgstr "Næsta ár"
+
+#: templates/zinnia/entry_detail_base.html:22
+msgid "RSS Feed of discussions on"
+msgstr "RSS veita af ummælum á"
+
+#: templates/zinnia/entry_detail_base.html:24
+msgid "RSS Feed of comments on"
+msgstr "RSS veita af ummælum á"
+
+#: templates/zinnia/entry_detail_base.html:26
+msgid "RSS Feed of pingbacks on"
+msgstr "RSS veita af tilvísunum á"
+
+#: templates/zinnia/entry_detail_base.html:28
+msgid "RSS Feed of trackbacks on"
+msgstr "RSS veita af trackbacks á"
+
+#: templates/zinnia/entry_detail_base.html:47
+msgid "Next entry"
+msgstr "Næsta færsla"
+
+#: templates/zinnia/entry_detail_base.html:61
+msgid "Previous entry"
+msgstr "Fyrri færsla"
+
+#: templates/zinnia/entry_detail_base.html:75
+msgid "Related entries"
+msgstr "Tengdar færslur"
+
+#: templates/zinnia/entry_detail_base.html:89
+msgid "Similar entries"
+msgstr "Svipaðar færslur"
+
+#: templates/zinnia/entry_detail_base.html:98
+msgid "Pingbacks"
+msgstr "Tilvísanir"
+
+#: templates/zinnia/entry_detail_base.html:115
+msgid "Direct link to this pingback"
+msgstr "Beinn hlekkur á þessa tilvísun"
+
+#: templates/zinnia/entry_detail_base.html:131
+msgid "Pingbacks are open."
+msgstr "Tilvísanir eru opnar"
+
+#: templates/zinnia/entry_detail_base.html:133
+msgid "Pingbacks are closed."
+msgstr "Tilvísanir eru lokaðar"
+
+#: templates/zinnia/entry_detail_base.html:142
+msgid "Trackbacks"
+msgstr "Trackbacks"
+
+#: templates/zinnia/entry_detail_base.html:159
+msgid "Direct link to this trackback"
+msgstr "Bein slóð á þessa tilvísun"
+
+#: templates/zinnia/entry_detail_base.html:177
+msgid "Trackback URL"
+msgstr "Slóða á tilvísun"
+
+#: templates/zinnia/entry_detail_base.html:187
+msgid "Comments"
+msgstr "Ummæli"
+
+#: templates/zinnia/entry_detail_base.html:213
+msgid "Direct link to this comment"
+msgstr "Beinn hlekkur á þessi ummæli"
+
+#: templates/zinnia/entry_list.html:4
+msgid "Latest entries for"
+msgstr "Nýjustu færslur í"
+
+#: templates/zinnia/entry_list.html:4
+msgid "the category"
+msgstr "flokknum"
+
+#: templates/zinnia/entry_list.html:4
+msgid "the tag"
+msgstr "tagginu"
+
+#: templates/zinnia/entry_list.html:4
+msgid "the author"
+msgstr "höfundinum"
+
+#: templates/zinnia/entry_list.html:6
+msgid "page"
+msgstr "síða"
+
+#: templates/zinnia/entry_list.html:11 templates/zinnia/entry_list.html:14
+#: templates/zinnia/entry_list.html:17 templates/zinnia/skeleton.html:37
+msgid "RSS Feed"
+msgstr "RSS Veita"
+
+#: templates/zinnia/entry_list.html:21
+msgid "Category"
+msgstr "Flokkur"
+
+#: templates/zinnia/entry_list.html:21
+msgid "Tag"
+msgstr "Tagg"
+
+#: templates/zinnia/entry_list.html:23
+msgid "Page"
+msgstr "Síða"
+
+#: templates/zinnia/entry_list.html:31
+#, python-format
+msgid "Category archives: %(category)s"
+msgstr "Safn eftir flokknum: %(category)s"
+
+#: templates/zinnia/entry_list.html:38
+#, python-format
+msgid "Tag archives: %(tag)s"
+msgstr "Safn eftir tagginu: %(tag)s"
+
+#: templates/zinnia/entry_list.html:42
+#, python-format
+msgid "Author archives: %(author)s"
+msgstr "Safn eftir höfundi: %(author)s"
+
+#: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:29
+#: templates/zinnia/sitemap.html.py:51
+#: templates/zinnia/tags/entries_featured.html:9
+#: templates/zinnia/tags/entries_popular.html:12
+#: templates/zinnia/tags/entries_random.html:9
+#: templates/zinnia/tags/entries_recent.html:9
+msgid "No entries yet."
+msgstr "Engar færslur komnar."
+
+#: templates/zinnia/entry_list.html:70 templates/zinnia/entry_list.html:71
+msgid "Edit the category"
+msgstr "Breyta flokknum"
+
+#: templates/zinnia/entry_list.html:77 templates/zinnia/entry_list.html:78
+msgid "Edit the tag"
+msgstr "Breyta tagginu"
+
+#: templates/zinnia/entry_list.html:84 templates/zinnia/entry_list.html:85
+msgid "Edit the author"
+msgstr "Breyta höfundi"
+
+#: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:6
+#: templates/zinnia/entry_search.html:16
+msgid "Search results for"
+msgstr "Leitarniðurstöður fyrir"
+
+#: templates/zinnia/entry_search.html:10
+msgid "RSS Feed of search result of"
+msgstr "RSS veita af leitarniðurstöðum á"
+
+#: templates/zinnia/entry_search.html:24
+#, python-format
+msgid "%(entry_count)s entry found"
+msgid_plural "%(entry_count)s entries found"
+msgstr[0] "%(entry_count)s færsla fannst"
+msgstr[1] "%(entry_count)s færslur fundust"
+
+#: templates/zinnia/entry_search.html:34
+msgid "Nothing found."
+msgstr "Ekkert fannst."
+
+#: templates/zinnia/login.html:4 templates/zinnia/login.html.py:9
+msgid "Login required"
+msgstr "Innskráning nauðsynleg"
+
+#: templates/zinnia/login.html:13
+msgid "Your username and password didn't match. Please try again."
+msgstr "Notandanafn og lykilorð passaði ekki. Reyndu aftur."
+
+#: templates/zinnia/login.html:17
+msgid "You need to be connected to view this entry."
+msgstr "Þú verður að vera tengdur til að skoða þessa færslu."
+
+#: templates/zinnia/login.html:34
+msgid "Login"
+msgstr "Innskrá"
+
+#: templates/zinnia/password.html:4 templates/zinnia/password.html.py:9
+msgid "Password required"
+msgstr "Lykilorð nauðsynlegt"
+
+#: templates/zinnia/password.html:13
+msgid "The password provided is not valid. Please try again."
+msgstr "Lykilorðið er ekki rétt. Reyndu aftur."
+
+#: templates/zinnia/password.html:17
+msgid "You need to provide a password to view this entry."
+msgstr "Þú verður að skrá lykilorð til að skoða þessa færslu."
+
+#: templates/zinnia/password.html:24
+msgid "Password"
+msgstr "Lykilorð"
+
+#: templates/zinnia/password.html:29
+msgid "Valid"
+msgstr "Í lagi"
+
+#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:11
+#: templates/zinnia/skeleton.html:31 templates/zinnia/skeleton.html.py:32
+#: templates/zinnia/skeleton.html:69 templates/zinnia/skeleton.html.py:70
+msgid "Sitemap"
+msgstr "Síðutré"
+
+#: templates/zinnia/sitemap.html:6
+msgid "Sitemap of the weblog"
+msgstr "Veftré síðunnar"
+
+#: templates/zinnia/sitemap.html:14
+msgid "Entries per categories"
+msgstr "Færslur eftir flokkum"
+
+#: templates/zinnia/sitemap.html:23 templates/zinnia/sitemap.html.py:45
+msgid "comment"
+msgstr "ummæli"
+
+#: templates/zinnia/sitemap.html:37
+msgid "All the entries"
+msgstr "Allar færslur"
+
+#: templates/zinnia/skeleton.html:11 templates/zinnia/skeleton.html.py:53
+msgid "Just another Zinnia weblog."
+msgstr "Enn eitt Zinnia bloggið."
+
+#: templates/zinnia/skeleton.html:43 templates/zinnia/tags/search_form.html:4
+msgid "Keywords..."
+msgstr "Leitarorð..."
+
+#: templates/zinnia/skeleton.html:61
+msgid "Useful links"
+msgstr "Nytsamlegir hlekkir"
+
+#: templates/zinnia/skeleton.html:64 templates/zinnia/skeleton.html.py:65
+msgid "Weblog index"
+msgstr "Blogg yfirlit"
+
+#: templates/zinnia/skeleton.html:76
+msgid "Search"
+msgstr "Leita"
+
+#: templates/zinnia/skeleton.html:86
+#, python-format
+msgid ""
+"Powered by <a href=\"http://www.djangoproject.com\">Django</a> and <a "
+"href=\"https://github.com/Fantomas42/django-blog-zinnia\">Zinnia "
+"%(ZINNIA_VERSION)s</a>."
+msgstr "Keyrt á <a href=\"http://www.djangoproject.com\">Django</a> og <a href=\"https://github.com/Fantomas42/django-blog-zinnia\">Zinnia %(ZINNIA_VERSION)s</a>."
+
+#: templates/zinnia/tag_list.html:4 templates/zinnia/tag_list.html.py:11
+msgid "Tag list"
+msgstr "Listi af töggum"
+
+#: templates/zinnia/tag_list.html:22 templates/zinnia/tags/tag_cloud.html:11
+msgid "No tags yet."
+msgstr "Engin tögg til."
+
+#: templates/zinnia/tags/entries_archives.html:12
+#: templates/zinnia/tags/entries_archives_tree.html:37
+msgid "No archives yet."
+msgstr "Ekkert safn til staðar."
+
+#: templates/zinnia/tags/entries_similar.html:9
+msgid "No similar entries."
+msgstr "Engar svipaðar færslur."
+
+#: templates/zinnia/tags/linkbacks_recent.html:9
+msgid "Linkback on"
+msgstr "Vísa á"
+
+#: templates/zinnia/tags/pagination.html:4
+#, python-format
+msgid "Page %(current_page)s of %(total_page)s"
+msgstr "Síða %(current_page)s af %(total_page)s"
+
+#: templates/zinnia/tags/pagination.html:10
+msgid "More recent entries"
+msgstr "Fleiri nýlegar færslur"
+
+#: templates/zinnia/tags/pagination.html:20
+#: templates/zinnia/tags/pagination.html:33
+#: templates/zinnia/tags/pagination.html:47
+msgid "Entries page"
+msgstr "Færslu síða"
+
+#: templates/zinnia/tags/pagination.html:56
+msgid "More old entries"
+msgstr "Fleiri gamlar færslur"
+
+#: templates/zinnia/tags/search_form.html:6
+msgid ""
+"You can use - to exclude words or phrases, &quot;double quotes&quot; for "
+"exact phrases and the AND/OR boolean operators combined with parenthesis for"
+" complex queries."
+msgstr "Þú getur notað bandstrik (-) til að fjarlægja orð eða setningar, &quot;double quotes&quot; fyrir nákvæmar setningar og AND/OR milli orðasambanda fyrir ítarlega leit."
+
+#: templates/zinnia/tags/tag_cloud.html:6
+#, python-format
+msgid "%(entry_count)s entry tagged by %(tag)s"
+msgid_plural "%(entry_count)s entries tagged by %(tag)s"
+msgstr[0] "%(entry_count)s færsla tögguð með %(tag)s"
+msgstr[1] "%(entry_count)s færslur taggaðar með %(tag)s"
+
+#: templatetags/zinnia_tags.py:341
+msgid "Blog"
+msgstr "Blogg"
+
+#: tests/test_views.py:574 views/search.py:30
+msgid "The pattern is too short"
+msgstr "Mynstrið er of stutt"
+
+#: tests/test_views.py:578 views/search.py:34
+msgid "No pattern to search found"
+msgstr "Ekkert leitarmynstur fannst"
+
+#: urls/__init__.py:23
+msgid "^feeds/"
+msgstr "^veitur/"
+
+#: urls/__init__.py:24
+msgid "^tags/"
+msgstr "^togg/"
+
+#: urls/__init__.py:25
+msgid "^authors/"
+msgstr "^hofundar/"
+
+#: urls/__init__.py:26
+msgid "^categories/"
+msgstr "^flokkar/"
+
+#: urls/__init__.py:27
+msgid "^search/"
+msgstr "^leit/"
+
+#: urls/__init__.py:28
+msgid "^random/"
+msgstr "^handahof/"
+
+#: urls/__init__.py:29
+msgid "^sitemap/"
+msgstr "^sidutre/"
+
+#: urls/__init__.py:30
+msgid "^trackback/"
+msgstr "^tilvisun/"
+
+#: urls/__init__.py:31
+msgid "^comments/"
+msgstr "^ummaeli/"
+
+#: urls/archives.py:18
+msgid "^page/(?P<page>\\d+)/$"
+msgstr "^sida/(?P<page>\\d+)/$"
+
+#: urls/archives.py:27
+msgid "^(?P<year>\\d{4})/page/(?P<page>\\d+)/$"
+msgstr "^(?P<year>\\d{4})/sida/(?P<page>\\d+)/$"
+
+#: urls/archives.py:33
+msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/$"
+msgstr "^(?P<year>\\d{4})/vika/(?P<week>\\d+)/$"
+
+#: urls/archives.py:36
+msgid "^(?P<year>\\d{4})/week/(?P<week>\\d+)/page/(?P<page>\\d+)/$"
+msgstr "^(?P<year>\\d{4})/vika/(?P<week>\\d+)/sida/(?P<page>\\d+)/$"
+
+#: urls/archives.py:45
+msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/page/(?P<page>\\d+)/$"
+msgstr "^(?P<year>\\d{4})/(?P<month>\\d{2})/sida/(?P<page>\\d+)/$"
+
+#: urls/archives.py:54
+msgid "^(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/page/(?P<page>\\d+)/$"
+msgstr "^(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/sida/(?P<page>\\d+)/$"
+
+#: urls/archives.py:61
+msgid "^today/$"
+msgstr "^idag/$"
+
+#: urls/archives.py:64
+msgid "^today/page/(?P<page>\\d+)/$"
+msgstr "^idag/sida/(?P<page>\\d+)/$"
+
+#: urls/authors.py:15
+msgid "^(?P<username>[.+-@\\w]+)/page/(?P<page>\\d+)/$"
+msgstr "^(?P<username>[.+-@\\w]+)/sida/(?P<page>\\d+)/$"
+
+#: urls/categories.py:15
+msgid "^(?P<path>[-\\/\\w]+)/page/(?P<page>\\d+)/$"
+msgstr "^(?P<path>[-\\/\\w]+)/sida/(?P<page>\\d+)/$"
+
+#: urls/comments.py:11
+msgid "^success/$"
+msgstr "^tokst/$"
+
+#: urls/feeds.py:23
+msgid "^discussions/$"
+msgstr "^umraedur/$"
+
+#: urls/feeds.py:26
+msgid "^search/$"
+msgstr "^leit/$"
+
+#: urls/feeds.py:29
+msgid "^tags/(?P<tag>[^/]+(?u))/$"
+msgstr "^togg/(?P<tag>[^/]+(?u))/$"
+
+#: urls/feeds.py:32
+msgid "^authors/(?P<username>[.+-@\\w]+)/$"
+msgstr "^hofundar/(?P<username>[.+-@\\w]+)/$"
+
+#: urls/feeds.py:35
+msgid "^categories/(?P<path>[-\\/\\w]+)/$"
+msgstr "^flokkar/(?P<path>[-\\/\\w]+)/$"
+
+#: urls/feeds.py:38
+msgid ""
+"^discussions/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+msgstr "^umraedur/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+
+#: urls/feeds.py:42
+msgid ""
+"^comments/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+msgstr "^ummaeli/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+
+#: urls/feeds.py:46
+msgid ""
+"^pingbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+msgstr "^bakvisanir/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+
+#: urls/feeds.py:50
+msgid ""
+"^trackbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+msgstr "^tilvisanir/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>[-\\w]+)/$"
+
+#: urls/quick_entry.py:11
+msgid "^quick-entry/$"
+msgstr "^snogg-skrif/$"
+
+#: urls/tags.py:18
+msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
+msgstr "^(?P<tag>[^/]+(?u))/sida/(?P<page>\\d+)/$"
+
+#: views/tags.py:48
+#, python-format
+msgid "No Tag found matching \"%s\"."
+msgstr "Ekkert tagg fannst með heitinu \"%s\"."
+
+#: views/mixins/entry_preview.py:27
+msgid "No entry found matching the query"
+msgstr "Engin færsla fannst með þessum leitarorðum"
+
+#: xmlrpc/metaweblog.py:48
+msgid "Username is incorrect."
+msgstr "Notandanafn er rangt."
+
+#: xmlrpc/metaweblog.py:50
+msgid "Password is invalid."
+msgstr "Lykilorð er ekki rétt."
+
+#: xmlrpc/metaweblog.py:52
+msgid "User account unavailable."
+msgstr "Notandi er ekki virkur."
+
+#: xmlrpc/metaweblog.py:55
+#, python-format
+msgid "User cannot %s."
+msgstr "Notandi getur ekki %s."
+
+#: xmlrpc/pingback.py:114
+msgid "No title"
+msgstr "Enginn titill"

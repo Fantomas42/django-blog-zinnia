@@ -1,0 +1,88 @@
+body.dashboard #content {
+  width: 100%;
+}
+
+.module {
+  width: 48%;
+  table {
+    width: 100%;
+    th, td {
+      font-size: 12px;
+    }
+  }
+}
+
+.managelink {
+  background: url("../img/manage.png") no-repeat scroll 0 0.2em transparent;
+  padding-left: 12px;
+}
+
+.previewlink {
+  background: url("../img/preview.png") no-repeat scroll 0 0.2em transparent;
+  padding-left: 12px;
+}
+
+input, textarea, select {
+  border: 1px solid #cccccc;
+}
+
+.vTextField, .vLargeTextField {
+  width: 25em;
+}
+
+.required label, label.required {
+  color: #333333 !important;
+  font-weight: bold !important;
+}
+
+.button {
+  float: left;
+  margin-right: 5px;
+}
+
+#contents {
+  th {
+    width: 50%;
+  }
+  td {
+    padding-left: 10px;
+    a {
+      font-weight: bold;
+    }
+  }
+}
+
+#quickpost {
+  th {
+    width: 20%;
+    vertical-align: middle;
+  }
+  td {
+    width: 100%;
+  }
+}
+
+#comments {
+  th {
+    width: 10%;
+  }
+  td {
+    width: 100%;
+    white-space: normal;
+    a {
+      display: inline;
+    }
+  }
+}
+
+#drafts, #linkbacks, #comments {
+  th {
+    font-weight: normal;
+    a {
+      font-weight: bold;
+    }
+    abbr {
+      color: #666666;
+    }
+  }
+}

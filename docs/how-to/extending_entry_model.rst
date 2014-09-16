@@ -250,4 +250,4 @@ For more information you can see another implementation example in the
 
 .. _`South`: http://south.aeracode.org/
 .. _`SOUTH_MIGRATION_MODULES`: http://south.readthedocs.org/en/latest/settings.html#south-migration-modules
-.. _`cmsplugin-zinnia`: https://github.com/Fantomas42/cmsplugin-zinnia
+.. _`cmsplugin-zinnia`: https://github.com/django-blog-zinnia/cmsplugin-zinnia

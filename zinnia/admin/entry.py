@@ -9,8 +9,6 @@ from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.translation import get_language
 from django.template.response import TemplateResponse
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -68,7 +66,7 @@ class EntryAdmin(admin.ModelAdmin):
     search_fields = ('title', 'excerpt', 'content', 'tags')
     actions = ['make_mine', 'make_published', 'make_hidden',
                'close_comments', 'close_pingbacks', 'close_trackbacks',
-               'ping_directories', 'make_tweet', 'put_on_top',
+               'ping_directories', 'put_on_top',
                'mark_featured', 'unmark_featured']
     actions_on_top = True
     actions_on_bottom = True
@@ -84,9 +82,9 @@ class EntryAdmin(admin.ModelAdmin):
         """
         title = _('%(title)s (%(word_count)i words)') % \
             {'title': entry.title, 'word_count': entry.word_count}
-        reaction_count = (entry.comment_count +
-                          entry.pingback_count +
-                          entry.trackback_count)
+        reaction_count = int(entry.comment_count +
+                             entry.pingback_count +
+                             entry.trackback_count)
         if reaction_count:
             return ungettext_lazy(
                 '%(title)s (%(reactions)i reaction)',
@@ -133,7 +131,7 @@ class EntryAdmin(admin.ModelAdmin):
         """
         try:
             return ', '.join(['<a href="%s" target="blank">%s</a>' %
-                              (reverse('zinnia_tag_detail', args=[tag]), tag)
+                              (reverse('zinnia:tag_detail', args=[tag]), tag)
                               for tag in entry.tags_list])
         except NoReverseMatch:
             return entry.tags
@@ -145,7 +143,7 @@ class EntryAdmin(admin.ModelAdmin):
         Return the sites linked in HTML.
         """
         try:
-            index_url = reverse('zinnia_entry_archive_index')
+            index_url = reverse('zinnia:entry_archive_index')
         except NoReverseMatch:
             index_url = ''
         return ', '.join(
@@ -187,7 +185,7 @@ class EntryAdmin(admin.ModelAdmin):
         if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
             form.cleaned_data['authors'] = entry.authors.all()
 
-        if not form.cleaned_data.get('authors'):
+        if not entry.pk and not form.cleaned_data.get('authors'):
             form.cleaned_data['authors'] = Author.objects.filter(
                 pk=request.user.pk)
 
@@ -199,7 +197,7 @@ class EntryAdmin(admin.ModelAdmin):
         Make special filtering by user's permissions.
         """
         if not request.user.has_perm('zinnia.can_view_all'):
-            queryset = request.user.entries.all()
+            queryset = self.model.objects.filter(authors__pk=request.user.pk)
         else:
             queryset = super(EntryAdmin, self).get_queryset(request)
         return queryset.prefetch_related('categories', 'authors', 'sites')
@@ -245,8 +243,6 @@ class EntryAdmin(admin.ModelAdmin):
             del actions['make_published']
         if not settings.PING_DIRECTORIES:
             del actions['ping_directories']
-        if not settings.USE_TWITTER:
-            del actions['make_tweet']
 
         return actions
 
@@ -255,9 +251,10 @@ class EntryAdmin(admin.ModelAdmin):
         """
         Set the entries to the current user.
         """
+        author = Author.objects.get(pk=request.user.pk)
         for entry in queryset:
-            if request.user not in entry.authors.all():
-                entry.authors.add(request.user)
+            if author not in entry.authors.all():
+                entry.authors.add(author)
         self.message_user(
             request, _('The selected entries now belong to you.'))
     make_mine.short_description = _('Set the entries to the user')
@@ -341,24 +338,6 @@ class EntryAdmin(admin.ModelAdmin):
     unmark_featured.short_description = _(
         'Unmark selected entries as featured')
 
-    def make_tweet(self, request, queryset):
-        """
-        Post an update on Twitter.
-        """
-        import tweepy
-        auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY,
-                                   settings.TWITTER_CONSUMER_SECRET)
-        auth.set_access_token(settings.TWITTER_ACCESS_KEY,
-                              settings.TWITTER_ACCESS_SECRET)
-        api = tweepy.API(auth)
-        for entry in queryset:
-            short_url = entry.short_url
-            message = '%s %s' % (entry.title[:139 - len(short_url)], short_url)
-            api.update_status(message)
-        self.message_user(
-            request, _('The selected entries have been tweeted.'))
-    make_tweet.short_description = _('Tweet entries selected')
-
     def ping_directories(self, request, queryset, messages=True):
         """
         Ping web directories for selected entries.
@@ -386,7 +365,7 @@ class EntryAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         """
-        Overload the admin's urls for WYSIWYG and tag auto-completion.
+        Overload the admin's urls for tag auto-completion.
         """
         entry_admin_urls = super(EntryAdmin, self).get_urls()
         urls = patterns(
@@ -394,15 +373,7 @@ class EntryAdmin(admin.ModelAdmin):
             url(r'^autocomplete_tags/$',
                 self.admin_site.admin_view(self.autocomplete_tags),
                 name='zinnia_entry_autocomplete_tags'),
-            url(r'^wymeditor/$',
-                self.admin_site.admin_view(self.wymeditor),
-                name='zinnia_entry_wymeditor'),
-            url(r'^markitup/$',
-                self.admin_site.admin_view(self.markitup),
-                name='zinnia_entry_markitup'),
-            url(r'^markitup/preview/$',
-                self.admin_site.admin_view(self.content_preview),
-                name='zinnia_entry_markitup_preview'),)
+        )
         return urls + entry_admin_urls
 
     def autocomplete_tags(self, request):
@@ -412,35 +383,6 @@ class EntryAdmin(admin.ModelAdmin):
         return TemplateResponse(
             request, 'admin/zinnia/entry/autocomplete_tags.js',
             content_type='application/javascript')
-
-    def wymeditor(self, request):
-        """
-        View for serving the config of WYMEditor.
-        """
-        return TemplateResponse(
-            request, 'admin/zinnia/entry/wymeditor.js',
-            {'lang': get_language().split('-')[0]},
-            content_type='application/javascript')
-
-    def markitup(self, request):
-        """
-        View for serving the config of MarkItUp.
-        """
-        return TemplateResponse(
-            request, 'admin/zinnia/entry/markitup.js',
-            content_type='application/javascript')
-
-    @csrf_exempt
-    def content_preview(self, request):
-        """
-        Admin view to preview Entry.content in HTML,
-        useful when using markups to write entries.
-        """
-        data = request.POST.get('data', '')
-        entry = self.model(content=data)
-        return TemplateResponse(
-            request, 'admin/zinnia/entry/preview.html',
-            {'preview': entry.html_content})
 
     def _media(self):
         """
@@ -457,25 +399,5 @@ class EntryAdmin(admin.ModelAdmin):
                 static_url('js/jquery.autocomplete.js'),
                 reverse('admin:zinnia_entry_autocomplete_tags')))
 
-        if settings.WYSIWYG == 'wymeditor':
-            media += Media(
-                js=(static_url('js/wymeditor/jquery.wymeditor.pack.js'),
-                    static_url('js/wymeditor/plugins/hovertools/'
-                               'jquery.wymeditor.hovertools.js'),
-                    reverse('admin:zinnia_entry_wymeditor')))
-        elif settings.WYSIWYG == 'tinymce':
-            from tinymce.widgets import TinyMCE
-            media += TinyMCE().media + Media(
-                js=(reverse('tinymce-js', args=('admin/zinnia/entry',)),))
-        elif settings.WYSIWYG == 'markitup':
-            media += Media(
-                js=(static_url('js/markitup/jquery.markitup.js'),
-                    static_url('js/markitup/sets/%s/set.js' % (
-                        settings.MARKUP_LANGUAGE)),
-                    reverse('admin:zinnia_entry_markitup')),
-                css={'all': (
-                    static_url('js/markitup/skins/django/style.css'),
-                    static_url('js/markitup/sets/%s/style.css' % (
-                        settings.MARKUP_LANGUAGE)))})
         return media
     media = property(_media)

@@ -19,9 +19,9 @@ MOLLOM_PRIVATE_KEY = 'MOLLOM_PRIVATE_KEY'
 INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.contenttypes',
-    'django.contrib.comments',
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django_comments',
     'django_xmlrpc',
     'mptt', 'tagging', 'zinnia']

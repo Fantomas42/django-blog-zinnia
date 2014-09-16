@@ -48,7 +48,7 @@ More than a long speech, here the list of the main features:
 * Pingback/Trackback support
 * `Blogger conversion utility`_
 * `WordPress conversion utility`_
-* `WYMeditor`_, `TinyMCE`_ and `MarkItUp`_ support
+* `WYMeditor`_, `TinyMCE`_ , `CKEditor`_ and `MarkItUp`_ support
 * Efficient database queries
 * Ready to use and extendable templates
 * `Compass`_ and `Sass3`_ integration
@@ -60,7 +60,7 @@ Examples
 Take a look at the online demo at: http://demo.django-blog-zinnia.com/
 or you can visit these websites who use Zinnia.
 
-* `Fantomas' side`_  / `Mobile version`_
+* `Fantomas' side`_
 * `Darwin's Weblog`_
 * `ShiningPanda`_
 * `Tryolabs`_
@@ -112,25 +112,25 @@ More information and help available at these URLs:
 .. _`Markdown`: http://daringfireball.net/projects/markdown/
 .. _`Textile`: http://redcloth.org/hobix.com/textile/
 .. _`reStructuredText`: http://docutils.sourceforge.net/rst.html
-.. _`Akismet`: http://akismet.com
-.. _`TypePad`: http://antispam.typepad.com/
-.. _`Mollom`: http://mollom.com/
+.. _`Akismet`: https://github.com/Fantomas42/zinnia-spam-checker-akismet
+.. _`TypePad`: https://github.com/Fantomas42/zinnia-spam-checker-akismet#using-typepad-antispam
+.. _`Mollom`: https://github.com/Fantomas42/zinnia-spam-checker-mollom
 .. _`MetaWeblog API`: http://www.xmlrpc.com/metaWeblogApi
-.. _`Bit.ly`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#module-zinnia.url_shortener.backends.bitly
-.. _`Twitter`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#twitter
+.. _`Bit.ly`: https://github.com/Fantomas42/zinnia-url-shortener-bitly
+.. _`Twitter`:  https://github.com/Fantomas42/zinnia-twitter
 .. _`Gravatar`: http://gravatar.com/
 .. _`Django-CMS`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#django-cms
 .. _`Entry model extendable`: http://django-blog-zinnia.rtfd.org/extending-entry
-.. _`WYMeditor`: http://www.wymeditor.org/
-.. _`TinyMCE`: http://tinymce.moxiecode.com/
-.. _`MarkItUp`: http://markitup.jaysalvat.com/
+.. _`WYMeditor`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-wymeditor
+.. _`TinyMCE`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-tinymce
+.. _`CKEditor`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-ckeditor
+.. _`MarkItUp`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-markitup
 .. _`Blogger conversion utility`: http://docs.django-blog-zinnia.com/en/latest/how-to/import_export.html#from-blogger-to-zinnia
 .. _`WordPress conversion utility`: http://docs.django-blog-zinnia.com/en/latest/how-to/import_export.html#from-wordpress-to-zinnia
 .. _`Compass`: http://compass-style.org/
 .. _`Sass3`: http://sass-lang.com/
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
 .. _`Fantomas' side`: http://fantomas.willbreak.it/blog/
-.. _`Mobile version`: http://m.fantomas.willbreak.it/blog/
 .. _`Professional Web Studio`: http://www.professionalwebstudio.com/en/weblog/
 .. _`Tryolabs`: http://www.tryolabs.com/Blog/
 .. _`brainbreach`: http://brainbreach.com/

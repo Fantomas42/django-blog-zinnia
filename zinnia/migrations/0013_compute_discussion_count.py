@@ -1,11 +1,11 @@
+from south.v2 import DataMigration
+
 from django.db.models import Q
-from django.contrib.comments.models import CommentFlag
+
+from django_comments.models import CommentFlag
 
 from zinnia.flags import PINGBACK
 from zinnia.flags import TRACKBACK
-
-from south.v2 import DataMigration
-
 from zinnia.migrations import user_name
 from zinnia.migrations import user_table
 from zinnia.migrations import user_orm_label

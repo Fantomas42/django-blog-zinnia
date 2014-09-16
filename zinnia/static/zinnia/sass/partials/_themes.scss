@@ -4,7 +4,7 @@
     color: $rebase0;
     background-color: $rebase03;
     // Typography
-    #{headers(all)} { color: $rebase2; }
+    h1, h2, h3, h4, h5, h6 { color: $rebase2; }
     a { @include link-colors($rebase1, $rebase2,
                              $rebase2, $rebase1, $rebase1); }
     blockquote, pre { background-color: $rebase02;
@@ -84,13 +84,13 @@
       }
     }
     // Content related
-    .hfeed > h2 {
+    &.entry-list .hfeed > h2 {
       border-top: 1px solid $rebase01;
     }
 }
 
 @mixin accentize($accent) {
-    #{headers(all)} { color: $accent; }
+    h1, h2, h3, h4, h5, h6 { color: $accent; }
     a { @include link-colors($accent, lighten($accent, 5%),
                              lighten(adjust-hue($accent, 75deg), 10%),
                              $accent, $accent); }
@@ -105,7 +105,7 @@
 &.default {
   @include rebase(#fff, #eee, #ddd, #ccc,
                   #333, #666, #333, #000);
-  background: transparent image-url("background.gif") repeat-x scroll left top;
+  background: transparent url("../img/background.gif") repeat-x scroll left top;
 }
 
 &.light {

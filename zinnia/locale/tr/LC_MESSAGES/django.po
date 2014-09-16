@@ -4,16 +4,16 @@
 # 
 # Translators:
 # Ahmet Emre Aladağ <emre@woramo.com>, 2012
-# TurkishMAN <acikdunyam@gmail.com>, 2013
+# İbrahim <acikdunyam@gmail.com>, 2013
 # melihsozdinler <melihsozdinler@gmail.com>, 2012
 # melihsozdinler <melihsozdinler@gmail.com>, 2012
-# TurkishMAN <acikdunyam@gmail.com>, 2013
+# İbrahim <acikdunyam@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-07 19:30+0100\n"
-"PO-Revision-Date: 2014-03-07 18:30+0000\n"
+"POT-Creation-Date: 2014-05-06 20:16+0200\n"
+"PO-Revision-Date: 2014-05-06 18:16+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/django-blog-zinnia/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgid "Authors"
 msgstr "Yazarlar"
 
 #: breadcrumbs.py:75 admin/forms.py:57 templates/zinnia/base.html:36
-#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
+#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:58
 msgid "Categories"
 msgstr "Kategoriler"
 
@@ -48,101 +48,101 @@ msgstr "%s. Sayfa"
 msgid "Week %s"
 msgstr "%s. Hafta"
 
-#: feeds.py:178 templates/zinnia/entry_archive.html:4
+#: feeds.py:177 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:6
 msgid "Latest entries"
 msgstr "Son yazılar"
 
-#: feeds.py:184
+#: feeds.py:183
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "%s sitesi için son yazılar"
 
-#: feeds.py:214
+#: feeds.py:213
 #, python-format
 msgid "Entries for the category %s"
 msgstr "%s kategorisindeki yazılar"
 
-#: feeds.py:220
+#: feeds.py:219
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "%s kategorisindeki son yazılar"
 
-#: feeds.py:251
+#: feeds.py:249
 #, python-format
 msgid "Entries for author %s"
 msgstr "%s yazarının yazıları"
 
-#: feeds.py:257
+#: feeds.py:255
 #, python-format
 msgid "The latest entries by %s"
 msgstr "%s tarafından yazılan son yazılar"
 
-#: feeds.py:288
+#: feeds.py:286
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "%s etiketli yazılar"
 
-#: feeds.py:294
+#: feeds.py:292
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "%s etiketli son yazılar"
 
-#: feeds.py:327
+#: feeds.py:325
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr "'%s' için arama sonuçları"
 
-#: feeds.py:333
+#: feeds.py:331
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr "'%s' örüntüsünü içeren yazılar"
 
-#: feeds.py:398
+#: feeds.py:396
 msgid "Latest discussions"
 msgstr "Son tartışmalar"
 
-#: feeds.py:404
+#: feeds.py:402
 #, python-format
 msgid "The latest discussions for the site %s"
 msgstr "%s sitesindeki son tartışmalar"
 
-#: feeds.py:437
+#: feeds.py:435
 #, python-format
 msgid "Discussions on %s"
 msgstr "%s hakkında tartışmalar"
 
-#: feeds.py:443
+#: feeds.py:441
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "%s yazısı hakkında son tartışmalar"
 
-#: feeds.py:470
+#: feeds.py:468
 #, python-format
 msgid "Comments on %s"
 msgstr "%s için yorumlar"
 
-#: feeds.py:476
+#: feeds.py:474
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "%s yazısı için son yorumlar"
 
-#: feeds.py:520
+#: feeds.py:518
 #, python-format
 msgid "Pingbacks on %s"
 msgstr "%s için Geripingler"
 
-#: feeds.py:526
+#: feeds.py:524
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "%s yazısı için son geripingler"
 
-#: feeds.py:552
+#: feeds.py:550
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "%s için geri izler"
 
-#: feeds.py:558
+#: feeds.py:556
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "%s yazısı için son geri izler"
@@ -585,8 +585,7 @@ msgstr "İçerik"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:9
 #: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:17
-#: templates/zinnia/sitemap.html:57 templates/zinnia/tag_list.html:18
-#: templates/zinnia/tags/authors.html:8
+#: templates/zinnia/tag_list.html:18 templates/zinnia/tags/authors.html:8
 #: templates/zinnia/tags/categories.html:7
 #: templates/zinnia/tags/categories_tree.html:6
 #: templates/zinnia/tags/statistics.html:7
@@ -1073,7 +1072,7 @@ msgstr "Bir yazı yaz"
 msgid "Category list"
 msgstr "Kategori listesi"
 
-#: templates/zinnia/category_list.html:28 templates/zinnia/sitemap.html:62
+#: templates/zinnia/category_list.html:28
 #: templates/zinnia/tags/categories.html:11
 #: templates/zinnia/tags/categories_tree.html:16
 msgid "No categories yet."
@@ -1134,7 +1133,7 @@ msgid "Next week"
 msgstr ""
 
 #: templates/zinnia/entry_archive_year.html:15
-#: templates/zinnia/sitemap.html:69
+#: templates/zinnia/sitemap.html:63
 msgid "Monthly archives"
 msgstr "Aylık arşivler"
 
@@ -1266,8 +1265,8 @@ msgstr "Etiket arşivleri: %(tag)s"
 msgid "Author archives: %(author)s"
 msgstr "Yazar arşivleri: %(author)s"
 
-#: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:25
-#: templates/zinnia/sitemap.html.py:45
+#: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:29
+#: templates/zinnia/sitemap.html.py:51
 #: templates/zinnia/tags/entries_featured.html:9
 #: templates/zinnia/tags/entries_popular.html:12
 #: templates/zinnia/tags/entries_random.html:9
@@ -1343,21 +1342,25 @@ msgstr "Parola"
 msgid "Valid"
 msgstr "Geçerli"
 
-#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:9
+#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:11
 #: templates/zinnia/skeleton.html:31 templates/zinnia/skeleton.html.py:32
 #: templates/zinnia/skeleton.html:69 templates/zinnia/skeleton.html.py:70
 msgid "Sitemap"
 msgstr "Site haritası"
 
-#: templates/zinnia/sitemap.html:12
+#: templates/zinnia/sitemap.html:6
+msgid "Sitemap of the weblog"
+msgstr ""
+
+#: templates/zinnia/sitemap.html:14
 msgid "Entries per categories"
 msgstr "Kategorilere göre yazılar"
 
-#: templates/zinnia/sitemap.html:20 templates/zinnia/sitemap.html.py:40
+#: templates/zinnia/sitemap.html:23 templates/zinnia/sitemap.html.py:45
 msgid "comment"
 msgstr "yorum"
 
-#: templates/zinnia/sitemap.html:33
+#: templates/zinnia/sitemap.html:37
 msgid "All the entries"
 msgstr "Tüm yazılar"
 
@@ -1443,15 +1446,15 @@ msgid_plural "%(entry_count)s entries tagged by %(tag)s"
 msgstr[0] "one: %(tag)s ile etiketlenen %(entry_count)s yazı\nother: %(tag)s ile etikletlenen %(entry_count)s yazı"
 msgstr[1] "one: %(tag)s ile etiketlenen %(entry_count)s yazı\nother: %(tag)s ile etikletlenen %(entry_count)s yazı"
 
-#: templatetags/zinnia_tags.py:335
+#: templatetags/zinnia_tags.py:341
 msgid "Blog"
 msgstr ""
 
-#: tests/test_views.py:555 views/search.py:30
+#: tests/test_views.py:574 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Örüntü çok kısa"
 
-#: tests/test_views.py:559 views/search.py:34
+#: tests/test_views.py:578 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Aranacak örüntü bulunamadı"
 
@@ -1587,6 +1590,10 @@ msgstr ""
 #, python-format
 msgid "No Tag found matching \"%s\"."
 msgstr "\"%s\" için hiç etiket bulunamadı."
+
+#: views/mixins/entry_preview.py:27
+msgid "No entry found matching the query"
+msgstr ""
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."

@@ -8,13 +8,13 @@
 {% block link %}
   {{ block.super }}
   {% if category %}
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ category }}" href="{% url 'zinnia_category_feed' category.tree_path %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ category }}" href="{% url 'zinnia:category_feed' category.tree_path %}" />
   {% endif %}
   {% if tag %}
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ tag }}" href="{% url 'zinnia_tag_feed' tag.name %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ tag }}" href="{% url 'zinnia:tag_feed' tag.name %}" />
   {% endif %}
   {% if author %}
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ author }}" href="{% url 'zinnia_author_feed' author.get_username %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ author }}" href="{% url 'zinnia:author_feed' author.get_username %}" />
   {% endif %}
 {% endblock link %}
 

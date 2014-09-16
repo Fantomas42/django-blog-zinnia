@@ -1,0 +1,59 @@
+body.dashboard #content {
+  width: 100%; }
+
+.module {
+  width: 48%; }
+  .module table {
+    width: 100%; }
+    .module table th, .module table td {
+      font-size: 12px; }
+
+.managelink {
+  background: url("../img/manage.png") no-repeat scroll 0 0.2em transparent;
+  padding-left: 12px; }
+
+.previewlink {
+  background: url("../img/preview.png") no-repeat scroll 0 0.2em transparent;
+  padding-left: 12px; }
+
+input, textarea, select {
+  border: 1px solid #cccccc; }
+
+.vTextField, .vLargeTextField {
+  width: 25em; }
+
+.required label, label.required {
+  color: #333333 !important;
+  font-weight: bold !important; }
+
+.button {
+  float: left;
+  margin-right: 5px; }
+
+#contents th {
+  width: 50%; }
+#contents td {
+  padding-left: 10px; }
+  #contents td a {
+    font-weight: bold; }
+
+#quickpost th {
+  width: 20%;
+  vertical-align: middle; }
+#quickpost td {
+  width: 100%; }
+
+#comments th {
+  width: 10%; }
+#comments td {
+  width: 100%;
+  white-space: normal; }
+  #comments td a {
+    display: inline; }
+
+#drafts th, #linkbacks th, #comments th {
+  font-weight: normal; }
+  #drafts th a, #linkbacks th a, #comments th a {
+    font-weight: bold; }
+  #drafts th abbr, #linkbacks th abbr, #comments th abbr {
+    color: #666666; }

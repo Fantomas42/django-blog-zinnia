@@ -131,15 +131,15 @@ Is it possible have a different comment system, with reply feature for example ?
 --------------------------------------------------------------------------------
 
 Yes the comment system integrated in Zinnia is based on
-:mod:`django.contrib.comments` and can be extended or replaced if doesn't
+:mod:`django_comments` and can be extended or replaced if doesn't
 quite fit your needs. You should take a look on the
 `customizing the comments framework`_ documentation for more information.
 
 .. warning::
 
    The custom comment Model must be inherited from
-   :class:`~django.contrib.comments.models.Comment` and implement the
-   :class:`~django.contrib.comments.managers.CommentManager` to properly
+   :class:`~django_comments.models.Comment` and implement the
+   :class:`~django_comments.managers.CommentManager` to properly
    work with Zinnia.
 
 
@@ -153,6 +153,6 @@ If you want the ability to reply on comments, you can take a look at
 .. _`convert Zinnia into a multilingual Weblog`:  http://www.codeispoetry.me/django-blog-zinnia-multilanguage-support-with-django-modeltranslation/
 .. _`django-modeltranslation`:
 .. _`sorl.thumbnail`: http://thumbnail.sorl.net/
-.. _`customizing the comments framework`: https://docs.djangoproject.com/en/dev/ref/contrib/comments/custom/
-.. _`zinnia-threaded-comments`: https://github.com/Fantomas42/zinnia-threaded-comments
+.. _`customizing the comments framework`: http://django-contrib-comments.readthedocs.org/en/latest/custom.html
+.. _`zinnia-threaded-comments`: https://github.com/django-blog-zinnia/zinnia-threaded-comments
 .. _`django-threadcomments`: https://github.com/HonzaKral/django-threadedcomments

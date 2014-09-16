@@ -6,13 +6,14 @@ from django.utils import timezone
 from django.template import Context
 from django.template import Template
 from django.template import TemplateSyntaxError
-from django.contrib import comments
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
-from django.contrib.comments.models import CommentFlag
 from django.contrib.auth.tests.utils import skipIfCustomUser
+
+import django_comments as comments
+from django_comments.models import CommentFlag
 
 from tagging.models import Tag
 
@@ -229,6 +230,12 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(list(context['entries']), [second_entry, self.entry])
 
         self.entry.comment_count = 2
+        self.entry.save()
+        with self.assertNumQueries(0):
+            context = get_popular_entries(3)
+        self.assertEqual(list(context['entries']), [second_entry, self.entry])
+
+        self.entry.comment_count = 3
         self.entry.save()
         with self.assertNumQueries(0):
             context = get_popular_entries(3)
@@ -649,6 +656,29 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(list(context['middle']), [])
         self.assertEqual(list(context['end']), [5, 6, 7])
 
+    def test_zinnia_pagination_on_my_website(self):
+        """
+        Reproduce the issue encountred on my website,
+        versus the expected result.
+        """
+        class FakeRequest(object):
+            def __init__(self, get_dict={}):
+                self.GET = get_dict
+
+        source_context = Context({'request': FakeRequest()})
+        paginator = Paginator(range(40), 10)
+
+        with self.assertNumQueries(0):
+            for i in range(1, 5):
+                context = zinnia_pagination(
+                    source_context, paginator.page(i),
+                    begin_pages=1, end_pages=1,
+                    before_pages=2, after_pages=2)
+                self.assertEqual(context['page'].number, i)
+                self.assertEqual(list(context['begin']), [1, 2, 3, 4])
+                self.assertEqual(list(context['middle']), [])
+                self.assertEqual(list(context['end']), [])
+
     @skipIfCustomUser
     def test_zinnia_breadcrumbs(self):
         class FakeRequest(object):
@@ -673,7 +703,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(len(context['breadcrumbs']), 1)
         self.assertEqual(context['breadcrumbs'][0].name, 'Blog')
         self.assertEqual(context['breadcrumbs'][0].url,
-                         reverse('zinnia_entry_archive_index'))
+                         reverse('zinnia:entry_archive_index'))
         self.assertEqual(context['template'], 'zinnia/tags/breadcrumbs.html')
 
         with self.assertNumQueries(0):
@@ -711,7 +741,7 @@ class TemplateTagsTestCase(TestCase):
 
         tag = Tag.objects.get(name='test')
         source_context = Context(
-            {'request': FakeRequest(reverse('zinnia_tag_detail',
+            {'request': FakeRequest(reverse('zinnia:tag_detail',
                                             args=['test'])),
              'object': tag})
         with self.assertNumQueries(0):
@@ -731,35 +761,35 @@ class TemplateTagsTestCase(TestCase):
 
         source_context = Context(
             {'request': FakeRequest(reverse(
-                'zinnia_entry_archive_year', args=[2011]))})
+                'zinnia:entry_archive_year', args=[2011]))})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
         self.assertEqual(len(context['breadcrumbs']), 2)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
-            'zinnia_entry_archive_month', args=[2011, '03']))})
+            'zinnia:entry_archive_month', args=[2011, '03']))})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
         self.assertEqual(len(context['breadcrumbs']), 3)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
-            'zinnia_entry_archive_week', args=[2011, 15]))})
+            'zinnia:entry_archive_week', args=[2011, 15]))})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
         self.assertEqual(len(context['breadcrumbs']), 3)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
-            'zinnia_entry_archive_day', args=[2011, '03', 15]))})
+            'zinnia:entry_archive_day', args=[2011, '03', 15]))})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
         self.assertEqual(len(context['breadcrumbs']), 4)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest('%s?page=2' % reverse(
-            'zinnia_entry_archive_day', args=[2011, '03', 15])),
+            'zinnia:entry_archive_day', args=[2011, '03', 15])),
             'page_obj': FakePage(2)})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
@@ -767,7 +797,7 @@ class TemplateTagsTestCase(TestCase):
         check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
-            'zinnia_entry_archive_day_paginated', args=[2011, '03', 15, 2])),
+            'zinnia:entry_archive_day_paginated', args=[2011, '03', 15, 2])),
             'page_obj': FakePage(2)})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
@@ -851,6 +881,73 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(
             widont('A complete string with <markup>', autoescape=True),
             'A complete string with&nbsp;&lt;markup&gt;')
+
+    def test_widont_pre_punctuation(self):
+        """
+        In some languages like French, applying the widont filter
+        before a punctuation sign preceded by a space, leads to
+        ugly visual results, instead of a better visual results.
+        """
+        self.assertEqual(
+            widont('Releases : django-blog-zinnia'),
+            'Releases&nbsp;:&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases ; django-blog-zinnia'),
+            'Releases&nbsp;;&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases ! django-blog-zinnia'),
+            'Releases&nbsp;!&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases ? django-blog-zinnia'),
+            'Releases&nbsp;?&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases - django-blog-zinnia'),
+            'Releases&nbsp;-&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases + django-blog-zinnia'),
+            'Releases&nbsp;+&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases * django-blog-zinnia'),
+            'Releases&nbsp;*&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases / django-blog-zinnia'),
+            'Releases&nbsp;/&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases % django-blog-zinnia'),
+            'Releases&nbsp;%&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases = django-blog-zinnia'),
+            'Releases&nbsp;=&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases   :   django-blog-zinnia  '),
+            'Releases&nbsp;:&nbsp;django-blog-zinnia  ')
+        self.assertEqual(
+            widont('Releases :: django-blog-zinnia'),
+            'Releases&nbsp;::&nbsp;django-blog-zinnia')
+        self.assertEqual(
+            widont('Releases :z django-blog-zinnia'),
+            'Releases :z&nbsp;django-blog-zinnia')
+
+    def test_widont_post_punctuation(self):
+        """
+        Sometimes applying the widont filter on just a punctuation sign,
+        leads to ugly visual results, instead of better visual results.
+        """
+        self.assertEqual(
+            widont('Move !'),
+            'Move&nbsp;!')
+        self.assertEqual(
+            widont('Move it   !  '),
+            'Move&nbsp;it&nbsp;!  ')
+        self.assertEqual(
+            widont('Move it ?'),
+            'Move&nbsp;it&nbsp;?')
+        self.assertEqual(
+            widont('I like to move : it !'),
+            'I like to move&nbsp;:&nbsp;it&nbsp;!')
+        self.assertEqual(
+            widont('I like to : move it !'),
+            'I like to : move&nbsp;it&nbsp;!')
 
     def test_week_number(self):
         self.assertEqual(week_number(datetime(2013, 1, 1)), '0')

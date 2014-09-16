@@ -10,5 +10,5 @@ urlpatterns = patterns(
     '',
     url(_(r'^quick-entry/$'),
         QuickEntry.as_view(),
-        name='zinnia_entry_quick_post')
+        name='entry_quick_post')
 )

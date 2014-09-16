@@ -3,15 +3,16 @@ from datetime import timedelta
 
 from django.test import TestCase
 from django.utils import timezone
-from django.contrib import comments
 from django.utils.unittest import skipUnless
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.test.utils import override_settings
-from django.contrib.comments.models import CommentFlag
 from django.contrib.auth.tests.utils import skipIfCustomUser
+
+import django_comments as comments
+from django_comments.models import CommentFlag
 
 from zinnia.managers import PUBLISHED
 from zinnia.models_bases import entry
@@ -23,6 +24,7 @@ from zinnia.tests.utils import is_lib_available
 from zinnia import url_shortener as shortener_settings
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.url_shortener.backends.default import base36
 
 
 class EntryTestCase(TestCase):
@@ -175,8 +177,8 @@ class EntryTestCase(TestCase):
                                                    'backends.default'
         self.assertEqual(self.entry.short_url,
                          'http://example.com' +
-                         reverse('zinnia_entry_shortlink',
-                                 args=[self.entry.pk]))
+                         reverse('zinnia:entry_shortlink',
+                                 args=[base36(self.entry.pk)]))
         shortener_settings.URL_SHORTENER_BACKEND = original_shortener
 
     def test_previous_entry(self):

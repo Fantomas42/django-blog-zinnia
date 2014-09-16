@@ -8,13 +8,13 @@
 {% endblock meta %}
 
 {% block link %}
-    <link rel="index" href="{% url 'zinnia_entry_archive_index' %}" />
-    <link rel="author" type="text/plain" href="{% url 'zinnia_humans' %}" />
-    <link rel="EditURI" type="application/rsd+xml" href="{% url 'zinnia_rsd' %}" />
-    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url 'zinnia_wlwmanifest' %}" />
-    <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Blog" href="{% url 'zinnia_opensearch' %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url 'zinnia_entry_latest_feed' %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest discussions" %}" href="{% url 'zinnia_discussion_latest_feed' %}" />
+    <link rel="index" href="{% url 'zinnia:entry_archive_index' %}" />
+    <link rel="author" type="text/plain" href="{% url 'zinnia:humans' %}" />
+    <link rel="EditURI" type="application/rsd+xml" href="{% url 'zinnia:rsd' %}" />
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url 'zinnia:wlwmanifest' %}" />
+    <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Weblog" href="{% url 'zinnia:opensearch' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url 'zinnia:entry_latest_feed' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest discussions" %}" href="{% url 'zinnia:discussion_latest_feed' %}" />
     {% get_archives_entries "zinnia/tags/entries_archives_link.html" %}
 {% endblock link %}
 
@@ -33,11 +33,15 @@
   </p>
 </div>
 <div id="widget-categories" class="widget">
-  <h3>{% trans "Categories" %}</h3>
+  <h3>
+    <a href="{% url 'zinnia:category_list' %}">{% trans "Categories" %}</a>
+  </h3>
   {% get_categories %}
 </div>
 <div id="widget-authors" class="widget">
-  <h3>{% trans "Authors" %}</h3>
+  <h3>
+    <a href="{% url 'zinnia:author_list' %}">{% trans "Authors" %}</a>
+  </h3>
   {% get_authors %}
 </div>
 <div id="widget-calendar" class="widget">
@@ -45,7 +49,9 @@
   {% get_calendar_entries %}
 </div>
 <div id="widget-tags" class="widget">
-  <h3>{% trans "Tags" %}</h3>
+  <h3>
+    <a href="{% url 'zinnia:tag_list' %}">{% trans "Tags" %}</a>
+  </h3>
   {% get_tag_cloud %}
 </div>
 <div id="widget-recents" class="widget">

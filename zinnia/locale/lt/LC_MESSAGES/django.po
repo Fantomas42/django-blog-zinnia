@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# karolis <karoliszakas@gmail.com>, 2013
-# karolis <karoliszakas@gmail.com>, 2013
+# Karolis Zakas <karoliszakas@gmail.com>, 2013
+# Karolis Zakas <karoliszakas@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-07 19:30+0100\n"
-"PO-Revision-Date: 2014-03-07 18:30+0000\n"
+"POT-Creation-Date: 2014-05-06 20:16+0200\n"
+"PO-Revision-Date: 2014-05-06 18:16+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/django-blog-zinnia/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgid "Authors"
 msgstr "Autoriai"
 
 #: breadcrumbs.py:75 admin/forms.py:57 templates/zinnia/base.html:36
-#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
+#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:58
 msgid "Categories"
 msgstr "Kategorijos"
 
@@ -45,101 +45,101 @@ msgstr "Puslapis %s"
 msgid "Week %s"
 msgstr "Savaitė %s"
 
-#: feeds.py:178 templates/zinnia/entry_archive.html:4
+#: feeds.py:177 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:6
 msgid "Latest entries"
 msgstr "Naujausi įrašai"
 
-#: feeds.py:184
+#: feeds.py:183
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "Naujausi šios svetainės įrašai %s"
 
-#: feeds.py:214
+#: feeds.py:213
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Kategorijos %s įrašai"
 
-#: feeds.py:220
+#: feeds.py:219
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "Naujausi kategorijos %s įrašai"
 
-#: feeds.py:251
+#: feeds.py:249
 #, python-format
 msgid "Entries for author %s"
 msgstr "Autoriaus %s parašyti įrašai"
 
-#: feeds.py:257
+#: feeds.py:255
 #, python-format
 msgid "The latest entries by %s"
 msgstr "Naujausi %s parašyti įrašai"
 
-#: feeds.py:288
+#: feeds.py:286
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Įrašai pagal žymę %s"
 
-#: feeds.py:294
+#: feeds.py:292
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "Naujausi įrašai pagal žymę %s"
 
-#: feeds.py:327
+#: feeds.py:325
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr "Paieškos rezultatai pagal užklausą '%s'"
 
-#: feeds.py:333
+#: feeds.py:331
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr "Įrašai pagal struktūrą '%s'"
 
-#: feeds.py:398
+#: feeds.py:396
 msgid "Latest discussions"
 msgstr "Naujausios diskusijos"
 
-#: feeds.py:404
+#: feeds.py:402
 #, python-format
 msgid "The latest discussions for the site %s"
 msgstr "Naujausios svetainės %s diskusijos"
 
-#: feeds.py:437
+#: feeds.py:435
 #, python-format
 msgid "Discussions on %s"
 msgstr "%s diskusijos"
 
-#: feeds.py:443
+#: feeds.py:441
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "Naujausios įrašo %s diskusijos"
 
-#: feeds.py:470
+#: feeds.py:468
 #, python-format
 msgid "Comments on %s"
 msgstr "Komentarai parašyti į %s"
 
-#: feeds.py:476
+#: feeds.py:474
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "Naujausi komentarai parašyti įrašui %s"
 
-#: feeds.py:520
+#: feeds.py:518
 #, python-format
 msgid "Pingbacks on %s"
 msgstr "Pingbacks į %s"
 
-#: feeds.py:526
+#: feeds.py:524
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "Naujausi pingbacks įrašui %s"
 
-#: feeds.py:552
+#: feeds.py:550
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "Trackbacks į %s"
 
-#: feeds.py:558
+#: feeds.py:556
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "Naujausi trackbacks įrašui %s"
@@ -584,8 +584,7 @@ msgstr "Turinys"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:9
 #: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:17
-#: templates/zinnia/sitemap.html:57 templates/zinnia/tag_list.html:18
-#: templates/zinnia/tags/authors.html:8
+#: templates/zinnia/tag_list.html:18 templates/zinnia/tags/authors.html:8
 #: templates/zinnia/tags/categories.html:7
 #: templates/zinnia/tags/categories_tree.html:6
 #: templates/zinnia/tags/statistics.html:7
@@ -1081,7 +1080,7 @@ msgstr "Naujas įrašas"
 msgid "Category list"
 msgstr "Kategorijų sąrašas"
 
-#: templates/zinnia/category_list.html:28 templates/zinnia/sitemap.html:62
+#: templates/zinnia/category_list.html:28
 #: templates/zinnia/tags/categories.html:11
 #: templates/zinnia/tags/categories_tree.html:16
 msgid "No categories yet."
@@ -1142,7 +1141,7 @@ msgid "Next week"
 msgstr ""
 
 #: templates/zinnia/entry_archive_year.html:15
-#: templates/zinnia/sitemap.html:69
+#: templates/zinnia/sitemap.html:63
 msgid "Monthly archives"
 msgstr "Mėnesio archyvas"
 
@@ -1274,8 +1273,8 @@ msgstr "Žymės archyvai: %(tag)s"
 msgid "Author archives: %(author)s"
 msgstr "Autoriaus archyvai: %(author)s"
 
-#: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:25
-#: templates/zinnia/sitemap.html.py:45
+#: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:29
+#: templates/zinnia/sitemap.html.py:51
 #: templates/zinnia/tags/entries_featured.html:9
 #: templates/zinnia/tags/entries_popular.html:12
 #: templates/zinnia/tags/entries_random.html:9
@@ -1352,21 +1351,25 @@ msgstr "Slaptažodis"
 msgid "Valid"
 msgstr "Tinkamas"
 
-#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:9
+#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:11
 #: templates/zinnia/skeleton.html:31 templates/zinnia/skeleton.html.py:32
 #: templates/zinnia/skeleton.html:69 templates/zinnia/skeleton.html.py:70
 msgid "Sitemap"
 msgstr "Sitemap"
 
-#: templates/zinnia/sitemap.html:12
+#: templates/zinnia/sitemap.html:6
+msgid "Sitemap of the weblog"
+msgstr ""
+
+#: templates/zinnia/sitemap.html:14
 msgid "Entries per categories"
 msgstr "Įrašų per kategoriją"
 
-#: templates/zinnia/sitemap.html:20 templates/zinnia/sitemap.html.py:40
+#: templates/zinnia/sitemap.html:23 templates/zinnia/sitemap.html.py:45
 msgid "comment"
 msgstr "komentaras"
 
-#: templates/zinnia/sitemap.html:33
+#: templates/zinnia/sitemap.html:37
 msgid "All the entries"
 msgstr "Visi įrašai"
 
@@ -1453,15 +1456,15 @@ msgstr[0] ""
 msgstr[1] "%(entry_count)s įrašas pagal žymas %(tag)s"
 msgstr[2] "%(entry_count)s įrašai pagal žymas %(tag)s"
 
-#: templatetags/zinnia_tags.py:335
+#: templatetags/zinnia_tags.py:341
 msgid "Blog"
 msgstr ""
 
-#: tests/test_views.py:555 views/search.py:30
+#: tests/test_views.py:574 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Struktūra per trumpa"
 
-#: tests/test_views.py:559 views/search.py:34
+#: tests/test_views.py:578 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Struktūra paieškai nerasta"
 
@@ -1597,6 +1600,10 @@ msgstr "^(?P<tag>[^/]+(?u))/puslapis/(?P<page>\\d+)/$"
 #, python-format
 msgid "No Tag found matching \"%s\"."
 msgstr "Žymė pagal \"%s\" nerasta."
+
+#: views/mixins/entry_preview.py:27
+msgid "No entry found matching the query"
+msgstr ""
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."

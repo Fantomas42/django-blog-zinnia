@@ -37,15 +37,6 @@ PREVIEW_MAX_WORDS = getattr(settings, 'ZINNIA_PREVIEW_MAX_WORDS', 55)
 
 PREVIEW_MORE_STRING = getattr(settings, 'ZINNIA_PREVIEW_MORE_STRING', ' ...')
 
-WYSIWYG_MARKUP_MAPPING = {
-    'textile': 'markitup',
-    'markdown': 'markitup',
-    'restructuredtext': 'markitup',
-    'html': 'tinymce' in settings.INSTALLED_APPS and 'tinymce' or 'wymeditor'}
-
-WYSIWYG = getattr(settings, 'ZINNIA_WYSIWYG',
-                  WYSIWYG_MARKUP_MAPPING.get(MARKUP_LANGUAGE))
-
 AUTO_CLOSE_PINGBACKS_AFTER = getattr(
     settings, 'ZINNIA_AUTO_CLOSE_PINGBACKS_AFTER', None)
 
@@ -104,12 +95,3 @@ STOP_WORDS = getattr(settings, 'ZINNIA_STOP_WORDS',
                       'this', 'tis', 'too', 'twas', 'wants', 'was', 'were',
                       'what', 'when', 'where', 'which', 'while', 'who', 'whom',
                       'why', 'will', 'with', 'would', 'yet', 'you', 'your'))
-
-TWITTER_CONSUMER_KEY = getattr(settings, 'TWITTER_CONSUMER_KEY', '')
-TWITTER_CONSUMER_SECRET = getattr(settings, 'TWITTER_CONSUMER_SECRET', '')
-TWITTER_ACCESS_KEY = getattr(settings, 'TWITTER_ACCESS_KEY', '')
-TWITTER_ACCESS_SECRET = getattr(settings, 'TWITTER_ACCESS_SECRET', '')
-
-USE_TWITTER = getattr(settings, 'ZINNIA_USE_TWITTER',
-                      bool(TWITTER_ACCESS_KEY and TWITTER_ACCESS_SECRET and
-                           TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET))

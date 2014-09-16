@@ -1,13 +1,38 @@
 language: python
 python:
-    - "2.6"
-    - "2.7"
-    - "3.2"
-    - "3.3"
+    - 2.6
+    - 2.7
+    - 3.2
+    - 3.3
+    - 3.4
+env:
+    - DATABASE_ENGINE=sqlite
+    - DATABASE_ENGINE=postgres
+    - DATABASE_ENGINE=mysql
+matrix:
+    exclude:
+        - python: 3.2
+          env: DATABASE_ENGINE=mysql
+        - python: 3.3
+          env: DATABASE_ENGINE=mysql
+        - python: 3.4
+          env: DATABASE_ENGINE=mysql
+    fast_finish: true
 install:
-    - pip install -U setuptools
+    - pip install -U setuptools==5.3
     - python bootstrap.py
-    - ./bin/buildout -c travis.cfg
+    - ./bin/buildout -c travis.cfg testenv:DJANGO_SETTINGS_MODULE=zinnia.tests.implementations.$DATABASE_ENGINE
+    - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ];
+      then
+        pip install psycopg2;
+        psql -c 'create database zinnia;' -U postgres;
+      fi"
+    - sh -c "if [ '$DATABASE_ENGINE' = 'mysql' ];
+      then
+        pip install mysql-python;
+        mysql -e 'create database zinnia CHARACTER SET utf8 COLLATE utf8_general_ci;';
+        mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql;
+      fi"
 before_script:
     - ./bin/flake8 --exclude=migrations zinnia
 script:

@@ -1,5 +1,10 @@
+include AUTHORS
+include LICENSE
+include CHANGELOG
+include CONTRIBUTING
 include README.rst
-include LICENSE.txt
+include gulpfile.js
+include package.json
 include versions.cfg
 include buildout.cfg
 include bootstrap.py
@@ -9,7 +14,6 @@ recursive-include zinnia/fixtures *.json
 recursive-include zinnia/locale *
 recursive-include zinnia/static *
 recursive-include zinnia/templates *.txt *.html *.xml *.js
-exclude demo/demo.db
+exclude demo/demo.db*
 prune docs/build
 prune docs/coverage
-prune zinnia/static/zinnia/.sass-cache

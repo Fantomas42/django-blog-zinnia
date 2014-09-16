@@ -14,13 +14,13 @@
   <channel>
     <title>{{ site.name }}</title>
     <link>{{ site_url }}</link>
-    <description>Blog exported from django-blog-zinnia</description>
+    <description>Weblog exported from django-blog-zinnia</description>
     <pubDate>{% now "r" %}</pubDate>
     <generator>Zinnia {{ version }}</generator>
     <language>{{ language }}</language>
     <wp:wxr_version>1.0</wp:wxr_version>
     <wp:base_site_url>{{ site_url }}</wp:base_site_url>
-    <wp:base_blog_url>{{ site_url }}{% url 'zinnia_entry_archive_index' %}</wp:base_blog_url>
+    <wp:base_blog_url>{{ site_url }}{% url 'zinnia:entry_archive_index' %}</wp:base_blog_url>
     {% for category in categories %}
     <wp:category>
       <wp:category_nicename>{{ category.slug }}</wp:category_nicename>

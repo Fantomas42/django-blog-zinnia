@@ -9,7 +9,7 @@
   {% endif %}
   <fieldset>
     <legend>{% trans "Post your comment" %}</legend>
-    <input type="hidden" name="next" value="{% url 'zinnia_comment_success' %}"/>
+    <input type="hidden" name="next" value="{% url 'zinnia:comment_success' %}"/>
     {% for field in form %}
     {% if field.is_hidden %}{{ field }}{% else %}
     {% if user.email and field.name in "namemailurl" %}{% else %}

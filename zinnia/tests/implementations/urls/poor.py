@@ -8,6 +8,6 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^', include('zinnia.urls.entries')),
+    url(r'^', include('zinnia.urls.entries', namespace='zinnia')),
     url(r'^admin/', include(admin.site.urls)),
 )

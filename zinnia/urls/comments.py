@@ -10,5 +10,5 @@ urlpatterns = patterns(
     '',
     url(_(r'^success/$'),
         CommentSuccess.as_view(),
-        name='zinnia_comment_success')
+        name='comment_success')
 )

@@ -9,14 +9,6 @@ backends Package
     :undoc-members:
     :show-inheritance:
 
-:mod:`bitly` Module
--------------------
-
-.. automodule:: zinnia.url_shortener.backends.bitly
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 :mod:`default` Module
 ---------------------
 

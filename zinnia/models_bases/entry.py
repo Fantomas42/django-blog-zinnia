@@ -5,10 +5,11 @@ from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.html import linebreaks
 from django.contrib.sites.models import Site
-from django.contrib import comments
-from django.contrib.comments.models import CommentFlag
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
+
+import django_comments as comments
+from django_comments.models import CommentFlag
 
 from tagging.fields import TagField
 from tagging.utils import parse_tag_input
@@ -161,7 +162,7 @@ class CoreEntry(models.Model):
         creation_date = self.creation_date
         if timezone.is_aware(creation_date):
             creation_date = timezone.localtime(creation_date)
-        return ('zinnia_entry_detail', (), {
+        return ('zinnia:entry_detail', (), {
             'year': creation_date.strftime('%Y'),
             'month': creation_date.strftime('%m'),
             'day': creation_date.strftime('%d'),

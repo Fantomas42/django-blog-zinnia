@@ -18,9 +18,10 @@ from django.utils.translation import ugettext as _
 from django.utils.html import conditional_escape
 from django.template.defaultfilters import stringfilter
 from django.contrib.auth import get_user_model
-from django.contrib.comments.models import CommentFlag
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.comments import get_model as get_comment_model
+
+from django_comments.models import CommentFlag
+from django_comments import get_model as get_comment_model
 
 from tagging.models import Tag
 from tagging.utils import calculate_cloud
@@ -44,7 +45,12 @@ VECTORS_FACTORY = lambda: VectorBuilder(Entry.published.all(),
                                         ['title', 'excerpt', 'content'])
 CACHE_ENTRIES_RELATED = {}
 
-WIDONT_REGEXP = re.compile(r'\s+(\S+\s*)$')
+WIDONT_REGEXP = re.compile(
+    r'\s+(\S+\s*)$')
+DOUBLE_SPACE_PUNCTUATION_WIDONT_REGEXP = re.compile(
+    r'\s+([-+*/%=;:!?]+&nbsp;\S+\s*)$')
+END_PUNCTUATION_WIDONT_REGEXP = re.compile(
+    r'\s+([?!]+\s*)$')
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -125,7 +131,7 @@ def get_popular_entries(number=5, template='zinnia/tags/entries_popular.html'):
     return {'template': template,
             'entries': Entry.published.filter(
                 comment_count__gt=0).order_by(
-                '-comment_count')[:number]}
+                '-comment_count', '-creation_date')[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -168,7 +174,7 @@ def get_similar_entries(context, number=5,
     object_id = context['object'].pk
     columns, dataset = VECTORS()
     key = '%s-%s' % (object_id, VECTORS.key)
-    if not key in CACHE_ENTRIES_RELATED.keys():
+    if key not in CACHE_ENTRIES_RELATED.keys():
         CACHE_ENTRIES_RELATED[key] = compute_related(object_id, dataset)
 
     entries = CACHE_ENTRIES_RELATED[key][:number]
@@ -256,7 +262,7 @@ def get_recent_comments(number=5, template='zinnia/tags/comments_recent.html'):
     comments = get_comment_model().objects.filter(
         Q(flags=None) | Q(flags__flag=CommentFlag.MODERATOR_APPROVAL),
         content_type=content_type, object_pk__in=entry_published_pks,
-        is_public=True).order_by('-submit_date')[:number]
+        is_public=True).order_by('-pk')[:number]
 
     comments = comments.prefetch_related('content_object')
 
@@ -278,7 +284,7 @@ def get_recent_linkbacks(number=5,
         content_type=content_type,
         object_pk__in=entry_published_pks,
         flags__flag__in=[PINGBACK, TRACKBACK],
-        is_public=True).order_by('-submit_date')[:number]
+        is_public=True).order_by('-pk')[:number]
 
     linkbacks = linkbacks.prefetch_related('content_object')
 
@@ -304,13 +310,7 @@ def zinnia_pagination(context, page, begin_pages=1, end_pages=1,
     middle = list(page.paginator.page_range[
         max(page.number - before_pages - 1, 0):page.number + after_pages])
 
-    if set(begin) & set(end):  # [1, 2, 3], [...], [2, 3, 4]
-        begin = sorted(set(begin + end))  # [1, 2, 3, 4]
-        middle, end = [], []
-    elif begin[-1] + 1 == end[0]:  # [1, 2, 3], [...], [4, 5, 6]
-        begin += end  # [1, 2, 3, 4, 5, 6]
-        middle, end = [], []
-    elif set(begin) & set(middle):  # [1, 2, 3], [2, 3, 4], [...]
+    if set(begin) & set(middle):  # [1, 2, 3], [2, 3, 4], [...]
         begin = sorted(set(begin + middle))  # [1, 2, 3, 4]
         middle = []
     elif begin[-1] + 1 == middle[0]:  # [1, 2, 3], [4, 5, 6], [...]
@@ -322,6 +322,13 @@ def zinnia_pagination(context, page, begin_pages=1, end_pages=1,
     elif set(middle) & set(end):  # [...], [17, 18, 19], [18, 19, 20]
         end = sorted(set(middle + end))  # [17, 18, 19, 20]
         middle = []
+
+    if set(begin) & set(end):  # [1, 2, 3], [...], [2, 3, 4]
+        begin = sorted(set(begin + end))  # [1, 2, 3, 4]
+        middle, end = [], []
+    elif begin[-1] + 1 == end[0]:  # [1, 2, 3], [...], [4, 5, 6]
+        begin += end  # [1, 2, 3, 4, 5, 6]
+        middle, end = [], []
 
     return {'template': template,
             'page': page,
@@ -402,7 +409,10 @@ def widont(value, autoescape=None):
     def replace(matchobj):
         return '&nbsp;%s' % matchobj.group(1)
 
-    value = WIDONT_REGEXP.sub(replace, esc(smart_text(value)))
+    value = END_PUNCTUATION_WIDONT_REGEXP.sub(replace, esc(smart_text(value)))
+    value = WIDONT_REGEXP.sub(replace, value)
+    value = DOUBLE_SPACE_PUNCTUATION_WIDONT_REGEXP.sub(replace, value)
+
     return mark_safe(value)
 
 
@@ -410,7 +420,7 @@ def widont(value, autoescape=None):
 def week_number(date):
     """
     Return the Python week number of a date.
-    The django |date:"W" returns incompatible value
+    The django \|date:"W" returns incompatible value
     with the view implementation.
     """
     week_number = date.strftime('%W')

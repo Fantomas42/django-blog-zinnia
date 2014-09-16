@@ -4,23 +4,23 @@
 # 
 # Translators:
 # Daniel Izelli <izelli@gmail.com>, 2011
-# Fábio <bnafta@gmail.com>, 2013
-# Fábio <bnafta@gmail.com>, 2013
+# Fábio C. Barrionuevo da Luz <bnafta@gmail.com>, 2013
+# Fábio C. Barrionuevo da Luz <bnafta@gmail.com>, 2013-2014
 # fferreira <fernandogferreira@gmail.com>, 2012
 # fferreira <fernandogferreira@gmail.com>, 2012
-# Rodrigo Prior <rprior@infranology.com.br>, 2013
-# Rodrigo Prior <rprior@infranology.com.br>, 2013
+# Rodrigo <rprior@infranology.com.br>, 2013
+# Rodrigo <rprior@infranology.com.br>, 2013-2014
 # rogerio rgrlinux <rgrlinux@gmail.com>, 2011
 # Seta00 <reuben@seta00.com>, 2011
-# tiagosamaha <tiagosamaha@gmail.com>, 2013
-# tiagosamaha <tiagosamaha@gmail.com>, 2013
+# Tiago Samaha Cordeiro <tiagosamaha@gmail.com>, 2013
+# Tiago Samaha Cordeiro <tiagosamaha@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-07 19:30+0100\n"
-"PO-Revision-Date: 2014-03-07 18:30+0000\n"
-"Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
+"POT-Creation-Date: 2014-05-06 20:16+0200\n"
+"PO-Revision-Date: 2014-09-15 12:43+0000\n"
+"Last-Translator: Rodrigo <rprior@infranology.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/django-blog-zinnia/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgid "Authors"
 msgstr "Autores"
 
 #: breadcrumbs.py:75 admin/forms.py:57 templates/zinnia/base.html:36
-#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
+#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:58
 msgid "Categories"
 msgstr "Categorias"
 
@@ -54,101 +54,101 @@ msgstr "Página %s"
 msgid "Week %s"
 msgstr "Semana %s"
 
-#: feeds.py:178 templates/zinnia/entry_archive.html:4
+#: feeds.py:177 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:6
 msgid "Latest entries"
 msgstr "Últimos artigos"
 
-#: feeds.py:184
+#: feeds.py:183
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "Últimos artigos no site %s"
 
-#: feeds.py:214
+#: feeds.py:213
 #, python-format
 msgid "Entries for the category %s"
 msgstr "Artigos na categoria %s"
 
-#: feeds.py:220
+#: feeds.py:219
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "Últimos artigos na categoria %s"
 
-#: feeds.py:251
+#: feeds.py:249
 #, python-format
 msgid "Entries for author %s"
 msgstr "Artigos do autor %s"
 
-#: feeds.py:257
+#: feeds.py:255
 #, python-format
 msgid "The latest entries by %s"
 msgstr "Últimos artigos por %s"
 
-#: feeds.py:288
+#: feeds.py:286
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "Artigos com a tag %s"
 
-#: feeds.py:294
+#: feeds.py:292
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "Últimos artigos com a tag %s"
 
-#: feeds.py:327
+#: feeds.py:325
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr "Resultados da busca por '%s'"
 
-#: feeds.py:333
+#: feeds.py:331
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr "Os artigos contendo '%s'"
 
-#: feeds.py:398
+#: feeds.py:396
 msgid "Latest discussions"
 msgstr "As últimas discussões"
 
-#: feeds.py:404
+#: feeds.py:402
 #, python-format
 msgid "The latest discussions for the site %s"
 msgstr "As últimas discussões para o site %s"
 
-#: feeds.py:437
+#: feeds.py:435
 #, python-format
 msgid "Discussions on %s"
 msgstr "Discussões sobre %s"
 
-#: feeds.py:443
+#: feeds.py:441
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "Últimas discussões sobre o artigo %s"
 
-#: feeds.py:470
+#: feeds.py:468
 #, python-format
 msgid "Comments on %s"
 msgstr "Comentários sobre %s"
 
-#: feeds.py:476
+#: feeds.py:474
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "Os comentários mais recentes para o artigo  %s"
 
-#: feeds.py:520
+#: feeds.py:518
 #, python-format
 msgid "Pingbacks on %s"
 msgstr "Pingbacks sobre %s"
 
-#: feeds.py:526
+#: feeds.py:524
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "Os últimos pingbacks sobre  o artigo %s"
 
-#: feeds.py:552
+#: feeds.py:550
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "Trackbacks sobre %s"
 
-#: feeds.py:558
+#: feeds.py:556
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "Os últimos trackbacks sobre o artigo %s"
@@ -181,11 +181,11 @@ msgstr "Privacidade"
 
 #: admin/entry.py:50
 msgid "Templates"
-msgstr ""
+msgstr "Templates"
 
 #: admin/entry.py:53
 msgid "Metadatas"
-msgstr ""
+msgstr "Metadados"
 
 #: admin/entry.py:85
 #, python-format
@@ -477,7 +477,7 @@ msgstr "resumo"
 
 #: models_bases/entry.py:355
 msgid "Used for search and SEO."
-msgstr ""
+msgstr "Usado para busca e SEO."
 
 #: models_bases/entry.py:366
 msgid "image"
@@ -537,15 +537,15 @@ msgstr "Modelo utilizado para exibir o a página detalhada do artigo."
 
 #: templates/400.html:6
 msgid "Error 400"
-msgstr ""
+msgstr "Erro 400"
 
 #: templates/400.html:10 templates/400.html.py:15
 msgid "Bad request"
-msgstr ""
+msgstr "Bad request"
 
 #: templates/400.html:17
 msgid "Sorry, but the request was malformed."
-msgstr ""
+msgstr "Desculpe, mas o request foi mal formado."
 
 #: templates/403.html:6
 msgid "Error 403"
@@ -557,7 +557,7 @@ msgstr "Permissão negada"
 
 #: templates/403.html:17
 msgid "Sorry, but you don't have the permission to do this action."
-msgstr ""
+msgstr "Desculpe, mas você não tem permissão para fazer esta ação."
 
 #: templates/404.html:6
 msgid "Error 404"
@@ -591,8 +591,7 @@ msgstr "Conteúdos"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:9
 #: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:17
-#: templates/zinnia/sitemap.html:57 templates/zinnia/tag_list.html:18
-#: templates/zinnia/tags/authors.html:8
+#: templates/zinnia/tag_list.html:18 templates/zinnia/tags/authors.html:8
 #: templates/zinnia/tags/categories.html:7
 #: templates/zinnia/tags/categories_tree.html:6
 #: templates/zinnia/tags/statistics.html:7
@@ -938,7 +937,7 @@ msgstr "Última atualização em"
 #: templates/zinnia/_entry_detail_base.html:78
 #, python-format
 msgid "%(percent)s%% of %(object)s still remains to read."
-msgstr ""
+msgstr "%(percent)s%% de %(object)s que ainda necessitam serem lidos."
 
 #: templates/zinnia/_entry_detail_base.html:80
 msgid "Continue reading"
@@ -1079,7 +1078,7 @@ msgstr "Enviar um comentário"
 msgid "Category list"
 msgstr "Lista de categorias"
 
-#: templates/zinnia/category_list.html:28 templates/zinnia/sitemap.html:62
+#: templates/zinnia/category_list.html:28
 #: templates/zinnia/tags/categories.html:11
 #: templates/zinnia/tags/categories_tree.html:16
 msgid "No categories yet."
@@ -1140,7 +1139,7 @@ msgid "Next week"
 msgstr "Próxima semana"
 
 #: templates/zinnia/entry_archive_year.html:15
-#: templates/zinnia/sitemap.html:69
+#: templates/zinnia/sitemap.html:63
 msgid "Monthly archives"
 msgstr "Arquivos mensais"
 
@@ -1272,8 +1271,8 @@ msgstr "Tag: %(tag)s"
 msgid "Author archives: %(author)s"
 msgstr "Autor: %(author)s"
 
-#: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:25
-#: templates/zinnia/sitemap.html.py:45
+#: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:29
+#: templates/zinnia/sitemap.html.py:51
 #: templates/zinnia/tags/entries_featured.html:9
 #: templates/zinnia/tags/entries_popular.html:12
 #: templates/zinnia/tags/entries_random.html:9
@@ -1349,21 +1348,25 @@ msgstr "Senha"
 msgid "Valid"
 msgstr "Válido"
 
-#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:9
+#: templates/zinnia/sitemap.html:4 templates/zinnia/sitemap.html.py:11
 #: templates/zinnia/skeleton.html:31 templates/zinnia/skeleton.html.py:32
 #: templates/zinnia/skeleton.html:69 templates/zinnia/skeleton.html.py:70
 msgid "Sitemap"
 msgstr "Mapa do Site"
 
-#: templates/zinnia/sitemap.html:12
+#: templates/zinnia/sitemap.html:6
+msgid "Sitemap of the weblog"
+msgstr "Mapa do site do weblog"
+
+#: templates/zinnia/sitemap.html:14
 msgid "Entries per categories"
 msgstr "Artigos por categorias"
 
-#: templates/zinnia/sitemap.html:20 templates/zinnia/sitemap.html.py:40
+#: templates/zinnia/sitemap.html:23 templates/zinnia/sitemap.html.py:45
 msgid "comment"
 msgstr "comentário"
 
-#: templates/zinnia/sitemap.html:33
+#: templates/zinnia/sitemap.html:37
 msgid "All the entries"
 msgstr "Todas os artigos"
 
@@ -1449,15 +1452,15 @@ msgid_plural "%(entry_count)s entries tagged by %(tag)s"
 msgstr[0] "%(entry_count)s post marcado por %(tag)s"
 msgstr[1] "%(entry_count)s posts marcados por %(tag)s"
 
-#: templatetags/zinnia_tags.py:335
+#: templatetags/zinnia_tags.py:341
 msgid "Blog"
-msgstr ""
+msgstr "Blog"
 
-#: tests/test_views.py:555 views/search.py:30
+#: tests/test_views.py:574 views/search.py:30
 msgid "The pattern is too short"
 msgstr "O padrão é muito curto"
 
-#: tests/test_views.py:559 views/search.py:34
+#: tests/test_views.py:578 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Nenhum padrão encontrado"
 
@@ -1593,6 +1596,10 @@ msgstr "^(?P<tag>[^/]+(?u))/pagina/(?P<page>\\d+)/$"
 #, python-format
 msgid "No Tag found matching \"%s\"."
 msgstr "Nenhuma Tag encontrada com \"%s\""
+
+#: views/mixins/entry_preview.py:27
+msgid "No entry found matching the query"
+msgstr "Nenhuma entrada encontrada que correspondam à consulta"
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."
