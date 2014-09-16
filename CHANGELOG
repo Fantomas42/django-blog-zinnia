@@ -1,3 +1,26 @@
+0.14.2
+------
+
+* Optimize sitemap page
+* Smarter widont filter
+* Fix issue on pagination
+* Fix several admin issues
+* Fix short link for unpublished entries
+* Integration with Gulp.js
+* HTML and CSS fixes on default theme
+* Tested under PostGres and MySQL and SQLite
+* URLs are now under the ``zinnia`` namespace
+* Move Twitter support to ``zinnia-twitter``
+* Move Mollom support to ``zinnia-spam-checker-mollom``
+* Move Akismet support to ``zinnia-spam-checker-akismet``
+* Move Bit.ly support to ``zinnia-url-shortener-bitly``
+* Move TinyMCE support to ``zinnia-wysiwyg-tinymce``
+* Move MarkItUp support to ``zinnia-wysiwyg-markitup``
+* Move WYMEditor support to ``zinnia-wysiwyg-wymeditor``
+* Use ``django_comments`` instead of ``django.contrib.comments``
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.14.1...v0.14.2
+
 0.14.1
 ------
 
