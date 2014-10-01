@@ -691,22 +691,22 @@ table {
       margin-left: 6em; } }
 .zinnia #footer {
   padding-top: 1em; }
-.zinnia ul.breadcrumbs {
+.zinnia .breadcrumbs {
   display: none; }
 @media (min-width: 480px) {
-  .zinnia ul.breadcrumbs {
+  .zinnia .breadcrumbs {
     display: block;
     margin: 0;
     font-size: 1.2em;
     background: transparent url("../img/breadcrumb.png") no-repeat scroll left center; }
-    .zinnia ul.breadcrumbs li {
+    .zinnia .breadcrumbs li {
       list-style: none;
       display: inline; }
-      .zinnia ul.breadcrumbs li:after {
+      .zinnia .breadcrumbs li:after {
         content: "/"; }
-      .zinnia ul.breadcrumbs li:last-child:after {
+      .zinnia .breadcrumbs li:last-child:after {
         content: ""; }
-      .zinnia ul.breadcrumbs li.last:after {
+      .zinnia .breadcrumbs li.last:after {
         content: ""; } }
 .zinnia #sidebar h3 {
   padding: 0.5em; }
