@@ -22,7 +22,7 @@ def textile(value):
                       RuntimeWarning)
         return value
 
-    return textile.textile(force_bytes(value),
+    return textile.textile(force_text(value),
                            encoding='utf-8', output='utf-8')
 
 
