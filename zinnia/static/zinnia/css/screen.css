@@ -917,10 +917,10 @@ table {
     opacity: 1; }
 .zinnia .flex-direction-nav .prev {
   left: 0;
-  background: url("/../img/prev.png") no-repeat center center; }
+  background: url("../img/prev.png") no-repeat center center; }
 .zinnia .flex-direction-nav .next {
   right: 0;
-  background: url("/../img/next.png") no-repeat center center; }
+  background: url("../img/next.png") no-repeat center center; }
 @media (min-width: 900px) {
   .zinnia .slider-container {
     padding-left: 8.43373%;
