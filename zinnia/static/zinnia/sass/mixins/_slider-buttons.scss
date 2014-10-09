@@ -1,7 +1,7 @@
 // Left/Right button controllers mixins for the slider
 @mixin nav-direction-button($image-url, $direction) {
   #{$direction}: 0;
-  background: image-url("../img/" + $image-url) no-repeat center center;
+  background: url("../img/" + $image-url) no-repeat center center;
 }
 
 @mixin hd-nav-direction-button($direction) {
