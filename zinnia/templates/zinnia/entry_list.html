@@ -32,14 +32,29 @@
 {% if category.description %}
 <p>{{ category.description|striptags|safe }}</p>
 {% endif %}
+<p class="feed">
+  <a href="{% url 'zinnia:category_feed' category.tree_path %}" title="{% blocktrans with object=category %}RSS feed of {{ object }}{% endblocktrans %}">
+    {% blocktrans with object=category %}RSS feed of {{ object }}{% endblocktrans %}
+  </a>
+</p>
 {% endif %}
 
 {% if tag %}
 <h1>{% blocktrans %}Tag archives: {{ tag }}{% endblocktrans %}</h1>
+<p class="feed">
+  <a href="{% url 'zinnia:tag_feed' tag.name %}" title="{% blocktrans with object=tag %}RSS feed of {{ object }}{% endblocktrans %}">
+    {% blocktrans with object=tag %}RSS feed of {{ object }}{% endblocktrans %}
+  </a>
+</p>
 {% endif %}
 
 {% if author %}
 <h1>{% blocktrans %}Author archives: {{ author }}{% endblocktrans %}</h1>
+<p class="feed">
+  <a href="{% url 'zinnia:author_feed' author.get_username %}" title="{% blocktrans with object=author %}RSS feed of {{ object }}{% endblocktrans %}">
+    {% blocktrans with object=author %}RSS feed of {{ object }}{% endblocktrans %}
+  </a>
+</p>
 {% endif %}
 {% endblock content-title %}
 
