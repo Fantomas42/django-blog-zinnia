@@ -19,19 +19,17 @@
 
 {% if error %}
 <p class="error">{{ error }}</p>
+{% else %}
+<p class="feed">
+  <a href="{% url 'zinnia:entry_search_feed' %}?pattern={{ pattern }}" title="{% blocktrans %}RSS feed of search results for '{{ pattern }}'{% endblocktrans %}">
+    {% blocktrans %}RSS feed of search results for '{{ pattern }}'{% endblocktrans %}
+  </a>
+</p>
 {% endif %}
 
 {% if object_list %}
 <p class="success">
   {% blocktrans count entry_count=paginator.count %}{{ entry_count }} entry found{% plural %}{{ entry_count }} entries found{% endblocktrans %}
-</p>
-{% endif %}
-
-{% if not error %}
-<p class="feed">
-  <a href="{% url 'zinnia:entry_search_feed' %}?pattern={{ pattern }}" title="{% blocktrans %}RSS feed of search results for '{{ pattern }}'{% endblocktrans %}">
-    {% blocktrans %}RSS feed of search results for '{{ pattern }}'{% endblocktrans %}
-  </a>
 </p>
 {% endif %}
 
