@@ -7,10 +7,12 @@
 
 {% block link %}
   {{ block.super }}
+  {% if not error %}
   <link rel="alternate" type="application/rss+xml" title="{% blocktrans %}RSS feed of search results for '{{ pattern }}'{% endblocktrans %}" href="{% url 'zinnia:entry_search_feed' %}?pattern={{ pattern }}" />
+  {% endif %}
 {% endblock link %}
 
-{% block body-class %}{{ block.super }} search {% if object_list %}search-results{% else %}search-no-results{% endif %}{% endblock body-class %}
+{% block body-class %}{{ block.super }} search {% if error %}search-error{% elif object_list %}search-results{% else %}search-no-results{% endif %}{% endblock body-class %}
 
 {% block content-title %}
 <h1>{% blocktrans %}Search results for '{{ pattern }}'{% endblocktrans %}</h1>
@@ -24,6 +26,15 @@
   {% blocktrans count entry_count=paginator.count %}{{ entry_count }} entry found{% plural %}{{ entry_count }} entries found{% endblocktrans %}
 </p>
 {% endif %}
+
+{% if not error %}
+<p class="feed">
+  <a href="{% url 'zinnia:entry_search_feed' %}?pattern={{ pattern }}" title="{% blocktrans %}RSS feed of search results for '{{ pattern }}'{% endblocktrans %}">
+    {% blocktrans %}RSS feed of search results for '{{ pattern }}'{% endblocktrans %}
+  </a>
+</p>
+{% endif %}
+
 {% endblock content-title %}
 
 {% block content-loop %}
