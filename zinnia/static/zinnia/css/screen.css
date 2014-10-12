@@ -568,6 +568,9 @@ table {
   .zinnia form ul.errorlist li {
     list-style: none;
     display: inline; }
+.zinnia .feed {
+  background: transparent url("../img/rss.png") no-repeat scroll left center;
+  padding-left: 1.5em; }
 .zinnia .info {
   color: white;
   background: #2ba6cb;

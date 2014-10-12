@@ -1,22 +1,30 @@
 {% extends "zinnia/entry_list.html" %}
 {% load i18n zinnia_tags %}
 
-{% block title %}{% trans "Search results for" %} '{{ pattern }}'{% endblock title %}
+{% block title %}{% blocktrans %}Search results for '{{ pattern }}'{% endblocktrans %}{% endblock title %}
 
-{% block meta-description %}{% trans "Search results for" %} '{{ pattern }}'{% endblock meta-description %}
+{% block meta-description %}{% blocktrans %}Search results for '{{ pattern }}'{% endblocktrans %}{% endblock meta-description %}
 
 {% block link %}
   {{ block.super }}
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of search result of" %} '{{ pattern }}'" href="{% url 'zinnia:entry_search_feed' %}?pattern={{ pattern }}" />
+  {% if not error %}
+  <link rel="alternate" type="application/rss+xml" title="{% blocktrans %}RSS feed of search results for '{{ pattern }}'{% endblocktrans %}" href="{% url 'zinnia:entry_search_feed' %}?pattern={{ pattern }}" />
+  {% endif %}
 {% endblock link %}
 
-{% block body-class %}{{ block.super }} search {% if object_list %}search-results{% else %}search-no-results{% endif %}{% endblock body-class %}
+{% block body-class %}{{ block.super }} search {% if error %}search-error{% elif object_list %}search-results{% else %}search-no-results{% endif %}{% endblock body-class %}
 
 {% block content-title %}
-<h1>{% trans "Search results for" %} '{{ pattern }}'</h1>
+<h1>{% blocktrans %}Search results for '{{ pattern }}'{% endblocktrans %}</h1>
 
 {% if error %}
 <p class="error">{{ error }}</p>
+{% else %}
+<p class="feed">
+  <a href="{% url 'zinnia:entry_search_feed' %}?pattern={{ pattern }}" title="{% blocktrans %}RSS feed of search results for '{{ pattern }}'{% endblocktrans %}">
+    {% blocktrans %}RSS feed of search results for '{{ pattern }}'{% endblocktrans %}
+  </a>
+</p>
 {% endif %}
 
 {% if object_list %}
@@ -24,6 +32,7 @@
   {% blocktrans count entry_count=paginator.count %}{{ entry_count }} entry found{% plural %}{{ entry_count }} entries found{% endblocktrans %}
 </p>
 {% endif %}
+
 {% endblock content-title %}
 
 {% block content-loop %}
