@@ -92,7 +92,7 @@ Zinnia API
     :show-inheritance:
 
 :mod:`preview` Module
--------------------
+---------------------
 
 .. automodule:: zinnia.preview
     :members:
