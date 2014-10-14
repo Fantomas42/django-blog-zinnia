@@ -12,6 +12,10 @@ user_flagger_ = {}
 
 
 def _get_user_flagger():
+    """
+    Return an User instance used by the system
+    when flagging a comment as trackback or pingback.
+    """
     User = get_user_model()
     try:
         user = User.objects.get(pk=COMMENT_FLAG_USER_ID)
