@@ -1,3 +1,15 @@
+develop
+-------
+
+* Improvement on the default theme
+  * RSS links
+  * Better translations
+  * Correct title markup
+  * Fix anchors for linkbacks
+* Fix Textitle rendering on Python 3
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.14.2...develop
+
 0.14.2
 ------
 
