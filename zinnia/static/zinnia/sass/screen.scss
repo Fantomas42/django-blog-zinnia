@@ -15,18 +15,18 @@
 // under the body.zinnia class to avoid interferences
 .zinnia {
   @import "partials/page";
-  @import "partials/layouts";
-  @import "partials/themes";
   @import "partials/forms";
-  @import "partials/feeds";
   @import "partials/interactions";
-  @import "partials/archives";
+  @import "partials/layouts";
   @import "partials/header";
-  @import "partials/footer";
+  @import "partials/slider";
   @import "partials/breadcrumbs";
-  @import "partials/sidebar";
   @import "partials/entry";
   @import "partials/linkbacks";
+  @import "partials/feeds";
+  @import "partials/archives";
   @import "partials/paginator";
-  @import "partials/slider";
+  @import "partials/footer";
+  @import "partials/sidebar";
+  @import "partials/themes";
 }
