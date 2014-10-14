@@ -11,8 +11,6 @@ from zinnia.sitemaps import EntrySitemap
 from zinnia.sitemaps import CategorySitemap
 from zinnia.sitemaps import AuthorSitemap
 
-admin.autodiscover()
-
 urlpatterns = patterns(
     '',
     url(r'^$', RedirectView.as_view(url='/blog/')),
