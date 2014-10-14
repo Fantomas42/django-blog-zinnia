@@ -27,29 +27,29 @@ from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
-from zinnia.templatetags.zinnia_tags import widont
-from zinnia.templatetags.zinnia_tags import week_number
-from zinnia.templatetags.zinnia_tags import get_authors
-from zinnia.templatetags.zinnia_tags import get_gravatar
-from zinnia.templatetags.zinnia_tags import get_tag_cloud
-from zinnia.templatetags.zinnia_tags import get_categories
-from zinnia.templatetags.zinnia_tags import get_categories_tree
-from zinnia.templatetags.zinnia_tags import zinnia_pagination
-from zinnia.templatetags.zinnia_tags import zinnia_statistics
-from zinnia.templatetags.zinnia_tags import get_draft_entries
-from zinnia.templatetags.zinnia_tags import get_recent_entries
-from zinnia.templatetags.zinnia_tags import get_random_entries
-from zinnia.templatetags.zinnia_tags import zinnia_breadcrumbs
-from zinnia.templatetags.zinnia_tags import get_popular_entries
-from zinnia.templatetags.zinnia_tags import get_similar_entries
-from zinnia.templatetags.zinnia_tags import get_recent_comments
-from zinnia.templatetags.zinnia_tags import get_recent_linkbacks
-from zinnia.templatetags.zinnia_tags import get_featured_entries
-from zinnia.templatetags.zinnia_tags import get_calendar_entries
-from zinnia.templatetags.zinnia_tags import get_archives_entries
-from zinnia.templatetags.zinnia_tags import get_archives_entries_tree
-from zinnia.templatetags.zinnia_tags import user_admin_urlname
-from zinnia.templatetags.zinnia_tags import comment_admin_urlname
+from zinnia.templatetags.zinnia import widont
+from zinnia.templatetags.zinnia import week_number
+from zinnia.templatetags.zinnia import get_authors
+from zinnia.templatetags.zinnia import get_gravatar
+from zinnia.templatetags.zinnia import get_tag_cloud
+from zinnia.templatetags.zinnia import get_categories
+from zinnia.templatetags.zinnia import get_categories_tree
+from zinnia.templatetags.zinnia import zinnia_pagination
+from zinnia.templatetags.zinnia import zinnia_statistics
+from zinnia.templatetags.zinnia import get_draft_entries
+from zinnia.templatetags.zinnia import get_recent_entries
+from zinnia.templatetags.zinnia import get_random_entries
+from zinnia.templatetags.zinnia import zinnia_breadcrumbs
+from zinnia.templatetags.zinnia import get_popular_entries
+from zinnia.templatetags.zinnia import get_similar_entries
+from zinnia.templatetags.zinnia import get_recent_comments
+from zinnia.templatetags.zinnia import get_recent_linkbacks
+from zinnia.templatetags.zinnia import get_featured_entries
+from zinnia.templatetags.zinnia import get_calendar_entries
+from zinnia.templatetags.zinnia import get_archives_entries
+from zinnia.templatetags.zinnia import get_archives_entries_tree
+from zinnia.templatetags.zinnia import user_admin_urlname
+from zinnia.templatetags.zinnia import comment_admin_urlname
 
 
 class TemplateTagsTestCase(TestCase):
@@ -822,7 +822,7 @@ class TemplateTagsTestCase(TestCase):
     def test_get_tags(self):
         Tag.objects.create(name='tag')
         t = Template("""
-        {% load zinnia_tags %}
+        {% load zinnia %}
         {% get_tags as entry_tags %}
         {{ entry_tags|join:", " }}
         """)
@@ -834,12 +834,12 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(html.strip(), 'test, zinnia')
 
         template_error_as = """
-        {% load zinnia_tags %}
+        {% load zinnia %}
         {% get_tags a_s entry_tags %}"""
         self.assertRaises(TemplateSyntaxError, Template, template_error_as)
 
         template_error_args = """
-        {% load zinnia_tags %}
+        {% load zinnia %}
         {% get_tags as entry tags %}"""
         self.assertRaises(TemplateSyntaxError, Template, template_error_args)
 
@@ -1024,7 +1024,7 @@ class TemplateTagsTimezoneTestCase(TestCase):
 
     @override_settings(USE_TZ=False)
     def test_calendar_entries_no_timezone(self):
-        template = Template('{% load zinnia_tags %}'
+        template = Template('{% load zinnia %}'
                             '{% get_calendar_entries 2014 1 %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
         self.create_published_entry_at(datetime(2014, 1, 1, 23, 0))
@@ -1038,7 +1038,7 @@ class TemplateTagsTimezoneTestCase(TestCase):
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_calendar_entries_with_timezone(self):
-        template = Template('{% load zinnia_tags %}'
+        template = Template('{% load zinnia %}'
                             '{% get_calendar_entries 2014 1 %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
         self.create_published_entry_at(datetime(2014, 1, 1, 23, 0))
@@ -1052,7 +1052,7 @@ class TemplateTagsTimezoneTestCase(TestCase):
 
     @override_settings(USE_TZ=False)
     def test_archives_entries_no_timezone(self):
-        template = Template('{% load zinnia_tags %}'
+        template = Template('{% load zinnia %}'
                             '{% get_archives_entries %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
         self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
@@ -1062,7 +1062,7 @@ class TemplateTagsTimezoneTestCase(TestCase):
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_archives_entries_with_timezone(self):
-        template = Template('{% load zinnia_tags %}'
+        template = Template('{% load zinnia %}'
                             '{% get_archives_entries %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
         self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
@@ -1072,7 +1072,7 @@ class TemplateTagsTimezoneTestCase(TestCase):
 
     @override_settings(USE_TZ=False)
     def test_archives_entries_tree_no_timezone(self):
-        template = Template('{% load zinnia_tags %}'
+        template = Template('{% load zinnia %}'
                             '{% get_archives_entries_tree %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
         self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))
@@ -1082,7 +1082,7 @@ class TemplateTagsTimezoneTestCase(TestCase):
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_archives_entries_tree_with_timezone(self):
-        template = Template('{% load zinnia_tags %}'
+        template = Template('{% load zinnia %}'
                             '{% get_archives_entries_tree %}')
         self.create_published_entry_at(datetime(2014, 1, 1, 12, 0))
         self.create_published_entry_at(datetime(2014, 1, 31, 23, 0))

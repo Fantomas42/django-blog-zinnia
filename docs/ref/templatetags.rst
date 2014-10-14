@@ -20,9 +20,9 @@ create some **widgets** in your Web site's templates.
 To start using any of the following template tags you need to load them
 first at the top of your template: ::
 
-  {% load zinnia_tags %}
+  {% load zinnia %}
 
-.. module:: zinnia.templatetags.zinnia_tags
+.. module:: zinnia.templatetags.zinnia
 
 .. templatetag:: get_recent_entries
 

@@ -32,7 +32,7 @@ from zinnia.settings import COPYRIGHT
 from zinnia.settings import FEEDS_FORMAT
 from zinnia.settings import FEEDS_MAX_ITEMS
 from zinnia.views.categories import get_category_or_404
-from zinnia.templatetags.zinnia_tags import get_gravatar
+from zinnia.templatetags.zinnia import get_gravatar
 
 
 class ZinniaFeed(Feed):
