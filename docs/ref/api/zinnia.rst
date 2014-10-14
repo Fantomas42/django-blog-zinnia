@@ -51,6 +51,14 @@ Zinnia API
     :undoc-members:
     :show-inheritance:
 
+:mod:`flags` Module
+-------------------
+
+.. automodule:: zinnia.flags
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`managers` Module
 ----------------------
 
@@ -79,6 +87,14 @@ Zinnia API
 ------------------
 
 .. automodule:: zinnia.ping
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`preview` Module
+-------------------
+
+.. automodule:: zinnia.preview
     :members:
     :undoc-members:
     :show-inheritance:
