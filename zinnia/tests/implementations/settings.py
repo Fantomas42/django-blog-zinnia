@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'django_xmlrpc',
     'mptt',
     'tagging',
-    'south',
     'zinnia'
 ]
 

@@ -89,7 +89,6 @@ INSTALLED_APPS = (
     'django_comments',
     'django_xmlrpc',
     'mptt',
-    'south',
     'tagging',
     'zinnia'
 )
