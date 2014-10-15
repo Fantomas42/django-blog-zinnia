@@ -1,6 +1,7 @@
 """Settings for testing zinnia"""
-import os
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
+
+BASE_DIR = ''
 
 SITE_ID = 1
 
@@ -11,8 +12,6 @@ STATIC_URL = '/static/'
 SECRET_KEY = 'secret-key'
 
 ROOT_URLCONF = 'zinnia.tests.implementions.urls.default'
-
-LOCALE_PATHS = [os.path.join(os.path.dirname(__file__), 'locale')]
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.SHA1PasswordHasher'
