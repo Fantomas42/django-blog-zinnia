@@ -145,66 +145,6 @@ table {
   .zinnia form ul.errorlist li {
     list-style: none;
     display: inline; }
-.zinnia .info {
-  color: white;
-  background: #2ba6cb;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-color: #4fbcda;
-  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
-  padding: 0.5em;
-  margin-bottom: 1em; }
-  .zinnia .info a {
-    font-weight: bold;
-    color: white; }
-    .zinnia .info a:visited {
-      color: white; }
-    .zinnia .info a:focus {
-      color: white; }
-    .zinnia .info a:hover {
-      color: white; }
-    .zinnia .info a:active {
-      color: white; }
-.zinnia .error {
-  color: white;
-  background: #da0000;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-color: #ff0e0e;
-  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
-  padding: 0.5em;
-  margin-bottom: 1em; }
-  .zinnia .error a {
-    font-weight: bold;
-    color: white; }
-    .zinnia .error a:visited {
-      color: white; }
-    .zinnia .error a:focus {
-      color: white; }
-    .zinnia .error a:hover {
-      color: white; }
-    .zinnia .error a:active {
-      color: white; }
-.zinnia .success {
-  color: white;
-  background: #7fae00;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-color: #a5e100;
-  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
-  padding: 0.5em;
-  margin-bottom: 1em; }
-  .zinnia .success a {
-    font-weight: bold;
-    color: white; }
-    .zinnia .success a:visited {
-      color: white; }
-    .zinnia .success a:focus {
-      color: white; }
-    .zinnia .success a:hover {
-      color: white; }
-    .zinnia .success a:active {
-      color: white; }
 .zinnia .container {
   *zoom: 1;
   max-width: 60em;
@@ -944,3 +884,63 @@ table {
   background: #859900; }
 .zinnia.green .slide-content a {
   color: #cbe600; }
+.zinnia .info {
+  color: white;
+  background: #2ba6cb;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-color: #4fbcda;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  padding: 0.5em;
+  margin-bottom: 1em; }
+  .zinnia .info a {
+    font-weight: bold;
+    color: white; }
+    .zinnia .info a:visited {
+      color: white; }
+    .zinnia .info a:focus {
+      color: white; }
+    .zinnia .info a:hover {
+      color: white; }
+    .zinnia .info a:active {
+      color: white; }
+.zinnia .error {
+  color: white;
+  background: #da0000;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-color: #ff0e0e;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  padding: 0.5em;
+  margin-bottom: 1em; }
+  .zinnia .error a {
+    font-weight: bold;
+    color: white; }
+    .zinnia .error a:visited {
+      color: white; }
+    .zinnia .error a:focus {
+      color: white; }
+    .zinnia .error a:hover {
+      color: white; }
+    .zinnia .error a:active {
+      color: white; }
+.zinnia .success {
+  color: white;
+  background: #7fae00;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-color: #a5e100;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  padding: 0.5em;
+  margin-bottom: 1em; }
+  .zinnia .success a {
+    font-weight: bold;
+    color: white; }
+    .zinnia .success a:visited {
+      color: white; }
+    .zinnia .success a:focus {
+      color: white; }
+    .zinnia .success a:hover {
+      color: white; }
+    .zinnia .success a:active {
+      color: white; }

@@ -16,7 +16,6 @@
 .zinnia {
   @import "partials/page";
   @import "partials/forms";
-  @import "partials/interactions";
   @import "partials/layouts";
   @import "partials/header";
   @import "partials/slider";
@@ -29,4 +28,5 @@
   @import "partials/footer";
   @import "partials/sidebar";
   @import "partials/themes";
+  @import "partials/interactions";
 }
