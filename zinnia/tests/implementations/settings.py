@@ -1,8 +1,6 @@
 """Settings for testing zinnia"""
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 
-BASE_DIR = ''
-
 SITE_ID = 1
 
 USE_TZ = True
@@ -33,6 +31,8 @@ TEMPLATE_LOADERS = [
         'django.template.loaders.app_directories.Loader']
      ]
 ]
+
+SILENCED_SYSTEM_CHECKS = ['1_6.W001']
 
 INSTALLED_APPS = [
     'django.contrib.contenttypes',
