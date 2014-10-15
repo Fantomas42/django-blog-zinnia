@@ -3,7 +3,6 @@ from django.test import TestCase
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import flags
-from zinnia.flags import user_flagger_
 from zinnia.flags import get_user_flagger
 
 
@@ -15,10 +14,7 @@ class FlagsTestCase(TestCase):
         self.clear_user_flagger_cache()
 
     def clear_user_flagger_cache(self):
-        try:
-            del user_flagger_[()]
-        except KeyError:
-            pass
+        get_user_flagger.cache_clear()
 
     def test_get_user_flagger_cache(self):
         get_user_flagger()
