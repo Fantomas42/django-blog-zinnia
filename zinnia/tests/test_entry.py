@@ -1,9 +1,9 @@
 """Test cases for Zinnia's Entry"""
 from datetime import timedelta
+from unittest import skipUnless
 
 from django.test import TestCase
 from django.utils import timezone
-from django.utils.unittest import skipUnless
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils.translation import activate
