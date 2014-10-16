@@ -71,7 +71,12 @@ class DirectoryPinger(threading.Thread):
         """
         entry_url = '%s%s' % (self.ressources.site_url,
                               entry.get_absolute_url())
-        categories = '|'.join([c.title for c in entry.categories.all()])
+        try:
+            categories = '|'.join([c.title for c in entry.categories.all()])
+        except Exception:
+            reply = {'message': 'Cannot retrieve the list of categories.', 
+                    'flerror': True}
+            return reply
 
         try:
             reply = self.server.weblogUpdates.extendedPing(
