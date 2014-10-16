@@ -11,6 +11,14 @@ Zinnia API
     :undoc-members:
     :show-inheritance:
 
+:mod:`apps` Module
+------------------
+
+.. automodule:: zinnia.apps
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`breadcrumbs` Module
 -------------------------
 
