@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import models
+from django.db import migrations
 import django.utils.timezone
+
 import mptt.fields
 import tagging.fields
+
+from zinnia.migrations import user_model_label
 
 
 class Migration(migrations.Migration):
@@ -82,7 +86,7 @@ class Migration(migrations.Migration):
             options={
                 'proxy': True,
             },
-            bases=('auth.user', models.Model),
+            bases=(user_model_label, models.Model),
         ),
         migrations.AddField(
             model_name='entry',
