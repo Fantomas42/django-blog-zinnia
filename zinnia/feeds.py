@@ -41,7 +41,6 @@ class ZinniaFeed(Feed):
     enriched for a more convenient usage.
     """
     feed_copyright = COPYRIGHT
-    _site = None
 
     def __init__(self):
         if FEEDS_FORMAT == 'atom':
@@ -62,9 +61,7 @@ class ZinniaFeed(Feed):
         """
         Acquire the current site used.
         """
-        if self._site is None:
-            self._site = Site.objects.get_current()
-        return self._site
+        return Site.objects.get_current()
 
     @property
     def site_url(self):
