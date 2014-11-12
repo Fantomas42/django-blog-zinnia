@@ -2,15 +2,20 @@
 from itertools import chain
 
 from django.utils import six
+from django.forms import widgets
 from django.utils.html import escape
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.encoding import force_text
-from django.contrib.admin import widgets
+from django.contrib.admin import widgets as admin_widgets
 from django.contrib.staticfiles.storage import staticfiles_storage
 
+from tagging.models import Tag
 
-class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
+from zinnia.models import Entry
+
+
+class MPTTFilteredSelectMultiple(admin_widgets.FilteredSelectMultiple):
     """
     MPTT version of FilteredSelectMultiple.
     """
@@ -58,3 +63,13 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         js = (staticfiles_storage.url('admin/js/core.js'),
               staticfiles_storage.url('zinnia/js/mptt_m2m_selectbox.js'),
               staticfiles_storage.url('admin/js/SelectFilter2.js'))
+
+
+class TagAutoComplete(widgets.TextInput):
+
+    def get_tags(self):
+        """
+        Returns the list of tags to auto-complete.
+        """
+        return [tag.name for tag in
+                Tag.objects.usage_for_model(Entry)]
