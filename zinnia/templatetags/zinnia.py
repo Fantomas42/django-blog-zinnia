@@ -218,12 +218,13 @@ def get_calendar_entries(context, year=None, month=None,
         elif creation_date:
             if settings.USE_TZ:
                 creation_date = timezone.localtime(creation_date)
-            current_month = creation_date.date().replace(day=1)
+            current_month = creation_date.date()
         else:
             today = timezone.now()
             if settings.USE_TZ:
                 today = timezone.localtime(today)
-            current_month = today.date().replace(day=1)
+            current_month = today.date()
+        current_month = current_month.replace(day=1)
     else:
         current_month = date(year, month, 1)
 
