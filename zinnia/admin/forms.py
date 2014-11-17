@@ -64,7 +64,7 @@ class EntryAdminForm(forms.ModelForm):
 
     tags = TagField(
         label=_('Tags'), required=False,
-        widget=TagAutoComplete(attrs={'class': 'vTextField'}))
+        widget=TagAutoComplete())
 
     def __init__(self, *args, **kwargs):
         super(EntryAdminForm, self).__init__(*args, **kwargs)
