@@ -38,9 +38,10 @@ reproduction...). That's why Zinnia provides a third generic solution.
 
 The extension process is done in three main steps:
 
-#. Write a class containing your customizations.
-#. Register your class into Zinnia to be used.
-#. Update the :class:`~zinnia.admin.entry.EntryAdmin` class accordingly.
+#. Write a model class containing your customizations.
+#. Register your model class into Zinnia to be used.
+#. Create and register a new :class:`~django.contrib.admin.ModelAdmin`
+   class for your new model class.
 
 .. _writing-model-extension:
 
@@ -208,12 +209,12 @@ and the :class:`EntryAbstractClass` will be used.
 Updating the admin interface
 ============================
 
-Now we should update the :class:`Entry`'s admin class to reflect our
-changes and use the new fields.
+Now we should create a new :class:`~zinnia.admin.entry.EntryAdmin` admin
+class to reflect our changes and use the new fields.
 
 To do that we will write a new admin class inherited from
-:class:`~zinnia.admin.entry.EntryAdmin` and use the admin site
-register/unregister mechanism for using our new class.
+:class:`~zinnia.admin.entry.EntryAdmin` and register it within the admin
+site.
 
 In the file :file:`zinnia_gallery/admin.py` we can write these code lines
 for adding the gallery field: ::
@@ -231,15 +232,10 @@ for adding the gallery field: ::
       ('title', 'status'), 'content', 'image', 'gallery')}),) + \
       EntryAdmin.fieldsets[1:]
 
-  # Unregister the default EntryAdmin
-  # then register the EntryGalleryAdmin class
-  admin.site.unregister(Entry)
   admin.site.register(Entry, EntryGalleryAdmin)
 
-
-Note that the :mod:`zinnia_gallery` application must be registered in the
-:setting:`INSTALLED_APPS` setting after the :mod:`zinnia` application for
-applying the register/unregister mechanism in the admin site.
+Templating
+==========
 
 Now we can easily
 :doc:`customize the templates</how-to/customize_look_and_feel>`
