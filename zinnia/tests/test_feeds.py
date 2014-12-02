@@ -1,3 +1,4 @@
+# coding=utf-8
 """Test cases for Zinnia's feeds"""
 try:
     from urllib.parse import urljoin
@@ -194,6 +195,19 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.get_object('request', 'admin'), self.author)
         self.assertEqual(len(feed.items(self.author)), 1)
         self.assertEqual(feed.link(self.author), '/authors/admin/')
+        self.assertEqual(feed.get_title(self.author),
+                         'Entries for author %s' %
+                         self.author.__str__())
+        self.assertEqual(feed.description(self.author),
+                         'The latest entries by %s' %
+                         self.author.__str__())
+
+    def test_author_title_unicode(self):
+        self.author.first_name = 'Léon'
+        self.author.last_name = 'Bloom'
+        self.author.save()
+        self.create_published_entry()
+        feed = AuthorEntries()
         self.assertEqual(feed.get_title(self.author),
                          'Entries for author %s' %
                          self.author.__str__())
