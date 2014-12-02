@@ -1,3 +1,4 @@
+# coding=utf-8
 """Test cases for Zinnia's feeds"""
 try:
     from urllib.parse import urljoin
@@ -6,6 +7,7 @@ except ImportError:  # Python 2
 
 from django.test import TestCase
 from django.utils import timezone
+from django.utils.encoding import smart_text
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
@@ -200,6 +202,19 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.description(self.author),
                          'The latest entries by %s' %
                          self.author.__str__())
+
+    def test_author_title_non_ascii(self):
+        self.author.first_name = smart_text('Léon')
+        self.author.last_name = 'Bloom'
+        self.author.save()
+        self.create_published_entry()
+        feed = AuthorEntries()
+        self.assertEqual(feed.get_title(self.author),
+                         smart_text('Entries for author %s' %
+                                    self.author.__str__()))
+        self.assertEqual(feed.description(self.author),
+                         smart_text('The latest entries by %s' %
+                                    self.author.__str__()))
 
     def test_tag_entries(self):
         self.create_published_entry()

@@ -6,6 +6,7 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 
+from django.utils.encoding import smart_text
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
@@ -244,13 +245,13 @@ class AuthorEntries(EntryFeed):
         """
         Title of the feed.
         """
-        return _('Entries for author %s') % obj.__str__()
+        return _('Entries for author %s') % smart_text(obj.__str__())
 
     def description(self, obj):
         """
         Description of the feed.
         """
-        return _('The latest entries by %s') % obj.__str__()
+        return _('The latest entries by %s') % smart_text(obj.__str__())
 
 
 class TagEntries(EntryFeed):
