@@ -72,3 +72,12 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
         """
         return [tag.name for tag in
                 Tag.objects.usage_for_model(Entry)]
+
+    class Media:
+        static = lambda x: staticfiles_storage.url(
+            'zinnia/admin/select2/%s' % x)
+
+        css = {
+            'all': (static('css/select2.css'),)
+        }
+        js = (static('js/select2.js'),)
