@@ -137,7 +137,7 @@ class EntryFeed(ZinniaFeed):
         """
         if item.image:
             try:
-                return str(default_storage.size(item.image.path))
+                return str(item.image.size)
             except (os.error, NotImplementedError):
                 pass
         return '100000'
