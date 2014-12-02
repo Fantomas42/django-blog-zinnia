@@ -36,7 +36,7 @@ the specific language governing permissions and limitations under the Apache Lic
             }
         });
     }
-})(jQuery);
+})(django.jQuery);
 
 (function ($, undefined) {
     "use strict";
@@ -3538,4 +3538,4 @@ the specific language governing permissions and limitations under the Apache Lic
         }
     };
 
-}(jQuery));
+}(django.jQuery));
