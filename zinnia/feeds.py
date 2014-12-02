@@ -15,7 +15,6 @@ from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import NoReverseMatch
-from django.core.files.storage import default_storage
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
 
