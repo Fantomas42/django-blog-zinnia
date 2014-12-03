@@ -70,7 +70,7 @@ class TagAutoCompleteTestCase(TestCase):
 
     def test_get_tags(self):
         widget = TagAutoComplete()
-        self.assertEquals(
+        self.assertEqual(
             widget.get_tags(),
             [])
 
@@ -78,7 +78,7 @@ class TagAutoCompleteTestCase(TestCase):
                   'tags': 'zinnia, test',
                   'slug': 'my-entry'}
         Entry.objects.create(**params)
-        self.assertEquals(
+        self.assertEqual(
             widget.get_tags(),
             ['test', 'zinnia'])
 
@@ -88,13 +88,15 @@ class TagAutoCompleteTestCase(TestCase):
                   'tags': 'zinnia, test',
                   'slug': 'my-entry'}
         Entry.objects.create(**params)
-        self.assertEquals(
+        self.assertEqual(
             widget.render('tag', 'test,'),
-            '<input class="vTextField" name="tag" '
-            'type="text" value="test," />\n'
-            '<script type="text/javascript">\n(function($) {\n'
-            '  $(document).ready(function() {\n'
-            '    $("#id_tag").select2(\n'
-            '       {"maximumInputLength": 50, "tokenSeparators": [",", " "],'
-            ' "tags": ["test", "zinnia"]}\n     );\n    });\n}'
-            '(django.jQuery));\n</script>')
+            '<input class="vTextField" name="tag" type="text" value="test," />'
+            '\n<script type="text/javascript">\n(function($) {'
+            '\n  $(document).ready(function() {'
+            '\n    $("#id_tag").select2({'
+            '\n       width: "element",'
+            '\n       maximumInputLength: 50,'
+            '\n       tokenSeparators: [",", " "],'
+            '\n       tags: [\'test\',\'zinnia\']'
+            '\n     });\n    });'
+            '\n}(django.jQuery));\n</script>')

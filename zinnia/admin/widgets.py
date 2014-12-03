@@ -1,5 +1,4 @@
 """Widgets for Zinnia admin"""
-import json
 from itertools import chain
 
 from django.utils import six
@@ -81,18 +80,17 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
         """
         Render the default widget and initialize select2.
         """
-        datas = {
-            'maximumInputLength': 50,
-            'tokenSeparators': [',', ' '],
-            'tags': self.get_tags()
-        }
         output = [super(TagAutoComplete, self).render(name, value, attrs)]
         output.append('<script type="text/javascript">')
         output.append('(function($) {')
         output.append('  $(document).ready(function() {')
-        output.append('    $("#id_%s").select2(' % name)
-        output.append('       %s' % json.dumps(datas))
-        output.append('     );')
+        output.append('    $("#id_%s").select2({' % name)
+        output.append('       width: "element",')
+        output.append('       maximumInputLength: 50,')
+        output.append('       tokenSeparators: [",", " "],')
+        output.append('       tags: [%s]' % ','.join(
+            ["'%s'" % tag for tag in self.get_tags()]))
+        output.append('     });')
         output.append('    });')
         output.append('}(django.jQuery));')
         output.append('</script>')
