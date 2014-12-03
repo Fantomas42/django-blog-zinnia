@@ -5,6 +5,7 @@ Version: 3.5.2 Timestamp: Sat Nov  1 14:43:36 EDT 2014
     margin: 0;
     position: relative;
     display: inline-block;
+    width: 20.7em;
     /* inline-block for ie7 */
     zoom: 1;
     *display: inline;
@@ -404,7 +405,7 @@ html[dir="rtl"] .select2-results {
 .select2-results-dept-7 .select2-result-label { padding-left: 120px }
 
 .select2-results .select2-highlighted {
-    background: #3875d7;
+    background: #5b80b2;
     color: #fff;
 }
 
@@ -492,7 +493,7 @@ disabled look for disabled choices in the results dropdown
     padding: 0 5px 0 0;
     position: relative;
 
-    border: 1px solid #aaa;
+    /*border: 1px solid #aaa;*/
     cursor: text;
     overflow: hidden;
 
