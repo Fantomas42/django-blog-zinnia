@@ -66,6 +66,9 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
 
 
 class TagAutoComplete(widgets.AdminTextInputWidget):
+    """
+    Tag widget with autocompletion based on select2.
+    """
 
     def get_tags(self):
         """
@@ -75,6 +78,9 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
                 Tag.objects.usage_for_model(Entry)]
 
     def render(self, name, value, attrs=None):
+        """
+        Render the default widget and initialize select2.
+        """
         datas = {
             'maximumInputLength': 50,
             'tokenSeparators': [',', ' '],
@@ -93,6 +99,9 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
         return mark_safe('\n'.join(output))
 
     class Media:
+        """
+        TagAutoComplete's Media.
+        """
         static = lambda x: staticfiles_storage.url(
             'zinnia/admin/select2/%s' % x)
 
