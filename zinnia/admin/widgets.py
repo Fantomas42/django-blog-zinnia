@@ -82,6 +82,7 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
         Render the default widget and initialize select2.
         """
         datas = {
+            'width': 'element',
             'maximumInputLength': 50,
             'tokenSeparators': [',', ' '],
             'tags': self.get_tags()
