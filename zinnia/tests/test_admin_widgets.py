@@ -70,7 +70,7 @@ class TagAutoCompleteTestCase(TestCase):
 
     def test_get_tags(self):
         widget = TagAutoComplete()
-        self.assertEquals(
+        self.assertEqual(
             widget.get_tags(),
             [])
 
@@ -78,7 +78,7 @@ class TagAutoCompleteTestCase(TestCase):
                   'tags': 'zinnia, test',
                   'slug': 'my-entry'}
         Entry.objects.create(**params)
-        self.assertEquals(
+        self.assertEqual(
             widget.get_tags(),
             ['test', 'zinnia'])
 
@@ -88,7 +88,7 @@ class TagAutoCompleteTestCase(TestCase):
                   'tags': 'zinnia, test',
                   'slug': 'my-entry'}
         Entry.objects.create(**params)
-        self.assertEquals(
+        self.assertEqual(
             widget.render('tag', 'test,'),
             '<input class="vTextField" name="tag" '
             'type="text" value="test," />\n'

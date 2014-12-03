@@ -786,7 +786,7 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(
             response['Location'],
             'http://testserver%s' % entry.get_absolute_url())
-        self.assertEquals(
+        self.assertEqual(
             entry.content,
             'Hello *World* !')
         quick_entry.MARKUP_LANGUAGE = original_markup_language
