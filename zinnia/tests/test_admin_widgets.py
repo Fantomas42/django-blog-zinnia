@@ -3,6 +3,9 @@
 from django.test import TestCase
 from django.utils.encoding import smart_text
 
+from zinnia.models.entry import Entry
+from zinnia.signals import disconnect_entry_signals
+from zinnia.admin.widgets import TagAutoComplete
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 
 
@@ -58,3 +61,40 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
             '<option value="1" data-tree-id="1" data-left-value="1">'
             'Category 1</option>\n<option value="2" selected="selected" '
             'data-tree-id="1" data-left-value="2">|-- Category 2</option>')
+
+
+class TagAutoCompleteTestCase(TestCase):
+
+    def setUp(self):
+        disconnect_entry_signals()
+
+    def test_get_tags(self):
+        widget = TagAutoComplete()
+        self.assertEquals(
+            widget.get_tags(),
+            [])
+
+        params = {'title': 'My entry',
+                  'tags': 'zinnia, test',
+                  'slug': 'my-entry'}
+        Entry.objects.create(**params)
+        self.assertEquals(
+            widget.get_tags(),
+            ['test', 'zinnia'])
+
+    def test_render(self):
+        widget = TagAutoComplete()
+        params = {'title': 'My entry',
+                  'tags': 'zinnia, test',
+                  'slug': 'my-entry'}
+        Entry.objects.create(**params)
+        self.assertEquals(
+            widget.render('tag', 'test,'),
+            '<input class="vTextField" name="tag" '
+            'type="text" value="test," />\n'
+            '<script type="text/javascript">\n(function($) {\n'
+            '  $(document).ready(function() {\n'
+            '    $("#id_tag").select2(\n'
+            '       {"maximumInputLength": 50, "tokenSeparators": [",", " "],'
+            ' "tags": ["test", "zinnia"]}\n     );\n    });\n}'
+            '(django.jQuery));\n</script>')
