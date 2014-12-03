@@ -90,11 +90,13 @@ class TagAutoCompleteTestCase(TestCase):
         Entry.objects.create(**params)
         self.assertEqual(
             widget.render('tag', 'test,'),
-            '<input class="vTextField" name="tag" '
-            'type="text" value="test," />\n'
-            '<script type="text/javascript">\n(function($) {\n'
-            '  $(document).ready(function() {\n'
-            '    $("#id_tag").select2(\n'
-            '       {"maximumInputLength": 50, "tokenSeparators": [",", " "],'
-            ' "tags": ["test", "zinnia"]}\n     );\n    });\n}'
-            '(django.jQuery));\n</script>')
+            '<input class="vTextField" name="tag" type="text" value="test," />'
+            '\n<script type="text/javascript">\n(function($) {'
+            '\n  $(document).ready(function() {'
+            '\n    $("#id_tag").select2({'
+            '\n       width: "element",'
+            '\n       maximumInputLength: 50,'
+            '\n       tokenSeparators: [",", " "],'
+            '\n       tags: [\'test\',\'zinnia\']'
+            '\n     });\n    });'
+            '\n}(django.jQuery));\n</script>')
