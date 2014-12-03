@@ -9,13 +9,20 @@ var HTML       = 'zinnia/templates/**/*.html',
     SASS       = 'zinnia/static/zinnia/sass/**/*.scss',
     CSS        = 'zinnia/static/zinnia/css/*.css';
 
-
 gulp.task('sass', function() {
 
   return gulp.src(SASS)
          .pipe(sass({errLogToConsole: true}))
          .pipe(prefix())
          .pipe(gulp.dest('zinnia/static/zinnia/css'));
+});
+
+gulp.task('admin-dashboard', function() {
+
+  return gulp.src('zinnia/static/zinnia/admin/dashboard/sass/*.scss')
+         .pipe(sass({errLogToConsole: true}))
+         .pipe(prefix())
+         .pipe(gulp.dest('zinnia/static/zinnia/admin/dashboard/css'));
 });
 
 gulp.task('watch', function() {
@@ -35,4 +42,4 @@ gulp.task('watch', function() {
 });
 
 
-gulp.task('default', ['sass', 'watch']);
+gulp.task('default', ['sass', 'admin-dashboard', 'watch']);
