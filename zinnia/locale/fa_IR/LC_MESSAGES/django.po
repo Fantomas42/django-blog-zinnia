@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 20:16+0200\n"
-"PO-Revision-Date: 2014-09-03 13:10+0000\n"
-"Last-Translator: hadiazaddel <hadiazaddel@chmail.ir>\n"
+"POT-Creation-Date: 2014-12-04 16:34+0100\n"
+"PO-Revision-Date: 2014-10-14 13:32+0000\n"
+"Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Persian (Iran) (http://www.transifex.com/projects/p/django-blog-zinnia/language/fa_IR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,19 +19,20 @@ msgstr ""
 "Language: fa_IR\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: breadcrumbs.py:68 templates/admin/zinnia/widgets/quickpost.html:25
-#: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:48
+#: breadcrumbs.py:68 admin/forms.py:66
+#: templates/admin/zinnia/widgets/quickpost.html:25
+#: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:53
 #: templates/zinnia/tag_list.html:6
 msgid "Tags"
 msgstr "برچسب ها"
 
 #: breadcrumbs.py:71 templates/zinnia/author_list.html:6
-#: templates/zinnia/base.html:40
+#: templates/zinnia/base.html:43
 msgid "Authors"
 msgstr "نویسندگان"
 
-#: breadcrumbs.py:75 admin/forms.py:57 templates/zinnia/base.html:36
-#: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:58
+#: breadcrumbs.py:75 admin/forms.py:60 templates/zinnia/base.html:37
+#: templates/zinnia/category_list.html:6
 msgid "Categories"
 msgstr "موضوعات"
 
@@ -45,106 +46,106 @@ msgstr "صفحه %s"
 msgid "Week %s"
 msgstr "هفته %s"
 
-#: feeds.py:177 templates/zinnia/entry_archive.html:4
+#: feeds.py:175 templates/zinnia/entry_archive.html:4
 #: templates/zinnia/entry_archive.html:6
 msgid "Latest entries"
 msgstr "آخرین نوشته ها"
 
-#: feeds.py:183
+#: feeds.py:181
 #, python-format
 msgid "The latest entries for the site %s"
 msgstr "آخرین نوشته ها برای سایت  %s"
 
-#: feeds.py:213
+#: feeds.py:211
 #, python-format
 msgid "Entries for the category %s"
 msgstr "نوشته های مربوط به موضوع  %s"
 
-#: feeds.py:219
+#: feeds.py:217
 #, python-format
 msgid "The latest entries for the category %s"
 msgstr "آخرین نوشته های برای موضوع  %s"
 
-#: feeds.py:249
+#: feeds.py:247
 #, python-format
 msgid "Entries for author %s"
 msgstr "نوشته های متعلق به  %s"
 
-#: feeds.py:255
+#: feeds.py:253
 #, python-format
 msgid "The latest entries by %s"
 msgstr "آخرین نوشته های  %s"
 
-#: feeds.py:286
+#: feeds.py:284
 #, python-format
 msgid "Entries for the tag %s"
 msgstr "نوشته های مرتبط با برچسب  %s"
 
-#: feeds.py:292
+#: feeds.py:290
 #, python-format
 msgid "The latest entries for the tag %s"
 msgstr "آخرین نوشته های مرتبط با برچسب  %s"
 
-#: feeds.py:325
+#: feeds.py:323
 #, python-format
 msgid "Results of the search for '%s'"
 msgstr "نتایج جستجو برای %s"
 
-#: feeds.py:331
+#: feeds.py:329
 #, python-format
 msgid "The entries containing the pattern '%s'"
 msgstr "نوشته های شامل الگو '%s'"
 
-#: feeds.py:396
+#: feeds.py:394
 msgid "Latest discussions"
 msgstr "آخرین گفتوگو ها"
 
-#: feeds.py:402
+#: feeds.py:400
 #, python-format
 msgid "The latest discussions for the site %s"
 msgstr "آخرین گفتوگو ها برای سایت  %s"
 
-#: feeds.py:435
+#: feeds.py:433
 #, python-format
 msgid "Discussions on %s"
 msgstr "گفتوگوهای مربوط به  %s"
 
-#: feeds.py:441
+#: feeds.py:439
 #, python-format
 msgid "The latest discussions for the entry %s"
 msgstr "آخرین گفتوگو های مربوط به نوشته ی  %s"
 
-#: feeds.py:468
+#: feeds.py:466
 #, python-format
 msgid "Comments on %s"
 msgstr "نظرات ارسالی برای  %s"
 
-#: feeds.py:474
+#: feeds.py:472
 #, python-format
 msgid "The latest comments for the entry %s"
 msgstr "آخرین نظرات ارسالی برای  نوشته ی %s"
 
-#: feeds.py:518
+#: feeds.py:516
 #, python-format
 msgid "Pingbacks on %s"
 msgstr "بازخوان های %s"
 
-#: feeds.py:524
+#: feeds.py:522
 #, python-format
 msgid "The latest pingbacks for the entry %s"
 msgstr "آخرین بازخوان ها برای نوشته %s"
 
-#: feeds.py:550
+#: feeds.py:548
 #, python-format
 msgid "Trackbacks on %s"
 msgstr "بازخورد های %s"
 
-#: feeds.py:556
+#: feeds.py:554
 #, python-format
 msgid "The latest trackbacks for the entry %s"
 msgstr "آخرین بازخورد های برای نوشته %s"
 
-#: moderator.py:65 moderator.py:87 moderator.py:110
+#: moderator.py:66 moderator.py:88 moderator.py:111
 #, python-format
 msgid "[%(site)s] New comment posted on \"%(title)s\""
 msgstr "[%(site)s] نظر جدید برای \"%(title)s\" ارسال شده است"
@@ -153,190 +154,182 @@ msgstr "[%(site)s] نظر جدید برای \"%(title)s\" ارسال شده اس
 msgid "tree path"
 msgstr "مسیر درختی"
 
-#: admin/entry.py:37 templates/admin/zinnia/widgets/quickpost.html:17
+#: admin/entry.py:30 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "محتوا"
 
-#: admin/entry.py:39
+#: admin/entry.py:32
 msgid "Publication"
 msgstr "انتشار"
 
-#: admin/entry.py:43 templates/admin/zinnia/widgets/_content_stats.html:4
+#: admin/entry.py:36 templates/admin/zinnia/widgets/_content_stats.html:4
 #: templates/zinnia/_entry_detail_base.html:114
 msgid "Discussions"
 msgstr "گفتوگوها"
 
-#: admin/entry.py:47
+#: admin/entry.py:40
 msgid "Privacy"
 msgstr "حریم خصوصی"
 
-#: admin/entry.py:50
+#: admin/entry.py:43
 msgid "Templates"
 msgstr "قالب ها"
 
-#: admin/entry.py:53
+#: admin/entry.py:46
 msgid "Metadatas"
 msgstr "فراداده ها"
 
-#: admin/entry.py:85
+#: admin/entry.py:78
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i کلمه)"
 
-#: admin/entry.py:92
+#: admin/entry.py:85
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
 msgstr[0] ""
 
-#: admin/entry.py:97 models/category.py:21 models_bases/entry.py:46
+#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:50
 msgid "title"
 msgstr "عنوان"
 
-#: admin/entry.py:113
+#: admin/entry.py:106
 msgid "author(s)"
 msgstr "نویسنده(گان)"
 
-#: admin/entry.py:128
+#: admin/entry.py:121
 msgid "category(s)"
 msgstr "موضوع(ها)"
 
-#: admin/entry.py:141
+#: admin/entry.py:134
 msgid "tag(s)"
 msgstr "برچسب(ها)"
 
-#: admin/entry.py:156
+#: admin/entry.py:149
 msgid "site(s)"
 msgstr "سایت(ها)"
 
-#: admin/entry.py:169
+#: admin/entry.py:162
 msgid "short url"
 msgstr "آدرس کوتاه"
 
-#: admin/entry.py:177
+#: admin/entry.py:170
 msgid "is visible"
 msgstr "نمایش داده شود"
 
-#: admin/entry.py:262
+#: admin/entry.py:254
 msgid "The selected entries now belong to you."
 msgstr "نوشته های انتخاب شده حالا متعلق به شماست"
 
-#: admin/entry.py:263
+#: admin/entry.py:255
 msgid "Set the entries to the user"
 msgstr "تنظیم نوشته ها به کاربر"
 
-#: admin/entry.py:272
+#: admin/entry.py:264
 msgid "The selected entries are now marked as published."
 msgstr "نوشته های انتخاب شده منتشر گردید"
 
-#: admin/entry.py:273
+#: admin/entry.py:265
 msgid "Set entries selected as published"
 msgstr "منتشر کردن نوشته های انتخاب شده"
 
-#: admin/entry.py:281
+#: admin/entry.py:273
 msgid "The selected entries are now marked as hidden."
 msgstr "نوشته های انتخاب شده مقفی شد"
 
-#: admin/entry.py:282
+#: admin/entry.py:274
 msgid "Set entries selected as hidden"
 msgstr "مخفی کردن نوشته های انتخاب شده"
 
-#: admin/entry.py:290
+#: admin/entry.py:282
 msgid "Comments are now closed for selected entries."
 msgstr "بخش نظرات برای نوشته های انتخاب شده بسته گردید."
 
-#: admin/entry.py:291
+#: admin/entry.py:283
 msgid "Close the comments for selected entries"
 msgstr "بستن نظرات برای نوشته های انتخاب شده"
 
-#: admin/entry.py:300
+#: admin/entry.py:292
 msgid "Pingbacks are now closed for selected entries."
 msgstr "در حال حاضر بازخوان ها برای نوشته های انتخاب شده بسته است."
 
-#: admin/entry.py:302
+#: admin/entry.py:294
 msgid "Close the pingbacks for selected entries"
 msgstr "بازخوان ها را برای نوشته های انتخاب شده مسدود کن."
 
-#: admin/entry.py:310
+#: admin/entry.py:302
 msgid "Trackbacks are now closed for selected entries."
 msgstr "در حال حاضر بازخورد ها برای نوشته های انتخاب شده بسته است."
 
-#: admin/entry.py:312
+#: admin/entry.py:304
 msgid "Close the trackbacks for selected entries"
 msgstr "بازخورد ها را برای نوشته های انتخاب شده مسدود کن."
 
-#: admin/entry.py:321
+#: admin/entry.py:313
 msgid "The selected entries are now set at the current date."
 msgstr "تاریخ نوشته های انتخاب شده روی تاریخ جاری تنظیم گردید."
 
-#: admin/entry.py:323
+#: admin/entry.py:315
 msgid "Put the selected entries on top at the current date"
 msgstr ""
 
-#: admin/entry.py:331
+#: admin/entry.py:323
 msgid "Selected entries are now marked as featured."
 msgstr ""
 
-#: admin/entry.py:332
+#: admin/entry.py:324
 msgid "Mark selected entries as featured"
 msgstr ""
 
-#: admin/entry.py:340
+#: admin/entry.py:332
 msgid "Selected entries are no longer marked as featured."
 msgstr ""
 
-#: admin/entry.py:342
+#: admin/entry.py:334
 msgid "Unmark selected entries as featured"
 msgstr ""
 
-#: admin/entry.py:359
-msgid "The selected entries have been tweeted."
-msgstr "نوشته های انتخاب شده Tweet شدند."
-
-#: admin/entry.py:360
-msgid "Tweet entries selected"
-msgstr "Tweet کردن نوشته های انتخاب شده"
-
-#: admin/entry.py:381
+#: admin/entry.py:355
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr ""
 
-#: admin/entry.py:385
+#: admin/entry.py:359
 msgid "Ping Directories for selected entries"
 msgstr ""
 
-#: admin/filters.py:28
+#: admin/filters.py:29
 #, python-format
 msgid "%(item)s (%(count)i entry)"
 msgid_plural "%(item)s (%(count)i entries)"
 msgstr[0] ""
 
-#: admin/filters.py:49
+#: admin/filters.py:50
 msgid "published authors"
 msgstr ""
 
-#: admin/filters.py:60
+#: admin/filters.py:61
 msgid "published categories"
 msgstr "موضوعات منتشر شده"
 
-#: admin/forms.py:22
+#: admin/forms.py:25
 msgid "Parent category"
 msgstr "موضوع بالادست"
 
-#: admin/forms.py:24
+#: admin/forms.py:27
 msgid "No parent category"
 msgstr "موضوع بالادست وجود ندارد"
 
-#: admin/forms.py:41
+#: admin/forms.py:44
 msgid "A category cannot be parent of itself."
 msgstr "یه موضوع نمیتواند بالادست خود باشد"
 
-#: admin/forms.py:59 models/category.py:75 models_bases/entry.py:407
+#: admin/forms.py:62 models/category.py:75 models_bases/entry.py:434
 msgid "categories"
 msgstr "موضوعات"
 
-#: models/category.py:24 models_bases/entry.py:49
+#: models/category.py:24 models_bases/entry.py:53
 msgid "slug"
 msgstr ""
 
@@ -356,171 +349,171 @@ msgstr "موضوع بالادست"
 msgid "category"
 msgstr "موضوع"
 
-#: models_bases/entry.py:41
+#: models_bases/entry.py:45
 msgid "draft"
 msgstr "چرکنویس"
 
-#: models_bases/entry.py:42
+#: models_bases/entry.py:46
 msgid "hidden"
 msgstr "مخفی"
 
-#: models_bases/entry.py:43
+#: models_bases/entry.py:47
 msgid "published"
 msgstr "منتشر شده"
 
-#: models_bases/entry.py:51 models_bases/entry.py:76
+#: models_bases/entry.py:55 models_bases/entry.py:80
 msgid "Used to build the entry's URL."
 msgstr ""
 
-#: models_bases/entry.py:54
+#: models_bases/entry.py:58
 msgid "status"
 msgstr "وضعیت"
 
-#: models_bases/entry.py:58
+#: models_bases/entry.py:62
 msgid "start publication"
 msgstr "شروع انتشار"
 
-#: models_bases/entry.py:60
+#: models_bases/entry.py:64
 msgid "Start date of publication."
 msgstr "تاریخ شروع انتشار."
 
-#: models_bases/entry.py:63
+#: models_bases/entry.py:67
 msgid "end publication"
 msgstr "پایان انتشار"
 
-#: models_bases/entry.py:65
+#: models_bases/entry.py:69
 msgid "End date of publication."
 msgstr "تاریخ پایان انتشار."
 
-#: models_bases/entry.py:70
+#: models_bases/entry.py:74
 msgid "sites"
 msgstr "سایت ها"
 
-#: models_bases/entry.py:71
+#: models_bases/entry.py:75
 msgid "Sites where the entry will be published."
 msgstr "سایت هایی که نوشته در آنها منتشر خواهد شد."
 
-#: models_bases/entry.py:74
+#: models_bases/entry.py:78
 msgid "creation date"
 msgstr "تاریخ ایجاد"
 
-#: models_bases/entry.py:79
+#: models_bases/entry.py:83
 msgid "last update"
 msgstr "آخرین به روز رسانی"
 
-#: models_bases/entry.py:181
+#: models_bases/entry.py:185
 msgid "entry"
 msgstr "نوشته"
 
-#: models_bases/entry.py:182
+#: models_bases/entry.py:186
 msgid "entries"
 msgstr "نوشته ها"
 
-#: models_bases/entry.py:196
+#: models_bases/entry.py:200
 msgid "content"
 msgstr "محتوا"
 
-#: models_bases/entry.py:238
+#: models_bases/entry.py:242
 msgid "comments enabled"
 msgstr "بخش نظرات فعال است"
 
-#: models_bases/entry.py:239
+#: models_bases/entry.py:243
 msgid "Allows comments if checked."
 msgstr ""
 
-#: models_bases/entry.py:241
+#: models_bases/entry.py:245
 msgid "pingbacks enabled"
 msgstr ""
 
-#: models_bases/entry.py:242
+#: models_bases/entry.py:246
 msgid "Allows pingbacks if checked."
 msgstr ""
 
-#: models_bases/entry.py:244
+#: models_bases/entry.py:248
 msgid "trackbacks enabled"
 msgstr ""
 
-#: models_bases/entry.py:245
+#: models_bases/entry.py:249
 msgid "Allows trackbacks if checked."
 msgstr ""
 
-#: models_bases/entry.py:248
+#: models_bases/entry.py:252
 msgid "comment count"
 msgstr "تعداد نظرات"
 
-#: models_bases/entry.py:250
+#: models_bases/entry.py:254
 msgid "pingback count"
 msgstr ""
 
-#: models_bases/entry.py:252
+#: models_bases/entry.py:256
 msgid "trackback count"
 msgstr ""
 
-#: models_bases/entry.py:336
+#: models_bases/entry.py:340
 msgid "related entries"
 msgstr "نوشته های مرتبط"
 
-#: models_bases/entry.py:354
+#: models_bases/entry.py:358
 msgid "excerpt"
 msgstr "گلچین"
 
-#: models_bases/entry.py:355
+#: models_bases/entry.py:359
 msgid "Used for search and SEO."
 msgstr ""
 
-#: models_bases/entry.py:366
+#: models_bases/entry.py:392
 msgid "image"
 msgstr "تصویر"
 
-#: models_bases/entry.py:367
+#: models_bases/entry.py:394
 msgid "Used for illustration."
 msgstr ""
 
-#: models_bases/entry.py:378
+#: models_bases/entry.py:405
 msgid "featured"
 msgstr ""
 
-#: models_bases/entry.py:393
+#: models_bases/entry.py:420
 msgid "authors"
 msgstr "نویسندگان"
 
-#: models_bases/entry.py:417
+#: models_bases/entry.py:444
 msgid "tags"
 msgstr "برچسب ها"
 
-#: models_bases/entry.py:436
+#: models_bases/entry.py:463
 msgid "login required"
 msgstr "نیاز به احراز هویت"
 
-#: models_bases/entry.py:437
+#: models_bases/entry.py:464
 msgid "Only authenticated users can view the entry."
 msgstr "فقط کاربران احراز هویت شده میتوانند این نوشته را مشاهده کنند ."
 
-#: models_bases/entry.py:449
+#: models_bases/entry.py:476
 msgid "password"
 msgstr "گذرواژه"
 
-#: models_bases/entry.py:450
+#: models_bases/entry.py:477
 msgid "Protects the entry with a password."
 msgstr "از نوشته با رمز محافظت کن."
 
-#: models_bases/entry.py:462
+#: models_bases/entry.py:489
 msgid "content template"
 msgstr ""
 
-#: models_bases/entry.py:464 models_bases/entry.py:480
+#: models_bases/entry.py:491 models_bases/entry.py:507
 msgid "Default template"
 msgstr "قالب پیشفرض"
 
-#: models_bases/entry.py:466
+#: models_bases/entry.py:493
 msgid "Template used to display the entry's content."
 msgstr ""
 
-#: models_bases/entry.py:478
+#: models_bases/entry.py:505
 msgid "detail template"
 msgstr "جزئیات قالب"
 
-#: models_bases/entry.py:482
+#: models_bases/entry.py:509
 msgid "Template used to display the entry's detail page."
 msgstr ""
 
@@ -579,7 +572,7 @@ msgid "Contents"
 msgstr "محتوا"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:9
-#: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:17
+#: templates/zinnia/author_list.html:19 templates/zinnia/category_list.html:18
 #: templates/zinnia/tag_list.html:18 templates/zinnia/tags/authors.html:8
 #: templates/zinnia/tags/categories.html:7
 #: templates/zinnia/tags/categories_tree.html:6
@@ -790,13 +783,13 @@ msgstr "انتشار"
 
 #: templates/admin/zinnia/widgets/recent_comments.html:6
 #: templates/admin/zinnia/widgets/recent_comments.html:8
-#: templates/zinnia/base.html:56
+#: templates/zinnia/base.html:62
 msgid "Recent comments"
 msgstr "نظرات اخیر"
 
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:6
 #: templates/admin/zinnia/widgets/recent_linkbacks.html:8
-#: templates/zinnia/base.html:60
+#: templates/zinnia/base.html:66
 msgid "Recent linkbacks"
 msgstr ""
 
@@ -860,8 +853,8 @@ msgstr "ارسال نظر شما"
 msgid "Comment as"
 msgstr "نگارش نظر به عنوان "
 
-#: templates/comments/zinnia/entry/form.html:26 templates/zinnia/base.html:96
-#: templates/zinnia/base.html.py:97
+#: templates/comments/zinnia/entry/form.html:26 templates/zinnia/base.html:102
+#: templates/zinnia/base.html.py:103
 msgid "Log out"
 msgstr "خروج"
 
@@ -903,7 +896,7 @@ msgid "Written on"
 msgstr "نوشته شده در"
 
 #: templates/zinnia/_entry_detail_base.html:38
-#: templates/zinnia/category_list.html:16
+#: templates/zinnia/category_list.html:17
 #: templates/zinnia/tags/categories.html:6
 #: templates/zinnia/tags/categories_tree.html:5
 #, python-format
@@ -1004,23 +997,23 @@ msgid ""
 "to/customize_look_and_feel.html'>customizing your Weblog</a>."
 msgstr ""
 
-#: templates/zinnia/base.html:44
+#: templates/zinnia/base.html:48
 msgid "Calendar"
 msgstr "تقویم"
 
-#: templates/zinnia/base.html:52
+#: templates/zinnia/base.html:58
 msgid "Recent entries"
 msgstr "نوشته های اخیر"
 
-#: templates/zinnia/base.html:64
+#: templates/zinnia/base.html:70
 msgid "Random entries"
 msgstr "ارسال های رندم"
 
-#: templates/zinnia/base.html:68
+#: templates/zinnia/base.html:74
 msgid "Popular entries"
 msgstr "نوشته های محبوب"
 
-#: templates/zinnia/base.html:72 templates/zinnia/entry_archive_day.html:4
+#: templates/zinnia/base.html:78 templates/zinnia/entry_archive_day.html:4
 #: templates/zinnia/entry_archive_day.html:6
 #: templates/zinnia/entry_archive_day.html:11
 #: templates/zinnia/entry_archive_day.html:28
@@ -1041,15 +1034,15 @@ msgstr "نوشته های محبوب"
 msgid "Archives"
 msgstr "آرشیو"
 
-#: templates/zinnia/base.html:77
+#: templates/zinnia/base.html:83
 msgid "Tools"
 msgstr "ابزار ها"
 
-#: templates/zinnia/base.html:81 templates/zinnia/base.html.py:82
+#: templates/zinnia/base.html:87 templates/zinnia/base.html.py:88
 msgid "Dashboard"
 msgstr "پیشخوان"
 
-#: templates/zinnia/base.html:88 templates/zinnia/base.html.py:89
+#: templates/zinnia/base.html:94 templates/zinnia/base.html.py:95
 msgid "Post an entry"
 msgstr "ارسال یک نوشته"
 
@@ -1058,7 +1051,7 @@ msgstr "ارسال یک نوشته"
 msgid "Category list"
 msgstr "لیست موضوعات"
 
-#: templates/zinnia/category_list.html:28
+#: templates/zinnia/category_list.html:23
 #: templates/zinnia/tags/categories.html:11
 #: templates/zinnia/tags/categories_tree.html:16
 msgid "No categories yet."
@@ -1119,7 +1112,7 @@ msgid "Next week"
 msgstr "هفته بعدی"
 
 #: templates/zinnia/entry_archive_year.html:15
-#: templates/zinnia/sitemap.html:63
+#: templates/zinnia/sitemap.html:37
 msgid "Monthly archives"
 msgstr "آرشیو ماهیانه"
 
@@ -1220,8 +1213,12 @@ msgid "page"
 msgstr "صفحه"
 
 #: templates/zinnia/entry_list.html:11 templates/zinnia/entry_list.html:14
-#: templates/zinnia/entry_list.html:17 templates/zinnia/skeleton.html:37
-msgid "RSS Feed"
+#: templates/zinnia/entry_list.html:17 templates/zinnia/entry_list.html:36
+#: templates/zinnia/entry_list.html:37 templates/zinnia/entry_list.html:45
+#: templates/zinnia/entry_list.html:46 templates/zinnia/entry_list.html:54
+#: templates/zinnia/entry_list.html:55
+#, python-format
+msgid "RSS feed of %(object)s"
 msgstr ""
 
 #: templates/zinnia/entry_list.html:21
@@ -1241,18 +1238,17 @@ msgstr "صفحه"
 msgid "Category archives: %(category)s"
 msgstr ""
 
-#: templates/zinnia/entry_list.html:38
+#: templates/zinnia/entry_list.html:43
 #, python-format
 msgid "Tag archives: %(tag)s"
 msgstr ""
 
-#: templates/zinnia/entry_list.html:42
+#: templates/zinnia/entry_list.html:52
 #, python-format
 msgid "Author archives: %(author)s"
 msgstr ""
 
-#: templates/zinnia/entry_list.html:51 templates/zinnia/sitemap.html:29
-#: templates/zinnia/sitemap.html.py:51
+#: templates/zinnia/entry_list.html:66 templates/zinnia/sitemap.html:29
 #: templates/zinnia/tags/entries_featured.html:9
 #: templates/zinnia/tags/entries_popular.html:12
 #: templates/zinnia/tags/entries_random.html:9
@@ -1260,34 +1256,37 @@ msgstr ""
 msgid "No entries yet."
 msgstr "هنوز نوشته ای وجود ندارد"
 
-#: templates/zinnia/entry_list.html:70 templates/zinnia/entry_list.html:71
+#: templates/zinnia/entry_list.html:85 templates/zinnia/entry_list.html:86
 msgid "Edit the category"
 msgstr "ویرایش موضوع"
 
-#: templates/zinnia/entry_list.html:77 templates/zinnia/entry_list.html:78
+#: templates/zinnia/entry_list.html:92 templates/zinnia/entry_list.html:93
 msgid "Edit the tag"
 msgstr "ویرایش برچسب"
 
-#: templates/zinnia/entry_list.html:84 templates/zinnia/entry_list.html:85
+#: templates/zinnia/entry_list.html:99 templates/zinnia/entry_list.html:100
 msgid "Edit the author"
 msgstr "ویرایش نوسنده"
 
 #: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:6
-#: templates/zinnia/entry_search.html:16
-msgid "Search results for"
-msgstr "نتایج جستوجو برای"
-
-#: templates/zinnia/entry_search.html:10
-msgid "RSS Feed of search result of"
+#: templates/zinnia/entry_search.html:18
+#, python-format
+msgid "Search results for '%(pattern)s'"
 msgstr ""
 
-#: templates/zinnia/entry_search.html:24
+#: templates/zinnia/entry_search.html:11 templates/zinnia/entry_search.html:24
+#: templates/zinnia/entry_search.html:25
+#, python-format
+msgid "RSS feed of search results for '%(pattern)s'"
+msgstr ""
+
+#: templates/zinnia/entry_search.html:32
 #, python-format
 msgid "%(entry_count)s entry found"
 msgid_plural "%(entry_count)s entries found"
 msgstr[0] ""
 
-#: templates/zinnia/entry_search.html:34
+#: templates/zinnia/entry_search.html:43
 msgid "Nothing found."
 msgstr "چیزی یافت نشد"
 
@@ -1341,17 +1340,17 @@ msgstr ""
 msgid "Entries per categories"
 msgstr "تعداد نوشته ها بر حسب موضوعات"
 
-#: templates/zinnia/sitemap.html:23 templates/zinnia/sitemap.html.py:45
+#: templates/zinnia/sitemap.html:23
 msgid "comment"
 msgstr "نظر"
-
-#: templates/zinnia/sitemap.html:37
-msgid "All the entries"
-msgstr "تمام نوشته ها"
 
 #: templates/zinnia/skeleton.html:11 templates/zinnia/skeleton.html.py:53
 msgid "Just another Zinnia weblog."
 msgstr "یک وبلاگ دیگر با زیننیا ."
+
+#: templates/zinnia/skeleton.html:37
+msgid "RSS Feed"
+msgstr ""
 
 #: templates/zinnia/skeleton.html:43 templates/zinnia/tags/search_form.html:4
 msgid "Keywords..."
@@ -1430,15 +1429,15 @@ msgid "%(entry_count)s entry tagged by %(tag)s"
 msgid_plural "%(entry_count)s entries tagged by %(tag)s"
 msgstr[0] ""
 
-#: templatetags/zinnia_tags.py:341
+#: templatetags/zinnia.py:344
 msgid "Blog"
 msgstr "بلاگ"
 
-#: tests/test_views.py:574 views/search.py:30
+#: tests/test_views.py:586 views/search.py:30
 msgid "The pattern is too short"
 msgstr "الگوی وارد شده بسیار کوتاه است"
 
-#: tests/test_views.py:578 views/search.py:34
+#: tests/test_views.py:590 views/search.py:34
 msgid "No pattern to search found"
 msgstr "الگویی برای جستوجو یافت نشد"
 
@@ -1596,6 +1595,6 @@ msgstr "حساب کاربری در دسترس نیست"
 msgid "User cannot %s."
 msgstr ""
 
-#: xmlrpc/pingback.py:114
+#: xmlrpc/pingback.py:116
 msgid "No title"
 msgstr "بدون عنوان"
