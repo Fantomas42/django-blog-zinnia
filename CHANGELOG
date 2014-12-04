@@ -6,7 +6,14 @@ develop
   * Better translations
   * Correct title markup
   * Fix anchors for linkbacks
+* Reorder the provided statics
+* Rename ``zinnia_tags`` to ``zinnia``
+* Fix calendar in archive day view
 * Fix Textitle rendering on Python 3
+* Fix feeds for authors with accents
+* Fix admin issue with custom Entry model
+* Do not include anymore jQuery in admin for entries
+* Admin tag autocompletion with a widget based on select2
 
 https://github.com/Fantomas42/django-blog-zinnia/compare/v0.14.2...develop
 
