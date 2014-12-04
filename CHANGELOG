@@ -14,6 +14,7 @@ develop
 * Fix admin issue with custom Entry model
 * Do not include anymore jQuery in admin for entries
 * Admin tag autocompletion with a widget based on select2
+* Configurable upload path for image field with inheritance
 
 https://github.com/Fantomas42/django-blog-zinnia/compare/v0.14.2...develop
 
