@@ -1,5 +1,5 @@
 {% extends "zinnia/base.html" %}
-{% load i18n zinnia_tags %}
+{% load i18n zinnia %}
 
 {% block meta-description %}{% trans "Latest entries for" %} {% if category %}{% trans "the category" %} {{ category }}{% if category.description %}: {{ category.description|striptags|safe }}{% endif %}{% endif %}{% if tag %}{% trans "the tag" %} {{ tag }}{% endif %}{% if author %}{% trans "the author" %} {{ author }}{% endif %}{% endblock meta-description %}
 
@@ -8,13 +8,13 @@
 {% block link %}
   {{ block.super }}
   {% if category %}
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ category }}" href="{% url 'zinnia:category_feed' category.tree_path %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=category %}RSS feed of {{ object }}{% endblocktrans %}" href="{% url 'zinnia:category_feed' category.tree_path %}" />
   {% endif %}
   {% if tag %}
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ tag }}" href="{% url 'zinnia:tag_feed' tag.name %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=tag %}RSS feed of {{ object }}{% endblocktrans %}" href="{% url 'zinnia:tag_feed' tag.name %}" />
   {% endif %}
   {% if author %}
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed" %} {{ author }}" href="{% url 'zinnia:author_feed' author.get_username %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=author %}RSS feed of {{ object }}{% endblocktrans %}" href="{% url 'zinnia:author_feed' author.get_username %}" />
   {% endif %}
 {% endblock link %}
 
@@ -32,14 +32,29 @@
 {% if category.description %}
 <p>{{ category.description|striptags|safe }}</p>
 {% endif %}
+<p class="feed">
+  <a href="{% url 'zinnia:category_feed' category.tree_path %}" title="{% blocktrans with object=category %}RSS feed of {{ object }}{% endblocktrans %}">
+    {% blocktrans with object=category %}RSS feed of {{ object }}{% endblocktrans %}
+  </a>
+</p>
 {% endif %}
 
 {% if tag %}
 <h1>{% blocktrans %}Tag archives: {{ tag }}{% endblocktrans %}</h1>
+<p class="feed">
+  <a href="{% url 'zinnia:tag_feed' tag.name %}" title="{% blocktrans with object=tag %}RSS feed of {{ object }}{% endblocktrans %}">
+    {% blocktrans with object=tag %}RSS feed of {{ object }}{% endblocktrans %}
+  </a>
+</p>
 {% endif %}
 
 {% if author %}
 <h1>{% blocktrans %}Author archives: {{ author }}{% endblocktrans %}</h1>
+<p class="feed">
+  <a href="{% url 'zinnia:author_feed' author.get_username %}" title="{% blocktrans with object=author %}RSS feed of {{ object }}{% endblocktrans %}">
+    {% blocktrans with object=author %}RSS feed of {{ object }}{% endblocktrans %}
+  </a>
+</p>
 {% endif %}
 {% endblock content-title %}
 

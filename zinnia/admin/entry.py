@@ -1,18 +1,13 @@
 """EntryAdmin for Zinnia"""
-from django.forms import Media
 from django.contrib import admin
 from django.db.models import Q
-from django.conf.urls import url
-from django.conf.urls import patterns
 from django.utils import timezone
 from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
-from django.template.response import TemplateResponse
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.staticfiles.storage import staticfiles_storage
 
 from zinnia import settings
 from zinnia.managers import HIDDEN
@@ -362,42 +357,3 @@ class EntryAdmin(admin.ModelAdmin):
                         {'directory': directory, 'success': success})
     ping_directories.short_description = _(
         'Ping Directories for selected entries')
-
-    def get_urls(self):
-        """
-        Overload the admin's urls for tag auto-completion.
-        """
-        entry_admin_urls = super(EntryAdmin, self).get_urls()
-        urls = patterns(
-            '',
-            url(r'^autocomplete_tags/$',
-                self.admin_site.admin_view(self.autocomplete_tags),
-                name='zinnia_entry_autocomplete_tags'),
-        )
-        return urls + entry_admin_urls
-
-    def autocomplete_tags(self, request):
-        """
-        View for tag auto-completion.
-        """
-        return TemplateResponse(
-            request, 'admin/zinnia/entry/autocomplete_tags.js',
-            content_type='application/javascript')
-
-    def _media(self):
-        """
-        The medias needed to enhance the admin page.
-        """
-        def static_url(url):
-            return staticfiles_storage.url('zinnia/%s' % url)
-
-        media = super(EntryAdmin, self).media + Media(
-            css={'all': (
-                static_url('css/jquery.autocomplete.css'),)},
-            js=(static_url('js/jquery.js'),
-                static_url('js/jquery.bgiframe.js'),
-                static_url('js/jquery.autocomplete.js'),
-                reverse('admin:zinnia_entry_autocomplete_tags')))
-
-        return media
-    media = property(_media)

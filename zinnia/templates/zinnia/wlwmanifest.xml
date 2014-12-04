@@ -1,4 +1,4 @@
-{% load i18n staticfiles zinnia_tags %}<?xml version="1.0" encoding="utf-8" ?>
+{% load i18n staticfiles zinnia %}<?xml version="1.0" encoding="utf-8" ?>
 <manifest xmlns="http://schemas.microsoft.com/wlw/manifest/weblog">
   <options>
     <clientType>Metaweblog</clientType>
@@ -34,8 +34,8 @@
 
   <weblog>
     <serviceName>{{ site.name }} Weblog</serviceName>
-    <imageUrl>{% static "zinnia/img/wlw/zinnia.png" %}</imageUrl>
-    <watermarkImageUrl>{% static "zinnia/img/wlw/watermark.png" %}</watermarkImageUrl>
+    <imageUrl>{% static "zinnia/theme/img/wlw/zinnia.png" %}</imageUrl>
+    <watermarkImageUrl>{% static "zinnia/theme/img/wlw/watermark.png" %}</watermarkImageUrl>
     <homepageLinkText>{% trans "View site" %}</homepageLinkText>
     <adminLinkText>{% trans "Admin. site" %}</adminLinkText>
     <adminUrl><![CDATA[
@@ -50,7 +50,7 @@
     <button>
       <id>0</id>
       <text>{% trans "Manage comments" %}</text>
-      <imageUrl>{% static "zinnia/img/wlw/comments.png" %}</imageUrl>
+      <imageUrl>{% static "zinnia/theme/img/wlw/comments.png" %}</imageUrl>
       <clickUrl><![CDATA[
         {blog-homepage-url}{% url 'changelist'|comment_admin_urlname %}
       ]]></clickUrl>

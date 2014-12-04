@@ -1,11 +1,11 @@
-{% load i18n zinnia_tags %}
+{% load i18n zinnia %}
 {% for linkback in linkbacks %}
 <tr>
   <th>
     {% with entry=linkback.content_object %}
     <a href="{{ linkback.url }}">{{ linkback.name }}</a>
     {% trans "made a linkback on" %}
-    <a href="{{ entry.get_absolute_url }}#{{ linkback.flags.all.0.flag }}_{{ linkback.pk }}"
+    <a href="{{ entry.get_absolute_url }}#{{ linkback.flags.all.0.flag }}-{{ linkback.pk }}"
        title="{{ entry.title }}">
       {{ entry.title }}
     </a>

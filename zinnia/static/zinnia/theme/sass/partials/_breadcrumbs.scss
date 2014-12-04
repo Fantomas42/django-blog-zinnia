@@ -1,9 +1,9 @@
-ul.breadcrumbs {
+.breadcrumbs {
   display: none;
 }
 
 @include breakpoint("small") {
-  ul.breadcrumbs {
+  .breadcrumbs {
     display: block;
     @include delimited-list("/");
     margin: 0;

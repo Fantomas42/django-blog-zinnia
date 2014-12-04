@@ -56,6 +56,7 @@ class HTMLPreview(object):
     def build_preview(self):
         """
         Build the preview by:
+
         - Checking if a split marker is present in the content
           Then split the content with the marker to build the preview.
         - Splitting the content to a fixed number of words.

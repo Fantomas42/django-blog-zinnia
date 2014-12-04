@@ -3,25 +3,12 @@
 
 {% block extrastyle %}
 {{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static "zinnia/css/jquery.autocomplete.css" %}" />
-<link rel="stylesheet" type="text/css" href="{% static "zinnia/css/admin.dashboard.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "zinnia/admin/dashboard/css/dashboard.css" %}" />
 {% endblock extrastyle %}
 
 {% block extrahead %}
 {{ block.super }}
-<script type="text/javascript" src="{% static "zinnia/js/jquery.js" %}"></script>
-<script type="text/javascript" src="{% static "zinnia/js/jquery.masonry.js" %}"></script>
-<script type="text/javascript" src="{% static "zinnia/js/jquery.bgiframe.js" %}"></script>
-<script type="text/javascript" src="{% static "zinnia/js/jquery.autocomplete.js" %}"></script>
-<script type="text/javascript" src="{% url 'admin:zinnia_entry_autocomplete_tags' %}"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-  $("#content-main").masonry({
-    itemSelector: ".module",
-    gutter: 10
-  });
-});
-</script>
+<script type="text/javascript" src="{% static "zinnia/admin/dashboard/js/masonry.pkgd.js" %}"></script>
 {% endblock extrahead %}
 
 {% block content %}
@@ -33,3 +20,13 @@ $(document).ready(function() {
   {% include "admin/zinnia/widgets/recent_linkbacks.html" %}
 </div>
 {% endblock content %}
+
+{% block footer %}
+<script type="text/javascript">
+var msnry = new Masonry("#content-main", {
+  itemSelector: ".module",
+  gutter: 10
+});
+</script>
+{{ block.super }}
+{% endblock footer %}

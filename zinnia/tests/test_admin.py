@@ -8,7 +8,6 @@ from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.admin.sites import AdminSite
 from django.test.utils import restore_template_loaders
-from django.test.utils import setup_test_template_loader
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import settings
@@ -375,32 +374,6 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.admin.unmark_featured(self.request, Entry.objects.all())
         self.assertEqual(Entry.objects.filter(featured=True).count(), 0)
         self.assertEqual(len(self.request._messages.messages), 2)
-
-    def test_autocomplete_tags(self):
-        template_to_use = 'admin/zinnia/entry/autocomplete_tags.js'
-        setup_test_template_loader({template_to_use: ''})
-        response = self.admin.autocomplete_tags(self.request)
-        self.assertTemplateUsed(response, template_to_use)
-        self.assertEqual(response['Content-Type'], 'application/javascript')
-
-    def test_medias(self):
-        medias = self.admin.media
-        self.assertEqual(
-            medias._css,
-            {'all': ['/static/zinnia/css/jquery.autocomplete.css']})
-        self.assertEqual(
-            medias._js,
-            ['/static/admin/js/core.js',
-             '/static/admin/js/admin/RelatedObjectLookups.js',
-             '/static/admin/js/jquery.min.js',
-             '/static/admin/js/jquery.init.js',
-             '/static/admin/js/actions.min.js',
-             '/static/admin/js/urlify.js',
-             '/static/admin/js/prepopulate.min.js',
-             '/static/zinnia/js/jquery.js',
-             '/static/zinnia/js/jquery.bgiframe.js',
-             '/static/zinnia/js/jquery.autocomplete.js',
-             '/admin/zinnia/entry/autocomplete_tags/'])
 
 
 class CategoryAdminTestCase(BaseAdminTestCase):

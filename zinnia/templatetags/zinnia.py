@@ -26,17 +26,18 @@ from django_comments import get_model as get_comment_model
 from tagging.models import Tag
 from tagging.utils import calculate_cloud
 
-from zinnia.models.entry import Entry
-from zinnia.models.author import Author
-from zinnia.models.category import Category
-from zinnia.managers import DRAFT
-from zinnia.managers import tags_published
-from zinnia.flags import PINGBACK, TRACKBACK
-from zinnia.settings import PROTOCOL
-from zinnia.comparison import VectorBuilder
-from zinnia.comparison import pearson_score
-from zinnia.calendar import Calendar
-from zinnia.breadcrumbs import retrieve_breadcrumbs
+
+from ..models.entry import Entry
+from ..models.author import Author
+from ..models.category import Category
+from ..managers import DRAFT
+from ..managers import tags_published
+from ..flags import PINGBACK, TRACKBACK
+from ..settings import PROTOCOL
+from ..comparison import VectorBuilder
+from ..comparison import pearson_score
+from ..calendar import Calendar
+from ..breadcrumbs import retrieve_breadcrumbs
 
 register = Library()
 
@@ -217,12 +218,13 @@ def get_calendar_entries(context, year=None, month=None,
         elif creation_date:
             if settings.USE_TZ:
                 creation_date = timezone.localtime(creation_date)
-            current_month = creation_date.date().replace(day=1)
+            current_month = creation_date.date()
         else:
             today = timezone.now()
             if settings.USE_TZ:
                 today = timezone.localtime(today)
-            current_month = today.date().replace(day=1)
+            current_month = today.date()
+        current_month = current_month.replace(day=1)
     else:
         current_month = date(year, month, 1)
 

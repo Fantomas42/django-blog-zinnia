@@ -6,6 +6,7 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 
+from django.utils.encoding import smart_text
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
@@ -14,7 +15,6 @@ from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import NoReverseMatch
-from django.core.files.storage import default_storage
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
 
@@ -32,7 +32,7 @@ from zinnia.settings import COPYRIGHT
 from zinnia.settings import FEEDS_FORMAT
 from zinnia.settings import FEEDS_MAX_ITEMS
 from zinnia.views.categories import get_category_or_404
-from zinnia.templatetags.zinnia_tags import get_gravatar
+from zinnia.templatetags.zinnia import get_gravatar
 
 
 class ZinniaFeed(Feed):
@@ -41,7 +41,6 @@ class ZinniaFeed(Feed):
     enriched for a more convenient usage.
     """
     feed_copyright = COPYRIGHT
-    _site = None
 
     def __init__(self):
         if FEEDS_FORMAT == 'atom':
@@ -62,9 +61,7 @@ class ZinniaFeed(Feed):
         """
         Acquire the current site used.
         """
-        if self._site is None:
-            self._site = Site.objects.get_current()
-        return self._site
+        return Site.objects.get_current()
 
     @property
     def site_url(self):
@@ -139,7 +136,7 @@ class EntryFeed(ZinniaFeed):
         """
         if item.image:
             try:
-                return str(default_storage.size(item.image.path))
+                return str(item.image.size)
             except (os.error, NotImplementedError):
                 pass
         return '100000'
@@ -247,13 +244,13 @@ class AuthorEntries(EntryFeed):
         """
         Title of the feed.
         """
-        return _('Entries for author %s') % obj.__str__()
+        return _('Entries for author %s') % smart_text(obj.__str__())
 
     def description(self, obj):
         """
         Description of the feed.
         """
-        return _('The latest entries by %s') % obj.__str__()
+        return _('The latest entries by %s') % smart_text(obj.__str__())
 
 
 class TagEntries(EntryFeed):

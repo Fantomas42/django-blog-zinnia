@@ -6,10 +6,13 @@ from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 
+from tagging.forms import TagField
+
 from mptt.forms import TreeNodeChoiceField
 
 from zinnia.models.entry import Entry
 from zinnia.models.category import Category
+from zinnia.admin.widgets import TagAutoComplete
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.fields import MPTTModelMultipleChoiceField
 
@@ -58,6 +61,10 @@ class EntryAdminForm(forms.ModelForm):
         queryset=Category.objects.all(),
         widget=MPTTFilteredSelectMultiple(_('categories'), False,
                                           attrs={'rows': '10'}))
+
+    tags = TagField(
+        label=_('Tags'), required=False,
+        widget=TagAutoComplete())
 
     def __init__(self, *args, **kwargs):
         super(EntryAdminForm, self).__init__(*args, **kwargs)

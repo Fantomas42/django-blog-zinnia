@@ -9,6 +9,10 @@ from django.utils.encoding import force_text
 from django.contrib.admin import widgets
 from django.contrib.staticfiles.storage import staticfiles_storage
 
+from tagging.models import Tag
+
+from zinnia.models import Entry
+
 
 class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
     """
@@ -55,6 +59,52 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         """
         MPTTFilteredSelectMultiple's Media.
         """
-        js = (staticfiles_storage.url('admin/js/core.js'),
-              staticfiles_storage.url('zinnia/js/mptt_m2m_selectbox.js'),
-              staticfiles_storage.url('admin/js/SelectFilter2.js'))
+        static = staticfiles_storage.url
+        js = (static('admin/js/core.js'),
+              static('zinnia/admin/mptt/js/mptt_m2m_selectbox.js'),
+              static('admin/js/SelectFilter2.js'))
+
+
+class TagAutoComplete(widgets.AdminTextInputWidget):
+    """
+    Tag widget with autocompletion based on select2.
+    """
+
+    def get_tags(self):
+        """
+        Returns the list of tags to auto-complete.
+        """
+        return [tag.name for tag in
+                Tag.objects.usage_for_model(Entry)]
+
+    def render(self, name, value, attrs=None):
+        """
+        Render the default widget and initialize select2.
+        """
+        output = [super(TagAutoComplete, self).render(name, value, attrs)]
+        output.append('<script type="text/javascript">')
+        output.append('(function($) {')
+        output.append('  $(document).ready(function() {')
+        output.append('    $("#id_%s").select2({' % name)
+        output.append('       width: "element",')
+        output.append('       maximumInputLength: 50,')
+        output.append('       tokenSeparators: [",", " "],')
+        output.append('       tags: [%s]' % ','.join(
+            ["'%s'" % tag for tag in self.get_tags()]))
+        output.append('     });')
+        output.append('    });')
+        output.append('}(django.jQuery));')
+        output.append('</script>')
+        return mark_safe('\n'.join(output))
+
+    class Media:
+        """
+        TagAutoComplete's Media.
+        """
+        static = lambda x: staticfiles_storage.url(
+            'zinnia/admin/select2/%s' % x)
+
+        css = {
+            'all': (static('css/select2.css'),)
+        }
+        js = (static('js/select2.js'),)
