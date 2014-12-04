@@ -3,18 +3,13 @@ var gulp       = require('gulp'),
     prefix     = require('gulp-autoprefixer'),
     livereload = require('gulp-livereload');
 
-var HTML       = 'zinnia/templates/**/*.html',
-    IMG        = 'zinnia/static/zinnia/img/*',
-    JS         = 'zinnia/static/zinnia/js/**/*.js',
-    SASS       = 'zinnia/static/zinnia/sass/**/*.scss',
-    CSS        = 'zinnia/static/zinnia/css/*.css';
 
-gulp.task('sass', function() {
+gulp.task('theme', function() {
 
-  return gulp.src(SASS)
+  return gulp.src('zinnia/static/zinnia/theme/sass/**/*.scss')
          .pipe(sass({errLogToConsole: true}))
          .pipe(prefix())
-         .pipe(gulp.dest('zinnia/static/zinnia/css'));
+         .pipe(gulp.dest('zinnia/static/zinnia/theme/css'));
 });
 
 gulp.task('admin-dashboard', function() {
@@ -27,19 +22,15 @@ gulp.task('admin-dashboard', function() {
 
 gulp.task('watch', function() {
 
-  var server = livereload();
+  livereload.listen();
 
-  gulp.watch([CSS, JS, IMG], function(file) {
-    server.changed(file.path);
-  });
+  gulp.watch(['zinnia/static/zinnia/**/*',
+              'zinnia/templates/**/*']).on('change', livereload.changed);
 
-  gulp.watch(HTML, function(file) {
-    server.changed('.');
-  });
-
-  gulp.watch(SASS, ['sass']);
+  gulp.watch('zinnia/static/zinnia/theme/sass/**/*.scss', ['theme']);
+  gulp.watch('zinnia/static/zinnia/admin/dashboard/sass/*.scss', ['admin-dashboard']);
 
 });
 
 
-gulp.task('default', ['sass', 'admin-dashboard', 'watch']);
+gulp.task('default', ['theme', 'admin-dashboard', 'watch']);

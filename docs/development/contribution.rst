@@ -101,12 +101,12 @@ Writing CSS
 
 You want to contribute to the default stylesheets provided by Zinnia ?
 
-If you take a look at :file:`zinnia/static/zinnia/css/screen.css` you will
-probably notice that the CSS is not edited manually. It has been generated
-from `Sass`_ files and so it is good pratice not to edit this file
-directly.
+If you take a look at :file:`zinnia/static/zinnia/theme/css/screen.css` you
+will probably notice that the CSS is not edited manually. It has been
+generated from `Sass`_ files and so it is good pratice not to edit this
+file directly.
 
-Aside of ``zinnia/static/zinnia/css`` directory, you can see another
+Aside of ``zinnia/static/zinnia/theme/css`` directory, you can see another
 directory named ``sass`` which is organized like this: ::
 
   sass/

@@ -59,9 +59,10 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         """
         MPTTFilteredSelectMultiple's Media.
         """
-        js = (staticfiles_storage.url('admin/js/core.js'),
-              staticfiles_storage.url('zinnia/js/mptt_m2m_selectbox.js'),
-              staticfiles_storage.url('admin/js/SelectFilter2.js'))
+        static = staticfiles_storage.url
+        js = (static('admin/js/core.js'),
+              static('zinnia/admin/mptt/js/mptt_m2m_selectbox.js'),
+              static('admin/js/SelectFilter2.js'))
 
 
 class TagAutoComplete(widgets.AdminTextInputWidget):
