@@ -1,5 +1,5 @@
-develop
--------
+0.14.3
+------
 
 * Improvement on the default theme
   * RSS links
@@ -16,7 +16,7 @@ develop
 * Admin tag autocompletion with a widget based on select2
 * Configurable upload path for image field with inheritance
 
-https://github.com/Fantomas42/django-blog-zinnia/compare/v0.14.2...develop
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.14.2...v0.14.3
 
 0.14.2
 ------
