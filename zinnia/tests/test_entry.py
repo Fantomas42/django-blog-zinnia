@@ -316,6 +316,28 @@ class EntryTestCase(TestCase):
         self.entry.tags = 'tag-1, tag-2'
         self.assertEqual(self.entry.tags_list, ['tag-1', 'tag-2'])
 
+    def test_image_upload_to_dispatcher(self):
+        entry = Entry()
+        path = entry.image_upload_to_dispatcher('image.gif')
+        self.assertTrue(path.endswith('image.gif'))
+
+        class EntryCustomImageUploadTo(Entry):
+            def image_upload_to(self, filename):
+                return 'custom.png'
+
+        entry = EntryCustomImageUploadTo()
+        self.assertEqual(
+            entry.image_upload_to_dispatcher('image.gif'),
+            'custom.png')
+
+    def test_image_upload_to(self):
+        entry = Entry()
+        path = entry.image_upload_to('Desktop wallpaper.jpeg')
+        path_split = path.split('/')
+        self.assertEqual(path_split[-1], 'desktop-wallpaper.jpeg')
+        for i in range(1, 4):
+            self.assertTrue(path_split[-1 - i].isdigit())
+
 
 class EntryHtmlContentTestCase(TestCase):
 

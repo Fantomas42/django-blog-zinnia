@@ -381,7 +381,7 @@ class ImageEntry(models.Model):
             now.strftime('%d'),
             '%s%s' % (slugify(filename), extension))
 
-    def image_upload_to_dispatch(self, filename):
+    def image_upload_to_dispatcher(self, filename):
         """
         Dispatch method to allow overriding of ``image_upload_to``.
         Do not override this method directly.
@@ -390,7 +390,7 @@ class ImageEntry(models.Model):
 
     image = models.ImageField(
         _('image'), blank=True,
-        upload_to=image_upload_to_dispatch,
+        upload_to=image_upload_to_dispatcher,
         help_text=_('Used for illustration.'))
 
     class Meta:
