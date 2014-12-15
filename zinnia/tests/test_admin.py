@@ -249,10 +249,10 @@ class EntryAdminTestCase(BaseAdminTestCase):
             'root', 'root@exemple.com', 'toor')
         self.request.user = user
         self.assertEqual(self.admin.get_readonly_fields(self.request),
-                         ['status'])
+                         ['status', 'authors'])
         self.request.user = root
         self.assertEqual(self.admin.get_readonly_fields(self.request),
-                         ())
+                         [])
 
     def test_get_actions(self):
         original_ping_directories = settings.PING_DIRECTORIES
