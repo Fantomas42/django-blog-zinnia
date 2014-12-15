@@ -186,10 +186,6 @@ class EntryAdmin(admin.ModelAdmin):
         if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
             form.cleaned_data['authors'] = entry.authors.all()
 
-        if not entry.pk and not form.cleaned_data.get('authors'):
-            form.cleaned_data['authors'] = Author.objects.filter(
-                pk=request.user.pk)
-
         entry.last_update = timezone.now()
         entry.save()
 
@@ -204,8 +200,14 @@ class EntryAdmin(admin.ModelAdmin):
         return queryset.prefetch_related('categories', 'authors', 'sites')
 
     def get_changeform_initial_data(self, request):
+        """
+        Provide initial datas when creating an entry.
+        """
         get_data = super(EntryAdmin, self).get_changeform_initial_data(request)
-        return get_data or {'sites': [Site.objects.get_current()]}
+        return get_data or {
+            'sites': [Site.objects.get_current()],
+            'authors': Author.objects.filter(pk=request.user.pk)
+        }
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         """
