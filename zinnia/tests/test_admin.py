@@ -179,16 +179,27 @@ class EntryAdminTestCase(BaseAdminTestCase):
         user = User.objects.create_user(
             'user', 'user@exemple.com')
         self.request.user = user
-        form = EntryAdmin.form({'title': 'title'})
-        form.is_valid()
+        self.assertEqual(self.entry.excerpt, '')
+        self.admin.save_model(self.request, self.entry,
+                              EntryAdmin.form(), False)
+        self.assertEqual(self.entry.excerpt, '')
         self.entry.status = PUBLISHED
         self.admin.save_model(self.request, self.entry,
-                              form, False)
-        self.assertEqual(len(form.cleaned_data['authors']), 0)
-        self.assertEqual(self.entry.excerpt, self.entry.content)
-        self.admin.save_model(self.request, Entry(),
-                              form, False)
-        self.assertEqual(len(form.cleaned_data['authors']), 1)
+                              EntryAdmin.form(), False)
+        self.assertEqual(self.entry.excerpt, 'My content')
+
+        self.entry.content = 'My changed content'
+        self.admin.save_model(self.request, self.entry,
+                              EntryAdmin.form(), False)
+        self.assertEqual(self.entry.excerpt, 'My content')
+
+        self.entry.excerpt = ''
+        content = '<p>%s</p>' % ' '.join(['word-%s' % i for i in range(75)])
+        self.entry.content = content
+        self.admin.save_model(self.request, self.entry,
+                              EntryAdmin.form(), False)
+        self.assertEqual(self.entry.excerpt,
+                         ' '.join(['word-%s' % i for i in range(50)]) + '...')
 
     def test_queryset(self):
         user = Author.objects.create_user(
