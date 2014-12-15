@@ -12,6 +12,7 @@ from django.core.urlresolvers import NoReverseMatch
 from django.template.response import TemplateResponse
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.sites.models import Site
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 from zinnia import settings
@@ -201,6 +202,10 @@ class EntryAdmin(admin.ModelAdmin):
         else:
             queryset = super(EntryAdmin, self).get_queryset(request)
         return queryset.prefetch_related('categories', 'authors', 'sites')
+
+    def get_changeform_initial_data(self, request):
+        get_data = super(EntryAdmin, self).get_changeform_initial_data(request)
+        return get_data or {'sites': [Site.objects.get_current()]}
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         """
