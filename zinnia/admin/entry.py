@@ -183,9 +183,6 @@ class EntryAdmin(admin.ModelAdmin):
         if not entry.excerpt and entry.status == PUBLISHED:
             entry.excerpt = Truncator(strip_tags(entry.content)).words(50)
 
-        if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
-            form.cleaned_data['authors'] = entry.authors.all()
-
         entry.last_update = timezone.now()
         entry.save()
 
@@ -218,8 +215,6 @@ class EntryAdmin(admin.ModelAdmin):
                 kwargs['queryset'] = Author.objects.filter(
                     Q(is_staff=True) | Q(entries__isnull=False)
                     ).distinct()
-            else:
-                kwargs['queryset'] = Author.objects.filter(pk=request.user.pk)
 
         return super(EntryAdmin, self).formfield_for_manytomany(
             db_field, request, **kwargs)
@@ -228,11 +223,15 @@ class EntryAdmin(admin.ModelAdmin):
         """
         Return readonly fields by user's permissions.
         """
-        readonly_fields = super(EntryAdmin, self).get_readonly_fields(
-            request, obj)
+        readonly_fields = list(super(EntryAdmin, self).get_readonly_fields(
+            request, obj))
+
         if not request.user.has_perm('zinnia.can_change_status'):
-            readonly_fields = list(readonly_fields)
             readonly_fields.append('status')
+
+        if not request.user.has_perm('zinnia.can_change_author'):
+            readonly_fields.append('authors')
+
         return readonly_fields
 
     def get_actions(self, request):
