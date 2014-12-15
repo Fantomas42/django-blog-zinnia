@@ -37,7 +37,8 @@ class CategoryAdminForm(forms.ModelForm):
         data = self.cleaned_data['parent']
         if data == self.instance:
             raise forms.ValidationError(
-                _('A category cannot be parent of itself.'))
+                _('A category cannot be parent of itself.'),
+                code='self_parenting')
         return data
 
     class Meta:
