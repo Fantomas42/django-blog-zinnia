@@ -217,6 +217,19 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.request.user = User.objects.get(pk=root.pk)
         self.assertEqual(len(self.admin.get_queryset(self.request)), 2)
 
+    def test_get_changeform_initial_data(self):
+        user = User.objects.create_user(
+            'user', 'user@exemple.com')
+        site = Site.objects.get_current()
+        self.request.user = user
+        data = self.admin.get_changeform_initial_data(self.request)
+        self.assertEqual(data, {'authors': [user.pk],
+                                'sites': [site.pk]})
+        request = self.request_factory.get('/?title=data')
+        request.user = user
+        data = self.admin.get_changeform_initial_data(request)
+        self.assertEqual(data, {'title': 'data'})
+
     def test_formfield_for_manytomany(self):
         staff = User.objects.create_user(
             'staff', 'staff@exemple.com')

@@ -202,8 +202,8 @@ class EntryAdmin(admin.ModelAdmin):
         """
         get_data = super(EntryAdmin, self).get_changeform_initial_data(request)
         return get_data or {
-            'sites': [Site.objects.get_current()],
-            'authors': Author.objects.filter(pk=request.user.pk)
+            'sites': [Site.objects.get_current().pk],
+            'authors': [request.user.pk]
         }
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
