@@ -211,10 +211,9 @@ class EntryAdmin(admin.ModelAdmin):
         Filter the disposable authors.
         """
         if db_field.name == 'authors':
-            if request.user.has_perm('zinnia.can_change_author'):
-                kwargs['queryset'] = Author.objects.filter(
-                    Q(is_staff=True) | Q(entries__isnull=False)
-                    ).distinct()
+            kwargs['queryset'] = Author.objects.filter(
+                Q(is_staff=True) | Q(entries__isnull=False)
+                ).distinct()
 
         return super(EntryAdmin, self).formfield_for_manytomany(
             db_field, request, **kwargs)

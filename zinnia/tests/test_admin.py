@@ -224,10 +224,6 @@ class EntryAdminTestCase(BaseAdminTestCase):
             'author', 'author@exemple.com')
         root = User.objects.create_superuser(
             'root', 'root@exemple.com', 'toor')
-        self.request.user = staff
-        field = self.admin.formfield_for_manytomany(
-            Entry.authors.field, self.request)
-        self.assertEqual(field.queryset.count(), 1)
         self.request.user = root
         field = self.admin.formfield_for_manytomany(
             Entry.authors.field, self.request)
