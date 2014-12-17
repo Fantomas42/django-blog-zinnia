@@ -2,7 +2,6 @@
 from django import forms
 from django.db.models import ManyToOneRel
 from django.db.models import ManyToManyRel
-from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 
@@ -41,7 +40,8 @@ class CategoryAdminForm(forms.ModelForm):
         data = self.cleaned_data['parent']
         if data == self.instance:
             raise forms.ValidationError(
-                _('A category cannot be parent of itself.'))
+                _('A category cannot be parent of itself.'),
+                code='self_parenting')
         return data
 
     class Meta:
@@ -71,7 +71,6 @@ class EntryAdminForm(forms.ModelForm):
         rel = ManyToManyRel(Category, 'id')
         self.fields['categories'].widget = RelatedFieldWidgetWrapper(
             self.fields['categories'].widget, rel, self.admin_site)
-        self.fields['sites'].initial = [Site.objects.get_current()]
 
     class Meta:
         """

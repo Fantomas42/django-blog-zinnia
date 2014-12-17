@@ -15,11 +15,6 @@ class EntryAdminFormTestCase(TestCase):
             isinstance(form.fields['categories'].widget,
                        RelatedFieldWidgetWrapper))
 
-    def test_initial_sites(self):
-        form = EntryAdminForm()
-        self.assertEqual(
-            len(form.fields['sites'].initial), 1)
-
 
 class CategoryAdminFormTestCase(TestCase):
 

@@ -178,16 +178,27 @@ class EntryAdminTestCase(BaseAdminTestCase):
         user = User.objects.create_user(
             'user', 'user@exemple.com')
         self.request.user = user
-        form = EntryAdmin.form({'title': 'title'})
-        form.is_valid()
+        self.assertEqual(self.entry.excerpt, '')
+        self.admin.save_model(self.request, self.entry,
+                              EntryAdmin.form(), False)
+        self.assertEqual(self.entry.excerpt, '')
         self.entry.status = PUBLISHED
         self.admin.save_model(self.request, self.entry,
-                              form, False)
-        self.assertEqual(len(form.cleaned_data['authors']), 0)
-        self.assertEqual(self.entry.excerpt, self.entry.content)
-        self.admin.save_model(self.request, Entry(),
-                              form, False)
-        self.assertEqual(len(form.cleaned_data['authors']), 1)
+                              EntryAdmin.form(), False)
+        self.assertEqual(self.entry.excerpt, 'My content')
+
+        self.entry.content = 'My changed content'
+        self.admin.save_model(self.request, self.entry,
+                              EntryAdmin.form(), False)
+        self.assertEqual(self.entry.excerpt, 'My content')
+
+        self.entry.excerpt = ''
+        content = '<p>%s</p>' % ' '.join(['word-%s' % i for i in range(75)])
+        self.entry.content = content
+        self.admin.save_model(self.request, self.entry,
+                              EntryAdmin.form(), False)
+        self.assertEqual(self.entry.excerpt,
+                         ' '.join(['word-%s' % i for i in range(50)]) + '...')
 
     def test_queryset(self):
         user = Author.objects.create_user(
@@ -205,6 +216,19 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.request.user = User.objects.get(pk=root.pk)
         self.assertEqual(len(self.admin.get_queryset(self.request)), 2)
 
+    def test_get_changeform_initial_data(self):
+        user = User.objects.create_user(
+            'user', 'user@exemple.com')
+        site = Site.objects.get_current()
+        self.request.user = user
+        data = self.admin.get_changeform_initial_data(self.request)
+        self.assertEqual(data, {'authors': [user.pk],
+                                'sites': [site.pk]})
+        request = self.request_factory.get('/?title=data')
+        request.user = user
+        data = self.admin.get_changeform_initial_data(request)
+        self.assertEqual(data, {'title': 'data'})
+
     def test_formfield_for_manytomany(self):
         staff = User.objects.create_user(
             'staff', 'staff@exemple.com')
@@ -212,10 +236,6 @@ class EntryAdminTestCase(BaseAdminTestCase):
             'author', 'author@exemple.com')
         root = User.objects.create_superuser(
             'root', 'root@exemple.com', 'toor')
-        self.request.user = staff
-        field = self.admin.formfield_for_manytomany(
-            Entry.authors.field, self.request)
-        self.assertEqual(field.queryset.count(), 1)
         self.request.user = root
         field = self.admin.formfield_for_manytomany(
             Entry.authors.field, self.request)
@@ -237,10 +257,10 @@ class EntryAdminTestCase(BaseAdminTestCase):
             'root', 'root@exemple.com', 'toor')
         self.request.user = user
         self.assertEqual(self.admin.get_readonly_fields(self.request),
-                         ['status'])
+                         ['status', 'authors'])
         self.request.user = root
         self.assertEqual(self.admin.get_readonly_fields(self.request),
-                         ())
+                         [])
 
     def test_get_actions(self):
         original_ping_directories = settings.PING_DIRECTORIES

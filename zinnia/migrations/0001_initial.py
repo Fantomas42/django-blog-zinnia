@@ -1,167 +1,101 @@
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
-from zinnia.migrations import user_name
-from zinnia.migrations import user_table
-from zinnia.migrations import user_orm_label
+from django.db import models
+from django.db import migrations
+import django.utils.timezone
+
+import mptt.fields
+import tagging.fields
+
 from zinnia.migrations import user_model_label
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
+    dependencies = [
+        ('auth', '0001_initial'),
+        ('sites', '0001_initial'),
+    ]
 
-        # Adding model 'Category'
-        db.create_table('zinnia_category', (
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, db_index=True)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=50)),
-        ))
-        db.send_create_signal('zinnia', ['Category'])
-
-        # Adding model 'Entry'
-        db.create_table('zinnia_entry', (
-            ('status', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('last_update', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-            ('comment_enabled', self.gf('django.db.models.fields.BooleanField')(default=True, blank=True)),
-            ('tags', self.gf('tagging.fields.TagField')()),
-            ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('excerpt', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, db_index=True)),
-            ('content', self.gf('django.db.models.fields.TextField')()),
-            ('end_publication', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2042, 3, 15, 0, 0))),
-            ('start_publication', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-            ('creation_date', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-        ))
-        db.send_create_signal('zinnia', ['Entry'])
-
-        # Adding M2M table for field sites on 'Entry'
-        db.create_table('zinnia_entry_sites', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('entry', models.ForeignKey(orm['zinnia.entry'], null=False)),
-            ('site', models.ForeignKey(orm['sites.site'], null=False))
-        ))
-        db.create_unique('zinnia_entry_sites', ['entry_id', 'site_id'])
-
-        # Adding M2M table for field related on 'Entry'
-        db.create_table('zinnia_entry_related', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('from_entry', models.ForeignKey(orm['zinnia.entry'], null=False)),
-            ('to_entry', models.ForeignKey(orm['zinnia.entry'], null=False))
-        ))
-        db.create_unique('zinnia_entry_related', ['from_entry_id', 'to_entry_id'])
-
-        # Adding M2M table for field categories on 'Entry'
-        db.create_table('zinnia_entry_categories', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('entry', models.ForeignKey(orm['zinnia.entry'], null=False)),
-            ('category', models.ForeignKey(orm['zinnia.category'], null=False))
-        ))
-        db.create_unique('zinnia_entry_categories', ['entry_id', 'category_id'])
-
-        # Adding M2M table for field authors on 'Entry'
-        db.create_table('zinnia_entry_authors', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('entry', models.ForeignKey(orm['zinnia.entry'], null=False)),
-            ('user', models.ForeignKey(orm[user_orm_label], null=False))
-        ))
-        db.create_unique('zinnia_entry_authors', ['entry_id', 'user_id'])
-
-    def backwards(self, orm):
-
-        # Deleting model 'Category'
-        db.delete_table('zinnia_category')
-
-        # Deleting model 'Entry'
-        db.delete_table('zinnia_entry')
-
-        # Removing M2M table for field sites on 'Entry'
-        db.delete_table('zinnia_entry_sites')
-
-        # Removing M2M table for field related on 'Entry'
-        db.delete_table('zinnia_entry_related')
-
-        # Removing M2M table for field categories on 'Entry'
-        db.delete_table('zinnia_entry_categories')
-
-        # Removing M2M table for field authors on 'Entry'
-        db.delete_table('zinnia_entry_authors')
-
-    models = {
-        'auth.group': {
-            'Meta': {'object_name': 'Group'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'}),
-            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'blank': 'True'})
-        },
-        'auth.permission': {
-            'Meta': {'unique_together': "(('content_type', 'codename'),)", 'object_name': 'Permission'},
-            'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        user_model_label: {
-            'Meta': {'object_name': user_name, 'db_table': "'%s'" % user_table},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
-            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
-            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
-        },
-        'contenttypes.contenttype': {
-            'Meta': {'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
-        'sites.site': {
-            'Meta': {'object_name': 'Site', 'db_table': "'django_site'"},
-            'domain': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        'zinnia.category': {
-            'Meta': {'object_name': 'Category'},
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        'zinnia.entry': {
-            'Meta': {'object_name': 'Entry'},
-            'authors': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['%s']" % user_orm_label, 'blank': 'True'}),
-            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['zinnia.Category']"}),
-            'comment_enabled': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
-            'content': ('django.db.models.fields.TextField', [], {}),
-            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'end_publication': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2042, 3, 15, 0, 0)'}),
-            'excerpt': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'last_update': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'related': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'related_rel_+'", 'null': 'True', 'to': "orm['zinnia.Entry']"}),
-            'sites': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['sites.Site']"}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
-            'start_publication': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'status': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'tags': ('tagging.fields.TagField', [], {}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        }
-    }
-
-    complete_apps = ['zinnia']
+    operations = [
+        migrations.CreateModel(
+            name='Category',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=255, verbose_name='title')),
+                ('slug', models.SlugField(help_text="Used to build the category's URL.", unique=True, max_length=255, verbose_name='slug')),
+                ('description', models.TextField(verbose_name='description', blank=True)),
+                ('lft', models.PositiveIntegerField(editable=False, db_index=True)),
+                ('rght', models.PositiveIntegerField(editable=False, db_index=True)),
+                ('tree_id', models.PositiveIntegerField(editable=False, db_index=True)),
+                ('level', models.PositiveIntegerField(editable=False, db_index=True)),
+                ('parent', mptt.fields.TreeForeignKey(related_name='children', verbose_name='parent category', blank=True, to='zinnia.Category', null=True)),
+            ],
+            options={
+                'ordering': ['title'],
+                'verbose_name': 'category',
+                'verbose_name_plural': 'categories',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Entry',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=255, verbose_name='title')),
+                ('slug', models.SlugField(help_text="Used to build the entry's URL.", max_length=255, verbose_name='slug', unique_for_date='creation_date')),
+                ('status', models.IntegerField(default=0, db_index=True, verbose_name='status', choices=[(0, 'draft'), (1, 'hidden'), (2, 'published')])),
+                ('start_publication', models.DateTimeField(help_text='Start date of publication.', null=True, verbose_name='start publication', db_index=True, blank=True)),
+                ('end_publication', models.DateTimeField(help_text='End date of publication.', null=True, verbose_name='end publication', db_index=True, blank=True)),
+                ('creation_date', models.DateTimeField(default=django.utils.timezone.now, help_text="Used to build the entry's URL.", verbose_name='creation date', db_index=True)),
+                ('last_update', models.DateTimeField(default=django.utils.timezone.now, verbose_name='last update')),
+                ('content', models.TextField(verbose_name='content', blank=True)),
+                ('comment_enabled', models.BooleanField(default=True, help_text='Allows comments if checked.', verbose_name='comments enabled')),
+                ('pingback_enabled', models.BooleanField(default=True, help_text='Allows pingbacks if checked.', verbose_name='pingbacks enabled')),
+                ('trackback_enabled', models.BooleanField(default=True, help_text='Allows trackbacks if checked.', verbose_name='trackbacks enabled')),
+                ('comment_count', models.IntegerField(default=0, verbose_name='comment count')),
+                ('pingback_count', models.IntegerField(default=0, verbose_name='pingback count')),
+                ('trackback_count', models.IntegerField(default=0, verbose_name='trackback count')),
+                ('excerpt', models.TextField(help_text='Used for search and SEO.', verbose_name='excerpt', blank=True)),
+                ('image', models.ImageField(help_text='Used for illustration.', upload_to='uploads/zinnia', verbose_name='image', blank=True)),
+                ('featured', models.BooleanField(default=False, verbose_name='featured')),
+                ('tags', tagging.fields.TagField(max_length=255, verbose_name='tags', blank=True)),
+                ('login_required', models.BooleanField(default=False, help_text='Only authenticated users can view the entry.', verbose_name='login required')),
+                ('password', models.CharField(help_text='Protects the entry with a password.', max_length=50, verbose_name='password', blank=True)),
+                ('content_template', models.CharField(default='zinnia/_entry_detail.html', help_text="Template used to display the entry's content.", max_length=250, verbose_name='content template', choices=[('zinnia/_entry_detail.html', 'Default template')])),
+                ('detail_template', models.CharField(default='entry_detail.html', help_text="Template used to display the entry's detail page.", max_length=250, verbose_name='detail template', choices=[('entry_detail.html', 'Default template')])),
+                ('categories', models.ManyToManyField(related_name='entries', null=True, verbose_name='categories', to='zinnia.Category', blank=True)),
+                ('related', models.ManyToManyField(related_name='related_rel_+', null=True, verbose_name='related entries', to='zinnia.Entry', blank=True)),
+                ('sites', models.ManyToManyField(help_text='Sites where the entry will be published.', related_name='entries', verbose_name='sites', to='sites.Site')),
+            ],
+            options={
+                'get_latest_by': 'creation_date',
+                'ordering': ['-creation_date'],
+                'abstract': False,
+                'verbose_name_plural': 'entries',
+                'verbose_name': 'entry',
+                'permissions': (('can_view_all', 'Can view all entries'), ('can_change_status', 'Can change status'), ('can_change_author', 'Can change author(s)')),
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Author',
+            fields=[
+            ],
+            options={
+                'proxy': True,
+            },
+            bases=(user_model_label, models.Model),
+        ),
+        migrations.AddField(
+            model_name='entry',
+            name='authors',
+            field=models.ManyToManyField(related_name='entries', verbose_name='authors', to='zinnia.Author', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AlterIndexTogether(
+            name='entry',
+            index_together=set([('status', 'creation_date', 'start_publication', 'end_publication'), ('slug', 'creation_date')]),
+        ),
+    ]

@@ -1,6 +1,5 @@
 language: python
 python:
-    - 2.6
     - 2.7
     - 3.2
     - 3.3
@@ -19,7 +18,7 @@ matrix:
           env: DATABASE_ENGINE=mysql
     fast_finish: true
 install:
-    - pip install -U setuptools==5.3
+    - pip install -U setuptools
     - python bootstrap.py
     - ./bin/buildout -c travis.cfg testenv:DJANGO_SETTINGS_MODULE=zinnia.tests.implementations.$DATABASE_ENGINE
     - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ];

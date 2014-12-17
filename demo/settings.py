@@ -53,7 +53,7 @@ LANGUAGES = (
     ('fa_IR', gettext('Persian')),
     ('fi_FI', gettext('Finnish')),
     ('uk_UA', gettext('Ukrainian')),
-    ('zh_CN', gettext('Simplified Chinese')),
+    ('zh-hans', gettext('Simplified Chinese')),
 )
 
 MIDDLEWARE_CLASSES = (
@@ -89,7 +89,6 @@ INSTALLED_APPS = (
     'django_comments',
     'django_xmlrpc',
     'mptt',
-    'south',
     'tagging',
     'zinnia'
 )
