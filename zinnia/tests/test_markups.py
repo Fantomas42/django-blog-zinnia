@@ -1,5 +1,6 @@
 """Test cases for Zinnia's markups"""
 import sys
+from unittest import skipUnless
 try:
     import builtins
 except ImportError:  # Python 2
@@ -7,7 +8,6 @@ except ImportError:  # Python 2
 import warnings
 
 from django.test import TestCase
-from django.utils.unittest import skipUnless
 
 from zinnia.markups import textile
 from zinnia.markups import markdown

@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.utils import timezone
 from django.utils.text import Truncator
 from django.utils.html import strip_tags
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
 from django.utils.translation import ungettext_lazy
@@ -12,7 +13,6 @@ from django.utils.translation import ugettext_lazy as _
 from zinnia import settings
 from zinnia.managers import HIDDEN
 from zinnia.managers import PUBLISHED
-from zinnia.settings import PROTOCOL
 from zinnia.models.author import Author
 from zinnia.ping import DirectoryPinger
 from zinnia.admin.forms import EntryAdminForm
@@ -143,7 +143,7 @@ class EntryAdmin(admin.ModelAdmin):
             index_url = ''
         return ', '.join(
             ['<a href="%s://%s%s" target="blank">%s</a>' %
-             (PROTOCOL, site.domain, index_url, site.name)
+             (settings.PROTOCOL, site.domain, index_url, site.name)
              for site in entry.sites.all()])
     get_sites.allow_tags = True
     get_sites.short_description = _('site(s)')
@@ -177,13 +177,6 @@ class EntryAdmin(admin.ModelAdmin):
         if not entry.excerpt and entry.status == PUBLISHED:
             entry.excerpt = Truncator(strip_tags(entry.content)).words(50)
 
-        if entry.pk and not request.user.has_perm('zinnia.can_change_author'):
-            form.cleaned_data['authors'] = entry.authors.all()
-
-        if not entry.pk and not form.cleaned_data.get('authors'):
-            form.cleaned_data['authors'] = Author.objects.filter(
-                pk=request.user.pk)
-
         entry.last_update = timezone.now()
         entry.save()
 
@@ -197,17 +190,24 @@ class EntryAdmin(admin.ModelAdmin):
             queryset = super(EntryAdmin, self).get_queryset(request)
         return queryset.prefetch_related('categories', 'authors', 'sites')
 
+    def get_changeform_initial_data(self, request):
+        """
+        Provide initial datas when creating an entry.
+        """
+        get_data = super(EntryAdmin, self).get_changeform_initial_data(request)
+        return get_data or {
+            'sites': [Site.objects.get_current().pk],
+            'authors': [request.user.pk]
+        }
+
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         """
         Filter the disposable authors.
         """
         if db_field.name == 'authors':
-            if request.user.has_perm('zinnia.can_change_author'):
-                kwargs['queryset'] = Author.objects.filter(
-                    Q(is_staff=True) | Q(entries__isnull=False)
-                    ).distinct()
-            else:
-                kwargs['queryset'] = Author.objects.filter(pk=request.user.pk)
+            kwargs['queryset'] = Author.objects.filter(
+                Q(is_staff=True) | Q(entries__isnull=False)
+                ).distinct()
 
         return super(EntryAdmin, self).formfield_for_manytomany(
             db_field, request, **kwargs)
@@ -216,11 +216,15 @@ class EntryAdmin(admin.ModelAdmin):
         """
         Return readonly fields by user's permissions.
         """
-        readonly_fields = super(EntryAdmin, self).get_readonly_fields(
-            request, obj)
+        readonly_fields = list(super(EntryAdmin, self).get_readonly_fields(
+            request, obj))
+
         if not request.user.has_perm('zinnia.can_change_status'):
-            readonly_fields = list(readonly_fields)
             readonly_fields.append('status')
+
+        if not request.user.has_perm('zinnia.can_change_author'):
+            readonly_fields.append('authors')
+
         return readonly_fields
 
     def get_actions(self, request):

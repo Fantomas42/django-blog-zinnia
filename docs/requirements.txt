@@ -1,5 +1,5 @@
 pillow==2.5.3
-django==1.6.7
+django==1.7
 django-mptt==0.6.1
 django-tagging==0.3.2
 django-xmlrpc==0.1.5

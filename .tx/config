@@ -1,8 +1,8 @@
 [main]
 host = https://www.transifex.com
+lang_map = sr@latin:sr_Latn, zh_CN:zh_Hans, zh_TW:zh_Hant
 
 [django-blog-zinnia.djangopo]
 file_filter = zinnia/locale/<lang>/LC_MESSAGES/django.po
 source_file = zinnia/locale/en/LC_MESSAGES/django.po
 source_lang = en
-

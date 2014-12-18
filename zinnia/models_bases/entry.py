@@ -179,7 +179,6 @@ class CoreEntry(models.Model):
         CoreEntry's meta informations.
         """
         abstract = True
-        app_label = 'zinnia'
         ordering = ['-creation_date']
         get_latest_by = 'creation_date'
         verbose_name = _('entry')
