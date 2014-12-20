@@ -32,11 +32,11 @@ setup(
     license=zinnia.__license__,
     include_package_data=True,
     zip_safe=False,
-    install_requires=['beautifulsoup4>=4.1',
+    install_requires=['beautifulsoup4>=4.3.2',
                       'django-contrib-comments>=1.5',
-                      'django-mptt>=0.5.1',
-                      'django-tagging>=0.3.2',
+                      'django-mptt>=0.6.1',
+                      'django-tagging>=0.3.4',
                       'django-xmlrpc>=0.1.5',
-                      'pyparsing>=2.0.1',
-                      'pytz>=2013b']
+                      'pyparsing>=2.0.3',
+                      'pytz>=2014.10']
 )
