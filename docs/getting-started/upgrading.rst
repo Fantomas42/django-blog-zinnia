@@ -17,30 +17,6 @@ The first thing to do is a to dump your data for safety reasons. ::
 
   $ python manage.py dumpdata --indent=2 zinnia > dump_zinnia_before_migration.json
 
-.. _preparing-database:
-
-Preparing the database
-======================
-
-The main problem with the upgrade process is the database. The Zinnia's
-models can have changed with new or missing fields.
-That's why Zinnia use `South`_'s migrations to facilitate this step.
-
-So we need to install the South package. ::
-
-  $ easy_install south
-
-South needs to be registered in your project's settings as an
-:setting:`INSTALLED_APPS`. Once it is done, use syncdb to finish the
-installation of South in your project. ::
-
-  $ python manage.py syncdb
-
-Now we will install the previous migrations of Zinnia to synchronize the
-current database schema with South. ::
-
-  $ python manage.py migrate zinnia --fake
-
 .. _update-zinnia-code:
 
 Update Zinnia's code
@@ -62,7 +38,7 @@ Update the database
 ===================
 
 The database should probably be updated to the latest database schema of
-Zinnia, South will be useful. ::
+Zinnia. ::
 
   $ python manage.py migrate zinnia
 
@@ -78,5 +54,3 @@ fine by browsing the Web site.
 
 By experience, problems mainly come from customized templates,
 because of changes in the URL reverse functions.
-
-.. _`South`: http://south.aeracode.org/

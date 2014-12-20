@@ -23,7 +23,6 @@ The packages below are optionnal but needed for run the full test suite or
 migrate the database.
 
 * `pytz`_
-* `South`_ >= 0.7.6
 * `pyparsing`_ >= 2.0.1
 * `django-xmlrpc`_ >= 0.1.5
 
@@ -156,12 +155,7 @@ Syncing the database
 Now that you have everything set up, simply run the following in your
 project directory to sync the models with the database. ::
 
-  $ python manage.py syncdb
-
-If you are using `South`_ to manage your database, you will have to do the
-following. ::
-
-  $ python manage.py syncdb --migrate
+  $ python manage.py migrate
 
 .. _`Python`: http://www.python.org/
 .. _`Django`: https://www.djangoproject.com/
@@ -174,4 +168,3 @@ following. ::
 .. _`pytz`: http://pytz.sourceforge.net/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/
 .. _`django-xmlrpc`: https://github.com/Fantomas42/django-xmlrpc
-.. _`South`: http://south.aeracode.org/
