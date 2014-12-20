@@ -11,11 +11,11 @@ Dependencies
 
 Make sure to install these packages prior to installation :
 
-* `Python`_ >= 2.6.5
+* `Python`_ >= 2.7
 * `Django`_ >= 1.7
 * `PIL`_ >= 1.1.6 or `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.5.1
-* `django-tagging`_ >= 0.3.2
+* `django-tagging`_ >= 0.3.4
 * `django-contrib-comments`_ >= 1.5
 * `beautifulsoup4`_ >= 4.1.3
 
