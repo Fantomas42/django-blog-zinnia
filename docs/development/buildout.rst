@@ -106,7 +106,7 @@ run. The demo project is usefull when you want to do functionnal testing.
 
 To launch the demo site, execute these commands: ::
 
-  $ ./bin/demo syncdb --migrate
+  $ ./bin/demo migrate
   $ ./bin/demo runserver
 
 To directly have entries in your demo, run this command: ::
