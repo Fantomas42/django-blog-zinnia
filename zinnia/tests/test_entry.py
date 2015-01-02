@@ -16,7 +16,7 @@ from django_comments.models import CommentFlag
 
 from zinnia.managers import PUBLISHED
 from zinnia.models_bases import entry
-from zinnia.models.entry import Entry
+from zinnia.models.entry import Entry, image_upload_to_dispatcher
 from zinnia.models.author import Author
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
@@ -318,7 +318,7 @@ class EntryTestCase(TestCase):
 
     def test_image_upload_to_dispatcher(self):
         entry = Entry()
-        path = entry.image_upload_to_dispatcher('image.gif')
+        path = image_upload_to_dispatcher(entry, 'image.gif')
         self.assertTrue(path.endswith('image.gif'))
 
         class EntryCustomImageUploadTo(Entry):
@@ -327,7 +327,7 @@ class EntryTestCase(TestCase):
 
         entry = EntryCustomImageUploadTo()
         self.assertEqual(
-            entry.image_upload_to_dispatcher('image.gif'),
+            image_upload_to_dispatcher(entry, 'image.gif'),
             'custom.png')
 
     def test_image_upload_to(self):
