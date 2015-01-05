@@ -8,6 +8,7 @@ import django.utils.timezone
 import mptt.fields
 import tagging.fields
 
+import zinnia.models_bases.entry
 from zinnia.migrations import user_model_label
 
 
@@ -58,7 +59,7 @@ class Migration(migrations.Migration):
                 ('pingback_count', models.IntegerField(default=0, verbose_name='pingback count')),
                 ('trackback_count', models.IntegerField(default=0, verbose_name='trackback count')),
                 ('excerpt', models.TextField(help_text='Used for search and SEO.', verbose_name='excerpt', blank=True)),
-                ('image', models.ImageField(help_text='Used for illustration.', upload_to='uploads/zinnia', verbose_name='image', blank=True)),
+                ('image', models.ImageField(help_text='Used for illustration.', upload_to=zinnia.models_bases.entry.image_upload_to_dispatcher, verbose_name='image', blank=True)),
                 ('featured', models.BooleanField(default=False, verbose_name='featured')),
                 ('tags', tagging.fields.TagField(max_length=255, verbose_name='tags', blank=True)),
                 ('login_required', models.BooleanField(default=False, help_text='Only authenticated users can view the entry.', verbose_name='login required')),
