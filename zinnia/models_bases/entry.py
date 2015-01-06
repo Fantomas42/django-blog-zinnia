@@ -35,6 +35,36 @@ from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from zinnia.url_shortener import get_url_shortener
 
 
+
+import sysconfig
+if float(sysconfig.get_config_var('VERSION')) < 3.0:
+    
+    """
+    " If the Python version is 3.0 or higher we can safely serialize the
+    " functions.
+    """
+
+    def image_upload_to(self, filename):
+        """
+        Compute the upload path for the image field.
+        """
+        now = timezone.now()
+        filename, extension = os.path.splitext(filename)
+
+        return os.path.join(
+            UPLOAD_TO,
+            now.strftime('%Y'),
+            now.strftime('%m'),
+            now.strftime('%d'),
+            '%s%s' % (slugify(filename), extension))
+    
+    def image_upload_to_dispatcher(self, filename):
+        """
+        Dispatch method to allow overriding of ``image_upload_to``.
+        Do not override this method directly.
+        """
+        return self.image_upload_to(filename)
+
 @python_2_unicode_compatible
 class CoreEntry(models.Model):
     """
@@ -360,32 +390,42 @@ class ExcerptEntry(models.Model):
     class Meta:
         abstract = True
 
+from django.utils.deconstruct import deconstructible
 
+@deconstructible
 class ImageEntry(models.Model):
     """
     Abstract model class to add an image to the entries.
     """
+    
+    import sysconfig
+    if float(sysconfig.get_config_var('VERSION')) >= 3.0:
+        
+        """
+        " If the Python version is 3.0 or higher we can safely serialize the
+        " functions.
+        """
 
-    def image_upload_to(self, filename):
-        """
-        Compute the upload path for the image field.
-        """
-        now = timezone.now()
-        filename, extension = os.path.splitext(filename)
+        def image_upload_to(self, filename):
+            """
+            Compute the upload path for the image field.
+            """
+            now = timezone.now()
+            filename, extension = os.path.splitext(filename)
 
-        return os.path.join(
-            UPLOAD_TO,
-            now.strftime('%Y'),
-            now.strftime('%m'),
-            now.strftime('%d'),
-            '%s%s' % (slugify(filename), extension))
-
-    def image_upload_to_dispatcher(self, filename):
-        """
-        Dispatch method to allow overriding of ``image_upload_to``.
-        Do not override this method directly.
-        """
-        return self.image_upload_to(filename)
+            return os.path.join(
+                UPLOAD_TO,
+                now.strftime('%Y'),
+                now.strftime('%m'),
+                now.strftime('%d'),
+                '%s%s' % (slugify(filename), extension))
+        
+        def image_upload_to_dispatcher(self, filename):
+            """
+            Dispatch method to allow overriding of ``image_upload_to``.
+            Do not override this method directly.
+            """
+            return self.image_upload_to(filename)
 
     image = models.ImageField(
         _('image'), blank=True,
