@@ -1,3 +1,11 @@
+0.15.1
+------
+
+* Documentation improvements
+* Fix migration issues with Django 1.7
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.15...v0.15.1
+
 0.15
 ----
 
