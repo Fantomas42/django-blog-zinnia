@@ -349,6 +349,17 @@ class RelatedEntry(models.Model):
         abstract = True
 
 
+class SubtitleEntry(models.Model):
+    """
+    Abstract model class providing a subtitle to the entries.
+    """
+    subtitle = models.TextField(
+        _('subtitle'), blank=True)
+
+    class Meta:
+        abstract = True
+
+
 class ExcerptEntry(models.Model):
     """
     Abstract model class to add an excerpt to the entries.
@@ -518,6 +529,7 @@ class AbstractEntry(
         ContentEntry,
         DiscussionsEntry,
         RelatedEntry,
+        SubtitleEntry,
         ExcerptEntry,
         ImageEntry,
         FeaturedEntry,
