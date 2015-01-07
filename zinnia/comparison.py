@@ -45,7 +45,7 @@ class ClusteredModel(object):
         """
         dataset = {}
         for item in self.queryset.filter():
-            dataset[item] = ' '.join([six.text_type(getattr(item, field))
+            dataset[item] = ' '.join([six.text_type(getattr(item, field, ''))
                                       for field in self.fields])
         return dataset
 
