@@ -407,7 +407,7 @@ class ImageEntry(models.Model):
 
     caption = models.TextField(
         _('caption'), blank=True,
-        help_text=_("Image's caption"))
+        help_text=_("Image's caption."))
 
     class Meta:
         abstract = True
