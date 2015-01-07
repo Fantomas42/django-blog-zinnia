@@ -383,7 +383,7 @@ def image_upload_to_dispatcher(entry, filename):
 
 class ImageEntry(models.Model):
     """
-    Abstract model class to add an image to the entries.
+    Abstract model class to add an image for illustrating the entries.
     """
 
     def image_upload_to(self, filename):
@@ -404,6 +404,10 @@ class ImageEntry(models.Model):
         _('image'), blank=True,
         upload_to=image_upload_to_dispatcher,
         help_text=_('Used for illustration.'))
+
+    caption = models.TextField(
+        _('caption'), blank=True,
+        help_text=_("Image's caption"))
 
     class Meta:
         abstract = True
