@@ -25,3 +25,5 @@ INSTALLED_APPS = [
     'django_comments',
     'django_xmlrpc',
     'mptt', 'tagging', 'zinnia']
+
+SILENCED_SYSTEM_CHECKS = ['1_7.W001']

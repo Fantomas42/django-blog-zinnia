@@ -317,22 +317,20 @@ class EntryTestCase(TestCase):
         self.assertEqual(self.entry.tags_list, ['tag-1', 'tag-2'])
 
     def test_image_upload_to_dispatcher(self):
-        entry = Entry()
-        path = entry.image_upload_to_dispatcher('image.gif')
+        path = entry.image_upload_to_dispatcher(self.entry, 'image.gif')
         self.assertTrue(path.endswith('image.gif'))
 
         class EntryCustomImageUploadTo(Entry):
             def image_upload_to(self, filename):
                 return 'custom.png'
 
-        entry = EntryCustomImageUploadTo()
+        custom_entry = EntryCustomImageUploadTo()
         self.assertEqual(
-            entry.image_upload_to_dispatcher('image.gif'),
+            entry.image_upload_to_dispatcher(custom_entry, 'image.gif'),
             'custom.png')
 
     def test_image_upload_to(self):
-        entry = Entry()
-        path = entry.image_upload_to('Desktop wallpaper.jpeg')
+        path = self.entry.image_upload_to('Desktop wallpaper.jpeg')
         path_split = path.split('/')
         self.assertEqual(path_split[-1], 'desktop-wallpaper.jpeg')
         for i in range(1, 4):
@@ -413,8 +411,8 @@ class EntryAbsoluteUrlTestCase(TestCase):
                   'content': 'My content',
                   'slug': 'my-entry',
                   'creation_date': creation_date}
-        entry = Entry.objects.create(**params)
-        self.assertTrue(url_expected in entry.get_absolute_url())
+        e = Entry.objects.create(**params)
+        self.assertTrue(url_expected in e.get_absolute_url())
 
     @override_settings(USE_TZ=False)
     def test_get_absolute_url_no_timezone(self):

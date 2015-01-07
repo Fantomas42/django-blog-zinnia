@@ -361,6 +361,15 @@ class ExcerptEntry(models.Model):
         abstract = True
 
 
+def image_upload_to_dispatcher(entry, filename):
+    """
+    Dispatch function to allow overriding of ``image_upload_to`` method.
+
+    Outside the model for fixing an issue with Django's migrations on Python 2.
+    """
+    return entry.image_upload_to(filename)
+
+
 class ImageEntry(models.Model):
     """
     Abstract model class to add an image to the entries.
@@ -379,13 +388,6 @@ class ImageEntry(models.Model):
             now.strftime('%m'),
             now.strftime('%d'),
             '%s%s' % (slugify(filename), extension))
-
-    def image_upload_to_dispatcher(self, filename):
-        """
-        Dispatch method to allow overriding of ``image_upload_to``.
-        Do not override this method directly.
-        """
-        return self.image_upload_to(filename)
 
     image = models.ImageField(
         _('image'), blank=True,
