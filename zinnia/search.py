@@ -52,23 +52,25 @@ def createQ(token):
         return Q()
 
     if not meta:
-        return Q(content__icontains=search) | \
-            Q(excerpt__icontains=search) | \
-            Q(title__icontains=search)
+        return (Q(title__icontains=search) |
+                Q(subtitle__icontains=search) |
+                Q(content__icontains=search) |
+                Q(excerpt__icontains=search) |
+                Q(caption__icontains=search))
 
     if meta == 'category':
         if wildcards == 'BOTH':
-            return Q(categories__title__icontains=search) | \
-                Q(categories__slug__icontains=search)
+            return (Q(categories__title__icontains=search) |
+                    Q(categories__slug__icontains=search))
         elif wildcards == 'START':
-            return Q(categories__title__iendswith=search) | \
-                Q(categories__slug__iendswith=search)
+            return (Q(categories__title__iendswith=search) |
+                    Q(categories__slug__iendswith=search))
         elif wildcards == 'END':
-            return Q(categories__title__istartswith=search) | \
-                Q(categories__slug__istartswith=search)
+            return (Q(categories__title__istartswith=search) |
+                    Q(categories__slug__istartswith=search))
         else:
-            return Q(categories__title__iexact=search) | \
-                Q(categories__slug__iexact=search)
+            return (Q(categories__title__iexact=search) |
+                    Q(categories__slug__iexact=search))
     elif meta == 'author':
         if wildcards == 'BOTH':
             return Q(**{'authors__%s__icontains' % Author.USERNAME_FIELD:
