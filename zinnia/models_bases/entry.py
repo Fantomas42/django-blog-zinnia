@@ -366,7 +366,7 @@ class ExcerptEntry(models.Model):
     """
     excerpt = models.TextField(
         _('excerpt'), blank=True,
-        help_text=_('Used for search and SEO.'))
+        help_text=_('Used for SEO purposes.'))
 
     class Meta:
         abstract = True
