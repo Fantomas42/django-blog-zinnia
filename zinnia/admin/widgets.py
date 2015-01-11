@@ -108,3 +108,14 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
             'all': (static('css/select2.css'),)
         }
         js = (static('js/select2.js'),)
+
+
+class MiniTextarea(widgets.AdminTextareaWidget):
+    """
+    Vertically shorter version of the admin textarea widget.
+    """
+    rows = 2
+
+    def __init__(self, attrs=None):
+        super(MiniTextarea, self).__init__(
+            {'rows': self.rows})

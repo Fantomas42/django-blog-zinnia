@@ -4,14 +4,12 @@ from django.db.models import ManyToOneRel
 from django.db.models import ManyToManyRel
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-from django.forms.widgets import Textarea
-
-from tagging.forms import TagField
 
 from mptt.forms import TreeNodeChoiceField
 
 from zinnia.models.entry import Entry
 from zinnia.models.category import Category
+from zinnia.admin.widgets import MiniTextarea
 from zinnia.admin.widgets import TagAutoComplete
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.fields import MPTTModelMultipleChoiceField
@@ -76,5 +74,8 @@ class EntryAdminForm(forms.ModelForm):
         model = Entry
         fields = forms.ALL_FIELDS
         widgets = {
-            'tags': TagAutoComplete()
+            'tags': TagAutoComplete,
+            'subtitle': MiniTextarea,
+            'caption': MiniTextarea,
+            'excerpt': MiniTextarea,
         }
