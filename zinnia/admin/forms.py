@@ -4,6 +4,7 @@ from django.db.models import ManyToOneRel
 from django.db.models import ManyToManyRel
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
+from django.forms.widgets import Textarea
 
 from tagging.forms import TagField
 
@@ -62,10 +63,6 @@ class EntryAdminForm(forms.ModelForm):
         widget=MPTTFilteredSelectMultiple(_('categories'), False,
                                           attrs={'rows': '10'}))
 
-    tags = TagField(
-        label=_('Tags'), required=False,
-        widget=TagAutoComplete())
-
     def __init__(self, *args, **kwargs):
         super(EntryAdminForm, self).__init__(*args, **kwargs)
         rel = ManyToManyRel(Category, 'id')
@@ -78,3 +75,6 @@ class EntryAdminForm(forms.ModelForm):
         """
         model = Entry
         fields = forms.ALL_FIELDS
+        widgets = {
+            'tags': TagAutoComplete()
+        }
