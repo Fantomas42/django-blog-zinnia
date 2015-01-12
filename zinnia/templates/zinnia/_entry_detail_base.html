@@ -56,11 +56,11 @@
     <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
       {% endif %}
       <img src="{{ object.image.url }}" alt="{{ object.image_caption|default:object.title }}" />
-      {% if object.image_caption %}
-      {{ object.image_caption|linebreaks }}
-      {% endif %}
       {% if continue_reading %}
     </a>
+    {% endif %}
+    {% if object.image_caption %}
+    {{ object.image_caption|linebreaks }}
     {% endif %}
   </div>
   {% endif %}
