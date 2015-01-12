@@ -369,6 +369,8 @@ table {
   background: transparent url("../img/category.png") no-repeat scroll 0.5em; }
 .zinnia .entry-last-update {
   display: none; }
+.zinnia .entry-image img {
+  width: 100%; }
 .zinnia .entry-body {
   padding-right: 0.5em; }
   .zinnia .entry-body img {
@@ -536,6 +538,8 @@ table {
     color: #666; }
   .zinnia.default .entry-content {
     color: #333; }
+  .zinnia.default .entry-image p {
+    color: #666; }
   .zinnia.default .entry-body img {
     border: 1px solid #ddd; }
   .zinnia.default .entry-footer strong {
@@ -620,6 +624,8 @@ table {
     color: #586e75; }
   .zinnia.light .entry-content {
     color: #073642; }
+  .zinnia.light .entry-image p {
+    color: #586e75; }
   .zinnia.light .entry-body img {
     border: 1px solid #93a1a1; }
   .zinnia.light .entry-footer strong {
@@ -704,6 +710,8 @@ table {
     color: #93a1a1; }
   .zinnia.dark .entry-content {
     color: #eee8d5; }
+  .zinnia.dark .entry-image p {
+    color: #93a1a1; }
   .zinnia.dark .entry-body img {
     border: 1px solid #586e75; }
   .zinnia.dark .entry-footer strong {

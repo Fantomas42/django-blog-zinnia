@@ -16,6 +16,12 @@ h2.entry-title {
   display: none;
 }
 
+.entry-image {
+  img {
+    width: 100%;
+  }
+}
+
 .entry-body {
   padding-right: 0.5em;
   img {
@@ -23,8 +29,8 @@ h2.entry-title {
     max-width: 100%;
     box-sizing: border-box;
     &, &.left {
-    margin: 0 1em 1em 0;
-    float: left;
+      margin: 0 1em 1em 0;
+      float: left;
     }
     &.right {
       margin: 0 0 1em 1em;
