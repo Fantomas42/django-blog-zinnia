@@ -349,12 +349,13 @@ class RelatedEntry(models.Model):
         abstract = True
 
 
-class SubtitleEntry(models.Model):
+class LeadEntry(models.Model):
     """
-    Abstract model class providing a subtitle to the entries.
+    Abstract model class providing a lead content to the entries.
     """
-    subtitle = models.TextField(
-        _('subtitle'), blank=True)
+    lead = models.TextField(
+        _('lead'), blank=True,
+        help_text=_('Lead paragraph'))
 
     class Meta:
         abstract = True
@@ -533,7 +534,7 @@ class AbstractEntry(
         ContentEntry,
         DiscussionsEntry,
         RelatedEntry,
-        SubtitleEntry,
+        LeadEntry,
         ExcerptEntry,
         ImageEntry,
         FeaturedEntry,

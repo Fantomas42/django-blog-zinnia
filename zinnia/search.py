@@ -53,7 +53,7 @@ def createQ(token):
 
     if not meta:
         return (Q(title__icontains=search) |
-                Q(subtitle__icontains=search) |
+                Q(lead__icontains=search) |
                 Q(content__icontains=search) |
                 Q(excerpt__icontains=search) |
                 Q(image_caption__icontains=search))

@@ -19,9 +19,10 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='entry',
-            name='subtitle',
+            name='lead',
             field=models.TextField(
-                default='', verbose_name='subtitle', blank=True),
+                default='', help_text='Lead paragraph',
+                verbose_name='lead', blank=True),
             preserve_default=False,
         ),
     ]
