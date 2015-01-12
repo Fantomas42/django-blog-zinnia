@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='entry',
-            name='caption',
+            name='image_caption',
             field=models.TextField(
                 default='', help_text="Image's caption",
                 verbose_name='caption', blank=True),

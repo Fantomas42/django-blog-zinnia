@@ -79,7 +79,7 @@ class EntryPublishedManager(models.Manager):
                 models.Q(subtitle__icontains=pattern) |
                 models.Q(content__icontains=pattern) |
                 models.Q(excerpt__icontains=pattern) |
-                models.Q(caption__icontains=pattern))
+                models.Q(image_caption__icontains=pattern))
             if lookup is None:
                 lookup = query_part
             else:

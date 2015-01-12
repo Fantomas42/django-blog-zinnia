@@ -405,7 +405,7 @@ class ImageEntry(models.Model):
         upload_to=image_upload_to_dispatcher,
         help_text=_('Used for illustration.'))
 
-    caption = models.TextField(
+    image_caption = models.TextField(
         _('caption'), blank=True,
         help_text=_("Image's caption."))
 

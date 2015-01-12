@@ -30,7 +30,7 @@ class EntryAdmin(admin.ModelAdmin):
         (_('Content'), {
             'fields': (('title', 'status'), 'subtitle', 'content',)}),
         (_('Illustration'), {
-            'fields': ('image', 'caption'),
+            'fields': ('image', 'image_caption'),
             'classes': ('collapse', 'collapse-closed')}),
         (_('Publication'), {
             'fields': (('start_publication', 'end_publication'),

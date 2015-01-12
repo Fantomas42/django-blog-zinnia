@@ -75,7 +75,7 @@ class EntryAdminForm(forms.ModelForm):
         fields = forms.ALL_FIELDS
         widgets = {
             'tags': TagAutoComplete,
-            'subtitle': MiniTextarea,
-            'caption': MiniTextarea,
             'excerpt': MiniTextarea,
+            'subtitle': MiniTextarea,
+            'image_caption': MiniTextarea,
         }

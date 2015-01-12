@@ -56,7 +56,7 @@ def createQ(token):
                 Q(subtitle__icontains=search) |
                 Q(content__icontains=search) |
                 Q(excerpt__icontains=search) |
-                Q(caption__icontains=search))
+                Q(image_caption__icontains=search))
 
     if meta == 'category':
         if wildcards == 'BOTH':
