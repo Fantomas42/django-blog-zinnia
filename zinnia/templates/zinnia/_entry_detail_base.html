@@ -66,6 +66,14 @@
   {% endif %}
   {% endblock entry-image %}
 
+  {% block entry-lead %}
+  {% if object.lead %}
+  <div class="entry-summary">
+    {{ object.lead|linebreaks }}
+  </div>
+  {% endif %}
+  {% endblock entry-lead %}
+
   {% block entry-body %}
   <div class="entry-body">
     {% block entry-content %}
