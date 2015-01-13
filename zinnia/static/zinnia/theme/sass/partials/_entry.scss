@@ -22,8 +22,9 @@ h2.entry-title {
   }
 }
 
-.entry-body {
-  padding-right: 0.5em;
+.entry-content {
+  text-align: justify;
+  p { font-size: 1.2em; }
   img {
     padding: 1em;
     max-width: 100%;
@@ -40,11 +41,6 @@ h2.entry-title {
   li {
     list-style-image: none;
   }
-}
-
-.entry-content {
-  text-align: justify;
-  p { font-size: 1.2em; }
   .hide { display: none; }
   .highlight { background: yellow };
 }
