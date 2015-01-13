@@ -320,7 +320,7 @@ class ViewsTestCase(ViewsBaseCase):
         with self.assertNumQueries(2):
             response = self.client.get('/today/')
         self.assertTemplateUsed(response, 'zinnia/entry_archive_today.html')
-        self.assertEqual(response.context['day'].date(), date.today())
+        self.assertEqual(response.context['day'], date.today())
         self.assertEqual(response.context['previous_month'], date(2010, 5, 1))
         self.assertEqual(response.context['next_month'], None)
         self.assertEqual(response.context['previous_day'], date(2010, 5, 31))
@@ -332,7 +332,7 @@ class ViewsTestCase(ViewsBaseCase):
         with self.assertNumQueries(2):
             response = self.client.get('/today/')
         self.assertTemplateUsed(response, 'zinnia/entry_archive_today.html')
-        self.assertEqual(response.context['day'].date(), timezone.localtime(
+        self.assertEqual(response.context['day'], timezone.localtime(
             timezone.now()).date())
         self.assertEqual(response.context['previous_month'], date(2010, 6, 1))
         self.assertEqual(response.context['next_month'], None)
