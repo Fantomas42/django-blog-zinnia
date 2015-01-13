@@ -49,38 +49,39 @@
   </div>
   {% endblock entry-header %}
 
-  {% block entry-image %}
-  {% if object.image %}
-  <div class="entry-image">
-    {% if continue_reading %}
-    <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
-      {% endif %}
-      <img src="{{ object.image.url }}" alt="{{ object.image_caption|default:object.title }}" />
-      {% if continue_reading %}
-    </a>
-    {% endif %}
-    {% if object.image_caption %}
-    {{ object.image_caption|linebreaks }}
-    {% endif %}
-  </div>
-  {% endif %}
-  {% endblock entry-image %}
-
-  {% block entry-lead %}
-  {% if object.lead %}
-  <div class="entry-summary">
-    {{ object.lead|linebreaks }}
-  </div>
-  {% endif %}
-  {% endblock entry-lead %}
-
   {% block entry-body %}
   <div class="entry-body">
+    {% block entry-image %}
+    {% if object.image %}
+    <div class="entry-image">
+      {% if continue_reading %}
+      <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+        {% endif %}
+        <img src="{{ object.image.url }}" alt="{{ object.image_caption|default:object.title }}" />
+        {% if continue_reading %}
+      </a>
+      {% endif %}
+      {% if object.image_caption %}
+      {{ object.image_caption|linebreaks }}
+      {% endif %}
+    </div>
+    {% endif %}
+    {% endblock entry-image %}
+
+    {% block entry-lead %}
+    {% if object.lead %}
+    <div class="entry-summary">
+      {{ object.lead|linebreaks }}
+    </div>
+    {% endif %}
+    {% endblock entry-lead %}
+
     {% block entry-content %}
     <div class="entry-content">
       {{ object_content|safe }}
     </div>
     {% endblock entry-content %}
+
     {% block continue-reading %}
     {% if continue_reading and object_content.has_more %}
     <p class="continue-reading">
