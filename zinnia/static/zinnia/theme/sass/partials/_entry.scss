@@ -22,6 +22,14 @@ h2.entry-title {
   }
 }
 
+.entry-summary {
+  p {
+    text-align: justify;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+}
+
 .entry-content {
   text-align: justify;
   p { font-size: 1.2em; }
