@@ -336,6 +336,13 @@ class EntryTestCase(TestCase):
         for i in range(1, 4):
             self.assertTrue(path_split[-1 - i].isdigit())
 
+    def test_save_last_update(self):
+        last_update = self.entry.last_update
+        self.entry.save()
+        self.assertNotEqual(
+            last_update,
+            self.entry.last_update)
+
 
 class EntryHtmlContentTestCase(TestCase):
 

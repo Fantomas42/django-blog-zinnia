@@ -180,7 +180,6 @@ class EntryAdmin(admin.ModelAdmin):
         if not entry.excerpt and entry.status == PUBLISHED:
             entry.excerpt = Truncator(strip_tags(entry.content)).words(50)
 
-        entry.last_update = timezone.now()
         entry.save()
 
     def get_queryset(self, request):

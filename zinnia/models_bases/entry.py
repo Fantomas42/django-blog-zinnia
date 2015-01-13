@@ -156,6 +156,14 @@ class CoreEntry(models.Model):
         """
         return get_url_shortener()(self)
 
+    def save(self, *args, **kwargs):
+        """
+        Overrides the save method to update the
+        the last_update field.
+        """
+        self.last_update = timezone.now()
+        super(CoreEntry, self).save(*args, **kwargs)
+
     @models.permalink
     def get_absolute_url(self):
         """
