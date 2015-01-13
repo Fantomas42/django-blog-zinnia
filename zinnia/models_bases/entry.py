@@ -349,13 +349,25 @@ class RelatedEntry(models.Model):
         abstract = True
 
 
+class LeadEntry(models.Model):
+    """
+    Abstract model class providing a lead content to the entries.
+    """
+    lead = models.TextField(
+        _('lead'), blank=True,
+        help_text=_('Lead paragraph'))
+
+    class Meta:
+        abstract = True
+
+
 class ExcerptEntry(models.Model):
     """
     Abstract model class to add an excerpt to the entries.
     """
     excerpt = models.TextField(
         _('excerpt'), blank=True,
-        help_text=_('Used for search and SEO.'))
+        help_text=_('Used for SEO purposes.'))
 
     class Meta:
         abstract = True
@@ -372,7 +384,7 @@ def image_upload_to_dispatcher(entry, filename):
 
 class ImageEntry(models.Model):
     """
-    Abstract model class to add an image to the entries.
+    Abstract model class to add an image for illustrating the entries.
     """
 
     def image_upload_to(self, filename):
@@ -393,6 +405,10 @@ class ImageEntry(models.Model):
         _('image'), blank=True,
         upload_to=image_upload_to_dispatcher,
         help_text=_('Used for illustration.'))
+
+    image_caption = models.TextField(
+        _('caption'), blank=True,
+        help_text=_("Image's caption."))
 
     class Meta:
         abstract = True
@@ -518,6 +534,7 @@ class AbstractEntry(
         ContentEntry,
         DiscussionsEntry,
         RelatedEntry,
+        LeadEntry,
         ExcerptEntry,
         ImageEntry,
         FeaturedEntry,

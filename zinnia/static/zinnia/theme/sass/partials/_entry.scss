@@ -16,15 +16,30 @@ h2.entry-title {
   display: none;
 }
 
-.entry-body {
-  padding-right: 0.5em;
+.entry-image {
+  img {
+    width: 100%;
+  }
+}
+
+.entry-summary {
+  p {
+    text-align: justify;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+}
+
+.entry-content {
+  text-align: justify;
+  p { font-size: 1.2em; }
   img {
     padding: 1em;
     max-width: 100%;
     box-sizing: border-box;
     &, &.left {
-    margin: 0 1em 1em 0;
-    float: left;
+      margin: 0 1em 1em 0;
+      float: left;
     }
     &.right {
       margin: 0 0 1em 1em;
@@ -34,11 +49,6 @@ h2.entry-title {
   li {
     list-style-image: none;
   }
-}
-
-.entry-content {
-  text-align: justify;
-  p { font-size: 1.2em; }
   .hide { display: none; }
   .highlight { background: yellow };
 }

@@ -43,7 +43,8 @@ register = Library()
 
 VECTORS = None
 VECTORS_FACTORY = lambda: VectorBuilder(Entry.published.all(),
-                                        ['title', 'excerpt', 'content'])
+                                        ['title', 'lead', 'content',
+                                         'excerpt', 'image_caption'])
 CACHE_ENTRIES_RELATED = {}
 
 WIDONT_REGEXP = re.compile(

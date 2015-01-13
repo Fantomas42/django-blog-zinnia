@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-04 16:34+0100\n"
-"PO-Revision-Date: 2014-10-14 13:32+0000\n"
+"POT-Creation-Date: 2015-01-12 15:16+0100\n"
+"PO-Revision-Date: 2015-01-12 14:16+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Ukrainian (Ukraine) (http://www.transifex.com/projects/p/django-blog-zinnia/language/uk_UA/)\n"
 "MIME-Version: 1.0\n"
@@ -19,8 +19,203 @@ msgstr ""
 "Language: uk_UA\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: breadcrumbs.py:68 admin/forms.py:66
-#: templates/admin/zinnia/widgets/quickpost.html:25
+#: admin/category.py:34
+msgid "tree path"
+msgstr "шлях"
+
+#: admin/entry.py:30 templates/admin/zinnia/widgets/quickpost.html:17
+msgid "Content"
+msgstr "Вміст"
+
+#: admin/entry.py:32
+msgid "Illustration"
+msgstr ""
+
+#: admin/entry.py:35
+msgid "Publication"
+msgstr "Публікація"
+
+#: admin/entry.py:39 templates/admin/zinnia/widgets/_content_stats.html:4
+#: templates/zinnia/_entry_detail_base.html:114
+msgid "Discussions"
+msgstr "Обговорення"
+
+#: admin/entry.py:43
+msgid "Privacy"
+msgstr "Приватність"
+
+#: admin/entry.py:46
+msgid "Templates"
+msgstr "Шаблони"
+
+#: admin/entry.py:49
+msgid "Metadatas"
+msgstr "Метадані"
+
+#: admin/entry.py:81
+#, python-format
+msgid "%(title)s (%(word_count)i words)"
+msgstr "%(title)s (%(word_count)i слів)"
+
+#: admin/entry.py:88
+#, python-format
+msgid "%(title)s (%(reactions)i reaction)"
+msgid_plural "%(title)s (%(reactions)i reactions)"
+msgstr[0] "%(title)s (%(reactions)i реакція)"
+msgstr[1] "%(title)s (%(reactions)i реакцій)"
+msgstr[2] "%(title)s (%(reactions)i реакцій)"
+
+#: admin/entry.py:93 models/category.py:21 models_bases/entry.py:50
+msgid "title"
+msgstr "Заголовок"
+
+#: admin/entry.py:109
+msgid "author(s)"
+msgstr "автор(и)"
+
+#: admin/entry.py:124
+msgid "category(s)"
+msgstr "категорія(-ї)"
+
+#: admin/entry.py:137
+msgid "tag(s)"
+msgstr "тег(и)"
+
+#: admin/entry.py:152
+msgid "site(s)"
+msgstr "сайт(и)"
+
+#: admin/entry.py:165
+msgid "short url"
+msgstr "коротке посилання"
+
+#: admin/entry.py:173
+msgid "is visible"
+msgstr "видимий"
+
+#: admin/entry.py:261
+msgid "The selected entries now belong to you."
+msgstr "Обрані дописи тепер належать вам."
+
+#: admin/entry.py:262
+msgid "Set the entries to the user"
+msgstr "Встановити дописи користувачу"
+
+#: admin/entry.py:271
+msgid "The selected entries are now marked as published."
+msgstr "Обрані дописи тепер відмічені як опубліковані"
+
+#: admin/entry.py:272
+msgid "Set entries selected as published"
+msgstr "Відмітити обрані дописи як опубліковані"
+
+#: admin/entry.py:280
+msgid "The selected entries are now marked as hidden."
+msgstr "Обрані дописи тепер відмічені як приховані."
+
+#: admin/entry.py:281
+msgid "Set entries selected as hidden"
+msgstr "Відмітити обрані дописи як приховані"
+
+#: admin/entry.py:289
+msgid "Comments are now closed for selected entries."
+msgstr "Коментарі тепер закриті для обраних дописів."
+
+#: admin/entry.py:290
+msgid "Close the comments for selected entries"
+msgstr "Закрити коментарі для обраних дописів"
+
+#: admin/entry.py:299
+msgid "Pingbacks are now closed for selected entries."
+msgstr "Пінгбеки обраних дописів тепер закриті."
+
+#: admin/entry.py:301
+msgid "Close the pingbacks for selected entries"
+msgstr "Закрити пінгбеки обраних дописів"
+
+#: admin/entry.py:309
+msgid "Trackbacks are now closed for selected entries."
+msgstr "Трекбеки обраних дописів тепер закриті."
+
+#: admin/entry.py:311
+msgid "Close the trackbacks for selected entries"
+msgstr "Закрити трекбеки обраних дописів"
+
+#: admin/entry.py:320
+msgid "The selected entries are now set at the current date."
+msgstr "Обрані дописи тепер відмічені сьогоднішньою датою."
+
+#: admin/entry.py:322
+msgid "Put the selected entries on top at the current date"
+msgstr "Пересунути обрані дописи на початок сьогоднішнього дня."
+
+#: admin/entry.py:330
+msgid "Selected entries are now marked as featured."
+msgstr "Обрані дописи тепер відмічені як важливі"
+
+#: admin/entry.py:331
+msgid "Mark selected entries as featured"
+msgstr "Відмітити обрані дописи як важливі"
+
+#: admin/entry.py:339
+msgid "Selected entries are no longer marked as featured."
+msgstr "Обрані дописи більше не відмічені як важливі"
+
+#: admin/entry.py:341
+msgid "Unmark selected entries as featured"
+msgstr "Зняти з вибраних дописів помітку \"важливі\""
+
+#: admin/entry.py:362
+#, python-format
+msgid "%(directory)s directory succesfully pinged %(success)d entries."
+msgstr ""
+
+#: admin/entry.py:366
+msgid "Ping Directories for selected entries"
+msgstr ""
+
+#: admin/filters.py:29
+#, python-format
+msgid "%(item)s (%(count)i entry)"
+msgid_plural "%(item)s (%(count)i entries)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: admin/filters.py:50
+msgid "published authors"
+msgstr "публіковані автори"
+
+#: admin/filters.py:61
+msgid "published categories"
+msgstr "публіковані категорії"
+
+#: admin/forms.py:23
+msgid "Parent category"
+msgstr "Батьківська категорія"
+
+#: admin/forms.py:25
+msgid "No parent category"
+msgstr "Батьківської категорії немає"
+
+#: admin/forms.py:42
+msgid "A category cannot be parent of itself."
+msgstr "Категорія не може бути своєю батьківською категоріїю"
+
+#: admin/forms.py:59 breadcrumbs.py:75 templates/zinnia/base.html:37
+#: templates/zinnia/category_list.html:6
+msgid "Categories"
+msgstr "Категорії"
+
+#: admin/forms.py:61 models/category.py:74 models_bases/entry.py:451
+msgid "categories"
+msgstr "категорії"
+
+#: apps.py:12
+msgid "Weblog"
+msgstr ""
+
+#: breadcrumbs.py:68 templates/admin/zinnia/widgets/quickpost.html:25
 #: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:53
 #: templates/zinnia/tag_list.html:6
 msgid "Tags"
@@ -30,11 +225,6 @@ msgstr "Теги"
 #: templates/zinnia/base.html:43
 msgid "Authors"
 msgstr "Автори"
-
-#: breadcrumbs.py:75 admin/forms.py:60 templates/zinnia/base.html:37
-#: templates/zinnia/category_list.html:6
-msgid "Categories"
-msgstr "Категорії"
 
 #: breadcrumbs.py:100
 #, python-format
@@ -145,194 +335,6 @@ msgstr "Трекбеки до %s"
 msgid "The latest trackbacks for the entry %s"
 msgstr "Останні трекбеки до %s"
 
-#: moderator.py:66 moderator.py:88 moderator.py:111
-#, python-format
-msgid "[%(site)s] New comment posted on \"%(title)s\""
-msgstr "[%(site)s] Новий коментар опублікований до \"%(title)s\""
-
-#: admin/category.py:34
-msgid "tree path"
-msgstr "шлях"
-
-#: admin/entry.py:30 templates/admin/zinnia/widgets/quickpost.html:17
-msgid "Content"
-msgstr "Вміст"
-
-#: admin/entry.py:32
-msgid "Publication"
-msgstr "Публікація"
-
-#: admin/entry.py:36 templates/admin/zinnia/widgets/_content_stats.html:4
-#: templates/zinnia/_entry_detail_base.html:114
-msgid "Discussions"
-msgstr "Обговорення"
-
-#: admin/entry.py:40
-msgid "Privacy"
-msgstr "Приватність"
-
-#: admin/entry.py:43
-msgid "Templates"
-msgstr "Шаблони"
-
-#: admin/entry.py:46
-msgid "Metadatas"
-msgstr "Метадані"
-
-#: admin/entry.py:78
-#, python-format
-msgid "%(title)s (%(word_count)i words)"
-msgstr "%(title)s (%(word_count)i слів)"
-
-#: admin/entry.py:85
-#, python-format
-msgid "%(title)s (%(reactions)i reaction)"
-msgid_plural "%(title)s (%(reactions)i reactions)"
-msgstr[0] "%(title)s (%(reactions)i реакція)"
-msgstr[1] "%(title)s (%(reactions)i реакцій)"
-msgstr[2] "%(title)s (%(reactions)i реакцій)"
-
-#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:50
-msgid "title"
-msgstr "Заголовок"
-
-#: admin/entry.py:106
-msgid "author(s)"
-msgstr "автор(и)"
-
-#: admin/entry.py:121
-msgid "category(s)"
-msgstr "категорія(-ї)"
-
-#: admin/entry.py:134
-msgid "tag(s)"
-msgstr "тег(и)"
-
-#: admin/entry.py:149
-msgid "site(s)"
-msgstr "сайт(и)"
-
-#: admin/entry.py:162
-msgid "short url"
-msgstr "коротке посилання"
-
-#: admin/entry.py:170
-msgid "is visible"
-msgstr "видимий"
-
-#: admin/entry.py:254
-msgid "The selected entries now belong to you."
-msgstr "Обрані дописи тепер належать вам."
-
-#: admin/entry.py:255
-msgid "Set the entries to the user"
-msgstr "Встановити дописи користувачу"
-
-#: admin/entry.py:264
-msgid "The selected entries are now marked as published."
-msgstr "Обрані дописи тепер відмічені як опубліковані"
-
-#: admin/entry.py:265
-msgid "Set entries selected as published"
-msgstr "Відмітити обрані дописи як опубліковані"
-
-#: admin/entry.py:273
-msgid "The selected entries are now marked as hidden."
-msgstr "Обрані дописи тепер відмічені як приховані."
-
-#: admin/entry.py:274
-msgid "Set entries selected as hidden"
-msgstr "Відмітити обрані дописи як приховані"
-
-#: admin/entry.py:282
-msgid "Comments are now closed for selected entries."
-msgstr "Коментарі тепер закриті для обраних дописів."
-
-#: admin/entry.py:283
-msgid "Close the comments for selected entries"
-msgstr "Закрити коментарі для обраних дописів"
-
-#: admin/entry.py:292
-msgid "Pingbacks are now closed for selected entries."
-msgstr "Пінгбеки обраних дописів тепер закриті."
-
-#: admin/entry.py:294
-msgid "Close the pingbacks for selected entries"
-msgstr "Закрити пінгбеки обраних дописів"
-
-#: admin/entry.py:302
-msgid "Trackbacks are now closed for selected entries."
-msgstr "Трекбеки обраних дописів тепер закриті."
-
-#: admin/entry.py:304
-msgid "Close the trackbacks for selected entries"
-msgstr "Закрити трекбеки обраних дописів"
-
-#: admin/entry.py:313
-msgid "The selected entries are now set at the current date."
-msgstr "Обрані дописи тепер відмічені сьогоднішньою датою."
-
-#: admin/entry.py:315
-msgid "Put the selected entries on top at the current date"
-msgstr "Пересунути обрані дописи на початок сьогоднішнього дня."
-
-#: admin/entry.py:323
-msgid "Selected entries are now marked as featured."
-msgstr "Обрані дописи тепер відмічені як важливі"
-
-#: admin/entry.py:324
-msgid "Mark selected entries as featured"
-msgstr "Відмітити обрані дописи як важливі"
-
-#: admin/entry.py:332
-msgid "Selected entries are no longer marked as featured."
-msgstr "Обрані дописи більше не відмічені як важливі"
-
-#: admin/entry.py:334
-msgid "Unmark selected entries as featured"
-msgstr "Зняти з вибраних дописів помітку \"важливі\""
-
-#: admin/entry.py:355
-#, python-format
-msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr ""
-
-#: admin/entry.py:359
-msgid "Ping Directories for selected entries"
-msgstr ""
-
-#: admin/filters.py:29
-#, python-format
-msgid "%(item)s (%(count)i entry)"
-msgid_plural "%(item)s (%(count)i entries)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#: admin/filters.py:50
-msgid "published authors"
-msgstr "публіковані автори"
-
-#: admin/filters.py:61
-msgid "published categories"
-msgstr "публіковані категорії"
-
-#: admin/forms.py:25
-msgid "Parent category"
-msgstr "Батьківська категорія"
-
-#: admin/forms.py:27
-msgid "No parent category"
-msgstr "Батьківської категорії немає"
-
-#: admin/forms.py:44
-msgid "A category cannot be parent of itself."
-msgstr "Категорія не може бути своєю батьківською категоріїю"
-
-#: admin/forms.py:62 models/category.py:75 models_bases/entry.py:434
-msgid "categories"
-msgstr "категорії"
-
 #: models/category.py:24 models_bases/entry.py:53
 msgid "slug"
 msgstr ""
@@ -349,7 +351,7 @@ msgstr "опис"
 msgid "parent category"
 msgstr "Батьківська категорія"
 
-#: models/category.py:74
+#: models/category.py:73
 msgid "category"
 msgstr "категорія"
 
@@ -405,121 +407,142 @@ msgstr "дата створення"
 msgid "last update"
 msgstr "останнє оновлення"
 
-#: models_bases/entry.py:185
+#: models_bases/entry.py:184
 msgid "entry"
 msgstr "допис"
 
-#: models_bases/entry.py:186
+#: models_bases/entry.py:185
 msgid "entries"
 msgstr "дописи"
 
-#: models_bases/entry.py:200
+#: models_bases/entry.py:199
 msgid "content"
 msgstr "вміст"
 
-#: models_bases/entry.py:242
+#: models_bases/entry.py:241
 msgid "comments enabled"
 msgstr "залишати коментарі дозволено"
 
-#: models_bases/entry.py:243
+#: models_bases/entry.py:242
 msgid "Allows comments if checked."
 msgstr "Дозволяє залишати коментарі, якщо відмічено."
 
-#: models_bases/entry.py:245
+#: models_bases/entry.py:244
 msgid "pingbacks enabled"
 msgstr "пінгбеки увімкнено"
 
-#: models_bases/entry.py:246
+#: models_bases/entry.py:245
 msgid "Allows pingbacks if checked."
 msgstr "Дозволяє пінгбеки, якщо відмічено."
 
-#: models_bases/entry.py:248
+#: models_bases/entry.py:247
 msgid "trackbacks enabled"
 msgstr "трекбеки увімкнено"
 
-#: models_bases/entry.py:249
+#: models_bases/entry.py:248
 msgid "Allows trackbacks if checked."
 msgstr "Дозволяє трекбеки, якщо відмічено."
 
-#: models_bases/entry.py:252
+#: models_bases/entry.py:251
 msgid "comment count"
 msgstr "кількість коментарів"
 
-#: models_bases/entry.py:254
+#: models_bases/entry.py:253
 msgid "pingback count"
 msgstr "кількість пінгбеків"
 
-#: models_bases/entry.py:256
+#: models_bases/entry.py:255
 msgid "trackback count"
 msgstr "кількість трекбеків"
 
-#: models_bases/entry.py:340
+#: models_bases/entry.py:339
 msgid "related entries"
 msgstr "пов'язані дописи"
 
+#: models_bases/entry.py:357
+msgid "lead"
+msgstr ""
+
 #: models_bases/entry.py:358
+msgid "Lead paragraph"
+msgstr ""
+
+#: models_bases/entry.py:369
 msgid "excerpt"
 msgstr "витяг"
 
-#: models_bases/entry.py:359
-msgid "Used for search and SEO."
-msgstr "Використовується для пошуку та СЕО."
+#: models_bases/entry.py:370
+msgid "Used for SEO purposes."
+msgstr ""
 
-#: models_bases/entry.py:392
+#: models_bases/entry.py:405
 msgid "image"
 msgstr "зображення"
 
-#: models_bases/entry.py:394
+#: models_bases/entry.py:407
 msgid "Used for illustration."
 msgstr "Використовується для ілюстрації."
 
-#: models_bases/entry.py:405
+#: models_bases/entry.py:410
+msgid "caption"
+msgstr ""
+
+#: models_bases/entry.py:411
+msgid "Image's caption."
+msgstr ""
+
+#: models_bases/entry.py:422
 msgid "featured"
 msgstr "популярний"
 
-#: models_bases/entry.py:420
+#: models_bases/entry.py:437
 msgid "authors"
 msgstr "автори"
 
-#: models_bases/entry.py:444
+#: models_bases/entry.py:461
 msgid "tags"
 msgstr "теги"
 
-#: models_bases/entry.py:463
+#: models_bases/entry.py:480
 msgid "login required"
 msgstr "необхідний вхід"
 
-#: models_bases/entry.py:464
+#: models_bases/entry.py:481
 msgid "Only authenticated users can view the entry."
 msgstr "Лише користувачі, шо пройшли автентифікацію, можуть бачити цей допис."
 
-#: models_bases/entry.py:476
+#: models_bases/entry.py:493
 msgid "password"
 msgstr "пароль"
 
-#: models_bases/entry.py:477
+#: models_bases/entry.py:494
 msgid "Protects the entry with a password."
 msgstr "Захист допису паролем."
 
-#: models_bases/entry.py:489
+#: models_bases/entry.py:506
 msgid "content template"
 msgstr "шаблон вмісту"
 
-#: models_bases/entry.py:491 models_bases/entry.py:507
+#: models_bases/entry.py:508 models_bases/entry.py:524
 msgid "Default template"
 msgstr "Шаблон за замовчуванням"
 
-#: models_bases/entry.py:493
+#: models_bases/entry.py:510
 msgid "Template used to display the entry's content."
 msgstr "Шаблон використовується для показу вмісту допису."
 
-#: models_bases/entry.py:505
+#: models_bases/entry.py:522
 msgid "detail template"
 msgstr "шаблон подробиць"
 
-#: models_bases/entry.py:509
+#: models_bases/entry.py:526
 msgid "Template used to display the entry's detail page."
 msgstr "Шаблон, що використовується для сторінки подробиць допису."
+
+#: moderator.py:66 moderator.py:88 moderator.py:111
+#, python-format
+msgid "[%(site)s] New comment posted on \"%(title)s\""
+msgstr "[%(site)s] Новий коментар опублікований до \"%(title)s\""
 
 #: templates/400.html:6
 msgid "Error 400"
@@ -852,21 +875,6 @@ msgstr "Видалити цей коментар"
 msgid "Approve this comment"
 msgstr "Підтвердити цей коментар"
 
-#: templates/comments/zinnia_entry_preview.html:4
-msgid "Comment preview"
-msgstr "Попередній перегляд коментаря"
-
-#: templates/comments/zinnia_entry_preview.html:10
-msgid "Please correct following error."
-msgid_plural "Please correct following errors."
-msgstr[0] "Виправте, будь ласка, наступну помилку."
-msgstr[1] "Виправте, будь ласка, наступні помилки."
-msgstr[2] "Виправте, будь ласка, наступні помилки."
-
-#: templates/comments/zinnia_entry_preview.html:12
-msgid "Preview of the comment"
-msgstr "Попередній перегляд коментаря"
-
 #: templates/comments/zinnia/entry/form.html:11
 msgid "Post your comment"
 msgstr "Відправити коментар"
@@ -902,6 +910,21 @@ msgstr "Повернутися до %(title)s"
 #: templates/comments/zinnia/entry/posted.html:27
 msgid "Return to entry list"
 msgstr "Повернутися до списку дописів"
+
+#: templates/comments/zinnia_entry_preview.html:4
+msgid "Comment preview"
+msgstr "Попередній перегляд коментаря"
+
+#: templates/comments/zinnia_entry_preview.html:10
+msgid "Please correct following error."
+msgid_plural "Please correct following errors."
+msgstr[0] "Виправте, будь ласка, наступну помилку."
+msgstr[1] "Виправте, будь ласка, наступні помилки."
+msgstr[2] "Виправте, будь ласка, наступні помилки."
+
+#: templates/comments/zinnia_entry_preview.html:12
+msgid "Preview of the comment"
+msgstr "Попередній перегляд коментаря"
 
 #: templates/zinnia/_entry_detail_base.html:17
 msgid "Written by"
@@ -1455,15 +1478,15 @@ msgstr[0] "%(entry_count)s допис помічений тегом %(tag)s"
 msgstr[1] "%(entry_count)s дописів помічено тегом %(tag)s"
 msgstr[2] "%(entry_count)s дописів помічено тегом %(tag)s"
 
-#: templatetags/zinnia.py:344
+#: templatetags/zinnia.py:345
 msgid "Blog"
 msgstr "Блог"
 
-#: tests/test_views.py:586 views/search.py:30
+#: tests/test_views.py:585 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Шаблон надто короткий"
 
-#: tests/test_views.py:590 views/search.py:34
+#: tests/test_views.py:589 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Не знайдено шаблону для пошуку"
 
@@ -1595,14 +1618,14 @@ msgstr "^quick-entry/$"
 msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 msgstr "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 
+#: views/mixins/entry_preview.py:27
+msgid "No entry found matching the query"
+msgstr "Не знайдено дописів, що відповідають запитові"
+
 #: views/tags.py:48
 #, python-format
 msgid "No Tag found matching \"%s\"."
 msgstr "Не знайдено тегів, що відповідають \"%s\"."
-
-#: views/mixins/entry_preview.py:27
-msgid "No entry found matching the query"
-msgstr "Не знайдено дописів, що відповідають запитові"
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."

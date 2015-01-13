@@ -5,6 +5,7 @@ from django.utils.encoding import smart_text
 
 from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_entry_signals
+from zinnia.admin.widgets import MiniTextarea
 from zinnia.admin.widgets import TagAutoComplete
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 
@@ -100,3 +101,14 @@ class TagAutoCompleteTestCase(TestCase):
             '\n       tags: [\'test\',\'zinnia\']'
             '\n     });\n    });'
             '\n}(django.jQuery));\n</script>')
+
+
+class MiniTextareaTestCase(TestCase):
+
+    def test_render(self):
+        widget = MiniTextarea()
+        self.assertEqual(
+            widget.render('field', 'value'),
+            '<textarea class="vLargeTextField" '
+            'cols="40" name="field" rows="2">'
+            '\r\nvalue</textarea>')
