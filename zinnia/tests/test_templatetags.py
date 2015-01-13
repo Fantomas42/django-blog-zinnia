@@ -258,6 +258,7 @@ class TemplateTagsTestCase(TestCase):
 
         params = {'title': 'My second entry',
                   'content': 'This is the second content of my tests.',
+                  'excerpt': 'Similarity testing',
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
                   'slug': 'my-second-entry'}
