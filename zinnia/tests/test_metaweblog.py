@@ -235,7 +235,7 @@ class MetaWeblogTestCase(TestCase):
                          'http://example.com/2010/01/01/my-entry-1/')
         self.assertEqual(post['postid'], self.entry_1.pk)
         self.assertEqual(post['userid'], 'webmaster')
-        self.assertEqual(post['mt_excerpt'], '')
+        self.assertEqual(post['mt_excerpt'], 'My content 1')
         self.assertEqual(post['mt_allow_comments'], 1)
         self.assertEqual(post['mt_allow_pings'], 1)
         self.assertEqual(post['mt_keywords'], self.entry_1.tags)

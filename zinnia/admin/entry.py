@@ -2,8 +2,6 @@
 from django.contrib import admin
 from django.db.models import Q
 from django.utils import timezone
-from django.utils.text import Truncator
-from django.utils.html import strip_tags
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
@@ -173,16 +171,6 @@ class EntryAdmin(admin.ModelAdmin):
     get_is_visible.short_description = _('is visible')
 
     # Custom Methods
-    def save_model(self, request, entry, form, change):
-        """
-        Save the authors, update time, make an excerpt.
-        """
-        if not entry.excerpt and entry.status == PUBLISHED:
-            entry.excerpt = Truncator(strip_tags(entry.content)).words(50)
-
-        entry.last_update = timezone.now()
-        entry.save()
-
     def get_queryset(self, request):
         """
         Make special filtering by user's permissions.

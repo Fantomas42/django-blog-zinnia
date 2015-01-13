@@ -4,6 +4,7 @@ import os
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
+from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.utils.html import linebreaks
 from django.contrib.sites.models import Site
@@ -155,6 +156,14 @@ class CoreEntry(models.Model):
         Returns the entry's short url.
         """
         return get_url_shortener()(self)
+
+    def save(self, *args, **kwargs):
+        """
+        Overrides the save method to update the
+        the last_update field.
+        """
+        self.last_update = timezone.now()
+        super(CoreEntry, self).save(*args, **kwargs)
 
     @models.permalink
     def get_absolute_url(self):
@@ -368,6 +377,16 @@ class ExcerptEntry(models.Model):
     excerpt = models.TextField(
         _('excerpt'), blank=True,
         help_text=_('Used for SEO purposes.'))
+
+    def save(self, *args, **kwargs):
+        """
+        Overrides the save method to create an excerpt
+        from the content field if void.
+        """
+        if not self.excerpt and self.status == PUBLISHED:
+            self.excerpt = Truncator(strip_tags(
+                getattr(self, 'content', ''))).words(50)
+        super(ExcerptEntry, self).save(*args, **kwargs)
 
     class Meta:
         abstract = True
