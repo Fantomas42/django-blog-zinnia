@@ -343,6 +343,21 @@ class EntryTestCase(TestCase):
             last_update,
             self.entry.last_update)
 
+    def test_save_excerpt(self):
+        self.assertEquals(self.entry.excerpt, '')
+        self.entry.status = PUBLISHED
+        self.entry.save()
+        self.assertEquals(self.entry.excerpt, 'My content')
+        self.entry.content = 'My changed content'
+        self.entry.save()
+        self.assertEquals(self.entry.excerpt, 'My content')
+        self.entry.excerpt = ''
+        content = '<p>%s</p>' % ' '.join(['word-%s' % i for i in range(75)])
+        self.entry.content = content
+        self.entry.save()
+        self.assertEqual(self.entry.excerpt,
+                         ' '.join(['word-%s' % i for i in range(50)]) + '...')
+
 
 class EntryHtmlContentTestCase(TestCase):
 

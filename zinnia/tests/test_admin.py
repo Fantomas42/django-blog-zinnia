@@ -174,32 +174,6 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.assertEqual(self.admin.get_is_visible(self.entry),
                          self.entry.is_visible)
 
-    def test_save_model(self):
-        user = User.objects.create_user(
-            'user', 'user@exemple.com')
-        self.request.user = user
-        self.assertEqual(self.entry.excerpt, '')
-        self.admin.save_model(self.request, self.entry,
-                              EntryAdmin.form(), False)
-        self.assertEqual(self.entry.excerpt, '')
-        self.entry.status = PUBLISHED
-        self.admin.save_model(self.request, self.entry,
-                              EntryAdmin.form(), False)
-        self.assertEqual(self.entry.excerpt, 'My content')
-
-        self.entry.content = 'My changed content'
-        self.admin.save_model(self.request, self.entry,
-                              EntryAdmin.form(), False)
-        self.assertEqual(self.entry.excerpt, 'My content')
-
-        self.entry.excerpt = ''
-        content = '<p>%s</p>' % ' '.join(['word-%s' % i for i in range(75)])
-        self.entry.content = content
-        self.admin.save_model(self.request, self.entry,
-                              EntryAdmin.form(), False)
-        self.assertEqual(self.entry.excerpt,
-                         ' '.join(['word-%s' % i for i in range(50)]) + '...')
-
     def test_queryset(self):
         user = Author.objects.create_user(
             'user', 'user@exemple.com')
