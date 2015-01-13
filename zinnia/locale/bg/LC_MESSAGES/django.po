@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-04 16:34+0100\n"
-"PO-Revision-Date: 2014-10-14 13:32+0000\n"
+"POT-Creation-Date: 2015-01-12 15:16+0100\n"
+"PO-Revision-Date: 2015-01-12 14:16+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/django-blog-zinnia/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -18,8 +18,201 @@ msgstr ""
 "Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: breadcrumbs.py:68 admin/forms.py:66
-#: templates/admin/zinnia/widgets/quickpost.html:25
+#: admin/category.py:34
+msgid "tree path"
+msgstr "пътека"
+
+#: admin/entry.py:30 templates/admin/zinnia/widgets/quickpost.html:17
+msgid "Content"
+msgstr "Съдържание"
+
+#: admin/entry.py:32
+msgid "Illustration"
+msgstr ""
+
+#: admin/entry.py:35
+msgid "Publication"
+msgstr "Публикация"
+
+#: admin/entry.py:39 templates/admin/zinnia/widgets/_content_stats.html:4
+#: templates/zinnia/_entry_detail_base.html:114
+msgid "Discussions"
+msgstr "Дискусии"
+
+#: admin/entry.py:43
+msgid "Privacy"
+msgstr "Поверителност"
+
+#: admin/entry.py:46
+msgid "Templates"
+msgstr ""
+
+#: admin/entry.py:49
+msgid "Metadatas"
+msgstr ""
+
+#: admin/entry.py:81
+#, python-format
+msgid "%(title)s (%(word_count)i words)"
+msgstr "%(title)s (%(word_count)i думи)"
+
+#: admin/entry.py:88
+#, python-format
+msgid "%(title)s (%(reactions)i reaction)"
+msgid_plural "%(title)s (%(reactions)i reactions)"
+msgstr[0] "%(title)s (%(reactions)i реакция)"
+msgstr[1] "%(title)s (%(reactions)i реакции)"
+
+#: admin/entry.py:93 models/category.py:21 models_bases/entry.py:50
+msgid "title"
+msgstr "Заглавие"
+
+#: admin/entry.py:109
+msgid "author(s)"
+msgstr "автор(и)"
+
+#: admin/entry.py:124
+msgid "category(s)"
+msgstr "категории"
+
+#: admin/entry.py:137
+msgid "tag(s)"
+msgstr "етикети"
+
+#: admin/entry.py:152
+msgid "site(s)"
+msgstr "сайтове"
+
+#: admin/entry.py:165
+msgid "short url"
+msgstr "кратък URL адрес"
+
+#: admin/entry.py:173
+msgid "is visible"
+msgstr "видима"
+
+#: admin/entry.py:261
+msgid "The selected entries now belong to you."
+msgstr ""
+
+#: admin/entry.py:262
+msgid "Set the entries to the user"
+msgstr ""
+
+#: admin/entry.py:271
+msgid "The selected entries are now marked as published."
+msgstr "Избраните статии са публикувани."
+
+#: admin/entry.py:272
+msgid "Set entries selected as published"
+msgstr "Публикувай избраните статии"
+
+#: admin/entry.py:280
+msgid "The selected entries are now marked as hidden."
+msgstr "Избраните статии са скрити."
+
+#: admin/entry.py:281
+msgid "Set entries selected as hidden"
+msgstr "Скрий избраните статии"
+
+#: admin/entry.py:289
+msgid "Comments are now closed for selected entries."
+msgstr "Коментарите за избраните статии са затворени."
+
+#: admin/entry.py:290
+msgid "Close the comments for selected entries"
+msgstr "Затвори коментарите за избраните статии"
+
+#: admin/entry.py:299
+msgid "Pingbacks are now closed for selected entries."
+msgstr ""
+
+#: admin/entry.py:301
+msgid "Close the pingbacks for selected entries"
+msgstr ""
+
+#: admin/entry.py:309
+msgid "Trackbacks are now closed for selected entries."
+msgstr ""
+
+#: admin/entry.py:311
+msgid "Close the trackbacks for selected entries"
+msgstr ""
+
+#: admin/entry.py:320
+msgid "The selected entries are now set at the current date."
+msgstr ""
+
+#: admin/entry.py:322
+msgid "Put the selected entries on top at the current date"
+msgstr "Постави избраните статии най-горе за текущата дата."
+
+#: admin/entry.py:330
+msgid "Selected entries are now marked as featured."
+msgstr ""
+
+#: admin/entry.py:331
+msgid "Mark selected entries as featured"
+msgstr ""
+
+#: admin/entry.py:339
+msgid "Selected entries are no longer marked as featured."
+msgstr ""
+
+#: admin/entry.py:341
+msgid "Unmark selected entries as featured"
+msgstr ""
+
+#: admin/entry.py:362
+#, python-format
+msgid "%(directory)s directory succesfully pinged %(success)d entries."
+msgstr ""
+
+#: admin/entry.py:366
+msgid "Ping Directories for selected entries"
+msgstr ""
+
+#: admin/filters.py:29
+#, python-format
+msgid "%(item)s (%(count)i entry)"
+msgid_plural "%(item)s (%(count)i entries)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/filters.py:50
+msgid "published authors"
+msgstr ""
+
+#: admin/filters.py:61
+msgid "published categories"
+msgstr "публикувани категории"
+
+#: admin/forms.py:23
+msgid "Parent category"
+msgstr "Родител"
+
+#: admin/forms.py:25
+msgid "No parent category"
+msgstr "Няма родител"
+
+#: admin/forms.py:42
+msgid "A category cannot be parent of itself."
+msgstr "Категория не може да бъде родител сама на себе си."
+
+#: admin/forms.py:59 breadcrumbs.py:75 templates/zinnia/base.html:37
+#: templates/zinnia/category_list.html:6
+msgid "Categories"
+msgstr "Категории"
+
+#: admin/forms.py:61 models/category.py:74 models_bases/entry.py:451
+msgid "categories"
+msgstr "категории"
+
+#: apps.py:12
+msgid "Weblog"
+msgstr ""
+
+#: breadcrumbs.py:68 templates/admin/zinnia/widgets/quickpost.html:25
 #: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:53
 #: templates/zinnia/tag_list.html:6
 msgid "Tags"
@@ -29,11 +222,6 @@ msgstr "Етикети"
 #: templates/zinnia/base.html:43
 msgid "Authors"
 msgstr "Автори"
-
-#: breadcrumbs.py:75 admin/forms.py:60 templates/zinnia/base.html:37
-#: templates/zinnia/category_list.html:6
-msgid "Categories"
-msgstr "Категории"
 
 #: breadcrumbs.py:100
 #, python-format
@@ -144,192 +332,6 @@ msgstr ""
 msgid "The latest trackbacks for the entry %s"
 msgstr ""
 
-#: moderator.py:66 moderator.py:88 moderator.py:111
-#, python-format
-msgid "[%(site)s] New comment posted on \"%(title)s\""
-msgstr "[%(site)s] Нови коментари по \"%(title)s\""
-
-#: admin/category.py:34
-msgid "tree path"
-msgstr "пътека"
-
-#: admin/entry.py:30 templates/admin/zinnia/widgets/quickpost.html:17
-msgid "Content"
-msgstr "Съдържание"
-
-#: admin/entry.py:32
-msgid "Publication"
-msgstr "Публикация"
-
-#: admin/entry.py:36 templates/admin/zinnia/widgets/_content_stats.html:4
-#: templates/zinnia/_entry_detail_base.html:114
-msgid "Discussions"
-msgstr "Дискусии"
-
-#: admin/entry.py:40
-msgid "Privacy"
-msgstr "Поверителност"
-
-#: admin/entry.py:43
-msgid "Templates"
-msgstr ""
-
-#: admin/entry.py:46
-msgid "Metadatas"
-msgstr ""
-
-#: admin/entry.py:78
-#, python-format
-msgid "%(title)s (%(word_count)i words)"
-msgstr "%(title)s (%(word_count)i думи)"
-
-#: admin/entry.py:85
-#, python-format
-msgid "%(title)s (%(reactions)i reaction)"
-msgid_plural "%(title)s (%(reactions)i reactions)"
-msgstr[0] "%(title)s (%(reactions)i реакция)"
-msgstr[1] "%(title)s (%(reactions)i реакции)"
-
-#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:50
-msgid "title"
-msgstr "Заглавие"
-
-#: admin/entry.py:106
-msgid "author(s)"
-msgstr "автор(и)"
-
-#: admin/entry.py:121
-msgid "category(s)"
-msgstr "категории"
-
-#: admin/entry.py:134
-msgid "tag(s)"
-msgstr "етикети"
-
-#: admin/entry.py:149
-msgid "site(s)"
-msgstr "сайтове"
-
-#: admin/entry.py:162
-msgid "short url"
-msgstr "кратък URL адрес"
-
-#: admin/entry.py:170
-msgid "is visible"
-msgstr "видима"
-
-#: admin/entry.py:254
-msgid "The selected entries now belong to you."
-msgstr ""
-
-#: admin/entry.py:255
-msgid "Set the entries to the user"
-msgstr ""
-
-#: admin/entry.py:264
-msgid "The selected entries are now marked as published."
-msgstr "Избраните статии са публикувани."
-
-#: admin/entry.py:265
-msgid "Set entries selected as published"
-msgstr "Публикувай избраните статии"
-
-#: admin/entry.py:273
-msgid "The selected entries are now marked as hidden."
-msgstr "Избраните статии са скрити."
-
-#: admin/entry.py:274
-msgid "Set entries selected as hidden"
-msgstr "Скрий избраните статии"
-
-#: admin/entry.py:282
-msgid "Comments are now closed for selected entries."
-msgstr "Коментарите за избраните статии са затворени."
-
-#: admin/entry.py:283
-msgid "Close the comments for selected entries"
-msgstr "Затвори коментарите за избраните статии"
-
-#: admin/entry.py:292
-msgid "Pingbacks are now closed for selected entries."
-msgstr ""
-
-#: admin/entry.py:294
-msgid "Close the pingbacks for selected entries"
-msgstr ""
-
-#: admin/entry.py:302
-msgid "Trackbacks are now closed for selected entries."
-msgstr ""
-
-#: admin/entry.py:304
-msgid "Close the trackbacks for selected entries"
-msgstr ""
-
-#: admin/entry.py:313
-msgid "The selected entries are now set at the current date."
-msgstr ""
-
-#: admin/entry.py:315
-msgid "Put the selected entries on top at the current date"
-msgstr "Постави избраните статии най-горе за текущата дата."
-
-#: admin/entry.py:323
-msgid "Selected entries are now marked as featured."
-msgstr ""
-
-#: admin/entry.py:324
-msgid "Mark selected entries as featured"
-msgstr ""
-
-#: admin/entry.py:332
-msgid "Selected entries are no longer marked as featured."
-msgstr ""
-
-#: admin/entry.py:334
-msgid "Unmark selected entries as featured"
-msgstr ""
-
-#: admin/entry.py:355
-#, python-format
-msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr ""
-
-#: admin/entry.py:359
-msgid "Ping Directories for selected entries"
-msgstr ""
-
-#: admin/filters.py:29
-#, python-format
-msgid "%(item)s (%(count)i entry)"
-msgid_plural "%(item)s (%(count)i entries)"
-msgstr[0] ""
-msgstr[1] ""
-
-#: admin/filters.py:50
-msgid "published authors"
-msgstr ""
-
-#: admin/filters.py:61
-msgid "published categories"
-msgstr "публикувани категории"
-
-#: admin/forms.py:25
-msgid "Parent category"
-msgstr "Родител"
-
-#: admin/forms.py:27
-msgid "No parent category"
-msgstr "Няма родител"
-
-#: admin/forms.py:44
-msgid "A category cannot be parent of itself."
-msgstr "Категория не може да бъде родител сама на себе си."
-
-#: admin/forms.py:62 models/category.py:75 models_bases/entry.py:434
-msgid "categories"
-msgstr "категории"
-
 #: models/category.py:24 models_bases/entry.py:53
 msgid "slug"
 msgstr ""
@@ -346,7 +348,7 @@ msgstr "Описание"
 msgid "parent category"
 msgstr "родител"
 
-#: models/category.py:74
+#: models/category.py:73
 msgid "category"
 msgstr "категория"
 
@@ -402,121 +404,142 @@ msgstr "дата на създаване"
 msgid "last update"
 msgstr "последна актуализация"
 
-#: models_bases/entry.py:185
+#: models_bases/entry.py:184
 msgid "entry"
 msgstr "статия"
 
-#: models_bases/entry.py:186
+#: models_bases/entry.py:185
 msgid "entries"
 msgstr "статии"
 
-#: models_bases/entry.py:200
+#: models_bases/entry.py:199
 msgid "content"
 msgstr "съдържание"
 
-#: models_bases/entry.py:242
+#: models_bases/entry.py:241
 msgid "comments enabled"
 msgstr "коментарите са включени"
 
-#: models_bases/entry.py:243
+#: models_bases/entry.py:242
 msgid "Allows comments if checked."
 msgstr "Разрешава коментари по статията"
 
-#: models_bases/entry.py:245
+#: models_bases/entry.py:244
 msgid "pingbacks enabled"
 msgstr ""
 
-#: models_bases/entry.py:246
+#: models_bases/entry.py:245
 msgid "Allows pingbacks if checked."
 msgstr ""
 
-#: models_bases/entry.py:248
+#: models_bases/entry.py:247
 msgid "trackbacks enabled"
 msgstr ""
 
-#: models_bases/entry.py:249
+#: models_bases/entry.py:248
 msgid "Allows trackbacks if checked."
 msgstr ""
 
-#: models_bases/entry.py:252
+#: models_bases/entry.py:251
 msgid "comment count"
 msgstr "брой коментари"
 
-#: models_bases/entry.py:254
+#: models_bases/entry.py:253
 msgid "pingback count"
 msgstr ""
 
-#: models_bases/entry.py:256
+#: models_bases/entry.py:255
 msgid "trackback count"
 msgstr ""
 
-#: models_bases/entry.py:340
+#: models_bases/entry.py:339
 msgid "related entries"
 msgstr "сродни статии"
 
+#: models_bases/entry.py:357
+msgid "lead"
+msgstr ""
+
 #: models_bases/entry.py:358
+msgid "Lead paragraph"
+msgstr ""
+
+#: models_bases/entry.py:369
 msgid "excerpt"
 msgstr "откъс"
 
-#: models_bases/entry.py:359
-msgid "Used for search and SEO."
+#: models_bases/entry.py:370
+msgid "Used for SEO purposes."
 msgstr ""
 
-#: models_bases/entry.py:392
+#: models_bases/entry.py:405
 msgid "image"
 msgstr "изображение"
 
-#: models_bases/entry.py:394
+#: models_bases/entry.py:407
 msgid "Used for illustration."
 msgstr "Използва се за онагледяване."
 
-#: models_bases/entry.py:405
+#: models_bases/entry.py:410
+msgid "caption"
+msgstr ""
+
+#: models_bases/entry.py:411
+msgid "Image's caption."
+msgstr ""
+
+#: models_bases/entry.py:422
 msgid "featured"
 msgstr "избрана"
 
-#: models_bases/entry.py:420
+#: models_bases/entry.py:437
 msgid "authors"
 msgstr "автори"
 
-#: models_bases/entry.py:444
+#: models_bases/entry.py:461
 msgid "tags"
 msgstr "етикети"
 
-#: models_bases/entry.py:463
+#: models_bases/entry.py:480
 msgid "login required"
 msgstr "Необходимо е да влезете в системата"
 
-#: models_bases/entry.py:464
+#: models_bases/entry.py:481
 msgid "Only authenticated users can view the entry."
 msgstr "Само потребители с удостоверена идентичност могат да прочетат статията."
 
-#: models_bases/entry.py:476
+#: models_bases/entry.py:493
 msgid "password"
 msgstr "парола"
 
-#: models_bases/entry.py:477
+#: models_bases/entry.py:494
 msgid "Protects the entry with a password."
 msgstr "Защитава статията с парола."
 
-#: models_bases/entry.py:489
+#: models_bases/entry.py:506
 msgid "content template"
 msgstr "шаблон за съдържанието"
 
-#: models_bases/entry.py:491 models_bases/entry.py:507
+#: models_bases/entry.py:508 models_bases/entry.py:524
 msgid "Default template"
 msgstr "Шаблон по подразбиране"
 
-#: models_bases/entry.py:493
+#: models_bases/entry.py:510
 msgid "Template used to display the entry's content."
 msgstr "Шаблон използван за показване на съдържанието на страницата."
 
-#: models_bases/entry.py:505
+#: models_bases/entry.py:522
 msgid "detail template"
 msgstr "шаблон за подробното съдържание"
 
-#: models_bases/entry.py:509
+#: models_bases/entry.py:526
 msgid "Template used to display the entry's detail page."
 msgstr "Шаблон използван за показване на подробното съдържание на статията."
+
+#: moderator.py:66 moderator.py:88 moderator.py:111
+#, python-format
+msgid "[%(site)s] New comment posted on \"%(title)s\""
+msgstr "[%(site)s] Нови коментари по \"%(title)s\""
 
 #: templates/400.html:6
 msgid "Error 400"
@@ -841,20 +864,6 @@ msgstr "Изтрий коментара"
 msgid "Approve this comment"
 msgstr "Одобри коментара"
 
-#: templates/comments/zinnia_entry_preview.html:4
-msgid "Comment preview"
-msgstr "Преглед на коментара"
-
-#: templates/comments/zinnia_entry_preview.html:10
-msgid "Please correct following error."
-msgid_plural "Please correct following errors."
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/comments/zinnia_entry_preview.html:12
-msgid "Preview of the comment"
-msgstr "Преглед на коментара."
-
 #: templates/comments/zinnia/entry/form.html:11
 msgid "Post your comment"
 msgstr "Напишете коментар"
@@ -890,6 +899,20 @@ msgstr "Обратно към  %(title)s"
 #: templates/comments/zinnia/entry/posted.html:27
 msgid "Return to entry list"
 msgstr "Върни към списъка със статии"
+
+#: templates/comments/zinnia_entry_preview.html:4
+msgid "Comment preview"
+msgstr "Преглед на коментара"
+
+#: templates/comments/zinnia_entry_preview.html:10
+msgid "Please correct following error."
+msgid_plural "Please correct following errors."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/comments/zinnia_entry_preview.html:12
+msgid "Preview of the comment"
+msgstr "Преглед на коментара."
 
 #: templates/zinnia/_entry_detail_base.html:17
 msgid "Written by"
@@ -1441,15 +1464,15 @@ msgid_plural "%(entry_count)s entries tagged by %(tag)s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templatetags/zinnia.py:344
+#: templatetags/zinnia.py:345
 msgid "Blog"
 msgstr ""
 
-#: tests/test_views.py:586 views/search.py:30
+#: tests/test_views.py:585 views/search.py:30
 msgid "The pattern is too short"
 msgstr ""
 
-#: tests/test_views.py:590 views/search.py:34
+#: tests/test_views.py:589 views/search.py:34
 msgid "No pattern to search found"
 msgstr ""
 
@@ -1581,13 +1604,13 @@ msgstr ""
 msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 msgstr ""
 
+#: views/mixins/entry_preview.py:27
+msgid "No entry found matching the query"
+msgstr ""
+
 #: views/tags.py:48
 #, python-format
 msgid "No Tag found matching \"%s\"."
-msgstr ""
-
-#: views/mixins/entry_preview.py:27
-msgid "No entry found matching the query"
 msgstr ""
 
 #: xmlrpc/metaweblog.py:48

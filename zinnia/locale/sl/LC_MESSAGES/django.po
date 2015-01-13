@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-04 16:34+0100\n"
-"PO-Revision-Date: 2014-10-14 13:32+0000\n"
+"POT-Creation-Date: 2015-01-12 15:16+0100\n"
+"PO-Revision-Date: 2015-01-12 14:16+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/django-blog-zinnia/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -18,8 +18,205 @@ msgstr ""
 "Language: sl\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
-#: breadcrumbs.py:68 admin/forms.py:66
-#: templates/admin/zinnia/widgets/quickpost.html:25
+#: admin/category.py:34
+msgid "tree path"
+msgstr "drevesna pot"
+
+#: admin/entry.py:30 templates/admin/zinnia/widgets/quickpost.html:17
+msgid "Content"
+msgstr "Vsebina"
+
+#: admin/entry.py:32
+msgid "Illustration"
+msgstr ""
+
+#: admin/entry.py:35
+msgid "Publication"
+msgstr "Objava"
+
+#: admin/entry.py:39 templates/admin/zinnia/widgets/_content_stats.html:4
+#: templates/zinnia/_entry_detail_base.html:114
+msgid "Discussions"
+msgstr "Razprave"
+
+#: admin/entry.py:43
+msgid "Privacy"
+msgstr "Zasebnost"
+
+#: admin/entry.py:46
+msgid "Templates"
+msgstr "Predloge"
+
+#: admin/entry.py:49
+msgid "Metadatas"
+msgstr "Meta podatki"
+
+#: admin/entry.py:81
+#, python-format
+msgid "%(title)s (%(word_count)i words)"
+msgstr "%(title)s (%(word_count)i besede)"
+
+#: admin/entry.py:88
+#, python-format
+msgid "%(title)s (%(reactions)i reaction)"
+msgid_plural "%(title)s (%(reactions)i reactions)"
+msgstr[0] "%(title)s (%(reactions)i odziv)"
+msgstr[1] "%(title)s (%(reactions)i odziva)"
+msgstr[2] "%(title)s (%(reactions)i odzivi)"
+msgstr[3] "%(title)s (%(reactions)i odzivi)"
+
+#: admin/entry.py:93 models/category.py:21 models_bases/entry.py:50
+msgid "title"
+msgstr "naslov"
+
+#: admin/entry.py:109
+msgid "author(s)"
+msgstr "avtor(ji)"
+
+#: admin/entry.py:124
+msgid "category(s)"
+msgstr "kategorija(e)"
+
+#: admin/entry.py:137
+msgid "tag(s)"
+msgstr "značka(e)"
+
+#: admin/entry.py:152
+msgid "site(s)"
+msgstr "Stran(i)"
+
+#: admin/entry.py:165
+msgid "short url"
+msgstr "skrajšan spletni naslov"
+
+#: admin/entry.py:173
+msgid "is visible"
+msgstr "je vidno"
+
+#: admin/entry.py:261
+msgid "The selected entries now belong to you."
+msgstr "Izbrani vnosi sedaj pripadajo Vam."
+
+#: admin/entry.py:262
+msgid "Set the entries to the user"
+msgstr "Nastavi vnose na uporabnika"
+
+#: admin/entry.py:271
+msgid "The selected entries are now marked as published."
+msgstr "Izbrani vnosi so označeni kot objavljeni."
+
+#: admin/entry.py:272
+msgid "Set entries selected as published"
+msgstr "Izbrane vnose nastavi kot objavljene"
+
+#: admin/entry.py:280
+msgid "The selected entries are now marked as hidden."
+msgstr "Izbrani vnosi so označeni kot skriti."
+
+#: admin/entry.py:281
+msgid "Set entries selected as hidden"
+msgstr "Izbrane vnose nastavi kot skrite"
+
+#: admin/entry.py:289
+msgid "Comments are now closed for selected entries."
+msgstr "Komentarji so onemogočeni za izbrane vnose."
+
+#: admin/entry.py:290
+msgid "Close the comments for selected entries"
+msgstr "Onemogoči komentarje za izbrane vnose"
+
+#: admin/entry.py:299
+msgid "Pingbacks are now closed for selected entries."
+msgstr "Oprtane povezave so sedaj zaprte za izbrane vnose."
+
+#: admin/entry.py:301
+msgid "Close the pingbacks for selected entries"
+msgstr "Zapri oprtane povezave za izbrane vnose"
+
+#: admin/entry.py:309
+msgid "Trackbacks are now closed for selected entries."
+msgstr "Povratne sledi so sedaj zaprte za izbrane vnose."
+
+#: admin/entry.py:311
+msgid "Close the trackbacks for selected entries"
+msgstr "Zapri povratne sledi za izbrane vnose"
+
+#: admin/entry.py:320
+msgid "The selected entries are now set at the current date."
+msgstr "Izbrani vnosi so sedaj postavljeni na trenutni datum."
+
+#: admin/entry.py:322
+msgid "Put the selected entries on top at the current date"
+msgstr "Za trenutni datum postavi izbrane vnose na vrh."
+
+#: admin/entry.py:330
+msgid "Selected entries are now marked as featured."
+msgstr "Izbrani vnosi so označeni kot predstavljeni."
+
+#: admin/entry.py:331
+msgid "Mark selected entries as featured"
+msgstr "Označi izbrane vnose kot predstavljene"
+
+#: admin/entry.py:339
+msgid "Selected entries are no longer marked as featured."
+msgstr "Izbrani vnosi niso več označeni kot predstavljeni."
+
+#: admin/entry.py:341
+msgid "Unmark selected entries as featured"
+msgstr "Odznači izbrane vnose kot predstavljene"
+
+#: admin/entry.py:362
+#, python-format
+msgid "%(directory)s directory succesfully pinged %(success)d entries."
+msgstr "%(directory)s imenik uspešno pingan %(success)d vnosov."
+
+#: admin/entry.py:366
+msgid "Ping Directories for selected entries"
+msgstr "Pingaj imenike za izbrane vnose"
+
+#: admin/filters.py:29
+#, python-format
+msgid "%(item)s (%(count)i entry)"
+msgid_plural "%(item)s (%(count)i entries)"
+msgstr[0] "%(item)s (%(count)i vnos)"
+msgstr[1] "%(item)s (%(count)i vnosa)"
+msgstr[2] "%(item)s (%(count)i vnosi)"
+msgstr[3] "%(item)s (%(count)i vnosi)"
+
+#: admin/filters.py:50
+msgid "published authors"
+msgstr "objavljeni avtorji"
+
+#: admin/filters.py:61
+msgid "published categories"
+msgstr "objavljene kategorije"
+
+#: admin/forms.py:23
+msgid "Parent category"
+msgstr "Starševska kategorija"
+
+#: admin/forms.py:25
+msgid "No parent category"
+msgstr "Ni nadrejene kategorije"
+
+#: admin/forms.py:42
+msgid "A category cannot be parent of itself."
+msgstr "Kategorija ne more biti nadrejena sami sebi"
+
+#: admin/forms.py:59 breadcrumbs.py:75 templates/zinnia/base.html:37
+#: templates/zinnia/category_list.html:6
+msgid "Categories"
+msgstr "Kategorije"
+
+#: admin/forms.py:61 models/category.py:74 models_bases/entry.py:451
+msgid "categories"
+msgstr "kategorije"
+
+#: apps.py:12
+msgid "Weblog"
+msgstr ""
+
+#: breadcrumbs.py:68 templates/admin/zinnia/widgets/quickpost.html:25
 #: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:53
 #: templates/zinnia/tag_list.html:6
 msgid "Tags"
@@ -29,11 +226,6 @@ msgstr "Značke"
 #: templates/zinnia/base.html:43
 msgid "Authors"
 msgstr "Avtorji"
-
-#: breadcrumbs.py:75 admin/forms.py:60 templates/zinnia/base.html:37
-#: templates/zinnia/category_list.html:6
-msgid "Categories"
-msgstr "Kategorije"
 
 #: breadcrumbs.py:100
 #, python-format
@@ -144,196 +336,6 @@ msgstr "Povratna sled za %s"
 msgid "The latest trackbacks for the entry %s"
 msgstr "Zadnje povratne sledi za vnos %s"
 
-#: moderator.py:66 moderator.py:88 moderator.py:111
-#, python-format
-msgid "[%(site)s] New comment posted on \"%(title)s\""
-msgstr "[%(site)s] Nov komentar objavljen na \"%(title)s\""
-
-#: admin/category.py:34
-msgid "tree path"
-msgstr "drevesna pot"
-
-#: admin/entry.py:30 templates/admin/zinnia/widgets/quickpost.html:17
-msgid "Content"
-msgstr "Vsebina"
-
-#: admin/entry.py:32
-msgid "Publication"
-msgstr "Objava"
-
-#: admin/entry.py:36 templates/admin/zinnia/widgets/_content_stats.html:4
-#: templates/zinnia/_entry_detail_base.html:114
-msgid "Discussions"
-msgstr "Razprave"
-
-#: admin/entry.py:40
-msgid "Privacy"
-msgstr "Zasebnost"
-
-#: admin/entry.py:43
-msgid "Templates"
-msgstr "Predloge"
-
-#: admin/entry.py:46
-msgid "Metadatas"
-msgstr "Meta podatki"
-
-#: admin/entry.py:78
-#, python-format
-msgid "%(title)s (%(word_count)i words)"
-msgstr "%(title)s (%(word_count)i besede)"
-
-#: admin/entry.py:85
-#, python-format
-msgid "%(title)s (%(reactions)i reaction)"
-msgid_plural "%(title)s (%(reactions)i reactions)"
-msgstr[0] "%(title)s (%(reactions)i odziv)"
-msgstr[1] "%(title)s (%(reactions)i odziva)"
-msgstr[2] "%(title)s (%(reactions)i odzivi)"
-msgstr[3] "%(title)s (%(reactions)i odzivi)"
-
-#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:50
-msgid "title"
-msgstr "naslov"
-
-#: admin/entry.py:106
-msgid "author(s)"
-msgstr "avtor(ji)"
-
-#: admin/entry.py:121
-msgid "category(s)"
-msgstr "kategorija(e)"
-
-#: admin/entry.py:134
-msgid "tag(s)"
-msgstr "značka(e)"
-
-#: admin/entry.py:149
-msgid "site(s)"
-msgstr "Stran(i)"
-
-#: admin/entry.py:162
-msgid "short url"
-msgstr "skrajšan spletni naslov"
-
-#: admin/entry.py:170
-msgid "is visible"
-msgstr "je vidno"
-
-#: admin/entry.py:254
-msgid "The selected entries now belong to you."
-msgstr "Izbrani vnosi sedaj pripadajo Vam."
-
-#: admin/entry.py:255
-msgid "Set the entries to the user"
-msgstr "Nastavi vnose na uporabnika"
-
-#: admin/entry.py:264
-msgid "The selected entries are now marked as published."
-msgstr "Izbrani vnosi so označeni kot objavljeni."
-
-#: admin/entry.py:265
-msgid "Set entries selected as published"
-msgstr "Izbrane vnose nastavi kot objavljene"
-
-#: admin/entry.py:273
-msgid "The selected entries are now marked as hidden."
-msgstr "Izbrani vnosi so označeni kot skriti."
-
-#: admin/entry.py:274
-msgid "Set entries selected as hidden"
-msgstr "Izbrane vnose nastavi kot skrite"
-
-#: admin/entry.py:282
-msgid "Comments are now closed for selected entries."
-msgstr "Komentarji so onemogočeni za izbrane vnose."
-
-#: admin/entry.py:283
-msgid "Close the comments for selected entries"
-msgstr "Onemogoči komentarje za izbrane vnose"
-
-#: admin/entry.py:292
-msgid "Pingbacks are now closed for selected entries."
-msgstr "Oprtane povezave so sedaj zaprte za izbrane vnose."
-
-#: admin/entry.py:294
-msgid "Close the pingbacks for selected entries"
-msgstr "Zapri oprtane povezave za izbrane vnose"
-
-#: admin/entry.py:302
-msgid "Trackbacks are now closed for selected entries."
-msgstr "Povratne sledi so sedaj zaprte za izbrane vnose."
-
-#: admin/entry.py:304
-msgid "Close the trackbacks for selected entries"
-msgstr "Zapri povratne sledi za izbrane vnose"
-
-#: admin/entry.py:313
-msgid "The selected entries are now set at the current date."
-msgstr "Izbrani vnosi so sedaj postavljeni na trenutni datum."
-
-#: admin/entry.py:315
-msgid "Put the selected entries on top at the current date"
-msgstr "Za trenutni datum postavi izbrane vnose na vrh."
-
-#: admin/entry.py:323
-msgid "Selected entries are now marked as featured."
-msgstr "Izbrani vnosi so označeni kot predstavljeni."
-
-#: admin/entry.py:324
-msgid "Mark selected entries as featured"
-msgstr "Označi izbrane vnose kot predstavljene"
-
-#: admin/entry.py:332
-msgid "Selected entries are no longer marked as featured."
-msgstr "Izbrani vnosi niso več označeni kot predstavljeni."
-
-#: admin/entry.py:334
-msgid "Unmark selected entries as featured"
-msgstr "Odznači izbrane vnose kot predstavljene"
-
-#: admin/entry.py:355
-#, python-format
-msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr "%(directory)s imenik uspešno pingan %(success)d vnosov."
-
-#: admin/entry.py:359
-msgid "Ping Directories for selected entries"
-msgstr "Pingaj imenike za izbrane vnose"
-
-#: admin/filters.py:29
-#, python-format
-msgid "%(item)s (%(count)i entry)"
-msgid_plural "%(item)s (%(count)i entries)"
-msgstr[0] "%(item)s (%(count)i vnos)"
-msgstr[1] "%(item)s (%(count)i vnosa)"
-msgstr[2] "%(item)s (%(count)i vnosi)"
-msgstr[3] "%(item)s (%(count)i vnosi)"
-
-#: admin/filters.py:50
-msgid "published authors"
-msgstr "objavljeni avtorji"
-
-#: admin/filters.py:61
-msgid "published categories"
-msgstr "objavljene kategorije"
-
-#: admin/forms.py:25
-msgid "Parent category"
-msgstr "Starševska kategorija"
-
-#: admin/forms.py:27
-msgid "No parent category"
-msgstr "Ni nadrejene kategorije"
-
-#: admin/forms.py:44
-msgid "A category cannot be parent of itself."
-msgstr "Kategorija ne more biti nadrejena sami sebi"
-
-#: admin/forms.py:62 models/category.py:75 models_bases/entry.py:434
-msgid "categories"
-msgstr "kategorije"
-
 #: models/category.py:24 models_bases/entry.py:53
 msgid "slug"
 msgstr "slug"
@@ -350,7 +352,7 @@ msgstr "opis"
 msgid "parent category"
 msgstr "nadrejena kategorija"
 
-#: models/category.py:74
+#: models/category.py:73
 msgid "category"
 msgstr "kategorija"
 
@@ -406,121 +408,142 @@ msgstr "datum nastanka"
 msgid "last update"
 msgstr "zadnja posodobitev"
 
-#: models_bases/entry.py:185
+#: models_bases/entry.py:184
 msgid "entry"
 msgstr "vnos"
 
-#: models_bases/entry.py:186
+#: models_bases/entry.py:185
 msgid "entries"
 msgstr "vnosi"
 
-#: models_bases/entry.py:200
+#: models_bases/entry.py:199
 msgid "content"
 msgstr "vsebina"
 
-#: models_bases/entry.py:242
+#: models_bases/entry.py:241
 msgid "comments enabled"
 msgstr "komentarji omogočeni"
 
-#: models_bases/entry.py:243
+#: models_bases/entry.py:242
 msgid "Allows comments if checked."
 msgstr "Omogoči komentarje če je označeno."
 
-#: models_bases/entry.py:245
+#: models_bases/entry.py:244
 msgid "pingbacks enabled"
 msgstr "oprtane povezave omogočene"
 
-#: models_bases/entry.py:246
+#: models_bases/entry.py:245
 msgid "Allows pingbacks if checked."
 msgstr "Omogoči oprtane povezave če označeno."
 
-#: models_bases/entry.py:248
+#: models_bases/entry.py:247
 msgid "trackbacks enabled"
 msgstr "Povratne sledi omogočene"
 
-#: models_bases/entry.py:249
+#: models_bases/entry.py:248
 msgid "Allows trackbacks if checked."
 msgstr "Omogoči povratne sledi če je označeno."
 
-#: models_bases/entry.py:252
+#: models_bases/entry.py:251
 msgid "comment count"
 msgstr "število komentarjev"
 
-#: models_bases/entry.py:254
+#: models_bases/entry.py:253
 msgid "pingback count"
 msgstr "število oprtanih povezav"
 
-#: models_bases/entry.py:256
+#: models_bases/entry.py:255
 msgid "trackback count"
 msgstr "število povratnih sledi"
 
-#: models_bases/entry.py:340
+#: models_bases/entry.py:339
 msgid "related entries"
 msgstr "sorodni vnosi"
 
+#: models_bases/entry.py:357
+msgid "lead"
+msgstr ""
+
 #: models_bases/entry.py:358
+msgid "Lead paragraph"
+msgstr ""
+
+#: models_bases/entry.py:369
 msgid "excerpt"
 msgstr "izvleček"
 
-#: models_bases/entry.py:359
-msgid "Used for search and SEO."
-msgstr "Uporabljeno za iskanje in optimizacijo spletnih iskalnikov"
+#: models_bases/entry.py:370
+msgid "Used for SEO purposes."
+msgstr ""
 
-#: models_bases/entry.py:392
+#: models_bases/entry.py:405
 msgid "image"
 msgstr "slika"
 
-#: models_bases/entry.py:394
+#: models_bases/entry.py:407
 msgid "Used for illustration."
 msgstr "Uporabljeno za ilustracijo."
 
-#: models_bases/entry.py:405
+#: models_bases/entry.py:410
+msgid "caption"
+msgstr ""
+
+#: models_bases/entry.py:411
+msgid "Image's caption."
+msgstr ""
+
+#: models_bases/entry.py:422
 msgid "featured"
 msgstr "izrazit"
 
-#: models_bases/entry.py:420
+#: models_bases/entry.py:437
 msgid "authors"
 msgstr "avtorji"
 
-#: models_bases/entry.py:444
+#: models_bases/entry.py:461
 msgid "tags"
 msgstr "značka"
 
-#: models_bases/entry.py:463
+#: models_bases/entry.py:480
 msgid "login required"
 msgstr "potrebna prijava"
 
-#: models_bases/entry.py:464
+#: models_bases/entry.py:481
 msgid "Only authenticated users can view the entry."
 msgstr "Samo avtenticirani uporabniki si lahko ogledajo ta vnos."
 
-#: models_bases/entry.py:476
+#: models_bases/entry.py:493
 msgid "password"
 msgstr "geslo"
 
-#: models_bases/entry.py:477
+#: models_bases/entry.py:494
 msgid "Protects the entry with a password."
 msgstr "Zaščiti vnos z geslom."
 
-#: models_bases/entry.py:489
+#: models_bases/entry.py:506
 msgid "content template"
 msgstr "vsebina predloge"
 
-#: models_bases/entry.py:491 models_bases/entry.py:507
+#: models_bases/entry.py:508 models_bases/entry.py:524
 msgid "Default template"
 msgstr "Privzeta predloga"
 
-#: models_bases/entry.py:493
+#: models_bases/entry.py:510
 msgid "Template used to display the entry's content."
 msgstr "Predloga ki bo uporabljena za prikaz vsebine vnosa."
 
-#: models_bases/entry.py:505
+#: models_bases/entry.py:522
 msgid "detail template"
 msgstr "predloga za podrobnosti"
 
-#: models_bases/entry.py:509
+#: models_bases/entry.py:526
 msgid "Template used to display the entry's detail page."
 msgstr "Predloga uporabljena za prikaz podrobnosti za vnos."
+
+#: moderator.py:66 moderator.py:88 moderator.py:111
+#, python-format
+msgid "[%(site)s] New comment posted on \"%(title)s\""
+msgstr "[%(site)s] Nov komentar objavljen na \"%(title)s\""
 
 #: templates/400.html:6
 msgid "Error 400"
@@ -861,22 +884,6 @@ msgstr "Izbriši ta komentar"
 msgid "Approve this comment"
 msgstr "Odobri ta komentar"
 
-#: templates/comments/zinnia_entry_preview.html:4
-msgid "Comment preview"
-msgstr "Predogled komentarjev"
-
-#: templates/comments/zinnia_entry_preview.html:10
-msgid "Please correct following error."
-msgid_plural "Please correct following errors."
-msgstr[0] "Prosimo popravite napako."
-msgstr[1] "Prosimo popravite napaki."
-msgstr[2] "Prosimo popravite napake."
-msgstr[3] "Prosimo popravite napake."
-
-#: templates/comments/zinnia_entry_preview.html:12
-msgid "Preview of the comment"
-msgstr "Predogled komentarja"
-
 #: templates/comments/zinnia/entry/form.html:11
 msgid "Post your comment"
 msgstr "Objavi komentar"
@@ -912,6 +919,22 @@ msgstr "Nazaj na %(title)s"
 #: templates/comments/zinnia/entry/posted.html:27
 msgid "Return to entry list"
 msgstr "Vrni se na seznam vnosov"
+
+#: templates/comments/zinnia_entry_preview.html:4
+msgid "Comment preview"
+msgstr "Predogled komentarjev"
+
+#: templates/comments/zinnia_entry_preview.html:10
+msgid "Please correct following error."
+msgid_plural "Please correct following errors."
+msgstr[0] "Prosimo popravite napako."
+msgstr[1] "Prosimo popravite napaki."
+msgstr[2] "Prosimo popravite napake."
+msgstr[3] "Prosimo popravite napake."
+
+#: templates/comments/zinnia_entry_preview.html:12
+msgid "Preview of the comment"
+msgstr "Predogled komentarja"
 
 #: templates/zinnia/_entry_detail_base.html:17
 msgid "Written by"
@@ -1467,15 +1490,15 @@ msgstr[1] "%(entry_count)s vnosa označena z %(tag)s"
 msgstr[2] "%(entry_count)s vnosi označeni z %(tag)s"
 msgstr[3] "%(entry_count)s vnosi označeni z %(tag)s"
 
-#: templatetags/zinnia.py:344
+#: templatetags/zinnia.py:345
 msgid "Blog"
 msgstr "Blog"
 
-#: tests/test_views.py:586 views/search.py:30
+#: tests/test_views.py:585 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Vzorec je prekratek"
 
-#: tests/test_views.py:590 views/search.py:34
+#: tests/test_views.py:589 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Ni bilo mogoče najti vzorca za iskanje"
 
@@ -1607,14 +1630,14 @@ msgstr "^hitri-vnos/$"
 msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 msgstr "^(?P<tag>[^/]+(?u))/stran/(?P<page>\\d+)/$"
 
+#: views/mixins/entry_preview.py:27
+msgid "No entry found matching the query"
+msgstr ""
+
 #: views/tags.py:48
 #, python-format
 msgid "No Tag found matching \"%s\"."
 msgstr "Ni bilo mogoče najti značke, ki se ujema z \"%s\"."
-
-#: views/mixins/entry_preview.py:27
-msgid "No entry found matching the query"
-msgstr ""
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."

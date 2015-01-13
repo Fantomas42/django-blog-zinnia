@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-04 16:34+0100\n"
-"PO-Revision-Date: 2014-10-14 13:32+0000\n"
+"POT-Creation-Date: 2015-01-12 15:16+0100\n"
+"PO-Revision-Date: 2015-01-12 14:16+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/django-blog-zinnia/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -24,8 +24,201 @@ msgstr ""
 "Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: breadcrumbs.py:68 admin/forms.py:66
-#: templates/admin/zinnia/widgets/quickpost.html:25
+#: admin/category.py:34
+msgid "tree path"
+msgstr "alberatura"
+
+#: admin/entry.py:30 templates/admin/zinnia/widgets/quickpost.html:17
+msgid "Content"
+msgstr "Contenuto"
+
+#: admin/entry.py:32
+msgid "Illustration"
+msgstr ""
+
+#: admin/entry.py:35
+msgid "Publication"
+msgstr "Pubblicazione"
+
+#: admin/entry.py:39 templates/admin/zinnia/widgets/_content_stats.html:4
+#: templates/zinnia/_entry_detail_base.html:114
+msgid "Discussions"
+msgstr "Discussioni"
+
+#: admin/entry.py:43
+msgid "Privacy"
+msgstr "Privacy"
+
+#: admin/entry.py:46
+msgid "Templates"
+msgstr ""
+
+#: admin/entry.py:49
+msgid "Metadatas"
+msgstr ""
+
+#: admin/entry.py:81
+#, python-format
+msgid "%(title)s (%(word_count)i words)"
+msgstr "%(title)s (%(word_count)i parole)"
+
+#: admin/entry.py:88
+#, python-format
+msgid "%(title)s (%(reactions)i reaction)"
+msgid_plural "%(title)s (%(reactions)i reactions)"
+msgstr[0] "%(title)s (%(reactions)i reazioni)"
+msgstr[1] "%(title)s (%(reactions)i reazioni)"
+
+#: admin/entry.py:93 models/category.py:21 models_bases/entry.py:50
+msgid "title"
+msgstr "titolo"
+
+#: admin/entry.py:109
+msgid "author(s)"
+msgstr "autore(i)"
+
+#: admin/entry.py:124
+msgid "category(s)"
+msgstr "Categoria(e)"
+
+#: admin/entry.py:137
+msgid "tag(s)"
+msgstr "Tag"
+
+#: admin/entry.py:152
+msgid "site(s)"
+msgstr "Site(s)"
+
+#: admin/entry.py:165
+msgid "short url"
+msgstr "url breve"
+
+#: admin/entry.py:173
+msgid "is visible"
+msgstr "visibile ?"
+
+#: admin/entry.py:261
+msgid "The selected entries now belong to you."
+msgstr "Gli elementi selezionati non ti appartengono"
+
+#: admin/entry.py:262
+msgid "Set the entries to the user"
+msgstr "Attribuisci gli articoli all'utente"
+
+#: admin/entry.py:271
+msgid "The selected entries are now marked as published."
+msgstr "Gli articoli selezionati sono ora marcati come pubblicati."
+
+#: admin/entry.py:272
+msgid "Set entries selected as published"
+msgstr "Pubblica gli articoli selezionati"
+
+#: admin/entry.py:280
+msgid "The selected entries are now marked as hidden."
+msgstr "Gli articoli selezionati sono ora marcati come nascosti."
+
+#: admin/entry.py:281
+msgid "Set entries selected as hidden"
+msgstr "Nascondi gli articoli selezionati"
+
+#: admin/entry.py:289
+msgid "Comments are now closed for selected entries."
+msgstr "I commenti sono adesso chiusi sugli articoli selezionati."
+
+#: admin/entry.py:290
+msgid "Close the comments for selected entries"
+msgstr "Chiudi i commenti per gli articoli selezionati"
+
+#: admin/entry.py:299
+msgid "Pingbacks are now closed for selected entries."
+msgstr "I pingback sono chiusi per gli articoli selezionati"
+
+#: admin/entry.py:301
+msgid "Close the pingbacks for selected entries"
+msgstr "Chiudi i pingback per articoli selezionati"
+
+#: admin/entry.py:309
+msgid "Trackbacks are now closed for selected entries."
+msgstr "I trackback sono chiusi per articoli selezionati"
+
+#: admin/entry.py:311
+msgid "Close the trackbacks for selected entries"
+msgstr "Chiudi i trackback per articoli selezionati"
+
+#: admin/entry.py:320
+msgid "The selected entries are now set at the current date."
+msgstr "La data per gli articoli selezionati è stata impostata a quella corrente."
+
+#: admin/entry.py:322
+msgid "Put the selected entries on top at the current date"
+msgstr "Imposta gli articoli selezionati in testa alla data corrente"
+
+#: admin/entry.py:330
+msgid "Selected entries are now marked as featured."
+msgstr "Articoli selezionati sono ora marcati come in evidenza."
+
+#: admin/entry.py:331
+msgid "Mark selected entries as featured"
+msgstr "Metti gli articoli selezionati in evidenza"
+
+#: admin/entry.py:339
+msgid "Selected entries are no longer marked as featured."
+msgstr "Gli articoli selezionati non sono più in evidenza"
+
+#: admin/entry.py:341
+msgid "Unmark selected entries as featured"
+msgstr "Togli gli articoli selezionati dall'evidenza"
+
+#: admin/entry.py:362
+#, python-format
+msgid "%(directory)s directory succesfully pinged %(success)d entries."
+msgstr "La directory %(directory)s è stata pingata con successo per %(success)d articoli."
+
+#: admin/entry.py:366
+msgid "Ping Directories for selected entries"
+msgstr "Pinga le directory per gli articoli selezionati"
+
+#: admin/filters.py:29
+#, python-format
+msgid "%(item)s (%(count)i entry)"
+msgid_plural "%(item)s (%(count)i entries)"
+msgstr[0] "%(item)s (%(count)i articoli)"
+msgstr[1] "%(item)s (%(count)i articoli)"
+
+#: admin/filters.py:50
+msgid "published authors"
+msgstr "autori pubblicati"
+
+#: admin/filters.py:61
+msgid "published categories"
+msgstr "categorie pubblicate"
+
+#: admin/forms.py:23
+msgid "Parent category"
+msgstr "Categoria padre"
+
+#: admin/forms.py:25
+msgid "No parent category"
+msgstr "Nessuna categoria padre"
+
+#: admin/forms.py:42
+msgid "A category cannot be parent of itself."
+msgstr "Una categoria non può essere categoria padre di se stessa."
+
+#: admin/forms.py:59 breadcrumbs.py:75 templates/zinnia/base.html:37
+#: templates/zinnia/category_list.html:6
+msgid "Categories"
+msgstr "Categorie"
+
+#: admin/forms.py:61 models/category.py:74 models_bases/entry.py:451
+msgid "categories"
+msgstr "categorie"
+
+#: apps.py:12
+msgid "Weblog"
+msgstr ""
+
+#: breadcrumbs.py:68 templates/admin/zinnia/widgets/quickpost.html:25
 #: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:53
 #: templates/zinnia/tag_list.html:6
 msgid "Tags"
@@ -35,11 +228,6 @@ msgstr "Tag"
 #: templates/zinnia/base.html:43
 msgid "Authors"
 msgstr "Autori"
-
-#: breadcrumbs.py:75 admin/forms.py:60 templates/zinnia/base.html:37
-#: templates/zinnia/category_list.html:6
-msgid "Categories"
-msgstr "Categorie"
 
 #: breadcrumbs.py:100
 #, python-format
@@ -150,192 +338,6 @@ msgstr "Trackback su %s"
 msgid "The latest trackbacks for the entry %s"
 msgstr "Ultimi trackback sull'articolo %s"
 
-#: moderator.py:66 moderator.py:88 moderator.py:111
-#, python-format
-msgid "[%(site)s] New comment posted on \"%(title)s\""
-msgstr "[%(site)s] Nuovo commento inviato su \"%(title)s\""
-
-#: admin/category.py:34
-msgid "tree path"
-msgstr "alberatura"
-
-#: admin/entry.py:30 templates/admin/zinnia/widgets/quickpost.html:17
-msgid "Content"
-msgstr "Contenuto"
-
-#: admin/entry.py:32
-msgid "Publication"
-msgstr "Pubblicazione"
-
-#: admin/entry.py:36 templates/admin/zinnia/widgets/_content_stats.html:4
-#: templates/zinnia/_entry_detail_base.html:114
-msgid "Discussions"
-msgstr "Discussioni"
-
-#: admin/entry.py:40
-msgid "Privacy"
-msgstr "Privacy"
-
-#: admin/entry.py:43
-msgid "Templates"
-msgstr ""
-
-#: admin/entry.py:46
-msgid "Metadatas"
-msgstr ""
-
-#: admin/entry.py:78
-#, python-format
-msgid "%(title)s (%(word_count)i words)"
-msgstr "%(title)s (%(word_count)i parole)"
-
-#: admin/entry.py:85
-#, python-format
-msgid "%(title)s (%(reactions)i reaction)"
-msgid_plural "%(title)s (%(reactions)i reactions)"
-msgstr[0] "%(title)s (%(reactions)i reazioni)"
-msgstr[1] "%(title)s (%(reactions)i reazioni)"
-
-#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:50
-msgid "title"
-msgstr "titolo"
-
-#: admin/entry.py:106
-msgid "author(s)"
-msgstr "autore(i)"
-
-#: admin/entry.py:121
-msgid "category(s)"
-msgstr "Categoria(e)"
-
-#: admin/entry.py:134
-msgid "tag(s)"
-msgstr "Tag"
-
-#: admin/entry.py:149
-msgid "site(s)"
-msgstr "Site(s)"
-
-#: admin/entry.py:162
-msgid "short url"
-msgstr "url breve"
-
-#: admin/entry.py:170
-msgid "is visible"
-msgstr "visibile ?"
-
-#: admin/entry.py:254
-msgid "The selected entries now belong to you."
-msgstr "Gli elementi selezionati non ti appartengono"
-
-#: admin/entry.py:255
-msgid "Set the entries to the user"
-msgstr "Attribuisci gli articoli all'utente"
-
-#: admin/entry.py:264
-msgid "The selected entries are now marked as published."
-msgstr "Gli articoli selezionati sono ora marcati come pubblicati."
-
-#: admin/entry.py:265
-msgid "Set entries selected as published"
-msgstr "Pubblica gli articoli selezionati"
-
-#: admin/entry.py:273
-msgid "The selected entries are now marked as hidden."
-msgstr "Gli articoli selezionati sono ora marcati come nascosti."
-
-#: admin/entry.py:274
-msgid "Set entries selected as hidden"
-msgstr "Nascondi gli articoli selezionati"
-
-#: admin/entry.py:282
-msgid "Comments are now closed for selected entries."
-msgstr "I commenti sono adesso chiusi sugli articoli selezionati."
-
-#: admin/entry.py:283
-msgid "Close the comments for selected entries"
-msgstr "Chiudi i commenti per gli articoli selezionati"
-
-#: admin/entry.py:292
-msgid "Pingbacks are now closed for selected entries."
-msgstr "I pingback sono chiusi per gli articoli selezionati"
-
-#: admin/entry.py:294
-msgid "Close the pingbacks for selected entries"
-msgstr "Chiudi i pingback per articoli selezionati"
-
-#: admin/entry.py:302
-msgid "Trackbacks are now closed for selected entries."
-msgstr "I trackback sono chiusi per articoli selezionati"
-
-#: admin/entry.py:304
-msgid "Close the trackbacks for selected entries"
-msgstr "Chiudi i trackback per articoli selezionati"
-
-#: admin/entry.py:313
-msgid "The selected entries are now set at the current date."
-msgstr "La data per gli articoli selezionati è stata impostata a quella corrente."
-
-#: admin/entry.py:315
-msgid "Put the selected entries on top at the current date"
-msgstr "Imposta gli articoli selezionati in testa alla data corrente"
-
-#: admin/entry.py:323
-msgid "Selected entries are now marked as featured."
-msgstr "Articoli selezionati sono ora marcati come in evidenza."
-
-#: admin/entry.py:324
-msgid "Mark selected entries as featured"
-msgstr "Metti gli articoli selezionati in evidenza"
-
-#: admin/entry.py:332
-msgid "Selected entries are no longer marked as featured."
-msgstr "Gli articoli selezionati non sono più in evidenza"
-
-#: admin/entry.py:334
-msgid "Unmark selected entries as featured"
-msgstr "Togli gli articoli selezionati dall'evidenza"
-
-#: admin/entry.py:355
-#, python-format
-msgid "%(directory)s directory succesfully pinged %(success)d entries."
-msgstr "La directory %(directory)s è stata pingata con successo per %(success)d articoli."
-
-#: admin/entry.py:359
-msgid "Ping Directories for selected entries"
-msgstr "Pinga le directory per gli articoli selezionati"
-
-#: admin/filters.py:29
-#, python-format
-msgid "%(item)s (%(count)i entry)"
-msgid_plural "%(item)s (%(count)i entries)"
-msgstr[0] "%(item)s (%(count)i articoli)"
-msgstr[1] "%(item)s (%(count)i articoli)"
-
-#: admin/filters.py:50
-msgid "published authors"
-msgstr "autori pubblicati"
-
-#: admin/filters.py:61
-msgid "published categories"
-msgstr "categorie pubblicate"
-
-#: admin/forms.py:25
-msgid "Parent category"
-msgstr "Categoria padre"
-
-#: admin/forms.py:27
-msgid "No parent category"
-msgstr "Nessuna categoria padre"
-
-#: admin/forms.py:44
-msgid "A category cannot be parent of itself."
-msgstr "Una categoria non può essere categoria padre di se stessa."
-
-#: admin/forms.py:62 models/category.py:75 models_bases/entry.py:434
-msgid "categories"
-msgstr "categorie"
-
 #: models/category.py:24 models_bases/entry.py:53
 msgid "slug"
 msgstr "slug"
@@ -352,7 +354,7 @@ msgstr "descrizione"
 msgid "parent category"
 msgstr "categoria padre"
 
-#: models/category.py:74
+#: models/category.py:73
 msgid "category"
 msgstr "categoria"
 
@@ -408,121 +410,142 @@ msgstr "data di creazione"
 msgid "last update"
 msgstr "ultimo aggiornamento"
 
-#: models_bases/entry.py:185
+#: models_bases/entry.py:184
 msgid "entry"
 msgstr "articolo"
 
-#: models_bases/entry.py:186
+#: models_bases/entry.py:185
 msgid "entries"
 msgstr "articoli"
 
-#: models_bases/entry.py:200
+#: models_bases/entry.py:199
 msgid "content"
 msgstr "contenuto"
 
-#: models_bases/entry.py:242
+#: models_bases/entry.py:241
 msgid "comments enabled"
 msgstr "commenti abilitati"
 
-#: models_bases/entry.py:243
+#: models_bases/entry.py:242
 msgid "Allows comments if checked."
 msgstr "Permetti i commenti se selezionato."
 
-#: models_bases/entry.py:245
+#: models_bases/entry.py:244
 msgid "pingbacks enabled"
 msgstr "pingbac abilitati"
 
-#: models_bases/entry.py:246
+#: models_bases/entry.py:245
 msgid "Allows pingbacks if checked."
 msgstr "Permetti i pingback se selezionato."
 
-#: models_bases/entry.py:248
+#: models_bases/entry.py:247
 msgid "trackbacks enabled"
 msgstr "trackback abilitati"
 
-#: models_bases/entry.py:249
+#: models_bases/entry.py:248
 msgid "Allows trackbacks if checked."
 msgstr "Permetti i trackback se selezionato"
 
-#: models_bases/entry.py:252
+#: models_bases/entry.py:251
 msgid "comment count"
 msgstr "numero commenti"
 
-#: models_bases/entry.py:254
+#: models_bases/entry.py:253
 msgid "pingback count"
 msgstr "numero pingback"
 
-#: models_bases/entry.py:256
+#: models_bases/entry.py:255
 msgid "trackback count"
 msgstr "numero trackback"
 
-#: models_bases/entry.py:340
+#: models_bases/entry.py:339
 msgid "related entries"
 msgstr "articoli correlati"
 
+#: models_bases/entry.py:357
+msgid "lead"
+msgstr ""
+
 #: models_bases/entry.py:358
+msgid "Lead paragraph"
+msgstr ""
+
+#: models_bases/entry.py:369
 msgid "excerpt"
 msgstr "estratto"
 
-#: models_bases/entry.py:359
-msgid "Used for search and SEO."
+#: models_bases/entry.py:370
+msgid "Used for SEO purposes."
 msgstr ""
 
-#: models_bases/entry.py:392
+#: models_bases/entry.py:405
 msgid "image"
 msgstr "immagine"
 
-#: models_bases/entry.py:394
+#: models_bases/entry.py:407
 msgid "Used for illustration."
 msgstr "Usato per l'illustrazione"
 
-#: models_bases/entry.py:405
+#: models_bases/entry.py:410
+msgid "caption"
+msgstr ""
+
+#: models_bases/entry.py:411
+msgid "Image's caption."
+msgstr ""
+
+#: models_bases/entry.py:422
 msgid "featured"
 msgstr "in evidenza"
 
-#: models_bases/entry.py:420
+#: models_bases/entry.py:437
 msgid "authors"
 msgstr "autori"
 
-#: models_bases/entry.py:444
+#: models_bases/entry.py:461
 msgid "tags"
 msgstr "tag"
 
-#: models_bases/entry.py:463
+#: models_bases/entry.py:480
 msgid "login required"
 msgstr "richiesta identificazione"
 
-#: models_bases/entry.py:464
+#: models_bases/entry.py:481
 msgid "Only authenticated users can view the entry."
 msgstr "Solo utenti autenticati possono vedere l'articolo"
 
-#: models_bases/entry.py:476
+#: models_bases/entry.py:493
 msgid "password"
 msgstr "password"
 
-#: models_bases/entry.py:477
+#: models_bases/entry.py:494
 msgid "Protects the entry with a password."
 msgstr "Protegge l'articolo con una password"
 
-#: models_bases/entry.py:489
+#: models_bases/entry.py:506
 msgid "content template"
 msgstr "template contenuto"
 
-#: models_bases/entry.py:491 models_bases/entry.py:507
+#: models_bases/entry.py:508 models_bases/entry.py:524
 msgid "Default template"
 msgstr "Template di default"
 
-#: models_bases/entry.py:493
+#: models_bases/entry.py:510
 msgid "Template used to display the entry's content."
 msgstr "Template usato per visualizzare il contenuto dell'articolo"
 
-#: models_bases/entry.py:505
+#: models_bases/entry.py:522
 msgid "detail template"
 msgstr "template dettaglio"
 
-#: models_bases/entry.py:509
+#: models_bases/entry.py:526
 msgid "Template used to display the entry's detail page."
 msgstr "Template usato per visualizzare la pagina dettaglio dell'articolo"
+
+#: moderator.py:66 moderator.py:88 moderator.py:111
+#, python-format
+msgid "[%(site)s] New comment posted on \"%(title)s\""
+msgstr "[%(site)s] Nuovo commento inviato su \"%(title)s\""
 
 #: templates/400.html:6
 msgid "Error 400"
@@ -847,20 +870,6 @@ msgstr "Cancella questo commento"
 msgid "Approve this comment"
 msgstr "Approva questo commento"
 
-#: templates/comments/zinnia_entry_preview.html:4
-msgid "Comment preview"
-msgstr "Anteprima commento"
-
-#: templates/comments/zinnia_entry_preview.html:10
-msgid "Please correct following error."
-msgid_plural "Please correct following errors."
-msgstr[0] "Prego correggi l'errore seguente."
-msgstr[1] "Prego correggi gli errori seguenti."
-
-#: templates/comments/zinnia_entry_preview.html:12
-msgid "Preview of the comment"
-msgstr "Anteprima del commento"
-
 #: templates/comments/zinnia/entry/form.html:11
 msgid "Post your comment"
 msgstr "Invia un commento"
@@ -896,6 +905,20 @@ msgstr "Torna a %(title)s"
 #: templates/comments/zinnia/entry/posted.html:27
 msgid "Return to entry list"
 msgstr "Torna all'elenco degli articoli"
+
+#: templates/comments/zinnia_entry_preview.html:4
+msgid "Comment preview"
+msgstr "Anteprima commento"
+
+#: templates/comments/zinnia_entry_preview.html:10
+msgid "Please correct following error."
+msgid_plural "Please correct following errors."
+msgstr[0] "Prego correggi l'errore seguente."
+msgstr[1] "Prego correggi gli errori seguenti."
+
+#: templates/comments/zinnia_entry_preview.html:12
+msgid "Preview of the comment"
+msgstr "Anteprima del commento"
 
 #: templates/zinnia/_entry_detail_base.html:17
 msgid "Written by"
@@ -1447,15 +1470,15 @@ msgid_plural "%(entry_count)s entries tagged by %(tag)s"
 msgstr[0] "%(entry_count)s articolo marcato con %(tag)s"
 msgstr[1] "%(entry_count)s articoli marcati con %(tag)s"
 
-#: templatetags/zinnia.py:344
+#: templatetags/zinnia.py:345
 msgid "Blog"
 msgstr ""
 
-#: tests/test_views.py:586 views/search.py:30
+#: tests/test_views.py:585 views/search.py:30
 msgid "The pattern is too short"
 msgstr "La sequenza di ricerca è troppo corta"
 
-#: tests/test_views.py:590 views/search.py:34
+#: tests/test_views.py:589 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Nessuna sequenza di ricerca trovata"
 
@@ -1587,14 +1610,14 @@ msgstr "^articolo-veloce/$"
 msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 msgstr "^(?P<tag>[^/]+(?u))/pagina/(?P<page>\\d+)/$"
 
+#: views/mixins/entry_preview.py:27
+msgid "No entry found matching the query"
+msgstr ""
+
 #: views/tags.py:48
 #, python-format
 msgid "No Tag found matching \"%s\"."
 msgstr "Nessun tag trovato per \"%s\""
-
-#: views/mixins/entry_preview.py:27
-msgid "No entry found matching the query"
-msgstr ""
 
 #: xmlrpc/metaweblog.py:48
 msgid "Username is incorrect."
