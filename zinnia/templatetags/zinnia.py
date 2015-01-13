@@ -212,7 +212,7 @@ def get_calendar_entries(context, year=None, month=None,
     Return an HTML calendar of entries.
     """
     if not (year and month):
-        month_day = context.get('month') or context.get('day')
+        month_day = context.get('day') or context.get('month')
         creation_date = getattr(context.get('object'), 'creation_date', None)
         if month_day:
             current_month = month_day
