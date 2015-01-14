@@ -85,9 +85,6 @@ You can use one of these values: ::
 
     ['html', 'markdown', 'restructuredtext', 'textile']
 
-The value of this variable will alter the value of :setting:`ZINNIA_WYSIWYG`
-if you don't set it.
-
 .. setting:: ZINNIA_MARKDOWN_EXTENSIONS
 
 ZINNIA_MARKDOWN_EXTENSIONS
@@ -135,6 +132,8 @@ ZINNIA_PREVIEW_MAX_WORDS
 
 Number of words used to build the entry's preview if no split markers are
 found.
+
+.. setting:: ZINNIA_PREVIEW_MORE_STRING
 
 ZINNIA_PREVIEW_MORE_STRING
 --------------------------
@@ -426,12 +425,3 @@ ZINNIA_STOP_WORDS
 
 List of common words excluded from the advanced search engine
 to optimize the search querying and the results.
-
-.. setting:: ZINNIA_USE_TWITTER
-
-ZINNIA_USE_TWITTER
-------------------
-**Default value:** ``True if the crendentials of Twitter have been defined``
-
-Boolean telling if the credentials of a Twitter account have been set and
-if Zinnia can post on Twitter.
