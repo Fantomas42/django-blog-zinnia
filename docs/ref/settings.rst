@@ -432,12 +432,3 @@ ZINNIA_SEARCH_FIELDS
 **Default value:** ``['title', 'lead', 'content', 'excerpt', 'image_caption']``
 
 List of text fields used to search within entries.
-
-.. setting:: ZINNIA_STOP_WORDS
-
-ZINNIA_STOP_WORDS
------------------
-**Default value:** See :file:`zinnia/settings.py`
-
-List of common words excluded from the advanced search engine
-to optimize the search querying and the results.
