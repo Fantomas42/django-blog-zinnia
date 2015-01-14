@@ -51,8 +51,8 @@ class ComparisonTestCase(TestCase):
         Entry.objects.create(**params)
         columns, dataset = vectors()
         self.assertEqual(sorted(columns), sorted(
-            ['content', 'This', 'my', 'is', '1',
+            ['content', 'this', 'is', '1',
              'second', '2', 'first']))
         self.assertEqual(sorted([sorted(row) for row in dataset.values()]),
-                         sorted([sorted([1, 1, 1, 1, 1, 0, 0, 1]),
-                                 sorted([0, 0, 0, 0, 0, 1, 1, 0])]))
+                         sorted([sorted([1, 1, 1, 1, 0, 0, 1]),
+                                 sorted([0, 0, 0, 0, 1, 1, 0])]))

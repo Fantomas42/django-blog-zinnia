@@ -73,6 +73,7 @@ class VectorBuilder(object):
         for instance, words in model_data.items():
             words_item_total = {}
             for word in words.split():
+                word = word.lower()
                 words_total.setdefault(word, 0)
                 words_item_total.setdefault(word, 0)
                 words_total[word] += 1
