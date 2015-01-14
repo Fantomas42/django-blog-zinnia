@@ -212,15 +212,18 @@ class ContentEntry(models.Model):
         """
         Returns the "content" field formatted in HTML.
         """
-        if '</p>' in self.content:
-            return self.content
+        content = self.content
+        if not content:
+            return ''
+        elif '</p>' in content:
+            return content
         elif MARKUP_LANGUAGE == 'markdown':
-            return markdown(self.content)
+            return markdown(content)
         elif MARKUP_LANGUAGE == 'textile':
-            return textile(self.content)
+            return textile(content)
         elif MARKUP_LANGUAGE == 'restructuredtext':
-            return restructuredtext(self.content)
-        return linebreaks(self.content)
+            return restructuredtext(content)
+        return linebreaks(content)
 
     @property
     def html_preview(self):

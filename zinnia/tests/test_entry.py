@@ -385,6 +385,8 @@ class EntryHtmlContentTestCase(TestCase):
                              ' this is my content'
         self.assertEqual(self.entry.html_content,
                          '<p>Hello world !<br /> this is my content</p>')
+        self.entry.content = ''
+        self.assertEqual(self.entry.html_content, '')
 
     @skipUnless(is_lib_available('textile'), 'Textile is not available')
     def test_html_content_textitle(self):
