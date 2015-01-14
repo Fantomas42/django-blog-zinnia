@@ -323,7 +323,7 @@ class MetaWeblogTestCase(TestCase):
         file_ = TemporaryFile()
         file_.write('My test content'.encode('utf-8'))
         file_.seek(0)
-        media = {'name': 'zinnia_test_file.txt',
+        media = {'name': 'test file.txt',
                  'type': 'text/plain',
                  'bits': Binary(file_.read())}
         file_.close()
@@ -332,6 +332,7 @@ class MetaWeblogTestCase(TestCase):
                           1, 'contributor', 'password', media)
         new_media = self.server.metaWeblog.newMediaObject(
             1, 'webmaster', 'password', media)
-        self.assertTrue('/zinnia_test_file' in new_media['url'])
+
+        self.assertTrue('/test-file' in new_media['url'])
         default_storage.delete('/'.join([
             UPLOAD_TO, new_media['url'].split('/')[-1]]))

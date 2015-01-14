@@ -1,5 +1,4 @@
 """XML-RPC methods of Zinnia metaWeblog API"""
-import os
 from datetime import datetime
 try:
     from xmlrpc.client import Fault
@@ -28,7 +27,6 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.settings import PROTOCOL
-from zinnia.settings import UPLOAD_TO
 from zinnia.managers import DRAFT, PUBLISHED
 
 
@@ -386,6 +384,6 @@ def new_media_object(blog_id, username, password, media):
     => media structure
     """
     authenticate(username, password)
-    path = default_storage.save(os.path.join(UPLOAD_TO, media['name']),
+    path = default_storage.save(Entry().image_upload_to(media['name']),
                                 ContentFile(media['bits'].data))
     return {'url': default_storage.url(path)}
