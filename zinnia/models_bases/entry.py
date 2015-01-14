@@ -366,6 +366,15 @@ class LeadEntry(models.Model):
         _('lead'), blank=True,
         help_text=_('Lead paragraph'))
 
+    @property
+    def html_lead(self):
+        """
+        Returns the "lead" field formatted in HTML.
+        """
+        if self.lead:
+            return linebreaks(self.lead)
+        return ''
+
     class Meta:
         abstract = True
 
