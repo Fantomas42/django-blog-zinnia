@@ -1,5 +1,7 @@
 """Search module with complex query parsing for Zinnia"""
 from django.utils import six
+from django.db.models import Q
+from django.conf import settings
 
 from pyparsing import Word
 from pyparsing import alphas
@@ -16,12 +18,13 @@ from pyparsing import ParseResults
 from pyparsing import CaselessLiteral
 from pyparsing import operatorPrecedence
 
-from django.db.models import Q
+from stop_words import safe_get_stop_words
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
-from zinnia.settings import STOP_WORDS
 from zinnia.settings import SEARCH_FIELDS
+
+STOP_WORDS = safe_get_stop_words(settings.LANGUAGE_CODE[:2])
 
 
 def createQ(token):
@@ -48,7 +51,7 @@ def createQ(token):
                 wildcards = 'END'
                 search = query[0]
 
-    # Ignore connective words (of, a, an...) and STOP_WORDS
+    # Ignore short term and stop words
     if (len(search) < 3 and not search.isdigit()) or search in STOP_WORDS:
         return Q()
 
