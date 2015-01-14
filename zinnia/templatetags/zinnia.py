@@ -34,6 +34,7 @@ from ..managers import DRAFT
 from ..managers import tags_published
 from ..flags import PINGBACK, TRACKBACK
 from ..settings import PROTOCOL
+from ..settings import COMPARISON_FIELDS
 from ..comparison import VectorBuilder
 from ..comparison import pearson_score
 from ..calendar import Calendar
@@ -43,8 +44,7 @@ register = Library()
 
 VECTORS = None
 VECTORS_FACTORY = lambda: VectorBuilder(Entry.published.all(),
-                                        ['title', 'lead', 'content',
-                                         'excerpt', 'image_caption'])
+                                        COMPARISON_FIELDS)
 CACHE_ENTRIES_RELATED = {}
 
 WIDONT_REGEXP = re.compile(

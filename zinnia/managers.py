@@ -3,6 +3,8 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.sites.models import Site
 
+from zinnia.settings import SEARCH_FIELDS
+
 DRAFT = 0
 HIDDEN = 1
 PUBLISHED = 2
@@ -74,12 +76,9 @@ class EntryPublishedManager(models.Manager):
         """
         lookup = None
         for pattern in pattern.split():
-            query_part = (
-                models.Q(lead__icontains=pattern) |
-                models.Q(title__icontains=pattern) |
-                models.Q(content__icontains=pattern) |
-                models.Q(excerpt__icontains=pattern) |
-                models.Q(image_caption__icontains=pattern))
+            query_part = models.Q()
+            for field in SEARCH_FIELDS:
+                query_part |= models.Q(**{'%s__icontains' % field: pattern})
             if lookup is None:
                 lookup = query_part
             else:

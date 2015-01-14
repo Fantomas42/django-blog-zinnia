@@ -74,6 +74,14 @@ PINGBACK_CONTENT_LENGTH = getattr(settings,
 F_MIN = getattr(settings, 'ZINNIA_F_MIN', 0.1)
 F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
 
+SEARCH_FIELDS = getattr(settings, 'ZINNIA_SEARCH_FIELDS',
+                        ['title', 'lead', 'content',
+                         'excerpt', 'image_caption'])
+
+COMPARISON_FIELDS = getattr(settings, 'ZINNIA_COMPARISON_FIELDS',
+                            ['title', 'lead', 'content',
+                             'excerpt', 'image_caption'])
+
 SPAM_CHECKER_BACKENDS = getattr(settings, 'ZINNIA_SPAM_CHECKER_BACKENDS',
                                 ())
 
