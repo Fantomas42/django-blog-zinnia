@@ -152,6 +152,27 @@ Zinnia-twitter is an admin extension allowing you to post your entries on
 
 URL: https://github.com/django-blog-zinnia/zinnia-twitter
 
+wordpress2zinnia
+================
+
+Migrate your Wordpress blog into Zinnia.
+
+URL: https://github.com/django-blog-zinnia/wordpress2zinnia
+
+blogger2zinnia
+==============
+
+Migrate your Blogger blog into Zinnia.
+
+URL: https://github.com/django-blog-zinnia/blogger2zinnia
+
+feed2zinnia
+===========
+
+Import RSS or Atom feeds into Zinnia.
+
+URL: https://github.com/django-blog-zinnia/feed2zinnia
+
 byteflow2zinnia
 ===============
 

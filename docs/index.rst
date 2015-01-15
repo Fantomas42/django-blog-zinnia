@@ -40,7 +40,6 @@ HOW-TOs
    how-to/customize_look_and_feel
    how-to/extending_entry_model
    how-to/rewriting_entry_url
-   how-to/import_export
 
 Development
 -----------
@@ -91,4 +90,3 @@ index or try to find it using the search function:
 .. _`documentation online at readthedocs.org`: http://docs.django-blog-zinnia.com/
 .. _`Build status`: https://travis-ci.org/Fantomas42/django-blog-zinnia
 .. _`Coverage report`: https://coveralls.io/r/Fantomas42/django-blog-zinnia
-
