@@ -69,9 +69,9 @@
     {% endblock entry-image %}
 
     {% block entry-lead %}
-    {% if object.lead %}
+    {% if not continue_reading and object.lead %}
     <div class="entry-summary">
-      {{ object.lead|linebreaks }}
+      {{ object.html_lead|safe }}
     </div>
     {% endif %}
     {% endblock entry-lead %}

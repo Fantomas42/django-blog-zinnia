@@ -390,6 +390,9 @@ table {
   text-align: justify;
   font-size: 1.2em;
   font-weight: bold; }
+  .zinnia .entry-summary p:first-of-type:first-letter {
+    font-size: 1.4em;
+    line-height: 0; }
 .zinnia .entry-content {
   text-align: justify; }
   .zinnia .entry-content p {

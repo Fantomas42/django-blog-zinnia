@@ -358,6 +358,12 @@ class EntryTestCase(TestCase):
         self.assertEqual(self.entry.excerpt,
                          ' '.join(['word-%s' % i for i in range(50)]) + '...')
 
+    def test_html_lead(self):
+        self.assertEquals(self.entry.html_lead, '')
+        self.entry.lead = 'Lead paragraph'
+        self.assertEquals(self.entry.html_lead,
+                          '<p>Lead paragraph</p>')
+
 
 class EntryHtmlContentTestCase(TestCase):
 
@@ -379,6 +385,8 @@ class EntryHtmlContentTestCase(TestCase):
                              ' this is my content'
         self.assertEqual(self.entry.html_content,
                          '<p>Hello world !<br /> this is my content</p>')
+        self.entry.content = ''
+        self.assertEqual(self.entry.html_content, '')
 
     @skipUnless(is_lib_available('textile'), 'Textile is not available')
     def test_html_content_textitle(self):
@@ -424,6 +432,10 @@ class EntryHtmlContentTestCase(TestCase):
         preview = self.entry.html_preview
         self.assertEqual(str(preview), '<p>My content</p>')
         self.assertEqual(preview.has_more, False)
+        self.entry.lead = 'Lead paragraph'
+        preview = self.entry.html_preview
+        self.assertEqual(str(preview), '<p>Lead paragraph</p>')
+        self.assertEqual(preview.has_more, True)
 
 
 class EntryAbsoluteUrlTestCase(TestCase):

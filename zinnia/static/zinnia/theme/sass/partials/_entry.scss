@@ -27,6 +27,10 @@ h2.entry-title {
     text-align: justify;
     font-size: 1.2em;
     font-weight: bold;
+    &:first-of-type:first-letter {
+      font-size: 1.4em;
+      line-height: 0;
+    }
   }
 }
 
