@@ -432,6 +432,10 @@ class EntryHtmlContentTestCase(TestCase):
         preview = self.entry.html_preview
         self.assertEqual(str(preview), '<p>My content</p>')
         self.assertEqual(preview.has_more, False)
+        self.entry.lead = 'Lead paragraph'
+        preview = self.entry.html_preview
+        self.assertEqual(str(preview), '<p>Lead paragraph</p>')
+        self.assertEqual(preview.has_more, True)
 
 
 class EntryAbsoluteUrlTestCase(TestCase):
