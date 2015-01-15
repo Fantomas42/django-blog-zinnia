@@ -75,3 +75,11 @@ class HTMLPreviewTestCase(TestCase):
         self.assertEqual(preview.remaining_words, 4)
         self.assertEqual(preview.displayed_percent, 33.333)
         self.assertEqual(preview.remaining_percent, 66.666)
+
+    def test_empty_text(self):
+        preview = HTMLPreview('')
+        self.assertEqual(str(preview), '')
+        self.assertEqual(preview.has_more, False)
+        preview = HTMLPreview('', '')
+        self.assertEqual(str(preview), '')
+        self.assertEqual(preview.has_more, False)
