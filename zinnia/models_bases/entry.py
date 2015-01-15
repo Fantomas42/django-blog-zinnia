@@ -228,9 +228,11 @@ class ContentEntry(models.Model):
     @property
     def html_preview(self):
         """
-        Returns a preview of the "content" field formmated in HTML.
+        Returns a preview of the "content" field or
+        the "lead" field if defined, formatted in HTML.
         """
-        return HTMLPreview(self.html_content)
+        return HTMLPreview(self.html_content,
+                           getattr(self, 'html_lead', ''))
 
     @property
     def word_count(self):

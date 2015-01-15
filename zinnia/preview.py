@@ -20,12 +20,13 @@ class HTMLPreview(object):
     Build an HTML preview of an HTML content.
     """
 
-    def __init__(self, content,
+    def __init__(self, content, lead='',
                  splitters=PREVIEW_SPLITTERS,
                  max_words=PREVIEW_MAX_WORDS,
                  more_string=PREVIEW_MORE_STRING):
         self._preview = None
 
+        self.lead = lead
         self.content = content
         self.splitters = splitters
         self.max_words = max_words
@@ -45,7 +46,7 @@ class HTMLPreview(object):
         """
         Boolean telling if the preview has hidden content.
         """
-        return self.preview != self.content
+        return bool(self.content and self.preview != self.content)
 
     def __str__(self):
         """
@@ -57,10 +58,13 @@ class HTMLPreview(object):
         """
         Build the preview by:
 
+        - Returning the lead attribut if not empty.
         - Checking if a split marker is present in the content
           Then split the content with the marker to build the preview.
         - Splitting the content to a fixed number of words.
         """
+        if self.lead:
+            return self.lead
         for splitter in self.splitters:
             if splitter in self.content:
                 return self.split(splitter)
@@ -87,9 +91,10 @@ class HTMLPreview(object):
     @cached_property
     def total_words(self):
         """
-        Return the total of words contained in the content.
+        Return the total of words contained
+        in the content and in the lead.
         """
-        return len(strip_tags(self.content).split())
+        return len(strip_tags('%s %s' % (self.lead, self.content)).split())
 
     @cached_property
     def displayed_words(self):
@@ -97,7 +102,7 @@ class HTMLPreview(object):
         Return the number of words displayed in the preview.
         """
         return (len(strip_tags(self.preview).split()) -
-                len(self.more_string.split()))
+                (len(self.more_string.split()) * int(not bool(self.lead))))
 
     @cached_property
     def remaining_words(self):
