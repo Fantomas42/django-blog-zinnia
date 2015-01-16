@@ -2,6 +2,7 @@
 from itertools import chain
 
 from django.utils import six
+from django.forms import Media
 from django.utils.html import escape
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
@@ -55,14 +56,15 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
                 option_label, sort_fields))
         return '\n'.join(output)
 
-    class Media:
+    @property
+    def media(self):
         """
         MPTTFilteredSelectMultiple's Media.
         """
-        static = staticfiles_storage.url
-        js = (static('admin/js/core.js'),
-              static('zinnia/admin/mptt/js/mptt_m2m_selectbox.js'),
-              static('admin/js/SelectFilter2.js'))
+        js = ['admin/js/core.js',
+              'zinnia/admin/mptt/js/mptt_m2m_selectbox.js',
+              'admin/js/SelectFilter2.js']
+        return Media(js=[staticfiles_storage.url(path) for path in js])
 
 
 class TagAutoComplete(widgets.AdminTextInputWidget):
@@ -97,17 +99,17 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
         output.append('</script>')
         return mark_safe('\n'.join(output))
 
-    class Media:
+    @property
+    def media(self):
         """
         TagAutoComplete's Media.
         """
         static = lambda x: staticfiles_storage.url(
             'zinnia/admin/select2/%s' % x)
-
-        css = {
-            'all': (static('css/select2.css'),)
-        }
-        js = (static('js/select2.js'),)
+        return Media(
+            css={'all': (static('css/select2.css'),)},
+            js=(static('js/select2.js'),)
+        )
 
 
 class MiniTextarea(widgets.AdminTextareaWidget):

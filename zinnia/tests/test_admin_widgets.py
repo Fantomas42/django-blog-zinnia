@@ -2,6 +2,7 @@
 """Test cases for Zinnia's admin widgets"""
 from django.test import TestCase
 from django.utils.encoding import smart_text
+from django.test.utils import override_settings
 
 from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_entry_signals
@@ -63,6 +64,15 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
             'Category 1</option>\n<option value="2" selected="selected" '
             'data-tree-id="1" data-left-value="2">|-- Category 2</option>')
 
+    @override_settings(STATIC_URL='/s/')
+    def test_media(self):
+        medias = MPTTFilteredSelectMultiple('test', False).media
+        self.assertEquals(medias._css, {})
+        self.assertEquals(medias._js, [
+            '/s/admin/js/core.js',
+            '/s/zinnia/admin/mptt/js/mptt_m2m_selectbox.js',
+            '/s/admin/js/SelectFilter2.js'])
+
 
 class TagAutoCompleteTestCase(TestCase):
 
@@ -101,6 +111,14 @@ class TagAutoCompleteTestCase(TestCase):
             '\n       tags: [\'test\',\'zinnia\']'
             '\n     });\n    });'
             '\n}(django.jQuery));\n</script>')
+
+    @override_settings(STATIC_URL='/s/')
+    def test_media(self):
+        medias = TagAutoComplete().media
+        self.assertEquals(medias._css,
+                          {'all': ['/s/zinnia/admin/select2/css/select2.css']})
+        self.assertEquals(medias._js,
+                          ['/s/zinnia/admin/select2/js/select2.js'])
 
 
 class MiniTextareaTestCase(TestCase):
