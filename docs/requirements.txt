@@ -7,4 +7,5 @@ beautifulsoup4==4.3.2
 feedparser==5.1.3
 gdata==2.0.18
 pyparsing==2.0.3
+stop-words==2015.1.19
 django-contrib-comments==1.5
