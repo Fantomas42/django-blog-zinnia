@@ -6,7 +6,7 @@
     <a href="{{ linkback.url }}">{{ linkback.name }}</a>
     {% trans "made a linkback on" %}
     <a href="{{ entry.get_absolute_url }}#{{ linkback.flags.all.0.flag }}-{{ linkback.pk }}"
-       title="{{ entry.title }}">
+       title="{% blocktrans with object=entry.title %}Linkback on {{ object }}{% endblocktrans %}">
       {{ entry.title }}
     </a>
     {% endwith %}
