@@ -13,8 +13,8 @@
     <link rel="EditURI" type="application/rsd+xml" href="{% url 'zinnia:rsd' %}" />
     <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url 'zinnia:wlwmanifest' %}" />
     <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Weblog" href="{% url 'zinnia:opensearch' %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url 'zinnia:entry_latest_feed' %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest discussions" %}" href="{% url 'zinnia:discussion_latest_feed' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS feed of latest entries" %}" href="{% url 'zinnia:entry_latest_feed' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS feed of latest discussions" %}" href="{% url 'zinnia:discussion_latest_feed' %}" />
     {% get_archives_entries "zinnia/tags/entries_archives_link.html" %}
 {% endblock link %}
 
