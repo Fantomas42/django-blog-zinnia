@@ -320,7 +320,7 @@ class SearchEntries(EntryFeed):
         """
         Title of the feed.
         """
-        return _("Results of the search for '%s'") % obj
+        return _("Search results for '%(pattern)s'") % {'pattern': obj}
 
     def description(self, obj):
         """
