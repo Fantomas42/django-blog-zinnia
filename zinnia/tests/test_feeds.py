@@ -188,7 +188,7 @@ class FeedsTestCase(TestCase):
             'Entries for the category %s' % self.category.title)
         self.assertEqual(
             feed.description(self.category),
-            'The latest entries for the category %s' % self.category.title)
+            'The latest entries categorized under %s' % self.category.title)
 
     def test_author_entries(self):
         self.create_published_entry()
@@ -226,7 +226,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.get_title(tag),
                          'Entries for the tag %s' % tag.name)
         self.assertEqual(feed.description(tag),
-                         'The latest entries for the tag %s' % tag.name)
+                         'The latest entries tagged with %s' % tag.name)
 
     def test_search_entries(self):
         class FakeRequest:
@@ -240,7 +240,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(len(feed.items('test')), 1)
         self.assertEqual(feed.link('test'), '/search/?pattern=test')
         self.assertEqual(feed.get_title('test'),
-                         "Results of the search for '%s'" % 'test')
+                         "Search results for '%s'" % 'test')
         self.assertEqual(
             feed.description('test'),
             "The entries containing the pattern '%s'" % 'test')
