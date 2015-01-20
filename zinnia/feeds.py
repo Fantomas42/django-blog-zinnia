@@ -214,7 +214,7 @@ class CategoryEntries(EntryFeed):
         """
         Description of the feed.
         """
-        return _('The latest entries for the category %s') % obj.title
+        return _('The latest entries categorized under %s') % obj.title
 
 
 class AuthorEntries(EntryFeed):
@@ -287,7 +287,7 @@ class TagEntries(EntryFeed):
         """
         Description of the feed.
         """
-        return _('The latest entries for the tag %s') % obj.name
+        return _('The latest entries tagged with %s') % obj.name
 
 
 class SearchEntries(EntryFeed):
