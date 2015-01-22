@@ -17,7 +17,7 @@ Make sure to install these packages prior to installation :
 * `django-mptt`_ >= 0.5.1
 * `django-tagging`_ >= 0.3.4
 * `beautifulsoup4`_ >= 4.1.3
-* `stop-words`_ >= 2015.1.19
+* `stop-words`_ >= 2015.1.22
 * `django-contrib-comments`_ >= 1.5
 
 The packages below are optionnal but needed for run the full test suite or
