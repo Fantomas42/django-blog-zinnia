@@ -489,7 +489,7 @@ class CategoriesEntry(models.Model):
 
 class TagsEntry(models.Model):
     """
-    Abstract lodel class to add tags to the entries.
+    Abstract model class to add tags to the entries.
     """
     tags = TagField(_('tags'))
 
