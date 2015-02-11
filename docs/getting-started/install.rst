@@ -16,8 +16,9 @@ Make sure to install these packages prior to installation :
 * `PIL`_ >= 1.1.6 or `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.5.1
 * `django-tagging`_ >= 0.3.4
-* `django-contrib-comments`_ >= 1.5
 * `beautifulsoup4`_ >= 4.1.3
+* `mots-vides`_ >= 2015.2.6
+* `django-contrib-comments`_ >= 1.5
 
 The packages below are optionnal but needed for run the full test suite or
 migrate the database.
@@ -27,7 +28,8 @@ migrate the database.
 * `django-xmlrpc`_ >= 0.1.5
 
 Note that all the needed dependencies will be resolved if you install
-Zinnia with :program:`pip` or :program:`easy_install`, excepting Django.
+Zinnia with :program:`pip` or :program:`easy_install`, excepting PIL and
+Django.
 
 .. _getting-the-code:
 
@@ -164,6 +166,7 @@ project directory to sync the models with the database. ::
 .. _`django-mptt`: https://github.com/django-mptt/django-mptt/
 .. _`django-tagging`: https://code.google.com/p/django-tagging/
 .. _`django-contrib-comments`: https://github.com/django/django-contrib-comments
+.. _`mots-vides`: https://github.com/Fantomas42/mots-vides
 .. _`beautifulsoup4`: http://www.crummy.com/software/BeautifulSoup/
 .. _`pytz`: http://pytz.sourceforge.net/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/

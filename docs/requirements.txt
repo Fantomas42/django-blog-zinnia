@@ -5,4 +5,5 @@ django-tagging==0.3.4
 django-xmlrpc==0.1.5
 beautifulsoup4==4.3.2
 pyparsing==2.0.3
+mots-vides==2015.2.6
 django-contrib-comments==1.5
