@@ -18,13 +18,13 @@ from pyparsing import ParseResults
 from pyparsing import CaselessLiteral
 from pyparsing import operatorPrecedence
 
-from stop_words import safe_get_stop_words
+from mots_vides import stop_words
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.settings import SEARCH_FIELDS
 
-STOP_WORDS = safe_get_stop_words(settings.LANGUAGE_CODE[:2])
+STOP_WORDS = stop_words(settings.LANGUAGE_CODE.split('-')[0])
 
 
 def createQ(token):

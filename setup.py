@@ -37,7 +37,7 @@ setup(
                       'django-mptt>=0.6.1',
                       'django-tagging>=0.3.4',
                       'django-xmlrpc>=0.1.5',
-                      'stop-words>=2015.1.22',
+                      'mots-vides>=2015.2.6',
                       'pyparsing>=2.0.3',
                       'pytz>=2014.10']
 )

@@ -17,7 +17,7 @@ Make sure to install these packages prior to installation :
 * `django-mptt`_ >= 0.5.1
 * `django-tagging`_ >= 0.3.4
 * `beautifulsoup4`_ >= 4.1.3
-* `stop-words`_ >= 2015.1.22
+* `mots-vides`_ >= 2015.2.6
 * `django-contrib-comments`_ >= 1.5
 
 The packages below are optionnal but needed for run the full test suite or
@@ -166,7 +166,7 @@ project directory to sync the models with the database. ::
 .. _`django-mptt`: https://github.com/django-mptt/django-mptt/
 .. _`django-tagging`: https://code.google.com/p/django-tagging/
 .. _`django-contrib-comments`: https://github.com/django/django-contrib-comments
-.. _`stop-words`: https://github.com/Alir3z4/python-stop-words
+.. _`mots-vides`: https://github.com/Fantomas42/mots-vides
 .. _`beautifulsoup4`: http://www.crummy.com/software/BeautifulSoup/
 .. _`pytz`: http://pytz.sourceforge.net/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/
