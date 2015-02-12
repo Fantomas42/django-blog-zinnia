@@ -43,8 +43,7 @@ from ..breadcrumbs import retrieve_breadcrumbs
 register = Library()
 
 VECTORS = None
-VECTORS_FACTORY = lambda: VectorBuilder(Entry.published.all(),
-                                        COMPARISON_FIELDS)
+
 CACHE_ENTRIES_RELATED = {}
 
 WIDONT_REGEXP = re.compile(
@@ -147,7 +146,7 @@ def get_similar_entries(context, number=5,
     global CACHE_ENTRIES_RELATED
 
     if VECTORS is None or flush:
-        VECTORS = VECTORS_FACTORY()
+        VECTORS = VectorBuilder(Entry.published.all(), COMPARISON_FIELDS)
         CACHE_ENTRIES_RELATED = {}
 
     def compute_related(object_id, dataset):

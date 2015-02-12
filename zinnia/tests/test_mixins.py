@@ -66,10 +66,18 @@ class MixinTestCase(TestCase):
                           'zinnia/entry_list.html'])
 
     def test_entry_queryset_archive_template_response_mixin(self):
-        get_year = lambda: 2012
-        get_week = lambda: 16
-        get_month = lambda: '04'
-        get_day = lambda: 21
+        def get_year():
+            return 2012
+
+        def get_week():
+            return 16
+
+        def get_month():
+            return '04'
+
+        def get_day():
+            return 21
+
         instance = EntryQuerysetArchiveTemplateResponseMixin()
         self.assertEqual(
             instance.get_template_names(),
@@ -141,9 +149,17 @@ class MixinTestCase(TestCase):
             detail_template = 'entry_detail.html'
             slug = 'my-fake-entry'
 
-        get_year = lambda: 2012
-        get_month = lambda: '04'
-        get_day = lambda: 21
+        def get_year():
+            return 2012
+
+        def get_week():
+            return 16
+
+        def get_month():
+            return '04'
+
+        def get_day():
+            return 21
 
         instance = EntryArchiveTemplateResponseMixin()
         instance.get_year = get_year
