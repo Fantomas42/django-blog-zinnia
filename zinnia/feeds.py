@@ -214,7 +214,8 @@ class CategoryEntries(EntryFeed):
         """
         Description of the feed.
         """
-        return _('The latest entries for the category %s') % obj.title
+        return (obj.description or
+                _('The latest entries for the category %s') % obj.title)
 
 
 class AuthorEntries(EntryFeed):
