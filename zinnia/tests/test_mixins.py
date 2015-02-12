@@ -164,6 +164,7 @@ class MixinTestCase(TestCase):
         instance = EntryArchiveTemplateResponseMixin()
         instance.get_year = get_year
         instance.get_month = get_month
+        instance.get_week = get_week
         instance.get_day = get_day
         instance.object = FakeEntry()
         self.assertEqual(
