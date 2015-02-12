@@ -24,6 +24,7 @@ from zinnia.views.mixins.templates import \
 
 class MixinTestCase(TestCase):
     """Test cases for zinnia.views.mixins"""
+    maxDiff = None
 
     def setUp(self):
         disconnect_entry_signals()
@@ -187,6 +188,12 @@ class MixinTestCase(TestCase):
              'zinnia/archives/month/04/my-fake-entry.html',
              'zinnia/archives/2012/month/04/entry_detail.html',
              'zinnia/archives/month/04/entry_detail.html',
+             'zinnia/archives/2012/week/16/my-fake-entry_entry_detail.html',
+             'zinnia/archives/week/16/my-fake-entry_entry_detail.html',
+             'zinnia/archives/2012/week/16/my-fake-entry.html',
+             'zinnia/archives/week/16/my-fake-entry.html',
+             'zinnia/archives/2012/week/16/entry_detail.html',
+             'zinnia/archives/week/16/entry_detail.html',
              'zinnia/archives/2012/my-fake-entry_entry_detail.html',
              'zinnia/archives/2012/my-fake-entry.html',
              'zinnia/archives/2012/entry_detail.html',
@@ -221,6 +228,12 @@ class MixinTestCase(TestCase):
              'zinnia/archives/month/04/my-fake-entry.html',
              'zinnia/archives/2012/month/04/custom.html',
              'zinnia/archives/month/04/custom.html',
+             'zinnia/archives/2012/week/16/my-fake-entry_custom.html',
+             'zinnia/archives/week/16/my-fake-entry_custom.html',
+             'zinnia/archives/2012/week/16/my-fake-entry.html',
+             'zinnia/archives/week/16/my-fake-entry.html',
+             'zinnia/archives/2012/week/16/custom.html',
+             'zinnia/archives/week/16/custom.html',
              'zinnia/archives/2012/my-fake-entry_custom.html',
              'zinnia/archives/2012/my-fake-entry.html',
              'zinnia/archives/2012/custom.html',
