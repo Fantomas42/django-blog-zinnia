@@ -189,6 +189,9 @@ class FeedsTestCase(TestCase):
         self.assertEqual(
             feed.description(self.category),
             'The latest entries for the category %s' % self.category.title)
+        self.category.description = 'Category description'
+        self.assertEqual(feed.description(self.category),
+                         'Category description')
 
     def test_author_entries(self):
         self.create_published_entry()

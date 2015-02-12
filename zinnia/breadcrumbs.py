@@ -62,9 +62,6 @@ def entry_breadcrumbs(entry):
             day_crumb(creation_date),
             Crumb(entry.title)]
 
-
-ZINNIA_ROOT_URL = lambda: reverse('zinnia:entry_archive_index')
-
 MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
                                              reverse('zinnia:tag_list')),
                                        Crumb(x.name)],
@@ -110,9 +107,10 @@ def retrieve_breadcrumbs(path, model_instance, root_name=''):
     based of the model's url handled by Zinnia.
     """
     breadcrumbs = []
+    zinnia_root_path = reverse('zinnia:entry_archive_index')
 
     if root_name:
-        breadcrumbs.append(Crumb(root_name, ZINNIA_ROOT_URL()))
+        breadcrumbs.append(Crumb(root_name, zinnia_root_path))
 
     if model_instance is not None:
         key = model_instance.__class__.__name__
@@ -149,7 +147,7 @@ def retrieve_breadcrumbs(path, model_instance, root_name=''):
         return breadcrumbs
 
     url_components = [comp for comp in
-                      path.replace(ZINNIA_ROOT_URL(), '', 1).split('/')
+                      path.replace(zinnia_root_path, '', 1).split('/')
                       if comp]
     if len(url_components):
         breadcrumbs.append(Crumb(_(url_components[-1].capitalize())))

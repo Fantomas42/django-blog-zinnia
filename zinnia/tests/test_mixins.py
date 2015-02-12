@@ -24,6 +24,7 @@ from zinnia.views.mixins.templates import \
 
 class MixinTestCase(TestCase):
     """Test cases for zinnia.views.mixins"""
+    maxDiff = None
 
     def setUp(self):
         disconnect_entry_signals()
@@ -66,10 +67,18 @@ class MixinTestCase(TestCase):
                           'zinnia/entry_list.html'])
 
     def test_entry_queryset_archive_template_response_mixin(self):
-        get_year = lambda: 2012
-        get_week = lambda: 16
-        get_month = lambda: '04'
-        get_day = lambda: 21
+        def get_year():
+            return 2012
+
+        def get_week():
+            return 16
+
+        def get_month():
+            return '04'
+
+        def get_day():
+            return 21
+
         instance = EntryQuerysetArchiveTemplateResponseMixin()
         self.assertEqual(
             instance.get_template_names(),
@@ -141,13 +150,22 @@ class MixinTestCase(TestCase):
             detail_template = 'entry_detail.html'
             slug = 'my-fake-entry'
 
-        get_year = lambda: 2012
-        get_month = lambda: '04'
-        get_day = lambda: 21
+        def get_year():
+            return 2012
+
+        def get_week():
+            return 16
+
+        def get_month():
+            return '04'
+
+        def get_day():
+            return 21
 
         instance = EntryArchiveTemplateResponseMixin()
         instance.get_year = get_year
         instance.get_month = get_month
+        instance.get_week = get_week
         instance.get_day = get_day
         instance.object = FakeEntry()
         self.assertEqual(
@@ -170,6 +188,12 @@ class MixinTestCase(TestCase):
              'zinnia/archives/month/04/my-fake-entry.html',
              'zinnia/archives/2012/month/04/entry_detail.html',
              'zinnia/archives/month/04/entry_detail.html',
+             'zinnia/archives/2012/week/16/my-fake-entry_entry_detail.html',
+             'zinnia/archives/week/16/my-fake-entry_entry_detail.html',
+             'zinnia/archives/2012/week/16/my-fake-entry.html',
+             'zinnia/archives/week/16/my-fake-entry.html',
+             'zinnia/archives/2012/week/16/entry_detail.html',
+             'zinnia/archives/week/16/entry_detail.html',
              'zinnia/archives/2012/my-fake-entry_entry_detail.html',
              'zinnia/archives/2012/my-fake-entry.html',
              'zinnia/archives/2012/entry_detail.html',
@@ -204,6 +228,12 @@ class MixinTestCase(TestCase):
              'zinnia/archives/month/04/my-fake-entry.html',
              'zinnia/archives/2012/month/04/custom.html',
              'zinnia/archives/month/04/custom.html',
+             'zinnia/archives/2012/week/16/my-fake-entry_custom.html',
+             'zinnia/archives/week/16/my-fake-entry_custom.html',
+             'zinnia/archives/2012/week/16/my-fake-entry.html',
+             'zinnia/archives/week/16/my-fake-entry.html',
+             'zinnia/archives/2012/week/16/custom.html',
+             'zinnia/archives/week/16/custom.html',
              'zinnia/archives/2012/my-fake-entry_custom.html',
              'zinnia/archives/2012/my-fake-entry.html',
              'zinnia/archives/2012/custom.html',
