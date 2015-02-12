@@ -215,7 +215,7 @@ class CategoryEntries(EntryFeed):
         Description of the feed.
         """
         return (obj.description or
-                _('The latest entries for the category %s') % obj.title)
+                _('The latest entries categorized under %s') % obj.title)
 
 
 class AuthorEntries(EntryFeed):
@@ -288,7 +288,7 @@ class TagEntries(EntryFeed):
         """
         Description of the feed.
         """
-        return _('The latest entries for the tag %s') % obj.name
+        return _('The latest entries tagged with %s') % obj.name
 
 
 class SearchEntries(EntryFeed):
@@ -321,7 +321,7 @@ class SearchEntries(EntryFeed):
         """
         Title of the feed.
         """
-        return _("Results of the search for '%s'") % obj
+        return _("Search results for '%(pattern)s'") % {'pattern': obj}
 
     def description(self, obj):
         """

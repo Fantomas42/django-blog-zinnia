@@ -10,7 +10,7 @@
     <strong>{{ comment.name }}</strong> {% trans "in" %}
     <strong>
       <a href="{{ entry.get_absolute_url }}#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
-         title="{% trans "Comment on" %} {{ entry.title }}">
+         title="{% blocktrans with object=entry.title %}Comment on {{ object }}{% endblocktrans %}">
         {{ entry.title }}
       </a>
     </strong>
