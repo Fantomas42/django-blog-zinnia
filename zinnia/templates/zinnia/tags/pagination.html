@@ -1,59 +1,61 @@
 {% load i18n %}
-<ul class="paginator">
-  <li class="index">
-    {% blocktrans with current_page=page.number total_page=page.paginator.num_pages %}Page {{ current_page }} of {{ total_page }}{% endblocktrans %}
-  </li>
+<nav>
+  <ul class="paginator">
+    <li class="index">
+      {% blocktrans with current_page=page.number total_page=page.paginator.num_pages %}Page {{ current_page }} of {{ total_page }}{% endblocktrans %}
+    </li>
 
-  {% if page.has_previous %}
-  <li class="page previous">
-    <a href="?page={{ page.previous_page_number }}{{ GET_string }}"
-       title="{% trans "More recent entries" %}">&laquo;</a>
-  </li>
-  {% endif %}
+    {% if page.has_previous %}
+    <li class="page previous">
+      <a href="?page={{ page.previous_page_number }}{{ GET_string }}"
+         title="{% trans "More recent entries" %}">&laquo;</a>
+    </li>
+    {% endif %}
 
-  {% for page_number in begin %}
-  <li class="page{% ifequal page.number page_number %} current{% endifequal %}">
-    {% ifequal page.number page_number %}
-    {{ page_number }}
-    {% else %}
-    <a href="?page={{ page_number }}{{ GET_string }}"
-       title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
-    {% endifequal%}
-  </li>
-  {% endfor %}
+    {% for page_number in begin %}
+    <li class="page{% ifequal page.number page_number %} current{% endifequal %}">
+      {% ifequal page.number page_number %}
+      {{ page_number }}
+      {% else %}
+      <a href="?page={{ page_number }}{{ GET_string }}"
+         title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
+      {% endifequal%}
+    </li>
+    {% endfor %}
 
-  {% if middle %}
-  <li class="ellipsis">&hellip;</li>
-  {% for page_number in middle %}
-  <li class="page{% ifequal page.number page_number %} current{% endifequal %}">
-    {% ifequal page.number page_number %}
-    {{ page_number }}
-    {% else %}
-    <a href="?page={{ page_number }}{{ GET_string }}"
-       title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
-    {% endifequal%}
-  </li>
-  {% endfor %}
-  {% endif %}
+    {% if middle %}
+    <li class="ellipsis">&hellip;</li>
+    {% for page_number in middle %}
+    <li class="page{% ifequal page.number page_number %} current{% endifequal %}">
+      {% ifequal page.number page_number %}
+      {{ page_number }}
+      {% else %}
+      <a href="?page={{ page_number }}{{ GET_string }}"
+         title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
+      {% endifequal%}
+    </li>
+    {% endfor %}
+    {% endif %}
 
-  {% if end %}
-  <li class="ellipsis">&hellip;</li>
-  {% for page_number in end %}
-  <li class="page{% ifequal page.number page_number %} current{% endifequal %}">
-    {% ifequal page.number page_number %}
-    {{ page_number }}
-    {% else %}
-    <a href="?page={{ page_number }}{{ GET_string }}"
-       title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
-    {% endifequal%}
-  </li>
-  {% endfor %}
-  {% endif %}
+    {% if end %}
+    <li class="ellipsis">&hellip;</li>
+    {% for page_number in end %}
+    <li class="page{% ifequal page.number page_number %} current{% endifequal %}">
+      {% ifequal page.number page_number %}
+      {{ page_number }}
+      {% else %}
+      <a href="?page={{ page_number }}{{ GET_string }}"
+         title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
+      {% endifequal%}
+    </li>
+    {% endfor %}
+    {% endif %}
 
-  {% if page.has_next %}
-  <li class="page next">
-    <a href="?page={{ page.next_page_number }}{{ GET_string }}"
-       title="{% trans "More old entries" %}">&raquo;</a>
-  </li>
-  {% endif %}
-</ul>
+    {% if page.has_next %}
+    <li class="page next">
+      <a href="?page={{ page.next_page_number }}{{ GET_string }}"
+         title="{% trans "More old entries" %}">&raquo;</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
