@@ -193,6 +193,17 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.description(self.category),
                          'Category description')
 
+    def test_category_title_non_ascii(self):
+        self.create_published_entry()
+        self.category.title = smart_text('Catégorie')
+        self.category.save()
+        feed = CategoryEntries()
+        self.assertEqual(feed.get_title(self.category),
+                         'Entries for the category %s' % self.category.title)
+        self.assertEqual(
+            feed.description(self.category),
+            'The latest entries categorized under %s' % self.category.title)
+
     def test_author_entries(self):
         self.create_published_entry()
         feed = AuthorEntries()
@@ -230,6 +241,18 @@ class FeedsTestCase(TestCase):
                          'Entries for the tag %s' % tag.name)
         self.assertEqual(feed.description(tag),
                          'The latest entries tagged with %s' % tag.name)
+
+    def test_tag_title_non_ascii(self):
+        entry = self.create_published_entry()
+        tag_unicode = smart_text('accentué')
+        entry.tags = tag_unicode
+        entry.save()
+        feed = TagEntries()
+        tag = Tag(name=tag_unicode)
+        self.assertEqual(feed.get_title(tag),
+                         'Entries for the tag %s' % tag_unicode)
+        self.assertEqual(feed.description(tag),
+                         'The latest entries tagged with %s' % tag_unicode)
 
     def test_search_entries(self):
         class FakeRequest:
