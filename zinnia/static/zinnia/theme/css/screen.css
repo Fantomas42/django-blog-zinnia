@@ -384,8 +384,12 @@ table {
   background: transparent url("../img/category.png") no-repeat scroll 0.5em; }
 .zinnia .entry-last-update {
   display: none; }
-.zinnia .entry-image img {
-  width: 100%; }
+.zinnia .entry-image {
+  margin-bottom: 1.5em; }
+  .zinnia .entry-image img {
+    width: 100%; }
+  .zinnia .entry-image p {
+    margin: 0; }
 .zinnia .entry-summary p {
   text-align: justify;
   font-size: 1.2em;

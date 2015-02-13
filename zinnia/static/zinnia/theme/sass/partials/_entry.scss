@@ -17,8 +17,12 @@ h2.entry-title {
 }
 
 .entry-image {
+  margin-bottom: 1.5em;
   img {
     width: 100%;
+  }
+  p {
+    margin: 0;
   }
 }
 
