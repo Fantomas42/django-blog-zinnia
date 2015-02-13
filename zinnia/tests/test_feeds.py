@@ -175,7 +175,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.get_title(None), 'Latest entries')
         self.assertEqual(
             feed.description(),
-            'The latest entries for the site example.com')
+            'The latest entries on the site example.com')
 
     def test_category_entries(self):
         self.create_published_entry()
@@ -200,7 +200,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(len(feed.items(self.author)), 1)
         self.assertEqual(feed.link(self.author), '/authors/admin/')
         self.assertEqual(feed.get_title(self.author),
-                         'Entries for author %s' %
+                         'Entries for the author %s' %
                          self.author.__str__())
         self.assertEqual(feed.description(self.author),
                          'The latest entries by %s' %
@@ -213,7 +213,7 @@ class FeedsTestCase(TestCase):
         self.create_published_entry()
         feed = AuthorEntries()
         self.assertEqual(feed.get_title(self.author),
-                         smart_text('Entries for author %s' %
+                         smart_text('Entries for the author %s' %
                                     self.author.__str__()))
         self.assertEqual(feed.description(self.author),
                          smart_text('The latest entries by %s' %
@@ -257,7 +257,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.get_title(None), 'Latest discussions')
         self.assertEqual(
             feed.description(),
-            'The latest discussions for the site example.com')
+            'The latest discussions on the site example.com')
 
     def test_entry_discussions(self):
         entry = self.create_published_entry()
@@ -281,7 +281,7 @@ class FeedsTestCase(TestCase):
                          'Discussions on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
-            'The latest discussions for the entry %s' % entry.title)
+            'The latest discussions on the entry %s' % entry.title)
 
     def test_feed_for_hidden_entry_issue_277(self):
         entry = self.create_published_entry()
@@ -321,7 +321,7 @@ class FeedsTestCase(TestCase):
                          'Comments on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
-            'The latest comments for the entry %s' % entry.title)
+            'The latest comments on the entry %s' % entry.title)
         self.assertTrue(urlEqual(
             feed.item_enclosure_url(comments[0]),
             'http://www.gravatar.com/avatar/e64c7d89f26b'
@@ -341,7 +341,7 @@ class FeedsTestCase(TestCase):
                          'Pingbacks on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
-            'The latest pingbacks for the entry %s' % entry.title)
+            'The latest pingbacks on the entry %s' % entry.title)
 
     def test_entry_trackbacks(self):
         entry = self.create_published_entry()
@@ -355,7 +355,7 @@ class FeedsTestCase(TestCase):
                          'Trackbacks on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
-            'The latest trackbacks for the entry %s' % entry.title)
+            'The latest trackbacks on the entry %s' % entry.title)
 
     def test_entry_feed_no_authors(self):
         entry = self.create_published_entry()
