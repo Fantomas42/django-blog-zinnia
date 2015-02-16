@@ -84,6 +84,12 @@ class EntryFeed(ZinniaFeed):
         """
         return item.creation_date
 
+    def item_updateddate(self, item):
+        """
+        Update date of an entry.
+        """
+        return item.last_update
+
     def item_categories(self, item):
         """
         Entry's categories.

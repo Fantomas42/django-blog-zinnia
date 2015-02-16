@@ -111,6 +111,7 @@ class FeedsTestCase(TestCase):
         entry = self.create_published_entry()
         feed = EntryFeed()
         self.assertEqual(feed.item_pubdate(entry), entry.creation_date)
+        self.assertEqual(feed.item_updateddate(entry), entry.last_update)
         self.assertEqual(feed.item_categories(entry), [self.category.title])
         self.assertEqual(feed.item_author_name(entry),
                          self.author.__str__())
