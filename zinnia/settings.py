@@ -1,5 +1,6 @@
 """Settings of Zinnia"""
 from django.conf import settings
+from django.utils import six
 
 PING_DIRECTORIES = getattr(settings, 'ZINNIA_PING_DIRECTORIES',
                            ('http://django-blog-zinnia.com/xmlrpc/',))
@@ -25,7 +26,11 @@ ENTRY_CONTENT_TEMPLATES = getattr(
 
 MARKUP_LANGUAGE = getattr(settings, 'ZINNIA_MARKUP_LANGUAGE', 'html')
 
-MARKDOWN_EXTENSIONS = getattr(settings, 'ZINNIA_MARKDOWN_EXTENSIONS', '')
+MARKDOWN_EXTENSIONS = getattr(settings, 'ZINNIA_MARKDOWN_EXTENSIONS',
+    getattr(settings, 'MARKDOWN_EXTENSIONS', []))
+
+if isinstance(MARKDOWN_EXTENSIONS, six.string_types):
+    MARKDOWN_EXTENSIONS = [e for e in MARKDOWN_EXTENSIONS.split(',') if e]
 
 RESTRUCTUREDTEXT_SETTINGS = getattr(
     settings, 'ZINNIA_RESTRUCTUREDTEXT_SETTINGS', {})
