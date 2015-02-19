@@ -38,7 +38,6 @@ def markdown(value, extensions=MARKDOWN_EXTENSIONS):
                       RuntimeWarning)
         return value
 
-    extensions = [e for e in extensions.split(',') if e]
     return markdown.markdown(force_text(value),
                              extensions, safe_mode=False)
 
