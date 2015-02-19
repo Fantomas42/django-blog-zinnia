@@ -3,9 +3,11 @@ from django.db import migrations
 
 from ..models import Entry
 from ..models_bases.entry import LeadEntry, ImageEntry
+from .. import settings
 
 operations = []
-if issubclass(Entry, ImageEntry):
+
+if issubclass(Entry, ImageEntry) and settings.IMAGE_FILED:
     operations.append(migrations.AddField(
         model_name='entry',
         name='image_caption',
@@ -13,6 +15,7 @@ if issubclass(Entry, ImageEntry):
             default='', help_text="Image's caption",
             verbose_name='caption', blank=True),
         preserve_default=False,))
+
 if issubclass(Entry, LeadEntry):
     operations.append(migrations.AddField(
         model_name='entry',

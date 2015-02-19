@@ -8,7 +8,9 @@ import tagging.fields
 import zinnia.models_bases.entry
 from . import user_model_label
 
+from .. import settings
 from ..models import Entry
+from ..models_bases import load_model_class
 from ..models_bases.entry import CoreEntry, ContentEntry, \
     DiscussionsEntry, RelatedEntry, ExcerptEntry, ImageEntry, FeaturedEntry, \
     AuthorsEntry, CategoriesEntry, TagsEntry, LoginRequiredEntry, \
@@ -187,7 +189,7 @@ if issubclass(Entry, ExcerptEntry):
             help_text='Used for search and SEO.',
             verbose_name='excerpt', blank=True)))
 
-if issubclass(Entry, ImageEntry):
+if issubclass(Entry, ImageEntry) and settings.IMAGE_FILED is True:
     operations.append(migrations.AddField(
         model_name='Entry',
         name='image',
@@ -195,6 +197,11 @@ if issubclass(Entry, ImageEntry):
             help_text='Used for illustration.',
             upload_to=zinnia.models_bases.entry.image_upload_to_dispatcher,
             verbose_name='image', blank=True)))
+elif issubclass(Entry, ImageEntry) and settings.IMAGE_FILED:
+    operations.append(migrations.AddField(
+        model_name='Entry',
+        name='image',
+        field=load_model_class(settings.IMAGE_FILED)))
 
 if issubclass(Entry, FeaturedEntry):
     operations.append(migrations.AddField(

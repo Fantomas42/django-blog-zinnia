@@ -1,5 +1,6 @@
 """XML-RPC methods for Zinnia"""
 
+from .. import settings
 
 ZINNIA_XMLRPC_PINGBACK = [
     ('zinnia.xmlrpc.pingback.pingback_ping',
@@ -29,8 +30,7 @@ ZINNIA_XMLRPC_METAWEBLOG = [
     ('zinnia.xmlrpc.metaweblog.new_post',
      'metaWeblog.newPost'),
     ('zinnia.xmlrpc.metaweblog.edit_post',
-     'metaWeblog.editPost'),
-    ('zinnia.xmlrpc.metaweblog.new_media_object',
-     'metaWeblog.newMediaObject')]
+     'metaWeblog.editPost')] + ([('zinnia.xmlrpc.metaweblog.new_media_object',
+     'metaWeblog.newMediaObject')] if settings.IMAGE_FILED is True else [])
 
 ZINNIA_XMLRPC_METHODS = ZINNIA_XMLRPC_PINGBACK + ZINNIA_XMLRPC_METAWEBLOG

@@ -61,6 +61,8 @@ COMMENT_MIN_WORDS = getattr(settings, 'ZINNIA_COMMENT_MIN_WORDS', 4)
 
 COMMENT_FLAG_USER_ID = getattr(settings, 'ZINNIA_COMMENT_FLAG_USER_ID', 1)
 
+IMAGE_FILED = getattr(settings, 'ZINNIA_IMAGE_FILED', True)
+
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads/zinnia')
 
 PROTOCOL = getattr(settings, 'ZINNIA_PROTOCOL', 'http')
@@ -75,12 +77,12 @@ F_MIN = getattr(settings, 'ZINNIA_F_MIN', 0.1)
 F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
 
 SEARCH_FIELDS = getattr(settings, 'ZINNIA_SEARCH_FIELDS',
-                        ['title', 'lead', 'content',
-                         'excerpt', 'image_caption'])
+                        ['title', 'lead', 'content', 'excerpt'] + \
+                        ([ 'image_caption'] if IMAGE_FILED else []))
 
 COMPARISON_FIELDS = getattr(settings, 'ZINNIA_COMPARISON_FIELDS',
-                            ['title', 'lead', 'content',
-                             'excerpt', 'image_caption'])
+                            ['title', 'lead', 'content', 'excerpt'] + \
+                            ([ 'image_caption'] if IMAGE_FILED else []))
 
 SPAM_CHECKER_BACKENDS = getattr(settings, 'ZINNIA_SPAM_CHECKER_BACKENDS',
                                 ())
