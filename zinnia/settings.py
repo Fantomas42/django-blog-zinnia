@@ -1,5 +1,6 @@
 """Settings of Zinnia"""
 from django.conf import settings
+from django.utils import six
 
 PING_DIRECTORIES = getattr(settings, 'ZINNIA_PING_DIRECTORIES',
                            ('http://django-blog-zinnia.com/xmlrpc/',))
@@ -25,7 +26,11 @@ ENTRY_CONTENT_TEMPLATES = getattr(
 
 MARKUP_LANGUAGE = getattr(settings, 'ZINNIA_MARKUP_LANGUAGE', 'html')
 
-MARKDOWN_EXTENSIONS = getattr(settings, 'ZINNIA_MARKDOWN_EXTENSIONS', '')
+MARKDOWN_EXTENSIONS = getattr(settings, 'ZINNIA_MARKDOWN_EXTENSIONS',
+    getattr(settings, 'MARKDOWN_EXTENSIONS', []))
+
+if isinstance(MARKDOWN_EXTENSIONS, six.string_types):
+    MARKDOWN_EXTENSIONS = [e for e in MARKDOWN_EXTENSIONS.split(',') if e]
 
 RESTRUCTUREDTEXT_SETTINGS = getattr(
     settings, 'ZINNIA_RESTRUCTUREDTEXT_SETTINGS', {})
@@ -61,6 +66,8 @@ COMMENT_MIN_WORDS = getattr(settings, 'ZINNIA_COMMENT_MIN_WORDS', 4)
 
 COMMENT_FLAG_USER_ID = getattr(settings, 'ZINNIA_COMMENT_FLAG_USER_ID', 1)
 
+IMAGE_FIELD = getattr(settings, 'ZINNIA_IMAGE_FIELD', True)
+
 UPLOAD_TO = getattr(settings, 'ZINNIA_UPLOAD_TO', 'uploads/zinnia')
 
 PROTOCOL = getattr(settings, 'ZINNIA_PROTOCOL', 'http')
@@ -75,12 +82,12 @@ F_MIN = getattr(settings, 'ZINNIA_F_MIN', 0.1)
 F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
 
 SEARCH_FIELDS = getattr(settings, 'ZINNIA_SEARCH_FIELDS',
-                        ['title', 'lead', 'content',
-                         'excerpt', 'image_caption'])
+                        ['title', 'lead', 'content', 'excerpt'] + \
+                        ([ 'image_caption'] if IMAGE_FIELD else []))
 
 COMPARISON_FIELDS = getattr(settings, 'ZINNIA_COMPARISON_FIELDS',
-                            ['title', 'lead', 'content',
-                             'excerpt', 'image_caption'])
+                            ['title', 'lead', 'content', 'excerpt'] + \
+                            ([ 'image_caption'] if IMAGE_FIELD else []))
 
 SPAM_CHECKER_BACKENDS = getattr(settings, 'ZINNIA_SPAM_CHECKER_BACKENDS',
                                 ())

@@ -126,7 +126,7 @@ class EntryFeed(ZinniaFeed):
         """
         Return an image for enclosure.
         """
-        if item.image:
+        if hasattr(item, 'image') and item.image:
             url = item.image.url
         else:
             img = BeautifulSoup(item.html_content).find('img')
@@ -140,7 +140,7 @@ class EntryFeed(ZinniaFeed):
         if the enclosure is present on the FS,
         otherwise returns an hardcoded value.
         """
-        if item.image:
+        if hasattr(item, 'image') and item.image:
             try:
                 return str(item.image.size)
             except (os.error, NotImplementedError):

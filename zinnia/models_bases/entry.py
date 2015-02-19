@@ -11,6 +11,7 @@ from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
+from . import load_model_class
 
 import django_comments as comments
 from django_comments.models import CommentFlag
@@ -24,6 +25,7 @@ from zinnia.markups import restructuredtext
 from zinnia.preview import HTMLPreview
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import UPLOAD_TO
+from zinnia.settings import IMAGE_FIELD
 from zinnia.settings import MARKUP_LANGUAGE
 from zinnia.settings import ENTRY_DETAIL_TEMPLATES
 from zinnia.settings import ENTRY_CONTENT_TEMPLATES
@@ -420,28 +422,32 @@ class ImageEntry(models.Model):
     Abstract model class to add an image for illustrating the entries.
     """
 
-    def image_upload_to(self, filename):
-        """
-        Compute the upload path for the image field.
-        """
-        now = timezone.now()
-        filename, extension = os.path.splitext(filename)
+    if IMAGE_FIELD is True:
+        def image_upload_to(self, filename):
+            """
+            Compute the upload path for the image field.
+            """
+            now = timezone.now()
+            filename, extension = os.path.splitext(filename)
 
-        return os.path.join(
-            UPLOAD_TO,
-            now.strftime('%Y'),
-            now.strftime('%m'),
-            now.strftime('%d'),
-            '%s%s' % (slugify(filename), extension))
+            return os.path.join(
+                UPLOAD_TO,
+                now.strftime('%Y'),
+                now.strftime('%m'),
+                now.strftime('%d'),
+                '%s%s' % (slugify(filename), extension))
 
-    image = models.ImageField(
-        _('image'), blank=True,
-        upload_to=image_upload_to_dispatcher,
-        help_text=_('Used for illustration.'))
+        image = models.ImageField(
+            _('image'), blank=True,
+            upload_to=image_upload_to_dispatcher,
+            help_text=_('Used for illustration.'))
+    elif IMAGE_FIELD:
+        image = load_model_class(IMAGE_FIELD)
 
-    image_caption = models.TextField(
-        _('caption'), blank=True,
-        help_text=_("Image's caption."))
+    if IMAGE_FIELD:
+        image_caption = models.TextField(
+            _('caption'), blank=True,
+            help_text=_("Image's caption."))
 
     class Meta:
         abstract = True

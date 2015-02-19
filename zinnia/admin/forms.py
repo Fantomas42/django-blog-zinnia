@@ -13,6 +13,7 @@ from zinnia.admin.widgets import MiniTextarea
 from zinnia.admin.widgets import TagAutoComplete
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.fields import MPTTModelMultipleChoiceField
+from zinnia import settings
 
 
 class CategoryAdminForm(forms.ModelForm):
@@ -77,5 +78,6 @@ class EntryAdminForm(forms.ModelForm):
             'tags': TagAutoComplete,
             'lead': MiniTextarea,
             'excerpt': MiniTextarea,
-            'image_caption': MiniTextarea,
         }
+        if settings.IMAGE_FIELD:
+            widgets.update(image_caption=MiniTextarea)

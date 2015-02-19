@@ -7,7 +7,7 @@ def load_model_class(model_path):
     """
     Load by import a class by a string path like:
     'module.models.MyModel'.
-    This mecanizm allows extension and customization of
+    This mechanism allows extension and customization of
     the Entry model class.
     """
     dot = model_path.rindex('.')

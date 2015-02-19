@@ -90,8 +90,27 @@ INSTALLED_APPS = (
     'django_xmlrpc',
     'mptt',
     'tagging',
-    'zinnia'
+    'zinnia',
+    # 'filer',
 )
 
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
+
+if 'filer' in INSTALLED_APPS:
+    ZINNIA_IMAGE_FIELD = 'demo.models_bases.ZINNIA_IMAGE_FIELD'
+    INSTALLED_APPS += (
+        'polymorphic',
+        'easy_thumbnails',
+    )
+    THUMBNAIL_HIGH_RESOLUTION = True
+    THUMBNAIL_PROCESSORS = (
+        'easy_thumbnails.processors.colorspace',
+        'easy_thumbnails.processors.autocrop',
+        #'easy_thumbnails.processors.scale_and_crop',
+        'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+        'easy_thumbnails.processors.filters',
+    )
+
+## Otherwise, if you want, you can safely disable an image filed
+# ZINNIA_IMAGE_FIELD = False
