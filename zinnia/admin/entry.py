@@ -29,7 +29,7 @@ class EntryAdmin(admin.ModelAdmin):
             'fields': (('title', 'status'), 'lead', 'content',)}),
         (_('Illustration'), {
             'fields': ('image', 'image_caption'),
-            'classes': ('collapse', 'collapse-closed')}) if settings.IMAGE_FILED else (
+            'classes': ('collapse', 'collapse-closed')}) if settings.IMAGE_FIELD else (
             None, {'fields': (), 'classes': ()}),
         (_('Publication'), {
             'fields': (('start_publication', 'end_publication'),

@@ -31,6 +31,6 @@ ZINNIA_XMLRPC_METAWEBLOG = [
      'metaWeblog.newPost'),
     ('zinnia.xmlrpc.metaweblog.edit_post',
      'metaWeblog.editPost')] + ([('zinnia.xmlrpc.metaweblog.new_media_object',
-     'metaWeblog.newMediaObject')] if settings.IMAGE_FILED is True else [])
+     'metaWeblog.newMediaObject')] if settings.IMAGE_FIELD is True else [])
 
 ZINNIA_XMLRPC_METHODS = ZINNIA_XMLRPC_PINGBACK + ZINNIA_XMLRPC_METAWEBLOG

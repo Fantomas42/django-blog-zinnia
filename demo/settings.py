@@ -98,7 +98,7 @@ from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
 
 if 'filer' in INSTALLED_APPS:
-    ZINNIA_IMAGE_FILED = 'demo.models_bases.ZINNIA_IMAGE_FILED'
+    ZINNIA_IMAGE_FIELD = 'demo.models_bases.ZINNIA_IMAGE_FIELD'
     INSTALLED_APPS += (
         'polymorphic',
         'easy_thumbnails',
@@ -113,4 +113,4 @@ if 'filer' in INSTALLED_APPS:
     )
 
 ## Otherwise, if you want, you can safely disable an image filed
-# ZINNIA_IMAGE_FILED = False
+# ZINNIA_IMAGE_FIELD = False

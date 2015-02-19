@@ -79,5 +79,5 @@ class EntryAdminForm(forms.ModelForm):
             'lead': MiniTextarea,
             'excerpt': MiniTextarea,
         }
-        if settings.IMAGE_FILED:
+        if settings.IMAGE_FIELD:
             widgets.update(image_caption=MiniTextarea)

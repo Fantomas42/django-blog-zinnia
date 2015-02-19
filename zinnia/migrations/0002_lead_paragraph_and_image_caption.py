@@ -7,7 +7,7 @@ from .. import settings
 
 operations = []
 
-if issubclass(Entry, ImageEntry) and settings.IMAGE_FILED:
+if issubclass(Entry, ImageEntry) and settings.IMAGE_FIELD:
     operations.append(migrations.AddField(
         model_name='entry',
         name='image_caption',

@@ -25,7 +25,7 @@ from zinnia.markups import restructuredtext
 from zinnia.preview import HTMLPreview
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import UPLOAD_TO
-from zinnia.settings import IMAGE_FILED
+from zinnia.settings import IMAGE_FIELD
 from zinnia.settings import MARKUP_LANGUAGE
 from zinnia.settings import ENTRY_DETAIL_TEMPLATES
 from zinnia.settings import ENTRY_CONTENT_TEMPLATES
@@ -422,7 +422,7 @@ class ImageEntry(models.Model):
     Abstract model class to add an image for illustrating the entries.
     """
 
-    if IMAGE_FILED is True:
+    if IMAGE_FIELD is True:
         def image_upload_to(self, filename):
             """
             Compute the upload path for the image field.
@@ -441,10 +441,10 @@ class ImageEntry(models.Model):
             _('image'), blank=True,
             upload_to=image_upload_to_dispatcher,
             help_text=_('Used for illustration.'))
-    elif IMAGE_FILED:
-        image = load_model_class(IMAGE_FILED)
+    elif IMAGE_FIELD:
+        image = load_model_class(IMAGE_FIELD)
 
-    if IMAGE_FILED:
+    if IMAGE_FIELD:
         image_caption = models.TextField(
             _('caption'), blank=True,
             help_text=_("Image's caption."))

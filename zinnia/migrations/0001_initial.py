@@ -189,7 +189,7 @@ if issubclass(Entry, ExcerptEntry):
             help_text='Used for search and SEO.',
             verbose_name='excerpt', blank=True)))
 
-if issubclass(Entry, ImageEntry) and settings.IMAGE_FILED is True:
+if issubclass(Entry, ImageEntry) and settings.IMAGE_FIELD is True:
     operations.append(migrations.AddField(
         model_name='Entry',
         name='image',
@@ -197,11 +197,11 @@ if issubclass(Entry, ImageEntry) and settings.IMAGE_FILED is True:
             help_text='Used for illustration.',
             upload_to=zinnia.models_bases.entry.image_upload_to_dispatcher,
             verbose_name='image', blank=True)))
-elif issubclass(Entry, ImageEntry) and settings.IMAGE_FILED:
+elif issubclass(Entry, ImageEntry) and settings.IMAGE_FIELD:
     operations.append(migrations.AddField(
         model_name='Entry',
         name='image',
-        field=load_model_class(settings.IMAGE_FILED)))
+        field=load_model_class(settings.IMAGE_FIELD)))
 
 if issubclass(Entry, FeaturedEntry):
     operations.append(migrations.AddField(
