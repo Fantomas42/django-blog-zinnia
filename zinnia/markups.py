@@ -4,6 +4,7 @@ Code originally provided by django.contrib.markups
 """
 import warnings
 
+from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.encoding import force_bytes
 
@@ -30,6 +31,12 @@ def markdown(value, extensions=MARKDOWN_EXTENSIONS):
     """
     Markdown processing with optionally using various extensions
     that python-markdown supports.
+    `extensions` may be a string of comma-separated extension paths
+    or an iterable of either markdown.Extension instances or
+    extension paths.
+    Samples:
+        'markdown.extensions.nl2br,markdown.extension.toc'
+        ['markdown.extensions.nl2br', MyExtension(mysetting="foo")]
     """
     try:
         import markdown
@@ -38,9 +45,11 @@ def markdown(value, extensions=MARKDOWN_EXTENSIONS):
                       RuntimeWarning)
         return value
 
-    extensions = [e for e in extensions.split(',') if e]
+    if isinstance(extensions, six.string_types):
+        extensions = [e for e in extensions.split(',') if e]
+
     return markdown.markdown(force_text(value),
-                             extensions, safe_mode=False)
+                             extensions=extensions, safe_mode=False)
 
 
 def restructuredtext(value, settings=RESTRUCTUREDTEXT_SETTINGS):
