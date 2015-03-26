@@ -30,6 +30,7 @@ class MarkupsTestCase(TestCase):
 
     @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
     def test_markdown_extensions(self):
+        from markdown.extensions.toc import TocExtension
         text = '[TOC]\n\n# Header 1\n\n## Header 2'
         self.assertEqual(markdown(text).strip(),
                          '<p>[TOC]</p>\n<h1>Header 1</h1>'
@@ -40,6 +41,20 @@ class MarkupsTestCase(TestCase):
                          'Header 2</a></li>\n</ul>\n</li>\n</ul>\n</div>'
                          '\n<h1 id="header-1">Header 1</h1>\n'
                          '<h2 id="header-2">Header 2</h2>')
+        self.assertEqual(markdown(text, extensions=['toc']).strip(),
+                         '<div class="toc">\n<ul>\n<li><a href="#header-1">'
+                         'Header 1</a><ul>\n<li><a href="#header-2">'
+                         'Header 2</a></li>\n</ul>\n</li>\n</ul>\n</div>'
+                         '\n<h1 id="header-1">Header 1</h1>\n'
+                         '<h2 id="header-2">Header 2</h2>')
+        tocext = TocExtension(marker='--TOC--', permalink='PL')
+        self.assertEqual(markdown(text, extensions=[tocext]).strip(),
+                         '<p>[TOC]</p>\n<h1 id="header-1">Header 1'
+                         '<a class="headerlink" href="#header-1" '
+                         'title="Permanent link">PL</a></h1>\n'
+                         '<h2 id="header-2">Header 2'
+                         '<a class="headerlink" href="#header-2" '
+                         'title="Permanent link">PL</a></h2>')
 
     @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
     def test_restructuredtext(self):
