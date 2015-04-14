@@ -1,7 +1,6 @@
 """Forms for Zinnia admin"""
 from django import forms
 from django.db.models import ManyToOneRel
-from django.db.models import ManyToManyRel
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 
@@ -60,12 +59,6 @@ class EntryAdminForm(forms.ModelForm):
         queryset=Category.objects.all(),
         widget=MPTTFilteredSelectMultiple(_('categories'), False,
                                           attrs={'rows': '10'}))
-
-    def __init__(self, *args, **kwargs):
-        super(EntryAdminForm, self).__init__(*args, **kwargs)
-        rel = ManyToManyRel(Category, 'id')
-        self.fields['categories'].widget = RelatedFieldWidgetWrapper(
-            self.fields['categories'].widget, rel, self.admin_site)
 
     class Meta:
         """
