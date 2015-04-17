@@ -414,6 +414,16 @@ class EntryHtmlContentTestCase(TestCase):
                          '\n<ul>\n<li>Item 1</li>\n'
                          '<li>Item 2</li>\n</ul>')
 
+    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    def test_markdown_with_inline_html(self):
+        entry.MARKUP_LANGUAGE = 'markdown'
+        self.entry.content = ('Hello *World* !\n\n'
+                              '<p>This is an inline HTML paragraph</p>')
+        html_content = self.entry.html_content
+        self.assertEqual(html_content,
+                         '<p>Hello <em>World</em> !</p>\n'
+                         '<p>This is an inline HTML paragraph</p>')
+
     @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
     def test_html_content_restructuredtext(self):
         entry.MARKUP_LANGUAGE = 'restructuredtext'

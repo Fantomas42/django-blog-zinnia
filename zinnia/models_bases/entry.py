@@ -215,15 +215,15 @@ class ContentEntry(models.Model):
         content = self.content
         if not content:
             return ''
-        elif '</p>' in content:
-            return content
         elif MARKUP_LANGUAGE == 'markdown':
             return markdown(content)
         elif MARKUP_LANGUAGE == 'textile':
             return textile(content)
         elif MARKUP_LANGUAGE == 'restructuredtext':
             return restructuredtext(content)
-        return linebreaks(content)
+        elif '</p>' not in content:
+            return linebreaks(content)
+        return content
 
     @property
     def html_preview(self):
