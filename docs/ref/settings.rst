@@ -89,12 +89,13 @@ You can use one of these values: ::
 
 ZINNIA_MARKDOWN_EXTENSIONS
 --------------------------
-**Default value:** ``''`` (Empty string)
+**Default value:** ``()`` (Empty tuple)
 
-Extensions names coma separated to be used for rendering the entries in
-MarkDown. Example: ::
+List of either markdown.Extension instances or extension paths, used for
+rendering the entries in MarkDown. Example: ::
 
-  ZINNIA_MARKDOWN_EXTENSIONS = 'extension1_name,extension2_name...'
+  ZINNIA_MARKDOWN_EXTENSIONS =  ['markdown.extensions.nl2br',
+                                 MyExtension(mysetting="foo")]
 
 .. setting:: ZINNIA_RESTRUCTUREDTEXT_SETTINGS
 
