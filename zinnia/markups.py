@@ -30,6 +30,8 @@ def markdown(value, extensions=MARKDOWN_EXTENSIONS):
     """
     Markdown processing with optionally using various extensions
     that python-markdown supports.
+    `extensions` is an iterable of either markdown.Extension instances
+    or extension paths.
     """
     try:
         import markdown
@@ -38,9 +40,8 @@ def markdown(value, extensions=MARKDOWN_EXTENSIONS):
                       RuntimeWarning)
         return value
 
-    extensions = [e for e in extensions.split(',') if e]
     return markdown.markdown(force_text(value),
-                             extensions, safe_mode=False)
+                             extensions=extensions, safe_mode=False)
 
 
 def restructuredtext(value, settings=RESTRUCTUREDTEXT_SETTINGS):
