@@ -1,5 +1,6 @@
 """Widgets for Zinnia admin"""
 from itertools import chain
+import json
 
 from django.utils import six
 from django.forms import Media
@@ -91,8 +92,7 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
         output.append('       width: "element",')
         output.append('       maximumInputLength: 50,')
         output.append('       tokenSeparators: [",", " "],')
-        output.append('       tags: [%s]' % ','.join(
-            ["'%s'" % tag for tag in self.get_tags()]))
+        output.append('       tags: %s' % json.dumps(self.get_tags()))
         output.append('     });')
         output.append('    });')
         output.append('}(django.jQuery));')
