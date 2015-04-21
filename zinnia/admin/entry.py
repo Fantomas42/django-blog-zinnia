@@ -66,6 +66,7 @@ class EntryAdmin(admin.ModelAdmin):
                'mark_featured', 'unmark_featured']
     actions_on_top = True
     actions_on_bottom = True
+    list_per_page = 20
 
     def __init__(self, model, admin_site):
         self.form.admin_site = admin_site
