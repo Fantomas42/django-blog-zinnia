@@ -136,6 +136,16 @@ want. Here's a custom implementation of the URLs provided by Zinnia: ::
 
   url(r'^', include(blog_urls, namespace='zinnia'))
 
+.. _emails:
+
+Emails
+======
+
+Be sure that the sending of emails is correctly configured, otherwise the
+moderation system will not work. Please refer to
+https://docs.djangoproject.com/en/dev/topics/email/ for more information
+about sending emails.
+
 .. _static-files:
 
 Static Files
@@ -145,7 +155,7 @@ Since the version 1.3 of Django, Zinnia uses the
 :mod:`~django.contrib.staticfiles` application to serve the static files
 needed. Please refer to
 https://docs.djangoproject.com/en/dev/howto/static-files/ for more
-informations about serving static files.
+information about serving static files.
 
 .. _syncing-database:
 
