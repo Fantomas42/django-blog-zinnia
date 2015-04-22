@@ -30,13 +30,13 @@ class ComparisonTestCase(TestCase):
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         entry_2 = Entry.objects.create(**params)
         cm = ClusteredModel(Entry.objects.all())
-        self.assertEqual(list(cm.dataset().values()),
-                         [str(entry_1.pk), str(entry_2.pk)])
+        self.assertEqual(sorted(cm.dataset().values()),
+                         sorted([str(entry_1.pk), str(entry_2.pk)]))
         cm = ClusteredModel(Entry.objects.all(),
                             ['title', 'excerpt', 'content'])
-        self.assertEqual(list(cm.dataset().values()),
-                         ['My entry 1  My content 1',
-                          'My entry 2  My content 2'])
+        self.assertEqual(sorted(cm.dataset().values()),
+                         sorted(['My entry 1  My content 1',
+                                 'My entry 2  My content 2']))
 
     def test_vector_builder(self):
         vectors = VectorBuilder(Entry.objects.all(),
