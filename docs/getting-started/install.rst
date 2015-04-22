@@ -13,7 +13,7 @@ Make sure to install these packages prior to installation :
 
 * `Python`_ >= 2.7
 * `Django`_ >= 1.7,<1.8
-* `PIL`_ >= 1.1.6 or `Pillow`_ >= 2.0.0
+* `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.5.1
 * `django-tagging`_ >= 0.3.4
 * `beautifulsoup4`_ >= 4.1.3
@@ -28,8 +28,7 @@ migrate the database.
 * `django-xmlrpc`_ >= 0.1.5
 
 Note that all the needed dependencies will be resolved if you install
-Zinnia with :program:`pip` or :program:`easy_install`, excepting PIL and
-Django.
+Zinnia with :program:`pip` or :program:`easy_install`, excepting Django.
 
 .. _getting-the-code:
 
@@ -171,7 +170,6 @@ project directory to sync the models with the database. ::
 
 .. _`Python`: http://www.python.org/
 .. _`Django`: https://www.djangoproject.com/
-.. _`PIL`: http://www.pythonware.com/products/pil/
 .. _`Pillow`: http://python-imaging.github.io/Pillow/
 .. _`django-mptt`: https://github.com/django-mptt/django-mptt/
 .. _`django-tagging`: https://code.google.com/p/django-tagging/
