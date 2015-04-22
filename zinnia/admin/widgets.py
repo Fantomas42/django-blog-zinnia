@@ -1,6 +1,7 @@
 """Widgets for Zinnia admin"""
 import json
 from itertools import chain
+import json
 
 from django.utils import six
 from django.forms import Media
