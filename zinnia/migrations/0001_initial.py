@@ -7,7 +7,6 @@ import mptt.fields
 import tagging.fields
 
 import zinnia.models_bases.entry
-from zinnia.migrations import user_model_label
 
 
 class Migration(migrations.Migration):
@@ -157,7 +156,7 @@ class Migration(migrations.Migration):
             options={
                 'proxy': True,
             },
-            bases=(user_model_label, models.Model),
+            bases=(settings.AUTH_USER_MODEL.lower(), models.Model),
         ),
         migrations.AddField(
             model_name='entry',
