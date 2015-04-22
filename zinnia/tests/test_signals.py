@@ -41,7 +41,7 @@ class SignalsTestCase(TestCase):
 
         import zinnia.ping
         from zinnia import settings
-        self.original_pinger = zinnia.ping.DirectoryPinger
+        original_pinger = zinnia.ping.DirectoryPinger
         zinnia.ping.DirectoryPinger = fake_pinger
 
         params = {'title': 'My entry',
@@ -62,7 +62,7 @@ class SignalsTestCase(TestCase):
         self.assertEqual(self.top, 1)
 
         # Remove stub
-        zinnia.ping.DirectoryPinger = self.original_pinger
+        zinnia.ping.DirectoryPinger = original_pinger
 
     def test_ping_external_urls_handler(self):
         # Set up a stub around ExternalUrlsPinger

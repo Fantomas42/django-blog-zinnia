@@ -11,6 +11,7 @@ from django.test.utils import restore_template_loaders
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import settings
+from zinnia.admin import entry as entry_admin
 from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -65,7 +66,7 @@ class TestMessageBackend(object):
         self.messages = []
 
     def add(self, *ka, **kw):
-        self.messages.append((ka, kw))
+        self.messages.append(ka)
 
 
 @skipIfCustomUser
@@ -368,6 +369,32 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.admin.unmark_featured(self.request, Entry.objects.all())
         self.assertEqual(Entry.objects.filter(featured=True).count(), 0)
         self.assertEqual(len(self.request._messages.messages), 2)
+
+    def test_ping_directories(self):
+        class FakePinger(object):
+            def __init__(self, *ka, **kw):
+                self.results = [{'flerror': False, 'message': 'OK'},
+                                {'flerror': True, 'message': 'KO'}]
+
+            def join(self):
+                pass
+
+        original_pinger = entry_admin.DirectoryPinger
+        entry_admin.DirectoryPinger = FakePinger
+        original_ping_directories = settings.PING_DIRECTORIES
+        settings.PING_DIRECTORIES = ['http://ping.com/ping']
+
+        self.request._messages = TestMessageBackend()
+        self.admin.ping_directories(self.request, Entry.objects.all(), False)
+        self.assertEqual(len(self.request._messages.messages), 0)
+        self.admin.ping_directories(self.request, Entry.objects.all())
+        self.assertEqual(len(self.request._messages.messages), 2)
+        self.assertEqual(self.request._messages.messages,
+                         [(20, 'http://ping.com/ping : KO', ''),
+                          (20, 'http://ping.com/ping directory succesfully '
+                           'pinged 1 entries.', '')])
+        entry_admin.DirectoryPinger = original_pinger
+        settings.PING_DIRECTORIES = original_ping_directories
 
 
 class CategoryAdminTestCase(BaseAdminTestCase):
