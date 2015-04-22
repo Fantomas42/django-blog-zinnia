@@ -135,6 +135,15 @@ want. Here's a custom implementation of the URLs provided by Zinnia: ::
 
   url(r'^', include(blog_urls, namespace='zinnia'))
 
+.. _sites:
+
+Sites
+=====
+
+Define the value of :setting:`SITE_ID` if not already done. ::
+
+  SITE_ID = 1
+
 .. _emails:
 
 Emails
