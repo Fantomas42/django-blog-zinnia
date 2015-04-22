@@ -108,7 +108,27 @@ class TagAutoCompleteTestCase(TestCase):
             '\n       width: "element",'
             '\n       maximumInputLength: 50,'
             '\n       tokenSeparators: [",", " "],'
-            '\n       tags: [\'test\',\'zinnia\']'
+            '\n       tags: ["test", "zinnia"]'
+            '\n     });\n    });'
+            '\n}(django.jQuery));\n</script>')
+
+    def test_render_tag_with_apostrophe(self):
+        widget = TagAutoComplete()
+        params = {'title': 'My entry',
+                  'tags': "zinnia, test, apos'trophe",
+                  'slug': 'my-entry'}
+        Entry.objects.create(**params)
+        self.maxDiff = None
+        self.assertEqual(
+            widget.render('tag', 'test,'),
+            '<input class="vTextField" name="tag" type="text" value="test," />'
+            '\n<script type="text/javascript">\n(function($) {'
+            '\n  $(document).ready(function() {'
+            '\n    $("#id_tag").select2({'
+            '\n       width: "element",'
+            '\n       maximumInputLength: 50,'
+            '\n       tokenSeparators: [",", " "],'
+            '\n       tags: ["apos\'trophe", "test", "zinnia"]'
             '\n     });\n    });'
             '\n}(django.jQuery));\n</script>')
 
