@@ -349,7 +349,7 @@ class RelatedEntry(models.Model):
     """
     related = models.ManyToManyField(
         'self',
-        blank=True, null=True,
+        blank=True,
         verbose_name=_('related entries'))
 
     @property
@@ -465,8 +465,8 @@ class AuthorsEntry(models.Model):
     """
     authors = models.ManyToManyField(
         'zinnia.Author',
+        blank=True,
         related_name='entries',
-        blank=True, null=False,
         verbose_name=_('authors'))
 
     class Meta:
@@ -479,8 +479,8 @@ class CategoriesEntry(models.Model):
     """
     categories = models.ManyToManyField(
         'zinnia.Category',
+        blank=True,
         related_name='entries',
-        blank=True, null=True,
         verbose_name=_('categories'))
 
     class Meta:
