@@ -324,6 +324,9 @@ class EntryTestCase(TestCase):
             def image_upload_to(self, filename):
                 return 'custom.png'
 
+            class Meta:
+                proxy = True
+
         custom_entry = EntryCustomImageUploadTo()
         self.assertEqual(
             entry.image_upload_to_dispatcher(custom_entry, 'image.gif'),
