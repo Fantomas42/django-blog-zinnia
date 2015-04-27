@@ -33,29 +33,29 @@ String defining the base model path for the Entry model. See
 
 ZINNIA_ENTRY_DETAIL_TEMPLATES
 -----------------------------
-**Default value:** ``()`` (Empty tuple)
+**Default value:** ``[]`` (Empty list)
 
 List of tuple for extending the list of templates availables for
 rendering the entry detail view. By using this setting, you can
 change the look and feel of an entry page directly in the admin
 interface. Example: ::
 
-  ZINNIA_ENTRY_DETAIL_TEMPLATES = (('entry_detail_alternate.html',
-                                    gettext('Alternative template')),)
+  ZINNIA_ENTRY_DETAIL_TEMPLATES = [('entry_detail_alternate.html',
+                                    gettext('Alternative template')),]
 
 .. setting:: ZINNIA_ENTRY_CONTENT_TEMPLATES
 
 ZINNIA_ENTRY_CONTENT_TEMPLATES
 ------------------------------
-**Default value:** ``()`` (Empty tuple)
+**Default value:** ``[]`` (Empty list)
 
 List of tuple for extending the list of templates availables for
 rendering the content of an entry. By using this setting, you can
 change the look and feel of an entry directly in the admin
 interface. Example: ::
 
-  ZINNIA_ENTRY_CONTENT_TEMPLATES = (('zinnia/_entry_detail_alternate.html',
-                                     gettext('Alternative template')),)
+  ZINNIA_ENTRY_CONTENT_TEMPLATES = [('zinnia/_entry_detail_alternate.html',
+                                     gettext('Alternative template')),]
 
 .. setting:: ZINNIA_UPLOAD_TO
 
@@ -89,7 +89,7 @@ You can use one of these values: ::
 
 ZINNIA_MARKDOWN_EXTENSIONS
 --------------------------
-**Default value:** ``()`` (Empty tuple)
+**Default value:** ``[]`` (Empty list)
 
 List of either markdown.Extension instances or extension paths, used for
 rendering the entries in MarkDown. Example: ::
@@ -291,7 +291,7 @@ new public comment has been posted.
 
 ZINNIA_SPAM_CHECKER_BACKENDS
 ----------------------------
-**Default value:** ``()`` (Empty tuple)
+**Default value:** ``[]`` (Empty list)
 
 List of strings representing the module path to a spam checker backend.
 See :doc:`/topics/spam_checker` for more informations about this setting.
