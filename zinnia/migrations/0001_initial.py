@@ -97,7 +97,7 @@ class Migration(migrations.Migration):
                 ('trackback_count', models.IntegerField(
                     default=0, verbose_name='trackback count')),
                 ('excerpt', models.TextField(
-                    help_text='Used for search and SEO.',
+                    help_text='Used for SEO purposes.',
                     verbose_name='excerpt', blank=True)),
                 ('image', models.ImageField(
                     help_text='Used for illustration.',
@@ -125,11 +125,11 @@ class Migration(migrations.Migration):
                     max_length=250, verbose_name='detail template',
                     choices=[('entry_detail.html', 'Default template')])),
                 ('categories', models.ManyToManyField(
-                    related_name='entries', null=True,
+                    related_name='entries',
                     verbose_name='categories', to='zinnia.Category',
                     blank=True)),
                 ('related', models.ManyToManyField(
-                    related_name='related_rel_+', null=True,
+                    related_name='related_rel_+',
                     verbose_name='related entries', to='zinnia.Entry',
                     blank=True)),
                 ('sites', models.ManyToManyField(
