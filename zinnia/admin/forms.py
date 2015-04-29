@@ -1,7 +1,5 @@
 """Forms for Zinnia admin"""
 from django import forms
-from django.db.models import ManyToOneRel
-from django.db.models import ManyToManyRel
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 
@@ -27,10 +25,10 @@ class CategoryAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CategoryAdminForm, self).__init__(*args, **kwargs)
-        rel = ManyToOneRel(Category._meta.get_field('tree_id'),
-                           Category, 'id')
         self.fields['parent'].widget = RelatedFieldWidgetWrapper(
-            self.fields['parent'].widget, rel, self.admin_site)
+            self.fields['parent'].widget,
+            Category.parent.field.rel,
+            self.admin_site)
 
     def clean_parent(self):
         """
@@ -63,9 +61,10 @@ class EntryAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EntryAdminForm, self).__init__(*args, **kwargs)
-        rel = ManyToManyRel(Category, 'id')
         self.fields['categories'].widget = RelatedFieldWidgetWrapper(
-            self.fields['categories'].widget, rel, self.admin_site)
+            self.fields['categories'].widget,
+            Entry.categories.field.rel,
+            self.admin_site)
 
     class Meta:
         """
