@@ -21,6 +21,13 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
     MPTT version of FilteredSelectMultiple.
     """
 
+    def __init__(self, verbose_name, is_stacked=False, attrs=None, choices=()):
+        """
+        Initializes the widget directly not stacked.
+        """
+        super(MPTTFilteredSelectMultiple, self).__init__(
+            verbose_name, is_stacked, attrs, choices)
+
     def render_option(self, selected_choices, option_value,
                       option_label, sort_fields):
         """

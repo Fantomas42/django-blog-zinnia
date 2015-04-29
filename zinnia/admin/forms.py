@@ -19,8 +19,8 @@ class CategoryAdminForm(forms.ModelForm):
     """
     parent = TreeNodeChoiceField(
         label=_('Parent category'),
-        level_indicator='|--', required=False,
         empty_label=_('No parent category'),
+        level_indicator='|--', required=False,
         queryset=Category.objects.all())
 
     def __init__(self, *args, **kwargs):
@@ -56,8 +56,7 @@ class EntryAdminForm(forms.ModelForm):
     categories = MPTTModelMultipleChoiceField(
         label=_('Categories'), required=False,
         queryset=Category.objects.all(),
-        widget=MPTTFilteredSelectMultiple(_('categories'), False,
-                                          attrs={'rows': '10'}))
+        widget=MPTTFilteredSelectMultiple(_('categories')))
 
     def __init__(self, *args, **kwargs):
         super(EntryAdminForm, self).__init__(*args, **kwargs)
