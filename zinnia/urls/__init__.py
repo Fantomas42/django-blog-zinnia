@@ -1,7 +1,6 @@
 """Defaults urls for the Zinnia project"""
 from django.conf.urls import url
 from django.conf.urls import include
-from django.conf.urls import patterns
 
 from django.utils.translation import ugettext_lazy
 
@@ -18,8 +17,7 @@ def i18n_url(url, translate=TRANSLATED_URLS):
 
 _ = i18n_url
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(_(r'^feeds/'), include('zinnia.urls.feeds')),
     url(_(r'^tags/'), include('zinnia.urls.tags')),
     url(_(r'^authors/'), include('zinnia.urls.authors')),
@@ -34,4 +32,4 @@ urlpatterns = patterns(
     url(r'^', include('zinnia.urls.shortlink')),
     url(r'^', include('zinnia.urls.quick_entry')),
     url(r'^', include('zinnia.urls.capabilities')),
-)
+]

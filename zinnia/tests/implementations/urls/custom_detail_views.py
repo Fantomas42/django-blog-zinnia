@@ -1,6 +1,5 @@
 """Test urls for the zinnia project"""
 from django.conf.urls import url
-from django.conf.urls import patterns
 
 from zinnia.views.tags import TagDetail
 from zinnia.views.authors import AuthorDetail
@@ -10,8 +9,10 @@ from zinnia.tests.implementations.urls.default import (
 
 
 class CustomModelDetailMixin(object):
-    """Mixin for changing the template_name
-    and overriding the context"""
+    """
+    Mixin for changing the template_name
+    and overriding the context.
+    """
     template_name = 'zinnia/entry_custom_list.html'
 
     def get_context_data(self, **kwargs):
@@ -33,8 +34,7 @@ class CustomCategoryDetail(CustomModelDetailMixin, CategoryDetail):
     pass
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^authors/(?P<username>[.+-@\w]+)/$',
         CustomAuthorDetail.as_view(),
         name='zinnia_author_detail'),
@@ -53,4 +53,4 @@ urlpatterns = patterns(
     url(r'^tags/(?P<tag>[^/]+(?u))/page/(?P<page>\d+)/$',
         CustomTagDetail.as_view(),
         name='zinnia_tag_detail_paginated'),
-) + test_urlpatterns
+] + test_urlpatterns

@@ -1,14 +1,12 @@
 """Urls for the Zinnia authors"""
 from django.conf.urls import url
-from django.conf.urls import patterns
 
 from zinnia.urls import _
 from zinnia.views.authors import AuthorList
 from zinnia.views.authors import AuthorDetail
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         AuthorList.as_view(),
         name='author_list'),
@@ -18,4 +16,4 @@ urlpatterns = patterns(
     url(r'^(?P<username>[.+-@\w]+)/$',
         AuthorDetail.as_view(),
         name='author_detail'),
-)
+]

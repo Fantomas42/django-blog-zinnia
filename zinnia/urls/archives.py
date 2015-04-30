@@ -1,6 +1,5 @@
 """Urls for the Zinnia archives"""
 from django.conf.urls import url
-from django.conf.urls import patterns
 
 from zinnia.urls import _
 from zinnia.views.archives import EntryDay
@@ -70,6 +69,4 @@ archive_patterns = (index_patterns + year_patterns +
                     week_patterns + month_patterns +
                     day_patterns + today_patterns)
 
-urlpatterns = patterns(
-    '', *archive_patterns
-)
+urlpatterns = archive_patterns

@@ -1,14 +1,12 @@
 """Urls for the Zinnia categories"""
 from django.conf.urls import url
-from django.conf.urls import patterns
 
 from zinnia.urls import _
 from zinnia.views.categories import CategoryList
 from zinnia.views.categories import CategoryDetail
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         CategoryList.as_view(),
         name='category_list'),
@@ -18,4 +16,4 @@ urlpatterns = patterns(
     url(r'^(?P<path>[-\/\w]+)/$',
         CategoryDetail.as_view(),
         name='category_detail'),
-)
+]
