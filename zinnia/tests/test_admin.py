@@ -7,7 +7,6 @@ from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.admin.sites import AdminSite
-from django.test.utils import restore_template_loaders
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import settings
@@ -45,10 +44,6 @@ class BaseAdminTestCase(TestCase):
         self.urls = self.rich_urls
         self._urlconf_setup()
         deactivate()
-        try:
-            restore_template_loaders()
-        except AttributeError:
-            pass
 
     def check_with_rich_and_poor_urls(self, func, args,
                                       result_rich, result_poor):

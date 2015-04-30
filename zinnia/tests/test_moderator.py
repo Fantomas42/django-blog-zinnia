@@ -4,8 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
-from django.test.utils import restore_template_loaders
-from django.test.utils import setup_test_template_loader
+from django.test.utils import override_settings
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
 import django_comments as comments
@@ -22,16 +21,16 @@ from zinnia.signals import disconnect_entry_signals
 
 
 @skipIfCustomUser
+@override_settings(
+    TEMPLATE_LOADERS=(
+        'zinnia.tests.utils.VoidLoader',
+    ))
 class CommentModeratorTestCase(TestCase):
     """Test cases for the moderator"""
 
     def setUp(self):
         disconnect_entry_signals()
         disconnect_discussion_signals()
-        setup_test_template_loader(
-            {'comments/comment_authors_email.txt': '',
-             'comments/comment_notification_email.txt': '',
-             'comments/comment_reply_email.txt': ''})
 
         self.site = Site.objects.get_current()
         self.author = Author.objects.create(username='admin',
@@ -43,9 +42,6 @@ class CommentModeratorTestCase(TestCase):
         self.entry = Entry.objects.create(**params)
         self.entry.sites.add(self.site)
         self.entry.authors.add(self.author)
-
-    def tearDown(self):
-        restore_template_loaders()
 
     def test_email(self):
         comment = comments.get_model().objects.create(

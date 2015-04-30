@@ -12,8 +12,7 @@ from django.utils import six
 from django.utils import timezone
 from django.test import TestCase
 from django.contrib.sites.models import Site
-from django.test.utils import restore_template_loaders
-from django.test.utils import setup_test_template_loader
+from django.test.utils import override_settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
@@ -37,6 +36,10 @@ from zinnia.signals import disconnect_discussion_signals
 
 
 @skipIfCustomUser
+@override_settings(
+    TEMPLATE_LOADERS=(
+        'zinnia.tests.utils.EntryDetailLoader',
+    ))
 class PingBackTestCase(TestCase):
     """Test cases for pingbacks"""
     urls = 'zinnia.tests.implementations.urls.default'
@@ -65,12 +68,6 @@ class PingBackTestCase(TestCase):
         import zinnia.xmlrpc.pingback
         self.original_urlopen = zinnia.xmlrpc.pingback.urlopen
         zinnia.xmlrpc.pingback.urlopen = self.fake_urlopen
-        # Set a short template for entry_detail to avoid rendering errors
-        setup_test_template_loader(
-            {'zinnia/entry_detail.html':
-             '<html><head><title>{{ object.title }}</title></head>'
-             '<body>{{ object.html_content|safe }}</body></html>',
-             '404.html': '404'})
         # Preparing site
         self.site = Site.objects.get_current()
         # Creating tests entries
@@ -110,7 +107,6 @@ class PingBackTestCase(TestCase):
         import zinnia.xmlrpc.pingback
         zinnia.xmlrpc.pingback.urlopen = self.original_urlopen
         shortener_settings.URL_SHORTENER_BACKEND = self.original_shortener
-        restore_template_loaders()
 
     def test_generate_pingback_content(self):
         soup = BeautifulSoup(self.second_entry.content)
