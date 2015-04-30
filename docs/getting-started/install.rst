@@ -12,13 +12,13 @@ Dependencies
 Make sure to install these packages prior to installation :
 
 * `Python`_ >= 2.7
-* `Django`_ >= 1.7,<1.8
+* `Django`_ >= 1.7,<1.9
 * `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.5.1
 * `django-tagging`_ >= 0.3.4
 * `beautifulsoup4`_ >= 4.1.3
 * `mots-vides`_ >= 2015.2.6
-* `django-contrib-comments`_ >= 1.5
+* `django-contrib-comments`_ >= 1.6
 
 The packages below are optionnal but needed for run the full test suite or
 migrate the database.
