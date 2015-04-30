@@ -40,8 +40,7 @@ def markdown(value, extensions=MARKDOWN_EXTENSIONS):
                       RuntimeWarning)
         return value
 
-    return markdown.markdown(force_text(value),
-                             extensions=extensions, safe_mode=False)
+    return markdown.markdown(force_text(value), extensions=extensions)
 
 
 def restructuredtext(value, settings=RESTRUCTUREDTEXT_SETTINGS):
