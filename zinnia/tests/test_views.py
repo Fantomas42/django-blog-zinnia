@@ -740,6 +740,7 @@ class ViewsTestCase(ViewsBaseCase):
             'Hello *World* !')
         quick_entry.MARKUP_LANGUAGE = original_markup_language
 
+
 @override_settings(
     ROOT_URLCONF='zinnia.tests.implementations.urls.custom_detail_views'
 )
@@ -749,11 +750,6 @@ class CustomDetailViewsTestCase(ViewsBaseCase):
     tags_detail and categories_detail views to be called with a custom
     template_name keyword argument and an extra_context.
     """
-
-    def setUp(self):
-        """We don't need to generate the full template
-        to make the tests working"""
-        super(CustomDetailViewsTestCase, self).setUp()
 
     def test_custom_category_detail(self):
         response = self.check_publishing_context('/categories/tests/', 2, 3)
