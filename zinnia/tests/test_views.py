@@ -118,13 +118,15 @@ class ViewsBaseCase(TestCase):
         self.assertTrue('protocol' in response.context)
 
 
+@override_settings(
+    ROOT_URLCONF='zinnia.tests.implementations.urls.default'
+)
 class ViewsTestCase(ViewsBaseCase):
     """
     Test cases for generic views used in the application,
     for reproducing and correcting issue :
     http://github.com/Fantomas42/django-blog-zinnia/issues#issue/3
     """
-    urls = 'zinnia.tests.implementations.urls.default'
 
     @override_settings(USE_TZ=False)
     def test_zinnia_entry_archive_index_no_timezone(self):
@@ -738,14 +740,15 @@ class ViewsTestCase(ViewsBaseCase):
             'Hello *World* !')
         quick_entry.MARKUP_LANGUAGE = original_markup_language
 
-
+@override_settings(
+    ROOT_URLCONF='zinnia.tests.implementations.urls.custom_detail_views'
+)
 class CustomDetailViewsTestCase(ViewsBaseCase):
     """
     Tests with an alternate urls.py that modifies how author_detail,
     tags_detail and categories_detail views to be called with a custom
     template_name keyword argument and an extra_context.
     """
-    urls = 'zinnia.tests.implementations.urls.custom_detail_views'
 
     def setUp(self):
         """We don't need to generate the full template

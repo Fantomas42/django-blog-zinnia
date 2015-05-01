@@ -50,9 +50,11 @@ from zinnia.signals import disconnect_discussion_signals
 
 
 @skipIfCustomUser
+@override_settings(
+    ROOT_URLCONF='zinnia.tests.implementations.urls.default'
+)
 class FeedsTestCase(TestCase):
     """Test cases for the Feed classes provided"""
-    urls = 'zinnia.tests.implementations.urls.default'
 
     def setUp(self):
         disconnect_entry_signals()
