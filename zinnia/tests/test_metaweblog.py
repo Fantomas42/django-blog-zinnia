@@ -11,6 +11,7 @@ from tempfile import TemporaryFile
 
 from django.test import TestCase
 from django.contrib.sites.models import Site
+from django.test.utils import override_settings
 from django.core.files.storage import default_storage
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
@@ -30,9 +31,11 @@ from zinnia.signals import disconnect_entry_signals
 
 
 @skipIfCustomUser
+@override_settings(
+    ROOT_URLCONF='zinnia.tests.implementations.urls.default'
+)
 class MetaWeblogTestCase(TestCase):
     """Test cases for MetaWeblog"""
-    urls = 'zinnia.tests.implementations.urls.default'
 
     def setUp(self):
         disconnect_entry_signals()

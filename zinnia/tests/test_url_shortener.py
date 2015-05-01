@@ -2,6 +2,7 @@
 import warnings
 
 from django.test import TestCase
+from django.test.utils import override_settings
 
 from zinnia.url_shortener import get_url_shortener
 from zinnia import url_shortener as us_settings
@@ -46,9 +47,11 @@ class FakeEntry(object):
         self.pk = pk
 
 
+@override_settings(
+    ROOT_URLCONF='zinnia.tests.implementations.urls.default'
+)
 class UrlShortenerDefaultBackendTestCase(TestCase):
     """Tests cases for the default url shortener backend"""
-    urls = 'zinnia.tests.implementations.urls.default'
 
     def test_backend(self):
         original_protocol = default.PROTOCOL

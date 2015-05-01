@@ -37,12 +37,12 @@ from zinnia.signals import disconnect_discussion_signals
 
 @skipIfCustomUser
 @override_settings(
+    ROOT_URLCONF='zinnia.tests.implementations.urls.default',
     TEMPLATE_LOADERS=(
         'zinnia.tests.utils.EntryDetailLoader',
     ))
 class PingBackTestCase(TestCase):
     """Test cases for pingbacks"""
-    urls = 'zinnia.tests.implementations.urls.default'
 
     def fake_urlopen(self, url):
         """Fake urlopen using client if domain
