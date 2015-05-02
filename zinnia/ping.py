@@ -167,12 +167,14 @@ class ExternalUrlsPinger(threading.Thread):
                 page = urlopen(url)
                 headers = page.info()
 
-                if 'text/' not in headers.get('Content-Type', '').lower():
-                    continue
-
                 server_url = headers.get('X-Pingback')
+
                 if not server_url:
-                    server_url = self.find_pingback_href(page.read())
+                    content_type = headers.get('Content-Type', '').split(
+                        ';')[0].strip().lower()
+                    if content_type in ['text/html', 'application/xhtml+xml']:
+                        server_url = self.find_pingback_href(
+                            page.read(5 * 1024))
 
                 if server_url:
                     server_url_splitted = urlsplit(server_url)
