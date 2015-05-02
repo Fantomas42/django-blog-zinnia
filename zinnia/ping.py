@@ -173,7 +173,8 @@ class ExternalUrlsPinger(threading.Thread):
                     content_type = headers.get('Content-Type', '').split(
                         ';')[0].strip().lower()
                     if content_type in ['text/html', 'application/xhtml+xml']:
-                        server_url = self.find_pingback_href(page.read())
+                        server_url = self.find_pingback_href(
+                            page.read(5 * 1024))
 
                 if server_url:
                     server_url_splitted = urlsplit(server_url)
