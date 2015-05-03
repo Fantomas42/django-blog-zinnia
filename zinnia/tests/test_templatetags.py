@@ -279,6 +279,9 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(len(context['entries']), 1)
         self.assertEqual(context['entries'][0].pk, self.entry.pk)
         self.assertEqual(context['template'], 'custom_template.html')
+        with self.assertNumQueries(1):
+            context = get_similar_entries(source_context, 3,
+                                          'custom_template.html')
 
     def test_get_archives_entries(self):
         with self.assertNumQueries(0):

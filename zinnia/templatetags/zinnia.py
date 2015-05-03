@@ -146,18 +146,20 @@ def get_similar_entries(context, number=5,
     if not entry:
         return {'template': template, 'entries': []}
 
-    cache_key = '%s:%s' % (entry.pk, '-'.join(VECTORS.columns))
-    related_entries = cache.get('related_entries', {})
+    cache_key = '%s:%s:%s' % (entry.pk, number,
+                              '-'.join(sorted(VECTORS.columns)))
+    cache_related = cache.get('related_entries', {})
 
-    if cache_key not in related_entries.keys():
-        related_entries[cache_key] = compute_related(
-            entry.pk, VECTORS._dataset)
-        cache.set('related_entries', related_entries)
+    if cache_key not in cache_related:
+        related_entry_pks = compute_related(
+            entry.pk, VECTORS._dataset)[:number]
+        related_entries = sorted(
+            Entry.objects.filter(pk__in=related_entry_pks),
+            key=lambda x: related_entry_pks.index(x.pk))
+        cache_related[cache_key] = related_entries
+        cache.set('related_entries', cache_related)
 
-    entry_pks = related_entries[cache_key][:number]
-    entries = list(Entry.objects.filter(pk__in=entry_pks))
-    entries.sort(key=lambda x: entry_pks.index(x.pk))
-
+    entries = cache_related[cache_key]
     return {'template': template,
             'entries': entries}
 
