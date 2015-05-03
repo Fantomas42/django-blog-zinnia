@@ -1,5 +1,7 @@
 """Comparison tools for Zinnia"""
 from django.utils import six
+from django.core.cache import caches
+from django.core.cache import InvalidCacheBackendError
 
 from math import sqrt
 
@@ -110,3 +112,15 @@ class VectorBuilder(object):
     def __call__(self):
         self.flush()
         return self.columns, self.dataset
+
+
+def get_comparison_cache():
+    """
+    Try to access to ``zinnia_comparison`` cache backend,
+    if fail use the ``default`` cache backend.
+    """
+    try:
+        comparison_cache = caches['zinnia_comparison']
+    except InvalidCacheBackendError:
+        comparison_cache = caches['default']
+    return comparison_cache

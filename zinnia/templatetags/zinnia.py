@@ -37,14 +37,13 @@ from ..settings import PROTOCOL
 from ..settings import COMPARISON_FIELDS
 from ..comparison import VectorBuilder
 from ..comparison import pearson_score
+from ..comparison import get_comparison_cache
 from ..calendar import Calendar
 from ..breadcrumbs import retrieve_breadcrumbs
 
 register = Library()
 
 VECTORS = None
-
-CACHE_ENTRIES_RELATED = {}
 
 WIDONT_REGEXP = re.compile(
     r'\s+(\S+\s*)$')
@@ -143,11 +142,11 @@ def get_similar_entries(context, number=5,
     Return similar entries.
     """
     global VECTORS
-    global CACHE_ENTRIES_RELATED
+    cache = get_comparison_cache()
 
     if VECTORS is None or flush:
         VECTORS = VectorBuilder(Entry.published, COMPARISON_FIELDS)
-        CACHE_ENTRIES_RELATED = {}
+        cache.set('related_entries', {})
 
     def compute_related(object_id, dataset):
         """
@@ -174,11 +173,13 @@ def get_similar_entries(context, number=5,
 
     object_id = context['object'].pk
     columns, dataset = VECTORS()
-    key = '%s-%s' % (object_id, VECTORS.key)
-    if key not in CACHE_ENTRIES_RELATED.keys():
-        CACHE_ENTRIES_RELATED[key] = compute_related(object_id, dataset)
+    cache_key = '%s-%s' % (object_id, VECTORS.key)
+    related_entries = cache.get('related_entries', {})
+    if cache_key not in related_entries.keys():
+        related_entries[cache_key] = compute_related(object_id, dataset)
+        cache.set('related_entries', related_entries)
 
-    entry_pks = CACHE_ENTRIES_RELATED[key][:number]
+    entry_pks = related_entries[cache_key][:number]
     entries = list(Entry.objects.filter(pk__in=entry_pks))
     entries.sort(key=lambda x: entry_pks.index(x.pk))
     return {'template': template,
