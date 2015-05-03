@@ -34,7 +34,7 @@ class ClusteredModel(object):
     building a dataset of instances.
     """
 
-    def __init__(self, queryset, fields=['id']):
+    def __init__(self, queryset, fields):
         self.fields = fields
         self.queryset = queryset
 
@@ -44,9 +44,10 @@ class ClusteredModel(object):
         and the specified fields.
         """
         dataset = {}
-        for item in self.queryset.filter():
-            dataset[item] = ' '.join([six.text_type(getattr(item, field, ''))
-                                      for field in self.fields])
+        for item in self.queryset.values_list(*(['pk'] + self.fields)):
+            item = list(item)
+            item_pk = item.pop(0)
+            dataset[item_pk] = ' '.join(map(six.text_type, item))
         return dataset
 
 

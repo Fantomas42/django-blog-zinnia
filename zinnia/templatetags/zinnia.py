@@ -146,7 +146,7 @@ def get_similar_entries(context, number=5,
     global CACHE_ENTRIES_RELATED
 
     if VECTORS is None or flush:
-        VECTORS = VectorBuilder(Entry.published.all(), COMPARISON_FIELDS)
+        VECTORS = VectorBuilder(Entry.published, COMPARISON_FIELDS)
         CACHE_ENTRIES_RELATED = {}
 
     def compute_related(object_id, dataset):
@@ -154,19 +154,19 @@ def get_similar_entries(context, number=5,
         Compute related entries to an entry with a dataset.
         """
         object_vector = None
-        for entry, e_vector in dataset.items():
-            if entry.pk == object_id:
+        for entry_id, e_vector in dataset.items():
+            if entry_id == object_id:
                 object_vector = e_vector
 
         if not object_vector:
             return []
 
         entry_related = {}
-        for entry, e_vector in dataset.items():
-            if entry.pk != object_id:
+        for entry_id, e_vector in dataset.items():
+            if entry_id != object_id:
                 score = pearson_score(object_vector, e_vector)
                 if score:
-                    entry_related[entry] = score
+                    entry_related[entry_id] = score
 
         related = sorted(entry_related.items(),
                          key=lambda k_v: (k_v[1], k_v[0]))
@@ -178,7 +178,9 @@ def get_similar_entries(context, number=5,
     if key not in CACHE_ENTRIES_RELATED.keys():
         CACHE_ENTRIES_RELATED[key] = compute_related(object_id, dataset)
 
-    entries = CACHE_ENTRIES_RELATED[key][:number]
+    entry_pks = CACHE_ENTRIES_RELATED[key][:number]
+    entries = list(Entry.objects.filter(pk__in=entry_pks))
+    entries.sort(key=lambda x: entry_pks.index(x.pk))
     return {'template': template,
             'entries': entries}
 
