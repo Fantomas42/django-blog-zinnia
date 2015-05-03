@@ -35,8 +35,8 @@ class ComparisonTestCase(TestCase):
         cm = ClusteredModel(Entry.objects.all(),
                             ['title', 'excerpt', 'content'])
         self.assertEqual(sorted(cm.dataset().values()),
-                         sorted(['my entry 1  my content 1',
-                                 'my entry 2  my content 2']))
+                         sorted([' entry 1   content 1',
+                                 ' entry 2   content 2']))
 
     def test_vector_builder(self):
         vectors = VectorBuilder(Entry.objects.all(),
@@ -54,9 +54,8 @@ class ComparisonTestCase(TestCase):
         self.assertEqual(vectors._dataset, {})
         self.assertEqual(vectors._columns, [])
         self.assertEqual(sorted(vectors.columns), sorted(
-            ['content', 'this', 'is', '1',
-             'second', '2', 'first']))
+            ['1', '2', 'content']))
         self.assertEqual(sorted([sorted(row) for row in
                                  vectors._dataset.values()]),
-                         sorted([sorted([1, 1, 1, 1, 0, 0, 1]),
-                                 sorted([0, 0, 0, 0, 1, 1, 0])]))
+                         sorted([sorted([0, 0, 1]),
+                                 sorted([0, 1, 1])]))

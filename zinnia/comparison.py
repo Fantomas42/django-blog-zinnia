@@ -8,6 +8,7 @@ from math import sqrt
 
 from zinnia.settings import F_MIN
 from zinnia.settings import F_MAX
+from zinnia.search import STOP_WORDS
 
 
 def pearson_score(list1, list2):
@@ -51,7 +52,7 @@ class ClusteredModel(object):
             item = list(item)
             item_pk = item.pop(0)
             datas = ' '.join(map(six.text_type, item))
-            dataset[item_pk] = strip_tags(datas).lower()
+            dataset[item_pk] = STOP_WORDS.rebase(strip_tags(datas).lower(), '')
         return dataset
 
 
