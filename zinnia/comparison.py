@@ -1,6 +1,7 @@
 """Comparison tools for Zinnia"""
 from django.utils import six
 from django.core.cache import caches
+from django.utils.html import strip_tags
 from django.core.cache import InvalidCacheBackendError
 
 from math import sqrt
@@ -49,7 +50,8 @@ class ClusteredModel(object):
         for item in self.queryset.values_list(*(['pk'] + self.fields)):
             item = list(item)
             item_pk = item.pop(0)
-            dataset[item_pk] = ' '.join(map(six.text_type, item))
+            datas = ' '.join(map(six.text_type, item))
+            dataset[item_pk] = strip_tags(datas)
         return dataset
 
 

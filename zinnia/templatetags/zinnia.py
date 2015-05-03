@@ -140,12 +140,11 @@ def get_similar_entries(context, number=5,
     """
     Return similar entries.
     """
-    cache = get_comparison_cache()
-
     entry = context.get('entry')
     if not entry:
         return {'template': template, 'entries': []}
 
+    cache = get_comparison_cache()
     cache_key = '%s:%s:%s' % (entry.pk, number,
                               '-'.join(sorted(VECTORS.columns)))
     cache_related = cache.get('related_entries', {})
