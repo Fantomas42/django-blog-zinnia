@@ -41,6 +41,8 @@ class ComparisonTestCase(TestCase):
     def test_vector_builder(self):
         vectors = VectorBuilder(Entry.objects.all(),
                                 ['title', 'excerpt', 'content'])
+        self.assertEqual(vectors.dataset, {})
+        self.assertEqual(vectors.columns, [])
         params = {'title': 'My entry 1', 'content':
                   'This is my first content',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1'}
@@ -49,10 +51,12 @@ class ComparisonTestCase(TestCase):
                   'My second entry',
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         Entry.objects.create(**params)
-        columns, dataset = vectors()
-        self.assertEqual(sorted(columns), sorted(
+        self.assertEqual(vectors._dataset, {})
+        self.assertEqual(vectors._columns, [])
+        self.assertEqual(sorted(vectors.columns), sorted(
             ['content', 'this', 'is', '1',
              'second', '2', 'first']))
-        self.assertEqual(sorted([sorted(row) for row in dataset.values()]),
+        self.assertEqual(sorted([sorted(row) for row in
+                                 vectors._dataset.values()]),
                          sorted([sorted([1, 1, 1, 1, 0, 0, 1]),
                                  sorted([0, 0, 0, 0, 1, 1, 0])]))

@@ -152,12 +152,12 @@ def get_similar_entries(context, number=5,
         VECTORS = VectorBuilder(Entry.published, COMPARISON_FIELDS)
         cache.set('related_entries', {})
 
-    columns, dataset = VECTORS()
     cache_key = '%s:%s' % (entry.pk, VECTORS.key)
     related_entries = cache.get('related_entries', {})
 
     if cache_key not in related_entries.keys():
-        related_entries[cache_key] = compute_related(entry.pk, dataset)
+        related_entries[cache_key] = compute_related(
+            entry.pk, VECTORS.dataset)
         cache.set('related_entries', related_entries)
 
     entry_pks = related_entries[cache_key][:number]

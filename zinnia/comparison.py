@@ -60,8 +60,8 @@ class VectorBuilder(object):
 
     def __init__(self, queryset, fields):
         self.key = ''
-        self.columns = []
-        self.dataset = {}
+        self._columns = []
+        self._dataset = {}
         self.clustered_model = ClusteredModel(queryset, fields)
         self.build_dataset()
 
@@ -89,10 +89,10 @@ class VectorBuilder(object):
             if frequency > F_MIN and frequency < F_MAX:
                 top_words.append(word)
 
-        self.dataset = {}
-        self.columns = top_words
+        self._dataset = {}
+        self._columns = top_words
         for instance in data.keys():
-            self.dataset[instance] = [data[instance].get(word, 0)
+            self._dataset[instance] = [data[instance].get(word, 0)
                                       for word in top_words]
         self.key = self.generate_key()
 
@@ -104,14 +104,25 @@ class VectorBuilder(object):
 
     def flush(self):
         """
-        Flush the dataset.
+        Flush the dataset if required.
         """
         if self.key != self.generate_key():
             self.build_dataset()
+        return self._columns, self._dataset
 
-    def __call__(self):
-        self.flush()
-        return self.columns, self.dataset
+    @property
+    def columns(self):
+        """
+        Access to columns in a secure manner.
+        """
+        return self.flush()[0]
+
+    @property
+    def dataset(self):
+        """
+        Access to dataset in a secure manner.
+        """
+        return self.flush()[1]
 
 
 def compute_related(object_id, dataset):
