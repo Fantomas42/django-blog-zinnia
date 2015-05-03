@@ -136,8 +136,7 @@ def get_popular_entries(number=5, template='zinnia/tags/entries_popular.html'):
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_similar_entries(context, number=5,
-                        template='zinnia/tags/entries_similar.html',
-                        flush=False):
+                        template='zinnia/tags/entries_similar.html'):
     """
     Return similar entries.
     """
@@ -148,16 +147,15 @@ def get_similar_entries(context, number=5,
     if not entry:
         return {'template': template, 'entries': []}
 
-    if VECTORS is None or flush:
+    if VECTORS is None:
         VECTORS = VectorBuilder(Entry.published, COMPARISON_FIELDS)
-        cache.set('related_entries', {})
 
-    cache_key = '%s:%s' % (entry.pk, VECTORS.key)
+    cache_key = '%s:%s' % (entry.pk, '-'.join(VECTORS.columns))
     related_entries = cache.get('related_entries', {})
 
     if cache_key not in related_entries.keys():
         related_entries[cache_key] = compute_related(
-            entry.pk, VECTORS.dataset)
+            entry.pk, VECTORS._dataset)
         cache.set('related_entries', related_entries)
 
     entry_pks = related_entries[cache_key][:number]
