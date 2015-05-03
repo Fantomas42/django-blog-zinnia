@@ -51,7 +51,7 @@ class ClusteredModel(object):
             item = list(item)
             item_pk = item.pop(0)
             datas = ' '.join(map(six.text_type, item))
-            dataset[item_pk] = strip_tags(datas)
+            dataset[item_pk] = strip_tags(datas).lower()
         return dataset
 
 
@@ -77,7 +77,6 @@ class VectorBuilder(object):
         for instance, words in model_data.items():
             words_item_total = {}
             for word in words.split():
-                word = word.lower()
                 words_total.setdefault(word, 0)
                 words_item_total.setdefault(word, 0)
                 words_total[word] += 1
@@ -85,8 +84,9 @@ class VectorBuilder(object):
             data[instance] = words_item_total
 
         top_words = []
+        total = len(data)
         for word, count in words_total.items():
-            frequency = float(count) / len(data)
+            frequency = float(count) / total
             if frequency > F_MIN and frequency < F_MAX:
                 top_words.append(word)
 
