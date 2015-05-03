@@ -114,6 +114,30 @@ class VectorBuilder(object):
         return self.columns, self.dataset
 
 
+def compute_related(object_id, dataset):
+    """
+    Compute related pks to an object with a dataset.
+    """
+    object_vector = None
+    for o_id, o_vector in dataset.items():
+        if o_id == object_id:
+            object_vector = o_vector
+
+    if not object_vector:
+        return []
+
+    object_related = {}
+    for o_id, o_vector in dataset.items():
+        if o_id != object_id:
+            score = pearson_score(object_vector, o_vector)
+            if score:
+                object_related[o_id] = score
+
+    related = sorted(object_related.items(),
+                     key=lambda k_v: (k_v[1], k_v[0]))
+    return [rel[0] for rel in related]
+
+
 def get_comparison_cache():
     """
     Try to access to ``zinnia_comparison`` cache backend,

@@ -36,7 +36,7 @@ from ..flags import PINGBACK, TRACKBACK
 from ..settings import PROTOCOL
 from ..settings import COMPARISON_FIELDS
 from ..comparison import VectorBuilder
-from ..comparison import pearson_score
+from ..comparison import compute_related
 from ..comparison import get_comparison_cache
 from ..calendar import Calendar
 from ..breadcrumbs import retrieve_breadcrumbs
@@ -147,29 +147,6 @@ def get_similar_entries(context, number=5,
     if VECTORS is None or flush:
         VECTORS = VectorBuilder(Entry.published, COMPARISON_FIELDS)
         cache.set('related_entries', {})
-
-    def compute_related(object_id, dataset):
-        """
-        Compute related entries to an entry with a dataset.
-        """
-        object_vector = None
-        for entry_id, e_vector in dataset.items():
-            if entry_id == object_id:
-                object_vector = e_vector
-
-        if not object_vector:
-            return []
-
-        entry_related = {}
-        for entry_id, e_vector in dataset.items():
-            if entry_id != object_id:
-                score = pearson_score(object_vector, e_vector)
-                if score:
-                    entry_related[entry_id] = score
-
-        related = sorted(entry_related.items(),
-                         key=lambda k_v: (k_v[1], k_v[0]))
-        return [rel[0] for rel in related]
 
     object_id = context['object'].pk
     columns, dataset = VECTORS()
