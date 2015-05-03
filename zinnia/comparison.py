@@ -63,7 +63,6 @@ class VectorBuilder(object):
         self._columns = []
         self._dataset = {}
         self.clustered_model = ClusteredModel(queryset, fields)
-        self.build_dataset()
 
     def build_dataset(self):
         """
@@ -93,7 +92,7 @@ class VectorBuilder(object):
         self._columns = top_words
         for instance in data.keys():
             self._dataset[instance] = [data[instance].get(word, 0)
-                                      for word in top_words]
+                                       for word in top_words]
         self.key = self.generate_key()
 
     def generate_key(self):

@@ -43,7 +43,7 @@ from ..breadcrumbs import retrieve_breadcrumbs
 
 register = Library()
 
-VECTORS = None
+VECTORS = VectorBuilder(Entry.published, COMPARISON_FIELDS)
 
 WIDONT_REGEXP = re.compile(
     r'\s+(\S+\s*)$')
@@ -140,15 +140,11 @@ def get_similar_entries(context, number=5,
     """
     Return similar entries.
     """
-    global VECTORS
     cache = get_comparison_cache()
 
     entry = context.get('entry')
     if not entry:
         return {'template': template, 'entries': []}
-
-    if VECTORS is None:
-        VECTORS = VectorBuilder(Entry.published, COMPARISON_FIELDS)
 
     cache_key = '%s:%s' % (entry.pk, '-'.join(VECTORS.columns))
     related_entries = cache.get('related_entries', {})
