@@ -250,6 +250,13 @@ class TemplateTagsTestCase(TestCase):
     def test_get_similar_entries(self):
         self.publish_entry()
         source_context = Context({'object': self.entry})
+        with self.assertNumQueries(0):
+            context = get_similar_entries(source_context)
+        self.assertEqual(len(context['entries']), 0)
+        self.assertEqual(context['template'],
+                         'zinnia/tags/entries_similar.html')
+
+        source_context = Context({'entry': self.entry})
         with self.assertNumQueries(3):
             context = get_similar_entries(source_context)
         self.assertEqual(len(context['entries']), 0)
@@ -265,7 +272,7 @@ class TemplateTagsTestCase(TestCase):
         second_entry = Entry.objects.create(**params)
         second_entry.sites.add(self.site)
 
-        source_context = Context({'object': second_entry})
+        source_context = Context({'entry': second_entry})
         with self.assertNumQueries(4):
             context = get_similar_entries(source_context, 3,
                                           'custom_template.html',

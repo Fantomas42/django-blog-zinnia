@@ -144,21 +144,26 @@ def get_similar_entries(context, number=5,
     global VECTORS
     cache = get_comparison_cache()
 
+    entry = context.get('entry')
+    if not entry:
+        return {'template': template, 'entries': []}
+
     if VECTORS is None or flush:
         VECTORS = VectorBuilder(Entry.published, COMPARISON_FIELDS)
         cache.set('related_entries', {})
 
-    object_id = context['object'].pk
     columns, dataset = VECTORS()
-    cache_key = '%s-%s' % (object_id, VECTORS.key)
+    cache_key = '%s:%s' % (entry.pk, VECTORS.key)
     related_entries = cache.get('related_entries', {})
+
     if cache_key not in related_entries.keys():
-        related_entries[cache_key] = compute_related(object_id, dataset)
+        related_entries[cache_key] = compute_related(entry.pk, dataset)
         cache.set('related_entries', related_entries)
 
     entry_pks = related_entries[cache_key][:number]
     entries = list(Entry.objects.filter(pk__in=entry_pks))
     entries.sort(key=lambda x: entry_pks.index(x.pk))
+
     return {'template': template,
             'entries': entries}
 
