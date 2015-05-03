@@ -118,11 +118,7 @@ def compute_related(object_id, dataset):
     """
     Compute related pks to an object with a dataset.
     """
-    object_vector = None
-    for o_id, o_vector in dataset.items():
-        if o_id == object_id:
-            object_vector = o_vector
-
+    object_vector = dataset.get(object_id)
     if not object_vector:
         return []
 
