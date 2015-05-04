@@ -1,12 +1,20 @@
 """Comparison tools for Zinnia"""
+import sys
+import unicodedata
+from math import sqrt
+
 from django.utils import six
 from django.core.cache import caches
 from django.utils.html import strip_tags
 from django.core.cache import InvalidCacheBackendError
 
-from math import sqrt
-
 from zinnia.search import STOP_WORDS
+
+
+PUNCTUATION = dict.fromkeys(
+    i for i in xrange(sys.maxunicode)
+    if unicodedata.category(unichr(i)).startswith('P')
+)
 
 
 def pearson_score(list1, list2):
@@ -48,8 +56,18 @@ class ClusteredModel(object):
             item = list(item)
             item_pk = item.pop(0)
             datas = ' '.join(map(six.text_type, item))
-            dataset[item_pk] = STOP_WORDS.rebase(strip_tags(datas).lower(), '')
+            dataset[item_pk] = self.clean(datas)
         return dataset
+
+    def clean(self, datas):
+        """
+        Apply a cleaning on the datas.
+        """
+        datas = strip_tags(datas)             # Remove HTML
+        datas = datas.translate(PUNCTUATION)  # Remove punctuation
+        datas = STOP_WORDS.rebase(datas, '')  # Remove STOP WORDS
+        datas = datas.lower()
+        return datas
 
 
 class VectorBuilder(object):

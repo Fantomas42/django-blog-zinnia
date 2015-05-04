@@ -29,20 +29,20 @@ class ComparisonTestCase(TestCase):
                          -1)
 
     def test_clustered_model(self):
-        params = {'title': 'My entry 1', 'content': 'My content 1',
+        params = {'title': 'My entry 1', 'content': 'My content 1.',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1'}
         entry_1 = Entry.objects.create(**params)
-        params = {'title': 'My entry 2', 'content': 'My content 2',
+        params = {'title': 'My entry 2', 'content': 'My content 2.',
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         entry_2 = Entry.objects.create(**params)
         cm = ClusteredModel(Entry.objects.all(), ['id'])
         self.assertEqual(sorted(cm.dataset().values()),
                          sorted([str(entry_1.pk), str(entry_2.pk)]))
         cm = ClusteredModel(Entry.objects.all(),
-                            ['title', 'excerpt', 'content'])
+                            ['title', 'content', 'tags'])
         self.assertEqual(sorted(cm.dataset().values()),
-                         sorted([' entry 1   content 1',
-                                 ' entry 2   content 2']))
+                         sorted([' entry 1  content 1 zinnia test',
+                                 ' entry 2  content 2 zinnia test']))
 
     def test_vector_builder(self):
         vectors = VectorBuilder(Entry.objects.all(),
