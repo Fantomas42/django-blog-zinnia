@@ -15,16 +15,17 @@ def pearson_score(list1, list2):
     """
     Compute the Pearson' score between 2 lists of vectors.
     """
+    size = len(list1)
     sum1 = sum(list1)
     sum2 = sum(list2)
     sum_sq1 = sum([pow(l, 2) for l in list1])
     sum_sq2 = sum([pow(l, 2) for l in list2])
 
-    prod_sum = sum([list1[i] * list2[i] for i in range(len(list1))])
+    prod_sum = sum([list1[i] * list2[i] for i in range(size)])
 
-    num = prod_sum - (sum1 * sum2 / len(list1))
-    den = sqrt((sum_sq1 - pow(sum1, 2.0) / len(list1)) *
-               (sum_sq2 - pow(sum2, 2.0) / len(list2)))
+    num = prod_sum - (sum1 * sum2 / float(size))
+    den = sqrt((sum_sq1 - pow(sum1, 2.0) / size) *
+               (sum_sq2 - pow(sum2, 2.0) / size))
 
     if den == 0.0:
         return 1.0

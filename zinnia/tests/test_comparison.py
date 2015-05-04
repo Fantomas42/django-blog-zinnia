@@ -22,6 +22,8 @@ class ComparisonTestCase(TestCase):
                          0.9819805060619656)
         self.assertEqual(pearson_score([0, 1, 2], [0, 1, 3]),
                          0.9819805060619656)
+        self.assertEqual(pearson_score([2, 0, 0, 0], [0, 1, 1, 1]),
+                         -1)
 
     def test_clustered_model(self):
         params = {'title': 'My entry 1', 'content': 'My content 1',
