@@ -16,7 +16,10 @@ class ComparisonTestCase(TestCase):
         disconnect_entry_signals()
 
     def test_pearson_score(self):
-        self.assertEqual(pearson_score([42], [42]), 1.0)
+        self.assertRaises(ZeroDivisionError, pearson_score,
+                          [42], [42])
+        self.assertRaises(ZeroDivisionError, pearson_score,
+                          [2, 2, 2], [1, 1, 1])
         self.assertEqual(pearson_score([0, 1, 2], [0, 1, 2]), 1.0)
         self.assertEqual(pearson_score([0, 1, 3], [0, 1, 2]),
                          0.9819805060619656)

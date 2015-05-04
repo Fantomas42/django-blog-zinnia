@@ -27,9 +27,6 @@ def pearson_score(list1, list2):
     den = sqrt((sum_sq1 - pow(sum1, 2.0) / size) *
                (sum_sq2 - pow(sum2, 2.0) / size))
 
-    if den == 0.0:
-        return 1.0
-
     return num / den
 
 
@@ -139,9 +136,10 @@ def compute_related(object_id, dataset):
     object_related = {}
     for o_id, o_vector in dataset.items():
         if o_id != object_id:
-            score = pearson_score(object_vector, o_vector)
-            if score:
-                object_related[o_id] = score
+            try:
+                object_related[o_id] = pearson_score(object_vector, o_vector)
+            except ZeroDivisionError:
+                pass
 
     related = sorted(object_related.items(),
                      key=lambda k_v: k_v[1], reverse=True)
