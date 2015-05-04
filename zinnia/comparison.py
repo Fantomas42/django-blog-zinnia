@@ -6,8 +6,6 @@ from django.core.cache import InvalidCacheBackendError
 
 from math import sqrt
 
-from zinnia.settings import F_MIN
-from zinnia.settings import F_MAX
 from zinnia.search import STOP_WORDS
 
 
@@ -82,18 +80,11 @@ class VectorBuilder(object):
                 words_item_total[word] += 1
             data[instance] = words_item_total
 
-        top_words = []
-        total = len(data)
-        for word, count in words_total.items():
-            frequency = float(count) / total
-            if frequency > F_MIN and frequency < F_MAX:
-                top_words.append(word)
-
         self._dataset = {}
-        self._columns = top_words
+        self._columns = words_total.keys()
         for instance in data.keys():
             self._dataset[instance] = [data[instance].get(word, 0)
-                                       for word in top_words]
+                                       for word in self._columns]
         self.key = self.generate_key()
 
     def generate_key(self):
