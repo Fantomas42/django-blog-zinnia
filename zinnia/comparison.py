@@ -12,8 +12,8 @@ from zinnia.search import STOP_WORDS
 
 
 PUNCTUATION = dict.fromkeys(
-    i for i in xrange(sys.maxunicode)
-    if unicodedata.category(unichr(i)).startswith('P')
+    i for i in range(sys.maxunicode)
+    if unicodedata.category(six.unichr(i)).startswith('P')
 )
 
 
