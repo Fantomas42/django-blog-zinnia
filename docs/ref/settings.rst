@@ -401,7 +401,7 @@ and in the opensearch document.
 
 ZINNIA_COMPARISON_FIELDS
 ------------------------
-**Default value:** ``['title', 'lead', 'content', 'excerpt', 'image_caption']``
+**Default value:** ``['title', 'lead', 'content', 'excerpt', 'image_caption', 'tags']``
 
 List of text fields used to find similarity between entries.
 
@@ -409,6 +409,6 @@ List of text fields used to find similarity between entries.
 
 ZINNIA_SEARCH_FIELDS
 --------------------
-**Default value:** ``['title', 'lead', 'content', 'excerpt', 'image_caption']``
+**Default value:** ``['title', 'lead', 'content', 'excerpt', 'image_caption', 'tags']``
 
 List of text fields used to search within entries.
