@@ -3,6 +3,7 @@ from django.test import TestCase
 
 from zinnia.models.entry import Entry
 from zinnia.comparison import pearson_score
+from zinnia.comparison import compute_related
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import ClusteredModel
 from zinnia.signals import disconnect_entry_signals
@@ -57,3 +58,15 @@ class ComparisonTestCase(TestCase):
             ['1', '2', 'content']))
         self.assertEqual(sorted(vectors._dataset[e1.pk]), [0, 1, 1])
         self.assertEqual(sorted(vectors._dataset[e2.pk]), [0, 0, 1])
+
+    def test_compute_related(self):
+        dataset = {1: [1, 2, 3],
+                   2: [1, 5, 7],
+                   3: [2, 8, 3],
+                   4: [1, 8, 3],
+                   5: [7, 3, 5]}
+        self.assertEqual(compute_related('error', dataset), [])
+        self.assertEqual(compute_related(1, dataset), [2, 4, 3, 5])
+        self.assertEqual(compute_related(2, dataset), [1, 4, 3, 5])
+        self.assertEqual(compute_related(3, dataset), [4, 2, 1, 5])
+        self.assertEqual(compute_related(4, dataset), [3, 2, 1, 5])

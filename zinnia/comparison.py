@@ -143,7 +143,7 @@ def compute_related(object_id, dataset):
                 object_related[o_id] = score
 
     related = sorted(object_related.items(),
-                     key=lambda k_v: (k_v[1], k_v[0]))
+                     key=lambda k_v: k_v[1], reverse=True)
     return [rel[0] for rel in related]
 
 
