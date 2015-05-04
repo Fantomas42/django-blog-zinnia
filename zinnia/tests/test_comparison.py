@@ -46,16 +46,14 @@ class ComparisonTestCase(TestCase):
         params = {'title': 'My entry 1', 'content':
                   'This is my first content',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1'}
-        Entry.objects.create(**params)
+        e1 = Entry.objects.create(**params)
         params = {'title': 'My entry 2', 'content':
                   'My second entry',
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
-        Entry.objects.create(**params)
+        e2 = Entry.objects.create(**params)
         self.assertEqual(vectors._dataset, {})
         self.assertEqual(vectors._columns, [])
         self.assertEqual(sorted(vectors.columns), sorted(
             ['1', '2', 'content']))
-        self.assertEqual(sorted([sorted(row) for row in
-                                 vectors._dataset.values()]),
-                         sorted([sorted([0, 0, 1]),
-                                 sorted([0, 1, 1])]))
+        self.assertEqual(sorted(vectors._dataset[e1.pk]), [0, 1, 1])
+        self.assertEqual(sorted(vectors._dataset[e2.pk]), [0, 0, 1])
