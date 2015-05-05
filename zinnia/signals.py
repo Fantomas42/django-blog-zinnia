@@ -13,10 +13,12 @@ from django_comments.signals import comment_was_flagged
 
 from zinnia import settings
 from zinnia.models.entry import Entry
+from zinnia.comparison import get_comparison_cache
 
 comment_model = comments.get_model()
 ENTRY_PS_PING_DIRECTORIES = 'zinnia.entry.post_save.ping_directories'
 ENTRY_PS_PING_EXTERNAL_URLS = 'zinnia.entry.post_save.ping_external_urls'
+ENTRY_PS_FLUSH_SIMILAR_CACHE = 'zinnia.entry.post_save.flush_similar_cache'
 COMMENT_PS_COUNT_DISCUSSIONS = 'zinnia.comment.post_save.count_discussions'
 COMMENT_PD_COUNT_DISCUSSIONS = 'zinnia.comment.pre_delete.count_discussions'
 COMMENT_WF_COUNT_DISCUSSIONS = 'zinnia.comment.was_flagged.count_discussions'
@@ -69,6 +71,17 @@ def ping_external_urls_handler(sender, **kwargs):
         from zinnia.ping import ExternalUrlsPinger
 
         ExternalUrlsPinger(entry)
+
+
+@disable_for_loaddata
+def flush_similar_cache_handler(sender, **kwargs):
+    """
+    Flush the cache of similar entries when an entry is saved.
+    """
+    entry = kwargs['instance']
+    if entry.is_visible:
+        cache = get_comparison_cache()
+        cache.delete('related_entries')
 
 
 def count_discussions_handler(sender, **kwargs):
@@ -131,6 +144,9 @@ def connect_entry_signals():
     post_save.connect(
         ping_external_urls_handler, sender=Entry,
         dispatch_uid=ENTRY_PS_PING_EXTERNAL_URLS)
+    post_save.connect(
+        flush_similar_cache_handler, sender=Entry,
+        dispatch_uid=ENTRY_PS_FLUSH_SIMILAR_CACHE)
 
 
 def disconnect_entry_signals():
@@ -143,6 +159,9 @@ def disconnect_entry_signals():
     post_save.disconnect(
         sender=Entry,
         dispatch_uid=ENTRY_PS_PING_EXTERNAL_URLS)
+    post_save.disconnect(
+        sender=Entry,
+        dispatch_uid=ENTRY_PS_FLUSH_SIMILAR_CACHE)
 
 
 def connect_discussion_signals():
