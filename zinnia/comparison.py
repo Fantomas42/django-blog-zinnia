@@ -8,7 +8,7 @@ from django.core.cache import caches
 from django.utils.html import strip_tags
 from django.core.cache import InvalidCacheBackendError
 
-from zinnia.search import STOP_WORDS
+from zinnia.settings import STOP_WORDS
 
 
 PUNCTUATION = dict.fromkeys(
