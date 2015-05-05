@@ -145,8 +145,7 @@ def get_similar_entries(context, number=5,
         return {'template': template, 'entries': []}
 
     cache = get_comparison_cache()
-    cache_key = '%s:%s:%s' % (entry.pk, number,
-                              '-'.join(sorted(VECTORS.columns)))
+    cache_key = '%s:%s' % (entry.pk, number)
     cache_related = cache.get('related_entries', {})
 
     if cache_key not in cache_related:
