@@ -81,7 +81,7 @@ def flush_similar_cache_handler(sender, **kwargs):
     entry = kwargs['instance']
     if entry.is_visible:
         cache = get_comparison_cache()
-        cache.delete('related_entries')
+        cache.delete_many(['related_entries', 'vectors'])
 
 
 def count_discussions_handler(sender, **kwargs):

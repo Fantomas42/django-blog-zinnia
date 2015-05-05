@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.template import Context
 from django.template import Template
 from django.template import TemplateSyntaxError
+from django.db.models.signals import post_save
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
@@ -27,6 +28,8 @@ from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.signals import flush_similar_cache_handler
+from zinnia.signals import ENTRY_PS_FLUSH_SIMILAR_CACHE
 from zinnia.templatetags.zinnia import widont
 from zinnia.templatetags.zinnia import week_number
 from zinnia.templatetags.zinnia import get_authors
@@ -248,6 +251,9 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(list(context['entries']), [second_entry])
 
     def test_get_similar_entries(self):
+        post_save.connect(
+            flush_similar_cache_handler, sender=Entry,
+            dispatch_uid=ENTRY_PS_FLUSH_SIMILAR_CACHE)
         self.publish_entry()
         source_context = Context({'object': self.entry})
         with self.assertNumQueries(0):
@@ -257,7 +263,7 @@ class TemplateTagsTestCase(TestCase):
                          'zinnia/tags/entries_similar.html')
 
         source_context = Context({'entry': self.entry})
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(1):
             context = get_similar_entries(source_context)
         self.assertEqual(len(context['entries']), 0)
         self.assertEqual(context['template'],
@@ -280,15 +286,18 @@ class TemplateTagsTestCase(TestCase):
         third_entry.sites.add(self.site)
 
         source_context = Context({'entry': second_entry})
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(2):
             context = get_similar_entries(source_context, 3,
                                           'custom_template.html')
         self.assertEqual(len(context['entries']), 2)
         self.assertEqual(context['entries'][0].pk, third_entry.pk)
         self.assertEqual(context['template'], 'custom_template.html')
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(0):
             context = get_similar_entries(source_context, 3,
                                           'custom_template.html')
+        post_save.disconnect(
+            sender=Entry,
+            dispatch_uid=ENTRY_PS_FLUSH_SIMILAR_CACHE)
 
     def test_get_archives_entries(self):
         with self.assertNumQueries(0):

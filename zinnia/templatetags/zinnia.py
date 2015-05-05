@@ -151,7 +151,7 @@ def get_similar_entries(context, number=5,
 
     if cache_key not in cache_related:
         related_entry_pks = compute_related(
-            entry.pk, VECTORS._dataset)[:number]
+            entry.pk, VECTORS.dataset)[:number]
         related_entries = sorted(
             Entry.objects.filter(pk__in=related_entry_pks),
             key=lambda x: related_entry_pks.index(x.pk))

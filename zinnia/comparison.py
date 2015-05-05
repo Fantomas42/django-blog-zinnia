@@ -76,9 +76,6 @@ class VectorBuilder(object):
     """
 
     def __init__(self, queryset, fields):
-        self.key = ''
-        self._columns = []
-        self._dataset = {}
         self.clustered_model = ClusteredModel(queryset, fields)
 
     def build_dataset(self):
@@ -98,40 +95,37 @@ class VectorBuilder(object):
                 words_item_total[word] += 1
             data[instance] = words_item_total
 
-        self._dataset = {}
-        self._columns = list(words_total.keys())
+        dataset = {}
+        columns = list(words_total.keys())
         for instance in data.keys():
-            self._dataset[instance] = [data[instance].get(word, 0)
-                                       for word in self._columns]
-        self.key = self.generate_key()
+            dataset[instance] = [data[instance].get(word, 0)
+                                 for word in columns]
+        return columns, dataset
 
-    def generate_key(self):
+    def columns_dataset(self):
         """
-        Generate key for this list of vectors.
+        Cache system for columns and dataset.
         """
-        return self.clustered_model.queryset.count()
-
-    def flush(self):
-        """
-        Flush the dataset if required.
-        """
-        if self.key != self.generate_key():
-            self.build_dataset()
-        return self._columns, self._dataset
+        cache = get_comparison_cache()
+        columns_dataset = cache.get('vectors')
+        if not columns_dataset:
+            columns_dataset = self.build_dataset()
+            cache.set('vectors', columns_dataset)
+        return columns_dataset
 
     @property
     def columns(self):
         """
-        Access to columns in a secure manner.
+        Access to columns.
         """
-        return self.flush()[0]
+        return self.columns_dataset()[0]
 
     @property
     def dataset(self):
         """
-        Access to dataset in a secure manner.
+        Access to dataset.
         """
-        return self.flush()[1]
+        return self.columns_dataset()[1]
 
 
 def compute_related(object_id, dataset):

@@ -6,6 +6,7 @@ from zinnia.comparison import pearson_score
 from zinnia.comparison import compute_related
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import ClusteredModel
+from zinnia.comparison import get_comparison_cache
 from zinnia.signals import disconnect_entry_signals
 
 
@@ -45,6 +46,8 @@ class ComparisonTestCase(TestCase):
                                  ' entry 2  content 2 zinnia test']))
 
     def test_vector_builder(self):
+        cache = get_comparison_cache()
+        cache.delete('vectors')
         vectors = VectorBuilder(Entry.objects.all(),
                                 ['title', 'excerpt', 'content'])
         self.assertEqual(vectors.dataset, {})
@@ -57,12 +60,13 @@ class ComparisonTestCase(TestCase):
                   'My second entry',
                   'slug': 'my-entry-2'}
         e2 = Entry.objects.create(**params)
-        self.assertEqual(vectors._dataset, {})
-        self.assertEqual(vectors._columns, [])
+        self.assertEqual(vectors.dataset, {})
+        self.assertEqual(vectors.columns, [])
+        cache.delete('vectors')
         self.assertEqual(sorted(vectors.columns), sorted(
             ['1', '2', 'content', 'entry']))
-        self.assertEqual(sorted(vectors._dataset[e1.pk]), [0, 1, 1, 1])
-        self.assertEqual(sorted(vectors._dataset[e2.pk]), [0, 0, 1, 2])
+        self.assertEqual(sorted(vectors.dataset[e1.pk]), [0, 1, 1, 1])
+        self.assertEqual(sorted(vectors.dataset[e2.pk]), [0, 0, 1, 2])
 
     def test_compute_related(self):
         dataset = {1: [1, 2, 3],
