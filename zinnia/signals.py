@@ -21,8 +21,8 @@ COMMENT_PS_COUNT_DISCUSSIONS = 'zinnia.comment.post_save.count_discussions'
 COMMENT_PD_COUNT_DISCUSSIONS = 'zinnia.comment.pre_delete.count_discussions'
 COMMENT_WF_COUNT_DISCUSSIONS = 'zinnia.comment.was_flagged.count_discussions'
 COMMENT_WP_COUNT_COMMENTS = 'zinnia.comment.was_posted.count_comments'
-PINGBACK_WP_COUNT_PINGBACKS = 'zinnia.pingback.was_flagged.count_pingbacks'
-TRACKBACK_WP_COUNT_TRACKBACKS = 'zinnia.trackback.was_flagged.count_trackbacks'
+PINGBACK_WF_COUNT_PINGBACKS = 'zinnia.pingback.was_flagged.count_pingbacks'
+TRACKBACK_WF_COUNT_TRACKBACKS = 'zinnia.trackback.was_flagged.count_trackbacks'
 
 pingback_was_posted = Signal(providing_args=['pingback', 'entry'])
 trackback_was_posted = Signal(providing_args=['trackback', 'entry'])
@@ -165,10 +165,10 @@ def connect_discussion_signals():
         dispatch_uid=COMMENT_WP_COUNT_COMMENTS)
     pingback_was_posted.connect(
         count_pingbacks_handler, sender=comment_model,
-        dispatch_uid=PINGBACK_WP_COUNT_PINGBACKS)
+        dispatch_uid=PINGBACK_WF_COUNT_PINGBACKS)
     trackback_was_posted.connect(
         count_trackbacks_handler, sender=comment_model,
-        dispatch_uid=TRACKBACK_WP_COUNT_TRACKBACKS)
+        dispatch_uid=TRACKBACK_WF_COUNT_TRACKBACKS)
 
 
 def disconnect_discussion_signals():
@@ -190,7 +190,7 @@ def disconnect_discussion_signals():
         dispatch_uid=COMMENT_WP_COUNT_COMMENTS)
     pingback_was_posted.disconnect(
         sender=comment_model,
-        dispatch_uid=PINGBACK_WP_COUNT_PINGBACKS)
+        dispatch_uid=PINGBACK_WF_COUNT_PINGBACKS)
     trackback_was_posted.disconnect(
         sender=comment_model,
-        dispatch_uid=TRACKBACK_WP_COUNT_TRACKBACKS)
+        dispatch_uid=TRACKBACK_WF_COUNT_TRACKBACKS)
