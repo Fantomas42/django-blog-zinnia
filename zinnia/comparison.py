@@ -99,7 +99,7 @@ class VectorBuilder(object):
             data[instance] = words_item_total
 
         self._dataset = {}
-        self._columns = words_total.keys()
+        self._columns = list(words_total.keys())
         for instance in data.keys():
             self._dataset[instance] = [data[instance].get(word, 0)
                                        for word in self._columns]
