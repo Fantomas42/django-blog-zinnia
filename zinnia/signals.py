@@ -6,6 +6,7 @@ from django.db.models import F
 from django.dispatch import Signal
 from django.db.models.signals import post_save
 from django.db.models.signals import pre_delete
+from django.db.models.signals import post_delete
 
 import django_comments as comments
 from django_comments.signals import comment_was_posted
@@ -21,6 +22,7 @@ comment_model = comments.get_model()
 ENTRY_PS_PING_DIRECTORIES = 'zinnia.entry.post_save.ping_directories'
 ENTRY_PS_PING_EXTERNAL_URLS = 'zinnia.entry.post_save.ping_external_urls'
 ENTRY_PS_FLUSH_SIMILAR_CACHE = 'zinnia.entry.post_save.flush_similar_cache'
+ENTRY_PD_FLUSH_SIMILAR_CACHE = 'zinnia.entry.pre_delete.flush_similar_cache'
 COMMENT_PS_COUNT_DISCUSSIONS = 'zinnia.comment.post_save.count_discussions'
 COMMENT_PD_COUNT_DISCUSSIONS = 'zinnia.comment.pre_delete.count_discussions'
 COMMENT_WF_COUNT_DISCUSSIONS = 'zinnia.comment.was_flagged.count_discussions'
@@ -145,6 +147,9 @@ def connect_entry_signals():
     post_save.connect(
         flush_similar_cache_handler, sender=Entry,
         dispatch_uid=ENTRY_PS_FLUSH_SIMILAR_CACHE)
+    post_delete.connect(
+        flush_similar_cache_handler, sender=Entry,
+        dispatch_uid=ENTRY_PD_FLUSH_SIMILAR_CACHE)
 
 
 def disconnect_entry_signals():
@@ -160,6 +165,9 @@ def disconnect_entry_signals():
     post_save.disconnect(
         sender=Entry,
         dispatch_uid=ENTRY_PS_FLUSH_SIMILAR_CACHE)
+    post_delete.disconnect(
+        sender=Entry,
+        dispatch_uid=ENTRY_PD_FLUSH_SIMILAR_CACHE)
 
 
 def connect_discussion_signals():
