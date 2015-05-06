@@ -34,16 +34,12 @@ from ..managers import DRAFT
 from ..managers import tags_published
 from ..flags import PINGBACK, TRACKBACK
 from ..settings import PROTOCOL
-from ..settings import COMPARISON_FIELDS
-from ..comparison import VectorBuilder
 from ..comparison import compute_related
 from ..comparison import get_comparison_cache
+from ..comparison import EntryPublishedVectorBuilder
 from ..calendar import Calendar
 from ..breadcrumbs import retrieve_breadcrumbs
 
-register = Library()
-
-VECTORS = VectorBuilder(Entry.published, COMPARISON_FIELDS)
 
 WIDONT_REGEXP = re.compile(
     r'\s+(\S+\s*)$')
@@ -51,6 +47,8 @@ DOUBLE_SPACE_PUNCTUATION_WIDONT_REGEXP = re.compile(
     r'\s+([-+*/%=;:!?]+&nbsp;\S+\s*)$')
 END_PUNCTUATION_WIDONT_REGEXP = re.compile(
     r'\s+([?!]+\s*)$')
+
+register = Library()
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -149,8 +147,9 @@ def get_similar_entries(context, number=5,
     cache_related = cache.get('related_entries', {})
 
     if cache_key not in cache_related:
+        vectors = EntryPublishedVectorBuilder()
         related_entry_pks = compute_related(
-            entry.pk, VECTORS.dataset)[:number]
+            entry.pk, vectors.dataset)[:number]
         related_entries = sorted(
             Entry.objects.filter(pk__in=related_entry_pks),
             key=lambda x: related_entry_pks.index(x.pk))

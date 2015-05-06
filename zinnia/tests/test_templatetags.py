@@ -29,7 +29,6 @@ from zinnia.tests.utils import urlEqual
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 from zinnia.signals import flush_similar_cache_handler
-from zinnia.signals import ENTRY_PS_FLUSH_SIMILAR_CACHE
 from zinnia.templatetags.zinnia import widont
 from zinnia.templatetags.zinnia import week_number
 from zinnia.templatetags.zinnia import get_authors
@@ -253,7 +252,7 @@ class TemplateTagsTestCase(TestCase):
     def test_get_similar_entries(self):
         post_save.connect(
             flush_similar_cache_handler, sender=Entry,
-            dispatch_uid=ENTRY_PS_FLUSH_SIMILAR_CACHE)
+            dispatch_uid='flush_cache')
         self.publish_entry()
         source_context = Context({'object': self.entry})
         with self.assertNumQueries(0):
@@ -285,19 +284,16 @@ class TemplateTagsTestCase(TestCase):
         third_entry = Entry.objects.create(**params)
         third_entry.sites.add(self.site)
 
-        source_context = Context({'entry': second_entry})
         with self.assertNumQueries(2):
             context = get_similar_entries(source_context, 3,
                                           'custom_template.html')
         self.assertEqual(len(context['entries']), 2)
-        self.assertEqual(context['entries'][0].pk, third_entry.pk)
+        self.assertEqual(context['entries'][0].pk, second_entry.pk)
         self.assertEqual(context['template'], 'custom_template.html')
         with self.assertNumQueries(0):
-            context = get_similar_entries(source_context, 3,
-                                          'custom_template.html')
+            context = get_similar_entries(source_context, 3)
         post_save.disconnect(
-            sender=Entry,
-            dispatch_uid=ENTRY_PS_FLUSH_SIMILAR_CACHE)
+            sender=Entry, dispatch_uid='flush_cache')
 
     def test_get_archives_entries(self):
         with self.assertNumQueries(0):

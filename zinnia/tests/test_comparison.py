@@ -6,7 +6,6 @@ from zinnia.comparison import pearson_score
 from zinnia.comparison import compute_related
 from zinnia.comparison import VectorBuilder
 from zinnia.comparison import ClusteredModel
-from zinnia.comparison import get_comparison_cache
 from zinnia.signals import disconnect_entry_signals
 
 
@@ -33,10 +32,8 @@ class ComparisonTestCase(TestCase):
                                  ' entry 2  content 2 zinnia test']))
 
     def test_vector_builder(self):
-        cache = get_comparison_cache()
-        cache.delete('vectors')
-        vectors = VectorBuilder(Entry.objects.all(),
-                                ['title', 'excerpt', 'content'])
+        vectors = VectorBuilder(queryset=Entry.objects.all(),
+                                fields=['title', 'excerpt', 'content'])
         self.assertEqual(vectors.dataset, {})
         self.assertEqual(vectors.columns, [])
         params = {'title': 'My entry 1', 'content':
@@ -47,9 +44,8 @@ class ComparisonTestCase(TestCase):
                   'My second entry',
                   'slug': 'my-entry-2'}
         e2 = Entry.objects.create(**params)
-        self.assertEqual(vectors.dataset, {})
-        self.assertEqual(vectors.columns, [])
-        cache.delete('vectors')
+        vectors = VectorBuilder(queryset=Entry.objects.all(),
+                                fields=['title', 'excerpt', 'content'])
         self.assertEqual(sorted(vectors.columns), sorted(
             ['1', '2', 'content', 'entry']))
         self.assertEqual(sorted(vectors.dataset[e1.pk]), [0, 1, 1, 1])

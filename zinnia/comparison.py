@@ -6,9 +6,12 @@ from math import sqrt
 from django.utils import six
 from django.core.cache import caches
 from django.utils.html import strip_tags
+from django.utils.functional import cached_property
 from django.core.cache import InvalidCacheBackendError
 
+from zinnia.models.entry import Entry
 from zinnia.settings import STOP_WORDS
+from zinnia.settings import COMPARISON_FIELDS
 
 
 PUNCTUATION = dict.fromkeys(
@@ -55,13 +58,18 @@ class VectorBuilder(object):
     """
     Build a list of vectors based on datasets.
     """
+    fields = None
+    queryset = None
 
-    def __init__(self, queryset, fields):
-        self.clustered_model = ClusteredModel(queryset, fields)
+    def __init__(self, **kwargs):
+        self.fields = kwargs.pop('fields', self.fields)
+        self.queryset = kwargs.pop('queryset', self.queryset)
+        self.clustered_model = ClusteredModel(self.queryset, self.fields)
 
-    def build_dataset(self):
+    @cached_property
+    def columns_dataset(self):
         """
-        Generate the whole dataset.
+        Generate the columns and the whole dataset.
         """
         data = {}
         words_total = {}
@@ -83,30 +91,45 @@ class VectorBuilder(object):
                                  for word in columns]
         return columns, dataset
 
-    def columns_dataset(self):
-        """
-        Cache system for columns and dataset.
-        """
-        cache = get_comparison_cache()
-        columns_dataset = cache.get('vectors')
-        if not columns_dataset:
-            columns_dataset = self.build_dataset()
-            cache.set('vectors', columns_dataset)
-        return columns_dataset
-
     @property
     def columns(self):
         """
         Access to columns.
         """
-        return self.columns_dataset()[0]
+        return self.columns_dataset[0]
 
     @property
     def dataset(self):
         """
         Access to dataset.
         """
-        return self.columns_dataset()[1]
+        return self.columns_dataset[1]
+
+
+class CachedVectorBuilder(VectorBuilder):
+    """
+    Cached version of VectorBuilder.
+    """
+
+    @property
+    def columns_dataset(self):
+        """
+        Implement high level cache system for columns and dataset.
+        """
+        cache = get_comparison_cache()
+        columns_dataset = cache.get('vectors')
+        if not columns_dataset:
+            columns_dataset = super(CachedVectorBuilder, self).columns_dataset
+            cache.set('vectors', columns_dataset)
+        return columns_dataset
+
+
+class EntryPublishedVectorBuilder(CachedVectorBuilder):
+    """
+    Vector builder for published entries.
+    """
+    queryset = Entry.published
+    fields = COMPARISON_FIELDS
 
 
 def pearson_score(list1, list2):
