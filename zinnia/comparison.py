@@ -52,8 +52,8 @@ class ClusteredModel(object):
         Apply a cleaning on the datas.
         """
         datas = strip_tags(datas)             # Remove HTML
-        datas = datas.translate(PUNCTUATION)  # Remove punctuation
         datas = STOP_WORDS.rebase(datas, '')  # Remove STOP WORDS
+        datas = datas.translate(PUNCTUATION)  # Remove punctuation
         datas = datas.lower()
         return datas
 
