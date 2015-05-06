@@ -13,6 +13,8 @@ from django_comments.signals import comment_was_flagged
 
 from zinnia import settings
 from zinnia.models.entry import Entry
+from zinnia.ping import DirectoryPinger
+from zinnia.ping import ExternalUrlsPinger
 from zinnia.comparison import get_comparison_cache
 
 comment_model = comments.get_model()
@@ -54,8 +56,6 @@ def ping_directories_handler(sender, **kwargs):
     entry = kwargs['instance']
 
     if entry.is_visible and settings.SAVE_PING_DIRECTORIES:
-        from zinnia.ping import DirectoryPinger
-
         for directory in settings.PING_DIRECTORIES:
             DirectoryPinger(directory, [entry])
 
@@ -68,8 +68,6 @@ def ping_external_urls_handler(sender, **kwargs):
     entry = kwargs['instance']
 
     if entry.is_visible and settings.SAVE_PING_EXTERNAL_URLS:
-        from zinnia.ping import ExternalUrlsPinger
-
         ExternalUrlsPinger(entry)
 
 
