@@ -26,7 +26,8 @@ class ClusteredModel(object):
     building a dataset of instances.
     """
 
-    def __init__(self, queryset, fields):
+    def __init__(self, queryset, fields, limit=None):
+        self.limit = limit
         self.fields = fields
         self.queryset = queryset
 
@@ -36,7 +37,10 @@ class ClusteredModel(object):
         and the specified fields.
         """
         dataset = {}
-        for item in self.queryset.values_list(*(['pk'] + self.fields)):
+        queryset = self.queryset.values_list(*(['pk'] + self.fields))
+        if self.limit:
+            queryset = queryset[:self.limit]
+        for item in queryset:
             item = list(item)
             item_pk = item.pop(0)
             datas = ' '.join(map(six.text_type, item))
@@ -58,13 +62,16 @@ class VectorBuilder(object):
     """
     Build a list of vectors based on datasets.
     """
+    limit = None
     fields = None
     queryset = None
 
     def __init__(self, **kwargs):
+        self.limit = kwargs.pop('limit', self.limit)
         self.fields = kwargs.pop('fields', self.fields)
         self.queryset = kwargs.pop('queryset', self.queryset)
-        self.clustered_model = ClusteredModel(self.queryset, self.fields)
+        self.clustered_model = ClusteredModel(
+            self.queryset, self.fields, self.limit)
 
     @cached_property
     def columns_dataset(self):
@@ -128,6 +135,7 @@ class EntryPublishedVectorBuilder(CachedVectorBuilder):
     """
     Vector builder for published entries.
     """
+    limit = 100
     queryset = Entry.published
     fields = COMPARISON_FIELDS
 
