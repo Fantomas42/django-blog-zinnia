@@ -16,19 +16,6 @@ class ComparisonTestCase(TestCase):
     def setUp(self):
         disconnect_entry_signals()
 
-    def test_pearson_score(self):
-        self.assertRaises(ZeroDivisionError, pearson_score,
-                          [42], [42])
-        self.assertRaises(ZeroDivisionError, pearson_score,
-                          [2, 2, 2], [1, 1, 1])
-        self.assertEqual(pearson_score([0, 1, 2], [0, 1, 2]), 1.0)
-        self.assertEqual(pearson_score([0, 1, 3], [0, 1, 2]),
-                         0.9819805060619656)
-        self.assertEqual(pearson_score([0, 1, 2], [0, 1, 3]),
-                         0.9819805060619656)
-        self.assertEqual(pearson_score([2, 0, 0, 0], [0, 1, 1, 1]),
-                         -1)
-
     def test_clustered_model(self):
         params = {'title': 'My entry 1', 'content': 'My content 1.',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1'}
@@ -67,6 +54,19 @@ class ComparisonTestCase(TestCase):
             ['1', '2', 'content', 'entry']))
         self.assertEqual(sorted(vectors.dataset[e1.pk]), [0, 1, 1, 1])
         self.assertEqual(sorted(vectors.dataset[e2.pk]), [0, 0, 1, 2])
+
+    def test_pearson_score(self):
+        self.assertRaises(ZeroDivisionError, pearson_score,
+                          [42], [42])
+        self.assertRaises(ZeroDivisionError, pearson_score,
+                          [2, 2, 2], [1, 1, 1])
+        self.assertEqual(pearson_score([0, 1, 2], [0, 1, 2]), 1.0)
+        self.assertEqual(pearson_score([0, 1, 3], [0, 1, 2]),
+                         0.9819805060619656)
+        self.assertEqual(pearson_score([0, 1, 2], [0, 1, 3]),
+                         0.9819805060619656)
+        self.assertEqual(pearson_score([2, 0, 0, 0], [0, 1, 1, 1]),
+                         -1)
 
     def test_compute_related(self):
         dataset = {1: [1, 2, 3],

@@ -17,25 +17,6 @@ PUNCTUATION = dict.fromkeys(
 )
 
 
-def pearson_score(list1, list2):
-    """
-    Compute the Pearson' score between 2 lists of vectors.
-    """
-    size = len(list1)
-    sum1 = sum(list1)
-    sum2 = sum(list2)
-    sum_sq1 = sum([pow(l, 2) for l in list1])
-    sum_sq2 = sum([pow(l, 2) for l in list2])
-
-    prod_sum = sum([list1[i] * list2[i] for i in range(size)])
-
-    num = prod_sum - (sum1 * sum2 / float(size))
-    den = sqrt((sum_sq1 - pow(sum1, 2.0) / size) *
-               (sum_sq2 - pow(sum2, 2.0) / size))
-
-    return num / den
-
-
 class ClusteredModel(object):
     """
     Wrapper around Model class
@@ -126,6 +107,25 @@ class VectorBuilder(object):
         Access to dataset.
         """
         return self.columns_dataset()[1]
+
+
+def pearson_score(list1, list2):
+    """
+    Compute the Pearson' score between 2 lists of vectors.
+    """
+    size = len(list1)
+    sum1 = sum(list1)
+    sum2 = sum(list2)
+    sum_sq1 = sum([pow(l, 2) for l in list1])
+    sum_sq2 = sum([pow(l, 2) for l in list2])
+
+    prod_sum = sum([list1[i] * list2[i] for i in range(size)])
+
+    num = prod_sum - (sum1 * sum2 / float(size))
+    den = sqrt((sum_sq1 - pow(sum1, 2.0) / size) *
+               (sum_sq2 - pow(sum2, 2.0) / size))
+
+    return num / den
 
 
 def compute_related(object_id, dataset):
