@@ -91,8 +91,9 @@ class VectorBuilder(object):
                 words_item_total[word] += 1
             data[instance] = words_item_total
 
+        columns = sorted([word for word, count in
+                          words_total.items() if count > 1])
         dataset = {}
-        columns = list(words_total.keys())
         for instance in data.keys():
             dataset[instance] = [data[instance].get(word, 0)
                                  for word in columns]

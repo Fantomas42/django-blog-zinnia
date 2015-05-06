@@ -40,19 +40,18 @@ class ComparisonTestCase(TestCase):
         self.assertEqual(vectors.dataset, {})
         self.assertEqual(vectors.columns, [])
         params = {'title': 'My entry 1', 'content':
-                  'This is my first content',
+                  'This is my first content 1',
                   'slug': 'my-entry-1'}
         e1 = Entry.objects.create(**params)
         params = {'title': 'My entry 2', 'content':
-                  'My second entry',
+                  'My second content entry 2',
                   'slug': 'my-entry-2'}
         e2 = Entry.objects.create(**params)
         vectors = VectorBuilder(queryset=Entry.objects.all(),
                                 fields=['title', 'excerpt', 'content'])
-        self.assertEqual(sorted(vectors.columns), sorted(
-            ['1', '2', 'content', 'entry']))
-        self.assertEqual(sorted(vectors.dataset[e1.pk]), [0, 1, 1, 1])
-        self.assertEqual(sorted(vectors.dataset[e2.pk]), [0, 0, 1, 2])
+        self.assertEqual(vectors.columns, ['1', '2', 'content', 'entry'])
+        self.assertEqual(vectors.dataset[e1.pk], [2, 0, 1, 1])
+        self.assertEqual(vectors.dataset[e2.pk], [0, 2, 1, 2])
 
     def test_pearson_score(self):
         self.assertRaises(ZeroDivisionError, pearson_score,
