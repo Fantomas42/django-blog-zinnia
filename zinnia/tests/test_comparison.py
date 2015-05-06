@@ -3,9 +3,7 @@ from django.test import TestCase
 
 from zinnia.models.entry import Entry
 from zinnia.comparison import pearson_score
-from zinnia.comparison import compute_related
-from zinnia.comparison import VectorBuilder
-from zinnia.comparison import ClusteredModel
+from zinnia.comparison import ModelVectorBuilder
 from zinnia.signals import disconnect_entry_signals
 
 
@@ -15,28 +13,28 @@ class ComparisonTestCase(TestCase):
     def setUp(self):
         disconnect_entry_signals()
 
-    def test_clustered_model(self):
+    def test_raw_dataset(self):
         params = {'title': 'My entry 1', 'content': 'My content 1.',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1'}
         entry_1 = Entry.objects.create(**params)
         params = {'title': 'My entry 2', 'content': 'My content 2.',
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         entry_2 = Entry.objects.create(**params)
-        cm = ClusteredModel(Entry.objects.all(), ['id'])
-        self.assertEqual(sorted(cm.dataset().values()),
+        v = ModelVectorBuilder(queryset=Entry.objects.all(), fields=['id'])
+        self.assertEqual(sorted(v.raw_dataset.values()),
                          sorted([str(entry_1.pk), str(entry_2.pk)]))
-        cm = ClusteredModel(Entry.objects.all(),
-                            ['title', 'content', 'tags'])
-        self.assertEqual(sorted(cm.dataset().values()),
-                         sorted([' entry 1  content 1 zinnia test',
-                                 ' entry 2  content 2 zinnia test']))
-        cm = ClusteredModel(Entry.objects.all().order_by('-pk'),
-                            ['title'], 1)
-        self.assertEqual(cm.dataset().values(), [' entry 2'])
+        v = ModelVectorBuilder(queryset=Entry.objects.all(),
+                               fields=['title', 'content', 'tags'])
+        self.assertEqual(sorted(v.raw_dataset.values()),
+                         sorted(['entry 1  content 1 zinnia test',
+                                 'entry 2  content 2 zinnia test']))
+        v = ModelVectorBuilder(queryset=Entry.objects.all().order_by('-pk'),
+                               fields=['title'], limit=1)
+        self.assertEqual(v.raw_dataset.values(), ['entry 2'])
 
-    def test_vector_builder(self):
-        vectors = VectorBuilder(queryset=Entry.objects.all(),
-                                fields=['title', 'excerpt', 'content'])
+    def test_column_dataset(self):
+        vectors = ModelVectorBuilder(queryset=Entry.objects.all(),
+                                     fields=['title', 'excerpt', 'content'])
         self.assertEqual(vectors.dataset, {})
         self.assertEqual(vectors.columns, [])
         params = {'title': 'My entry 1', 'content':
@@ -47,8 +45,8 @@ class ComparisonTestCase(TestCase):
                   'My second content entry 2',
                   'slug': 'my-entry-2'}
         e2 = Entry.objects.create(**params)
-        vectors = VectorBuilder(queryset=Entry.objects.all(),
-                                fields=['title', 'excerpt', 'content'])
+        vectors = ModelVectorBuilder(queryset=Entry.objects.all(),
+                                     fields=['title', 'excerpt', 'content'])
         self.assertEqual(vectors.columns, ['1', '2', 'content', 'entry'])
         self.assertEqual(vectors.dataset[e1.pk], [2, 0, 1, 1])
         self.assertEqual(vectors.dataset[e2.pk], [0, 2, 1, 2])
@@ -67,15 +65,18 @@ class ComparisonTestCase(TestCase):
                          -1)
 
     def test_compute_related(self):
-        dataset = {1: [1, 2, 3],
-                   2: [1, 5, 7],
-                   3: [2, 8, 3],
-                   4: [1, 8, 3],
-                   5: [7, 3, 5]}
-        self.assertEqual(compute_related('error', dataset), [])
-        self.assertEqual(compute_related(1, dataset), [2, 4, 3, 5])
-        self.assertEqual(compute_related(2, dataset), [1, 4, 3, 5])
-        self.assertEqual(compute_related(3, dataset), [4, 2, 1, 5])
-        self.assertEqual(compute_related(4, dataset), [3, 2, 1, 5])
-        dataset[2] = [0, 0, 0]
-        self.assertEqual(compute_related(1, dataset), [4, 3, 5])
+        class VirtualVectorBuilder(ModelVectorBuilder):
+            dataset = {1: [1, 2, 3],
+                       2: [1, 5, 7],
+                       3: [2, 8, 3],
+                       4: [1, 8, 3],
+                       5: [7, 3, 5]}
+
+        v = VirtualVectorBuilder()
+        self.assertEqual(v.compute_related('error'), [])
+        self.assertEqual(v.compute_related(1), [2, 4, 3, 5])
+        self.assertEqual(v.compute_related(2), [1, 4, 3, 5])
+        self.assertEqual(v.compute_related(3), [4, 2, 1, 5])
+        self.assertEqual(v.compute_related(4), [3, 2, 1, 5])
+        v.dataset[2] = [0, 0, 0]
+        self.assertEqual(v.compute_related(1), [4, 3, 5])

@@ -20,20 +20,63 @@ PUNCTUATION = dict.fromkeys(
 )
 
 
-class ClusteredModel(object):
+def pearson_score(list1, list2):
     """
-    Wrapper around Model class
-    building a dataset of instances.
+    Compute the Pearson' score between 2 lists of vectors.
     """
+    size = len(list1)
+    sum1 = sum(list1)
+    sum2 = sum(list2)
+    sum_sq1 = sum([pow(l, 2) for l in list1])
+    sum_sq2 = sum([pow(l, 2) for l in list2])
 
-    def __init__(self, queryset, fields, limit=None):
-        self.limit = limit
-        self.fields = fields
-        self.queryset = queryset
+    prod_sum = sum([list1[i] * list2[i] for i in range(size)])
 
-    def dataset(self):
+    num = prod_sum - (sum1 * sum2 / float(size))
+    den = sqrt((sum_sq1 - pow(sum1, 2.0) / size) *
+               (sum_sq2 - pow(sum2, 2.0) / size))
+
+    return num / den
+
+
+class ModelVectorBuilder(object):
+    """
+    Build a list of vectors based on a Queryset.
+    """
+    limit = None
+    fields = None
+    queryset = None
+
+    def __init__(self, **kwargs):
+        self.limit = kwargs.pop('limit', self.limit)
+        self.fields = kwargs.pop('fields', self.fields)
+        self.queryset = kwargs.pop('queryset', self.queryset)
+
+    def compute_related(self, object_id, score=pearson_score):
         """
-        Generate a dataset based on the queryset
+        Compute the most related pks to an object's pk.
+        """
+        dataset = self.dataset
+        object_vector = dataset.get(object_id)
+        if not object_vector:
+            return []
+
+        object_related = {}
+        for o_id, o_vector in dataset.items():
+            if o_id != object_id:
+                try:
+                    object_related[o_id] = score(object_vector, o_vector)
+                except ZeroDivisionError:
+                    pass
+
+        related = sorted(object_related.items(),
+                         key=lambda k_v: k_v[1], reverse=True)
+        return [rel[0] for rel in related]
+
+    @cached_property
+    def raw_dataset(self):
+        """
+        Generate a raw dataset based on the queryset
         and the specified fields.
         """
         dataset = {}
@@ -44,34 +87,18 @@ class ClusteredModel(object):
             item = list(item)
             item_pk = item.pop(0)
             datas = ' '.join(map(six.text_type, item))
-            dataset[item_pk] = self.clean(datas)
+            dataset[item_pk] = self.raw_clean(datas)
         return dataset
 
-    def clean(self, datas):
+    def raw_clean(self, datas):
         """
-        Apply a cleaning on the datas.
+        Apply a cleaning on raw datas.
         """
         datas = strip_tags(datas)             # Remove HTML
         datas = STOP_WORDS.rebase(datas, '')  # Remove STOP WORDS
         datas = datas.translate(PUNCTUATION)  # Remove punctuation
         datas = datas.lower()
-        return datas
-
-
-class VectorBuilder(object):
-    """
-    Build a list of vectors based on datasets.
-    """
-    limit = None
-    fields = None
-    queryset = None
-
-    def __init__(self, **kwargs):
-        self.limit = kwargs.pop('limit', self.limit)
-        self.fields = kwargs.pop('fields', self.fields)
-        self.queryset = kwargs.pop('queryset', self.queryset)
-        self.clustered_model = ClusteredModel(
-            self.queryset, self.fields, self.limit)
+        return datas.strip()
 
     @cached_property
     def columns_dataset(self):
@@ -81,8 +108,7 @@ class VectorBuilder(object):
         data = {}
         words_total = {}
 
-        model_data = self.clustered_model.dataset()
-        for instance, words in model_data.items():
+        for instance, words in self.raw_dataset.items():
             words_item_total = {}
             for word in words.split():
                 words_total.setdefault(word, 0)
@@ -114,7 +140,7 @@ class VectorBuilder(object):
         return self.columns_dataset[1]
 
 
-class CachedVectorBuilder(VectorBuilder):
+class CachedModelVectorBuilder(ModelVectorBuilder):
     """
     Cached version of VectorBuilder.
     """
@@ -127,58 +153,19 @@ class CachedVectorBuilder(VectorBuilder):
         cache = get_comparison_cache()
         columns_dataset = cache.get('vectors')
         if not columns_dataset:
-            columns_dataset = super(CachedVectorBuilder, self).columns_dataset
+            columns_dataset = super(CachedModelVectorBuilder, self
+                                    ).columns_dataset
             cache.set('vectors', columns_dataset)
         return columns_dataset
 
 
-class EntryPublishedVectorBuilder(CachedVectorBuilder):
+class EntryPublishedVectorBuilder(CachedModelVectorBuilder):
     """
     Vector builder for published entries.
     """
     limit = 100
     queryset = Entry.published
     fields = COMPARISON_FIELDS
-
-
-def pearson_score(list1, list2):
-    """
-    Compute the Pearson' score between 2 lists of vectors.
-    """
-    size = len(list1)
-    sum1 = sum(list1)
-    sum2 = sum(list2)
-    sum_sq1 = sum([pow(l, 2) for l in list1])
-    sum_sq2 = sum([pow(l, 2) for l in list2])
-
-    prod_sum = sum([list1[i] * list2[i] for i in range(size)])
-
-    num = prod_sum - (sum1 * sum2 / float(size))
-    den = sqrt((sum_sq1 - pow(sum1, 2.0) / size) *
-               (sum_sq2 - pow(sum2, 2.0) / size))
-
-    return num / den
-
-
-def compute_related(object_id, dataset):
-    """
-    Compute related pks to an object with a dataset.
-    """
-    object_vector = dataset.get(object_id)
-    if not object_vector:
-        return []
-
-    object_related = {}
-    for o_id, o_vector in dataset.items():
-        if o_id != object_id:
-            try:
-                object_related[o_id] = pearson_score(object_vector, o_vector)
-            except ZeroDivisionError:
-                pass
-
-    related = sorted(object_related.items(),
-                     key=lambda k_v: k_v[1], reverse=True)
-    return [rel[0] for rel in related]
 
 
 def get_comparison_cache():

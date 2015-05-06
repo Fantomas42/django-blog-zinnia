@@ -34,7 +34,6 @@ from ..managers import DRAFT
 from ..managers import tags_published
 from ..flags import PINGBACK, TRACKBACK
 from ..settings import PROTOCOL
-from ..comparison import compute_related
 from ..comparison import get_comparison_cache
 from ..comparison import EntryPublishedVectorBuilder
 from ..calendar import Calendar
@@ -148,8 +147,7 @@ def get_similar_entries(context, number=5,
 
     if cache_key not in cache_related:
         vectors = EntryPublishedVectorBuilder()
-        related_entry_pks = compute_related(
-            entry.pk, vectors.dataset)[:number]
+        related_entry_pks = vectors.compute_related(entry.pk)[:number]
         related_entries = sorted(
             Entry.objects.filter(pk__in=related_entry_pks),
             key=lambda x: related_entry_pks.index(x.pk))
