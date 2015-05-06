@@ -79,3 +79,5 @@ class ComparisonTestCase(TestCase):
         self.assertEqual(compute_related(2, dataset), [1, 4, 3, 5])
         self.assertEqual(compute_related(3, dataset), [4, 2, 1, 5])
         self.assertEqual(compute_related(4, dataset), [3, 2, 1, 5])
+        dataset[2] = [0, 0, 0]
+        self.assertEqual(compute_related(1, dataset), [4, 3, 5])
