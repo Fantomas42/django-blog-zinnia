@@ -174,7 +174,7 @@ def get_comparison_cache():
     if fail use the ``default`` cache backend.
     """
     try:
-        comparison_cache = caches['zinnia_comparison']
+        comparison_cache = caches['comparison']
     except InvalidCacheBackendError:
         comparison_cache = caches['default']
     return comparison_cache
