@@ -74,9 +74,52 @@ class ComparisonTestCase(TestCase):
 
         v = VirtualVectorBuilder()
         self.assertEqual(v.compute_related('error'), [])
-        self.assertEqual(v.compute_related(1), [2, 4, 3, 5])
-        self.assertEqual(v.compute_related(2), [1, 4, 3, 5])
-        self.assertEqual(v.compute_related(3), [4, 2, 1, 5])
-        self.assertEqual(v.compute_related(4), [3, 2, 1, 5])
+        self.assertEqual(v.compute_related(1),
+                         [(2, 0.9819805060619659),
+                          (4, 0.2773500981126146),
+                          (3, 0.15554275420956382),
+                          (5, -0.5)])
+        self.assertEqual(v.compute_related(2),
+                         [(1, 0.9819805060619659),
+                          (4, 0.4539206495016019),
+                          (3, 0.33942211665106525),
+                          (5, -0.6546536707079772)])
+        self.assertEqual(v.compute_related(3),
+                         [(4, 0.9922153572367627),
+                          (2, 0.33942211665106525),
+                          (1, 0.15554275420956382),
+                          (5, -0.9332565252573828)])
+        self.assertEqual(v.compute_related(4),
+                         [(3, 0.9922153572367627),
+                          (2, 0.4539206495016019),
+                          (1, 0.2773500981126146),
+                          (5, -0.9707253433941511)])
         v.dataset[2] = [0, 0, 0]
-        self.assertEqual(v.compute_related(1), [4, 3, 5])
+        self.assertEqual(v.compute_related(1),
+                         [(4, 0.2773500981126146),
+                          (3, 0.15554275420956382),
+                          (5, -0.5)])
+
+    def test_get_related(self):
+        params = {'title': 'My entry 1', 'content':
+                  'This is my first content 1',
+                  'slug': 'my-entry-1'}
+        e1 = Entry.objects.create(**params)
+        vectors = ModelVectorBuilder(queryset=Entry.objects.all(),
+                                     fields=['title', 'content'])
+        with self.assertNumQueries(1):
+            self.assertEquals(vectors.get_related(e1, 10), [])
+
+        params = {'title': 'My entry 2', 'content':
+                  'My second content entry 2',
+                  'slug': 'my-entry-2'}
+        e2 = Entry.objects.create(**params)
+        with self.assertNumQueries(0):
+            self.assertEquals(vectors.get_related(e1, 10), [])
+
+        vectors = ModelVectorBuilder(queryset=Entry.objects.all(),
+                                     fields=['title', 'content'])
+        with self.assertNumQueries(2):
+            self.assertEquals(vectors.get_related(e1, 10), [e2])
+        with self.assertNumQueries(1):
+            self.assertEquals(vectors.get_related(e1, 10), [e2])

@@ -34,7 +34,6 @@ from ..managers import DRAFT
 from ..managers import tags_published
 from ..flags import PINGBACK, TRACKBACK
 from ..settings import PROTOCOL
-from ..comparison import get_comparison_cache
 from ..comparison import EntryPublishedVectorBuilder
 from ..calendar import Calendar
 from ..breadcrumbs import retrieve_breadcrumbs
@@ -141,20 +140,9 @@ def get_similar_entries(context, number=5,
     if not entry:
         return {'template': template, 'entries': []}
 
-    cache = get_comparison_cache()
-    cache_key = '%s:%s' % (entry.pk, number)
-    cache_related = cache.get('related_entries', {})
+    vectors = EntryPublishedVectorBuilder()
+    entries = vectors.get_related(entry, number)
 
-    if cache_key not in cache_related:
-        vectors = EntryPublishedVectorBuilder()
-        related_entry_pks = vectors.compute_related(entry.pk)[:number]
-        related_entries = sorted(
-            Entry.objects.filter(pk__in=related_entry_pks),
-            key=lambda x: related_entry_pks.index(x.pk))
-        cache_related[cache_key] = related_entries
-        cache.set('related_entries', cache_related)
-
-    entries = cache_related[cache_key]
     return {'template': template,
             'entries': entries}
 

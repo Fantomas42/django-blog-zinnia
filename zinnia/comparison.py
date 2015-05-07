@@ -52,6 +52,17 @@ class ModelVectorBuilder(object):
         self.fields = kwargs.pop('fields', self.fields)
         self.queryset = kwargs.pop('queryset', self.queryset)
 
+    def get_related(self, instance, number):
+        """
+        Return a list of the most related objects to instance.
+        """
+        related_pks = self.compute_related(instance.pk)[:number]
+        related_pks = [pk for pk, score in related_pks]
+        related_objects = sorted(
+            self.queryset.model.objects.filter(pk__in=related_pks),
+            key=lambda x: related_pks.index(x.pk))
+        return related_objects
+
     def compute_related(self, object_id, score=pearson_score):
         """
         Compute the most related pks to an object's pk.
@@ -71,7 +82,7 @@ class ModelVectorBuilder(object):
 
         related = sorted(object_related.items(),
                          key=lambda k_v: k_v[1], reverse=True)
-        return [rel[0] for rel in related]
+        return related
 
     @cached_property
     def raw_dataset(self):
@@ -144,6 +155,20 @@ class CachedModelVectorBuilder(ModelVectorBuilder):
     """
     Cached version of VectorBuilder.
     """
+
+    def get_related(self, instance, number):
+        """
+        Implement high level cache system for get_related.
+        """
+        cache = get_comparison_cache()
+        cache_key = '%s:%s' % (instance.pk, number)
+        cache_related = cache.get('related_entries', {})
+        if cache_key not in cache_related:
+            related_objects = super(CachedModelVectorBuilder,
+                                    self).get_related(instance, number)
+            cache_related[cache_key] = related_objects
+            cache.set('related_entries', cache_related)
+        return cache_related[cache_key]
 
     @property
     def columns_dataset(self):
