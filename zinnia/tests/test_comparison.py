@@ -4,6 +4,7 @@ from django.test import TestCase
 from zinnia.models.entry import Entry
 from zinnia.comparison import pearson_score
 from zinnia.comparison import ModelVectorBuilder
+from zinnia.comparison import CachedModelVectorBuilder
 from zinnia.signals import disconnect_entry_signals
 
 
@@ -16,15 +17,15 @@ class ComparisonTestCase(TestCase):
     def test_raw_dataset(self):
         params = {'title': 'My entry 1', 'content': 'My content 1.',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1'}
-        entry_1 = Entry.objects.create(**params)
+        e_1 = Entry.objects.create(**params)
         params = {'title': 'My entry 2', 'content': 'My content 2.',
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
-        entry_2 = Entry.objects.create(**params)
+        e_2 = Entry.objects.create(**params)
         v = ModelVectorBuilder(queryset=Entry.objects.all(), fields=['id'])
         with self.assertNumQueries(1):
             self.assertEqual(len(v.raw_dataset), 2)
             self.assertEqual(sorted(v.raw_dataset.values()),
-                             sorted([str(entry_1.pk), str(entry_2.pk)]))
+                             sorted([str(e_1.pk), str(e_2.pk)]))
         v = ModelVectorBuilder(queryset=Entry.objects.all(),
                                fields=['title', 'content', 'tags'])
         self.assertEqual(sorted(v.raw_dataset.values()),
@@ -126,3 +127,44 @@ class ComparisonTestCase(TestCase):
             self.assertEquals(vectors.get_related(e1, 10), [e2])
         with self.assertNumQueries(1):
             self.assertEquals(vectors.get_related(e1, 10), [e2])
+
+    def test_cached_vector_builder(self):
+        params = {'title': 'My entry 1',
+                  'content': 'My content 1',
+                  'slug': 'my-entry-1'}
+        e1 = Entry.objects.create(**params)
+        v = CachedModelVectorBuilder(
+            queryset=Entry.objects.all(), fields=['title', 'content'])
+        with self.assertNumQueries(1):
+            self.assertEquals(len(v.columns), 1)
+        with self.assertNumQueries(0):
+            self.assertEquals(len(v.columns), 1)
+        with self.assertNumQueries(0):
+            self.assertEquals(v.get_related(e1, 5), [])
+
+        for i in range(1, 3):
+            params = {'title': 'My entry %s' % i,
+                      'content': 'My content %s' % i,
+                      'slug': 'my-entry-%s' % i}
+            Entry.objects.create(**params)
+        v = CachedModelVectorBuilder(
+            queryset=Entry.objects.all(), fields=['title', 'content'])
+        with self.assertNumQueries(0):
+            self.assertEquals(len(v.columns), 4)
+        with self.assertNumQueries(0):
+            self.assertEquals(v.get_related(e1, 5), [])
+
+        v.cache_flush()
+        with self.assertNumQueries(2):
+            self.assertEquals(len(v.get_related(e1, 5)), 2)
+        with self.assertNumQueries(0):
+            self.assertEquals(len(v.get_related(e1, 5)), 2)
+        with self.assertNumQueries(0):
+            self.assertEquals(len(v.columns), 4)
+
+        v = CachedModelVectorBuilder(
+            queryset=Entry.objects.all(), fields=['title', 'content'])
+        with self.assertNumQueries(0):
+            self.assertEquals(len(v.columns), 4)
+        with self.assertNumQueries(0):
+            self.assertEquals(len(v.get_related(e1, 5)), 2)

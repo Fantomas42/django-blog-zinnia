@@ -292,6 +292,12 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['template'], 'custom_template.html')
         with self.assertNumQueries(0):
             context = get_similar_entries(source_context, 3)
+
+        source_context = Context({'entry': second_entry})
+        with self.assertNumQueries(1):
+            context = get_similar_entries(source_context)
+        self.assertEqual(len(context['entries']), 2)
+
         post_save.disconnect(
             sender=Entry, dispatch_uid='flush_cache')
 
