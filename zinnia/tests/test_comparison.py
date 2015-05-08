@@ -33,7 +33,7 @@ class ComparisonTestCase(TestCase):
                                  'entry 2  content 2 zinnia test']))
         v = ModelVectorBuilder(queryset=Entry.objects.all().order_by('-pk'),
                                fields=['title'], limit=1)
-        self.assertEqual(v.raw_dataset.values(), ['entry 2'])
+        self.assertEqual(list(v.raw_dataset.values()), ['entry 2'])
 
     def test_column_dataset(self):
         vectors = ModelVectorBuilder(queryset=Entry.objects.all(),
