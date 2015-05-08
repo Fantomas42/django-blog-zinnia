@@ -16,7 +16,7 @@ from zinnia import settings
 from zinnia.models.entry import Entry
 from zinnia.ping import DirectoryPinger
 from zinnia.ping import ExternalUrlsPinger
-from zinnia.comparison import get_comparison_cache
+from zinnia.comparison import EntryPublishedVectorBuilder
 
 comment_model = comments.get_model()
 ENTRY_PS_PING_DIRECTORIES = 'zinnia.entry.post_save.ping_directories'
@@ -80,8 +80,7 @@ def flush_similar_cache_handler(sender, **kwargs):
     """
     entry = kwargs['instance']
     if entry.is_visible:
-        cache = get_comparison_cache()
-        cache.delete_many(['related_entries', 'vectors'])
+        EntryPublishedVectorBuilder().cache_flush()
 
 
 def count_discussions_handler(sender, **kwargs):

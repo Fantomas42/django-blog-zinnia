@@ -150,7 +150,7 @@ class ComparisonTestCase(TestCase):
         v = CachedModelVectorBuilder(
             queryset=Entry.objects.all(), fields=['title', 'content'])
         with self.assertNumQueries(0):
-            self.assertEquals(len(v.columns), 4)
+            self.assertEquals(len(v.columns), 1)
         with self.assertNumQueries(0):
             self.assertEquals(v.get_related(e1, 5), [])
 

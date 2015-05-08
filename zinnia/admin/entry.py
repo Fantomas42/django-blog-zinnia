@@ -16,7 +16,7 @@ from zinnia.ping import DirectoryPinger
 from zinnia.admin.forms import EntryAdminForm
 from zinnia.admin.filters import AuthorListFilter
 from zinnia.admin.filters import CategoryListFilter
-from zinnia.comparison import get_comparison_cache
+from zinnia.comparison import EntryPublishedVectorBuilder
 
 
 class EntryAdmin(admin.ModelAdmin):
@@ -255,8 +255,7 @@ class EntryAdmin(admin.ModelAdmin):
         Set entries selected as published.
         """
         queryset.update(status=PUBLISHED)
-        cache = get_comparison_cache()
-        cache.delete_many(['related_entries', 'vectors'])
+        EntryPublishedVectorBuilder().cache_flush()
         self.ping_directories(request, queryset, messages=False)
         self.message_user(
             request, _('The selected entries are now marked as published.'))
@@ -267,8 +266,7 @@ class EntryAdmin(admin.ModelAdmin):
         Set entries selected as hidden.
         """
         queryset.update(status=HIDDEN)
-        cache = get_comparison_cache()
-        cache.delete_many(['related_entries', 'vectors'])
+        EntryPublishedVectorBuilder().cache_flush()
         self.message_user(
             request, _('The selected entries are now marked as hidden.'))
     make_hidden.short_description = _('Set entries selected as hidden')

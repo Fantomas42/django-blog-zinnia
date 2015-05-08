@@ -156,32 +156,72 @@ class CachedModelVectorBuilder(ModelVectorBuilder):
     Cached version of VectorBuilder.
     """
 
+    @property
+    def cache_backend(self):
+        """
+        Try to access to ``comparison`` cache value,
+        if fail use the ``default`` cache backend config.
+        """
+        try:
+            comparison_cache = caches['comparison']
+        except InvalidCacheBackendError:
+            comparison_cache = caches['default']
+        return comparison_cache
+
+    @property
+    def cache_key(self):
+        """
+        Key for the cache.
+        """
+        return self.__class__.__name__
+
+    def get_cache(self):
+        """
+        Get the cache from cache.
+        """
+        return self.cache_backend.get(self.cache_key, {})
+
+    def set_cache(self, value):
+        """
+        Assign the cache in cache.
+        """
+        value.update(self.cache)
+        return self.cache_backend.set(self.cache_key, value)
+
+    cache = property(get_cache, set_cache)
+
+    def cache_flush(self):
+        """
+        Flush the cache for this instance.
+        """
+        return self.cache_backend.delete(self.cache_key)
+
     def get_related(self, instance, number):
         """
         Implement high level cache system for get_related.
         """
-        cache = get_comparison_cache()
+        cache = self.cache
         cache_key = '%s:%s' % (instance.pk, number)
-        cache_related = cache.get('related_entries', {})
-        if cache_key not in cache_related:
+        if cache_key not in cache:
             related_objects = super(CachedModelVectorBuilder,
                                     self).get_related(instance, number)
-            cache_related[cache_key] = related_objects
-            cache.set('related_entries', cache_related)
-        return cache_related[cache_key]
+            cache[cache_key] = related_objects
+            self.cache = cache
+        return cache[cache_key]
 
     @property
     def columns_dataset(self):
         """
         Implement high level cache system for columns and dataset.
         """
-        cache = get_comparison_cache()
-        columns_dataset = cache.get('vectors')
-        if not columns_dataset:
+        cache = self.cache
+        cache_key = 'columns_dataset'
+        if cache_key not in cache:
             columns_dataset = super(CachedModelVectorBuilder, self
                                     ).columns_dataset
-            cache.set('vectors', columns_dataset)
-        return columns_dataset
+            cache[cache_key] = columns_dataset
+            self.cache = cache
+        return cache[cache_key]
 
 
 class EntryPublishedVectorBuilder(CachedModelVectorBuilder):
@@ -191,15 +231,3 @@ class EntryPublishedVectorBuilder(CachedModelVectorBuilder):
     limit = 100
     queryset = Entry.published
     fields = COMPARISON_FIELDS
-
-
-def get_comparison_cache():
-    """
-    Try to access to ``zinnia_comparison`` cache backend,
-    if fail use the ``default`` cache backend.
-    """
-    try:
-        comparison_cache = caches['comparison']
-    except InvalidCacheBackendError:
-        comparison_cache = caches['default']
-    return comparison_cache
