@@ -293,6 +293,13 @@ class TemplateTagsTestCase(TestCase):
         with self.assertNumQueries(0):
             context = get_similar_entries(source_context, 3)
 
+        second_site = Site.objects.create(domain='second', name='second')
+        second_entry.sites.add(second_site)
+        with override_settings(SITE_ID=second_site.pk):
+            with self.assertNumQueries(2):
+                context = get_similar_entries(source_context, 3)
+        self.assertEqual(len(context['entries']), 0)
+
         source_context = Context({'entry': second_entry})
         with self.assertNumQueries(1):
             context = get_similar_entries(source_context)

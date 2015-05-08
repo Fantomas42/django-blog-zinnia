@@ -6,6 +6,7 @@ from math import sqrt
 from django.utils import six
 from django.core.cache import caches
 from django.utils.html import strip_tags
+from django.contrib.sites.models import Site
 from django.utils.functional import cached_property
 from django.core.cache import InvalidCacheBackendError
 
@@ -231,3 +232,11 @@ class EntryPublishedVectorBuilder(CachedModelVectorBuilder):
     limit = 100
     queryset = Entry.published
     fields = COMPARISON_FIELDS
+
+    @property
+    def cache_key(self):
+        """
+        Key for the cache handling current site.
+        """
+        return '%s:%s' % (super(EntryPublishedVectorBuilder, self).cache_key,
+                          Site.objects.get_current().pk)
