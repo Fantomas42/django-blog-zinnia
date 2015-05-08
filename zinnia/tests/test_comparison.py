@@ -21,8 +21,10 @@ class ComparisonTestCase(TestCase):
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         entry_2 = Entry.objects.create(**params)
         v = ModelVectorBuilder(queryset=Entry.objects.all(), fields=['id'])
-        self.assertEqual(sorted(v.raw_dataset.values()),
-                         sorted([str(entry_1.pk), str(entry_2.pk)]))
+        with self.assertNumQueries(1):
+            self.assertEqual(len(v.raw_dataset), 2)
+            self.assertEqual(sorted(v.raw_dataset.values()),
+                             sorted([str(entry_1.pk), str(entry_2.pk)]))
         v = ModelVectorBuilder(queryset=Entry.objects.all(),
                                fields=['title', 'content', 'tags'])
         self.assertEqual(sorted(v.raw_dataset.values()),
@@ -35,8 +37,9 @@ class ComparisonTestCase(TestCase):
     def test_column_dataset(self):
         vectors = ModelVectorBuilder(queryset=Entry.objects.all(),
                                      fields=['title', 'excerpt', 'content'])
-        self.assertEqual(vectors.dataset, {})
-        self.assertEqual(vectors.columns, [])
+        with self.assertNumQueries(1):
+            self.assertEqual(vectors.dataset, {})
+            self.assertEqual(vectors.columns, [])
         params = {'title': 'My entry 1', 'content':
                   'This is my first content 1',
                   'slug': 'my-entry-1'}
