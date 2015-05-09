@@ -21,11 +21,11 @@ class ComparisonTestCase(TestCase):
         params = {'title': 'My entry 2', 'content': 'My content 2.',
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         Entry.objects.create(**params)
-        v = ModelVectorBuilder(queryset=Entry.objects.all(), fields=['id'])
+        v = ModelVectorBuilder(queryset=Entry.objects.all(), fields=['title'])
         with self.assertNumQueries(1):
             self.assertEqual(len(v.raw_dataset), 2)
             self.assertEqual(sorted(v.raw_dataset.values()),
-                             [[], []])
+                             [['entry'], ['entry']])
         v = ModelVectorBuilder(queryset=Entry.objects.all(),
                                fields=['title', 'content', 'tags'])
         self.assertEqual(sorted(v.raw_dataset.values()),
