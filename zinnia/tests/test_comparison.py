@@ -51,9 +51,9 @@ class ComparisonTestCase(TestCase):
         e2 = Entry.objects.create(**params)
         vectors = ModelVectorBuilder(queryset=Entry.objects.all(),
                                      fields=['title', 'excerpt', 'content'])
-        self.assertEqual(vectors.columns, ['entry', 'content', '01', '02'])
-        self.assertEqual(vectors.dataset[e1.pk], [1, 1, 2, 0])
-        self.assertEqual(vectors.dataset[e2.pk], [2, 1, 0, 2])
+        self.assertEqual(vectors.columns, ['01', '02', 'content', 'entry'])
+        self.assertEqual(vectors.dataset[e1.pk], [2, 0, 1, 1])
+        self.assertEqual(vectors.dataset[e2.pk], [0, 2, 1, 2])
 
     def test_pearson_score(self):
         self.assertRaises(ZeroDivisionError, pearson_score,

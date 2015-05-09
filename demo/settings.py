@@ -25,7 +25,7 @@ USE_L10N = True
 
 SITE_ID = 1
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'fr'
 
 LANGUAGES = (
     ('en', gettext('English')),

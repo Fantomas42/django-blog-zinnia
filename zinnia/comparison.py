@@ -132,6 +132,7 @@ class ModelVectorBuilder(object):
         columns = sorted(words_total.keys(),
                          key=lambda w: words_total[w],
                          reverse=True)[:250]
+        columns = sorted(columns)
         dataset = {}
         for instance in data.keys():
             dataset[instance] = [data[instance].get(word, 0)
