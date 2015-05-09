@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.template import Context
 from django.template import Template
 from django.template import TemplateSyntaxError
+from django.db.models.signals import post_save
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
@@ -27,6 +28,7 @@ from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.signals import flush_similar_cache_handler
 from zinnia.templatetags.zinnia import widont
 from zinnia.templatetags.zinnia import week_number
 from zinnia.templatetags.zinnia import get_authors
@@ -248,30 +250,63 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(list(context['entries']), [second_entry])
 
     def test_get_similar_entries(self):
+        post_save.connect(
+            flush_similar_cache_handler, sender=Entry,
+            dispatch_uid='flush_cache')
         self.publish_entry()
         source_context = Context({'object': self.entry})
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(0):
+            context = get_similar_entries(source_context)
+        self.assertEqual(len(context['entries']), 0)
+        self.assertEqual(context['template'],
+                         'zinnia/tags/entries_similar.html')
+
+        source_context = Context({'entry': self.entry})
+        with self.assertNumQueries(1):
             context = get_similar_entries(source_context)
         self.assertEqual(len(context['entries']), 0)
         self.assertEqual(context['template'],
                          'zinnia/tags/entries_similar.html')
 
         params = {'title': 'My second entry',
-                  'content': 'This is the second content of my tests.',
+                  'content': 'This is the second content of my testing',
                   'excerpt': 'Similarity testing',
-                  'tags': 'zinnia, test',
                   'status': PUBLISHED,
                   'slug': 'my-second-entry'}
         second_entry = Entry.objects.create(**params)
         second_entry.sites.add(self.site)
 
-        source_context = Context({'object': second_entry})
-        with self.assertNumQueries(3):
+        params = {'title': 'My third entry',
+                  'content': 'This is the third content for testing',
+                  'excerpt': 'Similarity testing',
+                  'status': PUBLISHED,
+                  'slug': 'my-third-entry'}
+        third_entry = Entry.objects.create(**params)
+        third_entry.sites.add(self.site)
+
+        with self.assertNumQueries(2):
             context = get_similar_entries(source_context, 3,
-                                          'custom_template.html',
-                                          flush=True)
-        self.assertEqual(len(context['entries']), 1)
+                                          'custom_template.html')
+        self.assertEqual(len(context['entries']), 2)
+        self.assertEqual(context['entries'][0].pk, second_entry.pk)
         self.assertEqual(context['template'], 'custom_template.html')
+        with self.assertNumQueries(0):
+            context = get_similar_entries(source_context, 3)
+
+        second_site = Site.objects.create(domain='second', name='second')
+        second_entry.sites.add(second_site)
+        with override_settings(SITE_ID=second_site.pk):
+            with self.assertNumQueries(2):
+                context = get_similar_entries(source_context, 3)
+        self.assertEqual(len(context['entries']), 0)
+
+        source_context = Context({'entry': second_entry})
+        with self.assertNumQueries(1):
+            context = get_similar_entries(source_context)
+        self.assertEqual(len(context['entries']), 2)
+
+        post_save.disconnect(
+            sender=Entry, dispatch_uid='flush_cache')
 
     def test_get_archives_entries(self):
         with self.assertNumQueries(0):

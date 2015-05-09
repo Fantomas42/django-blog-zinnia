@@ -6,6 +6,7 @@ from django.db.models import F
 from django.dispatch import Signal
 from django.db.models.signals import post_save
 from django.db.models.signals import pre_delete
+from django.db.models.signals import post_delete
 
 import django_comments as comments
 from django_comments.signals import comment_was_posted
@@ -13,16 +14,21 @@ from django_comments.signals import comment_was_flagged
 
 from zinnia import settings
 from zinnia.models.entry import Entry
+from zinnia.ping import DirectoryPinger
+from zinnia.ping import ExternalUrlsPinger
+from zinnia.comparison import EntryPublishedVectorBuilder
 
 comment_model = comments.get_model()
 ENTRY_PS_PING_DIRECTORIES = 'zinnia.entry.post_save.ping_directories'
 ENTRY_PS_PING_EXTERNAL_URLS = 'zinnia.entry.post_save.ping_external_urls'
+ENTRY_PS_FLUSH_SIMILAR_CACHE = 'zinnia.entry.post_save.flush_similar_cache'
+ENTRY_PD_FLUSH_SIMILAR_CACHE = 'zinnia.entry.post_delete.flush_similar_cache'
 COMMENT_PS_COUNT_DISCUSSIONS = 'zinnia.comment.post_save.count_discussions'
 COMMENT_PD_COUNT_DISCUSSIONS = 'zinnia.comment.pre_delete.count_discussions'
 COMMENT_WF_COUNT_DISCUSSIONS = 'zinnia.comment.was_flagged.count_discussions'
 COMMENT_WP_COUNT_COMMENTS = 'zinnia.comment.was_posted.count_comments'
-PINGBACK_WP_COUNT_PINGBACKS = 'zinnia.pingback.was_flagged.count_pingbacks'
-TRACKBACK_WP_COUNT_TRACKBACKS = 'zinnia.trackback.was_flagged.count_trackbacks'
+PINGBACK_WF_COUNT_PINGBACKS = 'zinnia.pingback.was_flagged.count_pingbacks'
+TRACKBACK_WF_COUNT_TRACKBACKS = 'zinnia.trackback.was_flagged.count_trackbacks'
 
 pingback_was_posted = Signal(providing_args=['pingback', 'entry'])
 trackback_was_posted = Signal(providing_args=['trackback', 'entry'])
@@ -52,8 +58,6 @@ def ping_directories_handler(sender, **kwargs):
     entry = kwargs['instance']
 
     if entry.is_visible and settings.SAVE_PING_DIRECTORIES:
-        from zinnia.ping import DirectoryPinger
-
         for directory in settings.PING_DIRECTORIES:
             DirectoryPinger(directory, [entry])
 
@@ -66,9 +70,17 @@ def ping_external_urls_handler(sender, **kwargs):
     entry = kwargs['instance']
 
     if entry.is_visible and settings.SAVE_PING_EXTERNAL_URLS:
-        from zinnia.ping import ExternalUrlsPinger
-
         ExternalUrlsPinger(entry)
+
+
+@disable_for_loaddata
+def flush_similar_cache_handler(sender, **kwargs):
+    """
+    Flush the cache of similar entries when an entry is saved.
+    """
+    entry = kwargs['instance']
+    if entry.is_visible:
+        EntryPublishedVectorBuilder().cache_flush()
 
 
 def count_discussions_handler(sender, **kwargs):
@@ -131,6 +143,12 @@ def connect_entry_signals():
     post_save.connect(
         ping_external_urls_handler, sender=Entry,
         dispatch_uid=ENTRY_PS_PING_EXTERNAL_URLS)
+    post_save.connect(
+        flush_similar_cache_handler, sender=Entry,
+        dispatch_uid=ENTRY_PS_FLUSH_SIMILAR_CACHE)
+    post_delete.connect(
+        flush_similar_cache_handler, sender=Entry,
+        dispatch_uid=ENTRY_PD_FLUSH_SIMILAR_CACHE)
 
 
 def disconnect_entry_signals():
@@ -143,6 +161,12 @@ def disconnect_entry_signals():
     post_save.disconnect(
         sender=Entry,
         dispatch_uid=ENTRY_PS_PING_EXTERNAL_URLS)
+    post_save.disconnect(
+        sender=Entry,
+        dispatch_uid=ENTRY_PS_FLUSH_SIMILAR_CACHE)
+    post_delete.disconnect(
+        sender=Entry,
+        dispatch_uid=ENTRY_PD_FLUSH_SIMILAR_CACHE)
 
 
 def connect_discussion_signals():
@@ -165,10 +189,10 @@ def connect_discussion_signals():
         dispatch_uid=COMMENT_WP_COUNT_COMMENTS)
     pingback_was_posted.connect(
         count_pingbacks_handler, sender=comment_model,
-        dispatch_uid=PINGBACK_WP_COUNT_PINGBACKS)
+        dispatch_uid=PINGBACK_WF_COUNT_PINGBACKS)
     trackback_was_posted.connect(
         count_trackbacks_handler, sender=comment_model,
-        dispatch_uid=TRACKBACK_WP_COUNT_TRACKBACKS)
+        dispatch_uid=TRACKBACK_WF_COUNT_TRACKBACKS)
 
 
 def disconnect_discussion_signals():
@@ -190,7 +214,7 @@ def disconnect_discussion_signals():
         dispatch_uid=COMMENT_WP_COUNT_COMMENTS)
     pingback_was_posted.disconnect(
         sender=comment_model,
-        dispatch_uid=PINGBACK_WP_COUNT_PINGBACKS)
+        dispatch_uid=PINGBACK_WF_COUNT_PINGBACKS)
     trackback_was_posted.disconnect(
         sender=comment_model,
-        dispatch_uid=TRACKBACK_WP_COUNT_TRACKBACKS)
+        dispatch_uid=TRACKBACK_WF_COUNT_TRACKBACKS)

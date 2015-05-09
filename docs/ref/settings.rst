@@ -383,35 +383,6 @@ ZINNIA_PINGBACK_CONTENT_LENGTH
 
 Size of the excerpt generated on pingback.
 
-.. _settings-similarity:
-
-Similarity
-==========
-
-.. setting:: ZINNIA_F_MIN
-
-ZINNIA_F_MIN
-------------
-**Default value:** ``0.1``
-
-Float setting of the minimal word frequency for similar entries.
-
-.. setting:: ZINNIA_F_MAX
-
-ZINNIA_F_MAX
-------------
-**Default value:** ``1.0``
-
-Float setting of the minimal word frequency for similar entries.
-
-.. setting:: ZINNIA_COMPARISON_FIELDS
-
-ZINNIA_COMPARISON_FIELDS
-------------------------
-**Default value:** ``['title', 'lead', 'content', 'excerpt', 'image_caption']``
-
-List of text fields used to find similarity between entries.
-
 .. _settings-misc:
 
 Miscellaneous
@@ -426,10 +397,18 @@ ZINNIA_COPYRIGHT
 String used for copyrighting your entries, used in the syndication feeds
 and in the opensearch document.
 
+.. setting:: ZINNIA_COMPARISON_FIELDS
+
+ZINNIA_COMPARISON_FIELDS
+------------------------
+**Default value:** ``['title', 'lead', 'content', 'excerpt', 'image_caption', 'tags']``
+
+List of text fields used to find similarity between entries.
+
 .. setting:: ZINNIA_SEARCH_FIELDS
 
 ZINNIA_SEARCH_FIELDS
 --------------------
-**Default value:** ``['title', 'lead', 'content', 'excerpt', 'image_caption']``
+**Default value:** ``['title', 'lead', 'content', 'excerpt', 'image_caption', 'tags']``
 
 List of text fields used to search within entries.

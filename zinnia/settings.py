@@ -1,6 +1,9 @@
 """Settings of Zinnia"""
 from django.conf import settings
 
+from mots_vides import stop_words
+
+
 PING_DIRECTORIES = getattr(settings, 'ZINNIA_PING_DIRECTORIES',
                            ('http://django-blog-zinnia.com/xmlrpc/',))
 SAVE_PING_DIRECTORIES = getattr(settings, 'ZINNIA_SAVE_PING_DIRECTORIES',
@@ -71,19 +74,18 @@ FEEDS_MAX_ITEMS = getattr(settings, 'ZINNIA_FEEDS_MAX_ITEMS', 15)
 PINGBACK_CONTENT_LENGTH = getattr(settings,
                                   'ZINNIA_PINGBACK_CONTENT_LENGTH', 300)
 
-F_MIN = getattr(settings, 'ZINNIA_F_MIN', 0.1)
-F_MAX = getattr(settings, 'ZINNIA_F_MAX', 1.0)
-
 SEARCH_FIELDS = getattr(settings, 'ZINNIA_SEARCH_FIELDS',
                         ['title', 'lead', 'content',
-                         'excerpt', 'image_caption'])
+                         'excerpt', 'image_caption', 'tags'])
 
 COMPARISON_FIELDS = getattr(settings, 'ZINNIA_COMPARISON_FIELDS',
                             ['title', 'lead', 'content',
-                             'excerpt', 'image_caption'])
+                             'excerpt', 'image_caption', 'tags'])
 
 SPAM_CHECKER_BACKENDS = getattr(settings, 'ZINNIA_SPAM_CHECKER_BACKENDS',
                                 [])
 
 URL_SHORTENER_BACKEND = getattr(settings, 'ZINNIA_URL_SHORTENER_BACKEND',
                                 'zinnia.url_shortener.backends.default')
+
+STOP_WORDS = stop_words(settings.LANGUAGE_CODE.split('-')[0])

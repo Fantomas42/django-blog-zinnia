@@ -130,6 +130,29 @@ Then install the corresponding library to your needs:
 * ``markdown`` -- requires `Markdown`_ >= 2.3.1
 * ``restructuredtext`` -- requires `Docutils`_ >= 0.10
 
+.. _zinnia-cache:
+
+Cache
+=====
+
+For performance considerations the Django's cache API is used when
+comparing the entries between them. To isolate these operations, the
+:setting:`CACHES` setting must contain a value named ``'comparison'``,
+otherwise the ``'default'`` value will be used.
+
+::
+
+  CACHES = {
+      'default': {
+          'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+      },
+      'comparison': {
+          'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+          'LOCATION': 'comparison',
+          'TIMEOUT': None,
+     }
+  }
+
 .. _zinnia-xmlrpc:
 
 XML-RPC
