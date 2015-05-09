@@ -110,7 +110,7 @@ class ModelVectorBuilder(object):
         datas = STOP_WORDS.rebase(datas, '')  # Remove STOP WORDS
         datas = datas.translate(PUNCTUATION)  # Remove punctuation
         datas = datas.lower()
-        return datas.strip()
+        return [d for d in datas.split() if len(d) > 1]
 
     @cached_property
     def columns_dataset(self):
@@ -122,15 +122,16 @@ class ModelVectorBuilder(object):
 
         for instance, words in self.raw_dataset.items():
             words_item_total = {}
-            for word in words.split():
+            for word in words:
                 words_total.setdefault(word, 0)
                 words_item_total.setdefault(word, 0)
                 words_total[word] += 1
                 words_item_total[word] += 1
             data[instance] = words_item_total
 
-        columns = sorted([word for word, count in
-                          words_total.items() if count > 1])
+        columns = sorted(words_total.keys(),
+                         key=lambda w: words_total[w],
+                         reverse=True)[:250]
         dataset = {}
         for instance in data.keys():
             dataset[instance] = [data[instance].get(word, 0)

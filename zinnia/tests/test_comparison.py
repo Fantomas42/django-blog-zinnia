@@ -17,23 +17,23 @@ class ComparisonTestCase(TestCase):
     def test_raw_dataset(self):
         params = {'title': 'My entry 1', 'content': 'My content 1.',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1'}
-        e_1 = Entry.objects.create(**params)
+        Entry.objects.create(**params)
         params = {'title': 'My entry 2', 'content': 'My content 2.',
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
-        e_2 = Entry.objects.create(**params)
+        Entry.objects.create(**params)
         v = ModelVectorBuilder(queryset=Entry.objects.all(), fields=['id'])
         with self.assertNumQueries(1):
             self.assertEqual(len(v.raw_dataset), 2)
             self.assertEqual(sorted(v.raw_dataset.values()),
-                             sorted([str(e_1.pk), str(e_2.pk)]))
+                             [[], []])
         v = ModelVectorBuilder(queryset=Entry.objects.all(),
                                fields=['title', 'content', 'tags'])
         self.assertEqual(sorted(v.raw_dataset.values()),
-                         sorted(['entry 1  content 1 zinnia test',
-                                 'entry 2  content 2 zinnia test']))
+                         [['entry', 'content', 'zinnia', 'test'],
+                          ['entry', 'content', 'zinnia', 'test']])
         v = ModelVectorBuilder(queryset=Entry.objects.all().order_by('-pk'),
                                fields=['title'], limit=1)
-        self.assertEqual(list(v.raw_dataset.values()), ['entry 2'])
+        self.assertEqual(list(v.raw_dataset.values()), [['entry']])
 
     def test_column_dataset(self):
         vectors = ModelVectorBuilder(queryset=Entry.objects.all(),
@@ -41,19 +41,19 @@ class ComparisonTestCase(TestCase):
         with self.assertNumQueries(1):
             self.assertEqual(vectors.dataset, {})
             self.assertEqual(vectors.columns, [])
-        params = {'title': 'My entry 1', 'content':
-                  'This is my first content 1',
+        params = {'title': 'My entry 1 (01)', 'content':
+                  'This is my first content 1 (01)',
                   'slug': 'my-entry-1'}
         e1 = Entry.objects.create(**params)
-        params = {'title': 'My entry 2', 'content':
-                  'My second content entry 2',
+        params = {'title': 'My entry 2 (02)', 'content':
+                  'My second content entry 2 (02)',
                   'slug': 'my-entry-2'}
         e2 = Entry.objects.create(**params)
         vectors = ModelVectorBuilder(queryset=Entry.objects.all(),
                                      fields=['title', 'excerpt', 'content'])
-        self.assertEqual(vectors.columns, ['1', '2', 'content', 'entry'])
-        self.assertEqual(vectors.dataset[e1.pk], [2, 0, 1, 1])
-        self.assertEqual(vectors.dataset[e2.pk], [0, 2, 1, 2])
+        self.assertEqual(vectors.columns, ['entry', 'content', '01', '02'])
+        self.assertEqual(vectors.dataset[e1.pk], [1, 1, 2, 0])
+        self.assertEqual(vectors.dataset[e2.pk], [2, 1, 0, 2])
 
     def test_pearson_score(self):
         self.assertRaises(ZeroDivisionError, pearson_score,
@@ -105,8 +105,8 @@ class ComparisonTestCase(TestCase):
                           (5, -0.5)])
 
     def test_get_related(self):
-        params = {'title': 'My entry 1', 'content':
-                  'This is my first content 1',
+        params = {'title': 'My entry 01', 'content':
+                  'This is my first content 01',
                   'slug': 'my-entry-1'}
         e1 = Entry.objects.create(**params)
         vectors = ModelVectorBuilder(queryset=Entry.objects.all(),
@@ -114,8 +114,8 @@ class ComparisonTestCase(TestCase):
         with self.assertNumQueries(1):
             self.assertEquals(vectors.get_related(e1, 10), [])
 
-        params = {'title': 'My entry 2', 'content':
-                  'My second content entry 2',
+        params = {'title': 'My entry 02', 'content':
+                  'My second content entry 02',
                   'slug': 'my-entry-2'}
         e2 = Entry.objects.create(**params)
         with self.assertNumQueries(0):
@@ -129,16 +129,16 @@ class ComparisonTestCase(TestCase):
             self.assertEquals(vectors.get_related(e1, 10), [e2])
 
     def test_cached_vector_builder(self):
-        params = {'title': 'My entry 1',
-                  'content': 'My content 1',
+        params = {'title': 'My entry number 1',
+                  'content': 'My content number 1',
                   'slug': 'my-entry-1'}
         e1 = Entry.objects.create(**params)
         v = CachedModelVectorBuilder(
             queryset=Entry.objects.all(), fields=['title', 'content'])
         with self.assertNumQueries(1):
-            self.assertEquals(len(v.columns), 1)
+            self.assertEquals(len(v.columns), 3)
         with self.assertNumQueries(0):
-            self.assertEquals(len(v.columns), 1)
+            self.assertEquals(len(v.columns), 3)
         with self.assertNumQueries(0):
             self.assertEquals(v.get_related(e1, 5), [])
 
@@ -150,7 +150,7 @@ class ComparisonTestCase(TestCase):
         v = CachedModelVectorBuilder(
             queryset=Entry.objects.all(), fields=['title', 'content'])
         with self.assertNumQueries(0):
-            self.assertEquals(len(v.columns), 1)
+            self.assertEquals(len(v.columns), 3)
         with self.assertNumQueries(0):
             self.assertEquals(v.get_related(e1, 5), [])
 
@@ -160,11 +160,11 @@ class ComparisonTestCase(TestCase):
         with self.assertNumQueries(0):
             self.assertEquals(len(v.get_related(e1, 5)), 2)
         with self.assertNumQueries(0):
-            self.assertEquals(len(v.columns), 4)
+            self.assertEquals(len(v.columns), 3)
 
         v = CachedModelVectorBuilder(
             queryset=Entry.objects.all(), fields=['title', 'content'])
         with self.assertNumQueries(0):
-            self.assertEquals(len(v.columns), 4)
+            self.assertEquals(len(v.columns), 3)
         with self.assertNumQueries(0):
             self.assertEquals(len(v.get_related(e1, 5)), 2)
