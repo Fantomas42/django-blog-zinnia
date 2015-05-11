@@ -1,6 +1,9 @@
 """Test cases for Zinnia's comparison"""
 from django.test import TestCase
 
+from mots_vides import stop_words
+
+from zinnia import comparison
 from zinnia.models.entry import Entry
 from zinnia.comparison import pearson_score
 from zinnia.comparison import ModelVectorBuilder
@@ -12,7 +15,13 @@ class ComparisonTestCase(TestCase):
     """Test cases for comparison tools"""
 
     def setUp(self):
+        english_stop_words = stop_words('english')
+        self.original_stop_words = comparison.STOP_WORDS
+        comparison.STOP_WORDS = english_stop_words
         disconnect_entry_signals()
+
+    def tearDown(self):
+        comparison.STOP_WORDS = self.original_stop_words
 
     def test_raw_dataset(self):
         params = {'title': 'My entry 1', 'content': 'My content 1.',

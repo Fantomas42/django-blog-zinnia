@@ -358,8 +358,8 @@ class EntryTestCase(TestCase):
         content = '<p>%s</p>' % ' '.join(['word-%s' % i for i in range(75)])
         self.entry.content = content
         self.entry.save()
-        self.assertEqual(self.entry.excerpt,
-                         ' '.join(['word-%s' % i for i in range(50)]) + '...')
+        self.assertTrue(' '.join(['word-%s' % i for i in range(50)])
+                        in self.entry.excerpt)
 
     def test_html_lead(self):
         self.assertEquals(self.entry.html_lead, '')
