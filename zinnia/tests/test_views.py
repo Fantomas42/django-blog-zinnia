@@ -320,12 +320,40 @@ class ViewsTestCase(ViewsBaseCase):
             response = self.client.get('/%s/' % base36(self.first_entry.pk))
         self.assertEqual(response.status_code, 404)
 
+    def test_zinnia_entry_detail(self):
+        entry = self.first_entry
+        with self.assertNumQueries(1):
+            response = self.client.get(entry.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+
+        entry.sites.clear()
+        with self.assertNumQueries(1):
+            response = self.client.get(entry.get_absolute_url())
+        self.assertEqual(response.status_code, 404)
+        entry.sites.add(self.site)
+
+        entry.status = DRAFT
+        entry.save()
+        with self.assertNumQueries(2):
+            response = self.client.get(entry.get_absolute_url())
+        self.assertEqual(response.status_code, 404)
+        entry.status = PUBLISHED
+
+        entry.start_publication = datetime(2020, 1, 1, 12, 0)
+        entry.save()
+        with self.assertNumQueries(2):
+            response = self.client.get(entry.get_absolute_url())
+        self.assertEqual(response.status_code, 404)
+        entry.start_publication = None
+
+        entry.save()
+        with self.assertNumQueries(1):
+            response = self.client.get(entry.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+
     @override_settings(USE_TZ=False)
     def test_zinnia_entry_detail_no_timezone(self):
         entry = self.create_published_entry()
-        entry.sites.clear()
-        response = self.client.get(entry.get_absolute_url())
-        self.assertEqual(response.status_code, 404)
         entry.detail_template = 'entry_custom.html'
         entry.save()
         entry.sites.add(Site.objects.get_current())
@@ -425,7 +453,7 @@ class ViewsTestCase(ViewsBaseCase):
         with self.assertNumQueries(3):
             response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.client.login(username='admin', password='password')
+        self.client.login(username=self.author.username, password='password')
         with self.assertNumQueries(6):
             response = self.client.get(url)
         self.assertEqual(response.status_code, 200)

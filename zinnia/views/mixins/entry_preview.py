@@ -2,8 +2,6 @@
 from django.http import Http404
 from django.utils.translation import ugettext as _
 
-from zinnia.managers import PUBLISHED
-
 
 class EntryPreviewMixin(object):
     """
@@ -18,7 +16,7 @@ class EntryPreviewMixin(object):
         it's an author of the entry.
         """
         obj = super(EntryPreviewMixin, self).get_object(queryset)
-        if obj.status == PUBLISHED:
+        if obj.is_visible:
             return obj
         if (self.request.user.has_perm('zinnia.can_view_all') or
                 self.request.user.pk in [
