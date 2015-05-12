@@ -18,12 +18,12 @@ your skin.
 	* Additional data is displayed in a block named ``sidebar``.
 
 You can also create your own app containing some Zinnia’s templates based
-on inheritance. For example you can find these applications which aim
-to turn Zinnia's templates HTML5 ready, which can be a good starting point
-to make your own at:
+on inheritance. For example you can find these applications which can be a
+good starting point to make your own at:
 
-* `Zinnia-theme-html5`_.
 * `Zinnia-theme-bootstrap`_.
+* `Zinnia-theme-foundation`_.
+* `Zinnia-theme-html5`_.
 * `Django Blog Quintet`_.
 
 .. warning::
@@ -308,7 +308,8 @@ good starting point of a packaged theme.
 
 .. _`specifying a template directory`: https://docs.djangoproject.com/en/dev/ref/templates/api/#loading-templates
 .. _`customize the look and feel`: https://docs.djangoproject.com/en/dev/intro/tutorial02/#customize-the-admin-look-and-feel
-.. _`Zinnia-theme-html5`: https://github.com/django-blog-zinnia/zinnia-theme-html5
 .. _`Zinnia-theme-bootstrap`: https://github.com/django-blog-zinnia/zinnia-theme-bootstrap
+.. _`Zinnia-theme-foundation`: https://github.com/django-blog-zinnia/zinnia-theme-foundation
+.. _`Zinnia-theme-html5`: https://github.com/django-blog-zinnia/zinnia-theme-html5
 .. _`Django Blog Quintet`: https://github.com/franckbret/django-blog-quintet
 .. _`Solarized`: http://ethanschoonover.com/solarized
