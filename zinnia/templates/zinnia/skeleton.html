@@ -1,12 +1,10 @@
 {% load i18n staticfiles %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
   <head>
+    <meta charset="utf-8">
     <title>{% block title %}{% endblock title %}{% block title-page %}{% endblock title-page %} - Zinnia's Weblog</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="cache-control" content="public" />
     <meta name="robots" content="follow, all" />
-    <meta name="language" content="{{ LANGUAGE_CODE }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="{% block meta-description %}{% trans "Just another Zinnia weblog." %}{% endblock meta-description %}{% block meta-description-page %}{% endblock meta-description-page %}" />
     <meta name="keywords" content="{% block meta-keywords %}django, blog, weblog, zinnia{% endblock meta-keywords %}" />
@@ -25,19 +23,21 @@
   </head>
   <body class="zinnia {% block theme-class %}default{% endblock theme-class %} {% block color-class %}blue{% endblock color-class %} {% block sidebar-class %}right-sidebar{% endblock sidebar-class %} {% block body-class %}{% endblock body-class %}">
     <div class="container">
-      <div id="header">
-        <ul class="top-navigation">
-          <li>
-            <a href="{% url 'zinnia:sitemap' %}" title="{% trans "Sitemap" %}" class="sitemap">
-              {% trans "Sitemap" %}
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'zinnia:entry_latest_feed' %}" title="{% trans "RSS feed of latest entries" %}" class="feeds">
-              {% trans "RSS feed" %}
-            </a>
-          </li>
-        </ul>
+      <header id="header" role="banner">
+        <nav>
+          <ul class="top-navigation">
+            <li>
+              <a href="{% url 'zinnia:sitemap' %}" title="{% trans "Sitemap" %}" class="sitemap" rel="sitemap">
+                {% trans "Sitemap" %}
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'zinnia:entry_latest_feed' %}" title="{% trans "RSS feed of latest entries" %}" class="feeds">
+                {% trans "RSS feed" %}
+              </a>
+            </li>
+          </ul>
+        </nav>
         <form method="get" action="{% url 'zinnia:entry_search' %}">
           <p>
             <input type="text" name="pattern" placeholder="{% trans "Keywords..." %}" {% if pattern %}value="{{ pattern }}"{% endif %} />
@@ -53,9 +53,9 @@
           <p>{% trans "Just another Zinnia weblog." %}</p>
         </blockquote>
         {% block breadcrumbs %}{% endblock breadcrumbs %}
-      </div>
+      </header>
       {% block slider %}{% endblock slider %}
-      <div id="content" class="hfeed">
+      <div id="content" class="hfeed" role="main">
         {% block content %}
         <div class="links">
           <h2>{% trans "Useful links" %}</h2>
@@ -78,13 +78,13 @@
         </div>
         {% endblock content %}
       </div>
-      <div id="sidebar">
+      <div id="sidebar" role="complementary">
         {% block sidebar %}
         {% endblock sidebar %}
       </div>
-      <div id="footer">
+      <footer id="footer" role="contentinfo">
         <p>{% blocktrans %}Powered by <a href="http://www.djangoproject.com">Django</a> and <a href="https://github.com/Fantomas42/django-blog-zinnia">Zinnia {{ ZINNIA_VERSION }}</a>.{% endblocktrans %}</p>
-      </div>
+      </footer>
     </div>
   </body>
 </html>

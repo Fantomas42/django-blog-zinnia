@@ -72,6 +72,9 @@ HTML5 ready.
 
 URL: https://github.com/django-blog-zinnia/zinnia-theme-html5
 
+.. versionchanged:: 0.15.2
+   This extension is no longer needed, because Zinnia is now HTML5 ready.
+
 zinnia-theme-bootstrap
 ======================
 
