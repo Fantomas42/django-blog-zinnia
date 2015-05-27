@@ -347,7 +347,7 @@ msgstr "слуг"
 
 #: models/category.py:25
 msgid "Used to build the category's URL."
-msgstr "Успользуется для создания урла категории."
+msgstr "Используется для создания урла категории."
 
 #: models/category.py:28
 msgid "description"
@@ -375,7 +375,7 @@ msgstr "опубликована"
 
 #: models_bases/entry.py:55 models_bases/entry.py:80
 msgid "Used to build the entry's URL."
-msgstr "Успользуется для создания урла записи."
+msgstr "Используется для создания урла записи."
 
 #: models_bases/entry.py:58
 msgid "status"
