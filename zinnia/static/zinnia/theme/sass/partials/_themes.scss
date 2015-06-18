@@ -20,7 +20,7 @@
     }
     .entry-info { color: $rebase1; }
     .entry-content { color: $rebase2; }
-    .entry-image p { color: $rebase1; }
+    .entry-image figcaption { color: $rebase1; }
     .entry-content img { border: 1px solid $rebase01; }
     .entry-footer strong { color: $rebase1; }
     .entry-widgets, #comments, #pingbacks, #trackbacks, #footer {
