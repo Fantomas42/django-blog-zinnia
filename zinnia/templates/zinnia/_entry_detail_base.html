@@ -61,12 +61,14 @@
       {% if continue_reading %}
       <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
         {% endif %}
-        <img src="{{ object.image.url }}" alt="{{ object.image_caption|default:object.title }}" />
+        <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+          <img src="{{ object.image.url }}" alt="{{ object.image_caption|default:object.title }}" itemprop="contentUrl" />
+          {% if object.image_caption %}
+          <figcaption itemprop="caption">{{ object.image_caption }}</figcaption>
+          {% endif %}
+        </figure>
         {% if continue_reading %}
       </a>
-      {% endif %}
-      {% if object.image_caption %}
-      {{ object.image_caption|linebreaks }}
       {% endif %}
     </div>
     {% endif %}
