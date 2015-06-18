@@ -27,7 +27,7 @@
       {% endwith %}
       {% endblock entry-authors %}
       {% block entry-published %}
-      <time class="published" datetime="{{ object.creation_date|date:"c" }}" itemprop="datePublished">{{ object.creation_date|date:"DATE_FORMAT" }}</time>
+      <time class="published" datetime="{{ object.publication_date|date:"c" }}" itemprop="datePublished">{{ object.publication_date|date:"DATE_FORMAT" }}</time>
       {% endblock entry-published %}
       {% block entry-categories %}
       {% with categories=object.categories.all %}
@@ -46,6 +46,9 @@
       {% trans "Last update on" %} <time class="updated" datetime="{{ object.last_update|date:"c" }}" itemprop="dateModified">{{ object.last_update|date:"DATE_FORMAT" }}</time>.
     </p>
     {% endblock entry-last-update %}
+    {% block entry-creation-date %}
+    <meta itemprop="dateCreated" content="{{ object.creation_date|date:"c" }}" />
+    {% endblock entry-creation-date %}
   </header>
   {% endblock entry-header %}
 

@@ -7,7 +7,7 @@
       {{ entry.title }}
     </a>
     {% trans "on" context "on date" %}
-    <abbr>{{ entry.creation_date|date:"DATE_FORMAT" }}</abbr>
+    <abbr>{{ entry.publication_date|date:"DATE_FORMAT" }}</abbr>
     {{ entry.html_content|truncatewords_html:20|safe }}
   </th>
   <td>
