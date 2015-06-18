@@ -156,9 +156,11 @@ class EntryTestCase(TestCase):
         entry.AUTO_CLOSE_TRACKBACKS_AFTER = original_auto_close
 
     def test_publication_date(self):
-        self.assertEqual(self.entry.publication_date, self.creation_date)
+        self.assertEqual(self.entry.publication_date,
+                         self.entry.creation_date)
         self.entry.start_publication = datetime(2020, 3, 15)
-        self.assertEqual(self.entry.publication_date, self.start_publication)
+        self.assertEqual(self.entry.publication_date,
+                         self.entry.start_publication)
 
     def test_is_actual(self):
         self.assertTrue(self.entry.is_actual)
