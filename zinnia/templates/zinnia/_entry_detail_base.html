@@ -1,10 +1,10 @@
 {% load i18n zinnia %}
-<article id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}">
+<article id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}" itemscope itemtype="http://schema.org/Article">
   {% block entry-header %}
   <header class="entry-header">
     {% block entry-title %}
-    <h2 class="entry-title">
-      <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+    <h2 class="entry-title" itemprop="name">
+      <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark" itemprop="url">
         {{ object.title|widont }}
       </a>
     </h2>
@@ -16,9 +16,9 @@
       {% if authors|length %}
       {% trans "Written by" %}
       {% for author in authors %}
-      <span class="vcard author">
+      <span class="vcard author" itemprop="author" itemscope itemtype="http://schema.org/Person">
         <a href="{{ author.get_absolute_url }}" class="fn url{% if not author.get_full_name %} nickname{% endif %}" rel="author"
-           title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}">{{ author }}</a></span>{% if not forloop.last %}, {% endif %}
+           title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}" itemprop="url">{{ author }}</a></span>{% if not forloop.last %}, {% endif %}
       {% endfor %}
       {% trans "on" context "on date" %}
       {% else %}
@@ -27,7 +27,7 @@
       {% endwith %}
       {% endblock entry-authors %}
       {% block entry-published %}
-      <time class="published" datetime="{{ object.creation_date|date:"c" }}">{{ object.creation_date|date:"DATE_FORMAT" }}</time>
+      <time class="published" datetime="{{ object.publication_date|date:"c" }}" itemprop="datePublished">{{ object.publication_date|date:"DATE_FORMAT" }}</time>
       {% endblock entry-published %}
       {% block entry-categories %}
       {% with categories=object.categories.all %}
@@ -36,33 +36,42 @@
       {% for category in categories %}
       <a href="{{ category.get_absolute_url }}"
          title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
-         rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.
+         rel="tag category" itemprop="articleSection">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.
       {% endwith %}
       {% endblock entry-categories %}
     </p>
     {% endblock entry-info %}
     {% block entry-last-update %}
     <p class="entry-last-update">
-      {% trans "Last update on" %} <time class="updated" datetime="{{ object.last_update|date:"c" }}">{{ object.last_update|date:"DATE_FORMAT" }}</time>.
+      {% trans "Last update on" %} <time class="updated" datetime="{{ object.last_update|date:"c" }}" itemprop="dateModified">{{ object.last_update|date:"DATE_FORMAT" }}</time>.
     </p>
     {% endblock entry-last-update %}
+    {% block entry-creation-date %}
+    <meta itemprop="dateCreated" content="{{ object.creation_date|date:"c" }}" />
+    {% endblock entry-creation-date %}
   </header>
   {% endblock entry-header %}
 
   {% block entry-body %}
   <div class="entry-body">
+    {% block entry-word-count %}
+    <meta itemprop="wordCount" content="{{ object.word_count }}" />
+    {% endblock entry-word-count %}
+
     {% block entry-image %}
     {% if object.image %}
     <div class="entry-image">
       {% if continue_reading %}
       <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
         {% endif %}
-        <img src="{{ object.image.url }}" alt="{{ object.image_caption|default:object.title }}" />
+        <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+          <img src="{{ object.image.url }}" alt="{{ object.image_caption|default:object.title }}" itemprop="contentUrl" />
+          {% if object.image_caption %}
+          <figcaption itemprop="caption">{{ object.image_caption }}</figcaption>
+          {% endif %}
+        </figure>
         {% if continue_reading %}
       </a>
-      {% endif %}
-      {% if object.image_caption %}
-      {{ object.image_caption|linebreaks }}
       {% endif %}
     </div>
     {% endif %}
@@ -70,14 +79,14 @@
 
     {% block entry-lead %}
     {% if not continue_reading and object.lead %}
-    <div class="entry-summary">
+    <div class="entry-summary" itemprop="headline">
       {{ object.html_lead|safe }}
     </div>
     {% endif %}
     {% endblock entry-lead %}
 
     {% block entry-content %}
-    <div class="entry-content">
+    <div class="entry-content" itemprop="articleBody">
       {{ object_content|safe }}
     </div>
     {% endblock entry-content %}
@@ -87,7 +96,7 @@
     <p class="continue-reading">
       <a href="{{ object.get_absolute_url }}"
          title="{% blocktrans with object=object.title percent=object_content.remaining_percent|floatformat:0 %}{{ percent }}% of {{ object }} still remains to read.{% endblocktrans %}"
-         rel="bookmark">
+         rel="bookmark" itemprop="url">
         {% trans "Continue reading" %}
       </a>
     </p>
@@ -101,10 +110,11 @@
     {% block entry-tags %}
     <p class="entry-tags">
       <strong>{% trans "Tags" %}</strong> :
+      <meta itemprop="keywords" content="{{ object.tags }}" />
       {% for tag in object.tags_list %}
       <a href="{% url 'zinnia:tag_detail' tag %}"
          title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
-         rel="tag">{{ tag }}</a>
+         rel="tag" itemprop="articleSection">{{ tag }}</a>
       {% empty %}
       <span>{% trans "No tags" %}</span>
       {% endfor %}
@@ -125,6 +135,8 @@
       <strong>{% trans "Discussions" %}</strong> :
       {% block entry-comments %}
       {% with comment_count=object.comment_count %}
+      <meta itemprop="commentCount" content="{{ object.comment_count }}" />
+      <meta itemprop="discussionUrl" content="{{ object.get_absolute_url }}#comments" />
       {% if comment_count %}
       <a href="{{ object.get_absolute_url }}#comments"
          title="{% blocktrans with object=object.title %}Comments on {{ object }}{% endblocktrans %}">

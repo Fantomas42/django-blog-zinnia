@@ -32,6 +32,7 @@ input, textarea, select {
 
 #contents th {
   width: 50%; }
+
 #contents td {
   padding-left: 10px; }
   #contents td a {
@@ -40,11 +41,13 @@ input, textarea, select {
 #quickpost th {
   width: 20%;
   vertical-align: middle; }
+
 #quickpost td {
   width: 100%; }
 
 #comments th {
   width: 10%; }
+
 #comments td {
   width: 100%;
   white-space: normal; }

@@ -87,6 +87,13 @@ class CoreEntry(models.Model):
     published = EntryPublishedManager()
 
     @property
+    def publication_date(self):
+        """
+        Return the publication date of the entry.
+        """
+        return self.start_publication or self.creation_date
+
+    @property
     def is_actual(self):
         """
         Checks if an entry is within his publication period.

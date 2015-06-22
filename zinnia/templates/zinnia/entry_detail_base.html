@@ -30,7 +30,7 @@
   {% endwith %}
 {% endblock link %}
 
-{% block body-class %}entry entry-{{ object.pk }}{% if object.featured %} featured{% endif %} year-{{ object.creation_date|date:"Y" }} month-{{ object.creation_date|date:"m" }} week-{{ object.creation_date|date:"W" }} day-{{ object.creation_date|date:"d" }}{% endblock body-class %}
+{% block body-class %}entry entry-{{ object.pk }}{% if object.featured %} featured{% endif %} year-{{ object.publication_date|date:"Y" }} month-{{ object.publication_date|date:"m" }} week-{{ object.publication_date|date:"W" }} day-{{ object.publication_date|date:"d" }}{% endblock body-class %}
 
 {% block content %}
 
@@ -107,9 +107,9 @@
 	<a href="{{ pingback.url }}" rel="external nofollow"
            class="fn url org">{{ pingback.name }}</a>
 	{% trans "on" context "on date" %}
-        <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}">
+        <time class="pingback-published" datetime="{{ pingback.submit_date|date:"c" }}">
           {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
+        </time>
         <a href="#pingback-{{ pingback.pk }}"
            id="c{{ pingback.pk }}" class="anchor-link"
            title="{% trans "Direct link to this pingback" %}">#</a>
@@ -151,9 +151,9 @@
 	<a href="{{ trackback.url }}" rel="external nofollow"
            class="fn url org">{{ trackback.name }}</a>
 	{% trans "on" context "on date" %}
-        <abbr class="trackback-published" title="{{ trackback.submit_date|date:"c" }}">
+        <time class="trackback-published" datetime="{{ trackback.submit_date|date:"c" }}">
           {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
+        </time>
         <a href="#trackback-{{ trackback.pk }}"
            id="c{{ trackback.pk }}" class="anchor-link"
            title="{% trans "Direct link to this trackback" %}">#</a>
@@ -205,9 +205,9 @@
 	<span class="fn">{{ comment.name }}</span>
 	{% endif %}
 	{% trans "on" context "on date" %}
-        <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
+        <time class="comment-published" datetime="{{ comment.submit_date|date:"c" }}">
           {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
+        </time>
         <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
            id="c{{ comment.pk }}" class="anchor-link"
            title="{% trans "Direct link to this comment" %}">#</a>
