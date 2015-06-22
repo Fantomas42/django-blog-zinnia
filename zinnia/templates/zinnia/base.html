@@ -13,8 +13,8 @@
     <link rel="EditURI" type="application/rsd+xml" href="{% url 'zinnia:rsd' %}" />
     <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url 'zinnia:wlwmanifest' %}" />
     <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Weblog" href="{% url 'zinnia:opensearch' %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url 'zinnia:entry_latest_feed' %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest discussions" %}" href="{% url 'zinnia:discussion_latest_feed' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS feed of latest entries" %}" href="{% url 'zinnia:entry_latest_feed' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS feed of latest discussions" %}" href="{% url 'zinnia:discussion_latest_feed' %}" />
     {% get_archives_entries "zinnia/tags/entries_archives_link.html" %}
 {% endblock link %}
 
@@ -23,7 +23,7 @@
 {% endblock breadcrumbs %}
 
 {% block sidebar %}
-<div id="widget-welcome" class="widget">
+<aside id="widget-welcome" class="widget">
   <h3>{% trans "Welcome!" %}</h3>
   <p>
     {% trans "This simple theme is the default appearance of Zinnia." %}
@@ -31,55 +31,55 @@
   <p>
     {% trans "Don't hesitate to override the template <strong>zinnia/base.html</strong> to start <a href='http://docs.django-blog-zinnia.com/en/latest/how-to/customize_look_and_feel.html'>customizing your Weblog</a>." %}
   </p>
-</div>
-<div id="widget-categories" class="widget">
+</aside>
+<aside id="widget-categories" class="widget">
   <h3>
     <a href="{% url 'zinnia:category_list' %}">{% trans "Categories" %}</a>
   </h3>
   {% get_categories %}
-</div>
-<div id="widget-authors" class="widget">
+</aside>
+<aside id="widget-authors" class="widget">
   <h3>
     <a href="{% url 'zinnia:author_list' %}">{% trans "Authors" %}</a>
   </h3>
   {% get_authors %}
-</div>
-<div id="widget-calendar" class="widget">
+</aside>
+<aside id="widget-calendar" class="widget">
   <h3>{% trans "Calendar" %}</h3>
   {% get_calendar_entries %}
-</div>
-<div id="widget-tags" class="widget">
+</aside>
+<aside id="widget-tags" class="widget">
   <h3>
     <a href="{% url 'zinnia:tag_list' %}">{% trans "Tags" %}</a>
   </h3>
   {% get_tag_cloud %}
-</div>
-<div id="widget-recents" class="widget">
+</aside>
+<aside id="widget-recents" class="widget">
   <h3>{% trans "Recent entries" %}</h3>
   {% get_recent_entries %}
-</div>
-<div id="widget-comments" class="widget">
+</aside>
+<aside id="widget-comments" class="widget">
   <h3>{% trans "Recent comments" %}</h3>
   {% get_recent_comments %}
-</div>
-<div id="widget-linkbacks" class="widget">
+</aside>
+<aside id="widget-linkbacks" class="widget">
   <h3>{% trans "Recent linkbacks" %}</h3>
   {% get_recent_linkbacks %}
-</div>
-<div id="widget-randoms" class="widget">
+</aside>
+<aside id="widget-randoms" class="widget">
   <h3>{% trans "Random entries" %}</h3>
   {% get_random_entries %}
-</div>
-<div id="widget-populars" class="widget">
+</aside>
+<aside id="widget-populars" class="widget">
   <h3>{% trans "Popular entries" %}</h3>
   {% get_popular_entries %}
-</div>
-<div id="widget-archives" class="widget">
+</aside>
+<aside id="widget-archives" class="widget">
   <h3>{% trans "Archives" %}</h3>
   {% get_archives_entries_tree %}
-</div>
+</aside>
 {% if user.is_authenticated %}
-<div id="widget-tools" class="widget">
+<aside id="widget-tools" class="widget">
   <h3>{% trans "Tools" %}</h3>
   <ul>
     {% if perms.zinnia %}
@@ -104,6 +104,6 @@
       </a>
     </li>
   </ul>
-</div>
+</aside>
 {% endif %}
 {% endblock sidebar %}

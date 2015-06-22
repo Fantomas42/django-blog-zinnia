@@ -1,16 +1,13 @@
 """Forms for Zinnia admin"""
 from django import forms
-from django.db.models import ManyToOneRel
-from django.db.models import ManyToManyRel
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-
-from tagging.forms import TagField
 
 from mptt.forms import TreeNodeChoiceField
 
 from zinnia.models.entry import Entry
 from zinnia.models.category import Category
+from zinnia.admin.widgets import MiniTextarea
 from zinnia.admin.widgets import TagAutoComplete
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.fields import MPTTModelMultipleChoiceField
@@ -22,16 +19,16 @@ class CategoryAdminForm(forms.ModelForm):
     """
     parent = TreeNodeChoiceField(
         label=_('Parent category'),
-        level_indicator='|--', required=False,
         empty_label=_('No parent category'),
+        level_indicator='|--', required=False,
         queryset=Category.objects.all())
 
     def __init__(self, *args, **kwargs):
         super(CategoryAdminForm, self).__init__(*args, **kwargs)
-        rel = ManyToOneRel(Category._meta.get_field('tree_id'),
-                           Category, 'id')
         self.fields['parent'].widget = RelatedFieldWidgetWrapper(
-            self.fields['parent'].widget, rel, self.admin_site)
+            self.fields['parent'].widget,
+            Category.parent.field.rel,
+            self.admin_site)
 
     def clean_parent(self):
         """
@@ -59,18 +56,14 @@ class EntryAdminForm(forms.ModelForm):
     categories = MPTTModelMultipleChoiceField(
         label=_('Categories'), required=False,
         queryset=Category.objects.all(),
-        widget=MPTTFilteredSelectMultiple(_('categories'), False,
-                                          attrs={'rows': '10'}))
-
-    tags = TagField(
-        label=_('Tags'), required=False,
-        widget=TagAutoComplete())
+        widget=MPTTFilteredSelectMultiple(_('categories')))
 
     def __init__(self, *args, **kwargs):
         super(EntryAdminForm, self).__init__(*args, **kwargs)
-        rel = ManyToManyRel(Category, 'id')
         self.fields['categories'].widget = RelatedFieldWidgetWrapper(
-            self.fields['categories'].widget, rel, self.admin_site)
+            self.fields['categories'].widget,
+            Entry.categories.field.rel,
+            self.admin_site)
 
     class Meta:
         """
@@ -78,3 +71,9 @@ class EntryAdminForm(forms.ModelForm):
         """
         model = Entry
         fields = forms.ALL_FIELDS
+        widgets = {
+            'tags': TagAutoComplete,
+            'lead': MiniTextarea,
+            'excerpt': MiniTextarea,
+            'image_caption': MiniTextarea,
+        }

@@ -155,6 +155,13 @@ class EntryTestCase(TestCase):
         self.assertEqual(self.entry.trackbacks_are_open, False)
         entry.AUTO_CLOSE_TRACKBACKS_AFTER = original_auto_close
 
+    def test_publication_date(self):
+        self.assertEqual(self.entry.publication_date,
+                         self.entry.creation_date)
+        self.entry.start_publication = datetime(2020, 3, 15)
+        self.assertEqual(self.entry.publication_date,
+                         self.entry.start_publication)
+
     def test_is_actual(self):
         self.assertTrue(self.entry.is_actual)
         self.entry.start_publication = datetime(2020, 3, 15)
@@ -324,6 +331,9 @@ class EntryTestCase(TestCase):
             def image_upload_to(self, filename):
                 return 'custom.png'
 
+            class Meta:
+                proxy = True
+
         custom_entry = EntryCustomImageUploadTo()
         self.assertEqual(
             entry.image_upload_to_dispatcher(custom_entry, 'image.gif'),
@@ -335,6 +345,34 @@ class EntryTestCase(TestCase):
         self.assertEqual(path_split[-1], 'desktop-wallpaper.jpeg')
         for i in range(1, 4):
             self.assertTrue(path_split[-1 - i].isdigit())
+
+    def test_save_last_update(self):
+        last_update = self.entry.last_update
+        self.entry.save()
+        self.assertNotEqual(
+            last_update,
+            self.entry.last_update)
+
+    def test_save_excerpt(self):
+        self.assertEquals(self.entry.excerpt, '')
+        self.entry.status = PUBLISHED
+        self.entry.save()
+        self.assertEquals(self.entry.excerpt, 'My content')
+        self.entry.content = 'My changed content'
+        self.entry.save()
+        self.assertEquals(self.entry.excerpt, 'My content')
+        self.entry.excerpt = ''
+        content = '<p>%s</p>' % ' '.join(['word-%s' % i for i in range(75)])
+        self.entry.content = content
+        self.entry.save()
+        self.assertTrue(' '.join(['word-%s' % i for i in range(50)])
+                        in self.entry.excerpt)
+
+    def test_html_lead(self):
+        self.assertEquals(self.entry.html_lead, '')
+        self.entry.lead = 'Lead paragraph'
+        self.assertEquals(self.entry.html_lead,
+                          '<p>Lead paragraph</p>')
 
 
 class EntryHtmlContentTestCase(TestCase):
@@ -357,6 +395,8 @@ class EntryHtmlContentTestCase(TestCase):
                              ' this is my content'
         self.assertEqual(self.entry.html_content,
                          '<p>Hello world !<br /> this is my content</p>')
+        self.entry.content = ''
+        self.assertEqual(self.entry.html_content, '')
 
     @skipUnless(is_lib_available('textile'), 'Textile is not available')
     def test_html_content_textitle(self):
@@ -384,6 +424,16 @@ class EntryHtmlContentTestCase(TestCase):
                          '\n<ul>\n<li>Item 1</li>\n'
                          '<li>Item 2</li>\n</ul>')
 
+    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    def test_markdown_with_inline_html(self):
+        entry.MARKUP_LANGUAGE = 'markdown'
+        self.entry.content = ('Hello *World* !\n\n'
+                              '<p>This is an inline HTML paragraph</p>')
+        html_content = self.entry.html_content
+        self.assertEqual(html_content,
+                         '<p>Hello <em>World</em> !</p>\n'
+                         '<p>This is an inline HTML paragraph</p>')
+
     @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
     def test_html_content_restructuredtext(self):
         entry.MARKUP_LANGUAGE = 'restructuredtext'
@@ -402,6 +452,10 @@ class EntryHtmlContentTestCase(TestCase):
         preview = self.entry.html_preview
         self.assertEqual(str(preview), '<p>My content</p>')
         self.assertEqual(preview.has_more, False)
+        self.entry.lead = 'Lead paragraph'
+        preview = self.entry.html_preview
+        self.assertEqual(str(preview), '<p>Lead paragraph</p>')
+        self.assertEqual(preview.has_more, True)
 
 
 class EntryAbsoluteUrlTestCase(TestCase):

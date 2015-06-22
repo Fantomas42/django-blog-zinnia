@@ -11,6 +11,7 @@ from tempfile import TemporaryFile
 
 from django.test import TestCase
 from django.contrib.sites.models import Site
+from django.test.utils import override_settings
 from django.core.files.storage import default_storage
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
@@ -30,9 +31,11 @@ from zinnia.signals import disconnect_entry_signals
 
 
 @skipIfCustomUser
+@override_settings(
+    ROOT_URLCONF='zinnia.tests.implementations.urls.default'
+)
 class MetaWeblogTestCase(TestCase):
     """Test cases for MetaWeblog"""
-    urls = 'zinnia.tests.implementations.urls.default'
 
     def setUp(self):
         disconnect_entry_signals()
@@ -235,7 +238,7 @@ class MetaWeblogTestCase(TestCase):
                          'http://example.com/2010/01/01/my-entry-1/')
         self.assertEqual(post['postid'], self.entry_1.pk)
         self.assertEqual(post['userid'], 'webmaster')
-        self.assertEqual(post['mt_excerpt'], '')
+        self.assertEqual(post['mt_excerpt'], 'My content 1')
         self.assertEqual(post['mt_allow_comments'], 1)
         self.assertEqual(post['mt_allow_pings'], 1)
         self.assertEqual(post['mt_keywords'], self.entry_1.tags)
@@ -323,7 +326,7 @@ class MetaWeblogTestCase(TestCase):
         file_ = TemporaryFile()
         file_.write('My test content'.encode('utf-8'))
         file_.seek(0)
-        media = {'name': 'zinnia_test_file.txt',
+        media = {'name': 'test file.txt',
                  'type': 'text/plain',
                  'bits': Binary(file_.read())}
         file_.close()
@@ -332,6 +335,7 @@ class MetaWeblogTestCase(TestCase):
                           1, 'contributor', 'password', media)
         new_media = self.server.metaWeblog.newMediaObject(
             1, 'webmaster', 'password', media)
-        self.assertTrue('/zinnia_test_file' in new_media['url'])
+
+        self.assertTrue('/test-file' in new_media['url'])
         default_storage.delete('/'.join([
             UPLOAD_TO, new_media['url'].split('/')[-1]]))

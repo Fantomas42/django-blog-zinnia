@@ -124,11 +124,13 @@ class ExternalUrlsPingerTestCase(TestCase):
         if 'example' in url:
             response = StringIO('')
             return addinfourl(response, {'X-Pingback': '/xmlrpc.php',
-                                         'Content-Type': 'text/html'}, url)
+                                         'Content-Type':
+                                         'text/html; charset=utf-8'}, url)
         elif 'localhost' in url:
             response = StringIO(
                 '<link rel="pingback" href="/xmlrpc/">')
-            return addinfourl(response, {'Content-Type': 'text/xhtml'}, url)
+            return addinfourl(response, {'Content-Type':
+                                         'application/xhtml+xml'}, url)
         elif 'google' in url:
             response = StringIO('PNG CONTENT')
             return addinfourl(response, {'content-type': 'image/png'}, url)

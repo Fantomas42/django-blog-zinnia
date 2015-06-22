@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-04 16:34+0100\n"
-"PO-Revision-Date: 2014-10-14 13:32+0000\n"
+"POT-Creation-Date: 2015-02-13 11:37+0100\n"
+"PO-Revision-Date: 2015-02-13 10:37+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/projects/p/django-blog-zinnia/language/he/)\n"
 "MIME-Version: 1.0\n"
@@ -18,284 +18,157 @@ msgstr ""
 "Language: he\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: breadcrumbs.py:68 admin/forms.py:66
-#: templates/admin/zinnia/widgets/quickpost.html:25
-#: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:53
-#: templates/zinnia/tag_list.html:6
-msgid "Tags"
-msgstr "טאגים"
-
-#: breadcrumbs.py:71 templates/zinnia/author_list.html:6
-#: templates/zinnia/base.html:43
-msgid "Authors"
-msgstr "עורכים"
-
-#: breadcrumbs.py:75 admin/forms.py:60 templates/zinnia/base.html:37
-#: templates/zinnia/category_list.html:6
-msgid "Categories"
-msgstr "קטגוריות"
-
-#: breadcrumbs.py:100
-#, python-format
-msgid "Page %s"
-msgstr "עמוד %s"
-
-#: breadcrumbs.py:128
-#, python-format
-msgid "Week %s"
-msgstr "שבוע %s"
-
-#: feeds.py:175 templates/zinnia/entry_archive.html:4
-#: templates/zinnia/entry_archive.html:6
-msgid "Latest entries"
-msgstr "פוסטים אחרונים"
-
-#: feeds.py:181
-#, python-format
-msgid "The latest entries for the site %s"
-msgstr "הפוסטים האחרונים לאתר %s"
-
-#: feeds.py:211
-#, python-format
-msgid "Entries for the category %s"
-msgstr "פוסטים בקטגורית %s"
-
-#: feeds.py:217
-#, python-format
-msgid "The latest entries for the category %s"
-msgstr "הפוסטים האחרונים בקטגוריית %s"
-
-#: feeds.py:247
-#, python-format
-msgid "Entries for author %s"
-msgstr "פוסטים מאת %s"
-
-#: feeds.py:253
-#, python-format
-msgid "The latest entries by %s"
-msgstr "פוסטים אחרונים מאת %s"
-
-#: feeds.py:284
-#, python-format
-msgid "Entries for the tag %s"
-msgstr "פוסטים מתויגים על ידי %s"
-
-#: feeds.py:290
-#, python-format
-msgid "The latest entries for the tag %s"
-msgstr "פוסטים אחרונים שתויגו עם %s"
-
-#: feeds.py:323
-#, python-format
-msgid "Results of the search for '%s'"
-msgstr "תוצאות החיפוש עבור' %s'"
-
-#: feeds.py:329
-#, python-format
-msgid "The entries containing the pattern '%s'"
-msgstr "פוסטים שמכילים'%s'"
-
-#: feeds.py:394
-msgid "Latest discussions"
-msgstr "שיחות אחרונות"
-
-#: feeds.py:400
-#, python-format
-msgid "The latest discussions for the site %s"
-msgstr "השיחות האחרונות באתר %s"
-
-#: feeds.py:433
-#, python-format
-msgid "Discussions on %s"
-msgstr "שיחות על %s"
-
-#: feeds.py:439
-#, python-format
-msgid "The latest discussions for the entry %s"
-msgstr "השיחות האחרונות על הפוסט - %s"
-
-#: feeds.py:466
-#, python-format
-msgid "Comments on %s"
-msgstr "תגובות על %s"
-
-#: feeds.py:472
-#, python-format
-msgid "The latest comments for the entry %s"
-msgstr "התגובות האחרונות על הפוסט %s"
-
-#: feeds.py:516
-#, python-format
-msgid "Pingbacks on %s"
-msgstr "Pingbacks על %s"
-
-#: feeds.py:522
-#, python-format
-msgid "The latest pingbacks for the entry %s"
-msgstr "Pingbacks אחרונים לפוסט %s"
-
-#: feeds.py:548
-#, python-format
-msgid "Trackbacks on %s"
-msgstr "Trackbacks על %s"
-
-#: feeds.py:554
-#, python-format
-msgid "The latest trackbacks for the entry %s"
-msgstr "Tracbacks אחרונים לפוסט %s"
-
-#: moderator.py:66 moderator.py:88 moderator.py:111
-#, python-format
-msgid "[%(site)s] New comment posted on \"%(title)s\""
-msgstr "[%(site)s] תגובות חדשות פורסמו על \"%(title)s\""
-
 #: admin/category.py:34
 msgid "tree path"
 msgstr "נתיב"
 
-#: admin/entry.py:30 templates/admin/zinnia/widgets/quickpost.html:17
+#: admin/entry.py:28 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "תוכן"
 
-#: admin/entry.py:32
+#: admin/entry.py:30
+msgid "Illustration"
+msgstr ""
+
+#: admin/entry.py:33
 msgid "Publication"
 msgstr "פרסום"
 
-#: admin/entry.py:36 templates/admin/zinnia/widgets/_content_stats.html:4
-#: templates/zinnia/_entry_detail_base.html:114
+#: admin/entry.py:37 templates/admin/zinnia/widgets/_content_stats.html:4
+#: templates/zinnia/_entry_detail_base.html:125
 msgid "Discussions"
 msgstr "תגובות"
 
-#: admin/entry.py:40
+#: admin/entry.py:41
 msgid "Privacy"
 msgstr "פרטיות"
 
-#: admin/entry.py:43
+#: admin/entry.py:44
 msgid "Templates"
 msgstr ""
 
-#: admin/entry.py:46
+#: admin/entry.py:47
 msgid "Metadatas"
 msgstr ""
 
-#: admin/entry.py:78
+#: admin/entry.py:79
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i מילים)"
 
-#: admin/entry.py:85
+#: admin/entry.py:86
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:50
+#: admin/entry.py:91 models/category.py:21 models_bases/entry.py:51
 msgid "title"
 msgstr "כותרת"
 
-#: admin/entry.py:106
+#: admin/entry.py:107
 msgid "author(s)"
 msgstr "עורך/ים"
 
-#: admin/entry.py:121
+#: admin/entry.py:122
 msgid "category(s)"
 msgstr "קטגוריה/יות"
 
-#: admin/entry.py:134
+#: admin/entry.py:135
 msgid "tag(s)"
 msgstr "תיוג/ים"
 
-#: admin/entry.py:149
+#: admin/entry.py:150
 msgid "site(s)"
 msgstr "אתר/ים"
 
-#: admin/entry.py:162
+#: admin/entry.py:163
 msgid "short url"
 msgstr "URL מקוצר"
 
-#: admin/entry.py:170
+#: admin/entry.py:171
 msgid "is visible"
 msgstr "האם גלוי"
 
-#: admin/entry.py:254
+#: admin/entry.py:249
 msgid "The selected entries now belong to you."
 msgstr "הפוסטים נבחרו שייכים מעכשיו לך"
 
-#: admin/entry.py:255
+#: admin/entry.py:250
 msgid "Set the entries to the user"
 msgstr "שייך פוסטים למשתמש"
 
-#: admin/entry.py:264
+#: admin/entry.py:259
 msgid "The selected entries are now marked as published."
 msgstr "הפוסטים שנבחרו מסומנים כעת כ-published"
 
-#: admin/entry.py:265
+#: admin/entry.py:260
 msgid "Set entries selected as published"
 msgstr "סמן את הפוסטים שנבחרו כ-published"
 
-#: admin/entry.py:273
+#: admin/entry.py:268
 msgid "The selected entries are now marked as hidden."
 msgstr "הפוסטים שנבחרו מסומנים כעת כ-hidden"
 
-#: admin/entry.py:274
+#: admin/entry.py:269
 msgid "Set entries selected as hidden"
 msgstr "סמן את הפוסטים שנבחרו כ-hidden"
 
-#: admin/entry.py:282
+#: admin/entry.py:277
 msgid "Comments are now closed for selected entries."
 msgstr "התגובות סגורות כעת עבור הפוסטים שנבחרו"
 
-#: admin/entry.py:283
+#: admin/entry.py:278
 msgid "Close the comments for selected entries"
 msgstr "סגור את התגובות לפוסטים שנבחרו"
 
-#: admin/entry.py:292
+#: admin/entry.py:287
 msgid "Pingbacks are now closed for selected entries."
 msgstr ""
 
-#: admin/entry.py:294
+#: admin/entry.py:289
 msgid "Close the pingbacks for selected entries"
 msgstr ""
 
-#: admin/entry.py:302
+#: admin/entry.py:297
 msgid "Trackbacks are now closed for selected entries."
 msgstr ""
 
-#: admin/entry.py:304
+#: admin/entry.py:299
 msgid "Close the trackbacks for selected entries"
 msgstr ""
 
-#: admin/entry.py:313
+#: admin/entry.py:308
 msgid "The selected entries are now set at the current date."
 msgstr "הפוסטים שנבחרו משויכים כעת לתאריך הנוכחי"
 
-#: admin/entry.py:315
+#: admin/entry.py:310
 msgid "Put the selected entries on top at the current date"
 msgstr "שים את הפוסטים שנבחרו הכי גבוה בתאריך הנוכחי"
 
-#: admin/entry.py:323
+#: admin/entry.py:318
 msgid "Selected entries are now marked as featured."
 msgstr "הפוסטים שנבחרו מסומנים כעת כ-featured"
 
-#: admin/entry.py:324
+#: admin/entry.py:319
 msgid "Mark selected entries as featured"
 msgstr "סמן את הפוסטים שנבחרו כ-featured"
 
-#: admin/entry.py:332
+#: admin/entry.py:327
 msgid "Selected entries are no longer marked as featured."
 msgstr "הערכים שנבחרו כבר לא מסומנים כ-featured"
 
-#: admin/entry.py:334
+#: admin/entry.py:329
 msgid "Unmark selected entries as featured"
 msgstr "הורד סימון featured מהערכים שנבחרו "
 
-#: admin/entry.py:355
+#: admin/entry.py:350
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr ""
 
-#: admin/entry.py:359
+#: admin/entry.py:354
 msgid "Ping Directories for selected entries"
 msgstr ""
 
@@ -314,23 +187,154 @@ msgstr "עורכים שפירסמו"
 msgid "published categories"
 msgstr "קטגוריות שפורסמו"
 
-#: admin/forms.py:25
+#: admin/forms.py:23
 msgid "Parent category"
 msgstr "קטגוריית אם"
 
-#: admin/forms.py:27
+#: admin/forms.py:25
 msgid "No parent category"
 msgstr "אין קטגוריית אם"
 
-#: admin/forms.py:44
+#: admin/forms.py:42
 msgid "A category cannot be parent of itself."
 msgstr "קטגוריה אינה יכולה להיות קטגוריית אם של עצמה. "
 
-#: admin/forms.py:62 models/category.py:75 models_bases/entry.py:434
+#: admin/forms.py:59 breadcrumbs.py:72 templates/zinnia/base.html:37
+#: templates/zinnia/category_list.html:6
+msgid "Categories"
+msgstr "קטגוריות"
+
+#: admin/forms.py:61 models/category.py:74 models_bases/entry.py:484
 msgid "categories"
 msgstr "קטגוריות"
 
-#: models/category.py:24 models_bases/entry.py:53
+#: apps.py:12
+msgid "Weblog"
+msgstr ""
+
+#: breadcrumbs.py:65 templates/admin/zinnia/widgets/quickpost.html:25
+#: templates/zinnia/_entry_detail_base.html:103 templates/zinnia/base.html:53
+#: templates/zinnia/tag_list.html:6
+msgid "Tags"
+msgstr "טאגים"
+
+#: breadcrumbs.py:68 templates/zinnia/author_list.html:6
+#: templates/zinnia/base.html:43
+msgid "Authors"
+msgstr "עורכים"
+
+#: breadcrumbs.py:97
+#, python-format
+msgid "Page %s"
+msgstr "עמוד %s"
+
+#: breadcrumbs.py:126
+#, python-format
+msgid "Week %s"
+msgstr "שבוע %s"
+
+#: feeds.py:175 templates/zinnia/entry_archive.html:4
+#: templates/zinnia/entry_archive.html:6
+msgid "Latest entries"
+msgstr "פוסטים אחרונים"
+
+#: feeds.py:181
+#, python-format
+msgid "The latest entries on the site %(object)s"
+msgstr ""
+
+#: feeds.py:212
+#, python-format
+msgid "Entries for the category %(object)s"
+msgstr ""
+
+#: feeds.py:219 templates/zinnia/entry_list.html:9
+#, python-format
+msgid "The latest entries categorized under %(object)s"
+msgstr ""
+
+#: feeds.py:250
+#, python-format
+msgid "Entries for the author %(object)s"
+msgstr ""
+
+#: feeds.py:257 templates/zinnia/entry_list.html:18
+#, python-format
+msgid "The latest entries by %(object)s"
+msgstr ""
+
+#: feeds.py:289
+#, python-format
+msgid "Entries for the tag %(object)s"
+msgstr ""
+
+#: feeds.py:295 templates/zinnia/entry_list.html:14
+#, python-format
+msgid "The latest entries tagged with %(object)s"
+msgstr ""
+
+#: feeds.py:329 templates/zinnia/entry_search.html:4
+#: templates/zinnia/entry_search.html:6 templates/zinnia/entry_search.html:18
+#, python-format
+msgid "Search results for '%(pattern)s'"
+msgstr ""
+
+#: feeds.py:335
+#, python-format
+msgid "The entries containing the pattern '%(pattern)s'"
+msgstr ""
+
+#: feeds.py:401
+msgid "Latest discussions"
+msgstr "שיחות אחרונות"
+
+#: feeds.py:407
+#, python-format
+msgid "The latest discussions on the site %(object)s"
+msgstr ""
+
+#: feeds.py:441
+#, python-format
+msgid "Discussions on %(object)s"
+msgstr ""
+
+#: feeds.py:447
+#, python-format
+msgid "The latest discussions on the entry %(object)s"
+msgstr ""
+
+#: feeds.py:475 templates/zinnia/_entry_detail_base.html:130
+#: templates/zinnia/tags/entries_popular.html:7
+#, python-format
+msgid "Comments on %(object)s"
+msgstr ""
+
+#: feeds.py:481
+#, python-format
+msgid "The latest comments on the entry %(object)s"
+msgstr ""
+
+#: feeds.py:526 templates/zinnia/_entry_detail_base.html:149
+#, python-format
+msgid "Pingbacks on %(object)s"
+msgstr ""
+
+#: feeds.py:532
+#, python-format
+msgid "The latest pingbacks on the entry %(object)s"
+msgstr ""
+
+#: feeds.py:559 templates/zinnia/_entry_detail_base.html:158
+#, python-format
+msgid "Trackbacks on %(object)s"
+msgstr ""
+
+#: feeds.py:565
+#, python-format
+msgid "The latest trackbacks on the entry %(object)s"
+msgstr ""
+
+#: models/category.py:24 models_bases/entry.py:54
 msgid "slug"
 msgstr "קיצור"
 
@@ -346,177 +350,198 @@ msgstr "תיאור"
 msgid "parent category"
 msgstr "קטגוריית אם"
 
-#: models/category.py:74
+#: models/category.py:73
 msgid "category"
 msgstr "קטגוריה"
 
-#: models_bases/entry.py:45
+#: models_bases/entry.py:46
 msgid "draft"
 msgstr "טיוטה"
 
-#: models_bases/entry.py:46
+#: models_bases/entry.py:47
 msgid "hidden"
 msgstr "חבוי"
 
-#: models_bases/entry.py:47
+#: models_bases/entry.py:48
 msgid "published"
 msgstr "מפורסם"
 
-#: models_bases/entry.py:55 models_bases/entry.py:80
+#: models_bases/entry.py:56 models_bases/entry.py:81
 msgid "Used to build the entry's URL."
 msgstr "בשימוש ליצירת הURL של הפוסט"
 
-#: models_bases/entry.py:58
+#: models_bases/entry.py:59
 msgid "status"
 msgstr "סטטוס"
 
-#: models_bases/entry.py:62
+#: models_bases/entry.py:63
 msgid "start publication"
 msgstr "תחילת פרסום"
 
-#: models_bases/entry.py:64
+#: models_bases/entry.py:65
 msgid "Start date of publication."
 msgstr "תאריך תחילת הפרסום"
 
-#: models_bases/entry.py:67
+#: models_bases/entry.py:68
 msgid "end publication"
 msgstr "סוף פרסום"
 
-#: models_bases/entry.py:69
+#: models_bases/entry.py:70
 msgid "End date of publication."
 msgstr "תאריך סוף הפרסום"
 
-#: models_bases/entry.py:74
+#: models_bases/entry.py:75
 msgid "sites"
 msgstr "אתרים"
 
-#: models_bases/entry.py:75
+#: models_bases/entry.py:76
 msgid "Sites where the entry will be published."
 msgstr "אתרים בהם הפוסט יפורסם"
 
-#: models_bases/entry.py:78
+#: models_bases/entry.py:79
 msgid "creation date"
 msgstr "תאריך יצירה"
 
-#: models_bases/entry.py:83
+#: models_bases/entry.py:84
 msgid "last update"
 msgstr "עודכן לאחרונה"
 
-#: models_bases/entry.py:185
+#: models_bases/entry.py:193
 msgid "entry"
 msgstr "פוסט"
 
-#: models_bases/entry.py:186
+#: models_bases/entry.py:194
 msgid "entries"
 msgstr "פוסטים"
 
-#: models_bases/entry.py:200
+#: models_bases/entry.py:208
 msgid "content"
 msgstr "תוכן"
 
-#: models_bases/entry.py:242
+#: models_bases/entry.py:255
 msgid "comments enabled"
 msgstr "ניתן לכתוב תגובות"
 
-#: models_bases/entry.py:243
+#: models_bases/entry.py:256
 msgid "Allows comments if checked."
 msgstr "אפשר תגובות אם מסומן"
 
-#: models_bases/entry.py:245
+#: models_bases/entry.py:258
 msgid "pingbacks enabled"
 msgstr ""
 
-#: models_bases/entry.py:246
+#: models_bases/entry.py:259
 msgid "Allows pingbacks if checked."
 msgstr ""
 
-#: models_bases/entry.py:248
+#: models_bases/entry.py:261
 msgid "trackbacks enabled"
 msgstr ""
 
-#: models_bases/entry.py:249
+#: models_bases/entry.py:262
 msgid "Allows trackbacks if checked."
 msgstr ""
 
-#: models_bases/entry.py:252
+#: models_bases/entry.py:265
 msgid "comment count"
 msgstr "מונה תגובות"
 
-#: models_bases/entry.py:254
+#: models_bases/entry.py:267
 msgid "pingback count"
 msgstr ""
 
-#: models_bases/entry.py:256
+#: models_bases/entry.py:269
 msgid "trackback count"
 msgstr ""
 
-#: models_bases/entry.py:340
+#: models_bases/entry.py:353
 msgid "related entries"
 msgstr "פוסטים מקושרים"
 
-#: models_bases/entry.py:358
-msgid "excerpt"
-msgstr "ציטוט"
+#: models_bases/entry.py:371
+msgid "lead"
+msgstr ""
 
-#: models_bases/entry.py:359
-msgid "Used for search and SEO."
+#: models_bases/entry.py:372
+msgid "Lead paragraph"
 msgstr ""
 
 #: models_bases/entry.py:392
+msgid "excerpt"
+msgstr "ציטוט"
+
+#: models_bases/entry.py:393
+msgid "Used for SEO purposes."
+msgstr ""
+
+#: models_bases/entry.py:438
 msgid "image"
 msgstr "תמונה"
 
-#: models_bases/entry.py:394
+#: models_bases/entry.py:440
 msgid "Used for illustration."
 msgstr "בשימוש לשם אילוסטרציה"
 
-#: models_bases/entry.py:405
+#: models_bases/entry.py:443
+msgid "caption"
+msgstr ""
+
+#: models_bases/entry.py:444
+msgid "Image's caption."
+msgstr ""
+
+#: models_bases/entry.py:455
 msgid "featured"
 msgstr ""
 
-#: models_bases/entry.py:420
+#: models_bases/entry.py:470
 msgid "authors"
 msgstr "כותבים"
 
-#: models_bases/entry.py:444
+#: models_bases/entry.py:494
 msgid "tags"
 msgstr "טאגים"
 
-#: models_bases/entry.py:463
+#: models_bases/entry.py:513
 msgid "login required"
 msgstr "דרוש login"
 
-#: models_bases/entry.py:464
+#: models_bases/entry.py:514
 msgid "Only authenticated users can view the entry."
 msgstr "רק משתמשים רשומים יכולים לצפות בפוסט"
 
-#: models_bases/entry.py:476
+#: models_bases/entry.py:526
 msgid "password"
 msgstr "סיסמה"
 
-#: models_bases/entry.py:477
+#: models_bases/entry.py:527
 msgid "Protects the entry with a password."
 msgstr "מגן על הפוסט עם סיסמה"
 
-#: models_bases/entry.py:489
+#: models_bases/entry.py:539
 msgid "content template"
 msgstr ""
 
-#: models_bases/entry.py:491 models_bases/entry.py:507
+#: models_bases/entry.py:541 models_bases/entry.py:557
 msgid "Default template"
 msgstr "Template ברירת מחדל"
 
-#: models_bases/entry.py:493
+#: models_bases/entry.py:543
 msgid "Template used to display the entry's content."
 msgstr ""
 
-#: models_bases/entry.py:505
+#: models_bases/entry.py:555
 msgid "detail template"
 msgstr ""
 
-#: models_bases/entry.py:509
+#: models_bases/entry.py:559
 msgid "Template used to display the entry's detail page."
 msgstr ""
+
+#: moderator.py:66 moderator.py:88 moderator.py:111
+#, python-format
+msgid "[%(site)s] New comment posted on \"%(title)s\""
+msgstr "[%(site)s] תגובות חדשות פורסמו על \"%(title)s\""
 
 #: templates/400.html:6
 msgid "Error 400"
@@ -585,7 +610,7 @@ msgstr[0] "פוסט %(entry_count)s"
 msgstr[1] "%(entry_count)s פוסטים"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:14
-#: templates/zinnia/_entry_detail_base.html:120
+#: templates/zinnia/_entry_detail_base.html:131
 #: templates/zinnia/tags/entries_popular.html:8
 #: templates/zinnia/tags/statistics.html:16
 #, python-format
@@ -603,7 +628,7 @@ msgstr[0] "קטגוריה %(category_count)s"
 msgstr[1] "%(category_count)s קטגוריות"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:24
-#: templates/zinnia/_entry_detail_base.html:139
+#: templates/zinnia/_entry_detail_base.html:150
 #: templates/zinnia/tags/statistics.html:19
 #, python-format
 msgid "%(pingback_count)s pingback"
@@ -620,7 +645,7 @@ msgstr[0] "תאג %(tag_count)s"
 msgstr[1] "%(tag_count)s תאגים"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:32
-#: templates/zinnia/_entry_detail_base.html:148
+#: templates/zinnia/_entry_detail_base.html:159
 #: templates/zinnia/tags/statistics.html:22
 #, python-format
 msgid "%(trackback_count)s trackback"
@@ -722,8 +747,9 @@ msgstr "ב-"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:13
 #: templates/zinnia/tags/comments_recent.html:8
-msgid "Comment on"
-msgstr "תגובה על"
+#, python-format
+msgid "Comment on %(object)s"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:22
 msgid "Edit the comment"
@@ -735,7 +761,7 @@ msgid "Edit"
 msgstr "ערוך"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:30
-#: templates/zinnia/_entry_detail_base.html:124
+#: templates/zinnia/_entry_detail_base.html:135
 #: templates/zinnia/entry_detail_base.html:229
 #: templates/zinnia/tags/comments_recent.html:15
 msgid "No comments yet."
@@ -749,6 +775,12 @@ msgstr "נהל תגובות"
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:7
 msgid "made a linkback on"
 msgstr "יצר linkback על"
+
+#: templates/admin/zinnia/widgets/_recent_linkbacks.html:9
+#: templates/zinnia/tags/linkbacks_recent.html:9
+#, python-format
+msgid "Linkback on %(object)s"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:17
 msgid "Edit the linkback"
@@ -805,7 +837,6 @@ msgstr "linkback-ים אחרונים"
 #: templates/comments/comment_authors_email.txt:1
 #: templates/comments/comment_notification_email.txt:1
 #: templates/comments/comment_reply_email.txt:1
-#: templates/zinnia/entry_list.html:21
 msgid "Author"
 msgstr "עורך"
 
@@ -840,20 +871,6 @@ msgstr "מחק תגובה"
 #: templates/comments/comment_notification_email.txt:14
 msgid "Approve this comment"
 msgstr ""
-
-#: templates/comments/zinnia_entry_preview.html:4
-msgid "Comment preview"
-msgstr "תצוגה מקדימה"
-
-#: templates/comments/zinnia_entry_preview.html:10
-msgid "Please correct following error."
-msgid_plural "Please correct following errors."
-msgstr[0] "אנא תקן את השגיאה הבאה"
-msgstr[1] "אנא תקן את השגיאות הבאות"
-
-#: templates/comments/zinnia_entry_preview.html:12
-msgid "Preview of the comment"
-msgstr "תצוגה מקדימה"
 
 #: templates/comments/zinnia/entry/form.html:11
 msgid "Post your comment"
@@ -891,6 +908,20 @@ msgstr ""
 msgid "Return to entry list"
 msgstr "חזרה לרשימת הפוסטים"
 
+#: templates/comments/zinnia_entry_preview.html:4
+msgid "Comment preview"
+msgstr "תצוגה מקדימה"
+
+#: templates/comments/zinnia_entry_preview.html:10
+msgid "Please correct following error."
+msgid_plural "Please correct following errors."
+msgstr[0] "אנא תקן את השגיאה הבאה"
+msgstr[1] "אנא תקן את השגיאות הבאות"
+
+#: templates/comments/zinnia_entry_preview.html:12
+msgid "Preview of the comment"
+msgstr "תצוגה מקדימה"
+
 #: templates/zinnia/_entry_detail_base.html:17
 msgid "Written by"
 msgstr "נכתב על ידי"
@@ -917,64 +948,48 @@ msgstr ""
 msgid "Last update on"
 msgstr "עודכן לאחרונה בתאריך"
 
-#: templates/zinnia/_entry_detail_base.html:78
+#: templates/zinnia/_entry_detail_base.html:89
 #, python-format
 msgid "%(percent)s%% of %(object)s still remains to read."
 msgstr ""
 
-#: templates/zinnia/_entry_detail_base.html:80
+#: templates/zinnia/_entry_detail_base.html:91
 msgid "Continue reading"
 msgstr "המשך לקרוא"
 
-#: templates/zinnia/_entry_detail_base.html:95
+#: templates/zinnia/_entry_detail_base.html:106
 #: templates/zinnia/tag_list.html:17
 #, python-format
 msgid "Show all entries tagged by %(tag)s"
 msgstr ""
 
-#: templates/zinnia/_entry_detail_base.html:98
+#: templates/zinnia/_entry_detail_base.html:109
 msgid "No tags"
 msgstr "אין תיוגים"
 
-#: templates/zinnia/_entry_detail_base.html:104
+#: templates/zinnia/_entry_detail_base.html:115
 msgid "Short url"
 msgstr "URL מקוצר"
 
-#: templates/zinnia/_entry_detail_base.html:106
+#: templates/zinnia/_entry_detail_base.html:117
 #, python-format
 msgid "Short URL to %(object)s"
 msgstr ""
 
-#: templates/zinnia/_entry_detail_base.html:119
-#: templates/zinnia/tags/entries_popular.html:7
-#, python-format
-msgid "Comments on %(object)s"
-msgstr ""
-
-#: templates/zinnia/_entry_detail_base.html:126
+#: templates/zinnia/_entry_detail_base.html:137
 #, python-format
 msgid "Leave a comment on %(object)s"
 msgstr "השאר תגובה על %(object)s"
 
-#: templates/zinnia/_entry_detail_base.html:127
+#: templates/zinnia/_entry_detail_base.html:138
 msgid "Be first to comment!"
 msgstr "הגב ראשון!"
 
-#: templates/zinnia/_entry_detail_base.html:130
+#: templates/zinnia/_entry_detail_base.html:141
 #: templates/zinnia/entry_detail_base.html:225
 #: templates/zinnia/entry_detail_base.html:231
 msgid "Comments are closed."
 msgstr "לא ניתן להגיב יותר"
-
-#: templates/zinnia/_entry_detail_base.html:138
-#, python-format
-msgid "Pingbacks on %(object)s"
-msgstr ""
-
-#: templates/zinnia/_entry_detail_base.html:147
-#, python-format
-msgid "Trackbacks on %(object)s"
-msgstr ""
 
 #: templates/zinnia/author_list.html:4 templates/zinnia/author_list.html:11
 msgid "Author list"
@@ -985,11 +1000,11 @@ msgid "No authors yet."
 msgstr "עדיין אין עורכים"
 
 #: templates/zinnia/base.html:16 templates/zinnia/skeleton.html:36
-msgid "RSS Feed of latest entries"
+msgid "RSS feed of latest entries"
 msgstr ""
 
 #: templates/zinnia/base.html:17
-msgid "RSS Feed of latest discussions"
+msgid "RSS feed of latest discussions"
 msgstr ""
 
 #: templates/zinnia/base.html:27
@@ -1135,19 +1150,23 @@ msgid "Next year"
 msgstr "שנה הבאה"
 
 #: templates/zinnia/entry_detail_base.html:22
-msgid "RSS Feed of discussions on"
+#, python-format
+msgid "RSS feed of discussions on %(object)s"
 msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:24
-msgid "RSS Feed of comments on"
+#, python-format
+msgid "RSS feed of comments on %(object)s"
 msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:26
-msgid "RSS Feed of pingbacks on"
+#, python-format
+msgid "RSS feed of pingbacks on %(object)s"
 msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:28
-msgid "RSS Feed of trackbacks on"
+#, python-format
+msgid "RSS feed of trackbacks on %(object)s"
 msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:47
@@ -1202,63 +1221,56 @@ msgstr "תגובות"
 msgid "Direct link to this comment"
 msgstr "קישור לתגובה זו"
 
-#: templates/zinnia/entry_list.html:4
-msgid "Latest entries for"
-msgstr "פוסטים אחרונים עבור"
+#: templates/zinnia/entry_list.html:23
+#, python-format
+msgid "page %(object)s"
+msgstr ""
 
-#: templates/zinnia/entry_list.html:4
-msgid "the category"
-msgstr "הקטגוריה"
+#: templates/zinnia/entry_list.html:27
+#, python-format
+msgid "Category %(object)s"
+msgstr ""
 
-#: templates/zinnia/entry_list.html:4
-msgid "the tag"
-msgstr "התיוג"
+#: templates/zinnia/entry_list.html:31
+#, python-format
+msgid "Tag %(object)s"
+msgstr ""
 
-#: templates/zinnia/entry_list.html:4
-msgid "the author"
-msgstr "העורך"
+#: templates/zinnia/entry_list.html:35
+#, python-format
+msgid "Author %(object)s"
+msgstr ""
 
-#: templates/zinnia/entry_list.html:6
-msgid "page"
-msgstr "עמוד"
+#: templates/zinnia/entry_list.html:40
+#, python-format
+msgid "Page %(object)s"
+msgstr ""
 
-#: templates/zinnia/entry_list.html:11 templates/zinnia/entry_list.html:14
-#: templates/zinnia/entry_list.html:17 templates/zinnia/entry_list.html:36
-#: templates/zinnia/entry_list.html:37 templates/zinnia/entry_list.html:45
-#: templates/zinnia/entry_list.html:46 templates/zinnia/entry_list.html:54
-#: templates/zinnia/entry_list.html:55
+#: templates/zinnia/entry_list.html:45 templates/zinnia/entry_list.html:48
+#: templates/zinnia/entry_list.html:51 templates/zinnia/entry_list.html:66
+#: templates/zinnia/entry_list.html:67 templates/zinnia/entry_list.html:75
+#: templates/zinnia/entry_list.html:76 templates/zinnia/entry_list.html:84
+#: templates/zinnia/entry_list.html:85
 #, python-format
 msgid "RSS feed of %(object)s"
 msgstr ""
 
-#: templates/zinnia/entry_list.html:21
-msgid "Category"
-msgstr "קטגוריה"
-
-#: templates/zinnia/entry_list.html:21
-msgid "Tag"
-msgstr "תיוג"
-
-#: templates/zinnia/entry_list.html:23
-msgid "Page"
-msgstr "עמוד"
-
-#: templates/zinnia/entry_list.html:31
+#: templates/zinnia/entry_list.html:61
 #, python-format
 msgid "Category archives: %(category)s"
 msgstr "ארכיון %(category)s"
 
-#: templates/zinnia/entry_list.html:43
+#: templates/zinnia/entry_list.html:73
 #, python-format
 msgid "Tag archives: %(tag)s"
 msgstr "ארכיון: %(tag)s"
 
-#: templates/zinnia/entry_list.html:52
+#: templates/zinnia/entry_list.html:82
 #, python-format
 msgid "Author archives: %(author)s"
 msgstr ""
 
-#: templates/zinnia/entry_list.html:66 templates/zinnia/sitemap.html:29
+#: templates/zinnia/entry_list.html:96 templates/zinnia/sitemap.html:29
 #: templates/zinnia/tags/entries_featured.html:9
 #: templates/zinnia/tags/entries_popular.html:12
 #: templates/zinnia/tags/entries_random.html:9
@@ -1266,23 +1278,17 @@ msgstr ""
 msgid "No entries yet."
 msgstr "עדיין אין פוסטים"
 
-#: templates/zinnia/entry_list.html:85 templates/zinnia/entry_list.html:86
+#: templates/zinnia/entry_list.html:115 templates/zinnia/entry_list.html:116
 msgid "Edit the category"
 msgstr "ערוך קטגוריה"
 
-#: templates/zinnia/entry_list.html:92 templates/zinnia/entry_list.html:93
+#: templates/zinnia/entry_list.html:122 templates/zinnia/entry_list.html:123
 msgid "Edit the tag"
 msgstr "ערוך תיוג"
 
-#: templates/zinnia/entry_list.html:99 templates/zinnia/entry_list.html:100
+#: templates/zinnia/entry_list.html:129 templates/zinnia/entry_list.html:130
 msgid "Edit the author"
 msgstr "ערוך את פרטי העורך"
-
-#: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:6
-#: templates/zinnia/entry_search.html:18
-#, python-format
-msgid "Search results for '%(pattern)s'"
-msgstr ""
 
 #: templates/zinnia/entry_search.html:11 templates/zinnia/entry_search.html:24
 #: templates/zinnia/entry_search.html:25
@@ -1360,7 +1366,7 @@ msgid "Just another Zinnia weblog."
 msgstr "בסך הכל עוד בלוג של Zinnia"
 
 #: templates/zinnia/skeleton.html:37
-msgid "RSS Feed"
+msgid "RSS feed"
 msgstr ""
 
 #: templates/zinnia/skeleton.html:43 templates/zinnia/tags/search_form.html:4
@@ -1404,10 +1410,6 @@ msgstr "לא קיים ארכיון"
 msgid "No similar entries."
 msgstr "אין ערכים דומים"
 
-#: templates/zinnia/tags/linkbacks_recent.html:9
-msgid "Linkback on"
-msgstr ""
-
 #: templates/zinnia/tags/pagination.html:4
 #, python-format
 msgid "Page %(current_page)s of %(total_page)s"
@@ -1441,15 +1443,15 @@ msgid_plural "%(entry_count)s entries tagged by %(tag)s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templatetags/zinnia.py:344
+#: templatetags/zinnia.py:347
 msgid "Blog"
 msgstr ""
 
-#: tests/test_views.py:586 views/search.py:30
+#: tests/test_views.py:585 views/search.py:30
 msgid "The pattern is too short"
 msgstr "התבנית קצרה מדי"
 
-#: tests/test_views.py:590 views/search.py:34
+#: tests/test_views.py:589 views/search.py:34
 msgid "No pattern to search found"
 msgstr "לא נמצא ערך לחיפוש"
 
@@ -1581,28 +1583,28 @@ msgstr "^quick-entry/$"
 msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 msgstr "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 
+#: views/mixins/entry_preview.py:27
+msgid "No entry found matching the query"
+msgstr ""
+
 #: views/tags.py:48
 #, python-format
 msgid "No Tag found matching \"%s\"."
 msgstr "לא נמצא תג מתאים ל-\"%s\". "
 
-#: views/mixins/entry_preview.py:27
-msgid "No entry found matching the query"
-msgstr ""
-
-#: xmlrpc/metaweblog.py:48
+#: xmlrpc/metaweblog.py:44
 msgid "Username is incorrect."
 msgstr "שם המשתמש שגוי."
 
-#: xmlrpc/metaweblog.py:50
+#: xmlrpc/metaweblog.py:46
 msgid "Password is invalid."
 msgstr "סיסמה שגויה."
 
-#: xmlrpc/metaweblog.py:52
+#: xmlrpc/metaweblog.py:48
 msgid "User account unavailable."
 msgstr "חשבון המשתמש אינו זמין. "
 
-#: xmlrpc/metaweblog.py:55
+#: xmlrpc/metaweblog.py:51
 #, python-format
 msgid "User cannot %s."
 msgstr "המשתמש אינו יכול %s."

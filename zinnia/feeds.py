@@ -84,6 +84,12 @@ class EntryFeed(ZinniaFeed):
         """
         return item.creation_date
 
+    def item_updateddate(self, item):
+        """
+        Update date of an entry.
+        """
+        return item.last_update
+
     def item_categories(self, item):
         """
         Entry's categories.
@@ -178,7 +184,8 @@ class LatestEntries(EntryFeed):
         """
         Description of the feed.
         """
-        return _('The latest entries for the site %s') % self.site.name
+        return _('The latest entries on the site %(object)s') % {
+            'object': self.site.name}
 
 
 class CategoryEntries(EntryFeed):
@@ -208,13 +215,15 @@ class CategoryEntries(EntryFeed):
         """
         Title of the feed.
         """
-        return _('Entries for the category %s') % obj.title
+        return _('Entries for the category %(object)s') % {'object': obj.title}
 
     def description(self, obj):
         """
         Description of the feed.
         """
-        return _('The latest entries for the category %s') % obj.title
+        return (obj.description or
+                _('The latest entries categorized under %(object)s') % {
+                    'object': obj.title})
 
 
 class AuthorEntries(EntryFeed):
@@ -244,13 +253,15 @@ class AuthorEntries(EntryFeed):
         """
         Title of the feed.
         """
-        return _('Entries for author %s') % smart_text(obj.__str__())
+        return _('Entries for the author %(object)s') % {
+            'object': smart_text(obj.__str__())}
 
     def description(self, obj):
         """
         Description of the feed.
         """
-        return _('The latest entries by %s') % smart_text(obj.__str__())
+        return _('The latest entries by %(object)s') % {
+            'object': smart_text(obj.__str__())}
 
 
 class TagEntries(EntryFeed):
@@ -281,13 +292,14 @@ class TagEntries(EntryFeed):
         """
         Title of the feed.
         """
-        return _('Entries for the tag %s') % obj.name
+        return _('Entries for the tag %(object)s') % {'object': obj.name}
 
     def description(self, obj):
         """
         Description of the feed.
         """
-        return _('The latest entries for the tag %s') % obj.name
+        return _('The latest entries tagged with %(object)s') % {
+            'object': obj.name}
 
 
 class SearchEntries(EntryFeed):
@@ -320,13 +332,14 @@ class SearchEntries(EntryFeed):
         """
         Title of the feed.
         """
-        return _("Results of the search for '%s'") % obj
+        return _("Search results for '%(pattern)s'") % {'pattern': obj}
 
     def description(self, obj):
         """
         Description of the feed.
         """
-        return _("The entries containing the pattern '%s'") % obj
+        return _("The entries containing the pattern '%(pattern)s'") % {
+            'pattern': obj}
 
 
 class DiscussionFeed(ZinniaFeed):
@@ -397,7 +410,8 @@ class LatestDiscussions(DiscussionFeed):
         """
         Description of the feed.
         """
-        return _('The latest discussions for the site %s') % self.site.name
+        return _('The latest discussions on the site %(object)s') % {
+            'object': self.site.name}
 
 
 class EntryDiscussions(DiscussionFeed):
@@ -430,13 +444,14 @@ class EntryDiscussions(DiscussionFeed):
         """
         Title of the feed.
         """
-        return _('Discussions on %s') % obj.title
+        return _('Discussions on %(object)s') % {'object': obj.title}
 
     def description(self, obj):
         """
         Description of the feed.
         """
-        return _('The latest discussions for the entry %s') % obj.title
+        return _('The latest discussions on the entry %(object)s') % {
+            'object': obj.title}
 
 
 class EntryComments(EntryDiscussions):
@@ -463,13 +478,14 @@ class EntryComments(EntryDiscussions):
         """
         Title of the feed.
         """
-        return _('Comments on %s') % obj.title
+        return _('Comments on %(object)s') % {'object': obj.title}
 
     def description(self, obj):
         """
         Description of the feed.
         """
-        return _('The latest comments for the entry %s') % obj.title
+        return _('The latest comments on the entry %(object)s') % {
+            'object': obj.title}
 
     def item_enclosure_url(self, item):
         """
@@ -513,13 +529,14 @@ class EntryPingbacks(EntryDiscussions):
         """
         Title of the feed.
         """
-        return _('Pingbacks on %s') % obj.title
+        return _('Pingbacks on %(object)s') % {'object': obj.title}
 
     def description(self, obj):
         """
         Description of the feed.
         """
-        return _('The latest pingbacks for the entry %s') % obj.title
+        return _('The latest pingbacks on the entry %(object)s') % {
+            'object': obj.title}
 
 
 class EntryTrackbacks(EntryDiscussions):
@@ -545,10 +562,11 @@ class EntryTrackbacks(EntryDiscussions):
         """
         Title of the feed.
         """
-        return _('Trackbacks on %s') % obj.title
+        return _('Trackbacks on %(object)s') % {'object': obj.title}
 
     def description(self, obj):
         """
         Description of the feed.
         """
-        return _('The latest trackbacks for the entry %s') % obj.title
+        return _('The latest trackbacks on the entry %(object)s') % {
+            'object': obj.title}

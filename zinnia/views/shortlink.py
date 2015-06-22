@@ -10,6 +10,7 @@ class EntryShortLink(RedirectView):
     View for handling the shortlink of an Entry,
     simply do a redirection.
     """
+    permanent = True
 
     def get_redirect_url(self, **kwargs):
         """

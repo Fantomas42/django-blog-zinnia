@@ -72,6 +72,9 @@ HTML5 ready.
 
 URL: https://github.com/django-blog-zinnia/zinnia-theme-html5
 
+.. versionchanged:: 0.15.2
+   This extension is no longer needed, because Zinnia is now HTML5 ready.
+
 zinnia-theme-bootstrap
 ======================
 
@@ -151,6 +154,27 @@ Zinnia-twitter is an admin extension allowing you to post your entries on
 `Twitter`_.
 
 URL: https://github.com/django-blog-zinnia/zinnia-twitter
+
+wordpress2zinnia
+================
+
+Migrate your Wordpress blog into Zinnia.
+
+URL: https://github.com/django-blog-zinnia/wordpress2zinnia
+
+blogger2zinnia
+==============
+
+Migrate your Blogger blog into Zinnia.
+
+URL: https://github.com/django-blog-zinnia/blogger2zinnia
+
+feed2zinnia
+===========
+
+Import RSS or Atom feeds into Zinnia.
+
+URL: https://github.com/django-blog-zinnia/feed2zinnia
 
 byteflow2zinnia
 ===============

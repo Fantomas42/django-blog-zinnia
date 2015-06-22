@@ -6,6 +6,7 @@ from django.contrib.admin import ModelAdmin
 from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
+from django.test.utils import override_settings
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
@@ -26,9 +27,11 @@ class MiniEntryCategoryAdmin(ModelAdmin):
     list_filter = [CategoryListFilter]
 
 
+@override_settings(
+    ROOT_URLCONF='zinnia.tests.implementations.urls.default'
+)
 class BaseListFilterTestCase(TestCase):
     """Base TestCase for testing Filters"""
-    urls = 'zinnia.tests.implementations.urls.default'
 
     def setUp(self):
         disconnect_entry_signals()

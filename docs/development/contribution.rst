@@ -152,6 +152,12 @@ https://www.transifex.net/projects/p/django-blog-zinnia/resource/djangopo/
 The translations hosted on Transifex.net will be pulled periodically in the
 repository, but if you are in a hurry, `send me a message`_.
 
+If you’ve found that a particular piece of text cannot be translated in
+your language, because it lacks a plural form, or requires to be split in
+two separate sentences to deal with a different gender, you can click the
+open issue button to mark your comment as an issue. A developer can then
+resolve the issue.
+
 .. _`Fork`: https://github.com/Fantomas42/django-blog-zinnia/fork
 .. _`Sass`: http://sass-lang.com/
 .. _`libsass`: http://libsass.org/

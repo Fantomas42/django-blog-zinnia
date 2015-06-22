@@ -1,7 +1,7 @@
 """URL shortener for Zinnia"""
 import warnings
+from importlib import import_module
 
-from django.utils.importlib import import_module
 from django.core.exceptions import ImproperlyConfigured
 
 from zinnia.settings import URL_SHORTENER_BACKEND

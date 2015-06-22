@@ -1,6 +1,8 @@
 """Test cases for Zinnia's signals"""
 from django.test import TestCase
 
+import zinnia.signals
+from zinnia import settings
 from zinnia.models.entry import Entry
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
@@ -39,10 +41,8 @@ class SignalsTestCase(TestCase):
         def fake_pinger(*ka, **kw):
             self.top += 1
 
-        import zinnia.ping
-        from zinnia import settings
-        self.original_pinger = zinnia.ping.DirectoryPinger
-        zinnia.ping.DirectoryPinger = fake_pinger
+        original_pinger = zinnia.signals.DirectoryPinger
+        zinnia.signals.DirectoryPinger = fake_pinger
 
         params = {'title': 'My entry',
                   'content': 'My content',
@@ -62,7 +62,7 @@ class SignalsTestCase(TestCase):
         self.assertEqual(self.top, 1)
 
         # Remove stub
-        zinnia.ping.DirectoryPinger = self.original_pinger
+        zinnia.signals.DirectoryPinger = original_pinger
 
     def test_ping_external_urls_handler(self):
         # Set up a stub around ExternalUrlsPinger
@@ -71,10 +71,8 @@ class SignalsTestCase(TestCase):
         def fake_pinger(*ka, **kw):
             self.top += 1
 
-        import zinnia.ping
-        from zinnia import settings
-        self.original_pinger = zinnia.ping.ExternalUrlsPinger
-        zinnia.ping.ExternalUrlsPinger = fake_pinger
+        self.original_pinger = zinnia.signals.ExternalUrlsPinger
+        zinnia.signals.ExternalUrlsPinger = fake_pinger
 
         params = {'title': 'My entry',
                   'content': 'My content',
@@ -93,4 +91,4 @@ class SignalsTestCase(TestCase):
         self.assertEqual(self.top, 1)
 
         # Remove stub
-        zinnia.ping.ExternalUrlsPinger = self.original_pinger
+        zinnia.signals.ExternalUrlsPinger = self.original_pinger

@@ -19,18 +19,18 @@
   <link rel="shortlink" href="{{ object.short_url }}" />
   <link rel="canonical" href="{{ object.get_absolute_url }}" />
   {% with year=object.creation_date|date:"Y" month=object.creation_date|date:"m" day=object.creation_date|date:"d" %}
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of discussions on" %} '{{ object.title }}'"
+  <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=object.title %}RSS feed of discussions on {{ object }}{% endblocktrans %}"
         href="{% url 'zinnia:entry_discussion_feed' year month day object.slug %}" />
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'"
+  <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=object.title %}RSS feed of comments on {{ object }}{% endblocktrans %}"
         href="{% url 'zinnia:entry_comment_feed' year month day object.slug %}" />
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of pingbacks on" %} '{{ object.title }}'"
+  <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=object.title %}RSS feed of pingbacks on {{ object }}{% endblocktrans %}"
         href="{% url 'zinnia:entry_pingback_feed' year month day object.slug %}" />
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of trackbacks on" %} '{{ object.title }}'"
+  <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=object.title %}RSS feed of trackbacks on {{ object }}{% endblocktrans %}"
         href="{% url 'zinnia:entry_trackback_feed' year month day object.slug %}" />
   {% endwith %}
 {% endblock link %}
 
-{% block body-class %}entry entry-{{ object.pk }}{% if object.featured %} featured{% endif %} year-{{ object.creation_date|date:"Y" }} month-{{ object.creation_date|date:"m" }} week-{{ object.creation_date|date:"W" }} day-{{ object.creation_date|date:"d" }}{% endblock body-class %}
+{% block body-class %}entry entry-{{ object.pk }}{% if object.featured %} featured{% endif %} year-{{ object.publication_date|date:"Y" }} month-{{ object.publication_date|date:"m" }} week-{{ object.publication_date|date:"W" }} day-{{ object.publication_date|date:"d" }}{% endblock body-class %}
 
 {% block content %}
 
@@ -39,7 +39,7 @@
 {% endblock entry-content %}
 
 {% block entry-widgets %}
-<div class="entry-widgets">
+<aside role="complementary" class="entry-widgets">
   {% block entry-next-entry %}
   {% with next_entry=object.next_entry %}
   {% if next_entry %}
@@ -90,11 +90,11 @@
     {% get_similar_entries %}
   </div>
   {% endblock entry-similar-entries %}
-</div>
+</aside>
 {% endblock entry-widgets %}
 
 {% block entry-pingbacks %}
-<div id="pingbacks">
+<section id="pingbacks">
   <h3>{% trans "Pingbacks" %}</h3>
   {% if object.pingback_count %}
   {% with pingback_list=object.pingbacks %}
@@ -107,9 +107,9 @@
 	<a href="{{ pingback.url }}" rel="external nofollow"
            class="fn url org">{{ pingback.name }}</a>
 	{% trans "on" context "on date" %}
-        <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}">
+        <time class="pingback-published" datetime="{{ pingback.submit_date|date:"c" }}">
           {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
+        </time>
         <a href="#pingback-{{ pingback.pk }}"
            id="c{{ pingback.pk }}" class="anchor-link"
            title="{% trans "Direct link to this pingback" %}">#</a>
@@ -133,12 +133,12 @@
   <p>{% trans "Pingbacks are closed." %}</p>
   {% endif %}
   {% endblock pingbacks-status %}
-</div>
+</section>
 {% endblock entry-pingbacks %}
 
 {% block entry-trackbacks %}
 {% if object.trackback_count or object.trackbacks_are_open %}
-<div id="trackbacks">
+<section id="trackbacks">
   <h3>{% trans "Trackbacks" %}</h3>
   {% if object.trackback_count %}
   {% with trackback_list=object.trackbacks %}
@@ -151,9 +151,9 @@
 	<a href="{{ trackback.url }}" rel="external nofollow"
            class="fn url org">{{ trackback.name }}</a>
 	{% trans "on" context "on date" %}
-        <abbr class="trackback-published" title="{{ trackback.submit_date|date:"c" }}">
+        <time class="trackback-published" datetime="{{ trackback.submit_date|date:"c" }}">
           {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
+        </time>
         <a href="#trackback-{{ trackback.pk }}"
            id="c{{ trackback.pk }}" class="anchor-link"
            title="{% trans "Direct link to this trackback" %}">#</a>
@@ -178,12 +178,12 @@
   </p>
   {% endif %}
   {% endblock trackbacks-status %}
-</div>
+</section>
 {% endif %}
 {% endblock entry-trackbacks %}
 
 {% block entry-comments %}
-<div id="comments">
+<section id="comments">
   <h3>{% trans "Comments" %}</h3>
   {% if object.comment_count %}
   {% with comment_list=object.comments %}
@@ -205,9 +205,9 @@
 	<span class="fn">{{ comment.name }}</span>
 	{% endif %}
 	{% trans "on" context "on date" %}
-        <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
+        <time class="comment-published" datetime="{{ comment.submit_date|date:"c" }}">
           {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
+        </time>
         <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
            id="c{{ comment.pk }}" class="anchor-link"
            title="{% trans "Direct link to this comment" %}">#</a>
@@ -231,7 +231,7 @@
   <p>{% trans "Comments are closed." %}</p>
     {% endif %}
   {% endif %}
-</div>
+</section>
 {% endblock entry-comments %}
 
 {% block entry-comments-form %}

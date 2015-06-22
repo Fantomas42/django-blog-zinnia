@@ -12,12 +12,13 @@ Dependencies
 Make sure to install these packages prior to installation :
 
 * `Python`_ >= 2.7
-* `Django`_ >= 1.7
-* `PIL`_ >= 1.1.6 or `Pillow`_ >= 2.0.0
+* `Django`_ >= 1.7,<1.9
+* `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.5.1
-* `django-tagging`_ >= 0.3.4
-* `django-contrib-comments`_ >= 1.5
+* `django-tagging`_ >= 0.3.6
 * `beautifulsoup4`_ >= 4.1.3
+* `mots-vides`_ >= 2015.2.6
+* `django-contrib-comments`_ >= 1.6
 
 The packages below are optionnal but needed for run the full test suite or
 migrate the database.
@@ -134,6 +135,25 @@ want. Here's a custom implementation of the URLs provided by Zinnia: ::
 
   url(r'^', include(blog_urls, namespace='zinnia'))
 
+.. _sites:
+
+Sites
+=====
+
+Define the value of :setting:`SITE_ID` if not already done. ::
+
+  SITE_ID = 1
+
+.. _emails:
+
+Emails
+======
+
+Be sure that the sending of emails is correctly configured, otherwise the
+moderation system will not work. Please refer to
+https://docs.djangoproject.com/en/dev/topics/email/ for more information
+about sending emails.
+
 .. _static-files:
 
 Static Files
@@ -143,7 +163,7 @@ Since the version 1.3 of Django, Zinnia uses the
 :mod:`~django.contrib.staticfiles` application to serve the static files
 needed. Please refer to
 https://docs.djangoproject.com/en/dev/howto/static-files/ for more
-informations about serving static files.
+information about serving static files.
 
 .. _syncing-database:
 
@@ -159,11 +179,11 @@ project directory to sync the models with the database. ::
 
 .. _`Python`: http://www.python.org/
 .. _`Django`: https://www.djangoproject.com/
-.. _`PIL`: http://www.pythonware.com/products/pil/
 .. _`Pillow`: http://python-imaging.github.io/Pillow/
 .. _`django-mptt`: https://github.com/django-mptt/django-mptt/
 .. _`django-tagging`: https://code.google.com/p/django-tagging/
 .. _`django-contrib-comments`: https://github.com/django/django-contrib-comments
+.. _`mots-vides`: https://github.com/Fantomas42/mots-vides
 .. _`beautifulsoup4`: http://www.crummy.com/software/BeautifulSoup/
 .. _`pytz`: http://pytz.sourceforge.net/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/

@@ -2,8 +2,6 @@
 from django.contrib import admin
 from django.db.models import Q
 from django.utils import timezone
-from django.utils.text import Truncator
-from django.utils.html import strip_tags
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
@@ -18,6 +16,7 @@ from zinnia.ping import DirectoryPinger
 from zinnia.admin.forms import EntryAdminForm
 from zinnia.admin.filters import AuthorListFilter
 from zinnia.admin.filters import CategoryListFilter
+from zinnia.comparison import EntryPublishedVectorBuilder
 
 
 class EntryAdmin(admin.ModelAdmin):
@@ -28,7 +27,10 @@ class EntryAdmin(admin.ModelAdmin):
     date_hierarchy = 'creation_date'
     fieldsets = (
         (_('Content'), {
-            'fields': (('title', 'status'), 'content', 'image')}),
+            'fields': (('title', 'status'), 'lead', 'content',)}),
+        (_('Illustration'), {
+            'fields': ('image', 'image_caption'),
+            'classes': ('collapse', 'collapse-closed')}),
         (_('Publication'), {
             'fields': (('start_publication', 'end_publication'),
                        'creation_date', 'sites'),
@@ -170,16 +172,6 @@ class EntryAdmin(admin.ModelAdmin):
     get_is_visible.short_description = _('is visible')
 
     # Custom Methods
-    def save_model(self, request, entry, form, change):
-        """
-        Save the authors, update time, make an excerpt.
-        """
-        if not entry.excerpt and entry.status == PUBLISHED:
-            entry.excerpt = Truncator(strip_tags(entry.content)).words(50)
-
-        entry.last_update = timezone.now()
-        entry.save()
-
     def get_queryset(self, request):
         """
         Make special filtering by user's permissions.
@@ -263,6 +255,7 @@ class EntryAdmin(admin.ModelAdmin):
         Set entries selected as published.
         """
         queryset.update(status=PUBLISHED)
+        EntryPublishedVectorBuilder().cache_flush()
         self.ping_directories(request, queryset, messages=False)
         self.message_user(
             request, _('The selected entries are now marked as published.'))
@@ -273,6 +266,7 @@ class EntryAdmin(admin.ModelAdmin):
         Set entries selected as hidden.
         """
         queryset.update(status=HIDDEN)
+        EntryPublishedVectorBuilder().cache_flush()
         self.message_user(
             request, _('The selected entries are now marked as hidden.'))
     make_hidden.short_description = _('Set entries selected as hidden')

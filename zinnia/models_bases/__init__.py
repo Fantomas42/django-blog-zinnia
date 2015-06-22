@@ -1,5 +1,6 @@
 """Base models for Zinnia"""
-from django.utils.importlib import import_module
+from importlib import import_module
+
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -7,7 +8,7 @@ def load_model_class(model_path):
     """
     Load by import a class by a string path like:
     'module.models.MyModel'.
-    This mecanizm allows extension and customization of
+    This mechanism allows extension and customization of
     the Entry model class.
     """
     dot = model_path.rindex('.')

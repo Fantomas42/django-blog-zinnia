@@ -1,6 +1,5 @@
 """Urls for the Zinnia feeds"""
 from django.conf.urls import url
-from django.conf.urls import patterns
 
 from zinnia.urls import _
 from zinnia.feeds import LatestEntries
@@ -15,8 +14,7 @@ from zinnia.feeds import EntryDiscussions
 from zinnia.feeds import LatestDiscussions
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         LatestEntries(),
         name='entry_latest_feed'),
@@ -51,4 +49,4 @@ urlpatterns = patterns(
         '(?P<day>\d{2})/(?P<slug>[-\w]+)/$'),
         EntryTrackbacks(),
         name='entry_trackback_feed'),
-)
+]

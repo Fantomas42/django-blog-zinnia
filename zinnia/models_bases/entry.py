@@ -4,6 +4,7 @@ import os
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
+from django.utils.text import Truncator
 from django.utils.html import strip_tags
 from django.utils.html import linebreaks
 from django.contrib.sites.models import Site
@@ -86,6 +87,13 @@ class CoreEntry(models.Model):
     published = EntryPublishedManager()
 
     @property
+    def publication_date(self):
+        """
+        Return the publication date of the entry.
+        """
+        return self.start_publication or self.creation_date
+
+    @property
     def is_actual(self):
         """
         Checks if an entry is within his publication period.
@@ -156,6 +164,14 @@ class CoreEntry(models.Model):
         """
         return get_url_shortener()(self)
 
+    def save(self, *args, **kwargs):
+        """
+        Overrides the save method to update the
+        the last_update field.
+        """
+        self.last_update = timezone.now()
+        super(CoreEntry, self).save(*args, **kwargs)
+
     @models.permalink
     def get_absolute_url(self):
         """
@@ -203,22 +219,27 @@ class ContentEntry(models.Model):
         """
         Returns the "content" field formatted in HTML.
         """
-        if '</p>' in self.content:
-            return self.content
+        content = self.content
+        if not content:
+            return ''
         elif MARKUP_LANGUAGE == 'markdown':
-            return markdown(self.content)
+            return markdown(content)
         elif MARKUP_LANGUAGE == 'textile':
-            return textile(self.content)
+            return textile(content)
         elif MARKUP_LANGUAGE == 'restructuredtext':
-            return restructuredtext(self.content)
-        return linebreaks(self.content)
+            return restructuredtext(content)
+        elif '</p>' not in content:
+            return linebreaks(content)
+        return content
 
     @property
     def html_preview(self):
         """
-        Returns a preview of the "content" field formmated in HTML.
+        Returns a preview of the "content" field or
+        the "lead" field if defined, formatted in HTML.
         """
-        return HTMLPreview(self.html_content)
+        return HTMLPreview(self.html_content,
+                           getattr(self, 'html_lead', ''))
 
     @property
     def word_count(self):
@@ -335,7 +356,7 @@ class RelatedEntry(models.Model):
     """
     related = models.ManyToManyField(
         'self',
-        blank=True, null=True,
+        blank=True,
         verbose_name=_('related entries'))
 
     @property
@@ -349,13 +370,44 @@ class RelatedEntry(models.Model):
         abstract = True
 
 
+class LeadEntry(models.Model):
+    """
+    Abstract model class providing a lead content to the entries.
+    """
+    lead = models.TextField(
+        _('lead'), blank=True,
+        help_text=_('Lead paragraph'))
+
+    @property
+    def html_lead(self):
+        """
+        Returns the "lead" field formatted in HTML.
+        """
+        if self.lead:
+            return linebreaks(self.lead)
+        return ''
+
+    class Meta:
+        abstract = True
+
+
 class ExcerptEntry(models.Model):
     """
     Abstract model class to add an excerpt to the entries.
     """
     excerpt = models.TextField(
         _('excerpt'), blank=True,
-        help_text=_('Used for search and SEO.'))
+        help_text=_('Used for SEO purposes.'))
+
+    def save(self, *args, **kwargs):
+        """
+        Overrides the save method to create an excerpt
+        from the content field if void.
+        """
+        if not self.excerpt and self.status == PUBLISHED:
+            self.excerpt = Truncator(strip_tags(
+                getattr(self, 'content', ''))).words(50)
+        super(ExcerptEntry, self).save(*args, **kwargs)
 
     class Meta:
         abstract = True
@@ -372,7 +424,7 @@ def image_upload_to_dispatcher(entry, filename):
 
 class ImageEntry(models.Model):
     """
-    Abstract model class to add an image to the entries.
+    Abstract model class to add an image for illustrating the entries.
     """
 
     def image_upload_to(self, filename):
@@ -393,6 +445,10 @@ class ImageEntry(models.Model):
         _('image'), blank=True,
         upload_to=image_upload_to_dispatcher,
         help_text=_('Used for illustration.'))
+
+    image_caption = models.TextField(
+        _('caption'), blank=True,
+        help_text=_("Image's caption."))
 
     class Meta:
         abstract = True
@@ -416,8 +472,8 @@ class AuthorsEntry(models.Model):
     """
     authors = models.ManyToManyField(
         'zinnia.Author',
+        blank=True,
         related_name='entries',
-        blank=True, null=False,
         verbose_name=_('authors'))
 
     class Meta:
@@ -430,8 +486,8 @@ class CategoriesEntry(models.Model):
     """
     categories = models.ManyToManyField(
         'zinnia.Category',
+        blank=True,
         related_name='entries',
-        blank=True, null=True,
         verbose_name=_('categories'))
 
     class Meta:
@@ -440,7 +496,7 @@ class CategoriesEntry(models.Model):
 
 class TagsEntry(models.Model):
     """
-    Abstract lodel class to add tags to the entries.
+    Abstract model class to add tags to the entries.
     """
     tags = TagField(_('tags'))
 
@@ -518,6 +574,7 @@ class AbstractEntry(
         ContentEntry,
         DiscussionsEntry,
         RelatedEntry,
+        LeadEntry,
         ExcerptEntry,
         ImageEntry,
         FeaturedEntry,

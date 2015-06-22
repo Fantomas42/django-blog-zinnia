@@ -7,10 +7,10 @@ from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.admin.sites import AdminSite
-from django.test.utils import restore_template_loaders
 from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import settings
+from zinnia.admin import entry as entry_admin
 from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
@@ -44,10 +44,6 @@ class BaseAdminTestCase(TestCase):
         self.urls = self.rich_urls
         self._urlconf_setup()
         deactivate()
-        try:
-            restore_template_loaders()
-        except AttributeError:
-            pass
 
     def check_with_rich_and_poor_urls(self, func, args,
                                       result_rich, result_poor):
@@ -65,7 +61,7 @@ class TestMessageBackend(object):
         self.messages = []
 
     def add(self, *ka, **kw):
-        self.messages.append((ka, kw))
+        self.messages.append(ka)
 
 
 @skipIfCustomUser
@@ -173,32 +169,6 @@ class EntryAdminTestCase(BaseAdminTestCase):
     def test_get_is_visible(self):
         self.assertEqual(self.admin.get_is_visible(self.entry),
                          self.entry.is_visible)
-
-    def test_save_model(self):
-        user = User.objects.create_user(
-            'user', 'user@exemple.com')
-        self.request.user = user
-        self.assertEqual(self.entry.excerpt, '')
-        self.admin.save_model(self.request, self.entry,
-                              EntryAdmin.form(), False)
-        self.assertEqual(self.entry.excerpt, '')
-        self.entry.status = PUBLISHED
-        self.admin.save_model(self.request, self.entry,
-                              EntryAdmin.form(), False)
-        self.assertEqual(self.entry.excerpt, 'My content')
-
-        self.entry.content = 'My changed content'
-        self.admin.save_model(self.request, self.entry,
-                              EntryAdmin.form(), False)
-        self.assertEqual(self.entry.excerpt, 'My content')
-
-        self.entry.excerpt = ''
-        content = '<p>%s</p>' % ' '.join(['word-%s' % i for i in range(75)])
-        self.entry.content = content
-        self.admin.save_model(self.request, self.entry,
-                              EntryAdmin.form(), False)
-        self.assertEqual(self.entry.excerpt,
-                         ' '.join(['word-%s' % i for i in range(50)]) + '...')
 
     def test_queryset(self):
         user = Author.objects.create_user(
@@ -394,6 +364,32 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.admin.unmark_featured(self.request, Entry.objects.all())
         self.assertEqual(Entry.objects.filter(featured=True).count(), 0)
         self.assertEqual(len(self.request._messages.messages), 2)
+
+    def test_ping_directories(self):
+        class FakePinger(object):
+            def __init__(self, *ka, **kw):
+                self.results = [{'flerror': False, 'message': 'OK'},
+                                {'flerror': True, 'message': 'KO'}]
+
+            def join(self):
+                pass
+
+        original_pinger = entry_admin.DirectoryPinger
+        entry_admin.DirectoryPinger = FakePinger
+        original_ping_directories = settings.PING_DIRECTORIES
+        settings.PING_DIRECTORIES = ['http://ping.com/ping']
+
+        self.request._messages = TestMessageBackend()
+        self.admin.ping_directories(self.request, Entry.objects.all(), False)
+        self.assertEqual(len(self.request._messages.messages), 0)
+        self.admin.ping_directories(self.request, Entry.objects.all())
+        self.assertEqual(len(self.request._messages.messages), 2)
+        self.assertEqual(self.request._messages.messages,
+                         [(20, 'http://ping.com/ping : KO', ''),
+                          (20, 'http://ping.com/ping directory succesfully '
+                           'pinged 1 entries.', '')])
+        entry_admin.DirectoryPinger = original_pinger
+        settings.PING_DIRECTORIES = original_ping_directories
 
 
 class CategoryAdminTestCase(BaseAdminTestCase):

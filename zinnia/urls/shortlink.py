@@ -1,13 +1,11 @@
 """Urls for the Zinnia entries short link"""
 from django.conf.urls import url
-from django.conf.urls import patterns
 
 from zinnia.views.shortlink import EntryShortLink
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^(?P<token>[\dA-Z]+)/$',
         EntryShortLink.as_view(),
         name='entry_shortlink'),
-)
+]

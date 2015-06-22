@@ -23,9 +23,9 @@
 	{{ comment.name }}
 	{% endif %}
 	{% trans "on" context "on date" %}
-        <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
+        <time class="comment-published" datetime="{{ comment.submit_date|date:"c" }}">
           {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
+        </time>
       </p>
       {{ comment.comment|linebreaks }}
     </li>

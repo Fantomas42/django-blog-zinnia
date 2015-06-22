@@ -2,9 +2,11 @@
 """Test cases for Zinnia's admin widgets"""
 from django.test import TestCase
 from django.utils.encoding import smart_text
+from django.test.utils import override_settings
 
 from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_entry_signals
+from zinnia.admin.widgets import MiniTextarea
 from zinnia.admin.widgets import TagAutoComplete
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 
@@ -62,6 +64,15 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
             'Category 1</option>\n<option value="2" selected="selected" '
             'data-tree-id="1" data-left-value="2">|-- Category 2</option>')
 
+    @override_settings(STATIC_URL='/s/')
+    def test_media(self):
+        medias = MPTTFilteredSelectMultiple('test', False).media
+        self.assertEquals(medias._css, {})
+        self.assertEquals(medias._js, [
+            '/s/admin/js/core.js',
+            '/s/zinnia/admin/mptt/js/mptt_m2m_selectbox.js',
+            '/s/admin/js/SelectFilter2.js'])
+
 
 class TagAutoCompleteTestCase(TestCase):
 
@@ -97,6 +108,45 @@ class TagAutoCompleteTestCase(TestCase):
             '\n       width: "element",'
             '\n       maximumInputLength: 50,'
             '\n       tokenSeparators: [",", " "],'
-            '\n       tags: [\'test\',\'zinnia\']'
+            '\n       tags: ["test", "zinnia"]'
             '\n     });\n    });'
             '\n}(django.jQuery));\n</script>')
+
+    def test_render_tag_with_apostrophe(self):
+        widget = TagAutoComplete()
+        params = {'title': 'My entry',
+                  'tags': "zinnia, test, apos'trophe",
+                  'slug': 'my-entry'}
+        Entry.objects.create(**params)
+        self.maxDiff = None
+        self.assertEqual(
+            widget.render('tag', 'test,'),
+            '<input class="vTextField" name="tag" type="text" value="test," />'
+            '\n<script type="text/javascript">\n(function($) {'
+            '\n  $(document).ready(function() {'
+            '\n    $("#id_tag").select2({'
+            '\n       width: "element",'
+            '\n       maximumInputLength: 50,'
+            '\n       tokenSeparators: [",", " "],'
+            '\n       tags: ["apos\'trophe", "test", "zinnia"]'
+            '\n     });\n    });'
+            '\n}(django.jQuery));\n</script>')
+
+    @override_settings(STATIC_URL='/s/')
+    def test_media(self):
+        medias = TagAutoComplete().media
+        self.assertEquals(medias._css,
+                          {'all': ['/s/zinnia/admin/select2/css/select2.css']})
+        self.assertEquals(medias._js,
+                          ['/s/zinnia/admin/select2/js/select2.js'])
+
+
+class MiniTextareaTestCase(TestCase):
+
+    def test_render(self):
+        widget = MiniTextarea()
+        self.assertEqual(
+            widget.render('field', 'value'),
+            '<textarea class="vLargeTextField" '
+            'cols="40" name="field" rows="2">'
+            '\r\nvalue</textarea>')

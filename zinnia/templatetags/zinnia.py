@@ -34,17 +34,10 @@ from ..managers import DRAFT
 from ..managers import tags_published
 from ..flags import PINGBACK, TRACKBACK
 from ..settings import PROTOCOL
-from ..comparison import VectorBuilder
-from ..comparison import pearson_score
+from ..comparison import EntryPublishedVectorBuilder
 from ..calendar import Calendar
 from ..breadcrumbs import retrieve_breadcrumbs
 
-register = Library()
-
-VECTORS = None
-VECTORS_FACTORY = lambda: VectorBuilder(Entry.published.all(),
-                                        ['title', 'excerpt', 'content'])
-CACHE_ENTRIES_RELATED = {}
 
 WIDONT_REGEXP = re.compile(
     r'\s+(\S+\s*)$')
@@ -52,6 +45,8 @@ DOUBLE_SPACE_PUNCTUATION_WIDONT_REGEXP = re.compile(
     r'\s+([-+*/%=;:!?]+&nbsp;\S+\s*)$')
 END_PUNCTUATION_WIDONT_REGEXP = re.compile(
     r'\s+([?!]+\s*)$')
+
+register = Library()
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -137,48 +132,17 @@ def get_popular_entries(number=5, template='zinnia/tags/entries_popular.html'):
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_similar_entries(context, number=5,
-                        template='zinnia/tags/entries_similar.html',
-                        flush=False):
+                        template='zinnia/tags/entries_similar.html'):
     """
     Return similar entries.
     """
-    global VECTORS
-    global CACHE_ENTRIES_RELATED
+    entry = context.get('entry')
+    if not entry:
+        return {'template': template, 'entries': []}
 
-    if VECTORS is None or flush:
-        VECTORS = VECTORS_FACTORY()
-        CACHE_ENTRIES_RELATED = {}
+    vectors = EntryPublishedVectorBuilder()
+    entries = vectors.get_related(entry, number)
 
-    def compute_related(object_id, dataset):
-        """
-        Compute related entries to an entry with a dataset.
-        """
-        object_vector = None
-        for entry, e_vector in dataset.items():
-            if entry.pk == object_id:
-                object_vector = e_vector
-
-        if not object_vector:
-            return []
-
-        entry_related = {}
-        for entry, e_vector in dataset.items():
-            if entry.pk != object_id:
-                score = pearson_score(object_vector, e_vector)
-                if score:
-                    entry_related[entry] = score
-
-        related = sorted(entry_related.items(),
-                         key=lambda k_v: (k_v[1], k_v[0]))
-        return [rel[0] for rel in related]
-
-    object_id = context['object'].pk
-    columns, dataset = VECTORS()
-    key = '%s-%s' % (object_id, VECTORS.key)
-    if key not in CACHE_ENTRIES_RELATED.keys():
-        CACHE_ENTRIES_RELATED[key] = compute_related(object_id, dataset)
-
-    entries = CACHE_ENTRIES_RELATED[key][:number]
     return {'template': template,
             'entries': entries}
 
@@ -211,10 +175,13 @@ def get_calendar_entries(context, year=None, month=None,
     Return an HTML calendar of entries.
     """
     if not (year and month):
-        month_day = context.get('month') or context.get('day')
-        creation_date = getattr(context.get('object'), 'creation_date', None)
-        if month_day:
-            current_month = month_day
+        day_week_month = (context.get('day') or
+                          context.get('week') or
+                          context.get('month'))
+        creation_date = getattr(context.get('object'),
+                                'creation_date', None)
+        if day_week_month:
+            current_month = day_week_month
         elif creation_date:
             if settings.USE_TZ:
                 creation_date = timezone.localtime(creation_date)

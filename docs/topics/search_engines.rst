@@ -115,5 +115,3 @@ Complex example:
 Note that the query is stripped of common words known as stop words.
 These are words such as **on**, **the** or **which** that are generally
 not meaningful and cause irrelevant results.
-
-The list of stop words is stored in the :setting:`ZINNIA_STOP_WORDS` setting.

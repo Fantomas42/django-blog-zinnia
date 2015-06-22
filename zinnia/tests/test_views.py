@@ -6,8 +6,6 @@ from django.test import TestCase
 from django.utils import timezone
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
-from django.test.utils import restore_template_loaders
-from django.test.utils import setup_test_template_loader
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.signals import user_logged_in
 from django.contrib.auth.models import update_last_login
@@ -33,6 +31,9 @@ from zinnia.url_shortener.backends.default import base36
 
 @skipIfCustomUser
 @override_settings(
+    TEMPLATE_LOADERS=(
+        'zinnia.tests.utils.VoidLoader',
+    ),
     TEMPLATE_CONTEXT_PROCESSORS=(
         'django.core.context_processors.request',
     ))
@@ -72,22 +73,6 @@ class ViewsBaseCase(TestCase):
         entry.categories.add(self.category)
         entry.authors.add(self.author)
         self.second_entry = entry
-
-    def tearDown(self):
-        """Always try to restore the initial template loaders
-        even if the test_template_loader has not been enabled,
-        to avoid cascading errors if a test fails"""
-        try:
-            restore_template_loaders()
-        except AttributeError:
-            pass
-
-    def inhibit_templates(self, *template_names):
-        """
-        Set templates with no content to bypass the rendering time.
-        """
-        setup_test_template_loader(
-            dict(map(lambda x: (x, ''), template_names)))
 
     def create_published_entry(self):
         params = {'title': 'My test entry',
@@ -133,19 +118,20 @@ class ViewsBaseCase(TestCase):
         self.assertTrue('protocol' in response.context)
 
 
+@override_settings(
+    ROOT_URLCONF='zinnia.tests.implementations.urls.default'
+)
 class ViewsTestCase(ViewsBaseCase):
     """
     Test cases for generic views used in the application,
     for reproducing and correcting issue :
     http://github.com/Fantomas42/django-blog-zinnia/issues#issue/3
     """
-    urls = 'zinnia.tests.implementations.urls.default'
 
     @override_settings(USE_TZ=False)
     def test_zinnia_entry_archive_index_no_timezone(self):
         template_name_today = 'zinnia/archives/%s/entry_archive.html' % \
                               date.today().strftime('%Y/%m/%d')
-        self.inhibit_templates(template_name_today)
         response = self.check_publishing_context(
             '/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(response, template_name_today)
@@ -155,16 +141,12 @@ class ViewsTestCase(ViewsBaseCase):
         template_name_today = 'zinnia/archives/%s/entry_archive.html' % \
                               timezone.localtime(timezone.now()
                                                  ).strftime('%Y/%m/%d')
-        self.inhibit_templates(template_name_today)
         response = self.check_publishing_context(
             '/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(response, template_name_today)
 
     @override_settings(USE_TZ=False)
     def test_zinnia_entry_archive_year_no_timezone(self):
-        self.inhibit_templates(
-            'zinnia/archives/2010/entry_archive_year.html',
-            'zinnia/entry_archive_year.html')
         response = self.check_publishing_context(
             '/2010/', 2, 3, 'entry_list', 3)
         self.assertTemplateUsed(
@@ -177,9 +159,6 @@ class ViewsTestCase(ViewsBaseCase):
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_zinnia_entry_archive_year_with_timezone(self):
-        self.inhibit_templates(
-            'zinnia/archives/2010/entry_archive_year.html',
-            'zinnia/entry_archive_year.html')
         response = self.check_publishing_context(
             '/2010/', 2, 3, 'entry_list', 3)
         self.assertTemplateUsed(
@@ -192,9 +171,6 @@ class ViewsTestCase(ViewsBaseCase):
 
     @override_settings(USE_TZ=False)
     def test_zinnia_entry_archive_week_no_timezone(self):
-        self.inhibit_templates(
-            'zinnia/archives/2010/week/00/entry_archive_week.html',
-            'zinnia/entry_archive_week.html')
         response = self.check_publishing_context(
             '/2010/week/00/', 1, 2, 'entry_list', 3)
         self.assertTemplateUsed(
@@ -216,9 +192,6 @@ class ViewsTestCase(ViewsBaseCase):
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_zinnia_entry_archive_week_with_timezone(self):
-        self.inhibit_templates(
-            'zinnia/archives/2010/week/00/entry_archive_week.html',
-            'zinnia/entry_archive_week.html')
         response = self.check_publishing_context(
             '/2010/week/00/', 1, 2, 'entry_list', 3)
         self.assertTemplateUsed(
@@ -240,9 +213,6 @@ class ViewsTestCase(ViewsBaseCase):
 
     @override_settings(USE_TZ=False)
     def test_zinnia_entry_archive_month_no_timezone(self):
-        self.inhibit_templates(
-            'zinnia/archives/2010/month/01/entry_archive_month.html',
-            'zinnia/entry_archive_month.html')
         response = self.check_publishing_context(
             '/2010/01/', 1, 2, 'entry_list', 3)
         self.assertTemplateUsed(
@@ -259,9 +229,6 @@ class ViewsTestCase(ViewsBaseCase):
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_zinnia_entry_archive_month_with_timezone(self):
-        self.inhibit_templates(
-            'zinnia/archives/2010/month/01/entry_archive_month.html',
-            'zinnia/entry_archive_month.html')
         response = self.check_publishing_context(
             '/2010/01/', 1, 2, 'entry_list', 3)
         self.assertTemplateUsed(
@@ -278,9 +245,6 @@ class ViewsTestCase(ViewsBaseCase):
 
     @override_settings(USE_TZ=False)
     def test_zinnia_entry_archive_day_no_timezone(self):
-        self.inhibit_templates(
-            'zinnia/archives/2010/01/01/entry_archive_day.html',
-            'zinnia/entry_archive_day.html')
         response = self.check_publishing_context(
             '/2010/01/01/', 1, 2, 'entry_list', 2)
         self.assertTemplateUsed(
@@ -297,9 +261,6 @@ class ViewsTestCase(ViewsBaseCase):
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_zinnia_entry_archive_day_with_timezone(self):
-        self.inhibit_templates(
-            'zinnia/archives/2010/01/02/entry_archive_day.html',
-            'zinnia/entry_archive_day.html')
         response = self.check_publishing_context(
             '/2010/01/02/', 1, 2, 'entry_list', 2)
         self.assertTemplateUsed(
@@ -316,11 +277,12 @@ class ViewsTestCase(ViewsBaseCase):
 
     @override_settings(USE_TZ=False)
     def test_zinnia_entry_archive_today_no_timezone(self):
-        self.inhibit_templates('zinnia/entry_archive_today.html')
+        template_name_today = 'zinnia/archives/%s/entry_archive_today.html' % \
+                              date.today().strftime('%Y/%m/%d')
         with self.assertNumQueries(2):
             response = self.client.get('/today/')
-        self.assertTemplateUsed(response, 'zinnia/entry_archive_today.html')
-        self.assertEqual(response.context['day'].date(), date.today())
+        self.assertTemplateUsed(response, template_name_today)
+        self.assertEqual(response.context['day'], date.today())
         self.assertEqual(response.context['previous_month'], date(2010, 5, 1))
         self.assertEqual(response.context['next_month'], None)
         self.assertEqual(response.context['previous_day'], date(2010, 5, 31))
@@ -328,11 +290,13 @@ class ViewsTestCase(ViewsBaseCase):
 
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_zinnia_entry_archive_today_with_timezone(self):
-        self.inhibit_templates('zinnia/entry_archive_today.html')
+        template_name_today = 'zinnia/archives/%s/entry_archive_today.html' % \
+                              timezone.localtime(timezone.now()
+                                                 ).strftime('%Y/%m/%d')
         with self.assertNumQueries(2):
             response = self.client.get('/today/')
-        self.assertTemplateUsed(response, 'zinnia/entry_archive_today.html')
-        self.assertEqual(response.context['day'].date(), timezone.localtime(
+        self.assertTemplateUsed(response, template_name_today)
+        self.assertEqual(response.context['day'], timezone.localtime(
             timezone.now()).date())
         self.assertEqual(response.context['previous_month'], date(2010, 6, 1))
         self.assertEqual(response.context['next_month'], None)
@@ -357,22 +321,63 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.status_code, 404)
 
     def test_zinnia_entry_detail(self):
-        self.inhibit_templates('zinnia/_entry_detail.html', '404.html')
-        entry = self.create_published_entry()
+        entry = self.first_entry
+        with self.assertNumQueries(1):
+            response = self.client.get(entry.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+
         entry.sites.clear()
-        response = self.client.get(entry.get_absolute_url())
+        with self.assertNumQueries(1):
+            response = self.client.get(entry.get_absolute_url())
         self.assertEqual(response.status_code, 404)
-        entry.detail_template = '_entry_detail.html'
+        entry.sites.add(self.site)
+
+        entry.status = DRAFT
+        entry.save()
+        with self.assertNumQueries(2):
+            response = self.client.get(entry.get_absolute_url())
+        self.assertEqual(response.status_code, 404)
+        entry.status = PUBLISHED
+
+        entry.start_publication = datetime(2020, 1, 1, 12, 0)
+        entry.save()
+        with self.assertNumQueries(2):
+            response = self.client.get(entry.get_absolute_url())
+        self.assertEqual(response.status_code, 404)
+        entry.start_publication = None
+
+        entry.save()
+        with self.assertNumQueries(1):
+            response = self.client.get(entry.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+
+    @override_settings(USE_TZ=False)
+    def test_zinnia_entry_detail_no_timezone(self):
+        entry = self.create_published_entry()
+        entry.detail_template = 'entry_custom.html'
         entry.save()
         entry.sites.add(Site.objects.get_current())
         with self.assertNumQueries(1):
             response = self.client.get(entry.get_absolute_url())
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'zinnia/_entry_detail.html')
+        self.assertTemplateUsed(
+            response,
+            'zinnia/archives/2010/01/01/my-test-entry_entry_custom.html')
 
+    @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
+    def test_zinnia_entry_detail_with_timezone(self):
+        entry = self.create_published_entry()
+        entry.detail_template = 'entry_custom.html'
+        entry.save()
+        with self.assertNumQueries(1):
+            response = self.client.get(entry.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            'zinnia/archives/2010/01/02/my-test-entry_entry_custom.html')
+
+    @override_settings(USE_TZ=False)
     def test_zinnia_entry_detail_login(self):
-        self.inhibit_templates('zinnia/entry_detail.html',
-                               'zinnia/login.html')
         entry = self.create_published_entry()
         entry.login_required = True
         entry.save()
@@ -383,11 +388,12 @@ class ViewsTestCase(ViewsBaseCase):
                                     {'username': 'admin',
                                      'password': 'password'})
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'zinnia/entry_detail.html')
+        self.assertTemplateUsed(
+            response,
+            'zinnia/archives/2010/01/01/my-test-entry_entry_detail.html')
 
+    @override_settings(USE_TZ=False)
     def test_zinnia_entry_detail_password(self):
-        self.inhibit_templates('zinnia/entry_detail.html',
-                               'zinnia/password.html')
         entry = self.create_published_entry()
         entry.password = 'password'
         entry.save()
@@ -404,13 +410,13 @@ class ViewsTestCase(ViewsBaseCase):
             response = self.client.post(entry.get_absolute_url(),
                                         {'entry_password': 'password'})
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'zinnia/entry_detail.html')
+        self.assertTemplateUsed(
+            response,
+            'zinnia/archives/2010/01/01/my-test-entry_entry_detail.html')
 
+    @override_settings(USE_TZ=False)
     def test_zinnia_entry_detail_login_password(self):
         user_logged_in.disconnect(update_last_login)
-        self.inhibit_templates('zinnia/entry_detail.html',
-                               'zinnia/login.html',
-                               'zinnia/password.html')
         entry = self.create_published_entry()
         entry.password = 'password'
         entry.login_required = True
@@ -429,11 +435,12 @@ class ViewsTestCase(ViewsBaseCase):
             response = self.client.post(entry.get_absolute_url(),
                                         {'entry_password': 'password'})
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'zinnia/entry_detail.html')
+        self.assertTemplateUsed(
+            response,
+            'zinnia/archives/2010/01/01/my-test-entry_entry_detail.html')
         user_logged_in.connect(update_last_login)
 
     def test_zinnia_entry_detail_preview(self):
-        self.inhibit_templates('zinnia/entry_detail.html', '404.html')
         self.first_entry.status = DRAFT
         self.first_entry.save()
         url = self.first_entry.get_absolute_url()
@@ -446,18 +453,16 @@ class ViewsTestCase(ViewsBaseCase):
         with self.assertNumQueries(3):
             response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.client.login(username='admin', password='password')
+        self.client.login(username=self.author.username, password='password')
         with self.assertNumQueries(6):
             response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_zinnia_entry_channel(self):
-        self.inhibit_templates('zinnia/entry_list.html')
         self.check_publishing_context(
             '/channel-test/', 2, 3, 'entry_list', 1)
 
     def test_zinnia_category_list(self):
-        self.inhibit_templates('zinnia/category_list.html')
         category = Category.objects.create(
             title='New category', slug='new-category')
         self.check_publishing_context(
@@ -468,7 +473,6 @@ class ViewsTestCase(ViewsBaseCase):
         self.check_publishing_context('/categories/', 2)
 
     def test_zinnia_category_detail(self):
-        self.inhibit_templates('zinnia/category/tests/entry_list.html')
         response = self.check_publishing_context(
             '/categories/tests/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(
@@ -478,7 +482,6 @@ class ViewsTestCase(ViewsBaseCase):
     def test_zinnia_category_detail_paginated(self):
         """Test case reproducing issue #42 on category
         detail view paginated"""
-        self.inhibit_templates('zinnia/entry_list.html')
         for i in range(PAGINATION):
             params = {'title': 'My entry %i' % i,
                       'content': 'My content %i' % i,
@@ -497,7 +500,6 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.context['category'].slug, 'tests')
 
     def test_zinnia_author_list(self):
-        self.inhibit_templates('zinnia/author_list.html')
         user = Author.objects.create(username='new-user',
                                      email='new_user@example.com')
         self.check_publishing_context(
@@ -508,7 +510,6 @@ class ViewsTestCase(ViewsBaseCase):
         self.check_publishing_context('/authors/', 2)
 
     def test_zinnia_author_detail(self):
-        self.inhibit_templates('zinnia/author/admin/entry_list.html')
         response = self.check_publishing_context(
             '/authors/admin/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(
@@ -518,7 +519,6 @@ class ViewsTestCase(ViewsBaseCase):
     def test_zinnia_author_detail_paginated(self):
         """Test case reproducing issue #207 on author
         detail view paginated"""
-        self.inhibit_templates('zinnia/entry_list.html')
         for i in range(PAGINATION):
             params = {'title': 'My entry %i' % i,
                       'content': 'My content %i' % i,
@@ -537,7 +537,6 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.context['author'].username, 'admin')
 
     def test_zinnia_tag_list(self):
-        self.inhibit_templates('zinnia/tag_list.html')
         self.check_publishing_context(
             '/tags/', 1,
             friendly_context='tag_list',
@@ -547,7 +546,6 @@ class ViewsTestCase(ViewsBaseCase):
         self.check_publishing_context('/tags/', 2)
 
     def test_zinnia_tag_detail(self):
-        self.inhibit_templates('zinnia/tag/tests/entry_list.html', '404.html')
         response = self.check_publishing_context(
             '/tags/tests/', 2, 3, 'entry_list', 2)
         self.assertTemplateUsed(
@@ -557,7 +555,6 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.status_code, 404)
 
     def test_zinnia_tag_detail_paginated(self):
-        self.inhibit_templates('zinnia/entry_list.html')
         for i in range(PAGINATION):
             params = {'title': 'My entry %i' % i,
                       'content': 'My content %i' % i,
@@ -576,7 +573,6 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.context['tag'].name, 'tests')
 
     def test_zinnia_entry_search(self):
-        self.inhibit_templates('zinnia/entry_search.html')
         self.check_publishing_context(
             '/search/?pattern=test', 2, 3, 'entry_list', 1)
         response = self.client.get('/search/?pattern=ab')
@@ -589,14 +585,12 @@ class ViewsTestCase(ViewsBaseCase):
                          _('No pattern to search found'))
 
     def test_zinnia_entry_random(self):
-        self.inhibit_templates('zinnia/entry_detail.html')
         response = self.client.get('/random/', follow=True)
         self.assertTrue(response.redirect_chain[0][0].startswith(
             'http://testserver/2010/'))
         self.assertEqual(response.redirect_chain[0][1], 302)
 
     def test_zinnia_sitemap(self):
-        self.inhibit_templates('zinnia/sitemap.html')
         with self.assertNumQueries(0):
             response = self.client.get('/sitemap/')
         self.assertEqual(len(response.context['entries']), 2)
@@ -611,7 +605,6 @@ class ViewsTestCase(ViewsBaseCase):
     def test_zinnia_trackback(self):
         # Clear the cache of user flagger to avoid error on MySQL
         get_user_flagger.cache_clear()
-        self.inhibit_templates('zinnia/entry_trackback.xml', '404.html')
         response = self.client.post('/trackback/404/')
         trackback_url = '/trackback/%s/' % self.first_entry.pk
         self.assertEqual(response.status_code, 404)
@@ -650,7 +643,6 @@ class ViewsTestCase(ViewsBaseCase):
     def test_zinnia_trackback_on_entry_without_author(self):
         # Clear the cache of user flagger to avoid error on MySQL
         get_user_flagger.cache_clear()
-        self.inhibit_templates('zinnia/entry_trackback.xml')
         self.first_entry.authors.clear()
         response = self.client.post('/trackback/%s/' % self.first_entry.pk,
                                     {'url': 'http://example.com'})
@@ -658,11 +650,6 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual('error' in response.context, False)
 
     def test_capabilities(self):
-        self.inhibit_templates(
-            'zinnia/humans.txt',
-            'zinnia/rsd.xml',
-            'zinnia/wlwmanifest.xml',
-            'zinnia/opensearch.xml')
         self.check_capabilities('/humans.txt', 'text/plain', 0)
         self.check_capabilities('/rsd.xml', 'application/rsd+xml', 0)
         self.check_capabilities('/wlwmanifest.xml',
@@ -671,8 +658,6 @@ class ViewsTestCase(ViewsBaseCase):
                                 'application/opensearchdescription+xml', 0)
 
     def test_comment_success(self):
-        self.inhibit_templates('comments/zinnia/entry/posted.html',
-                               'zinnia/entry_list.html')
         with self.assertNumQueries(0):
             response = self.client.get('/comments/success/')
         self.assertTemplateUsed(response, 'comments/zinnia/entry/posted.html')
@@ -699,7 +684,6 @@ class ViewsTestCase(ViewsBaseCase):
             ('http://example.com/categories/tests/', 302))
 
     def test_comment_success_invalid_pk_issue_292(self):
-        self.inhibit_templates('comments/zinnia/entry/posted.html')
         with self.assertNumQueries(0):
             response = self.client.get('/comments/success/?c=file.php')
         self.assertTemplateUsed(response, 'comments/zinnia/entry/posted.html')
@@ -785,19 +769,15 @@ class ViewsTestCase(ViewsBaseCase):
         quick_entry.MARKUP_LANGUAGE = original_markup_language
 
 
+@override_settings(
+    ROOT_URLCONF='zinnia.tests.implementations.urls.custom_detail_views'
+)
 class CustomDetailViewsTestCase(ViewsBaseCase):
     """
     Tests with an alternate urls.py that modifies how author_detail,
     tags_detail and categories_detail views to be called with a custom
     template_name keyword argument and an extra_context.
     """
-    urls = 'zinnia.tests.implementations.urls.custom_detail_views'
-
-    def setUp(self):
-        """We don't need to generate the full template
-        to make the tests working"""
-        super(CustomDetailViewsTestCase, self).setUp()
-        self.inhibit_templates('zinnia/entry_custom_list.html')
 
     def test_custom_category_detail(self):
         response = self.check_publishing_context('/categories/tests/', 2, 3)

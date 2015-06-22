@@ -1,3 +1,27 @@
+0.15.2
+------
+
+* Covering of the code at 100%
+* Compatibility with Django 1.8
+* Improvements on the Calendar
+* Improvements on ``CategoryFeed``
+* Improvements on ``Entry.save()``
+* Improvements on ping of external URLs
+* Improvements on the comparison module
+* Improvements on the translation strings
+* The default theme is now in HTML5
+* The default theme supports Microdatas
+* Add a ``lead`` field on the Entry model
+* Add an ``image_caption`` field on the Entry model
+* Fix preview of entries when not yet published
+* Fix migrations when using custom ``User`` model
+* More generic parameter for MarkDown extensions
+* Import utilies were moved to their own package
+* The fields where the search is done are now configurable
+
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.15.1...v0.15.2
+
 0.15.1
 ------
 

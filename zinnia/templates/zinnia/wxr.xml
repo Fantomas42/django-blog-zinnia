@@ -37,7 +37,7 @@
     <item>
       <title>{{ entry.title }}</title>
       <link>{{ site_url }}{{ entry.get_absolute_url }}</link>
-      <pubDate>{{ entry.creation_date|date:"r" }}</pubDate>
+      <pubDate>{{ entry.publication_date|date:"r" }}</pubDate>
       <dc:creator><![CDATA[{% with author=entry.authors.all.0 %}{% if author %}{{ author }}{% else %}Anonymous{% endif %}{% endwith %}]]></dc:creator>
       {% for category in entry.categories.all %}
       <category domain="category" nicename="{{ category.slug }}"><![CDATA[{{ category.title }}]]></category>

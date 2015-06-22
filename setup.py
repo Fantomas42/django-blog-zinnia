@@ -33,10 +33,12 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=['beautifulsoup4>=4.3.2',
-                      'django-contrib-comments>=1.5',
+                      'django-contrib-comments>=1.6.0',
                       'django-mptt>=0.6.1',
-                      'django-tagging>=0.3.4',
+                      'django-tagging>=0.3.6',
                       'django-xmlrpc>=0.1.5',
+                      'mots-vides>=2015.5.11',
+                      'pillow>=2.0.0',
                       'pyparsing>=2.0.3',
                       'pytz>=2014.10']
 )

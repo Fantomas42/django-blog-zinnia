@@ -33,29 +33,29 @@ String defining the base model path for the Entry model. See
 
 ZINNIA_ENTRY_DETAIL_TEMPLATES
 -----------------------------
-**Default value:** ``()`` (Empty tuple)
+**Default value:** ``[]`` (Empty list)
 
 List of tuple for extending the list of templates availables for
 rendering the entry detail view. By using this setting, you can
 change the look and feel of an entry page directly in the admin
 interface. Example: ::
 
-  ZINNIA_ENTRY_DETAIL_TEMPLATES = (('entry_detail_alternate.html',
-                                    gettext('Alternative template')),)
+  ZINNIA_ENTRY_DETAIL_TEMPLATES = [('entry_detail_alternate.html',
+                                    gettext('Alternative template')),]
 
 .. setting:: ZINNIA_ENTRY_CONTENT_TEMPLATES
 
 ZINNIA_ENTRY_CONTENT_TEMPLATES
 ------------------------------
-**Default value:** ``()`` (Empty tuple)
+**Default value:** ``[]`` (Empty list)
 
 List of tuple for extending the list of templates availables for
 rendering the content of an entry. By using this setting, you can
 change the look and feel of an entry directly in the admin
 interface. Example: ::
 
-  ZINNIA_ENTRY_CONTENT_TEMPLATES = (('zinnia/_entry_detail_alternate.html',
-                                     gettext('Alternative template')),)
+  ZINNIA_ENTRY_CONTENT_TEMPLATES = [('zinnia/_entry_detail_alternate.html',
+                                     gettext('Alternative template')),]
 
 .. setting:: ZINNIA_UPLOAD_TO
 
@@ -85,19 +85,17 @@ You can use one of these values: ::
 
     ['html', 'markdown', 'restructuredtext', 'textile']
 
-The value of this variable will alter the value of :setting:`ZINNIA_WYSIWYG`
-if you don't set it.
-
 .. setting:: ZINNIA_MARKDOWN_EXTENSIONS
 
 ZINNIA_MARKDOWN_EXTENSIONS
 --------------------------
-**Default value:** ``''`` (Empty string)
+**Default value:** ``[]`` (Empty list)
 
-Extensions names coma separated to be used for rendering the entries in
-MarkDown. Example: ::
+List of either markdown.Extension instances or extension paths, used for
+rendering the entries in MarkDown. Example: ::
 
-  ZINNIA_MARKDOWN_EXTENSIONS = 'extension1_name,extension2_name...'
+  ZINNIA_MARKDOWN_EXTENSIONS =  ['markdown.extensions.nl2br',
+                                 MyExtension(mysetting="foo")]
 
 .. setting:: ZINNIA_RESTRUCTUREDTEXT_SETTINGS
 
@@ -135,6 +133,8 @@ ZINNIA_PREVIEW_MAX_WORDS
 
 Number of words used to build the entry's preview if no split markers are
 found.
+
+.. setting:: ZINNIA_PREVIEW_MORE_STRING
 
 ZINNIA_PREVIEW_MORE_STRING
 --------------------------
@@ -291,7 +291,7 @@ new public comment has been posted.
 
 ZINNIA_SPAM_CHECKER_BACKENDS
 ----------------------------
-**Default value:** ``()`` (Empty tuple)
+**Default value:** ``[]`` (Empty list)
 
 List of strings representing the module path to a spam checker backend.
 See :doc:`/topics/spam_checker` for more informations about this setting.
@@ -383,27 +383,6 @@ ZINNIA_PINGBACK_CONTENT_LENGTH
 
 Size of the excerpt generated on pingback.
 
-.. _settings-similarity:
-
-Similarity
-==========
-
-.. setting:: ZINNIA_F_MIN
-
-ZINNIA_F_MIN
-------------
-**Default value:** ``0.1``
-
-Float setting of the minimal word frequency for similar entries.
-
-.. setting:: ZINNIA_F_MAX
-
-ZINNIA_F_MAX
-------------
-**Default value:** ``1.0``
-
-Float setting of the minimal word frequency for similar entries.
-
 .. _settings-misc:
 
 Miscellaneous
@@ -418,20 +397,18 @@ ZINNIA_COPYRIGHT
 String used for copyrighting your entries, used in the syndication feeds
 and in the opensearch document.
 
-.. setting:: ZINNIA_STOP_WORDS
+.. setting:: ZINNIA_COMPARISON_FIELDS
 
-ZINNIA_STOP_WORDS
------------------
-**Default value:** See :file:`zinnia/settings.py`
+ZINNIA_COMPARISON_FIELDS
+------------------------
+**Default value:** ``['title', 'lead', 'content', 'excerpt', 'image_caption', 'tags']``
 
-List of common words excluded from the advanced search engine
-to optimize the search querying and the results.
+List of text fields used to find similarity between entries.
 
-.. setting:: ZINNIA_USE_TWITTER
+.. setting:: ZINNIA_SEARCH_FIELDS
 
-ZINNIA_USE_TWITTER
-------------------
-**Default value:** ``True if the crendentials of Twitter have been defined``
+ZINNIA_SEARCH_FIELDS
+--------------------
+**Default value:** ``['title', 'lead', 'content', 'excerpt', 'image_caption', 'tags']``
 
-Boolean telling if the credentials of a Twitter account have been set and
-if Zinnia can post on Twitter.
+List of text fields used to search within entries.

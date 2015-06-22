@@ -62,7 +62,7 @@ or you can visit these websites who use Zinnia.
 
 * `Fantomas' side`_
 * `Darwin's Weblog`_
-* `ShiningPanda`_
+* `Ubuntu's developers blog`_
 * `Tryolabs`_
 * `AR.Drone Best of User Videos`_
 * `Professional Web Studio`_
@@ -125,8 +125,8 @@ More information and help available at these URLs:
 .. _`TinyMCE`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-tinymce
 .. _`CKEditor`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-ckeditor
 .. _`MarkItUp`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-markitup
-.. _`Blogger conversion utility`: http://docs.django-blog-zinnia.com/en/latest/how-to/import_export.html#from-blogger-to-zinnia
-.. _`WordPress conversion utility`: http://docs.django-blog-zinnia.com/en/latest/how-to/import_export.html#from-wordpress-to-zinnia
+.. _`Blogger conversion utility`: https://github.com/django-blog-zinnia/blogger2zinnia
+.. _`WordPress conversion utility`: https://github.com/django-blog-zinnia/wordpress2zinnia
 .. _`Compass`: http://compass-style.org/
 .. _`Sass3`: http://sass-lang.com/
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
@@ -139,7 +139,7 @@ More information and help available at these URLs:
 .. _`Infantium`: http://www.infantium.com/blog/
 .. _`AR.Drone Best of User Videos`: http://ardrone.parrot.com/best-of-user-videos/
 .. _`Darwin's Weblog`: http://darwin.willbreak.it/
-.. _`ShiningPanda`: http://www.shiningpanda.com/blog/
+.. _`Ubuntu's developers blog`: http://developer.ubuntu.com/en/blog/
 .. _`Pana`: http://chusen87.com/news/
 .. _`MAGIC Center at RIT`: http://magic.rit.edu/
 .. _`Rudolf Steiner School of Kreuzlingen`: http://www.steinerschulekreuzlingen.ch/

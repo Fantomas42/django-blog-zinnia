@@ -1,5 +1,4 @@
 """XML-RPC methods of Zinnia metaWeblog API"""
-import os
 from datetime import datetime
 try:
     from xmlrpc.client import Fault
@@ -14,8 +13,6 @@ from django.utils import timezone
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils.translation import gettext as _
-from django.utils.text import Truncator
-from django.utils.html import strip_tags
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.template.defaultfilters import slugify
@@ -28,7 +25,6 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.settings import PROTOCOL
-from zinnia.settings import UPLOAD_TO
 from zinnia.managers import DRAFT, PUBLISHED
 
 
@@ -295,8 +291,7 @@ def new_post(blog_id, username, password, post, publish):
 
     entry_dict = {'title': post['title'],
                   'content': post['description'],
-                  'excerpt': post.get('mt_excerpt', Truncator(
-                      strip_tags(post['description'])).words(50)),
+                  'excerpt': post.get('mt_excerpt', ''),
                   'creation_date': creation_date,
                   'last_update': creation_date,
                   'comment_enabled': post.get('mt_allow_comments', 1) == 1,
@@ -348,8 +343,7 @@ def edit_post(post_id, username, password, post, publish):
 
     entry.title = post['title']
     entry.content = post['description']
-    entry.excerpt = post.get('mt_excerpt', Truncator(
-        strip_tags(post['description'])).words(50))
+    entry.excerpt = post.get('mt_excerpt', '')
     entry.creation_date = creation_date
     entry.last_update = timezone.now()
     entry.comment_enabled = post.get('mt_allow_comments', 1) == 1
@@ -386,6 +380,6 @@ def new_media_object(blog_id, username, password, media):
     => media structure
     """
     authenticate(username, password)
-    path = default_storage.save(os.path.join(UPLOAD_TO, media['name']),
+    path = default_storage.save(Entry().image_upload_to(media['name']),
                                 ContentFile(media['bits'].data))
     return {'url': default_storage.url(path)}

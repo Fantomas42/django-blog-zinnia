@@ -1,5 +1,6 @@
 """Search module with complex query parsing for Zinnia"""
 from django.utils import six
+from django.db.models import Q
 
 from pyparsing import Word
 from pyparsing import alphas
@@ -16,11 +17,10 @@ from pyparsing import ParseResults
 from pyparsing import CaselessLiteral
 from pyparsing import operatorPrecedence
 
-from django.db.models import Q
-
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.settings import STOP_WORDS
+from zinnia.settings import SEARCH_FIELDS
 
 
 def createQ(token):
@@ -47,28 +47,29 @@ def createQ(token):
                 wildcards = 'END'
                 search = query[0]
 
-    # Ignore connective words (of, a, an...) and STOP_WORDS
+    # Ignore short term and stop words
     if (len(search) < 3 and not search.isdigit()) or search in STOP_WORDS:
         return Q()
 
     if not meta:
-        return Q(content__icontains=search) | \
-            Q(excerpt__icontains=search) | \
-            Q(title__icontains=search)
+        q = Q()
+        for field in SEARCH_FIELDS:
+            q |= Q(**{'%s__icontains' % field: search})
+        return q
 
     if meta == 'category':
         if wildcards == 'BOTH':
-            return Q(categories__title__icontains=search) | \
-                Q(categories__slug__icontains=search)
+            return (Q(categories__title__icontains=search) |
+                    Q(categories__slug__icontains=search))
         elif wildcards == 'START':
-            return Q(categories__title__iendswith=search) | \
-                Q(categories__slug__iendswith=search)
+            return (Q(categories__title__iendswith=search) |
+                    Q(categories__slug__iendswith=search))
         elif wildcards == 'END':
-            return Q(categories__title__istartswith=search) | \
-                Q(categories__slug__istartswith=search)
+            return (Q(categories__title__istartswith=search) |
+                    Q(categories__slug__istartswith=search))
         else:
-            return Q(categories__title__iexact=search) | \
-                Q(categories__slug__iexact=search)
+            return (Q(categories__title__iexact=search) |
+                    Q(categories__slug__iexact=search))
     elif meta == 'author':
         if wildcards == 'BOTH':
             return Q(**{'authors__%s__icontains' % Author.USERNAME_FIELD:

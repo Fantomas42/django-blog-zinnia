@@ -39,6 +39,16 @@ class HTMLPreviewTestCase(TestCase):
         self.assertEqual(str(preview), '<p>Hello the .........</p>')
         self.assertEqual(preview.has_more, True)
 
+    def test_has_more_with_lead(self):
+        text = '<p>Hello the World</p>'
+        lead = '<p>Lead paragraph</p>'
+        preview = HTMLPreview(text, lead)
+        self.assertEqual(str(preview), '<p>Lead paragraph</p>')
+        self.assertEqual(preview.has_more, True)
+        preview = HTMLPreview('', lead)
+        self.assertEqual(str(preview), '<p>Lead paragraph</p>')
+        self.assertEqual(preview.has_more, False)
+
     def test_str_non_ascii_issue_314(self):
         text = '<p>тест non ascii</p>'
         preview = HTMLPreview(text, splitters=[],
@@ -54,3 +64,22 @@ class HTMLPreviewTestCase(TestCase):
         self.assertEqual(preview.remaining_words, 2)
         self.assertEqual(preview.displayed_percent, 50.0)
         self.assertEqual(preview.remaining_percent, 50.0)
+
+    def test_metrics_with_lead(self):
+        text = '<p>Hello World</p> <p>Hello dude</p>'
+        lead = '<p>Lead paragraph</p>'
+        preview = HTMLPreview(text, lead, splitters=[],
+                              max_words=2, more_string=' ...')
+        self.assertEqual(preview.total_words, 6)
+        self.assertEqual(preview.displayed_words, 2)
+        self.assertEqual(preview.remaining_words, 4)
+        self.assertEqual('%.2f' % preview.displayed_percent, '33.33')
+        self.assertEqual('%.2f' % preview.remaining_percent, '66.67')
+
+    def test_empty_text(self):
+        preview = HTMLPreview('')
+        self.assertEqual(str(preview), '')
+        self.assertEqual(preview.has_more, False)
+        preview = HTMLPreview('', '')
+        self.assertEqual(str(preview), '')
+        self.assertEqual(preview.has_more, False)

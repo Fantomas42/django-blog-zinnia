@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-blog-zinnia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-04 16:34+0100\n"
-"PO-Revision-Date: 2014-10-14 13:32+0000\n"
+"POT-Creation-Date: 2015-02-13 11:37+0100\n"
+"PO-Revision-Date: 2015-02-13 10:37+0000\n"
 "Last-Translator: Julien Fache <fantomas42@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/django-blog-zinnia/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -19,284 +19,157 @@ msgstr ""
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: breadcrumbs.py:68 admin/forms.py:66
-#: templates/admin/zinnia/widgets/quickpost.html:25
-#: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:53
-#: templates/zinnia/tag_list.html:6
-msgid "Tags"
-msgstr "Etiketter"
-
-#: breadcrumbs.py:71 templates/zinnia/author_list.html:6
-#: templates/zinnia/base.html:43
-msgid "Authors"
-msgstr "Skribent"
-
-#: breadcrumbs.py:75 admin/forms.py:60 templates/zinnia/base.html:37
-#: templates/zinnia/category_list.html:6
-msgid "Categories"
-msgstr "Kategorier"
-
-#: breadcrumbs.py:100
-#, python-format
-msgid "Page %s"
-msgstr "Sida %s"
-
-#: breadcrumbs.py:128
-#, python-format
-msgid "Week %s"
-msgstr "Vecka %s"
-
-#: feeds.py:175 templates/zinnia/entry_archive.html:4
-#: templates/zinnia/entry_archive.html:6
-msgid "Latest entries"
-msgstr "Senaste inläggen"
-
-#: feeds.py:181
-#, python-format
-msgid "The latest entries for the site %s"
-msgstr "De senaste inläggen för sidan %s"
-
-#: feeds.py:211
-#, python-format
-msgid "Entries for the category %s"
-msgstr "Inlägg från kategorin %s"
-
-#: feeds.py:217
-#, python-format
-msgid "The latest entries for the category %s"
-msgstr "De senaste inläggen i kategorin %s"
-
-#: feeds.py:247
-#, python-format
-msgid "Entries for author %s"
-msgstr "Inlägg av skribenten %s"
-
-#: feeds.py:253
-#, python-format
-msgid "The latest entries by %s"
-msgstr "De senaste inläggen av %s"
-
-#: feeds.py:284
-#, python-format
-msgid "Entries for the tag %s"
-msgstr "Inlägg med tagg %s"
-
-#: feeds.py:290
-#, python-format
-msgid "The latest entries for the tag %s"
-msgstr "De senaste inläggen med taggen %s"
-
-#: feeds.py:323
-#, python-format
-msgid "Results of the search for '%s'"
-msgstr "Sökresultat för '%s'"
-
-#: feeds.py:329
-#, python-format
-msgid "The entries containing the pattern '%s'"
-msgstr "Inläggen som innehåller '%s'"
-
-#: feeds.py:394
-msgid "Latest discussions"
-msgstr "Senaste diskussionerna"
-
-#: feeds.py:400
-#, python-format
-msgid "The latest discussions for the site %s"
-msgstr "De senaste diskussionerna för sidan %s"
-
-#: feeds.py:433
-#, python-format
-msgid "Discussions on %s"
-msgstr "Diskussioner på %s"
-
-#: feeds.py:439
-#, python-format
-msgid "The latest discussions for the entry %s"
-msgstr "De senaste diskussionerna för inlägget %s"
-
-#: feeds.py:466
-#, python-format
-msgid "Comments on %s"
-msgstr "Kommentarer på %s"
-
-#: feeds.py:472
-#, python-format
-msgid "The latest comments for the entry %s"
-msgstr "De senaste kommentarerna för inlägget %s"
-
-#: feeds.py:516
-#, python-format
-msgid "Pingbacks on %s"
-msgstr "Pingbacks på %s"
-
-#: feeds.py:522
-#, python-format
-msgid "The latest pingbacks for the entry %s"
-msgstr "De senaste pingbacksen för inlägget %s"
-
-#: feeds.py:548
-#, python-format
-msgid "Trackbacks on %s"
-msgstr "Trackbacks på %s"
-
-#: feeds.py:554
-#, python-format
-msgid "The latest trackbacks for the entry %s"
-msgstr "De senaste trackbacksen för inlägg %s"
-
-#: moderator.py:66 moderator.py:88 moderator.py:111
-#, python-format
-msgid "[%(site)s] New comment posted on \"%(title)s\""
-msgstr "[%(site)s] Nya kommentar för \"%(title)s\""
-
 #: admin/category.py:34
 msgid "tree path"
 msgstr "sökväg"
 
-#: admin/entry.py:30 templates/admin/zinnia/widgets/quickpost.html:17
+#: admin/entry.py:28 templates/admin/zinnia/widgets/quickpost.html:17
 msgid "Content"
 msgstr "Innehåll"
 
-#: admin/entry.py:32
+#: admin/entry.py:30
+msgid "Illustration"
+msgstr ""
+
+#: admin/entry.py:33
 msgid "Publication"
 msgstr "Publicering"
 
-#: admin/entry.py:36 templates/admin/zinnia/widgets/_content_stats.html:4
-#: templates/zinnia/_entry_detail_base.html:114
+#: admin/entry.py:37 templates/admin/zinnia/widgets/_content_stats.html:4
+#: templates/zinnia/_entry_detail_base.html:125
 msgid "Discussions"
 msgstr "Diskussioner"
 
-#: admin/entry.py:40
+#: admin/entry.py:41
 msgid "Privacy"
 msgstr "Sekretess"
 
-#: admin/entry.py:43
+#: admin/entry.py:44
 msgid "Templates"
 msgstr "Mallar"
 
-#: admin/entry.py:46
+#: admin/entry.py:47
 msgid "Metadatas"
 msgstr "Metadata"
 
-#: admin/entry.py:78
+#: admin/entry.py:79
 #, python-format
 msgid "%(title)s (%(word_count)i words)"
 msgstr "%(title)s (%(word_count)i ord)"
 
-#: admin/entry.py:85
+#: admin/entry.py:86
 #, python-format
 msgid "%(title)s (%(reactions)i reaction)"
 msgid_plural "%(title)s (%(reactions)i reactions)"
 msgstr[0] "%(title)s (%(reactions)i reaktion)"
 msgstr[1] "%(title)s (%(reactions)i reaktioner)"
 
-#: admin/entry.py:90 models/category.py:21 models_bases/entry.py:50
+#: admin/entry.py:91 models/category.py:21 models_bases/entry.py:51
 msgid "title"
 msgstr "titel"
 
-#: admin/entry.py:106
+#: admin/entry.py:107
 msgid "author(s)"
 msgstr "skribent(er)"
 
-#: admin/entry.py:121
+#: admin/entry.py:122
 msgid "category(s)"
 msgstr "kategori(er)"
 
-#: admin/entry.py:134
+#: admin/entry.py:135
 msgid "tag(s)"
 msgstr "tagg(ar)"
 
-#: admin/entry.py:149
+#: admin/entry.py:150
 msgid "site(s)"
 msgstr "sida/or"
 
-#: admin/entry.py:162
+#: admin/entry.py:163
 msgid "short url"
 msgstr "kort url"
 
-#: admin/entry.py:170
+#: admin/entry.py:171
 msgid "is visible"
 msgstr "är synlig"
 
-#: admin/entry.py:254
+#: admin/entry.py:249
 msgid "The selected entries now belong to you."
 msgstr "De markerade inläggen hör nu till dig."
 
-#: admin/entry.py:255
+#: admin/entry.py:250
 msgid "Set the entries to the user"
 msgstr "Tilldela inläggen till användaren"
 
-#: admin/entry.py:264
+#: admin/entry.py:259
 msgid "The selected entries are now marked as published."
 msgstr "De valda inläggen är nu markerade som publicerade."
 
-#: admin/entry.py:265
+#: admin/entry.py:260
 msgid "Set entries selected as published"
 msgstr "Markera valda inlägg som publicerade"
 
-#: admin/entry.py:273
+#: admin/entry.py:268
 msgid "The selected entries are now marked as hidden."
 msgstr "De valda inläggen är nu markerade som dolda."
 
-#: admin/entry.py:274
+#: admin/entry.py:269
 msgid "Set entries selected as hidden"
 msgstr "Markera valda inlägg som dolda"
 
-#: admin/entry.py:282
+#: admin/entry.py:277
 msgid "Comments are now closed for selected entries."
 msgstr "Kommentarer är nu avstängt för valda inlägg."
 
-#: admin/entry.py:283
+#: admin/entry.py:278
 msgid "Close the comments for selected entries"
 msgstr "Stäng av kommentarer för valda inlägg"
 
-#: admin/entry.py:292
+#: admin/entry.py:287
 msgid "Pingbacks are now closed for selected entries."
 msgstr "Pingbacks är nu avstängt för valda inlägg."
 
-#: admin/entry.py:294
+#: admin/entry.py:289
 msgid "Close the pingbacks for selected entries"
 msgstr "Stäng av pingbacks för valda inlägg"
 
-#: admin/entry.py:302
+#: admin/entry.py:297
 msgid "Trackbacks are now closed for selected entries."
 msgstr "Trackbacks är nu avstängt för valda inlägg."
 
-#: admin/entry.py:304
+#: admin/entry.py:299
 msgid "Close the trackbacks for selected entries"
 msgstr "Stäng av trackbacks för valda inlägg"
 
-#: admin/entry.py:313
+#: admin/entry.py:308
 msgid "The selected entries are now set at the current date."
 msgstr "De valda inläggen har nu satts till aktuellt datum."
 
-#: admin/entry.py:315
+#: admin/entry.py:310
 msgid "Put the selected entries on top at the current date"
 msgstr "Sätt datum för valda inlägg till aktuell tid"
 
-#: admin/entry.py:323
+#: admin/entry.py:318
 msgid "Selected entries are now marked as featured."
 msgstr "Valda inlägg är nu markerade som huvudnummer."
 
-#: admin/entry.py:324
+#: admin/entry.py:319
 msgid "Mark selected entries as featured"
 msgstr "Markera valda inlägg som huvudnummer"
 
-#: admin/entry.py:332
+#: admin/entry.py:327
 msgid "Selected entries are no longer marked as featured."
 msgstr "Valda inlägg är inte längre markerade som huvudnummer."
 
-#: admin/entry.py:334
+#: admin/entry.py:329
 msgid "Unmark selected entries as featured"
 msgstr "Avmarekera valda inlägg som huvudnummer"
 
-#: admin/entry.py:355
+#: admin/entry.py:350
 #, python-format
 msgid "%(directory)s directory succesfully pinged %(success)d entries."
 msgstr "Katalogen %(directory)s har pingat %(success)d inlägg."
 
-#: admin/entry.py:359
+#: admin/entry.py:354
 msgid "Ping Directories for selected entries"
 msgstr "Pinga kataloger för valda inlägg"
 
@@ -315,23 +188,154 @@ msgstr "publicerade skribenter"
 msgid "published categories"
 msgstr "publicerade kategorier"
 
-#: admin/forms.py:25
+#: admin/forms.py:23
 msgid "Parent category"
 msgstr "Förälderkategori"
 
-#: admin/forms.py:27
+#: admin/forms.py:25
 msgid "No parent category"
 msgstr "Ingen förälderkategori"
 
-#: admin/forms.py:44
+#: admin/forms.py:42
 msgid "A category cannot be parent of itself."
 msgstr "En kategori kan inte vara förälder till sig själv."
 
-#: admin/forms.py:62 models/category.py:75 models_bases/entry.py:434
+#: admin/forms.py:59 breadcrumbs.py:72 templates/zinnia/base.html:37
+#: templates/zinnia/category_list.html:6
+msgid "Categories"
+msgstr "Kategorier"
+
+#: admin/forms.py:61 models/category.py:74 models_bases/entry.py:484
 msgid "categories"
 msgstr "kategorier"
 
-#: models/category.py:24 models_bases/entry.py:53
+#: apps.py:12
+msgid "Weblog"
+msgstr ""
+
+#: breadcrumbs.py:65 templates/admin/zinnia/widgets/quickpost.html:25
+#: templates/zinnia/_entry_detail_base.html:103 templates/zinnia/base.html:53
+#: templates/zinnia/tag_list.html:6
+msgid "Tags"
+msgstr "Etiketter"
+
+#: breadcrumbs.py:68 templates/zinnia/author_list.html:6
+#: templates/zinnia/base.html:43
+msgid "Authors"
+msgstr "Skribent"
+
+#: breadcrumbs.py:97
+#, python-format
+msgid "Page %s"
+msgstr "Sida %s"
+
+#: breadcrumbs.py:126
+#, python-format
+msgid "Week %s"
+msgstr "Vecka %s"
+
+#: feeds.py:175 templates/zinnia/entry_archive.html:4
+#: templates/zinnia/entry_archive.html:6
+msgid "Latest entries"
+msgstr "Senaste inläggen"
+
+#: feeds.py:181
+#, python-format
+msgid "The latest entries on the site %(object)s"
+msgstr ""
+
+#: feeds.py:212
+#, python-format
+msgid "Entries for the category %(object)s"
+msgstr ""
+
+#: feeds.py:219 templates/zinnia/entry_list.html:9
+#, python-format
+msgid "The latest entries categorized under %(object)s"
+msgstr ""
+
+#: feeds.py:250
+#, python-format
+msgid "Entries for the author %(object)s"
+msgstr ""
+
+#: feeds.py:257 templates/zinnia/entry_list.html:18
+#, python-format
+msgid "The latest entries by %(object)s"
+msgstr ""
+
+#: feeds.py:289
+#, python-format
+msgid "Entries for the tag %(object)s"
+msgstr ""
+
+#: feeds.py:295 templates/zinnia/entry_list.html:14
+#, python-format
+msgid "The latest entries tagged with %(object)s"
+msgstr ""
+
+#: feeds.py:329 templates/zinnia/entry_search.html:4
+#: templates/zinnia/entry_search.html:6 templates/zinnia/entry_search.html:18
+#, python-format
+msgid "Search results for '%(pattern)s'"
+msgstr ""
+
+#: feeds.py:335
+#, python-format
+msgid "The entries containing the pattern '%(pattern)s'"
+msgstr ""
+
+#: feeds.py:401
+msgid "Latest discussions"
+msgstr "Senaste diskussionerna"
+
+#: feeds.py:407
+#, python-format
+msgid "The latest discussions on the site %(object)s"
+msgstr ""
+
+#: feeds.py:441
+#, python-format
+msgid "Discussions on %(object)s"
+msgstr ""
+
+#: feeds.py:447
+#, python-format
+msgid "The latest discussions on the entry %(object)s"
+msgstr ""
+
+#: feeds.py:475 templates/zinnia/_entry_detail_base.html:130
+#: templates/zinnia/tags/entries_popular.html:7
+#, python-format
+msgid "Comments on %(object)s"
+msgstr "Kommentarer på %(object)s"
+
+#: feeds.py:481
+#, python-format
+msgid "The latest comments on the entry %(object)s"
+msgstr ""
+
+#: feeds.py:526 templates/zinnia/_entry_detail_base.html:149
+#, python-format
+msgid "Pingbacks on %(object)s"
+msgstr "Pingbacks på %(object)s"
+
+#: feeds.py:532
+#, python-format
+msgid "The latest pingbacks on the entry %(object)s"
+msgstr ""
+
+#: feeds.py:559 templates/zinnia/_entry_detail_base.html:158
+#, python-format
+msgid "Trackbacks on %(object)s"
+msgstr "Trackbacks på %(object)s"
+
+#: feeds.py:565
+#, python-format
+msgid "The latest trackbacks on the entry %(object)s"
+msgstr ""
+
+#: models/category.py:24 models_bases/entry.py:54
 msgid "slug"
 msgstr "slug"
 
@@ -347,177 +351,198 @@ msgstr "beskrivning"
 msgid "parent category"
 msgstr "förälderkategori"
 
-#: models/category.py:74
+#: models/category.py:73
 msgid "category"
 msgstr "kategori"
 
-#: models_bases/entry.py:45
+#: models_bases/entry.py:46
 msgid "draft"
 msgstr "utkast"
 
-#: models_bases/entry.py:46
+#: models_bases/entry.py:47
 msgid "hidden"
 msgstr "dold"
 
-#: models_bases/entry.py:47
+#: models_bases/entry.py:48
 msgid "published"
 msgstr "publicerad"
 
-#: models_bases/entry.py:55 models_bases/entry.py:80
+#: models_bases/entry.py:56 models_bases/entry.py:81
 msgid "Used to build the entry's URL."
 msgstr "Används för att bygga inläggets URL."
 
-#: models_bases/entry.py:58
+#: models_bases/entry.py:59
 msgid "status"
 msgstr "status"
 
-#: models_bases/entry.py:62
+#: models_bases/entry.py:63
 msgid "start publication"
 msgstr "starta publicering"
 
-#: models_bases/entry.py:64
+#: models_bases/entry.py:65
 msgid "Start date of publication."
 msgstr "Startdatum för publicering."
 
-#: models_bases/entry.py:67
+#: models_bases/entry.py:68
 msgid "end publication"
 msgstr "avsluta publicering"
 
-#: models_bases/entry.py:69
+#: models_bases/entry.py:70
 msgid "End date of publication."
 msgstr "Slutdatum för publicering."
 
-#: models_bases/entry.py:74
+#: models_bases/entry.py:75
 msgid "sites"
 msgstr "platser"
 
-#: models_bases/entry.py:75
+#: models_bases/entry.py:76
 msgid "Sites where the entry will be published."
 msgstr "Platser där inlägg kommer bli publicerade."
 
-#: models_bases/entry.py:78
+#: models_bases/entry.py:79
 msgid "creation date"
 msgstr "skapandedatum"
 
-#: models_bases/entry.py:83
+#: models_bases/entry.py:84
 msgid "last update"
 msgstr "senast uppdaterad"
 
-#: models_bases/entry.py:185
+#: models_bases/entry.py:193
 msgid "entry"
 msgstr "inlägg"
 
-#: models_bases/entry.py:186
+#: models_bases/entry.py:194
 msgid "entries"
 msgstr "inlägg"
 
-#: models_bases/entry.py:200
+#: models_bases/entry.py:208
 msgid "content"
 msgstr "innehåll"
 
-#: models_bases/entry.py:242
+#: models_bases/entry.py:255
 msgid "comments enabled"
 msgstr "kommenterer påslaget"
 
-#: models_bases/entry.py:243
+#: models_bases/entry.py:256
 msgid "Allows comments if checked."
 msgstr "Tillåter kommentarer ifall ikryssad."
 
-#: models_bases/entry.py:245
+#: models_bases/entry.py:258
 msgid "pingbacks enabled"
 msgstr "pingbacks påslaget"
 
-#: models_bases/entry.py:246
+#: models_bases/entry.py:259
 msgid "Allows pingbacks if checked."
 msgstr "Tillåter pingbacks ifall ikryssad."
 
-#: models_bases/entry.py:248
+#: models_bases/entry.py:261
 msgid "trackbacks enabled"
 msgstr "trackbacks påslaget"
 
-#: models_bases/entry.py:249
+#: models_bases/entry.py:262
 msgid "Allows trackbacks if checked."
 msgstr "Tillåter trackbacks ifall ikryssad."
 
-#: models_bases/entry.py:252
+#: models_bases/entry.py:265
 msgid "comment count"
 msgstr "antal kommentarer"
 
-#: models_bases/entry.py:254
+#: models_bases/entry.py:267
 msgid "pingback count"
 msgstr "antal pingbacks"
 
-#: models_bases/entry.py:256
+#: models_bases/entry.py:269
 msgid "trackback count"
 msgstr "antal trackbacks"
 
-#: models_bases/entry.py:340
+#: models_bases/entry.py:353
 msgid "related entries"
 msgstr "relaterade inlägg"
 
-#: models_bases/entry.py:358
+#: models_bases/entry.py:371
+msgid "lead"
+msgstr ""
+
+#: models_bases/entry.py:372
+msgid "Lead paragraph"
+msgstr ""
+
+#: models_bases/entry.py:392
 msgid "excerpt"
 msgstr "utdrag"
 
-#: models_bases/entry.py:359
-msgid "Used for search and SEO."
-msgstr "Används för sökning och sökmotoroptimering."
+#: models_bases/entry.py:393
+msgid "Used for SEO purposes."
+msgstr ""
 
-#: models_bases/entry.py:392
+#: models_bases/entry.py:438
 msgid "image"
 msgstr "bild"
 
-#: models_bases/entry.py:394
+#: models_bases/entry.py:440
 msgid "Used for illustration."
 msgstr "Använd för illustration."
 
-#: models_bases/entry.py:405
+#: models_bases/entry.py:443
+msgid "caption"
+msgstr ""
+
+#: models_bases/entry.py:444
+msgid "Image's caption."
+msgstr ""
+
+#: models_bases/entry.py:455
 msgid "featured"
 msgstr "huvudnummer"
 
-#: models_bases/entry.py:420
+#: models_bases/entry.py:470
 msgid "authors"
 msgstr "skribenter"
 
-#: models_bases/entry.py:444
+#: models_bases/entry.py:494
 msgid "tags"
 msgstr "taggar"
 
-#: models_bases/entry.py:463
+#: models_bases/entry.py:513
 msgid "login required"
 msgstr "inloggning krävs"
 
-#: models_bases/entry.py:464
+#: models_bases/entry.py:514
 msgid "Only authenticated users can view the entry."
 msgstr "Enbart inloggade användare kan se inlägget."
 
-#: models_bases/entry.py:476
+#: models_bases/entry.py:526
 msgid "password"
 msgstr "lösenord"
 
-#: models_bases/entry.py:477
+#: models_bases/entry.py:527
 msgid "Protects the entry with a password."
 msgstr "Skyddar inlägget med ett lösenord."
 
-#: models_bases/entry.py:489
+#: models_bases/entry.py:539
 msgid "content template"
 msgstr "innehållsmall"
 
-#: models_bases/entry.py:491 models_bases/entry.py:507
+#: models_bases/entry.py:541 models_bases/entry.py:557
 msgid "Default template"
 msgstr "Standardmall"
 
-#: models_bases/entry.py:493
+#: models_bases/entry.py:543
 msgid "Template used to display the entry's content."
 msgstr "Mall använd för att visa inläggets innehåll."
 
-#: models_bases/entry.py:505
+#: models_bases/entry.py:555
 msgid "detail template"
 msgstr "Detaljmall"
 
-#: models_bases/entry.py:509
+#: models_bases/entry.py:559
 msgid "Template used to display the entry's detail page."
 msgstr "Mall använd för att visa inläggs detaljsida."
+
+#: moderator.py:66 moderator.py:88 moderator.py:111
+#, python-format
+msgid "[%(site)s] New comment posted on \"%(title)s\""
+msgstr "[%(site)s] Nya kommentar för \"%(title)s\""
 
 #: templates/400.html:6
 msgid "Error 400"
@@ -586,7 +611,7 @@ msgstr[0] "%(entry_count)s innehåll"
 msgstr[1] "%(entry_count)s innehåll"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:14
-#: templates/zinnia/_entry_detail_base.html:120
+#: templates/zinnia/_entry_detail_base.html:131
 #: templates/zinnia/tags/entries_popular.html:8
 #: templates/zinnia/tags/statistics.html:16
 #, python-format
@@ -604,7 +629,7 @@ msgstr[0] "%(category_count)s kategori"
 msgstr[1] "%(category_count)s kategorier"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:24
-#: templates/zinnia/_entry_detail_base.html:139
+#: templates/zinnia/_entry_detail_base.html:150
 #: templates/zinnia/tags/statistics.html:19
 #, python-format
 msgid "%(pingback_count)s pingback"
@@ -621,7 +646,7 @@ msgstr[0] "%(tag_count)s etikett"
 msgstr[1] "%(tag_count)s etiketter"
 
 #: templates/admin/zinnia/widgets/_content_stats.html:32
-#: templates/zinnia/_entry_detail_base.html:148
+#: templates/zinnia/_entry_detail_base.html:159
 #: templates/zinnia/tags/statistics.html:22
 #, python-format
 msgid "%(trackback_count)s trackback"
@@ -723,8 +748,9 @@ msgstr "i"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:13
 #: templates/zinnia/tags/comments_recent.html:8
-msgid "Comment on"
-msgstr "Kommentarer på"
+#, python-format
+msgid "Comment on %(object)s"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:22
 msgid "Edit the comment"
@@ -736,7 +762,7 @@ msgid "Edit"
 msgstr "Ändra"
 
 #: templates/admin/zinnia/widgets/_recent_comments.html:30
-#: templates/zinnia/_entry_detail_base.html:124
+#: templates/zinnia/_entry_detail_base.html:135
 #: templates/zinnia/entry_detail_base.html:229
 #: templates/zinnia/tags/comments_recent.html:15
 msgid "No comments yet."
@@ -750,6 +776,12 @@ msgstr "Administrera kommentarerna"
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:7
 msgid "made a linkback on"
 msgstr "gjorde en linkback på"
+
+#: templates/admin/zinnia/widgets/_recent_linkbacks.html:9
+#: templates/zinnia/tags/linkbacks_recent.html:9
+#, python-format
+msgid "Linkback on %(object)s"
+msgstr ""
 
 #: templates/admin/zinnia/widgets/_recent_linkbacks.html:17
 msgid "Edit the linkback"
@@ -806,7 +838,6 @@ msgstr "Nya linkbacks"
 #: templates/comments/comment_authors_email.txt:1
 #: templates/comments/comment_notification_email.txt:1
 #: templates/comments/comment_reply_email.txt:1
-#: templates/zinnia/entry_list.html:21
 msgid "Author"
 msgstr "Skribent"
 
@@ -841,20 +872,6 @@ msgstr "Tabort denna kommentar"
 #: templates/comments/comment_notification_email.txt:14
 msgid "Approve this comment"
 msgstr "Godkänn denna kommentar"
-
-#: templates/comments/zinnia_entry_preview.html:4
-msgid "Comment preview"
-msgstr "Kommentarförhandsvisning"
-
-#: templates/comments/zinnia_entry_preview.html:10
-msgid "Please correct following error."
-msgid_plural "Please correct following errors."
-msgstr[0] "Var god korrigera följande fel."
-msgstr[1] "Var god korrigera följande fel."
-
-#: templates/comments/zinnia_entry_preview.html:12
-msgid "Preview of the comment"
-msgstr "Förhandsvisning av kommentar"
 
 #: templates/comments/zinnia/entry/form.html:11
 msgid "Post your comment"
@@ -892,6 +909,20 @@ msgstr "Tillbaka till %(title)s"
 msgid "Return to entry list"
 msgstr "Återvänd till inläggslistan"
 
+#: templates/comments/zinnia_entry_preview.html:4
+msgid "Comment preview"
+msgstr "Kommentarförhandsvisning"
+
+#: templates/comments/zinnia_entry_preview.html:10
+msgid "Please correct following error."
+msgid_plural "Please correct following errors."
+msgstr[0] "Var god korrigera följande fel."
+msgstr[1] "Var god korrigera följande fel."
+
+#: templates/comments/zinnia_entry_preview.html:12
+msgid "Preview of the comment"
+msgstr "Förhandsvisning av kommentar"
+
 #: templates/zinnia/_entry_detail_base.html:17
 msgid "Written by"
 msgstr "Skrivet av"
@@ -918,64 +949,48 @@ msgstr "Visa alla inlägg i %(category)s"
 msgid "Last update on"
 msgstr "Senast uppdaterad den"
 
-#: templates/zinnia/_entry_detail_base.html:78
+#: templates/zinnia/_entry_detail_base.html:89
 #, python-format
 msgid "%(percent)s%% of %(object)s still remains to read."
 msgstr ""
 
-#: templates/zinnia/_entry_detail_base.html:80
+#: templates/zinnia/_entry_detail_base.html:91
 msgid "Continue reading"
 msgstr "Fortsätt läsa"
 
-#: templates/zinnia/_entry_detail_base.html:95
+#: templates/zinnia/_entry_detail_base.html:106
 #: templates/zinnia/tag_list.html:17
 #, python-format
 msgid "Show all entries tagged by %(tag)s"
 msgstr "Visa alla inlägg etiketterade med %(tag)s"
 
-#: templates/zinnia/_entry_detail_base.html:98
+#: templates/zinnia/_entry_detail_base.html:109
 msgid "No tags"
 msgstr "Inga etiketter"
 
-#: templates/zinnia/_entry_detail_base.html:104
+#: templates/zinnia/_entry_detail_base.html:115
 msgid "Short url"
 msgstr "Kort url"
 
-#: templates/zinnia/_entry_detail_base.html:106
+#: templates/zinnia/_entry_detail_base.html:117
 #, python-format
 msgid "Short URL to %(object)s"
 msgstr "Kort URL till %(object)s"
 
-#: templates/zinnia/_entry_detail_base.html:119
-#: templates/zinnia/tags/entries_popular.html:7
-#, python-format
-msgid "Comments on %(object)s"
-msgstr "Kommentarer på %(object)s"
-
-#: templates/zinnia/_entry_detail_base.html:126
+#: templates/zinnia/_entry_detail_base.html:137
 #, python-format
 msgid "Leave a comment on %(object)s"
 msgstr "Lämna kommenter på %(object)s"
 
-#: templates/zinnia/_entry_detail_base.html:127
+#: templates/zinnia/_entry_detail_base.html:138
 msgid "Be first to comment!"
 msgstr "Bli den första att kommentera!"
 
-#: templates/zinnia/_entry_detail_base.html:130
+#: templates/zinnia/_entry_detail_base.html:141
 #: templates/zinnia/entry_detail_base.html:225
 #: templates/zinnia/entry_detail_base.html:231
 msgid "Comments are closed."
 msgstr "Kommentarer är avstängda."
-
-#: templates/zinnia/_entry_detail_base.html:138
-#, python-format
-msgid "Pingbacks on %(object)s"
-msgstr "Pingbacks på %(object)s"
-
-#: templates/zinnia/_entry_detail_base.html:147
-#, python-format
-msgid "Trackbacks on %(object)s"
-msgstr "Trackbacks på %(object)s"
 
 #: templates/zinnia/author_list.html:4 templates/zinnia/author_list.html:11
 msgid "Author list"
@@ -986,12 +1001,12 @@ msgid "No authors yet."
 msgstr "inga skribenter än."
 
 #: templates/zinnia/base.html:16 templates/zinnia/skeleton.html:36
-msgid "RSS Feed of latest entries"
-msgstr "RSS-flöde för senaste inlägg"
+msgid "RSS feed of latest entries"
+msgstr ""
 
 #: templates/zinnia/base.html:17
-msgid "RSS Feed of latest discussions"
-msgstr "RSS-flöde för senaste diskussioner"
+msgid "RSS feed of latest discussions"
+msgstr ""
 
 #: templates/zinnia/base.html:27
 msgid "Welcome!"
@@ -1136,20 +1151,24 @@ msgid "Next year"
 msgstr "Nästa år"
 
 #: templates/zinnia/entry_detail_base.html:22
-msgid "RSS Feed of discussions on"
-msgstr "RSS-flöde för diskussioner på"
+#, python-format
+msgid "RSS feed of discussions on %(object)s"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:24
-msgid "RSS Feed of comments on"
-msgstr "RSS-flöde för kommentarer på"
+#, python-format
+msgid "RSS feed of comments on %(object)s"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:26
-msgid "RSS Feed of pingbacks on"
-msgstr "RSS-flöde för pinbacks på"
+#, python-format
+msgid "RSS feed of pingbacks on %(object)s"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:28
-msgid "RSS Feed of trackbacks on"
-msgstr "RSS-flöde för trackbacks på"
+#, python-format
+msgid "RSS feed of trackbacks on %(object)s"
+msgstr ""
 
 #: templates/zinnia/entry_detail_base.html:47
 msgid "Next entry"
@@ -1203,63 +1222,56 @@ msgstr "Kommentarer"
 msgid "Direct link to this comment"
 msgstr "Direktlänk till denna kommentar"
 
-#: templates/zinnia/entry_list.html:4
-msgid "Latest entries for"
-msgstr "Senaste inläggen för"
+#: templates/zinnia/entry_list.html:23
+#, python-format
+msgid "page %(object)s"
+msgstr ""
 
-#: templates/zinnia/entry_list.html:4
-msgid "the category"
-msgstr "kategorin"
+#: templates/zinnia/entry_list.html:27
+#, python-format
+msgid "Category %(object)s"
+msgstr ""
 
-#: templates/zinnia/entry_list.html:4
-msgid "the tag"
-msgstr "etiketten"
+#: templates/zinnia/entry_list.html:31
+#, python-format
+msgid "Tag %(object)s"
+msgstr ""
 
-#: templates/zinnia/entry_list.html:4
-msgid "the author"
-msgstr "skribenten"
+#: templates/zinnia/entry_list.html:35
+#, python-format
+msgid "Author %(object)s"
+msgstr ""
 
-#: templates/zinnia/entry_list.html:6
-msgid "page"
-msgstr "sidan"
+#: templates/zinnia/entry_list.html:40
+#, python-format
+msgid "Page %(object)s"
+msgstr ""
 
-#: templates/zinnia/entry_list.html:11 templates/zinnia/entry_list.html:14
-#: templates/zinnia/entry_list.html:17 templates/zinnia/entry_list.html:36
-#: templates/zinnia/entry_list.html:37 templates/zinnia/entry_list.html:45
-#: templates/zinnia/entry_list.html:46 templates/zinnia/entry_list.html:54
-#: templates/zinnia/entry_list.html:55
+#: templates/zinnia/entry_list.html:45 templates/zinnia/entry_list.html:48
+#: templates/zinnia/entry_list.html:51 templates/zinnia/entry_list.html:66
+#: templates/zinnia/entry_list.html:67 templates/zinnia/entry_list.html:75
+#: templates/zinnia/entry_list.html:76 templates/zinnia/entry_list.html:84
+#: templates/zinnia/entry_list.html:85
 #, python-format
 msgid "RSS feed of %(object)s"
 msgstr ""
 
-#: templates/zinnia/entry_list.html:21
-msgid "Category"
-msgstr "Kategori"
-
-#: templates/zinnia/entry_list.html:21
-msgid "Tag"
-msgstr "Etikett"
-
-#: templates/zinnia/entry_list.html:23
-msgid "Page"
-msgstr "Sida"
-
-#: templates/zinnia/entry_list.html:31
+#: templates/zinnia/entry_list.html:61
 #, python-format
 msgid "Category archives: %(category)s"
 msgstr "Kategoriakriv: %(category)s"
 
-#: templates/zinnia/entry_list.html:43
+#: templates/zinnia/entry_list.html:73
 #, python-format
 msgid "Tag archives: %(tag)s"
 msgstr "Ettikettarkiv: %(tag)s"
 
-#: templates/zinnia/entry_list.html:52
+#: templates/zinnia/entry_list.html:82
 #, python-format
 msgid "Author archives: %(author)s"
 msgstr "Skribentarkiv: %(author)s"
 
-#: templates/zinnia/entry_list.html:66 templates/zinnia/sitemap.html:29
+#: templates/zinnia/entry_list.html:96 templates/zinnia/sitemap.html:29
 #: templates/zinnia/tags/entries_featured.html:9
 #: templates/zinnia/tags/entries_popular.html:12
 #: templates/zinnia/tags/entries_random.html:9
@@ -1267,23 +1279,17 @@ msgstr "Skribentarkiv: %(author)s"
 msgid "No entries yet."
 msgstr "Inga inlägg än."
 
-#: templates/zinnia/entry_list.html:85 templates/zinnia/entry_list.html:86
+#: templates/zinnia/entry_list.html:115 templates/zinnia/entry_list.html:116
 msgid "Edit the category"
 msgstr "Ändra kategori"
 
-#: templates/zinnia/entry_list.html:92 templates/zinnia/entry_list.html:93
+#: templates/zinnia/entry_list.html:122 templates/zinnia/entry_list.html:123
 msgid "Edit the tag"
 msgstr "Ändra etikett"
 
-#: templates/zinnia/entry_list.html:99 templates/zinnia/entry_list.html:100
+#: templates/zinnia/entry_list.html:129 templates/zinnia/entry_list.html:130
 msgid "Edit the author"
 msgstr "Ändra skribent"
-
-#: templates/zinnia/entry_search.html:4 templates/zinnia/entry_search.html:6
-#: templates/zinnia/entry_search.html:18
-#, python-format
-msgid "Search results for '%(pattern)s'"
-msgstr ""
 
 #: templates/zinnia/entry_search.html:11 templates/zinnia/entry_search.html:24
 #: templates/zinnia/entry_search.html:25
@@ -1361,8 +1367,8 @@ msgid "Just another Zinnia weblog."
 msgstr ""
 
 #: templates/zinnia/skeleton.html:37
-msgid "RSS Feed"
-msgstr "RSS-flöde"
+msgid "RSS feed"
+msgstr ""
 
 #: templates/zinnia/skeleton.html:43 templates/zinnia/tags/search_form.html:4
 msgid "Keywords..."
@@ -1405,10 +1411,6 @@ msgstr "Inga arkiv än."
 msgid "No similar entries."
 msgstr "Inga liknande inlägg"
 
-#: templates/zinnia/tags/linkbacks_recent.html:9
-msgid "Linkback on"
-msgstr "Linkbacks på"
-
 #: templates/zinnia/tags/pagination.html:4
 #, python-format
 msgid "Page %(current_page)s of %(total_page)s"
@@ -1442,15 +1444,15 @@ msgid_plural "%(entry_count)s entries tagged by %(tag)s"
 msgstr[0] "%(entry_count)s inlägg etiketterat med %(tag)s"
 msgstr[1] "%(entry_count)s inlägg etiketterade med %(tag)s"
 
-#: templatetags/zinnia.py:344
+#: templatetags/zinnia.py:347
 msgid "Blog"
 msgstr ""
 
-#: tests/test_views.py:586 views/search.py:30
+#: tests/test_views.py:585 views/search.py:30
 msgid "The pattern is too short"
 msgstr "Sökmönstret är för kort"
 
-#: tests/test_views.py:590 views/search.py:34
+#: tests/test_views.py:589 views/search.py:34
 msgid "No pattern to search found"
 msgstr "Inget sökmönster funnet"
 
@@ -1582,28 +1584,28 @@ msgstr "^snabb-inlägg/$"
 msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 msgstr "^(?P<tag>[^/]+(?u))/sida/(?P<page>\\d+)/$"
 
+#: views/mixins/entry_preview.py:27
+msgid "No entry found matching the query"
+msgstr "Inget inlägg matchade sökningen"
+
 #: views/tags.py:48
 #, python-format
 msgid "No Tag found matching \"%s\"."
 msgstr "Inga etiketter matchande \"%s\" funna."
 
-#: views/mixins/entry_preview.py:27
-msgid "No entry found matching the query"
-msgstr "Inget inlägg matchade sökningen"
-
-#: xmlrpc/metaweblog.py:48
+#: xmlrpc/metaweblog.py:44
 msgid "Username is incorrect."
 msgstr "Användarnamn inkorrekt."
 
-#: xmlrpc/metaweblog.py:50
+#: xmlrpc/metaweblog.py:46
 msgid "Password is invalid."
 msgstr "Lösenord ogiltigt."
 
-#: xmlrpc/metaweblog.py:52
+#: xmlrpc/metaweblog.py:48
 msgid "User account unavailable."
 msgstr "Användarkonto otillgänglig."
 
-#: xmlrpc/metaweblog.py:55
+#: xmlrpc/metaweblog.py:51
 #, python-format
 msgid "User cannot %s."
 msgstr "Användare kan inte %s."

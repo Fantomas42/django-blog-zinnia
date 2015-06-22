@@ -1,7 +1,9 @@
 """Widgets for Zinnia admin"""
+import json
 from itertools import chain
 
 from django.utils import six
+from django.forms import Media
 from django.utils.html import escape
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
@@ -18,6 +20,13 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
     """
     MPTT version of FilteredSelectMultiple.
     """
+
+    def __init__(self, verbose_name, is_stacked=False, attrs=None, choices=()):
+        """
+        Initializes the widget directly not stacked.
+        """
+        super(MPTTFilteredSelectMultiple, self).__init__(
+            verbose_name, is_stacked, attrs, choices)
 
     def render_option(self, selected_choices, option_value,
                       option_label, sort_fields):
@@ -55,14 +64,15 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
                 option_label, sort_fields))
         return '\n'.join(output)
 
-    class Media:
+    @property
+    def media(self):
         """
         MPTTFilteredSelectMultiple's Media.
         """
-        static = staticfiles_storage.url
-        js = (static('admin/js/core.js'),
-              static('zinnia/admin/mptt/js/mptt_m2m_selectbox.js'),
-              static('admin/js/SelectFilter2.js'))
+        js = ['admin/js/core.js',
+              'zinnia/admin/mptt/js/mptt_m2m_selectbox.js',
+              'admin/js/SelectFilter2.js']
+        return Media(js=[staticfiles_storage.url(path) for path in js])
 
 
 class TagAutoComplete(widgets.AdminTextInputWidget):
@@ -89,22 +99,33 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
         output.append('       width: "element",')
         output.append('       maximumInputLength: 50,')
         output.append('       tokenSeparators: [",", " "],')
-        output.append('       tags: [%s]' % ','.join(
-            ["'%s'" % tag for tag in self.get_tags()]))
+        output.append('       tags: %s' % json.dumps(self.get_tags()))
         output.append('     });')
         output.append('    });')
         output.append('}(django.jQuery));')
         output.append('</script>')
         return mark_safe('\n'.join(output))
 
-    class Media:
+    @property
+    def media(self):
         """
         TagAutoComplete's Media.
         """
-        static = lambda x: staticfiles_storage.url(
-            'zinnia/admin/select2/%s' % x)
+        def static(path):
+            return staticfiles_storage.url(
+                'zinnia/admin/select2/%s' % path)
+        return Media(
+            css={'all': (static('css/select2.css'),)},
+            js=(static('js/select2.js'),)
+        )
 
-        css = {
-            'all': (static('css/select2.css'),)
-        }
-        js = (static('js/select2.js'),)
+
+class MiniTextarea(widgets.AdminTextareaWidget):
+    """
+    Vertically shorter version of the admin textarea widget.
+    """
+    rows = 2
+
+    def __init__(self, attrs=None):
+        super(MiniTextarea, self).__init__(
+            {'rows': self.rows})

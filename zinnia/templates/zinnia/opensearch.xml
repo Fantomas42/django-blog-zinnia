@@ -1,9 +1,9 @@
-{% load staticfiles zinnia %}{% get_tags as entry_tags %}<?xml version="1.0" encoding="UTF-8"?>
+{% load i18n staticfiles zinnia %}{% get_tags as entry_tags %}<?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
   <ShortName>{{ site.name }}</ShortName>
-  <LongName>{{ site.name }} - web search</LongName>
-  <Description>Make a search on {{ site.name }}.</Description>
+  <LongName>{{ site.name }} - {% trans "Web search" %}</LongName>
+  <Description>{% blocktrans with object=site.name %}Make a search on {{ object }}.{% endblocktrans %}</Description>
   <Attribution>{{ copyright }}</Attribution>
   <Tags>{{ entry_tags|slice:":15"|join:" " }}</Tags>
   <Url type="text/html" template="{{ protocol }}://{{ site.domain }}{% url 'zinnia:entry_search' %}?pattern={searchTerms}" />
