@@ -7,6 +7,15 @@
 
 {% block meta-keywords %}{% if object.tags %}{{ object.tags }}{% else %}{{ block.super }}{% endif %}{% endblock meta-keywords %}
 
+{% block meta %}
+  <meta property="og:title" content="{{ object.title }}">
+  <meta property="og:site_name" content="{{ object.title }}">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta property="og:description" content="{{ object.excerpt|safe }}">
+  {% for author in object.authors %}<meta property="og:author" content="{{ author }}">{% endfor %}
+  <meta property="og:type" content="article">
+{% endblock meta %}
+
 {% block link %}
   {{ block.super }}
   {% with previous_entry=object.previous_entry %}{% if previous_entry %}
