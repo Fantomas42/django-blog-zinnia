@@ -24,7 +24,7 @@ class EntryAdmin(admin.ModelAdmin):
     Admin for Entry model.
     """
     form = EntryAdminForm
-    date_hierarchy = 'creation_date'
+    date_hierarchy = 'publication_date'
     fieldsets = (
         (_('Content'), {
             'fields': (('title', 'status'), 'lead', 'content',)}),
@@ -32,8 +32,8 @@ class EntryAdmin(admin.ModelAdmin):
             'fields': ('image', 'image_caption'),
             'classes': ('collapse', 'collapse-closed')}),
         (_('Publication'), {
-            'fields': (('start_publication', 'end_publication'),
-                       'creation_date', 'sites'),
+            'fields': ('publication_date', 'sites',
+                       ('start_publication', 'end_publication')),
             'classes': ('collapse', 'collapse-closed')}),
         (_('Discussions'), {
             'fields': ('comment_enabled', 'pingback_enabled',
@@ -49,13 +49,11 @@ class EntryAdmin(admin.ModelAdmin):
             'fields': ('featured', 'excerpt', 'authors', 'related'),
             'classes': ('collapse', 'collapse-closed')}),
         (None, {'fields': ('categories', 'tags', 'slug')}))
-    list_filter = (CategoryListFilter, AuthorListFilter, 'status', 'featured',
-                   'login_required', 'comment_enabled', 'pingback_enabled',
-                   'trackback_enabled', 'creation_date', 'start_publication',
-                   'end_publication', 'sites')
+    list_filter = (CategoryListFilter, AuthorListFilter,
+                   'publication_date', 'sites', 'status')
     list_display = ('get_title', 'get_authors', 'get_categories',
                     'get_tags', 'get_sites', 'get_is_visible', 'featured',
-                    'get_short_url', 'creation_date')
+                    'get_short_url', 'publication_date')
     radio_fields = {'content_template': admin.VERTICAL,
                     'detail_template': admin.VERTICAL}
     filter_horizontal = ('categories', 'authors', 'related')
@@ -305,7 +303,7 @@ class EntryAdmin(admin.ModelAdmin):
         """
         Put the selected entries on top at the current date.
         """
-        queryset.update(creation_date=timezone.now())
+        queryset.update(publication_date=timezone.now())
         self.ping_directories(request, queryset, messages=False)
         self.message_user(request, _(
             'The selected entries are now set at the current date.'))
