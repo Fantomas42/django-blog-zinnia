@@ -58,6 +58,7 @@ class QuickEntry(View):
         and redirect to the admin in case of error or
         to the entry's page in case of success.
         """
+        now = timezone.now()
         data = {
             'title': request.POST.get('title'),
             'slug': slugify(request.POST.get('title')),
@@ -66,8 +67,9 @@ class QuickEntry(View):
             'authors': [request.user.pk],
             'content_template': 'zinnia/_entry_detail.html',
             'detail_template': 'entry_detail.html',
-            'creation_date': timezone.now(),
-            'last_update': timezone.now(),
+            'publication_date': now,
+            'creation_date': now,
+            'last_update': now,
             'content': request.POST.get('content'),
             'tags': request.POST.get('tags')}
         form = QuickEntryForm(data)

@@ -14,7 +14,7 @@ class ArchiveMixin(object):
     paginate_by = PAGINATION
     allow_empty = ALLOW_EMPTY
     allow_future = ALLOW_FUTURE
-    date_field = 'creation_date'
+    date_field = 'publication_date'
     month_format = '%m'
     week_format = '%W'
 
@@ -42,7 +42,7 @@ class PreviousNextPublishedMixin(object):
                              'month': [None, None],
                              'day':  [None, None]}
             dates = self.get_queryset().datetimes(
-                'creation_date', 'day', order='ASC')
+                'publication_date', 'day', order='ASC')
             for d in dates:
                 d_year = datetime(d.year, 1, 1)
                 d_month = datetime(d.year, d.month, 1)
