@@ -103,9 +103,9 @@ def pingback_ping(source, target):
         try:
             entry = Entry.published.get(
                 slug=kwargs['slug'],
-                creation_date__year=kwargs['year'],
-                creation_date__month=kwargs['month'],
-                creation_date__day=kwargs['day'])
+                publication_date__year=kwargs['year'],
+                publication_date__month=kwargs['month'],
+                publication_date__day=kwargs['day'])
             if not entry.pingbacks_are_open:
                 return TARGET_IS_NOT_PINGABLE
         except (KeyError, Entry.DoesNotExist):
@@ -156,9 +156,9 @@ def pingback_extensions_get_pingbacks(target):
     try:
         entry = Entry.published.get(
             slug=kwargs['slug'],
-            creation_date__year=kwargs['year'],
-            creation_date__month=kwargs['month'],
-            creation_date__day=kwargs['day'])
+            publication_date__year=kwargs['year'],
+            publication_date__month=kwargs['month'],
+            publication_date__day=kwargs['day'])
     except (KeyError, Entry.DoesNotExist):
         return TARGET_IS_NOT_PINGABLE
 

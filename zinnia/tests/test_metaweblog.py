@@ -56,6 +56,7 @@ class MetaWeblogTestCase(TestCase):
                                     slug='category-2')]
         params = {'title': 'My entry 1', 'content': 'My content 1',
                   'tags': 'zinnia, test', 'slug': 'my-entry-1',
+                  'publication_date': datetime(2010, 1, 1, 12),
                   'creation_date': datetime(2010, 1, 1, 12),
                   'status': PUBLISHED}
         self.entry_1 = Entry.objects.create(**params)
@@ -64,6 +65,7 @@ class MetaWeblogTestCase(TestCase):
         self.entry_1.sites.add(self.site)
 
         params = {'title': 'My entry 2', 'content': 'My content 2',
+                  'publication_date': datetime(2010, 3, 15),
                   'creation_date': datetime(2010, 3, 15),
                   'tags': 'zinnia, test', 'slug': 'my-entry-2'}
         self.entry_2 = Entry.objects.create(**params)
@@ -285,6 +287,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEqual(entry.authors.count(), 1)
         self.assertEqual(entry.authors.all()[0], self.webmaster)
         self.assertEqual(entry.creation_date, self.entry_2.creation_date)
+        self.assertEqual(entry.publication_date, self.entry_2.creation_date)
 
         entry.title = 'Title edited'
         entry.creation_date = datetime(2000, 1, 1)
@@ -311,6 +314,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEqual(entry.pingback_enabled, False)
         self.assertEqual(entry.categories.count(), 0)
         self.assertEqual(entry.creation_date, datetime(2000, 1, 1))
+        self.assertEqual(entry.publication_date, datetime(2000, 1, 1))
 
         del post['dateCreated']
         post['wp_author_id'] = self.contributor.pk
@@ -321,6 +325,7 @@ class MetaWeblogTestCase(TestCase):
         self.assertEqual(entry.authors.count(), 1)
         self.assertEqual(entry.authors.all()[0], self.contributor)
         self.assertEqual(entry.creation_date, datetime(2000, 1, 1))
+        self.assertEqual(entry.publication_date, datetime(2000, 1, 1))
 
     def test_new_media_object(self):
         file_ = TemporaryFile()

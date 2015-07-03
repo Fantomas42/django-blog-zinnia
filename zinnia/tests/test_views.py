@@ -54,7 +54,7 @@ class ViewsBaseCase(TestCase):
                   'content': 'First test entry published',
                   'slug': 'test-1',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 1, 1, 23, 00),
+                  'publication_date': datetime(2010, 1, 1, 23, 0),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
@@ -66,7 +66,7 @@ class ViewsBaseCase(TestCase):
                   'content': 'Second test entry published',
                   'slug': 'test-2',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 5, 31, 23, 00),
+                  'publication_date': datetime(2010, 5, 31, 23, 00),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
@@ -79,7 +79,7 @@ class ViewsBaseCase(TestCase):
                   'content': 'My test content',
                   'slug': 'my-test-entry',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 1, 1, 23, 0),
+                  'publication_date': datetime(2010, 1, 1, 23, 0),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
@@ -486,7 +486,7 @@ class ViewsTestCase(ViewsBaseCase):
             params = {'title': 'My entry %i' % i,
                       'content': 'My content %i' % i,
                       'slug': 'my-entry-%i' % i,
-                      'creation_date': datetime(2010, 1, 1),
+                      'publication_date': datetime(2010, 1, 1),
                       'status': PUBLISHED}
             entry = Entry.objects.create(**params)
             entry.sites.add(self.site)
@@ -523,7 +523,7 @@ class ViewsTestCase(ViewsBaseCase):
             params = {'title': 'My entry %i' % i,
                       'content': 'My content %i' % i,
                       'slug': 'my-entry-%i' % i,
-                      'creation_date': datetime(2010, 1, 1),
+                      'publication_date': datetime(2010, 1, 1),
                       'status': PUBLISHED}
             entry = Entry.objects.create(**params)
             entry.sites.add(self.site)
@@ -560,7 +560,7 @@ class ViewsTestCase(ViewsBaseCase):
                       'content': 'My content %i' % i,
                       'slug': 'my-entry-%i' % i,
                       'tags': 'tests',
-                      'creation_date': datetime(2010, 1, 1),
+                      'publication_date': datetime(2010, 1, 1),
                       'status': PUBLISHED}
             entry = Entry.objects.create(**params)
             entry.sites.add(self.site)

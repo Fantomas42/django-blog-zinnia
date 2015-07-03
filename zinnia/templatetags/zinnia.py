@@ -127,7 +127,7 @@ def get_popular_entries(number=5, template='zinnia/tags/entries_popular.html'):
     return {'template': template,
             'entries': Entry.published.filter(
                 comment_count__gt=0).order_by(
-                '-comment_count', '-creation_date')[:number]}
+                '-comment_count', '-publication_date')[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -154,7 +154,7 @@ def get_archives_entries(template='zinnia/tags/entries_archives.html'):
     """
     return {'template': template,
             'archives': Entry.published.datetimes(
-                'creation_date', 'month', order='DESC')}
+                'publication_date', 'month', order='DESC')}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
@@ -165,7 +165,7 @@ def get_archives_entries_tree(
     """
     return {'template': template,
             'archives': Entry.published.datetimes(
-                'creation_date', 'day', order='ASC')}
+                'publication_date', 'day', order='ASC')}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -178,14 +178,14 @@ def get_calendar_entries(context, year=None, month=None,
         day_week_month = (context.get('day') or
                           context.get('week') or
                           context.get('month'))
-        creation_date = getattr(context.get('object'),
-                                'creation_date', None)
+        publication_date = getattr(context.get('object'),
+                                   'publication_date', None)
         if day_week_month:
             current_month = day_week_month
-        elif creation_date:
+        elif publication_date:
             if settings.USE_TZ:
-                creation_date = timezone.localtime(creation_date)
-            current_month = creation_date.date()
+                publication_date = timezone.localtime(publication_date)
+            current_month = publication_date.date()
         else:
             today = timezone.now()
             if settings.USE_TZ:
@@ -197,7 +197,7 @@ def get_calendar_entries(context, year=None, month=None,
 
     dates = list(map(
         lambda x: settings.USE_TZ and timezone.localtime(x).date() or x.date(),
-        Entry.published.datetimes('creation_date', 'month')))
+        Entry.published.datetimes('publication_date', 'month')))
 
     if current_month not in dates:
         dates.append(current_month)
@@ -447,10 +447,10 @@ def zinnia_statistics(template='zinnia/tags/statistics.html'):
     trackbacks_count = trackbacks.count()
 
     if entries_count:
-        first_entry = entries.order_by('creation_date')[0]
+        first_entry = entries.order_by('publication_date')[0]
         last_entry = entries.latest()
-        months_count = (last_entry.creation_date -
-                        first_entry.creation_date).days / 31.0
+        months_count = (last_entry.publication_date -
+                        first_entry.publication_date).days / 31.0
         entries_per_month = entries_count / (months_count or 1.0)
 
         comments_per_entry = float(replies_count) / entries_count

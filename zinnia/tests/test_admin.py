@@ -346,7 +346,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
         original_ping_directories = settings.PING_DIRECTORIES
         settings.PING_DIRECTORIES = []
         self.request._messages = TestMessageBackend()
-        self.entry.creation_date = datetime(2011, 1, 1, 12, 0)
+        self.entry.publication_date = datetime(2011, 1, 1, 12, 0)
         self.admin.put_on_top(self.request, Entry.objects.all())
         self.assertEqual(
             Entry.objects.get(pk=self.entry.pk).creation_date.date(),

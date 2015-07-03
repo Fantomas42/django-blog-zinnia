@@ -252,19 +252,19 @@ class MixinTestCase(TestCase):
 
         params = {'title': 'Entry 1', 'content': 'Entry 1',
                   'slug': 'entry-1', 'status': PUBLISHED,
-                  'creation_date': datetime(2012, 1, 1, 12)}
+                  'publication_date': datetime(2012, 1, 1, 12)}
         entry_1 = Entry.objects.create(**params)
         entry_1.sites.add(site)
 
         params = {'title': 'Entry 2', 'content': 'Entry 2',
                   'slug': 'entry-2', 'status': PUBLISHED,
-                  'creation_date': datetime(2012, 3, 15, 12)}
+                  'publication_date': datetime(2012, 3, 15, 12)}
         entry_2 = Entry.objects.create(**params)
         entry_2.sites.add(site)
 
         params = {'title': 'Entry 3', 'content': 'Entry 3',
                   'slug': 'entry-3', 'status': PUBLISHED,
-                  'creation_date': datetime(2013, 6, 2, 12)}
+                  'publication_date': datetime(2013, 6, 2, 12)}
         entry_3 = Entry.objects.create(**params)
         entry_3.sites.add(site)
 

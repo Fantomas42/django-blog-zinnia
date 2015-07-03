@@ -77,7 +77,7 @@ class FeedsTestCase(TestCase):
                   '<img src="/image.jpg" />',
                   'slug': 'my-test-entry',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 1, 1, 12),
+                  'publication_date': datetime(2010, 1, 1, 12),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
@@ -112,7 +112,7 @@ class FeedsTestCase(TestCase):
     def test_entry_feed(self):
         entry = self.create_published_entry()
         feed = EntryFeed()
-        self.assertEqual(feed.item_pubdate(entry), entry.creation_date)
+        self.assertEqual(feed.item_pubdate(entry), entry.publication_date)
         self.assertEqual(feed.item_updateddate(entry), entry.last_update)
         self.assertEqual(feed.item_categories(entry), [self.category.title])
         self.assertEqual(feed.item_author_name(entry),
@@ -320,7 +320,7 @@ class FeedsTestCase(TestCase):
     @override_settings(USE_TZ=False)
     def test_feed_discussions_no_timezone_issue_277(self):
         entry = self.create_published_entry()
-        entry.creation_date = datetime(2014, 1, 1, 23)
+        entry.publication_date = datetime(2014, 1, 1, 23)
         entry.save()
         feed = EntryDiscussions()
         self.assertEqual(feed.get_object(
@@ -329,7 +329,7 @@ class FeedsTestCase(TestCase):
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Paris')
     def test_feed_discussions_with_timezone_issue_277(self):
         entry = self.create_published_entry()
-        entry.creation_date = datetime(2014, 1, 1, 23)
+        entry.publication_date = datetime(2014, 1, 1, 23)
         entry.save()
         feed = EntryDiscussions()
         self.assertEqual(feed.get_object(
@@ -426,7 +426,7 @@ class FeedsTestCase(TestCase):
                   'content': 'My content ',
                   'slug': 'my-test-entry',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 2, 1, 12),
+                  'publication_date': datetime(2010, 2, 1, 12),
                   'status': PUBLISHED}
         entry_same_slug = Entry.objects.create(**params)
         entry_same_slug.sites.add(self.site)
