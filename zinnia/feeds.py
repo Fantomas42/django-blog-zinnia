@@ -82,7 +82,7 @@ class EntryFeed(ZinniaFeed):
         """
         Publication date of an entry.
         """
-        return item.creation_date
+        return item.publication_date
 
     def item_updateddate(self, item):
         """
@@ -424,9 +424,9 @@ class EntryDiscussions(DiscussionFeed):
         Retrieve the discussions by entry's slug.
         """
         return get_object_or_404(Entry, slug=slug,
-                                 creation_date__year=year,
-                                 creation_date__month=month,
-                                 creation_date__day=day)
+                                 publication_date__year=year,
+                                 publication_date__month=month,
+                                 publication_date__day=day)
 
     def items(self, obj):
         """
