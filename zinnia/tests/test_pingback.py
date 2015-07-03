@@ -77,7 +77,7 @@ class PingBackTestCase(TestCase):
         params = {'title': 'My first entry',
                   'content': 'My first content',
                   'slug': 'my-first-entry',
-                  'creation_date': datetime(2010, 1, 1, 12),
+                  'publication_date': datetime(2010, 1, 1, 12),
                   'status': PUBLISHED}
         self.first_entry = Entry.objects.create(**params)
         self.first_entry.sites.add(self.site)
@@ -93,7 +93,7 @@ class PingBackTestCase(TestCase):
                       'http://example.com/error-404/',
                       'http://external/'),
                   'slug': 'my-second-entry',
-                  'creation_date': datetime(2010, 1, 1, 12),
+                  'publication_date': datetime(2010, 1, 1, 12),
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(self.site)
