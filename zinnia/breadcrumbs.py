@@ -19,33 +19,33 @@ class Crumb(object):
         self.url = url
 
 
-def year_crumb(creation_date):
+def year_crumb(date):
     """
     Crumb for a year.
     """
-    year = creation_date.strftime('%Y')
+    year = date.strftime('%Y')
     return Crumb(year, reverse('zinnia:entry_archive_year',
                                args=[year]))
 
 
-def month_crumb(creation_date):
+def month_crumb(date):
     """
     Crumb for a month.
     """
-    year = creation_date.strftime('%Y')
-    month = creation_date.strftime('%m')
-    month_text = format(creation_date, 'F').capitalize()
+    year = date.strftime('%Y')
+    month = date.strftime('%m')
+    month_text = format(date, 'F').capitalize()
     return Crumb(month_text, reverse('zinnia:entry_archive_month',
                                      args=[year, month]))
 
 
-def day_crumb(creation_date):
+def day_crumb(date):
     """
     Crumb for a day.
     """
-    year = creation_date.strftime('%Y')
-    month = creation_date.strftime('%m')
-    day = creation_date.strftime('%d')
+    year = date.strftime('%Y')
+    month = date.strftime('%m')
+    day = date.strftime('%d')
     return Crumb(day, reverse('zinnia:entry_archive_day',
                               args=[year, month, day]))
 
@@ -54,13 +54,11 @@ def entry_breadcrumbs(entry):
     """
     Breadcrumbs for an Entry.
     """
-    creation_date = entry.creation_date
-    if is_aware(creation_date):
-        creation_date = localtime(creation_date)
-    return [year_crumb(creation_date),
-            month_crumb(creation_date),
-            day_crumb(creation_date),
-            Crumb(entry.title)]
+    date = entry.publication_date
+    if is_aware(date):
+        date = localtime(date)
+    return [year_crumb(date), month_crumb(date),
+            day_crumb(date), Crumb(entry.title)]
 
 MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
                                              reverse('zinnia:tag_list')),
