@@ -18,7 +18,7 @@
   {% endif %}{% endwith %}
   <link rel="shortlink" href="{{ object.short_url }}" />
   <link rel="canonical" href="{{ object.get_absolute_url }}" />
-  {% with year=object.creation_date|date:"Y" month=object.creation_date|date:"m" day=object.creation_date|date:"d" %}
+  {% with year=object.publication_date|date:"Y" month=object.publication_date|date:"m" day=object.publication_date|date:"d" %}
   <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=object.title %}RSS feed of discussions on {{ object }}{% endblocktrans %}"
         href="{% url 'zinnia:entry_discussion_feed' year month day object.slug %}" />
   <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=object.title %}RSS feed of comments on {{ object }}{% endblocktrans %}"
