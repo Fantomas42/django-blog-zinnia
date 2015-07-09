@@ -31,12 +31,20 @@ from zinnia.url_shortener.backends.default import base36
 
 @skipIfCustomUser
 @override_settings(
-    TEMPLATE_LOADERS=(
-        'zinnia.tests.utils.VoidLoader',
-    ),
-    TEMPLATE_CONTEXT_PROCESSORS=(
-        'django.core.context_processors.request',
-    ))
+    TEMPLATES=[
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.request',
+                ],
+                'loaders': [
+                    'zinnia.tests.utils.VoidLoader',
+                ]
+            }
+        }
+    ]
+)
 class ViewsBaseCase(TestCase):
     """
     Setup and utility function base case.

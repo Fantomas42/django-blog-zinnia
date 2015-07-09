@@ -21,16 +21,21 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
 ]
 
-TEMPLATE_CONTEXT_PROCESSORS = [
-    'django.core.context_processors.request',
-    'zinnia.context_processors.version'
-]
-
-TEMPLATE_LOADERS = [
-    ['django.template.loaders.cached.Loader', [
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader']
-     ]
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'zinnia.context_processors.version',
+            ],
+            'loaders': [
+                ['django.template.loaders.cached.Loader', [
+                    'django.template.loaders.app_directories.Loader']
+                 ]
+            ]
+        }
+    }
 ]
 
 SILENCED_SYSTEM_CHECKS = ['1_6.W001']

@@ -38,9 +38,17 @@ from zinnia.signals import disconnect_discussion_signals
 @skipIfCustomUser
 @override_settings(
     ROOT_URLCONF='zinnia.tests.implementations.urls.default',
-    TEMPLATE_LOADERS=(
-        'zinnia.tests.utils.EntryDetailLoader',
-    ))
+    TEMPLATES=[
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'OPTIONS': {
+                'loaders': [
+                    'zinnia.tests.utils.EntryDetailLoader',
+                ]
+            }
+        }
+    ],
+)
 class PingBackTestCase(TestCase):
     """Test cases for pingbacks"""
 

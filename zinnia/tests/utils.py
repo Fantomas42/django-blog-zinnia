@@ -13,7 +13,7 @@ from django.utils import six
 from django.conf import settings
 from django.utils import timezone
 from django.test.client import Client
-from django.template.loader import BaseLoader
+from django.template.loaders.base import Loader
 
 
 class TestTransport(Transport):
@@ -71,7 +71,7 @@ def urlEqual(url_1, url_2):
             parse_qs(parse_result_1[5]) == parse_qs(parse_result_2[5]))
 
 
-class VoidLoader(BaseLoader):
+class VoidLoader(Loader):
     """
     Template loader which is always returning
     an empty template.
@@ -83,7 +83,7 @@ class VoidLoader(BaseLoader):
         return ('', 'voidloader:%s' % template_name)
 
 
-class EntryDetailLoader(BaseLoader):
+class EntryDetailLoader(Loader):
     """
     Template loader which only return the content
     of an entry detail template.
