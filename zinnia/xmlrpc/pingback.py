@@ -111,7 +111,7 @@ def pingback_ping(source, target):
         except (KeyError, Entry.DoesNotExist):
             return TARGET_IS_NOT_PINGABLE
 
-        soup = BeautifulSoup(document)
+        soup = BeautifulSoup(document, 'html.parser')
         title = six.text_type(soup.find('title'))
         title = title and strip_tags(title) or _('No title')
         description = generate_pingback_content(soup, target,

@@ -22,9 +22,17 @@ from zinnia.signals import disconnect_entry_signals
 
 @skipIfCustomUser
 @override_settings(
-    TEMPLATE_LOADERS=(
-        'zinnia.tests.utils.VoidLoader',
-    ))
+    TEMPLATES=[
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'OPTIONS': {
+                'loaders': [
+                    'zinnia.tests.utils.VoidLoader',
+                ]
+            }
+        }
+    ]
+)
 class CommentModeratorTestCase(TestCase):
     """Test cases for the moderator"""
 

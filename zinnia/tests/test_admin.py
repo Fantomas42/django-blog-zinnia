@@ -25,7 +25,6 @@ from zinnia.url_shortener.backends.default import base36
 class BaseAdminTestCase(TestCase):
     rich_urls = 'zinnia.tests.implementations.urls.default'
     poor_urls = 'zinnia.tests.implementations.urls.poor'
-    urls = rich_urls
     model_class = None
     admin_class = None
 
@@ -38,21 +37,16 @@ class BaseAdminTestCase(TestCase):
 
     def tearDown(self):
         """
-        Be sure to restore the good urls to use
-        if a test fail before restoring the urls.
+        Deactivate the translation system.
         """
-        self.urls = self.rich_urls
-        self._urlconf_setup()
         deactivate()
 
     def check_with_rich_and_poor_urls(self, func, args,
                                       result_rich, result_poor):
-        self.assertEqual(func(*args), result_rich)
-        self.urls = self.poor_urls
-        self._urlconf_setup()
-        self.assertEqual(func(*args), result_poor)
-        self.urls = self.rich_urls
-        self._urlconf_setup()
+        with self.settings(ROOT_URLCONF=self.rich_urls):
+            self.assertEqual(func(*args), result_rich)
+        with self.settings(ROOT_URLCONF=self.poor_urls):
+            self.assertEqual(func(*args), result_poor)
 
 
 class TestMessageBackend(object):
@@ -113,7 +107,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
             '<a href="/authors/author-2/" target="blank">author-2</a>',
             'author-1, author-2',)
 
-    def test_get_catgories(self):
+    def test_get_categories(self):
         self.check_with_rich_and_poor_urls(
             self.admin.get_categories, (self.entry,),
             '', '')
