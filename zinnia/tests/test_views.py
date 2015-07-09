@@ -406,7 +406,7 @@ class ViewsTestCase(ViewsBaseCase):
                                         {'entry_password': 'bad_password'})
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEqual(response.context['error'], True)
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(6):
             response = self.client.post(entry.get_absolute_url(),
                                         {'entry_password': 'password'})
         self.assertEqual(response.status_code, 200)
