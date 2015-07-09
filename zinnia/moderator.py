@@ -1,6 +1,5 @@
 """Moderator of Zinnia comments"""
 from django.conf import settings
-from django.template import Context
 from django.template import loader
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
@@ -60,9 +59,9 @@ class EntryCommentModerator(CommentModerator):
         site = Site.objects.get_current()
         template = loader.get_template(
             'comments/comment_notification_email.txt')
-        context = Context({'comment': comment, 'site': site,
-                           'protocol': PROTOCOL,
-                           'content_object': content_object})
+        context = {'comment': comment, 'site': site,
+                   'protocol': PROTOCOL,
+                   'content_object': content_object}
         subject = _('[%(site)s] New comment posted on "%(title)s"') % \
             {'site': site.name, 'title': content_object.title}
         message = template.render(context)
@@ -82,9 +81,9 @@ class EntryCommentModerator(CommentModerator):
             site = Site.objects.get_current()
             template = loader.get_template(
                 'comments/comment_authors_email.txt')
-            context = Context({'comment': comment, 'site': site,
-                               'protocol': PROTOCOL,
-                               'content_object': content_object})
+            context = {'comment': comment, 'site': site,
+                       'protocol': PROTOCOL,
+                       'content_object': content_object}
             subject = _('[%(site)s] New comment posted on "%(title)s"') % \
                 {'site': site.name, 'title': content_object.title}
             message = template.render(context)
@@ -105,9 +104,9 @@ class EntryCommentModerator(CommentModerator):
         if recipient_list:
             site = Site.objects.get_current()
             template = loader.get_template('comments/comment_reply_email.txt')
-            context = Context({'comment': comment, 'site': site,
-                               'protocol': PROTOCOL,
-                               'content_object': content_object})
+            context = {'comment': comment, 'site': site,
+                       'protocol': PROTOCOL,
+                       'content_object': content_object}
             subject = _('[%(site)s] New comment posted on "%(title)s"') % \
                 {'site': site.name, 'title': content_object.title}
             message = template.render(context)
