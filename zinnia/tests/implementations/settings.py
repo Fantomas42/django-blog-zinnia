@@ -9,7 +9,7 @@ STATIC_URL = '/static/'
 
 SECRET_KEY = 'secret-key'
 
-ROOT_URLCONF = 'zinnia.tests.implementions.urls.default'
+ROOT_URLCONF = 'zinnia.tests.implementations.urls.default'
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.SHA1PasswordHasher'
