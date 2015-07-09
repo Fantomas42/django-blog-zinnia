@@ -109,7 +109,7 @@ class PingBackTestCase(TestCase):
         shortener_settings.URL_SHORTENER_BACKEND = self.original_shortener
 
     def test_generate_pingback_content(self):
-        soup = BeautifulSoup(self.second_entry.content)
+        soup = BeautifulSoup(self.second_entry.content, 'html.parser')
         target = 'http://%s%s' % (self.site.domain,
                                   self.first_entry.get_absolute_url())
 
@@ -121,11 +121,13 @@ class PingBackTestCase(TestCase):
             generate_pingback_content(soup, target, 50),
             '...ond content with link to first entry and other lin...')
 
-        soup = BeautifulSoup('<a href="%s">test link</a>' % target)
+        soup = BeautifulSoup('<a href="%s">test link</a>' % target,
+                             'html.parser')
         self.assertEqual(
             generate_pingback_content(soup, target, 6), 'test l...')
 
-        soup = BeautifulSoup('test <a href="%s">link</a>' % target)
+        soup = BeautifulSoup('test <a href="%s">link</a>' % target,
+                             'html.parser')
         self.assertEqual(
             generate_pingback_content(soup, target, 8), '...est link')
         self.assertEqual(
