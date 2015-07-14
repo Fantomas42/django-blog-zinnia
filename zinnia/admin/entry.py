@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
+from django.utils.html import format_html, conditional_escape
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
 
@@ -94,12 +95,13 @@ class EntryAdmin(admin.ModelAdmin):
         Return the authors in HTML.
         """
         try:
-            authors = ['<a href="%s" target="blank">%s</a>' %
-                       (author.get_absolute_url(),
-                        getattr(author, author.USERNAME_FIELD))
+            authors = [format_html('<a href="{}" target="blank">{}</a>',
+                                   author.get_absolute_url(),
+                                   getattr(author, author.USERNAME_FIELD))
                        for author in entry.authors.all()]
         except NoReverseMatch:
-            authors = [getattr(author, author.USERNAME_FIELD)
+            authors = [conditional_escape(getattr(author,
+                                                  author.USERNAME_FIELD))
                        for author in entry.authors.all()]
         return ', '.join(authors)
     get_authors.allow_tags = True
@@ -110,12 +112,13 @@ class EntryAdmin(admin.ModelAdmin):
         Return the categories linked in HTML.
         """
         try:
-            categories = ['<a href="%s" target="blank">%s</a>' %
-                          (category.get_absolute_url(), category.title)
+            categories = [format_html('<a href="{}" target="blank">{}</a>',
+                                      category.get_absolute_url(),
+                                      category.title)
                           for category in entry.categories.all()]
         except NoReverseMatch:
-            categories = [category.title for category in
-                          entry.categories.all()]
+            categories = [conditional_escape(category.title)
+                          for category in entry.categories.all()]
         return ', '.join(categories)
     get_categories.allow_tags = True
     get_categories.short_description = _('category(s)')
@@ -125,11 +128,13 @@ class EntryAdmin(admin.ModelAdmin):
         Return the tags linked in HTML.
         """
         try:
-            return ', '.join(['<a href="%s" target="blank">%s</a>' %
-                              (reverse('zinnia:tag_detail', args=[tag]), tag)
+            return ', '.join([format_html('<a href="{}" target="blank">{}</a>',
+                                          reverse('zinnia:tag_detail',
+                                                  args=[tag]),
+                                          tag)
                               for tag in entry.tags_list])
         except NoReverseMatch:
-            return entry.tags
+            return conditional_escape(entry.tags)
     get_tags.allow_tags = True
     get_tags.short_description = _('tag(s)')
 
@@ -143,7 +148,8 @@ class EntryAdmin(admin.ModelAdmin):
             index_url = ''
         return ', '.join(
             ['<a href="%s://%s%s" target="blank">%s</a>' %
-             (settings.PROTOCOL, site.domain, index_url, site.name)
+             (settings.PROTOCOL, site.domain, index_url,
+              conditional_escape(site.name))
              for site in entry.sites.all()])
     get_sites.allow_tags = True
     get_sites.short_description = _('site(s)')
@@ -156,8 +162,8 @@ class EntryAdmin(admin.ModelAdmin):
             short_url = entry.short_url
         except NoReverseMatch:
             short_url = entry.get_absolute_url()
-        return '<a href="%(url)s" target="blank">%(url)s</a>' % \
-               {'url': short_url}
+        return format_html('<a href="{url}" target="blank">{url}</a>',
+                           url=short_url)
     get_short_url.allow_tags = True
     get_short_url.short_description = _('short url')
 

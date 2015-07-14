@@ -94,7 +94,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
         author_1 = Author.objects.create_user(
             'author-1', 'author1@example.com')
         author_2 = Author.objects.create_user(
-            'author-2', 'author2@example.com')
+            'author<2>', 'author2@example.com')
         self.entry.authors.add(author_1)
         self.check_with_rich_and_poor_urls(
             self.admin.get_authors, (self.entry,),
@@ -104,8 +104,9 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.check_with_rich_and_poor_urls(
             self.admin.get_authors, (self.entry,),
             '<a href="/authors/author-1/" target="blank">author-1</a>, '
-            '<a href="/authors/author-2/" target="blank">author-2</a>',
-            'author-1, author-2',)
+            '<a href="/authors/author%3C2%3E/" target="blank">'
+            'author&lt;2&gt;</a>',
+            'author-1, author&lt;2&gt;',)
 
     def test_get_categories(self):
         self.check_with_rich_and_poor_urls(
@@ -113,7 +114,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
             '', '')
         category_1 = Category.objects.create(title='Category 1',
                                              slug='category-1')
-        category_2 = Category.objects.create(title='Category 2',
+        category_2 = Category.objects.create(title='Category <b>2</b>',
                                              slug='category-2')
         self.entry.categories.add(category_1)
         self.check_with_rich_and_poor_urls(
@@ -124,8 +125,9 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.check_with_rich_and_poor_urls(
             self.admin.get_categories, (self.entry,),
             '<a href="/categories/category-1/" target="blank">Category 1</a>, '
-            '<a href="/categories/category-2/" target="blank">Category 2</a>',
-            'Category 1, Category 2')
+            '<a href="/categories/category-2/" target="blank">Category '
+            '&lt;b&gt;2&lt;/b&gt;</a>',
+            'Category 1, Category &lt;b&gt;2&lt;/b&gt;')
 
     def test_get_tags(self):
         self.check_with_rich_and_poor_urls(
@@ -136,12 +138,12 @@ class EntryAdminTestCase(BaseAdminTestCase):
             self.admin.get_tags, (self.entry,),
             '<a href="/tags/zinnia/" target="blank">zinnia</a>',
             'zinnia')
-        self.entry.tags = 'zinnia, test'
+        self.entry.tags = 'zinnia, t<e>st'
         self.check_with_rich_and_poor_urls(
             self.admin.get_tags, (self.entry,),
-            '<a href="/tags/test/" target="blank">test</a>, '
+            '<a href="/tags/t%3Ce%3Est/" target="blank">t&lt;e&gt;st</a>, '
             '<a href="/tags/zinnia/" target="blank">zinnia</a>',
-            'zinnia, test')  # Yes, this is not the same order...
+            'zinnia, t&lt;e&gt;st')  # Yes, this is not the same order...
 
     def test_get_sites(self):
         self.assertEqual(self.admin.get_sites(self.entry), '')
