@@ -5,7 +5,8 @@ from django.utils import timezone
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
-from django.utils.html import format_html, conditional_escape
+from django.utils.html import format_html
+from django.utils.html import conditional_escape
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
 
