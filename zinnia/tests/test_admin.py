@@ -112,22 +112,24 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.check_with_rich_and_poor_urls(
             self.admin.get_categories, (self.entry,),
             '', '')
-        category_1 = Category.objects.create(title='Category 1',
+        category_1 = Category.objects.create(title='Category <b>1</b>',
                                              slug='category-1')
         category_2 = Category.objects.create(title='Category <b>2</b>',
                                              slug='category-2')
         self.entry.categories.add(category_1)
         self.check_with_rich_and_poor_urls(
             self.admin.get_categories, (self.entry,),
-            '<a href="/categories/category-1/" target="blank">Category 1</a>',
-            'Category 1')
+            '<a href="/categories/category-1/" target="blank">'
+            'Category &lt;b&gt;1&lt;/b&gt;</a>',
+            'Category &lt;b&gt;1&lt;/b&gt;')
         self.entry.categories.add(category_2)
         self.check_with_rich_and_poor_urls(
             self.admin.get_categories, (self.entry,),
-            '<a href="/categories/category-1/" target="blank">Category 1</a>, '
+            '<a href="/categories/category-1/" target="blank">'
+            'Category &lt;b&gt;1&lt;/b&gt;</a>, '
             '<a href="/categories/category-2/" target="blank">Category '
             '&lt;b&gt;2&lt;/b&gt;</a>',
-            'Category 1, Category &lt;b&gt;2&lt;/b&gt;')
+            'Category &lt;b&gt;1&lt;/b&gt;, Category &lt;b&gt;2&lt;/b&gt;')
 
     def test_get_tags(self):
         self.check_with_rich_and_poor_urls(
