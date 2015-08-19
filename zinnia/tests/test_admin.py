@@ -1,4 +1,7 @@
+# coding=utf-8
 """Test cases for Zinnia's admin"""
+from __future__ import unicode_literals
+
 from django.test import TestCase
 from django.test import RequestFactory
 from django.utils import timezone
@@ -106,7 +109,17 @@ class EntryAdminTestCase(BaseAdminTestCase):
             '<a href="/authors/author-1/" target="blank">author-1</a>, '
             '<a href="/authors/author%3C2%3E/" target="blank">'
             'author&lt;2&gt;</a>',
-            'author-1, author&lt;2&gt;',)
+            'author-1, author&lt;2&gt;')
+
+    def test_get_authors_non_ascii(self):
+        author = Author.objects.create_user(
+            'тест', 'test@example.com')
+        self.entry.authors.add(author)
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_authors, (self.entry,),
+            '<a href="/authors/%D1%82%D0%B5%D1%81%D1%82/" '
+            'target="blank">тест</a>',
+            'тест')
 
     def test_get_categories(self):
         self.check_with_rich_and_poor_urls(
@@ -131,6 +144,16 @@ class EntryAdminTestCase(BaseAdminTestCase):
             '&lt;b&gt;2&lt;/b&gt;</a>',
             'Category &lt;b&gt;1&lt;/b&gt;, Category &lt;b&gt;2&lt;/b&gt;')
 
+    def test_get_categories_non_ascii(self):
+        category = Category.objects.create(title='Category тест',
+                                           slug='category')
+        self.entry.categories.add(category)
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_categories, (self.entry,),
+            '<a href="/categories/category/" target="blank">'
+            'Category тест</a>',
+            'Category тест')
+
     def test_get_tags(self):
         self.check_with_rich_and_poor_urls(
             self.admin.get_tags, (self.entry,),
@@ -146,6 +169,14 @@ class EntryAdminTestCase(BaseAdminTestCase):
             '<a href="/tags/t%3Ce%3Est/" target="blank">t&lt;e&gt;st</a>, '
             '<a href="/tags/zinnia/" target="blank">zinnia</a>',
             'zinnia, t&lt;e&gt;st')  # Yes, this is not the same order...
+
+    def test_get_tags_non_ascii(self):
+        self.entry.tags = 'тест'
+        self.check_with_rich_and_poor_urls(
+            self.admin.get_tags, (self.entry,),
+            '<a href="/tags/%D1%82%D0%B5%D1%81%D1%82/" '
+            'target="blank">тест</a>',
+            'тест')
 
     def test_get_sites(self):
         self.assertEqual(self.admin.get_sites(self.entry), '')
