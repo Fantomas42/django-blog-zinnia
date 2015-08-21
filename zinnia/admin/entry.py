@@ -8,6 +8,7 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
 from django.utils.html import format_html
+from django.utils.html import format_html_join
 from django.utils.html import conditional_escape
 from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -98,15 +99,15 @@ class EntryAdmin(admin.ModelAdmin):
         Return the authors in HTML.
         """
         try:
-            authors = [format_html('<a href="{}" target="blank">{}</a>',
-                                   author.get_absolute_url(),
-                                   getattr(author, author.USERNAME_FIELD))
-                       for author in entry.authors.all()]
+            return format_html_join(
+                ', ', '<a href="{}" target="blank">{}</a>',
+                [(author.get_absolute_url(),
+                  getattr(author, author.USERNAME_FIELD))
+                 for author in entry.authors.all()])
         except NoReverseMatch:
-            authors = [conditional_escape(getattr(author,
-                                                  author.USERNAME_FIELD))
-                       for author in entry.authors.all()]
-        return ', '.join(authors)
+            return ', '.join(
+                [conditional_escape(getattr(author, author.USERNAME_FIELD))
+                 for author in entry.authors.all()])
     get_authors.allow_tags = True
     get_authors.short_description = _('author(s)')
 
@@ -115,14 +116,13 @@ class EntryAdmin(admin.ModelAdmin):
         Return the categories linked in HTML.
         """
         try:
-            categories = [format_html('<a href="{}" target="blank">{}</a>',
-                                      category.get_absolute_url(),
-                                      category.title)
-                          for category in entry.categories.all()]
+            return format_html_join(
+                ', ', '<a href="{}" target="blank">{}</a>',
+                [(category.get_absolute_url(), category.title)
+                 for category in entry.categories.all()])
         except NoReverseMatch:
-            categories = [conditional_escape(category.title)
-                          for category in entry.categories.all()]
-        return ', '.join(categories)
+            return ', '.join([conditional_escape(category.title)
+                              for category in entry.categories.all()])
     get_categories.allow_tags = True
     get_categories.short_description = _('category(s)')
 
@@ -131,11 +131,10 @@ class EntryAdmin(admin.ModelAdmin):
         Return the tags linked in HTML.
         """
         try:
-            return ', '.join([format_html('<a href="{}" target="blank">{}</a>',
-                                          reverse('zinnia:tag_detail',
-                                                  args=[tag]),
-                                          tag)
-                              for tag in entry.tags_list])
+            return format_html_join(
+                ', ', '<a href="{}" target="blank">{}</a>',
+                [(reverse('zinnia:tag_detail', args=[tag]), tag)
+                 for tag in entry.tags_list])
         except NoReverseMatch:
             return conditional_escape(entry.tags)
     get_tags.allow_tags = True
@@ -149,11 +148,10 @@ class EntryAdmin(admin.ModelAdmin):
             index_url = reverse('zinnia:entry_archive_index')
         except NoReverseMatch:
             index_url = ''
-        return ', '.join(
-            ['<a href="%s://%s%s" target="blank">%s</a>' %
-             (settings.PROTOCOL, site.domain, index_url,
-              conditional_escape(site.name))
-             for site in entry.sites.all()])
+        return format_html_join(
+            ', ', '<a href="{}://{}{}" target="blank">{}</a>',
+            [(settings.PROTOCOL, site.domain, index_url,
+              conditional_escape(site.name)) for site in entry.sites.all()])
     get_sites.allow_tags = True
     get_sites.short_description = _('site(s)')
 
