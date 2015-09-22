@@ -1,4 +1,5 @@
-{% load i18n mptt_tags %}
+{% load i18n %}
+{% load mptt_tags %}
 <ul class="{% if not categories %}no-{% endif %}categories-tree category-root">
   {% recursetree categories %}
   <li{% if node.slug == context_category.slug %} class="current">{% else %}>{% endif %}

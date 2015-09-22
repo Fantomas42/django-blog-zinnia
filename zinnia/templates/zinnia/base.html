@@ -1,5 +1,6 @@
 {% extends "zinnia/skeleton.html" %}
-{% load zinnia i18n %}
+{% load i18n %}
+{% load zinnia %}
 
 {% block meta-keywords %}{% get_tags as entry_tags %}{{ entry_tags|join:", "}}{% endblock meta-keywords %}
 

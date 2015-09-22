@@ -1,5 +1,6 @@
 {% extends "zinnia/entry_list.html" %}
-{% load i18n zinnia %}
+{% load i18n %}
+{% load zinnia %}
 
 {% block meta-description %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock meta-description %}
 
