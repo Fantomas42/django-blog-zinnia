@@ -34,7 +34,7 @@ kwalitee:
 
 push-translations:
 	@echo "$(COLOR)* Generating english translation$(NO_COLOR)"
-	@cd zinnia && ../bin/demo makemessages --extension=.html,.txt -l en
+	@cd zinnia && ../bin/demo makemessages --extension=html,xml,txt,py -l en
 	@echo "$(COLOR)* Pushing source translation to Transifex$(NO_COLOR)"
 	@tx push -s
 	@echo "$(COLOR)* Removing source translation$(NO_COLOR)"
