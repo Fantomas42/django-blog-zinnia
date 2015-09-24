@@ -272,7 +272,7 @@ class FeedsTestCase(TestCase):
                          "Search results for '%s'" % 'test')
         self.assertEqual(
             feed.description('test'),
-            "The entries containing the pattern '%s'" % 'test')
+            "The latest entries containing the pattern '%s'" % 'test')
 
     def test_latest_discussions(self):
         entry = self.create_published_entry()
