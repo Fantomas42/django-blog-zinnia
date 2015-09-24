@@ -338,7 +338,7 @@ class SearchEntries(EntryFeed):
         """
         Description of the feed.
         """
-        return _("The entries containing the pattern '%(pattern)s'") % {
+        return _("The latest entries containing the pattern '%(pattern)s'") % {
             'pattern': obj}
 
 
