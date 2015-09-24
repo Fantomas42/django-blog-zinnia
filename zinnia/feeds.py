@@ -157,14 +157,14 @@ class EntryFeed(ZinniaFeed):
         return 'image/jpeg'
 
 
-class LatestEntries(EntryFeed):
+class LastEntries(EntryFeed):
     """
-    Feed for the latest entries.
+    Feed for the last entries.
     """
 
     def link(self):
         """
-        URL of latest entries.
+        URL of last entries.
         """
         return reverse('zinnia:entry_archive_index')
 
@@ -178,13 +178,13 @@ class LatestEntries(EntryFeed):
         """
         Title of the feed
         """
-        return _('Latest entries')
+        return _('Last entries')
 
     def description(self):
         """
         Description of the feed.
         """
-        return _('The latest entries on the site %(object)s') % {
+        return _('The last entries on the site %(object)s') % {
             'object': self.site.name}
 
 
@@ -222,7 +222,7 @@ class CategoryEntries(EntryFeed):
         Description of the feed.
         """
         return (obj.description or
-                _('The latest entries categorized under %(object)s') % {
+                _('The last entries categorized under %(object)s') % {
                     'object': obj.title})
 
 
@@ -260,7 +260,7 @@ class AuthorEntries(EntryFeed):
         """
         Description of the feed.
         """
-        return _('The latest entries by %(object)s') % {
+        return _('The last entries by %(object)s') % {
             'object': smart_text(obj.__str__())}
 
 
@@ -298,7 +298,7 @@ class TagEntries(EntryFeed):
         """
         Description of the feed.
         """
-        return _('The latest entries tagged with %(object)s') % {
+        return _('The last entries tagged with %(object)s') % {
             'object': obj.name}
 
 
@@ -338,7 +338,7 @@ class SearchEntries(EntryFeed):
         """
         Description of the feed.
         """
-        return _("The latest entries containing the pattern '%(pattern)s'") % {
+        return _("The last entries containing the pattern '%(pattern)s'") % {
             'pattern': obj}
 
 
@@ -380,9 +380,9 @@ class DiscussionFeed(ZinniaFeed):
         return item.url
 
 
-class LatestDiscussions(DiscussionFeed):
+class LastDiscussions(DiscussionFeed):
     """
-    Feed for the latest discussions.
+    Feed for the last discussions.
     """
 
     def items(self):
@@ -396,7 +396,7 @@ class LatestDiscussions(DiscussionFeed):
 
     def link(self):
         """
-        URL of latest discussions.
+        URL of last discussions.
         """
         return reverse('zinnia:entry_archive_index')
 
@@ -404,13 +404,13 @@ class LatestDiscussions(DiscussionFeed):
         """
         Title of the feed.
         """
-        return _('Latest discussions')
+        return _('Last discussions')
 
     def description(self):
         """
         Description of the feed.
         """
-        return _('The latest discussions on the site %(object)s') % {
+        return _('The last discussions on the site %(object)s') % {
             'object': self.site.name}
 
 
@@ -450,7 +450,7 @@ class EntryDiscussions(DiscussionFeed):
         """
         Description of the feed.
         """
-        return _('The latest discussions on the entry %(object)s') % {
+        return _('The last discussions on the entry %(object)s') % {
             'object': obj.title}
 
 
@@ -484,7 +484,7 @@ class EntryComments(EntryDiscussions):
         """
         Description of the feed.
         """
-        return _('The latest comments on the entry %(object)s') % {
+        return _('The last comments on the entry %(object)s') % {
             'object': obj.title}
 
     def item_enclosure_url(self, item):
@@ -535,7 +535,7 @@ class EntryPingbacks(EntryDiscussions):
         """
         Description of the feed.
         """
-        return _('The latest pingbacks on the entry %(object)s') % {
+        return _('The last pingbacks on the entry %(object)s') % {
             'object': obj.title}
 
 
@@ -568,5 +568,5 @@ class EntryTrackbacks(EntryDiscussions):
         """
         Description of the feed.
         """
-        return _('The latest trackbacks on the entry %(object)s') % {
+        return _('The last trackbacks on the entry %(object)s') % {
             'object': obj.title}

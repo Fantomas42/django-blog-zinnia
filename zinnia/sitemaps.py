@@ -89,7 +89,7 @@ class EntryRelatedSitemap(ZinniaSitemap):
     def lastmod(self, item):
         """
         The last modification date is defined
-        by the latest entries last update in the cache.
+        by the latest entry last update in the cache.
         """
         return self.cache[item.pk][1]
 

@@ -104,7 +104,7 @@ def get_featured_entries(number=5,
 def get_draft_entries(number=5,
                       template='zinnia/tags/entries_draft.html'):
     """
-    Return the latest draft entries.
+    Return the last draft entries.
     """
     return {'template': template,
             'entries': Entry.objects.filter(status=DRAFT)[:number]}

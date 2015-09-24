@@ -2,7 +2,7 @@
 from django.conf.urls import url
 
 from zinnia.urls import _
-from zinnia.feeds import LatestEntries
+from zinnia.feeds import LastEntries
 from zinnia.feeds import TagEntries
 from zinnia.feeds import AuthorEntries
 from zinnia.feeds import CategoryEntries
@@ -11,16 +11,16 @@ from zinnia.feeds import EntryComments
 from zinnia.feeds import EntryPingbacks
 from zinnia.feeds import EntryTrackbacks
 from zinnia.feeds import EntryDiscussions
-from zinnia.feeds import LatestDiscussions
+from zinnia.feeds import LastDiscussions
 
 
 urlpatterns = [
     url(r'^$',
-        LatestEntries(),
-        name='entry_latest_feed'),
+        LastEntries(),
+        name='entry_feed'),
     url(_(r'^discussions/$'),
-        LatestDiscussions(),
-        name='discussion_latest_feed'),
+        LastDiscussions(),
+        name='discussion_feed'),
     url(_(r'^search/$'),
         SearchEntries(),
         name='entry_search_feed'),
