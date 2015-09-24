@@ -33,7 +33,7 @@ class URLRessources(object):
         self.blog_url = '%s%s' % (self.site_url,
                                   reverse('zinnia:entry_archive_index'))
         self.blog_feed = '%s%s' % (self.site_url,
-                                   reverse('zinnia:entry_latest_feed'))
+                                   reverse('zinnia:entry_feed'))
 
 
 class DirectoryPinger(threading.Thread):

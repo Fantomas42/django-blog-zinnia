@@ -35,7 +35,7 @@ from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia import feeds
 from zinnia.feeds import EntryFeed
 from zinnia.feeds import ZinniaFeed
-from zinnia.feeds import LatestEntries
+from zinnia.feeds import LastEntries
 from zinnia.feeds import CategoryEntries
 from zinnia.feeds import AuthorEntries
 from zinnia.feeds import TagEntries
@@ -44,7 +44,7 @@ from zinnia.feeds import EntryDiscussions
 from zinnia.feeds import EntryComments
 from zinnia.feeds import EntryPingbacks
 from zinnia.feeds import EntryTrackbacks
-from zinnia.feeds import LatestDiscussions
+from zinnia.feeds import LastDiscussions
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 
@@ -170,15 +170,15 @@ class FeedsTestCase(TestCase):
         self.assertEqual(
             feed.item_enclosure_url(entry), None)
 
-    def test_latest_entries(self):
+    def test_last_entries(self):
         self.create_published_entry()
-        feed = LatestEntries()
+        feed = LastEntries()
         self.assertEqual(feed.link(), '/')
         self.assertEqual(len(feed.items()), 1)
-        self.assertEqual(feed.get_title(None), 'Latest entries')
+        self.assertEqual(feed.get_title(None), 'Last entries')
         self.assertEqual(
             feed.description(),
-            'The latest entries on the site example.com')
+            'The last entries on the site example.com')
 
     def test_category_entries(self):
         self.create_published_entry()
@@ -191,7 +191,7 @@ class FeedsTestCase(TestCase):
             'Entries for the category %s' % self.category.title)
         self.assertEqual(
             feed.description(self.category),
-            'The latest entries categorized under %s' % self.category.title)
+            'The last entries categorized under %s' % self.category.title)
         self.category.description = 'Category description'
         self.assertEqual(feed.description(self.category),
                          'Category description')
@@ -205,7 +205,7 @@ class FeedsTestCase(TestCase):
                          'Entries for the category %s' % self.category.title)
         self.assertEqual(
             feed.description(self.category),
-            'The latest entries categorized under %s' % self.category.title)
+            'The last entries categorized under %s' % self.category.title)
 
     def test_author_entries(self):
         self.create_published_entry()
@@ -217,7 +217,7 @@ class FeedsTestCase(TestCase):
                          'Entries for the author %s' %
                          self.author.__str__())
         self.assertEqual(feed.description(self.author),
-                         'The latest entries by %s' %
+                         'The last entries by %s' %
                          self.author.__str__())
 
     def test_author_title_non_ascii(self):
@@ -230,7 +230,7 @@ class FeedsTestCase(TestCase):
                          smart_text('Entries for the author %s' %
                                     self.author.__str__()))
         self.assertEqual(feed.description(self.author),
-                         smart_text('The latest entries by %s' %
+                         smart_text('The last entries by %s' %
                                     self.author.__str__()))
 
     def test_tag_entries(self):
@@ -243,7 +243,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.get_title(tag),
                          'Entries for the tag %s' % tag.name)
         self.assertEqual(feed.description(tag),
-                         'The latest entries tagged with %s' % tag.name)
+                         'The last entries tagged with %s' % tag.name)
 
     def test_tag_title_non_ascii(self):
         entry = self.create_published_entry()
@@ -255,7 +255,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.get_title(tag),
                          'Entries for the tag %s' % tag_unicode)
         self.assertEqual(feed.description(tag),
-                         'The latest entries tagged with %s' % tag_unicode)
+                         'The last entries tagged with %s' % tag_unicode)
 
     def test_search_entries(self):
         class FakeRequest:
@@ -272,18 +272,18 @@ class FeedsTestCase(TestCase):
                          "Search results for '%s'" % 'test')
         self.assertEqual(
             feed.description('test'),
-            "The latest entries containing the pattern '%s'" % 'test')
+            "The last entries containing the pattern '%s'" % 'test')
 
-    def test_latest_discussions(self):
+    def test_last_discussions(self):
         entry = self.create_published_entry()
         self.create_discussions(entry)
-        feed = LatestDiscussions()
+        feed = LastDiscussions()
         self.assertEqual(feed.link(), '/')
         self.assertEqual(len(feed.items()), 3)
-        self.assertEqual(feed.get_title(None), 'Latest discussions')
+        self.assertEqual(feed.get_title(None), 'Last discussions')
         self.assertEqual(
             feed.description(),
-            'The latest discussions on the site example.com')
+            'The last discussions on the site example.com')
 
     def test_entry_discussions(self):
         entry = self.create_published_entry()
@@ -307,7 +307,7 @@ class FeedsTestCase(TestCase):
                          'Discussions on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
-            'The latest discussions on the entry %s' % entry.title)
+            'The last discussions on the entry %s' % entry.title)
 
     def test_feed_for_hidden_entry_issue_277(self):
         entry = self.create_published_entry()
@@ -347,7 +347,7 @@ class FeedsTestCase(TestCase):
                          'Comments on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
-            'The latest comments on the entry %s' % entry.title)
+            'The last comments on the entry %s' % entry.title)
         self.assertTrue(urlEqual(
             feed.item_enclosure_url(comments[0]),
             'http://www.gravatar.com/avatar/e64c7d89f26b'
@@ -367,7 +367,7 @@ class FeedsTestCase(TestCase):
                          'Pingbacks on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
-            'The latest pingbacks on the entry %s' % entry.title)
+            'The last pingbacks on the entry %s' % entry.title)
 
     def test_entry_trackbacks(self):
         entry = self.create_published_entry()
@@ -381,7 +381,7 @@ class FeedsTestCase(TestCase):
                          'Trackbacks on %s' % entry.title)
         self.assertEqual(
             feed.description(entry),
-            'The latest trackbacks on the entry %s' % entry.title)
+            'The last trackbacks on the entry %s' % entry.title)
 
     def test_entry_feed_no_authors(self):
         entry = self.create_published_entry()
@@ -392,10 +392,10 @@ class FeedsTestCase(TestCase):
     def test_entry_feed_rss_or_atom(self):
         original_feeds_format = feeds.FEEDS_FORMAT
         feeds.FEEDS_FORMAT = ''
-        feed = LatestEntries()
+        feed = LastEntries()
         self.assertEqual(feed.feed_type, DefaultFeed)
         feeds.FEEDS_FORMAT = 'atom'
-        feed = LatestEntries()
+        feed = LastEntries()
         self.assertEqual(feed.feed_type, Atom1Feed)
         self.assertEqual(feed.subtitle, feed.description)
         feeds.FEEDS_FORMAT = original_feeds_format
@@ -403,8 +403,8 @@ class FeedsTestCase(TestCase):
     def test_title_with_sitename_implementation(self):
         feed = ZinniaFeed()
         self.assertRaises(NotImplementedError, feed.title)
-        feed = LatestEntries()
-        self.assertEqual(feed.title(), 'example.com - Latest entries')
+        feed = LastEntries()
+        self.assertEqual(feed.title(), 'example.com - Last entries')
 
     def test_discussion_feed_with_same_slugs(self):
         """

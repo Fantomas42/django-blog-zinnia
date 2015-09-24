@@ -7,16 +7,16 @@
 {% if category.description %}
 {{ category.description|striptags|safe }}
 {% else %}
-{% blocktrans with object=category %}The latest entries categorized under {{ object }}{% endblocktrans %}
+{% blocktrans with object=category %}The last entries categorized under {{ object }}{% endblocktrans %}
 {% endif %}
 {% endif %}
 
 {% if tag %}
-{% blocktrans with object=tag %}The latest entries tagged with {{ object }}{% endblocktrans %}
+{% blocktrans with object=tag %}The last entries tagged with {{ object }}{% endblocktrans %}
 {% endif %}
 
 {% if author %}
-{% blocktrans with object=author %}The latest entries by {{ object }}{% endblocktrans %}
+{% blocktrans with object=author %}The last entries by {{ object }}{% endblocktrans %}
 {% endif %}
 
 {% endspaceless %}{% endblock meta-description %}
