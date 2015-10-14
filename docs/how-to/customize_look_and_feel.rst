@@ -213,7 +213,7 @@ Templates for entry detail
 ==========================
 
 Each entries of the Weblog has the possibility to have his own template to
-be rendered by using the :setting:`ZINNIA_ENTRY_TEMPLATES` settings, so
+be rendered by using the :setting:`ZINNIA_ENTRY_DETAIL_TEMPLATES` settings, so
 with this option you can handle multiple presentation for your entries. And
 because :class:`~zinnia.views.entries.EntryDetail` is based on an archive
 view a custom list of templates is built uppon the publication date.
@@ -301,9 +301,10 @@ Going further
 As you can see that you can customize the look and feel of Zinnia by CSS,
 SASS, HTML and Python and even by adding custom views. So why don't you
 make a Python package containing a Django application of your complete
-theme ? The theme of your weblog will be sharable and easily
-installable. Remember to take a look at `Zinnia-theme-html5`_ for having a
-good starting point of a packaged theme.
+theme ? The theme of your weblog will be sharable and easily installable.
+
+Remember to take a look at `Zinnia-theme-bootstrap`_ for having a good
+starting point of a packaged theme.
 
 
 .. _`specifying a template directory`: https://docs.djangoproject.com/en/dev/ref/templates/api/#loading-templates
