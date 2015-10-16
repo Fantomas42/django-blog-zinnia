@@ -25,8 +25,17 @@ mixins Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`entry_cache` Module
+-------------------------
+
+.. automodule:: zinnia.views.mixins.entry_cache
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 :mod:`entry_preview` Module
-------------------------------
+---------------------------
 
 .. automodule:: zinnia.views.mixins.entry_preview
     :members:
