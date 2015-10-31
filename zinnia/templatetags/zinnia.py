@@ -16,6 +16,8 @@ from django.utils.encoding import smart_text
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.utils.html import conditional_escape
+from django.template.loader import select_template
+from django.template.defaultfilters import slugify
 from django.template.defaultfilters import stringfilter
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
@@ -34,6 +36,7 @@ from ..managers import DRAFT
 from ..managers import tags_published
 from ..flags import PINGBACK, TRACKBACK
 from ..settings import PROTOCOL
+from ..settings import ENTRY_LOOP_TEMPLATES
 from ..comparison import EntryPublishedVectorBuilder
 from ..calendar import Calendar
 from ..breadcrumbs import retrieve_breadcrumbs
@@ -322,6 +325,56 @@ def zinnia_breadcrumbs(context, root_name=_('Blog'),
 
     return {'template': template,
             'breadcrumbs': breadcrumbs}
+
+
+@register.assignment_tag(takes_context=True)
+def zinnia_positional_template(context, default_template):
+    """
+    Return a selected template from his position within a loop.
+    """
+    def global_position(context):
+        try:
+            loop_counter = context['forloop']['counter']
+        except KeyError:
+            return 0
+        try:
+            page = context['page_obj']
+        except KeyError:
+            return loop_counter
+        return (page.number - 1) * page.paginator.per_page + loop_counter
+
+    def filter_template(context, position):
+        context_object = context.get('category') or \
+            context.get('tag') or context.get('author') or \
+            context.get('year') or context.get('month') or \
+            context.get('day')
+
+        class_context_key = context_object.__class__.__name__.lower()
+        model_context_key = slugify(str(context_object))
+
+        for key in ['%s-%s' % (class_context_key, model_context_key),
+                    model_context_key, class_context_key, 'default']:
+            if key in ENTRY_LOOP_TEMPLATES:
+                loop_key = key
+                break
+        try:
+            return ENTRY_LOOP_TEMPLATES[loop_key][position]
+        except KeyError:
+            return None
+
+    templates = []
+    position = global_position(context)
+    if position:
+        templates.extend(['%s_%s' % (default_template, position),
+                          'zinnia/%s_entry_detail.html' % position])
+
+        filter_template = filter_template(context, position)
+        if filter_template:
+            templates.insert(0, filter_template)
+
+    templates.append(default_template)
+    template = select_template(templates)
+    return template
 
 
 @register.simple_tag
