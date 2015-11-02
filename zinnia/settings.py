@@ -25,6 +25,9 @@ ENTRY_DETAIL_TEMPLATES = getattr(
     settings, 'ZINNIA_ENTRY_DETAIL_TEMPLATES', [])
 ENTRY_CONTENT_TEMPLATES = getattr(
     settings, 'ZINNIA_ENTRY_CONTENT_TEMPLATES', [])
+ENTRY_LOOP_TEMPLATES = getattr(
+    settings, 'ZINNIA_ENTRY_LOOP_TEMPLATES', {})
+ENTRY_LOOP_TEMPLATES.setdefault('default', {})
 
 MARKUP_LANGUAGE = getattr(settings, 'ZINNIA_MARKUP_LANGUAGE', 'html')
 
