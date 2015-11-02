@@ -1,5 +1,6 @@
 *~
-*.pyc
+*.py[co]
+*.sw[po]
 .noseids
 .coverage
 .sass-cache

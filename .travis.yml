@@ -10,13 +10,6 @@ env:
     - DATABASE_ENGINE=postgres
     - DATABASE_ENGINE=mysql
 matrix:
-    exclude:
-        - python: 3.2
-          env: DATABASE_ENGINE=mysql
-        - python: 3.3
-          env: DATABASE_ENGINE=mysql
-        - python: 3.4
-          env: DATABASE_ENGINE=mysql
     fast_finish: true
 install:
     - pip install -U setuptools
@@ -29,7 +22,10 @@ install:
       fi"
     - sh -c "if [ '$DATABASE_ENGINE' = 'mysql' ];
       then
-        pip install mysql-python;
+        if [ `python -c 'import sys; print(sys.version_info[0])'` == 2 ] ;
+            then pip install mysql-python;
+            else pip install PyMySQL;
+        fi;
         mysql -e 'create database zinnia CHARACTER SET utf8 COLLATE utf8_general_ci;';
         mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql;
       fi"
