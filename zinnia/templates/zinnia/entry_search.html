@@ -39,7 +39,7 @@
 {% block content-loop %}
 {% if not error %}
 {% for object in object_list %}
-  {% zinnia_positional_template object.content_template as template %}
+  {% zinnia_loop_template object.content_template as template %}
   {% include template with object_content=object.html_preview continue_reading=1 %}
 {% empty %}
 <p class="info">{% trans "Nothing found." %}</p>
