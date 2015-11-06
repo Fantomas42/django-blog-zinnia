@@ -4,7 +4,10 @@ from django.template.defaultfilters import slugify
 from zinnia.settings import ENTRY_LOOP_TEMPLATES
 
 
-def loop_position(context):
+def get_loop_position(context):
+    """
+    Return the paginated current position within a loop with context.
+    """
     try:
         loop_counter = context['forloop']['counter']
     except KeyError:
@@ -16,12 +19,24 @@ def loop_position(context):
     return (page.number - 1) * page.paginator.per_page + loop_counter
 
 
-def filter_template(context, position):
-    context_object = context.get('category') or \
-        context.get('tag') or context.get('author') or \
-        context.get('year') or context.get('month') or \
-        context.get('day') or context.get('week') or \
-        context.get('pattern')
+def get_context_object(context, context_lookups):
+    """
+    Return the first object found in the context,
+    from a list of keys.
+    """
+    for key in context_lookups:
+        context_object = context.get(key)
+        if context_object:
+            return context_object
+
+
+def get_context_template(context, context_lookups, position):
+    """
+    Look into the context to find a matching key,
+    and returns the associated template matching key and position
+    in ENTRY_LOOP_TEMPLATES.
+    """
+    context_object = get_context_object(context, context_lookups)
 
     class_context_key = context_object.__class__.__name__.lower()
     model_context_key = slugify(str(context_object))
@@ -37,14 +52,21 @@ def filter_template(context, position):
         return None
 
 
-def get_positional_templates(context, default_template):
+def get_positional_templates(context, template_name=None, context_lookups=[]):
+    """
+    Build a list of templates from loop positions and context lookups.
+    """
     templates = []
-    position = loop_position(context)
+    position = get_loop_position(context)
+
     if position:
-        templates.extend(['%s_%s' % (default_template, position),
-                          'zinnia/%s_entry_detail.html' % position])
-        template = filter_template(context, position)
-        if template:
-            templates.insert(0, template)
+        if template_name:
+            templates.append('%s_%s' % (template_name, position))
+        templates.append('zinnia/%s_entry_detail.html' % position)
+
+        context_template = get_context_template(
+            context, context_lookups, position)
+        if context_template:
+            templates.insert(0, context_template)
 
     return templates

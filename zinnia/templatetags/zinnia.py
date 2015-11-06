@@ -332,7 +332,10 @@ def zinnia_positional_template(context, default_template):
     Return a selected template from his position within a loop
     and the filtering context.
     """
-    templates = get_positional_templates(context, default_template)
+    templates = get_positional_templates(
+        context, default_template,
+        ['category', 'tag', 'author', 'pattern',
+         'year', 'month', 'week', 'day'])
     templates.append(default_template)
     return select_template(templates)
 
