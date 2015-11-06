@@ -38,7 +38,9 @@ from ..settings import PROTOCOL
 from ..comparison import EntryPublishedVectorBuilder
 from ..calendar import Calendar
 from ..breadcrumbs import retrieve_breadcrumbs
-from ..context_templates import get_positional_templates
+from ..context_templates import get_loop_position
+from ..context_templates import get_context_object
+from ..context_templates import positional_template_list
 
 
 WIDONT_REGEXP = re.compile(
@@ -316,8 +318,8 @@ def zinnia_breadcrumbs(context, root_name=_('Blog'),
     Return a breadcrumb for the application.
     """
     path = context['request'].path
-    context_object = context.get('object') or context.get('category') or \
-        context.get('tag') or context.get('author')
+    context_object = get_context_object(
+        context, ['object', 'category', 'tag', 'author'])
     context_page = context.get('page_obj')
     breadcrumbs = retrieve_breadcrumbs(path, context_object,
                                        context_page, root_name)
@@ -332,11 +334,14 @@ def zinnia_positional_template(context, default_template):
     Return a selected template from his position within a loop
     and the filtering context.
     """
-    templates = get_positional_templates(
-        context, default_template,
+    position = get_loop_position(context)
+    context_object = get_context_object(
+        context,
         ['category', 'tag', 'author', 'pattern',
          'year', 'month', 'week', 'day'])
-    templates.append(default_template)
+    templates = positional_template_list(
+        position, context_object, default_template)
+
     return select_template(templates)
 
 

@@ -30,14 +30,12 @@ def get_context_object(context, context_lookups):
             return context_object
 
 
-def get_context_template(context, context_lookups, position):
+def get_context_template(context_object, position):
     """
     Look into the context to find a matching key,
     and returns the associated template matching key and position
     in ENTRY_LOOP_TEMPLATES.
     """
-    context_object = get_context_object(context, context_lookups)
-
     class_context_key = context_object.__class__.__name__.lower()
     model_context_key = slugify(str(context_object))
 
@@ -52,21 +50,20 @@ def get_context_template(context, context_lookups, position):
         return None
 
 
-def get_positional_templates(context, template_name=None, context_lookups=[]):
+def positional_template_list(position, context_object, template_name=None):
     """
     Build a list of templates from loop positions and context lookups.
     """
     templates = []
-    position = get_loop_position(context)
 
     if position:
         if template_name:
             templates.append('%s_%s' % (template_name, position))
         templates.append('zinnia/%s_entry_detail.html' % position)
 
-        context_template = get_context_template(
-            context, context_lookups, position)
+        context_template = get_context_template(context_object, position)
         if context_template:
             templates.insert(0, context_template)
 
+    templates.append(template_name)
     return templates
