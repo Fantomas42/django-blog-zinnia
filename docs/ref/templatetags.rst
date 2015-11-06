@@ -59,7 +59,7 @@ Usage examples: ::
 .. templatetag:: get_draft_entries
 
 get_draft_entries
-====================
+=================
 
 Display the latest entries marked as draft.
 
@@ -307,6 +307,23 @@ Usage examples: ::
   {% zinnia_breadcrumbs "News" %}
   {% zinnia_breadcrumbs "News" "custom_template.html" %}
   {% zinnia_breadcrumbs template="custom_template.html" %}
+
+.. templatetag:: zinnia_loop_template
+
+zinnia_loop_template
+====================
+
+Store in a context variable a :class:`~django.template.base.Template`
+choosen from his position whithin a loop of entries.
+
+.. autofunction:: zinnia_loop_template
+
+Usage example: ::
+
+  {% for object in object_list %}
+    {% zinnia_loop_template "my-template.html" as template %}
+    {% include template %}
+  {% endfor %}
 
 .. templatetag:: zinnia_statistics
 
