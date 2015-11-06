@@ -347,7 +347,8 @@ def zinnia_positional_template(context, default_template):
         context_object = context.get('category') or \
             context.get('tag') or context.get('author') or \
             context.get('year') or context.get('month') or \
-            context.get('day')
+            context.get('day') or context.get('week') or \
+            context.get('pattern')
 
         class_context_key = context_object.__class__.__name__.lower()
         model_context_key = slugify(str(context_object))
