@@ -40,6 +40,7 @@ from ..comparison import EntryPublishedVectorBuilder
 from ..calendar import Calendar
 from ..breadcrumbs import retrieve_breadcrumbs
 from ..context import get_context_first_object
+from ..context import get_context_first_matching_object
 from ..context import get_context_loop_positions
 from ..templates import loop_template_list
 
@@ -335,15 +336,15 @@ def zinnia_loop_template(context, default_template):
     Return a selected template from his position within a loop
     and the filtering context.
     """
-    context_object = get_context_first_object(
+    matching, context_object = get_context_first_matching_object(
         context,
         ['category', 'tag', 'author', 'pattern',
          'year', 'month', 'week', 'day'])
     context_positions = get_context_loop_positions(context)
 
     templates = loop_template_list(
-        context_positions, context_object, default_template,
-        ENTRY_LOOP_TEMPLATES)
+        context_positions, context_object, matching,
+        default_template, ENTRY_LOOP_TEMPLATES)
 
     return select_template(templates)
 

@@ -13,8 +13,8 @@ def append_position(path, position, separator=''):
     return ''.join([filename, separator, str(position), extension])
 
 
-def loop_template_list(loop_positions, instance, default_template,
-                       registery={}):
+def loop_template_list(loop_positions, instance, instance_type,
+                       default_template, registery={}):
     """
     Build a list of templates from a position within a loop
     and a registery of templates.
@@ -22,12 +22,11 @@ def loop_template_list(loop_positions, instance, default_template,
     templates = []
     local_loop_position = loop_positions[1]
     global_loop_position = loop_positions[0]
-    instance_class = instance.__class__.__name__.lower()
     instance_string = slugify(str(instance))
 
-    for key in ['%s-%s' % (instance_class, instance_string),
+    for key in ['%s-%s' % (instance_type, instance_string),
                 instance_string,
-                instance_class,
+                instance_type,
                 'default']:
         try:
             templates.append(registery[key][global_loop_position])

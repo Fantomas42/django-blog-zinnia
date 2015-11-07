@@ -4,11 +4,24 @@ from django.template import Context
 from django.core.paginator import Paginator
 
 from zinnia.context import get_context_first_object
+from zinnia.context import get_context_first_matching_object
 from zinnia.context import get_context_loop_positions
 
 
 class ContextTestCase(TestCase):
     """Tests cases for context"""
+
+    def test_get_context_first_matching_object(self):
+        context = Context({'a': 1, 'b': 2, 'c': 3})
+        self.assertEqual(
+            get_context_first_matching_object(context, ['key']),
+            (None, None))
+        self.assertEqual(
+            get_context_first_matching_object(context, ['a']),
+            ('a', 1))
+        self.assertEqual(
+            get_context_first_matching_object(context, ['b', 'a']),
+            ('b', 2))
 
     def test_get_context_first_object(self):
         context = Context({'a': 1, 'b': 2, 'c': 3})

@@ -946,28 +946,27 @@ class TemplateTagsTestCase(TestCase):
             zinnia_loop_template, context, 'zinnia/_entry_custom.html')
 
         # Test with context
-        class Cameleon(object):
-            def __init__(self, name):
-                self.name = name
-
-            def __str__(self):
-                return self.name
-
         for context_object_name in ['category', 'tag', 'author',
                                     'year', 'month', 'day']:
             ztemplatetags.ENTRY_LOOP_TEMPLATES = {
+                'slug': {25: 'template-slug.html'},
                 context_object_name: {25: 'template-%s.html' %
-                                      context_object_name}}
+                                      context_object_name},
+                '%s-slug' % context_object_name:
+                    {25: 'template-%s-slug.html' % context_object_name}}
             context = Context(
                 {'forloop': {'counter': 5},
                  'page_obj': paginator.page(3),
-                 context_object_name: Cameleon(context_object_name)})
+                 context_object_name: 'slug'})
             self.assertRaisesRegexp(
                 TemplateDoesNotExist,
+                'template-%s-slug.html, '
+                'template-slug.html, '
                 'template-%s.html, '
                 'zinnia/_entry_custom-25.html, '
                 'zinnia/_entry_custom_5.html, '
-                'zinnia/_entry_custom.html' % context_object_name,
+                'zinnia/_entry_custom.html' % (
+                    context_object_name, context_object_name),
                 zinnia_loop_template,
                 context, 'zinnia/_entry_custom.html')
         ztemplatetags.ENTRY_LOOP_TEMPLATES = original_entry_loop_templates

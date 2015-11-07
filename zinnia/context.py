@@ -1,15 +1,25 @@
 """Context module for Zinnia"""
 
 
+def get_context_first_matching_object(context, context_lookups):
+    """
+    Return the first object found in the context,
+    from a list of keys, with the matching key.
+    """
+    for key in context_lookups:
+        context_object = context.get(key)
+        if context_object:
+            return key, context_object
+    return None, None
+
+
 def get_context_first_object(context, context_lookups):
     """
     Return the first object found in the context,
     from a list of keys.
     """
-    for key in context_lookups:
-        context_object = context.get(key)
-        if context_object:
-            return context_object
+    return get_context_first_matching_object(
+        context, context_lookups)[1]
 
 
 def get_context_loop_positions(context):
