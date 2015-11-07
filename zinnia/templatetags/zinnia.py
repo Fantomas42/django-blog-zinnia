@@ -35,6 +35,7 @@ from ..managers import DRAFT
 from ..managers import tags_published
 from ..flags import PINGBACK, TRACKBACK
 from ..settings import PROTOCOL
+from ..settings import ENTRY_LOOP_TEMPLATES
 from ..comparison import EntryPublishedVectorBuilder
 from ..calendar import Calendar
 from ..breadcrumbs import retrieve_breadcrumbs
@@ -341,7 +342,8 @@ def zinnia_loop_template(context, default_template):
     context_position = get_context_loop_position(context)
 
     templates = loop_template_list(
-        context_position, context_object, default_template)
+        context_position, context_object, default_template,
+        ENTRY_LOOP_TEMPLATES)
 
     return select_template(templates)
 

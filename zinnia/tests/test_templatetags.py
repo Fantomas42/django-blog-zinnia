@@ -19,7 +19,6 @@ from django_comments.models import CommentFlag
 
 from tagging.models import Tag
 
-from zinnia import templates as ztemplates
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
@@ -55,6 +54,7 @@ from zinnia.templatetags.zinnia import get_archives_entries_tree
 from zinnia.templatetags.zinnia import user_admin_urlname
 from zinnia.templatetags.zinnia import comment_admin_urlname
 from zinnia.templatetags.zinnia import zinnia_loop_template
+from zinnia.templatetags import zinnia as ztemplatetags
 
 
 class TemplateTagsTestCase(TestCase):
@@ -900,7 +900,7 @@ class TemplateTagsTestCase(TestCase):
         # More tests can be done here, for testing path and objects in context
 
     def test_zinnia_loop_template(self):
-        original_entry_loop_templates = ztemplates.ENTRY_LOOP_TEMPLATES
+        original_entry_loop_templates = ztemplatetags.ENTRY_LOOP_TEMPLATES
         paginator = Paginator(range(50), 10)
         context = Context()
 
@@ -910,6 +910,8 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(template.template.name, 'zinnia/_entry_detail.html')
         self.assertRaisesRegexp(
             TemplateDoesNotExist,
+            'zinnia/_entry_custom.html_0, '
+            'zinnia/0_entry_detail.html, '
             'zinnia/_entry_custom.html',
             zinnia_loop_template, context, 'zinnia/_entry_custom.html')
 
@@ -933,7 +935,7 @@ class TemplateTagsTestCase(TestCase):
             zinnia_loop_template, context, 'zinnia/_entry_custom.html')
 
         # Test with default key
-        ztemplates.ENTRY_LOOP_TEMPLATES = {
+        ztemplatetags.ENTRY_LOOP_TEMPLATES = {
             'default': {25: 'template.html'}}
         self.assertRaisesRegexp(
             TemplateDoesNotExist,
@@ -953,7 +955,7 @@ class TemplateTagsTestCase(TestCase):
 
         for context_object_name in ['category', 'tag', 'author',
                                     'year', 'month', 'day']:
-            ztemplates.ENTRY_LOOP_TEMPLATES = {
+            ztemplatetags.ENTRY_LOOP_TEMPLATES = {
                 context_object_name: {25: 'template-%s.html' %
                                       context_object_name}}
             context = Context(
@@ -968,7 +970,7 @@ class TemplateTagsTestCase(TestCase):
                 'zinnia/_entry_custom.html' % context_object_name,
                 zinnia_loop_template,
                 context, 'zinnia/_entry_custom.html')
-        ztemplates.ENTRY_LOOP_TEMPLATES = original_entry_loop_templates
+        ztemplatetags.ENTRY_LOOP_TEMPLATES = original_entry_loop_templates
 
     def test_get_gravatar(self):
         self.assertTrue(urlEqual(

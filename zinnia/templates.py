@@ -1,31 +1,28 @@
 """Templates module for Zinnia"""
 from django.template.defaultfilters import slugify
 
-from zinnia.settings import ENTRY_LOOP_TEMPLATES
 
-
-def loop_template_list(position, context_object, template_name=None):
+def loop_template_list(loop_position, instance, default_template,
+                       registery={}):
     """
-    Build a list of templates from loop positions and context lookups.
+    Build a list of templates from a position within a loop
+    and a registery of templates.
     """
     templates = []
+    instance_class = instance.__class__.__name__.lower()
+    instance_string = slugify(str(instance))
 
-    if position:
-        if template_name:
-            templates.append('%s_%s' % (template_name, position))
-        templates.append('zinnia/%s_entry_detail.html' % position)
+    for key in ['%s-%s' % (instance_class, instance_string),
+                instance_string,
+                instance_class,
+                'default']:
+        try:
+            templates.append(registery[key][loop_position])
+        except KeyError:
+            pass
 
-        class_context_key = context_object.__class__.__name__.lower()
-        string_context_key = slugify(str(context_object))
-        for key in ['default',
-                    '%s-%s' % (class_context_key, string_context_key),
-                    string_context_key,
-                    class_context_key]:
-            try:
-                templates.insert(0, ENTRY_LOOP_TEMPLATES[key][position])
-            except KeyError:
-                pass
-
-    templates.append(template_name)
+    templates.append('%s_%s' % (default_template, loop_position))
+    templates.append('zinnia/%s_entry_detail.html' % loop_position)
+    templates.append(default_template)
 
     return templates
