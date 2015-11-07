@@ -13,7 +13,6 @@ class TemplateTestCase(TestCase):
             loop_template_list(
                 1, None, template),
             ['zinnia/template.html_1',
-             'zinnia/1_entry_detail.html',
              template])
         self.assertEqual(
             loop_template_list(
@@ -21,7 +20,6 @@ class TemplateTestCase(TestCase):
                 {'default': {1: 'default_template.html'}}),
             ['default_template.html',
              'zinnia/template.html_1',
-             'zinnia/1_entry_detail.html',
              template])
         self.assertEqual(
             loop_template_list(
@@ -35,5 +33,4 @@ class TemplateTestCase(TestCase):
              'str_template.html',
              'default_template.html',
              'zinnia/template.html_1',
-             'zinnia/1_entry_detail.html',
              template])

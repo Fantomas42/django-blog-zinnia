@@ -22,7 +22,6 @@ def loop_template_list(loop_position, instance, default_template,
             pass
 
     templates.append('%s_%s' % (default_template, loop_position))
-    templates.append('zinnia/%s_entry_detail.html' % loop_position)
     templates.append(default_template)
 
     return templates

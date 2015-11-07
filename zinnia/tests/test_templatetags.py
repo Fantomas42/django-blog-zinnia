@@ -911,7 +911,6 @@ class TemplateTagsTestCase(TestCase):
         self.assertRaisesRegexp(
             TemplateDoesNotExist,
             'zinnia/_entry_custom.html_0, '
-            'zinnia/0_entry_detail.html, '
             'zinnia/_entry_custom.html',
             zinnia_loop_template, context, 'zinnia/_entry_custom.html')
 
@@ -920,7 +919,6 @@ class TemplateTagsTestCase(TestCase):
         self.assertRaisesRegexp(
             TemplateDoesNotExist,
             'zinnia/_entry_custom.html_5, '
-            'zinnia/5_entry_detail.html, '
             'zinnia/_entry_custom.html',
             zinnia_loop_template, context, 'zinnia/_entry_custom.html')
 
@@ -930,7 +928,6 @@ class TemplateTagsTestCase(TestCase):
         self.assertRaisesRegexp(
             TemplateDoesNotExist,
             'zinnia/_entry_custom.html_25, '
-            'zinnia/25_entry_detail.html, '
             'zinnia/_entry_custom.html',
             zinnia_loop_template, context, 'zinnia/_entry_custom.html')
 
@@ -941,7 +938,6 @@ class TemplateTagsTestCase(TestCase):
             TemplateDoesNotExist,
             'template.html, '
             'zinnia/_entry_custom.html_25, '
-            'zinnia/25_entry_detail.html, '
             'zinnia/_entry_custom.html',
             zinnia_loop_template, context, 'zinnia/_entry_custom.html')
 
@@ -966,7 +962,6 @@ class TemplateTagsTestCase(TestCase):
                 TemplateDoesNotExist,
                 'template-%s.html, '
                 'zinnia/_entry_custom.html_25, '
-                'zinnia/25_entry_detail.html, '
                 'zinnia/_entry_custom.html' % context_object_name,
                 zinnia_loop_template,
                 context, 'zinnia/_entry_custom.html')
