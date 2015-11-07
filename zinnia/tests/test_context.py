@@ -4,7 +4,7 @@ from django.template import Context
 from django.core.paginator import Paginator
 
 from zinnia.context import get_context_first_object
-from zinnia.context import get_context_loop_position
+from zinnia.context import get_context_loop_positions
 
 
 class ContextTestCase(TestCase):
@@ -22,18 +22,18 @@ class ContextTestCase(TestCase):
             get_context_first_object(context, ['b', 'a']),
             2)
 
-    def test_get_context_loop_position(self):
+    def test_get_context_loop_positions(self):
         paginator = Paginator(range(50), 10)
         context = Context({})
         self.assertEqual(
-            get_context_loop_position(context),
-            0)
+            get_context_loop_positions(context),
+            (0, 0))
         context = Context({'forloop': {'counter': 5}})
         self.assertEqual(
-            get_context_loop_position(context),
-            5)
+            get_context_loop_positions(context),
+            (5, 5))
         context = Context({'forloop': {'counter': 5},
                            'page_obj': paginator.page(3)})
         self.assertEqual(
-            get_context_loop_position(context),
-            25)
+            get_context_loop_positions(context),
+            (25, 5))

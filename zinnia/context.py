@@ -12,16 +12,19 @@ def get_context_first_object(context, context_lookups):
             return context_object
 
 
-def get_context_loop_position(context):
+def get_context_loop_positions(context):
     """
-    Return the paginated current position within a loop.
+    Return the paginated current position within a loop,
+    and the non-paginated position.
     """
     try:
         loop_counter = context['forloop']['counter']
     except KeyError:
-        return 0
+        return 0, 0
     try:
         page = context['page_obj']
     except KeyError:
-        return loop_counter
-    return (page.number - 1) * page.paginator.per_page + loop_counter
+        return loop_counter, loop_counter
+    total_loop_counter = ((page.number - 1) * page.paginator.per_page +
+                          loop_counter)
+    return total_loop_counter, loop_counter

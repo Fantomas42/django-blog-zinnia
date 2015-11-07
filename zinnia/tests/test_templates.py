@@ -12,37 +12,43 @@ class TemplateTestCase(TestCase):
         template = 'zinnia/template.html'
         self.assertEqual(
             loop_template_list(
-                1, None, template),
+                (1, 1), None, template),
             ['zinnia/template-1.html',
+             'zinnia/template_1.html',
              template])
         self.assertEqual(
             loop_template_list(
-                1, None, template,
-                {'default': {1: 'default_template.html'}}),
+                (10, 1), None, template,
+                {'default': {10: 'default_template.html'}}),
             ['default_template.html',
-             'zinnia/template-1.html',
+             'zinnia/template-10.html',
+             'zinnia/template_1.html',
              template])
         self.assertEqual(
             loop_template_list(
-                1, 'object', template,
-                {'default': {1: 'default_template.html'},
-                 'str': {1: 'str_template.html'},
-                 'object': {1: 'object_template.html'},
-                 'str-object': {1: 'str_object_template.html'}}),
+                (10, 1), 'object', template,
+                {'default': {10: 'default_template.html'},
+                 'str': {10: 'str_template.html'},
+                 'object': {10: 'object_template.html'},
+                 'str-object': {10: 'str_object_template.html'}}),
             ['str_object_template.html',
              'object_template.html',
              'str_template.html',
              'default_template.html',
-             'zinnia/template-1.html',
+             'zinnia/template-10.html',
+             'zinnia/template_1.html',
              template])
 
     def test_append_position(self):
         self.assertEqual(
             append_position('template.html', 1),
-            'template-1.html')
+            'template1.html')
         self.assertEqual(
             append_position('template', 1),
-            'template-1')
+            'template1')
         self.assertEqual(
             append_position('/path/template.html', 1),
+            '/path/template1.html')
+        self.assertEqual(
+            append_position('/path/template.html', 1, '-'),
             '/path/template-1.html')
