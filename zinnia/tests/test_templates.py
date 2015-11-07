@@ -1,6 +1,7 @@
 """Test cases for Zinnia Template"""
 from django.test import TestCase
 
+from zinnia.templates import append_position
 from zinnia.templates import loop_template_list
 
 
@@ -12,14 +13,14 @@ class TemplateTestCase(TestCase):
         self.assertEqual(
             loop_template_list(
                 1, None, template),
-            ['zinnia/template.html_1',
+            ['zinnia/template-1.html',
              template])
         self.assertEqual(
             loop_template_list(
                 1, None, template,
                 {'default': {1: 'default_template.html'}}),
             ['default_template.html',
-             'zinnia/template.html_1',
+             'zinnia/template-1.html',
              template])
         self.assertEqual(
             loop_template_list(
@@ -32,5 +33,16 @@ class TemplateTestCase(TestCase):
              'object_template.html',
              'str_template.html',
              'default_template.html',
-             'zinnia/template.html_1',
+             'zinnia/template-1.html',
              template])
+
+    def test_append_position(self):
+        self.assertEqual(
+            append_position('template.html', 1),
+            'template-1.html')
+        self.assertEqual(
+            append_position('template', 1),
+            'template-1')
+        self.assertEqual(
+            append_position('/path/template.html', 1),
+            '/path/template-1.html')

@@ -910,7 +910,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(template.template.name, 'zinnia/_entry_detail.html')
         self.assertRaisesRegexp(
             TemplateDoesNotExist,
-            'zinnia/_entry_custom.html_0, '
+            'zinnia/_entry_custom-0.html, '
             'zinnia/_entry_custom.html',
             zinnia_loop_template, context, 'zinnia/_entry_custom.html')
 
@@ -918,7 +918,7 @@ class TemplateTagsTestCase(TestCase):
         context = Context({'forloop': {'counter': 5}})
         self.assertRaisesRegexp(
             TemplateDoesNotExist,
-            'zinnia/_entry_custom.html_5, '
+            'zinnia/_entry_custom-5.html, '
             'zinnia/_entry_custom.html',
             zinnia_loop_template, context, 'zinnia/_entry_custom.html')
 
@@ -927,7 +927,7 @@ class TemplateTagsTestCase(TestCase):
                            'page_obj': paginator.page(3)})
         self.assertRaisesRegexp(
             TemplateDoesNotExist,
-            'zinnia/_entry_custom.html_25, '
+            'zinnia/_entry_custom-25.html, '
             'zinnia/_entry_custom.html',
             zinnia_loop_template, context, 'zinnia/_entry_custom.html')
 
@@ -937,7 +937,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertRaisesRegexp(
             TemplateDoesNotExist,
             'template.html, '
-            'zinnia/_entry_custom.html_25, '
+            'zinnia/_entry_custom-25.html, '
             'zinnia/_entry_custom.html',
             zinnia_loop_template, context, 'zinnia/_entry_custom.html')
 
@@ -961,7 +961,7 @@ class TemplateTagsTestCase(TestCase):
             self.assertRaisesRegexp(
                 TemplateDoesNotExist,
                 'template-%s.html, '
-                'zinnia/_entry_custom.html_25, '
+                'zinnia/_entry_custom-25.html, '
                 'zinnia/_entry_custom.html' % context_object_name,
                 zinnia_loop_template,
                 context, 'zinnia/_entry_custom.html')

@@ -1,5 +1,14 @@
 """Templates module for Zinnia"""
+import os
+
 from django.template.defaultfilters import slugify
+
+
+def append_position(path, position):
+    """
+    """
+    filename, extension = os.path.splitext(path)
+    return ''.join([filename, '-', str(position), extension])
 
 
 def loop_template_list(loop_position, instance, default_template,
@@ -21,7 +30,7 @@ def loop_template_list(loop_position, instance, default_template,
         except KeyError:
             pass
 
-    templates.append('%s_%s' % (default_template, loop_position))
+    templates.append(append_position(default_template, loop_position))
     templates.append(default_template)
 
     return templates
