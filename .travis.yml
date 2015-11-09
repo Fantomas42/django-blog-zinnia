@@ -10,6 +10,9 @@ env:
     - DATABASE_ENGINE=postgres
     - DATABASE_ENGINE=mysql
 matrix:
+    exclude:
+        - python: 3.2
+          env: DATABASE_ENGINE=mysql
     fast_finish: true
 install:
     - pip install -U setuptools
