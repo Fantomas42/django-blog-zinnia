@@ -224,9 +224,13 @@ for adding the gallery field: ::
   class EntryGalleryAdmin(EntryAdmin):
     # In our case we put the gallery field
     # into the 'Content' fieldset
-    fieldsets = ((_('Content'), {'fields': (
-      ('title', 'status'), 'content', 'image', 'gallery')}),) + \
-      EntryAdmin.fieldsets[1:]
+    fieldsets = (
+      (_('Content'), {
+        'fields': (('title', 'status'), 'lead', 'content',)}),
+      (_('Illustration'), {
+        'fields': ('image', 'gallery'),
+        'classes': ('collapse', 'collapse-closed')}),) + \
+      EntryAdmin.fieldsets[2:]
 
   admin.site.register(Entry, EntryGalleryAdmin)
 
