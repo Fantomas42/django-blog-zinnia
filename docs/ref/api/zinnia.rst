@@ -51,6 +51,14 @@ Zinnia API
     :undoc-members:
     :show-inheritance:
 
+:mod:`context` Module
+---------------------
+
+.. automodule:: zinnia.context
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`feeds` Module
 -------------------
 
@@ -127,6 +135,14 @@ Zinnia API
 ----------------------
 
 .. automodule:: zinnia.sitemaps
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`templates` Module
+-----------------------
+
+.. automodule:: zinnia.templates
     :members:
     :undoc-members:
     :show-inheritance:

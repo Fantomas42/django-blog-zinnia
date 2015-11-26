@@ -57,6 +57,23 @@ interface. Example: ::
   ZINNIA_ENTRY_CONTENT_TEMPLATES = [('zinnia/_entry_detail_alternate.html',
                                      gettext('Alternative template')),]
 
+.. setting:: ZINNIA_ENTRY_LOOP_TEMPLATES
+
+ZINNIA_ENTRY_LOOP_TEMPLATES
+---------------------------
+**Default value:** ``{'default': {}}``
+
+Dictionary of dictionaries of indexes for by-passing the template used when
+rendering an entry within a loop of filtered entries. By using this
+setting, you can change with Python code, the look and feel of an entry
+within a specific loop. Example: ::
+
+  ZINNIA_ENTRY_LOOP_TEMPLATES = {
+      'default': {1: 'zinnia/_entry_detail_first.html'},
+      'author-admin': dict([(i, 'zinnia/_entry_detail_admin.html')
+                            for i in range(1000) if not i % 5])
+  }
+
 .. setting:: ZINNIA_UPLOAD_TO
 
 ZINNIA_UPLOAD_TO

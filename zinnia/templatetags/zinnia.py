@@ -16,6 +16,7 @@ from django.utils.encoding import smart_text
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.utils.html import conditional_escape
+from django.template.loader import select_template
 from django.template.defaultfilters import stringfilter
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
@@ -34,9 +35,14 @@ from ..managers import DRAFT
 from ..managers import tags_published
 from ..flags import PINGBACK, TRACKBACK
 from ..settings import PROTOCOL
+from ..settings import ENTRY_LOOP_TEMPLATES
 from ..comparison import EntryPublishedVectorBuilder
 from ..calendar import Calendar
 from ..breadcrumbs import retrieve_breadcrumbs
+from ..context import get_context_first_object
+from ..context import get_context_first_matching_object
+from ..context import get_context_loop_positions
+from ..templates import loop_template_list
 
 
 WIDONT_REGEXP = re.compile(
@@ -314,14 +320,33 @@ def zinnia_breadcrumbs(context, root_name=_('Blog'),
     Return a breadcrumb for the application.
     """
     path = context['request'].path
-    context_object = context.get('object') or context.get('category') or \
-        context.get('tag') or context.get('author')
+    context_object = get_context_first_object(
+        context, ['object', 'category', 'tag', 'author'])
     context_page = context.get('page_obj')
     breadcrumbs = retrieve_breadcrumbs(path, context_object,
                                        context_page, root_name)
 
     return {'template': template,
             'breadcrumbs': breadcrumbs}
+
+
+@register.assignment_tag(takes_context=True)
+def zinnia_loop_template(context, default_template):
+    """
+    Return a selected template from his position within a loop
+    and the filtering context.
+    """
+    matching, context_object = get_context_first_matching_object(
+        context,
+        ['category', 'tag', 'author', 'pattern',
+         'year', 'month', 'week', 'day'])
+    context_positions = get_context_loop_positions(context)
+
+    templates = loop_template_list(
+        context_positions, context_object, matching,
+        default_template, ENTRY_LOOP_TEMPLATES)
+
+    return select_template(templates)
 
 
 @register.simple_tag

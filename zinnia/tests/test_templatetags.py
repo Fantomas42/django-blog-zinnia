@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.template import Context
 from django.template import Template
 from django.template import TemplateSyntaxError
+from django.template import TemplateDoesNotExist
 from django.db.models.signals import post_save
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
@@ -52,6 +53,8 @@ from zinnia.templatetags.zinnia import get_archives_entries
 from zinnia.templatetags.zinnia import get_archives_entries_tree
 from zinnia.templatetags.zinnia import user_admin_urlname
 from zinnia.templatetags.zinnia import comment_admin_urlname
+from zinnia.templatetags.zinnia import zinnia_loop_template
+from zinnia.templatetags import zinnia as ztemplatetags
 
 
 class TemplateTagsTestCase(TestCase):
@@ -895,6 +898,78 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(len(context['breadcrumbs']), 5)
         check_only_last_have_no_url(context['breadcrumbs'])
         # More tests can be done here, for testing path and objects in context
+
+    def test_zinnia_loop_template(self):
+        original_entry_loop_templates = ztemplatetags.ENTRY_LOOP_TEMPLATES
+        paginator = Paginator(range(50), 10)
+        context = Context()
+
+        # Test simple
+        template = zinnia_loop_template(
+            context, 'zinnia/_entry_detail.html')
+        self.assertEqual(template.template.name, 'zinnia/_entry_detail.html')
+        self.assertRaisesRegexp(
+            TemplateDoesNotExist,
+            'zinnia/_entry_custom-0.html, '
+            'zinnia/_entry_custom_0.html, '
+            'zinnia/_entry_custom.html',
+            zinnia_loop_template, context, 'zinnia/_entry_custom.html')
+
+        # Test with loop
+        context = Context({'forloop': {'counter': 5}})
+        self.assertRaisesRegexp(
+            TemplateDoesNotExist,
+            'zinnia/_entry_custom-5.html, '
+            'zinnia/_entry_custom_5.html, '
+            'zinnia/_entry_custom.html',
+            zinnia_loop_template, context, 'zinnia/_entry_custom.html')
+
+        # Test with pagination
+        context = Context({'forloop': {'counter': 5},
+                           'page_obj': paginator.page(3)})
+        self.assertRaisesRegexp(
+            TemplateDoesNotExist,
+            'zinnia/_entry_custom-25.html, '
+            'zinnia/_entry_custom_5.html, '
+            'zinnia/_entry_custom.html',
+            zinnia_loop_template, context, 'zinnia/_entry_custom.html')
+
+        # Test with default key
+        ztemplatetags.ENTRY_LOOP_TEMPLATES = {
+            'default': {25: 'template.html'}}
+        self.assertRaisesRegexp(
+            TemplateDoesNotExist,
+            'template.html, '
+            'zinnia/_entry_custom-25.html, '
+            'zinnia/_entry_custom_5.html, '
+            'zinnia/_entry_custom.html',
+            zinnia_loop_template, context, 'zinnia/_entry_custom.html')
+
+        # Test with context
+        for context_object_name in ['category', 'tag', 'author',
+                                    'year', 'month', 'day']:
+            ztemplatetags.ENTRY_LOOP_TEMPLATES = {
+                'slug': {25: 'template-slug.html'},
+                context_object_name: {25: 'template-%s.html' %
+                                      context_object_name},
+                '%s-slug' % context_object_name:
+                    {25: 'template-%s-slug.html' % context_object_name}}
+            context = Context(
+                {'forloop': {'counter': 5},
+                 'page_obj': paginator.page(3),
+                 context_object_name: 'slug'})
+            self.assertRaisesRegexp(
+                TemplateDoesNotExist,
+                'template-%s-slug.html, '
+                'template-slug.html, '
+                'template-%s.html, '
+                'zinnia/_entry_custom-25.html, '
+                'zinnia/_entry_custom_5.html, '
+                'zinnia/_entry_custom.html' % (
+                    context_object_name, context_object_name),
+                zinnia_loop_template,
+                context, 'zinnia/_entry_custom.html')
+        ztemplatetags.ENTRY_LOOP_TEMPLATES = original_entry_loop_templates
 
     def test_get_gravatar(self):
         self.assertTrue(urlEqual(

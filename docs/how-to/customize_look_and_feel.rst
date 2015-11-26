@@ -257,6 +257,45 @@ names will be: ::
 
 Now you have the choice !
 
+.. _content-templates:
+
+Templates for entries' content
+==============================
+
+Imagine that you have different kind of entries, some with photos, some
+with videos or even with tweets. You might not want to share the same
+presentation between these different entries.
+
+An elegent solution to better highlight the content is to use different
+templates for each kind of content or presentation you want.
+
+You can easily do this by using the :setting:`ZINNIA_ENTRY_CONTENT_TEMPLATES`.
+It allows you to specify a content template for each entries of your blog
+using the administration interface.
+
+.. _loop-templates:
+
+Templates within loops
+======================
+
+When displaying a list of entries the templates are chosen according to
+:setting:`ZINNIA_ENTRY_CONTENT_TEMPLATES`.
+
+But how can we specify a template for a given index position the list ?
+For example if we want to highlight the first entry.
+
+Then we simply create a new template suffixed by a dash followed by the
+position.
+
+Example: ``zinnia/_entry_detail-1.html``
+
+If we use an underscore instead of a dash the position will reset at every
+new page. Replacing the dash by an underscore in the previous example would
+highlight the first entry of every page.
+
+You can bypass this behavior altogether and have more control over your
+templates by using the :setting:`ENTRY_LOOP_TEMPLATES` setting.
+
 .. _changing-templates:
 
 Changing templates
