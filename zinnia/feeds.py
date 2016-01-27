@@ -130,7 +130,10 @@ class EntryFeed(ZinniaFeed):
             url = item.image.url.replace("https://", "http://")
         else:
             img = BeautifulSoup(item.html_content, 'html.parser').find('img')
-            url = img.get('src').replace("https://", "http://") if img else None
+            if img:
+                url = img.get('src').replace("https://", "http://")
+            else:
+                url = None
         self.cached_enclosure_url = url
         return urljoin(self.site_url, url) if url else None
 
