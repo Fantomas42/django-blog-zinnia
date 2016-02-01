@@ -41,7 +41,7 @@ More than a long speech, here the list of the main features:
 * `Bit.ly`_ support
 * `Twitter`_ support
 * `Gravatar`_ support
-* `Django-CMS`_ plugins
+* Django-CMS plugins
 * Collaborative work
 * Tags autocompletion
 * `Entry model extendable`_
@@ -106,9 +106,9 @@ More information and help available at these URLs:
 .. |paypal| image:: https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif
    :alt:  Make a free donation with Paypal to encourage the development
    :target: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=68T48HR8KK9KG
-.. _`Sitemaps`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#module-zinnia.sitemaps
-.. _`Advanced search engine`: http://docs.django-blog-zinnia.com/en/latest/topics/search_engines.html
-.. _`Custom templates for various contents`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#templates-for-entries
+.. _`Sitemaps`: http://django-blog-zinnia.readthedocs.org/en/latest/getting-started/configuration.html#module-zinnia.sitemaps
+.. _`Advanced search engine`: http://django-blog-zinnia.readthedocs.org/en/latest/topics/search_engines.html
+.. _`Custom templates for various contents`: http://django-blog-zinnia.readthedocs.org/en/latest/getting-started/configuration.html#templates-for-entries
 .. _`Markdown`: http://daringfireball.net/projects/markdown/
 .. _`Textile`: http://redcloth.org/hobix.com/textile/
 .. _`reStructuredText`: http://docutils.sourceforge.net/rst.html
@@ -119,8 +119,7 @@ More information and help available at these URLs:
 .. _`Bit.ly`: https://github.com/Fantomas42/zinnia-url-shortener-bitly
 .. _`Twitter`:  https://github.com/Fantomas42/zinnia-twitter
 .. _`Gravatar`: http://gravatar.com/
-.. _`Django-CMS`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#django-cms
-.. _`Entry model extendable`: http://django-blog-zinnia.rtfd.org/extending-entry
+.. _`Entry model extendable`: http://django-blog-zinnia.readthedocs.org/en/latest/how-to/extending_entry_model.html
 .. _`WYMeditor`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-wymeditor
 .. _`TinyMCE`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-tinymce
 .. _`CKEditor`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-ckeditor
@@ -146,7 +145,7 @@ More information and help available at these URLs:
 .. _`Vidzor Studio LLC`: http://vidzor.com/blog/
 .. _`Bookshadow`: http://bookshadow.com/weblog/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
-.. _`Documentation`: http://docs.django-blog-zinnia.com/
+.. _`Documentation`: http://django-blog-zinnia.readthedocs.org/
 .. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia
 .. _`Coverage report`: https://coveralls.io/r/Fantomas42/django-blog-zinnia
 .. _`Google Group`: http://groups.google.com/group/django-blog-zinnia/
