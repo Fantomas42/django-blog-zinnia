@@ -280,9 +280,9 @@ def zinnia_pagination(context, page, begin_pages=1, end_pages=1,
         if key != 'page':
             GET_string += '&%s=%s' % (key, value)
 
-    begin = list(page.paginator.page_range[:begin_pages])
-    end = list(page.paginator.page_range[-end_pages:])
-    middle = list(page.paginator.page_range[
+    begin = list(list(page.paginator.page_range)[:begin_pages])
+    end = list(list(page.paginator.page_range)[-end_pages:])
+    middle = list(list(page.paginator.page_range)[
         max(page.number - before_pages - 1, 0):page.number + after_pages])
 
     if set(begin) & set(middle):  # [1, 2, 3], [2, 3, 4], [...]
