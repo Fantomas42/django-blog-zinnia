@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.template import Context
 from django.template import Template
 from django.template import TemplateSyntaxError
+from django.template import TemplateDoesNotExist
 from django.db.models.signals import post_save
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
@@ -52,6 +53,8 @@ from zinnia.templatetags.zinnia import get_archives_entries
 from zinnia.templatetags.zinnia import get_archives_entries_tree
 from zinnia.templatetags.zinnia import user_admin_urlname
 from zinnia.templatetags.zinnia import comment_admin_urlname
+from zinnia.templatetags.zinnia import zinnia_loop_template
+from zinnia.templatetags import zinnia as ztemplatetags
 
 
 class TemplateTagsTestCase(TestCase):
@@ -63,7 +66,7 @@ class TemplateTagsTestCase(TestCase):
         params = {'title': 'My entry',
                   'content': 'My content',
                   'tags': 'zinnia, test',
-                  'creation_date': datetime(2010, 1, 1, 12),
+                  'publication_date': datetime(2010, 1, 1, 12),
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
         self.site = Site.objects.get_current()
@@ -320,7 +323,7 @@ class TemplateTagsTestCase(TestCase):
                   'content': 'My second content',
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
-                  'creation_date': datetime(2009, 1, 1),
+                  'publication_date': datetime(2009, 1, 1),
                   'slug': 'my-second-entry'}
         second_entry = Entry.objects.create(**params)
         second_entry.sites.add(self.site)
@@ -331,10 +334,12 @@ class TemplateTagsTestCase(TestCase):
 
         self.assertEqual(
             context['archives'][0],
-            self.make_local(self.entry.creation_date).replace(day=1, hour=0))
+            self.make_local(self.entry.publication_date).replace(
+                day=1, hour=0))
         self.assertEqual(
             context['archives'][1],
-            self.make_local(second_entry.creation_date).replace(day=1, hour=0))
+            self.make_local(second_entry.publication_date).replace(
+                day=1, hour=0))
         self.assertEqual(context['template'], 'custom_template.html')
 
     def test_get_archives_tree(self):
@@ -349,7 +354,7 @@ class TemplateTagsTestCase(TestCase):
                   'content': 'My second content',
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
-                  'creation_date': datetime(2009, 1, 10),
+                  'publication_date': datetime(2009, 1, 10),
                   'slug': 'my-second-entry'}
         second_entry = Entry.objects.create(**params)
         second_entry.sites.add(self.site)
@@ -360,11 +365,11 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(
             context['archives'][0],
             self.make_local(
-                second_entry.creation_date).replace(hour=0))
+                second_entry.publication_date).replace(hour=0))
         self.assertEqual(
             context['archives'][1],
             self.make_local(
-                self.entry.creation_date).replace(hour=0))
+                self.entry.publication_date).replace(hour=0))
         self.assertEqual(context['template'], 'custom_template.html')
 
     def test_get_calendar_entries_no_params(self):
@@ -381,7 +386,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_calendar_entries(source_context)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
     def test_get_calendar_entries_incomplete_year_month(self):
@@ -391,14 +396,14 @@ class TemplateTagsTestCase(TestCase):
             context = get_calendar_entries(source_context, year=2009)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context, month=1)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
     def test_get_calendar_entries_full_params(self):
@@ -410,7 +415,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(
             context['next_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
         self.assertEqual(context['template'], 'custom_template.html')
 
     def test_get_calendar_entries_no_prev_next(self):
@@ -429,14 +434,14 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(
             context['next_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
 
         source_context = Context({'month': date(2010, 6, 1)})
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
         source_context = Context({'month': date(2010, 1, 1)})
@@ -453,14 +458,14 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(
             context['next_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
 
         source_context = Context({'week': date(2010, 5, 31)})
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
         source_context = Context({'week': date(2010, 1, 4)})
@@ -477,14 +482,14 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(
             context['next_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
 
         source_context = Context({'day': date(2010, 6, 15)})
         with self.assertNumQueries(2):
             context = get_calendar_entries(source_context)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
         source_context = Context({'day': date(2010, 1, 15)})
@@ -500,14 +505,14 @@ class TemplateTagsTestCase(TestCase):
             context = get_calendar_entries(source_context)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
         self.assertEqual(context['next_month'], None)
 
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'tags': 'zinnia, test',
                   'status': PUBLISHED,
-                  'creation_date': datetime(2008, 1, 15),
+                  'publication_date': datetime(2008, 1, 15),
                   'slug': 'my-second-entry'}
         second_entry = Entry.objects.create(**params)
         second_entry.sites.add(self.site)
@@ -517,7 +522,8 @@ class TemplateTagsTestCase(TestCase):
             context = get_calendar_entries(source_context)
         self.assertEqual(
             context['previous_month'],
-            self.make_local(second_entry.creation_date).date().replace(day=1))
+            self.make_local(second_entry.publication_date).date().replace(
+                day=1))
         self.assertEqual(context['next_month'], None)
 
         source_context = Context({'object': second_entry})
@@ -526,7 +532,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['previous_month'], None)
         self.assertEqual(
             context['next_month'],
-            self.make_local(self.entry.creation_date).date().replace(day=1))
+            self.make_local(self.entry.publication_date).date().replace(day=1))
 
     @skipIfCustomUser
     def test_get_recent_comments(self):
@@ -893,6 +899,78 @@ class TemplateTagsTestCase(TestCase):
         check_only_last_have_no_url(context['breadcrumbs'])
         # More tests can be done here, for testing path and objects in context
 
+    def test_zinnia_loop_template(self):
+        original_entry_loop_templates = ztemplatetags.ENTRY_LOOP_TEMPLATES
+        paginator = Paginator(range(50), 10)
+        context = Context()
+
+        # Test simple
+        template = zinnia_loop_template(
+            context, 'zinnia/_entry_detail.html')
+        self.assertEqual(template.template.name, 'zinnia/_entry_detail.html')
+        self.assertRaisesRegexp(
+            TemplateDoesNotExist,
+            'zinnia/_entry_custom-0.html, '
+            'zinnia/_entry_custom_0.html, '
+            'zinnia/_entry_custom.html',
+            zinnia_loop_template, context, 'zinnia/_entry_custom.html')
+
+        # Test with loop
+        context = Context({'forloop': {'counter': 5}})
+        self.assertRaisesRegexp(
+            TemplateDoesNotExist,
+            'zinnia/_entry_custom-5.html, '
+            'zinnia/_entry_custom_5.html, '
+            'zinnia/_entry_custom.html',
+            zinnia_loop_template, context, 'zinnia/_entry_custom.html')
+
+        # Test with pagination
+        context = Context({'forloop': {'counter': 5},
+                           'page_obj': paginator.page(3)})
+        self.assertRaisesRegexp(
+            TemplateDoesNotExist,
+            'zinnia/_entry_custom-25.html, '
+            'zinnia/_entry_custom_5.html, '
+            'zinnia/_entry_custom.html',
+            zinnia_loop_template, context, 'zinnia/_entry_custom.html')
+
+        # Test with default key
+        ztemplatetags.ENTRY_LOOP_TEMPLATES = {
+            'default': {25: 'template.html'}}
+        self.assertRaisesRegexp(
+            TemplateDoesNotExist,
+            'template.html, '
+            'zinnia/_entry_custom-25.html, '
+            'zinnia/_entry_custom_5.html, '
+            'zinnia/_entry_custom.html',
+            zinnia_loop_template, context, 'zinnia/_entry_custom.html')
+
+        # Test with context
+        for context_object_name in ['category', 'tag', 'author',
+                                    'year', 'month', 'day']:
+            ztemplatetags.ENTRY_LOOP_TEMPLATES = {
+                'slug': {25: 'template-slug.html'},
+                context_object_name: {25: 'template-%s.html' %
+                                      context_object_name},
+                '%s-slug' % context_object_name:
+                    {25: 'template-%s-slug.html' % context_object_name}}
+            context = Context(
+                {'forloop': {'counter': 5},
+                 'page_obj': paginator.page(3),
+                 context_object_name: 'slug'})
+            self.assertRaisesRegexp(
+                TemplateDoesNotExist,
+                'template-%s-slug.html, '
+                'template-slug.html, '
+                'template-%s.html, '
+                'zinnia/_entry_custom-25.html, '
+                'zinnia/_entry_custom_5.html, '
+                'zinnia/_entry_custom.html' % (
+                    context_object_name, context_object_name),
+                zinnia_loop_template,
+                context, 'zinnia/_entry_custom.html')
+        ztemplatetags.ENTRY_LOOP_TEMPLATES = original_entry_loop_templates
+
     def test_get_gravatar(self):
         self.assertTrue(urlEqual(
             get_gravatar('webmaster@example.com'),
@@ -1100,12 +1178,12 @@ class TemplateTagsTestCase(TestCase):
 
 class TemplateTagsTimezoneTestCase(TestCase):
 
-    def create_published_entry_at(self, creation_date):
+    def create_published_entry_at(self, publication_date):
         params = {'title': 'My entry',
                   'content': 'My content',
                   'slug': 'my-entry',
                   'status': PUBLISHED,
-                  'creation_date': creation_date}
+                  'publication_date': publication_date}
         entry = Entry.objects.create(**params)
         entry.sites.add(Site.objects.get_current())
         return entry

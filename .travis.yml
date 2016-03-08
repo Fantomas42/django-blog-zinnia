@@ -1,3 +1,4 @@
+sudo: false
 language: python
 python:
     - 2.7
@@ -12,10 +13,6 @@ matrix:
     exclude:
         - python: 3.2
           env: DATABASE_ENGINE=mysql
-        - python: 3.3
-          env: DATABASE_ENGINE=mysql
-        - python: 3.4
-          env: DATABASE_ENGINE=mysql
     fast_finish: true
 install:
     - pip install -U setuptools
@@ -24,12 +21,10 @@ install:
     - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ];
       then
         pip install psycopg2;
-        psql -c 'create database zinnia;' -U postgres;
       fi"
     - sh -c "if [ '$DATABASE_ENGINE' = 'mysql' ];
       then
-        pip install mysql-python;
-        mysql -e 'create database zinnia CHARACTER SET utf8 COLLATE utf8_general_ci;';
+        pip install mysqlclient;
         mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql;
       fi"
 before_script:

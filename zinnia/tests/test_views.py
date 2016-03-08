@@ -31,12 +31,21 @@ from zinnia.url_shortener.backends.default import base36
 
 @skipIfCustomUser
 @override_settings(
-    TEMPLATE_LOADERS=(
-        'zinnia.tests.utils.VoidLoader',
-    ),
-    TEMPLATE_CONTEXT_PROCESSORS=(
-        'django.core.context_processors.request',
-    ))
+    SESSION_ENGINE='django.contrib.sessions.backends.cache',
+    TEMPLATES=[
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.request',
+                ],
+                'loaders': [
+                    'zinnia.tests.utils.VoidLoader',
+                ]
+            }
+        }
+    ]
+)
 class ViewsBaseCase(TestCase):
     """
     Setup and utility function base case.
@@ -54,7 +63,7 @@ class ViewsBaseCase(TestCase):
                   'content': 'First test entry published',
                   'slug': 'test-1',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 1, 1, 23, 00),
+                  'publication_date': datetime(2010, 1, 1, 23, 0),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
@@ -66,7 +75,7 @@ class ViewsBaseCase(TestCase):
                   'content': 'Second test entry published',
                   'slug': 'test-2',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 5, 31, 23, 00),
+                  'publication_date': datetime(2010, 5, 31, 23, 00),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
@@ -79,7 +88,7 @@ class ViewsBaseCase(TestCase):
                   'content': 'My test content',
                   'slug': 'my-test-entry',
                   'tags': 'tests',
-                  'creation_date': datetime(2010, 1, 1, 23, 0),
+                  'publication_date': datetime(2010, 1, 1, 23, 0),
                   'status': PUBLISHED}
         entry = Entry.objects.create(**params)
         entry.sites.add(self.site)
@@ -384,9 +393,10 @@ class ViewsTestCase(ViewsBaseCase):
         with self.assertNumQueries(1):
             response = self.client.get(entry.get_absolute_url())
         self.assertTemplateUsed(response, 'zinnia/login.html')
-        response = self.client.post(entry.get_absolute_url(),
-                                    {'username': 'admin',
-                                     'password': 'password'})
+        with self.assertNumQueries(3):
+            response = self.client.post(entry.get_absolute_url(),
+                                        {'username': 'admin',
+                                         'password': 'password'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
@@ -406,7 +416,7 @@ class ViewsTestCase(ViewsBaseCase):
                                         {'entry_password': 'bad_password'})
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEqual(response.context['error'], True)
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(1):
             response = self.client.post(entry.get_absolute_url(),
                                         {'entry_password': 'password'})
         self.assertEqual(response.status_code, 200)
@@ -424,14 +434,14 @@ class ViewsTestCase(ViewsBaseCase):
         with self.assertNumQueries(1):
             response = self.client.get(entry.get_absolute_url())
         self.assertTemplateUsed(response, 'zinnia/login.html')
-        with self.assertNumQueries(12):
+        with self.assertNumQueries(2):
             response = self.client.post(entry.get_absolute_url(),
                                         {'username': 'admin',
                                          'password': 'password'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'zinnia/password.html')
         self.assertEqual(response.context['error'], False)
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(2):
             response = self.client.post(entry.get_absolute_url(),
                                         {'entry_password': 'password'})
         self.assertEqual(response.status_code, 200)
@@ -450,11 +460,11 @@ class ViewsTestCase(ViewsBaseCase):
         Author.objects.create_superuser(
             'root', 'root@example.com', 'password')
         self.client.login(username='root', password='password')
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(2):
             response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.client.login(username=self.author.username, password='password')
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(5):
             response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -486,7 +496,7 @@ class ViewsTestCase(ViewsBaseCase):
             params = {'title': 'My entry %i' % i,
                       'content': 'My content %i' % i,
                       'slug': 'my-entry-%i' % i,
-                      'creation_date': datetime(2010, 1, 1),
+                      'publication_date': datetime(2010, 1, 1),
                       'status': PUBLISHED}
             entry = Entry.objects.create(**params)
             entry.sites.add(self.site)
@@ -523,7 +533,7 @@ class ViewsTestCase(ViewsBaseCase):
             params = {'title': 'My entry %i' % i,
                       'content': 'My content %i' % i,
                       'slug': 'my-entry-%i' % i,
-                      'creation_date': datetime(2010, 1, 1),
+                      'publication_date': datetime(2010, 1, 1),
                       'status': PUBLISHED}
             entry = Entry.objects.create(**params)
             entry.sites.add(self.site)
@@ -560,7 +570,7 @@ class ViewsTestCase(ViewsBaseCase):
                       'content': 'My content %i' % i,
                       'slug': 'my-entry-%i' % i,
                       'tags': 'tests',
-                      'creation_date': datetime(2010, 1, 1),
+                      'publication_date': datetime(2010, 1, 1),
                       'status': PUBLISHED}
             entry = Entry.objects.create(**params)
             entry.sites.add(self.site)

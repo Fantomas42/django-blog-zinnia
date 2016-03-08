@@ -52,12 +52,17 @@ class CoreEntry(models.Model):
 
     slug = models.SlugField(
         _('slug'), max_length=255,
-        unique_for_date='creation_date',
+        unique_for_date='publication_date',
         help_text=_("Used to build the entry's URL."))
 
     status = models.IntegerField(
         _('status'), db_index=True,
         choices=STATUS_CHOICES, default=DRAFT)
+
+    publication_date = models.DateTimeField(
+        _('publication date'),
+        db_index=True, default=timezone.now,
+        help_text=_("Used to build the entry's URL."))
 
     start_publication = models.DateTimeField(
         _('start publication'),
@@ -77,21 +82,13 @@ class CoreEntry(models.Model):
 
     creation_date = models.DateTimeField(
         _('creation date'),
-        db_index=True, default=timezone.now,
-        help_text=_("Used to build the entry's URL."))
+        default=timezone.now)
 
     last_update = models.DateTimeField(
         _('last update'), default=timezone.now)
 
     objects = models.Manager()
     published = EntryPublishedManager()
-
-    @property
-    def publication_date(self):
-        """
-        Return the publication date of the entry.
-        """
-        return self.start_publication or self.creation_date
 
     @property
     def is_actual(self):
@@ -178,13 +175,13 @@ class CoreEntry(models.Model):
         Builds and returns the entry's URL based on
         the slug and the creation date.
         """
-        creation_date = self.creation_date
-        if timezone.is_aware(creation_date):
-            creation_date = timezone.localtime(creation_date)
+        publication_date = self.publication_date
+        if timezone.is_aware(publication_date):
+            publication_date = timezone.localtime(publication_date)
         return ('zinnia:entry_detail', (), {
-            'year': creation_date.strftime('%Y'),
-            'month': creation_date.strftime('%m'),
-            'day': creation_date.strftime('%d'),
+            'year': publication_date.strftime('%Y'),
+            'month': publication_date.strftime('%m'),
+            'day': publication_date.strftime('%d'),
             'slug': self.slug})
 
     def __str__(self):
@@ -195,12 +192,12 @@ class CoreEntry(models.Model):
         CoreEntry's meta informations.
         """
         abstract = True
-        ordering = ['-creation_date']
-        get_latest_by = 'creation_date'
+        ordering = ['-publication_date']
+        get_latest_by = 'publication_date'
         verbose_name = _('entry')
         verbose_name_plural = _('entries')
-        index_together = [['slug', 'creation_date'],
-                          ['status', 'creation_date',
+        index_together = [['slug', 'publication_date'],
+                          ['status', 'publication_date',
                            'start_publication', 'end_publication']]
         permissions = (('can_view_all', 'Can view all entries'),
                        ('can_change_status', 'Can change status'),
@@ -314,7 +311,7 @@ class DiscussionsEntry(models.Model):
         if (discussion_enabled and isinstance(auto_close_after, int)
                 and auto_close_after >= 0):
             return (timezone.now() - (
-                self.start_publication or self.creation_date)).days < \
+                self.start_publication or self.publication_date)).days < \
                 auto_close_after
         return discussion_enabled
 

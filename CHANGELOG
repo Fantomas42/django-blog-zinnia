@@ -1,3 +1,17 @@
+0.16
+----
+
+* Improve testing
+* Improve documentation
+* Reduce queries on ``entry_detail_view``
+* Implement custom templates within a loop
+* Add a publication_date field to remove ambiguosity
+* Remove WXR template
+* Remove usage of ``Context``
+* Remove BeautifulSoup warnings
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.15.2...v0.16
+
 0.15.2
 ------
 

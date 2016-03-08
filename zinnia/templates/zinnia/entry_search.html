@@ -1,5 +1,6 @@
 {% extends "zinnia/entry_list.html" %}
-{% load i18n zinnia %}
+{% load i18n %}
+{% load zinnia %}
 
 {% block title %}{% blocktrans %}Search results for '{{ pattern }}'{% endblocktrans %}{% endblock title %}
 
@@ -38,7 +39,8 @@
 {% block content-loop %}
 {% if not error %}
 {% for object in object_list %}
-  {% include object.content_template with object_content=object.html_preview continue_reading=1 %}
+  {% zinnia_loop_template object.content_template as template %}
+  {% include template with object_content=object.html_preview continue_reading=1 %}
 {% empty %}
 <p class="info">{% trans "Nothing found." %}</p>
 {% endfor %}

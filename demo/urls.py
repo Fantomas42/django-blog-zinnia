@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.conf.urls import include
 
+from django.views.static import serve
 from django.views.defaults import bad_request
 from django.views.defaults import server_error
 from django.views.defaults import page_not_found
@@ -54,6 +55,6 @@ urlpatterns += [
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+        url(r'^media/(?P<path>.*)$', serve,
             {'document_root': settings.MEDIA_ROOT})
     ]

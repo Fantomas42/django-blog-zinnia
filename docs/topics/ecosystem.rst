@@ -123,6 +123,14 @@ admin with `MarkItUp`_.
 
 URL: https://github.com/django-blog-zinnia/zinnia-wysiwyg-markitup
 
+zinnia-url-shortener-hashids
+============================
+
+Zinnia-url-shortener-bitly is an extension providing URL shortening for the
+entries via `Hashids`_ algorithm.
+
+URL: https://github.com/django-blog-zinnia/zinnia-url-shortener-hashids
+
 zinnia-url-shortener-bitly
 ==========================
 
@@ -201,6 +209,7 @@ URL: https://github.com/azaghal/zinnia-drupal
 .. _`TinyMCE`: http://www.tinymce.com/
 .. _`CKEditor`: http://ckeditor.com/
 .. _`MarkItUp`: http://markitup.jaysalvat.com/
+.. _`Hashids`: http://hashids.org/
 .. _`Bit.ly`: https://bitly.com/
 .. _`Akismet`: http://akismet.com/
 .. _`Mollom`: https://mollom.com/

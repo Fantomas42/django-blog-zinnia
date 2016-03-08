@@ -33,7 +33,7 @@ class URLRessources(object):
         self.blog_url = '%s%s' % (self.site_url,
                                   reverse('zinnia:entry_archive_index'))
         self.blog_feed = '%s%s' % (self.site_url,
-                                   reverse('zinnia:entry_latest_feed'))
+                                   reverse('zinnia:entry_feed'))
 
 
 class DirectoryPinger(threading.Thread):
@@ -138,7 +138,7 @@ class ExternalUrlsPinger(threading.Thread):
         """
         Find external URLs in an entry.
         """
-        soup = BeautifulSoup(entry.html_content)
+        soup = BeautifulSoup(entry.html_content, 'html.parser')
         external_urls = [a['href'] for a in soup.find_all('a')
                          if self.is_external_url(
                              a['href'], self.ressources.site_url)]
@@ -148,7 +148,7 @@ class ExternalUrlsPinger(threading.Thread):
         """
         Try to find LINK markups to pingback URL.
         """
-        soup = BeautifulSoup(content)
+        soup = BeautifulSoup(content, 'html.parser')
         for link in soup.find_all('link'):
             dict_attr = dict(link.attrs)
             if 'rel' in dict_attr and 'href' in dict_attr:

@@ -155,13 +155,6 @@ class EntryTestCase(TestCase):
         self.assertEqual(self.entry.trackbacks_are_open, False)
         entry.AUTO_CLOSE_TRACKBACKS_AFTER = original_auto_close
 
-    def test_publication_date(self):
-        self.assertEqual(self.entry.publication_date,
-                         self.entry.creation_date)
-        self.entry.start_publication = datetime(2020, 3, 15)
-        self.assertEqual(self.entry.publication_date,
-                         self.entry.start_publication)
-
     def test_is_actual(self):
         self.assertTrue(self.entry.is_actual)
         self.entry.start_publication = datetime(2020, 3, 15)
@@ -205,7 +198,7 @@ class EntryTestCase(TestCase):
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'slug': 'my-second-entry',
-                  'creation_date': datetime(2000, 1, 1),
+                  'publication_date': datetime(2000, 1, 1),
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
@@ -217,7 +210,7 @@ class EntryTestCase(TestCase):
         params = {'title': 'My third entry',
                   'content': 'My third content',
                   'slug': 'my-third-entry',
-                  'creation_date': datetime(2001, 1, 1),
+                  'publication_date': datetime(2001, 1, 1),
                   'status': PUBLISHED}
         self.third_entry = Entry.objects.create(**params)
         self.third_entry.sites.add(site)
@@ -243,7 +236,7 @@ class EntryTestCase(TestCase):
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'slug': 'my-second-entry',
-                  'creation_date': datetime(2100, 1, 1),
+                  'publication_date': datetime(2100, 1, 1),
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
@@ -255,7 +248,7 @@ class EntryTestCase(TestCase):
         params = {'title': 'My third entry',
                   'content': 'My third content',
                   'slug': 'my-third-entry',
-                  'creation_date': datetime(2050, 1, 1),
+                  'publication_date': datetime(2050, 1, 1),
                   'status': PUBLISHED}
         self.third_entry = Entry.objects.create(**params)
         self.third_entry.sites.add(site)
@@ -278,14 +271,14 @@ class EntryTestCase(TestCase):
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'slug': 'my-second-entry',
-                  'creation_date': datetime(2001, 1, 1),
+                  'publication_date': datetime(2001, 1, 1),
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.sites.add(site)
         params = {'title': 'My third entry',
                   'content': 'My third content',
                   'slug': 'my-third-entry',
-                  'creation_date': datetime(2050, 1, 1),
+                  'publication_date': datetime(2050, 1, 1),
                   'status': PUBLISHED}
         self.third_entry = Entry.objects.create(**params)
         self.third_entry.sites.add(site)
@@ -460,11 +453,11 @@ class EntryHtmlContentTestCase(TestCase):
 
 class EntryAbsoluteUrlTestCase(TestCase):
 
-    def check_get_absolute_url(self, creation_date, url_expected):
+    def check_get_absolute_url(self, publication_date, url_expected):
         params = {'title': 'My entry',
                   'content': 'My content',
                   'slug': 'my-entry',
-                  'creation_date': creation_date}
+                  'publication_date': publication_date}
         e = Entry.objects.create(**params)
         self.assertTrue(url_expected in e.get_absolute_url())
 

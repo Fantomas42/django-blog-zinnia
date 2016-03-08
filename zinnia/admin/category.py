@@ -1,5 +1,6 @@
 """CategoryAdmin for Zinnia"""
 from django.contrib import admin
+from django.utils.html import format_html
 from django.core.urlresolvers import NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
 
@@ -26,8 +27,9 @@ class CategoryAdmin(admin.ModelAdmin):
         Return the category's tree path in HTML.
         """
         try:
-            return '<a href="%s" target="blank">/%s/</a>' % \
-                   (category.get_absolute_url(), category.tree_path)
+            return format_html(
+                '<a href="{}" target="blank">/{}/</a>',
+                category.get_absolute_url(), category.tree_path)
         except NoReverseMatch:
             return '/%s/' % category.tree_path
     get_tree_path.allow_tags = True

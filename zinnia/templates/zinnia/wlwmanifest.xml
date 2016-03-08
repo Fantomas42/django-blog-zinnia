@@ -37,7 +37,7 @@
     <imageUrl>{% static "zinnia/theme/img/wlw/zinnia.png" %}</imageUrl>
     <watermarkImageUrl>{% static "zinnia/theme/img/wlw/watermark.png" %}</watermarkImageUrl>
     <homepageLinkText>{% trans "View site" %}</homepageLinkText>
-    <adminLinkText>{% trans "Admin. site" %}</adminLinkText>
+    <adminLinkText>{% trans "Administration site" %}</adminLinkText>
     <adminUrl><![CDATA[
         {blog-homepage-url}{% url 'admin:index' %}
     ]]></adminUrl>

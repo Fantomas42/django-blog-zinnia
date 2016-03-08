@@ -16,6 +16,7 @@ from django.utils.encoding import smart_text
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.utils.html import conditional_escape
+from django.template.loader import select_template
 from django.template.defaultfilters import stringfilter
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
@@ -34,9 +35,14 @@ from ..managers import DRAFT
 from ..managers import tags_published
 from ..flags import PINGBACK, TRACKBACK
 from ..settings import PROTOCOL
+from ..settings import ENTRY_LOOP_TEMPLATES
 from ..comparison import EntryPublishedVectorBuilder
 from ..calendar import Calendar
 from ..breadcrumbs import retrieve_breadcrumbs
+from ..context import get_context_first_object
+from ..context import get_context_first_matching_object
+from ..context import get_context_loop_positions
+from ..templates import loop_template_list
 
 
 WIDONT_REGEXP = re.compile(
@@ -104,7 +110,7 @@ def get_featured_entries(number=5,
 def get_draft_entries(number=5,
                       template='zinnia/tags/entries_draft.html'):
     """
-    Return the latest draft entries.
+    Return the last draft entries.
     """
     return {'template': template,
             'entries': Entry.objects.filter(status=DRAFT)[:number]}
@@ -127,7 +133,7 @@ def get_popular_entries(number=5, template='zinnia/tags/entries_popular.html'):
     return {'template': template,
             'entries': Entry.published.filter(
                 comment_count__gt=0).order_by(
-                '-comment_count', '-creation_date')[:number]}
+                '-comment_count', '-publication_date')[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -154,7 +160,7 @@ def get_archives_entries(template='zinnia/tags/entries_archives.html'):
     """
     return {'template': template,
             'archives': Entry.published.datetimes(
-                'creation_date', 'month', order='DESC')}
+                'publication_date', 'month', order='DESC')}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
@@ -165,7 +171,7 @@ def get_archives_entries_tree(
     """
     return {'template': template,
             'archives': Entry.published.datetimes(
-                'creation_date', 'day', order='ASC')}
+                'publication_date', 'day', order='ASC')}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -178,14 +184,14 @@ def get_calendar_entries(context, year=None, month=None,
         day_week_month = (context.get('day') or
                           context.get('week') or
                           context.get('month'))
-        creation_date = getattr(context.get('object'),
-                                'creation_date', None)
+        publication_date = getattr(context.get('object'),
+                                   'publication_date', None)
         if day_week_month:
             current_month = day_week_month
-        elif creation_date:
+        elif publication_date:
             if settings.USE_TZ:
-                creation_date = timezone.localtime(creation_date)
-            current_month = creation_date.date()
+                publication_date = timezone.localtime(publication_date)
+            current_month = publication_date.date()
         else:
             today = timezone.now()
             if settings.USE_TZ:
@@ -197,7 +203,7 @@ def get_calendar_entries(context, year=None, month=None,
 
     dates = list(map(
         lambda x: settings.USE_TZ and timezone.localtime(x).date() or x.date(),
-        Entry.published.datetimes('creation_date', 'month')))
+        Entry.published.datetimes('publication_date', 'month')))
 
     if current_month not in dates:
         dates.append(current_month)
@@ -314,14 +320,33 @@ def zinnia_breadcrumbs(context, root_name=_('Blog'),
     Return a breadcrumb for the application.
     """
     path = context['request'].path
-    context_object = context.get('object') or context.get('category') or \
-        context.get('tag') or context.get('author')
+    context_object = get_context_first_object(
+        context, ['object', 'category', 'tag', 'author'])
     context_page = context.get('page_obj')
     breadcrumbs = retrieve_breadcrumbs(path, context_object,
                                        context_page, root_name)
 
     return {'template': template,
             'breadcrumbs': breadcrumbs}
+
+
+@register.assignment_tag(takes_context=True)
+def zinnia_loop_template(context, default_template):
+    """
+    Return a selected template from his position within a loop
+    and the filtering context.
+    """
+    matching, context_object = get_context_first_matching_object(
+        context,
+        ['category', 'tag', 'author', 'pattern',
+         'year', 'month', 'week', 'day'])
+    context_positions = get_context_loop_positions(context)
+
+    templates = loop_template_list(
+        context_positions, context_object, matching,
+        default_template, ENTRY_LOOP_TEMPLATES)
+
+    return select_template(templates)
 
 
 @register.simple_tag
@@ -447,10 +472,10 @@ def zinnia_statistics(template='zinnia/tags/statistics.html'):
     trackbacks_count = trackbacks.count()
 
     if entries_count:
-        first_entry = entries.order_by('creation_date')[0]
+        first_entry = entries.order_by('publication_date')[0]
         last_entry = entries.latest()
-        months_count = (last_entry.creation_date -
-                        first_entry.creation_date).days / 31.0
+        months_count = (last_entry.publication_date -
+                        first_entry.publication_date).days / 31.0
         entries_per_month = entries_count / (months_count or 1.0)
 
         comments_per_entry = float(replies_count) / entries_count

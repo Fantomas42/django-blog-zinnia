@@ -4,7 +4,7 @@
   <th>
     {% with entry=linkback.content_object %}
     <a href="{{ linkback.url }}">{{ linkback.name }}</a>
-    {% trans "made a linkback on" %}
+    {% trans "made a linkback on" context "on entry" %}
     <a href="{{ entry.get_absolute_url }}#{{ linkback.flags.all.0.flag }}-{{ linkback.pk }}"
        title="{% blocktrans with object=entry.title %}Linkback on {{ object }}{% endblocktrans %}">
       {{ entry.title }}

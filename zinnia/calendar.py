@@ -103,9 +103,9 @@ class Calendar(HTMLCalendar):
         self.current_month = themonth
         self.day_entries = [date.day
                             for date in Entry.published.filter(
-                                creation_date__year=theyear,
-                                creation_date__month=themonth
-                                ).datetimes('creation_date', 'day')]
+                                publication_date__year=theyear,
+                                publication_date__month=themonth
+                                ).datetimes('publication_date', 'day')]
         v = []
         a = v.append
         a('<table class="%s">' % (

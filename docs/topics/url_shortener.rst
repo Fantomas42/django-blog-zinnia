@@ -21,8 +21,8 @@ entries shorter, example:
 
   http://mydomain.com/blog/2S/
 
-This backend use the primary key of the entries, encoded in base 36 for
-more privacy.
+This backend use the primary key of the entries, encoded in base 36 to
+save a few more characters.
 
 Of course the URL is short (and can be shorter) but if you have a long
 domain, the URL can be not so short, example:
