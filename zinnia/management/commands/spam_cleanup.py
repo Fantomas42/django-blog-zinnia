@@ -1,20 +1,22 @@
-"""Spam cleanup command module for Zinnia"""
+"""
+Spam cleanup command module for Zinnia.
+"""
+from django.core.management.base import BaseCommand
 from django.contrib.contenttypes.models import ContentType
-from django.core.management.base import NoArgsCommand
 
 import django_comments as comments
 
 from zinnia.models.entry import Entry
 
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     """
     Command object for removing comments
     marked as non-public and removed.
     """
     help = "Delete the entries's comments marked as non-public and removed."
 
-    def handle_noargs(self, **options):
+    def handle(self, *args, **options):
         verbosity = int(options.get('verbosity', 1))
 
         content_type = ContentType.objects.get_for_model(Entry)
