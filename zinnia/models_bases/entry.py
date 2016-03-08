@@ -308,8 +308,8 @@ class DiscussionsEntry(models.Model):
         are a certain number of days.
         """
         discussion_enabled = getattr(self, discussion_type)
-        if (discussion_enabled and isinstance(auto_close_after, int)
-                and auto_close_after >= 0):
+        if (discussion_enabled and isinstance(auto_close_after, int) and
+                auto_close_after >= 0):
             return (timezone.now() - (
                 self.start_publication or self.publication_date)).days < \
                 auto_close_after
