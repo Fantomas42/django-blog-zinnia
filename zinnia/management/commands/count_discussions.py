@@ -7,6 +7,7 @@ from django.utils.encoding import smart_str
 from django.core.management.base import BaseCommand
 
 from zinnia.models.entry import Entry
+from zinnia.signals import disconnect_entry_signals
 
 
 class Command(BaseCommand):
@@ -25,6 +26,7 @@ class Command(BaseCommand):
             sys.stdout.flush()
 
     def handle(self, *args, **options):
+        disconnect_entry_signals()
         self.verbosity = int(options.get('verbosity', 1))
         for entry in Entry.objects.all():
             self.write_out('Processing %s\n' % entry.title)
