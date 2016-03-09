@@ -24,7 +24,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'extensions.settings'
 import django
 from django.core.management import call_command
 django.setup()
-call_command('syncdb', verbosity=0, interactive=False)
+call_command('migrate', verbosity=0, interactive=False)
 
 import zinnia
 
