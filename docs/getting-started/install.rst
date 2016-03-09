@@ -18,6 +18,7 @@ Make sure to install these packages prior to installation :
 * `django-tagging`_ >= 0.3.6
 * `beautifulsoup4`_ >= 4.1.3
 * `mots-vides`_ >= 2015.2.6
+* `regex`_ >= 2016.3.2
 * `django-contrib-comments`_ >= 1.6
 
 The packages below are optionnal but needed for run the full test suite or
@@ -193,6 +194,7 @@ project directory to sync the models with the database. ::
 .. _`django-tagging`: https://code.google.com/p/django-tagging/
 .. _`django-contrib-comments`: https://github.com/django/django-contrib-comments
 .. _`mots-vides`: https://github.com/Fantomas42/mots-vides
+.. _`regex`: https://pypi.python.org/pypi/regex
 .. _`beautifulsoup4`: http://www.crummy.com/software/BeautifulSoup/
 .. _`pytz`: http://pytz.sourceforge.net/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/

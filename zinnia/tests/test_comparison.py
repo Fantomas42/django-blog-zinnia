@@ -177,3 +177,14 @@ class ComparisonTestCase(TestCase):
             self.assertEquals(len(v.columns), 3)
         with self.assertNumQueries(0):
             self.assertEquals(len(v.get_related(e1, 5)), 2)
+
+    def test_raw_clean(self):
+        v = ModelVectorBuilder(queryset=Entry.objects.none(), fields=['title'])
+        self.assertEquals(v.raw_clean('<p>HTML Content</p>'),
+                          ['html', 'content'])
+        self.assertEquals(v.raw_clean('<p>An HTML Content</p>'),
+                          ['html', 'content'])
+        self.assertEquals(v.raw_clean('<p>An HTML Content 2</p>'),
+                          ['html', 'content'])
+        self.assertEquals(v.raw_clean('<p>!HTML Content ?</p>'),
+                          ['html', 'content'])
