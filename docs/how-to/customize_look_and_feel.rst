@@ -294,7 +294,7 @@ new page. Replacing the dash by an underscore in the previous example would
 highlight the first entry of every page.
 
 You can bypass this behavior altogether and have more control over your
-templates by using the :setting:`ENTRY_LOOP_TEMPLATES` setting.
+templates by using the :setting:`ZINNIA_ENTRY_LOOP_TEMPLATES` setting.
 
 .. _changing-templates:
 
