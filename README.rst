@@ -91,16 +91,16 @@ More information and help available at these URLs:
 * Discussions and help at `Google Group`_
 * For reporting a bug use `GitHub Issues`_
 
-.. |travis-develop| image:: https://travis-ci.org/Fantomas42/django-blog-zinnia.png?branch=develop
+.. |travis-develop| image:: https://img.shields.io/travis/Fantomas42/django-blog-zinnia/develop.svg
    :alt: Build Status - develop branch
    :target: http://travis-ci.org/Fantomas42/django-blog-zinnia
 .. |coverage-develop| image:: https://coveralls.io/repos/Fantomas42/django-blog-zinnia/badge.png?branch=develop
    :alt: Coverage of the code
    :target: https://coveralls.io/r/Fantomas42/django-blog-zinnia
-.. |latest-version| image:: https://pypip.in/v/django-blog-zinnia/badge.png
+.. |latest-version| image:: https://img.shields.io/pypi/v/django-blog-zinnia.svg
    :alt: Latest version on Pypi
    :target: https://pypi.python.org/pypi/django-blog-zinnia/
-.. |downloads| image:: https://pypip.in/d/django-blog-zinnia/badge.png
+.. |downloads| image:: https://img.shields.io/pypi/dm/django-blog-zinnia.svg
    :alt: Downloads from Pypi
    :target: https://pypi.python.org/pypi/django-blog-zinnia/
 .. |paypal| image:: https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif
