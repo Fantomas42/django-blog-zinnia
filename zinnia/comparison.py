@@ -15,7 +15,7 @@ from zinnia.settings import STOP_WORDS
 from zinnia.settings import COMPARISON_FIELDS
 
 
-PUNCTUATION = re.compile(ur'\p{P}+')
+PUNCTUATION = re.compile(r'\p{P}+')
 
 
 def pearson_score(list1, list2):
