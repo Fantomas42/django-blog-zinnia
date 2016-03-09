@@ -99,10 +99,10 @@ More information and help available at these URLs:
    :target: https://coveralls.io/r/Fantomas42/django-blog-zinnia
 .. |latest-version| image:: https://pypip.in/v/django-blog-zinnia/badge.png
    :alt: Latest version on Pypi
-   :target: https://crate.io/packages/django-blog-zinnia/
+   :target: https://pypi.python.org/pypi/django-blog-zinnia/
 .. |downloads| image:: https://pypip.in/d/django-blog-zinnia/badge.png
    :alt: Downloads from Pypi
-   :target: https://crate.io/packages/django-blog-zinnia/
+   :target: https://pypi.python.org/pypi/django-blog-zinnia/
 .. |paypal| image:: https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif
    :alt:  Make a free donation with Paypal to encourage the development
    :target: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=68T48HR8KK9KG
