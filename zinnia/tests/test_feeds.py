@@ -162,7 +162,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.item_enclosure_length(entry), '100000')
         self.assertEqual(feed.item_enclosure_mime_type(entry), 'image/jpeg')
 
-    def test_entry_feed_enclosure_replace_https(self):
+    def test_entry_feed_enclosure_replace_https_in_rss(self):
         entry = self.create_published_entry()
         feed = EntryFeed()
         entry.content = 'My test content with image in https ' \
@@ -170,6 +170,24 @@ class FeedsTestCase(TestCase):
         entry.save()
         self.assertEqual(
             feed.item_enclosure_url(entry), 'http://test.com/image.jpg')
+        feed.protocol = 'https'
+        entry.content = 'My test content with image <img src="image.jpg" />'
+        entry.save()
+        self.assertEqual(
+            feed.item_enclosure_url(entry), 'http://example.com/image.jpg')
+        path = default_storage.save('enclosure.png', ContentFile('Content'))
+        entry.image = path
+        entry.save()
+        self.assertEqual(feed.item_enclosure_url(entry),
+                         urljoin('http://example.com', entry.image.url))
+        original_feeds_format = feeds.FEEDS_FORMAT
+        feeds.FEEDS_FORMAT = 'atom'
+        feed = LastEntries()
+        feed.protocol = 'https'
+        self.assertEqual(feed.item_enclosure_url(entry),
+                         urljoin('https://example.com', entry.image.url))
+        feeds.FEEDS_FORMAT = original_feeds_format
+        default_storage.delete(path)
 
     def test_entry_feed_enclosure_without_image(self):
         entry = self.create_published_entry()
