@@ -128,16 +128,16 @@ class EntryFeed(ZinniaFeed):
         Return an image for enclosure.
         """
         if item.image:
-            url = item.image.url.replace("https://", "http://")
+            url = item.image.url
         else:
             img = BeautifulSoup(item.html_content, 'html.parser').find('img')
-            if img:
-                url = img.get('src')
-                url = url.replace("https://", "http://") if url else None
-            else:
-                url = None
+            url = img.get('src') if img else None
         self.cached_enclosure_url = url
-        return urljoin(self.site_url, url) if url else None
+        if url:
+            url = urljoin(self.site_url, url)
+            if FEEDS_FORMAT == 'rss':
+                url = url.replace('https', 'http')
+        return url
 
     def item_enclosure_length(self, item):
         """
