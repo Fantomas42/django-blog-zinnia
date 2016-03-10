@@ -162,6 +162,23 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.item_enclosure_length(entry), '100000')
         self.assertEqual(feed.item_enclosure_mime_type(entry), 'image/jpeg')
 
+    def test_entry_feed_enclosure_replace_https(self):
+        entry = self.create_published_entry()
+        feed = EntryFeed()
+        entry.content = 'My test content with image in https ' \
+                        '<img src="https://test.com/image.jpg" />'
+        entry.save()
+        self.assertEqual(
+            feed.item_enclosure_url(entry), 'http://test.com/image.jpg')
+
+    def test_entry_feed_enclosure_without_image(self):
+        entry = self.create_published_entry()
+        feed = EntryFeed()
+        entry.content = 'My test content without image '
+        entry.save()
+        self.assertEqual(
+            feed.item_enclosure_url(entry), None)
+
     def test_entry_feed_enclosure_issue_134(self):
         entry = self.create_published_entry()
         feed = EntryFeed()
