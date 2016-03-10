@@ -94,7 +94,7 @@ More information and help available at these URLs:
 .. |travis-develop| image:: https://img.shields.io/travis/Fantomas42/django-blog-zinnia/develop.svg
    :alt: Build Status - develop branch
    :target: http://travis-ci.org/Fantomas42/django-blog-zinnia
-.. |coverage-develop| image:: https://coveralls.io/repos/Fantomas42/django-blog-zinnia/badge.png?branch=develop
+.. |coverage-develop| image:: https://img.shields.io/coveralls/Fantomas42/django-blog-zinnia/develop.svg
    :alt: Coverage of the code
    :target: https://coveralls.io/r/Fantomas42/django-blog-zinnia
 .. |latest-version| image:: https://img.shields.io/pypi/v/django-blog-zinnia.svg
