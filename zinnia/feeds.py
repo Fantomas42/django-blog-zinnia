@@ -40,6 +40,7 @@ class ZinniaFeed(Feed):
     Base Feed class for the Zinnia application,
     enriched for a more convenient usage.
     """
+    protocol = PROTOCOL
     feed_copyright = COPYRIGHT
 
     def __init__(self):
@@ -68,7 +69,7 @@ class ZinniaFeed(Feed):
         """
         Return the URL of the current site.
         """
-        return '%s://%s' % (PROTOCOL, self.site.domain)
+        return '%s://%s' % (self.protocol, self.site.domain)
 
 
 class EntryFeed(ZinniaFeed):
