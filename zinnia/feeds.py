@@ -42,9 +42,10 @@ class ZinniaFeed(Feed):
     """
     protocol = PROTOCOL
     feed_copyright = COPYRIGHT
+    feed_format = FEEDS_FORMAT
 
     def __init__(self):
-        if FEEDS_FORMAT == 'atom':
+        if self.feed_format == 'atom':
             self.feed_type = Atom1Feed
             self.subtitle = getattr(self, 'description', None)
 
@@ -135,7 +136,7 @@ class EntryFeed(ZinniaFeed):
         self.cached_enclosure_url = url
         if url:
             url = urljoin(self.site_url, url)
-            if FEEDS_FORMAT == 'rss':
+            if self.feed_format == 'rss':
                 url = url.replace('https', 'http')
         return url
 

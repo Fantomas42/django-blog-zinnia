@@ -32,7 +32,6 @@ from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
 from zinnia.models.category import Category
 from zinnia.flags import PINGBACK, TRACKBACK
-from zinnia import feeds
 from zinnia.feeds import EntryFeed
 from zinnia.feeds import ZinniaFeed
 from zinnia.feeds import LastEntries
@@ -180,13 +179,13 @@ class FeedsTestCase(TestCase):
         entry.save()
         self.assertEqual(feed.item_enclosure_url(entry),
                          urljoin('http://example.com', entry.image.url))
-        original_feeds_format = feeds.FEEDS_FORMAT
-        feeds.FEEDS_FORMAT = 'atom'
+        original_feed_format = LastEntries.feed_format
+        LastEntries.feed_format = 'atom'
         feed = LastEntries()
         feed.protocol = 'https'
         self.assertEqual(feed.item_enclosure_url(entry),
                          urljoin('https://example.com', entry.image.url))
-        feeds.FEEDS_FORMAT = original_feeds_format
+        LastEntries.feed_format = original_feed_format
         default_storage.delete(path)
 
     def test_entry_feed_enclosure_without_image(self):
@@ -425,15 +424,15 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.item_author_name(entry), None)
 
     def test_entry_feed_rss_or_atom(self):
-        original_feeds_format = feeds.FEEDS_FORMAT
-        feeds.FEEDS_FORMAT = ''
+        original_feed_format = LastEntries.feed_format
+        LastEntries.feed_format = ''
         feed = LastEntries()
         self.assertEqual(feed.feed_type, DefaultFeed)
-        feeds.FEEDS_FORMAT = 'atom'
+        LastEntries.feed_format = 'atom'
         feed = LastEntries()
         self.assertEqual(feed.feed_type, Atom1Feed)
         self.assertEqual(feed.subtitle, feed.description)
-        feeds.FEEDS_FORMAT = original_feeds_format
+        LastEntries.feed_format = original_feed_format
 
     def test_title_with_sitename_implementation(self):
         feed = ZinniaFeed()
