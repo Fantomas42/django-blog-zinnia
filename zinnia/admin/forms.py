@@ -27,7 +27,7 @@ class CategoryAdminForm(forms.ModelForm):
         super(CategoryAdminForm, self).__init__(*args, **kwargs)
         self.fields['parent'].widget = RelatedFieldWidgetWrapper(
             self.fields['parent'].widget,
-            Category.parent.field.rel,
+            Category.parent.field.remote_field,
             self.admin_site)
 
     def clean_parent(self):
@@ -62,7 +62,7 @@ class EntryAdminForm(forms.ModelForm):
         super(EntryAdminForm, self).__init__(*args, **kwargs)
         self.fields['categories'].widget = RelatedFieldWidgetWrapper(
             self.fields['categories'].widget,
-            Entry.categories.field.rel,
+            Entry.categories.field.remote_field,
             self.admin_site)
 
     class Meta:
