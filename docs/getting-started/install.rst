@@ -116,7 +116,7 @@ URLs
 Add at least these following lines to your project's urls.py in order to
 display the Weblog. ::
 
-  url(r'^weblog/', include('zinnia.urls', namespace='zinnia')),
+  url(r'^weblog/', include('zinnia.urls')),
   url(r'^comments/', include('django_comments.urls')),
 
 Remember to enable the :mod:`~django.contrib.admin` site in the urls.py of
@@ -126,7 +126,7 @@ Note that the default Zinnia URLset :mod:`zinnia.urls` is calibrated for
 convenient usage, but you can customize your Weblog URLs as you
 want. Here's a custom implementation of the URLs provided by Zinnia: ::
 
-  blog_urls = [
+  blog_urls = ([
       url(r'^', include('zinnia.urls.capabilities')),
       url(r'^search/', include('zinnia.urls.search')),
       url(r'^sitemap/', include('zinnia.urls.sitemap')),
@@ -141,9 +141,9 @@ want. Here's a custom implementation of the URLs provided by Zinnia: ::
       url(r'^blog/', include('zinnia.urls.archives')),
       url(r'^blog/', include('zinnia.urls.shortlink')),
       url(r'^blog/', include('zinnia.urls.quick_entry'))
-  ]
+  ], 'zinnia')
 
-  url(r'^', include(blog_urls, namespace='zinnia'))
+  url(r'^', include(blog_urls))
 
 .. _sites:
 
