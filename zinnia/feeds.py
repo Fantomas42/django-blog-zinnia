@@ -138,7 +138,7 @@ class EntryFeed(ZinniaFeed):
         if url:
             url = urljoin(self.site_url, url)
             if self.feed_format == 'rss':
-                url = url.replace('https', 'http')
+                url = url.replace('https://', 'http://')
         return url
 
     def item_enclosure_length(self, item):
