@@ -61,20 +61,16 @@ Take a look at the online demo at: http://demo.django-blog-zinnia.com/
 or you can visit these websites who use Zinnia.
 
 * `Fantomas' side`_
-* `Darwin's Weblog`_
 * `Ubuntu's developers blog`_
 * `Tryolabs`_
 * `AR.Drone Best of User Videos`_
 * `Professional Web Studio`_
-* `brainbreach`_
-* `Mauro Bianchi`_
-* `Sergey Miracle`_
 * `Infantium`_
-* `Pana`_
-* `MAGIC Center at RIT`_
 * `Rudolf Steiner School of Kreuzlingen`_
 * `Vidzor Studio LLC`_
 * `Bookshadow`_
+* `Future Proof Games`_
+* `Detvora Club`_
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
@@ -130,21 +126,17 @@ More information and help available at these URLs:
 .. _`Compass`: http://compass-style.org/
 .. _`Sass3`: http://sass-lang.com/
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
-.. _`Fantomas' side`: http://fantomas.willbreak.it/blog/
-.. _`Professional Web Studio`: http://www.professionalwebstudio.com/en/weblog/
-.. _`Tryolabs`: http://www.tryolabs.com/Blog/
-.. _`brainbreach`: http://brainbreach.com/
-.. _`Mauro Bianchi`: http://www.maurobianchi.it/
-.. _`Sergey Miracle`: http://sergeymiracle.com/weblog/
-.. _`Infantium`: http://www.infantium.com/blog/
-.. _`AR.Drone Best of User Videos`: http://ardrone.parrot.com/best-of-user-videos/
-.. _`Darwin's Weblog`: http://darwin.willbreak.it/
+.. _`Fantomas' side`: http://fantomas.site/blog/
 .. _`Ubuntu's developers blog`: http://developer.ubuntu.com/en/blog/
-.. _`Pana`: http://chusen87.com/news/
-.. _`MAGIC Center at RIT`: http://magic.rit.edu/
+.. _`Tryolabs`: http://www.tryolabs.com/Blog/
+.. _`AR.Drone Best of User Videos`: http://ardrone.parrot.com/best-of-user-videos/
+.. _`Professional Web Studio`: http://www.professionalwebstudio.com/en/weblog/
+.. _`Infantium`: http://www.infantium.com/blog/
 .. _`Rudolf Steiner School of Kreuzlingen`: http://www.steinerschulekreuzlingen.ch/
 .. _`Vidzor Studio LLC`: http://vidzor.com/blog/
 .. _`Bookshadow`: http://bookshadow.com/weblog/
+.. _`Future Proof Games`: http://futureproofgames.com/blog/
+.. _`Detvora Club`: http://detvora.club/blog/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://docs.django-blog-zinnia.com/
 .. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia
