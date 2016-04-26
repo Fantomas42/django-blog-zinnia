@@ -41,10 +41,7 @@ Built-in spam checkers
 ======================
 
 - :mod:`zinnia.spam_checker.backends.all_is_spam`
-- :mod:`zinnia.spam_checker.backends.automattic`
 - :mod:`zinnia.spam_checker.backends.long_enough`
-- :mod:`zinnia.spam_checker.backends.mollom`
-- :mod:`zinnia.spam_checker.backends.typepad`
 
 .. _writing-spam-checker:
 
