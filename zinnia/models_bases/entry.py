@@ -380,9 +380,18 @@ class LeadEntry(models.Model):
         """
         Returns the "lead" field formatted in HTML.
         """
-        if self.lead:
-            return linebreaks(self.lead)
-        return ''
+        lead = self.lead
+        if not lead:
+            return ''
+        elif MARKUP_LANGUAGE == 'markdown':
+            return markdown(lead)
+        elif MARKUP_LANGUAGE == 'textile':
+            return textile(lead)
+        elif MARKUP_LANGUAGE == 'restructuredtext':
+            return restructuredtext(lead)
+        elif '</p>' not in lead:
+            return linebreaks(lead)
+        return lead
 
     class Meta:
         abstract = True
