@@ -9,7 +9,6 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.test.utils import override_settings
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 import django_comments as comments
 from django_comments.models import CommentFlag
@@ -21,6 +20,7 @@ from zinnia.models.author import Author
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import is_lib_available
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia import url_shortener as shortener_settings
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals

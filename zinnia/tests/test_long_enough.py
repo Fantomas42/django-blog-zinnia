@@ -2,13 +2,13 @@
 from django.test import TestCase
 from django.utils import timezone
 from django.contrib.sites.models import Site
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 import django_comments as comments
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.spam_checker.backends.long_enough import backend
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals

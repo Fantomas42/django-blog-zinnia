@@ -4,13 +4,13 @@ from datetime import date
 from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.core.exceptions import ImproperlyConfigured
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.signals import disconnect_entry_signals
 from zinnia.views.mixins.archives import PreviousNextPublishedMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin

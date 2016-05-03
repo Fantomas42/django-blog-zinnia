@@ -1,4 +1,5 @@
 """Utils for Zinnia's tests"""
+from unittest import skipIf
 try:
     from urllib.parse import parse_qs
     from urllib.parse import urlparse
@@ -95,3 +96,11 @@ class EntryDetailLoader(Loader):
         return ('<html><head><title>{{ object.title }}</title></head>'
                 '<body>{{ object.html_content|safe }}</body></html>',
                 'entrydetailloader:%s' % template_name)
+
+
+def skipIfCustomUser(test_func):
+    """
+    Skip a test if a custom user model is in use.
+    """
+    return skipIf(settings.AUTH_USER_MODEL != 'auth.User',
+                  'Custom user model in use')(test_func)

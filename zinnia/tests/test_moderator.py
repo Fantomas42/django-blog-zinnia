@@ -5,7 +5,6 @@ from django.utils import timezone
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.test.utils import override_settings
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 import django_comments as comments
 from django_comments.forms import CommentForm
@@ -14,6 +13,7 @@ from django_comments.moderation import moderator as moderator_stack
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.moderator import EntryCommentModerator
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_discussion_signals

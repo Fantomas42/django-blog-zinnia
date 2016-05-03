@@ -18,7 +18,6 @@ from django.utils.feedgenerator import DefaultFeed
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.storage import default_storage
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 import django_comments as comments
 
@@ -44,6 +43,7 @@ from zinnia.feeds import EntryComments
 from zinnia.feeds import EntryPingbacks
 from zinnia.feeds import EntryTrackbacks
 from zinnia.feeds import LastDiscussions
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 

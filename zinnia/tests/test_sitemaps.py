@@ -2,7 +2,6 @@
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.contrib.sites.models import Site
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
@@ -12,6 +11,7 @@ from zinnia.sitemaps import EntrySitemap
 from zinnia.sitemaps import CategorySitemap
 from zinnia.sitemaps import AuthorSitemap
 from zinnia.sitemaps import TagSitemap
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.signals import disconnect_entry_signals
 
 

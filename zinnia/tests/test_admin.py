@@ -10,7 +10,6 @@ from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.admin.sites import AdminSite
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import settings
 from zinnia.admin import entry as entry_admin
@@ -19,6 +18,7 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.tests.utils import datetime
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.admin.entry import EntryAdmin
 from zinnia.admin.category import CategoryAdmin
 from zinnia.signals import disconnect_entry_signals
