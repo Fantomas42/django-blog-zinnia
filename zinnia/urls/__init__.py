@@ -17,6 +17,8 @@ def i18n_url(url, translate=TRANSLATED_URLS):
 
 _ = i18n_url
 
+app_name = 'zinnia'
+
 urlpatterns = [
     url(_(r'^feeds/'), include('zinnia.urls.feeds')),
     url(_(r'^tags/'), include('zinnia.urls.tags')),

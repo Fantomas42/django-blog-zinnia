@@ -9,7 +9,6 @@ from django.test.utils import override_settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.signals import user_logged_in
 from django.contrib.auth.models import update_last_login
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 import django_comments as comments
 
@@ -22,6 +21,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.flags import get_user_flagger
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_entry_signals

@@ -14,7 +14,6 @@ from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 import django_comments as comments
 
@@ -28,6 +27,7 @@ from zinnia.flags import get_user_flagger
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import TestTransport
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.xmlrpc.pingback import generate_pingback_content
 from zinnia import url_shortener as shortener_settings
 from zinnia.signals import connect_discussion_signals

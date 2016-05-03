@@ -1,9 +1,9 @@
 """Test cases for Zinnia's flags"""
 from django.test import TestCase
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import flags
 from zinnia.flags import get_user_flagger
+from zinnia.tests.utils import skipIfCustomUser
 
 
 @skipIfCustomUser

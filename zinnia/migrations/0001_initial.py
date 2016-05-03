@@ -42,6 +42,7 @@ class Migration(migrations.Migration):
                     editable=False, db_index=True)),
                 ('parent', mptt.fields.TreeForeignKey(
                     related_name='children', verbose_name='parent category',
+                    on_delete=models.CASCADE,
                     blank=True, to='zinnia.Category', null=True)),
             ],
             options={

@@ -1,4 +1,5 @@
 """Utils for Zinnia's tests"""
+from unittest import skipIf
 try:
     from urllib.parse import parse_qs
     from urllib.parse import urlparse
@@ -12,6 +13,7 @@ from datetime import datetime as original_datetime
 from django.utils import six
 from django.conf import settings
 from django.utils import timezone
+from django.template import Origin
 from django.test.client import Client
 from django.template.loaders.base import Loader
 
@@ -79,8 +81,14 @@ class VoidLoader(Loader):
     is_usable = True
     _accepts_engine_in_init = True
 
-    def load_template_source(self, template_name, template_dirs=None):
-        return ('', 'voidloader:%s' % template_name)
+    def get_template_sources(self, template_name):
+        yield Origin(
+            name='voidloader',
+            template_name=template_name,
+            loader=self)
+
+    def get_contents(self, origin):
+        return ''
 
 
 class EntryDetailLoader(Loader):
@@ -91,7 +99,20 @@ class EntryDetailLoader(Loader):
     is_usable = True
     _accepts_engine_in_init = True
 
-    def load_template_source(self, template_name, template_dirs=None):
+    def get_template_sources(self, template_name):
+        yield Origin(
+            name='entrydetailloader',
+            template_name=template_name,
+            loader=self)
+
+    def get_contents(self, origin):
         return ('<html><head><title>{{ object.title }}</title></head>'
-                '<body>{{ object.html_content|safe }}</body></html>',
-                'entrydetailloader:%s' % template_name)
+                '<body>{{ object.html_content|safe }}</body></html>')
+
+
+def skipIfCustomUser(test_func):
+    """
+    Skip a test if a custom user model is in use.
+    """
+    return skipIf(settings.AUTH_USER_MODEL != 'auth.User',
+                  'Custom user model in use')(test_func)

@@ -331,7 +331,7 @@ def zinnia_breadcrumbs(context, root_name=_('Blog'),
             'breadcrumbs': breadcrumbs}
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def zinnia_loop_template(context, default_template):
     """
     Return a selected template from his position within a loop
@@ -369,7 +369,7 @@ def get_gravatar(email, size=80, rating='g', default=None,
     return url.replace('&', '&amp;')
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_tags():
     """
     Return the published tags.

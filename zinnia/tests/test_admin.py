@@ -10,7 +10,6 @@ from django.contrib.sites.models import Site
 from django.utils.translation import activate
 from django.utils.translation import deactivate
 from django.contrib.admin.sites import AdminSite
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from zinnia import settings
 from zinnia.admin import entry as entry_admin
@@ -19,6 +18,7 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.tests.utils import datetime
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.admin.entry import EntryAdmin
 from zinnia.admin.category import CategoryAdmin
 from zinnia.signals import disconnect_entry_signals
@@ -187,13 +187,16 @@ class EntryAdminTestCase(BaseAdminTestCase):
             '<a href="http://example.com" target="blank">example.com</a>')
 
     def test_get_short_url(self):
+        with self.settings(ROOT_URLCONF=self.poor_urls):
+            entry_url = self.entry.get_absolute_url()
+
         self.check_with_rich_and_poor_urls(
             self.admin.get_short_url, (self.entry,),
             '<a href="http://example.com/%(hash)s/" target="blank">'
             'http://example.com/%(hash)s/</a>' % {
                 'hash': base36(self.entry.pk)},
             '<a href="%(url)s" target="blank">%(url)s</a>' % {
-                'url': self.entry.get_absolute_url()})
+                'url': entry_url})
 
     def test_get_is_visible(self):
         self.assertEqual(self.admin.get_is_visible(self.entry),

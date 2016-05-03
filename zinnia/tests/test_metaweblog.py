@@ -13,7 +13,6 @@ from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
 from django.core.files.storage import default_storage
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 from tagging.models import Tag
 
@@ -27,6 +26,7 @@ from zinnia.tests.utils import datetime
 from zinnia.xmlrpc.metaweblog import authenticate
 from zinnia.xmlrpc.metaweblog import post_structure
 from zinnia.tests.utils import TestTransport
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.signals import disconnect_entry_signals
 
 

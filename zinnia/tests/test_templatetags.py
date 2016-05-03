@@ -12,7 +12,6 @@ from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 import django_comments as comments
 from django_comments.models import CommentFlag
@@ -27,6 +26,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 from zinnia.signals import flush_similar_cache_handler

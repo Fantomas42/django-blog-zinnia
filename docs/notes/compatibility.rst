@@ -23,6 +23,14 @@ Compatibility with Django
 
 Here a list establishing the compatibility between Zinnia and Django:
 
+.. versionchanged:: 0.17
+
+Backward incompatibilities with Django v1.8.x due to :
+
+* Usage of Field.remote_field.
+* Usage of the new template tag syntax.
+* Changes around the application namespace.
+
 .. versionchanged:: 0.16
 
 Backward incompatibilities with Django v1.7.x due to :
