@@ -13,11 +13,13 @@ from django.test.utils import override_settings
 import django_comments as comments
 from django_comments.models import CommentFlag
 
+from zinnia import markups
 from zinnia.managers import PUBLISHED
 from zinnia.models_bases import entry
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
-from zinnia.flags import PINGBACK, TRACKBACK
+from zinnia.flags import PINGBACK
+from zinnia.flags import TRACKBACK
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import is_lib_available
 from zinnia.tests.utils import skipIfCustomUser
@@ -375,13 +377,13 @@ class EntryHtmlContentTestCase(TestCase):
                   'content': 'My content',
                   'slug': 'my-entry'}
         self.entry = Entry(**params)
-        self.original_rendering = entry.MARKUP_LANGUAGE
+        self.original_rendering = markups.MARKUP_LANGUAGE
 
     def tearDown(self):
-        entry.MARKUP_LANGUAGE = self.original_rendering
+        markups.MARKUP_LANGUAGE = self.original_rendering
 
     def test_html_content_default(self):
-        entry.MARKUP_LANGUAGE = None
+        markups.MARKUP_LANGUAGE = None
         self.assertEqual(self.entry.html_content, '<p>My content</p>')
 
         self.entry.content = 'Hello world !\n' \
@@ -393,7 +395,7 @@ class EntryHtmlContentTestCase(TestCase):
 
     @skipUnless(is_lib_available('textile'), 'Textile is not available')
     def test_html_content_textitle(self):
-        entry.MARKUP_LANGUAGE = 'textile'
+        markups.MARKUP_LANGUAGE = 'textile'
         self.entry.content = 'Hello world !\n\n' \
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
@@ -406,7 +408,7 @@ class EntryHtmlContentTestCase(TestCase):
 
     @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
     def test_html_content_markdown(self):
-        entry.MARKUP_LANGUAGE = 'markdown'
+        markups.MARKUP_LANGUAGE = 'markdown'
         self.entry.content = 'Hello world !\n\n' \
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
@@ -419,7 +421,7 @@ class EntryHtmlContentTestCase(TestCase):
 
     @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
     def test_markdown_with_inline_html(self):
-        entry.MARKUP_LANGUAGE = 'markdown'
+        markups.MARKUP_LANGUAGE = 'markdown'
         self.entry.content = ('Hello *World* !\n\n'
                               '<p>This is an inline HTML paragraph</p>')
         html_content = self.entry.html_content
@@ -429,7 +431,7 @@ class EntryHtmlContentTestCase(TestCase):
 
     @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
     def test_html_content_restructuredtext(self):
-        entry.MARKUP_LANGUAGE = 'restructuredtext'
+        markups.MARKUP_LANGUAGE = 'restructuredtext'
         self.entry.content = 'Hello world !\n\n' \
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
@@ -441,7 +443,7 @@ class EntryHtmlContentTestCase(TestCase):
                          '<li>Item 2</li>\n</ul>\n')
 
     def test_html_preview(self):
-        entry.MARKUP_LANGUAGE = None
+        markups.MARKUP_LANGUAGE = None
         preview = self.entry.html_preview
         self.assertEqual(str(preview), '<p>My content</p>')
         self.assertEqual(preview.has_more, False)
@@ -449,6 +451,79 @@ class EntryHtmlContentTestCase(TestCase):
         preview = self.entry.html_preview
         self.assertEqual(str(preview), '<p>Lead paragraph</p>')
         self.assertEqual(preview.has_more, True)
+
+
+class EntryHtmlLeadTestCase(TestCase):
+
+    def setUp(self):
+        params = {'title': 'My entry',
+                  'lead': 'My lead',
+                  'slug': 'my-entry'}
+        self.entry = Entry(**params)
+        self.original_rendering = markups.MARKUP_LANGUAGE
+
+    def tearDown(self):
+        markups.MARKUP_LANGUAGE = self.original_rendering
+
+    def test_html_lead_default(self):
+        markups.MARKUP_LANGUAGE = None
+        self.assertEqual(self.entry.html_lead, '<p>My lead</p>')
+
+        self.entry.lead = 'Hello world !\n' \
+                          ' this is my lead'
+        self.assertEqual(self.entry.html_lead,
+                         '<p>Hello world !<br /> this is my lead</p>')
+        self.entry.lead = ''
+        self.assertEqual(self.entry.html_lead, '')
+
+    @skipUnless(is_lib_available('textile'), 'Textile is not available')
+    def test_html_lead_textitle(self):
+        markups.MARKUP_LANGUAGE = 'textile'
+        self.entry.lead = 'Hello world !\n\n' \
+                          'this is my lead :\n\n' \
+                          '* Item 1\n* Item 2'
+        html_lead = self.entry.html_lead
+        self.assertEqual(html_lead,
+                         '\t<p>Hello world !</p>\n\n\t'
+                         '<p>this is my lead :</p>\n\n\t'
+                         '<ul>\n\t\t<li>Item 1</li>\n\t\t'
+                         '<li>Item 2</li>\n\t</ul>')
+
+    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    def test_html_lead_markdown(self):
+        markups.MARKUP_LANGUAGE = 'markdown'
+        self.entry.lead = 'Hello world !\n\n' \
+                          'this is my lead :\n\n' \
+                          '* Item 1\n* Item 2'
+        html_lead = self.entry.html_lead
+        self.assertEqual(html_lead,
+                         '<p>Hello world !</p>\n'
+                         '<p>this is my lead :</p>'
+                         '\n<ul>\n<li>Item 1</li>\n'
+                         '<li>Item 2</li>\n</ul>')
+
+    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    def test_markdown_with_inline_html(self):
+        markups.MARKUP_LANGUAGE = 'markdown'
+        self.entry.lead = ('Hello *World* !\n\n'
+                           '<p>This is an inline HTML paragraph</p>')
+        html_lead = self.entry.html_lead
+        self.assertEqual(html_lead,
+                         '<p>Hello <em>World</em> !</p>\n'
+                         '<p>This is an inline HTML paragraph</p>')
+
+    @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
+    def test_html_lead_restructuredtext(self):
+        markups.MARKUP_LANGUAGE = 'restructuredtext'
+        self.entry.lead = 'Hello world !\n\n' \
+                          'this is my lead :\n\n' \
+                          '* Item 1\n* Item 2'
+        html_lead = self.entry.html_lead
+        self.assertEqual(html_lead,
+                         '<p>Hello world !</p>\n'
+                         '<p>this is my lead :</p>'
+                         '\n<ul class="simple">\n<li>Item 1</li>\n'
+                         '<li>Item 2</li>\n</ul>\n')
 
 
 class EntryAbsoluteUrlTestCase(TestCase):

@@ -4,9 +4,11 @@ Code originally provided by django.contrib.markups
 """
 import warnings
 
+from django.utils.html import linebreaks
 from django.utils.encoding import force_text
 from django.utils.encoding import force_bytes
 
+from zinnia.settings import MARKUP_LANGUAGE
 from zinnia.settings import MARKDOWN_EXTENSIONS
 from zinnia.settings import RESTRUCTUREDTEXT_SETTINGS
 
@@ -58,3 +60,21 @@ def restructuredtext(value, settings=RESTRUCTUREDTEXT_SETTINGS):
                           writer_name='html4css1',
                           settings_overrides=settings)
     return force_text(parts['fragment'])
+
+
+def html_format(value):
+    """
+    Returns the value formatted in HTML,
+    depends on MARKUP_LANGUAGE setting.
+    """
+    if not value:
+        return ''
+    elif MARKUP_LANGUAGE == 'markdown':
+        return markdown(value)
+    elif MARKUP_LANGUAGE == 'textile':
+        return textile(value)
+    elif MARKUP_LANGUAGE == 'restructuredtext':
+        return restructuredtext(value)
+    elif '</p>' not in value:
+        return linebreaks(value)
+    return value

@@ -6,7 +6,6 @@ from django.db.models import Q
 from django.utils import timezone
 from django.utils.text import Truncator
 from django.utils.html import strip_tags
-from django.utils.html import linebreaks
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -18,13 +17,11 @@ from django_comments.models import CommentFlag
 from tagging.fields import TagField
 from tagging.utils import parse_tag_input
 
-from zinnia.markups import textile
-from zinnia.markups import markdown
-from zinnia.markups import restructuredtext
+from zinnia.flags import PINGBACK
+from zinnia.flags import TRACKBACK
+from zinnia.markups import html_format
 from zinnia.preview import HTMLPreview
-from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.settings import UPLOAD_TO
-from zinnia.settings import MARKUP_LANGUAGE
 from zinnia.settings import ENTRY_DETAIL_TEMPLATES
 from zinnia.settings import ENTRY_CONTENT_TEMPLATES
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
@@ -216,18 +213,7 @@ class ContentEntry(models.Model):
         """
         Returns the "content" field formatted in HTML.
         """
-        content = self.content
-        if not content:
-            return ''
-        elif MARKUP_LANGUAGE == 'markdown':
-            return markdown(content)
-        elif MARKUP_LANGUAGE == 'textile':
-            return textile(content)
-        elif MARKUP_LANGUAGE == 'restructuredtext':
-            return restructuredtext(content)
-        elif '</p>' not in content:
-            return linebreaks(content)
-        return content
+        return html_format(self.content)
 
     @property
     def html_preview(self):
@@ -380,9 +366,7 @@ class LeadEntry(models.Model):
         """
         Returns the "lead" field formatted in HTML.
         """
-        if self.lead:
-            return linebreaks(self.lead)
-        return ''
+        return html_format(self.lead)
 
     class Meta:
         abstract = True
