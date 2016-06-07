@@ -20,7 +20,8 @@
 {% endblock link %}
 
 {% block breadcrumbs %}
-  {% zinnia_breadcrumbs %}
+  {% trans "Blog" as root_name %}
+  {% zinnia_breadcrumbs root_name %}
 {% endblock breadcrumbs %}
 
 {% block sidebar %}
