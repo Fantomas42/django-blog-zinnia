@@ -1,3 +1,15 @@
+0.17
+-----
+
+* Compatibility with Django 1.9
+* Fix RSS enclosure
+* Fix paginator issue
+* Implement Entry.lead_html method
+* Usage of regex module to speed up
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.16...v0.17
+
+
 0.16
 ----
 
