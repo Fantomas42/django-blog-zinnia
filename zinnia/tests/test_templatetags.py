@@ -921,7 +921,8 @@ class TemplateTagsTestCase(TestCase):
             context = zinnia_breadcrumbs(source_context, 'Root')
         self.assertEqual(len(context['breadcrumbs']), 2)
         self.assertEqual(context['breadcrumbs'][0].name, 'Root')
-        self.assertEqual(context['breadcrumbs'][0].url, '/')
+        self.assertEqual(context['breadcrumbs'][0].url,
+                         reverse('zinnia:entry_archive_index'))
         self.assertEqual(context['breadcrumbs'][1].name, 'Path')
         self.assertEqual(context['breadcrumbs'][1].url, None)
         # More tests can be done here, for testing path and objects in context
