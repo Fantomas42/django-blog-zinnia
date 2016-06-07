@@ -1,5 +1,5 @@
 """Zinnia"""
-__version__ = '0.16'
+__version__ = '0.17'
 __license__ = 'BSD License'
 
 __author__ = 'Fantomas42'

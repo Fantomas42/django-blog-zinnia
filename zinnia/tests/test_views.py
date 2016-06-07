@@ -9,7 +9,6 @@ from django.test.utils import override_settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.signals import user_logged_in
 from django.contrib.auth.models import update_last_login
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 import django_comments as comments
 
@@ -22,6 +21,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.flags import get_user_flagger
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_entry_signals
@@ -318,7 +318,7 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.status_code, 301)
         self.assertEqual(
             response['Location'],
-            'http://testserver%s' % self.first_entry.get_absolute_url())
+            self.first_entry.get_absolute_url())
 
     def test_zinnia_entry_shortlink_unpublished(self):
         """
@@ -596,8 +596,7 @@ class ViewsTestCase(ViewsBaseCase):
 
     def test_zinnia_entry_random(self):
         response = self.client.get('/random/', follow=True)
-        self.assertTrue(response.redirect_chain[0][0].startswith(
-            'http://testserver/2010/'))
+        self.assertTrue(response.redirect_chain[0][0].startswith('/2010/'))
         self.assertEqual(response.redirect_chain[0][1], 302)
 
     def test_zinnia_sitemap(self):
@@ -706,25 +705,25 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
             response['Location'],
-            'http://testserver/accounts/login/?next=/quick-entry/')
+            '/accounts/login/?next=/quick-entry/')
         self.client.login(username='admin', password='password')
         response = self.client.get('/quick-entry/')
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
             response['Location'],
-            'http://testserver/accounts/login/?next=/quick-entry/')
+            '/accounts/login/?next=/quick-entry/')
         self.client.logout()
         self.client.login(username='root', password='password')
         response = self.client.get('/quick-entry/')
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
             response['Location'],
-            'http://testserver/admin/zinnia/entry/add/')
+            '/admin/zinnia/entry/add/')
         response = self.client.post('/quick-entry/', {'content': 'test'})
         self.assertEqual(response.status_code, 302)
         self.assertTrue(urlEqual(
             response['Location'],
-            'http://testserver/admin/zinnia/entry/add/'
+            '/admin/zinnia/entry/add/'
             '?tags=&title=&sites=1&content='
             '%3Cp%3Etest%3C%2Fp%3E&authors=2&slug='))
         response = self.client.post('/quick-entry/',
@@ -735,7 +734,7 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
             response['Location'],
-            'http://testserver%s' % entry.get_absolute_url())
+            entry.get_absolute_url())
         self.assertEqual(entry.status, DRAFT)
         self.assertEqual(entry.title, 'test')
         self.assertEqual(entry.tags, 'test')
@@ -752,7 +751,7 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.status_code, 302)
         self.assertTrue(urlEqual(
             response['Location'],
-            'http://testserver/admin/zinnia/entry/add/'
+            '/admin/zinnia/entry/add/'
             '?tags=test-2&title=%D1%82%D0%B5%D1%81%D1%82'
             '&sites=1&content=%3Cp%3ETest+content%3C%2Fp%3E'
             '&authors=2&slug='))
@@ -772,7 +771,7 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
             response['Location'],
-            'http://testserver%s' % entry.get_absolute_url())
+            entry.get_absolute_url())
         self.assertEqual(
             entry.content,
             'Hello *World* !')

@@ -18,7 +18,6 @@ from django.utils.feedgenerator import DefaultFeed
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.storage import default_storage
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 import django_comments as comments
 
@@ -32,7 +31,6 @@ from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
 from zinnia.models.category import Category
 from zinnia.flags import PINGBACK, TRACKBACK
-from zinnia import feeds
 from zinnia.feeds import EntryFeed
 from zinnia.feeds import ZinniaFeed
 from zinnia.feeds import LastEntries
@@ -45,6 +43,7 @@ from zinnia.feeds import EntryComments
 from zinnia.feeds import EntryPingbacks
 from zinnia.feeds import EntryTrackbacks
 from zinnia.feeds import LastDiscussions
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 
@@ -161,6 +160,41 @@ class FeedsTestCase(TestCase):
                          urljoin('http://example.com', entry.image.url))
         self.assertEqual(feed.item_enclosure_length(entry), '100000')
         self.assertEqual(feed.item_enclosure_mime_type(entry), 'image/jpeg')
+
+    def test_entry_feed_enclosure_replace_https_in_rss(self):
+        entry = self.create_published_entry()
+        feed = EntryFeed()
+        entry.content = 'My test content with image in https ' \
+                        '<img src="https://test.com/image.jpg" />'
+        entry.save()
+        self.assertEqual(
+            feed.item_enclosure_url(entry), 'http://test.com/image.jpg')
+        feed.protocol = 'https'
+        entry.content = 'My test content with image <img src="image.jpg" />'
+        entry.save()
+        self.assertEqual(
+            feed.item_enclosure_url(entry), 'http://example.com/image.jpg')
+        path = default_storage.save('enclosure.png', ContentFile('Content'))
+        entry.image = path
+        entry.save()
+        self.assertEqual(feed.item_enclosure_url(entry),
+                         urljoin('http://example.com', entry.image.url))
+        original_feed_format = LastEntries.feed_format
+        LastEntries.feed_format = 'atom'
+        feed = LastEntries()
+        feed.protocol = 'https'
+        self.assertEqual(feed.item_enclosure_url(entry),
+                         urljoin('https://example.com', entry.image.url))
+        LastEntries.feed_format = original_feed_format
+        default_storage.delete(path)
+
+    def test_entry_feed_enclosure_without_image(self):
+        entry = self.create_published_entry()
+        feed = EntryFeed()
+        entry.content = 'My test content without image '
+        entry.save()
+        self.assertEqual(
+            feed.item_enclosure_url(entry), None)
 
     def test_entry_feed_enclosure_issue_134(self):
         entry = self.create_published_entry()
@@ -390,15 +424,15 @@ class FeedsTestCase(TestCase):
         self.assertEqual(feed.item_author_name(entry), None)
 
     def test_entry_feed_rss_or_atom(self):
-        original_feeds_format = feeds.FEEDS_FORMAT
-        feeds.FEEDS_FORMAT = ''
+        original_feed_format = LastEntries.feed_format
+        LastEntries.feed_format = ''
         feed = LastEntries()
         self.assertEqual(feed.feed_type, DefaultFeed)
-        feeds.FEEDS_FORMAT = 'atom'
+        LastEntries.feed_format = 'atom'
         feed = LastEntries()
         self.assertEqual(feed.feed_type, Atom1Feed)
         self.assertEqual(feed.subtitle, feed.description)
-        feeds.FEEDS_FORMAT = original_feeds_format
+        LastEntries.feed_format = original_feed_format
 
     def test_title_with_sitename_implementation(self):
         feed = ZinniaFeed()

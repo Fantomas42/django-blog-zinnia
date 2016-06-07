@@ -12,12 +12,13 @@ Dependencies
 Make sure to install these packages prior to installation :
 
 * `Python`_ >= 2.7
-* `Django`_ >= 1.7,<1.9
+* `Django`_ >= 1.9,<1.10
 * `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.5.1
 * `django-tagging`_ >= 0.3.6
 * `beautifulsoup4`_ >= 4.1.3
 * `mots-vides`_ >= 2015.2.6
+* `regex`_ >= 2016.3.2
 * `django-contrib-comments`_ >= 1.6
 
 The packages below are optionnal but needed for run the full test suite or
@@ -115,7 +116,7 @@ URLs
 Add at least these following lines to your project's urls.py in order to
 display the Weblog. ::
 
-  url(r'^weblog/', include('zinnia.urls', namespace='zinnia')),
+  url(r'^weblog/', include('zinnia.urls')),
   url(r'^comments/', include('django_comments.urls')),
 
 Remember to enable the :mod:`~django.contrib.admin` site in the urls.py of
@@ -125,7 +126,7 @@ Note that the default Zinnia URLset :mod:`zinnia.urls` is calibrated for
 convenient usage, but you can customize your Weblog URLs as you
 want. Here's a custom implementation of the URLs provided by Zinnia: ::
 
-  blog_urls = [
+  blog_urls = ([
       url(r'^', include('zinnia.urls.capabilities')),
       url(r'^search/', include('zinnia.urls.search')),
       url(r'^sitemap/', include('zinnia.urls.sitemap')),
@@ -140,9 +141,9 @@ want. Here's a custom implementation of the URLs provided by Zinnia: ::
       url(r'^blog/', include('zinnia.urls.archives')),
       url(r'^blog/', include('zinnia.urls.shortlink')),
       url(r'^blog/', include('zinnia.urls.quick_entry'))
-  ]
+  ], 'zinnia')
 
-  url(r'^', include(blog_urls, namespace='zinnia'))
+  url(r'^', include(blog_urls))
 
 .. _sites:
 
@@ -193,6 +194,7 @@ project directory to sync the models with the database. ::
 .. _`django-tagging`: https://code.google.com/p/django-tagging/
 .. _`django-contrib-comments`: https://github.com/django/django-contrib-comments
 .. _`mots-vides`: https://github.com/Fantomas42/mots-vides
+.. _`regex`: https://pypi.python.org/pypi/regex
 .. _`beautifulsoup4`: http://www.crummy.com/software/BeautifulSoup/
 .. _`pytz`: http://pytz.sourceforge.net/
 .. _`pyparsing`: http://pyparsing.wikispaces.com/

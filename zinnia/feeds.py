@@ -40,10 +40,13 @@ class ZinniaFeed(Feed):
     Base Feed class for the Zinnia application,
     enriched for a more convenient usage.
     """
+    protocol = PROTOCOL
     feed_copyright = COPYRIGHT
+    feed_format = FEEDS_FORMAT
+    limit = FEEDS_MAX_ITEMS
 
     def __init__(self):
-        if FEEDS_FORMAT == 'atom':
+        if self.feed_format == 'atom':
             self.feed_type = Atom1Feed
             self.subtitle = getattr(self, 'description', None)
 
@@ -68,7 +71,7 @@ class ZinniaFeed(Feed):
         """
         Return the URL of the current site.
         """
-        return '%s://%s' % (PROTOCOL, self.site.domain)
+        return '%s://%s' % (self.protocol, self.site.domain)
 
 
 class EntryFeed(ZinniaFeed):
@@ -132,7 +135,11 @@ class EntryFeed(ZinniaFeed):
             img = BeautifulSoup(item.html_content, 'html.parser').find('img')
             url = img.get('src') if img else None
         self.cached_enclosure_url = url
-        return urljoin(self.site_url, url) if url else None
+        if url:
+            url = urljoin(self.site_url, url)
+            if self.feed_format == 'rss':
+                url = url.replace('https://', 'http://')
+        return url
 
     def item_enclosure_length(self, item):
         """
@@ -172,7 +179,7 @@ class LastEntries(EntryFeed):
         """
         Items are published entries.
         """
-        return Entry.published.all()[:FEEDS_MAX_ITEMS]
+        return Entry.published.all()[:self.limit]
 
     def get_title(self, obj):
         """
@@ -203,7 +210,7 @@ class CategoryEntries(EntryFeed):
         """
         Items are the published entries of the category.
         """
-        return obj.entries_published()[:FEEDS_MAX_ITEMS]
+        return obj.entries_published()[:self.limit]
 
     def link(self, obj):
         """
@@ -241,7 +248,7 @@ class AuthorEntries(EntryFeed):
         """
         Items are the published entries of the author.
         """
-        return obj.entries_published()[:FEEDS_MAX_ITEMS]
+        return obj.entries_published()[:self.limit]
 
     def link(self, obj):
         """
@@ -280,7 +287,7 @@ class TagEntries(EntryFeed):
         Items are the published entries of the tag.
         """
         return TaggedItem.objects.get_by_model(
-            Entry.published.all(), obj)[:FEEDS_MAX_ITEMS]
+            Entry.published.all(), obj)[:self.limit]
 
     def link(self, obj):
         """
@@ -320,7 +327,7 @@ class SearchEntries(EntryFeed):
         """
         Items are the published entries founds.
         """
-        return Entry.published.search(obj)[:FEEDS_MAX_ITEMS]
+        return Entry.published.search(obj)[:self.limit]
 
     def link(self, obj):
         """
@@ -392,7 +399,7 @@ class LastDiscussions(DiscussionFeed):
         content_type = ContentType.objects.get_for_model(Entry)
         return comments.get_model().objects.filter(
             content_type=content_type, is_public=True).order_by(
-            '-submit_date')[:FEEDS_MAX_ITEMS]
+            '-submit_date')[:self.limit]
 
     def link(self):
         """
@@ -432,7 +439,7 @@ class EntryDiscussions(DiscussionFeed):
         """
         Items are the discussions on the entry.
         """
-        return obj.discussions[:FEEDS_MAX_ITEMS]
+        return obj.discussions[:self.limit]
 
     def link(self, obj):
         """
@@ -465,7 +472,7 @@ class EntryComments(EntryDiscussions):
         """
         Items are the comments on the entry.
         """
-        return obj.comments[:FEEDS_MAX_ITEMS]
+        return obj.comments[:self.limit]
 
     def item_link(self, item):
         """
@@ -517,7 +524,7 @@ class EntryPingbacks(EntryDiscussions):
         """
         Items are the pingbacks on the entry.
         """
-        return obj.pingbacks[:FEEDS_MAX_ITEMS]
+        return obj.pingbacks[:self.limit]
 
     def item_link(self, item):
         """
@@ -550,7 +557,7 @@ class EntryTrackbacks(EntryDiscussions):
         """
         Items are the trackbacks on the entry.
         """
-        return obj.trackbacks[:FEEDS_MAX_ITEMS]
+        return obj.trackbacks[:self.limit]
 
     def item_link(self, item):
         """

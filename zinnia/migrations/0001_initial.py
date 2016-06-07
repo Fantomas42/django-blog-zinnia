@@ -42,6 +42,7 @@ class Migration(migrations.Migration):
                     editable=False, db_index=True)),
                 ('parent', mptt.fields.TreeForeignKey(
                     related_name='children', verbose_name='parent category',
+                    on_delete=models.CASCADE,
                     blank=True, to='zinnia.Category', null=True)),
             ],
             options={
@@ -118,14 +119,16 @@ class Migration(migrations.Migration):
                     default='zinnia/_entry_detail.html',
                     help_text="Template used to display the entry's content.",
                     max_length=250, verbose_name='content template',
-                    choices=[('zinnia/_entry_detail.html', 'Default template')]
-                             + zinnia.settings.ENTRY_CONTENT_TEMPLATES)),
+                    choices=[
+                        ('zinnia/_entry_detail.html', 'Default template')] + \
+                        zinnia.settings.ENTRY_CONTENT_TEMPLATES)),
                 ('detail_template', models.CharField(
                     default='entry_detail.html',
                     help_text="Template used to display the entry's detail page.",  # noqa
                     max_length=250, verbose_name='detail template',
-                    choices=[('entry_detail.html', 'Default template')]
-                             + zinnia.settings.ENTRY_DETAIL_TEMPLATES)),
+                    choices=[
+                        ('entry_detail.html', 'Default template')] + \
+                        zinnia.settings.ENTRY_DETAIL_TEMPLATES)),
                 ('categories', models.ManyToManyField(
                     related_name='entries',
                     verbose_name='categories', to='zinnia.Category',

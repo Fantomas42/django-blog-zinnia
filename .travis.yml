@@ -2,17 +2,13 @@ sudo: false
 language: python
 python:
     - 2.7
-    - 3.2
-    - 3.3
     - 3.4
+    - 3.5
 env:
     - DATABASE_ENGINE=sqlite
     - DATABASE_ENGINE=postgres
     - DATABASE_ENGINE=mysql
 matrix:
-    exclude:
-        - python: 3.2
-          env: DATABASE_ENGINE=mysql
     fast_finish: true
 install:
     - pip install -U setuptools

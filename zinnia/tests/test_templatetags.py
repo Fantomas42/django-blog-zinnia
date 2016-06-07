@@ -12,7 +12,6 @@ from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from django.test.utils import override_settings
-from django.contrib.auth.tests.utils import skipIfCustomUser
 
 import django_comments as comments
 from django_comments.models import CommentFlag
@@ -27,6 +26,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import urlEqual
+from zinnia.tests.utils import skipIfCustomUser
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 from zinnia.signals import flush_similar_cache_handler
@@ -794,6 +794,11 @@ class TemplateTagsTestCase(TestCase):
         source_context = Context({'request': FakeRequest('/')})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
+        self.assertEqual(len(context['breadcrumbs']), 0)
+        self.assertEqual(context['template'], 'zinnia/tags/breadcrumbs.html')
+
+        with self.assertNumQueries(0):
+            context = zinnia_breadcrumbs(source_context, 'Blog')
         self.assertEqual(len(context['breadcrumbs']), 1)
         self.assertEqual(context['breadcrumbs'][0].name, 'Blog')
         self.assertEqual(context['breadcrumbs'][0].url,
@@ -812,7 +817,7 @@ class TemplateTagsTestCase(TestCase):
              'object': self.entry})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
-        self.assertEqual(len(context['breadcrumbs']), 5)
+        self.assertEqual(len(context['breadcrumbs']), 4)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         cat_1 = Category.objects.create(title='Category 1', slug='category-1')
@@ -821,7 +826,7 @@ class TemplateTagsTestCase(TestCase):
              'object': cat_1})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
-        self.assertEqual(len(context['breadcrumbs']), 3)
+        self.assertEqual(len(context['breadcrumbs']), 2)
         check_only_last_have_no_url(context['breadcrumbs'])
         cat_2 = Category.objects.create(title='Category 2', slug='category-2',
                                         parent=cat_1)
@@ -830,7 +835,7 @@ class TemplateTagsTestCase(TestCase):
              'object': cat_2})
         with self.assertNumQueries(1):
             context = zinnia_breadcrumbs(source_context)
-        self.assertEqual(len(context['breadcrumbs']), 4)
+        self.assertEqual(len(context['breadcrumbs']), 3)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         tag = Tag.objects.get(name='test')
@@ -840,7 +845,7 @@ class TemplateTagsTestCase(TestCase):
              'object': tag})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
-        self.assertEqual(len(context['breadcrumbs']), 3)
+        self.assertEqual(len(context['breadcrumbs']), 2)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         author = Author.objects.create_user(username='webmaster',
@@ -850,7 +855,7 @@ class TemplateTagsTestCase(TestCase):
              'object': author})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
-        self.assertEqual(len(context['breadcrumbs']), 3)
+        self.assertEqual(len(context['breadcrumbs']), 2)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context(
@@ -858,28 +863,28 @@ class TemplateTagsTestCase(TestCase):
                 'zinnia:entry_archive_year', args=[2011]))})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
-        self.assertEqual(len(context['breadcrumbs']), 2)
+        self.assertEqual(len(context['breadcrumbs']), 1)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
             'zinnia:entry_archive_month', args=[2011, '03']))})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
-        self.assertEqual(len(context['breadcrumbs']), 3)
+        self.assertEqual(len(context['breadcrumbs']), 2)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
             'zinnia:entry_archive_week', args=[2011, 15]))})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
-        self.assertEqual(len(context['breadcrumbs']), 3)
+        self.assertEqual(len(context['breadcrumbs']), 2)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
             'zinnia:entry_archive_day', args=[2011, '03', 15]))})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
-        self.assertEqual(len(context['breadcrumbs']), 4)
+        self.assertEqual(len(context['breadcrumbs']), 3)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest('%s?page=2' % reverse(
@@ -887,7 +892,7 @@ class TemplateTagsTestCase(TestCase):
             'page_obj': FakePage(2)})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
-        self.assertEqual(len(context['breadcrumbs']), 5)
+        self.assertEqual(len(context['breadcrumbs']), 4)
         check_only_last_have_no_url(context['breadcrumbs'])
 
         source_context = Context({'request': FakeRequest(reverse(
@@ -895,8 +900,31 @@ class TemplateTagsTestCase(TestCase):
             'page_obj': FakePage(2)})
         with self.assertNumQueries(0):
             context = zinnia_breadcrumbs(source_context)
-        self.assertEqual(len(context['breadcrumbs']), 5)
+        self.assertEqual(len(context['breadcrumbs']), 4)
         check_only_last_have_no_url(context['breadcrumbs'])
+
+        source_context = Context({'request': FakeRequest('/url/')})
+        with self.assertNumQueries(0):
+            context = zinnia_breadcrumbs(source_context)
+        self.assertEqual(len(context['breadcrumbs']), 1)
+        self.assertEqual(context['breadcrumbs'][0].name, 'Url')
+        self.assertEqual(context['breadcrumbs'][0].url, None)
+
+        source_context = Context({'request': FakeRequest('/url/path/')})
+        with self.assertNumQueries(0):
+            context = zinnia_breadcrumbs(source_context)
+        self.assertEqual(len(context['breadcrumbs']), 1)
+        self.assertEqual(context['breadcrumbs'][0].name, 'Path')
+        self.assertEqual(context['breadcrumbs'][0].url, None)
+
+        with self.assertNumQueries(0):
+            context = zinnia_breadcrumbs(source_context, 'Root')
+        self.assertEqual(len(context['breadcrumbs']), 2)
+        self.assertEqual(context['breadcrumbs'][0].name, 'Root')
+        self.assertEqual(context['breadcrumbs'][0].url,
+                         reverse('zinnia:entry_archive_index'))
+        self.assertEqual(context['breadcrumbs'][1].name, 'Path')
+        self.assertEqual(context['breadcrumbs'][1].url, None)
         # More tests can be done here, for testing path and objects in context
 
     def test_zinnia_loop_template(self):

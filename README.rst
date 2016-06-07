@@ -61,20 +61,17 @@ Take a look at the online demo at: http://demo.django-blog-zinnia.com/
 or you can visit these websites who use Zinnia.
 
 * `Fantomas' side`_
-* `Darwin's Weblog`_
 * `Ubuntu's developers blog`_
 * `Tryolabs`_
 * `AR.Drone Best of User Videos`_
 * `Professional Web Studio`_
-* `brainbreach`_
-* `Mauro Bianchi`_
-* `Sergey Miracle`_
 * `Infantium`_
-* `Pana`_
-* `MAGIC Center at RIT`_
 * `Rudolf Steiner School of Kreuzlingen`_
 * `Vidzor Studio LLC`_
 * `Bookshadow`_
+* `Future Proof Games`_
+* `Detvora Club`_
+* `Stumbling Mountain`_
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
@@ -91,18 +88,18 @@ More information and help available at these URLs:
 * Discussions and help at `Google Group`_
 * For reporting a bug use `GitHub Issues`_
 
-.. |travis-develop| image:: https://travis-ci.org/Fantomas42/django-blog-zinnia.png?branch=develop
+.. |travis-develop| image:: https://img.shields.io/travis/Fantomas42/django-blog-zinnia/develop.svg
    :alt: Build Status - develop branch
    :target: http://travis-ci.org/Fantomas42/django-blog-zinnia
-.. |coverage-develop| image:: https://coveralls.io/repos/Fantomas42/django-blog-zinnia/badge.png?branch=develop
+.. |coverage-develop| image:: https://img.shields.io/coveralls/Fantomas42/django-blog-zinnia/develop.svg
    :alt: Coverage of the code
    :target: https://coveralls.io/r/Fantomas42/django-blog-zinnia
-.. |latest-version| image:: https://pypip.in/v/django-blog-zinnia/badge.png
+.. |latest-version| image:: https://img.shields.io/pypi/v/django-blog-zinnia.svg
    :alt: Latest version on Pypi
-   :target: https://crate.io/packages/django-blog-zinnia/
-.. |downloads| image:: https://pypip.in/d/django-blog-zinnia/badge.png
+   :target: https://pypi.python.org/pypi/django-blog-zinnia/
+.. |downloads| image:: https://img.shields.io/pypi/dm/django-blog-zinnia.svg
    :alt: Downloads from Pypi
-   :target: https://crate.io/packages/django-blog-zinnia/
+   :target: https://pypi.python.org/pypi/django-blog-zinnia/
 .. |paypal| image:: https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif
    :alt:  Make a free donation with Paypal to encourage the development
    :target: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=68T48HR8KK9KG
@@ -130,21 +127,18 @@ More information and help available at these URLs:
 .. _`Compass`: http://compass-style.org/
 .. _`Sass3`: http://sass-lang.com/
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
-.. _`Fantomas' side`: http://fantomas.willbreak.it/blog/
-.. _`Professional Web Studio`: http://www.professionalwebstudio.com/en/weblog/
-.. _`Tryolabs`: http://www.tryolabs.com/Blog/
-.. _`brainbreach`: http://brainbreach.com/
-.. _`Mauro Bianchi`: http://www.maurobianchi.it/
-.. _`Sergey Miracle`: http://sergeymiracle.com/weblog/
-.. _`Infantium`: http://www.infantium.com/blog/
-.. _`AR.Drone Best of User Videos`: http://ardrone.parrot.com/best-of-user-videos/
-.. _`Darwin's Weblog`: http://darwin.willbreak.it/
+.. _`Fantomas' side`: http://fantomas.site/blog/
 .. _`Ubuntu's developers blog`: http://developer.ubuntu.com/en/blog/
-.. _`Pana`: http://chusen87.com/news/
-.. _`MAGIC Center at RIT`: http://magic.rit.edu/
+.. _`Tryolabs`: http://www.tryolabs.com/Blog/
+.. _`AR.Drone Best of User Videos`: http://ardrone.parrot.com/best-of-user-videos/
+.. _`Professional Web Studio`: http://www.professionalwebstudio.com/en/weblog/
+.. _`Infantium`: http://www.infantium.com/blog/
 .. _`Rudolf Steiner School of Kreuzlingen`: http://www.steinerschulekreuzlingen.ch/
 .. _`Vidzor Studio LLC`: http://vidzor.com/blog/
 .. _`Bookshadow`: http://bookshadow.com/weblog/
+.. _`Future Proof Games`: http://futureproofgames.com/blog/
+.. _`Detvora Club`: http://detvora.club/blog/
+.. _`Stumbling Mountain`: https://stumblingmountain.com/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://docs.django-blog-zinnia.com/
 .. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia

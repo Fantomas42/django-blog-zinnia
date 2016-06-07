@@ -9,9 +9,11 @@ import warnings
 
 from django.test import TestCase
 
+from zinnia import markups
 from zinnia.markups import textile
 from zinnia.markups import markdown
 from zinnia.markups import restructuredtext
+from zinnia.markups import html_format
 from zinnia.tests.utils import is_lib_available
 
 
@@ -117,3 +119,56 @@ class MarkupFailImportTestCase(TestCase):
         self.assertEqual(
             str(w[-1].message),
             "The Python docutils library isn't installed.")
+
+
+class HtmlFormatTestCase(TestCase):
+
+    def setUp(self):
+        self.original_rendering = markups.MARKUP_LANGUAGE
+
+    def tearDown(self):
+        markups.MARKUP_LANGUAGE = self.original_rendering
+
+    def test_html_format_default(self):
+        markups.MARKUP_LANGUAGE = None
+        self.assertEquals(html_format(''), '')
+        self.assertEquals(html_format('Content'), '<p>Content</p>')
+        self.assertEquals(html_format('Content</p>'), 'Content</p>')
+        self.assertEquals(html_format('Hello\nworld!'),
+                          '<p>Hello<br />world!</p>')
+
+    @skipUnless(is_lib_available('textile'), 'Textile is not available')
+    def test_html_content_textitle(self):
+        markups.MARKUP_LANGUAGE = 'textile'
+        value = 'Hello world !\n\n' \
+                'this is my content :\n\n' \
+                '* Item 1\n* Item 2'
+        self.assertEqual(html_format(value),
+                         '\t<p>Hello world !</p>\n\n\t'
+                         '<p>this is my content :</p>\n\n\t'
+                         '<ul>\n\t\t<li>Item 1</li>\n\t\t'
+                         '<li>Item 2</li>\n\t</ul>')
+
+    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    def test_html_content_markdown(self):
+        markups.MARKUP_LANGUAGE = 'markdown'
+        value = 'Hello world !\n\n' \
+                'this is my content :\n\n' \
+                '* Item 1\n* Item 2'
+        self.assertEqual(html_format(value),
+                         '<p>Hello world !</p>\n'
+                         '<p>this is my content :</p>'
+                         '\n<ul>\n<li>Item 1</li>\n'
+                         '<li>Item 2</li>\n</ul>')
+
+    @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
+    def test_html_content_restructuredtext(self):
+        markups.MARKUP_LANGUAGE = 'restructuredtext'
+        value = 'Hello world !\n\n' \
+                'this is my content :\n\n' \
+                '* Item 1\n* Item 2'
+        self.assertEqual(html_format(value),
+                         '<p>Hello world !</p>\n'
+                         '<p>this is my content :</p>'
+                         '\n<ul class="simple">\n<li>Item 1</li>\n'
+                         '<li>Item 2</li>\n</ul>\n')

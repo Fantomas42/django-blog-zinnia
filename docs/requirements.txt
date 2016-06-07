@@ -1,9 +1,10 @@
-beautifulsoup4==4.4.0
-django==1.8.4
-django-contrib-comments==1.6.1
-django-mptt==0.7.4
-django-tagging==0.4
+beautifulsoup4==4.4.1
+django==1.9.6
+django-contrib-comments==1.7.1
+django-mptt==0.8.2
+django-tagging==0.4.3
 django-xmlrpc==0.1.5
 mots-vides==2015.5.11
-pillow==2.9.0
-pyparsing==2.0.3
+pillow==3.2.0
+pyparsing==2.1.1
+regex==2016.3.2

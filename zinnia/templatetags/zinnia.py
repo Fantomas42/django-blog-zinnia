@@ -14,7 +14,6 @@ from django.utils import timezone
 from django.template import Library
 from django.utils.encoding import smart_text
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
 from django.utils.html import conditional_escape
 from django.template.loader import select_template
 from django.template.defaultfilters import stringfilter
@@ -280,10 +279,11 @@ def zinnia_pagination(context, page, begin_pages=1, end_pages=1,
         if key != 'page':
             GET_string += '&%s=%s' % (key, value)
 
-    begin = list(page.paginator.page_range[:begin_pages])
-    end = list(page.paginator.page_range[-end_pages:])
-    middle = list(page.paginator.page_range[
-        max(page.number - before_pages - 1, 0):page.number + after_pages])
+    page_range = list(page.paginator.page_range)
+    begin = page_range[:begin_pages]
+    end = page_range[-end_pages:]
+    middle = page_range[max(page.number - before_pages - 1, 0):
+                        page.number + after_pages]
 
     if set(begin) & set(middle):  # [1, 2, 3], [2, 3, 4], [...]
         begin = sorted(set(begin + middle))  # [1, 2, 3, 4]
@@ -314,7 +314,7 @@ def zinnia_pagination(context, page, begin_pages=1, end_pages=1,
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
-def zinnia_breadcrumbs(context, root_name=_('Blog'),
+def zinnia_breadcrumbs(context, root_name='',
                        template='zinnia/tags/breadcrumbs.html',):
     """
     Return a breadcrumb for the application.
@@ -330,7 +330,7 @@ def zinnia_breadcrumbs(context, root_name=_('Blog'),
             'breadcrumbs': breadcrumbs}
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def zinnia_loop_template(context, default_template):
     """
     Return a selected template from his position within a loop
@@ -368,7 +368,7 @@ def get_gravatar(email, size=80, rating='g', default=None,
     return url.replace('&', '&amp;')
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_tags():
     """
     Return the published tags.

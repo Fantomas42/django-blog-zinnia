@@ -1,13 +1,16 @@
-"""Management command for re-counting the discussions on Entry"""
+"""
+Management command for re-counting the discussions on Entry.
+"""
 import sys
 
 from django.utils.encoding import smart_str
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from zinnia.models.entry import Entry
+from zinnia.signals import disconnect_entry_signals
 
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     """
     Command for re-counting the discussions on entries
     in case of problems.
@@ -22,7 +25,8 @@ class Command(NoArgsCommand):
             sys.stdout.write(smart_str(message))
             sys.stdout.flush()
 
-    def handle_noargs(self, **options):
+    def handle(self, *args, **options):
+        disconnect_entry_signals()
         self.verbosity = int(options.get('verbosity', 1))
         for entry in Entry.objects.all():
             self.write_out('Processing %s\n' % entry.title)
