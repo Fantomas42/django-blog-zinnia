@@ -42,24 +42,21 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
 
     def test_render_options(self):
         widget = MPTTFilteredSelectMultiple('test', False)
-        self.assertEqual(widget.render_options([], []), '')
+        self.assertEqual(widget.render_options([]), '')
 
-        options = widget.render_options([
+        choices = [
             (1, 'Category 1', (1, 1)),
-            (2, '|-- Category 2', (1, 2))], [])
+            (2, '|-- Category 2', (1, 2))]
+        widget = MPTTFilteredSelectMultiple('test', False, choices=choices)
 
         self.assertEqual(
-            options,
+            widget.render_options([]),
             '<option value="1" data-tree-id="1" data-left-value="1">'
             'Category 1</option>\n<option value="2" data-tree-id="1" '
             'data-left-value="2">|-- Category 2</option>')
 
-        options = widget.render_options([
-            (1, 'Category 1', (1, 1)),
-            (2, '|-- Category 2', (1, 2))], [2])
-
         self.assertEqual(
-            options,
+            widget.render_options([2]),
             '<option value="1" data-tree-id="1" data-left-value="1">'
             'Category 1</option>\n<option value="2" selected="selected" '
             'data-tree-id="1" data-left-value="2">|-- Category 2</option>')
