@@ -108,7 +108,6 @@ class EntryAdmin(admin.ModelAdmin):
             return ', '.join(
                 [conditional_escape(getattr(author, author.USERNAME_FIELD))
                  for author in entry.authors.all()])
-    get_authors.allow_tags = True
     get_authors.short_description = _('author(s)')
 
     def get_categories(self, entry):
@@ -123,7 +122,6 @@ class EntryAdmin(admin.ModelAdmin):
         except NoReverseMatch:
             return ', '.join([conditional_escape(category.title)
                               for category in entry.categories.all()])
-    get_categories.allow_tags = True
     get_categories.short_description = _('category(s)')
 
     def get_tags(self, entry):
@@ -137,7 +135,6 @@ class EntryAdmin(admin.ModelAdmin):
                  for tag in entry.tags_list])
         except NoReverseMatch:
             return conditional_escape(entry.tags)
-    get_tags.allow_tags = True
     get_tags.short_description = _('tag(s)')
 
     def get_sites(self, entry):
@@ -152,7 +149,6 @@ class EntryAdmin(admin.ModelAdmin):
             ', ', '<a href="{}://{}{}" target="blank">{}</a>',
             [(settings.PROTOCOL, site.domain, index_url,
               conditional_escape(site.name)) for site in entry.sites.all()])
-    get_sites.allow_tags = True
     get_sites.short_description = _('site(s)')
 
     def get_short_url(self, entry):
@@ -165,7 +161,6 @@ class EntryAdmin(admin.ModelAdmin):
             short_url = entry.get_absolute_url()
         return format_html('<a href="{url}" target="blank">{url}</a>',
                            url=short_url)
-    get_short_url.allow_tags = True
     get_short_url.short_description = _('short url')
 
     def get_is_visible(self, entry):
