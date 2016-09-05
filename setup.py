@@ -35,7 +35,7 @@ setup(
     install_requires=['beautifulsoup4>=4.3.2',
                       'django-contrib-comments>=1.7.2',
                       'django-mptt>=0.8.6',
-                      'django-tagging>=0.4.3',
+                      'django-tagging>=0.4.4',
                       'django-xmlrpc>=0.1.5',
                       'mots-vides>=2015.5.11',
                       'pillow>=2.0.0',
