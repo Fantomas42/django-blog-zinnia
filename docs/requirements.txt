@@ -2,7 +2,7 @@ beautifulsoup4==4.5.1
 django==1.10
 django-contrib-comments==1.7.2
 django-mptt==0.8.6
-django-tagging==0.4.4
+django-tagging==0.4.5
 django-xmlrpc==0.1.5
 mots-vides==2015.5.11
 pillow==3.3.1

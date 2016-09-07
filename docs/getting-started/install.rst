@@ -15,7 +15,7 @@ Make sure to install these packages prior to installation :
 * `Django`_ >= 1.10,<1.11
 * `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.8.6
-* `django-tagging`_ >= 0.4.4
+* `django-tagging`_ >= 0.4.5
 * `beautifulsoup4`_ >= 4.1.3
 * `mots-vides`_ >= 2015.2.6
 * `regex`_ >= 2016.3.2
