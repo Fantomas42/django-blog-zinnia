@@ -1,6 +1,5 @@
 """Widgets for Zinnia admin"""
 import json
-from itertools import chain
 
 from django.utils import six
 from django.forms import Media
@@ -47,7 +46,7 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
             option_label, option_value, selected_html,
             sort_fields[0], sort_fields[1])
 
-    def render_options(self, choices, selected_choices):
+    def render_options(self, selected_choices):
         """
         This is copy'n'pasted from django.forms.widgets Select(Widget)
         change to the for loop and render_option so they will unpack
@@ -57,8 +56,7 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         """
         selected_choices = set(force_text(v) for v in selected_choices)
         output = []
-        for option_value, option_label, sort_fields in chain(
-                self.choices, choices):
+        for option_value, option_label, sort_fields in self.choices:
             output.append(self.render_option(
                 selected_choices, option_value,
                 option_label, sort_fields))
