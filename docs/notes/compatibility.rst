@@ -7,8 +7,8 @@ readability and to be always present when the version 3.4.2 of Django will
 be here. :)
 
 Predicting the future is a good thing, because it's coming soon.
-Actually Zinnia is designed to handle the 1.8.x version and will reach the
-release 1.10 easily without major changes.
+Actually Zinnia is designed to handle the 1.10.x version and will reach the
+release 1.12 easily without major changes.
 
 https://docs.djangoproject.com/en/dev/internals/deprecation/
 
@@ -22,6 +22,14 @@ Compatibility with Django
 =========================
 
 Here a list establishing the compatibility between Zinnia and Django:
+
+.. versionchanged:: 0.18
+
+Backward incompatibilities with Django v1.9.x due to :
+
+* Removal of allow_tags property in django.contrib.admin
+* Changes in prototype of widget.render_options
+* Use of the new property user.is_authenticated
 
 .. versionchanged:: 0.17
 
