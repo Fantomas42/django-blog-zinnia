@@ -32,5 +32,4 @@ class CategoryAdmin(admin.ModelAdmin):
                 category.get_absolute_url(), category.tree_path)
         except NoReverseMatch:
             return '/%s/' % category.tree_path
-    get_tree_path.allow_tags = True
     get_tree_path.short_description = _('tree path')
