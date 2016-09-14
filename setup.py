@@ -8,7 +8,7 @@ setup(
     name='django-blog-zinnia',
     version=zinnia.__version__,
 
-    description='A clear and powerfull weblog application powered with Django',
+    description='A clear and powerful weblog application powered with Django',
     long_description='\n'.join([open('README.rst').read(),
                                 open('CHANGELOG').read()]),
     keywords='django, blog, weblog, zinnia, post, news',
