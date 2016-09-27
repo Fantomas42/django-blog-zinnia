@@ -1,3 +1,17 @@
+0.18.1
+------
+
+* Fix messed relationships in Python 3
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.18...v0.18.1
+
+0.18
+-----
+
+* Compatibility with Django 1.10
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.17...v0.18
+
 0.17
 -----
 
