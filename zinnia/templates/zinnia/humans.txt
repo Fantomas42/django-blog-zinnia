@@ -14,7 +14,7 @@
 /* TEAM */
   Developer: Julien Fache
   Nickname: Fantomas42
-  Site: http://fantomas.willbreak.it/
+  Site: http://fantomas.site/
   Twitter: @fantomas42
   GitHub: https://github.com/Fantomas42/
   Location: Paris, France
