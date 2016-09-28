@@ -1,7 +1,6 @@
 include AUTHORS
 include LICENSE
 include CHANGELOG
-include CONTRIBUTING
 include README.rst
 include gulpfile.js
 include package.json
