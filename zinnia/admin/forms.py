@@ -1,16 +1,16 @@
 """Forms for Zinnia admin"""
 from django import forms
-from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
+from django.utils.translation import ugettext_lazy as _
 
 from mptt.forms import TreeNodeChoiceField
 
-from zinnia.models.entry import Entry
-from zinnia.models.category import Category
+from zinnia.admin.fields import MPTTModelMultipleChoiceField
+from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.widgets import MiniTextarea
 from zinnia.admin.widgets import TagAutoComplete
-from zinnia.admin.widgets import MPTTFilteredSelectMultiple
-from zinnia.admin.fields import MPTTModelMultipleChoiceField
+from zinnia.models.category import Category
+from zinnia.models.entry import Entry
 
 
 class CategoryAdminForm(forms.ModelForm):

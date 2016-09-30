@@ -1,21 +1,21 @@
 """Moderator of Zinnia comments"""
 from django.conf import settings
-from django.template import loader
-from django.core.mail import send_mail
-from django.core.mail import EmailMessage
 from django.contrib.sites.models import Site
+from django.core.mail import EmailMessage
+from django.core.mail import send_mail
+from django.template import loader
 from django.utils.translation import activate
 from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
 
 from django_comments.moderation import CommentModerator
 
-from zinnia.settings import PROTOCOL
-from zinnia.settings import MAIL_COMMENT_REPLY
-from zinnia.settings import MAIL_COMMENT_AUTHORS
-from zinnia.settings import AUTO_MODERATE_COMMENTS
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
+from zinnia.settings import AUTO_MODERATE_COMMENTS
+from zinnia.settings import MAIL_COMMENT_AUTHORS
 from zinnia.settings import MAIL_COMMENT_NOTIFICATION_RECIPIENTS
+from zinnia.settings import MAIL_COMMENT_REPLY
+from zinnia.settings import PROTOCOL
 from zinnia.settings import SPAM_CHECKER_BACKENDS
 from zinnia.spam_checker import check_is_spam
 

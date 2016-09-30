@@ -3,8 +3,8 @@ Management command for re-counting the discussions on Entry.
 """
 import sys
 
-from django.utils.encoding import smart_str
 from django.core.management.base import BaseCommand
+from django.utils.encoding import smart_str
 
 from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_entry_signals

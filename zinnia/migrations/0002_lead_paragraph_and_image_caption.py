@@ -1,5 +1,5 @@
-from django.db import models
 from django.db import migrations
+from django.db import models
 
 
 class Migration(migrations.Migration):

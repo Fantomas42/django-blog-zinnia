@@ -1,14 +1,14 @@
 """Calendar module for Zinnia"""
 from __future__ import absolute_import
 
-from datetime import date
 from calendar import HTMLCalendar
+from datetime import date
 
+from django.core.urlresolvers import reverse
 from django.utils.dates import MONTHS
 from django.utils.dates import WEEKDAYS_ABBR
-from django.utils.formats import get_format
 from django.utils.formats import date_format
-from django.core.urlresolvers import reverse
+from django.utils.formats import get_format
 
 from zinnia.models.entry import Entry
 

@@ -1,31 +1,31 @@
 """XML-RPC methods of Zinnia metaWeblog API"""
 from datetime import datetime
 try:
-    from xmlrpc.client import Fault
     from xmlrpc.client import DateTime
+    from xmlrpc.client import Fault
 except ImportError:  # Python 2
-    from xmlrpclib import Fault
     from xmlrpclib import DateTime
+    from xmlrpclib import Fault
 
-from django.utils import six
 from django.conf import settings
-from django.utils import timezone
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
-from django.utils.translation import gettext as _
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
-
-from tagging.models import Tag
+from django.utils import six
+from django.utils import timezone
+from django.utils.translation import gettext as _
 
 from django_xmlrpc.decorators import xmlrpc_func
 
-from zinnia.models.entry import Entry
+from tagging.models import Tag
+
+from zinnia.managers import DRAFT, PUBLISHED
 from zinnia.models.author import Author
 from zinnia.models.category import Category
+from zinnia.models.entry import Entry
 from zinnia.settings import PROTOCOL
-from zinnia.managers import DRAFT, PUBLISHED
 
 
 # http://docs.nucleuscms.org/blog/12#errorcodes

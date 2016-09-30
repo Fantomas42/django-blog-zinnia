@@ -1,13 +1,13 @@
 """Views for Zinnia categories"""
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
-from django.views.generic.list import ListView
 from django.views.generic.list import BaseListView
+from django.views.generic.list import ListView
 
 from zinnia.models.category import Category
 from zinnia.settings import PAGINATION
-from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
+from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 
 
 def get_category_or_404(path):

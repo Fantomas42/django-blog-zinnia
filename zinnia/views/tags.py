@@ -1,18 +1,18 @@
 """Views for Zinnia tags"""
 from django.http import Http404
-from django.views.generic.list import ListView
-from django.views.generic.list import BaseListView
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
+from django.views.generic.list import BaseListView
+from django.views.generic.list import ListView
 
-from tagging.utils import get_tag
 from tagging.models import Tag
 from tagging.models import TaggedItem
+from tagging.utils import get_tag
 
 from zinnia.models.entry import Entry
 from zinnia.settings import PAGINATION
-from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
+from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 
 
 class TagList(ListView):

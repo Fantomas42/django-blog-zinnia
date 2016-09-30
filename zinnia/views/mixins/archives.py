@@ -2,9 +2,9 @@
 from datetime import datetime
 from datetime import timedelta
 
-from zinnia.settings import PAGINATION
 from zinnia.settings import ALLOW_EMPTY
 from zinnia.settings import ALLOW_FUTURE
+from zinnia.settings import PAGINATION
 
 
 class ArchiveMixin(object):

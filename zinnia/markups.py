@@ -4,12 +4,12 @@ Code originally provided by django.contrib.markups
 """
 import warnings
 
-from django.utils.html import linebreaks
-from django.utils.encoding import force_text
 from django.utils.encoding import force_bytes
+from django.utils.encoding import force_text
+from django.utils.html import linebreaks
 
-from zinnia.settings import MARKUP_LANGUAGE
 from zinnia.settings import MARKDOWN_EXTENSIONS
+from zinnia.settings import MARKUP_LANGUAGE
 from zinnia.settings import RESTRUCTUREDTEXT_SETTINGS
 
 

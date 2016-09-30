@@ -1,9 +1,9 @@
 """Filters for Zinnia admin"""
+from django.contrib.admin import SimpleListFilter
 from django.db.models import Count
 from django.utils.encoding import smart_text
-from django.contrib.admin import SimpleListFilter
-from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ungettext_lazy
 
 from zinnia.models.author import Author
 from zinnia.models.category import Category

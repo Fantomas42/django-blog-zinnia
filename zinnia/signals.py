@@ -3,20 +3,20 @@ import inspect
 from functools import wraps
 
 from django.db.models import F
-from django.dispatch import Signal
+from django.db.models.signals import post_delete
 from django.db.models.signals import post_save
 from django.db.models.signals import pre_delete
-from django.db.models.signals import post_delete
+from django.dispatch import Signal
 
 import django_comments as comments
-from django_comments.signals import comment_was_posted
 from django_comments.signals import comment_was_flagged
+from django_comments.signals import comment_was_posted
 
 from zinnia import settings
+from zinnia.comparison import EntryPublishedVectorBuilder
 from zinnia.models.entry import Entry
 from zinnia.ping import DirectoryPinger
 from zinnia.ping import ExternalUrlsPinger
-from zinnia.comparison import EntryPublishedVectorBuilder
 
 comment_model = comments.get_model()
 ENTRY_PS_PING_DIRECTORIES = 'zinnia.entry.post_save.ping_directories'
