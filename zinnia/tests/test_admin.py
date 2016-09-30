@@ -18,7 +18,7 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.tests.utils import datetime
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.admin.entry import EntryAdmin
 from zinnia.admin.category import CategoryAdmin
 from zinnia.signals import disconnect_entry_signals
@@ -61,7 +61,7 @@ class TestMessageBackend(object):
         self.messages.append(ka)
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 class EntryAdminTestCase(BaseAdminTestCase):
     """Test case for Entry Admin"""
     model_class = Entry

@@ -27,7 +27,7 @@ from zinnia.flags import get_user_flagger
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import TestTransport
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.xmlrpc.pingback import generate_pingback_content
 from zinnia import url_shortener as shortener_settings
 from zinnia.signals import connect_discussion_signals
@@ -35,7 +35,7 @@ from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 @override_settings(
     ROOT_URLCONF='zinnia.tests.implementations.urls.default',
     TEMPLATES=[

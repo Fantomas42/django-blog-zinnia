@@ -28,7 +28,7 @@ from zinnia.managers import PUBLISHED
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.tests.utils import datetime
-from zinnia.tests.utils import urlEqual
+from zinnia.tests.utils import url_equal
 from zinnia.models.category import Category
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.feeds import EntryFeed
@@ -43,12 +43,12 @@ from zinnia.feeds import EntryComments
 from zinnia.feeds import EntryPingbacks
 from zinnia.feeds import EntryTrackbacks
 from zinnia.feeds import LastDiscussions
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 @override_settings(
     ROOT_URLCONF='zinnia.tests.implementations.urls.default'
 )
@@ -382,7 +382,7 @@ class FeedsTestCase(TestCase):
         self.assertEqual(
             feed.description(entry),
             'The last comments on the entry %s' % entry.title)
-        self.assertTrue(urlEqual(
+        self.assertTrue(url_equal(
             feed.item_enclosure_url(comments[0]),
             'http://www.gravatar.com/avatar/e64c7d89f26b'
             'd1972efa854d13d7dd61?s=80&amp;r=g'))

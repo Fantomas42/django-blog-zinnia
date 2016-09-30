@@ -22,7 +22,7 @@ from zinnia.flags import PINGBACK
 from zinnia.flags import TRACKBACK
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import is_lib_available
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia import url_shortener as shortener_settings
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
@@ -39,7 +39,7 @@ class EntryTestCase(TestCase):
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_discussions(self):
         site = Site.objects.get_current()
         self.assertEqual(self.entry.discussions.count(), 0)

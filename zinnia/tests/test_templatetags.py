@@ -25,8 +25,8 @@ from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.tests.utils import datetime
-from zinnia.tests.utils import urlEqual
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import url_equal
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import disconnect_discussion_signals
 from zinnia.signals import flush_similar_cache_handler
@@ -126,7 +126,7 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(context['template'], 'custom_template.html')
         self.assertEqual(context['context_category'], category)
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_get_authors(self):
         source_context = Context()
         with self.assertNumQueries(0):
@@ -537,7 +537,7 @@ class TemplateTagsTestCase(TestCase):
             context['next_month'],
             self.make_local(self.entry.publication_date).date().replace(day=1))
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_get_recent_comments(self):
         with self.assertNumQueries(1):
             context = get_recent_comments()
@@ -576,7 +576,7 @@ class TemplateTagsTestCase(TestCase):
             self.assertEqual(context['comments'][1].content_object,
                              self.entry)
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_get_recent_linkbacks(self):
         user = Author.objects.create_user(username='webmaster',
                                           email='webmaster@example.com')
@@ -776,7 +776,7 @@ class TemplateTagsTestCase(TestCase):
                 self.assertEqual(list(context['middle']), [])
                 self.assertEqual(list(context['end']), [])
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_zinnia_breadcrumbs(self):
         class FakeRequest(object):
             def __init__(self, path):
@@ -1003,15 +1003,15 @@ class TemplateTagsTestCase(TestCase):
         ztemplatetags.ENTRY_LOOP_TEMPLATES = original_entry_loop_templates
 
     def test_get_gravatar(self):
-        self.assertTrue(urlEqual(
+        self.assertTrue(url_equal(
             get_gravatar('webmaster@example.com'),
             'http://www.gravatar.com/avatar/86d4fd4a22de452'
             'a9228298731a0b592?s=80&amp;r=g'))
-        self.assertTrue(urlEqual(
+        self.assertTrue(url_equal(
             get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404'),
             'http://www.gravatar.com/avatar/86d4fd4a22de452'
             'a9228298731a0b592?s=15&amp;r=x&amp;d=404'))
-        self.assertTrue(urlEqual(
+        self.assertTrue(url_equal(
             get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404', 'https'),
             'https://secure.gravatar.com/avatar/86d4fd4a22de452'
             'a9228298731a0b592?s=15&amp;r=x&amp;d=404'))
@@ -1155,12 +1155,12 @@ class TemplateTagsTestCase(TestCase):
         self.assertTrue(comment_admin_url.startswith('admin:'))
         self.assertTrue(comment_admin_url.endswith('_action'))
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_user_admin_urlname(self):
         user_admin_url = user_admin_urlname('action')
         self.assertEqual(user_admin_url, 'admin:auth_user_action')
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_zinnia_statistics(self):
         with self.assertNumQueries(8):
             context = zinnia_statistics()

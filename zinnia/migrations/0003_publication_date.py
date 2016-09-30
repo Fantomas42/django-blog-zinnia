@@ -4,8 +4,8 @@ from django.utils import timezone
 
 
 def fill_publication_date(apps, schema_editor):
-    Entry = apps.get_model('zinnia', 'Entry')
-    for entry in Entry.objects.all():
+    entry_klass = apps.get_model('zinnia', 'Entry')
+    for entry in entry_klass.objects.all():
         entry.publication_date = entry.creation_date
         entry.save()
 

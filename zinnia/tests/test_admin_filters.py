@@ -13,7 +13,7 @@ from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.admin.filters import AuthorListFilter
 from zinnia.admin.filters import CategoryListFilter
 from zinnia.signals import disconnect_entry_signals
@@ -71,7 +71,7 @@ class BaseListFilterTestCase(TestCase):
             modeladmin.list_max_show_all, modeladmin.list_editable, modeladmin)
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 class AuthorListFilterTestCase(BaseListFilterTestCase):
     """Test case for AuthorListFilter"""
 

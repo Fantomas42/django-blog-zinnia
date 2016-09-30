@@ -26,11 +26,11 @@ from zinnia.tests.utils import datetime
 from zinnia.xmlrpc.metaweblog import authenticate
 from zinnia.xmlrpc.metaweblog import post_structure
 from zinnia.tests.utils import TestTransport
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.signals import disconnect_entry_signals
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 @override_settings(
     ROOT_URLCONF='zinnia.tests.implementations.urls.default'
 )

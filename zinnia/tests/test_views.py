@@ -20,8 +20,8 @@ from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
 from zinnia.settings import PAGINATION
 from zinnia.tests.utils import datetime
-from zinnia.tests.utils import urlEqual
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import url_equal
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.flags import get_user_flagger
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_entry_signals
@@ -29,7 +29,7 @@ from zinnia.signals import disconnect_discussion_signals
 from zinnia.url_shortener.backends.default import base36
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 @override_settings(
     SESSION_ENGINE='django.contrib.sessions.backends.cache',
     TEMPLATES=[
@@ -721,7 +721,7 @@ class ViewsTestCase(ViewsBaseCase):
             '/admin/zinnia/entry/add/')
         response = self.client.post('/quick-entry/', {'content': 'test'})
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(urlEqual(
+        self.assertTrue(url_equal(
             response['Location'],
             '/admin/zinnia/entry/add/'
             '?tags=&title=&sites=1&content='
@@ -749,7 +749,7 @@ class ViewsTestCase(ViewsBaseCase):
                                      'content': 'Test content',
                                      'save_draft': ''})
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(urlEqual(
+        self.assertTrue(url_equal(
             response['Location'],
             '/admin/zinnia/entry/add/'
             '?tags=test-2&title=%D1%82%D0%B5%D1%81%D1%82'

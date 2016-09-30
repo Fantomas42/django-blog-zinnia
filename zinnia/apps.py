@@ -18,9 +18,9 @@ class ZinniaConfig(AppConfig):
         from zinnia.signals import connect_discussion_signals
         from zinnia.moderator import EntryCommentModerator
 
-        Entry = self.get_model('Entry')
+        entry_klass = self.get_model('Entry')
         # Register the comment moderator on Entry
-        moderator.register(Entry, EntryCommentModerator)
+        moderator.register(entry_klass, EntryCommentModerator)
         # Connect the signals
         connect_entry_signals()
         connect_discussion_signals()

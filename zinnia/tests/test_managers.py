@@ -11,11 +11,11 @@ from zinnia.tests.utils import datetime
 from zinnia.managers import PUBLISHED
 from zinnia.managers import tags_published
 from zinnia.managers import entries_published
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.signals import disconnect_entry_signals
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 class ManagersTestCase(TestCase):
 
     def setUp(self):
