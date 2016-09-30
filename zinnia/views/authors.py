@@ -1,13 +1,13 @@
 """Views for Zinnia authors"""
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
-from django.views.generic.list import ListView
 from django.views.generic.list import BaseListView
+from django.views.generic.list import ListView
 
-from zinnia.settings import PAGINATION
 from zinnia.models.author import Author
-from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
+from zinnia.settings import PAGINATION
 from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
+from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 
 
 class AuthorList(ListView):

@@ -8,31 +8,31 @@ except ImportError:  # Python 2
     from urlparse import urlsplit
     from xmlrpclib import ServerProxy
 
+from bs4 import BeautifulSoup
+
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
+from django.test import TestCase
+from django.test.utils import override_settings
 from django.utils import six
 from django.utils import timezone
-from django.test import TestCase
-from django.contrib.sites.models import Site
-from django.test.utils import override_settings
-from django.contrib.contenttypes.models import ContentType
 
 import django_comments as comments
 
-from bs4 import BeautifulSoup
-
-from zinnia.models.entry import Entry
-from zinnia.models.author import Author
-from zinnia.models.category import Category
+from zinnia import url_shortener as shortener_settings
 from zinnia.flags import PINGBACK
 from zinnia.flags import get_user_flagger
 from zinnia.managers import PUBLISHED
-from zinnia.tests.utils import datetime
+from zinnia.models.author import Author
+from zinnia.models.category import Category
+from zinnia.models.entry import Entry
+from zinnia.signals import connect_discussion_signals
+from zinnia.signals import disconnect_discussion_signals
+from zinnia.signals import disconnect_entry_signals
 from zinnia.tests.utils import TestTransport
+from zinnia.tests.utils import datetime
 from zinnia.tests.utils import skip_if_custom_user
 from zinnia.xmlrpc.pingback import generate_pingback_content
-from zinnia import url_shortener as shortener_settings
-from zinnia.signals import connect_discussion_signals
-from zinnia.signals import disconnect_entry_signals
-from zinnia.signals import disconnect_discussion_signals
 
 
 @skip_if_custom_user

@@ -1,9 +1,9 @@
 """Views for Zinnia sitemap"""
 from django.views.generic import TemplateView
 
-from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
+from zinnia.models.entry import Entry
 
 
 class Sitemap(TemplateView):

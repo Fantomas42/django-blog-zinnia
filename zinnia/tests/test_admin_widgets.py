@@ -1,14 +1,14 @@
 # coding=utf-8
 """Test cases for Zinnia's admin widgets"""
 from django.test import TestCase
-from django.utils.encoding import smart_text
 from django.test.utils import override_settings
+from django.utils.encoding import smart_text
 
-from zinnia.models.entry import Entry
-from zinnia.signals import disconnect_entry_signals
+from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.widgets import MiniTextarea
 from zinnia.admin.widgets import TagAutoComplete
-from zinnia.admin.widgets import MPTTFilteredSelectMultiple
+from zinnia.models.entry import Entry
+from zinnia.signals import disconnect_entry_signals
 
 
 class MPTTFilteredSelectMultipleTestCase(TestCase):

@@ -6,33 +6,33 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 
-from django.utils.encoding import smart_text
+from bs4 import BeautifulSoup
+
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
+from django.contrib.syndication.views import Feed
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import NoReverseMatch
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.template.defaultfilters import slugify
+from django.utils.encoding import smart_text
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.translation import ugettext as _
-from django.contrib.syndication.views import Feed
-from django.template.defaultfilters import slugify
-from django.core.urlresolvers import NoReverseMatch
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.contenttypes.models import ContentType
-
-from bs4 import BeautifulSoup
 
 import django_comments as comments
 
 from tagging.models import Tag
 from tagging.models import TaggedItem
 
-from zinnia.models.entry import Entry
 from zinnia.models.author import Author
-from zinnia.settings import PROTOCOL
+from zinnia.models.entry import Entry
 from zinnia.settings import COPYRIGHT
 from zinnia.settings import FEEDS_FORMAT
 from zinnia.settings import FEEDS_MAX_ITEMS
-from zinnia.views.categories import get_category_or_404
+from zinnia.settings import PROTOCOL
 from zinnia.templatetags.zinnia import get_gravatar
+from zinnia.views.categories import get_category_or_404
 
 
 class ZinniaFeed(Feed):

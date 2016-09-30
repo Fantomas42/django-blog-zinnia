@@ -1,11 +1,11 @@
 """Author model for Zinnia"""
 from django.apps import apps
-from django.db import models
 from django.conf import settings
+from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
-from zinnia.managers import entries_published
 from zinnia.managers import EntryRelatedPublishedManager
+from zinnia.managers import entries_published
 
 
 def safe_get_user_model():

@@ -1,10 +1,10 @@
 """Test cases for Zinnia's Category"""
-from django.test import TestCase
 from django.contrib.sites.models import Site
+from django.test import TestCase
 
-from zinnia.models.entry import Entry
-from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
+from zinnia.models.category import Category
+from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_entry_signals
 
 

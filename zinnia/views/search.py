@@ -1,6 +1,6 @@
 """Views for Zinnia entries search"""
-from django.views.generic.list import ListView
 from django.utils.translation import ugettext as _
+from django.views.generic.list import ListView
 
 from zinnia.models.entry import Entry
 from zinnia.settings import PAGINATION

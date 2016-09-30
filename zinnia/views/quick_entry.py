@@ -5,20 +5,20 @@ except:  # Python 2
     from urllib import urlencode
 
 from django import forms
+from django.contrib.auth.decorators import permission_required
+from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+from django.template.defaultfilters import slugify
+from django.utils import timezone
+from django.utils.decorators import method_decorator
+from django.utils.encoding import smart_str
 from django.utils.html import linebreaks
 from django.views.generic.base import View
-from django.utils.encoding import smart_str
-from django.core.urlresolvers import reverse
-from django.contrib.sites.models import Site
-from django.template.defaultfilters import slugify
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import permission_required
-from django.utils import timezone
 
-from zinnia.models.entry import Entry
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
+from zinnia.models.entry import Entry
 from zinnia.settings import MARKUP_LANGUAGE
 
 

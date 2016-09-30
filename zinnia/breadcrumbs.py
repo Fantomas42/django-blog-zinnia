@@ -1,12 +1,12 @@
 """Breadcrumb module for Zinnia"""
 import re
-from functools import wraps
 from datetime import datetime
+from functools import wraps
 
+from django.core.urlresolvers import reverse
 from django.utils.dateformat import format
 from django.utils.timezone import is_aware
 from django.utils.timezone import localtime
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 
 

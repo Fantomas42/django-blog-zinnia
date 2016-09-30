@@ -2,8 +2,8 @@
 from django.conf.urls import url
 
 from zinnia.urls import _
-from zinnia.views.categories import CategoryList
 from zinnia.views.categories import CategoryDetail
+from zinnia.views.categories import CategoryList
 
 
 urlpatterns = [

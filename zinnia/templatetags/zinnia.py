@@ -1,46 +1,45 @@
 """Template tags and filters for Zinnia"""
 import re
-from hashlib import md5
 from datetime import date
+from hashlib import md5
 try:
     from urllib.parse import urlencode
 except ImportError:  # Python 2
     from urllib import urlencode
 
-from django.db.models import Q
-from django.db.models import Count
 from django.conf import settings
-from django.utils import timezone
-from django.template import Library
-from django.utils.encoding import smart_text
-from django.utils.safestring import mark_safe
-from django.utils.html import conditional_escape
-from django.template.loader import select_template
-from django.template.defaultfilters import stringfilter
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Count
+from django.db.models import Q
+from django.template import Library
+from django.template.defaultfilters import stringfilter
+from django.template.loader import select_template
+from django.utils import timezone
+from django.utils.encoding import smart_text
+from django.utils.html import conditional_escape
+from django.utils.safestring import mark_safe
 
-from django_comments.models import CommentFlag
 from django_comments import get_model as get_comment_model
+from django_comments.models import CommentFlag
 
 from tagging.models import Tag
 from tagging.utils import calculate_cloud
 
-
-from ..models.entry import Entry
-from ..models.author import Author
-from ..models.category import Category
+from ..breadcrumbs import retrieve_breadcrumbs
+from ..calendar import Calendar
+from ..comparison import EntryPublishedVectorBuilder
+from ..context import get_context_first_matching_object
+from ..context import get_context_first_object
+from ..context import get_context_loop_positions
+from ..flags import PINGBACK, TRACKBACK
 from ..managers import DRAFT
 from ..managers import tags_published
-from ..flags import PINGBACK, TRACKBACK
-from ..settings import PROTOCOL
+from ..models.author import Author
+from ..models.category import Category
+from ..models.entry import Entry
 from ..settings import ENTRY_LOOP_TEMPLATES
-from ..comparison import EntryPublishedVectorBuilder
-from ..calendar import Calendar
-from ..breadcrumbs import retrieve_breadcrumbs
-from ..context import get_context_first_object
-from ..context import get_context_first_matching_object
-from ..context import get_context_loop_positions
+from ..settings import PROTOCOL
 from ..templates import loop_template_list
 
 

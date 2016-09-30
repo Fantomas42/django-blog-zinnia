@@ -1,17 +1,17 @@
 """Test cases for Zinnia's long_enought spam checker"""
+from django.contrib.sites.models import Site
 from django.test import TestCase
 from django.utils import timezone
-from django.contrib.sites.models import Site
 
 import django_comments as comments
 
-from zinnia.models.entry import Entry
-from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
-from zinnia.tests.utils import skip_if_custom_user
-from zinnia.spam_checker.backends.long_enough import backend
-from zinnia.signals import disconnect_entry_signals
+from zinnia.models.author import Author
+from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.signals import disconnect_entry_signals
+from zinnia.spam_checker.backends.long_enough import backend
+from zinnia.tests.utils import skip_if_custom_user
 
 
 @skip_if_custom_user

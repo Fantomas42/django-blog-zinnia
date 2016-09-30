@@ -9,25 +9,25 @@ except ImportError:  # Python 2
     from xmlrpclib import ServerProxy
 from tempfile import TemporaryFile
 
-from django.test import TestCase
 from django.contrib.sites.models import Site
-from django.test.utils import override_settings
 from django.core.files.storage import default_storage
+from django.test import TestCase
+from django.test.utils import override_settings
 
 from tagging.models import Tag
 
-from zinnia.models.entry import Entry
-from zinnia.models.author import Author
-from zinnia.models.category import Category
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
+from zinnia.models.author import Author
+from zinnia.models.category import Category
+from zinnia.models.entry import Entry
 from zinnia.settings import UPLOAD_TO
+from zinnia.signals import disconnect_entry_signals
+from zinnia.tests.utils import TestTransport
 from zinnia.tests.utils import datetime
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.xmlrpc.metaweblog import authenticate
 from zinnia.xmlrpc.metaweblog import post_structure
-from zinnia.tests.utils import TestTransport
-from zinnia.tests.utils import skip_if_custom_user
-from zinnia.signals import disconnect_entry_signals
 
 
 @skip_if_custom_user

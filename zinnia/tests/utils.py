@@ -1,4 +1,5 @@
 """Utils for Zinnia's tests"""
+from datetime import datetime as original_datetime
 from unittest import skipIf
 try:
     from urllib.parse import parse_qs
@@ -8,14 +9,13 @@ except ImportError:  # Python 2
     from urlparse import parse_qs
     from urlparse import urlparse
     from xmlrpclib import Transport
-from datetime import datetime as original_datetime
 
-from django.utils import six
 from django.conf import settings
-from django.utils import timezone
 from django.template import Origin
-from django.test.client import Client
 from django.template.loaders.base import Loader
+from django.test.client import Client
+from django.utils import six
+from django.utils import timezone
 
 
 class TestTransport(Transport):

@@ -1,7 +1,7 @@
 """Models for Zinnia"""
-from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
+from zinnia.models.entry import Entry
 
 # Here we import the Zinnia's Model classes
 # to register the Models at the loading, not

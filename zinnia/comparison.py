@@ -1,18 +1,18 @@
 """Comparison tools for Zinnia"""
 from math import sqrt
 
-from django.utils import six
-from django.core.cache import caches
-from django.utils.html import strip_tags
 from django.contrib.sites.models import Site
-from django.utils.functional import cached_property
 from django.core.cache import InvalidCacheBackendError
+from django.core.cache import caches
+from django.utils import six
+from django.utils.functional import cached_property
+from django.utils.html import strip_tags
 
 import regex as re
 
 from zinnia.models.entry import Entry
-from zinnia.settings import STOP_WORDS
 from zinnia.settings import COMPARISON_FIELDS
+from zinnia.settings import STOP_WORDS
 
 
 PUNCTUATION = re.compile(r'\p{P}+')

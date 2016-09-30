@@ -5,47 +5,47 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 from django.test import TestCase
+from django.test.utils import override_settings
 from django.utils import timezone
 from django.utils.encoding import smart_text
-from django.contrib.sites.models import Site
-from django.utils.translation import activate
-from django.utils.translation import deactivate
-from django.test.utils import override_settings
-from django.core.files.base import ContentFile
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.feedgenerator import DefaultFeed
-from django.core.exceptions import ObjectDoesNotExist
-from django.core.files.storage import default_storage
-from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import activate
+from django.utils.translation import deactivate
 
 import django_comments as comments
 
 from tagging.models import Tag
 
-from zinnia.managers import HIDDEN
-from zinnia.managers import PUBLISHED
-from zinnia.models.entry import Entry
-from zinnia.models.author import Author
-from zinnia.tests.utils import datetime
-from zinnia.tests.utils import url_equal
-from zinnia.models.category import Category
-from zinnia.flags import PINGBACK, TRACKBACK
-from zinnia.feeds import EntryFeed
-from zinnia.feeds import ZinniaFeed
-from zinnia.feeds import LastEntries
-from zinnia.feeds import CategoryEntries
 from zinnia.feeds import AuthorEntries
-from zinnia.feeds import TagEntries
-from zinnia.feeds import SearchEntries
-from zinnia.feeds import EntryDiscussions
+from zinnia.feeds import CategoryEntries
 from zinnia.feeds import EntryComments
+from zinnia.feeds import EntryDiscussions
+from zinnia.feeds import EntryFeed
 from zinnia.feeds import EntryPingbacks
 from zinnia.feeds import EntryTrackbacks
 from zinnia.feeds import LastDiscussions
-from zinnia.tests.utils import skip_if_custom_user
-from zinnia.signals import disconnect_entry_signals
+from zinnia.feeds import LastEntries
+from zinnia.feeds import SearchEntries
+from zinnia.feeds import TagEntries
+from zinnia.feeds import ZinniaFeed
+from zinnia.flags import PINGBACK, TRACKBACK
+from zinnia.managers import HIDDEN
+from zinnia.managers import PUBLISHED
+from zinnia.models.author import Author
+from zinnia.models.category import Category
+from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.signals import disconnect_entry_signals
+from zinnia.tests.utils import datetime
+from zinnia.tests.utils import skip_if_custom_user
+from zinnia.tests.utils import url_equal
 
 
 @skip_if_custom_user

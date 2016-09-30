@@ -1,35 +1,35 @@
 """XML-RPC methods of Zinnia Pingback"""
 try:
-    from urllib.error import URLError
     from urllib.error import HTTPError
-    from urllib.request import urlopen
+    from urllib.error import URLError
     from urllib.parse import urlsplit
+    from urllib.request import urlopen
 except ImportError:  # Python 2
-    from urllib2 import urlopen
-    from urllib2 import URLError
     from urllib2 import HTTPError
+    from urllib2 import URLError
+    from urllib2 import urlopen
     from urlparse import urlsplit
 
+from bs4 import BeautifulSoup
+
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
+from django.core.urlresolvers import Resolver404
+from django.core.urlresolvers import resolve
 from django.utils import six
 from django.utils import timezone
 from django.utils.html import strip_tags
-from django.contrib.sites.models import Site
-from django.core.urlresolvers import resolve
-from django.core.urlresolvers import Resolver404
 from django.utils.translation import ugettext as _
-from django.contrib.contenttypes.models import ContentType
 
 import django_comments as comments
 
 from django_xmlrpc.decorators import xmlrpc_func
 
-from bs4 import BeautifulSoup
-
-from zinnia.models.entry import Entry
 from zinnia.flags import PINGBACK
 from zinnia.flags import get_user_flagger
-from zinnia.signals import pingback_was_posted
+from zinnia.models.entry import Entry
 from zinnia.settings import PINGBACK_CONTENT_LENGTH
+from zinnia.signals import pingback_was_posted
 
 UNDEFINED_ERROR = 0
 SOURCE_DOES_NOT_EXIST = 16

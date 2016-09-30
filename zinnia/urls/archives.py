@@ -3,11 +3,11 @@ from django.conf.urls import url
 
 from zinnia.urls import _
 from zinnia.views.archives import EntryDay
-from zinnia.views.archives import EntryWeek
-from zinnia.views.archives import EntryYear
+from zinnia.views.archives import EntryIndex
 from zinnia.views.archives import EntryMonth
 from zinnia.views.archives import EntryToday
-from zinnia.views.archives import EntryIndex
+from zinnia.views.archives import EntryWeek
+from zinnia.views.archives import EntryYear
 
 
 index_patterns = [

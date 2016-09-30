@@ -1,14 +1,14 @@
 """Widgets for Zinnia admin"""
 import json
 
-from django.utils import six
+from django.contrib.admin import widgets
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.forms import Media
+from django.utils import six
+from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from django.utils.encoding import force_text
-from django.contrib.admin import widgets
-from django.contrib.staticfiles.storage import staticfiles_storage
 
 from tagging.models import Tag
 

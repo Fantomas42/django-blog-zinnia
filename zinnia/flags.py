@@ -1,6 +1,6 @@
 """Comment flags for Zinnia"""
-from django.utils.lru_cache import lru_cache
 from django.contrib.auth import get_user_model
+from django.utils.lru_cache import lru_cache
 
 from zinnia.settings import COMMENT_FLAG_USER_ID
 

@@ -1,19 +1,19 @@
 """Test cases for Zinnia's markups"""
 import sys
+import warnings
 from unittest import skipUnless
 try:
     import builtins
 except ImportError:  # Python 2
     import __builtin__ as builtins
-import warnings
 
 from django.test import TestCase
 
 from zinnia import markups
-from zinnia.markups import textile
+from zinnia.markups import html_format
 from zinnia.markups import markdown
 from zinnia.markups import restructuredtext
-from zinnia.markups import html_format
+from zinnia.markups import textile
 from zinnia.tests.utils import is_lib_available
 
 

@@ -1,10 +1,10 @@
 """Test cases for Zinnia's admin forms"""
-from django.test import TestCase
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
+from django.test import TestCase
 
-from zinnia.models import Category
-from zinnia.admin.forms import EntryAdminForm
 from zinnia.admin.forms import CategoryAdminForm
+from zinnia.admin.forms import EntryAdminForm
+from zinnia.models import Category
 
 
 class EntryAdminFormTestCase(TestCase):

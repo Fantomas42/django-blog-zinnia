@@ -1,15 +1,15 @@
 """Base entry models for Zinnia"""
 import os
 
+from django.contrib.sites.models import Site
 from django.db import models
 from django.db.models import Q
-from django.utils import timezone
-from django.utils.text import Truncator
-from django.utils.html import strip_tags
-from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.html import strip_tags
+from django.utils.text import Truncator
+from django.utils.translation import ugettext_lazy as _
 
 import django_comments as comments
 from django_comments.models import CommentFlag
@@ -19,17 +19,17 @@ from tagging.utils import parse_tag_input
 
 from zinnia.flags import PINGBACK
 from zinnia.flags import TRACKBACK
+from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
+from zinnia.managers import EntryPublishedManager
+from zinnia.managers import entries_published
 from zinnia.markups import html_format
 from zinnia.preview import HTMLPreview
-from zinnia.settings import UPLOAD_TO
-from zinnia.settings import ENTRY_DETAIL_TEMPLATES
-from zinnia.settings import ENTRY_CONTENT_TEMPLATES
 from zinnia.settings import AUTO_CLOSE_COMMENTS_AFTER
 from zinnia.settings import AUTO_CLOSE_PINGBACKS_AFTER
 from zinnia.settings import AUTO_CLOSE_TRACKBACKS_AFTER
-from zinnia.managers import entries_published
-from zinnia.managers import EntryPublishedManager
-from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
+from zinnia.settings import ENTRY_CONTENT_TEMPLATES
+from zinnia.settings import ENTRY_DETAIL_TEMPLATES
+from zinnia.settings import UPLOAD_TO
 from zinnia.url_shortener import get_url_shortener
 
 
