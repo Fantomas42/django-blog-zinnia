@@ -71,7 +71,8 @@ def get_categories_tree(context, template='zinnia/tags/categories_tree.html'):
     Return the categories as a tree.
     """
     return {'template': template,
-            'categories': Category.objects.all(),
+            'categories': Category.objects.all().annotate(
+                count_entries=Count('entries')),
             'context_category': context.get('category')}
 
 

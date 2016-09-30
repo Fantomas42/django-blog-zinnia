@@ -115,11 +115,14 @@ class TemplateTagsTestCase(TestCase):
 
         category = Category.objects.create(title='Category 1',
                                            slug='category-1')
+        self.entry.categories.add(category)
+        self.publish_entry()
         source_context = Context({'category': category})
         with self.assertNumQueries(0):
             context = get_categories_tree(
                 source_context, 'custom_template.html')
         self.assertEqual(len(context['categories']), 1)
+        self.assertEqual(context['categories'][0].count_entries, 1)
         self.assertEqual(context['template'], 'custom_template.html')
         self.assertEqual(context['context_category'], category)
 
