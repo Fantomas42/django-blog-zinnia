@@ -3,10 +3,10 @@ from django.test import TestCase
 
 from zinnia import flags
 from zinnia.flags import get_user_flagger
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import skip_if_custom_user
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 class FlagsTestCase(TestCase):
     """Test cases for zinnia.flags"""
 

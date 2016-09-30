@@ -10,7 +10,7 @@ from zinnia.models.author import Author
 from zinnia.models.category import Category
 from zinnia.managers import PUBLISHED
 from zinnia.tests.utils import datetime
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.signals import disconnect_entry_signals
 from zinnia.views.mixins.archives import PreviousNextPublishedMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
@@ -335,7 +335,7 @@ class MixinTestCase(TestCase):
         self.assertRaises(ImproperlyConfigured,
                           instance.get_queryset)
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_prefetch_categories_authors_mixin(self):
         author = Author.objects.create_user(username='author',
                                             email='author@example.com')

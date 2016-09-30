@@ -15,12 +15,13 @@ def get_user_flagger():
     Return an User instance used by the system
     when flagging a comment as trackback or pingback.
     """
-    User = get_user_model()
+    user_klass = get_user_model()
     try:
-        user = User.objects.get(pk=COMMENT_FLAG_USER_ID)
-    except User.DoesNotExist:
+        user = user_klass.objects.get(pk=COMMENT_FLAG_USER_ID)
+    except user_klass.DoesNotExist:
         try:
-            user = User.objects.get(**{User.USERNAME_FIELD: FLAGGER_USERNAME})
-        except User.DoesNotExist:
-            user = User.objects.create_user(FLAGGER_USERNAME)
+            user = user_klass.objects.get(
+                **{user_klass.USERNAME_FIELD: FLAGGER_USERNAME})
+        except user_klass.DoesNotExist:
+            user = user_klass.objects.create_user(FLAGGER_USERNAME)
     return user

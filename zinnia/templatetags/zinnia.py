@@ -275,10 +275,10 @@ def zinnia_pagination(context, page, begin_pages=1, end_pages=1,
     Return a Digg-like pagination,
     by splitting long list of page into 3 blocks of pages.
     """
-    GET_string = ''
+    get_string = ''
     for key, value in context['request'].GET.items():
         if key != 'page':
-            GET_string += '&%s=%s' % (key, value)
+            get_string += '&%s=%s' % (key, value)
 
     page_range = list(page.paginator.page_range)
     begin = page_range[:begin_pages]
@@ -311,7 +311,7 @@ def zinnia_pagination(context, page, begin_pages=1, end_pages=1,
             'begin': begin,
             'middle': middle,
             'end': end,
-            'GET_string': GET_string}
+            'GET_string': get_string}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -356,10 +356,10 @@ def get_gravatar(email, size=80, rating='g', default=None,
     """
     Return url for a Gravatar.
     """
-    GRAVATAR_PROTOCOLS = {'http': 'http://www',
+    gravatar_protocols = {'http': 'http://www',
                           'https': 'https://secure'}
     url = '%s.gravatar.com/avatar/%s' % (
-        GRAVATAR_PROTOCOLS[protocol],
+        gravatar_protocols[protocol],
         md5(email.strip().lower().encode('utf-8')).hexdigest())
     options = {'s': size, 'r': rating}
     if default:

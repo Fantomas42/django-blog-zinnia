@@ -13,14 +13,14 @@ from django_comments.moderation import moderator as moderator_stack
 from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.moderator import EntryCommentModerator
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_discussion_signals
 from zinnia.signals import disconnect_entry_signals
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 @override_settings(
     TEMPLATES=[
         {

@@ -11,11 +11,11 @@ from zinnia.sitemaps import EntrySitemap
 from zinnia.sitemaps import CategorySitemap
 from zinnia.sitemaps import AuthorSitemap
 from zinnia.sitemaps import TagSitemap
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.signals import disconnect_entry_signals
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 @override_settings(
     ROOT_URLCONF='zinnia.tests.implementations.urls.default'
 )

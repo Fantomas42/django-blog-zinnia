@@ -61,7 +61,15 @@ def is_lib_available(library):
         return False
 
 
-def urlEqual(url_1, url_2):
+def skip_if_custom_user(test_func):
+    """
+    Skip a test if a custom user model is in use.
+    """
+    return skipIf(settings.AUTH_USER_MODEL != 'auth.User',
+                  'Custom user model in use')(test_func)
+
+
+def url_equal(url_1, url_2):
     """
     Compare two URLs with query string where
     ordering does not matter.
@@ -108,11 +116,3 @@ class EntryDetailLoader(Loader):
     def get_contents(self, origin):
         return ('<html><head><title>{{ object.title }}</title></head>'
                 '<body>{{ object.html_content|safe }}</body></html>')
-
-
-def skipIfCustomUser(test_func):
-    """
-    Skip a test if a custom user model is in use.
-    """
-    return skipIf(settings.AUTH_USER_MODEL != 'auth.User',
-                  'Custom user model in use')(test_func)
