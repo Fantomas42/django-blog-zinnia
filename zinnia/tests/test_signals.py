@@ -3,14 +3,14 @@ from django.test import TestCase
 
 import zinnia.signals
 from zinnia import settings
-from zinnia.models.entry import Entry
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
+from zinnia.models.entry import Entry
 from zinnia.signals import disable_for_loaddata
+from zinnia.signals import disconnect_discussion_signals
+from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import ping_directories_handler
 from zinnia.signals import ping_external_urls_handler
-from zinnia.signals import disconnect_entry_signals
-from zinnia.signals import disconnect_discussion_signals
 
 
 class SignalsTestCase(TestCase):

@@ -1,22 +1,22 @@
 """Test cases for Zinnia's admin filters"""
-from django.test import TestCase
-from django.test import RequestFactory
-from django.contrib.admin import site
 from django.contrib.admin import ModelAdmin
+from django.contrib.admin import site
+from django.contrib.admin.views.main import ChangeList
 from django.contrib.sites.models import Site
+from django.test import RequestFactory
+from django.test import TestCase
+from django.test.utils import override_settings
 from django.utils.translation import activate
 from django.utils.translation import deactivate
-from django.test.utils import override_settings
-from django.contrib.admin.views.main import ChangeList
 
-from zinnia.models.entry import Entry
-from zinnia.models.author import Author
-from zinnia.models.category import Category
-from zinnia.managers import PUBLISHED
-from zinnia.tests.utils import skip_if_custom_user
 from zinnia.admin.filters import AuthorListFilter
 from zinnia.admin.filters import CategoryListFilter
+from zinnia.managers import PUBLISHED
+from zinnia.models.author import Author
+from zinnia.models.category import Category
+from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_entry_signals
+from zinnia.tests.utils import skip_if_custom_user
 
 
 class MiniEntryAuthorAdmin(ModelAdmin):

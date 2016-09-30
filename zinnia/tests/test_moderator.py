@@ -1,23 +1,23 @@
 """Test cases for Zinnia's moderator"""
-from django.core import mail
-from django.test import TestCase
-from django.utils import timezone
 from django.contrib.sites.models import Site
+from django.core import mail
 from django.core.urlresolvers import reverse
+from django.test import TestCase
 from django.test.utils import override_settings
+from django.utils import timezone
 
 import django_comments as comments
 from django_comments.forms import CommentForm
 from django_comments.moderation import moderator as moderator_stack
 
-from zinnia.models.entry import Entry
-from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
-from zinnia.tests.utils import skip_if_custom_user
+from zinnia.models.author import Author
+from zinnia.models.entry import Entry
 from zinnia.moderator import EntryCommentModerator
 from zinnia.signals import connect_discussion_signals
 from zinnia.signals import disconnect_discussion_signals
 from zinnia.signals import disconnect_entry_signals
+from zinnia.tests.utils import skip_if_custom_user
 
 
 @skip_if_custom_user

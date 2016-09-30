@@ -1,60 +1,60 @@
 """Test cases for Zinnia's templatetags"""
 from datetime import date
 
-from django.test import TestCase
-from django.utils import timezone
-from django.template import Context
-from django.template import Template
-from django.template import TemplateSyntaxError
-from django.template import TemplateDoesNotExist
-from django.db.models.signals import post_save
+from django.contrib.sites.models import Site
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
-from django.contrib.sites.models import Site
+from django.db.models.signals import post_save
+from django.template import Context
+from django.template import Template
+from django.template import TemplateDoesNotExist
+from django.template import TemplateSyntaxError
+from django.test import TestCase
 from django.test.utils import override_settings
+from django.utils import timezone
 
 import django_comments as comments
 from django_comments.models import CommentFlag
 
 from tagging.models import Tag
 
-from zinnia.models.entry import Entry
-from zinnia.models.author import Author
-from zinnia.models.category import Category
+from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
-from zinnia.flags import PINGBACK, TRACKBACK
-from zinnia.tests.utils import datetime
-from zinnia.tests.utils import url_equal
-from zinnia.tests.utils import skip_if_custom_user
-from zinnia.signals import disconnect_entry_signals
+from zinnia.models.author import Author
+from zinnia.models.category import Category
+from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import flush_similar_cache_handler
-from zinnia.templatetags.zinnia import widont
-from zinnia.templatetags.zinnia import week_number
-from zinnia.templatetags.zinnia import get_authors
-from zinnia.templatetags.zinnia import get_gravatar
-from zinnia.templatetags.zinnia import get_tag_cloud
-from zinnia.templatetags.zinnia import get_categories
-from zinnia.templatetags.zinnia import get_categories_tree
-from zinnia.templatetags.zinnia import zinnia_pagination
-from zinnia.templatetags.zinnia import zinnia_statistics
-from zinnia.templatetags.zinnia import get_draft_entries
-from zinnia.templatetags.zinnia import get_recent_entries
-from zinnia.templatetags.zinnia import get_random_entries
-from zinnia.templatetags.zinnia import zinnia_breadcrumbs
-from zinnia.templatetags.zinnia import get_popular_entries
-from zinnia.templatetags.zinnia import get_similar_entries
-from zinnia.templatetags.zinnia import get_recent_comments
-from zinnia.templatetags.zinnia import get_recent_linkbacks
-from zinnia.templatetags.zinnia import get_featured_entries
-from zinnia.templatetags.zinnia import get_calendar_entries
+from zinnia.templatetags import zinnia as ztemplatetags
+from zinnia.templatetags.zinnia import comment_admin_urlname
 from zinnia.templatetags.zinnia import get_archives_entries
 from zinnia.templatetags.zinnia import get_archives_entries_tree
+from zinnia.templatetags.zinnia import get_authors
+from zinnia.templatetags.zinnia import get_calendar_entries
+from zinnia.templatetags.zinnia import get_categories
+from zinnia.templatetags.zinnia import get_categories_tree
+from zinnia.templatetags.zinnia import get_draft_entries
+from zinnia.templatetags.zinnia import get_featured_entries
+from zinnia.templatetags.zinnia import get_gravatar
+from zinnia.templatetags.zinnia import get_popular_entries
+from zinnia.templatetags.zinnia import get_random_entries
+from zinnia.templatetags.zinnia import get_recent_comments
+from zinnia.templatetags.zinnia import get_recent_entries
+from zinnia.templatetags.zinnia import get_recent_linkbacks
+from zinnia.templatetags.zinnia import get_similar_entries
+from zinnia.templatetags.zinnia import get_tag_cloud
 from zinnia.templatetags.zinnia import user_admin_urlname
-from zinnia.templatetags.zinnia import comment_admin_urlname
+from zinnia.templatetags.zinnia import week_number
+from zinnia.templatetags.zinnia import widont
+from zinnia.templatetags.zinnia import zinnia_breadcrumbs
 from zinnia.templatetags.zinnia import zinnia_loop_template
-from zinnia.templatetags import zinnia as ztemplatetags
+from zinnia.templatetags.zinnia import zinnia_pagination
+from zinnia.templatetags.zinnia import zinnia_statistics
+from zinnia.tests.utils import datetime
+from zinnia.tests.utils import skip_if_custom_user
+from zinnia.tests.utils import url_equal
 
 
 class TemplateTagsTestCase(TestCase):

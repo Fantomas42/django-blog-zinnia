@@ -2,26 +2,26 @@
 """Test cases for Zinnia's admin"""
 from __future__ import unicode_literals
 
-from django.test import TestCase
-from django.test import RequestFactory
-from django.utils import timezone
+from django.contrib.admin.sites import AdminSite
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.test import RequestFactory
+from django.test import TestCase
+from django.utils import timezone
 from django.utils.translation import activate
 from django.utils.translation import deactivate
-from django.contrib.admin.sites import AdminSite
 
 from zinnia import settings
 from zinnia.admin import entry as entry_admin
+from zinnia.admin.category import CategoryAdmin
+from zinnia.admin.entry import EntryAdmin
 from zinnia.managers import PUBLISHED
-from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
+from zinnia.models.entry import Entry
+from zinnia.signals import disconnect_entry_signals
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import skip_if_custom_user
-from zinnia.admin.entry import EntryAdmin
-from zinnia.admin.category import CategoryAdmin
-from zinnia.signals import disconnect_entry_signals
 from zinnia.url_shortener.backends.default import base36
 
 

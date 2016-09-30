@@ -1,25 +1,24 @@
 """Test cases for Zinnia's mixins"""
 from datetime import date
 
-from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.core.exceptions import ImproperlyConfigured
+from django.test import TestCase
 
-from zinnia.models.entry import Entry
+from zinnia.managers import PUBLISHED
 from zinnia.models.author import Author
 from zinnia.models.category import Category
-from zinnia.managers import PUBLISHED
+from zinnia.models.entry import Entry
+from zinnia.signals import disconnect_entry_signals
 from zinnia.tests.utils import datetime
 from zinnia.tests.utils import skip_if_custom_user
-from zinnia.signals import disconnect_entry_signals
 from zinnia.views.mixins.archives import PreviousNextPublishedMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
-from zinnia.views.mixins.prefetch_related import PrefetchRelatedMixin
 from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
-from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
+from zinnia.views.mixins.prefetch_related import PrefetchRelatedMixin
 from zinnia.views.mixins.templates import EntryArchiveTemplateResponseMixin
-from zinnia.views.mixins.templates import \
-    EntryQuerysetArchiveTemplateResponseMixin
+from zinnia.views.mixins.templates import EntryQuerysetArchiveTemplateResponseMixin  # noqa
+from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
 
 
 class MixinTestCase(TestCase):

@@ -1,11 +1,11 @@
 """Test urls for the zinnia project"""
 from django.conf.urls import url
 
-from zinnia.views.tags import TagDetail
-from zinnia.views.authors import AuthorDetail
-from zinnia.views.categories import CategoryDetail
 from zinnia.tests.implementations.urls.default import (
     urlpatterns as test_urlpatterns)
+from zinnia.views.authors import AuthorDetail
+from zinnia.views.categories import CategoryDetail
+from zinnia.views.tags import TagDetail
 
 
 class CustomModelDetailMixin(object):

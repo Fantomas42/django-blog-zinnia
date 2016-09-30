@@ -4,16 +4,16 @@ try:
     from urllib.error import URLError
     from urllib.response import addinfourl
 except ImportError:  # Python 2
+    from cStringIO import StringIO
     from urllib import addinfourl
     from urllib2 import URLError
-    from cStringIO import StringIO
 
 from django.test import TestCase
 
 from zinnia.models.entry import Entry
-from zinnia.ping import URLRessources
 from zinnia.ping import DirectoryPinger
 from zinnia.ping import ExternalUrlsPinger
+from zinnia.ping import URLRessources
 from zinnia.signals import disconnect_entry_signals
 
 
