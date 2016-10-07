@@ -100,6 +100,3 @@ INSTALLED_APPS = (
     'tagging',
     'zinnia'
 )
-
-from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS  # noqa
-XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
