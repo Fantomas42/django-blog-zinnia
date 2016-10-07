@@ -166,20 +166,6 @@ you need to install `django-xmlrpc`_.
 Then register :mod:`django_xmlrpc` in your :setting:`INSTALLED_APPS`
 section of your project's settings.
 
-Now add these lines in your project's settings. ::
-
-  from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
-  XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
-
-:data:`ZINNIA_XMLRPC_METHODS` is a simple list of tuples containing all
-the Webservices embedded in Zinnia.
-
-If you only want to use the Pingback service import
-:data:`ZINNIA_XMLRPC_PINGBACK`, or if you want you just want to enable the
-`MetaWeblog API`_ import :data:`ZINNIA_XMLRPC_METAWEBLOG`.
-
-You can also use your own mixins.
-
 Finally we need to register the URL of the XML-RPC server.
 Insert something like this in your project's urls.py: ::
 
