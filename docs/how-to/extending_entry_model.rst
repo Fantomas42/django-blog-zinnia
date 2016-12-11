@@ -174,8 +174,10 @@ result is not replicable for multiple installations and breaks the
 migration system with future releases of Zinnia.
 
 Fortunatly Django provides a solution with the :setting:`MIGRATION_MODULES`
-setting. Once this setting done for the ``'zinnia'`` key, can now start to
-write new migrations.
+setting. Once this setting is done for the ``'zinnia'`` key, can now start to
+write new migrations. Note that it is recommended to use a different package
+then the default one for your app to avoid conflict
+(e.g. ``MIGRATION_MODULES = {'zinnia': 'zinnia_gallery.migrations_zinnia'}``).
 
 It's recommended that the new **initial** migration represents the default
 :class:`Entry` schema provided by Zinnia, because after that, you just have
