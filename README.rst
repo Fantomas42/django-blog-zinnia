@@ -62,7 +62,6 @@ or you can visit these websites who use Zinnia.
 
 * `Fantomas' side`_
 * `Ubuntu's developers blog`_
-* `Tryolabs`_
 * `AR.Drone Best of User Videos`_
 * `Professional Web Studio`_
 * `Infantium`_
@@ -129,7 +128,6 @@ More information and help available at these URLs:
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
 .. _`Fantomas' side`: http://fantomas.site/blog/
 .. _`Ubuntu's developers blog`: http://developer.ubuntu.com/en/blog/
-.. _`Tryolabs`: http://www.tryolabs.com/Blog/
 .. _`AR.Drone Best of User Videos`: http://ardrone.parrot.com/best-of-user-videos/
 .. _`Professional Web Studio`: http://www.professionalwebstudio.com/en/weblog/
 .. _`Infantium`: http://www.infantium.com/blog/
