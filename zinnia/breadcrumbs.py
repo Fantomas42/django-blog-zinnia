@@ -60,6 +60,7 @@ def entry_breadcrumbs(entry):
     return [year_crumb(date), month_crumb(date),
             day_crumb(date), Crumb(entry.title)]
 
+
 MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
                                              reverse('zinnia:tag_list')),
                                        Crumb(x.name)],

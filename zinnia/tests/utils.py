@@ -47,6 +47,7 @@ def omniscient_datetime(*args):
         d = timezone.make_aware(d, timezone.utc)
     return d
 
+
 datetime = omniscient_datetime
 
 

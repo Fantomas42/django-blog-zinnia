@@ -14,6 +14,7 @@ def i18n_url(url, translate=TRANSLATED_URLS):
         return ugettext_lazy(url)
     return url
 
+
 _ = i18n_url
 
 app_name = 'zinnia'
