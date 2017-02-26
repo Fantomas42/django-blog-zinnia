@@ -16,19 +16,30 @@ these steps.
 * Register :mod:`django.contrib.sitemaps` in the :setting:`INSTALLED_APPS` section.
 * Edit your project's URLs and add this code: ::
 
-from django.contrib.sitemaps.views import sitemap
-from zinnia.sitemaps import TagSitemap
-from zinnia.sitemaps import EntrySitemap
-from zinnia.sitemaps import CategorySitemap
-from zinnia.sitemaps import AuthorSitemap
-sitemaps = {'tags': TagSitemap,
-            'blog': EntrySitemap,
-            'authors': AuthorSitemap,
-            'categories': CategorySitemap,}
-urlpatterns += [
-        url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
-            name='django.contrib.sitemaps.views.sitemap'),
-    ]
+  from django.contrib.sitemaps.views import index
+  from django.contrib.sitemaps.views import sitemap
+
+  from zinnia.sitemaps import AuthorSitemap
+  from zinnia.sitemaps import CategorySitemap
+  from zinnia.sitemaps import EntrySitemap
+  from zinnia.sitemaps import TagSitemap
+
+  sitemaps = {
+      'tags': TagSitemap,
+      'blog': EntrySitemap,
+      'authors': AuthorSitemap,
+      'categories': CategorySitemap
+  }
+
+  urlpatterns += [
+      url(r'^sitemap.xml$',
+          index,
+          {'sitemaps': sitemaps}),
+      url(r'^sitemap-(?P<section>.+)\.xml$',
+          sitemap,
+          {'sitemaps': sitemaps},
+          name='django.contrib.sitemaps.views.sitemap'),
+  ]
 
 .. _zinnia-templates:
 
