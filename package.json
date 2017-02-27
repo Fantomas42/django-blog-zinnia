@@ -1,9 +1,11 @@
 {
   "name": "django-blog-zinnia",
+  "description": "Sass builder for django-blog-zinnia",
+  "private": true,
   "devDependencies": {
-    "gulp": "*",
-    "gulp-sass": "*",
-    "gulp-livereload": "*",
-    "gulp-autoprefixer": "*"
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-autoprefixer": "^3.1.1"
   }
 }
