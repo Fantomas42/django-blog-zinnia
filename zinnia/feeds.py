@@ -129,9 +129,9 @@ class EntryFeed(ZinniaFeed):
         """
         Return an image for enclosure.
         """
-        if item.image:
+        try:
             url = item.image.url
-        else:
+        except (AttributeError, ValueError):
             img = BeautifulSoup(item.html_content, 'html.parser').find('img')
             url = img.get('src') if img else None
         self.cached_enclosure_url = url
@@ -143,24 +143,26 @@ class EntryFeed(ZinniaFeed):
 
     def item_enclosure_length(self, item):
         """
-        Try to obtain the size of the enclosure
-        if the enclosure is present on the FS,
+        Try to obtain the size of the enclosure if it's present on the FS,
         otherwise returns an hardcoded value.
+        Note: this method is only called if item_enclosure_url
+        has returned something.
         """
-        if item.image:
-            try:
-                return str(item.image.size)
-            except (os.error, NotImplementedError):
-                pass
+        try:
+            return str(item.image.size)
+        except (AttributeError, ValueError, os.error):
+            pass
         return '100000'
 
     def item_enclosure_mime_type(self, item):
         """
         Guess the enclosure's mimetype.
+        Note: this method is only called if item_enclosure_url
+        has returned something.
         """
-        mimetype, encoding = guess_type(self.cached_enclosure_url)
-        if mimetype:
-            return mimetype
+        mime_type, encoding = guess_type(self.cached_enclosure_url)
+        if mime_type:
+            return mime_type
         return 'image/jpeg'
 
 
