@@ -1,0 +1,10 @@
+max-line-length: 80
+uses:
+  - django
+autodetect: true
+ignore-paths:
+  - docs
+  - demo
+python-targets:
+  - 2
+  - 3
