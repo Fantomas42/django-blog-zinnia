@@ -125,27 +125,10 @@ class EntryQuerysetArchiveTemplateResponseMixin(TemplateResponseMixin):
         return templates
 
 
-class EntryArchiveTemplateResponseMixin(
-        EntryQuerysetArchiveTemplateResponseMixin):
-    """
-    Same as EntryQuerysetArchivetemplateResponseMixin
-    but use the template defined in the Entry instance
-    as the base template name.
-    """
-
-    def get_default_base_template_names(self):
-        """
-        Return the Entry.template value.
-        """
-        return [self.object.detail_template,
-                '%s.html' % self.object.slug,
-                '%s_%s' % (self.object.slug, self.object.detail_template)]
-
-
 class EntryQuerysetArchiveTodayTemplateResponseMixin(
         EntryQuerysetArchiveTemplateResponseMixin):
     """
-    Same as EntryQuerysetArchivetemplateResponseMixin
+    Same as EntryQuerysetArchiveTemplateResponseMixin
     but use the current date of the day when getting
     archive part values.
     """
@@ -163,3 +146,20 @@ class EntryQuerysetArchiveTodayTemplateResponseMixin(
                 today = timezone.localtime(today)
             self.today = today
         return self.today.strftime(parts_dict[part])
+
+
+class EntryArchiveTemplateResponseMixin(
+        EntryQuerysetArchiveTemplateResponseMixin):
+    """
+    Same as EntryQuerysetArchiveTemplateResponseMixin
+    but use the template defined in the Entry instance
+    as the base template name.
+    """
+
+    def get_default_base_template_names(self):
+        """
+        Return the Entry.template value.
+        """
+        return [self.object.detail_template,
+                '%s.html' % self.object.slug,
+                '%s_%s' % (self.object.slug, self.object.detail_template)]
