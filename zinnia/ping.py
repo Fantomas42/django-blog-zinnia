@@ -62,7 +62,7 @@ class DirectoryPinger(threading.Thread):
         for entry in self.entries:
             reply = self.ping_entry(entry)
             self.results.append(reply)
-            logger.info('%s : %s' % (self.server_name, reply['message']))
+            logger.info('%s : %s', self.server_name, reply['message'])
         socket.setdefaulttimeout(None)
 
     def ping_entry(self, entry):
@@ -121,7 +121,7 @@ class ExternalUrlsPinger(threading.Thread):
         for url, server_name in external_urls_pingable.items():
             reply = self.pingback_url(server_name, url)
             self.results.append(reply)
-            logger.info('%s : %s' % (url, reply))
+            logger.info('%s : %s', url, reply)
 
         socket.setdefaulttimeout(None)
 

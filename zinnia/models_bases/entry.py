@@ -144,10 +144,10 @@ class CoreEntry(models.Model):
                 previous = None
 
             if index:
-                next = entries[index - 1]
+                _next = entries[index - 1]
             else:
-                next = None
-            previous_next = (previous, next)
+                _next = None
+            previous_next = (previous, _next)
             setattr(self, 'previous_next', previous_next)
         return previous_next
 
