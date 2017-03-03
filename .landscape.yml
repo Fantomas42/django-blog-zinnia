@@ -3,6 +3,7 @@ uses:
   - django
 autodetect: true
 ignore-paths:
+  - bootstrap.py
   - docs
   - demo
 python-targets:
