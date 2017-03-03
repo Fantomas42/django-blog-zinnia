@@ -1,7 +1,7 @@
 """Views for Zinnia quick entry"""
 try:
     from urllib.parse import urlencode
-except:  # Python 2
+except ImportError:  # Python 2
     from urllib import urlencode
 
 from django import forms
