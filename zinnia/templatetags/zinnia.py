@@ -323,8 +323,8 @@ def zinnia_breadcrumbs(context, root_name='',
     context_object = get_context_first_object(
         context, ['object', 'category', 'tag', 'author'])
     context_page = context.get('page_obj')
-    breadcrumbs = retrieve_breadcrumbs(path, context_object,
-                                       context_page, root_name)
+    breadcrumbs = retrieve_breadcrumbs(
+        path, context_object, context_page, root_name)
 
     return {'template': template,
             'breadcrumbs': breadcrumbs}
