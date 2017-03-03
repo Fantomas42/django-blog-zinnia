@@ -91,12 +91,12 @@ def pingback_ping(source, target):
         if target not in document:
             return SOURCE_DOES_NOT_LINK
 
-        scheme, netloc, path, query, fragment = urlsplit(target)
-        if netloc != site.domain:
+        target_splitted = urlsplit(target)
+        if target_splitted.netloc != site.domain:
             return TARGET_DOES_NOT_EXIST
 
         try:
-            view, args, kwargs = resolve(path)
+            view, args, kwargs = resolve(target_splitted.path)
         except Resolver404:
             return TARGET_DOES_NOT_EXIST
 
@@ -144,12 +144,12 @@ def pingback_extensions_get_pingbacks(target):
     """
     site = Site.objects.get_current()
 
-    scheme, netloc, path, query, fragment = urlsplit(target)
-    if netloc != site.domain:
+    target_splitted = urlsplit(target)
+    if target_splitted.netloc != site.domain:
         return TARGET_DOES_NOT_EXIST
 
     try:
-        view, args, kwargs = resolve(path)
+        view, args, kwargs = resolve(target_splitted.path)
     except Resolver404:
         return TARGET_DOES_NOT_EXIST
 
