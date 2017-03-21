@@ -49,7 +49,7 @@ class DirectoryPinger(threading.Thread):
         self.server = ServerProxy(self.server_name)
         self.ressources = URLRessources()
 
-        threading.Thread.__init__(self)
+        super(DirectoryPinger, self).__init__()
         if start_now:
             self.start()
 
@@ -104,7 +104,7 @@ class ExternalUrlsPinger(threading.Thread):
         self.entry_url = '%s%s' % (self.ressources.site_url,
                                    self.entry.get_absolute_url())
 
-        threading.Thread.__init__(self)
+        super(ExternalUrlsPinger, self).__init__()
         if start_now:
             self.start()
 
