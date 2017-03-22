@@ -66,8 +66,7 @@ Follow these few command to start the development: ::
   $ cd django-blog-zinnia
   $ virtualenv .
   $ source ./bin/activate
-  $ pip install -U setuptools
-  $ python bootstrap.py
+  $ pip install zc.buildout
   $ ./bin/buildout
 
 The buildout script will resolve all the dependencies needed to develop the

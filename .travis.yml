@@ -11,9 +11,8 @@ env:
 matrix:
     fast_finish: true
 install:
-    - pip install -U setuptools
-    - python bootstrap.py
-    - ./bin/buildout -c travis.cfg testenv:DJANGO_SETTINGS_MODULE=zinnia.tests.implementations.$DATABASE_ENGINE
+    - pip install zc.buildout==2.8.0
+    - buildout -c travis.cfg testenv:DJANGO_SETTINGS_MODULE=zinnia.tests.implementations.$DATABASE_ENGINE
     - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ];
       then
         pip install psycopg2;
