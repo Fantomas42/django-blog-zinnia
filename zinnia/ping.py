@@ -41,7 +41,7 @@ class DirectoryPinger(Thread):
     Threaded web directory pinger.
     """
 
-    def __init__(self, server_name, entries, timeout=10, start_now=True):
+    def __init__(self, server_name, entries, timeout=10):
         self.results = []
         self.timeout = timeout
         self.entries = entries
@@ -50,8 +50,7 @@ class DirectoryPinger(Thread):
         self.ressources = URLRessources()
 
         super(DirectoryPinger, self).__init__()
-        if start_now:
-            self.start()
+        self.start()
 
     def run(self):
         """
@@ -96,7 +95,7 @@ class ExternalUrlsPinger(Thread):
     Threaded external URLs pinger.
     """
 
-    def __init__(self, entry, timeout=10, start_now=True):
+    def __init__(self, entry, timeout=10):
         self.results = []
         self.entry = entry
         self.timeout = timeout
@@ -105,8 +104,7 @@ class ExternalUrlsPinger(Thread):
                                    self.entry.get_absolute_url())
 
         super(ExternalUrlsPinger, self).__init__()
-        if start_now:
-            self.start()
+        self.start()
 
     def run(self):
         """
