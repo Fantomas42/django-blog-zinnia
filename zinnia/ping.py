@@ -1,7 +1,7 @@
 """Pings utilities for Zinnia"""
 import socket
-import threading
 from logging import getLogger
+from threading import Thread
 try:
     from urllib.request import urlopen
     from urllib.parse import urlsplit
@@ -36,12 +36,12 @@ class URLRessources(object):
                                    reverse('zinnia:entry_feed'))
 
 
-class DirectoryPinger(threading.Thread):
+class DirectoryPinger(Thread):
     """
     Threaded web directory pinger.
     """
 
-    def __init__(self, server_name, entries, timeout=10, start_now=True):
+    def __init__(self, server_name, entries, timeout=10):
         self.results = []
         self.timeout = timeout
         self.entries = entries
@@ -49,9 +49,8 @@ class DirectoryPinger(threading.Thread):
         self.server = ServerProxy(self.server_name)
         self.ressources = URLRessources()
 
-        threading.Thread.__init__(self)
-        if start_now:
-            self.start()
+        super(DirectoryPinger, self).__init__()
+        self.start()
 
     def run(self):
         """
@@ -91,12 +90,12 @@ class DirectoryPinger(threading.Thread):
         return reply
 
 
-class ExternalUrlsPinger(threading.Thread):
+class ExternalUrlsPinger(Thread):
     """
     Threaded external URLs pinger.
     """
 
-    def __init__(self, entry, timeout=10, start_now=True):
+    def __init__(self, entry, timeout=10):
         self.results = []
         self.entry = entry
         self.timeout = timeout
@@ -104,9 +103,8 @@ class ExternalUrlsPinger(threading.Thread):
         self.entry_url = '%s%s' % (self.ressources.site_url,
                                    self.entry.get_absolute_url())
 
-        threading.Thread.__init__(self)
-        if start_now:
-            self.start()
+        super(ExternalUrlsPinger, self).__init__()
+        self.start()
 
     def run(self):
         """

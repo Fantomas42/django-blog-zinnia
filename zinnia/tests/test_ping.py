@@ -17,17 +17,9 @@ from zinnia.ping import URLRessources
 from zinnia.signals import disconnect_entry_signals
 
 
-class NoThreadMixin(object):
+class FakeThread(object):
     def start(self):
-        self.run()
-
-
-class NoThreadDirectoryPinger(NoThreadMixin, DirectoryPinger):
-    pass
-
-
-class NoThreadExternalUrlsPinger(NoThreadMixin, ExternalUrlsPinger):
-    pass
+        pass
 
 
 class DirectoryPingerTestCase(TestCase):
@@ -40,10 +32,14 @@ class DirectoryPingerTestCase(TestCase):
                   'tags': 'zinnia, test',
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
+        self.original_thread = DirectoryPinger.__bases__
+        DirectoryPinger.__bases__ = (FakeThread,)
+
+    def tearDown(self):
+        DirectoryPinger.__bases__ = self.original_thread
 
     def test_ping_entry(self):
-        pinger = NoThreadDirectoryPinger('http://localhost', [self.entry],
-                                         start_now=False)
+        pinger = DirectoryPinger('http://localhost', [self.entry])
         self.assertEqual(
             pinger.ping_entry(self.entry),
             {'message': 'http://localhost is an invalid directory.',
@@ -51,7 +47,8 @@ class DirectoryPingerTestCase(TestCase):
         self.assertEqual(pinger.results, [])
 
     def test_run(self):
-        pinger = NoThreadDirectoryPinger('http://localhost', [self.entry])
+        pinger = DirectoryPinger('http://localhost', [self.entry])
+        pinger.run()
         self.assertEqual(
             pinger.results,
             [{'flerror': True,
@@ -68,10 +65,15 @@ class ExternalUrlsPingerTestCase(TestCase):
                   'tags': 'zinnia, test',
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
+        self.original_thread = ExternalUrlsPinger.__bases__
+        ExternalUrlsPinger.__bases__ = (FakeThread,)
+
+    def tearDown(self):
+        ExternalUrlsPinger.__bases__ = self.original_thread
 
     def test_is_external_url(self):
         r = URLRessources()
-        pinger = ExternalUrlsPinger(self.entry, start_now=False)
+        pinger = ExternalUrlsPinger(self.entry)
         self.assertEqual(pinger.is_external_url(
             'http://example.com/', 'http://google.com/'), True)
         self.assertEqual(pinger.is_external_url(
@@ -87,7 +89,7 @@ class ExternalUrlsPingerTestCase(TestCase):
 
     def test_find_external_urls(self):
         r = URLRessources()
-        pinger = ExternalUrlsPinger(self.entry, start_now=False)
+        pinger = ExternalUrlsPinger(self.entry)
         external_urls = pinger.find_external_urls(self.entry)
         self.assertEqual(external_urls, [])
         self.entry.content = """
@@ -101,7 +103,7 @@ class ExternalUrlsPingerTestCase(TestCase):
         self.assertEqual(external_urls, ['http://fantomas.willbreak.it/'])
 
     def test_find_pingback_href(self):
-        pinger = ExternalUrlsPinger(self.entry, start_now=False)
+        pinger = ExternalUrlsPinger(self.entry)
         result = pinger.find_pingback_href('')
         self.assertEqual(result, None)
         result = pinger.find_pingback_href("""
@@ -138,7 +140,7 @@ class ExternalUrlsPingerTestCase(TestCase):
             raise URLError('Invalid ressource')
 
     def test_pingback_url(self):
-        pinger = ExternalUrlsPinger(self.entry, start_now=False)
+        pinger = ExternalUrlsPinger(self.entry)
         self.assertEqual(
             pinger.pingback_url('http://localhost',
                                 'http://error.com'),
@@ -149,7 +151,7 @@ class ExternalUrlsPingerTestCase(TestCase):
         import zinnia.ping
         self.original_urlopen = zinnia.ping.urlopen
         zinnia.ping.urlopen = self.fake_urlopen
-        pinger = ExternalUrlsPinger(self.entry, start_now=False)
+        pinger = ExternalUrlsPinger(self.entry)
 
         urls = ['http://localhost/', 'http://example.com/', 'http://error',
                 'http://www.google.co.uk/images/nav_logo72.png']
@@ -170,7 +172,8 @@ class ExternalUrlsPingerTestCase(TestCase):
         <a href="http://error">Error</a>
         <a href="http://www.google.co.uk/images/nav_logo72.png">Img</a>
         """
-        pinger = NoThreadExternalUrlsPinger(self.entry)
+        pinger = ExternalUrlsPinger(self.entry)
+        pinger.run()
         self.assertEqual(pinger.results, [
             'http://localhost/ cannot be pinged.'])
         zinnia.ping.urlopen = self.original_urlopen
