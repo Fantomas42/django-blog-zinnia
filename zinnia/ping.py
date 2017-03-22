@@ -1,7 +1,7 @@
 """Pings utilities for Zinnia"""
 import socket
-import threading
 from logging import getLogger
+from threading import Thread
 try:
     from urllib.request import urlopen
     from urllib.parse import urlsplit
@@ -36,7 +36,7 @@ class URLRessources(object):
                                    reverse('zinnia:entry_feed'))
 
 
-class DirectoryPinger(threading.Thread):
+class DirectoryPinger(Thread):
     """
     Threaded web directory pinger.
     """
@@ -91,7 +91,7 @@ class DirectoryPinger(threading.Thread):
         return reply
 
 
-class ExternalUrlsPinger(threading.Thread):
+class ExternalUrlsPinger(Thread):
     """
     Threaded external URLs pinger.
     """
