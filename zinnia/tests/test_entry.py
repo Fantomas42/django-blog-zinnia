@@ -1,6 +1,5 @@
 """Test cases for Zinnia's Entry"""
 from datetime import timedelta
-from unittest import skipUnless
 
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
@@ -24,8 +23,8 @@ from zinnia.models_bases import entry
 from zinnia.signals import disconnect_discussion_signals
 from zinnia.signals import disconnect_entry_signals
 from zinnia.tests.utils import datetime
-from zinnia.tests.utils import is_lib_available
 from zinnia.tests.utils import skip_if_custom_user
+from zinnia.tests.utils import skip_if_lib_not_available
 from zinnia.url_shortener.backends.default import base36
 
 
@@ -393,7 +392,7 @@ class EntryHtmlContentTestCase(TestCase):
         self.entry.content = ''
         self.assertEqual(self.entry.html_content, '')
 
-    @skipUnless(is_lib_available('textile'), 'Textile is not available')
+    @skip_if_lib_not_available('textile')
     def test_html_content_textitle(self):
         markups.MARKUP_LANGUAGE = 'textile'
         self.entry.content = 'Hello world !\n\n' \
@@ -406,7 +405,7 @@ class EntryHtmlContentTestCase(TestCase):
                          '<ul>\n\t\t<li>Item 1</li>\n\t\t'
                          '<li>Item 2</li>\n\t</ul>')
 
-    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    @skip_if_lib_not_available('markdown')
     def test_html_content_markdown(self):
         markups.MARKUP_LANGUAGE = 'markdown'
         self.entry.content = 'Hello world !\n\n' \
@@ -419,7 +418,7 @@ class EntryHtmlContentTestCase(TestCase):
                          '\n<ul>\n<li>Item 1</li>\n'
                          '<li>Item 2</li>\n</ul>')
 
-    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    @skip_if_lib_not_available('markdown')
     def test_markdown_with_inline_html(self):
         markups.MARKUP_LANGUAGE = 'markdown'
         self.entry.content = ('Hello *World* !\n\n'
@@ -429,7 +428,7 @@ class EntryHtmlContentTestCase(TestCase):
                          '<p>Hello <em>World</em> !</p>\n'
                          '<p>This is an inline HTML paragraph</p>')
 
-    @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
+    @skip_if_lib_not_available('docutils')
     def test_html_content_restructuredtext(self):
         markups.MARKUP_LANGUAGE = 'restructuredtext'
         self.entry.content = 'Hello world !\n\n' \
@@ -476,7 +475,7 @@ class EntryHtmlLeadTestCase(TestCase):
         self.entry.lead = ''
         self.assertEqual(self.entry.html_lead, '')
 
-    @skipUnless(is_lib_available('textile'), 'Textile is not available')
+    @skip_if_lib_not_available('textile')
     def test_html_lead_textitle(self):
         markups.MARKUP_LANGUAGE = 'textile'
         self.entry.lead = 'Hello world !\n\n' \
@@ -489,7 +488,7 @@ class EntryHtmlLeadTestCase(TestCase):
                          '<ul>\n\t\t<li>Item 1</li>\n\t\t'
                          '<li>Item 2</li>\n\t</ul>')
 
-    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    @skip_if_lib_not_available('markdown')
     def test_html_lead_markdown(self):
         markups.MARKUP_LANGUAGE = 'markdown'
         self.entry.lead = 'Hello world !\n\n' \
@@ -502,7 +501,7 @@ class EntryHtmlLeadTestCase(TestCase):
                          '\n<ul>\n<li>Item 1</li>\n'
                          '<li>Item 2</li>\n</ul>')
 
-    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    @skip_if_lib_not_available('markdown')
     def test_markdown_with_inline_html(self):
         markups.MARKUP_LANGUAGE = 'markdown'
         self.entry.lead = ('Hello *World* !\n\n'
@@ -512,7 +511,7 @@ class EntryHtmlLeadTestCase(TestCase):
                          '<p>Hello <em>World</em> !</p>\n'
                          '<p>This is an inline HTML paragraph</p>')
 
-    @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
+    @skip_if_lib_not_available('docutils')
     def test_html_lead_restructuredtext(self):
         markups.MARKUP_LANGUAGE = 'restructuredtext'
         self.entry.lead = 'Hello world !\n\n' \
