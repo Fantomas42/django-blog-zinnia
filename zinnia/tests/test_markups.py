@@ -1,7 +1,5 @@
 """Test cases for Zinnia's markups"""
-import sys
 import warnings
-from unittest import skipUnless
 try:
     import builtins
 except ImportError:  # Python 2
@@ -72,8 +70,6 @@ class MarkupsTestCase(TestCase):
             'toto<span>&#64;</span>example<span>&#46;</span>com</a></p>')
 
 
-@skipUnless(sys.version_info >= (2, 7, 0),
-            'Cannot run these tests under Python 2.7')
 class MarkupFailImportTestCase(TestCase):
     exclude_list = ['textile', 'markdown', 'docutils']
 
