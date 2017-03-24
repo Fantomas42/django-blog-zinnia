@@ -51,7 +51,9 @@ class Author(safe_get_user_model(),
         """
         If the user has a full name, use it instead of the username.
         """
-        return self.get_full_name() or self.get_username()
+        return (self.get_short_name()
+                or self.get_full_name()
+                or self.get_username())
 
     class Meta:
         """

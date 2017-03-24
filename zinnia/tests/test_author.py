@@ -36,12 +36,12 @@ class AuthorTestCase(TestCase):
     def test_str(self):
         self.assertEqual(self.author.__str__(),
                          'webmaster')
+        self.author.last_name = 'Doe'
+        self.assertEqual(self.author.__str__(),
+                         'Doe')
         self.author.first_name = 'John'
         self.assertEqual(self.author.__str__(),
                          'John')
-        self.author.last_name = 'Doe'
-        self.assertEqual(self.author.__str__(),
-                         'John Doe')
 
     def test_manager_pollution(self):
         """
