@@ -5,7 +5,6 @@ from functools import wraps
 from django.db.models import F
 from django.db.models.signals import post_delete
 from django.db.models.signals import post_save
-from django.db.models.signals import pre_delete
 from django.dispatch import Signal
 
 import django_comments as comments
@@ -24,7 +23,7 @@ ENTRY_PS_PING_EXTERNAL_URLS = 'zinnia.entry.post_save.ping_external_urls'
 ENTRY_PS_FLUSH_SIMILAR_CACHE = 'zinnia.entry.post_save.flush_similar_cache'
 ENTRY_PD_FLUSH_SIMILAR_CACHE = 'zinnia.entry.post_delete.flush_similar_cache'
 COMMENT_PS_COUNT_DISCUSSIONS = 'zinnia.comment.post_save.count_discussions'
-COMMENT_PD_COUNT_DISCUSSIONS = 'zinnia.comment.pre_delete.count_discussions'
+COMMENT_PD_COUNT_DISCUSSIONS = 'zinnia.comment.post_delete.count_discussions'
 COMMENT_WF_COUNT_DISCUSSIONS = 'zinnia.comment.was_flagged.count_discussions'
 COMMENT_WP_COUNT_COMMENTS = 'zinnia.comment.was_posted.count_comments'
 PINGBACK_WF_COUNT_PINGBACKS = 'zinnia.pingback.was_flagged.count_pingbacks'
@@ -178,7 +177,7 @@ def connect_discussion_signals():
     post_save.connect(
         count_discussions_handler, sender=comment_model,
         dispatch_uid=COMMENT_PS_COUNT_DISCUSSIONS)
-    pre_delete.connect(
+    post_delete.connect(
         count_discussions_handler, sender=comment_model,
         dispatch_uid=COMMENT_PD_COUNT_DISCUSSIONS)
     comment_was_flagged.connect(
@@ -203,7 +202,7 @@ def disconnect_discussion_signals():
     post_save.disconnect(
         sender=comment_model,
         dispatch_uid=COMMENT_PS_COUNT_DISCUSSIONS)
-    pre_delete.disconnect(
+    post_delete.disconnect(
         sender=comment_model,
         dispatch_uid=COMMENT_PD_COUNT_DISCUSSIONS)
     comment_was_flagged.disconnect(
