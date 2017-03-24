@@ -45,13 +45,18 @@ class Author(safe_get_user_model(),
         """
         Builds and returns the author's URL based on his username.
         """
-        return ('zinnia:author_detail', [self.get_username()])
+        try:
+            return super(Author, self).get_absolute_url()
+        except AttributeError:
+            return ('zinnia:author_detail', [self.get_username()])
 
     def __str__(self):
         """
         If the user has a full name, use it instead of the username.
         """
-        return self.get_full_name() or self.get_username()
+        return (self.get_short_name()
+                or self.get_full_name()
+                or self.get_username())
 
     class Meta:
         """
