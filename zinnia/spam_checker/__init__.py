@@ -26,10 +26,13 @@ def get_spam_checker(backend_path):
 
 
 def check_is_spam(content, content_object, request,
-                  backends=SPAM_CHECKER_BACKENDS):
+                  backends=None):
     """
     Return True if the content is a spam, else False.
     """
+    if backends is None:
+        backends = SPAM_CHECKER_BACKENDS
+
     for backend_path in backends:
         spam_checker = get_spam_checker(backend_path)
         if spam_checker is not None:
