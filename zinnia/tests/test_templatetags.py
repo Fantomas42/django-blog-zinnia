@@ -294,7 +294,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_similar_entries(source_context, 3,
                                           'custom_template.html')
         self.assertEqual(len(context['entries']), 2)
-        self.assertEqual(context['entries'][0].pk, second_entry.pk)
+        self.assertEqual(context['entries'][0].pk, third_entry.pk)
         self.assertEqual(context['template'], 'custom_template.html')
         with self.assertNumQueries(0):
             context = get_similar_entries(source_context, 3)

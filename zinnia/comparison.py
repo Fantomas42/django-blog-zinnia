@@ -77,9 +77,8 @@ class ModelVectorBuilder(object):
                     object_related[o_id] = score(object_vector, o_vector)
                 except ZeroDivisionError:
                     pass
-
         related = sorted(object_related.items(),
-                         key=lambda k_v: k_v[1], reverse=True)
+                         key=lambda k_v: (k_v[1], k_v[0]), reverse=True)
         return related
 
     @cached_property
