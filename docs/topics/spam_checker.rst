@@ -6,7 +6,7 @@ Spam Checker
 
 .. versionadded:: 0.9
 
-Spam protection is mandatory when you want to let your users to comment
+Spam protection is mandatory when you want to let your users react on
 your entries.
 
 Originally Zinnia provided a only one type of spam protection with the
@@ -18,7 +18,7 @@ service may be a little bit risky.
 Now Akismet has been moved in a dedicated module and the moderation system
 let you choose the spam checkers to use. With this new feature you can now
 write a custom spam checker corresponding to your needs and use it for
-moderation your comments.
+moderating your comments, trackbacks and linkbacks.
 
 We can imagine for example that you want to authorize comments from
 a white-list of IPs, it's possible by writing a backend.
@@ -34,6 +34,10 @@ Configuration example: ::
   )
 
 .. seealso:: :setting:`ZINNIA_SPAM_CHECKER_BACKENDS`
+
+.. versionchanged:: 0.19
+
+The spam protection now also apply on incoming trackbacks and linkbacks.
 
 .. _builtin-spam-checkers:
 

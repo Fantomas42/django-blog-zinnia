@@ -76,6 +76,10 @@ class PingBackTestCase(TestCase):
         import zinnia.xmlrpc.pingback
         self.original_urlopen = zinnia.xmlrpc.pingback.urlopen
         zinnia.xmlrpc.pingback.urlopen = self.fake_urlopen
+        # Set up a stub around zinnia.spam_checker
+        import zinnia.spam_checker
+        self.original_scb = zinnia.spam_checker.SPAM_CHECKER_BACKENDS
+        zinnia.spam_checker.SPAM_CHECKER_BACKENDS = []
         # Preparing site
         self.site = Site.objects.get_current()
         # Creating tests entries
@@ -115,6 +119,8 @@ class PingBackTestCase(TestCase):
         import zinnia.xmlrpc.pingback
         zinnia.xmlrpc.pingback.urlopen = self.original_urlopen
         shortener_settings.URL_SHORTENER_BACKEND = self.original_shortener
+        import zinnia.spam_checker
+        zinnia.spam_checker.SPAM_CHECKER_BACKENDS = self.original_scb
 
     def test_generate_pingback_content(self):
         soup = BeautifulSoup(self.second_entry.content, 'html.parser')
@@ -215,6 +221,22 @@ class PingBackTestCase(TestCase):
         self.assertEqual(first_entry_reloaded.pingback_count, 1)
         self.assertTrue(self.second_entry.title in
                         self.first_entry.pingbacks[0].user_name)
+
+    def test_pingback_ping_spam_checker(self):
+        import zinnia.spam_checker
+        original_scb = zinnia.spam_checker.SPAM_CHECKER_BACKENDS
+        zinnia.spam_checker.SPAM_CHECKER_BACKENDS = (
+            'zinnia.spam_checker.backends.all_is_spam',
+        )
+        target = 'http://%s%s' % (
+            self.site.domain, self.first_entry.get_absolute_url())
+        source = 'http://%s%s' % (
+            self.site.domain, self.second_entry.get_absolute_url())
+        self.first_entry.pingback_enabled = True
+        self.first_entry.save()
+        response = self.server.pingback.ping(source, target)
+        self.assertEqual(response, 51)
+        zinnia.spam_checker.SPAM_CHECKER_BACKENDS = original_scb
 
     def test_pingback_extensions_get_pingbacks(self):
         target = 'http://%s%s' % (

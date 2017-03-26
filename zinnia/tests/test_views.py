@@ -614,6 +614,11 @@ class ViewsTestCase(ViewsBaseCase):
     def test_zinnia_trackback(self):
         # Clear the cache of user flagger to avoid error on MySQL
         get_user_flagger.cache_clear()
+        # Disable spam-checkers
+        import zinnia.spam_checker
+        original_scb = zinnia.spam_checker.SPAM_CHECKER_BACKENDS
+        zinnia.spam_checker.SPAM_CHECKER_BACKENDS = []
+
         response = self.client.post('/trackback/404/')
         trackback_url = '/trackback/%s/' % self.first_entry.pk
         self.assertEqual(response.status_code, 404)
@@ -648,15 +653,44 @@ class ViewsTestCase(ViewsBaseCase):
                                     {'url': 'http://example.com'})
         self.assertEqual(response.context['error'],
                          'Trackback is already registered')
+        zinnia.spam_checker.SPAM_CHECKER_BACKENDS = original_scb
 
     def test_zinnia_trackback_on_entry_without_author(self):
         # Clear the cache of user flagger to avoid error on MySQL
         get_user_flagger.cache_clear()
+        # Disable spam-checkers
+        import zinnia.spam_checker
+        original_scb = zinnia.spam_checker.SPAM_CHECKER_BACKENDS
+        zinnia.spam_checker.SPAM_CHECKER_BACKENDS = []
+
         self.first_entry.authors.clear()
         response = self.client.post('/trackback/%s/' % self.first_entry.pk,
                                     {'url': 'http://example.com'})
         self.assertEqual(response['Content-Type'], 'text/xml')
         self.assertEqual('error' in response.context, False)
+        zinnia.spam_checker.SPAM_CHECKER_BACKENDS = original_scb
+
+    def test_zinnia_trackback_spam_check(self):
+        # Clear the cache of user flagger to avoid error on MySQL
+        get_user_flagger.cache_clear()
+        import zinnia.spam_checker
+        original_scb = zinnia.spam_checker.SPAM_CHECKER_BACKENDS
+        zinnia.spam_checker.SPAM_CHECKER_BACKENDS = (
+            'zinnia.spam_checker.backends.all_is_spam',
+        )
+        response = self.client.post('/trackback/%s/' % self.first_entry.pk,
+                                    {'url': 'http://example.com',
+                                     'excerpt': 'Spam'})
+        self.assertEqual(response['Content-Type'], 'text/xml')
+        self.assertEqual(response.context['error'],
+                         'Trackback considered like spam')
+        zinnia.spam_checker.SPAM_CHECKER_BACKENDS = []
+        response = self.client.post('/trackback/%s/' % self.first_entry.pk,
+                                    {'url': 'http://example.com',
+                                     'excerpt': 'Spam'})
+        self.assertEqual(response['Content-Type'], 'text/xml')
+        self.assertEqual('error' in response.context, False)
+        zinnia.spam_checker.SPAM_CHECKER_BACKENDS = original_scb
 
     def test_capabilities(self):
         self.check_capabilities('/humans.txt', 'text/plain', 0)
