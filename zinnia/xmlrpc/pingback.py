@@ -17,7 +17,6 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import Resolver404
 from django.core.urlresolvers import resolve
 from django.utils import six
-from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext as _
 
@@ -30,6 +29,7 @@ from zinnia.flags import get_user_flagger
 from zinnia.models.entry import Entry
 from zinnia.settings import PINGBACK_CONTENT_LENGTH
 from zinnia.signals import pingback_was_posted
+from zinnia.spam_checker import check_is_spam
 
 UNDEFINED_ERROR = 0
 SOURCE_DOES_NOT_EXIST = 16
@@ -37,6 +37,11 @@ SOURCE_DOES_NOT_LINK = 17
 TARGET_DOES_NOT_EXIST = 32
 TARGET_IS_NOT_PINGABLE = 33
 PINGBACK_ALREADY_REGISTERED = 48
+PINGBACK_IS_SPAM = 51
+
+
+class FakeRequest(object):
+    META = {}
 
 
 def generate_pingback_content(soup, target, max_length, trunc_char='...'):
@@ -117,11 +122,24 @@ def pingback_ping(source, target):
         description = generate_pingback_content(soup, target,
                                                 PINGBACK_CONTENT_LENGTH)
 
-        pingback, created = comments.get_model().objects.get_or_create(
-            content_type=ContentType.objects.get_for_model(Entry),
-            object_pk=entry.pk, user_url=source, site=site,
-            defaults={'comment': description, 'user_name': title,
-                      'submit_date': timezone.now()})
+        pingback_klass = comments.get_model()
+        pingback_datas = {
+            'content_type': ContentType.objects.get_for_model(Entry),
+            'object_pk': entry.pk,
+            'site': site,
+            'user_url': source,
+            'user_name': title,
+            'comment': description
+        }
+        pingback = pingback_klass(**pingback_datas)
+        if check_is_spam(pingback, entry, FakeRequest()):
+            return PINGBACK_IS_SPAM
+
+        pingback_defaults = {'comment': pingback_datas.pop('comment'),
+                             'user_name': pingback_datas.pop('user_name')}
+        pingback, created = pingback_klass.objects.get_or_create(
+            defaults=pingback_defaults,
+            **pingback_datas)
         if created:
             pingback.flags.create(user=get_user_flagger(), flag=PINGBACK)
             pingback_was_posted.send(pingback.__class__,
