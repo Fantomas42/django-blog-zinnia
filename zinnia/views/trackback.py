@@ -3,7 +3,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
-from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
