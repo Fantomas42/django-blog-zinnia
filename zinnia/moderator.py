@@ -33,89 +33,6 @@ class EntryCommentModerator(CommentModerator):
     auto_moderate_comments = AUTO_MODERATE_COMMENTS
     mail_comment_notification_recipients = MAIL_COMMENT_NOTIFICATION_RECIPIENTS
 
-    def email(self, comment, entry, request):
-        """
-        Send email notifications needed.
-        """
-        if comment.is_public:
-            current_language = get_language()
-            try:
-                activate(settings.LANGUAGE_CODE)
-                if self.mail_comment_notification_recipients:
-                    self.do_email_notification(comment, entry,
-                                               request)
-                if self.email_authors:
-                    self.do_email_authors(comment, entry,
-                                          request)
-                if self.email_reply:
-                    self.do_email_reply(comment, entry, request)
-            finally:
-                activate(current_language)
-
-    def do_email_notification(self, comment, entry, request):
-        """
-        Send email notification of a new comment to site staff.
-        """
-        site = Site.objects.get_current()
-        template = loader.get_template(
-            'comments/zinnia/entry/email/notification.txt')
-        context = {'comment': comment, 'site': site,
-                   'protocol': PROTOCOL,
-                   'entry': entry}
-        subject = _('[%(site)s] New comment posted on "%(title)s"') % \
-            {'site': site.name, 'title': entry.title}
-        message = template.render(context)
-        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
-                  self.mail_comment_notification_recipients,
-                  fail_silently=not settings.DEBUG)
-
-    def do_email_authors(self, comment, entry, request):
-        """
-        Send email notification of a new comment to the authors of the entry.
-        """
-        exclude_list = self.mail_comment_notification_recipients + ['']
-        recipient_list = set(
-            [author.email for author in entry.authors.all()]) - \
-            set(exclude_list)
-        if recipient_list:
-            site = Site.objects.get_current()
-            template = loader.get_template(
-                'comments/zinnia/entry/email/authors.txt')
-            context = {'comment': comment, 'site': site,
-                       'protocol': PROTOCOL,
-                       'entry': entry}
-            subject = _('[%(site)s] New comment posted on "%(title)s"') % \
-                {'site': site.name, 'title': entry.title}
-            message = template.render(context)
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
-                      recipient_list, fail_silently=not settings.DEBUG)
-
-    def do_email_reply(self, comment, entry, request):
-        """
-        Send email notification of a new comment to the authors of
-        the previous comments.
-        """
-        exclude_list = self.mail_comment_notification_recipients + \
-            [author.email for author in entry.authors.all()] + \
-            [comment.email]
-        recipient_list = set(
-            [other_comment.email for other_comment in entry.comments
-             if other_comment.email]) - set(exclude_list)
-        if recipient_list:
-            site = Site.objects.get_current()
-            template = loader.get_template(
-                'comments/zinnia/entry/email/reply.txt')
-            context = {'comment': comment, 'site': site,
-                       'protocol': PROTOCOL,
-                       'entry': entry}
-            subject = _('[%(site)s] New comment posted on "%(title)s"') % \
-                {'site': site.name, 'title': entry.title}
-            message = template.render(context)
-            mail = EmailMessage(subject, message,
-                                settings.DEFAULT_FROM_EMAIL,
-                                bcc=recipient_list)
-            mail.send(fail_silently=not settings.DEBUG)
-
     def moderate(self, comment, entry, request):
         """
         Determine if a new comment should be marked as non-public
@@ -131,3 +48,120 @@ class EntryCommentModerator(CommentModerator):
             return True
 
         return False
+
+    def email(self, comment, entry, request):
+        """
+        Send email notifications needed.
+        """
+        current_language = get_language()
+        try:
+            activate(settings.LANGUAGE_CODE)
+            site = Site.objects.get_current()
+            if self.auto_moderate_comments or comment.is_public:
+                self.do_email_notification(comment, entry, site)
+            if comment.is_public:
+                self.do_email_authors(comment, entry, site)
+                self.do_email_reply(comment, entry, site)
+        finally:
+            activate(current_language)
+
+    def do_email_notification(self, comment, entry, site):
+        """
+        Send email notification of a new comment to site staff.
+        """
+        if not self.mail_comment_notification_recipients:
+            return
+
+        template = loader.get_template(
+            'comments/zinnia/entry/email/notification.txt')
+        context = {
+            'comment': comment,
+            'entry': entry,
+            'site': site,
+            'protocol': PROTOCOL
+        }
+        subject = _('[%(site)s] New comment posted on "%(title)s"') % \
+            {'site': site.name, 'title': entry.title}
+        message = template.render(context)
+
+        send_mail(
+            subject, message,
+            settings.DEFAULT_FROM_EMAIL,
+            self.mail_comment_notification_recipients,
+            fail_silently=not settings.DEBUG
+        )
+
+    def do_email_authors(self, comment, entry, site):
+        """
+        Send email notification of a new comment to
+        the authors of the entry.
+        """
+        if not self.email_authors:
+            return
+
+        exclude_list = self.mail_comment_notification_recipients + ['']
+        recipient_list = (
+            set([author.email for author in entry.authors.all()])
+            - set(exclude_list)
+        )
+        if not recipient_list:
+            return
+
+        template = loader.get_template(
+            'comments/zinnia/entry/email/authors.txt')
+        context = {
+            'comment': comment,
+            'entry': entry,
+            'site': site,
+            'protocol': PROTOCOL
+        }
+        subject = _('[%(site)s] New comment posted on "%(title)s"') % \
+            {'site': site.name, 'title': entry.title}
+        message = template.render(context)
+
+        send_mail(
+            subject, message,
+            settings.DEFAULT_FROM_EMAIL,
+            recipient_list,
+            fail_silently=not settings.DEBUG
+        )
+
+    def do_email_reply(self, comment, entry, site):
+        """
+        Send email notification of a new comment to
+        the authors of the previous comments.
+        """
+        if not self.email_reply:
+            return
+
+        exclude_list = (
+            self.mail_comment_notification_recipients
+            + [author.email for author in entry.authors.all()]
+            + [comment.email]
+        )
+        recipient_list = (
+            set([other_comment.email
+                 for other_comment in entry.comments
+                 if other_comment.email])
+            - set(exclude_list)
+        )
+        if not recipient_list:
+            return
+
+        template = loader.get_template(
+            'comments/zinnia/entry/email/reply.txt')
+        context = {
+            'comment': comment,
+            'entry': entry,
+            'site': site,
+            'protocol': PROTOCOL
+        }
+        subject = _('[%(site)s] New comment posted on "%(title)s"') % \
+            {'site': site.name, 'title': entry.title}
+        message = template.render(context)
+
+        mail = EmailMessage(
+            subject, message,
+            settings.DEFAULT_FROM_EMAIL,
+            bcc=recipient_list)
+        mail.send(fail_silently=not settings.DEBUG)
