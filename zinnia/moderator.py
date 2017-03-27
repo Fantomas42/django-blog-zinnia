@@ -58,7 +58,7 @@ class EntryCommentModerator(CommentModerator):
         """
         site = Site.objects.get_current()
         template = loader.get_template(
-            'comments/comment_notification_email.txt')
+            'comments/zinnia/entry/email/notification.txt')
         context = {'comment': comment, 'site': site,
                    'protocol': PROTOCOL,
                    'entry': entry}
@@ -80,7 +80,7 @@ class EntryCommentModerator(CommentModerator):
         if recipient_list:
             site = Site.objects.get_current()
             template = loader.get_template(
-                'comments/comment_authors_email.txt')
+                'comments/zinnia/entry/email/authors.txt')
             context = {'comment': comment, 'site': site,
                        'protocol': PROTOCOL,
                        'entry': entry}
@@ -103,7 +103,8 @@ class EntryCommentModerator(CommentModerator):
              if other_comment.email]) - set(exclude_list)
         if recipient_list:
             site = Site.objects.get_current()
-            template = loader.get_template('comments/comment_reply_email.txt')
+            template = loader.get_template(
+                'comments/zinnia/entry/email/reply.txt')
             context = {'comment': comment, 'site': site,
                        'protocol': PROTOCOL,
                        'entry': entry}
