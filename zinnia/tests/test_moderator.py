@@ -77,7 +77,7 @@ class CommentModeratorTestCase(TestCase):
         self.assertEqual(len(mail.outbox), 0)
         moderator = EntryCommentModerator(Entry)
         moderator.mail_comment_notification_recipients = ['admin@example.com']
-        moderator.do_email_notification(comment, self.entry, 'request')
+        moderator.do_email_notification(comment, self.entry, self.site)
         self.assertEqual(len(mail.outbox), 1)
 
     def test_do_email_authors(self):
@@ -90,10 +90,10 @@ class CommentModeratorTestCase(TestCase):
         moderator.email_authors = True
         moderator.mail_comment_notification_recipients = [
             'admin@example.com', 'webmaster@example.com']
-        moderator.do_email_authors(comment, self.entry, 'request')
+        moderator.do_email_authors(comment, self.entry, self.site)
         self.assertEqual(len(mail.outbox), 0)
         moderator.mail_comment_notification_recipients = []
-        moderator.do_email_authors(comment, self.entry, 'request')
+        moderator.do_email_authors(comment, self.entry, self.site)
         self.assertEqual(len(mail.outbox), 1)
 
     def test_do_email_authors_without_email(self):
@@ -111,7 +111,7 @@ class CommentModeratorTestCase(TestCase):
         contributor = Author.objects.create(username='contributor',
                                             email='contrib@example.com')
         self.entry.authors.add(contributor)
-        moderator.do_email_authors(comment, self.entry, 'request')
+        moderator.do_email_authors(comment, self.entry, self.site)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(
             set(mail.outbox[0].to),
@@ -119,7 +119,7 @@ class CommentModeratorTestCase(TestCase):
         mail.outbox = []
         contributor.email = ''
         contributor.save()
-        moderator.do_email_authors(comment, self.entry, 'request')
+        moderator.do_email_authors(comment, self.entry, self.site)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, ['admin@example.com'])
 
@@ -129,24 +129,24 @@ class CommentModeratorTestCase(TestCase):
             content_object=self.entry, submit_date=timezone.now(),
             site=self.site)
         moderator = EntryCommentModerator(Entry)
-        moderator.email_notification_reply = True
+        moderator.email_reply = True
         moderator.mail_comment_notification_recipients = [
             'admin@example.com', 'webmaster@example.com']
-        moderator.do_email_reply(comment, self.entry, 'request')
+        moderator.do_email_reply(comment, self.entry, self.site)
         self.assertEqual(len(mail.outbox), 0)
 
         comment = comments.get_model().objects.create(
             comment='My Comment 2', user_email='user_1@example.com',
             content_object=self.entry, is_public=True,
             submit_date=timezone.now(), site=self.site)
-        moderator.do_email_reply(comment, self.entry, 'request')
+        moderator.do_email_reply(comment, self.entry, self.site)
         self.assertEqual(len(mail.outbox), 0)
 
         comment = comments.get_model().objects.create(
             comment='My Comment 3', user_email='user_2@example.com',
             content_object=self.entry, is_public=True,
             submit_date=timezone.now(), site=self.site)
-        moderator.do_email_reply(comment, self.entry, 'request')
+        moderator.do_email_reply(comment, self.entry, self.site)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].bcc, ['user_1@example.com'])
 
@@ -154,7 +154,7 @@ class CommentModeratorTestCase(TestCase):
             comment='My Comment 4', user=self.author, is_public=True,
             content_object=self.entry, submit_date=timezone.now(),
             site=self.site)
-        moderator.do_email_reply(comment, self.entry, 'request')
+        moderator.do_email_reply(comment, self.entry, self.site)
         self.assertEqual(len(mail.outbox), 2)
         self.assertEqual(
             set(mail.outbox[1].bcc),
