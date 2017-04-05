@@ -1,2 +1,5 @@
 {% load i18n %}
-{{ obj.name }} {% trans "on" context "on date" %} {{ obj.submit_date|date:"DATETIME_FORMAT" }}
+{# Translators: Author of a comment or a linkback #}
+{% blocktrans with author=obj.name datetime=obj.submit_date|date:"DATETIME_FORMAT" trimmed %}
+{{ author }} on {{ datetime }}
+{% endblocktrans %}
