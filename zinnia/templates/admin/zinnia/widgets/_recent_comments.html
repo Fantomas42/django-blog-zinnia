@@ -1,4 +1,6 @@
-{% load i18n zinnia %}
+{% load i18n %}
+{% load zinnia %}
+
 {% for comment in comments %}
 <tr>
   <th>
@@ -7,13 +9,15 @@
   </th>
   <td>
     {% with entry=comment.content_object %}
-    <strong>{{ comment.name }}</strong> {% trans "in" %}
+    {% blocktrans with comment_author=comment.name comment_pk=comment.pk comment_author_slug=comment.user_name|slugify entry_url=entry.get_absolute_url entry_title=entry.title trimmed %}
+    <strong>{{ comment_author }}</strong> in
     <strong>
-      <a href="{{ entry.get_absolute_url }}#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
-         title="{% blocktrans with object=entry.title %}Comment on {{ object }}{% endblocktrans %}">
-        {{ entry.title }}
+      <a href="{{ entry_url }}#comment-{{ comment_pk }}-by-{{ comment_author_slug }}"
+         title="Comment on {{ entry_title }}">
+        {{ entry_title }}
       </a>
     </strong>
+    {% endblocktrans %}
     {% endwith %}
     {{ comment.comment|truncatewords:20|linebreaks }}
   </td>
