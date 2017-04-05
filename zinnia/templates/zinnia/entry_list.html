@@ -21,7 +21,7 @@
 
 {% endspaceless %}{% endblock meta-description %}
 
-{% block meta-description-page %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} {% blocktrans with object=page_obj.number %}page {{ object }}{% endblocktrans %}{% endifnotequal %}{% endif %}{% endblock meta-description-page %}
+{% block meta-description-page %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} {% blocktrans with page_number=page_obj.number %}page {{ page_number }}{% endblocktrans %}{% endifnotequal %}{% endif %}{% endblock meta-description-page %}
 
 {% block title %}{% spaceless %}
 {% if category %}
