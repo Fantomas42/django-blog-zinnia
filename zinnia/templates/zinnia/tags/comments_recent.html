@@ -3,11 +3,13 @@
   {% for comment in comments %}
   <li>
     {% with entry=comment.content_object %}
-    {{ comment.name }} {% trans "in" %}
-    <a href="{{ entry.get_absolute_url }}#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
-       title="{% blocktrans with object=entry.title %}Comment on {{ object }}{% endblocktrans %}">
-      {{ entry.title }}
+    {% blocktrans with comment_author=comment.name comment_pk=comment.pk comment_author_slug=comment.user_name|slugify entry_url=entry.get_absolute_url entry_title=entry.title trimmed %}
+    {{ comment_author }} in
+    <a href="{{ entry_url }}#comment-{{ comment_pk }}-by-{{ comment_author_slug }}"
+       title="Comment on {{ entry_title }}">
+      {{ entry_title }}
     </a>
+    {% endblocktrans %}
     {% endwith %}
   </li>
   {% empty %}
