@@ -203,19 +203,17 @@
       {% endblock comment-image %}
       {% block comment-info %}
       <p class="comment-info">
-	{% if comment.url %}
-	<a href="{{ comment.url }}" rel="external nofollow"
-           class="fn url">{{ comment.name }}</a>
-	{% else %}
-	<span class="fn">{{ comment.name }}</span>
-	{% endif %}
-	{% trans "on" context "on date" %}
-        <time class="comment-published" datetime="{{ comment.submit_date|date:"c" }}">
-          {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+        {% blocktrans with comment_url=comment.url|default:"#" comment_name=comment.name comment_human_date=comment.submit_date|date:"SHORT_DATETIME_FORMAT" comment_technical_date=comment.submit_date|date:"c" comment_pk=comment.pk comment_author_slug=comment.user_name|slugify trimmed %}
+        <a href="{{ comment_url }}" rel="external nofollow"
+           class="fn url">{{ comment_name }}</a>
+        on
+        <time class="comment-published" datetime="{{ comment_technical_date }}">
+          {{ comment_human_date }}
         </time>
-        <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
-           id="c{{ comment.pk }}" class="anchor-link"
-           title="{% trans "Direct link to this comment" %}">#</a>
+        <a href="#comment-{{ comment_pk }}-by-{{ comment_author_slug }}"
+           id="c{{ comment_pk }}" class="anchor-link"
+           title="Direct link to this comment">#</a>
+        {% endblocktrans %}
       </p>
       {% endblock comment-info %}
       {% block comment-content %}
