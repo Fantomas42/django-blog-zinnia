@@ -23,7 +23,7 @@
       {% endfor %}
       {% trans "on" context "on date" %}
       {% else %}
-      {% trans "Written on" %}
+      {% trans "Written on" context "on date" %}
       {% endif %}
       {% endwith %}
       {% endblock entry-authors %}
@@ -33,7 +33,7 @@
       {% block entry-categories %}
       {% with categories=object.categories.all %}
       {% if categories|length %}
-      {% trans "in" %}
+      {% trans "in" context "in categories" %}
       {% for category in categories %}
       <a href="{{ category.get_absolute_url }}"
          title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
