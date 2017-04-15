@@ -1,10 +1,9 @@
 import django
-from django.conf import settings
 from django.db import migrations
 from django.db import models
-#from django.utils import timezone
 
 import swapper
+
 import tagging
 
 import zinnia.settings

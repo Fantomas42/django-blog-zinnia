@@ -4,6 +4,7 @@ from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 from django.utils.translation import ugettext_lazy as _
 
 from mptt.forms import TreeNodeChoiceField
+
 import swapper
 
 from zinnia.admin.fields import MPTTModelMultipleChoiceField
@@ -62,7 +63,7 @@ class EntryAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EntryAdminForm, self).__init__(*args, **kwargs)
 
-        Entry = swapper.load_model("zinnia", "Entry")
+        Entry = swapper.load_model("zinnia", "Entry")  # noqa: N806
 
         self.fields['categories'].widget = RelatedFieldWidgetWrapper(
             self.fields['categories'].widget,

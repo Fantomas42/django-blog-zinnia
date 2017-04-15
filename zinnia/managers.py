@@ -16,7 +16,7 @@ def tags_published():
     """
     from tagging.models import Tag
     import swapper
-    Entry = swapper.load_model("zinnia", "Entry")
+    Entry = swapper.load_model("zinnia", "Entry")  # noqa: N806
 
     tags_entry_published = Tag.objects.usage_for_queryset(
         Entry.published.all())

@@ -82,7 +82,7 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
         """
         Returns the list of tags to auto-complete.
         """
-        Entry = swapper.load_model("zinnia", "Entry")
+        Entry = swapper.load_model("zinnia", "Entry")  # noqa: N806
         return [tag.name for tag in
                 Tag.objects.usage_for_model(Entry)]
 

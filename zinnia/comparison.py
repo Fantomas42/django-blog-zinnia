@@ -9,6 +9,7 @@ from django.utils.functional import cached_property
 from django.utils.html import strip_tags
 
 import regex as re
+
 import swapper
 
 from zinnia.settings import COMPARISON_FIELDS

@@ -17,9 +17,9 @@ from zinnia import url_shortener as shortener_settings
 from zinnia.flags import PINGBACK
 from zinnia.flags import TRACKBACK
 from zinnia.managers import PUBLISHED
+from zinnia.models import entry
 from zinnia.models.author import Author
 from zinnia.models.entry import Entry
-from zinnia.models import entry
 from zinnia.signals import disconnect_discussion_signals
 from zinnia.signals import disconnect_entry_signals
 from zinnia.tests.utils import datetime
