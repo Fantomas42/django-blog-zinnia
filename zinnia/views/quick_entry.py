@@ -16,10 +16,13 @@ from django.utils.encoding import smart_str
 from django.utils.html import linebreaks
 from django.views.generic.base import View
 
+import swapper
+
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
-from zinnia.models.entry import Entry
 from zinnia.settings import MARKUP_LANGUAGE
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class QuickEntryForm(forms.ModelForm):

@@ -22,17 +22,21 @@ from django.utils.translation import ugettext as _
 
 import django_comments as comments
 
+import swapper
+
 from tagging.models import Tag
 from tagging.models import TaggedItem
 
 from zinnia.models.author import Author
-from zinnia.models.entry import Entry
 from zinnia.settings import COPYRIGHT
 from zinnia.settings import FEEDS_FORMAT
 from zinnia.settings import FEEDS_MAX_ITEMS
 from zinnia.settings import PROTOCOL
 from zinnia.templatetags.zinnia import get_gravatar
 from zinnia.views.categories import get_category_or_404
+
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class ZinniaFeed(Feed):

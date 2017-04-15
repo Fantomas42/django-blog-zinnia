@@ -11,12 +11,15 @@ import django_comments as comments
 from django_comments.signals import comment_was_flagged
 from django_comments.signals import comment_was_posted
 
+import swapper
+
 from zinnia import settings
 from zinnia.comparison import EntryPublishedVectorBuilder
-from zinnia.models.entry import Entry
 from zinnia.ping import DirectoryPinger
 from zinnia.ping import ExternalUrlsPinger
 
+
+Entry = swapper.load_model("zinnia", "Entry")
 comment_model = comments.get_model()
 ENTRY_PS_PING_DIRECTORIES = 'zinnia.entry.post_save.ping_directories'
 ENTRY_PS_PING_EXTERNAL_URLS = 'zinnia.entry.post_save.ping_external_urls'

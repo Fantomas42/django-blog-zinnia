@@ -19,7 +19,7 @@ from zinnia.flags import TRACKBACK
 from zinnia.managers import PUBLISHED
 from zinnia.models.author import Author
 from zinnia.models.entry import Entry
-from zinnia.models_bases import entry
+from zinnia.models import entry
 from zinnia.signals import disconnect_discussion_signals
 from zinnia.signals import disconnect_entry_signals
 from zinnia.tests.utils import datetime

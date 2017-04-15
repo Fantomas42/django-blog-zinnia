@@ -2,7 +2,9 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 
-from zinnia.models.entry import Entry
+import swapper
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class EntryShortLink(RedirectView):

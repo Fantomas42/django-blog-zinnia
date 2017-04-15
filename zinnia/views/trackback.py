@@ -9,11 +9,15 @@ from django.views.generic.base import TemplateView
 
 import django_comments as comments
 
+import swapper
+
 from zinnia.flags import TRACKBACK
 from zinnia.flags import get_user_flagger
-from zinnia.models.entry import Entry
 from zinnia.signals import trackback_was_posted
 from zinnia.spam_checker import check_is_spam
+
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class EntryTrackback(TemplateView):

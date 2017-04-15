@@ -9,7 +9,8 @@ from django.views.generic.dates import BaseTodayArchiveView
 from django.views.generic.dates import BaseWeekArchiveView
 from django.views.generic.dates import BaseYearArchiveView
 
-from zinnia.models.entry import Entry
+import swapper
+
 from zinnia.views.mixins.archives import ArchiveMixin
 from zinnia.views.mixins.archives import PreviousNextPublishedMixin
 from zinnia.views.mixins.callable_queryset import CallableQuerysetMixin
@@ -18,6 +19,8 @@ from zinnia.views.mixins.templates import \
     EntryQuerysetArchiveTemplateResponseMixin
 from zinnia.views.mixins.templates import \
     EntryQuerysetArchiveTodayTemplateResponseMixin
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class EntryArchiveMixin(ArchiveMixin,

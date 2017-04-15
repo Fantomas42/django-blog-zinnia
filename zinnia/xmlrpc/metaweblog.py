@@ -19,14 +19,17 @@ from django.utils.translation import gettext as _
 
 from django_xmlrpc.decorators import xmlrpc_func
 
+import swapper
+
 from tagging.models import Tag
 
 from zinnia.managers import DRAFT, PUBLISHED
 from zinnia.models.author import Author
 from zinnia.models.category import Category
-from zinnia.models.entry import Entry
 from zinnia.settings import PROTOCOL
 
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 # http://docs.nucleuscms.org/blog/12#errorcodes
 LOGIN_ERROR = 801

@@ -1,9 +1,13 @@
 """Views for Zinnia channels"""
 from django.views.generic.list import ListView
 
-from zinnia.models.entry import Entry
+import swapper
+
 from zinnia.settings import PAGINATION
 from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
+
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class BaseEntryChannel(object):
