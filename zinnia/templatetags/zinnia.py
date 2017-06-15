@@ -23,6 +23,8 @@ from django.utils.safestring import mark_safe
 from django_comments import get_model as get_comment_model
 from django_comments.models import CommentFlag
 
+import swapper
+
 from tagging.models import Tag
 from tagging.utils import calculate_cloud
 
@@ -37,11 +39,12 @@ from ..managers import DRAFT
 from ..managers import tags_published
 from ..models.author import Author
 from ..models.category import Category
-from ..models.entry import Entry
 from ..settings import ENTRY_LOOP_TEMPLATES
 from ..settings import PROTOCOL
 from ..templates import loop_template_list
 
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 WIDONT_REGEXP = re.compile(
     r'\s+(\S+\s*)$')

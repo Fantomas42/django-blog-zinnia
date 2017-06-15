@@ -14,11 +14,13 @@ class ZinniaConfig(AppConfig):
     def ready(self):
         from django_comments.moderation import moderator
 
+        import swapper
+
         from zinnia.signals import connect_entry_signals
         from zinnia.signals import connect_discussion_signals
         from zinnia.moderator import EntryCommentModerator
 
-        entry_klass = self.get_model('Entry')
+        entry_klass = swapper.load_model('zinnia', 'Entry')
         # Register the comment moderator on Entry
         moderator.register(entry_klass, EntryCommentModerator)
         # Connect the signals

@@ -5,7 +5,7 @@ from django.db import models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('zinnia', '0001_initial'),
+        ('zinnia', '0002_create_entry'),
     ]
 
     operations = [

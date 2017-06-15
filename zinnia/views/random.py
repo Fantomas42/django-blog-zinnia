@@ -1,7 +1,9 @@
 """Views for Zinnia random entry"""
 from django.views.generic.base import RedirectView
 
-from zinnia.models.entry import Entry
+import swapper
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class EntryRandom(RedirectView):

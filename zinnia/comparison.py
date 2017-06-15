@@ -10,11 +10,13 @@ from django.utils.html import strip_tags
 
 import regex as re
 
-from zinnia.models.entry import Entry
+import swapper
+
 from zinnia.settings import COMPARISON_FIELDS
 from zinnia.settings import STOP_WORDS
 
 
+Entry = swapper.load_model("zinnia", "Entry")
 PUNCTUATION = re.compile(r'\p{P}+')
 
 

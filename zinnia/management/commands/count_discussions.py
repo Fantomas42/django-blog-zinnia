@@ -6,8 +6,12 @@ import sys
 from django.core.management.base import BaseCommand
 from django.utils.encoding import smart_str
 
-from zinnia.models.entry import Entry
+import swapper
+
 from zinnia.signals import disconnect_entry_signals
+
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class Command(BaseCommand):

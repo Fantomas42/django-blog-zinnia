@@ -4,13 +4,17 @@ from django.core.urlresolvers import reverse
 from django.db.models import Count
 from django.db.models import Max
 
+import swapper
+
 from tagging.models import Tag
 from tagging.models import TaggedItem
 
 from zinnia.models.author import Author
 from zinnia.models.category import Category
-from zinnia.models.entry import Entry
 from zinnia.settings import PROTOCOL
+
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class ZinniaSitemap(Sitemap):

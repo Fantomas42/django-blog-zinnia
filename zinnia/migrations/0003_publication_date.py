@@ -2,9 +2,11 @@ from django.db import migrations
 from django.db import models
 from django.utils import timezone
 
+import swapper
+
 
 def fill_publication_date(apps, schema_editor):
-    entry_klass = apps.get_model('zinnia', 'Entry')
+    entry_klass = swapper.load_model('zinnia', 'Entry')
     for entry in entry_klass.objects.all():
         entry.publication_date = entry.creation_date
         entry.save()

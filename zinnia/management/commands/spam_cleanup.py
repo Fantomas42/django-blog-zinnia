@@ -6,7 +6,10 @@ from django.core.management.base import BaseCommand
 
 import django_comments as comments
 
-from zinnia.models.entry import Entry
+import swapper
+
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class Command(BaseCommand):

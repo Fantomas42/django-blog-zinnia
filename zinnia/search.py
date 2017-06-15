@@ -17,10 +17,14 @@ from pyparsing import printables
 from pyparsing import quotedString
 from pyparsing import removeQuotes
 
+import swapper
+
 from zinnia.models.author import Author
-from zinnia.models.entry import Entry
 from zinnia.settings import SEARCH_FIELDS
 from zinnia.settings import STOP_WORDS
+
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 def create_q(token):

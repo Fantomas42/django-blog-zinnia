@@ -24,13 +24,16 @@ import django_comments as comments
 
 from django_xmlrpc.decorators import xmlrpc_func
 
+import swapper
+
 from zinnia.flags import PINGBACK
 from zinnia.flags import get_user_flagger
-from zinnia.models.entry import Entry
 from zinnia.settings import PINGBACK_CONTENT_LENGTH
 from zinnia.signals import pingback_was_posted
 from zinnia.spam_checker import check_is_spam
 
+
+Entry = swapper.load_model("zinnia", "Entry")
 UNDEFINED_ERROR = 0
 SOURCE_DOES_NOT_EXIST = 16
 SOURCE_DOES_NOT_LINK = 17

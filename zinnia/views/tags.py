@@ -5,14 +5,17 @@ from django.utils.translation import ugettext as _
 from django.views.generic.list import BaseListView
 from django.views.generic.list import ListView
 
+import swapper
+
 from tagging.models import Tag
 from tagging.models import TaggedItem
 from tagging.utils import get_tag
 
-from zinnia.models.entry import Entry
 from zinnia.settings import PAGINATION
 from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
 from zinnia.views.mixins.templates import EntryQuerysetTemplateResponseMixin
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class TagList(ListView):

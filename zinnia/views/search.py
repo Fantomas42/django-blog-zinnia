@@ -2,9 +2,12 @@
 from django.utils.translation import ugettext as _
 from django.views.generic.list import ListView
 
-from zinnia.models.entry import Entry
+import swapper
+
 from zinnia.settings import PAGINATION
 from zinnia.views.mixins.prefetch_related import PrefetchCategoriesAuthorsMixin
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 
 class BaseEntrySearch(object):

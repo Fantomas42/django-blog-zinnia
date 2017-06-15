@@ -10,7 +10,9 @@ from django.utils.dates import WEEKDAYS_ABBR
 from django.utils.formats import date_format
 from django.utils.formats import get_format
 
-from zinnia.models.entry import Entry
+import swapper
+
+Entry = swapper.load_model("zinnia", "Entry")
 
 AMERICAN_TO_EUROPEAN_WEEK_DAYS = [6, 0, 1, 2, 3, 4, 5]
 

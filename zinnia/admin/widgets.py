@@ -10,9 +10,9 @@ from django.utils.html import escape
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
-from tagging.models import Tag
+import swapper
 
-from zinnia.models import Entry
+from tagging.models import Tag
 
 
 class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
@@ -82,6 +82,7 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
         """
         Returns the list of tags to auto-complete.
         """
+        Entry = swapper.load_model("zinnia", "Entry")  # noqa: N806
         return [tag.name for tag in
                 Tag.objects.usage_for_model(Entry)]
 
