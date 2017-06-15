@@ -66,6 +66,7 @@ or you can visit these websites who use Zinnia.
 * `Bookshadow`_
 * `Future Proof Games`_
 * `Programeria`_
+* `Tihomir Blajev Blog`_
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
@@ -127,6 +128,7 @@ More information and help available at these URLs:
 .. _`Bookshadow`: http://bookshadow.com/weblog/
 .. _`Future Proof Games`: http://futureproofgames.com/blog/
 .. _`Programeria`: https://programeria.pl/
+.. _`Tihomir Blajev Blog`: http://www.tihoblajev.com/weblog/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://docs.django-blog-zinnia.com/
 .. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia
