@@ -18,14 +18,14 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
 
         option = widget.render_option([], 1, 'Test', (4, 5))
 
-        self.assertEqual(
+        self.assertHTMLEqual(
             option,
             '<option value="1" data-tree-id="4"'
             ' data-left-value="5">Test</option>')
 
         option = widget.render_option(['0', '1', '2'], 1, 'Test', (4, 5))
 
-        self.assertEqual(
+        self.assertHTMLEqual(
             option,
             '<option value="1" selected="selected" data-tree-id="4"'
             ' data-left-value="5">Test</option>')
@@ -35,7 +35,7 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
 
         option = widget.render_option([], 1, 'тест', (1, 1))
 
-        self.assertEqual(
+        self.assertHTMLEqual(
             option,
             smart_text('<option value="1" data-tree-id="1"'
                        ' data-left-value="1">тест</option>'))
@@ -49,13 +49,13 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
             (2, '|-- Category 2', (1, 2))]
         widget = MPTTFilteredSelectMultiple('test', False, choices=choices)
 
-        self.assertEqual(
+        self.assertHTMLEqual(
             widget.render_options([]),
             '<option value="1" data-tree-id="1" data-left-value="1">'
             'Category 1</option>\n<option value="2" data-tree-id="1" '
             'data-left-value="2">|-- Category 2</option>')
 
-        self.assertEqual(
+        self.assertHTMLEqual(
             widget.render_options([2]),
             '<option value="1" data-tree-id="1" data-left-value="1">'
             'Category 1</option>\n<option value="2" selected="selected" '
@@ -96,7 +96,7 @@ class TagAutoCompleteTestCase(TestCase):
                   'tags': 'zinnia, test',
                   'slug': 'my-entry'}
         Entry.objects.create(**params)
-        self.assertEqual(
+        self.assertHTMLEqual(
             widget.render('tag', 'test,'),
             '<input class="vTextField" name="tag" type="text" value="test," />'
             '\n<script type="text/javascript">\n(function($) {'
@@ -116,7 +116,7 @@ class TagAutoCompleteTestCase(TestCase):
                   'slug': 'my-entry'}
         Entry.objects.create(**params)
         self.maxDiff = None
-        self.assertEqual(
+        self.assertHTMLEqual(
             widget.render('tag', 'test,'),
             '<input class="vTextField" name="tag" type="text" value="test," />'
             '\n<script type="text/javascript">\n(function($) {'
@@ -142,7 +142,7 @@ class MiniTextareaTestCase(TestCase):
 
     def test_render(self):
         widget = MiniTextarea()
-        self.assertEqual(
+        self.assertHTMLEqual(
             widget.render('field', 'value'),
             '<textarea class="vLargeTextField" '
             'cols="40" name="field" rows="2">'
