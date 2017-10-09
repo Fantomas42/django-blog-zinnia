@@ -21,7 +21,7 @@ install:
       then
         pip install mysqlclient;
         mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql;
-        mysql -e 'create database IF NOT EXISTS zinnia_test CHARACTER SET utf8 COLLATE utf8_general_ci;';
+        mysql -u root -e 'create database IF NOT EXISTS zinnia_test CHARACTER SET utf8 COLLATE utf8_general_ci;';
       fi"
 before_script:
     - ./bin/flake8 zinnia
