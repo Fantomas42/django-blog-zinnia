@@ -11,6 +11,146 @@ from zinnia.signals import disconnect_entry_signals
 
 class MPTTFilteredSelectMultipleTestCase(TestCase):
 
+    def test_optgroups(self):
+        choices = [
+            (1, 'Category 1', (1, 1)),
+            (2, '|-- Category 2', (1, 2))
+        ]
+
+        widget = MPTTFilteredSelectMultiple(
+            'test', False, choices=choices)
+
+        optgroups = widget.optgroups('toto', '1')
+        self.assertEquals(
+            optgroups,
+            [
+                (
+                    None, [
+                        {
+                            'index': '0',
+                            'name': 'toto',
+                            'template_name':
+                            'django/forms/widgets/select_option.html',
+                            'type': 'select',
+                            'selected': True,
+                            'attrs': {
+                                'selected': True,
+                                'data-tree-id': 1,
+                                'data-left-value': 1
+                            },
+                            'value': 1,
+                            'label': 'Category 1'
+                        }
+                    ], 0
+                ), (
+                    None, [
+                        {
+                            'index': '1',
+                            'name': 'toto',
+                            'template_name':
+                            'django/forms/widgets/select_option.html',
+                            'type': 'select',
+                            'selected': False,
+                            'attrs': {
+                                'data-tree-id': 1,
+                                'data-left-value': 2
+                            },
+                            'value': 2,
+                            'label': '|-- Category 2'
+                        }
+                    ], 1
+                )
+            ]
+        )
+
+        optgroups = widget.optgroups('toto', ['2'])
+        self.assertEquals(
+            optgroups,
+            [
+                (
+                    None, [
+                        {
+                            'index': '0',
+                            'name': 'toto',
+                            'template_name':
+                            'django/forms/widgets/select_option.html',
+                            'type': 'select',
+                            'selected': False,
+                            'attrs': {
+                                'data-tree-id': 1,
+                                'data-left-value': 1
+                            },
+                            'value': 1,
+                            'label': 'Category 1'
+                        }
+                    ], 0
+                ), (
+                    None, [
+                        {
+                            'index': '1',
+                            'name': 'toto',
+                            'template_name':
+                            'django/forms/widgets/select_option.html',
+                            'type': 'select',
+                            'selected': True,
+                            'attrs': {
+                                'selected': True,
+                                'data-tree-id': 1,
+                                'data-left-value': 2
+                            },
+                            'value': 2,
+                            'label': '|-- Category 2'
+                        }
+                    ], 1
+                )
+            ]
+        )
+
+        optgroups = widget.optgroups('toto', '1', {'attribute': 'value'})
+        self.assertEquals(
+            optgroups,
+            [
+                (
+                    None, [
+                        {
+                            'index': '0',
+                            'name': 'toto',
+                            'template_name':
+                            'django/forms/widgets/select_option.html',
+                            'type': 'select',
+                            'selected': True,
+                            'attrs': {
+                                'selected': True,
+                                'attribute': 'value',
+                                'data-tree-id': 1,
+                                'data-left-value': 1
+                            },
+                            'value': 1,
+                            'label': 'Category 1'
+                        }
+                    ], 0
+                ), (
+                    None, [
+                        {
+                            'index': '1',
+                            'name': 'toto',
+                            'template_name':
+                            'django/forms/widgets/select_option.html',
+                            'type': 'select',
+                            'selected': False,
+                            'attrs': {
+                                'attribute': 'value',
+                                'data-tree-id': 1,
+                                'data-left-value': 2
+                            },
+                            'value': 2,
+                            'label': '|-- Category 2'
+                        }
+                    ], 1
+                )
+            ]
+        )
+
     @override_settings(STATIC_URL='/s/')
     def test_media(self):
         medias = MPTTFilteredSelectMultiple('test', False).media
