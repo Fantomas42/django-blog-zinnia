@@ -83,7 +83,7 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
         return [tag.name for tag in
                 Tag.objects.usage_for_model(Entry)]
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         """
         Render the default widget and initialize select2.
         """
