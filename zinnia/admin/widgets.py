@@ -1,13 +1,12 @@
 """Widgets for Zinnia admin"""
 import json
 
+from itertools import chain
+
 from django.contrib.admin import widgets
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.forms import Media
-from django.utils import six
 from django.utils.encoding import force_text
-from django.utils.html import escape
-from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
 from tagging.models import Tag
@@ -19,6 +18,7 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
     """
     MPTT version of FilteredSelectMultiple.
     """
+    option_inherits_attrs = True
 
     def __init__(self, verbose_name, is_stacked=False, attrs=None, choices=()):
         """
@@ -27,40 +27,38 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
         super(MPTTFilteredSelectMultiple, self).__init__(
             verbose_name, is_stacked, attrs, choices)
 
-    def render_option(self, selected_choices, option_value,
-                      option_label, sort_fields):
-        """
-        Overrides the render_option method to handle
-        the sort_fields argument.
-        """
-        option_value = force_text(option_value)
-        option_label = escape(force_text(option_label))
+    def optgroups(self, name, value, attrs=None):
+        """Return a list of optgroups for this widget."""
+        groups = []
+        has_selected = False
+        if attrs is None:
+            attrs = {}
 
-        if option_value in selected_choices:
-            selected_html = mark_safe(' selected="selected"')
-        else:
-            selected_html = ''
-        return format_html(
-            six.text_type('<option value="{1}"{2} data-tree-id="{3}"'
-                          ' data-left-value="{4}">{0}</option>'),
-            option_label, option_value, selected_html,
-            sort_fields[0], sort_fields[1])
+        for index, (option_value, option_label, sort_fields) in enumerate(
+                chain(self.choices)):
 
-    def render_options(self, selected_choices):
-        """
-        This is copy'n'pasted from django.forms.widgets Select(Widget)
-        change to the for loop and render_option so they will unpack
-        and use our extra tuple of mptt sort fields (if you pass in
-        some default choices for this field, make sure they have the
-        extra tuple too!).
-        """
-        selected_choices = set(force_text(v) for v in selected_choices)
-        output = []
-        for option_value, option_label, sort_fields in self.choices:
-            output.append(self.render_option(
-                selected_choices, option_value,
-                option_label, sort_fields))
-        return '\n'.join(output)
+            # Set tree attributes
+            attrs['data-tree-id'] = sort_fields[0]
+            attrs['data-left-value'] = sort_fields[1]
+
+            subgroup = []
+            subindex = None
+            choices = [(option_value, option_label)]
+            groups.append((None, subgroup, index))
+
+            for subvalue, sublabel in choices:
+                selected = (
+                    force_text(subvalue) in value and
+                    (has_selected is False or self.allow_multiple_selected)
+                )
+                if selected is True and has_selected is False:
+                    has_selected = True
+                subgroup.append(self.create_option(
+                    name, subvalue, sublabel, selected, index,
+                    subindex=subindex, attrs=attrs,
+                ))
+
+        return groups
 
     @property
     def media(self):
@@ -85,7 +83,7 @@ class TagAutoComplete(widgets.AdminTextInputWidget):
         return [tag.name for tag in
                 Tag.objects.usage_for_model(Entry)]
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         """
         Render the default widget and initialize select2.
         """

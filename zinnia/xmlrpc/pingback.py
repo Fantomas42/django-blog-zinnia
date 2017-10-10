@@ -14,8 +14,8 @@ from bs4 import BeautifulSoup
 
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import Resolver404
-from django.core.urlresolvers import resolve
+from django.urls import Resolver404
+from django.urls import resolve
 from django.utils import six
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext as _

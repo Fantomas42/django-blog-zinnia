@@ -3,7 +3,6 @@ from datetime import date
 
 from django.contrib.sites.models import Site
 from django.core.paginator import Paginator
-from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.template import Context
 from django.template import Template
@@ -11,6 +10,7 @@ from django.template import TemplateDoesNotExist
 from django.template import TemplateSyntaxError
 from django.test import TestCase
 from django.test.utils import override_settings
+from django.urls import reverse
 from django.utils import timezone
 
 import django_comments as comments

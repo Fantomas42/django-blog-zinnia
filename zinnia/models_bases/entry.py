@@ -5,6 +5,7 @@ from django.contrib.sites.models import Site
 from django.db import models
 from django.db.models import Q
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import strip_tags
@@ -166,7 +167,6 @@ class CoreEntry(models.Model):
         self.last_update = timezone.now()
         super(CoreEntry, self).save(*args, **kwargs)
 
-    @models.permalink
     def get_absolute_url(self):
         """
         Builds and returns the entry's URL based on
@@ -175,7 +175,7 @@ class CoreEntry(models.Model):
         publication_date = self.publication_date
         if timezone.is_aware(publication_date):
             publication_date = timezone.localtime(publication_date)
-        return ('zinnia:entry_detail', (), {
+        return reverse('zinnia:entry_detail', kwargs={
             'year': publication_date.strftime('%Y'),
             'month': publication_date.strftime('%m'),
             'day': publication_date.strftime('%d'),

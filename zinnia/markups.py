@@ -24,8 +24,7 @@ def textile(value):
                       RuntimeWarning)
         return value
 
-    return textile.textile(force_text(value),
-                           encoding='utf-8', output='utf-8')
+    return textile.textile(force_text(value))
 
 
 def markdown(value, extensions=MARKDOWN_EXTENSIONS):

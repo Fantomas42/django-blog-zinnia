@@ -1,3 +1,16 @@
+0.19
+---
+
+* Compatibility with Django 1.11
+* Fix Threading issues in tests
+* Improve comparison of entries
+* Send mail to staff in case of comment moderation
+* Implement spam-checkers on Pingbacks and Trackbacks
+* Return the number of entries in the category_tree templatetag
+* Integration via BrowserSync
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.18.1...v0.19
+
 0.18.1
 ------
 
