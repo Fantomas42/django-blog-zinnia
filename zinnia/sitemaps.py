@@ -1,8 +1,8 @@
 """Sitemaps for Zinnia"""
 from django.contrib.sitemaps import Sitemap
-from django.core.urlresolvers import reverse
 from django.db.models import Count
 from django.db.models import Max
+from django.urls import reverse
 
 from tagging.models import Tag
 from tagging.models import TaggedItem
