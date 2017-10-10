@@ -1,36 +1,34 @@
 """Test cases for Zinnia's markups"""
-import sys
-from unittest import skipUnless
+import warnings
 try:
     import builtins
 except ImportError:  # Python 2
     import __builtin__ as builtins
-import warnings
 
 from django.test import TestCase
 
 from zinnia import markups
-from zinnia.markups import textile
+from zinnia.markups import html_format
 from zinnia.markups import markdown
 from zinnia.markups import restructuredtext
-from zinnia.markups import html_format
-from zinnia.tests.utils import is_lib_available
+from zinnia.markups import textile
+from zinnia.tests.utils import skip_if_lib_not_available
 
 
 class MarkupsTestCase(TestCase):
     text = 'Hello *World* !'
 
-    @skipUnless(is_lib_available('textile'), 'Textile is not available')
+    @skip_if_lib_not_available('textile')
     def test_textile(self):
         self.assertEqual(textile(self.text).strip(),
                          '<p>Hello <strong>World</strong> !</p>')
 
-    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    @skip_if_lib_not_available('markdown')
     def test_markdown(self):
         self.assertEqual(markdown(self.text).strip(),
                          '<p>Hello <em>World</em> !</p>')
 
-    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    @skip_if_lib_not_available('markdown')
     def test_markdown_extensions(self):
         text = '[TOC]\n\n# Header 1\n\n## Header 2'
         self.assertEqual(markdown(text).strip(),
@@ -53,12 +51,12 @@ class MarkupsTestCase(TestCase):
                          '<a class="headerlink" href="#header-2" '
                          'title="Permanent link">PL</a></h2>')
 
-    @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
+    @skip_if_lib_not_available('docutils')
     def test_restructuredtext(self):
         self.assertEqual(restructuredtext(self.text).strip(),
                          '<p>Hello <em>World</em> !</p>')
 
-    @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
+    @skip_if_lib_not_available('docutils')
     def test_restructuredtext_settings_override(self):
         text = 'My email is toto@example.com'
         self.assertEqual(restructuredtext(text).strip(),
@@ -72,8 +70,6 @@ class MarkupsTestCase(TestCase):
             'toto<span>&#64;</span>example<span>&#46;</span>com</a></p>')
 
 
-@skipUnless(sys.version_info >= (2, 7, 0),
-            'Cannot run these tests under Python 2.7')
 class MarkupFailImportTestCase(TestCase):
     exclude_list = ['textile', 'markdown', 'docutils']
 
@@ -137,7 +133,7 @@ class HtmlFormatTestCase(TestCase):
         self.assertEquals(html_format('Hello\nworld!'),
                           '<p>Hello<br />world!</p>')
 
-    @skipUnless(is_lib_available('textile'), 'Textile is not available')
+    @skip_if_lib_not_available('textile')
     def test_html_content_textitle(self):
         markups.MARKUP_LANGUAGE = 'textile'
         value = 'Hello world !\n\n' \
@@ -149,7 +145,7 @@ class HtmlFormatTestCase(TestCase):
                          '<ul>\n\t\t<li>Item 1</li>\n\t\t'
                          '<li>Item 2</li>\n\t</ul>')
 
-    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    @skip_if_lib_not_available('markdown')
     def test_html_content_markdown(self):
         markups.MARKUP_LANGUAGE = 'markdown'
         value = 'Hello world !\n\n' \
@@ -161,7 +157,7 @@ class HtmlFormatTestCase(TestCase):
                          '\n<ul>\n<li>Item 1</li>\n'
                          '<li>Item 2</li>\n</ul>')
 
-    @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
+    @skip_if_lib_not_available('docutils')
     def test_html_content_restructuredtext(self):
         markups.MARKUP_LANGUAGE = 'restructuredtext'
         value = 'Hello world !\n\n' \

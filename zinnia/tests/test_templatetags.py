@@ -1,60 +1,60 @@
 """Test cases for Zinnia's templatetags"""
 from datetime import date
 
-from django.test import TestCase
-from django.utils import timezone
+from django.contrib.sites.models import Site
+from django.core.paginator import Paginator
+from django.db.models.signals import post_save
 from django.template import Context
 from django.template import Template
-from django.template import TemplateSyntaxError
 from django.template import TemplateDoesNotExist
-from django.db.models.signals import post_save
-from django.core.paginator import Paginator
-from django.core.urlresolvers import reverse
-from django.contrib.sites.models import Site
+from django.template import TemplateSyntaxError
+from django.test import TestCase
 from django.test.utils import override_settings
+from django.urls import reverse
+from django.utils import timezone
 
 import django_comments as comments
 from django_comments.models import CommentFlag
 
 from tagging.models import Tag
 
-from zinnia.models.entry import Entry
-from zinnia.models.author import Author
-from zinnia.models.category import Category
+from zinnia.flags import PINGBACK, TRACKBACK
 from zinnia.managers import DRAFT
 from zinnia.managers import PUBLISHED
-from zinnia.flags import PINGBACK, TRACKBACK
-from zinnia.tests.utils import datetime
-from zinnia.tests.utils import urlEqual
-from zinnia.tests.utils import skipIfCustomUser
-from zinnia.signals import disconnect_entry_signals
+from zinnia.models.author import Author
+from zinnia.models.category import Category
+from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.signals import disconnect_entry_signals
 from zinnia.signals import flush_similar_cache_handler
-from zinnia.templatetags.zinnia import widont
-from zinnia.templatetags.zinnia import week_number
-from zinnia.templatetags.zinnia import get_authors
-from zinnia.templatetags.zinnia import get_gravatar
-from zinnia.templatetags.zinnia import get_tag_cloud
-from zinnia.templatetags.zinnia import get_categories
-from zinnia.templatetags.zinnia import get_categories_tree
-from zinnia.templatetags.zinnia import zinnia_pagination
-from zinnia.templatetags.zinnia import zinnia_statistics
-from zinnia.templatetags.zinnia import get_draft_entries
-from zinnia.templatetags.zinnia import get_recent_entries
-from zinnia.templatetags.zinnia import get_random_entries
-from zinnia.templatetags.zinnia import zinnia_breadcrumbs
-from zinnia.templatetags.zinnia import get_popular_entries
-from zinnia.templatetags.zinnia import get_similar_entries
-from zinnia.templatetags.zinnia import get_recent_comments
-from zinnia.templatetags.zinnia import get_recent_linkbacks
-from zinnia.templatetags.zinnia import get_featured_entries
-from zinnia.templatetags.zinnia import get_calendar_entries
+from zinnia.templatetags import zinnia as ztemplatetags
+from zinnia.templatetags.zinnia import comment_admin_urlname
 from zinnia.templatetags.zinnia import get_archives_entries
 from zinnia.templatetags.zinnia import get_archives_entries_tree
+from zinnia.templatetags.zinnia import get_authors
+from zinnia.templatetags.zinnia import get_calendar_entries
+from zinnia.templatetags.zinnia import get_categories
+from zinnia.templatetags.zinnia import get_categories_tree
+from zinnia.templatetags.zinnia import get_draft_entries
+from zinnia.templatetags.zinnia import get_featured_entries
+from zinnia.templatetags.zinnia import get_gravatar
+from zinnia.templatetags.zinnia import get_popular_entries
+from zinnia.templatetags.zinnia import get_random_entries
+from zinnia.templatetags.zinnia import get_recent_comments
+from zinnia.templatetags.zinnia import get_recent_entries
+from zinnia.templatetags.zinnia import get_recent_linkbacks
+from zinnia.templatetags.zinnia import get_similar_entries
+from zinnia.templatetags.zinnia import get_tag_cloud
 from zinnia.templatetags.zinnia import user_admin_urlname
-from zinnia.templatetags.zinnia import comment_admin_urlname
+from zinnia.templatetags.zinnia import week_number
+from zinnia.templatetags.zinnia import widont
+from zinnia.templatetags.zinnia import zinnia_breadcrumbs
 from zinnia.templatetags.zinnia import zinnia_loop_template
-from zinnia.templatetags import zinnia as ztemplatetags
+from zinnia.templatetags.zinnia import zinnia_pagination
+from zinnia.templatetags.zinnia import zinnia_statistics
+from zinnia.tests.utils import datetime
+from zinnia.tests.utils import skip_if_custom_user
+from zinnia.tests.utils import url_equal
 
 
 class TemplateTagsTestCase(TestCase):
@@ -115,15 +115,18 @@ class TemplateTagsTestCase(TestCase):
 
         category = Category.objects.create(title='Category 1',
                                            slug='category-1')
+        self.entry.categories.add(category)
+        self.publish_entry()
         source_context = Context({'category': category})
         with self.assertNumQueries(0):
             context = get_categories_tree(
                 source_context, 'custom_template.html')
         self.assertEqual(len(context['categories']), 1)
+        self.assertEqual(context['categories'][0].count_entries, 1)
         self.assertEqual(context['template'], 'custom_template.html')
         self.assertEqual(context['context_category'], category)
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_get_authors(self):
         source_context = Context()
         with self.assertNumQueries(0):
@@ -291,7 +294,7 @@ class TemplateTagsTestCase(TestCase):
             context = get_similar_entries(source_context, 3,
                                           'custom_template.html')
         self.assertEqual(len(context['entries']), 2)
-        self.assertEqual(context['entries'][0].pk, second_entry.pk)
+        self.assertEqual(context['entries'][0].pk, third_entry.pk)
         self.assertEqual(context['template'], 'custom_template.html')
         with self.assertNumQueries(0):
             context = get_similar_entries(source_context, 3)
@@ -534,7 +537,7 @@ class TemplateTagsTestCase(TestCase):
             context['next_month'],
             self.make_local(self.entry.publication_date).date().replace(day=1))
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_get_recent_comments(self):
         with self.assertNumQueries(1):
             context = get_recent_comments()
@@ -573,7 +576,7 @@ class TemplateTagsTestCase(TestCase):
             self.assertEqual(context['comments'][1].content_object,
                              self.entry)
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_get_recent_linkbacks(self):
         user = Author.objects.create_user(username='webmaster',
                                           email='webmaster@example.com')
@@ -773,7 +776,7 @@ class TemplateTagsTestCase(TestCase):
                 self.assertEqual(list(context['middle']), [])
                 self.assertEqual(list(context['end']), [])
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_zinnia_breadcrumbs(self):
         class FakeRequest(object):
             def __init__(self, path):
@@ -1000,15 +1003,15 @@ class TemplateTagsTestCase(TestCase):
         ztemplatetags.ENTRY_LOOP_TEMPLATES = original_entry_loop_templates
 
     def test_get_gravatar(self):
-        self.assertTrue(urlEqual(
+        self.assertTrue(url_equal(
             get_gravatar('webmaster@example.com'),
             'http://www.gravatar.com/avatar/86d4fd4a22de452'
             'a9228298731a0b592?s=80&amp;r=g'))
-        self.assertTrue(urlEqual(
+        self.assertTrue(url_equal(
             get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404'),
             'http://www.gravatar.com/avatar/86d4fd4a22de452'
             'a9228298731a0b592?s=15&amp;r=x&amp;d=404'))
-        self.assertTrue(urlEqual(
+        self.assertTrue(url_equal(
             get_gravatar('  WEBMASTER@example.com  ', 15, 'x', '404', 'https'),
             'https://secure.gravatar.com/avatar/86d4fd4a22de452'
             'a9228298731a0b592?s=15&amp;r=x&amp;d=404'))
@@ -1152,12 +1155,12 @@ class TemplateTagsTestCase(TestCase):
         self.assertTrue(comment_admin_url.startswith('admin:'))
         self.assertTrue(comment_admin_url.endswith('_action'))
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_user_admin_urlname(self):
         user_admin_url = user_admin_urlname('action')
         self.assertEqual(user_admin_url, 'admin:auth_user_action')
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_zinnia_statistics(self):
         with self.assertNumQueries(8):
             context = zinnia_statistics()

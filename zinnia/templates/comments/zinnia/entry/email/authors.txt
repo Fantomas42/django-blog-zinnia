@@ -1,0 +1,6 @@
+{% load i18n %}{% trans "Author" %}: {{ comment.name }} {{ comment.url }}
+
+{% trans "Comment" %}:
+{{ comment.comment }}
+
+{% trans "View this comment" %}: {{ protocol }}://{{ site }}{{ entry.get_absolute_url }}#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}

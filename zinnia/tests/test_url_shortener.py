@@ -4,8 +4,8 @@ import warnings
 from django.test import TestCase
 from django.test.utils import override_settings
 
-from zinnia.url_shortener import get_url_shortener
 from zinnia import url_shortener as us_settings
+from zinnia.url_shortener import get_url_shortener
 from zinnia.url_shortener.backends import default
 
 

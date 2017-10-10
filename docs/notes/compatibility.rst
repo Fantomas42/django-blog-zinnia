@@ -23,6 +23,12 @@ Compatibility with Django
 
 Here a list establishing the compatibility between Zinnia and Django:
 
+.. versionchanged:: 0.19
+
+Backward incompatibilities with Django v1.10.x due to :
+
+* Removal of Select.render_option() method
+
 .. versionchanged:: 0.18
 
 Backward incompatibilities with Django v1.9.x due to :

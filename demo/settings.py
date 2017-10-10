@@ -1,7 +1,7 @@
 """Settings for Zinnia Demo"""
 import os
 
-gettext = lambda s: s
+gettext = lambda s: s  # noqa
 
 DEBUG = True
 
@@ -100,6 +100,3 @@ INSTALLED_APPS = (
     'tagging',
     'zinnia'
 )
-
-from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
-XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS

@@ -16,16 +16,14 @@
       <img src="{% get_gravatar comment.email 60 "G" %}"
            class="gravatar photo" alt="{{ comment.name }}" />
       <p class="comment-info">
-	{% if comment.url %}
-	<a href="{{ comment.url }}" rel="external nofollow"
-           class="fn url">{{ comment.name }}</a>
-	{% else %}
-	{{ comment.name }}
-	{% endif %}
-	{% trans "on" context "on date" %}
-        <time class="comment-published" datetime="{{ comment.submit_date|date:"c" }}">
-          {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+        {% blocktrans with comment_url=comment.url|default:"#" comment_name=comment.name comment_human_date=comment.submit_date|date:"SHORT_DATETIME_FORMAT" comment_technical_date=comment.submit_date|date:"c" trimmed %}
+        <a href="{{ comment_url }}" rel="external nofollow"
+           class="fn url">{{ comment_name }}</a>
+        on
+        <time class="comment-published" datetime="{{ comment_technical_date }}">
+          {{ comment_human_date }}
         </time>
+        {% endblocktrans %}
       </p>
       {{ comment.comment|linebreaks }}
     </li>

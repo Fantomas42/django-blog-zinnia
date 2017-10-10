@@ -3,11 +3,11 @@ import datetime
 
 from django.utils import timezone
 from django.views.generic.dates import BaseArchiveIndexView
-from django.views.generic.dates import BaseYearArchiveView
-from django.views.generic.dates import BaseMonthArchiveView
-from django.views.generic.dates import BaseWeekArchiveView
 from django.views.generic.dates import BaseDayArchiveView
+from django.views.generic.dates import BaseMonthArchiveView
 from django.views.generic.dates import BaseTodayArchiveView
+from django.views.generic.dates import BaseWeekArchiveView
+from django.views.generic.dates import BaseYearArchiveView
 
 from zinnia.models.entry import Entry
 from zinnia.views.mixins.archives import ArchiveMixin

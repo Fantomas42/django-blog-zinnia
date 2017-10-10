@@ -1,7 +1,7 @@
 """CategoryAdmin for Zinnia"""
 from django.contrib import admin
+from django.urls import NoReverseMatch
 from django.utils.html import format_html
-from django.core.urlresolvers import NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
 
 from zinnia.admin.forms import CategoryAdminForm

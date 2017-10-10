@@ -2,9 +2,9 @@
 from django.test import TestCase
 from django.utils.encoding import smart_text
 
-from zinnia.models import Category
 from zinnia.admin.fields import MPTTModelChoiceIterator
 from zinnia.admin.fields import MPTTModelMultipleChoiceField
+from zinnia.models import Category
 
 
 class MPTTModelChoiceIteratorTestCase(TestCase):

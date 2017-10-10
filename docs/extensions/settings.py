@@ -1,5 +1,5 @@
 """Settings for Zinnia documentation"""
-from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
+from zinnia.xmlrpc import XMLRPC_METHODS # noqa
 
 DATABASES = {'default': {'NAME': ':memory:',
                          'ENGINE': 'django.db.backends.sqlite3'}}

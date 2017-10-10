@@ -1,31 +1,30 @@
 """Test cases for Zinnia's Entry"""
 from datetime import timedelta
-from unittest import skipUnless
 
-from django.test import TestCase
-from django.utils import timezone
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
+from django.test import TestCase
+from django.test.utils import override_settings
+from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import activate
 from django.utils.translation import deactivate
-from django.test.utils import override_settings
 
 import django_comments as comments
 from django_comments.models import CommentFlag
 
 from zinnia import markups
-from zinnia.managers import PUBLISHED
-from zinnia.models_bases import entry
-from zinnia.models.entry import Entry
-from zinnia.models.author import Author
+from zinnia import url_shortener as shortener_settings
 from zinnia.flags import PINGBACK
 from zinnia.flags import TRACKBACK
-from zinnia.tests.utils import datetime
-from zinnia.tests.utils import is_lib_available
-from zinnia.tests.utils import skipIfCustomUser
-from zinnia import url_shortener as shortener_settings
-from zinnia.signals import disconnect_entry_signals
+from zinnia.managers import PUBLISHED
+from zinnia.models.author import Author
+from zinnia.models.entry import Entry
+from zinnia.models_bases import entry
 from zinnia.signals import disconnect_discussion_signals
+from zinnia.signals import disconnect_entry_signals
+from zinnia.tests.utils import datetime
+from zinnia.tests.utils import skip_if_custom_user
+from zinnia.tests.utils import skip_if_lib_not_available
 from zinnia.url_shortener.backends.default import base36
 
 
@@ -39,7 +38,7 @@ class EntryTestCase(TestCase):
                   'slug': 'my-entry'}
         self.entry = Entry.objects.create(**params)
 
-    @skipIfCustomUser
+    @skip_if_custom_user
     def test_discussions(self):
         site = Site.objects.get_current()
         self.assertEqual(self.entry.discussions.count(), 0)
@@ -393,7 +392,7 @@ class EntryHtmlContentTestCase(TestCase):
         self.entry.content = ''
         self.assertEqual(self.entry.html_content, '')
 
-    @skipUnless(is_lib_available('textile'), 'Textile is not available')
+    @skip_if_lib_not_available('textile')
     def test_html_content_textitle(self):
         markups.MARKUP_LANGUAGE = 'textile'
         self.entry.content = 'Hello world !\n\n' \
@@ -406,7 +405,7 @@ class EntryHtmlContentTestCase(TestCase):
                          '<ul>\n\t\t<li>Item 1</li>\n\t\t'
                          '<li>Item 2</li>\n\t</ul>')
 
-    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    @skip_if_lib_not_available('markdown')
     def test_html_content_markdown(self):
         markups.MARKUP_LANGUAGE = 'markdown'
         self.entry.content = 'Hello world !\n\n' \
@@ -419,7 +418,7 @@ class EntryHtmlContentTestCase(TestCase):
                          '\n<ul>\n<li>Item 1</li>\n'
                          '<li>Item 2</li>\n</ul>')
 
-    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    @skip_if_lib_not_available('markdown')
     def test_markdown_with_inline_html(self):
         markups.MARKUP_LANGUAGE = 'markdown'
         self.entry.content = ('Hello *World* !\n\n'
@@ -429,7 +428,7 @@ class EntryHtmlContentTestCase(TestCase):
                          '<p>Hello <em>World</em> !</p>\n'
                          '<p>This is an inline HTML paragraph</p>')
 
-    @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
+    @skip_if_lib_not_available('docutils')
     def test_html_content_restructuredtext(self):
         markups.MARKUP_LANGUAGE = 'restructuredtext'
         self.entry.content = 'Hello world !\n\n' \
@@ -476,7 +475,7 @@ class EntryHtmlLeadTestCase(TestCase):
         self.entry.lead = ''
         self.assertEqual(self.entry.html_lead, '')
 
-    @skipUnless(is_lib_available('textile'), 'Textile is not available')
+    @skip_if_lib_not_available('textile')
     def test_html_lead_textitle(self):
         markups.MARKUP_LANGUAGE = 'textile'
         self.entry.lead = 'Hello world !\n\n' \
@@ -489,7 +488,7 @@ class EntryHtmlLeadTestCase(TestCase):
                          '<ul>\n\t\t<li>Item 1</li>\n\t\t'
                          '<li>Item 2</li>\n\t</ul>')
 
-    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    @skip_if_lib_not_available('markdown')
     def test_html_lead_markdown(self):
         markups.MARKUP_LANGUAGE = 'markdown'
         self.entry.lead = 'Hello world !\n\n' \
@@ -502,7 +501,7 @@ class EntryHtmlLeadTestCase(TestCase):
                          '\n<ul>\n<li>Item 1</li>\n'
                          '<li>Item 2</li>\n</ul>')
 
-    @skipUnless(is_lib_available('markdown'), 'Markdown is not available')
+    @skip_if_lib_not_available('markdown')
     def test_markdown_with_inline_html(self):
         markups.MARKUP_LANGUAGE = 'markdown'
         self.entry.lead = ('Hello *World* !\n\n'
@@ -512,7 +511,7 @@ class EntryHtmlLeadTestCase(TestCase):
                          '<p>Hello <em>World</em> !</p>\n'
                          '<p>This is an inline HTML paragraph</p>')
 
-    @skipUnless(is_lib_available('docutils'), 'Docutils is not available')
+    @skip_if_lib_not_available('docutils')
     def test_html_lead_restructuredtext(self):
         markups.MARKUP_LANGUAGE = 'restructuredtext'
         self.entry.lead = 'Hello world !\n\n' \

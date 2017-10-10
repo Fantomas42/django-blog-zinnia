@@ -1,12 +1,12 @@
 """Breadcrumb module for Zinnia"""
 import re
-from functools import wraps
 from datetime import datetime
+from functools import wraps
 
-from django.utils.dateformat import format
+from django.urls import reverse
+from django.utils.dateformat import DateFormat
 from django.utils.timezone import is_aware
 from django.utils.timezone import localtime
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 
 
@@ -34,7 +34,7 @@ def month_crumb(date):
     """
     year = date.strftime('%Y')
     month = date.strftime('%m')
-    month_text = format(date, 'F').capitalize()
+    month_text = DateFormat(date).format('F').capitalize()
     return Crumb(month_text, reverse('zinnia:entry_archive_month',
                                      args=[year, month]))
 
@@ -59,6 +59,7 @@ def entry_breadcrumbs(entry):
         date = localtime(date)
     return [year_crumb(date), month_crumb(date),
             day_crumb(date), Crumb(entry.title)]
+
 
 MODEL_BREADCRUMBS = {'Tag': lambda x: [Crumb(_('Tags'),
                                              reverse('zinnia:tag_list')),

@@ -2,9 +2,9 @@
 from django.contrib.sites.models import Site
 from django.views.generic.base import TemplateView
 
-from zinnia.settings import PROTOCOL
 from zinnia.settings import COPYRIGHT
 from zinnia.settings import FEEDS_FORMAT
+from zinnia.settings import PROTOCOL
 
 
 class CapabilityView(TemplateView):

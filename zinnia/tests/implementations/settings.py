@@ -1,6 +1,4 @@
 """Settings for testing zinnia"""
-from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
-
 SITE_ID = 1
 
 USE_TZ = True
@@ -54,5 +52,3 @@ INSTALLED_APPS = [
 ]
 
 ZINNIA_PAGINATION = 3
-
-XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS

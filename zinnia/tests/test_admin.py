@@ -2,26 +2,28 @@
 """Test cases for Zinnia's admin"""
 from __future__ import unicode_literals
 
-from django.test import TestCase
-from django.test import RequestFactory
-from django.utils import timezone
+from django.contrib.admin.sites import AdminSite
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.test import RequestFactory
+from django.test import TestCase
+from django.test.utils import override_settings
+from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import activate
 from django.utils.translation import deactivate
-from django.contrib.admin.sites import AdminSite
 
 from zinnia import settings
 from zinnia.admin import entry as entry_admin
+from zinnia.admin.category import CategoryAdmin
+from zinnia.admin.entry import EntryAdmin
 from zinnia.managers import PUBLISHED
-from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
-from zinnia.tests.utils import datetime
-from zinnia.tests.utils import skipIfCustomUser
-from zinnia.admin.entry import EntryAdmin
-from zinnia.admin.category import CategoryAdmin
+from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_entry_signals
+from zinnia.tests.utils import datetime
+from zinnia.tests.utils import skip_if_custom_user
 from zinnia.url_shortener.backends.default import base36
 
 
@@ -61,7 +63,7 @@ class TestMessageBackend(object):
         self.messages.append(ka)
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 class EntryAdminTestCase(BaseAdminTestCase):
     """Test case for Entry Admin"""
     model_class = Entry
@@ -436,3 +438,68 @@ class CategoryAdminTestCase(BaseAdminTestCase):
             self.admin.get_tree_path, (category,),
             '<a href="/categories/cat/" target="blank">/cat/</a>',
             '/cat/')
+
+
+@skip_if_custom_user
+@override_settings(
+    DEBUG=True
+)
+class FunctionnalAdminTestCase(TestCase):
+    """
+    Functional testing admin integration.
+
+    We just executing the view to see if the integration works.
+    """
+
+    def setUp(self):
+        disconnect_entry_signals()
+        self.author = Author.objects.create_superuser(
+            username='admin',
+            email='admin@example.com',
+            password='password'
+        )
+
+        self.category = Category.objects.create(
+            title='Category', slug='cat'
+        )
+        params = {
+            'title': 'My title',
+            'content': 'My content',
+            'slug': 'my-title'
+        }
+        self.entry = Entry.objects.create(**params)
+        self.client.force_login(self.author)
+
+    def assert_admin(self, url):
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+    def test_admin_entry_list(self):
+        self.assert_admin(
+            reverse('admin:zinnia_entry_changelist')
+        )
+
+    def test_admin_category_list(self):
+        self.assert_admin(
+            reverse('admin:zinnia_category_changelist')
+        )
+
+    def test_admin_entry_add(self):
+        self.assert_admin(
+            reverse('admin:zinnia_entry_add')
+        )
+
+    def test_admin_category_add(self):
+        self.assert_admin(
+            reverse('admin:zinnia_category_add')
+        )
+
+    def test_admin_entry_update(self):
+        self.assert_admin(
+            reverse('admin:zinnia_entry_change', args=[self.entry.pk])
+        )
+
+    def test_admin_category_update(self):
+        self.assert_admin(
+            reverse('admin:zinnia_category_change', args=[self.category.pk])
+        )

@@ -1,14 +1,18 @@
-{% load i18n zinnia %}
+{% load i18n %}
+{% load zinnia %}
+
 {% for linkback in linkbacks %}
 <tr>
   <th>
     {% with entry=linkback.content_object %}
-    <a href="{{ linkback.url }}">{{ linkback.name }}</a>
-    {% trans "made a linkback on" context "on entry" %}
-    <a href="{{ entry.get_absolute_url }}#{{ linkback.flags.all.0.flag }}-{{ linkback.pk }}"
-       title="{% blocktrans with object=entry.title %}Linkback on {{ object }}{% endblocktrans %}">
-      {{ entry.title }}
+    {% blocktrans with linkback_url=linkback.url linkback_name=linkback.name linkback_type=linkback.flags.all.0.flag linkback_pk=linkback.pk entry_url=entry.get_absolute_url entry_title=entry.title trimmed %}
+    <a href="{{ linkback_url }}">{{ linkback_name }}</a>
+    made a linkback on
+    <a href="{{ entry_url }}#{{ linkback_type }}-{{ linkback_pk }}"
+       title="Linkback on {{ entry_title }}">
+      {{ entry_title }}
     </a>
+    {% endblocktrans %}
     {% endwith %}
     {{ linkback.comment|truncatewords:20|linebreaks }}
   </th>

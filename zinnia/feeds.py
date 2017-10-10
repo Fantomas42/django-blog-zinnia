@@ -6,33 +6,33 @@ try:
 except ImportError:  # Python 2
     from urlparse import urljoin
 
-from django.utils.encoding import smart_text
+from bs4 import BeautifulSoup
+
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
+from django.contrib.syndication.views import Feed
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
+from django.template.defaultfilters import slugify
+from django.urls import NoReverseMatch
+from django.urls import reverse
+from django.utils.encoding import smart_text
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.translation import ugettext as _
-from django.contrib.syndication.views import Feed
-from django.template.defaultfilters import slugify
-from django.core.urlresolvers import NoReverseMatch
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.contenttypes.models import ContentType
-
-from bs4 import BeautifulSoup
 
 import django_comments as comments
 
 from tagging.models import Tag
 from tagging.models import TaggedItem
 
-from zinnia.models.entry import Entry
 from zinnia.models.author import Author
-from zinnia.settings import PROTOCOL
+from zinnia.models.entry import Entry
 from zinnia.settings import COPYRIGHT
 from zinnia.settings import FEEDS_FORMAT
 from zinnia.settings import FEEDS_MAX_ITEMS
-from zinnia.views.categories import get_category_or_404
+from zinnia.settings import PROTOCOL
 from zinnia.templatetags.zinnia import get_gravatar
+from zinnia.views.categories import get_category_or_404
 
 
 class ZinniaFeed(Feed):
@@ -129,9 +129,9 @@ class EntryFeed(ZinniaFeed):
         """
         Return an image for enclosure.
         """
-        if item.image:
+        try:
             url = item.image.url
-        else:
+        except (AttributeError, ValueError):
             img = BeautifulSoup(item.html_content, 'html.parser').find('img')
             url = img.get('src') if img else None
         self.cached_enclosure_url = url
@@ -143,24 +143,26 @@ class EntryFeed(ZinniaFeed):
 
     def item_enclosure_length(self, item):
         """
-        Try to obtain the size of the enclosure
-        if the enclosure is present on the FS,
+        Try to obtain the size of the enclosure if it's present on the FS,
         otherwise returns an hardcoded value.
+        Note: this method is only called if item_enclosure_url
+        has returned something.
         """
-        if item.image:
-            try:
-                return str(item.image.size)
-            except (os.error, NotImplementedError):
-                pass
+        try:
+            return str(item.image.size)
+        except (AttributeError, ValueError, os.error):
+            pass
         return '100000'
 
     def item_enclosure_mime_type(self, item):
         """
         Guess the enclosure's mimetype.
+        Note: this method is only called if item_enclosure_url
+        has returned something.
         """
-        mimetype, encoding = guess_type(self.cached_enclosure_url)
-        if mimetype:
-            return mimetype
+        mime_type, encoding = guess_type(self.cached_enclosure_url)
+        if mime_type:
+            return mime_type
         return 'image/jpeg'
 
 

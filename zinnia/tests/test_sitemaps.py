@@ -1,21 +1,21 @@
 """Test cases for Zinnia's sitemaps"""
+from django.contrib.sites.models import Site
 from django.test import TestCase
 from django.test.utils import override_settings
-from django.contrib.sites.models import Site
 
 from zinnia.managers import PUBLISHED
-from zinnia.models.entry import Entry
 from zinnia.models.author import Author
 from zinnia.models.category import Category
-from zinnia.sitemaps import EntrySitemap
-from zinnia.sitemaps import CategorySitemap
-from zinnia.sitemaps import AuthorSitemap
-from zinnia.sitemaps import TagSitemap
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_entry_signals
+from zinnia.sitemaps import AuthorSitemap
+from zinnia.sitemaps import CategorySitemap
+from zinnia.sitemaps import EntrySitemap
+from zinnia.sitemaps import TagSitemap
+from zinnia.tests.utils import skip_if_custom_user
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 @override_settings(
     ROOT_URLCONF='zinnia.tests.implementations.urls.default'
 )

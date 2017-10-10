@@ -105,15 +105,17 @@
     <li id="pingback-{{ pingback.pk }}" class="pingback vcard {% cycle 'box1' 'box2' %}">
       {% block pingback-info %}
       <p class="pingback-info">
-	<a href="{{ pingback.url }}" rel="external nofollow"
-           class="fn url org">{{ pingback.name }}</a>
-	{% trans "on" context "on date" %}
-        <time class="pingback-published" datetime="{{ pingback.submit_date|date:"c" }}">
-          {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+        {% blocktrans with pingback_url=pingback.url pingback_name=pingback.name pingback_human_date=pingback.submit_date|date:"SHORT_DATETIME_FORMAT" pingback_technical_date=pingback.submit_date|date:"c" pingback_pk=pingback.pk trimmed %}
+	<a href="{{ pingback_url }}" rel="external nofollow"
+           class="fn url org">{{ pingback_name }}</a>
+	on
+        <time class="pingback-published" datetime="{{ pingback_technical_date }}">
+          {{ pingback_human_date }}
         </time>
-        <a href="#pingback-{{ pingback.pk }}"
-           id="c{{ pingback.pk }}" class="anchor-link"
-           title="{% trans "Direct link to this pingback" %}">#</a>
+        <a href="#pingback-{{ pingback_pk }}"
+           id="c{{ pingback_pk }}" class="anchor-link"
+           title="Direct link to this pingback">#</a>
+        {% endblocktrans %}
       </p>
       {% endblock pingback-info %}
       {% block pingback-content %}
@@ -149,15 +151,17 @@
     <li id="trackback-{{ trackback.pk }}" class="trackback vcard {% cycle 'box1' 'box2' %}">
       {% block trackback-info %}
       <p class="trackback-info">
-	<a href="{{ trackback.url }}" rel="external nofollow"
-           class="fn url org">{{ trackback.name }}</a>
-	{% trans "on" context "on date" %}
-        <time class="trackback-published" datetime="{{ trackback.submit_date|date:"c" }}">
-          {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+        {% blocktrans with trackback_url=trackback.url trackback_name=trackback.name trackback_human_date=trackback.submit_date|date:"SHORT_DATETIME_FORMAT" trackback_technical_date=trackback.submit_date|date:"c" trackback_pk=trackback.pk trimmed %}
+	<a href="{{ trackback_url }}" rel="external nofollow"
+           class="fn url org">{{ trackback_name }}</a>
+	on
+        <time class="trackback-published" datetime="{{ trackback_technical_date }}">
+          {{ trackback_human_date }}
         </time>
-        <a href="#trackback-{{ trackback.pk }}"
-           id="c{{ trackback.pk }}" class="anchor-link"
-           title="{% trans "Direct link to this trackback" %}">#</a>
+        <a href="#trackback-{{ trackback_pk }}"
+           id="c{{ trackback_pk }}" class="anchor-link"
+           title="Direct link to this trackback">#</a>
+        {% endblocktrans %}
       </p>
       {% endblock trackback-info %}
       {% block trackback-content %}
@@ -199,19 +203,17 @@
       {% endblock comment-image %}
       {% block comment-info %}
       <p class="comment-info">
-	{% if comment.url %}
-	<a href="{{ comment.url }}" rel="external nofollow"
-           class="fn url">{{ comment.name }}</a>
-	{% else %}
-	<span class="fn">{{ comment.name }}</span>
-	{% endif %}
-	{% trans "on" context "on date" %}
-        <time class="comment-published" datetime="{{ comment.submit_date|date:"c" }}">
-          {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+        {% blocktrans with comment_url=comment.url|default:"#" comment_name=comment.name comment_human_date=comment.submit_date|date:"SHORT_DATETIME_FORMAT" comment_technical_date=comment.submit_date|date:"c" comment_pk=comment.pk comment_author_slug=comment.user_name|slugify trimmed %}
+        <a href="{{ comment_url }}" rel="external nofollow"
+           class="fn url">{{ comment_name }}</a>
+        on
+        <time class="comment-published" datetime="{{ comment_technical_date }}">
+          {{ comment_human_date }}
         </time>
-        <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
-           id="c{{ comment.pk }}" class="anchor-link"
-           title="{% trans "Direct link to this comment" %}">#</a>
+        <a href="#comment-{{ comment_pk }}-by-{{ comment_author_slug }}"
+           id="c{{ comment_pk }}" class="anchor-link"
+           title="Direct link to this comment">#</a>
+        {% endblocktrans %}
       </p>
       {% endblock comment-info %}
       {% block comment-content %}

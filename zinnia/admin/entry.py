@@ -2,26 +2,26 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from django.db.models import Q
-from django.utils import timezone
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
-from django.core.urlresolvers import NoReverseMatch
+from django.db.models import Q
+from django.urls import NoReverseMatch
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.html import conditional_escape
 from django.utils.html import format_html
 from django.utils.html import format_html_join
-from django.utils.html import conditional_escape
-from django.utils.translation import ungettext_lazy
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ungettext_lazy
 
 from zinnia import settings
+from zinnia.admin.filters import AuthorListFilter
+from zinnia.admin.filters import CategoryListFilter
+from zinnia.admin.forms import EntryAdminForm
+from zinnia.comparison import EntryPublishedVectorBuilder
 from zinnia.managers import HIDDEN
 from zinnia.managers import PUBLISHED
 from zinnia.models.author import Author
 from zinnia.ping import DirectoryPinger
-from zinnia.admin.forms import EntryAdminForm
-from zinnia.admin.filters import AuthorListFilter
-from zinnia.admin.filters import CategoryListFilter
-from zinnia.comparison import EntryPublishedVectorBuilder
 
 
 class EntryAdmin(admin.ModelAdmin):

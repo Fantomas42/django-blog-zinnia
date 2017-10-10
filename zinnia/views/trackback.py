@@ -1,19 +1,19 @@
 """Views for Zinnia trackback"""
-from django.utils import timezone
-from django.contrib.sites.models import Site
-from django.shortcuts import get_object_or_404
-from django.views.generic.base import TemplateView
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-from django.http import HttpResponsePermanentRedirect
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
+from django.http import HttpResponsePermanentRedirect
+from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.base import TemplateView
 
 import django_comments as comments
 
-from zinnia.models.entry import Entry
 from zinnia.flags import TRACKBACK
 from zinnia.flags import get_user_flagger
+from zinnia.models.entry import Entry
 from zinnia.signals import trackback_was_posted
+from zinnia.spam_checker import check_is_spam
 
 
 class EntryTrackback(TemplateView):
@@ -66,12 +66,26 @@ class EntryTrackback(TemplateView):
         blog_name = request.POST.get('blog_name') or title
         ip_address = request.META.get('REMOTE_ADDR', None)
 
-        trackback, created = comments.get_model().objects.get_or_create(
-            content_type=ContentType.objects.get_for_model(Entry),
-            object_pk=entry.pk, site=site, user_url=url,
-            user_name=blog_name, ip_address=ip_address,
-            defaults={'comment': excerpt,
-                      'submit_date': timezone.now()})
+        trackback_klass = comments.get_model()
+        trackback_datas = {
+            'content_type': ContentType.objects.get_for_model(Entry),
+            'object_pk': entry.pk,
+            'site': site,
+            'user_url': url,
+            'user_name': blog_name,
+            'ip_address': ip_address,
+            'comment': excerpt
+        }
+
+        trackback = trackback_klass(**trackback_datas)
+        if check_is_spam(trackback, entry, request):
+            return self.render_to_response(
+                {'error': 'Trackback considered like spam'})
+
+        trackback_defaults = {'comment': trackback_datas.pop('comment')}
+        trackback, created = trackback_klass.objects.get_or_create(
+            defaults=trackback_defaults,
+            **trackback_datas)
         if created:
             trackback.flags.create(user=get_user_flagger(), flag=TRACKBACK)
             trackback_was_posted.send(trackback.__class__,

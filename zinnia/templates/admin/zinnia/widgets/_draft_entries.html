@@ -2,12 +2,14 @@
 {% for entry in entries %}
 <tr>
   <th>
-    <a href="{% url 'admin:zinnia_entry_change' entry.pk %}"
-       title="{% trans "Edit the entry" %}">
-      {{ entry.title }}
+    {% url 'admin:zinnia_entry_change' entry.pk as entry_edit_url %}
+    {% blocktrans with entry_title=entry.title publication_date=entry.publication_date|date:"DATE_FORMAT" trimmed %}
+    <a href="{{ entry_edit_url }}" title="Edit the entry">
+      {{ entry_title }}
     </a>
-    {% trans "on" context "on date" %}
-    <time>{{ entry.publication_date|date:"DATE_FORMAT" }}</time>
+    on
+    <time>{{ publication_date }}</time>
+    {% endblocktrans %}
     {{ entry.html_content|truncatewords_html:20|safe }}
   </th>
   <td>

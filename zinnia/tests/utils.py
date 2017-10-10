@@ -1,4 +1,7 @@
 """Utils for Zinnia's tests"""
+import functools
+from datetime import datetime as original_datetime
+from unittest import SkipTest
 from unittest import skipIf
 try:
     from urllib.parse import parse_qs
@@ -8,14 +11,13 @@ except ImportError:  # Python 2
     from urlparse import parse_qs
     from urlparse import urlparse
     from xmlrpclib import Transport
-from datetime import datetime as original_datetime
 
-from django.utils import six
 from django.conf import settings
-from django.utils import timezone
 from django.template import Origin
-from django.test.client import Client
 from django.template.loaders.base import Loader
+from django.test.client import Client
+from django.utils import six
+from django.utils import timezone
 
 
 class TestTransport(Transport):
@@ -47,6 +49,7 @@ def omniscient_datetime(*args):
         d = timezone.make_aware(d, timezone.utc)
     return d
 
+
 datetime = omniscient_datetime
 
 
@@ -61,7 +64,29 @@ def is_lib_available(library):
         return False
 
 
-def urlEqual(url_1, url_2):
+def skip_if_lib_not_available(lib):
+    """
+    Skip a test if a lib is not available
+    """
+    def decorator(test_func):
+        @functools.wraps(test_func)
+        def f(*args, **kwargs):
+            if not is_lib_available(lib):
+                raise SkipTest('%s is not available' % lib.title())
+            return test_func(*args, **kwargs)
+        return f
+    return decorator
+
+
+def skip_if_custom_user(test_func):
+    """
+    Skip a test if a custom user model is in use.
+    """
+    return skipIf(settings.AUTH_USER_MODEL != 'auth.User',
+                  'Custom user model in use')(test_func)
+
+
+def url_equal(url_1, url_2):
     """
     Compare two URLs with query string where
     ordering does not matter.
@@ -108,11 +133,3 @@ class EntryDetailLoader(Loader):
     def get_contents(self, origin):
         return ('<html><head><title>{{ object.title }}</title></head>'
                 '<body>{{ object.html_content|safe }}</body></html>')
-
-
-def skipIfCustomUser(test_func):
-    """
-    Skip a test if a custom user model is in use.
-    """
-    return skipIf(settings.AUTH_USER_MODEL != 'auth.User',
-                  'Custom user model in use')(test_func)

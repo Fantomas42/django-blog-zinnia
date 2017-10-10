@@ -1,7 +1,7 @@
 """All is spam, spam checker backend for Zinnia"""
 
 
-def backend(comment, content_object, request):
+def backend(*ka):
     """
     Backend for setting all comments to spam.
     """

@@ -1,16 +1,16 @@
 """Test cases for Zinnia's Author"""
-from django.test import TestCase
-from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
+from django.contrib.sites.models import Site
+from django.test import TestCase
 
-from zinnia.models.entry import Entry
-from zinnia.models.author import Author
 from zinnia.managers import PUBLISHED
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.models.author import Author
+from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_entry_signals
+from zinnia.tests.utils import skip_if_custom_user
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 class AuthorTestCase(TestCase):
 
     def setUp(self):
@@ -36,12 +36,12 @@ class AuthorTestCase(TestCase):
     def test_str(self):
         self.assertEqual(self.author.__str__(),
                          'webmaster')
+        self.author.last_name = 'Doe'
+        self.assertEqual(self.author.__str__(),
+                         'Doe')
         self.author.first_name = 'John'
         self.assertEqual(self.author.__str__(),
                          'John')
-        self.author.last_name = 'Doe'
-        self.assertEqual(self.author.__str__(),
-                         'John Doe')
 
     def test_manager_pollution(self):
         """

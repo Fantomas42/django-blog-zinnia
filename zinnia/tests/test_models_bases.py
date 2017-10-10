@@ -1,6 +1,6 @@
 """Test cases for zinnia.models_bases"""
-from django.test import TestCase
 from django.core.exceptions import ImproperlyConfigured
+from django.test import TestCase
 
 from zinnia.models_bases import load_model_class
 from zinnia.models_bases.entry import AbstractEntry

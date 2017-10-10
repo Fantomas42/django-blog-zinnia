@@ -1,21 +1,21 @@
 """Test cases for Zinnia's managers"""
-from django.test import TestCase
 from django.contrib.sites.models import Site
+from django.test import TestCase
 
 from tagging.models import Tag
 
-from zinnia.models.entry import Entry
+from zinnia.managers import PUBLISHED
+from zinnia.managers import entries_published
+from zinnia.managers import tags_published
 from zinnia.models.author import Author
 from zinnia.models.category import Category
-from zinnia.tests.utils import datetime
-from zinnia.managers import PUBLISHED
-from zinnia.managers import tags_published
-from zinnia.managers import entries_published
-from zinnia.tests.utils import skipIfCustomUser
+from zinnia.models.entry import Entry
 from zinnia.signals import disconnect_entry_signals
+from zinnia.tests.utils import datetime
+from zinnia.tests.utils import skip_if_custom_user
 
 
-@skipIfCustomUser
+@skip_if_custom_user
 class ManagersTestCase(TestCase):
 
     def setUp(self):

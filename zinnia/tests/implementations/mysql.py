@@ -6,6 +6,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zinnia',
         'USER': 'root',
-        'HOST': 'localhost'
+        'HOST': 'localhost',
+        'TEST': {
+            'CHARSET': 'utf8',
+            'COLLATION': 'utf8_general_ci',
+        }
     }
 }

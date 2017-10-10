@@ -1,0 +1,11 @@
+max-line-length: 80
+uses:
+  - django
+autodetect: true
+ignore-paths:
+  - bootstrap.py
+  - docs
+  - demo
+python-targets:
+  - 2
+  - 3
