@@ -1,8 +1,6 @@
-# coding=utf-8
 """Test cases for Zinnia's admin widgets"""
 from django.test import TestCase
 from django.test.utils import override_settings
-from django.utils.encoding import smart_text
 
 from zinnia.admin.widgets import MPTTFilteredSelectMultiple
 from zinnia.admin.widgets import MiniTextarea
@@ -12,54 +10,6 @@ from zinnia.signals import disconnect_entry_signals
 
 
 class MPTTFilteredSelectMultipleTestCase(TestCase):
-
-    def test_render_option(self):
-        widget = MPTTFilteredSelectMultiple('test', False)
-
-        option = widget.render_option([], 1, 'Test', (4, 5))
-
-        self.assertHTMLEqual(
-            option,
-            '<option value="1" data-tree-id="4"'
-            ' data-left-value="5">Test</option>')
-
-        option = widget.render_option(['0', '1', '2'], 1, 'Test', (4, 5))
-
-        self.assertHTMLEqual(
-            option,
-            '<option value="1" selected="selected" data-tree-id="4"'
-            ' data-left-value="5">Test</option>')
-
-    def test_render_option_non_ascii_issue_317(self):
-        widget = MPTTFilteredSelectMultiple('test', False)
-
-        option = widget.render_option([], 1, 'тест', (1, 1))
-
-        self.assertHTMLEqual(
-            option,
-            smart_text('<option value="1" data-tree-id="1"'
-                       ' data-left-value="1">тест</option>'))
-
-    def test_render_options(self):
-        widget = MPTTFilteredSelectMultiple('test', False)
-        self.assertEqual(widget.render_options([]), '')
-
-        choices = [
-            (1, 'Category 1', (1, 1)),
-            (2, '|-- Category 2', (1, 2))]
-        widget = MPTTFilteredSelectMultiple('test', False, choices=choices)
-
-        self.assertHTMLEqual(
-            widget.render_options([]),
-            '<option value="1" data-tree-id="1" data-left-value="1">'
-            'Category 1</option>\n<option value="2" data-tree-id="1" '
-            'data-left-value="2">|-- Category 2</option>')
-
-        self.assertHTMLEqual(
-            widget.render_options([2]),
-            '<option value="1" data-tree-id="1" data-left-value="1">'
-            'Category 1</option>\n<option value="2" selected="selected" '
-            'data-tree-id="1" data-left-value="2">|-- Category 2</option>')
 
     @override_settings(STATIC_URL='/s/')
     def test_media(self):
