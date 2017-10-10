@@ -9,6 +9,8 @@
 * Return the number of entries in the category_tree templatetag
 * Integration via BrowserSync
 
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.18.1...v0.19
+
 0.18.1
 ------
 
