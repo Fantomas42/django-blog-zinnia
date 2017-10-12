@@ -40,7 +40,7 @@ from ..models.category import Category
 from ..models.entry import Entry
 from ..settings import ENTRY_LOOP_TEMPLATES
 from ..settings import PROTOCOL
-from ..templates import loop_template_list
+from ..templating import loop_template_list
 
 
 WIDONT_REGEXP = re.compile(
