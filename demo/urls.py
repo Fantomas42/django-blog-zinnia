@@ -1,4 +1,6 @@
 """Urls for the demo of Zinnia"""
+from functools import partial
+
 from django.conf import settings
 from django.conf.urls import include
 from django.conf.urls import url
@@ -47,9 +49,9 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    url(r'^400/$', bad_request),
-    url(r'^403/$', permission_denied),
-    url(r'^404/$', page_not_found),
+    url(r'^400/$', partial(bad_request, exception=None)),
+    url(r'^403/$', partial(permission_denied, exception=None)),
+    url(r'^404/$', partial(page_not_found, exception=None)),
     url(r'^500/$', server_error),
 ]
 
