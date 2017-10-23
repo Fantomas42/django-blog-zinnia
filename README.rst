@@ -1,6 +1,6 @@
-===============================================
-Django Blog Zinnia |latest-version| |downloads|
-===============================================
+===================================
+Django Blog Zinnia |latest-version|
+===================================
 
 |travis-develop| |coverage-develop|
 
@@ -91,9 +91,6 @@ More information and help available at these URLs:
    :target: https://coveralls.io/r/Fantomas42/django-blog-zinnia
 .. |latest-version| image:: https://img.shields.io/pypi/v/django-blog-zinnia.svg
    :alt: Latest version on Pypi
-   :target: https://pypi.python.org/pypi/django-blog-zinnia/
-.. |downloads| image:: https://img.shields.io/pypi/dm/django-blog-zinnia.svg
-   :alt: Downloads from Pypi
    :target: https://pypi.python.org/pypi/django-blog-zinnia/
 .. |paypal| image:: https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif
    :alt:  Make a free donation with Paypal to encourage the development
