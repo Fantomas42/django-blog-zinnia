@@ -1,7 +1,7 @@
 """Templates module for Zinnia"""
 import os
 
-from django.template.defaultfilters import slugify
+from slugify import slugify
 
 
 def append_position(path, position, separator=''):

@@ -8,7 +8,7 @@ from django import forms
 from django.contrib.auth.decorators import permission_required
 from django.contrib.sites.models import Site
 from django.shortcuts import redirect
-from django.template.defaultfilters import slugify
+from slugify import slugify
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.decorators import method_decorator

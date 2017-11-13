@@ -41,5 +41,6 @@ setup(
                       'pillow>=2.0.0',
                       'pyparsing>=2.0.3',
                       'pytz>=2014.10',
-                      'regex>=2016.3.2']
+                      'regex>=2016.3.2',
+                      'python-slugify',] # compatible with non ASCII charaters
 )

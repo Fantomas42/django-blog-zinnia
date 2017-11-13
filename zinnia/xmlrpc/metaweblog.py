@@ -11,7 +11,7 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from django.template.defaultfilters import slugify
+from slugify import slugify # compatible with non-ASCII characters
 from django.urls import reverse
 from django.utils import six
 from django.utils import timezone
@@ -204,7 +204,7 @@ def delete_post(apikey, post_id, username, password, publish):
     entry.delete()
     return True
 
-
+    
 @xmlrpc_func(returns='struct', args=['string', 'string', 'string'])
 def get_post(post_id, username, password):
     """
@@ -262,8 +262,9 @@ def new_category(blog_id, username, password, category_struct):
     """
     authenticate(username, password, 'zinnia.add_category')
     category_dict = {'title': category_struct['name'],
-                     'description': category_struct['description'],
-                     'slug': category_struct['slug']}
+#                     'description': category_struct['description'], # open live writer doesn't support this key
+#                     'slug': category_struct['slug'] # open live writer doesn't support this key
+                    }
     if int(category_struct['parent_id']):
         category_dict['parent'] = Category.objects.get(
             pk=category_struct['parent_id'])
@@ -271,6 +272,17 @@ def new_category(blog_id, username, password, category_struct):
 
     return category.pk
 
+    
+@xmlrpc_func(returns='boolean', args=['string', 'string', 'string', 'struct'])
+def set_categories(postid, username, password, categories):
+    """
+    mt.setPostCategories(postid, username, password, categories)
+    => boolean
+    """
+    # This is useless 'cause category already set by new_post().
+    # Just for the compatability with open live writer
+    return True
+    
 
 @xmlrpc_func(returns='string', args=['string', 'string', 'string',
                                      'struct', 'boolean'])
