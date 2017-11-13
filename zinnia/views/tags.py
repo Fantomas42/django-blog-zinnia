@@ -1,6 +1,6 @@
 """Views for Zinnia tags"""
 from django.http import Http404
-from django.template.defaultfilters import slugify
+from slugify import slugify
 from django.utils.translation import ugettext as _
 from django.views.generic.list import BaseListView
 from django.views.generic.list import ListView
