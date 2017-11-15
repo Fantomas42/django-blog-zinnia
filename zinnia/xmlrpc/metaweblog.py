@@ -261,10 +261,16 @@ def new_category(blog_id, username, password, category_struct):
     => category_id
     """
     authenticate(username, password, 'zinnia.add_category')
-    category_dict = {'title': category_struct['name'],
-#                     'description': category_struct['description'], # open live writer doesn't support this key
-#                     'slug': category_struct['slug'] # open live writer doesn't support this key
-                    }
+    category_dict = {
+        'title': category_struct['name'],
+        'slug': slugify(category_struct['name']),
+    }
+    if category_struct.has_key('description'):
+        if category_struct['description']:
+            category_dict['description'] =  category_struct['description']
+    if category_struct.has_key('slug'):
+        if category_struct['slug']:
+            category_dict['slug'] = category_struct['slug']
     if int(category_struct['parent_id']):
         category_dict['parent'] = Category.objects.get(
             pk=category_struct['parent_id'])
