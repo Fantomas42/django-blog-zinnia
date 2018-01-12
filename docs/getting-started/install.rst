@@ -112,8 +112,11 @@ already present. ::
 
 URLs
 ====
+In your project's urls.py, add this line if it is not already there ::
 
-Add at least these following lines to your project's urls.py in order to
+  from django.conf.urls import include
+
+Then, add at least these following lines in order to
 display the Weblog. ::
 
   url(r'^weblog/', include('zinnia.urls')),
