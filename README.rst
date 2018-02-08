@@ -61,12 +61,12 @@ Take a look at the online demo at: http://demo.django-blog-zinnia.com/
 or you can visit these websites who use Zinnia.
 
 * `Fantomas' side`_
-* `Ubuntu's developers blog`_
 * `Vidzor Studio LLC`_
 * `Bookshadow`_
 * `Future Proof Games`_
 * `Programeria`_
 * `Tihomir Blajev Blog`_
+* `Branchspot`_
 
 If you are a proud user of Zinnia, send me the URL of your website and I
 will add it to the list.
@@ -120,12 +120,12 @@ More information and help available at these URLs:
 .. _`Sass3`: http://sass-lang.com/
 .. _`Windows Live Writer`: http://explore.live.com/windows-live-writer
 .. _`Fantomas' side`: http://fantomas.site/blog/
-.. _`Ubuntu's developers blog`: http://developer.ubuntu.com/en/blog/
 .. _`Vidzor Studio LLC`: http://vidzor.com/blog/
 .. _`Bookshadow`: http://bookshadow.com/weblog/
 .. _`Future Proof Games`: http://futureproofgames.com/blog/
 .. _`Programeria`: https://programeria.pl/
 .. _`Tihomir Blajev Blog`: http://www.tihoblajev.com/weblog/
+.. _`Branchspot`: https://www.branchspot.com/blog/
 .. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
 .. _`Documentation`: http://docs.django-blog-zinnia.com/
 .. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia
