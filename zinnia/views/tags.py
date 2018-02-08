@@ -80,4 +80,4 @@ class TagDetail(EntryQuerysetTemplateResponseMixin,
         """
         The model name is the tag slugified.
         """
-        return slugify(self.tag)
+        return slugify(self.tag.name)
