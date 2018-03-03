@@ -60,7 +60,7 @@ class EntryPublishedManager(models.Manager):
         """
         try:
             return self.advanced_search(pattern)
-        except:
+        except Exception:
             return self.basic_search(pattern)
 
     def advanced_search(self, pattern):

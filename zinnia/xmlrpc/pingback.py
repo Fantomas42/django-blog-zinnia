@@ -147,7 +147,7 @@ def pingback_ping(source, target):
                                      entry=entry)
             return 'Pingback from %s to %s registered.' % (source, target)
         return PINGBACK_ALREADY_REGISTERED
-    except:
+    except Exception:
         return UNDEFINED_ERROR
 
 
