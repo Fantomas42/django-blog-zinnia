@@ -222,10 +222,14 @@ class TagAutoCompleteTestCase(TestCase):
     @override_settings(STATIC_URL='/s/')
     def test_media(self):
         medias = TagAutoComplete().media
-        self.assertEquals(medias._css,
-                          {'all': ['/s/zinnia/admin/select2/css/select2.css']})
-        self.assertEquals(medias._js,
-                          ['/s/zinnia/admin/select2/js/select2.js'])
+        self.assertEquals(
+            medias._css,
+            {'all': ('/s/zinnia/admin/select2/css/select2.css',)}
+        )
+        self.assertEquals(
+            medias._js,
+            ('/s/zinnia/admin/select2/js/select2.js',)
+        )
 
 
 class MiniTextareaTestCase(TestCase):
