@@ -1,14 +1,8 @@
 """XML-RPC methods of Zinnia Pingback"""
-try:
-    from urllib.error import HTTPError
-    from urllib.error import URLError
-    from urllib.parse import urlsplit
-    from urllib.request import urlopen
-except ImportError:  # Python 2
-    from urllib2 import HTTPError
-    from urllib2 import URLError
-    from urllib2 import urlopen
-    from urlparse import urlsplit
+from urllib.error import HTTPError
+from urllib.error import URLError
+from urllib.parse import urlsplit
+from urllib.request import urlopen
 
 from bs4 import BeautifulSoup
 

@@ -3,14 +3,9 @@ import functools
 from datetime import datetime as original_datetime
 from unittest import SkipTest
 from unittest import skipIf
-try:
-    from urllib.parse import parse_qs
-    from urllib.parse import urlparse
-    from xmlrpc.client import Transport
-except ImportError:  # Python 2
-    from urlparse import parse_qs
-    from urlparse import urlparse
-    from xmlrpclib import Transport
+from urllib.parse import parse_qs
+from urllib.parse import urlparse
+from xmlrpc.client import Transport
 
 from django.conf import settings
 from django.template import Origin

@@ -2,10 +2,7 @@
 import re
 from datetime import date
 from hashlib import md5
-try:
-    from urllib.parse import urlencode
-except ImportError:  # Python 2
-    from urllib import urlencode
+from urllib.parse import urlencode
 
 from django.conf import settings
 from django.contrib.auth import get_user_model

@@ -1,9 +1,6 @@
 """Test cases for Zinnia's markups"""
+import builtins
 import warnings
-try:
-    import builtins
-except ImportError:  # Python 2
-    import __builtin__ as builtins
 
 from django.test import TestCase
 

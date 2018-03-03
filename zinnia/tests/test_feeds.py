@@ -1,9 +1,6 @@
 # coding=utf-8
 """Test cases for Zinnia's feeds"""
-try:
-    from urllib.parse import urljoin
-except ImportError:  # Python 2
-    from urlparse import urljoin
+from urllib.parse import urljoin
 
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
