@@ -18,13 +18,13 @@ Make sure to install these packages prior to installation :
 * `django-tagging`_ >= 0.4.5
 * `beautifulsoup4`_ >= 4.1.3
 * `mots-vides`_ >= 2015.2.6
+* `pyparsing`_ >= 2.0.1
 * `regex`_ >= 2016.3.2
 * `django-contrib-comments`_ >= 1.7
 
 The packages below are optionnal but needed for run the full test suite or
 migrate the database.
 
-* `pyparsing`_ >= 2.0.1
 * `django-xmlrpc`_ >= 0.1.7
 
 Note that all the needed dependencies will be resolved if you install
