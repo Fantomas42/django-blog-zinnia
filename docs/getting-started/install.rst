@@ -116,6 +116,9 @@ URLs
 Add at least these following lines to your project's urls.py in order to
 display the Weblog. ::
 
+  from django.conf.urls import include
+  from django.conf.urls import url
+
   url(r'^weblog/', include('zinnia.urls')),
   url(r'^comments/', include('django_comments.urls')),
 
