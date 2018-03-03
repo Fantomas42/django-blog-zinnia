@@ -11,8 +11,8 @@ Dependencies
 
 Make sure to install these packages prior to installation :
 
-* `Python`_ >= 2.7
-* `Django`_ >= 1.11,<2.0
+* `Python`_ >= 3.4
+* `Django`_ >= 2.0
 * `Pillow`_ >= 2.0.0
 * `django-mptt`_ >= 0.8.6
 * `django-tagging`_ >= 0.4.5
@@ -24,7 +24,6 @@ Make sure to install these packages prior to installation :
 The packages below are optionnal but needed for run the full test suite or
 migrate the database.
 
-* `pytz`_
 * `pyparsing`_ >= 2.0.1
 * `django-xmlrpc`_ >= 0.1.7
 
