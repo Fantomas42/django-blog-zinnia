@@ -23,6 +23,12 @@ Compatibility with Django
 
 Here a list establishing the compatibility between Zinnia and Django:
 
+.. versionchanged:: 0.20
+
+Backward incompatibilities with Django v1.11.x due to :
+
+* Removal of Python 2 code
+
 .. versionchanged:: 0.19
 
 Backward incompatibilities with Django v1.10.x due to :
