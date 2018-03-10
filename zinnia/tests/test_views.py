@@ -434,7 +434,7 @@ class ViewsTestCase(ViewsBaseCase):
         with self.assertNumQueries(1):
             response = self.client.get(entry.get_absolute_url())
         self.assertTemplateUsed(response, 'zinnia/login.html')
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(3):
             response = self.client.post(entry.get_absolute_url(),
                                         {'username': 'admin',
                                          'password': 'password'})

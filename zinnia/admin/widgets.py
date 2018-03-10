@@ -1,6 +1,5 @@
 """Widgets for Zinnia admin"""
 import json
-
 from itertools import chain
 
 from django.contrib.admin import widgets
