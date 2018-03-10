@@ -1,5 +1,14 @@
+0.20
+----
+
+* Remove compatibility with Django 1.x
+* Remove code for Python 2.0
+* Documentation improvements
+
+https://github.com/Fantomas42/django-blog-zinnia/compare/v0.19...v0.20
+
 0.19
----
+----
 
 * Compatibility with Django 1.11
 * Fix Threading issues in tests

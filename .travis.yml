@@ -1,8 +1,6 @@
 sudo: false
 language: python
 python:
-    - 2.7
-    - 3.4
     - 3.5
     - 3.6
 env:
@@ -12,8 +10,7 @@ env:
 matrix:
     fast_finish: true
 install:
-    - pip install zc.buildout==2.9.3
-    - pip install -U six==1.11.0 # For Python 3.4
+    - pip install zc.buildout
     - buildout -c travis.cfg testenv:DJANGO_SETTINGS_MODULE=zinnia.tests.implementations.$DATABASE_ENGINE
     - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ];
       then

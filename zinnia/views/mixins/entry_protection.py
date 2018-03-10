@@ -1,5 +1,5 @@
 """Protection mixins for Zinnia views"""
-from django.contrib.auth.views import login
+from django.contrib.auth.views import LoginView
 
 
 class LoginMixin(object):
@@ -12,7 +12,9 @@ class LoginMixin(object):
         """
         Return the login view.
         """
-        return login(self.request, 'zinnia/login.html')
+        return LoginView.as_view(
+            template_name='zinnia/login.html'
+        )(self.request)
 
 
 class PasswordMixin(object):

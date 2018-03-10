@@ -1,3 +1,10 @@
+<!--
+
+Have you read the contributing guidelines ?
+
+https://github.com/Fantomas42/django-blog-zinnia/blob/develop/.github/CONTRIBUTING.md
+
+-->
 # Actual behavior
 
 
@@ -19,9 +26,15 @@
 
 # Disclaimer
 
-Please read these questions **carefully** and answer honestly with an `x`
-into all the boxes `[ ]`:
+<!--
 
- - [ ] I have read the guidelines for contributing linked to above.
- - [ ] I have checked for duplicate issues.
- - [ ] This is not a support request.
+Please read these points carefully and answer honestly with an `X`
+into all the boxes. Example : [X]
+
+-->
+
+Before submitting an *issue* make sure you have:
+
+ - [ ] Read the guidelines for contributing.
+ - [ ] Checked for duplicate issues.
+ - [ ] Not a support request.

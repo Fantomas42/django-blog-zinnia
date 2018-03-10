@@ -1,8 +1,8 @@
 """Test cases for Zinnia Template"""
 from django.test import TestCase
 
-from zinnia.templates import append_position
-from zinnia.templates import loop_template_list
+from zinnia.templating import append_position
+from zinnia.templating import loop_template_list
 
 
 class TemplateTestCase(TestCase):

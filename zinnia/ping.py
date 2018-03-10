@@ -2,16 +2,10 @@
 import socket
 from logging import getLogger
 from threading import Thread
-try:
-    from urllib.request import urlopen
-    from urllib.parse import urlsplit
-    from xmlrpc.client import Error
-    from xmlrpc.client import ServerProxy
-except ImportError:  # Python 2
-    from urllib2 import urlopen
-    from urlparse import urlsplit
-    from xmlrpclib import Error
-    from xmlrpclib import ServerProxy
+from urllib.parse import urlsplit
+from urllib.request import urlopen
+from xmlrpc.client import Error
+from xmlrpc.client import ServerProxy
 
 from bs4 import BeautifulSoup
 

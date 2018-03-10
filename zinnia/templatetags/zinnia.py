@@ -2,10 +2,7 @@
 import re
 from datetime import date
 from hashlib import md5
-try:
-    from urllib.parse import urlencode
-except ImportError:  # Python 2
-    from urllib import urlencode
+from urllib.parse import urlencode
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -40,7 +37,7 @@ from ..models.category import Category
 from ..models.entry import Entry
 from ..settings import ENTRY_LOOP_TEMPLATES
 from ..settings import PROTOCOL
-from ..templates import loop_template_list
+from ..templating import loop_template_list
 
 
 WIDONT_REGEXP = re.compile(
