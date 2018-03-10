@@ -40,7 +40,7 @@ extensions = ['sphinx.ext.autodoc',
               'extensions.zinnia_docs']
 
 intersphinx_mapping = {
-    'django': ('http://readthedocs.org/docs/django/en/latest/', None),
+    'django': ('https://django.readthedocs.io/en/latest/', None),
     }
 
 # Add any paths that contain templates here, relative to this directory.
