@@ -1,7 +1,7 @@
 """Views for Zinnia comments"""
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponsePermanentRedirect
-from django.template.defaultfilters import slugify
+from slugify import slugify
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.base import View
 
