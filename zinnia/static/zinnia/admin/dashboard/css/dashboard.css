@@ -23,7 +23,7 @@ input, textarea, select {
   width: 25em; }
 
 .required label, label.required {
-  color: #333333 !important;
+  color: Gray20 !important;
   font-weight: bold !important; }
 
 .button {
