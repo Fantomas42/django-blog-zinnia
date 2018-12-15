@@ -3,7 +3,6 @@ from django.db import models
 from django.urls import reverse
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-
 from mptt.managers import TreeManager
 from mptt.models import MPTTModel
 from mptt.models import TreeForeignKey
@@ -13,7 +12,7 @@ from zinnia.managers import entries_published
 
 
 @python_2_unicode_compatible
-class Category(MPTTModel):
+class AbstractCategory(MPTTModel):
     """
     Simple model for categorizing entries.
     """
@@ -73,6 +72,7 @@ class Category(MPTTModel):
         ordering = ['title']
         verbose_name = _('category')
         verbose_name_plural = _('categories')
+        abstract = True
 
     class MPTTMeta:
         """
