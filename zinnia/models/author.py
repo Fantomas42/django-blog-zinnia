@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.encoding import python_2_unicode_compatible
+from django.contrib.auth import get_user_model
 
 from zinnia.managers import EntryRelatedPublishedManager
 from zinnia.managers import entries_published
@@ -13,8 +14,9 @@ def safe_get_user_model():
     """
     Safe loading of the User model, customized or not.
     """
-    user_app, user_model = settings.AUTH_USER_MODEL.split('.')
-    return apps.get_registered_model(user_app, user_model)
+    # user_app, user_model = settings.AUTH_USER_MODEL.split('.')
+    # return apps.get_registered_model(user_app, user_model)
+    return get_user_model()
 
 
 class AuthorPublishedManager(models.Model):
