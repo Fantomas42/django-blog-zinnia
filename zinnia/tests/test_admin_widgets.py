@@ -10,6 +10,7 @@ from zinnia.signals import disconnect_entry_signals
 
 
 class MPTTFilteredSelectMultipleTestCase(TestCase):
+    maxDiff = None
 
     def test_optgroups(self):
         choices = [
@@ -39,7 +40,8 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
                                 'data-left-value': 1
                             },
                             'value': 1,
-                            'label': 'Category 1'
+                            'label': 'Category 1',
+                            'wrap_label': True
                         }
                     ], 0
                 ), (
@@ -56,7 +58,8 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
                                 'data-left-value': 2
                             },
                             'value': 2,
-                            'label': '|-- Category 2'
+                            'label': '|-- Category 2',
+                            'wrap_label': True
                         }
                     ], 1
                 )
@@ -81,7 +84,8 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
                                 'data-left-value': 1
                             },
                             'value': 1,
-                            'label': 'Category 1'
+                            'label': 'Category 1',
+                            'wrap_label': True
                         }
                     ], 0
                 ), (
@@ -99,7 +103,8 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
                                 'data-left-value': 2
                             },
                             'value': 2,
-                            'label': '|-- Category 2'
+                            'label': '|-- Category 2',
+                            'wrap_label': True
                         }
                     ], 1
                 )
@@ -126,7 +131,8 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
                                 'data-left-value': 1
                             },
                             'value': 1,
-                            'label': 'Category 1'
+                            'label': 'Category 1',
+                            'wrap_label': True
                         }
                     ], 0
                 ), (
@@ -144,7 +150,8 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
                                 'data-left-value': 2
                             },
                             'value': 2,
-                            'label': '|-- Category 2'
+                            'label': '|-- Category 2',
+                            'wrap_label': True
                         }
                     ], 1
                 )
@@ -224,11 +231,11 @@ class TagAutoCompleteTestCase(TestCase):
         medias = TagAutoComplete().media
         self.assertEquals(
             medias._css,
-            {'all': ('/s/zinnia/admin/select2/css/select2.css',)}
+            {'all': ['/s/zinnia/admin/select2/css/select2.css']}
         )
         self.assertEquals(
             medias._js,
-            ('/s/zinnia/admin/select2/js/select2.js',)
+            ['/s/zinnia/admin/select2/js/select2.js']
         )
 
 

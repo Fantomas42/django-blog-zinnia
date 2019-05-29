@@ -387,8 +387,10 @@ class EntryHtmlContentTestCase(TestCase):
 
         self.entry.content = 'Hello world !\n' \
                              ' this is my content'
-        self.assertEqual(self.entry.html_content,
-                         '<p>Hello world !<br /> this is my content</p>')
+        self.assertHTMLEqual(
+            self.entry.html_content,
+            '<p>Hello world !<br /> this is my content</p>'
+        )
         self.entry.content = ''
         self.assertEqual(self.entry.html_content, '')
 
@@ -399,11 +401,13 @@ class EntryHtmlContentTestCase(TestCase):
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
         html_content = self.entry.html_content
-        self.assertEqual(html_content,
-                         '\t<p>Hello world !</p>\n\n\t'
-                         '<p>this is my content :</p>\n\n\t'
-                         '<ul>\n\t\t<li>Item 1</li>\n\t\t'
-                         '<li>Item 2</li>\n\t</ul>')
+        self.assertHTMLEqual(
+            html_content,
+            '\t<p>Hello world !</p>\n\n\t'
+            '<p>this is my content :</p>\n\n\t'
+            '<ul>\n\t\t<li>Item 1</li>\n\t\t'
+            '<li>Item 2</li>\n\t</ul>'
+        )
 
     @skip_if_lib_not_available('markdown')
     def test_html_content_markdown(self):
@@ -412,11 +416,13 @@ class EntryHtmlContentTestCase(TestCase):
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
         html_content = self.entry.html_content
-        self.assertEqual(html_content,
-                         '<p>Hello world !</p>\n'
-                         '<p>this is my content :</p>'
-                         '\n<ul>\n<li>Item 1</li>\n'
-                         '<li>Item 2</li>\n</ul>')
+        self.assertHTMLEqual(
+            html_content,
+            '<p>Hello world !</p>\n'
+            '<p>this is my content :</p>'
+            '\n<ul>\n<li>Item 1</li>\n'
+            '<li>Item 2</li>\n</ul>'
+        )
 
     @skip_if_lib_not_available('markdown')
     def test_markdown_with_inline_html(self):
@@ -424,9 +430,11 @@ class EntryHtmlContentTestCase(TestCase):
         self.entry.content = ('Hello *World* !\n\n'
                               '<p>This is an inline HTML paragraph</p>')
         html_content = self.entry.html_content
-        self.assertEqual(html_content,
-                         '<p>Hello <em>World</em> !</p>\n'
-                         '<p>This is an inline HTML paragraph</p>')
+        self.assertHTMLEqual(
+            html_content,
+            '<p>Hello <em>World</em> !</p>\n'
+            '<p>This is an inline HTML paragraph</p>'
+        )
 
     @skip_if_lib_not_available('docutils')
     def test_html_content_restructuredtext(self):
@@ -435,11 +443,13 @@ class EntryHtmlContentTestCase(TestCase):
                              'this is my content :\n\n' \
                              '* Item 1\n* Item 2'
         html_content = self.entry.html_content
-        self.assertEqual(html_content,
-                         '<p>Hello world !</p>\n'
-                         '<p>this is my content :</p>'
-                         '\n<ul class="simple">\n<li>Item 1</li>\n'
-                         '<li>Item 2</li>\n</ul>\n')
+        self.assertHTMLEqual(
+            html_content,
+            '<p>Hello world !</p>\n'
+            '<p>this is my content :</p>'
+            '\n<ul class="simple">\n<li>Item 1</li>\n'
+            '<li>Item 2</li>\n</ul>\n'
+        )
 
     def test_html_preview(self):
         markups.MARKUP_LANGUAGE = None
@@ -470,8 +480,8 @@ class EntryHtmlLeadTestCase(TestCase):
 
         self.entry.lead = 'Hello world !\n' \
                           ' this is my lead'
-        self.assertEqual(self.entry.html_lead,
-                         '<p>Hello world !<br /> this is my lead</p>')
+        self.assertHTMLEqual(self.entry.html_lead,
+                             '<p>Hello world !<br /> this is my lead</p>')
         self.entry.lead = ''
         self.assertEqual(self.entry.html_lead, '')
 
@@ -482,11 +492,13 @@ class EntryHtmlLeadTestCase(TestCase):
                           'this is my lead :\n\n' \
                           '* Item 1\n* Item 2'
         html_lead = self.entry.html_lead
-        self.assertEqual(html_lead,
-                         '\t<p>Hello world !</p>\n\n\t'
-                         '<p>this is my lead :</p>\n\n\t'
-                         '<ul>\n\t\t<li>Item 1</li>\n\t\t'
-                         '<li>Item 2</li>\n\t</ul>')
+        self.assertHTMLEqual(
+            html_lead,
+            '\t<p>Hello world !</p>\n\n\t'
+            '<p>this is my lead :</p>\n\n\t'
+            '<ul>\n\t\t<li>Item 1</li>\n\t\t'
+            '<li>Item 2</li>\n\t</ul>'
+        )
 
     @skip_if_lib_not_available('markdown')
     def test_html_lead_markdown(self):
@@ -495,11 +507,13 @@ class EntryHtmlLeadTestCase(TestCase):
                           'this is my lead :\n\n' \
                           '* Item 1\n* Item 2'
         html_lead = self.entry.html_lead
-        self.assertEqual(html_lead,
-                         '<p>Hello world !</p>\n'
-                         '<p>this is my lead :</p>'
-                         '\n<ul>\n<li>Item 1</li>\n'
-                         '<li>Item 2</li>\n</ul>')
+        self.assertHTMLEqual(
+            html_lead,
+            '<p>Hello world !</p>\n'
+            '<p>this is my lead :</p>'
+            '\n<ul>\n<li>Item 1</li>\n'
+            '<li>Item 2</li>\n</ul>'
+        )
 
     @skip_if_lib_not_available('markdown')
     def test_markdown_with_inline_html(self):
@@ -507,9 +521,11 @@ class EntryHtmlLeadTestCase(TestCase):
         self.entry.lead = ('Hello *World* !\n\n'
                            '<p>This is an inline HTML paragraph</p>')
         html_lead = self.entry.html_lead
-        self.assertEqual(html_lead,
-                         '<p>Hello <em>World</em> !</p>\n'
-                         '<p>This is an inline HTML paragraph</p>')
+        self.assertHTMLEqual(
+            html_lead,
+            '<p>Hello <em>World</em> !</p>\n'
+            '<p>This is an inline HTML paragraph</p>'
+        )
 
     @skip_if_lib_not_available('docutils')
     def test_html_lead_restructuredtext(self):
@@ -518,11 +534,13 @@ class EntryHtmlLeadTestCase(TestCase):
                           'this is my lead :\n\n' \
                           '* Item 1\n* Item 2'
         html_lead = self.entry.html_lead
-        self.assertEqual(html_lead,
-                         '<p>Hello world !</p>\n'
-                         '<p>this is my lead :</p>'
-                         '\n<ul class="simple">\n<li>Item 1</li>\n'
-                         '<li>Item 2</li>\n</ul>\n')
+        self.assertHTMLEqual(
+            html_lead,
+            '<p>Hello world !</p>\n'
+            '<p>this is my lead :</p>'
+            '\n<ul class="simple">\n<li>Item 1</li>\n'
+            '<li>Item 2</li>\n</ul>\n'
+        )
 
 
 class EntryAbsoluteUrlTestCase(TestCase):

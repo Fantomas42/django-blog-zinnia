@@ -2,6 +2,7 @@
 from django.contrib.admin import ModelAdmin
 from django.contrib.admin import site
 from django.contrib.admin.views.main import ChangeList
+from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.test import RequestFactory
 from django.test import TestCase
@@ -36,6 +37,9 @@ class BaseListFilterTestCase(TestCase):
     def setUp(self):
         disconnect_entry_signals()
         activate('en')
+        self.root = User.objects.create_superuser(
+            'root', 'root@exemple.com', 'toor'
+        )
         self.request_factory = RequestFactory()
         self.site = Site.objects.get_current()
 
@@ -68,7 +72,8 @@ class BaseListFilterTestCase(TestCase):
             modeladmin.list_display_links, modeladmin.list_filter,
             modeladmin.date_hierarchy, modeladmin.search_fields,
             modeladmin.list_select_related, modeladmin.list_per_page,
-            modeladmin.list_max_show_all, modeladmin.list_editable, modeladmin)
+            modeladmin.list_max_show_all, modeladmin.list_editable,
+            modeladmin, modeladmin.sortable_by)
 
 
 @skip_if_custom_user
@@ -92,11 +97,13 @@ class AuthorListFilterTestCase(BaseListFilterTestCase):
         modeladmin = MiniEntryAuthorAdmin(Entry, site)
 
         request = self.request_factory.get('/')
+        request.user = self.root
         changelist = self.get_changelist(request, Entry, modeladmin)
         queryset = changelist.get_queryset(request)
         self.assertEqual(queryset.count(), 3)
 
         request = self.request_factory.get('/', {'author': self.authors[1].pk})
+        request.user = self.root
         changelist = self.get_changelist(request, Entry, modeladmin)
         queryset = changelist.get_queryset(request)
         self.assertEqual(queryset.count(), 2)
@@ -113,6 +120,7 @@ class AuthorListFilterTestCase(BaseListFilterTestCase):
                                'contributor (1 entry)')])
 
 
+@skip_if_custom_user
 class CategoryListFilterTestCase(BaseListFilterTestCase):
     """Test case for CategoryListFilter"""
 
@@ -134,12 +142,15 @@ class CategoryListFilterTestCase(BaseListFilterTestCase):
         modeladmin = MiniEntryCategoryAdmin(Entry, site)
 
         request = self.request_factory.get('/')
+        request.user = self.root
         changelist = self.get_changelist(request, Entry, modeladmin)
         queryset = changelist.get_queryset(request)
         self.assertEqual(queryset.count(), 3)
 
-        request = self.request_factory.get('/', {'category':
-                                                 str(self.categories[1].pk)})
+        request = self.request_factory.get(
+            '/', {'category': str(self.categories[1].pk)}
+        )
+        request.user = self.root
         changelist = self.get_changelist(request, Entry, modeladmin)
         queryset = changelist.get_queryset(request)
         self.assertEqual(queryset.count(), 2)

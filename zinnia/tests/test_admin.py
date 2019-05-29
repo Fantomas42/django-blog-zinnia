@@ -276,8 +276,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
         settings.PING_DIRECTORIES = True
         self.assertEqual(
             list(self.admin.get_actions(self.request).keys()),
-            ['delete_selected',
-             'close_comments',
+            ['close_comments',
              'close_pingbacks',
              'close_trackbacks',
              'ping_directories',
@@ -287,8 +286,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
         settings.PING_DIRECTORIES = False
         self.assertEqual(
             list(self.admin.get_actions(self.request).keys()),
-            ['delete_selected',
-             'close_comments',
+            ['close_comments',
              'close_pingbacks',
              'close_trackbacks',
              'put_on_top',
