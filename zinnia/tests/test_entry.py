@@ -348,13 +348,13 @@ class EntryTestCase(TestCase):
             self.entry.last_update)
 
     def test_save_excerpt(self):
-        self.assertEquals(self.entry.excerpt, '')
+        self.assertEqual(self.entry.excerpt, '')
         self.entry.status = PUBLISHED
         self.entry.save()
-        self.assertEquals(self.entry.excerpt, 'My content')
+        self.assertEqual(self.entry.excerpt, 'My content')
         self.entry.content = 'My changed content'
         self.entry.save()
-        self.assertEquals(self.entry.excerpt, 'My content')
+        self.assertEqual(self.entry.excerpt, 'My content')
         self.entry.excerpt = ''
         content = '<p>%s</p>' % ' '.join(['word-%s' % i for i in range(75)])
         self.entry.content = content
@@ -363,9 +363,9 @@ class EntryTestCase(TestCase):
                         in self.entry.excerpt)
 
     def test_html_lead(self):
-        self.assertEquals(self.entry.html_lead, '')
+        self.assertEqual(self.entry.html_lead, '')
         self.entry.lead = 'Lead paragraph'
-        self.assertEquals(self.entry.html_lead,
+        self.assertEqual(self.entry.html_lead,
                           '<p>Lead paragraph</p>')
 
 

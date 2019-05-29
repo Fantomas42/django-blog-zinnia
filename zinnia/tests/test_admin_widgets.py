@@ -22,7 +22,7 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
             'test', False, choices=choices)
 
         optgroups = widget.optgroups('toto', '1')
-        self.assertEquals(
+        self.assertEqual(
             optgroups,
             [
                 (
@@ -67,7 +67,7 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
         )
 
         optgroups = widget.optgroups('toto', ['2'])
-        self.assertEquals(
+        self.assertEqual(
             optgroups,
             [
                 (
@@ -112,7 +112,7 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
         )
 
         optgroups = widget.optgroups('toto', '1', {'attribute': 'value'})
-        self.assertEquals(
+        self.assertEqual(
             optgroups,
             [
                 (
@@ -161,8 +161,8 @@ class MPTTFilteredSelectMultipleTestCase(TestCase):
     @override_settings(STATIC_URL='/s/')
     def test_media(self):
         medias = MPTTFilteredSelectMultiple('test', False).media
-        self.assertEquals(medias._css, {})
-        self.assertEquals(medias._js, [
+        self.assertEqual(medias._css, {})
+        self.assertEqual(medias._js, [
             '/s/admin/js/core.js',
             '/s/zinnia/admin/mptt/js/mptt_m2m_selectbox.js',
             '/s/admin/js/SelectFilter2.js'])
@@ -229,11 +229,11 @@ class TagAutoCompleteTestCase(TestCase):
     @override_settings(STATIC_URL='/s/')
     def test_media(self):
         medias = TagAutoComplete().media
-        self.assertEquals(
+        self.assertEqual(
             medias._css,
             {'all': ['/s/zinnia/admin/select2/css/select2.css']}
         )
-        self.assertEquals(
+        self.assertEqual(
             medias._js,
             ['/s/zinnia/admin/select2/js/select2.js']
         )
