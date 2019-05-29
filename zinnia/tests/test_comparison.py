@@ -181,10 +181,10 @@ class ComparisonTestCase(TestCase):
     def test_raw_clean(self):
         v = ModelVectorBuilder(queryset=Entry.objects.none(), fields=['title'])
         self.assertEqual(v.raw_clean('<p>HTML Content</p>'),
-                          ['html', 'content'])
+                         ['html', 'content'])
         self.assertEqual(v.raw_clean('<p>An HTML Content</p>'),
-                          ['html', 'content'])
+                         ['html', 'content'])
         self.assertEqual(v.raw_clean('<p>An HTML Content 2</p>'),
-                          ['html', 'content'])
+                         ['html', 'content'])
         self.assertEqual(v.raw_clean('<p>!HTML Content ?</p>'),
-                          ['html', 'content'])
+                         ['html', 'content'])

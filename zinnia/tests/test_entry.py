@@ -366,7 +366,7 @@ class EntryTestCase(TestCase):
         self.assertEqual(self.entry.html_lead, '')
         self.entry.lead = 'Lead paragraph'
         self.assertEqual(self.entry.html_lead,
-                          '<p>Lead paragraph</p>')
+                         '<p>Lead paragraph</p>')
 
 
 class EntryHtmlContentTestCase(TestCase):
