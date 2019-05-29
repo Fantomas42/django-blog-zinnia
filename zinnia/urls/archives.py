@@ -51,7 +51,7 @@ day_patterns = [
         EntryDay.as_view(),
         name='entry_archive_day'),
     url(_(r'^(?P<year>\d{4})/(?P<month>\d{2})/'
-          '(?P<day>\d{2})/page/(?P<page>\d+)/$'),
+          r'(?P<day>\d{2})/page/(?P<page>\d+)/$'),
         EntryDay.as_view(),
         name='entry_archive_day_paginated'),
 ]
