@@ -97,7 +97,7 @@ Example of a query with boolean operator:
    This will returns all the entries containing the term ``paris`` or
    ``berlin``.
 
-Example of e query with parenthesis:
+Example of a query with parenthesis:
    ``(paris or berlin) love``
 
    This will returns all the entries containing the terms ``paris`` or
