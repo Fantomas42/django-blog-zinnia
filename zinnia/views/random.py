@@ -16,5 +16,5 @@ class EntryRandom(RedirectView):
         Get entry corresponding to 'pk' and
         return the get_absolute_url of the entry.
         """
-        entry = Entry.published.all().order_by('?')[0]
+        entry = Entry.objects.published(self.request).all().order_by('?')[0]
         return entry.get_absolute_url()

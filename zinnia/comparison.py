@@ -228,8 +228,11 @@ class EntryPublishedVectorBuilder(CachedModelVectorBuilder):
     Vector builder for published entries.
     """
     limit = 100
-    queryset = Entry.published
     fields = COMPARISON_FIELDS
+
+    @property
+    def queryset(self):
+        return Entry.objects.published()
 
     @property
     def cache_key(self):

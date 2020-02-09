@@ -20,7 +20,7 @@ class BaseEntryChannel(object):
         Override the get_queryset method to build
         the queryset with entry matching query.
         """
-        return Entry.published.search(self.query)
+        return Entry.objects.published(self.request).search(self.query)
 
     def get_context_data(self, **kwargs):
         """

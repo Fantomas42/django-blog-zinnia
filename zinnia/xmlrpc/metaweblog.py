@@ -235,7 +235,7 @@ def get_tags(blog_id, username, password):
     site = Site.objects.get_current()
     return [tag_structure(tag, site)
             for tag in Tag.objects.usage_for_queryset(
-                Entry.published.all(), counts=True)]
+                Entry.objects.published(), counts=True)]
 
 
 @xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])

@@ -137,9 +137,9 @@ QUERY = OneOrMore(EXPRESSION) + StringEnd()
 QUERY.setParseAction(union_q)
 
 
-def advanced_search(pattern):
+def advanced_search(pattern, request=None):
     """
     Parse the grammar of a pattern and build a queryset with it.
     """
     query_parsed = QUERY.parseString(pattern)
-    return Entry.published.filter(query_parsed[0]).distinct()
+    return Entry.objects.published(request).filter(query_parsed[0]).distinct()

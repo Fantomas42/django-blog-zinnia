@@ -10,19 +10,19 @@ HIDDEN = 1
 PUBLISHED = 2
 
 
-def tags_published():
+def tags_published(request=None):
     """
     Return the published tags.
     """
     from tagging.models import Tag
     from zinnia.models.entry import Entry
     tags_entry_published = Tag.objects.usage_for_queryset(
-        Entry.published.all())
+        Entry.objects.published(request))
     # Need to do that until the issue #44 of django-tagging is fixed
     return Tag.objects.filter(name__in=[t.name for t in tags_entry_published])
 
 
-def entries_published(queryset):
+def entries_published(queryset, request=None):
     """
     Return only the entries published.
     """
@@ -32,27 +32,27 @@ def entries_published(queryset):
         models.Q(start_publication=None),
         models.Q(end_publication__gt=now) |
         models.Q(end_publication=None),
-        status=PUBLISHED, sites=Site.objects.get_current())
+        status=PUBLISHED, sites=Site.objects.get_current(request))
 
 
-class EntryPublishedManager(models.Manager):
-    """
-    Manager to retrieve published entries.
-    """
-
-    def get_queryset(self):
+class EntryQuerySet(models.QuerySet):
+    def published(self, request=None):
         """
         Return published entries.
         """
-        return entries_published(
-            super(EntryPublishedManager, self).get_queryset())
+        return entries_published(self, request)
 
-    def on_site(self):
+    def on_site(self, request=None):
         """
-        Return entries published on current site.
+        Return entries of current site.
         """
-        return super(EntryPublishedManager, self).get_queryset().filter(
-            sites=Site.objects.get_current())
+        return self.filter(sites=Site.objects.get_current(request))
+
+
+class EntryManager(models.Manager.from_queryset(EntryQuerySet)):
+    """
+    Manager to retrieve published entries.
+    """
 
     def search(self, pattern):
         """
@@ -63,14 +63,14 @@ class EntryPublishedManager(models.Manager):
         except Exception:
             return self.basic_search(pattern)
 
-    def advanced_search(self, pattern):
+    def advanced_search(self, pattern, request=None):
         """
         Advanced search on entries.
         """
         from zinnia.search import advanced_search
-        return advanced_search(pattern)
+        return advanced_search(pattern, request)
 
-    def basic_search(self, pattern):
+    def basic_search(self, pattern, request=None):
         """
         Basic search on entries.
         """
@@ -84,7 +84,7 @@ class EntryPublishedManager(models.Manager):
             else:
                 lookup |= query_part
 
-        return self.get_queryset().filter(lookup)
+        return self.published(request).filter(lookup)
 
 
 class EntryRelatedPublishedManager(models.Manager):
@@ -105,4 +105,4 @@ class EntryRelatedPublishedManager(models.Manager):
             models.Q(entries__end_publication=None),
             entries__status=PUBLISHED,
             entries__sites=Site.objects.get_current()
-            ).distinct()
+        ).distinct()

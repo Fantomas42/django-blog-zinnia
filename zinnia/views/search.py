@@ -22,14 +22,14 @@ class BaseEntrySearch(object):
         Overridde the get_queryset method to
         do some validations and build the search queryset.
         """
-        entries = Entry.published.none()
+        entries = Entry.objects.published(self.request).none()
 
         if self.request.GET:
             self.pattern = self.request.GET.get('pattern', '')
             if len(self.pattern) < 3:
                 self.error = _('The pattern is too short')
             else:
-                entries = Entry.published.search(self.pattern)
+                entries = Entry.objects.published(self.request).search(self.pattern)
         else:
             self.error = _('No pattern to search found')
         return entries

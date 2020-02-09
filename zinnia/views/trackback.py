@@ -34,7 +34,7 @@ class EntryTrackback(TemplateView):
         """
         Retrieve the Entry trackbacked.
         """
-        return get_object_or_404(Entry.published, pk=self.kwargs['pk'])
+        return get_object_or_404(Entry.objects.published(self.request), pk=self.kwargs['pk'])
 
     def get(self, request, *args, **kwargs):
         """

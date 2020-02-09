@@ -45,7 +45,7 @@ class BaseCategoryDetail(object):
         build a queryset of her published entries.
         """
         self.category = get_category_or_404(self.kwargs['path'])
-        return self.category.entries_published()
+        return self.category.entries_published(self.request)
 
     def get_context_data(self, **kwargs):
         """

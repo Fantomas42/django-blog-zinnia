@@ -21,7 +21,7 @@ from tagging.utils import parse_tag_input
 from zinnia.flags import PINGBACK
 from zinnia.flags import TRACKBACK
 from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
-from zinnia.managers import EntryPublishedManager
+from zinnia.managers import EntryManager
 from zinnia.managers import entries_published
 from zinnia.markups import html_format
 from zinnia.preview import HTMLPreview
@@ -85,8 +85,7 @@ class CoreEntry(models.Model):
     last_update = models.DateTimeField(
         _('last update'), default=timezone.now)
 
-    objects = models.Manager()
-    published = EntryPublishedManager()
+    objects = EntryManager()
 
     @property
     def is_actual(self):
@@ -342,12 +341,11 @@ class RelatedEntry(models.Model):
         blank=True,
         verbose_name=_('related entries'))
 
-    @property
-    def related_published(self):
+    def related_published(self, request=None):
         """
         Returns only related entries published.
         """
-        return entries_published(self.related)
+        return entries_published(self.related, request)
 
     class Meta:
         abstract = True

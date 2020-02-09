@@ -38,11 +38,11 @@ class AbstractCategory(MPTTModel):
     objects = TreeManager()
     published = EntryRelatedPublishedManager()
 
-    def entries_published(self):
+    def entries_published(self, request=None):
         """
         Returns category's published entries.
         """
-        return entries_published(self.entries)
+        return entries_published(self.entries, request)
 
     @property
     def tree_path(self):

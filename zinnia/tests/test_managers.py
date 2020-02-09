@@ -95,41 +95,41 @@ class ManagersTestCase(TestCase):
         self.assertEqual(entries_published(Entry.objects.all()).count(), 2)
 
     def test_entry_published_manager_get_query_set(self):
-        self.assertEqual(Entry.published.count(), 1)
+        self.assertEqual(Entry.objects.published().count(), 1)
         self.entry_2.status = PUBLISHED
         self.entry_2.save()
-        self.assertEqual(Entry.published.count(), 2)
+        self.assertEqual(Entry.objects.published().count(), 2)
         self.entry_1.sites.clear()
-        self.assertEqual(Entry.published.count(), 1)
+        self.assertEqual(Entry.objects.published().count(), 1)
         self.entry_1.sites.add(*self.sites)
         self.entry_1.start_publication = datetime(2020, 1, 1)
         self.entry_1.save()
-        self.assertEqual(Entry.published.count(), 1)
+        self.assertEqual(Entry.objects.published().count(), 1)
         self.entry_1.start_publication = datetime(2000, 1, 1)
         self.entry_1.save()
-        self.assertEqual(Entry.published.count(), 2)
+        self.assertEqual(Entry.objects.published().count(), 2)
         self.entry_1.end_publication = datetime(2000, 1, 1)
         self.entry_1.save()
-        self.assertEqual(Entry.published.count(), 1)
+        self.assertEqual(Entry.objects.published().count(), 1)
         self.entry_1.end_publication = datetime(2020, 1, 1)
         self.entry_1.save()
-        self.assertEqual(Entry.published.count(), 2)
+        self.assertEqual(Entry.objects.published().count(), 2)
 
     def test_entry_published_manager_on_site(self):
-        self.assertEqual(Entry.published.on_site().count(), 2)
+        self.assertEqual(Entry.objects.published().on_site().count(), 2)
         self.entry_2.sites.clear()
         self.entry_2.sites.add(self.sites[1])
-        self.assertEqual(Entry.published.on_site().count(), 1)
+        self.assertEqual(Entry.objects.published().on_site().count(), 1)
         self.entry_1.sites.clear()
-        self.assertEqual(Entry.published.on_site().count(), 0)
+        self.assertEqual(Entry.objects.published().on_site().count(), 0)
 
     def test_entry_published_manager_basic_search(self):
-        self.assertEqual(Entry.published.basic_search('My ').count(), 1)
+        self.assertEqual(Entry.objects.basic_search('My ').count(), 1)
         self.entry_2.status = PUBLISHED
         self.entry_2.save()
-        self.assertEqual(Entry.published.basic_search('My ').count(), 2)
-        self.assertEqual(Entry.published.basic_search('1').count(), 1)
-        self.assertEqual(Entry.published.basic_search('content 1').count(), 2)
+        self.assertEqual(Entry.objects.basic_search('My ').count(), 2)
+        self.assertEqual(Entry.objects.basic_search('1').count(), 1)
+        self.assertEqual(Entry.objects.basic_search('content 1').count(), 2)
 
     def test_entry_published_manager_advanced_search(self):
         category = Category.objects.create(
@@ -139,111 +139,111 @@ class ManagersTestCase(TestCase):
         self.entry_2.status = PUBLISHED
         self.entry_2.save()
         self.assertEqual(
-            Entry.published.advanced_search('content').count(), 2)
-        search = Entry.published.advanced_search('content 1')
+            Entry.objects.advanced_search('content').count(), 2)
+        search = Entry.objects.advanced_search('content 1')
         self.assertEqual(search.count(), 1)
         self.assertEqual(search.all()[0], self.entry_1)
         self.assertEqual(
-            Entry.published.advanced_search('content 1 or 2').count(), 2)
+            Entry.objects.advanced_search('content 1 or 2').count(), 2)
         self.assertEqual(
-            Entry.published.advanced_search('content 1 and 2').count(), 0)
+            Entry.objects.advanced_search('content 1 and 2').count(), 0)
         self.assertEqual(
-            Entry.published.advanced_search('content 1 2').count(), 0)
+            Entry.objects.advanced_search('content 1 2').count(), 0)
         self.assertEqual(
-            Entry.published.advanced_search('"My content" 1 or 2').count(), 2)
+            Entry.objects.advanced_search('"My content" 1 or 2').count(), 2)
         self.assertEqual(
-            Entry.published.advanced_search('-"My content" 2').count(), 0)
-        search = Entry.published.advanced_search('content -1')
+            Entry.objects.advanced_search('-"My content" 2').count(), 0)
+        search = Entry.objects.advanced_search('content -1')
         self.assertEqual(search.count(), 1)
         self.assertEqual(search.all()[0], self.entry_2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content category:SimpleCategory').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content category:simple').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content category:"Category 1"').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content category:"category-1"').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content category:"category-2"').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content tag:zinnia').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content tag:custom').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content author:webmaster').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content author:contributor').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content author:webmaster tag:zinnia').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content author:webmaster tag:custom').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content 1 or 2 author:webmaster').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'content 1 or 2 author:webmaster').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '(author:webmaster content) my').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '(author:webmaster) or (author:contributor)').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '(author:webmaster) (author:contributor)').count(), 0)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '(author:webmaster content) 1').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '(author:webmaster content) or 2').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '(author:contributor content) or 1').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '(author:contributor content) or 2').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '(author:webmaster or ("hello world")) and 2').count(), 1)
 
         # Complex queries
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '(author:admin and "content 1") or author:webmaster').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'author:admin and ("content 1" or author:webmaster)').count(), 0)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'author:admin and "content 1" or author:webmaster').count(), 0)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '-(author:webmaster and "content 1")').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '-(-author:webmaster and "content 1")').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'category:"category -1" or author:"web master"').count(), 0)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'category:"category-1" or author:"webmaster"').count(), 2)
 
         # Wildcards
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'author:webm*').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'author:*bmas*').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'author:*master').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'author:*master category:*ory-2').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'author:*master or category:cate*').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'category:*ate*').count(), 2)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'author:"webmast*"').count(), 0)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'tag:"zinnia*"').count(), 0)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'tag:*inni*').count(), 2)
 
     def test_entry_published_manager_advanced_search_with_punctuation(self):
         self.entry_2.content = 'How are you today ? Fine thank you ! OK.'
         self.entry_2.status = PUBLISHED
         self.entry_2.save()
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'today ?').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             'today or ! or .').count(), 1)
-        self.assertEqual(Entry.published.advanced_search(
+        self.assertEqual(Entry.objects.advanced_search(
             '"you today ?"').count(), 1)
 
     def test_entry_published_manager_search(self):
@@ -253,8 +253,8 @@ class ManagersTestCase(TestCase):
         # Be sure that basic_search does not return
         # the same results of advanced_search
         self.assertNotEqual(
-            Entry.published.basic_search('content 1').count(),
-            Entry.published.advanced_search('content 1').count())
+            Entry.objects.basic_search('content 1').count(),
+            Entry.objects.advanced_search('content 1').count())
         # Now check the fallback with the '*' pattern
         # which will fails advanced search
-        self.assertEqual(Entry.published.search('*').count(), 1)
+        self.assertEqual(Entry.objects.published().search('*').count(), 1)

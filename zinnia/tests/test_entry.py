@@ -2,7 +2,7 @@
 from datetime import timedelta
 
 from django.contrib.sites.models import Site
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.test.utils import override_settings
 from django.urls import reverse
 from django.utils import timezone
@@ -293,24 +293,27 @@ class EntryTestCase(TestCase):
 
     def test_related_published(self):
         site = Site.objects.get_current()
-        self.assertFalse(self.entry.related_published)
+        request_factory = RequestFactory()
+        request = request_factory.get('/')
+
+        self.assertFalse(self.entry.related_published(request))
         params = {'title': 'My second entry',
                   'content': 'My second content',
                   'slug': 'my-second-entry',
                   'status': PUBLISHED}
         self.second_entry = Entry.objects.create(**params)
         self.second_entry.related.add(self.entry)
-        self.assertEqual(len(self.entry.related_published), 0)
+        self.assertEqual(len(self.entry.related_published(request)), 0)
 
         self.second_entry.sites.add(site)
-        self.assertEqual(len(self.entry.related_published), 1)
-        self.assertEqual(len(self.second_entry.related_published), 0)
+        self.assertEqual(len(self.entry.related_published(request)), 1)
+        self.assertEqual(len(self.second_entry.related_published(request)), 0)
 
         self.entry.status = PUBLISHED
         self.entry.save()
         self.entry.sites.add(site)
-        self.assertEqual(len(self.entry.related_published), 1)
-        self.assertEqual(len(self.second_entry.related_published), 1)
+        self.assertEqual(len(self.entry.related_published(request)), 1)
+        self.assertEqual(len(self.second_entry.related_published(request)), 1)
 
     def test_tags_list(self):
         self.assertEqual(self.entry.tags_list, [])

@@ -100,7 +100,7 @@ def pingback_ping(source, target):
             return TARGET_DOES_NOT_EXIST
 
         try:
-            entry = Entry.published.get(
+            entry = Entry.objects.published().get(
                 slug=kwargs['slug'],
                 publication_date__year=kwargs['year'],
                 publication_date__month=kwargs['month'],
@@ -166,7 +166,7 @@ def pingback_extensions_get_pingbacks(target):
         return TARGET_DOES_NOT_EXIST
 
     try:
-        entry = Entry.published.get(
+        entry = Entry.objects.published().get(
             slug=kwargs['slug'],
             publication_date__year=kwargs['year'],
             publication_date__month=kwargs['month'],
