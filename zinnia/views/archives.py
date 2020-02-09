@@ -35,7 +35,9 @@ class EntryArchiveMixin(ArchiveMixin,
     - EntryQuerysetArchiveTemplateResponseMixin to provide a
       custom templates for archives.
     """
-    queryset = Entry.published.all
+
+    def queryset(self):
+        return Entry.objects.published(self.request)
 
 
 class EntryIndex(EntryArchiveMixin,

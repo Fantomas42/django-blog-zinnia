@@ -83,23 +83,23 @@ def get_authors(context, template='zinnia/tags/authors.html'):
             'context_author': context.get('author')}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def get_recent_entries(number=5, template='zinnia/tags/entries_recent.html'):
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def get_recent_entries(context, number=5, template='zinnia/tags/entries_recent.html'):
     """
     Return the most recent entries.
     """
     return {'template': template,
-            'entries': Entry.published.all()[:number]}
+            'entries': Entry.objects.published(context['request']).all()[:number]}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def get_featured_entries(number=5,
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def get_featured_entries(context, number=5,
                          template='zinnia/tags/entries_featured.html'):
     """
     Return the featured entries.
     """
     return {'template': template,
-            'entries': Entry.published.filter(featured=True)[:number]}
+            'entries': Entry.objects.published(context['request']).filter(featured=True)[:number]}
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html')
@@ -112,22 +112,22 @@ def get_draft_entries(number=5,
             'entries': Entry.objects.filter(status=DRAFT)[:number]}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def get_random_entries(number=5, template='zinnia/tags/entries_random.html'):
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def get_random_entries(context, number=5, template='zinnia/tags/entries_random.html'):
     """
     Return random entries.
     """
     return {'template': template,
-            'entries': Entry.published.order_by('?')[:number]}
+            'entries': Entry.objects.published(context['request']).order_by('?')[:number]}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def get_popular_entries(number=5, template='zinnia/tags/entries_popular.html'):
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def get_popular_entries(context, number=5, template='zinnia/tags/entries_popular.html'):
     """
     Return popular entries.
     """
     return {'template': template,
-            'entries': Entry.published.filter(
+            'entries': Entry.objects.published(context['request']).filter(
                 comment_count__gt=0).order_by(
                 '-comment_count', '-publication_date')[:number]}
 
@@ -149,24 +149,24 @@ def get_similar_entries(context, number=5,
             'entries': entries}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def get_archives_entries(template='zinnia/tags/entries_archives.html'):
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def get_archives_entries(context, template='zinnia/tags/entries_archives.html'):
     """
     Return archives entries.
     """
     return {'template': template,
-            'archives': Entry.published.datetimes(
+            'archives': Entry.objects.published(context['request']).datetimes(
                 'publication_date', 'month', order='DESC')}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
 def get_archives_entries_tree(
-        template='zinnia/tags/entries_archives_tree.html'):
+        context, template='zinnia/tags/entries_archives_tree.html'):
     """
     Return archives entries as a tree.
     """
     return {'template': template,
-            'archives': Entry.published.datetimes(
+            'archives': Entry.objects.published(context['request']).datetimes(
                 'publication_date', 'day', order='ASC')}
 
 
@@ -199,7 +199,7 @@ def get_calendar_entries(context, year=None, month=None,
 
     dates = list(map(
         lambda x: settings.USE_TZ and timezone.localtime(x).date() or x.date(),
-        Entry.published.datetimes('publication_date', 'month')))
+        Entry.objects.published(context['request']).datetimes('publication_date', 'month')))
 
     if current_month not in dates:
         dates.append(current_month)
@@ -220,14 +220,14 @@ def get_calendar_entries(context, year=None, month=None,
                 next_month=next_month)}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def get_recent_comments(number=5, template='zinnia/tags/comments_recent.html'):
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def get_recent_comments(context, number=5, template='zinnia/tags/comments_recent.html'):
     """
     Return the most recent comments.
     """
     # Using map(smart_text... fix bug related to issue #8554
     entry_published_pks = map(smart_text,
-                              Entry.published.values_list('id', flat=True))
+                              Entry.objects.published(context['request']).values_list('id', flat=True))
     content_type = ContentType.objects.get_for_model(Entry)
 
     comments = get_comment_model().objects.filter(
@@ -241,14 +241,14 @@ def get_recent_comments(number=5, template='zinnia/tags/comments_recent.html'):
             'comments': comments}
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def get_recent_linkbacks(number=5,
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def get_recent_linkbacks(context, number=5,
                          template='zinnia/tags/linkbacks_recent.html'):
     """
     Return the most recent linkbacks.
     """
     entry_published_pks = map(smart_text,
-                              Entry.published.values_list('id', flat=True))
+                              Entry.objects.published(context['request']).values_list('id', flat=True))
     content_type = ContentType.objects.get_for_model(Entry)
 
     linkbacks = get_comment_model().objects.filter(
@@ -365,13 +365,13 @@ def get_gravatar(email, size=80, rating='g', default=None,
     return url.replace('&', '&amp;')
 
 
-@register.simple_tag
-def get_tags():
+@register.simple_tag(takes_context=True)
+def get_tags(context):
     """
     Return the published tags.
     """
     return Tag.objects.usage_for_queryset(
-        Entry.published.all())
+        Entry.objects.published(context['request']).all())
 
 
 @register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
@@ -381,7 +381,7 @@ def get_tag_cloud(context, steps=6, min_count=None,
     Return a cloud of published tags.
     """
     tags = Tag.objects.usage_for_queryset(
-        Entry.published.all(), counts=True,
+        Entry.objects.published(context['request']).all(), counts=True,
         min_count=min_count)
     return {'template': template,
             'tags': calculate_cloud(tags, steps),
@@ -442,8 +442,8 @@ def user_admin_urlname(action):
         action)
 
 
-@register.inclusion_tag('zinnia/tags/dummy.html')
-def zinnia_statistics(template='zinnia/tags/statistics.html'):
+@register.inclusion_tag('zinnia/tags/dummy.html', takes_context=True)
+def zinnia_statistics(context, template='zinnia/tags/statistics.html'):
     """
     Return statistics on the content of Zinnia.
     """
@@ -451,9 +451,9 @@ def zinnia_statistics(template='zinnia/tags/statistics.html'):
     discussions = get_comment_model().objects.filter(
         content_type=content_type)
 
-    entries = Entry.published
+    entries = Entry.objects.published(context['request'])
     categories = Category.objects
-    tags = tags_published()
+    tags = tags_published(context['request'])
     authors = Author.published
     replies = discussions.filter(
         flags=None, is_public=True)

@@ -269,7 +269,7 @@ class MixinTestCase(TestCase):
 
         class EntryPreviousNextPublished(PreviousNextPublishedMixin):
             def get_queryset(self):
-                return Entry.published.all()
+                return Entry.objects.published()
 
         test_date = datetime(2009, 12, 1)
         epnp = EntryPreviousNextPublished()

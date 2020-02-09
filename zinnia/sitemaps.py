@@ -31,7 +31,7 @@ class EntrySitemap(ZinniaSitemap):
         """
         Return published entries.
         """
-        return Entry.published.all()
+        return Entry.objects.published()
 
     def lastmod(self, obj):
         """
@@ -124,7 +124,7 @@ class TagSitemap(EntryRelatedSitemap):
         """
         Return the published Tags with option counts.
         """
-        self.entries_qs = Entry.published.all()
+        self.entries_qs = Entry.objects.published()
         return Tag.objects.usage_for_queryset(
             self.entries_qs, counts=True)
 

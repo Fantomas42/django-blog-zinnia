@@ -250,17 +250,17 @@ class MetaWeblogTestCase(TestCase):
         self.assertRaises(Fault, self.server.metaWeblog.newPost,
                           1, 'contributor', 'password', post, 1)
         self.assertEqual(Entry.objects.count(), 2)
-        self.assertEqual(Entry.published.count(), 1)
+        self.assertEqual(Entry.objects.published().count(), 1)
         self.server.metaWeblog.newPost(
             1, 'webmaster', 'password', post, 1)
         self.assertEqual(Entry.objects.count(), 3)
-        self.assertEqual(Entry.published.count(), 2)
+        self.assertEqual(Entry.objects.published().count(), 2)
         del post['dateCreated']
         post['wp_author_id'] = self.contributor.pk
         self.server.metaWeblog.newPost(
             1, 'webmaster', 'password', post, 0)
         self.assertEqual(Entry.objects.count(), 4)
-        self.assertEqual(Entry.published.count(), 2)
+        self.assertEqual(Entry.objects.published().count(), 2)
 
     def test_edit_post(self):
         post = post_structure(self.entry_2, self.site)

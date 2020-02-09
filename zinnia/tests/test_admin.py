@@ -333,9 +333,9 @@ class EntryAdminTestCase(BaseAdminTestCase):
         settings.PING_DIRECTORIES = []
         self.request._messages = TestMessageBackend()
         self.entry.sites.add(Site.objects.get_current())
-        self.assertEqual(Entry.published.count(), 0)
+        self.assertEqual(Entry.objects.published(self.request).count(), 0)
         self.admin.make_published(self.request, Entry.objects.all())
-        self.assertEqual(Entry.published.count(), 1)
+        self.assertEqual(Entry.objects.published(self.request).count(), 1)
         self.assertEqual(len(self.request._messages.messages), 1)
         settings.PING_DIRECTORIES = original_ping_directories
 
@@ -344,9 +344,9 @@ class EntryAdminTestCase(BaseAdminTestCase):
         self.entry.status = PUBLISHED
         self.entry.save()
         self.entry.sites.add(Site.objects.get_current())
-        self.assertEqual(Entry.published.count(), 1)
+        self.assertEqual(Entry.objects.published(self.request).count(), 1)
         self.admin.make_hidden(self.request, Entry.objects.all())
-        self.assertEqual(Entry.published.count(), 0)
+        self.assertEqual(Entry.objects.published(self.request).count(), 0)
         self.assertEqual(len(self.request._messages.messages), 1)
 
     def test_close_comments(self):

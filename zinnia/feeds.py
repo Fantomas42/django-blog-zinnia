@@ -47,6 +47,10 @@ class ZinniaFeed(Feed):
             self.feed_type = Atom1Feed
             self.subtitle = getattr(self, 'description', None)
 
+    def __call__(self, request, *args, **kwargs):
+        self.request = request
+        return super(ZinniaFeed, self).__call__(request, *args, **kwargs)
+
     def title(self, obj=None):
         """
         Title of the feed prefixed with the site name.
@@ -178,7 +182,7 @@ class LastEntries(EntryFeed):
         """
         Items are published entries.
         """
-        return Entry.published.all()[:self.limit]
+        return Entry.objects.published(self.request)[:self.limit]
 
     def get_title(self, obj):
         """
@@ -209,7 +213,7 @@ class CategoryEntries(EntryFeed):
         """
         Items are the published entries of the category.
         """
-        return obj.entries_published()[:self.limit]
+        return obj.entries_published(self.request)[:self.limit]
 
     def link(self, obj):
         """
@@ -247,7 +251,7 @@ class AuthorEntries(EntryFeed):
         """
         Items are the published entries of the author.
         """
-        return obj.entries_published()[:self.limit]
+        return obj.entries_published(self.request)[:self.limit]
 
     def link(self, obj):
         """
@@ -286,7 +290,7 @@ class TagEntries(EntryFeed):
         Items are the published entries of the tag.
         """
         return TaggedItem.objects.get_by_model(
-            Entry.published.all(), obj)[:self.limit]
+            Entry.objects.published(self.request), obj)[:self.limit]
 
     def link(self, obj):
         """
@@ -326,7 +330,7 @@ class SearchEntries(EntryFeed):
         """
         Items are the published entries founds.
         """
-        return Entry.published.search(obj)[:self.limit]
+        return Entry.objects.published(self.request).search(obj)[:self.limit]
 
     def link(self, obj):
         """

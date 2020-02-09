@@ -35,11 +35,11 @@ class Author(safe_get_user_model(),
     Proxy model around :class:`django.contrib.auth.models.get_user_model`.
     """
 
-    def entries_published(self):
+    def entries_published(self, request=None):
         """
         Returns author's published entries.
         """
-        return entries_published(self.entries)
+        return entries_published(self.entries, request)
 
     def get_absolute_url(self):
         """

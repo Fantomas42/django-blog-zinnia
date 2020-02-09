@@ -28,7 +28,7 @@ class TagList(ListView):
         with a count of their entries published.
         """
         return Tag.objects.usage_for_queryset(
-            Entry.published.all(), counts=True)
+            Entry.objects.published(self.request), counts=True)
 
 
 class BaseTagDetail(object):
@@ -48,7 +48,7 @@ class BaseTagDetail(object):
             raise Http404(_('No Tag found matching "%s".') %
                           self.kwargs['tag'])
         return TaggedItem.objects.get_by_model(
-            Entry.published.all(), self.tag)
+            Entry.objects.published(self.request), self.tag)
 
     def get_context_data(self, **kwargs):
         """

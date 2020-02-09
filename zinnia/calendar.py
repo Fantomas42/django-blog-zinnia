@@ -102,7 +102,7 @@ class Calendar(HTMLCalendar):
         self.current_year = theyear
         self.current_month = themonth
         self.day_entries = [date.day
-                            for date in Entry.published.filter(
+                            for date in Entry.objects.published().filter(
                                 publication_date__year=theyear,
                                 publication_date__month=themonth
                                 ).datetimes('publication_date', 'day')]

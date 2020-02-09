@@ -24,7 +24,8 @@ class EntryDateDetail(ArchiveMixin,
     - CallableQueryMixin to defer the execution of the *queryset*
       property when imported
     """
-    queryset = Entry.published.on_site
+    def queryset(self):
+        return Entry.objects.on_site(self.request)
 
 
 class EntryDetail(EntryCacheMixin,
