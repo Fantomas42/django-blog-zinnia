@@ -1,5 +1,5 @@
 beautifulsoup4==4.6.0
-django==2.0.3
+django==2.2.10
 django-contrib-comments==1.8.0
 django-mptt==0.9.0
 django-tagging==0.4.6
