@@ -26,7 +26,7 @@ SITE_ID = 1
 
 LANGUAGE_CODE = 'en'
 
-__LANGUAGES = (
+LANGUAGES = (
     ('en', gettext('English')),
     ('fr', gettext('French')),
     ('de', gettext('German')),
