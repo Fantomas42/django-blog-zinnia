@@ -11,21 +11,21 @@ Dependencies
 
 Make sure to install these packages prior to installation :
 
-* `Python`_ >= 3.4
-* `Django`_ >= 2.0
-* `Pillow`_ >= 2.0.0
-* `django-mptt`_ >= 0.8.6
-* `django-tagging`_ >= 0.4.5
-* `beautifulsoup4`_ >= 4.1.3
-* `mots-vides`_ >= 2015.2.6
-* `pyparsing`_ >= 2.0.1
-* `regex`_ >= 2016.3.2
-* `django-contrib-comments`_ >= 1.7
+* `Python`_ >= 3.5
+* `Django`_ >= 2.2
+* `Pillow`_ >= 7.0.0
+* `django-mptt`_ >= 0.11.0
+* `django-tagging`_ >= 0.5.0
+* `beautifulsoup4`_ >= 4.8.2
+* `mots-vides`_ >= 2015.5.11
+* `pyparsing`_ >= 2.4.6
+* `regex`_ >= 2020.2.20
+* `django-contrib-comments`_ >= 1.9.2
 
 The packages below are optionnal but needed for run the full test suite or
 migrate the database.
 
-* `django-xmlrpc`_ >= 0.1.7
+* `django-xmlrpc`_ >= 0.1.8
 
 Note that all the needed dependencies will be resolved if you install
 Zinnia with :program:`pip` or :program:`easy_install`, excepting Django.
