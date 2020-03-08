@@ -34,19 +34,19 @@ urlpatterns = [
         CategoryEntries(),
         name='category_feed'),
     url(_(r'^discussions/(?P<year>\d{4})/(?P<month>\d{2})/'
-          '(?P<day>\d{2})/(?P<slug>[-\w]+)/$'),
+          r'(?P<day>\d{2})/(?P<slug>[-\w]+)/$'),
         EntryDiscussions(),
         name='entry_discussion_feed'),
     url(_(r'^comments/(?P<year>\d{4})/(?P<month>\d{2})/'
-          '(?P<day>\d{2})/(?P<slug>[-\w]+)/$'),
+          r'(?P<day>\d{2})/(?P<slug>[-\w]+)/$'),
         EntryComments(),
         name='entry_comment_feed'),
     url(_(r'^pingbacks/(?P<year>\d{4})/(?P<month>\d{2})/'
-        '(?P<day>\d{2})/(?P<slug>[-\w]+)/$'),
+          r'(?P<day>\d{2})/(?P<slug>[-\w]+)/$'),
         EntryPingbacks(),
         name='entry_pingback_feed'),
     url(_(r'^trackbacks/(?P<year>\d{4})/(?P<month>\d{2})/'
-        '(?P<day>\d{2})/(?P<slug>[-\w]+)/$'),
+          r'(?P<day>\d{2})/(?P<slug>[-\w]+)/$'),
         EntryTrackbacks(),
         name='entry_trackback_feed'),
 ]

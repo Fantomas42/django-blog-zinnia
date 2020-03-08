@@ -409,7 +409,7 @@ def widont(value, autoescape=None):
 
 @register.filter
 def week_number(date):
-    """
+    r"""
     Return the Python week number of a date.
     The django \|date:"W" returns incompatible value
     with the view implementation.

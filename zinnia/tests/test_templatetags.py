@@ -939,7 +939,7 @@ class TemplateTagsTestCase(TestCase):
         template = zinnia_loop_template(
             context, 'zinnia/_entry_detail.html')
         self.assertEqual(template.template.name, 'zinnia/_entry_detail.html')
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             TemplateDoesNotExist,
             'zinnia/_entry_custom-0.html, '
             'zinnia/_entry_custom_0.html, '
@@ -948,7 +948,7 @@ class TemplateTagsTestCase(TestCase):
 
         # Test with loop
         context = Context({'forloop': {'counter': 5}})
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             TemplateDoesNotExist,
             'zinnia/_entry_custom-5.html, '
             'zinnia/_entry_custom_5.html, '
@@ -958,7 +958,7 @@ class TemplateTagsTestCase(TestCase):
         # Test with pagination
         context = Context({'forloop': {'counter': 5},
                            'page_obj': paginator.page(3)})
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             TemplateDoesNotExist,
             'zinnia/_entry_custom-25.html, '
             'zinnia/_entry_custom_5.html, '
@@ -968,7 +968,7 @@ class TemplateTagsTestCase(TestCase):
         # Test with default key
         ztemplatetags.ENTRY_LOOP_TEMPLATES = {
             'default': {25: 'template.html'}}
-        self.assertRaisesRegexp(
+        self.assertRaisesRegex(
             TemplateDoesNotExist,
             'template.html, '
             'zinnia/_entry_custom-25.html, '
@@ -989,7 +989,7 @@ class TemplateTagsTestCase(TestCase):
                 {'forloop': {'counter': 5},
                  'page_obj': paginator.page(3),
                  context_object_name: 'slug'})
-            self.assertRaisesRegexp(
+            self.assertRaisesRegex(
                 TemplateDoesNotExist,
                 'template-%s-slug.html, '
                 'template-slug.html, '

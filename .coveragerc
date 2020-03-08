@@ -1,21 +1,15 @@
 [run]
-source		= zinnia
-omit		= zinnia/tests/*
-                  zinnia/migrations/*
-                  zinnia/management/*
-                  demo/*
-                  eggs/*
-                  */lib/*
+source		  = zinnia
+# branch        = True
 
 [report]
-show_missing    = True
-exclude_lines	=
+show_missing  = True
+exclude_lines =
     pragma: no cover
-    from xmlrpc.client import Fault
-    from xmlrpc.client import Error
-    from xmlrpc.client import DateTime
-    from xmlrpc.client import ServerProxy
-    from urllib.request import urlopen
-    from urllib.parse import urlsplit
-    from urllib.error import URLError
-    from urllib.error import HTTPError
+omit		  =
+    zinnia/tests/*
+    zinnia/migrations/*
+    zinnia/management/*
+    demo/*
+    eggs/*
+    */lib/*

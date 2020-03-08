@@ -276,8 +276,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
         settings.PING_DIRECTORIES = True
         self.assertEqual(
             list(self.admin.get_actions(self.request).keys()),
-            ['delete_selected',
-             'close_comments',
+            ['close_comments',
              'close_pingbacks',
              'close_trackbacks',
              'ping_directories',
@@ -287,8 +286,7 @@ class EntryAdminTestCase(BaseAdminTestCase):
         settings.PING_DIRECTORIES = False
         self.assertEqual(
             list(self.admin.get_actions(self.request).keys()),
-            ['delete_selected',
-             'close_comments',
+            ['close_comments',
              'close_pingbacks',
              'close_trackbacks',
              'put_on_top',
@@ -472,7 +470,7 @@ class FunctionnalAdminTestCase(TestCase):
 
     def assert_admin(self, url):
         response = self.client.get(url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_admin_entry_list(self):
         self.assert_admin(
