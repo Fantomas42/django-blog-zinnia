@@ -2,8 +2,11 @@ sudo: false
 dist: xenial
 language: python
 python:
-    - 3.5
-    - 3.6
+    - 3.7
+    - 3.8
+services:
+    - postgresql
+    - mysql
 env:
     - DATABASE_ENGINE=sqlite
     - DATABASE_ENGINE=postgres

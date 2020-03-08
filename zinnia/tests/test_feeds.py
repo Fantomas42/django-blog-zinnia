@@ -259,10 +259,10 @@ class FeedsTestCase(TestCase):
         feed = AuthorEntries()
         self.assertEqual(feed.get_title(self.author),
                          smart_str('Entries for the author %s' %
-                                    self.author.__str__()))
+                                   self.author.__str__()))
         self.assertEqual(feed.description(self.author),
                          smart_str('The last entries by %s' %
-                                    self.author.__str__()))
+                                   self.author.__str__()))
 
     def test_tag_entries(self):
         self.create_published_entry()
