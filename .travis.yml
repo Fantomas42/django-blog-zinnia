@@ -8,12 +8,12 @@ services:
     - postgresql
     - mysql
 env:
-    - DJANGO=2.2 DATABASE_ENGINE=sqlite
-    - DJANGO=2.2 DATABASE_ENGINE=postgres
-    - DJANGO=2.2 DATABASE_ENGINE=mysql
-    - DJANGO=3.0 DATABASE_ENGINE=sqlite
-    - DJANGO=3.0 DATABASE_ENGINE=postgres
-    - DJANGO=3.0 DATABASE_ENGINE=mysql
+    - DJANGO=2.2.5 DATABASE_ENGINE=sqlite
+    - DJANGO=2.2.5 DATABASE_ENGINE=postgres
+    - DJANGO=2.2.5 DATABASE_ENGINE=mysql
+    - DJANGO=3.0.4 DATABASE_ENGINE=sqlite
+    - DJANGO=3.0.4 DATABASE_ENGINE=postgres
+    - DJANGO=3.0.4 DATABASE_ENGINE=mysql
 matrix:
     fast_finish: true
 install:
