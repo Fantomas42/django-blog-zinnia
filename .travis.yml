@@ -8,14 +8,17 @@ services:
     - postgresql
     - mysql
 env:
-    - DATABASE_ENGINE=sqlite
-    - DATABASE_ENGINE=postgres
-    - DATABASE_ENGINE=mysql
+    - DJANGO=2.2 DATABASE_ENGINE=sqlite
+    - DJANGO=2.2 DATABASE_ENGINE=postgres
+    - DJANGO=2.2 DATABASE_ENGINE=mysql
+    - DJANGO=3.0 DATABASE_ENGINE=sqlite
+    - DJANGO=3.0 DATABASE_ENGINE=postgres
+    - DJANGO=3.0 DATABASE_ENGINE=mysql
 matrix:
     fast_finish: true
 install:
     - pip install zc.buildout
-    - buildout -c travis.cfg testenv:DJANGO_SETTINGS_MODULE=zinnia.tests.implementations.$DATABASE_ENGINE
+    - buildout -c travis.cfg versions:django=$DJANGO testenv:DJANGO_SETTINGS_MODULE=zinnia.tests.implementations.$DATABASE_ENGINE
     - sh -c "if [ '$DATABASE_ENGINE' = 'postgres' ];
       then
         pip install psycopg2;
