@@ -1,6 +1,7 @@
 """Utils for Zinnia's tests"""
 import functools
 from datetime import datetime as original_datetime
+from io import BytesIO
 from unittest import SkipTest
 from unittest import skipIf
 from urllib.parse import parse_qs
@@ -11,7 +12,6 @@ from django.conf import settings
 from django.template import Origin
 from django.template.loaders.base import Loader
 from django.test.client import Client
-from django.utils import six
 from django.utils import timezone
 
 
@@ -29,7 +29,7 @@ class TestTransport(Transport):
         response = self.client.post(handler,
                                     request_body,
                                     content_type="text/xml")
-        res = six.BytesIO(response.content)
+        res = BytesIO(response.content)
         setattr(res, 'getheader', lambda *args: '')  # For Python >= 2.7
         res.seek(0)
         return self.parse_response(res)

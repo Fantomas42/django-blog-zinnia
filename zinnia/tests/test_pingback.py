@@ -1,4 +1,5 @@
 """Test cases for Zinnia's PingBack API"""
+from io import BytesIO
 from urllib.error import HTTPError
 from urllib.parse import urlsplit
 from xmlrpc.client import ServerProxy
@@ -9,7 +10,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.test import TestCase
 from django.test.utils import override_settings
-from django.utils import six
 from django.utils import timezone
 
 import django_comments as comments
@@ -54,7 +54,7 @@ class PingBackTestCase(TestCase):
         if not netloc:
             raise
         if self.site.domain == netloc:
-            response = six.BytesIO(self.client.get(url).content)
+            response = BytesIO(self.client.get(url).content)
             return response
         raise HTTPError(url, 404, 'unavailable url', {}, None)
 

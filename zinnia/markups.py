@@ -5,7 +5,7 @@ Code originally provided by django.contrib.markups
 import warnings
 
 from django.utils.encoding import force_bytes
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import linebreaks
 
 from zinnia.settings import MARKDOWN_EXTENSIONS
@@ -24,7 +24,7 @@ def textile(value):
                       RuntimeWarning)
         return value
 
-    return textile.textile(force_text(value))
+    return textile.textile(force_str(value))
 
 
 def markdown(value, extensions=MARKDOWN_EXTENSIONS):
@@ -41,7 +41,7 @@ def markdown(value, extensions=MARKDOWN_EXTENSIONS):
                       RuntimeWarning)
         return value
 
-    return markdown.markdown(force_text(value), extensions=extensions)
+    return markdown.markdown(force_str(value), extensions=extensions)
 
 
 def restructuredtext(value, settings=RESTRUCTUREDTEXT_SETTINGS):
@@ -58,7 +58,7 @@ def restructuredtext(value, settings=RESTRUCTUREDTEXT_SETTINGS):
     parts = publish_parts(source=force_bytes(value),
                           writer_name='html4css1',
                           settings_overrides=settings)
-    return force_text(parts['fragment'])
+    return force_str(parts['fragment'])
 
 
 def html_format(value):

@@ -1,6 +1,6 @@
 """Fields for Zinnia admin"""
 from django import forms
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str
 
 
 class MPTTModelChoiceIterator(forms.models.ModelChoiceIterator):
@@ -33,7 +33,7 @@ class MPTTModelMultipleChoiceField(forms.ModelMultipleChoiceField):
         Create labels which represent the tree level of each node
         when generating option labels.
         """
-        label = smart_text(obj)
+        label = smart_str(obj)
         prefix = self.level_indicator * getattr(obj, obj._mptt_meta.level_attr)
         if prefix:
             return '%s %s' % (prefix, label)

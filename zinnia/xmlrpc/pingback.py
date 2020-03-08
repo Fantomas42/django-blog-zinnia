@@ -10,9 +10,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.urls import Resolver404
 from django.urls import resolve
-from django.utils import six
 from django.utils.html import strip_tags
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 import django_comments as comments
 
@@ -44,7 +43,7 @@ def generate_pingback_content(soup, target, max_length, trunc_char='...'):
     """
     link = soup.find('a', href=target)
 
-    content = strip_tags(six.text_type(link.findParent()))
+    content = strip_tags(str(link.findParent()))
     index = content.index(link.string)
 
     if len(content) > max_length:
@@ -111,7 +110,7 @@ def pingback_ping(source, target):
             return TARGET_IS_NOT_PINGABLE
 
         soup = BeautifulSoup(document, 'html.parser')
-        title = six.text_type(soup.find('title'))
+        title = str(soup.find('title'))
         title = title and strip_tags(title) or _('No title')
         description = generate_pingback_content(soup, target,
                                                 PINGBACK_CONTENT_LENGTH)

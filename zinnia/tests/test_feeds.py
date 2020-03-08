@@ -10,7 +10,7 @@ from django.core.files.storage import default_storage
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.utils import timezone
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.feedgenerator import DefaultFeed
 from django.utils.translation import activate
@@ -229,7 +229,7 @@ class FeedsTestCase(TestCase):
 
     def test_category_title_non_ascii(self):
         self.create_published_entry()
-        self.category.title = smart_text('Catégorie')
+        self.category.title = smart_str('Catégorie')
         self.category.save()
         feed = CategoryEntries()
         self.assertEqual(feed.get_title(self.category),
@@ -252,16 +252,16 @@ class FeedsTestCase(TestCase):
                          self.author.__str__())
 
     def test_author_title_non_ascii(self):
-        self.author.first_name = smart_text('Léon')
+        self.author.first_name = smart_str('Léon')
         self.author.last_name = 'Bloom'
         self.author.save()
         self.create_published_entry()
         feed = AuthorEntries()
         self.assertEqual(feed.get_title(self.author),
-                         smart_text('Entries for the author %s' %
+                         smart_str('Entries for the author %s' %
                                     self.author.__str__()))
         self.assertEqual(feed.description(self.author),
-                         smart_text('The last entries by %s' %
+                         smart_str('The last entries by %s' %
                                     self.author.__str__()))
 
     def test_tag_entries(self):
@@ -278,7 +278,7 @@ class FeedsTestCase(TestCase):
 
     def test_tag_title_non_ascii(self):
         entry = self.create_published_entry()
-        tag_unicode = smart_text('accentué')
+        tag_unicode = smart_str('accentué')
         entry.tags = tag_unicode
         entry.save()
         feed = TagEntries()

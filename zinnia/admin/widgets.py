@@ -5,7 +5,7 @@ from itertools import chain
 from django.contrib.admin import widgets
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.forms import Media
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.safestring import mark_safe
 
 from tagging.models import Tag
@@ -47,7 +47,7 @@ class MPTTFilteredSelectMultiple(widgets.FilteredSelectMultiple):
 
             for subvalue, sublabel in choices:
                 selected = (
-                    force_text(subvalue) in value and
+                    force_str(subvalue) in value and
                     (has_selected is False or self.allow_multiple_selected)
                 )
                 if selected is True and has_selected is False:

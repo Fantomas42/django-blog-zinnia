@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.utils.dateformat import DateFormat
 from django.utils.timezone import is_aware
 from django.utils.timezone import localtime
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 class Crumb(object):

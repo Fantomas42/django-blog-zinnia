@@ -1,6 +1,6 @@
 """Preview mixins for Zinnia views"""
 from django.http import Http404
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 class EntryPreviewMixin(object):

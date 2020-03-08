@@ -9,7 +9,6 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.template.defaultfilters import slugify
 from django.urls import reverse
-from django.utils import six
 from django.utils import timezone
 from django.utils.translation import gettext as _
 
@@ -130,7 +129,7 @@ def post_structure(entry, site):
     """
     author = entry.authors.all()[0]
     return {'title': entry.title,
-            'description': six.text_type(entry.html_content),
+            'description': str(entry.html_content),
             'link': '%s://%s%s' % (PROTOCOL, site.domain,
                                    entry.get_absolute_url()),
             # Basic Extensions

@@ -1,7 +1,7 @@
 """Forms for Zinnia admin"""
 from django import forms
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from mptt.forms import TreeNodeChoiceField
 

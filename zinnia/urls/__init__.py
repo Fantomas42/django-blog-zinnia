@@ -1,7 +1,7 @@
 """Defaults urls for the Zinnia project"""
 from django.conf.urls import include
 from django.conf.urls import url
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 from zinnia.settings import TRANSLATED_URLS
 
@@ -11,7 +11,7 @@ def i18n_url(url, translate=TRANSLATED_URLS):
     Translate or not an URL part.
     """
     if translate:
-        return ugettext_lazy(url)
+        return gettext_lazy(url)
     return url
 
 

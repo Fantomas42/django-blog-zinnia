@@ -13,7 +13,7 @@ from django.template import Library
 from django.template.defaultfilters import stringfilter
 from django.template.loader import select_template
 from django.utils import timezone
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 
@@ -225,8 +225,8 @@ def get_recent_comments(number=5, template='zinnia/tags/comments_recent.html'):
     """
     Return the most recent comments.
     """
-    # Using map(smart_text... fix bug related to issue #8554
-    entry_published_pks = map(smart_text,
+    # Using map(smart_str... fix bug related to issue #8554
+    entry_published_pks = map(smart_str,
                               Entry.published.values_list('id', flat=True))
     content_type = ContentType.objects.get_for_model(Entry)
 
@@ -247,7 +247,7 @@ def get_recent_linkbacks(number=5,
     """
     Return the most recent linkbacks.
     """
-    entry_published_pks = map(smart_text,
+    entry_published_pks = map(smart_str,
                               Entry.published.values_list('id', flat=True))
     content_type = ContentType.objects.get_for_model(Entry)
 
@@ -400,7 +400,7 @@ def widont(value, autoescape=None):
     def replace(matchobj):
         return '&nbsp;%s' % matchobj.group(1)
 
-    value = END_PUNCTUATION_WIDONT_REGEXP.sub(replace, esc(smart_text(value)))
+    value = END_PUNCTUATION_WIDONT_REGEXP.sub(replace, esc(smart_str(value)))
     value = WIDONT_REGEXP.sub(replace, value)
     value = DOUBLE_SPACE_PUNCTUATION_WIDONT_REGEXP.sub(replace, value)
 

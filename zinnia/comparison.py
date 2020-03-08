@@ -4,7 +4,6 @@ from math import sqrt
 from django.contrib.sites.models import Site
 from django.core.cache import InvalidCacheBackendError
 from django.core.cache import caches
-from django.utils import six
 from django.utils.functional import cached_property
 from django.utils.html import strip_tags
 
@@ -94,7 +93,7 @@ class ModelVectorBuilder(object):
         for item in queryset:
             item = list(item)
             item_pk = item.pop(0)
-            datas = ' '.join(map(six.text_type, item))
+            datas = ' '.join(map(str, item))
             dataset[item_pk] = self.raw_clean(datas)
         return dataset
 
