@@ -150,8 +150,8 @@ If you want the ability to reply on comments, you can take a look at
 .. _`MarkDown`: http://daringfireball.net/projects/markdown/
 .. _`Textile`: http://redcloth.org/hobix.com/textile/
 .. _`reStructuredText`: http://docutils.sourceforge.net/rst.html
-.. _`convert Zinnia into a multilingual Weblog`:  http://www.codeispoetry.me/django-blog-zinnia-multilanguage-support-with-django-modeltranslation/
-.. _`django-modeltranslation`:
+.. _`convert Zinnia into a multilingual Weblog`: http://www.codeispoetry.me/django-blog-zinnia-multilanguage-support-with-django-modeltranslation/
+.. _`django-modeltranslation`: https://github.com/deschler/django-modeltranslation
 .. _`sorl.thumbnail`: https://github.com/mariocesar/sorl-thumbnail
 .. _`customizing the comments framework`: http://django-contrib-comments.readthedocs.org/en/latest/custom.html
 .. _`zinnia-threaded-comments`: https://github.com/django-blog-zinnia/zinnia-threaded-comments
