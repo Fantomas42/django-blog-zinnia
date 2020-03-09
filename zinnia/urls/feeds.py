@@ -24,7 +24,7 @@ urlpatterns = [
     url(_(r'^search/$'),
         SearchEntries(),
         name='entry_search_feed'),
-    url(_(r'^tags/(?P<tag>[^/]+(?u))/$'),
+    url(_(r'^tags/(?P<tag>[^/]+)/$'),
         TagEntries(),
         name='tag_feed'),
     url(_(r'^authors/(?P<username>[.+-@\w]+)/$'),

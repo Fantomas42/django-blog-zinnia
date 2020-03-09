@@ -10,10 +10,10 @@ urlpatterns = [
     url(r'^$',
         TagList.as_view(),
         name='tag_list'),
-    url(r'^(?P<tag>[^/]+(?u))/$',
+    url(r'^(?P<tag>[^/]+)/$',
         TagDetail.as_view(),
         name='tag_detail'),
-    url(_(r'^(?P<tag>[^/]+(?u))/page/(?P<page>\d+)/$'),
+    url(_(r'^(?P<tag>[^/]+)/page/(?P<page>\d+)/$'),
         TagDetail.as_view(),
         name='tag_detail_paginated'),
 ]

@@ -47,10 +47,10 @@ urlpatterns = [
     url(r'^categories/(?P<path>[-\/\w]+)/$',
         CustomCategoryDetail.as_view(),
         name='zinnia_category_detail'),
-    url(r'^tags/(?P<tag>[^/]+(?u))/$',
+    url(r'^tags/(?P<tag>[^/]+)/$',
         CustomTagDetail.as_view(),
         name='zinnia_tag_detail'),
-    url(r'^tags/(?P<tag>[^/]+(?u))/page/(?P<page>\d+)/$',
+    url(r'^tags/(?P<tag>[^/]+)/page/(?P<page>\d+)/$',
         CustomTagDetail.as_view(),
         name='zinnia_tag_detail_paginated'),
 ] + test_urlpatterns
