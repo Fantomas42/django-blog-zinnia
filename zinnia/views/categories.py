@@ -28,7 +28,7 @@ class CategoryList(ListView):
         Return a queryset of published categories,
         with a count of their entries published.
         """
-        return Category.published.all().annotate(
+        return Category.published.all().order_by('title').annotate(
             count_entries_published=Count('entries'))
 
 
