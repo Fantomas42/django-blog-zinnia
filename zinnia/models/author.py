@@ -1,6 +1,7 @@
 """Author model for Zinnia"""
 from django.apps import apps
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
@@ -12,8 +13,9 @@ def safe_get_user_model():
     """
     Safe loading of the User model, customized or not.
     """
-    user_app, user_model = settings.AUTH_USER_MODEL.split('.')
-    return apps.get_registered_model(user_app, user_model)
+    # user_app, user_model = settings.AUTH_USER_MODEL.split('.')
+    # return apps.get_registered_model(user_app, user_model)
+    return get_user_model()
 
 
 class AuthorPublishedManager(models.Model):
