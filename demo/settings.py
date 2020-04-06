@@ -47,11 +47,11 @@ LANGUAGES = (
     ('tr', gettext('Turkish')),
     ('sv', gettext('Swedish')),
     ('is', gettext('Icelandic')),
-    ('hr_HR', gettext('Croatian')),
-    ('pt_BR', gettext('Brazilian Portuguese')),
-    ('fa_IR', gettext('Persian')),
-    ('fi_FI', gettext('Finnish')),
-    ('uk_UA', gettext('Ukrainian')),
+    ('hr', gettext('Croatian')),
+    ('pt-br', gettext('Brazilian Portuguese')),
+    ('fa', gettext('Persian')),
+    ('fi', gettext('Finnish')),
+    ('uk', gettext('Ukrainian')),
     ('zh-hans', gettext('Simplified Chinese')),
 )
 
