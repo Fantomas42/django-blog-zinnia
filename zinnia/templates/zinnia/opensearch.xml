@@ -1,4 +1,4 @@
-{% load i18n staticfiles zinnia %}{% get_tags as entry_tags %}<?xml version="1.0" encoding="UTF-8"?>
+{% load i18n static zinnia %}{% get_tags as entry_tags %}<?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
   <ShortName>{{ site.name }}</ShortName>
