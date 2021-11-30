@@ -47,11 +47,11 @@ LANGUAGES = (
     ('tr', gettext('Turkish')),
     ('sv', gettext('Swedish')),
     ('is', gettext('Icelandic')),
-    ('hr_HR', gettext('Croatian')),
-    ('pt_BR', gettext('Brazilian Portuguese')),
-    ('fa_IR', gettext('Persian')),
-    ('fi_FI', gettext('Finnish')),
-    ('uk_UA', gettext('Ukrainian')),
+    # ('hr_HR', gettext('Croatian')),
+    # ('pt_BR', gettext('Brazilian Portuguese')),
+    # ('fa_IR', gettext('Persian')),
+    # ('fi_FI', gettext('Finnish')),
+    # ('uk_UA', gettext('Ukrainian')),
     ('zh-hans', gettext('Simplified Chinese')),
 )
 
@@ -100,3 +100,5 @@ INSTALLED_APPS = (
     'tagging',
     'zinnia'
 )
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
