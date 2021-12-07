@@ -203,7 +203,7 @@ class ManagersTestCase(TestCase):
         self.assertEqual(Entry.published.advanced_search(
             '(author:admin and "content 1") or author:webmaster').count(), 2)
         self.assertEqual(Entry.published.advanced_search(
-            '("content 1" or author:webmaster) and author:admin').count(), 0)
+            '"content 1" or author:webmaster and author:admin').count(), 0)
         self.assertEqual(Entry.published.advanced_search(
             'author:admin and "content 1" or author:webmaster').count(), 0)
         self.assertEqual(Entry.published.advanced_search(

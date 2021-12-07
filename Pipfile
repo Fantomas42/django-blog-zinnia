@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+django = "~=3.2.9"
 django-contrib-comments = "*"
 django-xmlrpc = "*"
 django-mptt = "*"
@@ -13,6 +13,8 @@ mots-vides = "*"
 beautifulsoup4 = "*"
 regex = "*"
 pillow = "*"
+markdown = "*"
+textile = "*"
 
 [dev-packages]
 sphinx = "*"
