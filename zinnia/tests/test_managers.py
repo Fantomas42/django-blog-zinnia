@@ -183,19 +183,19 @@ class ManagersTestCase(TestCase):
         self.assertEqual(Entry.published.advanced_search(
             'content 1 or 2 author:webmaster').count(), 2)
         self.assertEqual(Entry.published.advanced_search(
-            '(author:webmaster content) my').count(), 2)
+            'author:webmaster content my').count(), 2)
         self.assertEqual(Entry.published.advanced_search(
-            '(author:webmaster) or (author:contributor)').count(), 2)
+            'author:webmaster or author:contributor').count(), 2)
         self.assertEqual(Entry.published.advanced_search(
-            '(author:webmaster) (author:contributor)').count(), 0)
+            'author:webmaster and author:contributor').count(), 0)
         self.assertEqual(Entry.published.advanced_search(
-            '(author:webmaster content) 1').count(), 1)
+            'author:webmaster content 1').count(), 1)
         self.assertEqual(Entry.published.advanced_search(
-            '(author:webmaster content) or 2').count(), 2)
+            'content 2 or author:webmaster').count(), 2)
         self.assertEqual(Entry.published.advanced_search(
-            '(author:contributor content) or 1').count(), 2)
+            'content 1 or author:contributor').count(), 2)
         self.assertEqual(Entry.published.advanced_search(
-            '(author:contributor content) or 2').count(), 1)
+            'content 2 or author:contributor').count(), 1)
         self.assertEqual(Entry.published.advanced_search(
             '(author:webmaster or ("hello world")) and 2').count(), 1)
 
@@ -203,7 +203,7 @@ class ManagersTestCase(TestCase):
         self.assertEqual(Entry.published.advanced_search(
             '(author:admin and "content 1") or author:webmaster').count(), 2)
         self.assertEqual(Entry.published.advanced_search(
-            'author:admin and ("content 1" or author:webmaster)').count(), 0)
+            '("content 1" or author:webmaster) and author:admin').count(), 0)
         self.assertEqual(Entry.published.advanced_search(
             'author:admin and "content 1" or author:webmaster').count(), 0)
         self.assertEqual(Entry.published.advanced_search(

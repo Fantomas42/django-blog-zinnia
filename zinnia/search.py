@@ -11,7 +11,7 @@ from pyparsing import Word
 from pyparsing import WordEnd
 from pyparsing import alphas
 from pyparsing import opAssoc
-from pyparsing import operatorPrecedence
+from pyparsing import infixNotation
 from pyparsing import printables
 from pyparsing import quotedString
 from pyparsing import removeQuotes
@@ -126,7 +126,7 @@ TERM = Combine(Optional(Word(alphas).setResultsName('meta') + ':') +
                 WILDCARDS.setResultsName('query')))
 TERM.setParseAction(create_q)
 
-EXPRESSION = operatorPrecedence(TERM, [
+EXPRESSION = infixNotation(TERM, [
     (OPER_NOT, 1, opAssoc.RIGHT),
     (OPER_OR, 2, opAssoc.LEFT),
     (Optional(OPER_AND, default='and'), 2, opAssoc.LEFT)])
