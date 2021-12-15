@@ -1,20 +1,18 @@
+.. figure:: django_blog_zen/logo/dbz_logo_text.png
+    :scale: 50
+    :align: center
+
 ===================================
-Django Blog Zinnia |latest-version|
+Django Blog Zen
 ===================================
 
-|travis-develop| |coverage-develop|
+Simple yet powerful and really extendable application for managing a blog within your Django Web site.
 
-Simple yet powerful and really extendable application for managing a blog
-within your Django Web site.
+Django Blog Zen is a community maintained fork of the abandoned Django Blog Zinnia project by @Fantosmas42, and
+has been made for publishing Weblog entries and designed to do it well.
 
-Zinnia has been made for publishing Weblog entries and designed to do it well.
-
-Basically any feature that can be provided by another reusable app has been
-left out.
-Why should we re-implement something that is already done and reviewed by
-others and tested?
-
-|paypal|
+Basically any feature that can be provided by another reusable app has been left out.
+Why should we re-implement something that is already done and reviewed by others and tested?
 
 Features
 ========
