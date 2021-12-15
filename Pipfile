@@ -18,6 +18,7 @@ textile = "*"
 
 [dev-packages]
 sphinx = "*"
+sphinx-documatt-theme = "*"
 
 [requires]
 python_version = "3.9"
