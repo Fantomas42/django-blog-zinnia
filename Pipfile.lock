@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "02a61d3d8be286f6df73ea3e0b987418f79b81e69c360c9c6f762e06eedbece0"
+            "sha256": "a604572dbe9cb64a5462d1a7054906740e1af27a7de2e034435ce6491e17e019"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -34,11 +34,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:074e8818b4b40acdc2369e67dcd6555d558329785408dcd25340ee98f1f1d5c4",
-                "sha256:df6f5eb3c797b27c096d61494507b7634526d4ce8d7c8ca1e57a4fb19c0738a3"
+                "sha256:59304646ebc6a77b9b6a59adc67d51ecb03c5e3d63ed1f14c909cdfda84e8010",
+                "sha256:d5a8a14da819a8b9237ee4d8c78dfe056ff6e8a7511987be627192225113ee75"
             ],
             "index": "pypi",
-            "version": "==3.2.10"
+            "version": "==4.0"
         },
         "django-contrib-comments": {
             "hashes": [
@@ -64,12 +64,12 @@
             "version": "==0.13.4"
         },
         "django-tagging": {
+            "git": "https://github.com/arrobalytics/django-tagging.git",
             "hashes": [
                 "sha256:28d68fa4831705e51ad7d1e845ed6dd9e354f9b6f8a5f63b655a430646ef4e8d",
                 "sha256:5932ddcac9aec67cf605eeee06e9c498a022d145fa38d00c82088510d221f315"
             ],
-            "index": "pypi",
-            "version": "==0.5.0"
+            "ref": "027eb90c88ad2d4aead4f50bbbd8d6f0b1678954"
         },
         "django-xmlrpc": {
             "hashes": [
@@ -89,11 +89,11 @@
         },
         "importlib-metadata": {
             "hashes": [
-                "sha256:53ccfd5c134223e497627b9815d5030edf77d2ed573922f7a0b8f8bb81a1c100",
-                "sha256:75bdec14c397f528724c1bfd9709d660b33a4d2e77387a3358f20b848bb5e5fb"
+                "sha256:65a9576a5b2d58ca44d133c42a241905cc45e34d2c06fd5ba2bafa221e5d7b5e",
+                "sha256:766abffff765960fcc18003801f7044eb6755ffae4521c8e8ce8e83b9c9b0668"
             ],
             "markers": "python_version < '3.10'",
-            "version": "==4.8.2"
+            "version": "==4.8.3"
         },
         "markdown": {
             "hashes": [
@@ -157,13 +157,6 @@
             ],
             "index": "pypi",
             "version": "==8.4.0"
-        },
-        "pytz": {
-            "hashes": [
-                "sha256:3672058bc3453457b622aab7a1c3bfd5ab0bdae451512f6cf25f64ed37f5b87c",
-                "sha256:acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326"
-            ],
-            "version": "==2021.3"
         },
         "regex": {
             "hashes": [

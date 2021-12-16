@@ -4,11 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "~=3.2.9"
+django = ">=3.2.9"
 django-contrib-comments = "*"
 django-xmlrpc = "*"
 django-mptt = "*"
-django-tagging = "*"
+django-tagging = { git = "https://github.com/arrobalytics/django-tagging.git" }
 mots-vides = "*"
 beautifulsoup4 = "*"
 regex = "*"
