@@ -73,7 +73,9 @@ class BaseListFilterTestCase(TestCase):
             modeladmin.date_hierarchy, modeladmin.search_fields,
             modeladmin.list_select_related, modeladmin.list_per_page,
             modeladmin.list_max_show_all, modeladmin.list_editable,
-            modeladmin, modeladmin.sortable_by)
+            modeladmin, modeladmin.sortable_by,
+            search_help_text='Test Help Text'
+        )
 
 
 @skip_if_custom_user

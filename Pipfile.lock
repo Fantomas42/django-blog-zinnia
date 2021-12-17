@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a604572dbe9cb64a5462d1a7054906740e1af27a7de2e034435ce6491e17e019"
+            "sha256": "36cfc6fdc84956a0cdca5f85ce5b722c9ff945352ccb6fffc07eef04f514eaea"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -89,11 +89,11 @@
         },
         "importlib-metadata": {
             "hashes": [
-                "sha256:65a9576a5b2d58ca44d133c42a241905cc45e34d2c06fd5ba2bafa221e5d7b5e",
-                "sha256:766abffff765960fcc18003801f7044eb6755ffae4521c8e8ce8e83b9c9b0668"
+                "sha256:e8b45564028bc25f8c99f546616112a6df5de6655893d7eb74c9a99680dc9751",
+                "sha256:ee50794eccb0ec340adbc838344ebb9a6ff2bcba78f752d31fc716497e2149d6"
             ],
             "markers": "python_version < '3.10'",
-            "version": "==4.8.3"
+            "version": "==4.9.0"
         },
         "markdown": {
             "hashes": [
@@ -485,14 +485,6 @@
             ],
             "index": "pypi",
             "version": "==4.3.1"
-        },
-        "sphinx-documatt-theme": {
-            "hashes": [
-                "sha256:5caa243466291a9b422bdd58de4e985d1f41976e5a8f53ace711939c877f6d1a",
-                "sha256:7ee912201c79251206a51df4de8cd0538815e576dc7b242b29ca9d223132c72e"
-            ],
-            "index": "pypi",
-            "version": "==0.0.5"
         },
         "sphinxcontrib-applehelp": {
             "hashes": [
