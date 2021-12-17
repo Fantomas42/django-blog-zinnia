@@ -1,6 +1,5 @@
 """Defaults urls for the Zinnia project"""
-from django.conf.urls import include
-from django.conf.urls import url
+from django.urls import include, re_path
 from django.utils.translation import gettext_lazy
 
 from zinnia.settings import TRANSLATED_URLS
@@ -20,18 +19,18 @@ _ = i18n_url
 app_name = 'zinnia'
 
 urlpatterns = [
-    url(_(r'^feeds/'), include('zinnia.urls.feeds')),
-    url(_(r'^tags/'), include('zinnia.urls.tags')),
-    url(_(r'^authors/'), include('zinnia.urls.authors')),
-    url(_(r'^categories/'), include('zinnia.urls.categories')),
-    url(_(r'^search/'), include('zinnia.urls.search')),
-    url(_(r'^random/'), include('zinnia.urls.random')),
-    url(_(r'^sitemap/'), include('zinnia.urls.sitemap')),
-    url(_(r'^trackback/'), include('zinnia.urls.trackback')),
-    url(_(r'^comments/'), include('zinnia.urls.comments')),
-    url(r'^', include('zinnia.urls.entries')),
-    url(r'^', include('zinnia.urls.archives')),
-    url(r'^', include('zinnia.urls.shortlink')),
-    url(r'^', include('zinnia.urls.quick_entry')),
-    url(r'^', include('zinnia.urls.capabilities')),
+    re_path(_(r'^feeds/'), include('zinnia.urls.feeds')),
+    re_path(_(r'^tags/'), include('zinnia.urls.tags')),
+    re_path(_(r'^authors/'), include('zinnia.urls.authors')),
+    re_path(_(r'^categories/'), include('zinnia.urls.categories')),
+    re_path(_(r'^search/'), include('zinnia.urls.search')),
+    re_path(_(r'^random/'), include('zinnia.urls.random')),
+    re_path(_(r'^sitemap/'), include('zinnia.urls.sitemap')),
+    re_path(_(r'^trackback/'), include('zinnia.urls.trackback')),
+    re_path(_(r'^comments/'), include('zinnia.urls.comments')),
+    re_path(r'^', include('zinnia.urls.entries')),
+    re_path(r'^', include('zinnia.urls.archives')),
+    re_path(r'^', include('zinnia.urls.shortlink')),
+    re_path(r'^', include('zinnia.urls.quick_entry')),
+    re_path(r'^', include('zinnia.urls.capabilities')),
 ]
