@@ -15,6 +15,7 @@ regex = ">=2021.11.10"
 pillow = "~=8.4.0"
 markdown = "~=3.3.6"
 textile = "~=4.0.2"
+pyparsing = "~=3.0.6"
 
 [dev-packages]
 sphinx = "*"

@@ -6,12 +6,13 @@
 #
 
 -i https://pypi.org/simple
-asgiref==3.4.1; python_version >= '3.6'
-beautifulsoup4==4.10.0
+django>=3.2
 django-contrib-comments==2.1.0
 django-js-asset==1.2.2
 django-mptt==0.13.4
-django>=3.2
+pyparsing>=3.0.6
+asgiref==3.4.1; python_version >= '3.6'
+beautifulsoup4==4.10.0
 git+https://github.com/arrobalytics/django-tagging.git@027eb90c88ad2d4aead4f50bbbd8d6f0b1678954#egg=django-tagging
 git+https://github.com/arrobalytics/django-xmlrpc.git@6cf59c555b207de7ecec75ac962751e8245cf8c9#egg=django-xmlrpc
 git+https://github.com/arrobalytics/mots-vides.git@eaeccf73bdb415d0c5559ccd74de360b37a2bbac#egg=mots-vides
