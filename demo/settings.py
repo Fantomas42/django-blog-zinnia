@@ -1,22 +1,44 @@
 """Settings for Zinnia Demo"""
+import logging
 import os
+
+logger = logging.getLogger(__name__)
 
 gettext = lambda s: s  # noqa
 
-DEBUG = True
+DEBUG = False
+ALLOWED_HOSTS = [
+    '127.0.0.1'
+]
 
-DATABASES = {'default':
-             {'ENGINE': 'django.db.backends.sqlite3',
-              'NAME': os.path.join(os.path.dirname(__file__), 'demo.db')}
-             }
+DATABASES = {
+    'default':
+        {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(os.path.dirname(__file__), 'demo.db')
+        }
+}
 
-TIME_ZONE = 'Europe/Paris'
+TIME_ZONE = 'US/Eastern'
 
-STATIC_URL = '/static/'
+STATIC_ROOT = './demo_static/'
+
+STATIC_URL = os.environ.get('STATIC_URL')
+if not STATIC_URL:
+    logger.warning(
+        msg=f'WARNING: STATIC_URL is /static/'
+    )
+    STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
-SECRET_KEY = 'jo-1rzm(%sf)3#n+fb7h955yu$3(pt63abhi12_t7e^^5q8dyw'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    logger.warning(
+        msg=f'WARNING: SECRET_KEY environment variable not set. '
+            f'Using insecure configuration.'
+    )
+    SECRET_KEY = 'NeverUseThisSecretKey1234'
 
 USE_TZ = True
 USE_I18N = True
