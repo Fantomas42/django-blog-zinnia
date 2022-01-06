@@ -2,6 +2,7 @@
     :scale: 50
     :align: center
 
+
 This project is a friendly fork of the `original Django Blog Zinnia`_ project by Julien Fache `@Fantomas42`_.
 
 Despite multiple attempts to contact `Julien Fache`_, the original Zinnia repository
@@ -13,6 +14,23 @@ alternative, this fork this has been created.\
 
 Please head over to `Docs.DjangoBlogZinnia.com`_ for documentation and
 other resources.\
+
+Installation
+============
+
+In order to install this for use the following options.
+Using pip:
+
+``pip install git+https://github.com/arrobalytics/django-blog-zinnia.git@v0.22-alpha3``.
+
+Using pipenv, add Django Blog Zinnia to your Pipfile dependencies:
+
+``django-blog-zinnia = { git = "https://github.com/arrobalytics/django-blog-zinnia.git@v0.22-alpha3" }``
+
+Then run:
+
+``pipenv install``
+
 
 RoadMap
 =======
@@ -78,6 +96,9 @@ More than a long speech, here the list of the main features:
 * Ready to use and extendable templates
 * `Compass`_ and `Sass3`_ integration
 * `Windows Live Writer`_ compatibility
+
+
+
 
 Examples
 ========
