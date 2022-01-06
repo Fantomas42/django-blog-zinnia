@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = ">=3.2"
+django = ">=2.2"
 django-contrib-comments = "~=2.1.0"
 django-mptt = "~=0.13.4"
 django-xmlrpc = { git = "https://github.com/arrobalytics/django-xmlrpc.git" }

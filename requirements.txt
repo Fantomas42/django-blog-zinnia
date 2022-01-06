@@ -6,7 +6,7 @@
 #
 
 -i https://pypi.org/simple
-django>=3.2
+django>=2.2
 django-contrib-comments==2.1.0
 django-js-asset==1.2.2
 django-mptt==0.13.4

@@ -35,7 +35,7 @@ setup(
     install_requires=[
         "asgiref>=3.4.1; python_version >= '3.6'",
         "beautifulsoup4>=4.10.0",
-        "django=>4.0",
+        "django>=2.2",
         "django-contrib-comments>=2.1.0",
         "django-js-asset>=1.2.2",
         "django-mptt>=0.13.4",
