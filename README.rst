@@ -18,10 +18,9 @@ other resources.\
 Installation
 ============
 
-In order to install this for use the following options.
 Using pip:
 
-``pip install git+https://github.com/arrobalytics/django-blog-zinnia.git@v0.22-alpha3``.
+``pip install git+https://github.com/arrobalytics/django-blog-zinnia.git@v0.22-alpha4``.
 
 Using pipenv, add Django Blog Zinnia to your Pipfile dependencies:
 
