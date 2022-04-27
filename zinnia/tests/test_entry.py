@@ -1,6 +1,8 @@
 """Test cases for Zinnia's Entry"""
 from datetime import timedelta
+from sys import platform
 
+import django_comments as comments
 from django.contrib.sites.models import Site
 from django.test import TestCase
 from django.test.utils import override_settings
@@ -8,8 +10,6 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import activate
 from django.utils.translation import deactivate
-
-import django_comments as comments
 from django_comments.models import CommentFlag
 
 from zinnia import markups
@@ -158,7 +158,7 @@ class EntryTestCase(TestCase):
 
     def test_is_actual(self):
         self.assertTrue(self.entry.is_actual)
-        self.entry.start_publication = datetime(2020, 3, 15)
+        self.entry.start_publication = datetime(2021, 12, 31)
         self.assertFalse(self.entry.is_actual)
         self.entry.start_publication = timezone.now()
         self.assertTrue(self.entry.is_actual)
@@ -169,7 +169,7 @@ class EntryTestCase(TestCase):
         self.assertFalse(self.entry.is_visible)
         self.entry.status = PUBLISHED
         self.assertTrue(self.entry.is_visible)
-        self.entry.start_publication = datetime(2020, 3, 15)
+        self.entry.start_publication = datetime(2021, 12, 31)
         self.assertFalse(self.entry.is_visible)
 
     def test_short_url(self):
@@ -335,7 +335,10 @@ class EntryTestCase(TestCase):
 
     def test_image_upload_to(self):
         path = self.entry.image_upload_to('Desktop wallpaper.jpeg')
-        path_split = path.split('/')
+        if platform == 'win32':
+            path_split = path.split('\\')
+        else:
+            path_split = path.split('/')
         self.assertEqual(path_split[-1], 'desktop-wallpaper.jpeg')
         for i in range(1, 4):
             self.assertTrue(path_split[-1 - i].isdigit())

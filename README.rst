@@ -1,20 +1,62 @@
+.. figure:: zinnia/static/zinnia/logo/dbz_logo_text.png
+    :scale: 50
+    :align: center
+
+
+This project is a friendly fork of the `original Django Blog Zinnia`_ project by Julien Fache `@Fantomas42`_.
+
+Despite multiple attempts to contact `Julien Fache`_, the original Zinnia repository
+is no longer active and maintained by its author. Virtually no activity since March 2020
+has been recorded, and the project is no longer compatible with modern versions of Django 3 & 4.\
+
+In order to recover the project's legacy, and to provide a community maintained
+alternative, this fork this has been created.\
+
+Please head over to `Docs.DjangoBlogZinnia.com`_ for documentation and
+other resources.\
+
+Installation
+============
+
+Using pip:
+
+``pip install git+https://github.com/arrobalytics/django-blog-zinnia.git@v0.22-alpha4``.
+
+Using pipenv, add Django Blog Zinnia to your Pipfile dependencies:
+
+``django-blog-zinnia = { git = "https://github.com/arrobalytics/django-blog-zinnia.git@v0.22-alpha3" }``
+
+Then run:
+
+``pipenv install``
+
+
+RoadMap
+=======
+
+As a priority, this fork will be focused on updating Zinnia to work with modern versions of Django and
+in removing/replacing all deprecated features.
+
+Once the project is updated, the following activities are planned for future releases:
+
+* Inspection, evaluation and update of Zinnia's dependencies.
+* Extension of Entry Model to create and support multiple image sizes for SEO and performance purposes.
+* Implementation of a browser-based Entry editor to eliminate the need to write plain Markdown on the Django Admin site for creating Entries.
+* Develop a new Zinnia default theme based on modern CSS frameworks such as Bulma, Bootstrap, etc.
+* Update Tests and make use of GitHub actions for testing.
+* Update documentation.
+
 ===================================
-Django Blog Zinnia |latest-version|
+Django Blog Zinnia
 ===================================
 
-|travis-develop| |coverage-develop|
+Simple yet powerful and really extendable application for managing a blog within your Django Web site.
 
-Simple yet powerful and really extendable application for managing a blog
-within your Django Web site.
-
+Django Blog Zinnia is a community maintained fork of the abandoned Django Blog Zinnia project by `@Fantomas42`_.
 Zinnia has been made for publishing Weblog entries and designed to do it well.
 
-Basically any feature that can be provided by another reusable app has been
-left out.
-Why should we re-implement something that is already done and reviewed by
-others and tested?
-
-|paypal|
+Basically any feature that can be provided by another reusable app has been left out.
+Why should we re-implement something that is already done and reviewed by others and tested?
 
 Features
 ========
@@ -54,10 +96,13 @@ More than a long speech, here the list of the main features:
 * `Compass`_ and `Sass3`_ integration
 * `Windows Live Writer`_ compatibility
 
+
+
+
 Examples
 ========
 
-Take a look at the online demo at: http://demo.django-blog-zinnia.com/
+Take a look at the online demo at: http://demo.djangoblogzinnia.com/
 or you can visit these websites who use Zinnia.
 
 * `Fantomas' side`_
@@ -95,9 +140,10 @@ More information and help available at these URLs:
 .. |paypal| image:: https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif
    :alt:  Make a free donation with Paypal to encourage the development
    :target: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=68T48HR8KK9KG
-.. _`Sitemaps`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#module-zinnia.sitemaps
-.. _`Advanced search engine`: http://docs.django-blog-zinnia.com/en/latest/topics/search_engines.html
-.. _`Custom templates for various contents`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#templates-for-entries
+
+.. _`Sitemaps`: http://docs.djangoblogzinnia.com/en/latest/getting-started/configuration.html#module-zinnia.sitemaps
+.. _`Advanced search engine`: http://docs.djangoblogzinnia.com/en/latest/topics/search_engines.html
+.. _`Custom templates for various contents`: http://docs.djangoblogzinnia.com/en/latest/getting-started/configuration.html#templates-for-entries
 .. _`Markdown`: http://daringfireball.net/projects/markdown/
 .. _`Textile`: http://redcloth.org/hobix.com/textile/
 .. _`reStructuredText`: http://docutils.sourceforge.net/rst.html
@@ -108,7 +154,7 @@ More information and help available at these URLs:
 .. _`Bit.ly`: https://github.com/Fantomas42/zinnia-url-shortener-bitly
 .. _`Twitter`:  https://github.com/Fantomas42/zinnia-twitter
 .. _`Gravatar`: http://gravatar.com/
-.. _`Django-CMS`: http://docs.django-blog-zinnia.com/en/latest/getting-started/configuration.html#django-cms
+.. _`Django-CMS`: http://docs.djangoblogzinnia.com/en/latest/getting-started/configuration.html#django-cms
 .. _`Entry model extendable`: http://django-blog-zinnia.rtfd.org/extending-entry
 .. _`WYMeditor`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-wymeditor
 .. _`TinyMCE`: https://github.com/django-blog-zinnia/zinnia-wysiwyg-tinymce
@@ -126,9 +172,13 @@ More information and help available at these URLs:
 .. _`Programeria`: https://programeria.pl/
 .. _`Tihomir Blajev Blog`: http://www.tihoblajev.com/weblog/
 .. _`Branchspot`: https://www.branchspot.com/blog/
-.. _`Code repository`: https://github.com/Fantomas42/django-blog-zinnia
-.. _`Documentation`: http://docs.django-blog-zinnia.com/
+.. _`Code repository`: https://github.com/arrobalytics/django-blog-zinnia
+.. _`Documentation`: http://docs.djangoblogzinnia.com/
 .. _`Travis CI server`: http://travis-ci.org/Fantomas42/django-blog-zinnia
 .. _`Coverage report`: https://coveralls.io/r/Fantomas42/django-blog-zinnia
 .. _`Google Group`: http://groups.google.com/group/django-blog-zinnia/
-.. _`GitHub Issues`: https://github.com/Fantomas42/django-blog-zinnia/issues/
+.. _`GitHub Issues`: https://github.com/arrobalytics/django-blog-zinnia/issues/
+.. _`original Django Blog Zinnia`: https://github.com/Fantomas42/django-blog-zinnia/
+.. _`@Fantomas42`: https://github.com/Fantomas42/
+.. _`Julien Fache`: https://github.com/Fantomas42/
+.. _`Docs.DjangoBlogZinnia.com`: https://docs.djangoblogzinnia.com

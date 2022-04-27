@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = ">=2.2"
+django-contrib-comments = "~=2.1.0"
+django-mptt = "~=0.13.4"
+django-xmlrpc = { git = "https://github.com/arrobalytics/django-xmlrpc.git" }
+django-tagging = { git = "https://github.com/arrobalytics/django-tagging.git" }
+mots-vides = { git = "https://github.com/arrobalytics/mots-vides.git" }
+beautifulsoup4 = "~=4.3"
+regex = ">=2021.11.10"
+pillow = "~=8.4.0"
+markdown = "~=3.3.6"
+textile = "~=4.0.2"
+pyparsing = "~=3.0.6"
+
+[dev-packages]
+sphinx = "*"
+pipenv-setup = "*"
+gunicorn = "*"
+
+[requires]
+python_version = "3.9"

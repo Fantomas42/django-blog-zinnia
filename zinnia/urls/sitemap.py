@@ -1,10 +1,9 @@
 """Urls for the Zinnia sitemap"""
-from django.conf.urls import url
+from django.urls import re_path
 
 from zinnia.views.sitemap import Sitemap
 
-
 urlpatterns = [
-    url(r'^$', Sitemap.as_view(),
-        name='sitemap'),
+    re_path(r'^$', Sitemap.as_view(),
+            name='sitemap'),
 ]

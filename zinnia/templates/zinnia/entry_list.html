@@ -3,134 +3,148 @@
 {% load zinnia %}
 
 {% block meta-description %}{% spaceless %}
-{% if category %}
-{% if category.description %}
-{{ category.description|striptags|safe }}
-{% else %}
-{% blocktrans with object=category %}The last entries categorized under {{ object }}{% endblocktrans %}
-{% endif %}
-{% endif %}
+    {% if category %}
+        {% if category.description %}
+            {{ category.description|striptags|safe }}
+        {% else %}
+            {% blocktrans with object=category %}The last entries categorized under {{ object }}{% endblocktrans %}
+        {% endif %}
+    {% endif %}
 
-{% if tag %}
-{% blocktrans with object=tag %}The last entries tagged with {{ object }}{% endblocktrans %}
-{% endif %}
+    {% if tag %}
+        {% blocktrans with object=tag %}The last entries tagged with {{ object }}{% endblocktrans %}
+    {% endif %}
 
-{% if author %}
-{% blocktrans with object=author %}The last entries by {{ object }}{% endblocktrans %}
-{% endif %}
+    {% if author %}
+        {% blocktrans with object=author %}The last entries by {{ object }}{% endblocktrans %}
+    {% endif %}
 
 {% endspaceless %}{% endblock meta-description %}
 
-{% block meta-description-page %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} {% blocktrans with page_number=page_obj.number %}page {{ page_number }}{% endblocktrans %}{% endifnotequal %}{% endif %}{% endblock meta-description-page %}
+{% block meta-description-page %}{% if page_obj %}{% if page_obj.number != 1 %}
+    {% blocktrans with page_number=page_obj.number %}page {{ page_number }}{% endblocktrans %}{% endif %}
+{% endif %}{% endblock meta-description-page %}
 
 {% block title %}{% spaceless %}
-{% if category %}
-{% blocktrans with object=category %}Category {{ object }}{% endblocktrans %}
-{% endif %}
+    {% if category %}
+        {% blocktrans with object=category %}Category {{ object }}{% endblocktrans %}
+    {% endif %}
 
-{% if tag %}
-{% blocktrans with object=tag %}Tag {{ object }}{% endblocktrans %}
-{% endif %}
+    {% if tag %}
+        {% blocktrans with object=tag %}Tag {{ object }}{% endblocktrans %}
+    {% endif %}
 
-{% if author %}
-{% blocktrans with object=author %}Author {{ object }}{% endblocktrans %}
-{% endif %}
+    {% if author %}
+        {% blocktrans with object=author %}Author {{ object }}{% endblocktrans %}
+    {% endif %}
 
 {% endspaceless %}{% endblock title %}
 
-{% block title-page %}{% if page_obj %}{% ifnotequal page_obj.number 1 %} - {% blocktrans with object=page_obj.number %}Page {{ object }}{% endblocktrans %}{% endifnotequal %}{% endif %}{% endblock title-page %}
+{% block title-page %}{% if page_obj %}{% if page_obj.number != 1 %} - {% blocktrans with object=page_obj.number %}Page
+    {{ object }}{% endblocktrans %}{% endif %}{% endif %}{% endblock title-page %}
 
 {% block link %}
-  {{ block.super }}
-  {% if category %}
-    <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=category %}RSS feed of {{ object }}{% endblocktrans %}" href="{% url 'zinnia:category_feed' category.tree_path %}" />
-  {% endif %}
-  {% if tag %}
-    <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=tag %}RSS feed of {{ object }}{% endblocktrans %}" href="{% url 'zinnia:tag_feed' tag.name %}" />
-  {% endif %}
-  {% if author %}
-    <link rel="alternate" type="application/rss+xml" title="{% blocktrans with object=author %}RSS feed of {{ object }}{% endblocktrans %}" href="{% url 'zinnia:author_feed' author.get_username %}" />
-  {% endif %}
+    {{ block.super }}
+    {% if category %}
+        <link rel="alternate" type="application/rss+xml"
+              title="{% blocktrans with object=category %}RSS feed of {{ object }}{% endblocktrans %}"
+              href="{% url 'zinnia:category_feed' category.tree_path %}"/>
+    {% endif %}
+    {% if tag %}
+        <link rel="alternate" type="application/rss+xml"
+              title="{% blocktrans with object=tag %}RSS feed of {{ object }}{% endblocktrans %}"
+              href="{% url 'zinnia:tag_feed' tag.name %}"/>
+    {% endif %}
+    {% if author %}
+        <link rel="alternate" type="application/rss+xml"
+              title="{% blocktrans with object=author %}RSS feed of {{ object }}{% endblocktrans %}"
+              href="{% url 'zinnia:author_feed' author.get_username %}"/>
+    {% endif %}
 {% endblock link %}
 
-{% block body-class %}entry-list{% if page_obj %} paginated page-{{ page_obj.number }}{% endif %}{% if category %} category category-{{ category.slug }}{% endif %}{% if tag %} tag tag-{{ tag|slugify }}{% endif %}{% if author %} author author-{{ author|slugify }}{% endif %}{% endblock body-class %}
+{% block body-class %}entry-list{% if page_obj %} paginated page-{{ page_obj.number }}{% endif %}{% if category %}
+    category category-{{ category.slug }}{% endif %}{% if tag %} tag tag-{{ tag|slugify }}{% endif %}{% if author %}
+    author author-{{ author|slugify }}{% endif %}{% endblock body-class %}
 
 {% block content %}
 
-{% block content-title %}
-{% if category %}
-<h1>{% blocktrans %}Category archives: {{ category }}{% endblocktrans %}</h1>
-{% if category.description %}
-<p>{{ category.description|striptags|safe }}</p>
-{% endif %}
-<p class="feed">
-  <a href="{% url 'zinnia:category_feed' category.tree_path %}" title="{% blocktrans with object=category %}RSS feed of {{ object }}{% endblocktrans %}">
-    {% blocktrans with object=category %}RSS feed of {{ object }}{% endblocktrans %}
-  </a>
-</p>
-{% endif %}
+    {% block content-title %}
+        {% if category %}
+            <h1>{% blocktrans %}Category archives: {{ category }}{% endblocktrans %}</h1>
+            {% if category.description %}
+                <p>{{ category.description|striptags|safe }}</p>
+            {% endif %}
+            <p class="feed">
+                <a href="{% url 'zinnia:category_feed' category.tree_path %}"
+                   title="{% blocktrans with object=category %}RSS feed of {{ object }}{% endblocktrans %}">
+                    {% blocktrans with object=category %}RSS feed of {{ object }}{% endblocktrans %}
+                </a>
+            </p>
+        {% endif %}
 
-{% if tag %}
-<h1>{% blocktrans %}Tag archives: {{ tag }}{% endblocktrans %}</h1>
-<p class="feed">
-  <a href="{% url 'zinnia:tag_feed' tag.name %}" title="{% blocktrans with object=tag %}RSS feed of {{ object }}{% endblocktrans %}">
-    {% blocktrans with object=tag %}RSS feed of {{ object }}{% endblocktrans %}
-  </a>
-</p>
-{% endif %}
+        {% if tag %}
+            <h1>{% blocktrans %}Tag archives: {{ tag }}{% endblocktrans %}</h1>
+            <p class="feed">
+                <a href="{% url 'zinnia:tag_feed' tag.name %}"
+                   title="{% blocktrans with object=tag %}RSS feed of {{ object }}{% endblocktrans %}">
+                    {% blocktrans with object=tag %}RSS feed of {{ object }}{% endblocktrans %}
+                </a>
+            </p>
+        {% endif %}
 
-{% if author %}
-<h1>{% blocktrans %}Author archives: {{ author }}{% endblocktrans %}</h1>
-<p class="feed">
-  <a href="{% url 'zinnia:author_feed' author.get_username %}" title="{% blocktrans with object=author %}RSS feed of {{ object }}{% endblocktrans %}">
-    {% blocktrans with object=author %}RSS feed of {{ object }}{% endblocktrans %}
-  </a>
-</p>
-{% endif %}
-{% endblock content-title %}
+        {% if author %}
+            <h1>{% blocktrans %}Author archives: {{ author }}{% endblocktrans %}</h1>
+            <p class="feed">
+                <a href="{% url 'zinnia:author_feed' author.get_username %}"
+                   title="{% blocktrans with object=author %}RSS feed of {{ object }}{% endblocktrans %}">
+                    {% blocktrans with object=author %}RSS feed of {{ object }}{% endblocktrans %}
+                </a>
+            </p>
+        {% endif %}
+    {% endblock content-title %}
 
-{% block content-loop %}
-{% for object in object_list %}
-  {% zinnia_loop_template object.content_template as template %}
-  {% include template with object_content=object.html_preview continue_reading=1 %}
-{% empty %}
-  <p class="info">
-    <a href="{% url 'admin:zinnia_entry_add' %}">{% trans "No entries yet." %}</a>
-  </p>
-{% endfor %}
-{% endblock content-loop %}
+    {% block content-loop %}
+        {% for object in object_list %}
+            {% zinnia_loop_template object.content_template as template %}
+            {% include template with object_content=object.html_preview continue_reading=1 %}
+        {% empty %}
+            <p class="info">
+                <a href="{% url 'admin:zinnia_entry_add' %}">{% trans "No entries yet." %}</a>
+            </p>
+        {% endfor %}
+    {% endblock content-loop %}
 
-{% block content-pagination %}
-{% if is_paginated %}
-  {% zinnia_pagination page_obj %}
-{% endif %}
-{% endblock content-pagination %}
+    {% block content-pagination %}
+        {% if is_paginated %}
+            {% zinnia_pagination page_obj %}
+        {% endif %}
+    {% endblock content-pagination %}
 
-{% block content-related %}
-{% endblock content-related %}
+    {% block content-related %}
+    {% endblock content-related %}
 
 {% endblock content %}
 
 {% block admin-tools %}
-  {% if category and perms.zinnia.change_category %}
-  <li>
-    <a href="{% url 'admin:zinnia_category_change' category.pk %}" title="{% trans "Edit the category" %}">
-      {% trans "Edit the category" %}
-    </a>
-  </li>
-  {% endif %}
-  {% if tag and perms.tagging.change_tag %}
-  <li>
-    <a href="{% url 'admin:tagging_tag_change' tag.pk %}" title="{% trans "Edit the tag" %}">
-      {% trans "Edit the tag" %}
-    </a>
-  </li>
-  {% endif %}
-  {% if author and perms.auth.change_user %}
-  <li>
-    <a href="{% url 'change'|user_admin_urlname author.pk %}" title="{% trans "Edit the author" %}">
-      {% trans "Edit the author" %}
-    </a>
-  </li>
-  {% endif %}
+    {% if category and perms.zinnia.change_category %}
+        <li>
+            <a href="{% url 'admin:zinnia_category_change' category.pk %}" title="{% trans "Edit the category" %}">
+                {% trans "Edit the category" %}
+            </a>
+        </li>
+    {% endif %}
+    {% if tag and perms.tagging.change_tag %}
+        <li>
+            <a href="{% url 'admin:tagging_tag_change' tag.pk %}" title="{% trans "Edit the tag" %}">
+                {% trans "Edit the tag" %}
+            </a>
+        </li>
+    {% endif %}
+    {% if author and perms.auth.change_user %}
+        <li>
+            <a href="{% url 'change'|user_admin_urlname author.pk %}" title="{% trans "Edit the author" %}">
+                {% trans "Edit the author" %}
+            </a>
+        </li>
+    {% endif %}
 {% endblock admin-tools %}
