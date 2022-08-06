@@ -46,7 +46,7 @@ def markdown(value, extensions=MARKDOWN_EXTENSIONS):
 
 def restructuredtext(value, settings=RESTRUCTUREDTEXT_SETTINGS):
     """
-    RestructuredText processing with optionnally custom settings.
+    RestructuredText processing with optionally custom settings.
     """
     try:
         from docutils.core import publish_parts

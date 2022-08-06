@@ -2004,7 +2004,7 @@ Outlayer.prototype.layout = function() {
     this.options.isLayoutInstant : !this._isLayoutInited;
   this.layoutItems( this.items, isInstant );
 
-  // flag for initalized
+  // flag for initialized
   this._isLayoutInited = true;
 };
 

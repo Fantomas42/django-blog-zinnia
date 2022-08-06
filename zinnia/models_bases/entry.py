@@ -333,7 +333,7 @@ class DiscussionsEntry(models.Model):
 class RelatedEntry(models.Model):
     """
     Abstract model class for making manual relations
-    between the differents entries.
+    between the different entries.
     """
     related = models.ManyToManyField(
         'self',
@@ -569,7 +569,7 @@ class AbstractEntry(
     all the abstract entry model classes into a single one.
 
     In this manner we can override some fields without
-    reimplemting all the AbstractEntry.
+    reimplementing all the AbstractEntry.
     """
 
     class Meta(CoreEntry.Meta):
