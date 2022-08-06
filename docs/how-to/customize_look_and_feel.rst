@@ -42,7 +42,7 @@ CSS customizations
 ------------------
 
 Most of the time the customization process of Zinnia is about editing the
-cascading style sheet of the differents pages delivered by the Weblog.
+cascading style sheet of the different pages delivered by the Weblog.
 
 First of all you have to note that each page of the Weblog has several
 classes applied on the ``<body>`` markup. For examples if the document has
@@ -216,7 +216,7 @@ Each entries of the Weblog has the possibility to have his own template to
 be rendered by using the :setting:`ZINNIA_ENTRY_DETAIL_TEMPLATES` settings, so
 with this option you can handle multiple presentation for your entries. And
 because :class:`~zinnia.views.entries.EntryDetail` is based on an archive
-view a custom list of templates is built uppon the publication date.
+view a custom list of templates is built upon the publication date.
 The entry's slug is also used to build the template list for having
 maximal customization capabilities with ease.
 

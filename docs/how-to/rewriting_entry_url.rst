@@ -105,7 +105,7 @@ To do this override, simply use the method explained in the
           abstract = True
 
 Due to the intensive use of this method into the templates, make sure that
-your re-implemention is not too slow. For example hitting the database to
+your re-implementation is not too slow. For example hitting the database to
 recontruct this URL is not a really good idea. That's why an URL pattern
 based on the categories like ``/blog/<category-1>/<category-n>/<slug>/`` is
 really bad.

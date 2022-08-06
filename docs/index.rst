@@ -4,7 +4,7 @@ Django-Blog-Zinnia's documentation!
 
 Welcome to the version |version| of the documentation.
 
-You can also find the differents editions of the
+You can also find the different editions of the
 `documentation online at readthedocs.org`_.
 
 .. toctree::

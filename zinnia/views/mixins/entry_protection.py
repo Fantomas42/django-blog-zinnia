@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView
 
 class LoginMixin(object):
     """
-    Mixin implemeting a login view
+    Mixin implementing a login view
     configurated for Zinnia.
     """
 
