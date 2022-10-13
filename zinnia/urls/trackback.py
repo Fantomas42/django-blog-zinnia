@@ -1,11 +1,11 @@
 """Urls for the Zinnia trackback"""
-from django.conf.urls import url
+from django.urls import path
 
 from zinnia.views.trackback import EntryTrackback
 
 
 urlpatterns = [
-    url(r'^(?P<pk>\d+)/$',
+    path('<int:pk>/',
         EntryTrackback.as_view(),
         name='entry_trackback'),
 ]

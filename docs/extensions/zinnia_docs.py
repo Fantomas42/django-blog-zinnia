@@ -7,7 +7,7 @@ cross linking the django documentation.
 import inspect
 
 from django.db import models
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import strip_tags
 
 
@@ -22,10 +22,10 @@ def process_model_docstring(app, what, name, obj, options, lines):
     if inspect.isclass(obj) and issubclass(obj, models.Model):
         for field in obj._meta.fields:
             # Decode and strip any html out of the field's help text
-            help_text = strip_tags(force_text(field.help_text))
+            help_text = strip_tags(force_str(field.help_text))
             # Decode and capitalize the verbose name, for use if there isn't
             # any help text
-            verbose_name = force_text(field.verbose_name).capitalize()
+            verbose_name = force_str(field.verbose_name).capitalize()
 
             if help_text:
                 lines.append(':param %s: %s' % (field.attname, help_text))
