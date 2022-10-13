@@ -29,8 +29,8 @@ COMMENT_WP_COUNT_COMMENTS = 'zinnia.comment.was_posted.count_comments'
 PINGBACK_WF_COUNT_PINGBACKS = 'zinnia.pingback.was_flagged.count_pingbacks'
 TRACKBACK_WF_COUNT_TRACKBACKS = 'zinnia.trackback.was_flagged.count_trackbacks'
 
-pingback_was_posted = Signal(providing_args=['pingback', 'entry'])
-trackback_was_posted = Signal(providing_args=['trackback', 'entry'])
+pingback_was_posted = Signal()
+trackback_was_posted = Signal()
 
 
 def disable_for_loaddata(signal_handler):
