@@ -91,7 +91,7 @@ def handle_page_crumb(func):
         path = PAGE_REGEXP.sub('', path)
         breadcrumbs = func(path, model, root_name)
         if page:
-            if page.number > 1:
+            if page.number > 1 and breadcrumbs:
                 breadcrumbs[-1].url = path
                 page_crumb = Crumb(_('Page %s') % page.number)
                 breadcrumbs.append(page_crumb)
