@@ -720,7 +720,7 @@ class ViewsTestCase(ViewsBaseCase):
         self.assertEqual(response.context['comment'], comment)
         comment.is_public = True
         comment.save()
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(3):
             response = self.client.get(success_url, follow=True)
         self.assertEqual(
             response.redirect_chain[1],
