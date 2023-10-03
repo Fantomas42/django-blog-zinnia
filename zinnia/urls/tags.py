@@ -1,5 +1,5 @@
 """Urls for the Zinnia tags"""
-from django.conf.urls import url
+from django.urls import path, re_path
 
 from zinnia.urls import _
 from zinnia.views.tags import TagDetail
@@ -7,13 +7,13 @@ from zinnia.views.tags import TagList
 
 
 urlpatterns = [
-    url(r'^$',
+    path('',
         TagList.as_view(),
         name='tag_list'),
-    url(r'^(?P<tag>[^/]+)/$',
+    path('<str:tag>/',
         TagDetail.as_view(),
         name='tag_detail'),
-    url(_(r'^(?P<tag>[^/]+)/page/(?P<page>\d+)/$'),
+    re_path(_(r'^(?P<tag>[^/]+)/page/(?P<page>\d+)/$'),
         TagDetail.as_view(),
         name='tag_detail_paginated'),
 ]

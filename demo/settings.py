@@ -20,7 +20,6 @@ SECRET_KEY = 'jo-1rzm(%sf)3#n+fb7h955yu$3(pt63abhi12_t7e^^5q8dyw'
 
 USE_TZ = True
 USE_I18N = True
-USE_L10N = True
 
 SITE_ID = 1
 

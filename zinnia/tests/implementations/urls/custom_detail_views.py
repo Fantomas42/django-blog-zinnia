@@ -1,5 +1,5 @@
 """Test urls for the zinnia project"""
-from django.conf.urls import url
+from django.urls import path, re_path
 
 from zinnia.tests.implementations.urls.default import (
     urlpatterns as test_urlpatterns)
@@ -35,22 +35,22 @@ class CustomCategoryDetail(CustomModelDetailMixin, CategoryDetail):
 
 
 urlpatterns = [
-    url(r'^authors/(?P<username>[.+-@\w]+)/$',
+    re_path(r'^authors/(?P<username>[.+-@\w]+)/$',
         CustomAuthorDetail.as_view(),
         name='zinnia_author_detail'),
-    url(r'^authors/(?P<username>[.+-@\w]+)/page/(?P<page>\d+)/$',
+    re_path(r'^authors/(?P<username>[.+-@\w]+)/page/(?P<page>\d+)/$',
         CustomAuthorDetail.as_view(),
         name='zinnia_author_detail_paginated'),
-    url(r'^categories/(?P<path>[-\/\w]+)/page/(?P<page>\d+)/$',
+    re_path(r'^categories/(?P<path>[-\/\w]+)/page/(?P<page>\d+)/$',
         CustomCategoryDetail.as_view(),
         name='zinnia_category_detail_paginated'),
-    url(r'^categories/(?P<path>[-\/\w]+)/$',
+    re_path(r'^categories/(?P<path>[-\/\w]+)/$',
         CustomCategoryDetail.as_view(),
         name='zinnia_category_detail'),
-    url(r'^tags/(?P<tag>[^/]+)/$',
+    path('tags/<str:tag>/',
         CustomTagDetail.as_view(),
         name='zinnia_tag_detail'),
-    url(r'^tags/(?P<tag>[^/]+)/page/(?P<page>\d+)/$',
+    path('tags/<str:tag>/page/<int:page>/',
         CustomTagDetail.as_view(),
         name='zinnia_tag_detail_paginated'),
 ] + test_urlpatterns
